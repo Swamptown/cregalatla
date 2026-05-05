@@ -1,0 +1,42 @@
+{
+  "favorites": [],
+  "lookup_history": [
+    "item:minecraft:cobblestone",
+    "item:createcobblestone:mechanical_generator{\"minecraft:block_entity_data\":{id:\"createcobblestone:mechanical_generator\",type:\"none\"}}",
+    "item:createpropulsion:solid_burner",
+    "item:create:crimsite",
+    "#item:create:stone_types/crimsite",
+    "item:create:cut_crimsite",
+    "item:create:asurine_pillar",
+    "item:create:cut_dripstone_brick_wall",
+    "item:createpropulsion:liquid_burner",
+    "item:create:bar_of_chocolate",
+    {
+      "type": "fluid",
+      "id": "create:chocolate",
+      "amount": 0
+    },
+    "item:create:chocolate_bucket",
+    "item:minecraft:bucket",
+    "item:aeronautics:levitite_blend_bucket",
+    {
+      "type": "fluid",
+      "id": "aeronautics:levitite_blend",
+      "amount": 0
+    },
+    {
+      "type": "fluid",
+      "id": "createpropulsion:coral",
+      "amount": 0
+    },
+    "item:createpropulsion:tilt_adapter"
+  ],
+  "craft_history": [],
+  "recipe_defaults": {
+    "added": [],
+    "tags": {},
+    "resolutions": {},
+    "disabled": []
+  },
+  "hidden_stacks": []
+}

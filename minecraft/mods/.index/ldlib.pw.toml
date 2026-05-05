@@ -1,0 +1,17 @@
+filename = 'ldlib2-neoforge-1.21.1-2.2.7.a-all.jar'
+name = 'LDLib'
+side = ''
+x-prismlauncher-loaders = [ 'neoforge' ]
+x-prismlauncher-mc-versions = [ '1.21', '1.21.1' ]
+x-prismlauncher-release-type = 'beta'
+x-prismlauncher-version-number = 'LDLib2-2.2.7.a-neoforge'
+
+[download]
+hash = 'c810c5498d648e8870078f4dcda236b5f26e2834'
+hash-format = 'sha1'
+mode = 'metadata:curseforge'
+url = ''
+
+[update.curseforge]
+file-id = 8030336
+project-id = 626676

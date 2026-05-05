@@ -1,0 +1,5 @@
+/kill @e[tag=!player]
+/kill @e[type=!minecraft:player]
+/time set day
+/gamerule doDaylightCycle false
+/kill @e[type=!minecraft:player]
