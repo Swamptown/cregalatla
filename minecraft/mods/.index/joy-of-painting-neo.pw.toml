@@ -1,0 +1,18 @@
+filename = 'xercapaint-1.21.1-1.1.2.jar'
+name = 'Joy of Painting Neo'
+side = 'server'
+x-prismlauncher-dependencies = []
+x-prismlauncher-loaders = [ 'neoforge' ]
+x-prismlauncher-mc-versions = [ '1.21.1' ]
+x-prismlauncher-release-type = 'release'
+x-prismlauncher-version-number = 'xercapaint-1.21.1-1.1.2.jar'
+
+[download]
+hash = '66672f5ba6454d2c22df98f25f996f02b14b589a'
+hash-format = 'sha1'
+mode = 'metadata:curseforge'
+url = ''
+
+[update.curseforge]
+file-id = 7670169
+project-id = 1442522
