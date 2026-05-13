@@ -1,0 +1,18 @@
+filename = 'ravi_a-1.0.1-neoforge-1.21.1.jar'
+name = 'Wall Step and Super Dash'
+side = 'both'
+x-prismlauncher-dependencies = []
+x-prismlauncher-loaders = [ 'neoforge' ]
+x-prismlauncher-mc-versions = [ '1.21.1' ]
+x-prismlauncher-release-type = 'release'
+x-prismlauncher-version-number = '1.0.1'
+
+[download]
+hash = '5407c4d613eaefe543c61c66990c2222fb66277146610008bae3fd808ea16cdcbf1f41fea76460b903b1ff5e05008b7b7838e783dfe21d3f908d525e57ce9151'
+hash-format = 'sha512'
+mode = 'url'
+url = 'https://cdn.modrinth.com/data/7KLT5f0w/versions/CDNDHUVm/ravi_a-1.0.1-neoforge-1.21.1.jar'
+
+[update.modrinth]
+mod-id = '7KLT5f0w'
+version = 'CDNDHUVm'
