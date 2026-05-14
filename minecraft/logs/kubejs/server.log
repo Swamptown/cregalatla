@@ -1,15 +1,15 @@
-[18:28:01] [INIT] KubeJS 2101.7.2-build.363; MC 2101 NeoForge
-[18:28:01] [INIT] Loaded plugins:
-[18:28:01] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSPlugin
-[18:28:01] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin
-[18:28:01] [INIT] - dev.latvian.mods.kubejs.integration.architectury.ArchitecturyIntegration
-[18:28:01] [INIT] - com.lowdragmc.lowdraglib2.integration.kjs.LDLibKubeJSPlugin
-[18:28:01] [INIT] - dev.bluephs.createvintageneoforged.compat.kubejs.VintagejsPlugin
-[18:28:01] [INIT] - com.lightning.northstar.compat.kubejs.NorthstarKubeJsPlugin
-[18:28:01] [INIT] - dev.propulsionteam.propulsionsimulated.compat.kubejs.PropulsionKubeJSPlugin
-[18:28:01] [INIT] - dev.propulsionteam.propulsionsimulated.compat.kubejs.PropulsionKubeJSPlugin
-[18:28:01] [INIT] - dev.latvian.mods.kubejs.create.KubeJSCreatePlugin
-[18:28:01] [INFO] server_scripts:main.js#2: Hello, World! (Loaded server example script)
-[18:28:01] [INFO] Loaded script server_scripts:main.js in 0.001 s
-[18:28:01] [INFO] Loaded 1/1 KubeJS server scripts in 0.026 s with 0 errors and 0 warnings
-[18:28:06] [INFO] Server resource reload complete!
+[21:28:37] [INIT] KubeJS 2101.7.2-build.363; MC 2101 NeoForge
+[21:28:37] [INIT] Loaded plugins:
+[21:28:37] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSPlugin
+[21:28:37] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin
+[21:28:37] [INIT] - dev.latvian.mods.kubejs.integration.architectury.ArchitecturyIntegration
+[21:28:37] [INIT] - io.github.mortuusars.exposure.neoforge.integration.kubejs.ExposureKubeJSPlugin
+[21:28:37] [INIT] - com.lowdragmc.lowdraglib2.integration.kjs.LDLibKubeJSPlugin
+[21:28:37] [INIT] - com.lightning.northstar.compat.kubejs.NorthstarKubeJsPlugin
+[21:28:37] [INIT] - dev.propulsionteam.propulsionsimulated.compat.kubejs.PropulsionKubeJSPlugin
+[21:28:37] [INIT] - dev.propulsionteam.propulsionsimulated.compat.kubejs.PropulsionKubeJSPlugin
+[21:28:37] [INIT] - dev.latvian.mods.kubejs.create.KubeJSCreatePlugin
+[21:28:37] [INIT] - fr.lucreeper74.createmetallurgy.compat.kubejs.CreateMetallurgyKJS
+[21:28:37] [INFO] server_scripts:main.js#2: Hello, World! (Loaded server example script)
+[21:28:37] [INFO] Loaded script server_scripts:main.js in 0.0 s
+[21:28:38] [INFO] Loaded 1/1 KubeJS server scripts in 0.058 s with 0 errors and 0 warnings

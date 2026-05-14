@@ -1,72 +1,15 @@
 {
   "minecraft:recipes/decorations/crafting_table": {
     "criteria": {
-      "unlock_right_away": "2026-05-11 16:54:51 -0400"
-    },
-    "done": true
-  },
-  "lootr:root": {
-    "criteria": {
-      "always_true": "2026-05-11 16:54:51 -0400"
+      "unlock_right_away": "2026-05-12 19:24:11 -0400"
     },
     "done": true
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
-      "minecraft:forest": "2026-05-11 16:55:59 -0400",
-      "minecraft:taiga": "2026-05-11 18:29:14 -0400",
-      "minecraft:river": "2026-05-11 16:55:43 -0400",
-      "minecraft:plains": "2026-05-11 16:54:53 -0400"
+      "minecraft:birch_forest": "2026-05-12 19:24:10 -0400"
     },
     "done": false
-  },
-  "create_bic_bit:welcome": {
-    "criteria": {
-      "inventory_changed": "2026-05-11 18:29:41 -0400"
-    },
-    "done": true
-  },
-  "create:root": {
-    "criteria": {
-      "0": "2026-05-11 18:29:41 -0400"
-    },
-    "done": true
-  },
-  "simulated:root": {
-    "criteria": {
-      "0": "2026-05-11 18:29:41 -0400"
-    },
-    "done": true
-  },
-  "aeronautics:root": {
-    "criteria": {
-      "0": "2026-05-11 18:29:41 -0400"
-    },
-    "done": true
-  },
-  "lootr:social": {
-    "criteria": {
-      "opened_chest": "2026-05-11 18:29:33 -0400"
-    },
-    "done": false
-  },
-  "create_enchantment_industry:root": {
-    "criteria": {
-      "0": "2026-05-11 18:29:41 -0400"
-    },
-    "done": true
-  },
-  "lootr:1chest": {
-    "criteria": {
-      "opened_chest": "2026-05-11 18:29:33 -0400"
-    },
-    "done": true
-  },
-  "create_connected:root": {
-    "criteria": {
-      "0": "2026-05-11 18:29:41 -0400"
-    },
-    "done": true
   },
   "DataVersion": 3955
 }

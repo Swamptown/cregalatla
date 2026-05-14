@@ -1,16 +1,17 @@
-[18:26:58] [INIT] KubeJS 2101.7.2-build.363; MC 2101 NeoForge
-[18:26:58] [INIT] Loaded plugins:
-[18:26:58] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSPlugin
-[18:26:58] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin
-[18:26:58] [INIT] - dev.latvian.mods.kubejs.integration.architectury.ArchitecturyIntegration
-[18:26:58] [INIT] - com.lowdragmc.lowdraglib2.integration.kjs.LDLibKubeJSPlugin
-[18:26:58] [INIT] - dev.bluephs.createvintageneoforged.compat.kubejs.VintagejsPlugin
-[18:26:58] [INIT] - com.lightning.northstar.compat.kubejs.NorthstarKubeJsPlugin
-[18:26:58] [INIT] - dev.propulsionteam.propulsionsimulated.compat.kubejs.PropulsionKubeJSPlugin
-[18:26:58] [INIT] - dev.propulsionteam.propulsionsimulated.compat.kubejs.PropulsionKubeJSPlugin
-[18:26:58] [INIT] - dev.latvian.mods.kubejs.create.KubeJSCreatePlugin
-[18:26:59] [INFO] startup_scripts:main.js#2: Hello, World! (Loaded startup example script)
-[18:26:59] [INFO] Loaded script startup_scripts:main.js in 0.064 s
-[18:26:59] [INFO] Loaded 1/1 KubeJS startup scripts in 0.736 s with 0 errors and 0 warnings
-[18:26:59] [INFO] Validated 0 files in kubejs/assets/ in 1ms
-[18:26:59] [INFO] Validated 0 files in kubejs/data/ in 0ms
+[20:41:13] [INIT] KubeJS 2101.7.2-build.363; MC 2101 NeoForge
+[20:41:13] [INIT] Loaded plugins:
+[20:41:13] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSPlugin
+[20:41:13] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin
+[20:41:13] [INIT] - dev.latvian.mods.kubejs.integration.architectury.ArchitecturyIntegration
+[20:41:13] [INIT] - io.github.mortuusars.exposure.neoforge.integration.kubejs.ExposureKubeJSPlugin
+[20:41:13] [INIT] - com.lowdragmc.lowdraglib2.integration.kjs.LDLibKubeJSPlugin
+[20:41:13] [INIT] - com.lightning.northstar.compat.kubejs.NorthstarKubeJsPlugin
+[20:41:13] [INIT] - dev.propulsionteam.propulsionsimulated.compat.kubejs.PropulsionKubeJSPlugin
+[20:41:13] [INIT] - dev.propulsionteam.propulsionsimulated.compat.kubejs.PropulsionKubeJSPlugin
+[20:41:13] [INIT] - dev.latvian.mods.kubejs.create.KubeJSCreatePlugin
+[20:41:13] [INIT] - fr.lucreeper74.createmetallurgy.compat.kubejs.CreateMetallurgyKJS
+[20:41:14] [INFO] startup_scripts:main.js#2: Hello, World! (Loaded startup example script)
+[20:41:14] [INFO] Loaded script startup_scripts:main.js in 0.048 s
+[20:41:14] [INFO] Loaded 1/1 KubeJS startup scripts in 0.783 s with 0 errors and 0 warnings
+[20:41:14] [INFO] Validated 2 files in kubejs/assets/ in 1ms
+[20:41:14] [INFO] Validated 0 files in kubejs/data/ in 0ms

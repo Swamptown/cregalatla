@@ -1,5 +1,50 @@
-/kill @e[tag=!player]
-/kill @e[type=!minecraft:player]
+/advancement grant Rasgajag from mymod:air
+/advancement grant Rasgajag from mymod:earth
+/advancement grant Rasgajag from mymod:fire
+/advancement grant Rasgajag from mymod:water
+/scoreboard objectives list
+/scoreboard objectives setdisplay sidebar 10
+/scoreboard objectives setdisplay sidebar damage
+/gamemode creative
+/attribute Rasgajag minecraft:generic.attack_damage base set 0
+/attribute mxwl minecraft:generic.attack_damage base set 0
+/attribute mxwl minecraft:generic.fall_damage_multiplier get
+/attribute mxwl minecraft:generic.fall_damage_multiplier base set 0.5
+/attribute Rasgajag minecraft:generic.fall_damage_multiplier base set 0.5
+/attribute Rasgajag minecraft:generic.knockback_resistance base get
+/attribute Rasgajag minecraft:generic.knockback_resistance base set 1
+/attribute mxwl minecraft:generic.knockback_resistance base set 1
+/gamemode survival Rasgajag
+/tp mxwl
+/effect give Rasgajag minecraft:regeneration 1 255
+/attribute mxwl minecraft:generic.knockback_resistance base set .5
+/attribute mxwl minecraft:generic.knockback_resistance base set .25
+/effect give Rasgajag minecraft:regeneration 1 255
+/gamemode creative
+/gamemode survival
+/clear Rasgajag
+/gamemode creative
+/gamemode survival
+/tp mxwl
 /time set day
-/gamerule doDaylightCycle false
-/kill @e[type=!minecraft:player]
+/clear mxwl bow
+/gamemode creative
+/weather clear
+/give Rasgajag mymod:airbamb
+/tp mxwl
+/gamemode survival mxwl
+/locate structure mymod:firetemple1
+/tp @s 2160 ~ 1440
+/locate structure mymod:firetemple_3
+/tp @s 1824 ~ 912
+/attribute Rasgajag minecraft:generic.attack_damage base set 100
+/attribute Rasgajag minecraft:generic.attack_damage base set 0
+/give Rasgajag mymod:earthcore
+/locate structure minecraft:village_plains
+/tp @s 32 ~ 3488
+/attribute mxwl minecraft:generic.fall_damage_multiplier get
+/attribute mxwl minecraft:generic.fall_damage_multiplier base get
+/attribute mxwl minecraft:generic.fall_damage_multiplier base set 0.1
+/attribute mxwl minecraft:generic.fall_damage_multiplier base set .25
+/attribute mxwl minecraft:generic.knockback_resistance base get
+/data get entity d5de095d-6048-4a96-bd1b-ed1ded1b5da2

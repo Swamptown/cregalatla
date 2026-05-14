@@ -1,0 +1,262 @@
+{
+  "config_version": "2.0.22",
+  "config_datetime": "2026-05-06_01-01-10",
+  "general": {
+    "disable_all_structures": false,
+    "prevent_structure_overlap": false,
+    "enable_global_spacing_and_separation_modifier": false,
+    "global_spacing_and_separation_modifier": 1.0
+  },
+  "structure_namespaces": [
+    {
+      "name": "global",
+      "is_disabled": false,
+      "override_global_flatness_check": false,
+      "enable_flatness_check": true,
+      "flatness_check_allow_non_solid_blocks": false
+    }
+  ],
+  "structures": [],
+  "structure_sets": [
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:big_1",
+      "is_disabled": false,
+      "salt": 878977526,
+      "frequency": 0.505,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:big_1": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:big_2",
+      "is_disabled": false,
+      "salt": 878785151,
+      "frequency": 0.497,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:big_2": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:camp_1",
+      "is_disabled": false,
+      "salt": 541139603,
+      "frequency": 0.52500004,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:camp_1": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:camp_2",
+      "is_disabled": false,
+      "salt": 540177731,
+      "frequency": 0.51000005,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:camp_2": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:camp_3",
+      "is_disabled": false,
+      "salt": 539985357,
+      "frequency": 0.508,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:camp_3": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:camp_4",
+      "is_disabled": false,
+      "salt": 540562480,
+      "frequency": 0.508,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:camp_4": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:camp_5",
+      "is_disabled": false,
+      "salt": 540370106,
+      "frequency": 0.508,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:camp_5": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:factory_1",
+      "is_disabled": false,
+      "salt": 991993825,
+      "frequency": 0.508,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:factory_1": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:factory_2",
+      "is_disabled": false,
+      "salt": 991801451,
+      "frequency": 0.508,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:factory_2": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:foresttracks",
+      "is_disabled": false,
+      "salt": 1204635669,
+      "frequency": 0.49500003,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:foresttracks": 1
+      }
+    },
+    {
+      "spacing": 50,
+      "separation": 25,
+      "name": "create_easy_structures:freight_station",
+      "is_disabled": false,
+      "salt": 1354297359,
+      "frequency": 0.47500002,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:freight_station": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:house_2",
+      "is_disabled": false,
+      "salt": 1601847478,
+      "frequency": 0.492,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:house_2": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:house_3",
+      "is_disabled": false,
+      "salt": 1600885606,
+      "frequency": 0.49500003,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:house_3": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 25,
+      "name": "create_easy_structures:house_4",
+      "is_disabled": false,
+      "salt": 1600693231,
+      "frequency": 0.485,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:house_4": 1
+      }
+    },
+    {
+      "spacing": 50,
+      "separation": 15,
+      "name": "create_easy_structures:undergroundtrain",
+      "is_disabled": false,
+      "salt": 1719461658,
+      "frequency": 0.47500002,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:undergroundtrain": 1
+      }
+    },
+    {
+      "spacing": 60,
+      "separation": 15,
+      "name": "create_easy_structures:windmill",
+      "is_disabled": false,
+      "salt": 353987075,
+      "frequency": 0.5,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_easy_structures:windmill": 1
+      }
+    },
+    {
+      "spacing": 32,
+      "separation": 16,
+      "name": "create_rustic_structures:rustic_barn",
+      "is_disabled": false,
+      "salt": 1218093568,
+      "frequency": 0.492,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_rustic_structures:rustic_barn": 1
+      }
+    },
+    {
+      "spacing": 24,
+      "separation": 12,
+      "name": "create_rustic_structures:rustic_smithy",
+      "is_disabled": false,
+      "salt": 703989288,
+      "frequency": 0.513,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_rustic_structures:rustic_smithy": 1
+      }
+    },
+    {
+      "spacing": 16,
+      "separation": 8,
+      "name": "create_rustic_structures:rustic_well",
+      "is_disabled": false,
+      "salt": 1221516354,
+      "frequency": 0.518,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_rustic_structures:rustic_well": 1
+      }
+    },
+    {
+      "spacing": 24,
+      "separation": 12,
+      "name": "create_rustic_structures:rustic_windmill",
+      "is_disabled": false,
+      "salt": 1297317345,
+      "frequency": 0.513,
+      "override_global_spacing_and_separation_modifier": false,
+      "structure_weights": {
+        "create_rustic_structures:rustic_windmill": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+[20:41:15.187] [INFO]: Loading config 'startup.json'.
+[20:41:18.659] [INFO]: Loaded plugins: almostunified:neoforge, almostunified:common
+[21:28:39.151] [WARN]: Reload detected. Reconstructing runtime.
+[21:28:39.153] [INFO]: Loading config 'debug.json'.
+[21:28:39.155] [INFO]: Loading config 'placeholders.json'.
+[21:28:39.159] [INFO]: Loading config 'tags.json'.
+[21:28:39.184] [INFO]: [AutoHiding] Hiding 8/10 items for tag '#c:ores/iron' -> [northstar:moon_iron_ore, northstar:venus_iron_ore, northstar:mars_deep_iron_ore, northstar:mars_iron_ore, northstar:mercury_deep_iron_ore, northstar:moon_deep_iron_ore, northstar:venus_deep_iron_ore, northstar:mercury_iron_ore]
+[21:28:39.185] [INFO]: [AutoHiding] Hiding 8/10 items for tag '#c:ores/copper' -> [northstar:moon_copper_ore, northstar:mercury_deep_copper_ore, northstar:mars_copper_ore, northstar:venus_copper_ore, northstar:mercury_copper_ore, northstar:mars_deep_copper_ore, northstar:venus_deep_copper_ore, northstar:moon_deep_copper_ore]
+[21:28:39.185] [INFO]: [AutoHiding] Hiding 8/10 items for tag '#c:ores/diamond' -> [northstar:mercury_deep_diamond_ore, northstar:venus_deep_diamond_ore, northstar:mars_diamond_ore, northstar:moon_diamond_ore, northstar:mercury_diamond_ore, northstar:moon_deep_diamond_ore, northstar:venus_diamond_ore, northstar:mars_deep_diamond_ore]
+[21:28:39.185] [INFO]: [AutoHiding] Hiding 4/6 items for tag '#c:ores/lapis' -> [northstar:mercury_lapis_ore, northstar:moon_lapis_ore, northstar:moon_deep_lapis_ore, northstar:mercury_deep_lapis_ore]
+[21:28:39.186] [INFO]: [AutoHiding] Hiding 8/11 items for tag '#c:ores/gold' -> [northstar:mars_deep_gold_ore, northstar:mars_gold_ore, northstar:moon_deep_gold_ore, northstar:mercury_deep_gold_ore, northstar:venus_deep_gold_ore, northstar:mercury_gold_ore, northstar:moon_gold_ore, northstar:venus_gold_ore]
+[21:28:39.186] [INFO]: [AutoHiding] Hiding 8/10 items for tag '#c:ores/zinc' -> [northstar:moon_zinc_ore, northstar:mercury_zinc_ore, northstar:mars_zinc_ore, northstar:mars_deep_zinc_ore, northstar:mercury_deep_zinc_ore, northstar:moon_deep_zinc_ore, northstar:venus_deep_zinc_ore, northstar:venus_zinc_ore]
+[21:28:39.296] [INFO]: Loading config 'duplicates.json'.
+[21:28:39.299] [INFO]: Recipe count: 10442
+[21:28:39.329] [INFO]: 9574 out of 10442 recipes were loaded for unification.
+[21:28:39.658] [INFO]: Recipe count afterwards: 10362 (done in 358.3 ms)
