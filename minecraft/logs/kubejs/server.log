@@ -1,15 +1,16 @@
-[21:28:37] [INIT] KubeJS 2101.7.2-build.363; MC 2101 NeoForge
-[21:28:37] [INIT] Loaded plugins:
-[21:28:37] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSPlugin
-[21:28:37] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin
-[21:28:37] [INIT] - dev.latvian.mods.kubejs.integration.architectury.ArchitecturyIntegration
-[21:28:37] [INIT] - io.github.mortuusars.exposure.neoforge.integration.kubejs.ExposureKubeJSPlugin
-[21:28:37] [INIT] - com.lowdragmc.lowdraglib2.integration.kjs.LDLibKubeJSPlugin
-[21:28:37] [INIT] - com.lightning.northstar.compat.kubejs.NorthstarKubeJsPlugin
-[21:28:37] [INIT] - dev.propulsionteam.propulsionsimulated.compat.kubejs.PropulsionKubeJSPlugin
-[21:28:37] [INIT] - dev.propulsionteam.propulsionsimulated.compat.kubejs.PropulsionKubeJSPlugin
-[21:28:37] [INIT] - dev.latvian.mods.kubejs.create.KubeJSCreatePlugin
-[21:28:37] [INIT] - fr.lucreeper74.createmetallurgy.compat.kubejs.CreateMetallurgyKJS
-[21:28:37] [INFO] server_scripts:main.js#2: Hello, World! (Loaded server example script)
-[21:28:37] [INFO] Loaded script server_scripts:main.js in 0.0 s
-[21:28:38] [INFO] Loaded 1/1 KubeJS server scripts in 0.058 s with 0 errors and 0 warnings
+[16:36:17] [INIT] KubeJS 2101.7.2-build.363; MC 2101 NeoForge
+[16:36:17] [INIT] Loaded plugins:
+[16:36:17] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSPlugin
+[16:36:17] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin
+[16:36:17] [INIT] - dev.latvian.mods.kubejs.integration.architectury.ArchitecturyIntegration
+[16:36:17] [INIT] - io.github.mortuusars.exposure.neoforge.integration.kubejs.ExposureKubeJSPlugin
+[16:36:17] [INIT] - com.lowdragmc.lowdraglib2.integration.kjs.LDLibKubeJSPlugin
+[16:36:17] [INIT] - com.tom.createores.kubejs.KubeJSExcavation
+[16:36:17] [INIT] - dev.latvian.mods.kubejs.create.KubeJSCreatePlugin
+[16:36:17] [INIT] - fr.lucreeper74.createmetallurgy.compat.kubejs.CreateMetallurgyKJS
+[16:36:17] [INFO] server_scripts:main.js#2: Hello, World! (Loaded server example script)
+[16:36:17] [INFO] Loaded script server_scripts:main.js in 0.0 s
+[16:36:17] [INFO] Loaded 1/1 KubeJS server scripts in 0.019 s with 0 errors and 0 warnings
+[16:36:17] [WARN] Due to the way Minecraft resource loading works, KubeJS' server.log may not contain everything that happened in your server scripts on initial world creation.
+[16:36:17] [WARN] You can still see the full log (including past reloads) in your latest.log file.
+[16:36:21] [INFO] Server resource reload complete!

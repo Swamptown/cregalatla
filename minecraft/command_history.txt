@@ -1,5 +1,3 @@
-/advancement grant Rasgajag from mymod:air
-/advancement grant Rasgajag from mymod:earth
 /advancement grant Rasgajag from mymod:fire
 /advancement grant Rasgajag from mymod:water
 /scoreboard objectives list
@@ -48,3 +46,5 @@
 /attribute mxwl minecraft:generic.fall_damage_multiplier base set .25
 /attribute mxwl minecraft:generic.knockback_resistance base get
 /data get entity d5de095d-6048-4a96-bd1b-ed1ded1b5da2
+/datapack list
+/give Rasgajag minecraft:bundle
