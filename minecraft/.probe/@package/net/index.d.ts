@@ -1,0 +1,9 @@
+export * as minecraft from "@package/net/minecraft";
+export * as neoforged from "@package/net/neoforged";
+export * as fabricmc from "@package/net/fabricmc";
+export * as mehvahdjukaar from "@package/net/mehvahdjukaar";
+export * as caffeinemc from "@package/net/caffeinemc";
+export * as blay09 from "@package/net/blay09";
+export * as createmod from "@package/net/createmod";
+export * as mcreator from "@package/net/mcreator";
+export * as zlt from "@package/net/zlt";

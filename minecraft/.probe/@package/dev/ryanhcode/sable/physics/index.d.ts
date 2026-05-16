@@ -1,0 +1,15 @@
+import { $BlockPos_ } from "@package/net/minecraft/core";
+import { $RigidBodyHandle } from "@package/dev/ryanhcode/sable/api/physics/handle";
+import { $BlockEntitySubLevelReactionWheel } from "@package/dev/ryanhcode/sable/api/block";
+import { $ServerSubLevel } from "@package/dev/ryanhcode/sable/sublevel";
+export * as config from "@package/dev/ryanhcode/sable/physics/config";
+export * as floating_block from "@package/dev/ryanhcode/sable/physics/floating_block";
+
+declare module "@package/dev/ryanhcode/sable/physics" {
+    export class $ReactionWheelManager {
+        needsTicking(): boolean;
+        wheelChanged(arg0: $BlockPos_, arg1: $BlockEntitySubLevelReactionWheel, arg2: boolean): void;
+        physicsTick(arg0: $RigidBodyHandle): void;
+        constructor(arg0: $ServerSubLevel);
+    }
+}

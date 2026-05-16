@@ -1,10 +1,2 @@
-[16:35:41.123] [INFO]: Loading config 'startup.json'.
-[16:35:44.213] [INFO]: Loaded plugins: almostunified:neoforge, almostunified:common
-[16:36:14.346] [WARN]: Reload detected. Reconstructing runtime.
-[16:36:14.347] [INFO]: Loading config 'debug.json'.
-[16:36:14.349] [INFO]: Loading config 'placeholders.json'.
-[16:36:14.352] [INFO]: Loading config 'tags.json'.
-[16:36:14.465] [INFO]: Loading config 'duplicates.json'.
-[16:36:14.467] [INFO]: Recipe count: 9951
-[16:36:14.491] [INFO]: 9078 out of 9951 recipes were loaded for unification.
-[16:36:14.648] [INFO]: Recipe count afterwards: 9935 (done in 181.2 ms)
+[17:53:22.577] [INFO]: Loading config 'startup.json'.
+[17:53:26.597] [INFO]: Loaded plugins: almostunified:common, almostunified:neoforge

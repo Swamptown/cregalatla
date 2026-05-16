@@ -1,6 +1,18 @@
 {
   "favorites": [],
   "lookup_history": [
+    {
+      "type": "jemi",
+      "uid": "createoreexcavation:ore_vein_type/hardened_diamond"
+    },
+    "item:minecraft:oak_log",
+    "item:minecraft:spruce_door",
+    "item:createoreexcavation:vein_finder",
+    "item:createoreexcavation:drilling_machine",
+    "item:minecraft:oak_fence_gate",
+    "item:minecraft:stripped_spruce_wood",
+    "item:create_enchantment_industry:super_enchanting_template",
+    "item:create_enchantment_industry:super_experience_block",
     "item:mymod:airbambdown",
     "item:mymod:airbamb",
     "mob_effect:mymod:earthinggone",
@@ -17,16 +29,12 @@
     "mob_effect:mymod:bender",
     "item:create:potato_cannon",
     "item:minecraft:short_grass",
-    "item:northstar:raw_titanium_ore",
-    "item:northstar:titanium_ingot",
-    "item:northstar:titanium_block",
     "item:create:empty_schematic",
     "#item:create:stone_types/crimsite",
     "item:create:cut_crimsite_bricks",
     "item:create:layered_crimsite",
     "item:dndecor:crimsite_millstone",
     "item:create:cut_crimsite_stairs",
-    "item:sophisticatedcore:xp_bucket",
     "item:minecraft:dark_oak_log",
     "item:create_vibrant_vaults:red_vertical_shipping_container",
     "item:tfmg:zinc_electrode",
@@ -52,12 +60,10 @@
     "item:tfmg:blue_multimeter",
     "item:minecraft:cobblestone",
     "item:createcobblestone:mechanical_generator{\"minecraft:block_entity_data\":{id:\"createcobblestone:mechanical_generator\",type:\"none\"}}",
-    "item:createpropulsion:solid_burner",
     "item:create:crimsite",
     "item:create:cut_crimsite",
     "item:create:asurine_pillar",
     "item:create:cut_dripstone_brick_wall",
-    "item:createpropulsion:liquid_burner",
     "item:create:bar_of_chocolate",
     {
       "type": "fluid",
@@ -71,13 +77,7 @@
       "type": "fluid",
       "id": "aeronautics:levitite_blend",
       "amount": 0
-    },
-    {
-      "type": "fluid",
-      "id": "createpropulsion:coral",
-      "amount": 0
-    },
-    "item:createpropulsion:tilt_adapter"
+    }
   ],
   "craft_history": [],
   "recipe_defaults": {

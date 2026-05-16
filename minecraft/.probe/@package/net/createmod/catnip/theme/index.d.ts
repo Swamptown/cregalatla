@@ -1,0 +1,64 @@
+import { $UnaryOperator_ } from "@package/java/util/function";
+import { $Style } from "@package/net/minecraft/network/chat";
+import { $Vec3 } from "@package/net/minecraft/world/phys";
+import { $Couple } from "@package/net/createmod/catnip/data";
+import { $Vector3f } from "@package/org/joml";
+
+declare module "@package/net/createmod/catnip/theme" {
+    export class $Color {
+        copy(arg0: boolean): $Color;
+        copy(): $Color;
+        setValue(arg0: number): $Color;
+        brighter(): $Color;
+        darker(): $Color;
+        asVectorF(): $Vector3f;
+        static mixColors(arg0: $Color, arg1: $Color, arg2: number): $Color;
+        static mixColors(arg0: number, arg1: number, arg2: number): number;
+        static mixColors(arg0: $Couple<$Color>, arg1: number): $Color;
+        static rainbowColor(arg0: number): $Color;
+        static generateFromLong(arg0: number): $Color;
+        getRedAsFloat(): number;
+        getGreenAsFloat(): number;
+        getBlueAsFloat(): number;
+        getAlphaAsFloat(): number;
+        asVector(): $Vec3;
+        asStyle(): $Style;
+        ensureMutable(): $Color;
+        scaleAlpha(arg0: number): $Color;
+        scaleAlphaForText(arg0: number): $Color;
+        mixWith(arg0: $Color, arg1: number): $Color;
+        modifyValue(arg0: $UnaryOperator_<number>): $Color;
+        setRed(arg0: number): $Color;
+        setRed(arg0: number): $Color;
+        setGreen(arg0: number): $Color;
+        setGreen(arg0: number): $Color;
+        setBlue(arg0: number): $Color;
+        setBlue(arg0: number): $Color;
+        setImmutable(): $Color;
+        getRed(): number;
+        getGreen(): number;
+        getBlue(): number;
+        getAlpha(): number;
+        getRGB(): number;
+        setAlpha(arg0: number): $Color;
+        setAlpha(arg0: number): $Color;
+        static RED: $Color;
+        static TRANSPARENT_BLACK: $Color;
+        static WHITE: $Color;
+        static BLACK: $Color;
+        static SPRING_GREEN: $Color;
+        static PURPLE: $Color;
+        static GREEN: $Color;
+        constructor(arg0: number, arg1: boolean);
+        constructor(arg0: number);
+        constructor(arg0: number, arg1: number, arg2: number, arg3: number);
+        constructor(arg0: number, arg1: number, arg2: number, arg3: number);
+        constructor(arg0: number, arg1: number, arg2: number);
+        set value(value: number);
+        get redAsFloat(): number;
+        get greenAsFloat(): number;
+        get blueAsFloat(): number;
+        get alphaAsFloat(): number;
+        get RGB(): number;
+    }
+}

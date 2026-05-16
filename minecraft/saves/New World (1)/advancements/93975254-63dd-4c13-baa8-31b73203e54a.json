@@ -1,0 +1,33 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:savanna": "2026-05-15 23:19:44 -0400"
+    },
+    "done": false
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2026-05-15 23:19:45 -0400"
+    },
+    "done": true
+  },
+  "global:2mal3": {
+    "criteria": {
+      "trigger": "2026-05-15 23:19:45 -0400"
+    },
+    "done": true
+  },
+  "2mal3:adco/installed": {
+    "criteria": {
+      "trigger": "2026-05-15 23:19:45 -0400"
+    },
+    "done": true
+  },
+  "global:root": {
+    "criteria": {
+      "trigger": "2026-05-15 23:19:45 -0400"
+    },
+    "done": true
+  },
+  "DataVersion": 3955
+}

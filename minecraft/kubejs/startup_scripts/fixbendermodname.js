@@ -1,0 +1,1 @@
+Platform.mods.mymod.name = 'Bending Styles'

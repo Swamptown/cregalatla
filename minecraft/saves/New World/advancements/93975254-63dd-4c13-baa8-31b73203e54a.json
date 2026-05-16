@@ -1,79 +1,31 @@
 {
-  "minecraft:recipes/building_blocks/jungle_wood": {
-    "criteria": {
-      "has_log": "2026-05-14 16:37:37 -0400"
-    },
-    "done": true
-  },
-  "create:root": {
-    "criteria": {
-      "0": "2026-05-14 16:36:41 -0400"
-    },
-    "done": true
-  },
   "minecraft:recipes/decorations/crafting_table": {
     "criteria": {
-      "unlock_right_away": "2026-05-14 16:36:26 -0400"
+      "unlock_right_away": "2026-05-15 23:12:20 -0400"
     },
     "done": true
   },
-  "simulated:root": {
+  "global:2mal3": {
     "criteria": {
-      "0": "2026-05-14 16:36:41 -0400"
+      "trigger": "2026-05-15 23:12:20 -0400"
     },
     "done": true
   },
-  "aeronautics:root": {
+  "2mal3:adco/installed": {
     "criteria": {
-      "0": "2026-05-14 16:36:41 -0400"
-    },
-    "done": true
-  },
-  "exposure:recipes/decorations/lightroom": {
-    "criteria": {
-      "has_developed_film": "2026-05-14 16:36:41 -0400"
-    },
-    "done": true
-  },
-  "create_enchantment_industry:root": {
-    "criteria": {
-      "0": "2026-05-14 16:36:41 -0400"
-    },
-    "done": true
-  },
-  "minecraft:recipes/misc/charcoal": {
-    "criteria": {
-      "has_log": "2026-05-14 16:37:37 -0400"
-    },
-    "done": true
-  },
-  "create_connected:root": {
-    "criteria": {
-      "0": "2026-05-14 16:36:41 -0400"
-    },
-    "done": true
-  },
-  "global:better_bundle": {
-    "criteria": {
-      "trigger": "2026-05-14 16:36:26 -0400"
+      "trigger": "2026-05-15 23:12:20 -0400"
     },
     "done": true
   },
   "global:root": {
     "criteria": {
-      "trigger": "2026-05-14 16:36:26 -0400"
-    },
-    "done": true
-  },
-  "minecraft:recipes/building_blocks/jungle_planks": {
-    "criteria": {
-      "has_logs": "2026-05-14 16:37:37 -0400"
+      "trigger": "2026-05-15 23:12:20 -0400"
     },
     "done": true
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
-      "minecraft:sparse_jungle": "2026-05-14 16:36:24 -0400"
+      "minecraft:wooded_badlands": "2026-05-15 23:12:19 -0400"
     },
     "done": false
   },
