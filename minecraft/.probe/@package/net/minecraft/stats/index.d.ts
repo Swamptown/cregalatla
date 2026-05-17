@@ -137,14 +137,16 @@ declare module "@package/net/minecraft/stats" {
         constructor();
     }
     export class $RecipeBook {
-        remove(arg0: $RecipeHolder_<never>): void;
         remove(arg0: $ResourceLocation_): void;
+        remove(arg0: $RecipeHolder_<never>): void;
         add(arg0: $ResourceLocation_): void;
         add(arg0: $RecipeHolder_<never>): void;
         contains(arg0: $ResourceLocation_): boolean;
         contains(arg0: $RecipeHolder_<never>): boolean;
         isOpen(arg0: $RecipeBookType_): boolean;
         copyOverData(arg0: $RecipeBook): void;
+        willHighlight(arg0: $RecipeHolder_<never>): boolean;
+        removeHighlight(arg0: $RecipeHolder_<never>): void;
         setOpen(arg0: $RecipeBookType_, arg1: boolean): void;
         addHighlight(arg0: $ResourceLocation_): void;
         addHighlight(arg0: $RecipeHolder_<never>): void;
@@ -154,8 +156,6 @@ declare module "@package/net/minecraft/stats" {
         setBookSettings(arg0: $RecipeBookSettings): void;
         getBookSettings(): $RecipeBookSettings;
         setBookSetting(arg0: $RecipeBookType_, arg1: boolean, arg2: boolean): void;
-        willHighlight(arg0: $RecipeHolder_<never>): boolean;
-        removeHighlight(arg0: $RecipeHolder_<never>): void;
         highlight: $Set<$ResourceLocation>;
         known: $Set<$ResourceLocation>;
         constructor();
@@ -198,9 +198,9 @@ declare module "@package/net/minecraft/stats" {
     export interface $StatType<T> extends RegistryMarked<RegistryTypes.StatTypeTag, RegistryTypes.StatType> {}
     export class $ServerStatsCounter extends $StatsCounter {
         save(): void;
-        sendStats(arg0: $ServerPlayer): void;
         parseLocal(arg0: $DataFixer, arg1: string): void;
         markAllDirty(): void;
+        sendStats(arg0: $ServerPlayer): void;
         toJson(): string;
         stats: $Object2IntMap<$Stat<never>>;
         constructor(arg0: $MinecraftServer, arg1: $File_);

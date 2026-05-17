@@ -10,9 +10,9 @@ declare module "@package/xaero/map/highlight" {
     export class $AbstractHighlighter {
         isCoveringOutsideDiscovered(): boolean;
         regionHasHighlights(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): boolean;
+        chunkIsHighlit(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): boolean;
         getChunkHighlitColor(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): number[];
         calculateRegionHash(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): number;
-        chunkIsHighlit(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): boolean;
         getBlockHighlightSubtleTooltip(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): $Component;
         getBlockHighlightBluntTooltip(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): $Component;
         addMinimapBlockHighlightTooltips(arg0: $List_<$Component_>, arg1: $ResourceKey_<$Level>, arg2: number, arg3: number, arg4: number): void;
@@ -20,10 +20,10 @@ declare module "@package/xaero/map/highlight" {
     }
     export class $DimensionHighlighterHandler {
         static getKey(arg0: number, arg1: number): number;
+        clearCachedHashes(): void;
         clearCachedHash(arg0: number, arg1: number): void;
         static getXFromKey(arg0: number): number;
         static getZFromKey(arg0: number): number;
-        clearCachedHashes(): void;
         getRegionHash(arg0: number, arg1: number): number;
         getBlockHighlightSubtleTooltip(arg0: number, arg1: number, arg2: boolean): $Component;
         getBlockHighlightBluntTooltip(arg0: number, arg1: number, arg2: boolean): $Component;

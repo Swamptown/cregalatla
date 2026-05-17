@@ -15,8 +15,8 @@ declare module "@package/net/neoforged/neoforgespi/language" {
         getClasses(): $Set<$ModFileScanData$ClassData>;
         getAnnotations(): $Set<$ModFileScanData$AnnotationData>;
         getAnnotatedBy(arg0: $Class<$Annotation>, arg1: $ElementType_): $Stream<$ModFileScanData$AnnotationData>;
-        getIModInfoData(): $List<$IModFileInfo>;
         addModFileInfo(arg0: $IModFileInfo): void;
+        getIModInfoData(): $List<$IModFileInfo>;
         constructor();
         get classes(): $Set<$ModFileScanData$ClassData>;
         get annotations(): $Set<$ModFileScanData$AnnotationData>;
@@ -31,12 +31,12 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $ModFileScanData$ClassData}.
      */
-    export type $ModFileScanData$ClassData_ = { parent?: $Type, clazz?: $Type, interfaces?: $Set_<$Type>,  } | [parent?: $Type, clazz?: $Type, interfaces?: $Set_<$Type>, ];
+    export type $ModFileScanData$ClassData_ = { interfaces?: $Set_<$Type>, clazz?: $Type, parent?: $Type,  } | [interfaces?: $Set_<$Type>, clazz?: $Type, parent?: $Type, ];
     export class $IModInfo$DependencySide extends $Enum<$IModInfo$DependencySide> {
         static values(): $IModInfo$DependencySide[];
         static valueOf(arg0: string): $IModInfo$DependencySide;
-        isCorrectSide(): boolean;
         isContained(arg0: $Dist_): boolean;
+        isCorrectSide(): boolean;
         static SERVER: $IModInfo$DependencySide;
         static CLIENT: $IModInfo$DependencySide;
         static BOTH: $IModInfo$DependencySide;
@@ -57,7 +57,7 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $ModFileScanData$AnnotationData}.
      */
-    export type $ModFileScanData$AnnotationData_ = { annotationData?: $Map_<string, $Object>, clazz?: $Type, memberName?: string, targetType?: $ElementType_, annotationType?: $Type,  } | [annotationData?: $Map_<string, $Object>, clazz?: $Type, memberName?: string, targetType?: $ElementType_, annotationType?: $Type, ];
+    export type $ModFileScanData$AnnotationData_ = { annotationType?: $Type, targetType?: $ElementType_, memberName?: string, clazz?: $Type, annotationData?: $Map_<string, $Object>,  } | [annotationType?: $Type, targetType?: $ElementType_, memberName?: string, clazz?: $Type, annotationData?: $Map_<string, $Object>, ];
     export class $IModInfo$ModVersion {
     }
     export interface $IModInfo$ModVersion {
@@ -109,9 +109,7 @@ declare module "@package/net/neoforged/neoforgespi/language" {
         getDisplayName(): string;
         getVersion(): $ArtifactVersion;
         getNamespace(): string;
-        getDescription(): string;
         getConfig(): $IConfigurable;
-        getModId(): string;
         getOwningFile(): $IModFileInfo;
         getDependencies(): $List<$IModInfo$ModVersion>;
         getForgeFeatures(): $List<$ForgeFeature$Bound>;
@@ -120,13 +118,13 @@ declare module "@package/net/neoforged/neoforgespi/language" {
         getModURL(): ($URL) | undefined;
         getLogoFile(): (string) | undefined;
         getLogoBlur(): boolean;
+        getModId(): string;
+        getDescription(): string;
         get loader(): $IModLanguageLoader;
         get displayName(): string;
         get version(): $ArtifactVersion;
         get namespace(): string;
-        get description(): string;
         get config(): $IConfigurable;
-        get modId(): string;
         get owningFile(): $IModFileInfo;
         get dependencies(): $List<$IModInfo$ModVersion>;
         get forgeFeatures(): $List<$ForgeFeature$Bound>;
@@ -135,6 +133,8 @@ declare module "@package/net/neoforged/neoforgespi/language" {
         get modURL(): ($URL) | undefined;
         get logoFile(): (string) | undefined;
         get logoBlur(): boolean;
+        get modId(): string;
+        get description(): string;
     }
     export class $IModFileInfo {
     }
@@ -178,5 +178,5 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $IModFileInfo$LanguageSpec}.
      */
-    export type $IModFileInfo$LanguageSpec_ = { languageName?: string, acceptedVersions?: $VersionRange,  } | [languageName?: string, acceptedVersions?: $VersionRange, ];
+    export type $IModFileInfo$LanguageSpec_ = { acceptedVersions?: $VersionRange, languageName?: string,  } | [acceptedVersions?: $VersionRange, languageName?: string, ];
 }

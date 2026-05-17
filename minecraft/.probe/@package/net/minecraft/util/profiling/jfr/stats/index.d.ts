@@ -18,7 +18,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $FileIOStat}.
      */
-    export type $FileIOStat_ = { duration?: $Duration_, bytes?: number, path?: string,  } | [duration?: $Duration_, bytes?: number, path?: string, ];
+    export type $FileIOStat_ = { path?: string, bytes?: number, duration?: $Duration_,  } | [path?: string, bytes?: number, duration?: $Duration_, ];
     export class $TimedStat {
     }
     export interface $TimedStat {
@@ -52,7 +52,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $ChunkGenStat}.
      */
-    export type $ChunkGenStat_ = { worldPos?: $ColumnPos_, status?: $ChunkStatus_, chunkPos?: $ChunkPos, level?: string, duration?: $Duration_,  } | [worldPos?: $ColumnPos_, status?: $ChunkStatus_, chunkPos?: $ChunkPos, level?: string, duration?: $Duration_, ];
+    export type $ChunkGenStat_ = { duration?: $Duration_, level?: string, chunkPos?: $ChunkPos, status?: $ChunkStatus_, worldPos?: $ColumnPos_,  } | [duration?: $Duration_, level?: string, chunkPos?: $ChunkPos, status?: $ChunkStatus_, worldPos?: $ColumnPos_, ];
     export class $GcHeapStat$Timing extends $Enum<$GcHeapStat$Timing> {
     }
     /**
@@ -83,7 +83,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $FileIOStat$Summary}.
      */
-    export type $FileIOStat$Summary_ = { bytesPerSecond?: number, countsPerSecond?: number, totalBytes?: number, topTenContributorsByTotalBytes?: $List_<$Pair<string, number>>, counts?: number, timeSpentInIO?: $Duration_,  } | [bytesPerSecond?: number, countsPerSecond?: number, totalBytes?: number, topTenContributorsByTotalBytes?: $List_<$Pair<string, number>>, counts?: number, timeSpentInIO?: $Duration_, ];
+    export type $FileIOStat$Summary_ = { timeSpentInIO?: $Duration_, counts?: number, topTenContributorsByTotalBytes?: $List_<$Pair<string, number>>, totalBytes?: number, countsPerSecond?: number, bytesPerSecond?: number,  } | [timeSpentInIO?: $Duration_, counts?: number, topTenContributorsByTotalBytes?: $List_<$Pair<string, number>>, totalBytes?: number, countsPerSecond?: number, bytesPerSecond?: number, ];
     export class $TimedStatSummary<T extends $TimedStat> extends $Record {
         count(): number;
         static summary<T extends $TimedStat>(arg0: $List_<T>): $TimedStatSummary<T>;
@@ -97,7 +97,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $TimedStatSummary}.
      */
-    export type $TimedStatSummary_<T> = { fastest?: $TimedStat_, slowest?: $TimedStat_, totalDuration?: $Duration_, secondSlowest?: $TimedStat_, percentilesNanos?: $Map_<number, number>, count?: number,  } | [fastest?: $TimedStat_, slowest?: $TimedStat_, totalDuration?: $Duration_, secondSlowest?: $TimedStat_, percentilesNanos?: $Map_<number, number>, count?: number, ];
+    export type $TimedStatSummary_<T> = { count?: number, percentilesNanos?: $Map_<number, number>, secondSlowest?: $TimedStat_, totalDuration?: $Duration_, slowest?: $TimedStat_, fastest?: $TimedStat_,  } | [count?: number, percentilesNanos?: $Map_<number, number>, secondSlowest?: $TimedStat_, totalDuration?: $Duration_, slowest?: $TimedStat_, fastest?: $TimedStat_, ];
     export class $ThreadAllocationStat extends $Record {
         static from(arg0: $RecordedEvent): $ThreadAllocationStat;
         timestamp(): $Instant;
@@ -109,7 +109,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $ThreadAllocationStat}.
      */
-    export type $ThreadAllocationStat_ = { totalBytes?: number, timestamp?: $Instant, threadName?: string,  } | [totalBytes?: number, timestamp?: $Instant, threadName?: string, ];
+    export type $ThreadAllocationStat_ = { threadName?: string, timestamp?: $Instant, totalBytes?: number,  } | [threadName?: string, timestamp?: $Instant, totalBytes?: number, ];
     export class $TickTimeStat extends $Record {
         static from(arg0: $RecordedEvent): $TickTimeStat;
         timestamp(): $Instant;
@@ -119,7 +119,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $TickTimeStat}.
      */
-    export type $TickTimeStat_ = { currentAverage?: $Duration_, timestamp?: $Instant,  } | [currentAverage?: $Duration_, timestamp?: $Instant, ];
+    export type $TickTimeStat_ = { timestamp?: $Instant, currentAverage?: $Duration_,  } | [timestamp?: $Instant, currentAverage?: $Duration_, ];
     export class $GcHeapStat$Summary extends $Record {
         duration(): $Duration;
         allocationRateBytesPerSecond(): number;
@@ -131,7 +131,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $GcHeapStat$Summary}.
      */
-    export type $GcHeapStat$Summary_ = { allocationRateBytesPerSecond?: number, gcTotalDuration?: $Duration_, duration?: $Duration_, totalGCs?: number,  } | [allocationRateBytesPerSecond?: number, gcTotalDuration?: $Duration_, duration?: $Duration_, totalGCs?: number, ];
+    export type $GcHeapStat$Summary_ = { totalGCs?: number, duration?: $Duration_, gcTotalDuration?: $Duration_, allocationRateBytesPerSecond?: number,  } | [totalGCs?: number, duration?: $Duration_, gcTotalDuration?: $Duration_, allocationRateBytesPerSecond?: number, ];
     export class $GcHeapStat extends $Record {
         static from(arg0: $RecordedEvent): $GcHeapStat;
         timestamp(): $Instant;
@@ -143,7 +143,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $GcHeapStat}.
      */
-    export type $GcHeapStat_ = { heapUsed?: number, timestamp?: $Instant, timing?: $GcHeapStat$Timing_,  } | [heapUsed?: number, timestamp?: $Instant, timing?: $GcHeapStat$Timing_, ];
+    export type $GcHeapStat_ = { timing?: $GcHeapStat$Timing_, timestamp?: $Instant, heapUsed?: number,  } | [timing?: $GcHeapStat$Timing_, timestamp?: $Instant, heapUsed?: number, ];
     export class $ChunkIdentification extends $Record {
         x(): number;
         static from(arg0: $RecordedEvent): $ChunkIdentification;
@@ -155,7 +155,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $ChunkIdentification}.
      */
-    export type $ChunkIdentification_ = { z?: number, x?: number, dimension?: string, level?: string,  } | [z?: number, x?: number, dimension?: string, level?: string, ];
+    export type $ChunkIdentification_ = { level?: string, dimension?: string, x?: number, z?: number,  } | [level?: string, dimension?: string, x?: number, z?: number, ];
     export class $CpuLoadStat extends $Record {
         static from(arg0: $RecordedEvent): $CpuLoadStat;
         system(): number;
@@ -166,7 +166,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $CpuLoadStat}.
      */
-    export type $CpuLoadStat_ = { system?: number, userJvm?: number, jvm?: number,  } | [system?: number, userJvm?: number, jvm?: number, ];
+    export type $CpuLoadStat_ = { jvm?: number, userJvm?: number, system?: number,  } | [jvm?: number, userJvm?: number, system?: number, ];
     export class $PacketIdentification extends $Record {
         static from(arg0: $RecordedEvent): $PacketIdentification;
         direction(): string;
@@ -177,7 +177,7 @@ declare module "@package/net/minecraft/util/profiling/jfr/stats" {
     /**
      * Values that may be interpreted as {@link $PacketIdentification}.
      */
-    export type $PacketIdentification_ = { packetId?: string, direction?: string, protocolId?: string,  } | [packetId?: string, direction?: string, protocolId?: string, ];
+    export type $PacketIdentification_ = { protocolId?: string, direction?: string, packetId?: string,  } | [protocolId?: string, direction?: string, packetId?: string, ];
     export class $ThreadAllocationStat$Summary extends $Record {
         allocationsPerSecondByThread(): $Map<string, number>;
         constructor(arg0: $Map_<string, number>);

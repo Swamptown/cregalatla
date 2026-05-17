@@ -42,7 +42,7 @@ declare module "@package/dev/latvian/mods/rhino/util/wrap" {
     /**
      * Values that may be interpreted as {@link $TypeWrapper}.
      */
-    export type $TypeWrapper_<T> = { target?: $Class<any>, factory?: $TypeWrapperFactory_<any>, validator?: $TypeWrapperValidator_,  } | [target?: $Class<any>, factory?: $TypeWrapperFactory_<any>, validator?: $TypeWrapperValidator_, ];
+    export type $TypeWrapper_<T> = { validator?: $TypeWrapperValidator_, factory?: $TypeWrapperFactory_<any>, target?: $Class<any>,  } | [validator?: $TypeWrapperValidator_, factory?: $TypeWrapperFactory_<any>, target?: $Class<any>, ];
     export class $TypeWrapperFactory<T> {
     }
     export interface $TypeWrapperFactory<T> {

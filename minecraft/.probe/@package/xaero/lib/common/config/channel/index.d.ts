@@ -19,9 +19,9 @@ export * as register from "@package/xaero/lib/common/config/channel/register";
 declare module "@package/xaero/lib/common/config/channel" {
     export class $ConfigChannel {
         getId(): $ResourceLocation;
-        getServerConfigManager(): $ServerConfigManager;
         setBuiltInPermissions(arg0: $BuiltInConfigChannelPermissions): void;
-        getServerConfigProfileIO(): $ConfigProfileManagerIO;
+        getServerConfigSynchronizer(): $ServerConfigChannelSynchronizer;
+        getPrimaryCommonConfigManagerIO(): $SingleConfigManagerIO<$Config>;
         getConfigOptionManager(): $ConfigOptionManager;
         getClientConfigSynchronizer(): $ClientConfigChannelSynchronizer;
         getPrimaryClientConfigOptionManager(): $ClientConfigOptionManager;
@@ -31,18 +31,18 @@ declare module "@package/xaero/lib/common/config/channel" {
         getClientRegistryHandler(): $IConfigChannelClientRegistryHandler;
         freezeOptionManagers(): void;
         getBuiltInPermissions(): $BuiltInConfigChannelPermissions;
-        getPrimaryCommonConfigManagerIO(): $SingleConfigManagerIO<$Config>;
-        getServerConfigSynchronizer(): $ServerConfigChannelSynchronizer;
+        getServerConfigManager(): $ServerConfigManager;
+        getServerConfigProfileIO(): $ConfigProfileManagerIO;
         postLoad(): void;
+        getPrimaryCommonConfigManager(): $SingleConfigManager<$Config>;
         getClientConfigProfileIO(): $ConfigProfileManagerIO;
         getClientConfigManager(): $ClientConfigManager;
         getPrimaryClientConfigManagerIO(): $SingleConfigManagerIO<$Config>;
-        getPrimaryCommonConfigManager(): $SingleConfigManager<$Config>;
         getPrimaryClientConfigManager(): $SingleConfigManager<$Config>;
         logger: $Logger;
         get id(): $ResourceLocation;
-        get serverConfigManager(): $ServerConfigManager;
-        get serverConfigProfileIO(): $ConfigProfileManagerIO;
+        get serverConfigSynchronizer(): $ServerConfigChannelSynchronizer;
+        get primaryCommonConfigManagerIO(): $SingleConfigManagerIO<$Config>;
         get configOptionManager(): $ConfigOptionManager;
         get clientConfigSynchronizer(): $ClientConfigChannelSynchronizer;
         get primaryClientConfigOptionManager(): $ClientConfigOptionManager;
@@ -50,12 +50,12 @@ declare module "@package/xaero/lib/common/config/channel" {
         get configOptionUITypeManager(): $ConfigOptionUITypeManager;
         get commonRegistryHandler(): $IConfigChannelCommonRegistryHandler;
         get clientRegistryHandler(): $IConfigChannelClientRegistryHandler;
-        get primaryCommonConfigManagerIO(): $SingleConfigManagerIO<$Config>;
-        get serverConfigSynchronizer(): $ServerConfigChannelSynchronizer;
+        get serverConfigManager(): $ServerConfigManager;
+        get serverConfigProfileIO(): $ConfigProfileManagerIO;
+        get primaryCommonConfigManager(): $SingleConfigManager<$Config>;
         get clientConfigProfileIO(): $ConfigProfileManagerIO;
         get clientConfigManager(): $ClientConfigManager;
         get primaryClientConfigManagerIO(): $SingleConfigManagerIO<$Config>;
-        get primaryCommonConfigManager(): $SingleConfigManager<$Config>;
         get primaryClientConfigManager(): $SingleConfigManager<$Config>;
     }
 }

@@ -1,12 +1,11 @@
 import { $NioEventLoopGroup } from "@package/io/netty/channel/nio";
 import { $ServerInfo, $MinecraftServer } from "@package/net/minecraft/server";
 import { $Codec } from "@package/com/mojang/serialization";
-import { $ServerStatusPacketListener, $ServerStatus_, $ServerboundStatusRequestPacket } from "@package/net/minecraft/network/protocol/status";
+import { $ServerStatus_, $ServerStatusPacketListener, $ServerboundStatusRequestPacket } from "@package/net/minecraft/network/protocol/status";
 import { $ExecutorService, $Executor_, $CompletableFuture } from "@package/java/util/concurrent";
-import { $ServerLoginNetworkAddon } from "@package/net/fabricmc/fabric/impl/networking/server";
 import { $ServerCommonNetworkHandlerAccessor, $ServerLoginNetworkHandlerAccessor } from "@package/net/fabricmc/fabric/mixin/networking/accessor";
+import { $AbstractNetworkAddon, $NetworkHandlerExtensions, $PacketCallbackListener } from "@package/net/fabricmc/fabric/impl/networking";
 import { $RelativeMovement_ } from "@package/net/minecraft/world/entity";
-import { $NetworkHandlerExtensions, $PacketCallbackListener } from "@package/net/fabricmc/fabric/impl/networking";
 import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $CustomPacketPayload_, $CustomPacketPayload$Type_, $CustomPacketPayload } from "@package/net/minecraft/network/protocol/common/custom";
 import { $ConnectionType_, $ConnectionType } from "@package/net/neoforged/neoforge/network/connection";
@@ -30,7 +29,7 @@ import { $Component_, $ChatType$Bound_, $PlayerChatMessage_, $FilterMask, $Compo
 import { $ServerboundLoginAcknowledgedPacket, $ServerLoginPacketListener, $ServerboundKeyPacket, $ServerboundHelloPacket_, $ServerboundCustomQueryAnswerPacket_ } from "@package/net/minecraft/network/protocol/login";
 import { $ServerHandshakePacketListener, $ClientIntentionPacket_ } from "@package/net/minecraft/network/protocol/handshake";
 import { $LevelChunk } from "@package/net/minecraft/world/level/chunk";
-import { $ServerboundSetCommandMinecartPacket, $ServerboundJigsawGeneratePacket, $ServerboundDebugSampleSubscriptionPacket_, $ServerboundChangeDifficultyPacket, $ServerboundPlaceRecipePacket, $ServerboundUseItemPacket, $ServerboundBlockEntityTagQueryPacket, $ServerboundPickItemPacket, $ServerboundChatPacket_, $ServerboundPlayerActionPacket, $ServerGamePacketListener, $ServerboundPaddleBoatPacket, $ServerboundMoveVehiclePacket, $ServerboundLockDifficultyPacket, $ServerboundSetBeaconPacket_, $ServerboundSetStructureBlockPacket, $ServerboundPlayerInputPacket, $ServerboundEditBookPacket_, $ServerboundConfigurationAcknowledgedPacket, $ServerboundClientCommandPacket, $ServerboundSelectTradePacket, $ServerboundPlayerCommandPacket, $ServerboundSeenAdvancementsPacket, $ServerboundSwingPacket, $ServerboundMovePlayerPacket, $ServerboundSetJigsawBlockPacket, $ServerboundContainerClickPacket, $ServerboundPlayerAbilitiesPacket, $ServerboundCommandSuggestionPacket, $ServerboundRecipeBookChangeSettingsPacket, $ServerboundEntityTagQueryPacket, $ServerboundInteractPacket, $ServerboundChunkBatchReceivedPacket_, $ServerboundSetCarriedItemPacket, $ServerboundChatSessionUpdatePacket_, $ServerboundSetCommandBlockPacket, $ServerboundSignUpdatePacket, $ServerboundAcceptTeleportationPacket, $ServerboundChatAckPacket_, $ServerboundContainerSlotStateChangedPacket_, $ServerboundUseItemOnPacket, $ServerboundTeleportToEntityPacket, $ServerboundContainerClosePacket, $ServerboundChatCommandSignedPacket_, $ServerboundChatCommandPacket_, $ServerboundRenameItemPacket, $ServerboundContainerButtonClickPacket_, $ServerboundRecipeBookSeenRecipePacket, $ServerboundSetCreativeModeSlotPacket_ } from "@package/net/minecraft/network/protocol/game";
+import { $ServerboundSetCommandMinecartPacket, $ServerboundJigsawGeneratePacket, $ServerboundDebugSampleSubscriptionPacket_, $ServerboundChangeDifficultyPacket, $ServerboundPlaceRecipePacket, $ServerboundUseItemPacket, $ServerboundBlockEntityTagQueryPacket, $ServerboundPickItemPacket, $ServerboundChatPacket_, $ServerGamePacketListener, $ServerboundPlayerActionPacket, $ServerboundPaddleBoatPacket, $ServerboundMoveVehiclePacket, $ServerboundLockDifficultyPacket, $ServerboundSetBeaconPacket_, $ServerboundSetStructureBlockPacket, $ServerboundPlayerInputPacket, $ServerboundEditBookPacket_, $ServerboundConfigurationAcknowledgedPacket, $ServerboundClientCommandPacket, $ServerboundSelectTradePacket, $ServerboundPlayerCommandPacket, $ServerboundSeenAdvancementsPacket, $ServerboundSwingPacket, $ServerboundSetJigsawBlockPacket, $ServerboundMovePlayerPacket, $ServerboundContainerClickPacket, $ServerboundPlayerAbilitiesPacket, $ServerboundCommandSuggestionPacket, $ServerboundEntityTagQueryPacket, $ServerboundRecipeBookChangeSettingsPacket, $ServerboundInteractPacket, $ServerboundChunkBatchReceivedPacket_, $ServerboundSetCarriedItemPacket, $ServerboundChatSessionUpdatePacket_, $ServerboundSetCommandBlockPacket, $ServerboundSignUpdatePacket, $ServerboundAcceptTeleportationPacket, $ServerboundChatAckPacket_, $ServerboundContainerSlotStateChangedPacket_, $ServerboundUseItemOnPacket, $ServerboundContainerClosePacket, $ServerboundTeleportToEntityPacket, $ServerboundChatCommandSignedPacket_, $ServerboundChatCommandPacket_, $ServerboundRenameItemPacket, $ServerboundContainerButtonClickPacket_, $ServerboundRecipeBookSeenRecipePacket, $ServerboundSetCreativeModeSlotPacket_ } from "@package/net/minecraft/network/protocol/game";
 import { $ServerConfigurationPacketListener, $ServerboundFinishConfigurationPacket, $ServerboundSelectKnownPacks_ } from "@package/net/minecraft/network/protocol/configuration";
 import { $ServerboundPingRequestPacket } from "@package/net/minecraft/network/protocol/ping";
 import { $NeoListenableNetworkHandler } from "@package/org/sinytra/fabric/networking_api";
@@ -67,7 +66,7 @@ declare module "@package/net/minecraft/server/network" {
         handleEntityTagQuery(arg0: $ServerboundEntityTagQueryPacket): void;
         handleContainerSlotStateChanged(arg0: $ServerboundContainerSlotStateChangedPacket_): void;
         handleBlockEntityTagQuery(arg0: $ServerboundBlockEntityTagQueryPacket): void;
-        handler$fgl000$sable$handleMovePlayer(arg0: $ServerboundMovePlayerPacket, arg1: $CallbackInfo): void;
+        handler$ffe000$sable$handleMovePlayer(arg0: $ServerboundMovePlayerPacket, arg1: $CallbackInfo): void;
         handlePlayerAction(arg0: $ServerboundPlayerActionPacket): void;
         handleUseItemOn(arg0: $ServerboundUseItemOnPacket): void;
         handleUseItem(arg0: $ServerboundUseItemPacket): void;
@@ -94,8 +93,8 @@ declare module "@package/net/minecraft/server/network" {
         handleConfigurationAcknowledged(arg0: $ServerboundConfigurationAcknowledgedPacket): void;
         handleChunkBatchReceived(arg0: $ServerboundChunkBatchReceivedPacket_): void;
         handleDebugSampleSubscription(arg0: $ServerboundDebugSampleSubscriptionPacket_): void;
-        getPlayer(): $ServerPlayer;
         resetPosition(): void;
+        getPlayer(): $ServerPlayer;
         teleport(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $Set_<$RelativeMovement_>): void;
         teleport(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
         handlePickItem(arg0: $ServerboundPickItemPacket): void;
@@ -130,10 +129,10 @@ declare module "@package/net/minecraft/server/network" {
         protocol(): $ConnectionProtocol;
         onPacketError(arg0: $Packet<any>, arg1: $Exception): void;
         flow(): $PacketFlow;
+        fillCrashReport(arg0: $CrashReport): void;
         createDisconnectionInfo(arg0: $Component_, arg1: $Throwable): $DisconnectionDetails;
         shouldHandleMessage(arg0: $Packet<never>): boolean;
         fillListenerSpecificCrashDetails(arg0: $CrashReport, arg1: $CrashReportCategory): void;
-        fillCrashReport(arg0: $CrashReport): void;
         constructor(arg0: $MinecraftServer, arg1: $Connection);
         get acceptingMessages(): boolean;
     }
@@ -182,10 +181,10 @@ declare module "@package/net/minecraft/server/network" {
     }
     export class $ServerConfigurationPacketListenerImpl extends $ServerCommonPacketListenerImpl implements $ServerConfigurationPacketListener, $TickablePacketListener, $NeoListenableNetworkHandler, $FabricServerConfigurationNetworkHandler {
         tick(): void;
-        modify$dfj000$fabric_resource_loader_v0$filterKnownPacks(arg0: $List_<any>): $List<any>;
+        completeTask(arg0: $ConfigurationTask$Type_): void;
         returnToWorld(): void;
         startConfiguration(): void;
-        completeTask(arg0: $ConfigurationTask$Type_): void;
+        modify$fab000$fabric_resource_loader_v0$filterKnownPacks(arg0: $List_<any>): $List<any>;
         handleConfigurationFinished(arg0: $ServerboundFinishConfigurationPacket): void;
         handleSelectKnownPacks(arg0: $ServerboundSelectKnownPacks_): void;
         finishCurrentTask(arg0: $ConfigurationTask$Type_): void;
@@ -201,8 +200,8 @@ declare module "@package/net/minecraft/server/network" {
     export class $CommonListenerCookie extends $Record {
         transferred(): boolean;
         static createInitial(arg0: $GameProfile, arg1: boolean): $CommonListenerCookie;
-        clientInformation(): $ClientInformation;
         connectionType(): $ConnectionType;
+        clientInformation(): $ClientInformation;
         latency(): number;
         gameProfile(): $GameProfile;
         /**
@@ -214,7 +213,7 @@ declare module "@package/net/minecraft/server/network" {
     /**
      * Values that may be interpreted as {@link $CommonListenerCookie}.
      */
-    export type $CommonListenerCookie_ = { transferred?: boolean, gameProfile?: $GameProfile, connectionType?: $ConnectionType_, clientInformation?: $ClientInformation_, latency?: number,  } | [transferred?: boolean, gameProfile?: $GameProfile, connectionType?: $ConnectionType_, clientInformation?: $ClientInformation_, latency?: number, ];
+    export type $CommonListenerCookie_ = { latency?: number, clientInformation?: $ClientInformation_, connectionType?: $ConnectionType_, gameProfile?: $GameProfile, transferred?: boolean,  } | [latency?: number, clientInformation?: $ClientInformation_, connectionType?: $ConnectionType_, gameProfile?: $GameProfile, transferred?: boolean, ];
     export class $ServerGamePacketListenerImpl$EntityInteraction {
     }
     export interface $ServerGamePacketListenerImpl$EntityInteraction {
@@ -251,7 +250,7 @@ declare module "@package/net/minecraft/server/network" {
     /**
      * Values that may be interpreted as {@link $Filterable}.
      */
-    export type $Filterable_<T> = { raw?: any, filtered?: (T) | undefined,  } | [raw?: any, filtered?: (T) | undefined, ];
+    export type $Filterable_<T> = { filtered?: (T) | undefined, raw?: any,  } | [filtered?: (T) | undefined, raw?: any, ];
     export class $TextFilter {
         static DUMMY: $TextFilter;
     }
@@ -285,10 +284,10 @@ declare module "@package/net/minecraft/server/network" {
         protocol(): $ConnectionProtocol;
         onPacketError(arg0: $Packet<any>, arg1: $Exception): void;
         flow(): $PacketFlow;
+        fillCrashReport(arg0: $CrashReport): void;
         createDisconnectionInfo(arg0: $Component_, arg1: $Throwable): $DisconnectionDetails;
         shouldHandleMessage(arg0: $Packet<never>): boolean;
         fillListenerSpecificCrashDetails(arg0: $CrashReport, arg1: $CrashReportCategory): void;
-        fillCrashReport(arg0: $CrashReport): void;
         constructor(arg0: $ServerStatus_, arg1: $Connection);
         constructor(arg0: $ServerStatus_, arg1: $Connection, arg2: string);
         get acceptingMessages(): boolean;
@@ -315,28 +314,28 @@ declare module "@package/net/minecraft/server/network" {
     }
     export class $ServerCommonPacketListenerImpl implements $ServerCommonPacketListener, $ServerCommonNetworkHandlerAccessor {
         getOwner(): $GameProfile;
-        keepConnectionAlive(): void;
-        playerProfile(): $GameProfile;
-        wrapOperation$cfg000$fabric_networking_api_v1$onCustomPayloadRegisterPacket(arg0: $Connection, arg1: $Set_<any>, arg2: $Operation_<any>): void;
-        wrapOperation$cfg000$fabric_networking_api_v1$onCustomPayloadUnregisterPacket(arg0: $Connection, arg1: $Set_<any>, arg2: $Operation_<any>): void;
+        isSingleplayerOwner(): boolean;
         handlePong(arg0: $ServerboundPongPacket): void;
         handleResourcePackResponse(arg0: $ServerboundResourcePackPacket_): void;
         handleCookieResponse(arg0: $ServerboundCookieResponsePacket_): void;
+        keepConnectionAlive(): void;
+        playerProfile(): $GameProfile;
+        wrapOperation$eje000$fabric_networking_api_v1$onCustomPayloadRegisterPacket(arg0: $Connection, arg1: $Set_<any>, arg2: $Operation_<any>): void;
+        wrapOperation$eje000$fabric_networking_api_v1$onCustomPayloadUnregisterPacket(arg0: $Connection, arg1: $Set_<any>, arg2: $Operation_<any>): void;
         resumeFlushing(): void;
         suspendFlushing(): void;
-        isSingleplayerOwner(): boolean;
         getConnectionType(): $ConnectionType;
+        createCookie(arg0: $ClientInformation_, arg1: $ConnectionType_): $CommonListenerCookie;
         /**
          * @deprecated
          */
         createCookie(arg0: $ClientInformation_): $CommonListenerCookie;
-        createCookie(arg0: $ClientInformation_, arg1: $ConnectionType_): $CommonListenerCookie;
-        onDisconnect(arg0: $DisconnectionDetails_): void;
-        disconnect(arg0: $DisconnectionDetails_): void;
         disconnect(arg0: $Component_): void;
+        disconnect(arg0: $DisconnectionDetails_): void;
         send(arg0: $Packet<never>, arg1: $PacketSendListener): void;
         send(arg0: $Packet<never>): void;
         latency(): number;
+        onDisconnect(arg0: $DisconnectionDetails_): void;
         handleCustomPayload(arg0: $ServerboundCustomPayloadPacket_): void;
         handleKeepAlive(arg0: $ServerboundKeepAlivePacket): void;
         getMainThreadEventLoop(): $ReentrantBlockableEventLoop<never>;
@@ -345,14 +344,14 @@ declare module "@package/net/minecraft/server/network" {
         send(arg0: $CustomPacketPayload_, arg1: $PacketSendListener): void;
         flow(): $PacketFlow;
         hasChannel(arg0: $CustomPacketPayload_): boolean;
-        hasChannel(arg0: $CustomPacketPayload$Type_<never>): boolean;
         hasChannel(arg0: $ResourceLocation_): boolean;
+        hasChannel(arg0: $CustomPacketPayload$Type_<never>): boolean;
+        fillCrashReport(arg0: $CrashReport): void;
         createDisconnectionInfo(arg0: $Component_, arg1: $Throwable): $DisconnectionDetails;
         shouldHandleMessage(arg0: $Packet<never>): boolean;
         fillListenerSpecificCrashDetails(arg0: $CrashReport, arg1: $CrashReportCategory): void;
-        fillCrashReport(arg0: $CrashReport): void;
-        getConnection(): $Connection;
         getServer(): $MinecraftServer;
+        getConnection(): $Connection;
         static LATENCY_CHECK_INTERVAL: number;
         server: $MinecraftServer;
         static DISCONNECT_UNEXPECTED_QUERY: $Component;
@@ -381,8 +380,8 @@ declare module "@package/net/minecraft/server/network" {
     export class $TextFilterClient implements $AutoCloseable {
         close(): void;
         static createFromConfig(arg0: string): $TextFilterClient;
-        processJoinOrLeave(arg0: $GameProfile, arg1: $URL, arg2: $TextFilterClient$JoinOrLeaveEncoder_, arg3: $Executor_): void;
         requestMessageProcessing(arg0: $GameProfile, arg1: string, arg2: $TextFilterClient$IgnoreStrategy_, arg3: $Executor_): $CompletableFuture<$FilteredText>;
+        processJoinOrLeave(arg0: $GameProfile, arg1: $URL, arg2: $TextFilterClient$JoinOrLeaveEncoder_, arg3: $Executor_): void;
         createContext(arg0: $GameProfile): $TextFilter;
         joinEncoder: $TextFilterClient$JoinOrLeaveEncoder;
         leaveEncoder: $TextFilterClient$JoinOrLeaveEncoder;
@@ -397,30 +396,30 @@ declare module "@package/net/minecraft/server/network" {
         handleCustomQueryPacket(arg0: $ServerboundCustomQueryAnswerPacket_): void;
         handleLoginAcknowledgement(arg0: $ServerboundLoginAcknowledgedPacket): void;
         startClientVerification(arg0: $GameProfile): void;
-        getAddon(): $ServerLoginNetworkAddon;
         handleCookieResponse(arg0: $ServerboundCookieResponsePacket_): void;
         sent(arg0: $Packet<any>): void;
         isAcceptingMessages(): boolean;
-        onDisconnect(arg0: $DisconnectionDetails_): void;
-        fillListenerSpecificCrashDetails(arg0: $CrashReport, arg1: $CrashReportCategory): void;
         disconnect(arg0: $Component_): void;
         getUserName(): string;
+        onDisconnect(arg0: $DisconnectionDetails_): void;
+        fillListenerSpecificCrashDetails(arg0: $CrashReport, arg1: $CrashReportCategory): void;
         handleHello(arg0: $ServerboundHelloPacket_): void;
         protocol(): $ConnectionProtocol;
         onPacketError(arg0: $Packet<any>, arg1: $Exception): void;
+        fillCrashReport(arg0: $CrashReport): void;
         createDisconnectionInfo(arg0: $Component_, arg1: $Throwable): $DisconnectionDetails;
         shouldHandleMessage(arg0: $Packet<never>): boolean;
-        fillCrashReport(arg0: $CrashReport): void;
-        getConnection(): $Connection;
+        getAddon(): $AbstractNetworkAddon<never>;
         getServer(): $MinecraftServer;
+        getConnection(): $Connection;
         server: $MinecraftServer;
         requestedUsername: string;
         static LOGGER: $Logger;
         connection: $Connection;
         constructor(arg0: $MinecraftServer, arg1: $Connection, arg2: boolean);
-        get addon(): $ServerLoginNetworkAddon;
         get acceptingMessages(): boolean;
         get userName(): string;
+        get addon(): $AbstractNetworkAddon<never>;
     }
     export class $TextFilterClient$MessageEncoder {
     }
@@ -444,10 +443,10 @@ declare module "@package/net/minecraft/server/network" {
         protocol(): $ConnectionProtocol;
         onPacketError(arg0: $Packet<any>, arg1: $Exception): void;
         flow(): $PacketFlow;
+        fillCrashReport(arg0: $CrashReport): void;
         createDisconnectionInfo(arg0: $Component_, arg1: $Throwable): $DisconnectionDetails;
         shouldHandleMessage(arg0: $Packet<never>): boolean;
         fillListenerSpecificCrashDetails(arg0: $CrashReport, arg1: $CrashReportCategory): void;
-        fillCrashReport(arg0: $CrashReport): void;
         constructor(arg0: $MinecraftServer, arg1: $Connection);
         get acceptingMessages(): boolean;
     }

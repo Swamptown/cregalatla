@@ -78,8 +78,8 @@ declare module "@package/org/slf4j" {
         atWarn(): $LoggingEventBuilder;
         atError(): $LoggingEventBuilder;
         atLevel(arg0: $Level_): $LoggingEventBuilder;
-        isEnabledForLevel(arg0: $Level_): boolean;
         makeLoggingEventBuilder(arg0: $Level_): $LoggingEventBuilder;
+        isEnabledForLevel(arg0: $Level_): boolean;
         get name(): string;
     }
     export class $Marker {

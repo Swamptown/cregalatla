@@ -17,9 +17,9 @@ declare module "@package/xaero/hud/module" {
         close(): void;
         isActive(): boolean;
         onPostGameOverlay(): void;
-        prePotentialRender(): void;
         shouldFlipVertically(arg0: number, arg1: number): boolean;
         shouldFlipHorizontally(arg0: number, arg1: number): boolean;
+        prePotentialRender(): void;
         isFlippedHor(): boolean;
         getEffectiveX(arg0: number, arg1: number): number;
         isCentered(): boolean;

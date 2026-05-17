@@ -21,9 +21,9 @@ import { $Vector2i, $Vector3dc, $Quaterniond } from "@package/org/joml";
 declare module "@package/dev/ryanhcode/sable/api/sublevel" {
     export class $ClientSubLevelContainer extends $SubLevelContainer {
         addDebugInfo(arg0: $Consumer_<string>): void;
+        getLightingSceneId(arg0: $ClientSubLevel): number;
         getInterpolation(): $ClientSableInterpolationState;
         freeLightingScene(arg0: number): void;
-        getLightingSceneId(arg0: $ClientSubLevel): number;
         static DEFAULT_LOG_SIZE_LENGTH: number;
         static DEFAULT_ORIGIN: number;
         static DEFAULT_LOG_PLOT_SIZE: number;
@@ -46,7 +46,6 @@ declare module "@package/dev/ryanhcode/sable/api/sublevel" {
     export class $KinematicContraption {
     }
     export interface $KinematicContraption {
-        sable$liftProviders(): $Map<$BlockPos, $BlockSubLevelLiftProvider$LiftProviderContext>;
         sable$blockGetter(): $BlockGetter;
         sable$getLocalBounds(arg0: $BoundingBox3i): void;
         sable$getMassTracker(): $MassTracker;
@@ -58,6 +57,7 @@ declare module "@package/dev/ryanhcode/sable/api/sublevel" {
         sable$shouldCollide(): boolean;
         sable$getFloatingClusterContainer(): $FloatingClusterContainer;
         sable$getLocalPose(arg0: $Pose3d, arg1: number): $Pose3d;
+        sable$liftProviders(): $Map<$BlockPos, $BlockSubLevelLiftProvider$LiftProviderContext>;
     }
     export class $ServerSubLevelContainer extends $SubLevelContainer {
         initialize(): void;
@@ -82,17 +82,15 @@ declare module "@package/dev/ryanhcode/sable/api/sublevel" {
         static getContainer(arg0: $Level_): $SubLevelContainer;
         static getContainer(arg0: $ClientLevel): $ClientSubLevelContainer;
         static getContainer(arg0: $ServerLevel): $ServerSubLevelContainer;
-        inBounds(arg0: number, arg1: number): boolean;
+        getOccupancy(): $BitSet;
+        getChunkHolder(arg0: $ChunkPos): $PlotChunkHolder;
         inBounds(arg0: $BlockPos_): boolean;
         inBounds(arg0: $ChunkPos): boolean;
-        getChunkHolder(arg0: $ChunkPos): $PlotChunkHolder;
-        getOccupancy(): $BitSet;
+        inBounds(arg0: number, arg1: number): boolean;
         getOrigin(): $Vector2i;
-        getAllSubLevels(): $List<$SubLevel>;
-        getLogPlotSize(): number;
         processSubLevelRemovals(): void;
-        removeSubLevel(arg0: $SubLevel, arg1: $SubLevelRemovalReason_): void;
         removeSubLevel(arg0: number, arg1: number, arg2: $SubLevelRemovalReason_): void;
+        removeSubLevel(arg0: $SubLevel, arg1: $SubLevelRemovalReason_): void;
         allocateSubLevel(arg0: $UUID_, arg1: number, arg2: number, arg3: $Pose3d): $SubLevel;
         addObserver(arg0: $SubLevelObserver): void;
         allocateNewSubLevel(arg0: $Pose3d): $SubLevel;
@@ -101,11 +99,13 @@ declare module "@package/dev/ryanhcode/sable/api/sublevel" {
         getLogSideLength(): number;
         getLoadedCount(): number;
         queryIntersecting(arg0: $BoundingBox3dc): $Iterable<$SubLevel>;
-        getSubLevel(arg0: number, arg1: number): $SubLevel;
+        getAllSubLevels(): $List<$SubLevel>;
+        getLogPlotSize(): number;
         getSubLevel(arg0: $UUID_): $SubLevel;
+        getSubLevel(arg0: number, arg1: number): $SubLevel;
         getChunk(arg0: $ChunkPos): $LevelChunk;
-        getPlot(arg0: $ChunkPos): $LevelPlot;
         getPlot(arg0: number, arg1: number): $LevelPlot;
+        getPlot(arg0: $ChunkPos): $LevelPlot;
         static DEFAULT_LOG_SIZE_LENGTH: number;
         static DEFAULT_ORIGIN: number;
         static DEFAULT_LOG_PLOT_SIZE: number;
@@ -113,9 +113,9 @@ declare module "@package/dev/ryanhcode/sable/api/sublevel" {
         get level(): $Level;
         get occupancy(): $BitSet;
         get origin(): $Vector2i;
-        get allSubLevels(): $List<$SubLevel>;
-        get logPlotSize(): number;
         get logSideLength(): number;
         get loadedCount(): number;
+        get allSubLevels(): $List<$SubLevel>;
+        get logPlotSize(): number;
     }
 }

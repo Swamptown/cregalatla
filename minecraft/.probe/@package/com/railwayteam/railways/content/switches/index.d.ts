@@ -13,8 +13,6 @@ declare module "@package/com/railwayteam/railways/content/switches" {
     export class $TrackSwitch extends $SingleBlockEntityEdgePoint {
         isAutomatic(): boolean;
         isLocked(): boolean;
-        trySetSwitchState(arg0: $TrackSwitchBlock$SwitchState_): boolean;
-        getSwitchState(): $TrackSwitchBlock$SwitchState;
         hasStraightExit(): boolean;
         hasRightExit(): boolean;
         hasLeftExit(): boolean;
@@ -24,6 +22,8 @@ declare module "@package/com/railwayteam/railways/content/switches" {
         shouldAutoTrainsSwitch(): boolean;
         getTargetState(arg0: $TrackNodeLocation): $TrackSwitchBlock$SwitchState;
         setEdgesActive(arg0: $TrackGraph): void;
+        trySetSwitchState(arg0: $TrackSwitchBlock$SwitchState_): boolean;
+        getSwitchState(): $TrackSwitchBlock$SwitchState;
         static getSelectionPriority(): number;
         edgeLocation: $Couple<$TrackNodeLocation>;
         blockEntityPos: $BlockPos;
@@ -41,8 +41,8 @@ declare module "@package/com/railwayteam/railways/content/switches" {
         static values(): $TrackSwitchBlock$SwitchState[];
         static valueOf(arg0: string): $TrackSwitchBlock$SwitchState;
         nextStateForPonder(arg0: $TrackSwitchBlock$SwitchConstraint): $TrackSwitchBlock$SwitchState;
-        static fromSteerDirection(arg0: $TravellingPoint$SteerDirection_, arg1: boolean): $TrackSwitchBlock$SwitchState;
         nextStateFor(arg0: $TrackSwitch, arg1: $TrackSwitchBlock$SwitchConstraint): $TrackSwitchBlock$SwitchState;
+        static fromSteerDirection(arg0: $TravellingPoint$SteerDirection_, arg1: boolean): $TrackSwitchBlock$SwitchState;
         canSwitchTo(arg0: $TrackSwitchBlock$SwitchState_, arg1: $TrackSwitchBlock$SwitchConstraint): boolean;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;

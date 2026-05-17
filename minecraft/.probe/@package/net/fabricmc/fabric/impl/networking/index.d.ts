@@ -2,7 +2,6 @@ import { $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/re
 import { $Packet } from "@package/net/minecraft/network/protocol";
 import { $Map_, $Set } from "@package/java/util";
 export * as client from "@package/net/fabricmc/fabric/impl/networking/client";
-export * as server from "@package/net/fabricmc/fabric/impl/networking/server";
 
 declare module "@package/net/fabricmc/fabric/impl/networking" {
     export class $NetworkHandlerExtensions {

@@ -171,8 +171,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(arg0: $Schema);
     }
     export class $ItemWrittenBookPagesStrictJsonFix extends $DataFix {
-        makeRule(): $TypeRewriteRule;
         fixTag(arg0: $Dynamic<never>): $Dynamic<never>;
+        makeRule(): $TypeRewriteRule;
         constructor(arg0: $Schema, arg1: boolean);
     }
     export class $TeamDisplayNameFix extends $DataFix {
@@ -221,8 +221,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     export class $MissingDimensionFix extends $DataFix {
         static fields<A>(arg0: string, arg1: $Type<A>): $Type<$Pair<A, $Dynamic<never>>>;
         makeRule(): $TypeRewriteRule;
-        static optionalFields<A1, A2>(arg0: string, arg1: $Type<A1>, arg2: string, arg3: $Type<A2>): $Type<$Pair<$Either<A1, $Unit>, $Pair<$Either<A2, $Unit>, $Dynamic<never>>>>;
         static optionalFields<A>(arg0: string, arg1: $Type<A>): $Type<$Pair<$Either<A, $Unit>, $Dynamic<never>>>;
+        static optionalFields<A1, A2>(arg0: string, arg1: $Type<A1>, arg2: string, arg3: $Type<A2>): $Type<$Pair<$Either<A1, $Unit>, $Pair<$Either<A2, $Unit>, $Dynamic<never>>>>;
         static flatType(arg0: $Schema): $Type<$Pair<$Either<$Pair<$Either<never, $Unit>, $Pair<$Either<$List<$Pair<$Either<never, $Unit>, $Dynamic<never>>>, $Unit>, $Dynamic<never>>>, $Unit>, $Dynamic<never>>>;
         constructor(arg0: $Schema, arg1: boolean);
     }
@@ -591,10 +591,9 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     export class $BlockStateData {
         static parse(arg0: string): $Dynamic<never>;
         static getTag(arg0: number): $Dynamic<never>;
-        static bootstrap15(): void;
-        static upgradeBlock(arg0: string): string;
-        static upgradeBlock(arg0: number): string;
         static upgradeBlockStateTag(arg0: $Dynamic<never>): $Dynamic<never>;
+        static upgradeBlock(arg0: number): string;
+        static upgradeBlock(arg0: string): string;
         static bootstrap0(): void;
         static bootstrap1(): void;
         static bootstrap2(): void;
@@ -610,6 +609,7 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         static bootstrap12(): void;
         static bootstrap13(): void;
         static bootstrap14(): void;
+        static bootstrap15(): void;
         static FILTER_ME: string;
         constructor();
     }
@@ -645,8 +645,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         getStateId(arg0: string, arg1: boolean, arg2: number): number;
         skippable(): boolean;
         readStorage(arg0: $Dynamic<never>): void;
-        getBlock(arg0: number): number;
         isSkippable(): boolean;
+        getBlock(arg0: number): number;
         static PROPERTIES_TAG: string;
         static BLOCK_STATES_TAG: string;
         paletteFinder: $OpticFinder<$List<$Pair<string, $Dynamic<never>>>>;
@@ -1065,10 +1065,10 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     /**
      * Values that may be interpreted as {@link $StructuresBecomeConfiguredFix$Conversion}.
      */
-    export type $StructuresBecomeConfiguredFix$Conversion_ = { fallback?: string, biomeMapping?: $Map_<string, string>,  } | [fallback?: string, biomeMapping?: $Map_<string, string>, ];
+    export type $StructuresBecomeConfiguredFix$Conversion_ = { biomeMapping?: $Map_<string, string>, fallback?: string,  } | [biomeMapping?: $Map_<string, string>, fallback?: string, ];
     export class $EntityHealthFix extends $DataFix {
-        makeRule(): $TypeRewriteRule;
         fixTag(arg0: $Dynamic<never>): $Dynamic<never>;
+        makeRule(): $TypeRewriteRule;
         constructor(arg0: $Schema, arg1: boolean);
     }
     export class $SimplestEntityRenameFix extends $DataFix {
@@ -1078,8 +1078,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     }
     export class $WorldGenSettingsFix extends $DataFix {
         makeRule(): $TypeRewriteRule;
-        static defaultOverworld<T>(arg0: $Dynamic<T>, arg1: number): $Dynamic<T>;
         static vanillaLevels<T>(arg0: $Dynamic<T>, arg1: number, arg2: $Dynamic<T>, arg3: boolean): T;
+        static defaultOverworld<T>(arg0: $Dynamic<T>, arg1: number): $Dynamic<T>;
         constructor(arg0: $Schema);
     }
     export class $ChunkBedBlockEntityInjecterFix extends $DataFix {

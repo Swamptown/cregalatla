@@ -15,8 +15,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/math" {
         vector2f(): $Vector2f;
         addX(arg0: number): $Position;
         addY(arg0: number): $Position;
-        getY(): number;
         vec2(): $Vec2;
+        getY(): number;
         getX(): number;
         static ORIGIN: $Position;
         static CODEC: $Codec<$Position>;
@@ -98,10 +98,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/math" {
         moveHorizontal(arg0: number): $Rect;
         moveVertical(arg0: number): $Rect;
         unions(arg0: $Rect): $Rect;
-        getWidth(): number;
-        getHeight(): number;
         getLeft(): number;
         getRight(): number;
+        getWidth(): number;
+        getHeight(): number;
         static ZERO: $Rect;
         left: number;
         up: number;

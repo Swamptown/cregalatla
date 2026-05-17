@@ -1,5 +1,5 @@
 import { $Level_ } from "@package/net/minecraft/world/level";
-import { $BlockPos_, $Holder_, $Registry, $Holder$Reference, $Holder } from "@package/net/minecraft/core";
+import { $BlockPos_, $Holder_, $Holder$Reference, $Registry, $Holder } from "@package/net/minecraft/core";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $MapCodec, $Codec } from "@package/com/mojang/serialization";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";

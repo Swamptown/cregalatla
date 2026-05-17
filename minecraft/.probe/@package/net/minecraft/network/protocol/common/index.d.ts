@@ -130,7 +130,7 @@ declare module "@package/net/minecraft/network/protocol/common" {
     /**
      * Values that may be interpreted as {@link $ServerboundResourcePackPacket}.
      */
-    export type $ServerboundResourcePackPacket_ = { id?: $UUID_, action?: $ServerboundResourcePackPacket$Action_,  } | [id?: $UUID_, action?: $ServerboundResourcePackPacket$Action_, ];
+    export type $ServerboundResourcePackPacket_ = { action?: $ServerboundResourcePackPacket$Action_, id?: $UUID_,  } | [action?: $ServerboundResourcePackPacket$Action_, id?: $UUID_, ];
     export class $ServerboundKeepAlivePacket implements $Packet<$ServerCommonPacketListener> {
         type(): $PacketType<$ServerboundKeepAlivePacket>;
         getId(): number;
@@ -159,7 +159,7 @@ declare module "@package/net/minecraft/network/protocol/common" {
     /**
      * Values that may be interpreted as {@link $ClientboundStoreCookiePacket}.
      */
-    export type $ClientboundStoreCookiePacket_ = { key?: $ResourceLocation_, payload?: number[],  } | [key?: $ResourceLocation_, payload?: number[], ];
+    export type $ClientboundStoreCookiePacket_ = { payload?: number[], key?: $ResourceLocation_,  } | [payload?: number[], key?: $ResourceLocation_, ];
     export class $ClientboundDisconnectPacket extends $Record implements $Packet<$ClientCommonPacketListener> {
         type(): $PacketType<$ClientboundDisconnectPacket>;
         reason(): $Component;
@@ -210,13 +210,13 @@ declare module "@package/net/minecraft/network/protocol/common" {
     /**
      * Values that may be interpreted as {@link $ClientboundResourcePackPushPacket}.
      */
-    export type $ClientboundResourcePackPushPacket_ = { required?: boolean, hash?: string, url?: string, prompt?: ($Component_) | undefined, id?: $UUID_,  } | [required?: boolean, hash?: string, url?: string, prompt?: ($Component_) | undefined, id?: $UUID_, ];
+    export type $ClientboundResourcePackPushPacket_ = { id?: $UUID_, prompt?: ($Component_) | undefined, url?: string, hash?: string, required?: boolean,  } | [id?: $UUID_, prompt?: ($Component_) | undefined, url?: string, hash?: string, required?: boolean, ];
     export class $ServerCommonPacketListener {
     }
     export interface $ServerCommonPacketListener extends $ServerCookiePacketListener, $ServerPacketListener, $IServerCommonPacketListenerExtension {
-        handleClientInformation(arg0: $ServerboundClientInformationPacket_): void;
         handlePong(arg0: $ServerboundPongPacket): void;
         handleResourcePackResponse(arg0: $ServerboundResourcePackPacket_): void;
+        handleClientInformation(arg0: $ServerboundClientInformationPacket_): void;
         handleCustomPayload(arg0: $ServerboundCustomPayloadPacket_): void;
         handleKeepAlive(arg0: $ServerboundKeepAlivePacket): void;
     }

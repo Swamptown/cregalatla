@@ -52,9 +52,9 @@ declare module "@package/net/minecraft/world/effect" {
         initializeClient(arg0: $Consumer_<$IClientMobEffectExtensions>): void;
         getCategory(): $MobEffectCategory;
         getColor(): number;
-        requiredFeatures(): $FeatureFlagSet;
-        requiredFeatures(...arg0: $FeatureFlag[]): $MobEffect;
         getDescriptionId(): string;
+        requiredFeatures(...arg0: $FeatureFlag[]): $MobEffect;
+        requiredFeatures(): $FeatureFlagSet;
         onMobRemoved(arg0: $LivingEntity, arg1: number, arg2: $Entity$RemovalReason_): void;
         onEffectAdded(arg0: $LivingEntity, arg1: number): void;
         onEffectStarted(arg0: $LivingEntity, arg1: number): void;
@@ -88,7 +88,7 @@ declare module "@package/net/minecraft/world/effect" {
     /**
      * Values that may be interpreted as {@link $MobEffectInstance$Details}.
      */
-    export type $MobEffectInstance$Details_ = { duration?: number, ambient?: boolean, amplifier?: number, showParticles?: boolean, cures?: ($Set_<$EffectCure>) | undefined, showIcon?: boolean, hiddenEffect?: ($MobEffectInstance$Details_) | undefined,  } | [duration?: number, ambient?: boolean, amplifier?: number, showParticles?: boolean, cures?: ($Set_<$EffectCure>) | undefined, showIcon?: boolean, hiddenEffect?: ($MobEffectInstance$Details_) | undefined, ];
+    export type $MobEffectInstance$Details_ = { hiddenEffect?: ($MobEffectInstance$Details_) | undefined, showIcon?: boolean, cures?: ($Set_<$EffectCure>) | undefined, showParticles?: boolean, amplifier?: number, ambient?: boolean, duration?: number,  } | [hiddenEffect?: ($MobEffectInstance$Details_) | undefined, showIcon?: boolean, cures?: ($Set_<$EffectCure>) | undefined, showParticles?: boolean, amplifier?: number, ambient?: boolean, duration?: number, ];
     export class $HealOrHarmMobEffect extends $InstantenousMobEffect {
         static CODEC: $Codec<$Holder<$MobEffect>>;
         attributeModifiers: $Map<$Holder<$Attribute>, $MobEffect$AttributeTemplate>;
@@ -155,13 +155,13 @@ declare module "@package/net/minecraft/world/effect" {
         save(): $Tag;
         tick(arg0: $LivingEntity, arg1: $Runnable_): boolean;
         getDuration(): number;
-        showIcon(): boolean;
         setDetailsFrom(arg0: $MobEffectInstance): void;
         getBlendFactor(arg0: $LivingEntity, arg1: number): number;
         isInfiniteDuration(): boolean;
         endsWithin(arg0: number): boolean;
         mapDuration(arg0: $Int2IntFunction_): number;
         skipBlending(): void;
+        showIcon(): boolean;
         getDescriptionId(): string;
         onMobRemoved(arg0: $LivingEntity, arg1: $Entity$RemovalReason_): void;
         getEffect(): $Holder<$MobEffect>;
@@ -210,8 +210,8 @@ declare module "@package/net/minecraft/world/effect" {
     }
     export class $MobEffectUtil {
         static formatDuration(arg0: $MobEffectInstance, arg1: number, arg2: number): $Component;
-        static hasWaterBreathing(arg0: $LivingEntity): boolean;
         static addEffectToPlayersAround(arg0: $ServerLevel, arg1: $Entity, arg2: $Vec3_, arg3: number, arg4: $MobEffectInstance, arg5: number): $List<$ServerPlayer>;
+        static hasWaterBreathing(arg0: $LivingEntity): boolean;
         static hasDigSpeed(arg0: $LivingEntity): boolean;
         static getDigSpeedAmplification(arg0: $LivingEntity): number;
         constructor();
@@ -252,7 +252,7 @@ declare module "@package/net/minecraft/world/effect" {
     /**
      * Values that may be interpreted as {@link $MobEffect$AttributeTemplate}.
      */
-    export type $MobEffect$AttributeTemplate_ = { operation?: $AttributeModifier$Operation_, amount?: number, curve?: $Int2DoubleFunction_, id?: $ResourceLocation_,  } | [operation?: $AttributeModifier$Operation_, amount?: number, curve?: $Int2DoubleFunction_, id?: $ResourceLocation_, ];
+    export type $MobEffect$AttributeTemplate_ = { id?: $ResourceLocation_, curve?: $Int2DoubleFunction_, amount?: number, operation?: $AttributeModifier$Operation_,  } | [id?: $ResourceLocation_, curve?: $Int2DoubleFunction_, amount?: number, operation?: $AttributeModifier$Operation_, ];
     export class $WeavingMobEffect extends $MobEffect {
         static CODEC: $Codec<$Holder<$MobEffect>>;
         attributeModifiers: $Map<$Holder<$Attribute>, $MobEffect$AttributeTemplate>;

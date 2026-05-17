@@ -77,9 +77,9 @@ declare module "@package/com/mojang/blaze3d/font" {
     }
     export interface $SheetGlyphInfo {
         getTop(): number;
+        upload(arg0: number, arg1: number): void;
         getLeft(): number;
         getRight(): number;
-        upload(arg0: number, arg1: number): void;
         isColored(): boolean;
         getBottom(): number;
         getPixelWidth(): number;

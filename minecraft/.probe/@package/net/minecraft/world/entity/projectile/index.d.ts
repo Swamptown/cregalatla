@@ -31,7 +31,7 @@ export * as windcharge from "@package/net/minecraft/world/entity/projectile/wind
 
 declare module "@package/net/minecraft/world/entity/projectile" {
     export class $ThrownPotion extends $ThrowableItemProjectile implements $ItemSupplier {
-        handler$ela000$moonlight$extinguishILightables(arg0: $BlockPos_, arg1: $CallbackInfo, arg2: $BlockState_): void;
+        handler$gjh000$moonlight$extinguishILightables(arg0: $BlockPos_, arg1: $CallbackInfo, arg2: $BlockState_): void;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
@@ -196,18 +196,18 @@ declare module "@package/net/minecraft/world/entity/projectile" {
     }
     export class $ProjectileUtil {
         static getHitResultOnViewVector(arg0: $Entity, arg1: $Predicate_<$Entity>, arg2: number): $HitResult;
-        static getHitResultOnMoveVector(arg0: $Entity, arg1: $Predicate_<$Entity>, arg2: $ClipContext$Block_): $HitResult;
-        static getHitResultOnMoveVector(arg0: $Entity, arg1: $Predicate_<$Entity>): $HitResult;
+        static getWeaponHoldingHand(arg0: $LivingEntity, arg1: $Predicate_<$Item>): $InteractionHand;
         /**
          * @deprecated
          */
         static getWeaponHoldingHand(arg0: $LivingEntity, arg1: $Item_): $InteractionHand;
-        static getWeaponHoldingHand(arg0: $LivingEntity, arg1: $Predicate_<$Item>): $InteractionHand;
         static getMobArrow(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number, arg3: $ItemStack_): $AbstractArrow;
         static rotateTowardsMovement(arg0: $Entity, arg1: number): void;
-        static getEntityHitResult(arg0: $Level_, arg1: $Entity, arg2: $Vec3_, arg3: $Vec3_, arg4: $AABB_, arg5: $Predicate_<$Entity>, arg6: number): $EntityHitResult;
-        static getEntityHitResult(arg0: $Entity, arg1: $Vec3_, arg2: $Vec3_, arg3: $AABB_, arg4: $Predicate_<$Entity>, arg5: number): $EntityHitResult;
+        static getHitResultOnMoveVector(arg0: $Entity, arg1: $Predicate_<$Entity>, arg2: $ClipContext$Block_): $HitResult;
+        static getHitResultOnMoveVector(arg0: $Entity, arg1: $Predicate_<$Entity>): $HitResult;
         static getEntityHitResult(arg0: $Level_, arg1: $Entity, arg2: $Vec3_, arg3: $Vec3_, arg4: $AABB_, arg5: $Predicate_<$Entity>): $EntityHitResult;
+        static getEntityHitResult(arg0: $Entity, arg1: $Vec3_, arg2: $Vec3_, arg3: $AABB_, arg4: $Predicate_<$Entity>, arg5: number): $EntityHitResult;
+        static getEntityHitResult(arg0: $Level_, arg1: $Entity, arg2: $Vec3_, arg3: $Vec3_, arg4: $AABB_, arg5: $Predicate_<$Entity>, arg6: number): $EntityHitResult;
         constructor();
     }
     export class $Fireball extends $AbstractHurtingProjectile implements $ItemSupplier {
@@ -1734,9 +1734,9 @@ declare module "@package/net/minecraft/world/entity/projectile" {
     export class $Projectile extends $Entity implements $TraceableEntity {
         getOwner(): $Entity;
         setOwner(arg0: $Entity): void;
-        ownedBy(arg0: $Entity): boolean;
-        mayBreak(arg0: $Level_): boolean;
         onHit(arg0: $HitResult): void;
+        ownedBy(arg0: $Entity): boolean;
+        shoot(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
         hitTargetOrDeflectSelf(arg0: $HitResult): $ProjectileDeflection;
         static lerpRotation(arg0: number, arg1: number): number;
         onHitEntity(arg0: $EntityHitResult): void;
@@ -1748,7 +1748,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         shootFromRotation(arg0: $Entity, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         onDeflection(arg0: $Entity, arg1: boolean): void;
         updateRotation(): void;
-        shoot(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
+        mayBreak(arg0: $Level_): boolean;
         calculateHorizontalHurtKnockbackDirection(arg0: $LivingEntity, arg1: $DamageSource_): $DoubleDoubleImmutablePair;
         deflect(arg0: $ProjectileDeflection_, arg1: $Entity, arg2: $Entity, arg3: boolean): boolean;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;

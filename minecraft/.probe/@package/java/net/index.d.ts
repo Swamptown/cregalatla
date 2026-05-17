@@ -251,22 +251,22 @@ declare module "@package/java/net" {
         setOption<T>(arg0: $SocketOption<T>, arg1: T): $DatagramSocket;
         getOption<T>(arg0: $SocketOption<T>): T;
         supportedOptions(): $Set<$SocketOption<never>>;
-        connect(arg0: $SocketAddress): void;
         connect(arg0: $InetAddress, arg1: number): void;
+        connect(arg0: $SocketAddress): void;
         isConnected(): boolean;
         joinGroup(arg0: $SocketAddress, arg1: $NetworkInterface): void;
         leaveGroup(arg0: $SocketAddress, arg1: $NetworkInterface): void;
-        setBroadcast(arg0: boolean): void;
-        /**
-         * @deprecated
-         */
-        static setDatagramSocketImplFactory(arg0: $DatagramSocketImplFactory_): void;
         receive(arg0: $DatagramPacket): void;
         getInetAddress(): $InetAddress;
         getRemoteSocketAddress(): $SocketAddress;
         getLocalSocketAddress(): $SocketAddress;
         getLocalPort(): number;
         getReuseAddress(): boolean;
+        setBroadcast(arg0: boolean): void;
+        /**
+         * @deprecated
+         */
+        static setDatagramSocketImplFactory(arg0: $DatagramSocketImplFactory_): void;
         disconnect(): void;
         isClosed(): boolean;
         send(arg0: $DatagramPacket): void;
@@ -288,11 +288,11 @@ declare module "@package/java/net" {
         get channel(): $DatagramChannel;
         get localAddress(): $InetAddress;
         get connected(): boolean;
-        static set datagramSocketImplFactory(value: $DatagramSocketImplFactory_);
         get inetAddress(): $InetAddress;
         get remoteSocketAddress(): $SocketAddress;
         get localSocketAddress(): $SocketAddress;
         get localPort(): number;
+        static set datagramSocketImplFactory(value: $DatagramSocketImplFactory_);
         get closed(): boolean;
         get bound(): boolean;
     }
@@ -482,8 +482,8 @@ declare module "@package/java/net" {
         setOption<T>(arg0: $SocketOption<T>, arg1: T): $Socket;
         getOption<T>(arg0: $SocketOption<T>): T;
         supportedOptions(): $Set<$SocketOption<never>>;
-        connect(arg0: $SocketAddress, arg1: number): void;
         connect(arg0: $SocketAddress): void;
+        connect(arg0: $SocketAddress, arg1: number): void;
         isConnected(): boolean;
         shutdownInput(): void;
         shutdownOutput(): void;
@@ -502,7 +502,6 @@ declare module "@package/java/net" {
         getReuseAddress(): boolean;
         sendUrgentData(arg0: number): void;
         getOOBInline(): boolean;
-        getOutputStream(): $OutputStream;
         isClosed(): boolean;
         setKeepAlive(arg0: boolean): void;
         setOOBInline(arg0: boolean): void;
@@ -520,12 +519,12 @@ declare module "@package/java/net" {
         setPerformancePreferences(arg0: number, arg1: number, arg2: number): void;
         setSendBufferSize(arg0: number): void;
         isBound(): boolean;
-        constructor(arg0: $InetAddress, arg1: number, arg2: $InetAddress, arg3: number);
+        getOutputStream(): $OutputStream;
         constructor(arg0: string, arg1: number, arg2: $InetAddress, arg3: number);
-        constructor(arg0: $Proxy);
-        constructor(arg0: string, arg1: number);
-        constructor(arg0: $InetAddress, arg1: number);
         constructor();
+        constructor(arg0: $Proxy);
+        constructor(arg0: $InetAddress, arg1: number);
+        constructor(arg0: string, arg1: number);
         /**
          * @deprecated
          */
@@ -534,6 +533,7 @@ declare module "@package/java/net" {
          * @deprecated
          */
         constructor(arg0: string, arg1: number, arg2: boolean);
+        constructor(arg0: $InetAddress, arg1: number, arg2: $InetAddress, arg3: number);
         get port(): number;
         get inputStream(): $InputStream;
         get channel(): $SocketChannel;
@@ -546,9 +546,9 @@ declare module "@package/java/net" {
         get remoteSocketAddress(): $SocketAddress;
         get localSocketAddress(): $SocketAddress;
         get localPort(): number;
-        get outputStream(): $OutputStream;
         get closed(): boolean;
         get bound(): boolean;
+        get outputStream(): $OutputStream;
     }
     export class $HttpURLConnection extends $URLConnection {
         getErrorStream(): $InputStream;
@@ -564,8 +564,8 @@ declare module "@package/java/net" {
         getRequestMethod(): string;
         getResponseMessage(): string;
         usingProxy(): boolean;
-        disconnect(): void;
         setInstanceFollowRedirects(arg0: boolean): void;
+        disconnect(): void;
         static HTTP_SEE_OTHER: number;
         static HTTP_CLIENT_TIMEOUT: number;
         static HTTP_BAD_REQUEST: number;
@@ -626,10 +626,10 @@ declare module "@package/java/net" {
         getData(): number[];
         setAddress(arg0: $InetAddress): void;
         setSocketAddress(arg0: $SocketAddress): void;
-        setData(arg0: number[], arg1: number, arg2: number): void;
-        setData(arg0: number[]): void;
-        setPort(arg0: number): void;
         getSocketAddress(): $SocketAddress;
+        setPort(arg0: number): void;
+        setData(arg0: number[]): void;
+        setData(arg0: number[], arg1: number, arg2: number): void;
         constructor(arg0: number[], arg1: number, arg2: $SocketAddress);
         constructor(arg0: number[], arg1: number, arg2: $InetAddress, arg3: number);
         constructor(arg0: number[], arg1: number, arg2: number, arg3: $SocketAddress);

@@ -1,5 +1,5 @@
 import { $Container } from "@package/net/minecraft/world";
-import { $LithiumCooldownReceivingInventory, $LithiumTransferConditionInventory } from "@package/net/caffeinemc/mods/lithium/api/inventory";
+import { $LithiumTransferConditionInventory, $LithiumCooldownReceivingInventory } from "@package/net/caffeinemc/mods/lithium/api/inventory";
 import { $List_, $List } from "@package/java/util";
 import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entity";
 import { $ClassInstanceMultiMap } from "@package/net/minecraft/util";

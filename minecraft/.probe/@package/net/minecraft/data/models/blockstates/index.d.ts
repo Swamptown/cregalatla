@@ -142,8 +142,8 @@ declare module "@package/net/minecraft/data/models/blockstates" {
     }
     export class $MultiVariantGenerator implements $BlockStateGenerator {
         with(arg0: $PropertyDispatch): $MultiVariantGenerator;
-        static multiVariant(arg0: $Block_): $MultiVariantGenerator;
         static multiVariant(arg0: $Block_, ...arg1: $Variant[]): $MultiVariantGenerator;
+        static multiVariant(arg0: $Block_): $MultiVariantGenerator;
         static multiVariant(arg0: $Block_, arg1: $Variant): $MultiVariantGenerator;
         getBlock(): $Block;
         get(): $JsonElement;
@@ -180,8 +180,8 @@ declare module "@package/net/minecraft/data/models/blockstates" {
     export class $PropertyDispatch$C5<T1 extends $Comparable<T1>, T2 extends $Comparable<T2>, T3 extends $Comparable<T3>, T4 extends $Comparable<T4>, T5 extends $Comparable<T5>> extends $PropertyDispatch {
         generate(arg0: $PropertyDispatch$PentaFunction_<T1, T2, T3, T4, T5, $Variant>): $PropertyDispatch;
         generateList(arg0: $PropertyDispatch$PentaFunction_<T1, T2, T3, T4, T5, $List<$Variant>>): $PropertyDispatch;
-        select(arg0: T1, arg1: T2, arg2: T3, arg3: T4, arg4: T5, arg5: $List_<$Variant>): $PropertyDispatch$C5<T1, T2, T3, T4, T5>;
         select(arg0: T1, arg1: T2, arg2: T3, arg3: T4, arg4: T5, arg5: $Variant): $PropertyDispatch$C5<T1, T2, T3, T4, T5>;
+        select(arg0: T1, arg1: T2, arg2: T3, arg3: T4, arg4: T5, arg5: $List_<$Variant>): $PropertyDispatch$C5<T1, T2, T3, T4, T5>;
         constructor(arg0: $Property<T1>, arg1: $Property<T2>, arg2: $Property<T3>, arg3: $Property<T4>, arg4: $Property<T5>);
     }
     export class $MultiPartGenerator implements $BlockStateGenerator {

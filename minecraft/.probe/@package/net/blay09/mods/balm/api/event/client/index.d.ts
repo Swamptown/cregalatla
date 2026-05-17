@@ -19,12 +19,12 @@ export * as screen from "@package/net/blay09/mods/balm/api/event/client/screen";
 
 declare module "@package/net/blay09/mods/balm/api/event/client" {
     export class $RenderHandEvent extends $BalmEvent {
-        getHand(): $InteractionHand;
         getSwingProgress(): number;
+        getHand(): $InteractionHand;
         getItemStack(): $ItemStack;
         constructor(arg0: $InteractionHand_, arg1: $ItemStack_, arg2: number);
-        get hand(): $InteractionHand;
         get swingProgress(): number;
+        get hand(): $InteractionHand;
         get itemStack(): $ItemStack;
     }
     export class $GuiDrawEvent$Element extends $Enum<$GuiDrawEvent$Element> {
@@ -68,8 +68,8 @@ declare module "@package/net/blay09/mods/balm/api/event/client" {
         get hand(): $InteractionHand;
     }
     export class $FovUpdateEvent extends $BalmEvent {
-        getEntity(): $LivingEntity;
         setFov(arg0: number): void;
+        getEntity(): $LivingEntity;
         getFov(): number;
         constructor(arg0: $LivingEntity);
         get entity(): $LivingEntity;

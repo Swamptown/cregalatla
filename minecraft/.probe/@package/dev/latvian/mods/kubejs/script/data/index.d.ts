@@ -12,7 +12,7 @@ import { $SoundEvent_ } from "@package/net/minecraft/sounds";
 import { $Holder_, $HolderSet_, $Registry } from "@package/net/minecraft/core";
 import { $TickDuration_, $RegistryAccessContainer } from "@package/dev/latvian/mods/kubejs/util";
 import { $Path_ } from "@package/java/nio/file";
-import { $PackResources, $PackType_, $PackLocationInfo, $AbstractPackResources, $PackType, $PackResources$ResourceOutput_ } from "@package/net/minecraft/server/packs";
+import { $PackResources, $PackType_, $PackLocationInfo, $PackType, $AbstractPackResources, $PackResources$ResourceOutput_ } from "@package/net/minecraft/server/packs";
 import { $Enum, $Record, $Object } from "@package/java/lang";
 import { $LootTable } from "@package/net/minecraft/world/level/storage/loot";
 import { $ScriptType_, $ScriptType } from "@package/dev/latvian/mods/kubejs/script";
@@ -43,7 +43,7 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
     /**
      * Values that may be interpreted as {@link $GeneratedData}.
      */
-    export type $GeneratedData_ = { id?: $ResourceLocation_, data?: $Supplier_<number[]>,  } | [id?: $ResourceLocation_, data?: $Supplier_<number[]>, ];
+    export type $GeneratedData_ = { data?: $Supplier_<number[]>, id?: $ResourceLocation_,  } | [data?: $Supplier_<number[]>, id?: $ResourceLocation_, ];
     export class $GeneratedDataStage extends $Enum<$GeneratedDataStage> implements $StringRepresentable {
         static values(): $GeneratedDataStage[];
         static valueOf(name: string): $GeneratedDataStage;
@@ -173,17 +173,17 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
         close(): void;
         generate(map: $Map_<$ResourceLocation_, $GeneratedData_>): void;
         static scanForInvalidFiles(pathName: string, path: $Path_): void;
-        packId(): string;
+        getMetadataSection<T>(serializer: $MetadataSectionSerializer<T>): T;
         listResources(type: $PackType_, namespace: string, path: string, visitor: $PackResources$ResourceOutput_): void;
         getNamespaces(type: $PackType_): $Set<string>;
-        getMetadataSection<T>(serializer: $MetadataSectionSerializer<T>): T;
-        getRootResource(...path: string[]): $GeneratedData;
+        packId(): string;
         getGenerated(): $Map<$ResourceLocation, $GeneratedData>;
         static findBeforeModsIndex(packs: $List_<$PackResources>): number;
         static findAfterModsIndex(packs: $List_<$PackResources>): number;
         static scanAndLoad(path: $Path_, packs: $List_<$PackResources>): void;
         knownPackInfo(): ($KnownPack) | undefined;
         isHidden(): boolean;
+        getRootResource(...arg0: string[]): $IoSupplier<$InputStream>;
         static PACK_LOCATION_INFO: $PackLocationInfo;
         constructor(t: $PackType_);
         get generated(): $Map<$ResourceLocation, $GeneratedData>;
@@ -191,10 +191,6 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
     }
     export class $VirtualDataPack extends $VirtualResourcePack implements $KubeDataGenerator {
         dataMap<R, T>(type: $DataMapType<R, T>, consumer: $Consumer_<$VirtualDataMapFile<R, T>>): void;
-        setCompostable(items: $ItemPredicate_, chance: number, canVillagerCompost: boolean): void;
-        removeCompostable(items: $ItemPredicate_): void;
-        setFurnaceFuel(items: $ItemPredicate_, ticks: $TickDuration_): void;
-        removeFurnaceFuel(items: $ItemPredicate_): void;
         setMonsterRoomMobs(entityType: $EntityType_<never>, weight: number): void;
         setOxidizable(from: $Block_, to: $Block_): void;
         setParrotImitation(type: $EntityType_<never>, sound: $SoundEvent_): void;
@@ -202,6 +198,10 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
         setVibrationFrequency(gameEvent: $GameEvent_, frequency: number): void;
         setVillagerType(biome: $ResourceKey_<$Biome>, villagerType: $VillagerType_): void;
         setWaxable(from: $Block_, to: $Block_): void;
+        setCompostable(items: $ItemPredicate_, chance: number, canVillagerCompost: boolean): void;
+        removeCompostable(items: $ItemPredicate_): void;
+        setFurnaceFuel(items: $ItemPredicate_, ticks: $TickDuration_): void;
+        removeFurnaceFuel(items: $ItemPredicate_): void;
         component: $Component;
         stage: $GeneratedDataStage;
         scriptType: $ScriptType;

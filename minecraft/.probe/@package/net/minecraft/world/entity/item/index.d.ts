@@ -3,7 +3,7 @@ import { $TagKey } from "@package/net/minecraft/tags";
 import { $EntityDynamicLightSource } from "@package/dev/lambdaurora/lambdynlights/engine/source";
 import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $Fluid } from "@package/net/minecraft/world/level/material";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
+import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $LivingEntity, $Pose, $PortalProcessor, $Entity, $TraceableEntity } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
@@ -30,6 +30,9 @@ declare module "@package/net/minecraft/world/entity/item" {
         getTarget(): $UUID;
         setTarget(arg0: $UUID_): void;
         getOwner(): $Entity;
+        setItem(arg0: $ItemStack_): void;
+        static areMergable(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
+        handler$dfh000$item_obliterator$discardItemEntities(arg0: $CompoundTag_, arg1: $CallbackInfo): void;
         setNoPickUpDelay(): void;
         setNeverPickUp(): void;
         hasPickUpDelay(): boolean;
@@ -38,8 +41,6 @@ declare module "@package/net/minecraft/world/entity/item" {
         makeFakeItem(): void;
         getSpin(arg0: number): number;
         lithium$unsubscribe(arg0: $ChangeSubscriber<any>): number;
-        setItem(arg0: $ItemStack_): void;
-        static areMergable(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
         getItem(): $ItemStack;
         getAge(): number;
         lithium$notify(arg0: $ItemStack_, arg1: number): void;
@@ -142,12 +143,12 @@ declare module "@package/net/minecraft/world/entity/item" {
         set thrower(value: $Entity);
     }
     export class $PrimedTnt extends $Entity implements $TraceableEntity, $EntityDynamicLightSource {
-        getOwner(): $LivingEntity;
         getFuse(): number;
         setFuse(arg0: number): void;
         getBlockState(): $BlockState;
         setBlockState(arg0: $BlockState_): void;
         explode(): void;
+        getOwner(): $Entity;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
@@ -220,21 +221,22 @@ declare module "@package/net/minecraft/world/entity/item" {
         dimensions: $EntityDimensions;
         constructor(arg0: $EntityType_<$PrimedTnt>, arg1: $Level_);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $LivingEntity);
-        get owner(): $LivingEntity;
+        get owner(): $Entity;
     }
     export class $FallingBlockEntity extends $Entity implements $FallingBlockEntityAccessor {
         static fall(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $FallingBlockEntity;
         disableDrop(): void;
-        setHurtsEntities(arg0: number, arg1: number): void;
         setStartPos(arg0: $BlockPos_): void;
         getStartPos(): $BlockPos;
-        handler$ccb000$architectury$handleLand(ci: $CallbackInfo, block: $Block_, blockPos2: $BlockPos_, bl: boolean, bl2: boolean, d: number, blockState: $BlockState_): void;
+        handler$ehe000$architectury$handleLand(ci: $CallbackInfo, block: $Block_, blockPos2: $BlockPos_, bl: boolean, bl2: boolean, d: number, blockState: $BlockState_): void;
         callOnBrokenAfterFall(arg0: $Block_, arg1: $BlockPos_): void;
         setBlockState(state: $BlockState_): void;
-        static callInit$create_$md$8e2dbe$0(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $BlockState_): $FallingBlockEntity;
+        static callInit$create_$md$d858b6$0(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $BlockState_): $FallingBlockEntity;
+        setHurtsEntities(arg0: number, arg1: number): void;
         getBlockState(): $BlockState;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
+        blockState: $BlockState;
         cancelDrop: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;

@@ -16,10 +16,10 @@ export * as biome from "@package/xaero/map/file/worldsave/biome";
 
 declare module "@package/xaero/map/file/worldsave" {
     export class $WorldDataHandler {
+        buildRegion(arg0: $MapRegion, arg1: $HolderLookup<$Block_>, arg2: $Registry<$Block_>, arg3: $Registry<$Fluid_>, arg4: boolean, arg5: number[]): $WorldDataHandler$Result;
         prepareSingleplayer(arg0: $Level_, arg1: $MapProcessor): void;
         getWorldServer(): $ServerLevel;
         getWorldDataReader(): $WorldDataReader;
-        buildRegion(arg0: $MapRegion, arg1: $HolderLookup<$Block_>, arg2: $Registry<$Block_>, arg3: $Registry<$Fluid_>, arg4: boolean, arg5: number[]): $WorldDataHandler$Result;
         static onServerWorldUnload(arg0: $ServerLevel): void;
         handleRenderExecutor(): void;
         getWorldDir(): $Path;

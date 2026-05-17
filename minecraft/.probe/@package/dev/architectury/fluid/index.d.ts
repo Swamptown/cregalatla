@@ -23,15 +23,15 @@ declare module "@package/dev/architectury/fluid" {
         static init(): void;
         write(provider: $HolderLookup$Provider, tag: $Tag_): $Tag;
         write(buf: $RegistryFriendlyByteBuf): void;
-        static create(fluid: $Supplier_<$Fluid>, amount: number, patch: $DataComponentPatch_): $FluidStack;
+        static create(fluid: $Fluid_, amount: number, patch: $DataComponentPatch_): $FluidStack;
+        static create(stack: $FluidStack, amount: number): $FluidStack;
         static create(fluid: $Fluid_, amount: number): $FluidStack;
         static create(fluid: $Supplier_<$Fluid>, amount: number): $FluidStack;
         static create(fluid: $Holder_<$Fluid>, amount: number, patch: $DataComponentPatch_): $FluidStack;
         static create(fluid: $Holder_<$Fluid>, amount: number): $FluidStack;
-        static create(stack: $FluidStack, amount: number): $FluidStack;
-        static create(fluid: $Fluid_, amount: number, patch: $DataComponentPatch_): $FluidStack;
-        static read(buf: $RegistryFriendlyByteBuf): $FluidStack;
+        static create(fluid: $Supplier_<$Fluid>, amount: number, patch: $DataComponentPatch_): $FluidStack;
         static read(provider: $HolderLookup$Provider, tag: $Tag_): ($FluidStack) | undefined;
+        static read(buf: $RegistryFriendlyByteBuf): $FluidStack;
         grow(amount: number): void;
         copyWithAmount(amount: number): $FluidStack;
         getRawFluidSupplier(): $Supplier<$Fluid>;
@@ -40,13 +40,13 @@ declare module "@package/dev/architectury/fluid" {
         isFluidStackEqual(other: $FluidStack): boolean;
         isComponentEqual(other: $FluidStack): boolean;
         isFluidEqual(other: $FluidStack): boolean;
-        getFluid(): $Fluid;
         getTranslationKey(): string;
         setAmount(amount: number): void;
+        getFluid(): $Fluid;
         getPatch(): $DataComponentPatch;
         shrink(amount: number): void;
-        applyComponents(patch: $DataComponentPatch_): void;
         applyComponents(patch: $DataComponentMap_): void;
+        applyComponents(patch: $DataComponentPatch_): void;
         getAmount(): number;
         get<T>(arg0: $DataComponentType_<T>): T;
         getOrDefault<T>(arg0: $DataComponentType_<T>, arg1: T): T;
@@ -62,8 +62,8 @@ declare module "@package/dev/architectury/fluid" {
         get name(): $Component;
         get rawFluidSupplier(): $Supplier<$Fluid>;
         get rawFluid(): $Fluid;
-        get fluid(): $Fluid;
         get translationKey(): string;
+        get fluid(): $Fluid;
         get patch(): $DataComponentPatch;
         get components(): $DataComponentMap;
     }

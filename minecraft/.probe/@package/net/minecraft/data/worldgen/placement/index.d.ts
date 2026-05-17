@@ -31,12 +31,12 @@ declare module "@package/net/minecraft/data/worldgen/placement" {
         static register(arg0: $BootstrapContext<$PlacedFeature_>, arg1: $ResourceKey_<$PlacedFeature>, arg2: $Holder_<$ConfiguredFeature<never, never>>, ...arg3: $PlacementModifier[]): void;
         static register(arg0: $BootstrapContext<$PlacedFeature_>, arg1: $ResourceKey_<$PlacedFeature>, arg2: $Holder_<$ConfiguredFeature<never, never>>, arg3: $List_<$PlacementModifier>): void;
         static bootstrap(arg0: $BootstrapContext<$PlacedFeature_>): void;
+        static createKey(arg0: string): $ResourceKey<$PlacedFeature>;
         static countExtra(arg0: number, arg1: number, arg2: number): $PlacementModifier;
         static filteredByBlockSurvival(arg0: $Block_): $BlockPredicateFilter;
-        static onlyWhenEmpty<FC extends $FeatureConfiguration, F extends $Feature<FC>>(arg0: F, arg1: FC): $Holder<$PlacedFeature>;
-        static createKey(arg0: string): $ResourceKey<$PlacedFeature>;
         static inlinePlaced<FC extends $FeatureConfiguration, F extends $Feature<FC>>(arg0: F, arg1: FC, ...arg2: $PlacementModifier[]): $Holder<$PlacedFeature>;
         static inlinePlaced(arg0: $Holder_<$ConfiguredFeature<never, never>>, ...arg1: $PlacementModifier[]): $Holder<$PlacedFeature>;
+        static onlyWhenEmpty<FC extends $FeatureConfiguration, F extends $Feature<FC>>(arg0: F, arg1: FC): $Holder<$PlacedFeature>;
         static filtered<FC extends $FeatureConfiguration, F extends $Feature<FC>>(arg0: F, arg1: FC, arg2: $BlockPredicate): $Holder<$PlacedFeature>;
         static RANGE_8_8: $PlacementModifier;
         static FULL_RANGE: $PlacementModifier;

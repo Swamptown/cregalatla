@@ -98,8 +98,8 @@ declare module "@package/com/mojang/math" {
         getRightRotation(): $Quaternionf;
         inverse(): $Transformation;
         slerp(arg0: $Transformation, arg1: number): $Transformation;
-        getScale(): $Vector3f;
         getTranslation(): $Vector3f;
+        getScale(): $Vector3f;
         getMatrix(): $Matrix4f;
         getNormalMatrix(): $Matrix3f;
         isIdentity(): boolean;
@@ -115,8 +115,8 @@ declare module "@package/com/mojang/math" {
         constructor(arg0: $Vector3f, arg1: $Quaternionf, arg2: $Vector3f, arg3: $Quaternionf);
         get leftRotation(): $Quaternionf;
         get rightRotation(): $Quaternionf;
-        get scale(): $Vector3f;
         get translation(): $Vector3f;
+        get scale(): $Vector3f;
         get matrix(): $Matrix4f;
         get normalMatrix(): $Matrix3f;
     }
@@ -151,23 +151,23 @@ declare module "@package/com/mojang/math" {
     export class $GivensParameters extends $Record {
         sin(): number;
         cos(): number;
-        sinHalf(): number;
-        cosHalf(): number;
         static fromUnnormalized(arg0: number, arg1: number): $GivensParameters;
         aroundZ(arg0: $Matrix3f): $Matrix3f;
         aroundZ(arg0: $Quaternionf): $Quaternionf;
         aroundY(arg0: $Quaternionf): $Quaternionf;
         aroundY(arg0: $Matrix3f): $Matrix3f;
-        aroundX(arg0: $Matrix3f): $Matrix3f;
         aroundX(arg0: $Quaternionf): $Quaternionf;
+        aroundX(arg0: $Matrix3f): $Matrix3f;
         static fromPositiveAngle(arg0: number): $GivensParameters;
+        sinHalf(): number;
+        cosHalf(): number;
         inverse(): $GivensParameters;
         constructor(arg0: number, arg1: number);
     }
     /**
      * Values that may be interpreted as {@link $GivensParameters}.
      */
-    export type $GivensParameters_ = { sinHalf?: number, cosHalf?: number,  } | [sinHalf?: number, cosHalf?: number, ];
+    export type $GivensParameters_ = { cosHalf?: number, sinHalf?: number,  } | [cosHalf?: number, sinHalf?: number, ];
     export class $MatrixUtil {
         static eigenvalueJacobi(arg0: $Matrix3f, arg1: number): $Quaternionf;
         static isPureTranslation(arg0: $Matrix4f): boolean;
@@ -185,8 +185,8 @@ declare module "@package/com/mojang/math" {
         static XP: $Axis;
     }
     export interface $Axis {
-        rotationDegrees(arg0: number): $Quaternionf;
         rotation(arg0: number): $Quaternionf;
+        rotationDegrees(arg0: number): $Quaternionf;
     }
     /**
      * Values that may be interpreted as {@link $Axis}.

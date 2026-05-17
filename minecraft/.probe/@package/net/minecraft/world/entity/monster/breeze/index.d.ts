@@ -50,8 +50,8 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         tick(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         static canRun(arg0: $ServerLevel, arg1: $Breeze): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
@@ -59,8 +59,8 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
     }
     export class $ShootWhenStuck extends $Behavior<$Breeze> {
         start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();
@@ -250,8 +250,8 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         tick(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         static isFacingTarget(arg0: $Breeze, arg1: $LivingEntity): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;

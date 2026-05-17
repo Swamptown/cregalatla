@@ -16,11 +16,11 @@ declare module "@package/xaero/hud/minimap/world/state" {
         setAutoWorldPath(arg0: $XaeroPath): void;
         getAutoContainerPathIgnoreCaseCache(): $XaeroPath;
         setAutoContainerPathIgnoreCaseCache(arg0: $XaeroPath): void;
-        getAutoRootContainerPath(): $XaeroPath;
         getCurrentContainerPath(): $XaeroPath;
         getCurrentRootContainerPath(): $XaeroPath;
         getCustomContainerPath(): $XaeroPath;
         getCustomWorldPath(): $XaeroPath;
+        getAutoRootContainerPath(): $XaeroPath;
         getAutoWorldPath(): $XaeroPath;
         getCurrentWorldPath(arg0: $XaeroPath): $XaeroPath;
         getCurrentWorldPath(): $XaeroPath;
@@ -37,11 +37,7 @@ declare module "@package/xaero/hud/minimap/world/state" {
          */
         update(arg0: $MinimapSession): void;
         init(): void;
-        getAutoRootContainerPath(arg0: number): $XaeroPath;
-        /**
-         * @deprecated
-         */
-        getAutoRootContainerPath(arg0: number, arg1: $ClientPacketListener, arg2: $MinimapSession): $XaeroPath;
+        onServerLevelId(arg0: number): void;
         /**
          * @deprecated
          */
@@ -52,14 +48,18 @@ declare module "@package/xaero/hud/minimap/world/state" {
          */
         getPotentialWorldNode(arg0: $ResourceKey_<$Level>, arg1: boolean, arg2: $MinimapSession): string;
         getPotentialWorldNode(arg0: $ResourceKey_<$Level>, arg1: boolean): string;
+        getPotentialContainerPath(): $XaeroPath;
         /**
          * @deprecated
          */
         getPotentialContainerPath(arg0: $MinimapSession): $XaeroPath;
-        getPotentialContainerPath(): $XaeroPath;
         hasServerLevelId(arg0: $MinimapWorldRootContainer): boolean;
         getAutoWorldNodeBase(arg0: $MinimapWorldRootContainer): $Object;
-        onServerLevelId(arg0: number): void;
+        getAutoRootContainerPath(arg0: number): $XaeroPath;
+        /**
+         * @deprecated
+         */
+        getAutoRootContainerPath(arg0: number, arg1: $ClientPacketListener, arg2: $MinimapSession): $XaeroPath;
         setCurrentWorldSpawn(arg0: $BlockPos_): void;
         static ROOT_CONTAINER_FORMAT: number;
         constructor(arg0: $HudMod, arg1: $MinimapSession, arg2: $ClientPacketListener);

@@ -42,9 +42,9 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         static toABGR(arg0: number): number;
         static applyingLightmap(arg0: number, arg1: number): $IQuadTransformer;
         static applyingLightmap(arg0: number): $IQuadTransformer;
+        static applyingColor(arg0: number, arg1: number, arg2: number): $IQuadTransformer;
         static applyingColor(arg0: number): $IQuadTransformer;
         static applyingColor(arg0: number, arg1: number, arg2: number, arg3: number): $IQuadTransformer;
-        static applyingColor(arg0: number, arg1: number, arg2: number): $IQuadTransformer;
         static set tingEmissivity(value: number);
     }
     export class $ItemLayerModel implements $IUnbakedGeometry<$ItemLayerModel> {
@@ -59,11 +59,11 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         getTransforms(): $ItemTransforms;
         getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getOverrides(): $ItemOverrides;
-        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         isGui3d(): boolean;
         usesBlockLight(): boolean;
         getParticleIcon(): $TextureAtlasSprite;
         useAmbientOcclusion(): boolean;
+        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getQuads(arg0: $BlockState_, arg1: $Direction_, arg2: $RandomSource): $List<$BakedQuad>;
         emitBlockQuads(arg0: $BlockAndTintGetter, arg1: $BlockState_, arg2: $BlockPos_, arg3: $Supplier_<any>, arg4: $RenderContext): void;
         emitItemQuads(arg0: $ItemStack_, arg1: $Supplier_<any>, arg2: $RenderContext): void;
@@ -165,7 +165,7 @@ declare module "@package/net/neoforged/neoforge/client/model" {
     /**
      * Values that may be interpreted as {@link $ExtraFaceData}.
      */
-    export type $ExtraFaceData_ = { blockLight?: number, skyLight?: number, ambientOcclusion?: boolean, color?: number,  } | [blockLight?: number, skyLight?: number, ambientOcclusion?: boolean, color?: number, ];
+    export type $ExtraFaceData_ = { color?: number, ambientOcclusion?: boolean, skyLight?: number, blockLight?: number,  } | [color?: number, ambientOcclusion?: boolean, skyLight?: number, blockLight?: number, ];
     export class $SimpleModelState implements $ModelState {
         isUvLocked(): boolean;
         getRotation(): $Transformation;
@@ -196,13 +196,13 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
         getRenderPasses(arg0: $ItemStack_, arg1: boolean): $List<$BakedModel>;
         getOverrides(): $ItemOverrides;
-        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         isGui3d(): boolean;
         usesBlockLight(): boolean;
         getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         getParticleIcon(): $TextureAtlasSprite;
-        useAmbientOcclusion(): boolean;
         useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
+        useAmbientOcclusion(): boolean;
+        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
         emitBlockQuads(arg0: $BlockAndTintGetter, arg1: $BlockState_, arg2: $BlockPos_, arg3: $Supplier_<any>, arg4: $RenderContext): void;
         emitItemQuads(arg0: $ItemStack_, arg1: $Supplier_<any>, arg2: $RenderContext): void;
@@ -233,9 +233,9 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         emitBlockQuads(arg0: $BlockAndTintGetter, arg1: $BlockState_, arg2: $BlockPos_, arg3: $Supplier_<any>, arg4: $RenderContext): void;
         emitItemQuads(arg0: $ItemStack_, arg1: $Supplier_<any>, arg2: $RenderContext): void;
         getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
-        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
+        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         isVanillaAdapter(): boolean;
         constructor(arg0: boolean, arg1: boolean, arg2: boolean, arg3: $TextureAtlasSprite, arg4: $ItemTransforms, arg5: $ItemOverrides, arg6: $ImmutableMap<string, $BakedModel>, arg7: $ImmutableList<$BakedModel>);
         get customRenderer(): boolean;

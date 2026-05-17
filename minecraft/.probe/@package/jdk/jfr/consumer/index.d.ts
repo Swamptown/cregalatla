@@ -66,8 +66,8 @@ declare module "@package/jdk/jfr/consumer" {
         getString(arg0: string): string;
         getDuration(arg0: string): $Duration;
         hasField(arg0: string): boolean;
-        getInstant(arg0: string): $Instant;
         getThread(arg0: string): $RecordedThread;
+        getInstant(arg0: string): $Instant;
         get fields(): $List<$ValueDescriptor>;
     }
     export class $RecordedThreadGroup extends $RecordedObject {

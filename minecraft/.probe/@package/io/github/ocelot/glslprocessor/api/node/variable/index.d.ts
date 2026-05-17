@@ -16,10 +16,10 @@ declare module "@package/io/github/ocelot/glslprocessor/api/node/variable" {
         setExpression(arg0: $GlslNode): $GlslGetArrayNode;
         toList(): $List<$GlslNode>;
         getType(): $GlslSpecifiedType;
-        toSourceString(): string;
         getBody(): $GlslNodeList;
         setBody(arg0: $Collection_<$GlslNode>): boolean;
         setBody(...arg0: $GlslNode[]): boolean;
+        toSourceString(): string;
         constructor(arg0: $GlslNode, arg1: $GlslNode);
         get nodeType(): $GlslNodeType;
         get type(): $GlslSpecifiedType;
@@ -32,10 +32,10 @@ declare module "@package/io/github/ocelot/glslprocessor/api/node/variable" {
         getNodeType(): $GlslNodeType;
         toList(): $List<$GlslNode>;
         getType(): $GlslSpecifiedType;
-        toSourceString(): string;
         getBody(): $GlslNodeList;
         setBody(arg0: $Collection_<$GlslNode>): boolean;
         setBody(...arg0: $GlslNode[]): boolean;
+        toSourceString(): string;
         constructor(arg0: string);
         get nodeType(): $GlslNodeType;
         get type(): $GlslSpecifiedType;
@@ -53,23 +53,23 @@ declare module "@package/io/github/ocelot/glslprocessor/api/node/variable" {
         asDeclaration(): $GlslVariableDeclarationNode;
         asStruct(): $GlslStructDeclarationNode;
         isStruct(): boolean;
-        isFunction(): boolean;
         isDeclaration(): boolean;
+        isFunction(): boolean;
         asFunction(): $GlslFunctionNode;
         asField(): $GlslNewFieldNode;
         toList(): $List<$GlslNode>;
         getType(): $GlslSpecifiedType;
-        toSourceString(): string;
         getBody(): $GlslNodeList;
         setBody(arg0: $Collection_<$GlslNode>): boolean;
         setBody(...arg0: $GlslNode[]): boolean;
+        toSourceString(): string;
         constructor(arg0: $GlslSpecifiedType);
         get structSpecifier(): $GlslStructSpecifier;
         get nodeType(): $GlslNodeType;
         get field(): boolean;
         get struct(): boolean;
-        get function(): boolean;
         get declaration(): boolean;
+        get function(): boolean;
         get type(): $GlslSpecifiedType;
     }
     export class $GlslGetFieldNode implements $GlslNode {
@@ -82,10 +82,10 @@ declare module "@package/io/github/ocelot/glslprocessor/api/node/variable" {
         setExpression(arg0: $GlslNode): $GlslGetFieldNode;
         toList(): $List<$GlslNode>;
         getType(): $GlslSpecifiedType;
-        toSourceString(): string;
         getBody(): $GlslNodeList;
         setBody(arg0: $Collection_<$GlslNode>): boolean;
         setBody(...arg0: $GlslNode[]): boolean;
+        toSourceString(): string;
         constructor(arg0: $GlslNode, arg1: string);
         get nodeType(): $GlslNodeType;
         get type(): $GlslSpecifiedType;
@@ -96,29 +96,29 @@ declare module "@package/io/github/ocelot/glslprocessor/api/node/variable" {
         setName(arg0: string): $GlslNewFieldNode;
         getType(): $GlslSpecifiedType;
         visit(arg0: $GlslNodeVisitor): void;
-        getInitializer(): $GlslNode;
         setInitializer(arg0: $GlslNode): $GlslNewFieldNode;
+        getInitializer(): $GlslNode;
         getNodeType(): $GlslNodeType;
         setType(arg0: $GlslType_): $GlslNewFieldNode;
         isField(): boolean;
         asDeclaration(): $GlslVariableDeclarationNode;
         asStruct(): $GlslStructDeclarationNode;
         isStruct(): boolean;
-        isFunction(): boolean;
         isDeclaration(): boolean;
+        isFunction(): boolean;
         asFunction(): $GlslFunctionNode;
         asField(): $GlslNewFieldNode;
         toList(): $List<$GlslNode>;
-        toSourceString(): string;
         getBody(): $GlslNodeList;
         setBody(arg0: $Collection_<$GlslNode>): boolean;
         setBody(...arg0: $GlslNode[]): boolean;
+        toSourceString(): string;
         constructor(arg0: $GlslType_, arg1: string, arg2: $GlslNode);
         get nodeType(): $GlslNodeType;
         get field(): boolean;
         get struct(): boolean;
-        get function(): boolean;
         get declaration(): boolean;
+        get function(): boolean;
     }
     export class $GlslVariableDeclarationNode implements $GlslRootNode {
         getName(): string;
@@ -132,24 +132,24 @@ declare module "@package/io/github/ocelot/glslprocessor/api/node/variable" {
         asDeclaration(): $GlslVariableDeclarationNode;
         asStruct(): $GlslStructDeclarationNode;
         isStruct(): boolean;
-        isFunction(): boolean;
         isDeclaration(): boolean;
+        isFunction(): boolean;
         asFunction(): $GlslFunctionNode;
         asField(): $GlslNewFieldNode;
         toList(): $List<$GlslNode>;
         getType(): $GlslSpecifiedType;
-        toSourceString(): string;
         getBody(): $GlslNodeList;
         setBody(arg0: $Collection_<$GlslNode>): boolean;
         setBody(...arg0: $GlslNode[]): boolean;
+        toSourceString(): string;
         constructor(arg0: $Collection_<$GlslTypeQualifier>, arg1: $Collection_<string>);
         get typeQualifiers(): $List<$GlslTypeQualifier>;
         get names(): $List<string>;
         get nodeType(): $GlslNodeType;
         get field(): boolean;
         get struct(): boolean;
-        get function(): boolean;
         get declaration(): boolean;
+        get function(): boolean;
         get type(): $GlslSpecifiedType;
     }
 }

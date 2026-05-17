@@ -20,9 +20,9 @@ declare module "@package/mezz/jei/api/recipe" {
     export class $IFocusFactory {
     }
     export interface $IFocusFactory {
+        getEmptyFocusGroup(): $IFocusGroup;
         createFocus<V>(arg0: $RecipeIngredientRole_, arg1: $IIngredientType_<V>, arg2: V): $IFocus<V>;
         createFocus<V>(arg0: $RecipeIngredientRole_, arg1: $ITypedIngredient<V>): $IFocus<V>;
-        getEmptyFocusGroup(): $IFocusGroup;
         createFocusGroup(arg0: $Collection_<$IFocus<never>>): $IFocusGroup;
         get emptyFocusGroup(): $IFocusGroup;
     }
@@ -45,35 +45,35 @@ declare module "@package/mezz/jei/api/recipe" {
     export class $IRecipeManager {
     }
     export interface $IRecipeManager {
-        getRecipeType<T>(arg0: $ResourceLocation_, arg1: $Class<T>): ($RecipeType<T>) | undefined;
-        getRecipeType(arg0: $ResourceLocation_): ($RecipeType<never>) | undefined;
-        getRecipeCategory<T>(arg0: $RecipeType<T>): $IRecipeCategory<T>;
         createRecipeCategoryLookup(): $IRecipeCategoriesLookup;
         createRecipeCatalystLookup(arg0: $RecipeType<never>): $IRecipeCatalystLookup;
         createRecipeLookup<R>(arg0: $RecipeType<R>): $IRecipeLookup<R>;
+        getRecipeCategory<T>(arg0: $RecipeType<T>): $IRecipeCategory<T>;
         hideRecipeCategory(arg0: $RecipeType<never>): void;
+        unhideRecipes<T>(arg0: $RecipeType<T>, arg1: $Collection_<T>): void;
+        createRecipeSlotDrawable(arg0: $RecipeIngredientRole_, arg1: $List_<($ITypedIngredient<never>) | undefined>, arg2: $Set_<number>, arg3: number): $IRecipeSlotDrawable;
         /**
          * @deprecated
          */
         createRecipeSlotDrawable(arg0: $RecipeIngredientRole_, arg1: $List_<($ITypedIngredient<never>) | undefined>, arg2: $Set_<number>, arg3: number, arg4: number, arg5: number): $IRecipeSlotDrawable;
-        createRecipeSlotDrawable(arg0: $RecipeIngredientRole_, arg1: $List_<($ITypedIngredient<never>) | undefined>, arg2: $Set_<number>, arg3: number): $IRecipeSlotDrawable;
         hideRecipes<T>(arg0: $RecipeType<T>, arg1: $Collection_<T>): void;
-        unhideRecipes<T>(arg0: $RecipeType<T>, arg1: $Collection_<T>): void;
         unhideRecipeCategory(arg0: $RecipeType<never>): void;
         createRecipeLayoutDrawableOrShowError<T>(arg0: $IRecipeCategory<T>, arg1: T, arg2: $IFocusGroup): $IRecipeLayoutDrawable<T>;
-        createRecipeLayoutDrawable<T>(arg0: $IRecipeCategory<T>, arg1: T, arg2: $IFocusGroup, arg3: $IScalableDrawable_, arg4: number): ($IRecipeLayoutDrawable<T>) | undefined;
         createRecipeLayoutDrawable<T>(arg0: $IRecipeCategory<T>, arg1: T, arg2: $IFocusGroup): ($IRecipeLayoutDrawable<T>) | undefined;
+        createRecipeLayoutDrawable<T>(arg0: $IRecipeCategory<T>, arg1: T, arg2: $IFocusGroup, arg3: $IScalableDrawable_, arg4: number): ($IRecipeLayoutDrawable<T>) | undefined;
         getRecipeIngredients<T>(arg0: $IRecipeCategory<T>, arg1: T): $IIngredientSupplier;
         getRecipeButtonControllerFactories(): $List<$IRecipeButtonControllerFactory>;
         addRecipes<T>(arg0: $RecipeType<T>, arg1: $List_<T>): void;
+        getRecipeType<T>(arg0: $ResourceLocation_, arg1: $Class<T>): ($RecipeType<T>) | undefined;
+        getRecipeType(arg0: $ResourceLocation_): ($RecipeType<never>) | undefined;
         get recipeButtonControllerFactories(): $List<$IRecipeButtonControllerFactory>;
     }
     export class $RecipeType<T> {
         static create<T>(arg0: string, arg1: string, arg2: $Class<T>): $RecipeType<T>;
         static createFromDeferredVanilla<R extends $Recipe<never>>(arg0: $Supplier_<$RecipeType$1<R>>): $Supplier<$RecipeType<$RecipeHolder<R>>>;
+        getRecipeClass(): $Class<T>;
         static createRecipeHolderType<R extends $Recipe<never>>(arg0: $ResourceLocation_): $RecipeType<$RecipeHolder<R>>;
         static createFromVanilla<R extends $Recipe<never>>(arg0: $RecipeType_<R>): $RecipeType<$RecipeHolder<R>>;
-        getRecipeClass(): $Class<T>;
         getUid(): $ResourceLocation;
         constructor(arg0: $ResourceLocation_, arg1: $Class<T>);
         get recipeClass(): $Class<T>;

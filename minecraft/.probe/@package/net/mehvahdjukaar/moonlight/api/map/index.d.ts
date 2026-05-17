@@ -30,21 +30,20 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/map" {
         load(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         save(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         getType(): $CustomMapData$Type<P, never>;
+        setDirty(arg0: $MapItemSavedData, arg1: $Consumer_<C>): void;
+        onItemUpdate(arg0: $MapItemSavedData, arg1: $Entity): boolean;
+        onItemTooltip(arg0: $MapItemSavedData, arg1: $ItemStack_): $Component;
+        persistOnRescale(): boolean;
         createDirtyCounter(): C;
         createUpdatePatch(arg0: C): P;
-        applyUpdatePatch(arg0: P): void;
-        persistOnRescale(): boolean;
         persistOnCopyOrLock(): boolean;
-        setDirty(arg0: $MapItemSavedData, arg1: $Consumer_<C>): void;
-        onItemTooltip(arg0: $MapItemSavedData, arg1: $ItemStack_): $Component;
-        onItemUpdate(arg0: $MapItemSavedData, arg1: $Entity): boolean;
+        applyUpdatePatch(arg0: P): void;
         get type(): $CustomMapData$Type<P, never>;
     }
     export class $ExpandedMapData {
     }
     export interface $ExpandedMapData {
         ml$setCustomDecorationsDirty(): void;
-        ml$setCustomDataDirty<H extends $CustomMapData$DirtyCounter>(arg0: $CustomMapData$Type_<never, never>, arg1: $Consumer_<H>): void;
         ml$getCustomMarkers(): $Map<string, $MLMapMarker<never>>;
         ml$removeCustomMarker(arg0: string): boolean;
         ml$copy(): $MapItemSavedData;
@@ -54,6 +53,7 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/map" {
         ml$getCustomData(): $Map<$CustomMapData$Type<never, never>, $CustomMapData<never, never>>;
         ml$getCustomDecorations(): $Map<string, $MLMapDecoration>;
         ml$getVanillaDecorationSize(): number;
+        ml$setCustomDataDirty<H extends $CustomMapData$DirtyCounter>(arg0: $CustomMapData$Type_<never, never>, arg1: $Consumer_<H>): void;
     }
     export class $CustomMapData$DirtyDataPatch<P, D extends $CustomMapData<never, P>> extends $Record {
         type(): $CustomMapData$Type<P, D>;
@@ -65,7 +65,7 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/map" {
     /**
      * Values that may be interpreted as {@link $CustomMapData$DirtyDataPatch}.
      */
-    export type $CustomMapData$DirtyDataPatch_<P, D> = { patch?: any, type?: $CustomMapData$Type_<any, $CustomMapData<never, P>>,  } | [patch?: any, type?: $CustomMapData$Type_<any, $CustomMapData<never, P>>, ];
+    export type $CustomMapData$DirtyDataPatch_<P, D> = { type?: $CustomMapData$Type_<any, $CustomMapData<never, P>>, patch?: any,  } | [type?: $CustomMapData$Type_<any, $CustomMapData<never, P>>, patch?: any, ];
     export class $CustomMapData$Type<P, T extends $CustomMapData<never, P>> extends $Record {
         get(arg0: $MapItemSavedData): T;
         factory(): $Supplier<T>;
@@ -78,6 +78,6 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/map" {
     /**
      * Values that may be interpreted as {@link $CustomMapData$Type}.
      */
-    export type $CustomMapData$Type_<P, T> = RegistryTypes.MoonlightCustomMapDataTypes | { id?: $ResourceLocation_, factory?: $Supplier_<$CustomMapData<never, P>>, patchCodec?: $StreamCodec<$RegistryFriendlyByteBuf, any>,  } | [id?: $ResourceLocation_, factory?: $Supplier_<$CustomMapData<never, P>>, patchCodec?: $StreamCodec<$RegistryFriendlyByteBuf, any>, ];
+    export type $CustomMapData$Type_<P, T> = RegistryTypes.MoonlightCustomMapDataTypes | { patchCodec?: $StreamCodec<$RegistryFriendlyByteBuf, any>, factory?: $Supplier_<$CustomMapData<never, P>>, id?: $ResourceLocation_,  } | [patchCodec?: $StreamCodec<$RegistryFriendlyByteBuf, any>, factory?: $Supplier_<$CustomMapData<never, P>>, id?: $ResourceLocation_, ];
     export interface $CustomMapData$Type<P, T> extends RegistryMarked<RegistryTypes.MoonlightCustomMapDataTypesTag, RegistryTypes.MoonlightCustomMapDataTypes> {}
 }

@@ -1,4 +1,4 @@
-import { $RecipeSerializer_, $Recipe, $AbstractCookingRecipe$Factory_, $AbstractCookingRecipe } from "@package/net/minecraft/world/item/crafting";
+import { $RecipeSerializer_, $AbstractCookingRecipe$Factory_, $Recipe, $AbstractCookingRecipe } from "@package/net/minecraft/world/item/crafting";
 import { $AbstractRegistrate } from "@package/com/tterrag/registrate";
 import { $TagsProvider$TagAppender, $TagsProvider$TagLookup_, $IntrinsicHolderTagsProvider, $TagsProvider, $TagsProvider$TagLookup } from "@package/net/minecraft/data/tags";
 import { $CompletableFuture } from "@package/java/util/concurrent";
@@ -120,13 +120,13 @@ declare module "@package/com/tterrag/registrate/providers" {
     export class $RegistrateLangProvider extends $LanguageProvider implements $RegistrateProvider {
         add(arg0: $CreativeModeTab_, arg1: string): void;
         addItem(arg0: $NonNullSupplier_<$Item>): void;
-        getAutomaticName<T>(arg0: $NonNullSupplier_<T>, arg1: $ResourceKey_<$Registry<T>>): string;
         addBlock(arg0: $NonNullSupplier_<$Block>): void;
-        addTooltip(arg0: $NonNullSupplier_<$ItemLike>, arg1: string): void;
         addTooltip(arg0: $NonNullSupplier_<$ItemLike>, arg1: $List_<string>): void;
+        addTooltip(arg0: $NonNullSupplier_<$ItemLike>, arg1: string): void;
         addBlockWithTooltip(arg0: $NonNullSupplier_<$Block>, arg1: string): void;
         addBlockWithTooltip(arg0: $NonNullSupplier_<$Block>, arg1: string, arg2: string): void;
         addItemWithTooltip(arg0: $NonNullSupplier_<$Item>, arg1: string, arg2: $List_<string>): void;
+        getAutomaticName<T>(arg0: $NonNullSupplier_<T>, arg1: $ResourceKey_<$Registry<T>>): string;
         static toEnglishName(arg0: string): string;
         getSide(): $LogicalSide;
         addEntityType(arg0: $NonNullSupplier_<$EntityType<never>>): void;
@@ -156,7 +156,7 @@ declare module "@package/com/tterrag/registrate/providers" {
     /**
      * Values that may be interpreted as {@link $ProviderType$Context}.
      */
-    export type $ProviderType$Context_<T> = { provider?: $CompletableFuture<$HolderLookup$Provider>, existing?: $Map_<$ProviderType_<never>, $RegistrateProvider>, event?: $GatherDataEvent, type?: $ProviderType_<$RegistrateProvider>, fileHelper?: $ExistingFileHelper, parent?: $AbstractRegistrate<never>, output?: $PackOutput,  } | [provider?: $CompletableFuture<$HolderLookup$Provider>, existing?: $Map_<$ProviderType_<never>, $RegistrateProvider>, event?: $GatherDataEvent, type?: $ProviderType_<$RegistrateProvider>, fileHelper?: $ExistingFileHelper, parent?: $AbstractRegistrate<never>, output?: $PackOutput, ];
+    export type $ProviderType$Context_<T> = { output?: $PackOutput, parent?: $AbstractRegistrate<never>, fileHelper?: $ExistingFileHelper, type?: $ProviderType_<$RegistrateProvider>, event?: $GatherDataEvent, existing?: $Map_<$ProviderType_<never>, $RegistrateProvider>, provider?: $CompletableFuture<$HolderLookup$Provider>,  } | [output?: $PackOutput, parent?: $AbstractRegistrate<never>, fileHelper?: $ExistingFileHelper, type?: $ProviderType_<$RegistrateProvider>, event?: $GatherDataEvent, existing?: $Map_<$ProviderType_<never>, $RegistrateProvider>, provider?: $CompletableFuture<$HolderLookup$Provider>, ];
     export class $RegistrateBlockstateProvider extends $BlockStateProvider implements $RegistrateProvider {
         getExistingVariantBuilder(arg0: $Block_): ($VariantBlockStateBuilder) | undefined;
         getExistingMultipartBuilder(arg0: $Block_): ($MultiPartBlockStateBuilder) | undefined;
@@ -263,10 +263,8 @@ declare module "@package/com/tterrag/registrate/providers" {
     export type $ProviderType$SimpleServerDataFactory_<T> = ((arg0: $AbstractRegistrate<never>, arg1: $PackOutput, arg2: $CompletableFuture<$HolderLookup$Provider>) => T);
     export class $RegistrateItemModelProvider extends $ItemModelProvider implements $RegistrateProvider {
         name(arg0: $NonNullSupplier_<$ItemLike>): string;
-        blockItem(arg0: $NonNullSupplier_<$ItemLike>, arg1: string): $ItemModelBuilder;
-        blockItem(arg0: $NonNullSupplier_<$ItemLike>): $ItemModelBuilder;
-        blockSprite(arg0: $NonNullSupplier_<$ItemLike>): $ItemModelBuilder;
         blockSprite(arg0: $NonNullSupplier_<$ItemLike>, arg1: $ResourceLocation_): $ItemModelBuilder;
+        blockSprite(arg0: $NonNullSupplier_<$ItemLike>): $ItemModelBuilder;
         itemTexture(arg0: $NonNullSupplier_<$ItemLike>): $ResourceLocation;
         handheld(arg0: $NonNullSupplier_<$ItemLike>): $ItemModelBuilder;
         handheld(arg0: $NonNullSupplier_<$ItemLike>, arg1: $ResourceLocation_): $ItemModelBuilder;
@@ -275,6 +273,8 @@ declare module "@package/com/tterrag/registrate/providers" {
         getSide(): $LogicalSide;
         generated(arg0: $NonNullSupplier_<$ItemLike>, ...arg1: $ResourceLocation_[]): $ItemModelBuilder;
         generated(arg0: $NonNullSupplier_<$ItemLike>): $ItemModelBuilder;
+        blockItem(arg0: $NonNullSupplier_<$ItemLike>): $ItemModelBuilder;
+        blockItem(arg0: $NonNullSupplier_<$ItemLike>, arg1: string): $ItemModelBuilder;
         static TEXTURE: $ExistingFileHelper$ResourceType;
         static ITEM_FOLDER: string;
         generatedModels: $Map<$ResourceLocation, $ItemModelBuilder>;
@@ -296,33 +296,33 @@ declare module "@package/com/tterrag/registrate/providers" {
         getProvider(): $HolderLookup$Provider;
         wall<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>): void;
         advancement(): $Advancement$Builder;
-        campfire<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
-        campfire<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): void;
-        door<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: string): void;
-        slab<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: string, arg4: boolean): void;
+        smelting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): void;
+        smelting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
+        blasting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): void;
+        blasting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
+        smoking<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
+        smoking<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): void;
+        stonecutting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
+        stonecutting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>): void;
+        singleItemUnfinished<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): $ShapelessRecipeBuilder;
         safeName(arg0: $ItemLike_): string;
-        safeName(arg0: $DataIngredient): string;
         safeName(arg0: $ResourceLocation_): string;
-        safeId(arg0: $ResourceLocation_): $ResourceLocation;
+        safeName(arg0: $DataIngredient): string;
         safeId(arg0: $DataIngredient): $ResourceLocation;
+        safeId(arg0: $ResourceLocation_): $ResourceLocation;
         safeId(arg0: $ItemLike_): $ResourceLocation;
         cooking<T extends $ItemLike, S extends $AbstractCookingRecipe>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number, arg5: string, arg6: $RecipeSerializer_<S>, arg7: $AbstractCookingRecipe$Factory_<S>): void;
         cooking<T extends $ItemLike, S extends $AbstractCookingRecipe>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number, arg5: $RecipeSerializer_<S>, arg6: $AbstractCookingRecipe$Factory_<S>): void;
-        smelting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
-        smelting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): void;
-        blasting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): void;
-        blasting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
-        smoking<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): void;
-        smoking<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
-        stonecutting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
-        stonecutting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>): void;
+        planks<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>): void;
         smeltingAndBlasting<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
         singleItem<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): void;
         stairs<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: string, arg4: boolean): void;
         fenceGate<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: string): void;
         trapDoor<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: string): void;
-        singleItemUnfinished<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): $ShapelessRecipeBuilder;
-        planks<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>): void;
+        campfire<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number, arg4: number): void;
+        campfire<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: number): void;
+        door<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: string): void;
+        slab<T extends $ItemLike>(arg0: $DataIngredient, arg1: $RecipeCategory_, arg2: $Supplier_<T>, arg3: string, arg4: boolean): void;
         storage<T extends $ItemLike>(arg0: $NonNullSupplier_<T>, arg1: $RecipeCategory_, arg2: $NonNullSupplier_<T>): void;
         /**
          * @deprecated

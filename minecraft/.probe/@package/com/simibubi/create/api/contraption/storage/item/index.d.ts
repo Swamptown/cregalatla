@@ -33,22 +33,22 @@ declare module "@package/com/simibubi/create/api/contraption/storage/item" {
     export interface $MountedItemStorageType<T> extends RegistryMarked<RegistryTypes.CreateMountedItemStorageTypeTag, RegistryTypes.CreateMountedItemStorageType> {}
     export class $MountedItemStorage implements $IItemHandlerModifiable {
         unmount(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockEntity): void;
-        wrapMethod$dnm000$offroad$wrapHandler(arg0: $StructureTemplate$StructureBlockInfo_, arg1: $Contraption, arg2: $Operation_<any>): $IItemHandlerModifiable;
+        wrapMethod$cjd000$offroad$wrapHandler(arg0: $StructureTemplate$StructureBlockInfo_, arg1: $Contraption, arg2: $Operation_<any>): $IItemHandlerModifiable;
         handleInteraction(arg0: $ServerPlayer, arg1: $Contraption, arg2: $StructureTemplate$StructureBlockInfo_): boolean;
         kjs$self(): $IItemHandler;
+        kjs$getBlock(level: $Level_): $LevelBlock;
         kjs$isMutable(): boolean;
         kjs$setStackInSlot(slot: number, stack: $ItemStack_): void;
-        kjs$getBlock(level: $Level_): $LevelBlock;
         isEmpty(): boolean;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
-        clear(): void;
         clear(match: $ItemPredicate_): void;
+        clear(): void;
         find(match: $ItemPredicate_): number;
         find(): number;
         count(match: $ItemPredicate_): number;
         count(): number;
-        countNonEmpty(): number;
         countNonEmpty(match: $ItemPredicate_): number;
+        countNonEmpty(): number;
         getWidth(): number;
         getHeight(): number;
         setChanged(): void;

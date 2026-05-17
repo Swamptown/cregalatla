@@ -3,7 +3,7 @@ import { $CullFrustum } from "@package/foundry/veil/api/client/render";
 import { $VertexConsumer } from "@package/com/mojang/blaze3d/vertex";
 import { $LightData } from "@package/foundry/veil/api/client/render/light/data";
 import { $AdvancedFbo } from "@package/foundry/veil/api/client/render/framebuffer";
-import { $LightTypeRegistry$LightType_, $LightTypeRegistry$LightType } from "@package/foundry/veil/api/client/registry";
+import { $LightTypeRegistry$LightType, $LightTypeRegistry$LightType_ } from "@package/foundry/veil/api/client/registry";
 import { $Map, $Collection } from "@package/java/util";
 import { $NativeResource } from "@package/org/lwjgl/system";
 
@@ -19,11 +19,11 @@ declare module "@package/foundry/veil/api/client/render/light/renderer" {
     }
     export class $LightRenderer implements $NativeResource {
         free(): void;
+        getRenderers(): $Map<$LightTypeRegistry$LightType<never>, $LightTypeRenderer<never>>;
         addLight<T extends $LightData>(arg0: T): $LightRenderHandle<T>;
         addLight<T extends $LightData>(arg0: $LightRenderHandle<T>): $LightRenderHandle<T>;
         getLights<T extends $LightData>(arg0: $LightTypeRegistry$LightType_<T>): $Collection<$LightRenderHandle<T>>;
         addDebugInfo(arg0: $Consumer_<string>): void;
-        getRenderers(): $Map<$LightTypeRegistry$LightType<never>, $LightTypeRenderer<never>>;
         render(arg0: $CullFrustum, arg1: $AdvancedFbo): boolean;
         close(): void;
         constructor();

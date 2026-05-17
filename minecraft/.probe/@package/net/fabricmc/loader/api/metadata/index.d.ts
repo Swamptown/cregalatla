@@ -111,14 +111,9 @@ declare module "@package/net/fabricmc/loader/api/metadata" {
         getId(): string;
         getType(): string;
         getVersion(): $Version;
-        getDescription(): string;
-        getEnvironment(): $ModEnvironment;
-        getCustomValue(arg0: string): $CustomValue;
-        /**
-         * @deprecated
-         */
-        getSuggests(): $Collection<$ModDependency>;
-        getCustomValues(): $Map<string, $CustomValue>;
+        getLicense(): $Collection<string>;
+        getDependencies(): $Collection<$ModDependency>;
+        getProvides(): $Collection<string>;
         /**
          * @deprecated
          */
@@ -126,45 +121,50 @@ declare module "@package/net/fabricmc/loader/api/metadata" {
         /**
          * @deprecated
          */
-        getBreaks(): $Collection<$ModDependency>;
+        getRecommends(): $Collection<$ModDependency>;
+        /**
+         * @deprecated
+         */
+        getSuggests(): $Collection<$ModDependency>;
         /**
          * @deprecated
          */
         getConflicts(): $Collection<$ModDependency>;
-        getContributors(): $Collection<$Person>;
-        getProvides(): $Collection<string>;
         /**
          * @deprecated
          */
-        getRecommends(): $Collection<$ModDependency>;
-        containsCustomValue(arg0: string): boolean;
+        getBreaks(): $Collection<$ModDependency>;
         getAuthors(): $Collection<$Person>;
+        getContributors(): $Collection<$Person>;
         getContact(): $ContactInformation;
         getIconPath(arg0: number): (string) | undefined;
-        getLicense(): $Collection<string>;
-        getDependencies(): $Collection<$ModDependency>;
+        containsCustomValue(arg0: string): boolean;
+        getCustomValue(arg0: string): $CustomValue;
+        getCustomValues(): $Map<string, $CustomValue>;
         /**
          * @deprecated
          */
         containsCustomElement(arg0: string): boolean;
+        getDescription(): string;
+        getEnvironment(): $ModEnvironment;
         get name(): string;
         get id(): string;
         get type(): string;
         get version(): $Version;
-        get description(): string;
-        get environment(): $ModEnvironment;
-        get suggests(): $Collection<$ModDependency>;
-        get customValues(): $Map<string, $CustomValue>;
-        get depends(): $Collection<$ModDependency>;
-        get breaks(): $Collection<$ModDependency>;
-        get conflicts(): $Collection<$ModDependency>;
-        get contributors(): $Collection<$Person>;
-        get provides(): $Collection<string>;
-        get recommends(): $Collection<$ModDependency>;
-        get authors(): $Collection<$Person>;
-        get contact(): $ContactInformation;
         get license(): $Collection<string>;
         get dependencies(): $Collection<$ModDependency>;
+        get provides(): $Collection<string>;
+        get depends(): $Collection<$ModDependency>;
+        get recommends(): $Collection<$ModDependency>;
+        get suggests(): $Collection<$ModDependency>;
+        get conflicts(): $Collection<$ModDependency>;
+        get breaks(): $Collection<$ModDependency>;
+        get authors(): $Collection<$Person>;
+        get contributors(): $Collection<$Person>;
+        get contact(): $ContactInformation;
+        get customValues(): $Map<string, $CustomValue>;
+        get description(): string;
+        get environment(): $ModEnvironment;
     }
     export class $CustomValue {
     }

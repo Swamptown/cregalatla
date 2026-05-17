@@ -2,7 +2,7 @@ import { $IModInfo } from "@package/net/neoforged/neoforgespi/language";
 import { $NarratableEntry } from "@package/net/minecraft/client/gui/narration";
 import { $Component_ } from "@package/net/minecraft/network/chat";
 import { $ResourceLocation } from "@package/net/minecraft/resources";
-import { $AbstractSelectionList, $AbstractSliderButton, $ObjectSelectionList$Entry, $Button$OnPress_, $Button$CreateNarration_, $Button$CreateNarration, $WidgetTooltipHolder, $Button$Builder, $WidgetSprites, $ObjectSelectionList, $Renderable, $Button } from "@package/net/minecraft/client/gui/components";
+import { $AbstractSelectionList, $AbstractSliderButton, $ObjectSelectionList$Entry, $Button$CreateNarration_, $Button$OnPress_, $Button$CreateNarration, $WidgetTooltipHolder, $WidgetSprites, $Button$Builder, $ObjectSelectionList, $Renderable, $Button } from "@package/net/minecraft/client/gui/components";
 import { $Minecraft } from "@package/net/minecraft/client";
 import { $ModListScreen } from "@package/net/neoforged/neoforge/client/gui";
 import { $GuiGraphics } from "@package/net/minecraft/client/gui";
@@ -13,8 +13,8 @@ declare module "@package/net/neoforged/neoforge/client/gui/widget" {
     export class $ExtendedSlider extends $AbstractSliderButton {
         getValue(): number;
         setValue(arg0: number): void;
-        getValueLong(): number;
         getValueInt(): number;
+        getValueLong(): number;
         getValueString(): string;
         visible: boolean;
         tooltip: $WidgetTooltipHolder;
@@ -30,8 +30,8 @@ declare module "@package/net/neoforged/neoforge/client/gui/widget" {
         height: number;
         constructor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Component_, arg5: $Component_, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number, arg11: boolean);
         constructor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Component_, arg5: $Component_, arg6: number, arg7: number, arg8: number, arg9: boolean);
-        get valueLong(): number;
         get valueInt(): number;
+        get valueLong(): number;
         get valueString(): string;
     }
     export class $ModListWidget extends $ObjectSelectionList<$ModListWidget$ModEntry> {

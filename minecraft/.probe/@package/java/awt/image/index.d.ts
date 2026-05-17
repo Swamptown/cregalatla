@@ -10,11 +10,9 @@ declare module "@package/java/awt/image" {
     export class $Raster {
         getBounds(): $Rectangle;
         getParent(): $Raster;
-        static createRaster(arg0: $SampleModel, arg1: $DataBuffer, arg2: $Point): $Raster;
-        getSampleFloat(arg0: number, arg1: number, arg2: number): number;
-        static createBandedRaster(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Point): $WritableRaster;
-        static createBandedRaster(arg0: $DataBuffer, arg1: number, arg2: number, arg3: number, arg4: number[], arg5: number[], arg6: $Point): $WritableRaster;
         static createBandedRaster(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[], arg5: number[], arg6: $Point): $WritableRaster;
+        static createBandedRaster(arg0: $DataBuffer, arg1: number, arg2: number, arg3: number, arg4: number[], arg5: number[], arg6: $Point): $WritableRaster;
+        static createBandedRaster(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Point): $WritableRaster;
         getSampleDouble(arg0: number, arg1: number, arg2: number): number;
         getSamples(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[]): number[];
         getSamples(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[]): number[];
@@ -24,19 +22,27 @@ declare module "@package/java/awt/image" {
         getPixel(arg0: number, arg1: number, arg2: number[]): number[];
         getPixel(arg0: number, arg1: number, arg2: number[]): number[];
         createChild(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number[]): $Raster;
+        getTransferType(): number;
+        getSampleFloat(arg0: number, arg1: number, arg2: number): number;
+        static createRaster(arg0: $SampleModel, arg1: $DataBuffer, arg2: $Point): $Raster;
+        getPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): number[];
+        getPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): number[];
+        getPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): number[];
+        getSample(arg0: number, arg1: number, arg2: number): number;
+        getNumDataElements(): number;
         getWidth(): number;
         getHeight(): number;
-        createCompatibleWritableRaster(): $WritableRaster;
         createCompatibleWritableRaster(arg0: number, arg1: number): $WritableRaster;
         createCompatibleWritableRaster(arg0: number, arg1: number, arg2: number, arg3: number): $WritableRaster;
+        createCompatibleWritableRaster(): $WritableRaster;
         createCompatibleWritableRaster(arg0: $Rectangle): $WritableRaster;
         static createInterleavedRaster(arg0: $DataBuffer, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[], arg6: $Point): $WritableRaster;
         static createInterleavedRaster(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Point): $WritableRaster;
         static createInterleavedRaster(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[], arg6: $Point): $WritableRaster;
         static createPackedRaster(arg0: $DataBuffer, arg1: number, arg2: number, arg3: number, arg4: number[], arg5: $Point): $WritableRaster;
-        static createPackedRaster(arg0: $DataBuffer, arg1: number, arg2: number, arg3: number, arg4: $Point): $WritableRaster;
-        static createPackedRaster(arg0: number, arg1: number, arg2: number, arg3: number[], arg4: $Point): $WritableRaster;
         static createPackedRaster(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $Point): $WritableRaster;
+        static createPackedRaster(arg0: number, arg1: number, arg2: number, arg3: number[], arg4: $Point): $WritableRaster;
+        static createPackedRaster(arg0: $DataBuffer, arg1: number, arg2: number, arg3: number, arg4: $Point): $WritableRaster;
         getNumBands(): number;
         getSampleModel(): $SampleModel;
         getDataElements(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Object): $Object;
@@ -48,14 +54,10 @@ declare module "@package/java/awt/image" {
         getSampleModelTranslateY(): number;
         static createWritableRaster(arg0: $SampleModel, arg1: $Point): $WritableRaster;
         static createWritableRaster(arg0: $SampleModel, arg1: $DataBuffer, arg2: $Point): $WritableRaster;
-        getPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): number[];
-        getPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): number[];
-        getPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): number[];
-        getSample(arg0: number, arg1: number, arg2: number): number;
-        getTransferType(): number;
-        getNumDataElements(): number;
         get bounds(): $Rectangle;
         get parent(): $Raster;
+        get transferType(): number;
+        get numDataElements(): number;
         get width(): number;
         get height(): number;
         get numBands(): number;
@@ -65,8 +67,6 @@ declare module "@package/java/awt/image" {
         get minY(): number;
         get sampleModelTranslateX(): number;
         get sampleModelTranslateY(): number;
-        get transferType(): number;
-        get numDataElements(): number;
     }
     export class $WritableRenderedImage {
     }
@@ -172,8 +172,8 @@ declare module "@package/java/awt/image" {
     }
     export class $VolatileImage extends $Image implements $Transparency {
         validate(arg0: $GraphicsConfiguration): number;
-        contentsLost(): boolean;
         getSnapshot(): $BufferedImage;
+        contentsLost(): boolean;
         getCapabilities(): $ImageCapabilities;
         getWidth(): number;
         getHeight(): number;
@@ -199,8 +199,8 @@ declare module "@package/java/awt/image" {
         getDrawGraphics(): $Graphics;
         contentsLost(): boolean;
         contentsRestored(): boolean;
-        getCapabilities(): $BufferCapabilities;
         show(): void;
+        getCapabilities(): $BufferCapabilities;
         get drawGraphics(): $Graphics;
         get capabilities(): $BufferCapabilities;
     }
@@ -234,32 +234,35 @@ declare module "@package/java/awt/image" {
     }
     export interface $ImageConsumer {
         setProperties(arg0: $Hashtable<never, never>): void;
-        setHints(arg0: number): void;
         setDimensions(arg0: number, arg1: number): void;
-        imageComplete(arg0: number): void;
         setColorModel(arg0: $ColorModel): void;
+        imageComplete(arg0: number): void;
+        setHints(arg0: number): void;
         setPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $ColorModel, arg5: number[], arg6: number, arg7: number): void;
         setPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $ColorModel, arg5: number[], arg6: number, arg7: number): void;
         set properties(value: $Hashtable<never, never>);
-        set hints(value: number);
         set colorModel(value: $ColorModel);
+        set hints(value: number);
     }
     export class $ColorModel implements $Transparency {
-        getNumColorComponents(): number;
-        getNormalizedComponents(arg0: $Object, arg1: number[], arg2: number): number[];
-        getNormalizedComponents(arg0: number[], arg1: number, arg2: number[], arg3: number): number[];
-        isCompatibleSampleModel(arg0: $SampleModel): boolean;
         getUnnormalizedComponents(arg0: number[], arg1: number, arg2: number[], arg3: number): number[];
         getDataElement(arg0: number[], arg1: number): number;
         getDataElement(arg0: number[], arg1: number): number;
         getRed(arg0: number): number;
         getRed(arg0: $Object): number;
-        getGreen(arg0: $Object): number;
         getGreen(arg0: number): number;
+        getGreen(arg0: $Object): number;
         getBlue(arg0: number): number;
         getBlue(arg0: $Object): number;
-        getAlpha(arg0: $Object): number;
         getAlpha(arg0: number): number;
+        getAlpha(arg0: $Object): number;
+        getTransferType(): number;
+        getNumColorComponents(): number;
+        getNormalizedComponents(arg0: $Object, arg1: number[], arg2: number): number[];
+        getNormalizedComponents(arg0: number[], arg1: number, arg2: number[], arg3: number): number[];
+        isCompatibleSampleModel(arg0: $SampleModel): boolean;
+        getComponents(arg0: $Object, arg1: number[], arg2: number): number[];
+        getComponents(arg0: number, arg1: number[], arg2: number): number[];
         createCompatibleWritableRaster(arg0: number, arg1: number): $WritableRaster;
         static getRGBdefault(): $ColorModel;
         hasAlpha(): boolean;
@@ -267,22 +270,20 @@ declare module "@package/java/awt/image" {
         isCompatibleRaster(arg0: $Raster): boolean;
         coerceData(arg0: $WritableRaster, arg1: boolean): $ColorModel;
         getColorSpace(): $ColorSpace;
-        getComponentSize(): number[];
         getComponentSize(arg0: number): number;
+        getComponentSize(): number[];
         getPixelSize(): number;
         getNumComponents(): number;
         getAlphaRaster(arg0: $WritableRaster): $WritableRaster;
         getDataElements(arg0: number[], arg1: number, arg2: $Object): $Object;
-        getDataElements(arg0: number, arg1: $Object): $Object;
         getDataElements(arg0: number[], arg1: number, arg2: $Object): $Object;
+        getDataElements(arg0: number, arg1: $Object): $Object;
         getRGB(arg0: $Object): number;
         getRGB(arg0: number): number;
         createCompatibleSampleModel(arg0: number, arg1: number): $SampleModel;
         getTransparency(): number;
-        getComponents(arg0: number, arg1: number[], arg2: number): number[];
-        getComponents(arg0: $Object, arg1: number[], arg2: number): number[];
-        getTransferType(): number;
         constructor(arg0: number);
+        get transferType(): number;
         get numColorComponents(): number;
         static get RGBdefault(): $ColorModel;
         get alphaPremultiplied(): boolean;
@@ -290,19 +291,18 @@ declare module "@package/java/awt/image" {
         get pixelSize(): number;
         get numComponents(): number;
         get transparency(): number;
-        get transferType(): number;
     }
     export class $IndexColorModel extends $ColorModel {
         isValid(): boolean;
         isValid(arg0: number): boolean;
+        getTransparentPixel(): number;
+        getRGBs(arg0: number[]): void;
+        getValidPixels(): $BigInteger;
         convertToIntDiscrete(arg0: $Raster, arg1: boolean): $BufferedImage;
         getReds(arg0: number[]): void;
         getGreens(arg0: number[]): void;
         getBlues(arg0: number[]): void;
         getAlphas(arg0: number[]): void;
-        getTransparentPixel(): number;
-        getRGBs(arg0: number[]): void;
-        getValidPixels(): $BigInteger;
         getMapSize(): number;
         constructor(arg0: number, arg1: number, arg2: number[], arg3: number[], arg4: number[], arg5: number[]);
         constructor(arg0: number, arg1: number, arg2: number[], arg3: number, arg4: boolean);
@@ -319,21 +319,21 @@ declare module "@package/java/awt/image" {
         getSize(): number;
         getOffset(): number;
         getOffsets(): number[];
+        static getDataTypeSize(arg0: number): number;
         getNumBanks(): number;
         getElemFloat(arg0: number, arg1: number): number;
         getElemFloat(arg0: number): number;
-        setElemFloat(arg0: number, arg1: number): void;
         setElemFloat(arg0: number, arg1: number, arg2: number): void;
+        setElemFloat(arg0: number, arg1: number): void;
         getElemDouble(arg0: number, arg1: number): number;
         getElemDouble(arg0: number): number;
-        setElemDouble(arg0: number, arg1: number, arg2: number): void;
         setElemDouble(arg0: number, arg1: number): void;
-        static getDataTypeSize(arg0: number): number;
-        getDataType(): number;
+        setElemDouble(arg0: number, arg1: number, arg2: number): void;
         getElem(arg0: number): number;
         getElem(arg0: number, arg1: number): number;
-        setElem(arg0: number, arg1: number): void;
         setElem(arg0: number, arg1: number, arg2: number): void;
+        setElem(arg0: number, arg1: number): void;
+        getDataType(): number;
         static TYPE_INT: number;
         static TYPE_DOUBLE: number;
         static TYPE_SHORT: number;
@@ -419,15 +419,9 @@ declare module "@package/java/awt/image" {
     export class $SampleModel {
         getSampleSize(arg0: number): number;
         getSampleSize(): number[];
-        setPixel(arg0: number, arg1: number, arg2: number[], arg3: $DataBuffer): void;
-        setPixel(arg0: number, arg1: number, arg2: number[], arg3: $DataBuffer): void;
-        setPixel(arg0: number, arg1: number, arg2: number[], arg3: $DataBuffer): void;
-        createDataBuffer(): $DataBuffer;
-        createSubsetSampleModel(arg0: number[]): $SampleModel;
         setSamples(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[], arg6: $DataBuffer): void;
         setSamples(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[], arg6: $DataBuffer): void;
         setSamples(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[], arg6: $DataBuffer): void;
-        getSampleFloat(arg0: number, arg1: number, arg2: number, arg3: $DataBuffer): number;
         getSampleDouble(arg0: number, arg1: number, arg2: number, arg3: $DataBuffer): number;
         getSamples(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[], arg6: $DataBuffer): number[];
         getSamples(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[], arg6: $DataBuffer): number[];
@@ -435,15 +429,16 @@ declare module "@package/java/awt/image" {
         getPixel(arg0: number, arg1: number, arg2: number[], arg3: $DataBuffer): number[];
         getPixel(arg0: number, arg1: number, arg2: number[], arg3: $DataBuffer): number[];
         getPixel(arg0: number, arg1: number, arg2: number[], arg3: $DataBuffer): number[];
-        getWidth(): number;
-        getHeight(): number;
-        getNumBands(): number;
-        getDataElements(arg0: number, arg1: number, arg2: $Object, arg3: $DataBuffer): $Object;
-        getDataElements(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Object, arg5: $DataBuffer): $Object;
-        getDataType(): number;
-        setDataElements(arg0: number, arg1: number, arg2: $Object, arg3: $DataBuffer): void;
-        setDataElements(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Object, arg5: $DataBuffer): void;
-        createCompatibleSampleModel(arg0: number, arg1: number): $SampleModel;
+        getTransferType(): number;
+        getSampleFloat(arg0: number, arg1: number, arg2: number, arg3: $DataBuffer): number;
+        setSample(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $DataBuffer): void;
+        setSample(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $DataBuffer): void;
+        setSample(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $DataBuffer): void;
+        setPixel(arg0: number, arg1: number, arg2: number[], arg3: $DataBuffer): void;
+        setPixel(arg0: number, arg1: number, arg2: number[], arg3: $DataBuffer): void;
+        setPixel(arg0: number, arg1: number, arg2: number[], arg3: $DataBuffer): void;
+        createDataBuffer(): $DataBuffer;
+        createSubsetSampleModel(arg0: number[]): $SampleModel;
         getPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[], arg5: $DataBuffer): number[];
         getPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[], arg5: $DataBuffer): number[];
         getPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[], arg5: $DataBuffer): number[];
@@ -451,40 +446,45 @@ declare module "@package/java/awt/image" {
         setPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[], arg5: $DataBuffer): void;
         setPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[], arg5: $DataBuffer): void;
         getSample(arg0: number, arg1: number, arg2: number, arg3: $DataBuffer): number;
-        setSample(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $DataBuffer): void;
-        setSample(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $DataBuffer): void;
-        setSample(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $DataBuffer): void;
-        getTransferType(): number;
         getNumDataElements(): number;
+        getWidth(): number;
+        getHeight(): number;
+        getNumBands(): number;
+        getDataElements(arg0: number, arg1: number, arg2: $Object, arg3: $DataBuffer): $Object;
+        getDataElements(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Object, arg5: $DataBuffer): $Object;
+        getDataType(): number;
+        setDataElements(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Object, arg5: $DataBuffer): void;
+        setDataElements(arg0: number, arg1: number, arg2: $Object, arg3: $DataBuffer): void;
+        createCompatibleSampleModel(arg0: number, arg1: number): $SampleModel;
         constructor(arg0: number, arg1: number, arg2: number, arg3: number);
+        get transferType(): number;
+        get numDataElements(): number;
         get width(): number;
         get height(): number;
         get numBands(): number;
         get dataType(): number;
-        get transferType(): number;
-        get numDataElements(): number;
     }
     export class $WritableRaster extends $Raster {
-        setPixel(arg0: number, arg1: number, arg2: number[]): void;
-        setPixel(arg0: number, arg1: number, arg2: number[]): void;
-        setPixel(arg0: number, arg1: number, arg2: number[]): void;
         setSamples(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[]): void;
         setSamples(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[]): void;
         setSamples(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[]): void;
         getWritableParent(): $WritableRaster;
         createWritableTranslatedChild(arg0: number, arg1: number): $WritableRaster;
+        setSample(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        setSample(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        setSample(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        setPixel(arg0: number, arg1: number, arg2: number[]): void;
+        setPixel(arg0: number, arg1: number, arg2: number[]): void;
+        setPixel(arg0: number, arg1: number, arg2: number[]): void;
+        setPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): void;
+        setPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): void;
+        setPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): void;
         setDataElements(arg0: number, arg1: number, arg2: $Object): void;
-        setDataElements(arg0: number, arg1: number, arg2: $Raster): void;
         setDataElements(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Object): void;
+        setDataElements(arg0: number, arg1: number, arg2: $Raster): void;
         createWritableChild(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number[]): $WritableRaster;
-        setRect(arg0: $Raster): void;
         setRect(arg0: number, arg1: number, arg2: $Raster): void;
-        setPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): void;
-        setPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): void;
-        setPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]): void;
-        setSample(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        setSample(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        setSample(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        setRect(arg0: $Raster): void;
         get writableParent(): $WritableRaster;
     }
 }

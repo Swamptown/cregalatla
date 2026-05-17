@@ -79,12 +79,12 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/placement"
         locateOffset(): $Vec3i;
         frequencyReductionMethod(): $StructurePlacement$FrequencyReductionMethod;
         exclusionZone(): ($StructurePlacement$ExclusionZone) | undefined;
-        modifyReturnValue$cla000$structurify$getFrequency(arg0: number): number;
-        modifyReturnValue$cla000$structurify$getSalt(arg0: number): number;
+        modifyReturnValue$bjb000$structurify$getFrequency(arg0: number): number;
+        modifyReturnValue$bjb000$structurify$getSalt(arg0: number): number;
         isStructureChunk(arg0: $ChunkGeneratorStructureState, arg1: number, arg2: number): boolean;
         applyAdditionalChunkRestrictions(arg0: number, arg1: number, arg2: number): boolean;
         applyInteractionsWithOtherStructures(arg0: $ChunkGeneratorStructureState, arg1: number, arg2: number): boolean;
-        modifyExpressionValue$cla000$structurify$applyAdditionalChunkRestrictionsGetFrequency(arg0: number): number;
+        modifyExpressionValue$bjb000$structurify$applyAdditionalChunkRestrictionsGetFrequency(arg0: number): number;
         getLocatePos(arg0: $ChunkPos): $BlockPos;
         salt(): number;
         static CODEC: $Codec<$StructurePlacement>;
@@ -104,17 +104,17 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/placement"
     /**
      * Values that may be interpreted as {@link $StructurePlacement$ExclusionZone}.
      */
-    export type $StructurePlacement$ExclusionZone_ = { chunkCount?: number, otherSet?: $Holder_<$StructureSet>,  } | [chunkCount?: number, otherSet?: $Holder_<$StructureSet>, ];
+    export type $StructurePlacement$ExclusionZone_ = { otherSet?: $Holder_<$StructureSet>, chunkCount?: number,  } | [otherSet?: $Holder_<$StructureSet>, chunkCount?: number, ];
     export class $RandomSpreadStructurePlacement extends $StructurePlacement implements $StructurifyRandomSpreadStructurePlacement {
-        modifyReturnValue$ckp000$structurify$getSpacing(arg0: number): number;
-        modifyReturnValue$ckp000$structurify$getSeparation(arg0: number): number;
+        modifyReturnValue$bja000$structurify$getSpacing(arg0: number): number;
+        modifyReturnValue$bja000$structurify$getSeparation(arg0: number): number;
         getPotentialStructureChunk(arg0: number, arg1: number, arg2: number): $ChunkPos;
-        modifyExpressionValue$ckp000$structurify$getStartChunkGetSpacing(arg0: number): number;
-        modifyExpressionValue$ckp000$structurify$getStartChunkGetSeparation(arg0: number): number;
+        modifyExpressionValue$bja000$structurify$getStartChunkGetSpacing(arg0: number): number;
+        modifyExpressionValue$bja000$structurify$getStartChunkGetSeparation(arg0: number): number;
         structurify$getOriginalSpacing(): number;
         structurify$getOriginalSeparation(): number;
-        spreadType(): $RandomSpreadType;
         spacing(): number;
+        spreadType(): $RandomSpreadType;
         separation(): number;
         static CODEC: $MapCodec<$RandomSpreadStructurePlacement>;
         structurify$structureId: string;

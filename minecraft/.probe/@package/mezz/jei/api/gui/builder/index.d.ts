@@ -27,16 +27,16 @@ declare module "@package/mezz/jei/api/gui/builder" {
     }
     export interface $IIngredientAcceptor<THIS extends $IIngredientAcceptor<THIS>> extends $IIngredientConsumer {
         addOptionalTypedIngredients(arg0: $List_<($ITypedIngredient<never>) | undefined>): THIS;
-        addFluidStack(arg0: $Fluid_, arg1: number): THIS;
+        addItemStacks(arg0: $List_<$ItemStack_>): THIS;
         addFluidStack(arg0: $Fluid_): THIS;
-        addIngredientsUnsafe(arg0: $List_<never>): THIS;
+        addFluidStack(arg0: $Fluid_, arg1: number): THIS;
         addItemLike(arg0: $ItemLike_): $IIngredientConsumer;
-        addFluidStack(arg0: $Fluid_, arg1: number, arg2: $DataComponentPatch_): $IIngredientConsumer;
-        addItemStacks(arg0: $List_<$ItemStack_>): $IIngredientConsumer;
         addTypedIngredients(arg0: $List_<$ITypedIngredient<never>>): $IIngredientConsumer;
+        addFluidStack(arg0: $Fluid_, arg1: number, arg2: $DataComponentPatch_): $IIngredientConsumer;
         addTypedIngredient<I>(arg0: $ITypedIngredient<I>): $IIngredientConsumer;
-        addIngredients<I>(arg0: $IIngredientType_<I>, arg1: $List_<I>): $IIngredientConsumer;
+        addIngredientsUnsafe(arg0: $List_<never>): $IIngredientConsumer;
         addIngredients(arg0: $Ingredient_): $IIngredientConsumer;
+        addIngredients<I>(arg0: $IIngredientType_<I>, arg1: $List_<I>): $IIngredientConsumer;
         addIngredient<I>(arg0: $IIngredientType_<I>, arg1: I): $IIngredientConsumer;
         addItemStack(arg0: $ItemStack_): $IIngredientConsumer;
     }
@@ -44,11 +44,11 @@ declare module "@package/mezz/jei/api/gui/builder" {
     }
     export interface $IIngredientConsumer {
         addOptionalTypedIngredients(arg0: $List_<($ITypedIngredient<never>) | undefined>): $IIngredientConsumer;
-        addFluidStack(arg0: $Fluid_, arg1: number, arg2: $DataComponentPatch_): $IIngredientConsumer;
-        addFluidStack(arg0: $Fluid_): $IIngredientConsumer;
-        addFluidStack(arg0: $Fluid_, arg1: number): $IIngredientConsumer;
         addItemStacks(arg0: $List_<$ItemStack_>): $IIngredientConsumer;
         addTypedIngredients(arg0: $List_<$ITypedIngredient<never>>): $IIngredientConsumer;
+        addFluidStack(arg0: $Fluid_): $IIngredientConsumer;
+        addFluidStack(arg0: $Fluid_, arg1: number, arg2: $DataComponentPatch_): $IIngredientConsumer;
+        addFluidStack(arg0: $Fluid_, arg1: number): $IIngredientConsumer;
         addTypedIngredient<I>(arg0: $ITypedIngredient<I>): $IIngredientConsumer;
         addIngredientsUnsafe(arg0: $List_<never>): $IIngredientConsumer;
         addIngredients<I>(arg0: $IIngredientType_<I>, arg1: $List_<I>): $IIngredientConsumer;
@@ -87,13 +87,13 @@ declare module "@package/mezz/jei/api/gui/builder" {
          * @deprecated
          */
         removeAll(arg0: $List_<$Component_>): void;
+        clearIngredient(): void;
+        addKeyUsageComponent(arg0: string, arg1: $IJeiKeyMapping): void;
+        setIngredient(arg0: $ITypedIngredient<never>): void;
         /**
          * @deprecated
          */
         toLegacyToComponents(): $List<$Component>;
-        clearIngredient(): void;
-        addKeyUsageComponent(arg0: string, arg1: $IJeiKeyMapping): void;
-        setIngredient(arg0: $ITypedIngredient<never>): void;
         getLines(): $List<$Either<$FormattedText, $TooltipComponent>>;
         set ingredient(value: $ITypedIngredient<never>);
         get lines(): $List<$Either<$FormattedText, $TooltipComponent>>;

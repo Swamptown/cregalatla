@@ -19,6 +19,7 @@ import { $ScriptType_, $ConsoleJS, $ScriptType, $ScriptPack, $KubeJSContextFacto
 import { $ItemStack_ } from "@package/net/minecraft/world/item";
 import { $SpriteSet, $Particle, $ParticleProvider_, $ParticleProvider, $SimpleAnimatedParticle, $ParticleEngine$SpriteParticleRegistration } from "@package/net/minecraft/client/particle";
 import { $Component } from "@package/net/minecraft/network/chat";
+import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $GeneratedDataStage, $VirtualAssetPack } from "@package/dev/latvian/mods/kubejs/script/data";
 import { $Float2IntFunction_ } from "@package/it/unimi/dsi/fastutil/floats";
 import { $RepositorySource, $Pack } from "@package/net/minecraft/server/packs/repository";
@@ -130,12 +131,12 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         getXSpeed(): number;
         getYSpeed(): number;
         getZSpeed(): number;
-        getSpriteSet(): $SpriteSet;
-        onTick(tick: $Consumer_<$KubeAnimatedParticle>): void;
         getX(): number;
         getZ(): number;
+        onTick(tick: $Consumer_<$KubeAnimatedParticle>): void;
         getRandom(): $RandomSource;
         setSpeed(speed: $Vec3_): void;
+        getSpriteSet(): $SpriteSet;
         speedUpWhenYMotionIsBlocked: boolean;
         lifetime: number;
         roll: number;
@@ -174,8 +175,8 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         get XSpeed(): number;
         get YSpeed(): number;
         get ZSpeed(): number;
-        get spriteSet(): $SpriteSet;
         set speed(value: $Vec3_);
+        get spriteSet(): $SpriteSet;
     }
     export class $LangKubeEvent extends $Record implements $KubeEvent {
         add(namespace: string, key: string, value: string): void;
@@ -231,7 +232,7 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
     /**
      * Values that may be interpreted as {@link $LangKubeEvent}.
      */
-    export type $LangKubeEvent_ = { map?: $Map_<$LangKubeEvent$Key_, string>, lang?: string,  } | [map?: $Map_<$LangKubeEvent$Key_, string>, lang?: string, ];
+    export type $LangKubeEvent_ = { lang?: string, map?: $Map_<$LangKubeEvent$Key_, string>,  } | [lang?: string, map?: $Map_<$LangKubeEvent$Key_, string>, ];
     export class $EntityRendererRegistryKubeEvent implements $ClientKubeEvent {
         register(type: $EntityType_<never>, renderer: $EntityRendererProvider_<any>): void;
         getClient(): $Minecraft;
@@ -367,7 +368,7 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
     /**
      * Values that may be interpreted as {@link $LangKubeEvent$Key}.
      */
-    export type $LangKubeEvent$Key_ = { key?: string, namespace?: string, lang?: string,  } | [key?: string, namespace?: string, lang?: string, ];
+    export type $LangKubeEvent$Key_ = { lang?: string, namespace?: string, key?: string,  } | [lang?: string, namespace?: string, key?: string, ];
     export class $BlockEntityRendererRegistryKubeEvent implements $ClientKubeEvent {
         register(type: $BlockEntityType_<never>, renderer: $BlockEntityRendererProvider_<any>): void;
         getClient(): $Minecraft;
@@ -547,7 +548,6 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         constructor(side: $Direction_);
     }
     export class $ClientPlayerKubeEvent implements $KubePlayerEvent, $ClientKubeEvent {
-        getPlayer(): $LocalPlayer;
         getClient(): $Minecraft;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
@@ -588,13 +588,14 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         getLevel(): $Level;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getPlayer(): $Player;
         getEntity(): $LivingEntity;
         constructor(player: $LocalPlayer);
-        get player(): $LocalPlayer;
         get client(): $Minecraft;
         get level(): $Level;
         get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get player(): $Player;
         get entity(): $LivingEntity;
     }
     export class $AtlasSpriteRegistryKubeEvent implements $KubeEvent {
@@ -698,9 +699,9 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         constructor();
     }
     export class $KubeJSClient extends $KubeJSCommon {
+        static drawStackSize(graphics: $GuiGraphics, font: $Font, size: number, x: number, y: number, color: number, dropShadow: boolean): number;
         static loadPostChains(mc: $Minecraft): void;
         static resizePostChains(width: number, height: number): void;
-        static drawStackSize(graphics: $GuiGraphics, font: $Font, size: number, x: number, y: number, color: number, dropShadow: boolean): number;
         static copyDefaultOptionsFile(optionsFile: $File_): void;
         static formatNumber(count: number): string;
         static reloadClientScripts(): void;
@@ -719,10 +720,9 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         constructor(errorList: $KubeJSErrorScreen$ErrorList, minecraft: $Minecraft, index: number, line: $ConsoleLine, calendar: $Calendar);
     }
     export class $KubeJSClientEventHandler {
-        static setupClient(event: $FMLClientSetupEvent): void;
-        static registerMenuScreens(event: $RegisterMenuScreensEvent): void;
-        static registerParticleProviders(event: $RegisterParticleProvidersEvent): void;
         static onRegisterClientCommands(event: $RegisterClientCommandsEvent): void;
+        static tagsUpdated(event: $TagsUpdatedEvent): void;
+        static registerParticleProviders(event: $RegisterParticleProvidersEvent): void;
         static testRequirements(mc: $Minecraft, event: $DynamicItemTooltipsKubeEvent, r: $TooltipRequirements_): boolean;
         static hudPostDraw(event: $RenderGuiEvent$Post): void;
         static addClientPacks(event: $AddPackFindersEvent): void;
@@ -733,14 +733,15 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         static worldRender(event: $RenderLevelStageEvent): void;
         static guiPostInit(event: $ScreenEvent$Init$Post): void;
         static openScreenEvent(event: $ScreenEvent$Opening): void;
+        static setupClient(event: $FMLClientSetupEvent): void;
+        static registerMenuScreens(event: $RegisterMenuScreensEvent): void;
         static registerClientExtensions(event: $RegisterClientExtensionsEvent): void;
         static registerRenderers(event: $EntityRenderersEvent$RegisterRenderers): void;
-        static tagsUpdated(event: $TagsUpdatedEvent): void;
         static debugInfo(event: $CustomizeGuiOverlayEvent$DebugText): void;
         static onItemTooltip(event: $ItemTooltipEvent): void;
+        static setScreen(screen: $Screen): $Screen;
         static blockColors(event: $RegisterColorHandlersEvent$Block): void;
         static itemColors(event: $RegisterColorHandlersEvent$Item): void;
-        static setScreen(screen: $Screen): $Screen;
         static clientTick(event: $ClientTickEvent$Pre): void;
         static registerKeyMappings(event: $RegisterKeyMappingsEvent): void;
         static COMPONENT_ERROR: $Pattern;
@@ -764,8 +765,8 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         attenuationDistance(i: number): $SoundsGenerator$SoundInstance;
         asReferenceToEvent(): $SoundsGenerator$SoundInstance;
         toJson(): $JsonElement;
-        weight(i: number): $SoundsGenerator$SoundInstance;
         volume(f: number): $SoundsGenerator$SoundInstance;
+        weight(i: number): $SoundsGenerator$SoundInstance;
         preload(): $SoundsGenerator$SoundInstance;
         preload(b: boolean): $SoundsGenerator$SoundInstance;
         pitch(f: number): $SoundsGenerator$SoundInstance;

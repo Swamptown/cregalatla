@@ -9,8 +9,8 @@ export * as storage from "@package/net/minecraft/util/profiling/metrics/storage"
 declare module "@package/net/minecraft/util/profiling/metrics" {
     export class $MetricSampler$MetricSamplerBuilder<T> {
         build(): $MetricSampler;
-        withBeforeTick(arg0: $Consumer_<T>): $MetricSampler$MetricSamplerBuilder<T>;
         withThresholdAlert(arg0: $MetricSampler$ThresholdTest_): $MetricSampler$MetricSamplerBuilder<T>;
+        withBeforeTick(arg0: $Consumer_<T>): $MetricSampler$MetricSamplerBuilder<T>;
         constructor(arg0: string, arg1: $MetricCategory_, arg2: $ToDoubleFunction_<T>, arg3: T);
     }
     export class $MetricSampler$SamplerResult {

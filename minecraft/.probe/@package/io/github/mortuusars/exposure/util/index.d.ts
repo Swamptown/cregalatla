@@ -68,17 +68,17 @@ declare module "@package/io/github/mortuusars/exposure/util" {
         setter(): $TriConsumer<$ExtraData, string, T>;
         static longVal(key: string): $ExtraData$Type<number>;
         static stringBasedList<T>(key: string, extractFunc: $Function_<string, T>, packFunc: $Function_<T, string>): $ExtraData$Type<$List<T>>;
-        static intVal(key: string): $ExtraData$Type<number>;
-        static doubleVal(key: string): $ExtraData$Type<number>;
-        static floatVal(key: string): $ExtraData$Type<number>;
         static bool(key: string): $ExtraData$Type<boolean>;
         static resourceLocation(key: string): $ExtraData$Type<$ResourceLocation>;
         static stringRepresentable<T extends $StringRepresentable>(key: string, deserializeFunction: $Function_<string, T>): $ExtraData$Type<T>;
         static vec3(key: string): $ExtraData$Type<$Vec3>;
+        static intVal(key: string): $ExtraData$Type<number>;
+        static doubleVal(key: string): $ExtraData$Type<number>;
+        static floatVal(key: string): $ExtraData$Type<number>;
         constructor(key: string, getter: $BiFunction_<$ExtraData, string, T>, setter: $TriConsumer_<$ExtraData, string, T>);
     }
     /**
      * Values that may be interpreted as {@link $ExtraData$Type}.
      */
-    export type $ExtraData$Type_<T> = { key?: string, setter?: $TriConsumer_<$ExtraData, string, any>, getter?: $BiFunction_<$ExtraData, string, any>,  } | [key?: string, setter?: $TriConsumer_<$ExtraData, string, any>, getter?: $BiFunction_<$ExtraData, string, any>, ];
+    export type $ExtraData$Type_<T> = { getter?: $BiFunction_<$ExtraData, string, any>, setter?: $TriConsumer_<$ExtraData, string, any>, key?: string,  } | [getter?: $BiFunction_<$ExtraData, string, any>, setter?: $TriConsumer_<$ExtraData, string, any>, key?: string, ];
 }

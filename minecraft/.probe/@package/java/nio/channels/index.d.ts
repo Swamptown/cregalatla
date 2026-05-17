@@ -5,7 +5,7 @@ import { $SocketOption, $SocketAddress, $ServerSocket, $NetworkInterface, $Datag
 import { $ExecutorService, $Future } from "@package/java/util/concurrent";
 import { $AbstractSelectableChannel, $SelectorProvider, $AbstractInterruptibleChannel } from "@package/java/nio/channels/spi";
 import { $FileAttribute } from "@package/java/nio/file/attribute";
-import { $Arena, $MemorySegment } from "@package/java/lang/foreign";
+import { $MemorySegment, $Arena } from "@package/java/lang/foreign";
 import { $Throwable, $AutoCloseable, $Object } from "@package/java/lang";
 import { $Set_, $Set } from "@package/java/util";
 import { $ByteBuffer, $MappedByteBuffer } from "@package/java/nio";
@@ -52,11 +52,11 @@ declare module "@package/java/nio/channels" {
         interestOps(): number;
         interestOps(arg0: number): $SelectionKey;
         isReadable(): boolean;
+        readyOps(): number;
         interestOpsOr(arg0: number): number;
         interestOpsAnd(arg0: number): number;
         isConnectable(): boolean;
         isAcceptable(): boolean;
-        readyOps(): number;
         static OP_CONNECT: number;
         static OP_ACCEPT: number;
         static OP_READ: number;

@@ -17,7 +17,7 @@ import { $DataComponentsAccessor } from "@package/org/embeddedt/modernfix/common
 import { $ArmorTrim } from "@package/net/minecraft/world/item/armortrim";
 import { $LootTable } from "@package/net/minecraft/world/level/storage/loot";
 import { $Rarity, $Rarity_, $DyeColor, $DyeColor_, $ItemStack_, $AdventureModePredicate, $Instrument, $JukeboxPlayable } from "@package/net/minecraft/world/item";
-import { $ItemLore, $ItemAttributeModifiers, $Fireworks, $CustomData, $ItemContainerContents, $Unbreakable, $MapPostProcessing, $MapItemColor, $BlockItemStateProperties, $DebugStickState, $WritableBookContent, $Tool, $ChargedProjectiles, $SuspiciousStewEffects, $MapDecorations, $CustomModelData, $DyedItemColor, $LodestoneTracker, $SeededContainerLoot, $WrittenBookContent, $BundleContents, $ResolvableProfile, $FireworkExplosion } from "@package/net/minecraft/world/item/component";
+import { $ItemLore, $ItemAttributeModifiers, $Fireworks, $CustomData, $Unbreakable, $ItemContainerContents, $MapPostProcessing, $MapItemColor, $BlockItemStateProperties, $DebugStickState, $WritableBookContent, $Tool, $ChargedProjectiles, $SuspiciousStewEffects, $MapDecorations, $CustomModelData, $DyedItemColor, $LodestoneTracker, $SeededContainerLoot, $WrittenBookContent, $BundleContents, $ResolvableProfile, $FireworkExplosion } from "@package/net/minecraft/world/item/component";
 import { $Component_, $Component } from "@package/net/minecraft/network/chat";
 import { $KubeColor_ } from "@package/dev/latvian/mods/kubejs/color";
 import { $Stream } from "@package/java/util/stream";
@@ -36,8 +36,8 @@ declare module "@package/net/minecraft/core/component" {
         test(arg0: $DataComponentHolder_): boolean;
         static builder(): $DataComponentPredicate$Builder;
         static allOf(arg0: $DataComponentMap_): $DataComponentPredicate;
-        asPatch(): $DataComponentPatch;
         alwaysMatches(): boolean;
+        asPatch(): $DataComponentPatch;
         or(arg0: $Predicate_<$DataComponentMap>): $Predicate<$DataComponentMap>;
         negate(): $Predicate<$DataComponentMap>;
         and(arg0: $Predicate_<$DataComponentMap>): $Predicate<$DataComponentMap>;
@@ -103,7 +103,7 @@ declare module "@package/net/minecraft/core/component" {
     /**
      * Values that may be interpreted as {@link $DataComponentPatch$PatchKey}.
      */
-    export type $DataComponentPatch$PatchKey_ = { removed?: boolean, type?: $DataComponentType_<never>,  } | [removed?: boolean, type?: $DataComponentType_<never>, ];
+    export type $DataComponentPatch$PatchKey_ = { type?: $DataComponentType_<never>, removed?: boolean,  } | [type?: $DataComponentType_<never>, removed?: boolean, ];
     export class $TypedDataComponent<T> extends $Record {
         type(): $DataComponentType<T>;
         value(): T;
@@ -135,7 +135,7 @@ declare module "@package/net/minecraft/core/component" {
     /**
      * Values that may be interpreted as {@link $DataComponentType}.
      */
-    export type $DataComponentType_<T> = RegistryTypes.EnchantmentEffectComponentType | RegistryTypes.DataComponentType;
+    export type $DataComponentType_<T> = RegistryTypes.DataComponentType | RegistryTypes.EnchantmentEffectComponentType;
     export class $PatchedDataComponentMap implements $DataComponentMap, $ChangePublisher<any> {
         remove<T>(arg0: $DataComponentType_<T>): T;
         size(): number;
@@ -146,10 +146,10 @@ declare module "@package/net/minecraft/core/component" {
         keySet(): $Set<$DataComponentType<never>>;
         setAll(arg0: $DataComponentMap_): void;
         lithium$unsubscribe(arg0: $ChangeSubscriber<any>): number;
-        restorePatch(arg0: $DataComponentPatch_): void;
-        asPatch(): $DataComponentPatch;
         isPatchEmpty(): boolean;
         applyPatch(arg0: $DataComponentPatch_): void;
+        restorePatch(arg0: $DataComponentPatch_): void;
+        asPatch(): $DataComponentPatch;
         lithium$subscribe(arg0: $ChangeSubscriber<any>, arg1: number): void;
         static fromPatch(arg0: $DataComponentMap_, arg1: $DataComponentPatch_): $PatchedDataComponentMap;
         isEmpty(): boolean;
@@ -300,7 +300,7 @@ declare module "@package/net/minecraft/core/component" {
      * Values that may be interpreted as {@link $DataComponentHolder}.
      */
     export type $DataComponentHolder_ = (() => $DataComponentMap_);
-    export interface $DataComponentType<T> extends RegistryMarked<RegistryTypes.DataComponentTypeTag, RegistryTypes.DataComponentType> {}
+    export interface $DataComponentType<T> extends RegistryMarked<RegistryTypes.EnchantmentEffectComponentTypeTag, RegistryTypes.EnchantmentEffectComponentType> {}
     export class $DataComponentType$Builder$SimpleType<T> implements $DataComponentType<T> {
         isTransient(): boolean;
         codecOrThrow(): $Codec<T>;
@@ -308,7 +308,7 @@ declare module "@package/net/minecraft/core/component" {
     }
     export class $DataComponents implements $DataComponentsAccessor {
         static bootstrap(arg0: $Registry<$DataComponentType_<never>>): $DataComponentType<never>;
-        static mfix$getCache$modernfix_$md$8e2dbe$0(): $EncoderCache;
+        static mfix$getCache$modernfix_$md$d858b6$0(): $EncoderCache;
         static CONTAINER_LOOT: $DataComponentType<$SeededContainerLoot>;
         static TRIM: $DataComponentType<$ArmorTrim>;
         static BASE_COLOR: $DataComponentType<$DyeColor>;

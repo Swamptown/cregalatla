@@ -69,7 +69,7 @@ declare module "@package/net/minecraft/client/resources/metadata/animation" {
     /**
      * Values that may be interpreted as {@link $FrameSize}.
      */
-    export type $FrameSize_ = { height?: number, width?: number,  } | [height?: number, width?: number, ];
+    export type $FrameSize_ = { width?: number, height?: number,  } | [width?: number, height?: number, ];
     export class $AnimationMetadataSection$FrameOutput {
     }
     export interface $AnimationMetadataSection$FrameOutput {

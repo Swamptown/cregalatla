@@ -28,8 +28,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/resource" {
         get selectedProvider(): $IResourceProvider<$CompoundTag>;
     }
     export class $ResourceProviderContainer<T> extends $UIElement {
-        renameResource(arg0: $IResourcePath): void;
-        editResource(arg0: $IResourcePath): void;
         markResourceDirty(arg0: $IResourcePath): void;
         setUiSupplier(arg0: $UIElementProvider_<$IResourcePath>): $ResourceProviderContainer<$CompoundTag>;
         setCanRename(arg0: $Predicate_<$IResourcePath>): $ResourceProviderContainer<$CompoundTag>;
@@ -50,6 +48,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/resource" {
         setDisplayMode(arg0: $Resource$DisplayMode_): void;
         addNewResource(arg0: $CompoundTag_): void;
         appendResourceUI(arg0: $IResourcePath): void;
+        renameResource(arg0: $IResourcePath): void;
+        editResource(arg0: $IResourcePath): void;
         setAddDefault(arg0: $Supplier_<$CompoundTag>): $ResourceProviderContainer<$CompoundTag>;
         setCanRemove(arg0: $Predicate_<$IResourcePath>): $ResourceProviderContainer<$CompoundTag>;
         removeResource(arg0: $IResourcePath, arg1: boolean): void;

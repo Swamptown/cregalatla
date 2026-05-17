@@ -35,10 +35,10 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
     export class $Armadillo$ArmadilloState extends $Enum<$Armadillo$ArmadilloState> implements $StringRepresentable {
         static values(): $Armadillo$ArmadilloState[];
         static valueOf(arg0: string): $Armadillo$ArmadilloState;
+        isThreatened(): boolean;
         shouldHideInShell(arg0: number): boolean;
         animationDuration(): number;
         static fromName(arg0: string): $Armadillo$ArmadilloState;
-        isThreatened(): boolean;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static SCARED: $Armadillo$ArmadilloState;
@@ -255,8 +255,8 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         start(arg0: $ServerLevel, arg1: $Armadillo, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Armadillo, arg2: number): void;
         tick(arg0: $ServerLevel, arg1: $Armadillo, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: $Armadillo, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Armadillo): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Armadillo, arg2: number): boolean;
         nextPeekTimer: number;
         static DEFAULT_DURATION: number;
         dangerWasAround: boolean;

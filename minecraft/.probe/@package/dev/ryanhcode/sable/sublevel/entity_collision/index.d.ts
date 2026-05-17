@@ -17,7 +17,7 @@ declare module "@package/dev/ryanhcode/sable/sublevel/entity_collision" {
     /**
      * Values that may be interpreted as {@link $SubLevelEntityCollision$FirstCollisionInfo}.
      */
-    export type $SubLevelEntityCollision$FirstCollisionInfo_ = { block?: $BlockState_, bouncy?: boolean, localLocation?: $Vector3dc, globalDirection?: $Vector3dc, horizontal?: boolean,  } | [block?: $BlockState_, bouncy?: boolean, localLocation?: $Vector3dc, globalDirection?: $Vector3dc, horizontal?: boolean, ];
+    export type $SubLevelEntityCollision$FirstCollisionInfo_ = { horizontal?: boolean, globalDirection?: $Vector3dc, localLocation?: $Vector3dc, bouncy?: boolean, block?: $BlockState_,  } | [horizontal?: boolean, globalDirection?: $Vector3dc, localLocation?: $Vector3dc, bouncy?: boolean, block?: $BlockState_, ];
     export class $SubLevelEntityCollision$CollisionInfo {
         trackingSubLevel: $SubLevel;
         subLevelHorizontalCollision: boolean;

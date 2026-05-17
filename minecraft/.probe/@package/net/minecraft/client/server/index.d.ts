@@ -12,6 +12,7 @@ import { $ServerSubLevel } from "@package/dev/ryanhcode/sable/sublevel";
 import { $PlayerDataStorage, $WorldData, $LevelStorageSource$LevelStorageAccess } from "@package/net/minecraft/world/level/storage";
 import { $PackRepository } from "@package/net/minecraft/server/packs/repository";
 import { $ChunkProgressListenerFactory_ } from "@package/net/minecraft/server/level/progress";
+import { $LocalSampleLogger } from "@package/net/minecraft/util/debugchart";
 import { $LayeredRegistryAccess } from "@package/net/minecraft/core";
 import { $AtomicInteger } from "@package/java/util/concurrent/atomic";
 import { $IDeferrableIntegratedServer } from "@package/org/embeddedt/modernfix/duck/suspend_integrated_server_during_load";
@@ -42,9 +43,10 @@ declare module "@package/net/minecraft/client/server" {
         constructor();
     }
     export class $IntegratedServer extends $MinecraftServer implements $IDeferrableIntegratedServer, $SableToastableServer {
+        getTickTimeLogger(): $LocalSampleLogger;
+        sable$reportSubLevelPhysicsFailure(arg0: $ServerSubLevel): void;
         sable$reportSubLevelLoadFailure(arg0: $GlobalSavedSubLevelPointer_): void;
         sable$reportSubLevelSaveFailure(arg0: $SubLevelData): void;
-        sable$reportSubLevelPhysicsFailure(arg0: $ServerSubLevel): void;
         mfix$markClientLoadFinished(): void;
         setUUID(arg0: $UUID_): void;
         static VANILLA_BRAND: string;
@@ -59,6 +61,7 @@ declare module "@package/net/minecraft/client/server" {
         static DEMO_SETTINGS: $LevelSettings;
         playerDataStorage: $PlayerDataStorage;
         constructor(arg0: $Thread, arg1: $Minecraft, arg2: $LevelStorageSource$LevelStorageAccess, arg3: $PackRepository, arg4: $WorldStem_, arg5: $Services_, arg6: $ChunkProgressListenerFactory_);
+        get tickTimeLogger(): $LocalSampleLogger;
         set UUID(value: $UUID_);
     }
     export class $LanServer {

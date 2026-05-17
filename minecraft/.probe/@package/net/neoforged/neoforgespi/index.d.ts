@@ -3,7 +3,7 @@ import { $Logger } from "@package/org/slf4j";
 import { $Stream } from "@package/java/util/stream";
 import { $Path_ } from "@package/java/nio/file";
 import { $Class } from "@package/java/lang";
-import { $List, $ServiceLoader$Provider } from "@package/java/util";
+import { $ServiceLoader$Provider, $List } from "@package/java/util";
 import { $ModLoadingIssue_, $ModLoadingIssue } from "@package/net/neoforged/fml";
 export * as earlywindow from "@package/net/neoforged/neoforgespi/earlywindow";
 export * as language from "@package/net/neoforged/neoforgespi/language";

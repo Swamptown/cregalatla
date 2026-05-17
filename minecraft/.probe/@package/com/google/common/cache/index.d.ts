@@ -24,22 +24,22 @@ declare module "@package/com/google/common/cache" {
         apply(key: K): V;
         getAll(keys: $Iterable_<K>): $ImmutableMap<K, V>;
         getUnchecked(key: K): V;
-        refresh(key: K): void;
         asMap(): $ConcurrentMap<K, V>;
+        refresh(key: K): void;
     }
     export class $CacheStats {
         minus(other: $CacheStats): $CacheStats;
         plus(other: $CacheStats): $CacheStats;
-        loadSuccessCount(): number;
-        loadExceptionCount(): number;
         totalLoadTime(): number;
         evictionCount(): number;
         requestCount(): number;
+        hitRate(): number;
         missRate(): number;
         loadCount(): number;
         loadExceptionRate(): number;
         averageLoadPenalty(): number;
-        hitRate(): number;
+        loadSuccessCount(): number;
+        loadExceptionCount(): number;
         missCount(): number;
         hitCount(): number;
         constructor(hitCount: number, missCount: number, loadSuccessCount: number, loadExceptionCount: number, totalLoadTime: number, evictionCount: number);

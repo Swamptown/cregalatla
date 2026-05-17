@@ -11,13 +11,13 @@ declare module "@package/com/mojang/brigadier/suggestion" {
         getRemaining(): string;
         getInput(): string;
         restart(): $SuggestionsBuilder;
-        createOffset(arg0: number): $SuggestionsBuilder;
-        suggest(arg0: number, arg1: $Message_): $SuggestionsBuilder;
-        suggest(arg0: number): $SuggestionsBuilder;
-        suggest(arg0: string, arg1: $Message_): $SuggestionsBuilder;
-        suggest(arg0: string): $SuggestionsBuilder;
-        buildFuture(): $CompletableFuture<$Suggestions>;
         getRemainingLowerCase(): string;
+        createOffset(arg0: number): $SuggestionsBuilder;
+        suggest(arg0: number): $SuggestionsBuilder;
+        suggest(arg0: number, arg1: $Message_): $SuggestionsBuilder;
+        suggest(arg0: string): $SuggestionsBuilder;
+        suggest(arg0: string, arg1: $Message_): $SuggestionsBuilder;
+        buildFuture(): $CompletableFuture<$Suggestions>;
         getStart(): number;
         constructor(arg0: string, arg1: string, arg2: number);
         constructor(arg0: string, arg1: number);
@@ -52,12 +52,12 @@ declare module "@package/com/mojang/brigadier/suggestion" {
         apply(arg0: string): string;
         compareToIgnoreCase(arg0: $Suggestion): number;
         getText(): string;
-        getRange(): $StringRange;
         getTooltip(): $Message;
+        getRange(): $StringRange;
         constructor(arg0: $StringRange, arg1: string);
         constructor(arg0: $StringRange, arg1: string, arg2: $Message_);
         get text(): string;
-        get range(): $StringRange;
         get tooltip(): $Message;
+        get range(): $StringRange;
     }
 }

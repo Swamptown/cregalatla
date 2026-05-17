@@ -28,8 +28,8 @@ declare module "@package/xaero/common/mods" {
     export class $SupportXaeroWorldmap {
         confirmPlayerRadarRender(arg0: $Player): void;
         bumpLoadedRegion(arg0: $MapProcessor, arg1: $MapRegion): void;
-        getWorldMapIgnoreHeightmaps(): boolean;
         registerHighlighters(arg0: $HighlighterRegistry): void;
+        getWorldMapIgnoreHeightmaps(): boolean;
         createRadarRenderWrapper(arg0: $RadarRenderer): void;
         getMinimapBrightness(): number;
         drawMinimap(arg0: $MinimapSession, arg1: $PoseStack, arg2: $MinimapRendererHelper, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: boolean, arg10: number, arg11: number, arg12: $VertexConsumer, arg13: $MultiTextureRenderTypeRendererProvider): void;
@@ -98,10 +98,10 @@ declare module "@package/xaero/common/mods" {
         get multiplayerMap(): boolean;
     }
     export class $SupportMods {
-        pac(): boolean;
         framedBlocks(): boolean;
         shouldUseWorldMapChunks(): boolean;
         shouldUseWorldMapCaveChunks(): boolean;
+        pac(): boolean;
         worldmap(): boolean;
         static checkForMinimapDuplicates(arg0: string): void;
         supportIris: $SupportIris;
@@ -115,9 +115,9 @@ declare module "@package/xaero/common/mods" {
         constructor(arg0: $IXaeroMinimap);
     }
     export class $SupportFramedBlocks {
+        onWorldChange(): void;
         isFrameBlock(arg0: $Level_, arg1: $Registry<$Block_>, arg2: $BlockState_): boolean;
         unpackFramedBlock(arg0: $Level_, arg1: $Registry<$Block_>, arg2: $BlockState_, arg3: $BlockEntity): $BlockState;
-        onWorldChange(): void;
         constructor();
     }
 }

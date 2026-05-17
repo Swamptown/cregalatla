@@ -180,8 +180,8 @@ declare module "@package/net/neoforged/neoforge/client/gui" {
         any(): $Object;
         undoable(): boolean;
         tooltip(): $Component;
-        getWidget(arg0: $Options): $AbstractWidget;
         widget(): $AbstractWidget;
+        getWidget(arg0: $Options): $AbstractWidget;
         constructor(arg0: $Component_, arg1: $Component_, arg2: $OptionInstance<never>, arg3: boolean);
         constructor(arg0: $Component_, arg1: $Component_, arg2: $OptionInstance<never>);
         constructor(arg0: $Component_, arg1: $Component_, arg2: $AbstractWidget, arg3: boolean);
@@ -191,7 +191,7 @@ declare module "@package/net/neoforged/neoforge/client/gui" {
     /**
      * Values that may be interpreted as {@link $ConfigurationScreen$ConfigurationSectionScreen$Element}.
      */
-    export type $ConfigurationScreen$ConfigurationSectionScreen$Element_ = { option?: $OptionInstance<never>, tooltip?: $Component_, widget?: $AbstractWidget, name?: $Component_, undoable?: boolean,  } | [option?: $OptionInstance<never>, tooltip?: $Component_, widget?: $AbstractWidget, name?: $Component_, undoable?: boolean, ];
+    export type $ConfigurationScreen$ConfigurationSectionScreen$Element_ = { undoable?: boolean, name?: $Component_, widget?: $AbstractWidget, tooltip?: $Component_, option?: $OptionInstance<never>,  } | [undoable?: boolean, name?: $Component_, widget?: $AbstractWidget, tooltip?: $Component_, option?: $OptionInstance<never>, ];
     export class $ConfigurationScreen extends $OptionsSubScreen {
         translatableConfig(arg0: $ModConfig, arg1: string, arg2: string): $Component;
         static LONG_STRING: $Component;
@@ -410,7 +410,7 @@ declare module "@package/net/neoforged/neoforge/client/gui" {
     /**
      * Values that may be interpreted as {@link $ConfigurationScreen$UndoManager$Step}.
      */
-    export type $ConfigurationScreen$UndoManager$Step_<T> = { oldValue?: any, newValue?: any, undo?: $Consumer_<any>, run?: $Consumer_<any>,  } | [oldValue?: any, newValue?: any, undo?: $Consumer_<any>, run?: $Consumer_<any>, ];
+    export type $ConfigurationScreen$UndoManager$Step_<T> = { run?: $Consumer_<any>, undo?: $Consumer_<any>, newValue?: any, oldValue?: any,  } | [run?: $Consumer_<any>, undo?: $Consumer_<any>, newValue?: any, oldValue?: any, ];
     export class $ModListScreen$SortType extends $Enum<$ModListScreen$SortType> implements $Comparator<$ModContainer> {
         reversed(): $Comparator<$ModContainer>;
         thenComparing<U>(arg0: $Function_<$ModContainer, U>, arg1: $Comparator<U>): $Comparator<$ModContainer>;
@@ -460,8 +460,8 @@ declare module "@package/net/neoforged/neoforge/client/gui" {
         entries(): $Set<$UnmodifiableConfig$Entry>;
         static top(arg0: string, arg1: $Screen, arg2: $ModConfig, arg3: $ConfigurationScreen$ConfigurationSectionScreen$Filter_): $ConfigurationScreen$ConfigurationSectionScreen$Context;
         static section(arg0: $ConfigurationScreen$ConfigurationSectionScreen$Context_, arg1: $Screen, arg2: $Set_<$UnmodifiableConfig$Entry>, arg3: $Map_<string, $Object>, arg4: string): $ConfigurationScreen$ConfigurationSectionScreen$Context;
-        valueSpecs(): $Map<string, $Object>;
         modSpec(): $ModConfigSpec;
+        valueSpecs(): $Map<string, $Object>;
         modConfig(): $ModConfig;
         keylist(): $List<string>;
         modId(): string;
@@ -470,7 +470,7 @@ declare module "@package/net/neoforged/neoforge/client/gui" {
     /**
      * Values that may be interpreted as {@link $ConfigurationScreen$ConfigurationSectionScreen$Context}.
      */
-    export type $ConfigurationScreen$ConfigurationSectionScreen$Context_ = { modConfig?: $ModConfig, entries?: $Set_<$UnmodifiableConfig$Entry>, modId?: string, keylist?: $List_<string>, modSpec?: $ModConfigSpec, parent?: $Screen, filter?: $ConfigurationScreen$ConfigurationSectionScreen$Filter_, valueSpecs?: $Map_<string, $Object>,  } | [modConfig?: $ModConfig, entries?: $Set_<$UnmodifiableConfig$Entry>, modId?: string, keylist?: $List_<string>, modSpec?: $ModConfigSpec, parent?: $Screen, filter?: $ConfigurationScreen$ConfigurationSectionScreen$Filter_, valueSpecs?: $Map_<string, $Object>, ];
+    export type $ConfigurationScreen$ConfigurationSectionScreen$Context_ = { valueSpecs?: $Map_<string, $Object>, filter?: $ConfigurationScreen$ConfigurationSectionScreen$Filter_, parent?: $Screen, modSpec?: $ModConfigSpec, keylist?: $List_<string>, modId?: string, entries?: $Set_<$UnmodifiableConfig$Entry>, modConfig?: $ModConfig,  } | [valueSpecs?: $Map_<string, $Object>, filter?: $ConfigurationScreen$ConfigurationSectionScreen$Filter_, parent?: $Screen, modSpec?: $ModConfigSpec, keylist?: $List_<string>, modId?: string, entries?: $Set_<$UnmodifiableConfig$Entry>, modConfig?: $ModConfig, ];
     export class $ConfigurationScreen$ConfigurationListScreen<T> extends $ConfigurationScreen$ConfigurationSectionScreen {
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -497,9 +497,9 @@ declare module "@package/net/neoforged/neoforge/client/gui" {
     }
     export class $ConfigurationScreen$ConfigurationSectionScreen$Custom<T> extends $Record implements $OptionInstance$ValueSet<T> {
         values(): $List<T>;
-        validateValue(arg0: T): (T) | undefined;
-        createButton(arg0: $OptionInstance$TooltipSupplier_<T>, arg1: $Options, arg2: number, arg3: number, arg4: number, arg5: $Consumer_<T>): $Function<$OptionInstance<T>, $AbstractWidget>;
         codec(): $Codec<T>;
+        createButton(arg0: $OptionInstance$TooltipSupplier_<T>, arg1: $Options, arg2: number, arg3: number, arg4: number, arg5: $Consumer_<T>): $Function<$OptionInstance<T>, $AbstractWidget>;
+        validateValue(arg0: T): (T) | undefined;
         static BOOLEAN_VALUES_NO_PREFIX: $ConfigurationScreen$ConfigurationSectionScreen$Custom<boolean>;
         constructor(values: $List_<T>);
     }
@@ -524,7 +524,7 @@ declare module "@package/net/neoforged/neoforge/client/gui" {
     /**
      * Values that may be interpreted as {@link $ModMismatchDisconnectedScreen$MismatchInfoPanel$1Row}.
      */
-    export type $ModMismatchDisconnectedScreen$MismatchInfoPanel$1Row_ = { reason?: $MutableComponent_, name?: $MutableComponent_,  } | [reason?: $MutableComponent_, name?: $MutableComponent_, ];
+    export type $ModMismatchDisconnectedScreen$MismatchInfoPanel$1Row_ = { name?: $MutableComponent_, reason?: $MutableComponent_,  } | [name?: $MutableComponent_, reason?: $MutableComponent_, ];
     export class $LoadingErrorScreen$LoadingEntryList$LoadingMessageEntry extends $ObjectSelectionList$Entry<$LoadingErrorScreen$LoadingEntryList$LoadingMessageEntry> {
         /**
          * @deprecated

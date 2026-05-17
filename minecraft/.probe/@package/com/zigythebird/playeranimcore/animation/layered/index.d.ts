@@ -15,8 +15,8 @@ declare module "@package/com/zigythebird/playeranimcore/animation/layered" {
         get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
         getFirstPersonConfiguration(): $FirstPersonConfiguration;
         setupAnim(state: $AnimationData): void;
-        getFirstPersonMode(): $FirstPersonMode;
         canRemove(): boolean;
+        getFirstPersonMode(): $FirstPersonMode;
         get active(): boolean;
         get firstPersonConfiguration(): $FirstPersonConfiguration;
         set upAnim(value: $AnimationData);

@@ -12,14 +12,16 @@ import { $Vec3_, $BlockHitResult } from "@package/net/minecraft/world/phys";
 
 declare module "@package/com/simibubi/create/foundation/blockEntity/behaviour/filtering" {
     export class $FilteringBehaviour extends $BlockEntityBehaviour implements $ValueSettingsBehaviour {
-        test(arg0: $FluidStack_): boolean;
         test(arg0: $ItemStack_): boolean;
+        test(arg0: $FluidStack_): boolean;
         isActive(): boolean;
-        getFilter(): $ItemStack;
         getFilter(arg0: $Direction_): $ItemStack;
+        getFilter(): $ItemStack;
         getLabel(): $MutableComponent;
         setFilter(arg0: $Direction_, arg1: $ItemStack_): boolean;
         setFilter(arg0: $ItemStack_): boolean;
+        onlyActiveWhen(arg0: $Supplier_<boolean>): $FilteringBehaviour;
+        withPredicate(arg0: $Predicate_<$ItemStack>): $FilteringBehaviour;
         getValueSettings(): $ValueSettingsBehaviour$ValueSettings;
         getSlotPositioning(): $ValueBoxTransform;
         createBoard(arg0: $Player, arg1: $BlockHitResult): $ValueSettingsBoard;
@@ -33,24 +35,22 @@ declare module "@package/com/simibubi/create/foundation/blockEntity/behaviour/fi
         anyAmount(): boolean;
         getAmountTip(): $MutableComponent;
         getCountLabelForValueBox(): $MutableComponent;
-        isRecipeFilter(): boolean;
-        forRecipes(): $FilteringBehaviour;
-        forFluids(): $FilteringBehaviour;
-        onlyActiveWhen(arg0: $Supplier_<boolean>): $FilteringBehaviour;
-        withPredicate(arg0: $Predicate_<$ItemStack>): $FilteringBehaviour;
         getTip(): $MutableComponent;
         getClipboardKey(): string;
         writeToClipboard(arg0: $HolderLookup$Provider, arg1: $CompoundTag_, arg2: $Direction_): boolean;
         readFromClipboard(arg0: $HolderLookup$Provider, arg1: $CompoundTag_, arg2: $Player, arg3: $Direction_, arg4: boolean): boolean;
         testHit(arg0: $Vec3_): boolean;
-        netId(): number;
-        formatValue(arg0: $ValueSettingsBehaviour$ValueSettings_): $MutableComponent;
-        withCallback(arg0: $Consumer_<$ItemStack>): $FilteringBehaviour;
+        forFluids(): $FilteringBehaviour;
+        forRecipes(): $FilteringBehaviour;
+        isRecipeFilter(): boolean;
         setLabel(arg0: $MutableComponent_): void;
-        getRenderDistance(): number;
+        netId(): number;
+        withCallback(arg0: $Consumer_<$ItemStack>): $FilteringBehaviour;
+        formatValue(arg0: $ValueSettingsBehaviour$ValueSettings_): $MutableComponent;
+        getMaxStackSize(): number;
         getMaxStackSize(arg0: $ItemStack_): number;
         getMaxStackSize(arg0: $Direction_): number;
-        getMaxStackSize(): number;
+        getRenderDistance(): number;
         getAmount(): number;
         playFeedbackSound(arg0: $BlockEntityBehaviour): void;
         onlyVisibleWithWrench(): boolean;
@@ -68,9 +68,9 @@ declare module "@package/com/simibubi/create/foundation/blockEntity/behaviour/fi
         get countVisible(): boolean;
         get amountTip(): $MutableComponent;
         get countLabelForValueBox(): $MutableComponent;
-        get recipeFilter(): boolean;
         get tip(): $MutableComponent;
         get clipboardKey(): string;
+        get recipeFilter(): boolean;
         get renderDistance(): number;
         get amount(): number;
     }

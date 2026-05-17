@@ -13,15 +13,15 @@ declare module "@package/net/minecraft/commands/execution" {
     export class $ExecutionContext<T> implements $AutoCloseable {
         close(): void;
         static queueInitialFunctionCall<T extends $ExecutionCommandSource<T>>(arg0: $ExecutionContext<T>, arg1: $InstantiatedFunction<T>, arg2: T, arg3: $CommandResultCallback_): void;
-        forkLimit(): number;
-        incrementCost(): void;
-        tracer(): $TraceCallbacks;
-        tracer(arg0: $TraceCallbacks): void;
-        queueNext(arg0: $CommandQueueEntry_<T>): void;
         runCommandQueue(): void;
         static queueInitialCommandExecution<T extends $ExecutionCommandSource<T>>(arg0: $ExecutionContext<T>, arg1: string, arg2: $ContextChain<T>, arg3: T, arg4: $CommandResultCallback_): void;
-        frameControlForDepth(arg0: number): $Frame$FrameControl;
+        tracer(arg0: $TraceCallbacks): void;
+        tracer(): $TraceCallbacks;
+        queueNext(arg0: $CommandQueueEntry_<T>): void;
+        forkLimit(): number;
+        incrementCost(): void;
         discardAtDepthOrHigher(arg0: number): void;
+        frameControlForDepth(arg0: number): $Frame$FrameControl;
         profiler(): $ProfilerFiller;
         constructor(arg0: number, arg1: number, arg2: $ProfilerFiller);
     }
@@ -142,7 +142,7 @@ declare module "@package/net/minecraft/commands/execution" {
     /**
      * Values that may be interpreted as {@link $Frame}.
      */
-    export type $Frame_ = { depth?: number, returnValueConsumer?: $CommandResultCallback_, frameControl?: $Frame$FrameControl_,  } | [depth?: number, returnValueConsumer?: $CommandResultCallback_, frameControl?: $Frame$FrameControl_, ];
+    export type $Frame_ = { frameControl?: $Frame$FrameControl_, returnValueConsumer?: $CommandResultCallback_, depth?: number,  } | [frameControl?: $Frame$FrameControl_, returnValueConsumer?: $CommandResultCallback_, depth?: number, ];
     export class $CustomCommandExecutor$WithErrorHandling<T extends $ExecutionCommandSource<T>> implements $CustomCommandExecutor<T> {
         run(arg0: T, arg1: $ContextChain<T>, arg2: $ChainModifiers_, arg3: $ExecutionControl<T>): void;
         runGuarded(arg0: T, arg1: $ContextChain<T>, arg2: $ChainModifiers_, arg3: $ExecutionControl<T>): void;

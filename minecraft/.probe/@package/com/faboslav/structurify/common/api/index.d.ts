@@ -1,5 +1,5 @@
 import { $StructureSectionClaim } from "@package/com/faboslav/structurify/common/world/level/structure";
-import { $HolderSet, $HolderSet_ } from "@package/net/minecraft/core";
+import { $HolderSet_, $HolderSet } from "@package/net/minecraft/core";
 import { $StructureNamespaceData, $StructureData } from "@package/com/faboslav/structurify/common/config/data";
 import { $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $Biome } from "@package/net/minecraft/world/level/biome";
@@ -41,9 +41,9 @@ declare module "@package/com/faboslav/structurify/common/api" {
     export class $StructurifyStructure {
     }
     export interface $StructurifyStructure {
+        structurify$getGlobalStructureNamespaceData(): $StructureNamespaceData;
         structurify$setStructureResourceLocation(arg0: $ResourceLocation_): void;
         structurify$getStructureResourceLocation(): $ResourceLocation;
-        structurify$getGlobalStructureNamespaceData(): $StructureNamespaceData;
         structurify$getStructureNamespaceData(arg0: $ResourceLocation_): $StructureNamespaceData;
         structurify$getStructureNamespaceData(): $StructureNamespaceData;
         structurify$getStructureData(arg0: $ResourceLocation_): $StructureData;

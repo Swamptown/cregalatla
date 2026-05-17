@@ -15,17 +15,17 @@ declare module "@package/java/awt/print" {
     export type $Printable_ = ((arg0: $Graphics, arg1: $PageFormat, arg2: number) => number);
     export class $PageFormat implements $Cloneable {
         clone(): $Object;
+        setOrientation(arg0: number): void;
+        getOrientation(): number;
         getImageableY(): number;
         getImageableHeight(): number;
         getImageableX(): number;
         getImageableWidth(): number;
         getPaper(): $Paper;
         setPaper(arg0: $Paper): void;
-        setOrientation(arg0: number): void;
-        getOrientation(): number;
+        getMatrix(): number[];
         getWidth(): number;
         getHeight(): number;
-        getMatrix(): number[];
         static REVERSE_LANDSCAPE: number;
         static LANDSCAPE: number;
         static PORTRAIT: number;
@@ -34,9 +34,9 @@ declare module "@package/java/awt/print" {
         get imageableHeight(): number;
         get imageableX(): number;
         get imageableWidth(): number;
+        get matrix(): number[];
         get width(): number;
         get height(): number;
-        get matrix(): number[];
     }
     export class $Paper implements $Cloneable {
         clone(): $Object;

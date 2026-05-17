@@ -15,7 +15,7 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/tessellation" {
     /**
      * Values that may be interpreted as {@link $TessellationBinding}.
      */
-    export type $TessellationBinding_ = { target?: $GlBufferTarget_, buffer?: $GlBuffer, attributeBindings?: $GlVertexAttributeBinding[],  } | [target?: $GlBufferTarget_, buffer?: $GlBuffer, attributeBindings?: $GlVertexAttributeBinding[], ];
+    export type $TessellationBinding_ = { attributeBindings?: $GlVertexAttributeBinding[], buffer?: $GlBuffer, target?: $GlBufferTarget_,  } | [attributeBindings?: $GlVertexAttributeBinding[], buffer?: $GlBuffer, target?: $GlBufferTarget_, ];
     export class $GlIndexType extends $Enum<$GlIndexType> {
         static values(): $GlIndexType[];
         static valueOf(arg0: string): $GlIndexType;
@@ -36,8 +36,8 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/tessellation" {
     export interface $GlTessellation {
         delete(arg0: $CommandList): void;
         bind(arg0: $CommandList): void;
-        unbind(arg0: $CommandList): void;
         getPrimitiveType(): $GlPrimitiveType;
+        unbind(arg0: $CommandList): void;
         get primitiveType(): $GlPrimitiveType;
     }
     export class $GlPrimitiveType extends $Enum<$GlPrimitiveType> {

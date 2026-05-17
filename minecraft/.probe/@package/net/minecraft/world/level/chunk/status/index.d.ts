@@ -57,7 +57,7 @@ declare module "@package/net/minecraft/world/level/chunk/status" {
     /**
      * Values that may be interpreted as {@link $WorldGenContext}.
      */
-    export type $WorldGenContext_ = { generator?: $ChunkGenerator, lightEngine?: $ThreadedLevelLightEngine, mainThreadMailBox?: $ProcessorHandle<$ChunkTaskPriorityQueueSorter$Message<$Runnable_>>, structureManager?: $StructureTemplateManager, level?: $ServerLevel,  } | [generator?: $ChunkGenerator, lightEngine?: $ThreadedLevelLightEngine, mainThreadMailBox?: $ProcessorHandle<$ChunkTaskPriorityQueueSorter$Message<$Runnable_>>, structureManager?: $StructureTemplateManager, level?: $ServerLevel, ];
+    export type $WorldGenContext_ = { level?: $ServerLevel, structureManager?: $StructureTemplateManager, mainThreadMailBox?: $ProcessorHandle<$ChunkTaskPriorityQueueSorter$Message<$Runnable_>>, lightEngine?: $ThreadedLevelLightEngine, generator?: $ChunkGenerator,  } | [level?: $ServerLevel, structureManager?: $StructureTemplateManager, mainThreadMailBox?: $ProcessorHandle<$ChunkTaskPriorityQueueSorter$Message<$Runnable_>>, lightEngine?: $ThreadedLevelLightEngine, generator?: $ChunkGenerator, ];
     export class $ChunkPyramid extends $Record {
         steps(): $ImmutableList<$ChunkStep>;
         getStepTo(arg0: $ChunkStatus_): $ChunkStep;
@@ -97,17 +97,17 @@ declare module "@package/net/minecraft/world/level/chunk/status" {
     export class $ChunkStep extends $Record {
         apply(arg0: $WorldGenContext_, arg1: $StaticCache2D<$GenerationChunkHolder>, arg2: $ChunkAccess): $CompletableFuture<$ChunkAccess>;
         task(): $ChunkStatusTask;
-        blockStateWriteRadius(): number;
         accumulatedDependencies(): $ChunkDependencies;
         getAccumulatedRadiusOf(arg0: $ChunkStatus_): number;
         directDependencies(): $ChunkDependencies;
+        blockStateWriteRadius(): number;
         targetStatus(): $ChunkStatus;
         constructor(arg0: $ChunkStatus_, arg1: $ChunkDependencies, arg2: $ChunkDependencies, arg3: number, arg4: $ChunkStatusTask_);
     }
     /**
      * Values that may be interpreted as {@link $ChunkStep}.
      */
-    export type $ChunkStep_ = { blockStateWriteRadius?: number, accumulatedDependencies?: $ChunkDependencies, directDependencies?: $ChunkDependencies, targetStatus?: $ChunkStatus_, task?: $ChunkStatusTask_,  } | [blockStateWriteRadius?: number, accumulatedDependencies?: $ChunkDependencies, directDependencies?: $ChunkDependencies, targetStatus?: $ChunkStatus_, task?: $ChunkStatusTask_, ];
+    export type $ChunkStep_ = { task?: $ChunkStatusTask_, targetStatus?: $ChunkStatus_, directDependencies?: $ChunkDependencies, accumulatedDependencies?: $ChunkDependencies, blockStateWriteRadius?: number,  } | [task?: $ChunkStatusTask_, targetStatus?: $ChunkStatus_, directDependencies?: $ChunkDependencies, accumulatedDependencies?: $ChunkDependencies, blockStateWriteRadius?: number, ];
     export class $ChunkStatus {
         getName(): string;
         static max(arg0: $ChunkStatus_, arg1: $ChunkStatus_): $ChunkStatus;

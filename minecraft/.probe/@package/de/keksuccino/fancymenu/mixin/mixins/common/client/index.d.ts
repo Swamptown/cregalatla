@@ -52,20 +52,20 @@ declare module "@package/de/keksuccino/fancymenu/mixin/mixins/common/client" {
     export class $IMixinCommandSuggestions {
     }
     export interface $IMixinCommandSuggestions {
-        getAllowSuggestionsFancyMenu(): boolean;
-        getKeepSuggestionsFancyMenu(): boolean;
+        setSuggestionsFancyMenu(arg0: $CommandSuggestions$SuggestionsList): void;
+        invokeUpdateUsageInfoFancyMenu(): void;
+        invokeSortSuggestionsFancyMenu(arg0: $Suggestions): $List<$Suggestion>;
         getCurrentParseFancyMenu(): $ParseResults<$SharedSuggestionProvider>;
         setCurrentParseFancyMenu(arg0: $ParseResults<$SharedSuggestionProvider>): void;
         getPendingSuggestionsFancyMenu(): $CompletableFuture<$Suggestions>;
         setPendingSuggestionsFancyMenu(arg0: $CompletableFuture<$Suggestions>): void;
         getCommandUsageFancyMenu(): $List<$FormattedCharSequence>;
         getSuggestionsFancyMenu(): $CommandSuggestions$SuggestionsList;
-        setSuggestionsFancyMenu(arg0: $CommandSuggestions$SuggestionsList): void;
-        invokeUpdateUsageInfoFancyMenu(): void;
-        invokeSortSuggestionsFancyMenu(arg0: $Suggestions): $List<$Suggestion>;
+        getAllowSuggestionsFancyMenu(): boolean;
+        getKeepSuggestionsFancyMenu(): boolean;
+        get commandUsageFancyMenu(): $List<$FormattedCharSequence>;
         get allowSuggestionsFancyMenu(): boolean;
         get keepSuggestionsFancyMenu(): boolean;
-        get commandUsageFancyMenu(): $List<$FormattedCharSequence>;
     }
     export class $IMixinProgressScreen {
     }
@@ -102,6 +102,12 @@ declare module "@package/de/keksuccino/fancymenu/mixin/mixins/common/client" {
     export class $IMixinEditBox {
     }
     export interface $IMixinEditBox {
+        getHighlightPosFancyMenu(): number;
+        setDisplayPosFancyMenu(arg0: number): void;
+        invokeDeleteTextFancyMenu(arg0: number): void;
+        getDisplayPosFancyMenu(): number;
+        getMaxLengthFancyMenu(): number;
+        getBorderedFancyMenu(): boolean;
         getIsEditableFancyMenu(): boolean;
         getFormatterFancyMenu(): $BiFunction<string, number, $FormattedCharSequence>;
         getTextColorFancyMenu(): number;
@@ -110,12 +116,9 @@ declare module "@package/de/keksuccino/fancymenu/mixin/mixins/common/client" {
         getHintFancyMenu(): $Component;
         getSuggestionFancyMenu(): string;
         invokeRenderHighlightFancyMenu(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        getHighlightPosFancyMenu(): number;
-        setDisplayPosFancyMenu(arg0: number): void;
-        invokeDeleteTextFancyMenu(arg0: number): void;
-        getDisplayPosFancyMenu(): number;
-        getMaxLengthFancyMenu(): number;
-        getBorderedFancyMenu(): boolean;
+        get highlightPosFancyMenu(): number;
+        get maxLengthFancyMenu(): number;
+        get borderedFancyMenu(): boolean;
         get isEditableFancyMenu(): boolean;
         get formatterFancyMenu(): $BiFunction<string, number, $FormattedCharSequence>;
         get textColorFancyMenu(): number;
@@ -123,9 +126,6 @@ declare module "@package/de/keksuccino/fancymenu/mixin/mixins/common/client" {
         get focusedTimeFancyMenu(): number;
         get hintFancyMenu(): $Component;
         get suggestionFancyMenu(): string;
-        get highlightPosFancyMenu(): number;
-        get maxLengthFancyMenu(): number;
-        get borderedFancyMenu(): boolean;
     }
     export class $IMixinAbstractContainerScreen {
     }
@@ -193,14 +193,14 @@ declare module "@package/de/keksuccino/fancymenu/mixin/mixins/common/client" {
     export class $IMixinSuggestionsList {
     }
     export interface $IMixinSuggestionsList {
-        getOffsetFancyMenu(): number;
         getLastMouseFancyMenu(): $Vec2;
         setLastMouseFancyMenu(arg0: $Vec2): void;
         getRectFancyMenu(): $Rect2i;
         getCurrentFancyMenu(): number;
-        get offsetFancyMenu(): number;
+        getOffsetFancyMenu(): number;
         get rectFancyMenu(): $Rect2i;
         get currentFancyMenu(): number;
+        get offsetFancyMenu(): number;
     }
     export class $IMixinPostChain {
     }
@@ -354,16 +354,16 @@ declare module "@package/de/keksuccino/fancymenu/mixin/mixins/common/client" {
     export class $IMixinScreen {
     }
     export interface $IMixinScreen {
-        invokeRemoveWidgetFancyMenu(arg0: $GuiEventListener): void;
-        get_initialized_FancyMenu(): boolean;
-        invoke_init_FancyMenu(): void;
         getChildrenFancyMenu(): $List<$GuiEventListener>;
         getRenderablesFancyMenu(): $List<$Renderable>;
         getNarratablesFancyMenu(): $List<$NarratableEntry>;
-        get _initialized_FancyMenu(): boolean;
+        invokeRemoveWidgetFancyMenu(arg0: $GuiEventListener): void;
+        get_initialized_FancyMenu(): boolean;
+        invoke_init_FancyMenu(): void;
         get childrenFancyMenu(): $List<$GuiEventListener>;
         get renderablesFancyMenu(): $List<$Renderable>;
         get narratablesFancyMenu(): $List<$NarratableEntry>;
+        get _initialized_FancyMenu(): boolean;
     }
     export class $IMixinReceivingLevelScreen {
     }

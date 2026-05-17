@@ -4,11 +4,11 @@ import { $Thread$State, $StackTraceElement } from "@package/java/lang";
 declare module "@package/java/lang/management" {
     export class $MonitorInfo extends $LockInfo {
         static from(arg0: $CompositeData): $MonitorInfo;
-        getLockedStackDepth(): number;
         getLockedStackFrame(): $StackTraceElement;
+        getLockedStackDepth(): number;
         constructor(arg0: string, arg1: number, arg2: number, arg3: $StackTraceElement);
-        get lockedStackDepth(): number;
         get lockedStackFrame(): $StackTraceElement;
+        get lockedStackDepth(): number;
     }
     export class $LockInfo {
         static from(arg0: $CompositeData): $LockInfo;

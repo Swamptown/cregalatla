@@ -19,5 +19,5 @@ declare module "@package/io/github/mortuusars/exposure/world/sound" {
     /**
      * Values that may be interpreted as {@link $SoundEffect}.
      */
-    export type $SoundEffect_ = { volume?: number, pitchVariability?: number, pitch?: number, sound?: $Supplier_<$SoundEvent>,  } | [volume?: number, pitchVariability?: number, pitch?: number, sound?: $Supplier_<$SoundEvent>, ];
+    export type $SoundEffect_ = { sound?: $Supplier_<$SoundEvent>, pitch?: number, pitchVariability?: number, volume?: number,  } | [sound?: $Supplier_<$SoundEvent>, pitch?: number, pitchVariability?: number, volume?: number, ];
 }

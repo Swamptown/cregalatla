@@ -26,12 +26,12 @@ declare module "@package/net/fabricmc/fabric/api/lookup/v1/block" {
         find(arg0: $Level_, arg1: $BlockPos_, arg2: C): A;
         getId(): $ResourceLocation;
         getProvider(arg0: $Block_): $BlockApiLookup$BlockApiProvider<A, C>;
-        registerForBlockEntities(arg0: $BlockApiLookup$BlockEntityApiProvider_<A, C>, ...arg1: $BlockEntityType_<never>[]): void;
         registerForBlocks(arg0: $BlockApiLookup$BlockApiProvider_<A, C>, ...arg1: $Block_[]): void;
+        registerForBlockEntities(arg0: $BlockApiLookup$BlockEntityApiProvider_<A, C>, ...arg1: $BlockEntityType_<never>[]): void;
         registerForBlockEntity<T extends $BlockEntity>(arg0: $BiFunction_<T, C, A>, arg1: $BlockEntityType_<T>): void;
+        contextClass(): $Class<C>;
         registerSelf(...arg0: $BlockEntityType_<never>[]): void;
         registerFallback(arg0: $BlockApiLookup$BlockApiProvider_<A, C>): void;
-        contextClass(): $Class<C>;
         apiClass(): $Class<A>;
         get id(): $ResourceLocation;
     }
@@ -50,12 +50,12 @@ declare module "@package/net/fabricmc/fabric/api/lookup/v1/block" {
     export interface $BlockApiCache<A, C> {
         find(arg0: C): A;
         find(arg0: $BlockState_, arg1: C): A;
-        getWorld(): $ServerLevel;
         getLookup(): $BlockApiLookup<A, C>;
+        getWorld(): $ServerLevel;
         getBlockEntity(): $BlockEntity;
         getPos(): $BlockPos;
-        get world(): $ServerLevel;
         get lookup(): $BlockApiLookup<A, C>;
+        get world(): $ServerLevel;
         get blockEntity(): $BlockEntity;
         get pos(): $BlockPos;
     }

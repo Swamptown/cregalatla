@@ -12,8 +12,8 @@ declare module "@package/dev/simulated_team/simulated/content/blocks/nav_table/n
     }
     export interface $NavigationTarget {
         getTarget(arg0: $NavTableBlockEntity, arg1: $ItemStack_): $Vec3;
-        distanceToTarget(arg0: $NavTableBlockEntity): number;
         onInsert(arg0: $ItemStack_, arg1: $NavTableBlockEntity, arg2: $Player): void;
+        distanceToTarget(arg0: $NavTableBlockEntity): number;
         getMaxRange(): number;
         calculateSideStrength(arg0: $NavTableBlockEntity, arg1: $Direction_, arg2: $ItemStack_): number;
         getModulatingRange(): number;

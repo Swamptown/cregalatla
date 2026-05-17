@@ -132,10 +132,10 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         static autoFill(...arg0: $TrackSizingFunction[]): $GridTemplateComponent;
         static autoFit(...arg0: $TrackSizingFunction[]): $GridTemplateComponent;
         static repeatCount(arg0: number, ...arg1: $TrackSizingFunction[]): $GridTemplateComponent;
-        isRepeat(): boolean;
         isAutoRepetition(): boolean;
-        isSingle(): boolean;
         hasFixedComponent(): boolean;
+        isSingle(): boolean;
+        isRepeat(): boolean;
         getSingle(): $TrackSizingFunction;
         get type(): $GridTemplateComponent$Type;
         get autoRepetition(): boolean;
@@ -281,14 +281,14 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         static autoFill(arg0: $TrackSizingFunction): $GridRepetition;
         static autoFit(arg0: $TrackSizingFunction): $GridRepetition;
         static autoFit(arg0: $List_<$TrackSizingFunction>): $GridRepetition;
-        getTracks(): $List<$TrackSizingFunction>;
         getTrackCount(): number;
         isAutoRepetition(): boolean;
         hasFixedComponent(): boolean;
+        getTracks(): $List<$TrackSizingFunction>;
         get type(): $GridRepetition$RepetitionType;
-        get tracks(): $List<$TrackSizingFunction>;
         get trackCount(): number;
         get autoRepetition(): boolean;
+        get tracks(): $List<$TrackSizingFunction>;
     }
     export class $GridPlacement {
         getValue(): number;
@@ -296,15 +296,15 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         getType(): $GridPlacement$Type;
         getLineNumber(): number;
         isAuto(): boolean;
-        static namedLine(arg0: string): $GridPlacement;
         static namedLine(arg0: string, arg1: number): $GridPlacement;
+        static namedLine(arg0: string): $GridPlacement;
         static namedSpan(arg0: string, arg1: number): $GridPlacement;
         getLineName(): string;
+        isDefinite(): boolean;
         isLine(): boolean;
         isNamedLine(): boolean;
         isSpan(): boolean;
         isNamedSpan(): boolean;
-        isDefinite(): boolean;
         getNthIndex(): number;
         static span(arg0: number): $GridPlacement;
         static auto(): $GridPlacement;
@@ -518,8 +518,8 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         getEffectiveFlexShrink(): number;
         boxGenerationMode(): $BoxGenerationMode;
         flexNone(): $TaffyStyle;
-        flexInitial(): $TaffyStyle;
         clearFlex(): $TaffyStyle;
+        flexInitial(): $TaffyStyle;
         getItemIsTable(): boolean;
         getItemIsReplaced(): boolean;
         getBoxSizing(): $BoxSizing;
@@ -528,8 +528,8 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         hasAspectRatio(): boolean;
         getGap(): $TaffySize<$LengthPercentage>;
         getTextAlign(): $TextAlign;
-        getFlex(): number;
         getFlexWrap(): $FlexWrap;
+        getFlex(): number;
         getGridTemplateRows(): $List<$TrackSizingFunction>;
         getGridTemplateColumns(): $List<$TrackSizingFunction>;
         getGridAutoRows(): $List<$TrackSizingFunction>;
@@ -540,11 +540,10 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         getGridColumnStart(): $GridPlacement;
         getGridColumnEnd(): $GridPlacement;
         getBoxGenerationMode(): $BoxGenerationMode;
-        getMinSize(): $TaffySize<$TaffyDimension>;
-        getDisplay(): $TaffyDisplay;
         getPadding(): $TaffyRect<$LengthPercentage>;
-        flex(arg0: number, arg1: number): $TaffyStyle;
+        getDisplay(): $TaffyDisplay;
         flex(arg0: number, arg1: number, arg2: $TaffyDimension): $TaffyStyle;
+        flex(arg0: number, arg1: number): $TaffyStyle;
         flex(arg0: number, arg1: number, arg2: number): $TaffyStyle;
         flex(arg0: number): $TaffyStyle;
         setFlex(arg0: number): $TaffyStyle;
@@ -558,12 +557,13 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         getFlexGrow(): number;
         getFlexShrink(): number;
         getOverflow(): $TaffyPoint<$Overflow>;
-        getMargin(): $TaffyRect<$LengthPercentageAuto>;
-        getMaxSize(): $TaffySize<$TaffyDimension>;
+        getMinSize(): $TaffySize<$TaffyDimension>;
         isBlock(): boolean;
-        getBorder(): $TaffyRect<$LengthPercentage>;
-        getAspectRatio(): number;
+        getMaxSize(): $TaffySize<$TaffyDimension>;
+        getMargin(): $TaffyRect<$LengthPercentageAuto>;
         getDirection(): $TaffyDirection;
+        getAspectRatio(): number;
+        getBorder(): $TaffyRect<$LengthPercentage>;
         gridAutoColumns: $List<$TrackSizingFunction>;
         gridTemplateColumnNames: $List<$NamedGridLine>;
         flexGrow: number;
@@ -618,12 +618,12 @@ declare module "@package/dev/vfyjxf/taffy/style" {
     export class $AvailableSpace {
         getValue(): number;
         getType(): $AvailableSpace$Type;
+        mapDefiniteValue(arg0: $Function_<number, number>): $AvailableSpace;
         maybeSub(arg0: number): $AvailableSpace;
         maybeAdd(arg0: number): $AvailableSpace;
         maybeMax(arg0: number): $AvailableSpace;
         maybeMin(arg0: number): $AvailableSpace;
         isRoughlyEqual(arg0: $AvailableSpace): boolean;
-        mapDefiniteValue(arg0: $Function_<number, number>): $AvailableSpace;
         static maxContent(): $AvailableSpace;
         static minContent(): $AvailableSpace;
         isMaxContent(): boolean;

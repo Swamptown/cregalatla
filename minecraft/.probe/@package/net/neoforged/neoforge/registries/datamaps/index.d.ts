@@ -21,18 +21,18 @@ declare module "@package/net/neoforged/neoforge/registries/datamaps" {
     /**
      * Values that may be interpreted as {@link $DataMapEntry$Removal}.
      */
-    export type $DataMapEntry$Removal_<T, R> = { key?: $Either<$TagKey_<any>, $ResourceKey_<any>>, remover?: ($DataMapValueRemover_<R, T>) | undefined,  } | [key?: $Either<$TagKey_<any>, $ResourceKey_<any>>, remover?: ($DataMapValueRemover_<R, T>) | undefined, ];
+    export type $DataMapEntry$Removal_<T, R> = { remover?: ($DataMapValueRemover_<R, T>) | undefined, key?: $Either<$TagKey_<any>, $ResourceKey_<any>>,  } | [remover?: ($DataMapValueRemover_<R, T>) | undefined, key?: $Either<$TagKey_<any>, $ResourceKey_<any>>, ];
     export class $DataMapFile<T, R> extends $Record {
         values(): $Map<$Either<$TagKey<R>, $ResourceKey<R>>, ($WithConditions<$DataMapEntry<T>>) | undefined>;
         replace(): boolean;
-        static codec<T, R>(arg0: $ResourceKey_<$Registry<R>>, arg1: $DataMapType<R, T>): $Codec<$DataMapFile<T, R>>;
         removals(): $List<$DataMapEntry$Removal<T, R>>;
+        static codec<T, R>(arg0: $ResourceKey_<$Registry<R>>, arg1: $DataMapType<R, T>): $Codec<$DataMapFile<T, R>>;
         constructor(replace: boolean, values: $Map_<$Either<$TagKey_<R>, $ResourceKey_<R>>, ($WithConditions_<$DataMapEntry_<T>>) | undefined>, removals: $List_<$DataMapEntry$Removal_<T, R>>);
     }
     /**
      * Values that may be interpreted as {@link $DataMapFile}.
      */
-    export type $DataMapFile_<T, R> = { removals?: $List_<$DataMapEntry$Removal_<any, any>>, replace?: boolean, values?: $Map_<$Either<$TagKey_<any>, $ResourceKey_<any>>, ($WithConditions_<$DataMapEntry_<T>>) | undefined>,  } | [removals?: $List_<$DataMapEntry$Removal_<any, any>>, replace?: boolean, values?: $Map_<$Either<$TagKey_<any>, $ResourceKey_<any>>, ($WithConditions_<$DataMapEntry_<T>>) | undefined>, ];
+    export type $DataMapFile_<T, R> = { values?: $Map_<$Either<$TagKey_<any>, $ResourceKey_<any>>, ($WithConditions_<$DataMapEntry_<T>>) | undefined>, replace?: boolean, removals?: $List_<$DataMapEntry$Removal_<any, any>>,  } | [values?: $Map_<$Either<$TagKey_<any>, $ResourceKey_<any>>, ($WithConditions_<$DataMapEntry_<T>>) | undefined>, replace?: boolean, removals?: $List_<$DataMapEntry$Removal_<any, any>>, ];
     export class $DataMapsUpdatedEvent extends $Event {
         getCause(): $DataMapsUpdatedEvent$UpdateCause;
         ifRegistry<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Consumer_<$Registry<T>>): void;
@@ -79,9 +79,9 @@ declare module "@package/net/neoforged/neoforge/registries/datamaps" {
     export type $DataMapsUpdatedEvent$UpdateCause_ = "client_sync" | "server_reload";
     export class $DataMapValueMerger<R, T> {
         static mapMerger<K, V, R>(): $DataMapValueMerger<R, $Map<K, V>>;
+        static listMerger<T, R>(): $DataMapValueMerger<R, $List<T>>;
         static setMerger<T, R>(): $DataMapValueMerger<R, $Set<T>>;
         static defaultMerger<T, R>(): $DataMapValueMerger<R, T>;
-        static listMerger<T, R>(): $DataMapValueMerger<R, $List<T>>;
     }
     export interface $DataMapValueMerger<R, T> {
         merge(arg0: $Registry<R>, arg1: $Either<$TagKey_<R>, $ResourceKey_<R>>, arg2: T, arg3: $Either<$TagKey_<R>, $ResourceKey_<R>>, arg4: T): T;
@@ -95,7 +95,6 @@ declare module "@package/net/neoforged/neoforge/registries/datamaps" {
         synced(arg0: $Codec<T>, arg1: boolean): $DataMapType$Builder<T, R>;
     }
     export class $AdvancedDataMapType$Builder<T, R, VR extends $DataMapValueRemover<R, T>> extends $DataMapType$Builder<T, R> {
-        build(): $AdvancedDataMapType<R, T, VR>;
         merger(arg0: $DataMapValueMerger_<R, T>): $AdvancedDataMapType$Builder<T, R, VR>;
         remover<VR1 extends $DataMapValueRemover<R, T>>(arg0: $Codec<VR1>): $AdvancedDataMapType$Builder<T, R, VR1>;
     }

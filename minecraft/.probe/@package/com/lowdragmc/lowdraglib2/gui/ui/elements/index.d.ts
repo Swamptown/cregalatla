@@ -75,14 +75,14 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         getText(): string;
         setFormatter(arg0: $Function_<string, $Component>): $TextField;
         getFormatter(): $Function<string, $Component>;
-        setCharValidator(arg0: $Predicate_<string>): $TextField;
-        getHistoryStack(): $HistoryStack<string>;
-        isEditable(): boolean;
+        setSelection(arg0: number, arg1: number): void;
+        deleteChars(arg0: number): void;
         setTextResponder(arg0: $Consumer_<string>): $TextField;
         setResourceLocationOnly(): $TextField;
         setTextValidator(arg0: $Predicate_<string>): $TextField;
-        setSelection(arg0: number, arg1: number): void;
-        deleteChars(arg0: number): void;
+        isEditable(): boolean;
+        setCharValidator(arg0: $Predicate_<string>): $TextField;
+        getHistoryStack(): $HistoryStack<string>;
         deleteWords(arg0: number): void;
         deleteCharsToPos(arg0: number): void;
         getTextFieldStyle(): $TextField$TextFieldStyle;
@@ -106,32 +106,32 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         getHighlighted(): string;
         setWheelDur(arg0: number): $TextField;
         setWheelDur(arg0: number, arg1: number): $TextField;
-        getMode(): $TextField$Mode;
-        setText(arg0: string): $TextField;
-        setText(arg0: string, arg1: boolean): $TextField;
         getRawText(): string;
         getDisplayOffset(): number;
-        insertText(arg0: string): void;
+        getMode(): $TextField$Mode;
+        setText(arg0: string, arg1: boolean): $TextField;
+        setText(arg0: string): $TextField;
         getFont(): $Font;
         setCursor(arg0: number): void;
+        insertText(arg0: string): void;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
         constructor();
         get error(): boolean;
-        set charValidator(value: $Predicate_<string>);
-        get historyStack(): $HistoryStack<string>;
-        get editable(): boolean;
         set textResponder(value: $Consumer_<string>);
         set textValidator(value: $Predicate_<string>);
+        get editable(): boolean;
+        set charValidator(value: $Predicate_<string>);
+        get historyStack(): $HistoryStack<string>;
         get formattedLine(): $Tuple<$FormattedCharSequence, number>;
         set textRegexValidator(value: string);
         get selectionStart(): number;
         get selectionEnd(): number;
         get cursorPos(): number;
         get highlighted(): string;
-        get mode(): $TextField$Mode;
         get rawText(): string;
         get displayOffset(): number;
+        get mode(): $TextField$Mode;
         get font(): $Font;
         set cursor(value: number);
     }
@@ -143,10 +143,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         clearAllContentChildren(): $GraphView;
         fitToChildren(arg0: number, arg1: number): void;
         getGraphViewStyle(): $GraphView$GraphViewStyle;
-        setOffsetX(arg0: number): void;
-        setOffsetY(arg0: number): void;
         getOffsetX(): number;
         getOffsetY(): number;
+        setOffsetX(arg0: number): void;
+        setOffsetY(arg0: number): void;
         fit(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
         getScale(): number;
         static CODEC: $Codec<$UIElement>;
@@ -186,9 +186,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         setDynamicText(arg0: $Supplier_<$Component>): $Tab;
         getTabStyle(): $Tab$TabStyle;
         setOnTabUnselected(arg0: $Runnable_): $Tab;
-        setText(arg0: $Component_): $Tab;
         setText(arg0: string, arg1: boolean): $Tab;
         setText(arg0: string): $Tab;
+        setText(arg0: $Component_): $Tab;
         setSelected(arg0: boolean): void;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
@@ -203,22 +203,22 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
     }
     export class $TextField$TextFieldStyle extends $Style {
         static init(): void;
-        textShadow(arg0: boolean): $TextField$TextFieldStyle;
-        textShadow(): boolean;
-        focusOverlay(): $IGuiTexture;
         focusOverlay(arg0: $IGuiTexture_): $TextField$TextFieldStyle;
+        focusOverlay(): $IGuiTexture;
         errorColor(): number;
         errorColor(arg0: number): $TextField$TextFieldStyle;
         cursorColor(arg0: number): $TextField$TextFieldStyle;
         cursorColor(): number;
+        textShadow(): boolean;
+        textShadow(arg0: boolean): $TextField$TextFieldStyle;
+        textColor(arg0: number): $TextField$TextFieldStyle;
+        textColor(): number;
         font(): $ResourceLocation;
         font(arg0: $ResourceLocation_): $TextField$TextFieldStyle;
         fontSize(arg0: number): $TextField$TextFieldStyle;
         fontSize(): number;
         placeholder(): $Component;
         placeholder(arg0: $Component_): $TextField$TextFieldStyle;
-        textColor(): number;
-        textColor(arg0: number): $TextField$TextFieldStyle;
         holder: $UIElement;
         constructor(arg0: $TextField);
     }
@@ -306,6 +306,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         scrollerStyle(arg0: $Consumer_<$Scroller$ScrollerStyle>): $Scroller;
         headButton(arg0: $Consumer_<$Button>): $Scroller;
         tailButton(arg0: $Consumer_<$Button>): $Scroller;
+        scrollBar(arg0: $Consumer_<$Button>): $Scroller;
         getScrollerStyle(): $Scroller$ScrollerStyle;
         getNormalizedValue(): number;
         scrollValue(arg0: number): void;
@@ -314,12 +315,11 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         setMinValue(arg0: number): $Scroller;
         setMaxValue(arg0: number): $Scroller;
         getClampNormalizedValue(): $Function<number, number>;
-        scrollBar(arg0: $Consumer_<$Button>): $Scroller;
         scrollContainer(arg0: $Consumer_<$UIElement>): $Scroller;
         getMinValue(): number;
         getMaxValue(): number;
-        isDragging(): boolean;
         setRange(arg0: number, arg1: number): $Scroller;
+        isDragging(): boolean;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
         constructor();
@@ -336,10 +336,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
     export class $BindableUIElement<T> extends $UIElement implements $IBindable<T>, $IObservable<T>, $IDataConsumer<T> {
         getValue(): T;
         setValue(arg0: T, arg1: boolean): $BindableUIElement<T>;
-        bindDataSource(arg0: $IDataProvider<T>): $BindableUIElement<T>;
-        bindDataSource(arg0: $IDataProvider<T>, arg1: boolean): $BindableUIElement<T>;
-        unbindDataSource(arg0: $IDataProvider<T>): $BindableUIElement<T>;
         registerValueListener(arg0: $Consumer_<T>): $ISubscription;
+        bindDataSource(arg0: $IDataProvider<T>, arg1: boolean): $BindableUIElement<T>;
+        bindDataSource(arg0: $IDataProvider<T>): $BindableUIElement<T>;
+        unbindDataSource(arg0: $IDataProvider<T>): $BindableUIElement<T>;
         bind(arg0: $IBinding<T>): $UIElement;
         unbind(arg0: $IBinding<T>): $UIElement;
         setValue(arg0: T): $IDataSource<T>;
@@ -412,7 +412,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
     /**
      * Values that may be interpreted as {@link $TextArea$History}.
      */
-    export type $TextArea$History_ = { lines?: string[], cursor?: $Cursor_,  } | [lines?: string[], cursor?: $Cursor_, ];
+    export type $TextArea$History_ = { cursor?: $Cursor_, lines?: string[],  } | [cursor?: $Cursor_, lines?: string[], ];
     export class $TreeList<NODE extends $ITreeNode<never, never>> extends $UIElement {
         getRoot(): NODE;
         static textTemplate<NODE extends $ITreeNode<never, never>>(arg0: $Function_<NODE, $Component>): $UIElementProvider<NODE>;
@@ -476,13 +476,14 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         setValue(arg0: string[]): $TextArea;
         setValue(arg0: string[], arg1: boolean): $TextArea;
         isError(): boolean;
-        setLinesResponder(arg0: $Consumer_<string[]>): $TextArea;
-        setLines(arg0: $List_<string>): $TextArea;
-        setLines(arg0: string[], arg1: boolean): $TextArea;
-        setCharValidator(arg0: $Predicate_<string>): $TextArea;
-        getHistoryStack(): $HistoryStack<$TextArea$History>;
-        getSelStartCol(): number;
-        getSelEndCol(): number;
+        lineHeight(): number;
+        textAreaStyle(arg0: $Consumer_<$TextArea$TextAreaStyle>): $TextArea;
+        collapseSelectionToCursor(): void;
+        getCursorUnderMouse(arg0: number, arg1: number): $Cursor;
+        setSelection(arg0: $Cursor_, arg1: $Cursor_): void;
+        drawContentView(arg0: $GUIContext): void;
+        getScrollX(): number;
+        setTextValidator(arg0: $Predicate_<string[]>): $TextArea;
         getTextAreaStyle(): $TextArea$TextAreaStyle;
         isEditable(): boolean;
         cursorPos(): $Cursor;
@@ -492,17 +493,16 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         getSelStartLine(): number;
         getSelEndLine(): number;
         getCursorCol(): number;
-        drawContentView(arg0: $GUIContext): void;
-        lineHeight(): number;
-        setTextValidator(arg0: $Predicate_<string[]>): $TextArea;
         getScrollY(): number;
-        getScrollX(): number;
-        textAreaStyle(arg0: $Consumer_<$TextArea$TextAreaStyle>): $TextArea;
-        collapseSelectionToCursor(): void;
-        getCursorUnderMouse(arg0: number, arg1: number): $Cursor;
-        setSelection(arg0: $Cursor_, arg1: $Cursor_): void;
-        getLines(): $List<string>;
+        setLinesResponder(arg0: $Consumer_<string[]>): $TextArea;
+        setLines(arg0: $List_<string>): $TextArea;
+        setLines(arg0: string[], arg1: boolean): $TextArea;
+        setCharValidator(arg0: $Predicate_<string>): $TextArea;
+        getHistoryStack(): $HistoryStack<$TextArea$History>;
+        getSelStartCol(): number;
+        getSelEndCol(): number;
         getFont(): $Font;
+        getLines(): $List<string>;
         setCursor(arg0: number, arg1: number): void;
         contentView: $UIElement;
         verticalScroller: $Scroller;
@@ -511,19 +511,19 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         static EMPTY_LAYOUT: $Layout;
         constructor();
         get error(): boolean;
-        set linesResponder(value: $Consumer_<string[]>);
-        set charValidator(value: $Predicate_<string>);
-        get historyStack(): $HistoryStack<$TextArea$History>;
-        get selStartCol(): number;
-        get selEndCol(): number;
+        get scrollX(): number;
+        set textValidator(value: $Predicate_<string[]>);
         get editable(): boolean;
         get cursorLine(): number;
         get selStartLine(): number;
         get selEndLine(): number;
         get cursorCol(): number;
-        set textValidator(value: $Predicate_<string[]>);
         get scrollY(): number;
-        get scrollX(): number;
+        set linesResponder(value: $Consumer_<string[]>);
+        set charValidator(value: $Predicate_<string>);
+        get historyStack(): $HistoryStack<$TextArea$History>;
+        get selStartCol(): number;
+        get selEndCol(): number;
         get font(): $Font;
     }
     export class $Switch$SwitchStyle extends $Style {
@@ -583,10 +583,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         getValue(): $FluidStack;
         setValue(arg0: $FluidStack_, arg1: boolean): $FluidSlot;
         bind(arg0: $IFluidHandler, arg1: number): $FluidSlot;
+        setFluid(arg0: $FluidStack_, arg1: boolean): $FluidSlot;
+        setFluid(arg0: $FluidStack_): $FluidSlot;
         slotStyle(arg0: $Consumer_<$FluidSlot$SlotStyle>): $FluidSlot;
+        xeiRecipeSlot(arg0: $IngredientIO_, arg1: number): $FluidSlot;
         xeiRecipeSlot(): $FluidSlot;
         xeiRecipeSlot(arg0: $IngredientIO_, arg1: number, arg2: number, arg3: $Stream<$FluidStack_>): $FluidSlot;
-        xeiRecipeSlot(arg0: $IngredientIO_, arg1: number): $FluidSlot;
         getFullTooltipTexts(): $List<$Component>;
         xeiPhantom(): $FluidSlot;
         xeiRecipeIngredient(arg0: $IngredientIO_): $FluidSlot;
@@ -597,10 +599,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         setAllowClickFilled(arg0: boolean): $FluidSlot;
         isAllowClickDrained(): boolean;
         setAllowClickDrained(arg0: boolean): $FluidSlot;
-        setCapacity(arg0: number): $FluidSlot;
         getFluid(): $FluidStack;
-        setFluid(arg0: $FluidStack_, arg1: boolean): $FluidSlot;
-        setFluid(arg0: $FluidStack_): $FluidSlot;
+        setCapacity(arg0: number): $FluidSlot;
         getCapacity(): number;
         amountLabel: $Label;
         static CODEC: $Codec<$UIElement>;
@@ -653,10 +653,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         allowZoom(): boolean;
         gridTexture(): $IGuiTexture;
         gridTexture(arg0: $IGuiTexture_): $GraphView$GraphViewStyle;
+        gridSize(): number;
+        gridSize(arg0: number): $GraphView$GraphViewStyle;
         maxScale(arg0: number): $GraphView$GraphViewStyle;
         maxScale(): number;
-        gridSize(arg0: number): $GraphView$GraphViewStyle;
-        gridSize(): number;
         holder: $UIElement;
         constructor(arg0: $GraphView);
     }
@@ -734,25 +734,25 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
          * @deprecated
          */
         width(arg0: $StyleSizeLength): $Dialog;
+        addButton(arg0: $UIElement): $Dialog;
+        windowMode(arg0: number, arg1: number, arg2: number, arg3: number): $Dialog;
+        windowMode(arg0: number, arg1: number): $Dialog;
+        setClickOutsideClose(arg0: boolean): $Dialog;
         allowInteraction(): $Dialog;
         darkenBackground(): $Dialog;
         static stringEditorDialog(arg0: string, arg1: string, arg2: $Predicate_<string>, arg3: $Consumer_<string>): $Dialog;
-        windowMode(arg0: number, arg1: number): $Dialog;
-        windowMode(arg0: number, arg1: number, arg2: number, arg3: number): $Dialog;
-        setClickOutsideClose(arg0: boolean): $Dialog;
         static suffixFilter(...arg0: string[]): $Predicate<$FileNode>;
         static showFileDialog(arg0: string, arg1: $File_, arg2: boolean, arg3: $Predicate_<$FileNode>, arg4: $Consumer_<$File>): $Dialog;
         setAutoClose(arg0: boolean): $Dialog;
         addContent(arg0: $UIElement): $Dialog;
         static showCancelableCheck(arg0: string, arg1: string, arg2: $BooleanConsumer_, arg3: $Runnable_): $Dialog;
         static showCheckBox(arg0: string, arg1: string, arg2: $BooleanConsumer_): $Dialog;
-        addButton(arg0: $UIElement): $Dialog;
         static showNotification(arg0: string, arg1: number): $Dialog;
         static showNotification(arg0: string, arg1: string, arg2: $Runnable_): $Dialog;
         setOnClose(arg0: $Runnable_): $Dialog;
         setTitle(arg0: string): $Dialog;
-        show(arg0: $UIElement): $Dialog;
         show(arg0: $ModularUI): $Dialog;
+        show(arg0: $UIElement): $Dialog;
         titleBar: $UIElement;
         static CODEC: $Codec<$UIElement>;
         overlay: $UIElement;
@@ -767,7 +767,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
     }
     export class $TabView extends $UIElement {
         clear(): $TabView;
-        removeTab(arg0: $Tab): $TabView;
+        selectTab(arg0: $Tab): $TabView;
         tabHeaderContainer(arg0: $Consumer_<$UIElement>): $TabView;
         tabScroller(arg0: $Consumer_<$ScrollerView>): $TabView;
         tabContentContainer(arg0: $Consumer_<$UIElement>): $TabView;
@@ -776,7 +776,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         getTabContents(): $BiMap<$Tab, $UIElement>;
         setOnTabSelected(arg0: $Consumer_<$Tab>): $TabView;
         getSelectedTab(): $Tab;
-        selectTab(arg0: $Tab): $TabView;
+        removeTab(arg0: $Tab): $TabView;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
         constructor();
@@ -788,11 +789,23 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         getParticleManager(): $ParticleManager;
         setRenderFacing(arg0: boolean): $Scene;
         setRenderSelect(arg0: boolean): $Scene;
-        createScene(arg0: $Level_, arg1: boolean, arg2: $Size): $Scene;
         createScene(arg0: $Level_): $Scene;
+        createScene(arg0: $Level_, arg1: boolean, arg2: $Size): $Scene;
         setRenderedCore(arg0: $Collection_<$BlockPos_>): $Scene;
         setRenderedCore(arg0: $Collection_<$BlockPos_>, arg1: $ISceneBlockRenderHook, arg2: boolean): $Scene;
         setRenderedCore(arg0: $Collection_<$BlockPos_>, arg1: $ISceneBlockRenderHook): $Scene;
+        useOrtho(arg0: boolean): $Scene;
+        useOrtho(): $Scene;
+        useCacheBuffer(arg0: boolean): $Scene;
+        useCacheBuffer(): $Scene;
+        camZoom(): number;
+        setBeforeWorldRender(arg0: $Consumer_<$Scene>): $Scene;
+        releaseRendererResource(): void;
+        needCompileCache(): void;
+        setAfterWorldRender(arg0: $Consumer_<$Scene>): $Scene;
+        drawFacingBorder(arg0: $PoseStack, arg1: $BlockPosFace_, arg2: number): void;
+        drawFacingBorder(arg0: $PoseStack, arg1: $BlockPosFace_, arg2: number, arg3: number): void;
+        renderBlockOverLay(arg0: $WorldSceneRenderer): void;
         setZoom(arg0: number): $Scene;
         setOrthoRange(arg0: number): $Scene;
         setCameraYawAndPitch(arg0: number, arg1: number): $Scene;
@@ -822,27 +835,17 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         getLastClickPosFace(): $BlockPosFace;
         getLastHoverPosFace(): $BlockPosFace;
         getLastSelectedPosFace(): $BlockPosFace;
-        useOrtho(): $Scene;
-        useOrtho(arg0: boolean): $Scene;
-        useCacheBuffer(arg0: boolean): $Scene;
-        useCacheBuffer(): $Scene;
-        camZoom(): number;
-        setBeforeWorldRender(arg0: $Consumer_<$Scene>): $Scene;
-        releaseRendererResource(): void;
-        needCompileCache(): void;
-        setAfterWorldRender(arg0: $Consumer_<$Scene>): $Scene;
-        drawFacingBorder(arg0: $PoseStack, arg1: $BlockPosFace_, arg2: number): void;
-        drawFacingBorder(arg0: $PoseStack, arg1: $BlockPosFace_, arg2: number, arg3: number): void;
-        renderBlockOverLay(arg0: $WorldSceneRenderer): void;
-        getRange(): number;
         setCenter(arg0: $Vector3f): $Scene;
+        getRange(): number;
         getRenderer(): $WorldSceneRenderer;
-        isDragging(): boolean;
         getCenter(): $Vector3f;
+        isDragging(): boolean;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
         constructor();
         get particleManager(): $ParticleManager;
+        set beforeWorldRender(value: $Consumer_<$Scene>);
+        set afterWorldRender(value: $Consumer_<$Scene>);
         set orthoRange(value: number);
         get dummyWorld(): $TrackedDummyWorld;
         get rotationPitch(): number;
@@ -853,8 +856,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         get lastClickPosFace(): $BlockPosFace;
         get lastHoverPosFace(): $BlockPosFace;
         get lastSelectedPosFace(): $BlockPosFace;
-        set beforeWorldRender(value: $Consumer_<$Scene>);
-        set afterWorldRender(value: $Consumer_<$Scene>);
         get range(): number;
         get renderer(): $WorldSceneRenderer;
         get dragging(): boolean;
@@ -863,15 +864,15 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         mode(): $ScrollerMode;
         mode(arg0: $ScrollerMode_): $ScrollerView$ScrollerViewStyle;
         static init(): void;
-        scrollerViewMargin(): number;
-        adaptiveWidth(arg0: boolean): $ScrollerView$ScrollerViewStyle;
-        adaptiveWidth(): boolean;
         horizontalScrollDisplay(): $ScrollDisplay;
         horizontalScrollDisplay(arg0: $ScrollDisplay_): $ScrollerView$ScrollerViewStyle;
         verticalScrollDisplay(arg0: $ScrollDisplay_): $ScrollerView$ScrollerViewStyle;
         verticalScrollDisplay(): $ScrollDisplay;
-        adaptiveHeight(): boolean;
+        scrollerViewMargin(): number;
+        adaptiveWidth(): boolean;
+        adaptiveWidth(arg0: boolean): $ScrollerView$ScrollerViewStyle;
         adaptiveHeight(arg0: boolean): $ScrollerView$ScrollerViewStyle;
+        adaptiveHeight(): boolean;
         scrollerViewStyle(arg0: number): $ScrollerView$ScrollerViewStyle;
         minScrollPixel(arg0: number): $ScrollerView$ScrollerViewStyle;
         minScrollPixel(): number;
@@ -882,13 +883,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
     }
     export class $TextArea$TextAreaStyle extends $Style {
         static init(): void;
-        scrollerViewMargin(): number;
-        textShadow(arg0: boolean): $TextArea$TextAreaStyle;
-        textShadow(): boolean;
         viewMode(): $ScrollerMode;
         viewMode(arg0: $ScrollerMode_): $TextArea$TextAreaStyle;
-        horizontalScrollDisplay(): $ScrollDisplay;
         horizontalScrollDisplay(arg0: $ScrollDisplay_): $TextArea$TextAreaStyle;
+        horizontalScrollDisplay(): $ScrollDisplay;
         verticalScrollDisplay(arg0: $ScrollDisplay_): $TextArea$TextAreaStyle;
         verticalScrollDisplay(): $ScrollDisplay;
         focusOverlay(arg0: $IGuiTexture_): $TextArea$TextAreaStyle;
@@ -897,17 +895,20 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         errorColor(): number;
         cursorColor(): number;
         cursorColor(arg0: number): $TextArea$TextAreaStyle;
+        scrollerViewMargin(): number;
+        textShadow(arg0: boolean): $TextArea$TextAreaStyle;
+        textShadow(): boolean;
         scrollerViewStyle(arg0: number): $TextArea$TextAreaStyle;
         lineSpacing(arg0: number): $TextArea$TextAreaStyle;
         lineSpacing(): number;
-        font(arg0: $ResourceLocation_): $TextArea$TextAreaStyle;
+        textColor(): number;
+        textColor(arg0: number): $TextArea$TextAreaStyle;
         font(): $ResourceLocation;
+        font(arg0: $ResourceLocation_): $TextArea$TextAreaStyle;
         fontSize(): number;
         fontSize(arg0: number): $TextArea$TextAreaStyle;
         placeholder(): $Component;
         placeholder(arg0: $Component_): $TextArea$TextAreaStyle;
-        textColor(arg0: number): $TextArea$TextAreaStyle;
-        textColor(): number;
         holder: $UIElement;
         constructor(arg0: $TextArea);
     }
@@ -1004,14 +1005,14 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
         textWrap(): $TextWrap;
         textAlignHorizontal(arg0: $Horizontal_): $TextElement$TextStyle;
         textAlignHorizontal(): $Horizontal;
-        lineSpacing(arg0: number): $TextElement$TextStyle;
         lineSpacing(): number;
+        lineSpacing(arg0: number): $TextElement$TextStyle;
+        textColor(): number;
+        textColor(arg0: number): $TextElement$TextStyle;
         font(arg0: $ResourceLocation_): $TextElement$TextStyle;
         font(): $ResourceLocation;
         fontSize(arg0: number): $TextElement$TextStyle;
         fontSize(): number;
-        textColor(): number;
-        textColor(arg0: number): $TextElement$TextStyle;
         holder: $UIElement;
         constructor(arg0: $TextElement);
     }
@@ -1145,8 +1146,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements" {
     export class $Inspector extends $UIElement {
         clear(): void;
         getHistoryStack(): $IHistoryStack;
-        setHistoryStack(arg0: $IHistoryStack): $Inspector;
         getInspectedConfigurable(): $IConfigurable;
+        setHistoryStack(arg0: $IHistoryStack): $Inspector;
         inspect(arg0: $IConfigurable, arg1: $Consumer_<$Configurator>): $ConfiguratorGroup;
         inspect(arg0: $IConfigurable, arg1: $Consumer_<$Configurator>, arg2: $Runnable_): $ConfiguratorGroup;
         inspect(arg0: $IConfigurable): $ConfiguratorGroup;

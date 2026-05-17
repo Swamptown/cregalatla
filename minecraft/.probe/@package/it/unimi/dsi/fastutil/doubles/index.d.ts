@@ -71,11 +71,11 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         parallelStream(): $Stream<number>;
         rem(arg0: number): boolean;
         doubleStream(): $DoubleStream;
+        toDoubleArray(): number[];
         /**
          * @deprecated
          */
         toDoubleArray(arg0: number[]): number[];
-        toDoubleArray(): number[];
         doubleIterator(): $DoubleIterator;
         doubleSpliterator(): $DoubleSpliterator;
         doubleParallelStream(): $DoubleStream;

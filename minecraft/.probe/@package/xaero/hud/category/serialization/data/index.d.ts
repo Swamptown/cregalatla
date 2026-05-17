@@ -11,7 +11,6 @@ declare module "@package/xaero/hud/category/serialization/data" {
     }
     export class $ObjectCategoryDataNbtSerializer<D extends $ObjectCategoryData<D>, DB extends $ObjectCategoryData$Builder<D, DB>> extends $ObjectCategoryDataSerializer<D, $CompoundTag> {
         deserialize(arg0: $CompoundTag_): D;
-        serialize(arg0: D): $CompoundTag;
     }
     export class $FilterObjectCategoryData<D extends $FilterObjectCategoryData<D>> extends $ObjectCategoryData<D> {
         getHardInclude(): string;

@@ -15,24 +15,24 @@ declare module "@package/xaero/lib/common/config" {
         get<T>(arg0: $ConfigOption<T>): T;
         set<T>(arg0: $ConfigOption<T>, arg1: T): T;
         setChangeListener(arg0: $IConfigChangeListener): void;
-        usedOptions(): $Iterable<$ConfigOption<never>>;
         getFailedSerializedValue(arg0: $ConfigOption<never>): string;
-        addFailedSerializedValue<T>(arg0: $ConfigOption<T>, arg1: string): void;
-        getRemovedLargeOptions(): $Iterable<$ConfigOption<never>>;
-        postSave(): void;
         clearDirtyOptions(): void;
         setOptionDefault<T>(arg0: $ConfigOption<T>): void;
         copyOptionFrom<T>(arg0: $ConfigOption<T>, arg1: $Config): void;
+        usedOptions(): $Iterable<$ConfigOption<never>>;
         getDirtyOptions(): $Iterable<$ConfigOption<never>>;
         getChangeCount(): number;
         isAllowNullValues(): boolean;
+        addFailedSerializedValue<T>(arg0: $ConfigOption<T>, arg1: string): void;
+        getRemovedLargeOptions(): $Iterable<$ConfigOption<never>>;
+        postSave(): void;
         setDefaults(): void;
         copyOptionsFrom(arg0: $Config): void;
         getChangeListener(): $IConfigChangeListener;
-        get removedLargeOptions(): $Iterable<$ConfigOption<never>>;
         set optionDefault(value: $ConfigOption<T>);
         get dirtyOptions(): $Iterable<$ConfigOption<never>>;
         get changeCount(): number;
         get allowNullValues(): boolean;
+        get removedLargeOptions(): $Iterable<$ConfigOption<never>>;
     }
 }

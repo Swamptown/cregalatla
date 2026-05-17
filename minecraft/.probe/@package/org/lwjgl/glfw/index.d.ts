@@ -8,18 +8,18 @@ declare module "@package/org/lwjgl/glfw" {
         static create(arg0: number, arg1: number): $GLFWVidMode$Buffer;
         width(): number;
         height(): number;
+        static ngreenBits(arg0: number): number;
         static nblueBits(arg0: number): number;
-        static nrefreshRate(arg0: number): number;
-        static createSafe(arg0: number): $GLFWVidMode;
+        blueBits(): number;
+        static nredBits(arg0: number): number;
         static createSafe(arg0: number, arg1: number): $GLFWVidMode$Buffer;
+        static createSafe(arg0: number): $GLFWVidMode;
         static nwidth(arg0: number): number;
         static nheight(arg0: number): number;
         refreshRate(): number;
+        static nrefreshRate(arg0: number): number;
         redBits(): number;
         greenBits(): number;
-        blueBits(): number;
-        static nredBits(arg0: number): number;
-        static ngreenBits(arg0: number): number;
         static ALIGNOF: number;
         static SIZEOF: number;
         static GREENBITS: number;
@@ -59,10 +59,10 @@ declare module "@package/org/lwjgl/glfw" {
     export class $GLFWVidMode$Buffer extends $StructBuffer<$GLFWVidMode, $GLFWVidMode$Buffer> {
         width(): number;
         height(): number;
+        blueBits(): number;
         refreshRate(): number;
         redBits(): number;
         greenBits(): number;
-        blueBits(): number;
         constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
     }

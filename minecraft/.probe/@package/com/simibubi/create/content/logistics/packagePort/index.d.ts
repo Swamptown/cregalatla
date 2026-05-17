@@ -23,9 +23,9 @@ declare module "@package/com/simibubi/create/content/logistics/packagePort" {
         setup(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
         be(arg0: $LevelAccessor, arg1: $BlockPos_): $BlockEntity;
         export(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $ItemStack_, arg3: boolean): boolean;
+        deregister(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
         getExactTargetLocation(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): $Vec3;
         depositImmediately(): boolean;
-        deregister(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
         getIcon(): $ItemStack;
         canSupport(arg0: $BlockEntity): boolean;
         static CODEC: $Codec<$PackagePortTarget>;
@@ -48,9 +48,9 @@ declare module "@package/com/simibubi/create/content/logistics/packagePort" {
     export class $PackagePortBlockEntity extends $SmartBlockEntity implements $MenuProvider, $Clearable, $PackagePortBlockEntityAccessor {
         use(arg0: $Player): $ItemInteractionResult;
         getDisplayName(): $Component;
-        getFilterString(): string;
         isBackedUp(): boolean;
         filterChanged(): void;
+        getFilterString(): string;
         createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
         clearContent(): void;
         getComparatorOutput(): number;
@@ -69,8 +69,8 @@ declare module "@package/com/simibubi/create/content/logistics/packagePort" {
         target: $PackagePortTarget;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
         get displayName(): $Component;
-        get filterString(): string;
         get backedUp(): boolean;
+        get filterString(): string;
         get comparatorOutput(): number;
     }
 }

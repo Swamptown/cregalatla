@@ -9,10 +9,10 @@ declare module "@package/software/bernie/geckolib/animatable" {
     export interface $GeoAnimatable {
         getTick(arg0: $Object): number;
         getAnimatableInstanceCache(): $AnimatableInstanceCache;
+        registerControllers(arg0: $AnimatableManager$ControllerRegistrar_): void;
         getBoneResetTime(): number;
         shouldPlayAnimsWhileGamePaused(): boolean;
         animatableCacheOverride(): $AnimatableInstanceCache;
-        registerControllers(arg0: $AnimatableManager$ControllerRegistrar_): void;
         get animatableInstanceCache(): $AnimatableInstanceCache;
         get boneResetTime(): number;
     }

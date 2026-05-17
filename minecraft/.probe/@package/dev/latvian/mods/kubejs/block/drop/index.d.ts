@@ -13,7 +13,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/drop" {
     /**
      * Values that may be interpreted as {@link $BlockDrops}.
      */
-    export type $BlockDrops_ = { items?: $ItemStack_[], rolls?: $NumberProvider_,  } | [items?: $ItemStack_[], rolls?: $NumberProvider_, ];
+    export type $BlockDrops_ = { rolls?: $NumberProvider_, items?: $ItemStack_[],  } | [rolls?: $NumberProvider_, items?: $ItemStack_[], ];
     export class $BlockDropSupplier {
         static NO_DROPS: $BlockDropSupplier;
     }

@@ -58,10 +58,10 @@ declare module "@package/dev/latvian/mods/rhino/type" {
         getData(): $RecordTypeInfo$Data;
         createInstance(...arg1: $Object[]): $Object;
         createInstance(arg1: $Map_<never, never>): $Object;
+        createCombinedType(...arg0: $TypeInfo_[]): $TypeInfo;
         getObjectTypeInfo(): $JSObjectTypeInfo;
         getArrayTypeInfo(): $JSFixedArrayTypeInfo;
         static setGlobalDefaultValue<T>(arg0: $Class<T>, arg1: T): void;
-        createCombinedType(...arg0: $TypeInfo_[]): $TypeInfo;
         get data(): $RecordTypeInfo$Data;
         get objectTypeInfo(): $JSObjectTypeInfo;
         get arrayTypeInfo(): $JSFixedArrayTypeInfo;
@@ -132,7 +132,7 @@ declare module "@package/dev/latvian/mods/rhino/type" {
     /**
      * Values that may be interpreted as {@link $JSOptionalParam}.
      */
-    export type $JSOptionalParam_ = { type?: $TypeInfo_, optional?: boolean, name?: string,  } | [type?: $TypeInfo_, optional?: boolean, name?: string, ];
+    export type $JSOptionalParam_ = { name?: string, optional?: boolean, type?: $TypeInfo_,  } | [name?: string, optional?: boolean, type?: $TypeInfo_, ];
     export class $TypeStringContext {
         static DEFAULT: $TypeStringContext;
     }
@@ -151,7 +151,7 @@ declare module "@package/dev/latvian/mods/rhino/type" {
     /**
      * Values that may be interpreted as {@link $RecordTypeInfo$Component}.
      */
-    export type $RecordTypeInfo$Component_ = { type?: $TypeInfo_, name?: string, index?: number,  } | [type?: $TypeInfo_, name?: string, index?: number, ];
+    export type $RecordTypeInfo$Component_ = { index?: number, name?: string, type?: $TypeInfo_,  } | [index?: number, name?: string, type?: $TypeInfo_, ];
     export class $VariableTypeInfo extends $TypeInfoBase {
         getName(): string;
         getBounds(): $TypeInfo[];
@@ -314,5 +314,5 @@ declare module "@package/dev/latvian/mods/rhino/type" {
     /**
      * Values that may be interpreted as {@link $RecordTypeInfo$Data}.
      */
-    export type $RecordTypeInfo$Data_ = { componentMap?: $Map_<string, $RecordTypeInfo$Component_>, components?: $RecordTypeInfo$Component_[], defaultArguments?: $Object[],  } | [componentMap?: $Map_<string, $RecordTypeInfo$Component_>, components?: $RecordTypeInfo$Component_[], defaultArguments?: $Object[], ];
+    export type $RecordTypeInfo$Data_ = { defaultArguments?: $Object[], components?: $RecordTypeInfo$Component_[], componentMap?: $Map_<string, $RecordTypeInfo$Component_>,  } | [defaultArguments?: $Object[], components?: $RecordTypeInfo$Component_[], componentMap?: $Map_<string, $RecordTypeInfo$Component_>, ];
 }

@@ -19,27 +19,27 @@ declare module "@package/xaero/common/events" {
         constructor(arg0: $IXaeroMinimap);
     }
     export class $ModClientEvents {
-        handleRenderModOverlay(arg0: $GuiGraphics, arg1: $DeltaTracker): void;
         handleTextureStitchEventPost(arg0: $TextureAtlas): void;
+        handleRenderModOverlay(arg0: $GuiGraphics, arg1: $DeltaTracker): void;
         constructor(arg0: $IXaeroMinimap);
     }
     export class $ClientEvents {
-        worldUnload(arg0: $LevelAccessor): void;
-        handleGuiOpen(arg0: $Screen): $Screen;
-        handlePlayerSetSpawnEvent(arg0: $BlockPos_, arg1: $Level_): void;
-        handleRenderCrosshairOverlay(arg0: $GuiGraphics): boolean;
-        handleClientPlayerChatReceivedEvent(arg0: $ChatType$Bound_, arg1: $Component_, arg2: $GameProfile): boolean;
-        handleClientSystemChatReceivedEvent(arg0: $Component_): boolean;
-        handleClientTickStart(): void;
         handlePlayerTickStart(arg0: $Player): void;
         handleRenderGameOverlayEventPost(): void;
         handleRenderStatusEffectOverlay(arg0: $GuiGraphics): boolean;
         handleForceToggleKeyMapping(arg0: $ToggleKeyMapping): boolean;
+        handleGuiOpen(arg0: $Screen): $Screen;
         handleRenderGameOverlayEventPre(arg0: $GuiGraphics, arg1: number): void;
         handleClientSendChatEvent(arg0: string): boolean;
-        getLastGuiOpen(): $Object;
-        handleRenderTickStart(): void;
+        handleClientSystemChatReceivedEvent(arg0: $Component_): boolean;
         handleDrawScreenEventPost(arg0: $Screen): void;
+        handlePlayerSetSpawnEvent(arg0: $BlockPos_, arg1: $Level_): void;
+        getLastGuiOpen(): $Object;
+        worldUnload(arg0: $LevelAccessor): void;
+        handleClientTickStart(): void;
+        handleRenderTickStart(): void;
+        handleRenderCrosshairOverlay(arg0: $GuiGraphics): boolean;
+        handleClientPlayerChatReceivedEvent(arg0: $ChatType$Bound_, arg1: $Component_, arg2: $GameProfile): boolean;
         latestRealm: $RealmsServer;
         constructor(arg0: $HudMod);
         get lastGuiOpen(): $Object;
@@ -54,9 +54,9 @@ declare module "@package/xaero/common/events" {
     }
     export class $ClientEventsListener {
         clientTickPost(arg0: $HudSession): void;
+        playerTickPost(arg0: $HudSession): void;
         handleRenderStatusEffectOverlay(arg0: $GuiGraphics): boolean;
         handleForceToggleKeyMapping(arg0: $ToggleKeyMapping): boolean;
-        playerTickPost(arg0: $HudSession): void;
         constructor();
     }
 }

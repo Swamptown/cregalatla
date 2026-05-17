@@ -47,23 +47,23 @@ declare module "@package/javassist" {
     }
     export class $CtField$Initializer {
         static constant(arg0: number): $CtField$Initializer;
+        static constant(arg0: number): $CtField$Initializer;
         static constant(arg0: string): $CtField$Initializer;
         static constant(arg0: number): $CtField$Initializer;
         static constant(arg0: boolean): $CtField$Initializer;
         static constant(arg0: number): $CtField$Initializer;
-        static constant(arg0: number): $CtField$Initializer;
-        static byExpr(arg0: string): $CtField$Initializer;
-        static byNew(arg0: $CtClass): $CtField$Initializer;
         static byNew(arg0: $CtClass, arg1: string[]): $CtField$Initializer;
-        static byParameter(arg0: number): $CtField$Initializer;
-        static byNewWithParams(arg0: $CtClass): $CtField$Initializer;
+        static byNew(arg0: $CtClass): $CtField$Initializer;
+        static byExpr(arg0: string): $CtField$Initializer;
         static byNewWithParams(arg0: $CtClass, arg1: string[]): $CtField$Initializer;
+        static byNewWithParams(arg0: $CtClass): $CtField$Initializer;
         static byCall(arg0: $CtClass, arg1: string, arg2: string[]): $CtField$Initializer;
         static byCall(arg0: $CtClass, arg1: string): $CtField$Initializer;
         static byCallWithParams(arg0: $CtClass, arg1: string): $CtField$Initializer;
         static byCallWithParams(arg0: $CtClass, arg1: string, arg2: string[]): $CtField$Initializer;
-        static byNewArray(arg0: $CtClass, arg1: number[]): $CtField$Initializer;
         static byNewArray(arg0: $CtClass, arg1: number): $CtField$Initializer;
+        static byNewArray(arg0: $CtClass, arg1: number[]): $CtField$Initializer;
+        static byParameter(arg0: number): $CtField$Initializer;
         constructor();
     }
     export class $ClassPath {
@@ -149,14 +149,14 @@ declare module "@package/javassist" {
         isAnnotation(): boolean;
         isEnum(): boolean;
         getInterfaces(): $CtClass[];
+        toClass(arg0: $Class<never>): $Class<never>;
+        toClass(arg0: $ClassLoader, arg1: $ProtectionDomain): $Class<never>;
+        toClass(arg0: $MethodHandles$Lookup): $Class<never>;
         /**
          * @deprecated
          */
         toClass(arg0: $ClassLoader): $Class<never>;
-        toClass(arg0: $Class<never>): $Class<never>;
         toClass(): $Class<never>;
-        toClass(arg0: $ClassLoader, arg1: $ProtectionDomain): $Class<never>;
-        toClass(arg0: $MethodHandles$Lookup): $Class<never>;
         getSimpleName(): string;
         getDeclaredClasses(): $CtClass[];
         getPackageName(): string;
@@ -195,16 +195,16 @@ declare module "@package/javassist" {
         getURL(): $URL;
         detach(): void;
         addConstructor(arg0: $CtConstructor): void;
-        toBytecode(): number[];
-        toBytecode(arg0: $DataOutputStream): void;
         getClassFile(): $ClassFile;
         makeNestedClass(arg0: string, arg1: boolean): $CtClass;
         getClassFile2(): $ClassFile;
         getRefClasses(): $Collection<string>;
         getEnclosingBehavior(): $CtBehavior;
         getClassPool(): $ClassPool;
-        debugWriteFile(arg0: string): void;
+        toBytecode(arg0: $DataOutputStream): void;
+        toBytecode(): number[];
         debugWriteFile(): void;
+        debugWriteFile(arg0: string): void;
         stopPruning(arg0: boolean): boolean;
         defrost(): void;
         getAccessorMaker(): $AccessorMaker;
@@ -221,14 +221,14 @@ declare module "@package/javassist" {
         removeMethod(arg0: $CtMethod): void;
         rebuildClassFile(): void;
         makeUniqueName(arg0: string): string;
-        addField(arg0: $CtField, arg1: string): void;
-        addField(arg0: $CtField): void;
-        addField(arg0: $CtField, arg1: $CtField$Initializer): void;
-        getNestedClasses(): $CtClass[];
-        hasAnnotation(arg0: $Class<never>): boolean;
-        hasAnnotation(arg0: string): boolean;
         writeFile(): void;
         writeFile(arg0: string): void;
+        addField(arg0: $CtField, arg1: $CtField$Initializer): void;
+        addField(arg0: $CtField): void;
+        addField(arg0: $CtField, arg1: string): void;
+        hasAnnotation(arg0: string): boolean;
+        hasAnnotation(arg0: $Class<never>): boolean;
+        getNestedClasses(): $CtClass[];
         removeField(arg0: $CtField): void;
         subtypeOf(arg0: $CtClass): boolean;
         isModified(): boolean;
@@ -288,18 +288,18 @@ declare module "@package/javassist" {
         addLocalVariable(arg0: string, arg1: $CtClass): void;
         insertAt(arg0: number, arg1: boolean, arg2: string): number;
         insertAt(arg0: number, arg1: string): number;
-        getMethodInfo(): $MethodInfo;
+        addCatch(arg0: string, arg1: $CtClass, arg2: string): void;
+        addCatch(arg0: string, arg1: $CtClass): void;
         getAvailableParameterAnnotations(): $Object[][];
         setExceptionTypes(arg0: $CtClass[]): void;
         useCflow(arg0: string): void;
         addParameter(arg0: $CtClass): void;
         getLongName(): string;
+        getMethodInfo(): $MethodInfo;
         getMethodInfo2(): $MethodInfo;
-        addCatch(arg0: string, arg1: $CtClass): void;
-        addCatch(arg0: string, arg1: $CtClass, arg2: string): void;
-        insertAfter(arg0: string, arg1: boolean, arg2: boolean): void;
-        insertAfter(arg0: string, arg1: boolean): void;
         insertAfter(arg0: string): void;
+        insertAfter(arg0: string, arg1: boolean): void;
+        insertAfter(arg0: string, arg1: boolean, arg2: boolean): void;
         insertBefore(arg0: string): void;
         setBody(arg0: string, arg1: string, arg2: string): void;
         setBody(arg0: string): void;
@@ -308,9 +308,9 @@ declare module "@package/javassist" {
         get empty(): boolean;
         get parameterTypes(): $CtClass[];
         get parameterAnnotations(): $Object[][];
-        get methodInfo(): $MethodInfo;
         get availableParameterAnnotations(): $Object[][];
         get longName(): string;
+        get methodInfo(): $MethodInfo;
         get methodInfo2(): $MethodInfo;
     }
     export class $CtMethod extends $CtBehavior {

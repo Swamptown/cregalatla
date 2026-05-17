@@ -1,6 +1,6 @@
 import { $JsonElement } from "@package/com/google/gson";
 import { $Supplier_ } from "@package/java/util/function";
-import { $WSHandler_, $WSHandler } from "@package/dev/latvian/apps/tinyserver/ws";
+import { $WSHandler, $WSHandler_ } from "@package/dev/latvian/apps/tinyserver/ws";
 import { $ServerRegistry_ } from "@package/dev/latvian/apps/tinyserver";
 import { $LocalWebServer_, $KJSHTTPRequest, $KJSWSSession, $SessionInfo, $LocalWebServerRegistry } from "@package/dev/latvian/mods/kubejs/web";
 import { $Runnable_ } from "@package/java/lang";

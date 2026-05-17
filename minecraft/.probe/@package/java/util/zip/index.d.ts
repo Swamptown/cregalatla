@@ -1,5 +1,5 @@
 import { $LocalDateTime } from "@package/java/time";
-import { $InputStream, $File_, $Closeable } from "@package/java/io";
+import { $InputStream, $Closeable, $File_ } from "@package/java/io";
 import { $Stream } from "@package/java/util/stream";
 import { $FileTime } from "@package/java/nio/file/attribute";
 import { $Charset } from "@package/java/nio/charset";

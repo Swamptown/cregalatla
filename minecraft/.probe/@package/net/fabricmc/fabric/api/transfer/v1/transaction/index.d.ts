@@ -3,16 +3,16 @@ import { $Enum, $AutoCloseable } from "@package/java/lang";
 declare module "@package/net/fabricmc/fabric/api/transfer/v1/transaction" {
     export class $Transaction {
         static isOpen(): boolean;
-        static getLifecycle(): $Transaction$Lifecycle;
         /**
          * @deprecated
          */
         static getCurrentUnsafe(): $TransactionContext;
         static openNested(arg0: $TransactionContext): $Transaction;
         static openOuter(): $Transaction;
+        static getLifecycle(): $Transaction$Lifecycle;
         static get open(): boolean;
-        static get lifecycle(): $Transaction$Lifecycle;
         static get currentUnsafe(): $TransactionContext;
+        static get lifecycle(): $Transaction$Lifecycle;
     }
     export interface $Transaction extends $AutoCloseable, $TransactionContext {
         commit(): void;
@@ -52,8 +52,8 @@ declare module "@package/net/fabricmc/fabric/api/transfer/v1/transaction" {
     export class $TransactionContext$Result extends $Enum<$TransactionContext$Result> {
         static values(): $TransactionContext$Result[];
         static valueOf(arg0: string): $TransactionContext$Result;
-        wasAborted(): boolean;
         wasCommitted(): boolean;
+        wasAborted(): boolean;
         static ABORTED: $TransactionContext$Result;
         static COMMITTED: $TransactionContext$Result;
     }

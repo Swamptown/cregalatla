@@ -316,14 +316,14 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
-        defaultReturnValue(arg0: number): void;
         defaultReturnValue(): number;
-        mergeInt(arg0: number, arg1: number, arg2: $IntBinaryOperator_$1): number;
-        mergeInt(arg0: number, arg1: number, arg2: $IntBinaryOperator_): number;
+        defaultReturnValue(arg0: number): void;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Int2IntFunction_): number;
+        mergeInt(arg0: number, arg1: number, arg2: $IntBinaryOperator_$1): number;
+        mergeInt(arg0: number, arg1: number, arg2: $IntBinaryOperator_): number;
         int2IntEntrySet(): $ObjectSet<$Int2IntMap$Entry>;
         computeIfAbsentNullable(arg0: number, arg1: $IntFunction_<number>): number;
     }
@@ -332,18 +332,19 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
     }
     export class $IntArrayList extends $AbstractIntList implements $RandomAccess, $Cloneable, $Serializable {
         equals(arg0: $IntArrayList): boolean;
-        clone(): $IntArrayList;
+        clone(): $Object;
         compareTo(arg0: $IntArrayList): number;
-        static of(): $IntArrayList;
         static of(...arg0: number[]): $IntArrayList;
-        static wrap(arg0: number[], arg1: number): $IntArrayList;
+        static of(): $IntArrayList;
         static wrap(arg0: number[]): $IntArrayList;
+        static wrap(arg0: number[], arg1: number): $IntArrayList;
         trim(): void;
         trim(arg0: number): void;
         static toList(arg0: $IntStream): $IntArrayList;
         elements(): number[];
         ensureCapacity(arg0: number): void;
         static toListWithExpectedSize(arg0: $IntStream, arg1: number): $IntArrayList;
+        subList(arg0: number, arg1: number): $IntList;
         /**
          * @deprecated
          */
@@ -453,13 +454,13 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         unstableSort(arg0: $Comparator<number>): void;
         unstableSort(arg0: $IntComparator): void;
-        setElements(arg0: number, arg1: number[]): void;
         setElements(arg0: number[]): void;
+        setElements(arg0: number, arg1: number[]): void;
         setElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
-        removeInt(arg0: number): number;
         removeElements(arg0: number, arg1: number): void;
         addElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         addElements(arg0: number, arg1: number[]): void;
+        removeInt(arg0: number): number;
         iterator(): $Iterator<number>;
         listIterator(): $ListIterator<number>;
         [Symbol.iterator](): Iterator<number>
@@ -930,10 +931,10 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
         getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         popInt(): number;
         setElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
-        removeInt(arg0: number): number;
         removeElements(arg0: number, arg1: number): void;
-        addElements(arg0: number, arg1: number[]): void;
         addElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
+        addElements(arg0: number, arg1: number[]): void;
+        removeInt(arg0: number): number;
         /**
          * @deprecated
          */
@@ -971,8 +972,8 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         unstableSort(arg0: $Comparator<number>): void;
         unstableSort(arg0: $IntComparator): void;
-        setElements(arg0: number, arg1: number[]): void;
         setElements(arg0: number[]): void;
+        setElements(arg0: number, arg1: number[]): void;
         /**
          * @deprecated
          */
@@ -1041,9 +1042,9 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         toIntArray(arg0: number[]): number[];
         toIntArray(): number[];
+        intParallelStream(): $IntStream;
         intSpliterator(): $IntSpliterator;
         intIterator(): $IntIterator;
-        intParallelStream(): $IntStream;
         spliterator(): $Spliterator<number>;
     }
     export class $AbstractIntCollection extends $AbstractCollection<number> implements $IntCollection {
@@ -1068,9 +1069,9 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
         toIntArray(): number[];
         intStream(): $IntStream;
         removeIf(arg0: $IntPredicate_$1): boolean;
+        intParallelStream(): $IntStream;
         intSpliterator(): $IntSpliterator;
         intIterator(): $IntIterator;
-        intParallelStream(): $IntStream;
         forEach(arg0: $IntConsumer_$1): void;
     }
     export class $Int2ObjectSortedMap<V> {
@@ -1296,8 +1297,8 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         tailSet(arg0: number): $IntSortedSet;
         tailSet(arg0: number): $IntSortedSet;
-        lastInt(): number;
         firstInt(): number;
+        lastInt(): number;
         iterator(): $IntIterator;
         last(): number;
         spliterator(): $IntSpliterator;

@@ -56,11 +56,11 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
         static INSTANCE: $FalseCondition;
     }
     export class $ConditionalOps<T> extends $RegistryOps<T> {
-        static createConditionalCodecWithConditions<T>(arg0: $Codec<T>, arg1: string): $Codec<($WithConditions<T>) | undefined>;
-        static createConditionalCodecWithConditions<T>(arg0: $Codec<T>): $Codec<($WithConditions<T>) | undefined>;
-        static createConditionalCodec<T>(arg0: $Codec<T>, arg1: string): $Codec<(T) | undefined>;
-        static createConditionalCodec<T>(arg0: $Codec<T>): $Codec<(T) | undefined>;
         static decodeListWithElementConditions<T>(arg0: $Codec<T>): $Codec<$List<T>>;
+        static createConditionalCodecWithConditions<T>(arg0: $Codec<T>): $Codec<($WithConditions<T>) | undefined>;
+        static createConditionalCodecWithConditions<T>(arg0: $Codec<T>, arg1: string): $Codec<($WithConditions<T>) | undefined>;
+        static createConditionalCodec<T>(arg0: $Codec<T>): $Codec<(T) | undefined>;
+        static createConditionalCodec<T>(arg0: $Codec<T>, arg1: string): $Codec<(T) | undefined>;
         static retrieveContext(): $MapCodec<$ICondition$IContext>;
         delegate: $DynamicOps<T>;
         static DEFAULT_CONDITIONS_KEY: string;

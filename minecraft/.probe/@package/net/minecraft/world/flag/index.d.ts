@@ -71,11 +71,11 @@ declare module "@package/net/minecraft/world/flag" {
     }
     export class $FeatureFlagRegistry {
         subset(...arg0: $FeatureFlag[]): $FeatureFlagSet;
-        hasAnyModdedFlags(): boolean;
         toNames(arg0: $FeatureFlagSet): $Set<$ResourceLocation>;
         isSubset(arg0: $FeatureFlagSet): boolean;
-        fromNames(arg0: $Iterable_<$ResourceLocation>): $FeatureFlagSet;
         fromNames(arg0: $Iterable_<$ResourceLocation>, arg1: $Consumer_<$ResourceLocation>): $FeatureFlagSet;
+        fromNames(arg0: $Iterable_<$ResourceLocation>): $FeatureFlagSet;
+        hasAnyModdedFlags(): boolean;
         getAllFlags(): $Map<$ResourceLocation, $FeatureFlag>;
         getFlag(arg0: $ResourceLocation_): $FeatureFlag;
         allFlags(): $FeatureFlagSet;

@@ -4,10 +4,10 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/vertex/f
     export class $ChunkVertexType {
     }
     export interface $ChunkVertexType {
-        getEncoder(): $ChunkVertexEncoder;
         getVertexFormat(): $GlVertexFormat;
-        get encoder(): $ChunkVertexEncoder;
+        getEncoder(): $ChunkVertexEncoder;
         get vertexFormat(): $GlVertexFormat;
+        get encoder(): $ChunkVertexEncoder;
     }
     export class $ChunkVertexEncoder {
     }

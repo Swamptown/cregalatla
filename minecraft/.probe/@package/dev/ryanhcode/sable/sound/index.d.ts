@@ -19,21 +19,21 @@ declare module "@package/dev/ryanhcode/sable/sound" {
         isRelative(): boolean;
         unload(arg0: $Channel): void;
         tick(): void;
-        getStream(arg0: $SoundBufferLibrary, arg1: $Sound, arg2: boolean): $CompletableFuture<any>;
         getY(): number;
         getDelay(): number;
-        getSource(): $SoundSource;
+        getStream(arg0: $SoundBufferLibrary, arg1: $Sound, arg2: boolean): $CompletableFuture<any>;
+        getX(): number;
+        getZ(): number;
         isStopped(): boolean;
         isLooping(): boolean;
         getAttenuation(): $SoundInstance$Attenuation;
         canStartSilent(): boolean;
         canPlaySound(): boolean;
-        getX(): number;
-        getZ(): number;
         getVolume(): number;
         getPitch(): number;
         getSound(): $Sound;
         tickWithChannel(arg0: $Channel): void;
+        getSource(): $SoundSource;
         getAudioStream(arg0: $SoundBufferLibrary, arg1: $ResourceLocation_, arg2: boolean): $CompletableFuture<$AudioStream>;
         instance: $SoundInstance;
         constructor(arg0: $SoundInstance, arg1: $SubLevel);
@@ -41,14 +41,14 @@ declare module "@package/dev/ryanhcode/sable/sound" {
         get relative(): boolean;
         get y(): number;
         get delay(): number;
-        get source(): $SoundSource;
+        get x(): number;
+        get z(): number;
         get stopped(): boolean;
         get looping(): boolean;
         get attenuation(): $SoundInstance$Attenuation;
-        get x(): number;
-        get z(): number;
         get volume(): number;
         get pitch(): number;
         get sound(): $Sound;
+        get source(): $SoundSource;
     }
 }

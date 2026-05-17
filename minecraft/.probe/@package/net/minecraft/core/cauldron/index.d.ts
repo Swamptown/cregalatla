@@ -19,7 +19,7 @@ declare module "@package/net/minecraft/core/cauldron" {
     /**
      * Values that may be interpreted as {@link $CauldronInteraction$InteractionMap}.
      */
-    export type $CauldronInteraction$InteractionMap_ = { map?: $Map_<$Item_, $CauldronInteraction_>, name?: string,  } | [map?: $Map_<$Item_, $CauldronInteraction_>, name?: string, ];
+    export type $CauldronInteraction$InteractionMap_ = { name?: string, map?: $Map_<$Item_, $CauldronInteraction_>,  } | [name?: string, map?: $Map_<$Item_, $CauldronInteraction_>, ];
     export class $CauldronInteraction {
         static newInteractionMap(arg0: string): $CauldronInteraction$InteractionMap;
         static addDefaultInteractions(arg0: $Map_<$Item_, $CauldronInteraction_>): void;

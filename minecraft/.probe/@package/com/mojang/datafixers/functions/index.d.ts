@@ -16,10 +16,10 @@ declare module "@package/com/mojang/datafixers/functions" {
         static all(arg0: $PointFreeRule_): $PointFreeRule;
         static nop(): $PointFreeRule;
         static choice(...arg0: $PointFreeRule_[]): $PointFreeRule;
-        static one(arg0: $PointFreeRule_): $PointFreeRule;
         static everywhere(arg0: $PointFreeRule_, arg1: $PointFreeRule_): $PointFreeRule;
-        static many(arg0: $PointFreeRule_): $PointFreeRule;
         static once(arg0: $PointFreeRule_): $PointFreeRule;
+        static many(arg0: $PointFreeRule_): $PointFreeRule;
+        static one(arg0: $PointFreeRule_): $PointFreeRule;
     }
     export interface $PointFreeRule {
         rewrite<A>(arg0: $PointFree<A>): ($PointFree<A>) | undefined;

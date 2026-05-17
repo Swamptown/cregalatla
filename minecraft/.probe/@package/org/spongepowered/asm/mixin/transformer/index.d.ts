@@ -12,11 +12,11 @@ declare module "@package/org/spongepowered/asm/mixin/transformer" {
         transformClass(arg0: $MixinEnvironment, arg1: string, arg2: number[]): number[];
         reload(arg0: string, arg1: $ClassNode): $List<string>;
         getExtensions(): $IExtensionRegistry;
-        audit(arg0: $MixinEnvironment): void;
-        generateClass(arg0: $MixinEnvironment, arg1: string, arg2: $ClassNode): boolean;
         generateClass(arg0: $MixinEnvironment, arg1: string): number[];
+        generateClass(arg0: $MixinEnvironment, arg1: string, arg2: $ClassNode): boolean;
         computeFramesForClass(arg0: $MixinEnvironment, arg1: string, arg2: $ClassNode): boolean;
         transformClassBytes(arg0: string, arg1: string, arg2: number[]): number[];
+        audit(arg0: $MixinEnvironment): void;
         get extensions(): $IExtensionRegistry;
     }
 }

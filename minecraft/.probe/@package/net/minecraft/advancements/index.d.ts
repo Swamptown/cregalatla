@@ -5,7 +5,7 @@ import { $PlayerAdvancements } from "@package/net/minecraft/server";
 import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $MutableComponent, $Component_, $Component } from "@package/net/minecraft/network/chat";
 import { $Set_, $Map, $Set, $List, $Map_, $Collection_, $List_, $Collection } from "@package/java/util";
-import { $DistanceTrigger, $EffectsChangedTrigger, $EnterBlockTrigger, $UsedEnderEyeTrigger, $BredAnimalsTrigger, $SlideDownBlockTrigger, $LootTableTrigger, $ShotCrossbowTrigger, $BrewedPotionTrigger, $TameAnimalTrigger, $FilledBucketTrigger, $PlayerHurtEntityTrigger, $KilledTrigger, $PickedUpItemTrigger, $PlayerInteractTrigger, $EntityHurtPlayerTrigger, $SummonedEntityTrigger, $UsingItemTrigger, $RecipeCraftedTrigger, $StartRidingTrigger, $AnyBlockInteractionTrigger, $ConsumeItemTrigger, $ChangeDimensionTrigger, $PlayerTrigger, $ImpossibleTrigger, $DefaultBlockInteractionTrigger, $InventoryChangeTrigger, $ItemDurabilityTrigger, $ConstructBeaconTrigger, $UsedTotemTrigger, $CriterionValidator, $FallAfterExplosionTrigger, $BeeNestDestroyedTrigger, $KilledByCrossbowTrigger, $RecipeUnlockedTrigger, $EnchantedItemTrigger, $CuredZombieVillagerTrigger, $LevitationTrigger, $LightningStrikeTrigger, $TradeTrigger, $ItemUsedOnLocationTrigger, $ChanneledLightningTrigger, $TargetBlockTrigger, $FishingRodHookedTrigger } from "@package/net/minecraft/advancements/critereon";
+import { $DistanceTrigger, $EffectsChangedTrigger, $UsedEnderEyeTrigger, $EnterBlockTrigger, $BredAnimalsTrigger, $SlideDownBlockTrigger, $LootTableTrigger, $BrewedPotionTrigger, $ShotCrossbowTrigger, $TameAnimalTrigger, $FilledBucketTrigger, $PlayerHurtEntityTrigger, $KilledTrigger, $PickedUpItemTrigger, $PlayerInteractTrigger, $EntityHurtPlayerTrigger, $SummonedEntityTrigger, $UsingItemTrigger, $RecipeCraftedTrigger, $StartRidingTrigger, $AnyBlockInteractionTrigger, $ConsumeItemTrigger, $ChangeDimensionTrigger, $PlayerTrigger, $ImpossibleTrigger, $DefaultBlockInteractionTrigger, $InventoryChangeTrigger, $ItemDurabilityTrigger, $ConstructBeaconTrigger, $UsedTotemTrigger, $CriterionValidator, $FallAfterExplosionTrigger, $BeeNestDestroyedTrigger, $KilledByCrossbowTrigger, $RecipeUnlockedTrigger, $EnchantedItemTrigger, $CuredZombieVillagerTrigger, $LevitationTrigger, $LightningStrikeTrigger, $TradeTrigger, $ItemUsedOnLocationTrigger, $ChanneledLightningTrigger, $TargetBlockTrigger, $FishingRodHookedTrigger } from "@package/net/minecraft/advancements/critereon";
 import { $StringRepresentable, $ProblemReporter } from "@package/net/minecraft/util";
 import { $Instant } from "@package/java/time";
 import { $CacheableFunction } from "@package/net/minecraft/commands";
@@ -149,10 +149,10 @@ declare module "@package/net/minecraft/advancements" {
     export class $CriterionProgress {
         isDone(): boolean;
         getObtained(): $Instant;
-        grant(): void;
         serializeToNetwork(arg0: $FriendlyByteBuf): void;
         revoke(): void;
         static fromNetwork(arg0: $FriendlyByteBuf): $CriterionProgress;
+        grant(): void;
         constructor();
         constructor(arg0: $Instant);
         get done(): boolean;
@@ -164,9 +164,9 @@ declare module "@package/net/minecraft/advancements" {
         static recipe(arg0: $ResourceLocation_): $AdvancementRewards$Builder;
         addLootTable(arg0: $ResourceKey_<$LootTable>): $AdvancementRewards$Builder;
         addRecipe(arg0: $ResourceLocation_): $AdvancementRewards$Builder;
+        runs(arg0: $ResourceLocation_): $AdvancementRewards$Builder;
         static loot(arg0: $ResourceKey_<$LootTable>): $AdvancementRewards$Builder;
         static experience(arg0: number): $AdvancementRewards$Builder;
-        runs(arg0: $ResourceLocation_): $AdvancementRewards$Builder;
         addExperience(arg0: number): $AdvancementRewards$Builder;
         constructor();
     }
@@ -210,7 +210,7 @@ declare module "@package/net/minecraft/advancements" {
     /**
      * Values that may be interpreted as {@link $Advancement}.
      */
-    export type $Advancement_ = { requirements?: $AdvancementRequirements_, name?: ($Component_) | undefined, rewards?: $AdvancementRewards_, display?: ($DisplayInfo) | undefined, parent?: ($ResourceLocation_) | undefined, criteria?: $Map_<string, $Criterion_<never>>, sendsTelemetryEvent?: boolean,  } | [requirements?: $AdvancementRequirements_, name?: ($Component_) | undefined, rewards?: $AdvancementRewards_, display?: ($DisplayInfo) | undefined, parent?: ($ResourceLocation_) | undefined, criteria?: $Map_<string, $Criterion_<never>>, sendsTelemetryEvent?: boolean, ];
+    export type $Advancement_ = { sendsTelemetryEvent?: boolean, criteria?: $Map_<string, $Criterion_<never>>, parent?: ($ResourceLocation_) | undefined, display?: ($DisplayInfo) | undefined, rewards?: $AdvancementRewards_, name?: ($Component_) | undefined, requirements?: $AdvancementRequirements_,  } | [sendsTelemetryEvent?: boolean, criteria?: $Map_<string, $Criterion_<never>>, parent?: ($ResourceLocation_) | undefined, display?: ($DisplayInfo) | undefined, rewards?: $AdvancementRewards_, name?: ($Component_) | undefined, requirements?: $AdvancementRequirements_, ];
     export class $AdvancementRequirements extends $Record {
         size(): number;
         test(arg0: $Predicate_<string>): boolean;
@@ -234,9 +234,9 @@ declare module "@package/net/minecraft/advancements" {
     export type $AdvancementRequirements_ = { requirements?: $List_<$List_<string>>,  } | [requirements?: $List_<$List_<string>>, ];
     export class $AdvancementRewards extends $Record {
         function(): ($CacheableFunction) | undefined;
-        grant(arg0: $ServerPlayer): void;
         loot(): $List<$ResourceKey<$LootTable>>;
         experience(): number;
+        grant(arg0: $ServerPlayer): void;
         recipes(): $List<$ResourceLocation>;
         static CODEC: $Codec<$AdvancementRewards>;
         static EMPTY: $AdvancementRewards;
@@ -245,7 +245,7 @@ declare module "@package/net/minecraft/advancements" {
     /**
      * Values that may be interpreted as {@link $AdvancementRewards}.
      */
-    export type $AdvancementRewards_ = { experience?: number, loot?: $List_<$ResourceKey_<$LootTable>>, function?: ($CacheableFunction) | undefined, recipes?: $List_<$ResourceLocation_>,  } | [experience?: number, loot?: $List_<$ResourceKey_<$LootTable>>, function?: ($CacheableFunction) | undefined, recipes?: $List_<$ResourceLocation_>, ];
+    export type $AdvancementRewards_ = { recipes?: $List_<$ResourceLocation_>, function?: ($CacheableFunction) | undefined, loot?: $List_<$ResourceKey_<$LootTable>>, experience?: number,  } | [recipes?: $List_<$ResourceLocation_>, function?: ($CacheableFunction) | undefined, loot?: $List_<$ResourceKey_<$LootTable>>, experience?: number, ];
     export class $CriterionTrigger$Listener<T extends $CriterionTriggerInstance> extends $Record {
         run(arg0: $PlayerAdvancements): void;
         trigger(): T;
@@ -256,13 +256,13 @@ declare module "@package/net/minecraft/advancements" {
     /**
      * Values that may be interpreted as {@link $CriterionTrigger$Listener}.
      */
-    export type $CriterionTrigger$Listener_<T> = { trigger?: $CriterionTriggerInstance_, criterion?: string, advancement?: $AdvancementHolder_,  } | [trigger?: $CriterionTriggerInstance_, criterion?: string, advancement?: $AdvancementHolder_, ];
+    export type $CriterionTrigger$Listener_<T> = { advancement?: $AdvancementHolder_, criterion?: string, trigger?: $CriterionTriggerInstance_,  } | [advancement?: $AdvancementHolder_, criterion?: string, trigger?: $CriterionTriggerInstance_, ];
     export class $AdvancementType extends $Enum<$AdvancementType> implements $StringRepresentable {
         static values(): $AdvancementType[];
         static valueOf(arg0: string): $AdvancementType;
         getDisplayName(): $Component;
-        getChatColor(): $ChatFormatting;
         createAnnouncement(arg0: $AdvancementHolder_, arg1: $ServerPlayer): $MutableComponent;
+        getChatColor(): $ChatFormatting;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static CHALLENGE: $AdvancementType;
@@ -306,14 +306,14 @@ declare module "@package/net/minecraft/advancements" {
         isHidden(): boolean;
         getType(): $AdvancementType;
         shouldShowToast(): boolean;
-        getBackground(): ($ResourceLocation) | undefined;
         shouldAnnounceChat(): boolean;
+        getBackground(): ($ResourceLocation) | undefined;
         getY(): number;
-        getDescription(): $Component;
         getIcon(): $ItemStack;
+        getX(): number;
         getTitle(): $Component;
         setLocation(arg0: number, arg1: number): void;
-        getX(): number;
+        getDescription(): $Component;
         static CODEC: $Codec<$DisplayInfo>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $DisplayInfo>;
         constructor(arg0: $ItemStack_, arg1: $Component_, arg2: $Component_, arg3: ($ResourceLocation_) | undefined, arg4: $AdvancementType_, arg5: boolean, arg6: boolean, arg7: boolean);
@@ -321,10 +321,10 @@ declare module "@package/net/minecraft/advancements" {
         get type(): $AdvancementType;
         get background(): ($ResourceLocation) | undefined;
         get y(): number;
-        get description(): $Component;
         get icon(): $ItemStack;
-        get title(): $Component;
         get x(): number;
+        get title(): $Component;
+        get description(): $Component;
     }
     export class $AdvancementNode implements $AdvancementNodeKJS {
         parent(): $AdvancementNode;
@@ -332,8 +332,8 @@ declare module "@package/net/minecraft/advancements" {
         root(): $AdvancementNode;
         static getRoot(arg0: $AdvancementNode): $AdvancementNode;
         children(): $Iterable<$AdvancementNode>;
-        advancement(): $Advancement;
         addChild(arg0: $AdvancementNode): void;
+        advancement(): $Advancement;
         getParent(): $AdvancementNode;
         getChildren(): $Set<$AdvancementNode>;
         addChild(a: $AdvancementNode): void;

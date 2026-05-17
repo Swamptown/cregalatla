@@ -1,6 +1,6 @@
 import { $CommandResultCallback_, $ExecutionCommandSource } from "@package/net/minecraft/commands";
 import { $Consumer_ } from "@package/java/util/function";
-import { $UnboundEntryAction, $CommandQueueEntry, $CommandQueueEntry_, $Frame_, $ChainModifiers_, $EntryAction, $ExecutionContext, $Frame, $ExecutionControl } from "@package/net/minecraft/commands/execution";
+import { $UnboundEntryAction, $CommandQueueEntry, $CommandQueueEntry_, $ChainModifiers_, $Frame_, $ExecutionContext, $EntryAction, $Frame, $ExecutionControl } from "@package/net/minecraft/commands/execution";
 import { $DynamicCommandExceptionType } from "@package/com/mojang/brigadier/exceptions";
 import { $ContextChain, $CommandContext } from "@package/com/mojang/brigadier/context";
 import { $InstantiatedFunction } from "@package/net/minecraft/commands/functions";

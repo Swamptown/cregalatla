@@ -12,8 +12,8 @@ declare module "@package/fr/lucreeper74/createmetallurgy/content/blocks/industri
         test(arg0: $EntityType_<never>): boolean;
         static fromType(arg0: $EntityType_<never>, arg1: number): $DamagedEntityIngredient;
         static fromEntity(arg0: $Entity, arg1: number): $DamagedEntityIngredient;
-        getDisplay(): $List<$DamagedEntityIngredient$EntityStack>;
         getIngredient(): $EntityIngredient;
+        getDisplay(): $List<$DamagedEntityIngredient$EntityStack>;
         getEntities(): $List<$EntityType<never>>;
         getDamage(): number;
         static fromTag(arg0: $TagKey_<$EntityType<never>>, arg1: number): $DamagedEntityIngredient;
@@ -21,8 +21,8 @@ declare module "@package/fr/lucreeper74/createmetallurgy/content/blocks/industri
         static EMPTY: $DamagedEntityIngredient;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $DamagedEntityIngredient>;
         constructor(arg0: $EntityIngredient, arg1: number);
-        get display(): $List<$DamagedEntityIngredient$EntityStack>;
         get ingredient(): $EntityIngredient;
+        get display(): $List<$DamagedEntityIngredient$EntityStack>;
         get entities(): $List<$EntityType<never>>;
         get damage(): number;
     }

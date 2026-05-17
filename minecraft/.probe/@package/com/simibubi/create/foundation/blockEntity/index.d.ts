@@ -20,6 +20,7 @@ import { $Item_, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/it
 import { $VirtualBlockEntity } from "@package/net/createmod/ponder/api";
 import { $IItemHandlerModifiable } from "@package/net/neoforged/neoforge/items";
 import { $Player } from "@package/net/minecraft/world/entity/player";
+import { $ClientboundBlockEntityDataPacket } from "@package/net/minecraft/network/protocol/game";
 import { $Block } from "@package/net/minecraft/world/level/block";
 import { $AABB } from "@package/net/minecraft/world/phys";
 import { $BlockEntityType_, $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
@@ -27,26 +28,28 @@ export * as behaviour from "@package/com/simibubi/create/foundation/blockEntity/
 
 declare module "@package/com/simibubi/create/foundation/blockEntity" {
     export class $SyncedBlockEntity extends $BlockEntity {
-        writeClient(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $CompoundTag;
-        readClient(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        notifyUpdate(): void;
         sendData(): void;
         blockHolderGetter(): $HolderGetter<$Block>;
-        notifyUpdate(): void;
+        readClient(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        writeClient(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $CompoundTag;
+        getUpdatePacket(): $ClientboundBlockEntityDataPacket;
         worldPosition: $BlockPos;
         level: $Level;
         static ATTACHMENTS_NBT_KEY: string;
         hasComparators: number;
         remove: boolean;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
+        get updatePacket(): $ClientboundBlockEntityDataPacket;
     }
     export class $ItemHandlerContainer implements $Container {
         isEmpty(): boolean;
-        removeItem(arg0: number, arg1: number): $ItemStack;
         setItem(arg0: number, arg1: $ItemStack_): void;
         clearContent(): void;
         startOpen(arg0: $Player): void;
         stopOpen(arg0: $Player): void;
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
+        removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
         getMaxStackSize(): number;
         setChanged(): void;
@@ -62,6 +65,7 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
         canReceiveTransferCooldown(): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
         self(): $Container;
+        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -75,7 +79,6 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isEmpty(): boolean;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
@@ -83,8 +86,8 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
         find(): number;
         count(match: $ItemPredicate_): number;
         count(): number;
-        countNonEmpty(): number;
         countNonEmpty(match: $ItemPredicate_): number;
+        countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
         constructor(arg0: $IItemHandlerModifiable);
         get containerSize(): number;
@@ -108,10 +111,10 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
     export class $IMultiBlockEntityContainer$Fluid {
     }
     export interface $IMultiBlockEntityContainer$Fluid extends $IMultiBlockEntityContainer {
-        hasTank(): boolean;
-        getTank(arg0: number): $IFluidTank;
         getTankSize(arg0: number): number;
         setTankSize(arg0: number, arg1: number): void;
+        hasTank(): boolean;
+        getTank(arg0: number): $IFluidTank;
         getFluid(arg0: number): $FluidStack;
     }
     export class $SmartBlockEntity extends $CachedRenderBBBlockEntity implements $PartialSafeNBT, $IInteractionChecker, $SpecialBlockEntityItemRequirement, $VirtualBlockEntity {
@@ -121,15 +124,16 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
         destroy(): void;
         invalidate(): void;
         tick(): void;
+        getBehaviour<T extends $BlockEntityBehaviour>(arg0: $BehaviourType<T>): T;
         getRequiredItems(arg0: $BlockState_): $ItemRequirement;
+        setLazyTickRate(arg0: number): void;
+        lazyTick(): void;
         addBehaviours(arg0: $List_<$BlockEntityBehaviour>): void;
         addBehavioursDeferred(arg0: $List_<$BlockEntityBehaviour>): void;
         forEachBehaviour(arg0: $Consumer_<$BlockEntityBehaviour>): void;
-        lazyTick(): void;
         writeSafe(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         getAllBehaviours(): $Collection<$BlockEntityBehaviour>;
         attachBehaviourLate(arg0: $BlockEntityBehaviour): void;
-        setLazyTickRate(arg0: number): void;
         removeBehaviour(arg0: $BehaviourType<never>): void;
         markVirtual(): void;
         isChunkUnloaded(): boolean;
@@ -138,7 +142,6 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
         refreshBlockState(): void;
         registerAwardables(arg0: $List_<$BlockEntityBehaviour>, ...arg1: $CreateAdvancement[]): void;
         awardIfNear(arg0: $CreateAdvancement, arg1: number): void;
-        getBehaviour<T extends $BlockEntityBehaviour>(arg0: $BehaviourType<T>): T;
         award(arg0: $CreateAdvancement): void;
         worldPosition: $BlockPos;
         level: $Level;
@@ -146,32 +149,32 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
         hasComparators: number;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
         get virtual(): boolean;
-        get allBehaviours(): $Collection<$BlockEntityBehaviour>;
         set lazyTickRate(value: number);
+        get allBehaviours(): $Collection<$BlockEntityBehaviour>;
         get chunkUnloaded(): boolean;
     }
     export class $IMultiBlockEntityContainer {
     }
     export interface $IMultiBlockEntityContainer {
-        setExtraData(arg0: $Object): void;
-        removeController(arg0: boolean): void;
         getMainAxisOf(arg0: $BlockEntity): $Direction$Axis;
         getLastKnownPos(): $BlockPos;
         preventConnectivityUpdate(): void;
         notifyMultiUpdated(): void;
         getMainConnectionAxis(): $Direction$Axis;
+        setExtraData(arg0: $Object): void;
         modifyExtraData(arg0: $Object): $Object;
-        setController(arg0: $BlockPos_): void;
-        isController(): boolean;
+        removeController(arg0: boolean): void;
         getControllerBE<T extends $BlockEntity>(): T;
         getController(): $BlockPos;
+        isController(): boolean;
+        setController(arg0: $BlockPos_): void;
         getMaxWidth(): number;
-        getWidth(): number;
-        getHeight(): number;
         getMaxLength(arg0: $Direction$Axis_, arg1: number): number;
         setWidth(arg0: number): void;
         setHeight(arg0: number): void;
         getExtraData(): $Object;
+        getWidth(): number;
+        getHeight(): number;
         get lastKnownPos(): $BlockPos;
         get mainConnectionAxis(): $Direction$Axis;
         get controllerBE(): T;

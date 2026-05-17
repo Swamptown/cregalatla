@@ -33,8 +33,8 @@ declare module "@package/xaero/hud/minimap/player/tracker" {
         get elements(): $Iterable<$PlayerTrackerMinimapElement<never>>;
     }
     export class $PlayerTrackerMinimapElementRenderer extends $MinimapElementRenderer<$PlayerTrackerMinimapElement<never>, $PlayerTrackerMinimapElementRenderContext> {
-        renderElement(arg0: $PlayerTrackerMinimapElement<never>, arg1: boolean, arg2: boolean, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $MinimapElementRenderInfo, arg8: $GuiGraphics, arg9: $MultiBufferSource$BufferSource): boolean;
         getPlayerSkin(arg0: $Player, arg1: $PlayerInfo): $ResourceLocation;
+        renderElement(arg0: $PlayerTrackerMinimapElement<never>, arg1: boolean, arg2: boolean, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $MinimapElementRenderInfo, arg8: $GuiGraphics, arg9: $MultiBufferSource$BufferSource): boolean;
         getCollector(): $PlayerTrackerMinimapElementCollector;
         get collector(): $PlayerTrackerMinimapElementCollector;
     }
@@ -42,8 +42,8 @@ declare module "@package/xaero/hud/minimap/player/tracker" {
         setRenderedOnRadar(arg0: boolean): void;
         getSystem(): $IRenderedPlayerTracker<P>;
         wasRenderedOnRadar(): boolean;
-        getY(): number;
         getPlayer(): P;
+        getY(): number;
         getDimension(): $ResourceKey<$Level>;
         getX(): number;
         getZ(): number;
@@ -51,8 +51,8 @@ declare module "@package/xaero/hud/minimap/player/tracker" {
         constructor(arg0: P, arg1: $IRenderedPlayerTracker<P>);
         set renderedOnRadar(value: boolean);
         get system(): $IRenderedPlayerTracker<P>;
-        get y(): number;
         get player(): P;
+        get y(): number;
         get dimension(): $ResourceKey<$Level>;
         get x(): number;
         get z(): number;

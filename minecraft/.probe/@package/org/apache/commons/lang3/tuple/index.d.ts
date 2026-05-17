@@ -14,9 +14,9 @@ declare module "@package/org/apache/commons/lang3/tuple" {
         getKey(): L;
         accept<E extends $Throwable>(arg0: $FailableBiConsumer_<L, R, E>): void;
         static emptyArray<L, R>(): $Pair<L, R>[];
-        static ofNonNull<L, R>(arg0: L, arg1: R): $Pair<L, R>;
         getLeft(): L;
         getRight(): R;
+        static ofNonNull<L, R>(arg0: L, arg1: R): $Pair<L, R>;
         static EMPTY_ARRAY: $Pair<never, never>[];
         constructor();
         get value(): R;
@@ -42,9 +42,9 @@ declare module "@package/org/apache/commons/lang3/tuple" {
         compareTo(arg0: $Triple<L, M, R>): number;
         static of<L, M, R>(arg0: L, arg1: M, arg2: R): $Triple<L, M, R>;
         static emptyArray<L, M, R>(): $Triple<L, M, R>[];
-        static ofNonNull<L, M, R>(arg0: L, arg1: M, arg2: R): $Triple<L, M, R>;
         getLeft(): L;
         getRight(): R;
+        static ofNonNull<L, M, R>(arg0: L, arg1: M, arg2: R): $Triple<L, M, R>;
         getMiddle(): M;
         static EMPTY_ARRAY: $Triple<never, never, never>[];
         constructor();

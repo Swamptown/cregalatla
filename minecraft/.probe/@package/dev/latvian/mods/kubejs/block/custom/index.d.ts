@@ -51,8 +51,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(i: $ResourceLocation_);
     }
     export class $PressurePlateBlockBuilder extends $ShapedBlockBuilder implements $ButtonOrPressurePlateBuilder {
-        behaviour(behaviour: $BlockSetType_): this;
         ticksToStayPressed(ticks: $TickDuration_): this;
+        behaviour(behaviour: $BlockSetType_): this;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         randomTickCallback: $Consumer<$RandomTickCallback>;
@@ -141,8 +141,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(p: $BlockBuilder);
     }
     export class $FenceGateBlockBuilder extends $ShapedBlockBuilder {
-        behaviour(wt: $WoodType_): this;
         behaviour(wt: string): this;
+        behaviour(wt: $WoodType_): this;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         static FENCE_GATE_TAGS: $ResourceLocation[];
@@ -245,8 +245,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(i: $ResourceLocation_);
     }
     export class $DoorBlockBuilder extends $ShapedBlockBuilder {
-        behaviour(wt: $BlockSetType_): this;
         wooden(): this;
+        behaviour(wt: $BlockSetType_): this;
         static DOOR_TAGS: $ResourceLocation[];
         sourceLine: $SourceLine;
         id: $ResourceLocation;
@@ -353,8 +353,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
     export class $ButtonOrPressurePlateBuilder {
     }
     export interface $ButtonOrPressurePlateBuilder {
-        behaviour(behaviour: $BlockSetType_): this;
         ticksToStayPressed(ticks: $TickDuration_): this;
+        behaviour(behaviour: $BlockSetType_): this;
     }
     export class $PillarBlockBuilder$WithEntity extends $PillarBlockBuilder$PillarKubeBlock implements $EntityBlock {
         newBlockEntity(pos: $BlockPos_, state: $BlockState_): $BlockEntity;
@@ -458,14 +458,14 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(p: $BlockBuilder);
     }
     export class $CropBlockBuilder extends $BlockBuilder {
-        /**
-         * Remove seed drops from the loot table, does not prevent seed item from creating.
-         */
-        noSeeds(): this;
         farmersCanPlant(): this;
         bonemeal(bonemealCallback: $ToIntFunction_<$RandomTickCallback>): this;
         survive(surviveCallback: $CropBlockBuilder$SurviveCallback_): this;
         growTick(growSpeedCallback: $ToDoubleFunction_<$RandomTickCallback>): this;
+        /**
+         * Remove seed drops from the loot table, does not prevent seed item from creating.
+         */
+        noSeeds(): this;
         /**
          * Add a crop output with exactly one output.
          */

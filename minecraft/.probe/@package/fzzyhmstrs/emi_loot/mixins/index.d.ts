@@ -75,18 +75,18 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $ExplorationMapLootFunctionAccessor {
     }
     export interface $ExplorationMapLootFunctionAccessor {
-        getDestination(): $TagKey<$Structure>;
         getDecoration(): $Holder<$MapDecorationType>;
-        get destination(): $TagKey<$Structure>;
+        getDestination(): $TagKey<$Structure>;
         get decoration(): $Holder<$MapDecorationType>;
+        get destination(): $TagKey<$Structure>;
     }
     export class $SetEnchantmentsLootFunctionAccessor {
     }
     export interface $SetEnchantmentsLootFunctionAccessor {
-        getEnchantments(): $Map<$Holder<$Enchantment>, $NumberProvider>;
         getAdd(): boolean;
-        get enchantments(): $Map<$Holder<$Enchantment>, $NumberProvider>;
+        getEnchantments(): $Map<$Holder<$Enchantment>, $NumberProvider>;
         get add(): boolean;
+        get enchantments(): $Map<$Holder<$Enchantment>, $NumberProvider>;
     }
     export class $SetAttributesLootFunctionAccessor {
     }
@@ -162,12 +162,12 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     }
     export interface $LootPoolAccessor {
         getEntries(): $List<$LootPoolEntryContainer>;
-        getRolls(): $NumberProvider;
         getConditions(): $List<$LootItemCondition>;
+        getRolls(): $NumberProvider;
         getFunctions(): $List<$LootItemFunction>;
         get entries(): $List<$LootPoolEntryContainer>;
-        get rolls(): $NumberProvider;
         get conditions(): $List<$LootItemCondition>;
+        get rolls(): $NumberProvider;
         get functions(): $List<$LootItemFunction>;
     }
     export class $SetLootTableLootFunctionAccessor {
@@ -329,12 +329,12 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $SetBookCoverLootFunctionAccessor {
     }
     export interface $SetBookCoverLootFunctionAccessor {
-        getGeneration(): (number) | undefined;
-        getAuthor(): (string) | undefined;
         callApply(arg0: $WrittenBookContent_): $WrittenBookContent;
+        getAuthor(): (string) | undefined;
+        getGeneration(): (number) | undefined;
         getTitle(): ($Filterable<string>) | undefined;
-        get generation(): (number) | undefined;
         get author(): (string) | undefined;
+        get generation(): (number) | undefined;
         get title(): ($Filterable<string>) | undefined;
     }
     export class $SetItemLootFunctionAccessor {

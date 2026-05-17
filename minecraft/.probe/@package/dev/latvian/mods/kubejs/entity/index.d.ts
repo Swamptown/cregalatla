@@ -31,9 +31,9 @@ declare module "@package/dev/latvian/mods/kubejs/entity" {
         isActive(mobEffect: $Holder_<$MobEffect>): boolean;
         getMap(): $Map<$Holder<$MobEffect>, $MobEffectInstance>;
         getDuration(mobEffect: $Holder_<$MobEffect>): number;
-        isApplicable(effect: $MobEffectInstance): boolean;
-        getActive(): $Collection<$MobEffectInstance>;
         getActive(mobEffect: $Holder_<$MobEffect>): $MobEffectInstance;
+        getActive(): $Collection<$MobEffectInstance>;
+        isApplicable(effect: $MobEffectInstance): boolean;
         constructor(e: $LivingEntity);
         get map(): $Map<$Holder<$MobEffect>, $MobEffectInstance>;
     }
@@ -111,11 +111,11 @@ declare module "@package/dev/latvian/mods/kubejs/entity" {
     }
     export interface $KubeEntityEvent extends $KubeLevelEvent {
         getLevel(): $Level;
-        getEntity(): $Entity;
         getPlayer(): $Player;
+        getEntity(): $Entity;
         get level(): $Level;
-        get entity(): $Entity;
         get player(): $Player;
+        get entity(): $Entity;
     }
     /**
      * Values that may be interpreted as {@link $KubeEntityEvent}.
@@ -123,13 +123,13 @@ declare module "@package/dev/latvian/mods/kubejs/entity" {
     export type $KubeEntityEvent_ = (() => $Entity);
     export class $AttributeBuilder extends $BuilderBase<$Attribute> {
         range(defaultValue: number, min: number, max: number): this;
+        attachTo(entityType: $Predicate_<$EntityType<never>>): this;
         transformObject(attribute: $Attribute_): $Attribute;
         negativeSentiment(): this;
         neutralSentiment(): this;
         attachToPlayers(): this;
         attachToMonsters(): this;
         attachToCategory(category: $MobCategory_): this;
-        attachTo(entityType: $Predicate_<$EntityType<never>>): this;
         syncable(watch: boolean): this;
         sentiment(sentiment: $Attribute$Sentiment_): this;
         bool(defaultValue: boolean): this;
@@ -252,13 +252,13 @@ declare module "@package/dev/latvian/mods/kubejs/entity" {
     export class $BeforeLivingEntityHurtKubeEvent implements $KubeLivingEntityEvent {
         setDamage(damage: number): void;
         /**
-         * The damage source.
-         */
-        getSource(): $DamageSource;
-        /**
          * The amount of damage.
          */
         getDamage(): number;
+        /**
+         * The damage source.
+         */
+        getSource(): $DamageSource;
         getLevel(): $Level;
         getPlayer(): $Player;
         getRegistries(): $RegistryAccess;
@@ -310,10 +310,10 @@ declare module "@package/dev/latvian/mods/kubejs/entity" {
     }
     export class $LivingEntityDropsKubeEvent implements $KubeLivingEntityEvent {
         isRecentlyHit(): boolean;
-        addDrop(stack: $ItemStack_, chance: number): $ItemEntity;
         addDrop(stack: $ItemStack_): $ItemEntity;
-        getSource(): $DamageSource;
+        addDrop(stack: $ItemStack_, chance: number): $ItemEntity;
         getDrops(): $List<$ItemEntity>;
+        getSource(): $DamageSource;
         getLevel(): $Level;
         getPlayer(): $Player;
         getRegistries(): $RegistryAccess;
@@ -358,8 +358,8 @@ declare module "@package/dev/latvian/mods/kubejs/entity" {
         eventDrops: $List<$ItemEntity>;
         constructor(e: $LivingDropsEvent);
         get recentlyHit(): boolean;
-        get source(): $DamageSource;
         get drops(): $List<$ItemEntity>;
+        get source(): $DamageSource;
         get level(): $Level;
         get player(): $Player;
         get registries(): $RegistryAccess;
@@ -375,16 +375,16 @@ declare module "@package/dev/latvian/mods/kubejs/entity" {
     /**
      * Values that may be interpreted as {@link $AttributeBuilder$Range}.
      */
-    export type $AttributeBuilder$Range_ = { min?: number, defaultValue?: number, max?: number,  } | [min?: number, defaultValue?: number, max?: number, ];
+    export type $AttributeBuilder$Range_ = { max?: number, defaultValue?: number, min?: number,  } | [max?: number, defaultValue?: number, min?: number, ];
     export class $AfterLivingEntityHurtKubeEvent implements $KubeLivingEntityEvent {
-        /**
-         * The damage source.
-         */
-        getSource(): $DamageSource;
         /**
          * The amount of damage.
          */
         getDamage(): number;
+        /**
+         * The damage source.
+         */
+        getSource(): $DamageSource;
         getLevel(): $Level;
         getPlayer(): $Player;
         getRegistries(): $RegistryAccess;
@@ -427,8 +427,8 @@ declare module "@package/dev/latvian/mods/kubejs/entity" {
         success(): $Object;
         getEntity(): $LivingEntity;
         constructor(event: $LivingDamageEvent$Post);
-        get source(): $DamageSource;
         get damage(): number;
+        get source(): $DamageSource;
         get level(): $Level;
         get player(): $Player;
         get registries(): $RegistryAccess;

@@ -23,7 +23,9 @@ import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entit
 declare module "@package/com/simibubi/create/content/equipment/potatoCannon" {
     export class $PotatoProjectileEntity extends $AbstractHurtingProjectile implements $IEntityWithComplexSpawn, $PotatoProjectileEntityExtension, $PotatoProjectileEntityAccessor {
         static build(arg0: $EntityType$Builder<never>): $EntityType$Builder<never>;
-        setEnchantmentEffectsFromCannon(arg0: $ItemStack_): void;
+        static playHitSound(arg0: $Level_, arg1: $Vec3_): void;
+        writeSpawnData(arg0: $RegistryFriendlyByteBuf): void;
+        readSpawnData(arg0: $RegistryFriendlyByteBuf): void;
         getProjectileType(): $PotatoCannonProjectileType;
         getStuckEntity(): $Entity;
         setStuckEntity(arg0: $Entity): void;
@@ -31,9 +33,7 @@ declare module "@package/com/simibubi/create/content/equipment/potatoCannon" {
         static playLaunchSound(arg0: $Level_, arg1: $Vec3_, arg2: number): void;
         aeronautics$setIsFromMountedPotatoCannon(arg0: boolean): void;
         aeronautics$setDamageMultiplier(arg0: number): void;
-        static playHitSound(arg0: $Level_, arg1: $Vec3_): void;
-        writeSpawnData(arg0: $RegistryFriendlyByteBuf): void;
-        readSpawnData(arg0: $RegistryFriendlyByteBuf): void;
+        setEnchantmentEffectsFromCannon(arg0: $ItemStack_): void;
         setItem(arg0: $ItemStack_): void;
         getItem(): $ItemStack;
         recoveryChance(arg0: number): void;
@@ -114,8 +114,8 @@ declare module "@package/com/simibubi/create/content/equipment/potatoCannon" {
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
         constructor(arg0: $EntityType_<$AbstractHurtingProjectile>, arg1: $Level_);
-        set enchantmentEffectsFromCannon(value: $ItemStack_);
         get projectileType(): $PotatoCannonProjectileType;
         get renderMode(): $PotatoProjectileRenderMode;
+        set enchantmentEffectsFromCannon(value: $ItemStack_);
     }
 }

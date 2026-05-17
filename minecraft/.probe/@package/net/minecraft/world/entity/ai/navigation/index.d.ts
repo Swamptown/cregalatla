@@ -8,13 +8,13 @@ import { $Vec3_, $Vec3 } from "@package/net/minecraft/world/phys";
 
 declare module "@package/net/minecraft/world/entity/ai/navigation" {
     export class $GroundPathNavigation extends $PathNavigation {
-        setCanOpenDoors(arg0: boolean): void;
-        setCanPassDoors(arg0: boolean): void;
         hasValidPathType(arg0: $PathType_): boolean;
         canPassDoors(): boolean;
         canOpenDoors(): boolean;
         setAvoidSun(arg0: boolean): void;
         setCanWalkOverFences(arg0: boolean): void;
+        setCanOpenDoors(arg0: boolean): void;
+        setCanPassDoors(arg0: boolean): void;
         mob: $Mob;
         lastStuckCheck: number;
         level: $Level;
@@ -55,25 +55,9 @@ declare module "@package/net/minecraft/world/entity/ai/navigation" {
         isDone(): boolean;
         getPath(): $Path;
         tick(): void;
+        canFloat(): boolean;
         shouldRecomputePath(arg0: $BlockPos_): boolean;
         recomputePath(): void;
-        canFloat(): boolean;
-        setCanFloat(arg0: boolean): void;
-        createPath(arg0: $BlockPos_, arg1: number, arg2: number): $Path;
-        createPath(arg0: $Entity, arg1: number): $Path;
-        createPath(arg0: $Set_<$BlockPos_>, arg1: number, arg2: boolean, arg3: number, arg4: number): $Path;
-        createPath(arg0: $Stream<$BlockPos_>, arg1: number): $Path;
-        createPath(arg0: $Set_<$BlockPos_>, arg1: number, arg2: boolean, arg3: number): $Path;
-        createPath(arg0: $Set_<$BlockPos_>, arg1: number): $Path;
-        createPath(arg0: $BlockPos_, arg1: number): $Path;
-        createPath(arg0: number, arg1: number, arg2: number, arg3: number): $Path;
-        isStuck(): boolean;
-        createPathFinder(arg0: number): $PathFinder;
-        resetMaxVisitedNodesMultiplier(): void;
-        setMaxVisitedNodesMultiplier(arg0: number): void;
-        getTargetPos(): $BlockPos;
-        setSpeedModifier(arg0: number): void;
-        canUpdatePath(): boolean;
         trimPath(): void;
         getTempMobPos(): $Vec3;
         followThePath(): void;
@@ -86,9 +70,25 @@ declare module "@package/net/minecraft/world/entity/ai/navigation" {
         isStableDestination(arg0: $BlockPos_): boolean;
         getNodeEvaluator(): $NodeEvaluator;
         getMaxDistanceToWaypoint(): number;
-        moveTo(arg0: $Entity, arg1: number): boolean;
-        moveTo(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
+        isStuck(): boolean;
+        createPathFinder(arg0: number): $PathFinder;
+        resetMaxVisitedNodesMultiplier(): void;
+        setMaxVisitedNodesMultiplier(arg0: number): void;
+        getTargetPos(): $BlockPos;
+        setSpeedModifier(arg0: number): void;
+        canUpdatePath(): boolean;
+        setCanFloat(arg0: boolean): void;
+        createPath(arg0: $Entity, arg1: number): $Path;
+        createPath(arg0: $BlockPos_, arg1: number, arg2: number): $Path;
+        createPath(arg0: $Set_<$BlockPos_>, arg1: number, arg2: boolean, arg3: number, arg4: number): $Path;
+        createPath(arg0: $Set_<$BlockPos_>, arg1: number, arg2: boolean, arg3: number): $Path;
+        createPath(arg0: number, arg1: number, arg2: number, arg3: number): $Path;
+        createPath(arg0: $Stream<$BlockPos_>, arg1: number): $Path;
+        createPath(arg0: $Set_<$BlockPos_>, arg1: number): $Path;
+        createPath(arg0: $BlockPos_, arg1: number): $Path;
         moveTo(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
+        moveTo(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
+        moveTo(arg0: $Entity, arg1: number): boolean;
         moveTo(arg0: $Path, arg1: number): boolean;
         mob: $Mob;
         lastStuckCheck: number;
@@ -106,11 +106,11 @@ declare module "@package/net/minecraft/world/entity/ai/navigation" {
         timeLastRecompute: number;
         constructor(arg0: $Mob, arg1: $Level_);
         get done(): boolean;
+        get tempMobPos(): $Vec3;
+        get inProgress(): boolean;
         get stuck(): boolean;
         set maxVisitedNodesMultiplier(value: number);
         get targetPos(): $BlockPos;
-        get tempMobPos(): $Vec3;
-        get inProgress(): boolean;
     }
     export class $WaterBoundPathNavigation extends $PathNavigation {
         mob: $Mob;
@@ -147,10 +147,10 @@ declare module "@package/net/minecraft/world/entity/ai/navigation" {
         constructor(arg0: $Mob, arg1: $Level_);
     }
     export class $FlyingPathNavigation extends $PathNavigation {
-        setCanOpenDoors(arg0: boolean): void;
-        setCanPassDoors(arg0: boolean): void;
         canPassDoors(): boolean;
         canOpenDoors(): boolean;
+        setCanOpenDoors(arg0: boolean): void;
+        setCanPassDoors(arg0: boolean): void;
         mob: $Mob;
         lastStuckCheck: number;
         level: $Level;

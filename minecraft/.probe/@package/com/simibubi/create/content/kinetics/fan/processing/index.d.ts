@@ -20,8 +20,8 @@ declare module "@package/com/simibubi/create/content/kinetics/fan/processing" {
         isValidAt(arg0: $Level_, arg1: $BlockPos_): boolean;
         morphAirFlow(arg0: $FanProcessingType$AirFlowParticleAccess, arg1: $RandomSource): void;
         affectEntity(arg0: $Entity, arg1: $Level_): void;
-        spawnProcessingParticles(arg0: $Level_, arg1: $Vec3_): void;
         canProcess(arg0: $ItemStack_, arg1: $Level_): boolean;
+        spawnProcessingParticles(arg0: $Level_, arg1: $Vec3_): void;
         get priority(): number;
     }
     /**

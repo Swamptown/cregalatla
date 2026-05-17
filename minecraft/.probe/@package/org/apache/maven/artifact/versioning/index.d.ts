@@ -8,10 +8,10 @@ declare module "@package/org/apache/maven/artifact/versioning" {
     export interface $ArtifactVersion extends $Comparable<$ArtifactVersion> {
         getMajorVersion(): number;
         getMinorVersion(): number;
-        parseVersion(arg0: string): void;
         getIncrementalVersion(): number;
         getBuildNumber(): number;
         getQualifier(): string;
+        parseVersion(arg0: string): void;
         get majorVersion(): number;
         get minorVersion(): number;
         get incrementalVersion(): number;
@@ -20,7 +20,12 @@ declare module "@package/org/apache/maven/artifact/versioning" {
     }
     export class $VersionRange {
         static createFromVersionSpec(arg0: string): $VersionRange;
+        getRecommendedVersion(): $ArtifactVersion;
         getRestrictions(): $List<$Restriction>;
+        /**
+         * @deprecated
+         */
+        cloneOf(): $VersionRange;
         static createFromVersion(arg0: string): $VersionRange;
         restrict(arg0: $VersionRange): $VersionRange;
         getSelectedVersion(arg0: $Artifact): $ArtifactVersion;
@@ -28,13 +33,8 @@ declare module "@package/org/apache/maven/artifact/versioning" {
         matchVersion(arg0: $List_<$ArtifactVersion>): $ArtifactVersion;
         containsVersion(arg0: $ArtifactVersion): boolean;
         hasRestrictions(): boolean;
-        getRecommendedVersion(): $ArtifactVersion;
-        /**
-         * @deprecated
-         */
-        cloneOf(): $VersionRange;
-        get restrictions(): $List<$Restriction>;
         get recommendedVersion(): $ArtifactVersion;
+        get restrictions(): $List<$Restriction>;
     }
     export class $Restriction {
         containsVersion(arg0: $ArtifactVersion): boolean;

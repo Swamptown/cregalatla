@@ -168,12 +168,12 @@ declare module "@package/java/lang/reflect" {
     export interface $TypeVariable<D extends $GenericDeclaration> extends $Type, $AnnotatedElement {
         getName(): string;
         getBounds(): $Type[];
-        getAnnotatedBounds(): $AnnotatedType[];
         getGenericDeclaration(): D;
+        getAnnotatedBounds(): $AnnotatedType[];
         get name(): string;
         get bounds(): $Type[];
-        get annotatedBounds(): $AnnotatedType[];
         get genericDeclaration(): D;
+        get annotatedBounds(): $AnnotatedType[];
     }
     export class $RecordComponent implements $AnnotatedElement {
         getName(): string;

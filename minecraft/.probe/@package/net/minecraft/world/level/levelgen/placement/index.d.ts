@@ -109,8 +109,8 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
         static CODEC: $MapCodec<$SurfaceWaterDepthFilter>;
     }
     export class $EnvironmentScanPlacement extends $PlacementModifier {
-        static scanningFor(arg0: $Direction_, arg1: $BlockPredicate, arg2: $BlockPredicate, arg3: number): $EnvironmentScanPlacement;
         static scanningFor(arg0: $Direction_, arg1: $BlockPredicate, arg2: number): $EnvironmentScanPlacement;
+        static scanningFor(arg0: $Direction_, arg1: $BlockPredicate, arg2: $BlockPredicate, arg3: number): $EnvironmentScanPlacement;
         static CODEC: $MapCodec<$EnvironmentScanPlacement>;
     }
     export class $NoiseThresholdCountPlacement extends $RepeatingPlacement {
@@ -178,11 +178,11 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
     export class $PlacementContext extends $WorldGenerationContext {
         generator(): $ChunkGenerator;
         getLevel(): $WorldGenLevel;
-        getCarvingMask(arg0: $ChunkPos, arg1: $GenerationStep$Carving_): $CarvingMask;
         topFeature(): ($PlacedFeature) | undefined;
-        getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
+        getCarvingMask(arg0: $ChunkPos, arg1: $GenerationStep$Carving_): $CarvingMask;
         getBlockState(arg0: $BlockPos_): $BlockState;
         getMinBuildHeight(): number;
+        getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
         constructor(arg0: $WorldGenLevel, arg1: $ChunkGenerator, arg2: ($PlacedFeature_) | undefined);
         get level(): $WorldGenLevel;
         get minBuildHeight(): number;

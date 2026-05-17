@@ -8,8 +8,8 @@ declare module "@package/de/keksuccino/fancymenu/util/resource" {
     }
     export interface $PlayableResource extends $Resource {
         stop(): void;
-        play(): void;
         isPlaying(): boolean;
+        play(): void;
         pause(): void;
         isPaused(): boolean;
         get playing(): boolean;
@@ -36,13 +36,13 @@ declare module "@package/de/keksuccino/fancymenu/util/resource" {
     }
     export interface $RenderableResource extends $Resource {
         reset(): void;
-        getWidth(): number;
-        getHeight(): number;
         getAspectRatio(): $AspectRatio;
         getResourceLocation(): $ResourceLocation;
-        get width(): number;
-        get height(): number;
+        getWidth(): number;
+        getHeight(): number;
         get aspectRatio(): $AspectRatio;
         get resourceLocation(): $ResourceLocation;
+        get width(): number;
+        get height(): number;
     }
 }

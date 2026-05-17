@@ -23,12 +23,12 @@ declare module "@package/com/mojang/blaze3d/shaders" {
         static glGetUniformLocation(arg0: number, arg1: $CharSequence): number;
         static glBindAttribLocation(arg0: number, arg1: number, arg2: $CharSequence): void;
         static glGetAttribLocation(arg0: number, arg1: $CharSequence): number;
-        static uploadInteger(arg0: number, arg1: number): void;
-        static getTypeFromString(arg0: string): number;
         setLocation(arg0: number): void;
+        upload(): void;
         getIntBuffer(): $IntBuffer;
         getFloatBuffer(): $FloatBuffer;
-        upload(): void;
+        static uploadInteger(arg0: number, arg1: number): void;
+        static getTypeFromString(arg0: string): number;
         static UT_INT4: number;
         static UT_INT3: number;
         static UT_MAT4: number;
@@ -61,9 +61,9 @@ declare module "@package/com/mojang/blaze3d/shaders" {
     export type $FogShape_ = "sphere" | "cylinder";
     export class $ProgramManager {
         static glUseProgram(arg0: number): void;
-        static releaseProgram(arg0: $Shader): void;
         static createProgram(): number;
         static linkShader(arg0: $Shader): void;
+        static releaseProgram(arg0: $Shader): void;
         constructor();
     }
     export class $AbstractUniform {
@@ -103,7 +103,7 @@ declare module "@package/com/mojang/blaze3d/shaders" {
         static valueOf(arg0: string): $Program$Type;
         getExtension(): string;
         getPrograms(): $Map<string, $Program>;
-        static createProgramType$ldlib2_$md$8e2dbe$0(arg0: string, arg1: number, arg2: string, arg3: string, arg4: number): $Program$Type;
+        static createProgramType$ldlib2_$md$d858b6$0(arg0: string, arg1: number, arg2: string, arg3: string, arg4: number): $Program$Type;
         static VERTEX: $Program$Type;
         static FRAGMENT: $Program$Type;
         get extension(): string;

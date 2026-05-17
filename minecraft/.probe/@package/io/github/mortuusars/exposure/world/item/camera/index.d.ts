@@ -37,12 +37,12 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
         tick(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_): boolean;
         setStartTick(stack: $ItemStack_, tick: number): void;
         setEndTick(stack: $ItemStack_, tick: number): void;
-        getRemainingTicks(holder: $CameraHolder, stack: $ItemStack_): number;
         getLastReleaseTick(stack: $ItemStack_): number;
         setLastReleaseTick(stack: $ItemStack_, tick: number): void;
         getTicksSinceLastRelease(holder: $CameraHolder, stack: $ItemStack_): number;
         getEndTick(stack: $ItemStack_): number;
         getStartTick(stack: $ItemStack_): number;
+        getRemainingTicks(holder: $CameraHolder, stack: $ItemStack_): number;
         isTicking(holder: $CameraHolder, stack: $ItemStack_): boolean;
         constructor();
     }
@@ -80,7 +80,7 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
     /**
      * Values that may be interpreted as {@link $Attachment}.
      */
-    export type $Attachment_<T> = { itemPredicate?: $Predicate_<$ItemStack>, removedSound?: ($SoundEffect_) | undefined, insertedSound?: ($SoundEffect_) | undefined, id?: $ResourceLocation_, maxCount?: $Supplier_<number>, component?: $DataComponentType_<$StoredItemStack>, itemType?: $Class<$Item_>,  } | [itemPredicate?: $Predicate_<$ItemStack>, removedSound?: ($SoundEffect_) | undefined, insertedSound?: ($SoundEffect_) | undefined, id?: $ResourceLocation_, maxCount?: $Supplier_<number>, component?: $DataComponentType_<$StoredItemStack>, itemType?: $Class<$Item_>, ];
+    export type $Attachment_<T> = { itemType?: $Class<$Item_>, component?: $DataComponentType_<$StoredItemStack>, maxCount?: $Supplier_<number>, id?: $ResourceLocation_, insertedSound?: ($SoundEffect_) | undefined, removedSound?: ($SoundEffect_) | undefined, itemPredicate?: $Predicate_<$ItemStack>,  } | [itemType?: $Class<$Item_>, component?: $DataComponentType_<$StoredItemStack>, maxCount?: $Supplier_<number>, id?: $ResourceLocation_, insertedSound?: ($SoundEffect_) | undefined, removedSound?: ($SoundEffect_) | undefined, itemPredicate?: $Predicate_<$ItemStack>, ];
     export class $Shutter {
         isOpen(stack: $ItemStack_): boolean;
         getState(stack: $ItemStack_): $ShutterState;
@@ -88,8 +88,8 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
         close(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_): void;
         open(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_, shutterSpeed: $ShutterSpeed): void;
         tick(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_): boolean;
-        playCloseSound(holder: $CameraHolder): void;
         playOpenSound(holder: $CameraHolder): void;
+        playCloseSound(holder: $CameraHolder): void;
         onClosed(onClosed: $TriConsumer_<$CameraHolder, $ServerLevel, $ItemStack>): void;
         onOpen(onOpen: $TriConsumer_<$CameraHolder, $ServerLevel, $ItemStack>): void;
         shouldClose(stack: $ItemStack_, gameTime: number): boolean;
@@ -111,7 +111,7 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
     /**
      * Values that may be interpreted as {@link $ShutterState}.
      */
-    export type $ShutterState_ = { shutterSpeed?: $ShutterSpeed, isOpen?: boolean, openedAtTick?: number,  } | [shutterSpeed?: $ShutterSpeed, isOpen?: boolean, openedAtTick?: number, ];
+    export type $ShutterState_ = { openedAtTick?: number, isOpen?: boolean, shutterSpeed?: $ShutterSpeed,  } | [openedAtTick?: number, isOpen?: boolean, shutterSpeed?: $ShutterSpeed, ];
     export class $CameraItem extends $Item implements $IItemExtension {
         release(holder: $CameraHolder, stack: $ItemStack_): $InteractionResultHolder<$ItemStack>;
         isActive(stack: $ItemStack_): boolean;
@@ -156,11 +156,11 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
         onFrameAdded(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_, frame: $Frame_, positionsInFrame: $List_<$BlockPos_>, entitiesInFrame: $List_<$LivingEntity>): void;
         handleProjectionResult(level: $ServerLevel, holder: $CameraHolder, stack: $ItemStack_, projectionState: $CameraInstance$ProjectionState_, error: ($TranslatableError_) | undefined): void;
         static getGlassTintColor(stack: $ItemStack_, tintIndex: number): number;
-        getFov(level: $Level_, stack: $ItemStack_): number;
+        getCooldownPercent(holder: $CameraHolder, stack: $ItemStack_): number;
         activate(entity: $Entity, stack: $ItemStack_): $InteractionResultHolder<$ItemStack>;
         setActive(stack: $ItemStack_, active: boolean): void;
         getTimer(): $Timer;
-        getCooldownPercent(holder: $CameraHolder, stack: $ItemStack_): number;
+        getFov(level: $Level_, stack: $ItemStack_): number;
         isOnCooldown(holder: $CameraHolder, stack: $ItemStack_): boolean;
         getLastActionTime(stack: $ItemStack_): number;
         getAttachments(): $List<$Attachment<never>>;
@@ -189,10 +189,10 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
     }
     export class $Flash {
         shouldFire(camera: $ItemStack_, lightLevel: number): boolean;
-        fire(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_): boolean;
         getCooldown(): number;
-        isAvailable(camera: $ItemStack_): boolean;
+        fire(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_): boolean;
         getSound(): $SoundEvent;
+        isAvailable(camera: $ItemStack_): boolean;
         constructor();
         get cooldown(): number;
         get sound(): $SoundEvent;

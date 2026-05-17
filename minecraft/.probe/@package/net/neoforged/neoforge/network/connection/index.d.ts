@@ -18,8 +18,8 @@ declare module "@package/net/neoforged/neoforge/network/connection" {
      */
     export type $ConnectionType_ = "neoforge" | "other";
     export class $ConnectionUtils {
-        static removeConnection(arg0: $ChannelHandlerContext): void;
         static setConnection(arg0: $ChannelHandlerContext, arg1: $Connection): void;
+        static removeConnection(arg0: $ChannelHandlerContext): void;
         static getConnection(arg0: $ChannelHandlerContext): $Connection;
     }
 }

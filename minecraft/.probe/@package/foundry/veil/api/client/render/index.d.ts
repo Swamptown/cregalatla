@@ -29,32 +29,32 @@ declare module "@package/foundry/veil/api/client/render" {
         copy(arg0: $PoseStack): void;
         isEmpty(): boolean;
         isIdentity(): boolean;
+        rotate(arg0: number, arg1: number, arg2: number, arg3: number): void;
         rotate(arg0: $Quaterniondc): void;
-        rotate(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        rotate(arg0: number, arg1: number, arg2: number, arg3: number): void;
         rotate(arg0: $Quaternionfc): void;
+        rotate(arg0: number, arg1: number, arg2: number, arg3: number): void;
         normal(): $Matrix3f;
-        matrixPush(): void;
-        matrixPop(): void;
         setIdentity(): void;
-        applyScale(arg0: number, arg1: number, arg2: number): void;
+        applyScale(arg0: number): void;
         applyScale(arg0: number): void;
         applyScale(arg0: number, arg1: number, arg2: number): void;
-        applyScale(arg0: $Vector3dc): void;
+        applyScale(arg0: number, arg1: number, arg2: number): void;
         applyScale(arg0: $Vector3fc): void;
-        applyScale(arg0: number): void;
+        applyScale(arg0: $Vector3dc): void;
         toPoseStack(): $PoseStack;
-        translate(arg0: number, arg1: number, arg2: number): void;
-        translate(arg0: $Vector3fc): void;
         translate(arg0: $Vector3dc): void;
+        translate(arg0: $Vector3fc): void;
+        translate(arg0: number, arg1: number, arg2: number): void;
         translate(arg0: number, arg1: number, arg2: number): void;
         pose(): $PoseStack$Pose;
-        rotateAround(arg0: $Quaterniondc, arg1: number, arg2: number, arg3: number): void;
+        rotateXYZ(arg0: number, arg1: number, arg2: number): void;
+        rotateXYZ(arg0: number, arg1: number, arg2: number): void;
+        rotateZYX(arg0: number, arg1: number, arg2: number): void;
+        rotateZYX(arg0: number, arg1: number, arg2: number): void;
+        matrixPush(): void;
+        matrixPop(): void;
         rotateAround(arg0: $Quaternionfc, arg1: number, arg2: number, arg3: number): void;
-        rotateXYZ(arg0: number, arg1: number, arg2: number): void;
-        rotateXYZ(arg0: number, arg1: number, arg2: number): void;
-        rotateZYX(arg0: number, arg1: number, arg2: number): void;
-        rotateZYX(arg0: number, arg1: number, arg2: number): void;
+        rotateAround(arg0: $Quaterniondc, arg1: number, arg2: number, arg3: number): void;
         get empty(): boolean;
     }
     export class $VeilShaderBufferLayout<T> extends $Record {
@@ -71,7 +71,7 @@ declare module "@package/foundry/veil/api/client/render" {
     /**
      * Values that may be interpreted as {@link $VeilShaderBufferLayout}.
      */
-    export type $VeilShaderBufferLayout_<T> = RegistryTypes.VeilShaderBuffer | { structSpecifier?: $GlslStructSpecifier, requestedBinding?: $ShaderBlock$BufferBinding_, memoryLayout?: $ShaderBlock$MemoryLayout_, name?: string, fields?: $Map_<string, $VeilShaderBufferLayout$FieldSerializer_<any>>,  } | [structSpecifier?: $GlslStructSpecifier, requestedBinding?: $ShaderBlock$BufferBinding_, memoryLayout?: $ShaderBlock$MemoryLayout_, name?: string, fields?: $Map_<string, $VeilShaderBufferLayout$FieldSerializer_<any>>, ];
+    export type $VeilShaderBufferLayout_<T> = RegistryTypes.VeilShaderBuffer | { fields?: $Map_<string, $VeilShaderBufferLayout$FieldSerializer_<any>>, name?: string, memoryLayout?: $ShaderBlock$MemoryLayout_, requestedBinding?: $ShaderBlock$BufferBinding_, structSpecifier?: $GlslStructSpecifier,  } | [fields?: $Map_<string, $VeilShaderBufferLayout$FieldSerializer_<any>>, name?: string, memoryLayout?: $ShaderBlock$MemoryLayout_, requestedBinding?: $ShaderBlock$BufferBinding_, structSpecifier?: $GlslStructSpecifier, ];
     export interface $VeilShaderBufferLayout<T> extends RegistryMarked<RegistryTypes.VeilShaderBufferTag, RegistryTypes.VeilShaderBuffer> {}
     export class $CullFrustum {
     }

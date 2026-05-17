@@ -35,29 +35,29 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/events" {
     export interface $IFireConsumeBlockEvent extends $SimpleEvent {
         getState(): $BlockState;
         getLevel(): $LevelAccessor;
-        wasReplacedByFire(): boolean;
-        getChance(): number;
-        getFace(): $Direction;
-        setFinalState(arg0: $BlockState_): void;
         getFinalState(): $BlockState;
+        getFace(): $Direction;
+        getChance(): number;
+        setFinalState(arg0: $BlockState_): void;
+        wasReplacedByFire(): boolean;
         getAge(): number;
         getPos(): $BlockPos;
         get state(): $BlockState;
         get level(): $LevelAccessor;
-        get chance(): number;
         get face(): $Direction;
+        get chance(): number;
         get age(): number;
         get pos(): $BlockPos;
     }
     export class $IVillagerBrainEvent {
     }
     export interface $IVillagerBrainEvent extends $SimpleEvent {
+        scheduleActivity(arg0: $Activity_, arg1: number, arg2: number): void;
+        addTaskToActivity<P extends $Pair<number, $Behavior<$Villager>>>(arg0: $Activity_, arg1: P): boolean;
         addSensor(arg0: $SensorType_<$Sensor<$Villager>>): void;
         getVillager(): $Villager;
         getMemories(): $Map<$MemoryModuleType<never>, ($ExpirableValue<never>) | undefined>;
         addOrReplaceActivity(arg0: $Activity_, arg1: $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>): void;
-        scheduleActivity(arg0: $Activity_, arg1: number, arg2: number): void;
-        addTaskToActivity<P extends $Pair<number, $Behavior<$Villager>>>(arg0: $Activity_, arg1: P): boolean;
         getInternal(): $VillagerBrainEventInternal;
         get villager(): $Villager;
         get memories(): $Map<$MemoryModuleType<never>, ($ExpirableValue<never>) | undefined>;
@@ -67,15 +67,15 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/events" {
         static create(arg0: $ItemStack_, arg1: $Player, arg2: boolean): $IDropItemOnDeathEvent;
     }
     export interface $IDropItemOnDeathEvent extends $SimpleEvent {
-        setReturnItemStack(arg0: $ItemStack_): void;
-        isBeforeDrop(): boolean;
         getPlayer(): $Player;
         getReturnItemStack(): $ItemStack;
+        isBeforeDrop(): boolean;
+        setReturnItemStack(arg0: $ItemStack_): void;
+        getItemStack(): $ItemStack;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
-        getItemStack(): $ItemStack;
-        get beforeDrop(): boolean;
         get player(): $Player;
+        get beforeDrop(): boolean;
         get itemStack(): $ItemStack;
     }
     export class $SimpleEvent {

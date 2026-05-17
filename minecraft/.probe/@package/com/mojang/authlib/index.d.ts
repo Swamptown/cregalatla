@@ -29,7 +29,7 @@ declare module "@package/com/mojang/authlib" {
     /**
      * Values that may be interpreted as {@link $Environment}.
      */
-    export type $Environment_ = { sessionHost?: string, servicesHost?: string, name?: string,  } | [sessionHost?: string, servicesHost?: string, name?: string, ];
+    export type $Environment_ = { name?: string, servicesHost?: string, sessionHost?: string,  } | [name?: string, servicesHost?: string, sessionHost?: string, ];
     export class $HttpAuthenticationService implements $AuthenticationService {
         getProxy(): $Proxy;
         static constantURL(arg0: string): $URL;

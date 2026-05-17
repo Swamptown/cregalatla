@@ -1,6 +1,22 @@
 {
   "favorites": [],
   "lookup_history": [
+    "mob_effect:mymod:r",
+    "mob_effect:mymod:vgg",
+    "mob_effect:mymod:v",
+    "item:minecraft:blue_glazed_terracotta",
+    "mob_effect:mymod:bender",
+    "item:mymod:closed_earth_scroll",
+    "item:mymod:closed_fire_scroll",
+    "item:mymod:closed_water_scroll",
+    "item:minecraft:villager_spawn_egg",
+    {
+      "type": "item",
+      "id": "mymod:pieceofancientlore",
+      "amount": 10
+    },
+    "item:mymod:closed_scroll",
+    "item:minecraft:elytra",
     {
       "type": "jemi",
       "uid": "createoreexcavation:ore_vein_type/hardened_diamond"
@@ -17,16 +33,13 @@
     "item:mymod:airbamb",
     "mob_effect:mymod:earthinggone",
     "item:mymod:water_club",
-    "item:mymod:closed_scroll",
     "mob_effect:mymod:rg",
     "mob_effect:mymod:cooldown",
     "mob_effect:mymod:firebreath",
     "mob_effect:mymod:earthstolb",
     "mob_effect:mymod:waterbreath",
     "item:minecraft:red_candle",
-    "item:mymod:pieceofancientlore",
     "mob_effect:mymod:fall_cooldown",
-    "mob_effect:mymod:bender",
     "item:create:potato_cannon",
     "item:minecraft:short_grass",
     "item:create:empty_schematic",
@@ -86,5 +99,141 @@
     "resolutions": {},
     "disabled": []
   },
-  "hidden_stacks": []
+  "hidden_stacks": [
+    "mob_effect:mymod:g",
+    "mob_effect:mymod:v",
+    "mob_effect:mymod:bending",
+    "mob_effect:mymod:rg",
+    "mob_effect:mymod:cooldown",
+    "mob_effect:mymod:firebender",
+    "mob_effect:mymod:rgv",
+    "mob_effect:mymod:firebreath",
+    "mob_effect:mymod:gr",
+    "mob_effect:mymod:airbender",
+    "mob_effect:mymod:waterbender",
+    "mob_effect:mymod:earthbender",
+    "mob_effect:mymod:rv",
+    "mob_effect:mymod:gv",
+    "mob_effect:mymod:waterbreath",
+    "mob_effect:mymod:icebreath",
+    "mob_effect:mymod:earthing",
+    "mob_effect:mymod:earthinggone",
+    "mob_effect:mymod:earthstolb",
+    "mob_effect:mymod:watershielded",
+    "mob_effect:mymod:vr",
+    "mob_effect:mymod:airball",
+    "mob_effect:mymod:soon",
+    "mob_effect:mymod:time",
+    "mob_effect:mymod:vg",
+    "mob_effect:mymod:firefall",
+    {
+      "type": "jemi",
+      "uid": "mymod:earthblocks_base"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:earthingaround_2"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:shieldy"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:flow"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:earthflyshot"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:projectile_earthfirefly"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:earthfirefly"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:earthy_beatle"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:gargoyles"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:earthgone"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:earthingaround"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:earthblocks"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:longice"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:iceshortbuild"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:iceshort"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:lwaterong"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:shortwater"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:flyingearth"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:windthing"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:fireball"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:windshot"
+    },
+    "mob_effect:mymod:air_cooldown",
+    "mob_effect:mymod:sub_cooldown",
+    "mob_effect:mymod:attack_cooldown",
+    "mob_effect:mymod:water_consentrated",
+    "mob_effect:mymod:vgg",
+    "mob_effect:mymod:fall_cooldown",
+    "mob_effect:mymod:earth_stare",
+    {
+      "type": "jemi",
+      "uid": "mymod:flying_blocks"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:earth_converter"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:balanced_water"
+    },
+    {
+      "type": "jemi",
+      "uid": "mymod:whip_damage"
+    },
+    "mob_effect:mymod:bender",
+    "mob_effect:mymod:r"
+  ]
 }

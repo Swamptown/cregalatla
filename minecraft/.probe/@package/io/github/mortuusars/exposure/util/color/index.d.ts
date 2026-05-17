@@ -14,7 +14,7 @@ declare module "@package/io/github/mortuusars/exposure/util/color" {
     /**
      * Values that may be interpreted as {@link $Color$Unbounded}.
      */
-    export type $Color$Unbounded_ = { r?: number, a?: number, g?: number, b?: number,  } | [r?: number, a?: number, g?: number, b?: number, ];
+    export type $Color$Unbounded_ = { b?: number, g?: number, a?: number, r?: number,  } | [b?: number, g?: number, a?: number, r?: number, ];
     export class $Color extends $Record {
         static clamp(channel: number): number;
         add(other: $Color_): $Color;
@@ -53,17 +53,17 @@ declare module "@package/io/github/mortuusars/exposure/util/color" {
         static ARGBtoABGR(ARGB: number): number;
         static fromHex(hexColor: string): $Color;
         getG(): number;
-        static pack(alpha: number, red: number, green: number, blue: number): number;
         getA(): number;
         getB(): number;
-        getRGB(): number;
-        static rgb(rgb: number): $Color;
-        static rgb(r: number, g: number, b: number): $Color;
+        static pack(alpha: number, red: number, green: number, blue: number): number;
         static blue(argb: number): number;
         static green(argb: number): number;
         static alpha(argb: number): number;
         static argb(argb: number): $Color;
         static argb(a: number, r: number, g: number, b: number): $Color;
+        getRGB(): number;
+        static rgb(r: number, g: number, b: number): $Color;
+        static rgb(rgb: number): $Color;
         static WHITE: $Color;
         static CODEC: $Codec<$Color>;
         static HEX_STRING_CODEC: $Codec<$Color>;
@@ -82,5 +82,5 @@ declare module "@package/io/github/mortuusars/exposure/util/color" {
     /**
      * Values that may be interpreted as {@link $Color}.
      */
-    export type $Color_ = { r?: number, a?: number, g?: number, b?: number,  } | [r?: number, a?: number, g?: number, b?: number, ];
+    export type $Color_ = { b?: number, g?: number, a?: number, r?: number,  } | [b?: number, g?: number, a?: number, r?: number, ];
 }

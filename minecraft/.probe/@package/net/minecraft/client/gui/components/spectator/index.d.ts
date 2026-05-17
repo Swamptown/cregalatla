@@ -1,8 +1,8 @@
 import { $IMixinSpectatorGui } from "@package/de/keksuccino/fancymenu/mixin/mixins/common/client";
 import { $SpectatorMenu, $SpectatorMenuListener } from "@package/net/minecraft/client/gui/spectator";
 import { $Minecraft } from "@package/net/minecraft/client";
-import { $SpectatorPage } from "@package/net/minecraft/client/gui/spectator/categories";
 import { $GuiGraphics } from "@package/net/minecraft/client/gui";
+import { $SpectatorPage } from "@package/net/minecraft/client/gui/spectator/categories";
 
 declare module "@package/net/minecraft/client/gui/components/spectator" {
     export class $SpectatorGui implements $SpectatorMenuListener, $IMixinSpectatorGui {

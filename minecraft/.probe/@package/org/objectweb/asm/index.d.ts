@@ -90,7 +90,6 @@ declare module "@package/org/objectweb/asm" {
          */
         newHandle(arg0: number, arg1: string, arg2: string, arg3: string): number;
         newHandle(arg0: number, arg1: string, arg2: string, arg3: string, arg4: boolean): number;
-        hasFlags(arg0: number): boolean;
         newConst(arg0: $Object): number;
         newUTF8(arg0: string): number;
         newClass(arg0: string): number;
@@ -99,6 +98,7 @@ declare module "@package/org/objectweb/asm" {
         newInvokeDynamic(arg0: string, arg1: string, arg2: $Handle, ...arg3: $Object[]): number;
         newField(arg0: string, arg1: string, arg2: string): number;
         newNameType(arg0: string, arg1: string): number;
+        hasFlags(arg0: number): boolean;
         newMethod(arg0: string, arg1: string, arg2: string, arg3: boolean): number;
         static COMPUTE_MAXS: number;
         static COMPUTE_FRAMES: number;
@@ -174,12 +174,11 @@ declare module "@package/org/objectweb/asm" {
         static getType(arg0: $Method): $Type;
         static getType(arg0: $Constructor<never>): $Type;
         getSize(): number;
-        static getMethodType(arg0: $Type, ...arg1: $Type[]): $Type;
         static getMethodType(arg0: string): $Type;
+        static getMethodType(arg0: $Type, ...arg1: $Type[]): $Type;
         static getMethodDescriptor(arg0: $Type, ...arg1: $Type[]): string;
         static getMethodDescriptor(arg0: $Method): string;
         getClassName(): string;
-        getElementType(): $Type;
         static getObjectType(arg0: string): $Type;
         static getInternalName(arg0: $Class<never>): string;
         getInternalName(): string;
@@ -187,13 +186,14 @@ declare module "@package/org/objectweb/asm" {
         getArgumentCount(): number;
         getOpcode(arg0: number): number;
         getSort(): number;
-        static getConstructorDescriptor(arg0: $Constructor<never>): string;
         getDimensions(): number;
+        static getArgumentTypes(arg0: string): $Type[];
         static getArgumentTypes(arg0: $Method): $Type[];
         getArgumentTypes(): $Type[];
-        static getArgumentTypes(arg0: string): $Type[];
+        static getConstructorDescriptor(arg0: $Constructor<never>): string;
         static getArgumentsAndReturnSizes(arg0: string): number;
         getArgumentsAndReturnSizes(): number;
+        getElementType(): $Type;
         static CHAR_TYPE: $Type;
         static FLOAT: number;
         static DOUBLE_TYPE: $Type;
@@ -217,9 +217,9 @@ declare module "@package/org/objectweb/asm" {
         static INT_TYPE: $Type;
         get size(): number;
         get className(): string;
-        get elementType(): $Type;
         get sort(): number;
         get dimensions(): number;
+        get elementType(): $Type;
     }
     export class $ClassReader {
         getInterfaces(): string[];

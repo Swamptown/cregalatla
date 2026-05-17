@@ -1,4 +1,4 @@
-import { $RecipeManager, $RecipeHolder_, $RecipeType_ } from "@package/net/minecraft/world/item/crafting";
+import { $RecipeHolder_, $RecipeManager, $RecipeType_ } from "@package/net/minecraft/world/item/crafting";
 import { $Event } from "@package/net/neoforged/bus/api";
 import { $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $Multimap } from "@package/com/google/common/collect";

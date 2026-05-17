@@ -21,8 +21,8 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/render" {
     export class $RenderContext {
     }
     export interface $RenderContext {
-        getEmitter(): $QuadEmitter;
         hasTransform(): boolean;
+        getEmitter(): $QuadEmitter;
         getRenderType(): $RenderType;
         getModelData(): $ModelData;
         isFaceCulled(arg0: $Direction_): boolean;

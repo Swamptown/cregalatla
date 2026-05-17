@@ -113,7 +113,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
     /**
      * Values that may be interpreted as {@link $StyleMatcher}.
      */
-    export type $StyleMatcher_ = { weight?: number, selector?: $StyleSelector_[],  } | [weight?: number, selector?: $StyleSelector_[], ];
+    export type $StyleMatcher_ = { selector?: $StyleSelector_[], weight?: number,  } | [selector?: $StyleSelector_[], weight?: number, ];
     export class $StyleOrigin extends $Enum<$StyleOrigin> {
         static values(): $StyleOrigin[];
         static valueOf(arg0: string): $StyleOrigin;
@@ -146,7 +146,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
     /**
      * Values that may be interpreted as {@link $StyleSelector}.
      */
-    export type $StyleSelector_ = { type?: $SelectorType, identity?: $Either<string, $HierarchicalStyleMatcher>, scope?: $SelectorScope,  } | [type?: $SelectorType, identity?: $Either<string, $HierarchicalStyleMatcher>, scope?: $SelectorScope, ];
+    export type $StyleSelector_ = { scope?: $SelectorScope, identity?: $Either<string, $HierarchicalStyleMatcher>, type?: $SelectorType,  } | [scope?: $SelectorScope, identity?: $Either<string, $HierarchicalStyleMatcher>, type?: $SelectorType, ];
     export class $StyleChangeListener<T> {
     }
     export interface $StyleChangeListener<T> {
@@ -211,38 +211,38 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
         addLocalStylesheet(arg0: $UIElement, arg1: $Stylesheet): void;
         removeLocalStylesheet(arg0: $UIElement, arg1: $Stylesheet): void;
         scheduleReloadElementStyles(arg0: $UIElement): void;
-        requireCalculate(): boolean;
-        calculateStyle(): void;
-        addStylesheets(arg0: $List_<$Stylesheet>): void;
         addStylesheets(...arg0: $Stylesheet[]): void;
+        addStylesheets(arg0: $List_<$Stylesheet>): void;
         onElementRegister(arg0: $UIElement): void;
         onElementUnregister(arg0: $UIElement): void;
+        requireCalculate(): boolean;
+        calculateStyle(): void;
         modularUI: $ModularUI;
         globalSheets: $List<$Stylesheet>;
         constructor(arg0: $ModularUI);
         get elementStyleRules(): $Map<$UIElement, $Map<$Stylesheet, $List<$StyleRule>>>;
     }
     export class $LayoutStyle extends $Style {
-        /**
-         * @deprecated
-         */
-        bottom(arg0: $StyleLength): $LayoutStyle;
         bottom(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
-        top(arg0: $StyleLength): $LayoutStyle;
+        bottom(arg0: $StyleLength): $LayoutStyle;
         top(arg0: number): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        top(arg0: $StyleLength): $LayoutStyle;
         /**
          * @deprecated
          */
         left(arg0: $StyleLength): $LayoutStyle;
         left(arg0: number): $LayoutStyle;
+        right(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         right(arg0: $StyleLength): $LayoutStyle;
-        right(arg0: number): $LayoutStyle;
         overflow(arg0: $YogaOverflow_): $LayoutStyle;
         /**
          * @deprecated
@@ -259,34 +259,34 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
          * @deprecated
          */
         maxWidth(arg0: $StyleSizeLength): $LayoutStyle;
-        setAspectRatio(arg0: number): $LayoutStyle;
-        widthPercent(arg0: number): $LayoutStyle;
-        paddingAll(arg0: number): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        paddingAll(arg0: $StyleLength): $LayoutStyle;
-        marginRight(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         marginRight(arg0: $StyleLength): $LayoutStyle;
+        marginRight(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         setOverflow(arg0: $YogaOverflow_): $LayoutStyle;
-        heightPercent(arg0: number): $LayoutStyle;
-        flex(arg0: number): $LayoutStyle;
-        marginTop(arg0: number): $LayoutStyle;
+        setAspectRatio(arg0: number): $LayoutStyle;
+        widthPercent(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
-        marginTop(arg0: $StyleLength): $LayoutStyle;
+        paddingAll(arg0: $StyleLength): $LayoutStyle;
+        paddingAll(arg0: number): $LayoutStyle;
+        heightPercent(arg0: number): $LayoutStyle;
+        flex(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         gapAll(arg0: $StyleLength): $LayoutStyle;
         gapAll(arg0: number): $LayoutStyle;
+        marginTop(arg0: number): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        marginTop(arg0: $StyleLength): $LayoutStyle;
         /**
          * @deprecated
          */
@@ -297,6 +297,41 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
          */
         marginLeft(arg0: $StyleLength): $LayoutStyle;
         marginLeft(arg0: number): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setMinWidth(arg0: $StyleSizeLength): $LayoutStyle;
+        setMinWidth(arg0: $TaffyDimension): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setMinWidth(arg0: number): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setMinHeight(arg0: $StyleSizeLength): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setMinHeight(arg0: number): $LayoutStyle;
+        setMinHeight(arg0: $TaffyDimension): $LayoutStyle;
+        setMaxHeight(arg0: $TaffyDimension): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setMaxHeight(arg0: number): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setMaxHeight(arg0: $StyleSizeLength): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setMargin(arg0: $YogaEdge_, arg1: $StyleLength): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setMargin(arg0: $YogaEdge_, arg1: number): $LayoutStyle;
         alignItems(arg0: $AlignItems_): $LayoutStyle;
         setFlexGrow(arg0: number): $LayoutStyle;
         setFlexGrowAuto(): $LayoutStyle;
@@ -306,11 +341,15 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
         /**
          * @deprecated
          */
-        setGap(arg0: $YogaGutter_, arg1: $StyleLength): $LayoutStyle;
+        setDisplay(arg0: $YogaDisplay_): $LayoutStyle;
         /**
          * @deprecated
          */
         setGap(arg0: $YogaGutter_, arg1: number): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setGap(arg0: $YogaGutter_, arg1: $StyleLength): $LayoutStyle;
         /**
          * @deprecated
          */
@@ -475,11 +514,11 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
          */
         marginHorizontal(arg0: $StyleLength): $LayoutStyle;
         marginHorizontal(arg0: number): $LayoutStyle;
-        marginVertical(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         marginVertical(arg0: $StyleLength): $LayoutStyle;
+        marginVertical(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
@@ -502,31 +541,31 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
         marginHorizontalAuto(): $LayoutStyle;
         marginVerticalAuto(): $LayoutStyle;
         marginAllAuto(): $LayoutStyle;
-        paddingLeft(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         paddingLeft(arg0: $StyleLength): $LayoutStyle;
+        paddingLeft(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         paddingRight(arg0: $StyleLength): $LayoutStyle;
         paddingRight(arg0: number): $LayoutStyle;
+        paddingBottom(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         paddingBottom(arg0: $StyleLength): $LayoutStyle;
-        paddingBottom(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         paddingHorizontal(arg0: $StyleLength): $LayoutStyle;
         paddingHorizontal(arg0: number): $LayoutStyle;
-        paddingVertical(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         paddingVertical(arg0: $StyleLength): $LayoutStyle;
+        paddingVertical(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
@@ -631,16 +670,16 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
         flexWrap(arg0: $FlexWrap_): $LayoutStyle;
         aspectRatio(arg0: number): $LayoutStyle;
         aspectRatioAuto(): $LayoutStyle;
+        gapColumn(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         gapColumn(arg0: $StyleLength): $LayoutStyle;
-        gapColumn(arg0: number): $LayoutStyle;
-        gapRow(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         gapRow(arg0: $StyleLength): $LayoutStyle;
+        gapRow(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
@@ -654,13 +693,13 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
         gridTemplateColumns(arg0: string): $LayoutStyle;
         gridTemplateAreas(arg0: $GridTemplateAreas_): $LayoutStyle;
         gridTemplateAreas(arg0: string): $LayoutStyle;
-        gridAutoRows(arg0: $GridAuto_): $LayoutStyle;
         gridAutoRows(arg0: string): $LayoutStyle;
-        gridAutoColumns(arg0: $GridAuto_): $LayoutStyle;
+        gridAutoRows(arg0: $GridAuto_): $LayoutStyle;
         gridAutoColumns(arg0: string): $LayoutStyle;
+        gridAutoColumns(arg0: $GridAuto_): $LayoutStyle;
         gridAutoFlow(arg0: $GridAutoFlow_): $LayoutStyle;
-        gridRow(arg0: $Grid_): $LayoutStyle;
         gridRow(arg0: string): $LayoutStyle;
+        gridRow(arg0: $Grid_): $LayoutStyle;
         gridColumn(arg0: string): $LayoutStyle;
         gridColumn(arg0: $Grid_): $LayoutStyle;
         getMinWidth(): $TaffyDimension;
@@ -681,42 +720,14 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
         /**
          * @deprecated
          */
-        setMinWidth(arg0: number): $LayoutStyle;
+        setDirection(arg0: $YogaDirection_): $LayoutStyle;
+        maxHeight(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
-        setMinWidth(arg0: $StyleSizeLength): $LayoutStyle;
-        setMinWidth(arg0: $TaffyDimension): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        setMinHeight(arg0: $StyleSizeLength): $LayoutStyle;
-        setMinHeight(arg0: $TaffyDimension): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        setMinHeight(arg0: number): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        setMaxHeight(arg0: $StyleSizeLength): $LayoutStyle;
-        setMaxHeight(arg0: $TaffyDimension): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        setMaxHeight(arg0: number): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        setMargin(arg0: $YogaEdge_, arg1: $StyleLength): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        setMargin(arg0: $YogaEdge_, arg1: number): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        setDisplay(arg0: $YogaDisplay_): $LayoutStyle;
+        maxHeight(arg0: $StyleSizeLength): $LayoutStyle;
+        getMaxWidth(): $TaffyDimension;
+        getMaxHeight(): $TaffyDimension;
         /**
          * @deprecated
          */
@@ -728,21 +739,31 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
         /**
          * @deprecated
          */
-        setDirection(arg0: $YogaDirection_): $LayoutStyle;
-        maxHeight(arg0: number): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        maxHeight(arg0: $StyleSizeLength): $LayoutStyle;
-        getMaxWidth(): $TaffyDimension;
-        getMaxHeight(): $TaffyDimension;
-        getWidth(): $TaffyDimension;
-        getHeight(): $TaffyDimension;
-        height(arg0: number): $LayoutStyle;
-        /**
-         * @deprecated
-         */
         height(arg0: $StyleSizeLength): $LayoutStyle;
+        height(arg0: number): $LayoutStyle;
+        getAspectRatio(): number;
+        /**
+         * @deprecated
+         */
+        setWidth(arg0: number): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setWidth(arg0: $StyleSizeLength): $LayoutStyle;
+        setWidth(arg0: $TaffyDimension): $LayoutStyle;
+        setHeight(arg0: $TaffyDimension): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setHeight(arg0: number): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setHeight(arg0: $StyleSizeLength): $LayoutStyle;
+        /**
+         * @deprecated
+         */
+        setMaxWidth(arg0: $StyleSizeLength): $LayoutStyle;
         /**
          * @deprecated
          */
@@ -751,12 +772,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
         /**
          * @deprecated
          */
-        setMaxWidth(arg0: $StyleSizeLength): $LayoutStyle;
-        paddingTop(arg0: number): $LayoutStyle;
-        /**
-         * @deprecated
-         */
         paddingTop(arg0: $StyleLength): $LayoutStyle;
+        paddingTop(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
@@ -765,37 +782,20 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
          * @deprecated
          */
         setPosition(arg0: $YogaEdge_, arg1: $StyleLength): $LayoutStyle;
-        getAspectRatio(): number;
-        /**
-         * @deprecated
-         */
-        setWidth(arg0: $StyleSizeLength): $LayoutStyle;
-        setWidth(arg0: $TaffyDimension): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        setWidth(arg0: number): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        setHeight(arg0: $StyleSizeLength): $LayoutStyle;
-        /**
-         * @deprecated
-         */
-        setHeight(arg0: number): $LayoutStyle;
-        setHeight(arg0: $TaffyDimension): $LayoutStyle;
         minHeight(arg0: number): $LayoutStyle;
         /**
          * @deprecated
          */
         minHeight(arg0: $StyleSizeLength): $LayoutStyle;
+        getWidth(): $TaffyDimension;
+        getHeight(): $TaffyDimension;
         holder: $UIElement;
         constructor(arg0: $UIElement);
+        set display(value: $YogaDisplay_);
         set marginAuto(value: $YogaEdge_);
         set positionAuto(value: $YogaEdge_);
         set wrap(value: $YogaWrap_);
         get styleDirection(): $TaffyDirection;
-        set display(value: $YogaDisplay_);
         set direction(value: $YogaDirection_);
     }
     export class $BasicStyle extends $Style {
@@ -817,12 +817,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
         tooltips(...arg0: $Component_[]): $BasicStyle;
         backgroundTexture(): $IGuiTexture;
         backgroundTexture(arg0: $IGuiTexture_): $BasicStyle;
+        tooltips(): $Tooltips;
+        tooltips(arg0: $Tooltips_): $BasicStyle;
         background(arg0: $IGuiTexture_): $BasicStyle;
         opacity(): number;
         opacity(arg0: number): $BasicStyle;
         overlay(arg0: $IGuiTexture_): $BasicStyle;
-        tooltips(): $Tooltips;
-        tooltips(arg0: $Tooltips_): $BasicStyle;
         overlayTexture(arg0: $IGuiTexture_): $BasicStyle;
         overlayTexture(): $IGuiTexture;
         holder: $UIElement;
@@ -843,7 +843,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style" {
     /**
      * Values that may be interpreted as {@link $StyleSlot}.
      */
-    export type $StyleSlot_<T> = { origin?: $StyleOrigin_, value?: any, property?: $Property<any>, specificity?: number, sourceOrder?: number,  } | [origin?: $StyleOrigin_, value?: any, property?: $Property<any>, specificity?: number, sourceOrder?: number, ];
+    export type $StyleSlot_<T> = { sourceOrder?: number, specificity?: number, property?: $Property<any>, value?: any, origin?: $StyleOrigin_,  } | [sourceOrder?: number, specificity?: number, property?: $Property<any>, value?: any, origin?: $StyleOrigin_, ];
     export class $Property<VALUE> {
         static of<T>(arg0: string, arg1: $Class<T>, arg2: $Codec<T>, arg3: T, arg4: $ValueParser_<T>): $Property<T>;
         static of<T>(arg0: string, arg1: $Codec<T>, arg2: T, arg3: $ValueParser_<T>): $Property<T>;

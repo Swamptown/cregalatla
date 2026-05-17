@@ -51,8 +51,8 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
         reason(): $ReportReason;
         build(arg0: $ReportingContext): $Either<$Report$Result, $Report$CannotBuildReason>;
         setComments(arg0: string): void;
-        report(): R;
         hasContent(): boolean;
+        report(): R;
         setReason(arg0: $ReportReason_): void;
         reportedProfileId(): $UUID;
         attested(): boolean;
@@ -87,7 +87,7 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
     /**
      * Values that may be interpreted as {@link $AbuseReportSender$Services}.
      */
-    export type $AbuseReportSender$Services_ = { environment?: $ReportEnvironment_, userApiService?: $UserApiService,  } | [environment?: $ReportEnvironment_, userApiService?: $UserApiService, ];
+    export type $AbuseReportSender$Services_ = { userApiService?: $UserApiService, environment?: $ReportEnvironment_,  } | [userApiService?: $UserApiService, environment?: $ReportEnvironment_, ];
     export class $ReportingContext {
         matches(arg0: $ReportEnvironment_): boolean;
         static create(arg0: $ReportEnvironment_, arg1: $UserApiService): $ReportingContext;
@@ -166,8 +166,8 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
     export type $ReportReason_ = "generic" | "hate_speech" | "harassment_or_bullying" | "self_harm_or_suicide" | "imminent_harm" | "defamation_impersonation_false_information" | "alcohol_tobacco_drugs" | "child_sexual_exploitation_or_abuse" | "terrorism_or_violent_extremism" | "non_consensual_intimate_imagery";
     export class $ChatReport$Builder extends $Report$Builder<$ChatReport> {
         copy(): $ChatReport$Builder;
-        isReported(arg0: number): boolean;
         toggleReported(arg0: number): void;
+        isReported(arg0: number): boolean;
         reportedMessages(): $IntSet;
         limits: $AbuseReportLimits;
         constructor(arg0: $ChatReport, arg1: $AbuseReportLimits_);
@@ -270,5 +270,5 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
     /**
      * Values that may be interpreted as {@link $Report$Result}.
      */
-    export type $Report$Result_ = { id?: $UUID_, report?: $AbuseReport_, reportType?: $ReportType_,  } | [id?: $UUID_, report?: $AbuseReport_, reportType?: $ReportType_, ];
+    export type $Report$Result_ = { reportType?: $ReportType_, report?: $AbuseReport_, id?: $UUID_,  } | [reportType?: $ReportType_, report?: $AbuseReport_, id?: $UUID_, ];
 }

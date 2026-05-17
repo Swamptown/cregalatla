@@ -42,14 +42,14 @@ declare module "@package/com/tterrag/registrate/util" {
         negate(): $Predicate<$ItemStack>;
         and(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         static ingredient(arg0: $Ingredient_, arg1: $ItemLike_): $DataIngredient;
-        static ingredient(arg0: $Ingredient_, arg1: $TagKey_<$Item>): $DataIngredient;
         static ingredient(arg0: $Ingredient_, arg1: $ResourceLocation_, ...arg2: $ItemPredicate_[]): $DataIngredient;
-        toVanilla(): $Ingredient;
-        getCriterion(arg0: $RegistrateRecipeProvider): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
+        static ingredient(arg0: $Ingredient_, arg1: $TagKey_<$Item>): $DataIngredient;
         getStackingIds(): $IntList;
         isCustom(): boolean;
         hasNoItems(): boolean;
         getCustomIngredient(): $ICustomIngredient;
+        toVanilla(): $Ingredient;
+        getCriterion(arg0: $RegistrateRecipeProvider): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
         static items<T extends $ItemLike>(arg0: $NonNullSupplier_<T>, ...arg1: $NonNullSupplier_<T>[]): $DataIngredient;
         static items<T extends $ItemLike>(arg0: T, ...arg1: T[]): $DataIngredient;
         isSimple(): boolean;

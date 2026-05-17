@@ -4,7 +4,7 @@ import { $Item$Properties, $BlockItem, $Item } from "@package/net/minecraft/worl
 import { $FoodProperties_ } from "@package/net/minecraft/world/food";
 import { $BlockState } from "@package/net/minecraft/world/level/block/state";
 import { $ResourceLocation } from "@package/net/minecraft/resources";
-import { $SoundType_, $Block, $Block_ } from "@package/net/minecraft/world/level/block";
+import { $SoundType_, $Block_, $Block } from "@package/net/minecraft/world/level/block";
 import { $Object } from "@package/java/lang";
 import { $Map } from "@package/java/util";
 

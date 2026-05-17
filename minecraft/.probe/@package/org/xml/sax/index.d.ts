@@ -73,6 +73,9 @@ declare module "@package/org/xml/sax" {
     export class $ContentHandler {
     }
     export interface $ContentHandler {
+        endPrefixMapping(arg0: string): void;
+        startPrefixMapping(arg0: string, arg1: string): void;
+        skippedEntity(arg0: string): void;
         setDocumentLocator(arg0: $Locator): void;
         startElement(arg0: string, arg1: string, arg2: string, arg3: $Attributes): void;
         endElement(arg0: string, arg1: string, arg2: string): void;
@@ -81,9 +84,6 @@ declare module "@package/org/xml/sax" {
         characters(arg0: string[], arg1: number, arg2: number): void;
         ignorableWhitespace(arg0: string[], arg1: number, arg2: number): void;
         endDocument(): void;
-        endPrefixMapping(arg0: string): void;
-        startPrefixMapping(arg0: string, arg1: string): void;
-        skippedEntity(arg0: string): void;
         declaration(arg0: string, arg1: string, arg2: string): void;
         set documentLocator(value: $Locator);
     }

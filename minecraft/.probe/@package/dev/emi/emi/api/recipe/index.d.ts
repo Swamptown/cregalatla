@@ -15,10 +15,10 @@ declare module "@package/dev/emi/emi/api/recipe" {
     export class $EmiPlayerInventory {
         static of(entity: $Player): $EmiPlayerInventory;
         isEqual(other: $EmiPlayerInventory): boolean;
-        getCraftAvailability(recipe: $EmiRecipe): $List<boolean>;
         getCraftables(): $List<$EmiIngredient>;
-        canCraft(recipe: $EmiRecipe, amount: number): boolean;
+        getCraftAvailability(recipe: $EmiRecipe): $List<boolean>;
         canCraft(recipe: $EmiRecipe): boolean;
+        canCraft(recipe: $EmiRecipe, amount: number): boolean;
         getPredicate(): $Predicate<$EmiRecipe>;
         inventory: $Map<$EmiStack, $EmiStack>;
         /**
@@ -33,22 +33,22 @@ declare module "@package/dev/emi/emi/api/recipe" {
     }
     export interface $EmiRecipe {
         getId(): $ResourceLocation;
-        getInputs(): $List<$EmiIngredient>;
         getCatalysts(): $List<$EmiIngredient>;
         getDisplayWidth(): number;
         getDisplayHeight(): number;
         supportsRecipeTree(): boolean;
         hideCraftable(): boolean;
         getBackingRecipe(): $RecipeHolder<never>;
+        getInputs(): $List<$EmiIngredient>;
         getOutputs(): $List<$EmiStack>;
         getCategory(): $EmiRecipeCategory;
         addWidgets(arg0: $WidgetHolder): void;
         get id(): $ResourceLocation;
-        get inputs(): $List<$EmiIngredient>;
         get catalysts(): $List<$EmiIngredient>;
         get displayWidth(): number;
         get displayHeight(): number;
         get backingRecipe(): $RecipeHolder<never>;
+        get inputs(): $List<$EmiIngredient>;
         get outputs(): $List<$EmiStack>;
         get category(): $EmiRecipeCategory;
     }

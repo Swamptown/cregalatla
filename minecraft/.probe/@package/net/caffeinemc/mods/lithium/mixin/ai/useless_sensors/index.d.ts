@@ -1,4 +1,4 @@
-import { $SensorType, $Sensor, $SensorType_ } from "@package/net/minecraft/world/entity/ai/sensing";
+import { $Sensor, $SensorType, $SensorType_ } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $LivingEntity } from "@package/net/minecraft/world/entity";
 import { $Map_, $Map } from "@package/java/util";
 

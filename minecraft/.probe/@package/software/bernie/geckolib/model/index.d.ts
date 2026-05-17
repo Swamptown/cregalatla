@@ -11,16 +11,16 @@ declare module "@package/software/bernie/geckolib/model" {
     export class $GeoModel<T extends $GeoAnimatable> {
         getBone(arg0: string): ($GeoBone) | undefined;
         getBakedModel(arg0: $ResourceLocation_): $BakedGeoModel;
-        getAnimation(arg0: T, arg1: string): $Animation;
         handleAnimations(arg0: T, arg1: number, arg2: $AnimationState<T>, arg3: number): void;
-        getAnimationProcessor(): $AnimationProcessor<T>;
+        getAnimation(arg0: T, arg1: string): $Animation;
         applyMolangQueries(arg0: $AnimationState<T>, arg1: number): void;
-        addAdditionalStateData(arg0: T, arg1: number, arg2: $BiConsumer_<$DataTicket<T>, T>): void;
-        getModelResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
+        getAnimationProcessor(): $AnimationProcessor<T>;
         /**
          * @deprecated
          */
         getModelResource(arg0: T): $ResourceLocation;
+        getModelResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
+        addAdditionalStateData(arg0: T, arg1: number, arg2: $BiConsumer_<$DataTicket<T>, T>): void;
         getAnimationResource(arg0: T): $ResourceLocation;
         getAnimationResourceFallbacks(arg0: T): $ResourceLocation[];
         crashIfBoneMissing(): boolean;

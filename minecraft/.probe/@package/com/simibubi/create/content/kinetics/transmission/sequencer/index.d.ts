@@ -9,8 +9,8 @@ declare module "@package/com/simibubi/create/content/kinetics/transmission/seque
         static values(): $SequencerInstructions[];
         static valueOf(arg0: string): $SequencerInstructions;
         needsPropagation(): boolean;
-        static invokeInit$create_connected_$md$8e2dbe$0(arg0: string, arg1: number, arg2: string, arg3: $AllGuiTextures_): $SequencerInstructions;
-        static invokeInit$create_connected_$md$8e2dbe$1(arg0: string, arg1: number, arg2: string, arg3: $AllGuiTextures_, arg4: boolean, arg5: boolean, arg6: number, arg7: number, arg8: number): $SequencerInstructions;
+        static invokeInit$create_connected_$md$d858b6$0(arg0: string, arg1: number, arg2: string, arg3: $AllGuiTextures_): $SequencerInstructions;
+        static invokeInit$create_connected_$md$d858b6$1(arg0: string, arg1: number, arg2: string, arg3: $AllGuiTextures_, arg4: boolean, arg5: boolean, arg6: number, arg7: number, arg8: number): $SequencerInstructions;
         translationKey: string;
         maxValue: number;
         defaultValue: number;
@@ -32,11 +32,11 @@ declare module "@package/com/simibubi/create/content/kinetics/transmission/seque
      */
     export type $SequencerInstructions_ = "turn_angle" | "turn_distance" | "delay" | "await" | "end" | "turn_await" | "turn_time" | "loop";
     export class $SequencedGearshiftBlockEntity$SequenceContext extends $Record {
-        static fromNBT(arg0: $CompoundTag_): $SequencedGearshiftBlockEntity$SequenceContext;
         relativeValue(): number;
         static fromGearshift(arg0: $SequencerInstructions_, arg1: number, arg2: number): $SequencedGearshiftBlockEntity$SequenceContext;
         instruction(): $SequencerInstructions;
         getEffectiveValue(arg0: number): number;
+        static fromNBT(arg0: $CompoundTag_): $SequencedGearshiftBlockEntity$SequenceContext;
         serializeNBT(): $CompoundTag;
         constructor(instruction: $SequencerInstructions_, relativeValue: number);
     }

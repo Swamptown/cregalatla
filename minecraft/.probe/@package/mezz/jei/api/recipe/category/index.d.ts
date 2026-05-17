@@ -16,7 +16,6 @@ declare module "@package/mezz/jei/api/recipe/category" {
     export class $IRecipeCategory<T> {
     }
     export interface $IRecipeCategory<T> {
-        getRecipeType(): $RecipeType<T>;
         setRecipe(arg0: $IRecipeLayoutBuilder, arg1: T, arg2: $IFocusGroup): void;
         onDisplayedIngredientsUpdate(arg0: T, arg1: $List_<$IRecipeSlotDrawable>, arg2: $IFocusGroup): void;
         /**
@@ -38,19 +37,20 @@ declare module "@package/mezz/jei/api/recipe/category" {
          */
         getBackground(): $IDrawable;
         needsRecipeBorder(): boolean;
-        getRegistryName(arg0: T): $ResourceLocation;
         getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: $IRecipeSlotsView_, arg3: number, arg4: number): void;
-        getWidth(): number;
-        getHeight(): number;
+        getRegistryName(arg0: T): $ResourceLocation;
+        getRecipeType(): $RecipeType<T>;
         getIcon(): $IDrawable;
         getTitle(): $Component;
         draw(arg0: T, arg1: $IRecipeSlotsView_, arg2: $GuiGraphics, arg3: number, arg4: number): void;
         getCodec(arg0: $ICodecHelper, arg1: $IRecipeManager): $Codec<T>;
-        get recipeType(): $RecipeType<T>;
+        getWidth(): number;
+        getHeight(): number;
         get background(): $IDrawable;
-        get width(): number;
-        get height(): number;
+        get recipeType(): $RecipeType<T>;
         get icon(): $IDrawable;
         get title(): $Component;
+        get width(): number;
+        get height(): number;
     }
 }

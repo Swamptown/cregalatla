@@ -64,13 +64,13 @@ declare module "@package/net/minecraft/client/resources/server" {
     export class $ServerPackManager {
         popAll(): void;
         tick(): void;
+        pushLocalPack(arg0: $UUID_, arg1: $Path_): void;
+        popPack(arg0: $UUID_): void;
         allowServerPacks(): void;
         rejectServerPacks(): void;
         resetPromptStatus(): void;
         registerForUpdate(): void;
         pushPack(arg0: $UUID_, arg1: $URL, arg2: $HashCode): void;
-        pushLocalPack(arg0: $UUID_, arg1: $Path_): void;
-        popPack(arg0: $UUID_): void;
         packLoadFeedback: $PackLoadFeedback;
         packs: $List<$ServerPackManager$ServerPackData>;
         constructor(arg0: $PackDownloader_, arg1: $PackLoadFeedback, arg2: $PackReloadConfig_, arg3: $Runnable_, arg4: $ServerPackManager$PackPromptStatus_);
@@ -90,20 +90,20 @@ declare module "@package/net/minecraft/client/resources/server" {
     export class $DownloadedPackSource implements $AutoCloseable {
         popAll(): void;
         close(): void;
-        configureForServerControl(arg0: $Connection, arg1: $ServerPackManager$PackPromptStatus_): void;
-        allowServerPacks(): void;
-        rejectServerPacks(): void;
-        configureForLocalWorld(): void;
-        waitForPackFeedback(arg0: $UUID_): $CompletableFuture<void>;
         createRepositorySource(): $RepositorySource;
         onRecovery(): void;
         cleanupAfterDisconnect(): void;
         onReloadSuccess(): void;
         onRecoveryFailure(): void;
-        createDownloadNotifier(arg0: number): $HttpUtil$DownloadProgressListener;
-        pushPack(arg0: $UUID_, arg1: $URL, arg2: string): void;
         pushLocalPack(arg0: $UUID_, arg1: $Path_): void;
         popPack(arg0: $UUID_): void;
+        configureForServerControl(arg0: $Connection, arg1: $ServerPackManager$PackPromptStatus_): void;
+        allowServerPacks(): void;
+        rejectServerPacks(): void;
+        configureForLocalWorld(): void;
+        waitForPackFeedback(arg0: $UUID_): $CompletableFuture<void>;
+        createDownloadNotifier(arg0: number): $HttpUtil$DownloadProgressListener;
+        pushPack(arg0: $UUID_, arg1: $URL, arg2: string): void;
         minecraft: $Minecraft;
         manager: $ServerPackManager;
         static LOGGER: $Logger;

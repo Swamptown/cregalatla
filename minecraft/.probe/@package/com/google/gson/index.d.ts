@@ -18,15 +18,15 @@ declare module "@package/com/google/gson" {
         getDeclaringClass(): $Class<never>;
         getAnnotation<T extends $Annotation>(arg0: $Class<T>): T;
         getAnnotations(): $Collection<$Annotation>;
-        getDeclaredClass(): $Class<never>;
         getDeclaredType(): $Type;
+        getDeclaredClass(): $Class<never>;
         hasModifier(arg0: number): boolean;
         constructor(arg0: $Field);
         get name(): string;
         get declaringClass(): $Class<never>;
         get annotations(): $Collection<$Annotation>;
-        get declaredClass(): $Class<never>;
         get declaredType(): $Type;
+        get declaredClass(): $Class<never>;
     }
     export class $FieldNamingStrategy {
     }
@@ -46,6 +46,9 @@ declare module "@package/com/google/gson" {
         generateNonExecutableJson(): $GsonBuilder;
         serializeNulls(): $GsonBuilder;
         serializeSpecialFloatingPointValues(): $GsonBuilder;
+        excludeFieldsWithModifiers(...arg0: number[]): $GsonBuilder;
+        excludeFieldsWithoutExposeAnnotation(): $GsonBuilder;
+        enableComplexMapKeySerialization(): $GsonBuilder;
         disableInnerClassSerialization(): $GsonBuilder;
         setLongSerializationPolicy(arg0: $LongSerializationPolicy_): $GsonBuilder;
         setFieldNamingPolicy(arg0: $FieldNamingPolicy_): $GsonBuilder;
@@ -56,15 +59,12 @@ declare module "@package/com/google/gson" {
         addSerializationExclusionStrategy(arg0: $ExclusionStrategy): $GsonBuilder;
         addDeserializationExclusionStrategy(arg0: $ExclusionStrategy): $GsonBuilder;
         disableHtmlEscaping(): $GsonBuilder;
+        setDateFormat(arg0: string): $GsonBuilder;
         setDateFormat(arg0: number, arg1: number): $GsonBuilder;
         setDateFormat(arg0: number): $GsonBuilder;
-        setDateFormat(arg0: string): $GsonBuilder;
         registerTypeAdapterFactory(arg0: $TypeAdapterFactory_): $GsonBuilder;
         registerTypeHierarchyAdapter(arg0: $Class<never>, arg1: $Object): $GsonBuilder;
         disableJdkUnsafe(): $GsonBuilder;
-        excludeFieldsWithModifiers(...arg0: number[]): $GsonBuilder;
-        excludeFieldsWithoutExposeAnnotation(): $GsonBuilder;
-        enableComplexMapKeySerialization(): $GsonBuilder;
         addReflectionAccessFilter(arg0: $ReflectionAccessFilter_): $GsonBuilder;
         constructor();
         set version(value: number);
@@ -101,14 +101,14 @@ declare module "@package/com/google/gson" {
         isJsonArray(): boolean;
         isJsonObject(): boolean;
         deepCopy(): $JsonElement;
-        getAsJsonNull(): $JsonNull;
-        getAsFloat(): number;
         getAsByte(): number;
         /**
          * @deprecated
          */
         getAsCharacter(): string;
         getAsShort(): number;
+        getAsJsonNull(): $JsonNull;
+        getAsFloat(): number;
         /**
          * @deprecated
          */
@@ -128,11 +128,11 @@ declare module "@package/com/google/gson" {
         get asNumber(): $Number;
         get jsonArray(): boolean;
         get jsonObject(): boolean;
-        get asJsonNull(): $JsonNull;
-        get asFloat(): number;
         get asByte(): number;
         get asCharacter(): string;
         get asShort(): number;
+        get asJsonNull(): $JsonNull;
+        get asFloat(): number;
     }
     /**
      * Values that may be interpreted as {@link $JsonElement}.
@@ -187,7 +187,6 @@ declare module "@package/com/google/gson" {
         isNumber(): boolean;
         isString(): boolean;
         isBoolean(): boolean;
-        deepCopy(): $JsonPrimitive;
         constructor(arg0: string);
         constructor(arg0: string);
         constructor(arg0: $Number);

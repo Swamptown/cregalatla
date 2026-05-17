@@ -16,15 +16,15 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/rendering" {
         scale(arg0: number, arg1: number, arg2: number): void;
         last(): $PoseStack$Pose;
         setOnTransform(arg0: $Runnable_): $EnhancedPoseStack;
-        mulPose(arg0: $Quaternionf): void;
-        mulPose(arg0: $Matrix4f): void;
         setIdentity(): void;
         pushTransformation(arg0: $Transformation): void;
         translate(arg0: number, arg1: number, arg2: number): void;
         translate(arg0: number, arg1: number, arg2: number): void;
-        pushPose(): void;
         popPose(): void;
+        pushPose(): void;
         rotateAround(arg0: $Quaternionf, arg1: number, arg2: number, arg3: number): void;
+        mulPose(arg0: $Matrix4f): void;
+        mulPose(arg0: $Quaternionf): void;
         pose: $PoseStack;
         constructor(arg0: $PoseStack);
         set onTransform(value: $Runnable_);
@@ -33,9 +33,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/rendering" {
         clear(): void;
         release(): void;
         bind(arg0: $GUIContext): void;
-        unbind(): void;
         draw(arg0: $GUIContext): void;
         textureId(): number;
+        unbind(): void;
         constructor(arg0: $UIElement);
     }
     export class $GUIContext {

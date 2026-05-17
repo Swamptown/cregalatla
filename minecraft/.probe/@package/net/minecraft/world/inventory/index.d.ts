@@ -4,14 +4,15 @@ import { $CraftingResultSlotAccessor } from "@package/dev/emi/emi/mixin/accessor
 import { $RecipeType_, $Recipe, $RecipeHolder, $CraftingInput, $AbstractCookingRecipe, $CraftingInput$Positioned, $RecipeHolder_, $CraftingRecipe, $SingleRecipeInput, $StonecutterRecipe, $RecipeInput } from "@package/net/minecraft/world/item/crafting";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $Pair } from "@package/com/mojang/datafixers/util";
+import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $RecipeBookCategories } from "@package/net/minecraft/client";
 import { $FeatureFlagSet, $FeatureElement } from "@package/net/minecraft/world/flag";
-import { $Set_, $Map, $OptionalInt, $List, $List_ } from "@package/java/util";
+import { $Set_, $Map, $OptionalInt, $List, $List_, $Optional } from "@package/java/util";
 import { $LevelBlock } from "@package/dev/latvian/mods/kubejs/level";
 import { $AccessorCraftingMenu, $AccessorCrafterMenu, $AccessorInventoryMenu } from "@package/com/illusivesoulworks/polymorph/mixin/core";
 import { $ItemPredicate_ } from "@package/dev/latvian/mods/kubejs/item";
 import { $AbstractHorse } from "@package/net/minecraft/world/entity/animal/horse";
-import { $StringRepresentable } from "@package/net/minecraft/util";
+import { $StringRepresentable, $RandomSource } from "@package/net/minecraft/util";
 import { $SlotAccessor } from "@package/net/blay09/mods/balm/mixin";
 import { $ContainerListener as $ContainerListener$1, $SimpleContainer, $Container } from "@package/net/minecraft/world";
 import { $BiFunction, $Predicate_, $Predicate, $BiConsumer_, $BiFunction_ } from "@package/java/util/function";
@@ -36,6 +37,7 @@ import { $Player, $StackedContents, $Inventory } from "@package/net/minecraft/wo
 import { $ItemSlot } from "@package/com/lowdragmc/lowdraglib2/gui/ui/elements";
 import { $Stream } from "@package/java/util/stream";
 import { $ContainerLevelAccessMixin } from "@package/com/railwayteam/railways/neoforge/mixin";
+import { $EnchantmentMenuExtension } from "@package/com/almostreliable/morejs/features/enchantment";
 import { $ResourceKey, $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $Block_ } from "@package/net/minecraft/world/level/block";
 import { $MenuTypeKJS } from "@package/dev/latvian/mods/kubejs/core";
@@ -188,17 +190,17 @@ declare module "@package/net/minecraft/world/inventory" {
     }
     export class $MenuType<T extends $AbstractContainerMenu> implements $FeatureElement, $IMenuTypeExtension<T>, $MenuTypeKJS {
         create(arg0: number, arg1: $Inventory): T;
-        requiredFeatures(): $FeatureFlagSet;
         kjs$getKey(): $ResourceKey<any>;
+        requiredFeatures(): $FeatureFlagSet;
         kjs$getId(): string;
         isEnabled(arg0: $FeatureFlagSet): boolean;
         kjs$getRegistryId(): $ResourceKey<$Registry<$MenuType<never>>>;
         kjs$getRegistry(): $Registry<$MenuType<never>>;
         specialEquals(o: $Object, shallow: boolean): boolean;
-        getTagKeys(): $List<$TagKey<T>>;
         asHolder(): $Holder<T>;
         getIdLocation(): $ResourceLocation;
         getMod(): string;
+        getTagKeys(): $List<$TagKey<T>>;
         getTags(): $List<$ResourceLocation>;
         hasTag(tag: $ResourceLocation_): boolean;
         create(arg0: number, arg1: $Inventory, arg2: $RegistryFriendlyByteBuf): T;
@@ -228,9 +230,9 @@ declare module "@package/net/minecraft/world/inventory" {
         static GRINDSTONE: $MenuType<$GrindstoneMenu>;
         static SHULKER_BOX: $MenuType<$ShulkerBoxMenu>;
         constructor(arg0: $MenuType$MenuSupplier_<T>, arg1: $FeatureFlagSet);
-        get tagKeys(): $List<$TagKey<T>>;
         get idLocation(): $ResourceLocation;
         get mod(): string;
+        get tagKeys(): $List<$TagKey<T>>;
         get tags(): $List<$ResourceLocation>;
     }
     /**
@@ -239,13 +241,13 @@ declare module "@package/net/minecraft/world/inventory" {
     export type $MenuType_<T> = RegistryTypes.Menu;
     export class $MerchantContainer implements $Container {
         isEmpty(): boolean;
-        removeItem(arg0: number, arg1: number): $ItemStack;
-        setItem(arg0: number, arg1: $ItemStack_): void;
-        clearContent(): void;
         updateSellItem(): void;
         setSelectionHint(arg0: number): void;
         getFutureXp(): number;
         getActiveOffer(): $MerchantOffer;
+        setItem(arg0: number, arg1: $ItemStack_): void;
+        clearContent(): void;
+        removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
         setChanged(): void;
         stillValid(arg0: $Player): boolean;
@@ -257,13 +259,14 @@ declare module "@package/net/minecraft/world/inventory" {
         countItem(arg0: $Item_): number;
         hasAnyOf(arg0: $Set_<$Item_>): boolean;
         hasAnyMatching(arg0: $Predicate_<$ItemStack>): boolean;
-        getMaxStackSize(): number;
         getMaxStackSize(arg0: $ItemStack_): number;
+        getMaxStackSize(): number;
         canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
         setTransferCooldown(arg0: number): void;
         canReceiveTransferCooldown(): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
         self(): $Container;
+        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -277,7 +280,6 @@ declare module "@package/net/minecraft/world/inventory" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isEmpty(): boolean;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
@@ -285,8 +287,8 @@ declare module "@package/net/minecraft/world/inventory" {
         find(): number;
         count(match: $ItemPredicate_): number;
         count(): number;
-        countNonEmpty(): number;
         countNonEmpty(match: $ItemPredicate_): number;
+        countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
         constructor(arg0: $Merchant);
         set selectionHint(value: number);
@@ -365,15 +367,15 @@ declare module "@package/net/minecraft/world/inventory" {
     }
     export class $ChestMenu extends $AbstractContainerMenu {
         getContainer(): $Container;
-        static threeRows(arg0: number, arg1: $Inventory, arg2: $Container): $ChestMenu;
-        static threeRows(arg0: number, arg1: $Inventory): $ChestMenu;
         static oneRow(arg0: number, arg1: $Inventory): $ChestMenu;
         static twoRows(arg0: number, arg1: $Inventory): $ChestMenu;
         static fourRows(arg0: number, arg1: $Inventory): $ChestMenu;
         static fiveRows(arg0: number, arg1: $Inventory): $ChestMenu;
-        static sixRows(arg0: number, arg1: $Inventory, arg2: $Container): $ChestMenu;
         static sixRows(arg0: number, arg1: $Inventory): $ChestMenu;
+        static sixRows(arg0: number, arg1: $Inventory, arg2: $Container): $ChestMenu;
         getRowCount(): number;
+        static threeRows(arg0: number, arg1: $Inventory, arg2: $Container): $ChestMenu;
+        static threeRows(arg0: number, arg1: $Inventory): $ChestMenu;
         static QUICKCRAFT_HEADER_START: number;
         remoteSlots: $NonNullList<$ItemStack>;
         lastSlots: $NonNullList<$ItemStack>;
@@ -429,8 +431,8 @@ declare module "@package/net/minecraft/world/inventory" {
      */
     export type $ClickAction_ = "primary" | "secondary";
     export class $BrewingStandMenu extends $AbstractContainerMenu {
-        getFuel(): number;
         getBrewingTicks(): number;
+        getFuel(): number;
         static QUICKCRAFT_HEADER_START: number;
         remoteSlots: $NonNullList<$ItemStack>;
         lastSlots: $NonNullList<$ItemStack>;
@@ -448,8 +450,8 @@ declare module "@package/net/minecraft/world/inventory" {
         static QUICKCRAFT_TYPE_CHARITABLE: number;
         constructor(arg0: number, arg1: $Inventory);
         constructor(arg0: number, arg1: $Inventory, arg2: $Container, arg3: $ContainerData);
-        get fuel(): number;
         get brewingTicks(): number;
+        get fuel(): number;
     }
     export class $BrewingStandMenu$PotionSlot extends $Slot {
         container: $Container;
@@ -496,9 +498,9 @@ declare module "@package/net/minecraft/world/inventory" {
     export class $CraftingContainer {
     }
     export interface $CraftingContainer extends $Container, $StackedContentsCompatible {
-        asPositionedCraftInput(): $CraftingInput$Positioned;
         getItems(): $List<$ItemStack>;
         asCraftInput(): $CraftingInput;
+        asPositionedCraftInput(): $CraftingInput$Positioned;
         getWidth(): number;
         getHeight(): number;
         get items(): $List<$ItemStack>;
@@ -575,8 +577,8 @@ declare module "@package/net/minecraft/world/inventory" {
         constructor(arg0: $Container, arg1: number, arg2: number, arg3: number);
     }
     export class $PlayerEnderChestContainer extends $SimpleContainer {
-        setActiveChest(arg0: $EnderChestBlockEntity): void;
         isActiveChest(arg0: $EnderChestBlockEntity): boolean;
+        setActiveChest(arg0: $EnderChestBlockEntity): void;
         listeners: $List<$ContainerListener$1>;
         items: $NonNullList<$ItemStack>;
         constructor();
@@ -621,8 +623,14 @@ declare module "@package/net/minecraft/world/inventory" {
         getCount(): number;
         get count(): number;
     }
-    export class $EnchantmentMenu extends $AbstractContainerMenu {
+    export class $EnchantmentMenu extends $AbstractContainerMenu implements $EnchantmentMenuExtension {
         getGoldCount(): number;
+        morejs$getState(): $Optional<any>;
+        morejs$getContainer(): $Container;
+        morejs$getCosts(): number[];
+        morejs$getEnchantmentClues(): number[];
+        morejs$getLevelClues(): number[];
+        morejs$getRandom(): $RandomSource;
         getEnchantmentSeed(): number;
         costs: number[];
         static QUICKCRAFT_HEADER_START: number;
@@ -718,11 +726,11 @@ declare module "@package/net/minecraft/world/inventory" {
     }
     export class $ResultContainer implements $Container, $RecipeCraftingHolder {
         isEmpty(): boolean;
-        removeItem(arg0: number, arg1: number): $ItemStack;
         setItem(arg0: number, arg1: $ItemStack_): void;
         clearContent(): void;
         setRecipeUsed(arg0: $RecipeHolder_<never>): void;
         getRecipeUsed(): $RecipeHolder<never>;
+        removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
         setChanged(): void;
         stillValid(arg0: $Player): boolean;
@@ -734,15 +742,16 @@ declare module "@package/net/minecraft/world/inventory" {
         countItem(arg0: $Item_): number;
         hasAnyOf(arg0: $Set_<$Item_>): boolean;
         hasAnyMatching(arg0: $Predicate_<$ItemStack>): boolean;
-        getMaxStackSize(): number;
         getMaxStackSize(arg0: $ItemStack_): number;
+        getMaxStackSize(): number;
         canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
-        setRecipeUsed(arg0: $Level_, arg1: $ServerPlayer, arg2: $RecipeHolder_<never>): boolean;
         awardUsedRecipes(arg0: $Player, arg1: $List_<$ItemStack_>): void;
+        setRecipeUsed(arg0: $Level_, arg1: $ServerPlayer, arg2: $RecipeHolder_<never>): boolean;
         setTransferCooldown(arg0: number): void;
         canReceiveTransferCooldown(): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
         self(): $Container;
+        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -756,7 +765,6 @@ declare module "@package/net/minecraft/world/inventory" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isEmpty(): boolean;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
@@ -764,8 +772,8 @@ declare module "@package/net/minecraft/world/inventory" {
         find(): number;
         count(match: $ItemPredicate_): number;
         count(): number;
-        countNonEmpty(): number;
         countNonEmpty(match: $ItemPredicate_): number;
+        countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
         constructor();
         get containerSize(): number;
@@ -803,10 +811,10 @@ declare module "@package/net/minecraft/world/inventory" {
     }
     export class $AbstractFurnaceMenu extends $RecipeBookMenu<$SingleRecipeInput, $AbstractCookingRecipe> {
         isLit(): boolean;
-        isFuel(arg0: $ItemStack_): boolean;
         canSmelt(arg0: $ItemStack_): boolean;
         getBurnProgress(): number;
         getLitProgress(): number;
+        isFuel(arg0: $ItemStack_): boolean;
         level: $Level;
         static QUICKCRAFT_HEADER_START: number;
         remoteSlots: $NonNullList<$ItemStack>;
@@ -920,15 +928,15 @@ declare module "@package/net/minecraft/world/inventory" {
         getType(): $MenuType<never>;
         getSlot(arg0: number): $Slot;
         removed(arg0: $Player): void;
-        findSlot(arg0: $Container, arg1: number): $OptionalInt;
-        setRemoteSlot(arg0: number, arg1: $ItemStack_): void;
         addSlotListener(arg0: $ContainerListener): void;
         setSynchronizer(arg0: $ContainerSynchronizer): void;
         transferState(arg0: $AbstractContainerMenu): void;
+        findSlot(arg0: $Container, arg1: number): $OptionalInt;
+        setRemoteSlot(arg0: number, arg1: $ItemStack_): void;
         setItem(arg0: number, arg1: number, arg2: $ItemStack_): void;
-        static getRedstoneSignalFromBlockEntity(arg0: $BlockEntity): number;
-        static getRedstoneSignalFromContainer(arg0: $Container): number;
         getItems(): $NonNullList<$ItemStack>;
+        static getRedstoneSignalFromContainer(arg0: $Container): number;
+        static getRedstoneSignalFromBlockEntity(arg0: $BlockEntity): number;
         suppressRemoteUpdates(): void;
         static checkContainerSize(arg0: $Container, arg1: number): void;
         static checkContainerDataCount(arg0: $ContainerData, arg1: number): void;
@@ -939,8 +947,8 @@ declare module "@package/net/minecraft/world/inventory" {
         sendAllDataToRemote(): void;
         removeSlotListener(arg0: $ContainerListener): void;
         broadcastFullState(): void;
-        wrapOperation$zcm000$geckolib$forceGeckolibSlotChange(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $Operation_<any>): boolean;
-        wrapOperation$zcm000$geckolib$forceGeckolibIdSync(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $Operation_<any>): boolean;
+        wrapOperation$dco000$geckolib$forceGeckolibSlotChange(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $Operation_<any>): boolean;
+        wrapOperation$dco000$geckolib$forceGeckolibIdSync(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $Operation_<any>): boolean;
         setRemoteSlotNoCopy(arg0: number, arg1: $ItemStack_): void;
         setRemoteCarried(arg0: $ItemStack_): void;
         clickMenuButton(arg0: $Player, arg1: number): boolean;
@@ -953,7 +961,7 @@ declare module "@package/net/minecraft/world/inventory" {
         static canItemQuickReplace(arg0: $Slot, arg1: $ItemStack_, arg2: boolean): boolean;
         canDragTo(arg0: $Slot): boolean;
         static getQuickCraftPlaceCount(arg0: $Set_<$Slot>, arg1: number, arg2: $ItemStack_): number;
-        wrapOperation$zcm000$geckolib$removeGeckolibIdOnCopy(arg0: $ItemStack_, arg1: number, arg2: $Operation_<any>): $ItemStack;
+        wrapOperation$dco000$geckolib$removeGeckolibIdOnCopy(arg0: $ItemStack_, arg1: number, arg2: $Operation_<any>): $ItemStack;
         canTakeItemForPickAll(arg0: $ItemStack_, arg1: $Slot): boolean;
         clearContainer(arg0: $Player, arg1: $Container): void;
         slotsChanged(arg0: $Container): void;
@@ -967,12 +975,12 @@ declare module "@package/net/minecraft/world/inventory" {
         ldlib2$addSlot(arg0: $ItemSlot): void;
         ldlib2$getModularUI(): $ModularUI;
         ldlib2$setModularUI(arg0: $ModularUI): void;
-        setData(arg0: number, arg1: number): void;
         broadcastChanges(): void;
         getCarried(): $ItemStack;
         setCarried(arg0: $ItemStack_): void;
-        static stillValid(arg0: $ContainerLevelAccess_, arg1: $Player, arg2: $Block_): boolean;
         stillValid(arg0: $Player): boolean;
+        static stillValid(arg0: $ContainerLevelAccess_, arg1: $Player, arg2: $Block_): boolean;
+        setData(arg0: number, arg1: number): void;
         addSlot(arg0: $ItemSlot): void;
         getModularUI(): $ModularUI;
         getItemSlot(arg0: $Slot): $ItemSlot;
@@ -1010,8 +1018,13 @@ declare module "@package/net/minecraft/world/inventory" {
         remove(arg0: number): $ItemStack;
         set(arg0: $ItemStack_): void;
         isActive(): boolean;
-        onQuickCraft(arg0: $ItemStack_, arg1: number): void;
+        isSameInventory(arg0: $Slot): boolean;
+        setBackground(arg0: $ResourceLocation_, arg1: $ResourceLocation_): $Slot;
+        isHighlightable(): boolean;
+        isFake(): boolean;
+        allowModification(arg0: $Player): boolean;
         onQuickCraft(arg0: $ItemStack_, arg1: $ItemStack_): void;
+        onQuickCraft(arg0: $ItemStack_, arg1: number): void;
         mayPlace(arg0: $ItemStack_): boolean;
         setByPlayer(arg0: $ItemStack_): void;
         setByPlayer(arg0: $ItemStack_, arg1: $ItemStack_): void;
@@ -1023,19 +1036,14 @@ declare module "@package/net/minecraft/world/inventory" {
         onTake(arg0: $Player, arg1: $ItemStack_): void;
         safeTake(arg0: number, arg1: number, arg2: $Player): $ItemStack;
         getContainerSlot(): number;
-        allowModification(arg0: $Player): boolean;
         checkTakeAchievements(arg0: $ItemStack_): void;
         getNoItemIcon(): $Pair<$ResourceLocation, $ResourceLocation>;
         getSlotIndex(): number;
-        isSameInventory(arg0: $Slot): boolean;
-        setBackground(arg0: $ResourceLocation_, arg1: $ResourceLocation_): $Slot;
-        isHighlightable(): boolean;
-        isFake(): boolean;
-        hasItem(): boolean;
         getItem(): $ItemStack;
         getMaxStackSize(arg0: $ItemStack_): number;
         getMaxStackSize(): number;
         setChanged(): void;
+        hasItem(): boolean;
         getY(): number;
         getX(): number;
         setX(arg0: number): void;
@@ -1046,11 +1054,11 @@ declare module "@package/net/minecraft/world/inventory" {
         y: number;
         constructor(arg0: $Container, arg1: number, arg2: number, arg3: number);
         get active(): boolean;
+        get highlightable(): boolean;
+        get fake(): boolean;
         get containerSlot(): number;
         get noItemIcon(): $Pair<$ResourceLocation, $ResourceLocation>;
         get slotIndex(): number;
-        get highlightable(): boolean;
-        get fake(): boolean;
         get item(): $ItemStack;
     }
     export class $DataSlot {
@@ -1093,7 +1101,7 @@ declare module "@package/net/minecraft/world/inventory" {
     /**
      * Values that may be interpreted as {@link $ItemCombinerMenuSlotDefinition$SlotDefinition}.
      */
-    export type $ItemCombinerMenuSlotDefinition$SlotDefinition_ = { mayPlace?: $Predicate_<$ItemStack>, y?: number, x?: number, slotIndex?: number,  } | [mayPlace?: $Predicate_<$ItemStack>, y?: number, x?: number, slotIndex?: number, ];
+    export type $ItemCombinerMenuSlotDefinition$SlotDefinition_ = { slotIndex?: number, x?: number, y?: number, mayPlace?: $Predicate_<$ItemStack>,  } | [slotIndex?: number, x?: number, y?: number, mayPlace?: $Predicate_<$ItemStack>, ];
     export class $ClickType extends $Enum<$ClickType> {
         static values(): $ClickType[];
         static valueOf(arg0: string): $ClickType;
@@ -1111,33 +1119,34 @@ declare module "@package/net/minecraft/world/inventory" {
     export type $ClickType_ = "pickup" | "quick_move" | "swap" | "clone" | "throw" | "quick_craft" | "pickup_all";
     export class $TransientCraftingContainer implements $CraftingContainer {
         isEmpty(): boolean;
-        removeItem(arg0: number, arg1: number): $ItemStack;
         setItem(arg0: number, arg1: $ItemStack_): void;
-        clearContent(): void;
         getItems(): $List<$ItemStack>;
+        clearContent(): void;
         fillStackedContents(arg0: $StackedContents): void;
-        getWidth(): number;
-        getHeight(): number;
+        removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
         setChanged(): void;
         stillValid(arg0: $Player): boolean;
         getContainerSize(): number;
         removeItemNoUpdate(arg0: number): $ItemStack;
-        asPositionedCraftInput(): $CraftingInput$Positioned;
+        getWidth(): number;
+        getHeight(): number;
         asCraftInput(): $CraftingInput;
+        asPositionedCraftInput(): $CraftingInput$Positioned;
         startOpen(arg0: $Player): void;
         stopOpen(arg0: $Player): void;
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
         countItem(arg0: $Item_): number;
         hasAnyOf(arg0: $Set_<$Item_>): boolean;
         hasAnyMatching(arg0: $Predicate_<$ItemStack>): boolean;
-        getMaxStackSize(): number;
         getMaxStackSize(arg0: $ItemStack_): number;
+        getMaxStackSize(): number;
         canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
         setTransferCooldown(arg0: number): void;
         canReceiveTransferCooldown(): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
         self(): $Container;
+        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -1151,7 +1160,6 @@ declare module "@package/net/minecraft/world/inventory" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isEmpty(): boolean;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
@@ -1159,8 +1167,8 @@ declare module "@package/net/minecraft/world/inventory" {
         find(): number;
         count(match: $ItemPredicate_): number;
         count(): number;
-        countNonEmpty(): number;
         countNonEmpty(match: $ItemPredicate_): number;
+        countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
         menu: $AbstractContainerMenu;
         constructor(arg0: $AbstractContainerMenu, arg1: number, arg2: number);
@@ -1181,12 +1189,7 @@ declare module "@package/net/minecraft/world/inventory" {
         sendCarriedChange(arg0: $AbstractContainerMenu, arg1: $ItemStack_): void;
     }
     export class $MerchantMenu extends $AbstractContainerMenu {
-        tryMoveItems(arg0: number): void;
-        setXp(arg0: number): void;
-        setOffers(arg0: $MerchantOffers): void;
-        getOffers(): $MerchantOffers;
-        canRestock(): boolean;
-        showProgressBar(): boolean;
+        handler$dee000$morejs$invokeOpenTradeEvent(arg0: number, arg1: $Inventory, arg2: $Merchant, arg3: $CallbackInfo): void;
         setShowProgressBar(arg0: boolean): void;
         setSelectionHint(arg0: number): void;
         getTraderXp(): number;
@@ -1194,6 +1197,13 @@ declare module "@package/net/minecraft/world/inventory" {
         getTraderLevel(): number;
         setMerchantLevel(arg0: number): void;
         setCanRestock(arg0: boolean): void;
+        handler$dfi000$item_obliterator$getOffers(arg0: $CallbackInfoReturnable<any>): void;
+        setXp(arg0: number): void;
+        canRestock(): boolean;
+        showProgressBar(): boolean;
+        getOffers(): $MerchantOffers;
+        setOffers(arg0: $MerchantOffers): void;
+        tryMoveItems(arg0: number): void;
         static PAYMENT2_SLOT: number;
         static QUICKCRAFT_HEADER_START: number;
         remoteSlots: $NonNullList<$ItemStack>;
@@ -1214,12 +1224,12 @@ declare module "@package/net/minecraft/world/inventory" {
         static QUICKCRAFT_TYPE_CHARITABLE: number;
         constructor(arg0: number, arg1: $Inventory);
         constructor(arg0: number, arg1: $Inventory, arg2: $Merchant);
-        set xp(value: number);
         set selectionHint(value: number);
         get traderXp(): number;
         get futureTraderXp(): number;
         get traderLevel(): number;
         set merchantLevel(value: number);
+        set xp(value: number);
     }
     export class $GrindstoneMenu extends $AbstractContainerMenu {
         computeResult(arg0: $ItemStack_, arg1: $ItemStack_): $ItemStack;
@@ -1249,10 +1259,10 @@ declare module "@package/net/minecraft/world/inventory" {
     export class $RecipeCraftingHolder {
     }
     export interface $RecipeCraftingHolder {
+        awardUsedRecipes(arg0: $Player, arg1: $List_<$ItemStack_>): void;
         setRecipeUsed(arg0: $Level_, arg1: $ServerPlayer, arg2: $RecipeHolder_<never>): boolean;
         setRecipeUsed(arg0: $RecipeHolder_<never>): void;
         getRecipeUsed(): $RecipeHolder<never>;
-        awardUsedRecipes(arg0: $Player, arg1: $List_<$ItemStack_>): void;
     }
     export class $RecipeBookMenu<I extends $RecipeInput, R extends $Recipe<I>> extends $AbstractContainerMenu {
         getSize(): number;
@@ -1293,11 +1303,11 @@ declare module "@package/net/minecraft/world/inventory" {
     }
     export class $CrafterMenu extends $AbstractContainerMenu implements $ContainerListener, $AccessorCrafterMenu {
         getContainer(): $Container;
+        slotChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: $ItemStack_): void;
         setSlotState(arg0: number, arg1: boolean): void;
         isSlotDisabled(arg0: number): boolean;
-        isPowered(): boolean;
         dataChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: number): void;
-        slotChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: $ItemStack_): void;
+        isPowered(): boolean;
         callRefreshRecipeResult(): void;
         static QUICKCRAFT_HEADER_START: number;
         remoteSlots: $NonNullList<$ItemStack>;
@@ -1398,8 +1408,8 @@ declare module "@package/net/minecraft/world/inventory" {
     export class $ContainerListener {
     }
     export interface $ContainerListener {
-        dataChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: number): void;
         slotChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: $ItemStack_): void;
+        dataChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: number): void;
     }
     export class $ItemCombinerMenuSlotDefinition$Builder {
         build(): $ItemCombinerMenuSlotDefinition;

@@ -6,7 +6,7 @@ import { $ResourceKey_, $ResourceKey } from "@package/net/minecraft/resources";
 import { $ResourceOrTagKeyArgument$Result } from "@package/net/minecraft/commands/arguments";
 import { $Set_, $Set } from "@package/java/util";
 import { $CommandContext } from "@package/com/mojang/brigadier/context";
-import { $Structure_, $Structure } from "@package/net/minecraft/world/level/levelgen/structure";
+import { $Structure, $Structure_ } from "@package/net/minecraft/world/level/levelgen/structure";
 export * as structure from "@package/com/faboslav/structurify/common/mixin/structure";
 
 declare module "@package/com/faboslav/structurify/common/mixin" {

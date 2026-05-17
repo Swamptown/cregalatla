@@ -268,21 +268,20 @@ declare module "@package/org/jline/reader" {
     export interface $LineReader {
         readLine(arg0: string): string;
         readLine(arg0: string, arg1: string): string;
-        readLine(arg0: string, arg1: string, arg2: string): string;
-        readLine(arg0: string, arg1: string, arg2: $MaskingCallback, arg3: string): string;
         readLine(arg0: string, arg1: string, arg2: string, arg3: string): string;
+        readLine(arg0: string, arg1: string, arg2: $MaskingCallback, arg3: string): string;
+        readLine(arg0: string, arg1: string, arg2: string): string;
         readLine(): string;
         readLine(arg0: string): string;
         option(arg0: $LineReader$Option_, arg1: boolean): $LineReader;
         isSet(arg0: $LineReader$Option_): boolean;
         getKeys(): $KeyMap<$Binding>;
         getBuffer(): $Buffer;
-        variable(arg0: string, arg1: $Object): $LineReader;
+        getTerminal(): $Terminal;
         printAbove(arg0: $AttributedString): void;
         printAbove(arg0: string): void;
-        getTerminal(): $Terminal;
-        getParser(): $Parser;
         getWidgets(): $Map<string, $Widget>;
+        getParser(): $Parser;
         readMouseEvent(): $MouseEvent;
         defaultKeyMaps(): $Map<string, $KeyMap<$Binding>>;
         isReading(): boolean;
@@ -312,11 +311,12 @@ declare module "@package/org/jline/reader" {
         setTailTip(arg0: string): void;
         setAutosuggestion(arg0: $LineReader$SuggestionType_): void;
         getAutosuggestion(): $LineReader$SuggestionType;
+        variable(arg0: string, arg1: $Object): $LineReader;
         get keys(): $KeyMap<$Binding>;
         get buffer(): $Buffer;
         get terminal(): $Terminal;
-        get parser(): $Parser;
         get widgets(): $Map<string, $Widget>;
+        get parser(): $Parser;
         get reading(): boolean;
         get variables(): $Map<string, $Object>;
         set opt(value: $LineReader$Option_);
@@ -517,13 +517,13 @@ declare module "@package/org/jline/reader" {
         previous(): boolean;
         attach(arg0: $LineReader): void;
         purge(): void;
-        isPersistable(arg0: $History$Entry): boolean;
         reverseIterator(arg0: number): $Iterator<$History$Entry>;
         reverseIterator(): $Iterator<$History$Entry>;
         moveToFirst(): boolean;
-        moveToLast(): boolean;
         moveToEnd(): void;
         resetIndex(): void;
+        isPersistable(arg0: $History$Entry): boolean;
+        moveToLast(): boolean;
         moveTo(arg0: number): boolean;
         iterator(): $Iterator<$History$Entry>;
         [Symbol.iterator](): Iterator<$History$Entry>

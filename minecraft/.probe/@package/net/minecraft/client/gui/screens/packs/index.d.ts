@@ -78,17 +78,17 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
         getIconTexture(): $ResourceLocation;
         moveUp(): void;
         moveDown(): void;
+        canMoveUp(): boolean;
+        canMoveDown(): boolean;
         getSelfList(): $List<$Pack>;
         getOtherList(): $List<$Pack>;
         toggleSelection(): void;
-        canMoveUp(): boolean;
-        canMoveDown(): boolean;
-        getDescription(): $Component;
         getTitle(): $Component;
         isRequired(): boolean;
         getCompatibility(): $PackCompatibility;
         isFixedPosition(): boolean;
         getPackSource(): $PackSource;
+        getDescription(): $Component;
         getExtendedDescription(): $Component;
         canSelect(): boolean;
         canUnselect(): boolean;
@@ -99,12 +99,12 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
         get iconTexture(): $ResourceLocation;
         get selfList(): $List<$Pack>;
         get otherList(): $List<$Pack>;
-        get description(): $Component;
         get title(): $Component;
         get required(): boolean;
         get compatibility(): $PackCompatibility;
         get fixedPosition(): boolean;
         get packSource(): $PackSource;
+        get description(): $Component;
         get extendedDescription(): $Component;
     }
     export class $PackSelectionScreen extends $Screen {
@@ -157,7 +157,6 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
         canUnselect(): boolean;
         canMoveUp(): boolean;
         canMoveDown(): boolean;
-        getDescription(): $Component;
         select(): void;
         isSelected(): boolean;
         getTitle(): $Component;
@@ -165,15 +164,16 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
         getCompatibility(): $PackCompatibility;
         isFixedPosition(): boolean;
         getPackSource(): $PackSource;
+        getDescription(): $Component;
         get id(): string;
         get iconTexture(): $ResourceLocation;
         get extendedDescription(): $Component;
-        get description(): $Component;
         get selected(): boolean;
         get title(): $Component;
         get required(): boolean;
         get compatibility(): $PackCompatibility;
         get fixedPosition(): boolean;
         get packSource(): $PackSource;
+        get description(): $Component;
     }
 }

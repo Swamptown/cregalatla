@@ -5,7 +5,7 @@
     "allowedLeaves": [],
     "allowedNonDecayLeaves": [],
     "deniedLeaves": [],
-    "breakMode": "INSTANTANEOUS",
+    "breakMode": "FALL_ITEM",
     "detectionMode": "WHOLE_TREE",
     "detectionModeBiomeOverride": {},
     "maxScanSize": 500,

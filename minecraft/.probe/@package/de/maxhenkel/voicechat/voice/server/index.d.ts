@@ -32,7 +32,6 @@ declare module "@package/de/maxhenkel/voicechat/voice/server" {
         sendSoundPacket(arg0: $ServerPlayer, arg1: $PlayerState, arg2: $ServerPlayer, arg3: $PlayerState, arg4: $ClientConnection, arg5: $SoundPacket<never>, arg6: string): void;
         getUnconnectedSender(arg0: $NetworkMessage): $ClientConnection;
         sendPacketRaw(arg0: $Packet<never>, arg1: $ClientConnection): void;
-        getSender(arg0: $NetworkMessage): $ClientConnection;
         onPlayerLoggedOut(arg0: $ServerPlayer): void;
         onPlayerHide(arg0: $ServerPlayer, arg1: $ServerPlayer): void;
         onPlayerShow(arg0: $ServerPlayer, arg1: $ServerPlayer): void;
@@ -40,13 +39,14 @@ declare module "@package/de/maxhenkel/voicechat/voice/server" {
         getSecret(arg0: $UUID_): $Secret;
         getBroadcastRange(arg0: number): number;
         getPlayerStateManager(): $PlayerStateManager;
+        getSender(arg0: $NetworkMessage): $ClientConnection;
         getSocket(): $VoicechatSocket;
-        getConnection(arg0: $UUID_): $ClientConnection;
         isClosed(): boolean;
         sendPacket(arg0: $Packet<never>, arg1: $ClientConnection): boolean;
         getServer(): $MinecraftServer;
         getConnections(): $Map<$UUID, $ClientConnection>;
         onPlayerLoggedIn(arg0: $ServerPlayer): void;
+        getConnection(arg0: $UUID_): $ClientConnection;
         static MIN_PRIORITY: number;
         static MAX_PRIORITY: number;
         static NORM_PRIORITY: number;
@@ -120,9 +120,9 @@ declare module "@package/de/maxhenkel/voicechat/voice/server" {
         getType(): $Group$Type;
         isIsolated(): boolean;
         toClientGroup(): $ClientGroup;
-        isNormal(): boolean;
         getPassword(): string;
         isPersistent(): boolean;
+        isNormal(): boolean;
         constructor();
         constructor(arg0: $UUID_, arg1: string);
         constructor(arg0: $UUID_, arg1: string, arg2: string);
@@ -134,8 +134,8 @@ declare module "@package/de/maxhenkel/voicechat/voice/server" {
         get id(): $UUID;
         get type(): $Group$Type;
         get isolated(): boolean;
-        get normal(): boolean;
         get password(): string;
         get persistent(): boolean;
+        get normal(): boolean;
     }
 }

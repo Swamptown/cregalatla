@@ -9,8 +9,8 @@ declare module "@package/com/google/gson/internal" {
         withVersion(arg0: number): $Excluder;
         excludeClass(arg0: $Class<never>, arg1: boolean): boolean;
         excludeField(arg0: $Field, arg1: boolean): boolean;
-        disableInnerClassSerialization(): $Excluder;
         excludeFieldsWithoutExposeAnnotation(): $Excluder;
+        disableInnerClassSerialization(): $Excluder;
         withModifiers(...arg0: number[]): $Excluder;
         withExclusionStrategy(arg0: $ExclusionStrategy, arg1: boolean, arg2: boolean): $Excluder;
         static DEFAULT: $Excluder;

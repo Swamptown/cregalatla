@@ -16,11 +16,19 @@ import { $BlockStateShortShapeCache } from "@package/xaero/map/cache";
 declare module "@package/xaero/map/region/texture" {
     export class $RegionTexture<T extends $RegionTexture<T>> {
         getRegion(): $LeveledRegion<T>;
+        uploadBuffer(arg0: $DimensionHighlighterHandler, arg1: $TextureUploader, arg2: $LeveledRegion<T>, arg3: $BranchTextureRenderer, arg4: number, arg5: number): number;
+        setBufferedTextureVersion(arg0: number): void;
         shouldDownloadFromPBO(): boolean;
+        postBufferWrite(arg0: $PoolTextureDirectBufferUnit): void;
+        putHeight(arg0: number, arg1: number, arg2: number): void;
+        putHeight(arg0: number, arg1: number): void;
+        putTopHeight(arg0: number, arg1: number, arg2: number): void;
+        putTopHeight(arg0: number, arg1: number): void;
         onTextureDeletion(): void;
         ensureBiomeIndexStorage(): void;
         shouldHaveContentForBranchUpdate(): boolean;
         setShouldDownloadFromPBO(arg0: boolean): void;
+        decTimer(): void;
         isUploaded(): boolean;
         getTextureVersion(): number;
         removeHeight(arg0: number, arg1: number): void;
@@ -29,14 +37,6 @@ declare module "@package/xaero/map/region/texture" {
         hasSourceData(): boolean;
         preUpload(arg0: $MapProcessor, arg1: $BlockTintProvider, arg2: $OverlayManager, arg3: $LeveledRegion<T>, arg4: boolean, arg5: $BlockStateShortShapeCache, arg6: $MapUpdateFastConfig): void;
         postUpload(arg0: $MapProcessor, arg1: $LeveledRegion<T>, arg2: boolean): void;
-        postBufferWrite(arg0: $PoolTextureDirectBufferUnit): void;
-        putTopHeight(arg0: number, arg1: number): void;
-        putTopHeight(arg0: number, arg1: number, arg2: number): void;
-        putHeight(arg0: number, arg1: number, arg2: number): void;
-        putHeight(arg0: number, arg1: number): void;
-        decTimer(): void;
-        setBufferedTextureVersion(arg0: number): void;
-        uploadBuffer(arg0: $DimensionHighlighterHandler, arg1: $TextureUploader, arg2: $LeveledRegion<T>, arg3: $BranchTextureRenderer, arg4: number, arg5: number): number;
         addDebugLines(arg0: $List_<string>): void;
         getGlColorTexture(): number;
         getTextureHasLight(): boolean;
@@ -58,15 +58,15 @@ declare module "@package/xaero/map/region/texture" {
         writeCacheMapData(arg0: $DataOutputStream, arg1: number[], arg2: number[], arg3: $LeveledRegion<T>): void;
         resetBiomes(): void;
         readCacheData(arg0: number, arg1: number, arg2: $DataInputStream, arg3: number[], arg4: number[], arg5: $LeveledRegion<T>, arg6: $MapProcessor, arg7: number, arg8: number, arg9: boolean): void;
+        setBiome(arg0: number, arg1: number, arg2: $ResourceKey_<$Biome>): void;
         shouldUpload(): boolean;
         getTopHeight(arg0: number, arg1: number): number;
-        setBiome(arg0: number, arg1: number, arg2: $ResourceKey_<$Biome>): void;
         getBiomes(): $RegionTextureBiomes;
-        getHeight(arg0: number, arg1: number): number;
         getTimer(): number;
         getBiome(arg0: number, arg1: number): $ResourceKey<$Biome>;
         canUpload(): boolean;
         resetTimer(): void;
+        getHeight(arg0: number, arg1: number): number;
         static PBO_PACK_LENGTH: number;
         static PBO_UNPACK_LENGTH: number;
         constructor(arg0: $LeveledRegion<T>);
@@ -85,9 +85,9 @@ declare module "@package/xaero/map/region/texture" {
         get timer(): number;
     }
     export class $LeafRegionTexture extends $RegionTexture<$LeafRegionTexture> {
-        postBufferUpdate(arg0: boolean): void;
-        requestHighlightOnlyUpload(): void;
         resetHeights(): void;
+        requestHighlightOnlyUpload(): void;
+        postBufferUpdate(arg0: boolean): void;
         getTileChunk(): $MapTileChunk;
         static PBO_PACK_LENGTH: number;
         static PBO_UNPACK_LENGTH: number;

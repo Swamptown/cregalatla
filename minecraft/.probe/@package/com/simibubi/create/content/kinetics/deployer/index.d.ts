@@ -44,18 +44,18 @@ import { $RegisterCapabilitiesEvent } from "@package/net/neoforged/neoforge/capa
 declare module "@package/com/simibubi/create/content/kinetics/deployer" {
     export class $DeployerBlockEntity extends $KineticBlockEntity implements $Clearable {
         write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
-        getHandPose(): $PartialModel;
-        changeMode(): void;
-        discardPlayer(): void;
-        redstoneUpdate(): void;
         startFistBump(arg0: $Direction_): boolean;
         triggerFistBump(): void;
         getHandOffset(arg0: number): number;
         setAnimatedOffset(arg0: number): void;
+        getHandPose(): $PartialModel;
+        changeMode(): void;
+        discardPlayer(): void;
+        redstoneUpdate(): void;
+        getRecipe(arg0: $ItemStack_): $RecipeHolder<$Recipe<$RecipeInput>>;
         getPlayer(): $DeployerFakePlayer;
         clearContent(): void;
         static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
-        getRecipe(arg0: $ItemStack_): $RecipeHolder<$Recipe<$RecipeInput>>;
         sequenceContext: $SequencedGearshiftBlockEntity$SequenceContext;
         networkDirty: boolean;
         worldPosition: $BlockPos;
@@ -68,8 +68,8 @@ declare module "@package/com/simibubi/create/content/kinetics/deployer" {
         preventSpeedUpdate: number;
         network: number;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
-        get handPose(): $PartialModel;
         set animatedOffset(value: number);
+        get handPose(): $PartialModel;
         get player(): $DeployerFakePlayer;
     }
     export class $DeployerRecipeSearchEvent extends $Event implements $ICancellableEvent {

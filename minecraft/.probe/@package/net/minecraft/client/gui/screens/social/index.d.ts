@@ -27,12 +27,12 @@ declare module "@package/net/minecraft/client/gui/screens/social" {
      */
     export type $SocialInteractionsScreen$Page_ = "all" | "hidden" | "blocked";
     export class $PlayerEntry extends $ContainerObjectSelectionList$Entry<$PlayerEntry> {
+        setHasRecentMessages(arg0: boolean): void;
+        getEntryNarationMessage(arg0: $MutableComponent_): $MutableComponent;
         isChatReportable(): boolean;
         hasRecentMessages(): boolean;
         getPlayerName(): string;
         getSkinGetter(): $Supplier<$PlayerSkin>;
-        getEntryNarationMessage(arg0: $MutableComponent_): $MutableComponent;
-        setHasRecentMessages(arg0: boolean): void;
         isRemoved(): boolean;
         setRemoved(arg0: boolean): void;
         getPlayerId(): $UUID;
@@ -114,11 +114,11 @@ declare module "@package/net/minecraft/client/gui/screens/social" {
         getDiscoveredUUID(arg0: string): $UUID;
         addPlayer(arg0: $PlayerInfo): void;
         removePlayer(arg0: $UUID_): void;
-        getHiddenPlayers(): $Set<$UUID>;
         stopOnlineMode(): void;
         isBlocked(arg0: $UUID_): boolean;
         shouldHideMessageFrom(arg0: $UUID_): boolean;
         startOnlineMode(): void;
+        getHiddenPlayers(): $Set<$UUID>;
         constructor(arg0: $Minecraft, arg1: $UserApiService);
         get hiddenPlayers(): $Set<$UUID>;
     }

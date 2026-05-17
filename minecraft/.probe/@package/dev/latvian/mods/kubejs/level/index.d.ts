@@ -36,6 +36,10 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
          */
         getAffectedEntities(): $EntityArrayList;
         /**
+         * Remove an entity from the list of affected entities.
+         */
+        removeAffectedEntity(entity: $Entity): void;
+        /**
          * Remove all entities from the list of affected entities.
          */
         removeAllAffectedEntities(): void;
@@ -51,10 +55,6 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
          * Remove all knockback from all affected *players*.
          */
         removeKnockback(): void;
-        /**
-         * Remove an entity from the list of affected entities.
-         */
-        removeAffectedEntity(entity: $Entity): void;
         constructor(level: $Level_, explosion: $Explosion, affectedEntities: $List_<$Entity>);
         get affectedBlocks(): $List<$LevelBlock>;
         get affectedEntities(): $EntityArrayList;
@@ -62,8 +62,8 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
     export class $WrappedSpawner extends $Record {
         static of(spawner: $Either<$BlockEntity, $Entity>): $WrappedSpawner;
         block(): $LevelBlock;
-        entity(): $Entity;
         isWorldgen(): boolean;
+        entity(): $Entity;
         constructor(entity: $Entity, block: $LevelBlock);
         get worldgen(): boolean;
     }
@@ -99,14 +99,13 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         set(block: $Block_, properties: $Map_<never, never>): void;
         set(block: $Block_): void;
         getProperties(): $Map<string, string>;
-        getY(): number;
         setEntityData(tag: $CompoundTag_): void;
         getCenterY(): number;
-        spawnLightning(): void;
-        spawnLightning(effectOnly: boolean, player: $ServerPlayer): void;
         spawnLightning(effectOnly: boolean): void;
-        getPlayersInRadius(): $EntityArrayList;
+        spawnLightning(effectOnly: boolean, player: $ServerPlayer): void;
+        spawnLightning(): void;
         getPlayersInRadius(radius: number): $EntityArrayList;
+        getPlayersInRadius(): $EntityArrayList;
         getDown(): $LevelBlock;
         getUp(): $LevelBlock;
         getNorth(): $LevelBlock;
@@ -124,13 +123,14 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         popItemFromFace(item: $ItemStack_, dir: $Direction_): void;
         getBiomeId(): $ResourceLocation;
         toBlockStateString(): string;
-        createEntity(type: $EntityType_<never>): $Entity;
+        getY(): number;
         getDimension(): $ResourceLocation;
-        getItem(): $ItemStack;
+        createEntity(type: $EntityType_<never>): $Entity;
         getX(): number;
         getZ(): number;
-        getInventory(): $InventoryKJS;
+        getItem(): $ItemStack;
         getInventory(facing: $Direction_): $InventoryKJS;
+        getInventory(): $InventoryKJS;
         getEntityData(): $CompoundTag;
         getBlock(): $Block;
         setBlockState(state: $BlockState_): void;
@@ -148,9 +148,9 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         getRegistryId(): $ResourceKey<$Registry<$Block>>;
         getRegistry(): $Registry<$Block>;
         specialEquals(o: $Object, shallow: boolean): boolean;
-        getTagKeys(): $List<$TagKey<$Block>>;
         getIdLocation(): $ResourceLocation;
         getMod(): string;
+        getTagKeys(): $List<$TagKey<$Block>>;
         getTags(): $List<$ResourceLocation>;
         hasTag(tag: $ResourceLocation_): boolean;
         minecraftLevel: $Level;
@@ -159,7 +159,6 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         get entity(): $BlockEntity;
         get pos(): $BlockPos;
         get properties(): $Map<string, string>;
-        get y(): number;
         get centerY(): number;
         get down(): $LevelBlock;
         get up(): $LevelBlock;
@@ -173,10 +172,11 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         get blockLight(): number;
         get canSeeSky(): boolean;
         get biomeId(): $ResourceLocation;
+        get y(): number;
         get dimension(): $ResourceLocation;
-        get item(): $ItemStack;
         get x(): number;
         get z(): number;
+        get item(): $ItemStack;
         get block(): $Block;
         get centerX(): number;
         get centerZ(): number;
@@ -186,9 +186,9 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         get id(): string;
         get registryId(): $ResourceKey<$Registry<$Block>>;
         get registry(): $Registry<$Block>;
-        get tagKeys(): $List<$TagKey<$Block>>;
         get idLocation(): $ResourceLocation;
         get mod(): string;
+        get tagKeys(): $List<$TagKey<$Block>>;
         get tags(): $List<$ResourceLocation>;
     }
     export class $ExplosionProperties extends $Record {
@@ -208,7 +208,7 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
     /**
      * Values that may be interpreted as {@link $ExplosionProperties}.
      */
-    export type $ExplosionProperties_ = { particles?: (boolean) | undefined, damageSource?: $DamageSource_, explosionSound?: $Holder_<$SoundEvent>, largeParticles?: $ParticleOptions_, damageCalculator?: $ExplosionDamageCalculator, smallParticles?: $ParticleOptions_, strength?: (number) | undefined, source?: $Entity, mode?: $Level$ExplosionInteraction_, causesFire?: (boolean) | undefined,  } | [particles?: (boolean) | undefined, damageSource?: $DamageSource_, explosionSound?: $Holder_<$SoundEvent>, largeParticles?: $ParticleOptions_, damageCalculator?: $ExplosionDamageCalculator, smallParticles?: $ParticleOptions_, strength?: (number) | undefined, source?: $Entity, mode?: $Level$ExplosionInteraction_, causesFire?: (boolean) | undefined, ];
+    export type $ExplosionProperties_ = { causesFire?: (boolean) | undefined, mode?: $Level$ExplosionInteraction_, source?: $Entity, strength?: (number) | undefined, smallParticles?: $ParticleOptions_, damageCalculator?: $ExplosionDamageCalculator, largeParticles?: $ParticleOptions_, explosionSound?: $Holder_<$SoundEvent>, damageSource?: $DamageSource_, particles?: (boolean) | undefined,  } | [causesFire?: (boolean) | undefined, mode?: $Level$ExplosionInteraction_, source?: $Entity, strength?: (number) | undefined, smallParticles?: $ParticleOptions_, damageCalculator?: $ExplosionDamageCalculator, largeParticles?: $ParticleOptions_, explosionSound?: $Holder_<$SoundEvent>, damageSource?: $DamageSource_, particles?: (boolean) | undefined, ];
     export class $SimpleLevelKubeEvent implements $KubeLevelEvent {
         getLevel(): $Level;
         getRegistries(): $RegistryAccess;
@@ -273,15 +273,13 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         set(block: $Block_): void;
         getProperties(): $Map<string, string>;
         getLevel(): $Level;
-        getEntity(): $BlockEntity;
-        getY(): number;
         setEntityData(tag: $CompoundTag_): void;
         getCenterY(): number;
-        spawnLightning(): void;
-        spawnLightning(effectOnly: boolean, player: $ServerPlayer): void;
         spawnLightning(effectOnly: boolean): void;
-        getPlayersInRadius(): $EntityArrayList;
+        spawnLightning(effectOnly: boolean, player: $ServerPlayer): void;
+        spawnLightning(): void;
         getPlayersInRadius(radius: number): $EntityArrayList;
+        getPlayersInRadius(): $EntityArrayList;
         getDown(): $LevelBlock;
         getUp(): $LevelBlock;
         getNorth(): $LevelBlock;
@@ -299,18 +297,20 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         popItemFromFace(item: $ItemStack_, dir: $Direction_): void;
         getBiomeId(): $ResourceLocation;
         toBlockStateString(): string;
-        createEntity(type: $EntityType_<never>): $Entity;
+        getEntity(): $BlockEntity;
+        getY(): number;
         getDimension(): $ResourceLocation;
-        getItem(): $ItemStack;
+        createEntity(type: $EntityType_<never>): $Entity;
         getX(): number;
         getZ(): number;
+        getItem(): $ItemStack;
         getBlockState(): $BlockState;
-        getInventory(): $InventoryKJS;
         getInventory(facing: $Direction_): $InventoryKJS;
+        getInventory(): $InventoryKJS;
         getEntityData(): $CompoundTag;
         getBlock(): $Block;
-        setBlockState(state: $BlockState_, flags: number): void;
         setBlockState(state: $BlockState_): void;
+        setBlockState(state: $BlockState_, flags: number): void;
         getPos(): $BlockPos;
         explode(properties: $ExplosionProperties_): $Explosion;
         getCenterX(): number;
@@ -321,8 +321,6 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         canSeeSkyFromBelowWater(): boolean;
         get properties(): $Map<string, string>;
         get level(): $Level;
-        get entity(): $BlockEntity;
-        get y(): number;
         get centerY(): number;
         get down(): $LevelBlock;
         get up(): $LevelBlock;
@@ -336,10 +334,12 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         get blockLight(): number;
         get canSeeSky(): boolean;
         get biomeId(): $ResourceLocation;
+        get entity(): $BlockEntity;
+        get y(): number;
         get dimension(): $ResourceLocation;
-        get item(): $ItemStack;
         get x(): number;
         get z(): number;
+        get item(): $ItemStack;
         get block(): $Block;
         get pos(): $BlockPos;
         get centerX(): number;
@@ -362,9 +362,9 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         getPosition(): $Vec3;
         getY(): number;
         getExploder(): $LivingEntity;
-        getBlock(): $LevelBlock;
         getX(): number;
         getZ(): number;
+        getBlock(): $LevelBlock;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
         /**
@@ -408,9 +408,9 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         get position(): $Vec3;
         get y(): number;
         get exploder(): $LivingEntity;
-        get block(): $LevelBlock;
         get x(): number;
         get z(): number;
+        get block(): $LevelBlock;
         get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
     }

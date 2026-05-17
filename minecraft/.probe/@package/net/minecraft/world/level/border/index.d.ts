@@ -87,9 +87,9 @@ declare module "@package/net/minecraft/world/level/border" {
         getLerpTarget(): number;
         onAbsoluteMaxSizeChange(): void;
         getLerpSpeed(): number;
-        getMinX(): number;
         getStatus(): $BorderStatus;
         getCollisionShape(): $VoxelShape;
+        getMinX(): number;
         get size(): number;
         get maxX(): number;
         get minZ(): number;
@@ -97,22 +97,20 @@ declare module "@package/net/minecraft/world/level/border" {
         get lerpRemainingTime(): number;
         get lerpTarget(): number;
         get lerpSpeed(): number;
-        get minX(): number;
         get status(): $BorderStatus;
         get collisionShape(): $VoxelShape;
+        get minX(): number;
     }
     export class $WorldBorder implements $WorldBorderExtension {
         getSize(): number;
         tick(): void;
         setSize(arg0: number): void;
         setAbsoluteMaxSize(arg0: number): void;
-        clampToBounds(arg0: $BlockPos_): $BlockPos;
-        clampToBounds(arg0: $Vec3_): $BlockPos;
-        clampToBounds(arg0: number, arg1: number, arg2: number): $BlockPos;
+        handler$fjm000$sable$isWithinBounds(arg0: number, arg1: number, arg2: number, arg3: $CallbackInfoReturnable<any>): void;
         getMaxX(): number;
         getMinZ(): number;
         getMaxZ(): number;
-        handler$fld000$sable$isInsideCloseToBorder(arg0: $Entity, arg1: $AABB_, arg2: $CallbackInfoReturnable<any>): void;
+        handler$fjm000$sable$isInsideCloseToBorder(arg0: $Entity, arg1: $AABB_, arg2: $CallbackInfoReturnable<any>): void;
         setCenter(arg0: number, arg1: number): void;
         getLerpRemainingTime(): number;
         getLerpTarget(): number;
@@ -125,23 +123,24 @@ declare module "@package/net/minecraft/world/level/border" {
         setWarningTime(arg0: number): void;
         getWarningBlocks(): number;
         setWarningBlocks(arg0: number): void;
-        wrapOperation$dcf000$lithium$getUpdatedArea(arg0: $WorldBorder$BorderExtent, arg1: $Operation_<any>): $WorldBorder$BorderExtent;
+        wrapOperation$cae000$lithium$getUpdatedArea(arg0: $WorldBorder$BorderExtent, arg1: $Operation_<any>): $WorldBorder$BorderExtent;
         createSettings(): $WorldBorder$Settings;
         applySettings(arg0: $WorldBorder$Settings): void;
-        handler$fld000$sable$isWithinBounds(arg0: number, arg1: number, arg2: number, arg3: $CallbackInfoReturnable<any>): void;
-        getMinX(): number;
+        clampToBounds(arg0: $Vec3_): $BlockPos;
+        clampToBounds(arg0: $BlockPos_): $BlockPos;
+        clampToBounds(arg0: number, arg1: number, arg2: number): $BlockPos;
         removeListener(arg0: $BorderChangeListener): void;
         getListeners(): $List<$BorderChangeListener>;
         addListener(arg0: $BorderChangeListener): void;
         getStatus(): $BorderStatus;
-        isWithinBounds(arg0: $ChunkPos): boolean;
+        isWithinBounds(arg0: $BlockPos_): boolean;
         isWithinBounds(arg0: number, arg1: number): boolean;
         isWithinBounds(arg0: number, arg1: number, arg2: number): boolean;
-        isWithinBounds(arg0: $Vec3_): boolean;
         isWithinBounds(arg0: $AABB_): boolean;
-        isWithinBounds(arg0: $BlockPos_): boolean;
-        getDistanceToBorder(arg0: $Entity): number;
+        isWithinBounds(arg0: $ChunkPos): boolean;
+        isWithinBounds(arg0: $Vec3_): boolean;
         getDistanceToBorder(arg0: number, arg1: number): number;
+        getDistanceToBorder(arg0: $Entity): number;
         getDamageSafeZone(): number;
         getDamagePerBlock(): number;
         getCollisionShape(): $VoxelShape;
@@ -149,6 +148,7 @@ declare module "@package/net/minecraft/world/level/border" {
         getCenterX(): number;
         getCenterZ(): number;
         sable$setLevel(arg0: $Level_): void;
+        getMinX(): number;
         absoluteMaxSize: number;
         static DEFAULT_SETTINGS: $WorldBorder$Settings;
         static MAX_SIZE: number;
@@ -160,11 +160,11 @@ declare module "@package/net/minecraft/world/level/border" {
         get lerpRemainingTime(): number;
         get lerpTarget(): number;
         get lerpSpeed(): number;
-        get minX(): number;
         get listeners(): $List<$BorderChangeListener>;
         get status(): $BorderStatus;
         get collisionShape(): $VoxelShape;
         get centerX(): number;
         get centerZ(): number;
+        get minX(): number;
     }
 }

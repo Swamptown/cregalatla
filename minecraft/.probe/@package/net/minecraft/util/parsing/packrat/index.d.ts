@@ -13,7 +13,7 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
     /**
      * Values that may be interpreted as {@link $ErrorEntry}.
      */
-    export type $ErrorEntry_<S> = { cursor?: number, suggestions?: $SuggestionSupplier_<any>, reason?: $Object,  } | [cursor?: number, suggestions?: $SuggestionSupplier_<any>, reason?: $Object, ];
+    export type $ErrorEntry_<S> = { reason?: $Object, suggestions?: $SuggestionSupplier_<any>, cursor?: number,  } | [reason?: $Object, suggestions?: $SuggestionSupplier_<any>, cursor?: number, ];
     export class $ParseState$CacheEntry<T> extends $Record {
     }
     /**
@@ -178,7 +178,7 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
     /**
      * Values that may be interpreted as {@link $Rule$WrappedTerm}.
      */
-    export type $Rule$WrappedTerm_<S, T> = { child?: $Term_<any>, action?: $Rule$RuleAction_<any, any>,  } | [child?: $Term_<any>, action?: $Rule$RuleAction_<any, any>, ];
+    export type $Rule$WrappedTerm_<S, T> = { action?: $Rule$RuleAction_<any, any>, child?: $Term_<any>,  } | [action?: $Rule$RuleAction_<any, any>, child?: $Term_<any>, ];
     export class $Rule$SimpleRuleAction<T> {
     }
     export interface $Rule$SimpleRuleAction<T> {

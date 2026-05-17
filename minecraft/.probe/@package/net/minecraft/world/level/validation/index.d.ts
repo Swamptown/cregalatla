@@ -54,5 +54,5 @@ declare module "@package/net/minecraft/world/level/validation" {
     /**
      * Values that may be interpreted as {@link $PathAllowList$ConfigEntry}.
      */
-    export type $PathAllowList$ConfigEntry_ = { pattern?: string, type?: $PathAllowList$EntryType_,  } | [pattern?: string, type?: $PathAllowList$EntryType_, ];
+    export type $PathAllowList$ConfigEntry_ = { type?: $PathAllowList$EntryType_, pattern?: string,  } | [type?: $PathAllowList$EntryType_, pattern?: string, ];
 }

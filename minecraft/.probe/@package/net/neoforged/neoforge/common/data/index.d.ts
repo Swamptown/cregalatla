@@ -11,7 +11,7 @@ import { $MetadataSectionType } from "@package/net/minecraft/server/packs/metada
 import { $BiConsumer, $Consumer, $Supplier_, $Consumer_ } from "@package/java/util/function";
 import { $HolderLookup$Provider, $Holder_, $RegistrySetBuilder$PatchedRegistries_, $Registry, $RegistrySetBuilder } from "@package/net/minecraft/core";
 import { $Path_ } from "@package/java/nio/file";
-import { $OverlayMetadataSection$OverlayEntry, $OverlayMetadataSection$OverlayEntry_, $PackType_, $PackType } from "@package/net/minecraft/server/packs";
+import { $OverlayMetadataSection$OverlayEntry_, $OverlayMetadataSection$OverlayEntry, $PackType_, $PackType } from "@package/net/minecraft/server/packs";
 import { $WithConditions$Builder, $WithConditions_, $ICondition, $WithConditions } from "@package/net/neoforged/neoforge/common/conditions";
 import { $Enum, $Record } from "@package/java/lang";
 import { $DataMapValueRemover, $DataMapFile, $AdvancedDataMapType, $DataMapType } from "@package/net/neoforged/neoforge/registries/datamaps";
@@ -34,9 +34,9 @@ declare module "@package/net/neoforged/neoforge/common/data" {
         stream(): $SoundDefinition$Sound;
         stream(arg0: boolean): $SoundDefinition$Sound;
         attenuationDistance(arg0: number): $SoundDefinition$Sound;
+        volume(arg0: number): $SoundDefinition$Sound;
+        volume(arg0: number): $SoundDefinition$Sound;
         weight(arg0: number): $SoundDefinition$Sound;
-        volume(arg0: number): $SoundDefinition$Sound;
-        volume(arg0: number): $SoundDefinition$Sound;
         preload(): $SoundDefinition$Sound;
         preload(arg0: boolean): $SoundDefinition$Sound;
         static sound(arg0: $ResourceLocation_, arg1: $SoundDefinition$SoundType_): $SoundDefinition$Sound;
@@ -99,8 +99,8 @@ declare module "@package/net/neoforged/neoforge/common/data" {
     export class $DataMapProvider implements $DataProvider {
         getName(): string;
         run(arg0: $CachedOutput_): $CompletableFuture<never>;
-        builder<T, R, VR extends $DataMapValueRemover<R, T>>(arg0: $AdvancedDataMapType<R, T, VR>): $DataMapProvider$AdvancedBuilder<T, R, VR>;
         builder<T, R>(arg0: $DataMapType<R, T>): $DataMapProvider$Builder<T, R>;
+        builder<T, R, VR extends $DataMapValueRemover<R, T>>(arg0: $AdvancedDataMapType<R, T, VR>): $DataMapProvider$AdvancedBuilder<T, R, VR>;
         get name(): string;
     }
     export class $DataMapProvider$AdvancedBuilder<T, R, VR extends $DataMapValueRemover<R, T>> extends $DataMapProvider$Builder<T, R> {

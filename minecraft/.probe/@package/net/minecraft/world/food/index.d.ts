@@ -109,10 +109,10 @@ declare module "@package/net/minecraft/world/food" {
     }
     export class $FoodProperties extends $Record {
         saturation(): number;
-        canAlwaysEat(): boolean;
         eatDurationTicks(): number;
-        nutrition(): number;
+        canAlwaysEat(): boolean;
         eatSeconds(): number;
+        nutrition(): number;
         effects(): $List<$FoodProperties$PossibleEffect>;
         usingConvertsTo(): ($ItemStack) | undefined;
         static DIRECT_CODEC: $Codec<$FoodProperties>;
@@ -122,7 +122,7 @@ declare module "@package/net/minecraft/world/food" {
     /**
      * Values that may be interpreted as {@link $FoodProperties}.
      */
-    export type $FoodProperties_ = { canAlwaysEat?: boolean, usingConvertsTo?: ($ItemStack_) | undefined, eatSeconds?: number, effects?: $List_<$FoodProperties$PossibleEffect_>, saturation?: number, nutrition?: number,  } | [canAlwaysEat?: boolean, usingConvertsTo?: ($ItemStack_) | undefined, eatSeconds?: number, effects?: $List_<$FoodProperties$PossibleEffect_>, saturation?: number, nutrition?: number, ];
+    export type $FoodProperties_ = { nutrition?: number, saturation?: number, effects?: $List_<$FoodProperties$PossibleEffect_>, eatSeconds?: number, usingConvertsTo?: ($ItemStack_) | undefined, canAlwaysEat?: boolean,  } | [nutrition?: number, saturation?: number, effects?: $List_<$FoodProperties$PossibleEffect_>, eatSeconds?: number, usingConvertsTo?: ($ItemStack_) | undefined, canAlwaysEat?: boolean, ];
     export class $FoodProperties$PossibleEffect extends $Record {
         effectSupplier(): $Supplier<$MobEffectInstance>;
         effect(): $MobEffectInstance;
@@ -137,15 +137,15 @@ declare module "@package/net/minecraft/world/food" {
     export type $FoodProperties$PossibleEffect_ = { effectSupplier?: $Supplier_<$MobEffectInstance>, probability?: number,  } | [effectSupplier?: $Supplier_<$MobEffectInstance>, probability?: number, ];
     export class $FoodProperties$Builder implements $InjectedFoodPropertiesBuilderExtension {
         build(): $FoodProperties;
-        nutrition(arg0: number): $FoodProperties$Builder;
         saturationModifier(arg0: number): $FoodProperties$Builder;
         alwaysEdible(): $FoodProperties$Builder;
         fast(): $FoodProperties$Builder;
-        effect(arg0: $Supplier_<$MobEffectInstance>, arg1: number): $FoodProperties$Builder;
+        nutrition(arg0: number): $FoodProperties$Builder;
         /**
          * @deprecated
          */
         effect(arg0: $MobEffectInstance, arg1: number): $FoodProperties$Builder;
+        effect(arg0: $Supplier_<$MobEffectInstance>, arg1: number): $FoodProperties$Builder;
         usingConvertsTo(arg0: $ItemLike_): $FoodProperties$Builder;
         arch$effect(effectSupplier: $Supplier_<$MobEffectInstance>, chance: number): $FoodProperties$Builder;
         constructor();

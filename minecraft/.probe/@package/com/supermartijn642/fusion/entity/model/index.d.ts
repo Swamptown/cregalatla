@@ -24,9 +24,9 @@ declare module "@package/com/supermartijn642/fusion/entity/model" {
     }
     export class $EntityLayerProperties {
         gatherModels(output: $Consumer_<$ModelPart>): void;
-        identifier(): $ModelLayerLocation;
         transformed(properties: $VanillaModelLayerProperties): $EntityLayerProperties;
         chooseModel(entity: $Entity): $Triple<$ModelPart, $ResourceLocation, number>;
+        identifier(): $ModelLayerLocation;
         static RANDOM: $RandomSource;
         constructor(identifier: $ModelLayerLocation, defaultModel: $List_<$EntityLayerProperties$ModelOption>, conditionals: $List_<$Pair<$EntityModelPredicate, $List_<$EntityLayerProperties$ModelOption>>>);
     }

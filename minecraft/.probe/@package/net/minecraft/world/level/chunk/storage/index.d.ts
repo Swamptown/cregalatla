@@ -79,7 +79,7 @@ declare module "@package/net/minecraft/world/level/chunk/storage" {
     /**
      * Values that may be interpreted as {@link $RegionStorageInfo}.
      */
-    export type $RegionStorageInfo_ = { type?: string, dimension?: $ResourceKey_<$Level>, level?: string,  } | [type?: string, dimension?: $ResourceKey_<$Level>, level?: string, ];
+    export type $RegionStorageInfo_ = { level?: string, dimension?: $ResourceKey_<$Level>, type?: string,  } | [level?: string, dimension?: $ResourceKey_<$Level>, type?: string, ];
     export class $IOWorker implements $ChunkScanAccess, $AutoCloseable {
         store(arg0: $ChunkPos, arg1: $CompoundTag_): $CompletableFuture<void>;
         close(): void;
@@ -93,8 +93,8 @@ declare module "@package/net/minecraft/world/level/chunk/storage" {
     export class $ChunkSerializer {
         static write(arg0: $ServerLevel, arg1: $ChunkAccess): $CompoundTag;
         static read(arg0: $ServerLevel, arg1: $PoiManager, arg2: $RegionStorageInfo_, arg3: $ChunkPos, arg4: $CompoundTag_): $ProtoChunk;
-        static getChunkTypeFromTag(arg0: $CompoundTag_): $ChunkType;
         static packOffsets(arg0: $ShortList[]): $ListTag;
+        static getChunkTypeFromTag(arg0: $CompoundTag_): $ChunkType;
         static SKY_LIGHT_TAG: string;
         static Z_POS_TAG: string;
         static SECTIONS_TAG: string;
@@ -137,9 +137,9 @@ declare module "@package/net/minecraft/world/level/chunk/storage" {
         lithium$getInChunkColumn(arg0: number, arg1: number): $Iterable<any>;
         outsideStoredRange(arg0: number): boolean;
         setDirty(arg0: number): void;
-        getOrCreate(arg0: number): $Object;
         getOrLoad(arg0: number): (never) | undefined;
         hasWork(): boolean;
+        getOrCreate(arg0: number): $Object;
         levelHeightAccessor: $LevelHeightAccessor;
         constructor(arg0: $SimpleRegionStorage, arg1: $Function_<$Runnable, $Codec<$Object>>, arg2: $Function_<$Runnable, $Object>, arg3: $RegistryAccess, arg4: $ChunkIOErrorReporter, arg5: $LevelHeightAccessor);
         set dirty(value: number);
@@ -166,8 +166,8 @@ declare module "@package/net/minecraft/world/level/chunk/storage" {
         getId(): number;
         static fromId(arg0: number): $RegionFileVersion;
         static getSelected(): $RegionFileVersion;
-        static configure(arg0: string): void;
         static isValidVersion(arg0: number): boolean;
+        static configure(arg0: string): void;
         static VERSION_GZIP: $RegionFileVersion;
         static VERSION_LZ4: $RegionFileVersion;
         static VERSION_DEFLATE: $RegionFileVersion;

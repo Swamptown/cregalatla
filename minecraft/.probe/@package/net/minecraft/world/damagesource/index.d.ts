@@ -32,32 +32,34 @@ declare module "@package/net/minecraft/world/damagesource" {
         magic(): $DamageSource;
         noAggroMobAttack(arg0: $LivingEntity): $DamageSource;
         sonicBoom(arg0: $Entity): $DamageSource;
-        dragonBreath(): $DamageSource;
-        arrow(arg0: $AbstractArrow, arg1: $Entity): $DamageSource;
-        anvil(arg0: $Entity): $DamageSource;
-        fall(): $DamageSource;
+        spit(arg0: $Entity, arg1: $LivingEntity): $DamageSource;
+        mobAttack(arg0: $LivingEntity): $DamageSource;
         wither(): $DamageSource;
-        indirectMagic(arg0: $Entity, arg1: $Entity): $DamageSource;
-        fallingBlock(arg0: $Entity): $DamageSource;
+        trident(arg0: $Entity, arg1: $Entity): $DamageSource;
         hotFloor(): $DamageSource;
         sweetBerryBush(): $DamageSource;
         badRespawnPointExplosion(arg0: $Vec3_): $DamageSource;
         stalagmite(): $DamageSource;
         fallingStalactite(arg0: $Entity): $DamageSource;
-        spit(arg0: $Entity, arg1: $LivingEntity): $DamageSource;
-        mobAttack(arg0: $LivingEntity): $DamageSource;
-        cactus(): $DamageSource;
-        campfire(): $DamageSource;
-        inFire(): $DamageSource;
+        indirectMagic(arg0: $Entity, arg1: $Entity): $DamageSource;
+        fall(): $DamageSource;
+        arrow(arg0: $AbstractArrow, arg1: $Entity): $DamageSource;
         fireball(arg0: $Fireball, arg1: $Entity): $DamageSource;
-        trident(arg0: $Entity, arg1: $Entity): $DamageSource;
-        dryOut(): $DamageSource;
-        sting(arg0: $LivingEntity): $DamageSource;
+        witherSkull(arg0: $WitherSkull, arg1: $Entity): $DamageSource;
+        anvil(arg0: $Entity): $DamageSource;
+        inFire(): $DamageSource;
         windCharge(arg0: $Entity, arg1: $LivingEntity): $DamageSource;
         thorns(arg0: $Entity): $DamageSource;
         mobProjectile(arg0: $Entity, arg1: $LivingEntity): $DamageSource;
         starve(): $DamageSource;
-        witherSkull(arg0: $WitherSkull, arg1: $Entity): $DamageSource;
+        fallingBlock(arg0: $Entity): $DamageSource;
+        sting(arg0: $LivingEntity): $DamageSource;
+        dryOut(): $DamageSource;
+        cactus(): $DamageSource;
+        campfire(): $DamageSource;
+        dragonBreath(): $DamageSource;
+        onFire(): $DamageSource;
+        lava(): $DamageSource;
         genericKill(): $DamageSource;
         inWall(): $DamageSource;
         outOfBorder(): $DamageSource;
@@ -65,8 +67,6 @@ declare module "@package/net/minecraft/world/damagesource" {
         flyIntoWall(): $DamageSource;
         drown(): $DamageSource;
         cramming(): $DamageSource;
-        onFire(): $DamageSource;
-        lava(): $DamageSource;
         playerAttack(arg0: $Player): $DamageSource;
         lightningBolt(): $DamageSource;
         explosion(arg0: $Entity, arg1: $Entity): $DamageSource;
@@ -102,13 +102,13 @@ declare module "@package/net/minecraft/world/damagesource" {
     /**
      * Values that may be interpreted as {@link $DamageType}.
      */
-    export type $DamageType_ = RegistryTypes.DamageType | { scaling?: $DamageScaling_, msgId?: string, deathMessageType?: $DeathMessageType_, exhaustion?: number, effects?: $DamageEffects_,  } | [scaling?: $DamageScaling_, msgId?: string, deathMessageType?: $DeathMessageType_, exhaustion?: number, effects?: $DamageEffects_, ];
+    export type $DamageType_ = RegistryTypes.DamageType | { effects?: $DamageEffects_, exhaustion?: number, deathMessageType?: $DeathMessageType_, msgId?: string, scaling?: $DamageScaling_,  } | [effects?: $DamageEffects_, exhaustion?: number, deathMessageType?: $DeathMessageType_, msgId?: string, scaling?: $DamageScaling_, ];
     export class $DamageSource {
         type(): $DamageType;
         isDirect(): boolean;
         is(arg0: $TagKey_<$DamageType>): boolean;
         is(arg0: $ResourceKey_<$DamageType>): boolean;
-        getActual(): $Entity;
+        getLocalizedDeathMessage(arg0: $LivingEntity): $Component;
         /**
          * @deprecated
          */
@@ -116,21 +116,21 @@ declare module "@package/net/minecraft/world/damagesource" {
         getType(): string;
         sourcePositionRaw(): $Vec3;
         getPlayer(): $Player;
-        getLocalizedDeathMessage(arg0: $LivingEntity): $Component;
+        getActual(): $Entity;
         getImmediate(): $Entity;
         getSourcePosition(): $Vec3;
         getWeaponItem(): $ItemStack;
         typeHolder(): $Holder<$DamageType>;
         getFoodExhaustion(): number;
         isCreativePlayer(): boolean;
-        constructor(arg0: $Holder_<$DamageType>, arg1: $Entity, arg2: $Entity, arg3: $Vec3_);
-        constructor(arg0: $Holder_<$DamageType>, arg1: $Entity, arg2: $Entity);
-        constructor(arg0: $Holder_<$DamageType>, arg1: $Vec3_);
         constructor(arg0: $Holder_<$DamageType>, arg1: $Entity);
+        constructor(arg0: $Holder_<$DamageType>, arg1: $Entity, arg2: $Entity);
+        constructor(arg0: $Holder_<$DamageType>, arg1: $Entity, arg2: $Entity, arg3: $Vec3_);
         constructor(arg0: $Holder_<$DamageType>);
+        constructor(arg0: $Holder_<$DamageType>, arg1: $Vec3_);
         get direct(): boolean;
-        get actual(): $Entity;
         get player(): $Player;
+        get actual(): $Entity;
         get immediate(): $Entity;
         get sourcePosition(): $Vec3;
         get weaponItem(): $ItemStack;
@@ -210,7 +210,7 @@ declare module "@package/net/minecraft/world/damagesource" {
     /**
      * Values that may be interpreted as {@link $CombatEntry}.
      */
-    export type $CombatEntry_ = { fallDistance?: number, fallLocation?: $FallLocation_, damage?: number, source?: $DamageSource_,  } | [fallDistance?: number, fallLocation?: $FallLocation_, damage?: number, source?: $DamageSource_, ];
+    export type $CombatEntry_ = { source?: $DamageSource_, damage?: number, fallLocation?: $FallLocation_, fallDistance?: number,  } | [source?: $DamageSource_, damage?: number, fallLocation?: $FallLocation_, fallDistance?: number, ];
     export class $DamageEffects extends $Enum<$DamageEffects> implements $StringRepresentable, $IExtensibleEnum {
         static values(): $DamageEffects[];
         static valueOf(arg0: string): $DamageEffects;

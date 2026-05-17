@@ -31,7 +31,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor/la
     /**
      * Values that may be interpreted as {@link $Token}.
      */
-    export type $Token_ = { type?: $TokenType, startIndex?: number, endIndex?: number, text?: string,  } | [type?: $TokenType, startIndex?: number, endIndex?: number, text?: string, ];
+    export type $Token_ = { text?: string, endIndex?: number, startIndex?: number, type?: $TokenType,  } | [text?: string, endIndex?: number, startIndex?: number, type?: $TokenType, ];
     export class $LanguageDefinition implements $ILanguageDefinition {
         getName(): string;
         compileTokenPattern(): $LanguageDefinition;
@@ -53,11 +53,11 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor/la
     }
     export class $TokenType implements $Predicate<$Matcher> {
         test(arg0: $Matcher): boolean;
+        hasPattern(): boolean;
         getMatcher(): $Predicate<$Matcher>;
         setMatcher(arg0: $Predicate_<$Matcher>): $TokenType;
-        getPattern(): string;
         setPattern(arg0: string): $TokenType;
-        hasPattern(): boolean;
+        getPattern(): string;
         or(arg0: $Predicate_<$Matcher>): $Predicate<$Matcher>;
         negate(): $Predicate<$Matcher>;
         and(arg0: $Predicate_<$Matcher>): $Predicate<$Matcher>;

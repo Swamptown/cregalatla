@@ -18,21 +18,21 @@ declare module "@package/net/neoforged/neoforge/fluids/capability/templates" {
         isEmpty(): boolean;
         fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
         getSpace(): number;
-        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        setFluid(arg0: $FluidStack_): void;
+        getFluid(): $FluidStack;
+        setCapacity(arg0: number): $FluidTank;
         getTanks(): number;
         getFluidInTank(arg0: number): $FluidStack;
+        setFluidInTank(arg0: number, arg1: $FluidStack_): void;
+        setValidator(arg0: $Predicate_<$FluidStack>): $FluidTank;
+        getFluidAmount(): number;
         getTankCapacity(arg0: number): number;
-        isFluidValid(arg0: $FluidStack_): boolean;
         isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
+        isFluidValid(arg0: $FluidStack_): boolean;
         readFromNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $FluidTank;
         writeToNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $CompoundTag;
-        setValidator(arg0: $Predicate_<$FluidStack>): $FluidTank;
-        setFluidInTank(arg0: number, arg1: $FluidStack_): void;
-        getFluidAmount(): number;
-        setCapacity(arg0: number): $FluidTank;
-        getFluid(): $FluidStack;
-        setFluid(arg0: $FluidStack_): void;
         getCapacity(): number;
         supportsFill(arg0: number): boolean;
         supportsDrain(arg0: number): boolean;
@@ -48,18 +48,18 @@ declare module "@package/net/neoforged/neoforge/fluids/capability/templates" {
         fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
         drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        canDrainFluidType(arg0: $FluidStack_): boolean;
         canFillFluidType(arg0: $FluidStack_): boolean;
+        canDrainFluidType(arg0: $FluidStack_): boolean;
+        getContainer(): $ItemStack;
+        getFluid(): $FluidStack;
         getTanks(): number;
         getFluidInTank(arg0: number): $FluidStack;
         getTankCapacity(arg0: number): number;
         isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
-        getContainer(): $ItemStack;
-        getFluid(): $FluidStack;
         constructor(arg0: $Supplier_<$DataComponentType<$SimpleFluidContent>>, arg1: $ItemStack_, arg2: number);
-        get tanks(): number;
         get container(): $ItemStack;
         get fluid(): $FluidStack;
+        get tanks(): number;
     }
     export class $FluidHandlerItemStack$SwapEmpty extends $FluidHandlerItemStack {
         constructor(arg0: $Supplier_<$DataComponentType<$SimpleFluidContent>>, arg1: $ItemStack_, arg2: $ItemStack_, arg3: number);
@@ -79,18 +79,18 @@ declare module "@package/net/neoforged/neoforge/fluids/capability/templates" {
         fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
         drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        canDrainFluidType(arg0: $FluidStack_): boolean;
         canFillFluidType(arg0: $FluidStack_): boolean;
+        canDrainFluidType(arg0: $FluidStack_): boolean;
+        getContainer(): $ItemStack;
+        getFluid(): $FluidStack;
         getTanks(): number;
         getFluidInTank(arg0: number): $FluidStack;
         getTankCapacity(arg0: number): number;
         isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
-        getContainer(): $ItemStack;
-        getFluid(): $FluidStack;
         constructor(arg0: $Supplier_<$DataComponentType<$SimpleFluidContent>>, arg1: $ItemStack_, arg2: number);
-        get tanks(): number;
         get container(): $ItemStack;
         get fluid(): $FluidStack;
+        get tanks(): number;
     }
     export class $FluidHandlerItemStackSimple$Consumable extends $FluidHandlerItemStackSimple {
         constructor(arg0: $Supplier_<$DataComponentType<$SimpleFluidContent>>, arg1: $ItemStack_, arg2: number);

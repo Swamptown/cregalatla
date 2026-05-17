@@ -3,6 +3,7 @@
     "probejs.fullScanMods": [
         "minecraft",
         "kubejs",
-        "neoforge"
+        "neoforge",
+        "morejs"
     ]
 }

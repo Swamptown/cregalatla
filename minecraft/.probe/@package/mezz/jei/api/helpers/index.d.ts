@@ -58,23 +58,23 @@ declare module "@package/mezz/jei/api/helpers" {
     export class $IJeiHelpers {
     }
     export interface $IJeiHelpers {
-        getRecipeType(arg0: $ResourceLocation_): ($RecipeType<never>) | undefined;
-        getRecipeType<T>(arg0: $ResourceLocation_, arg1: $Class<T>): ($RecipeType<T>) | undefined;
+        getFocusFactory(): $IFocusFactory;
         getIngredientManager(): $IIngredientManager;
         getColorHelper(): $IColorHelper;
         getVanillaRecipeFactory(): $IVanillaRecipeFactory;
-        getFocusFactory(): $IFocusFactory;
         getPlatformFluidHelper(): $IPlatformFluidHelper<never>;
         getAllRecipeTypes(): $Stream<$RecipeType<never>>;
         getIngredientVisibility(): $IIngredientVisibility;
         getStackHelper(): $IStackHelper;
         getModIdHelper(): $IModIdHelper;
         getCodecHelper(): $ICodecHelper;
+        getRecipeType(arg0: $ResourceLocation_): ($RecipeType<never>) | undefined;
+        getRecipeType<T>(arg0: $ResourceLocation_, arg1: $Class<T>): ($RecipeType<T>) | undefined;
         getGuiHelper(): $IGuiHelper;
+        get focusFactory(): $IFocusFactory;
         get ingredientManager(): $IIngredientManager;
         get colorHelper(): $IColorHelper;
         get vanillaRecipeFactory(): $IVanillaRecipeFactory;
-        get focusFactory(): $IFocusFactory;
         get platformFluidHelper(): $IPlatformFluidHelper<never>;
         get allRecipeTypes(): $Stream<$RecipeType<never>>;
         get ingredientVisibility(): $IIngredientVisibility;

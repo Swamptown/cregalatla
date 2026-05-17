@@ -23,7 +23,7 @@ declare module "@package/dev/vfyjxf/taffy/tree" {
     /**
      * Values that may be interpreted as {@link $LayoutOutput}.
      */
-    export type $LayoutOutput_ = { contentSize?: $FloatSize, marginsCanCollapseThrough?: boolean, topMargin?: $CollapsibleMarginSet, firstBaselines?: $FloatPoint, bottomMargin?: $CollapsibleMarginSet, size?: $FloatSize,  } | [contentSize?: $FloatSize, marginsCanCollapseThrough?: boolean, topMargin?: $CollapsibleMarginSet, firstBaselines?: $FloatPoint, bottomMargin?: $CollapsibleMarginSet, size?: $FloatSize, ];
+    export type $LayoutOutput_ = { size?: $FloatSize, bottomMargin?: $CollapsibleMarginSet, firstBaselines?: $FloatPoint, topMargin?: $CollapsibleMarginSet, marginsCanCollapseThrough?: boolean, contentSize?: $FloatSize,  } | [size?: $FloatSize, bottomMargin?: $CollapsibleMarginSet, firstBaselines?: $FloatPoint, topMargin?: $CollapsibleMarginSet, marginsCanCollapseThrough?: boolean, contentSize?: $FloatSize, ];
     export class $Layout extends $Record {
         size(): $FloatSize;
         copy(): $Layout;
@@ -33,13 +33,13 @@ declare module "@package/dev/vfyjxf/taffy/tree" {
         margin(): $FloatRect;
         contentBoxWidth(): number;
         contentBoxHeight(): number;
-        scrollbarSize(): $FloatSize;
         static withOrder(arg0: number): $Layout;
         contentBoxSize(): $FloatSize;
         contentBoxX(): number;
         contentBoxY(): number;
         scrollWidth(): number;
         scrollHeight(): number;
+        scrollbarSize(): $FloatSize;
         border(): $FloatRect;
         padding(): $FloatRect;
         constructor(order: number, location: $FloatPoint, size: $FloatSize, contentSize: $FloatSize, scrollbarSize: $FloatSize, border: $FloatRect, padding: $FloatRect, margin: $FloatRect);
@@ -49,7 +49,7 @@ declare module "@package/dev/vfyjxf/taffy/tree" {
     /**
      * Values that may be interpreted as {@link $Layout}.
      */
-    export type $Layout_ = { location?: $FloatPoint, size?: $FloatSize, padding?: $FloatRect, order?: number, margin?: $FloatRect, border?: $FloatRect, contentSize?: $FloatSize, scrollbarSize?: $FloatSize,  } | [location?: $FloatPoint, size?: $FloatSize, padding?: $FloatRect, order?: number, margin?: $FloatRect, border?: $FloatRect, contentSize?: $FloatSize, scrollbarSize?: $FloatSize, ];
+    export type $Layout_ = { scrollbarSize?: $FloatSize, contentSize?: $FloatSize, border?: $FloatRect, margin?: $FloatRect, order?: number, padding?: $FloatRect, size?: $FloatSize, location?: $FloatPoint,  } | [scrollbarSize?: $FloatSize, contentSize?: $FloatSize, border?: $FloatRect, margin?: $FloatRect, order?: number, padding?: $FloatRect, size?: $FloatSize, location?: $FloatPoint, ];
     export class $RunMode extends $Enum<$RunMode> {
         static values(): $RunMode[];
         static valueOf(arg0: string): $RunMode;
@@ -99,15 +99,6 @@ declare module "@package/dev/vfyjxf/taffy/tree" {
         clearCache(arg0: $NodeId_): void;
         getChildren(arg0: $NodeId_): $List<$NodeId>;
         childCount(arg0: $NodeId_): number;
-        newWithChildren(arg0: $TaffyStyle, arg1: $List_<$NodeId_>): $NodeId;
-        newWithChildren(arg0: $TaffyStyle, ...arg1: $NodeId_[]): $NodeId;
-        removeChildAtIndex(arg0: $NodeId_, arg1: number): $NodeId;
-        getUnroundedLayout(arg0: $NodeId_): $Layout;
-        hasNewLayout(arg0: $NodeId_): boolean;
-        hasDirtyDescendant(arg0: $NodeId_): boolean;
-        needsVisit(arg0: $NodeId_): boolean;
-        acknowledgeLayout(arg0: $NodeId_): void;
-        setUnroundedLayout(arg0: $NodeId_, arg1: $Layout_): void;
         computeLayoutWithMeasure(arg0: $NodeId_, arg1: $TaffySize<$AvailableSpace>, arg2: $MeasureFunc_): void;
         enableRounding(): void;
         roundingEnabled(): boolean;
@@ -116,6 +107,15 @@ declare module "@package/dev/vfyjxf/taffy/tree" {
         setMeasureFunc(arg0: $NodeId_, arg1: $MeasureFunc_): void;
         getMeasureFunc(arg0: $NodeId_): $MeasureFunc;
         setChildren(arg0: $NodeId_, ...arg1: $NodeId_[]): void;
+        newWithChildren(arg0: $TaffyStyle, ...arg1: $NodeId_[]): $NodeId;
+        newWithChildren(arg0: $TaffyStyle, arg1: $List_<$NodeId_>): $NodeId;
+        removeChildAtIndex(arg0: $NodeId_, arg1: number): $NodeId;
+        getUnroundedLayout(arg0: $NodeId_): $Layout;
+        hasNewLayout(arg0: $NodeId_): boolean;
+        hasDirtyDescendant(arg0: $NodeId_): boolean;
+        needsVisit(arg0: $NodeId_): boolean;
+        acknowledgeLayout(arg0: $NodeId_): void;
+        setUnroundedLayout(arg0: $NodeId_, arg1: $Layout_): void;
         getChildAtIndex(arg0: $NodeId_, arg1: number): $NodeId;
         replaceChildAtIndex(arg0: $NodeId_, arg1: number, arg2: $NodeId_): $NodeId;
         totalNodeCount(): number;
@@ -127,19 +127,19 @@ declare module "@package/dev/vfyjxf/taffy/tree" {
         getCacheEntry(arg0: $NodeId_, arg1: $FloatSize, arg2: $TaffySize<$AvailableSpace>, arg3: $RunMode_): $LayoutOutput;
         storeCacheEntry(arg0: $NodeId_, arg1: $FloatSize, arg2: $TaffySize<$AvailableSpace>, arg3: $RunMode_, arg4: $LayoutOutput_): void;
         printTree(arg0: $NodeId_): void;
-        computeLayout(arg0: $NodeId_, arg1: $TaffySize<$AvailableSpace>): void;
         disableRounding(): void;
         setLayoutChangeListener(arg0: $LayoutChangeListener_): void;
         newLeaf(arg0: $TaffyStyle): $NodeId;
         insertChildAtIndex(arg0: $NodeId_, arg1: number, arg2: $NodeId_): void;
+        computeLayout(arg0: $NodeId_, arg1: $TaffySize<$AvailableSpace>): void;
+        addChild(arg0: $NodeId_, arg1: $NodeId_): void;
         markDirty(arg0: $NodeId_): void;
         removeChild(arg0: $NodeId_, arg1: $NodeId_): void;
-        addChild(arg0: $NodeId_, arg1: $NodeId_): void;
         getLayout(arg0: $NodeId_): $Layout;
         setLayout(arg0: $NodeId_, arg1: $Layout_): void;
+        setStyle(arg0: $NodeId_, arg1: $TaffyStyle): void;
         containsNode(arg0: $NodeId_): boolean;
         getAllNodes(): $Set<$NodeId>;
-        setStyle(arg0: $NodeId_, arg1: $TaffyStyle): void;
         getStyle(arg0: $NodeId_): $TaffyStyle;
         constructor();
         constructor(arg0: number);

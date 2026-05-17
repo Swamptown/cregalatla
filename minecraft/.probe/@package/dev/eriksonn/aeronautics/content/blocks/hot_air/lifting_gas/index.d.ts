@@ -10,14 +10,14 @@ declare module "@package/dev/eriksonn/aeronautics/content/blocks/hot_air/lifting
         getFillingTime(): number;
         getEmptyingTime(): number;
         getLiftStrength(): number;
-        getResponsivenessAdjustmentRange(): number;
         getResponsivenessAdjustmentFactor(): number;
+        getResponsivenessAdjustmentRange(): number;
         get name(): $Component;
         get fillingTime(): number;
         get emptyingTime(): number;
         get liftStrength(): number;
-        get responsivenessAdjustmentRange(): number;
         get responsivenessAdjustmentFactor(): number;
+        get responsivenessAdjustmentRange(): number;
     }
     /**
      * Values that may be interpreted as {@link $LiftingGasType}.

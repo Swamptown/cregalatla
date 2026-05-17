@@ -6,7 +6,7 @@ import { $IdentifiableResourceReloadListener } from "@package/net/fabricmc/fabri
 import { $EntityType } from "@package/net/minecraft/world/entity";
 import { $GameEvent } from "@package/net/minecraft/world/level/gameevent";
 import { $FabricTagKey } from "@package/net/fabricmc/fabric/api/tag";
-import { $ResourceManager, $PreparableReloadListener, $PreparableReloadListener$PreparationBarrier_ } from "@package/net/minecraft/server/packs/resources";
+import { $ResourceManager, $PreparableReloadListener$PreparationBarrier_, $PreparableReloadListener } from "@package/net/minecraft/server/packs/resources";
 import { $List, $Map_, $Collection_, $List_, $Collection, $Map } from "@package/java/util";
 import { $PaintingVariant } from "@package/net/minecraft/world/entity/decoration";
 import { $CatVariant } from "@package/net/minecraft/world/entity/animal";
@@ -211,7 +211,7 @@ declare module "@package/net/minecraft/tags" {
     /**
      * Values that may be interpreted as {@link $TagFile}.
      */
-    export type $TagFile_ = { replace?: boolean, remove?: $List_<$TagEntry>, entries?: $List_<$TagEntry>,  } | [replace?: boolean, remove?: $List_<$TagEntry>, entries?: $List_<$TagEntry>, ];
+    export type $TagFile_ = { entries?: $List_<$TagEntry>, remove?: $List_<$TagEntry>, replace?: boolean,  } | [entries?: $List_<$TagEntry>, remove?: $List_<$TagEntry>, replace?: boolean, ];
     export class $TagLoader<T> implements $TagLoaderExtension, $TagLoaderKJS<any> {
         load(arg0: $ResourceManager): $Map<$ResourceLocation, $List<$TagLoader$EntryWithSource>>;
         build(arg0: $Map_<$ResourceLocation_, $List_<$TagLoader$EntryWithSource_>>): $Map<$ResourceLocation, $Collection<$Object>>;
@@ -415,8 +415,8 @@ declare module "@package/net/minecraft/tags" {
         cast<E>(arg0: $ResourceKey_<$Registry<E>>): ($TagKey<E>) | undefined;
         location(): $ResourceLocation;
         static create<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $ResourceLocation_): $TagKey<T>;
-        isFor(arg0: $ResourceKey_<$Registry<never>>): boolean;
         static hashedCodec<T>(arg0: $ResourceKey_<$Registry<T>>): $Codec<$TagKey<T>>;
+        isFor(arg0: $ResourceKey_<$Registry<never>>): boolean;
         registry(): $ResourceKey<$Registry<T>>;
         static codec<T>(arg0: $ResourceKey_<$Registry<T>>): $Codec<$TagKey<T>>;
         getName(): $Component;
@@ -439,10 +439,10 @@ declare module "@package/net/minecraft/tags" {
         add(arg0: $TagEntry): $TagBuilder;
         static create(): $TagBuilder;
         build(): $List<$TagEntry>;
-        addOptionalTag(arg0: $ResourceLocation_): $TagBuilder;
-        addElement(arg0: $ResourceLocation_): $TagBuilder;
         getRemoveEntries(): $Stream<$TagEntry>;
         isReplace(): boolean;
+        addElement(arg0: $ResourceLocation_): $TagBuilder;
+        addOptionalTag(arg0: $ResourceLocation_): $TagBuilder;
         addOptionalElement(arg0: $ResourceLocation_): $TagBuilder;
         addTag(arg0: $ResourceLocation_): $TagBuilder;
         /**
@@ -635,9 +635,9 @@ declare module "@package/net/minecraft/tags" {
         visitRequiredDependencies(arg0: $Consumer_<$ResourceLocation>): void;
         visitOptionalDependencies(arg0: $Consumer_<$ResourceLocation>): void;
         elementOrTag(): $ExtraCodecs$TagOrElementLocation;
+        static optionalElement(arg0: $ResourceLocation_): $TagEntry;
         isTag(): boolean;
         verifyIfPresent(arg0: $Predicate_<$ResourceLocation>, arg1: $Predicate_<$ResourceLocation>): boolean;
-        static optionalElement(arg0: $ResourceLocation_): $TagEntry;
         isRequired(): boolean;
         static CODEC: $Codec<$TagEntry>;
         id: $ResourceLocation;
@@ -691,7 +691,7 @@ declare module "@package/net/minecraft/tags" {
      * Values that may be interpreted as {@link $TagNetworkSerialization$TagOutput}.
      */
     export type $TagNetworkSerialization$TagOutput_<T> = ((arg0: $TagKey<T>, arg1: $List<$Holder<T>>) => void);
-    export class $TagManager implements $PreparableReloadListener, $IdentifiableResourceReloadListener, $TagManagerKJS {
+    export class $TagManager implements $PreparableReloadListener, $TagManagerKJS, $IdentifiableResourceReloadListener {
         getResult(): $List<$TagManager$LoadResult<never>>;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         kjs$setResources(resources: $ReloadableServerResourcesKJS): void;
@@ -802,5 +802,5 @@ declare module "@package/net/minecraft/tags" {
     /**
      * Values that may be interpreted as {@link $TagLoader$EntryWithSource}.
      */
-    export type $TagLoader$EntryWithSource_ = { source?: string, entry?: $TagEntry, remove?: boolean,  } | [source?: string, entry?: $TagEntry, remove?: boolean, ];
+    export type $TagLoader$EntryWithSource_ = { remove?: boolean, entry?: $TagEntry, source?: string,  } | [remove?: boolean, entry?: $TagEntry, source?: string, ];
 }

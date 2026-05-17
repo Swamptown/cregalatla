@@ -57,7 +57,7 @@ declare module "@package/net/minecraft/server/dedicated" {
     /**
      * Values that may be interpreted as {@link $DedicatedServerProperties$WorldDimensionData}.
      */
-    export type $DedicatedServerProperties$WorldDimensionData_ = { levelType?: string, generatorSettings?: $JsonObject_,  } | [levelType?: string, generatorSettings?: $JsonObject_, ];
+    export type $DedicatedServerProperties$WorldDimensionData_ = { generatorSettings?: $JsonObject_, levelType?: string,  } | [generatorSettings?: $JsonObject_, levelType?: string, ];
     export class $ServerWatchdog implements $Runnable {
         run(): void;
         constructor(arg0: $DedicatedServer);
@@ -82,6 +82,8 @@ declare module "@package/net/minecraft/server/dedicated" {
     export class $DedicatedServer extends $MinecraftServer implements $ServerInterface {
         getProperties(): $DedicatedServerProperties;
         getServerPort(): number;
+        getServerIp(): string;
+        showGui(): void;
         getPluginNames(): string;
         storeUsingWhiteList(arg0: boolean): void;
         convertOldUsers(): boolean;
@@ -89,8 +91,6 @@ declare module "@package/net/minecraft/server/dedicated" {
         getMaxTickLength(): number;
         handleConsoleInputs(): void;
         handleConsoleInput(arg0: string, arg1: $CommandSourceStack): void;
-        getServerIp(): string;
-        showGui(): void;
         getServerName(): string;
         runCommand(arg0: string): string;
         static VANILLA_BRAND: string;
@@ -108,10 +108,10 @@ declare module "@package/net/minecraft/server/dedicated" {
         constructor(arg0: $Thread, arg1: $LevelStorageSource$LevelStorageAccess, arg2: $PackRepository, arg3: $WorldStem_, arg4: $DedicatedServerSettings, arg5: $DataFixer, arg6: $Services_, arg7: $ChunkProgressListenerFactory_);
         get properties(): $DedicatedServerProperties;
         get serverPort(): number;
+        get serverIp(): string;
         get pluginNames(): string;
         get levelIdName(): string;
         get maxTickLength(): number;
-        get serverIp(): string;
         get serverName(): string;
     }
     export class $DedicatedServerProperties extends $Settings<$DedicatedServerProperties> {

@@ -9,11 +9,11 @@ declare module "@package/org/apache/maven/artifact/repository" {
     export class $ArtifactRepositoryPolicy {
         merge(arg0: $ArtifactRepositoryPolicy): void;
         isEnabled(): boolean;
-        setUpdatePolicy(arg0: string): void;
-        getUpdatePolicy(): string;
         setChecksumPolicy(arg0: string): void;
         getChecksumPolicy(): string;
         checkOutOfDate(arg0: $Date): boolean;
+        setUpdatePolicy(arg0: string): void;
+        getUpdatePolicy(): string;
         setEnabled(arg0: boolean): void;
         static CHECKSUM_POLICY_IGNORE: string;
         static UPDATE_POLICY_DAILY: string;
@@ -64,20 +64,20 @@ declare module "@package/org/apache/maven/artifact/repository" {
         getAuthentication(): $Authentication;
         getMirroredRepositories(): $List<$ArtifactRepository>;
         setMirroredRepositories(arg0: $List_<$ArtifactRepository>): void;
+        setProxy(arg0: $Proxy): void;
+        setBlocked(arg0: boolean): void;
         /**
          * @deprecated
          */
         isBlacklisted(): boolean;
-        setProxy(arg0: $Proxy): void;
-        setBlocked(arg0: boolean): void;
         getUrl(): string;
         getLayout(): $ArtifactRepositoryLayout;
         setLayout(arg0: $ArtifactRepositoryLayout): void;
         setId(arg0: string): void;
         getReleases(): $ArtifactRepositoryPolicy;
         getSnapshots(): $ArtifactRepositoryPolicy;
-        getProxy(): $Proxy;
         isBlocked(): boolean;
+        getProxy(): $Proxy;
         setUrl(arg0: string): void;
         get key(): string;
         get protocol(): string;

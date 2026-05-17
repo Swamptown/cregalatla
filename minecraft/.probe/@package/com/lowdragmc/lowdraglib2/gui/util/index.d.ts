@@ -36,13 +36,13 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/util" {
         getParent(): $TreeNode<T, K>;
         getContent(): K;
         getChildren(): $List<$TreeNode<T, K>>;
+        getOrCreateChild(arg0: T): $TreeNode<T, K>;
         setValid(arg0: $Predicate_<$TreeNode<T, K>>): $TreeNode<T, K>;
         addContent(arg0: T, arg1: K): void;
-        getOrCreateChild(arg0: T): $TreeNode<T, K>;
-        removeChild(arg0: T): void;
-        removeChild(arg0: $TreeNode<T, K>): void;
         createChild(arg0: T): $TreeNode<T, K>;
         getDimension(): number;
+        removeChild(arg0: $TreeNode<T, K>): void;
+        removeChild(arg0: T): void;
         flatten(): $List<$ITreeNode<T, K>>;
         isLeaf(): boolean;
         getChild(arg0: T): $ITreeNode<T, K>;
@@ -85,9 +85,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/util" {
         branch(arg0: string, arg1: $Consumer_<$TreeBuilder$Menu>): $TreeBuilder$Menu;
         branch(arg0: $Component_, arg1: $Consumer_<$TreeBuilder$Menu>): $TreeBuilder$Menu;
         branch(arg0: $IGuiTexture_, arg1: $Component_, arg2: $Consumer_<$TreeBuilder$Menu>): $TreeBuilder$Menu;
-        endBranch(): $TreeBuilder$Menu;
-        static isCrossLine(arg0: $Tuple<$IGuiTexture_, $Component_>): boolean;
         crossLine(): $TreeBuilder$Menu;
+        static isCrossLine(arg0: $Tuple<$IGuiTexture_, $Component_>): boolean;
         static uiProvider(arg0: $Tuple<$IGuiTexture_, $Component_>): $UIElement;
         static hoverTextureProvider(arg0: $ITreeNode<$Tuple<$IGuiTexture_, $Component_>, $Runnable_>): $IGuiTexture;
         static getIcon(arg0: $Tuple<$IGuiTexture_, $Component_>): $IGuiTexture;

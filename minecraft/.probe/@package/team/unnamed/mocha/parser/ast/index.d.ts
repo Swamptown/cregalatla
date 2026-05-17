@@ -37,9 +37,9 @@ declare module "@package/team/unnamed/mocha/parser/ast" {
         visitExecutionScope(arg0: $ExecutionScopeExpression): R;
         visitBinary(arg0: $BinaryExpression): R;
         visitAccess(arg0: $AccessExpression): R;
-        visitUnary(arg0: $UnaryExpression): R;
         visitStatement(arg0: $StatementExpression): R;
         visitCall(arg0: $CallExpression): R;
+        visitUnary(arg0: $UnaryExpression): R;
         visitString(arg0: $StringExpression): R;
         visitFloat(arg0: $FloatExpression): R;
     }

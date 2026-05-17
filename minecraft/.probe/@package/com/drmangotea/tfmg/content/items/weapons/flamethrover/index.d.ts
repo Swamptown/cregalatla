@@ -1,4 +1,4 @@
-import { $RegistryAccess, $Holder$Reference, $HolderSet, $HolderSet_ } from "@package/net/minecraft/core";
+import { $RegistryAccess, $Holder$Reference, $HolderSet_, $HolderSet } from "@package/net/minecraft/core";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $Fluid_, $Fluid } from "@package/net/minecraft/world/level/material";
 import { RegistryTypes, RegistryMarked } from "@special/types";
@@ -21,6 +21,6 @@ declare module "@package/com/drmangotea/tfmg/content/items/weapons/flamethrover"
     /**
      * Values that may be interpreted as {@link $FlamethrowerFuelType}.
      */
-    export type $FlamethrowerFuelType_ = RegistryTypes.TfmgFlamethrowerFuelType | { hellfire?: boolean, color?: number, amount?: number, speed?: number, fluids?: $HolderSet_<$Fluid>, spread?: number, isCold?: boolean,  } | [hellfire?: boolean, color?: number, amount?: number, speed?: number, fluids?: $HolderSet_<$Fluid>, spread?: number, isCold?: boolean, ];
+    export type $FlamethrowerFuelType_ = RegistryTypes.TfmgFlamethrowerFuelType | { isCold?: boolean, spread?: number, fluids?: $HolderSet_<$Fluid>, speed?: number, amount?: number, color?: number, hellfire?: boolean,  } | [isCold?: boolean, spread?: number, fluids?: $HolderSet_<$Fluid>, speed?: number, amount?: number, color?: number, hellfire?: boolean, ];
     export interface $FlamethrowerFuelType extends RegistryMarked<RegistryTypes.TfmgFlamethrowerFuelTypeTag, RegistryTypes.TfmgFlamethrowerFuelType> {}
 }

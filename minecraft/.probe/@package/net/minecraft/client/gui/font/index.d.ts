@@ -8,7 +8,7 @@ import { $Either } from "@package/com/mojang/datafixers/util";
 import { $Executor_, $CompletableFuture } from "@package/java/util/concurrent";
 import { $IdentifiableResourceReloadListener } from "@package/net/fabricmc/fabric/api/resource";
 import { $BakedGlyph } from "@package/net/minecraft/client/gui/font/glyphs";
-import { $ResourceManager, $PreparableReloadListener, $PreparableReloadListener$PreparationBarrier_ } from "@package/net/minecraft/server/packs/resources";
+import { $ResourceManager, $PreparableReloadListener$PreparationBarrier_, $PreparableReloadListener } from "@package/net/minecraft/server/packs/resources";
 import { $Minecraft, $Options } from "@package/net/minecraft/client";
 import { $Map_, $Set_, $List_, $Collection, $Map } from "@package/java/util";
 import { $StringRepresentable, $DependencySorter$Entry } from "@package/net/minecraft/util";
@@ -52,7 +52,7 @@ declare module "@package/net/minecraft/client/gui/font" {
     /**
      * Values that may be interpreted as {@link $FontSet$GlyphInfoFilter}.
      */
-    export type $FontSet$GlyphInfoFilter_ = { glyphInfoNotFishy?: $GlyphInfo, glyphInfo?: $GlyphInfo,  } | [glyphInfoNotFishy?: $GlyphInfo, glyphInfo?: $GlyphInfo, ];
+    export type $FontSet$GlyphInfoFilter_ = { glyphInfo?: $GlyphInfo, glyphInfoNotFishy?: $GlyphInfo,  } | [glyphInfo?: $GlyphInfo, glyphInfoNotFishy?: $GlyphInfo, ];
     export class $CodepointMap$Output<T> {
     }
     export interface $CodepointMap$Output<T> {
@@ -96,7 +96,7 @@ declare module "@package/net/minecraft/client/gui/font" {
     /**
      * Values that may be interpreted as {@link $FontManager$UnresolvedBuilderBundle}.
      */
-    export type $FontManager$UnresolvedBuilderBundle_ = { builders?: $List_<$FontManager$BuilderResult_>, dependencies?: $Set_<$ResourceLocation_>, fontId?: $ResourceLocation_,  } | [builders?: $List_<$FontManager$BuilderResult_>, dependencies?: $Set_<$ResourceLocation_>, fontId?: $ResourceLocation_, ];
+    export type $FontManager$UnresolvedBuilderBundle_ = { fontId?: $ResourceLocation_, dependencies?: $Set_<$ResourceLocation_>, builders?: $List_<$FontManager$BuilderResult_>,  } | [fontId?: $ResourceLocation_, dependencies?: $Set_<$ResourceLocation_>, builders?: $List_<$FontManager$BuilderResult_>, ];
     export class $FontManager$FontDefinitionFile extends $Record {
     }
     /**
@@ -105,24 +105,24 @@ declare module "@package/net/minecraft/client/gui/font" {
     export type $FontManager$FontDefinitionFile_ = { providers?: $List_<$GlyphProviderDefinition$Conditional_>,  } | [providers?: $List_<$GlyphProviderDefinition$Conditional_>, ];
     export class $GlyphRenderTypes extends $Record {
         normal(): $RenderType;
-        seeThrough(): $RenderType;
         select(arg0: $Font$DisplayMode_): $RenderType;
         polygonOffset(): $RenderType;
         static createForColorTexture(arg0: $ResourceLocation_): $GlyphRenderTypes;
         static createForIntensityTexture(arg0: $ResourceLocation_): $GlyphRenderTypes;
+        seeThrough(): $RenderType;
         constructor(arg0: $RenderType, arg1: $RenderType, arg2: $RenderType);
     }
     /**
      * Values that may be interpreted as {@link $GlyphRenderTypes}.
      */
-    export type $GlyphRenderTypes_ = { seeThrough?: $RenderType, polygonOffset?: $RenderType, normal?: $RenderType,  } | [seeThrough?: $RenderType, polygonOffset?: $RenderType, normal?: $RenderType, ];
+    export type $GlyphRenderTypes_ = { normal?: $RenderType, polygonOffset?: $RenderType, seeThrough?: $RenderType,  } | [normal?: $RenderType, polygonOffset?: $RenderType, seeThrough?: $RenderType, ];
     export class $FontManager implements $PreparableReloadListener, $AutoCloseable, $IdentifiableResourceReloadListener {
         close(): void;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
-        getFabricId(): $ResourceLocation;
         createFont(): $Font;
         createFontFilterFishy(): $Font;
         updateOptions(arg0: $Options): void;
+        getFabricId(): $ResourceLocation;
         getName(): string;
         getFabricDependencies(): $Collection<$ResourceLocation>;
         static LOGGER: $Logger;
@@ -154,32 +154,32 @@ declare module "@package/net/minecraft/client/gui/font" {
         copy(): void;
         static setClipboardContents(arg0: $Minecraft, arg1: string): void;
         static getClipboardContents(arg0: $Minecraft): string;
-        setCursorToEnd(arg0: boolean): void;
-        setCursorToEnd(): void;
         moveByWords(arg0: number, arg1: boolean): void;
         moveByWords(arg0: number): void;
         removeCharsFromCursor(arg0: number): void;
         moveByChars(arg0: number): void;
         moveByChars(arg0: number, arg1: boolean): void;
-        setCursorPos(arg0: number, arg1: boolean): void;
         setCursorPos(arg0: number): void;
+        setCursorPos(arg0: number, arg1: boolean): void;
         isSelecting(): boolean;
         setSelectionRange(arg0: number, arg1: number): void;
         getSelectionPos(): number;
+        setCursorToEnd(arg0: boolean): void;
+        setCursorToEnd(): void;
         selectAll(): void;
-        getCursorPos(): number;
         paste(): void;
+        getCursorPos(): number;
         cut(): void;
-        removeWordsFromCursor(arg0: number): void;
         setSelectionPos(arg0: number): void;
+        removeWordsFromCursor(arg0: number): void;
+        keyPressed(arg0: number): boolean;
         insertText(arg0: string): void;
         charTyped(arg0: string): boolean;
-        keyPressed(arg0: number): boolean;
+        removeFromCursor(arg0: number, arg1: $TextFieldHelper$CursorStep_): void;
+        setCursorToStart(): void;
+        setCursorToStart(arg0: boolean): void;
         static createClipboardGetter(arg0: $Minecraft): $Supplier<string>;
         static createClipboardSetter(arg0: $Minecraft): $Consumer<string>;
-        removeFromCursor(arg0: number, arg1: $TextFieldHelper$CursorStep_): void;
-        setCursorToStart(arg0: boolean): void;
-        setCursorToStart(): void;
         moveBy(arg0: number, arg1: boolean, arg2: $TextFieldHelper$CursorStep_): void;
         constructor(arg0: $Supplier_<string>, arg1: $Consumer_<string>, arg2: $Supplier_<string>, arg3: $Consumer_<string>, arg4: $Predicate_<string>);
         get selecting(): boolean;
@@ -196,11 +196,11 @@ declare module "@package/net/minecraft/client/gui/font" {
     /**
      * Values that may be interpreted as {@link $FontManager$BuilderId}.
      */
-    export type $FontManager$BuilderId_ = { pack?: string, index?: number, fontId?: $ResourceLocation_,  } | [pack?: string, index?: number, fontId?: $ResourceLocation_, ];
+    export type $FontManager$BuilderId_ = { fontId?: $ResourceLocation_, index?: number, pack?: string,  } | [fontId?: $ResourceLocation_, index?: number, pack?: string, ];
     export class $FontManager$BuilderResult extends $Record {
     }
     /**
      * Values that may be interpreted as {@link $FontManager$BuilderResult}.
      */
-    export type $FontManager$BuilderResult_ = { result?: $Either<$CompletableFuture<($GlyphProvider_) | undefined>, $ResourceLocation_>, filter?: $FontOption$Filter, id?: $FontManager$BuilderId_,  } | [result?: $Either<$CompletableFuture<($GlyphProvider_) | undefined>, $ResourceLocation_>, filter?: $FontOption$Filter, id?: $FontManager$BuilderId_, ];
+    export type $FontManager$BuilderResult_ = { id?: $FontManager$BuilderId_, filter?: $FontOption$Filter, result?: $Either<$CompletableFuture<($GlyphProvider_) | undefined>, $ResourceLocation_>,  } | [id?: $FontManager$BuilderId_, filter?: $FontOption$Filter, result?: $Either<$CompletableFuture<($GlyphProvider_) | undefined>, $ResourceLocation_>, ];
 }

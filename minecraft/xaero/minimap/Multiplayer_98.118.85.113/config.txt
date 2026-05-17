@@ -11,5 +11,6 @@ sortReversed:false
 ignoreHeightmaps:false
 
 //dimension types (DO NOT EDIT)
+dimensionType:rocketnautics$space:rocketnautics$space
 dimensionType:minecraft$overworld:minecraft$overworld
 //server waypoints

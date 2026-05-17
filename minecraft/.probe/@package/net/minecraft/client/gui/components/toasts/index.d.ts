@@ -15,7 +15,7 @@ declare module "@package/net/minecraft/client/gui/components/toasts" {
         addToast(arg0: $Toast_): void;
         getMinecraft(): $Minecraft;
         render(arg0: $GuiGraphics): void;
-        handler$zcl000$sodium_extra$goodByeToasts(arg0: $Toast_, arg1: $CallbackInfo): void;
+        handler$zch000$sodium_extra$goodByeToasts(arg0: $Toast_, arg1: $CallbackInfo): void;
         getNotificationDisplayTimeMultiplier(): number;
         getToast<T extends $Toast>(arg0: $Class<T>, arg1: $Object): T;
         minecraft: $Minecraft;
@@ -122,9 +122,9 @@ declare module "@package/net/minecraft/client/gui/components/toasts" {
         forceHide(): void;
         height(): number;
         render(arg0: $GuiGraphics, arg1: $ToastComponent, arg2: number): $Toast$Visibility;
+        static addOrUpdate(arg0: $ToastComponent, arg1: $SystemToast$SystemToastId, arg2: $Component_, arg3: $Component_): void;
         static onWorldAccessFailure(arg0: $Minecraft, arg1: string): void;
         static onWorldDeleteFailure(arg0: $Minecraft, arg1: string): void;
-        static addOrUpdate(arg0: $ToastComponent, arg1: $SystemToast$SystemToastId, arg2: $Component_, arg3: $Component_): void;
         static onFileDropFailure(arg0: $Minecraft, arg1: number): void;
         static onPackCopyFailure(arg0: $Minecraft, arg1: string): void;
         slotCount(): number;

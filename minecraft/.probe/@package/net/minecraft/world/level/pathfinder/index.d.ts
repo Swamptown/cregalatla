@@ -35,7 +35,7 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
     /**
      * Values that may be interpreted as {@link $Path$DebugData}.
      */
-    export type $Path$DebugData_ = { targetNodes?: $Set_<$Target>, openSet?: $Node[], closedSet?: $Node[],  } | [targetNodes?: $Set_<$Target>, openSet?: $Node[], closedSet?: $Node[], ];
+    export type $Path$DebugData_ = { closedSet?: $Node[], openSet?: $Node[], targetNodes?: $Set_<$Target>,  } | [closedSet?: $Node[], openSet?: $Node[], targetNodes?: $Set_<$Target>, ];
     export class $AmphibiousNodeEvaluator extends $WalkNodeEvaluator {
         mob: $Mob;
         entityHeight: number;
@@ -58,11 +58,11 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
      */
     export type $PathComputationType_ = "land" | "water" | "air";
     export class $Target extends $Node {
-        static createFromStream(arg0: $FriendlyByteBuf): $Target;
-        isReached(): boolean;
         setReached(): void;
         updateBest(arg0: number, arg1: $Node): void;
         getBestNode(): $Node;
+        isReached(): boolean;
+        static createFromStream(arg0: $FriendlyByteBuf): $Target;
         cameFrom: $Node;
         f: number;
         g: number;
@@ -107,16 +107,16 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
         getTargetNodeAt(arg0: number, arg1: number, arg2: number): $Target;
         getPathTypeOfMob(arg0: $PathfindingContext, arg1: number, arg2: number, arg3: number, arg4: $Mob): $PathType;
         getNeighbors(arg0: $Node[], arg1: $Node): number;
-        static isBurningBlock(arg0: $BlockState_): boolean;
         canFloat(): boolean;
-        setCanOpenDoors(arg0: boolean): void;
-        setCanFloat(arg0: boolean): void;
-        setCanPassDoors(arg0: boolean): void;
+        static isBurningBlock(arg0: $BlockState_): boolean;
+        getPathType(arg0: $Mob, arg1: $BlockPos_): $PathType;
+        getPathType(arg0: $PathfindingContext, arg1: number, arg2: number, arg3: number): $PathType;
         canPassDoors(): boolean;
         canOpenDoors(): boolean;
         setCanWalkOverFences(arg0: boolean): void;
-        getPathType(arg0: $Mob, arg1: $BlockPos_): $PathType;
-        getPathType(arg0: $PathfindingContext, arg1: number, arg2: number, arg3: number): $PathType;
+        setCanOpenDoors(arg0: boolean): void;
+        setCanFloat(arg0: boolean): void;
+        setCanPassDoors(arg0: boolean): void;
         getStart(): $Node;
         mob: $Mob;
         entityHeight: number;
@@ -176,20 +176,20 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
         constructor(arg0: boolean);
     }
     export class $Node {
-        static createFromStream(arg0: $FriendlyByteBuf): $Node;
-        writeToStream(arg0: $FriendlyByteBuf): void;
         static createHash(arg0: number, arg1: number, arg2: number): number;
         distanceToXZ(arg0: $Node): number;
         distanceManhattan(arg0: $BlockPos_): number;
         distanceManhattan(arg0: $Node): number;
         asVec3(): $Vec3;
-        cloneAndMove(arg0: number, arg1: number, arg2: number): $Node;
+        writeToStream(arg0: $FriendlyByteBuf): void;
+        static createFromStream(arg0: $FriendlyByteBuf): $Node;
         inOpenSet(): boolean;
+        cloneAndMove(arg0: number, arg1: number, arg2: number): $Node;
         static readContents(arg0: $FriendlyByteBuf, arg1: $Node): void;
         distanceTo(arg0: $Node): number;
         distanceTo(arg0: $BlockPos_): number;
-        distanceToSqr(arg0: $BlockPos_): number;
         distanceToSqr(arg0: $Node): number;
+        distanceToSqr(arg0: $BlockPos_): number;
         asBlockPos(): $BlockPos;
         cameFrom: $Node;
         f: number;
@@ -228,10 +228,10 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
         isAmphibious(): boolean;
         getPathTypeWithinMobBB(arg0: $PathfindingContext, arg1: number, arg2: number, arg3: number): $Set<$PathType>;
         static checkNeighbourBlocks(arg0: $PathfindingContext, arg1: number, arg2: number, arg3: number, arg4: $PathType_): $PathType;
-        static getFloorLevel(arg0: $BlockGetter, arg1: $BlockPos_): number;
-        getFloorLevel(arg0: $BlockPos_): number;
         static getPathTypeStatic(arg0: $Mob, arg1: $BlockPos_): $PathType;
         static getPathTypeStatic(arg0: $PathfindingContext, arg1: $BlockPos$MutableBlockPos): $PathType;
+        getFloorLevel(arg0: $BlockPos_): number;
+        static getFloorLevel(arg0: $BlockGetter, arg1: $BlockPos_): number;
         mob: $Mob;
         entityHeight: number;
         entityDepth: number;
@@ -249,20 +249,18 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
         advance(): void;
         replaceNode(arg0: number, arg1: $Node): void;
         getNode(arg0: number): $Node;
-        static createFromStream(arg0: $FriendlyByteBuf): $Path;
-        writeToStream(arg0: $FriendlyByteBuf): void;
         setDebug(arg0: $Node[], arg1: $Node[], arg2: $Set_<$Target>): void;
+        getPreviousNode(): $Node;
         notStarted(): boolean;
+        getDistToTarget(): number;
         setNextNodeIndex(arg0: number): void;
         getEntityPosAtNode(arg0: $Entity, arg1: number): $Vec3;
-        getPreviousNode(): $Node;
-        getDistToTarget(): number;
         static readNodeArray(arg0: $FriendlyByteBuf): $Node[];
         static writeNodeArray(arg0: $FriendlyByteBuf, arg1: $Node[]): void;
+        writeToStream(arg0: $FriendlyByteBuf): void;
+        static createFromStream(arg0: $FriendlyByteBuf): $Path;
         debugData(): $Path$DebugData;
-        canReach(): boolean;
         sameAs(arg0: $Path): boolean;
-        getNodeCount(): number;
         getNextEntityPos(arg0: $Entity): $Vec3;
         getNextNodePos(): $BlockPos;
         getNextNode(): $Node;
@@ -271,14 +269,16 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
         getEndNode(): $Node;
         sable$setLocalPath(arg0: $Level_, arg1: boolean): void;
         truncateNodes(arg0: number): void;
+        getNodeCount(): number;
+        canReach(): boolean;
         constructor(arg0: $List_<$Node>, arg1: $BlockPos_, arg2: boolean);
         get done(): boolean;
         get target(): $BlockPos;
         get previousNode(): $Node;
         get distToTarget(): number;
-        get nodeCount(): number;
         get nextNodePos(): $BlockPos;
         get nextNode(): $Node;
         get endNode(): $Node;
+        get nodeCount(): number;
     }
 }

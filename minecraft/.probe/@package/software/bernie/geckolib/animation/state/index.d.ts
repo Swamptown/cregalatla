@@ -3,14 +3,15 @@ import { $GeoBone } from "@package/software/bernie/geckolib/cache/object";
 declare module "@package/software/bernie/geckolib/animation/state" {
     export class $BoneSnapshot {
         static copy(arg0: $BoneSnapshot): $BoneSnapshot;
+        getOffsetZ(): number;
         updateOffset(arg0: number, arg1: number, arg2: number): void;
         getBone(): $GeoBone;
-        updateScale(arg0: number, arg1: number, arg2: number): void;
         getOffsetX(): number;
         getOffsetY(): number;
-        updateRotation(arg0: number, arg1: number, arg2: number): void;
+        updateScale(arg0: number, arg1: number, arg2: number): void;
         getRotY(): number;
         getRotX(): number;
+        updateRotation(arg0: number, arg1: number, arg2: number): void;
         startRotAnim(): void;
         startPosAnim(): void;
         startScaleAnim(): void;
@@ -27,8 +28,8 @@ declare module "@package/software/bernie/geckolib/animation/state" {
         getScaleY(): number;
         getScaleZ(): number;
         getRotZ(): number;
-        getOffsetZ(): number;
         constructor(arg0: $GeoBone);
+        get offsetZ(): number;
         get bone(): $GeoBone;
         get offsetX(): number;
         get offsetY(): number;
@@ -44,6 +45,5 @@ declare module "@package/software/bernie/geckolib/animation/state" {
         get scaleY(): number;
         get scaleZ(): number;
         get rotZ(): number;
-        get offsetZ(): number;
     }
 }

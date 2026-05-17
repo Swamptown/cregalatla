@@ -8,9 +8,9 @@ declare module "@package/xaero/lib/common/player" {
     export class $ServerPlayerData {
         static get(arg0: $ServerPlayer): $ServerPlayerData;
         getConfigChannelData(arg0: $ConfigChannel): $ServerPlayerConfigChannelData;
-        setPlayer(arg0: $ServerPlayer): void;
         setShouldUpdateConfigPermissions(arg0: boolean): void;
         shouldUpdateConfigPermissions(): boolean;
+        setPlayer(arg0: $ServerPlayer): void;
         getPlayer(): $ServerPlayer;
         getConfigSynchronizer(): $ServerPlayerConfigSynchronizer;
         get configSynchronizer(): $ServerPlayerConfigSynchronizer;

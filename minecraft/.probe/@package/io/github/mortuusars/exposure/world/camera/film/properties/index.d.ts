@@ -23,7 +23,7 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/film/propert
     /**
      * Values that may be interpreted as {@link $Levels}.
      */
-    export type $Levels_ = { midtones?: number, black?: number, shadows?: number, white?: number, highlights?: number,  } | [midtones?: number, black?: number, shadows?: number, white?: number, highlights?: number, ];
+    export type $Levels_ = { highlights?: number, white?: number, shadows?: number, black?: number, midtones?: number,  } | [highlights?: number, white?: number, shadows?: number, black?: number, midtones?: number, ];
     export class $HSB extends $Record {
         hue(): number;
         saturation(): number;
@@ -36,7 +36,7 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/film/propert
     /**
      * Values that may be interpreted as {@link $HSB}.
      */
-    export type $HSB_ = { brightness?: number, saturation?: number, hue?: number,  } | [brightness?: number, saturation?: number, hue?: number, ];
+    export type $HSB_ = { hue?: number, saturation?: number, brightness?: number,  } | [hue?: number, saturation?: number, brightness?: number, ];
     export class $ColorBalance extends $Record {
         b(): number;
         g(): number;
@@ -49,7 +49,7 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/film/propert
     /**
      * Values that may be interpreted as {@link $ColorBalance}.
      */
-    export type $ColorBalance_ = { g?: number, r?: number, b?: number,  } | [g?: number, r?: number, b?: number, ];
+    export type $ColorBalance_ = { b?: number, r?: number, g?: number,  } | [b?: number, r?: number, g?: number, ];
     export class $FilmProperties extends $Record {
         size(): (number) | undefined;
         type(): $ExposureType;
@@ -71,7 +71,7 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/film/propert
     /**
      * Values that may be interpreted as {@link $FilmProperties}.
      */
-    export type $FilmProperties_ = { size?: (number) | undefined, colorPalette?: $ResourceKey_<$ColorPalette>, style?: $FilmStyle_, type?: $ExposureType_, ditherMode?: $DitherMode_,  } | [size?: (number) | undefined, colorPalette?: $ResourceKey_<$ColorPalette>, style?: $FilmStyle_, type?: $ExposureType_, ditherMode?: $DitherMode_, ];
+    export type $FilmProperties_ = { ditherMode?: $DitherMode_, type?: $ExposureType_, style?: $FilmStyle_, colorPalette?: $ResourceKey_<$ColorPalette>, size?: (number) | undefined,  } | [ditherMode?: $DitherMode_, type?: $ExposureType_, style?: $FilmStyle_, colorPalette?: $ResourceKey_<$ColorPalette>, size?: (number) | undefined, ];
     export class $FilmStyle extends $Record {
         static create(): $FilmStyle;
         levels(): $Levels;
@@ -94,5 +94,5 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/film/propert
     /**
      * Values that may be interpreted as {@link $FilmStyle}.
      */
-    export type $FilmStyle_ = { noise?: number, levels?: $Levels_, sensitivity?: number, hsb?: $HSB_, contrast?: number, colorBalance?: $ColorBalance_,  } | [noise?: number, levels?: $Levels_, sensitivity?: number, hsb?: $HSB_, contrast?: number, colorBalance?: $ColorBalance_, ];
+    export type $FilmStyle_ = { colorBalance?: $ColorBalance_, contrast?: number, hsb?: $HSB_, sensitivity?: number, levels?: $Levels_, noise?: number,  } | [colorBalance?: $ColorBalance_, contrast?: number, hsb?: $HSB_, sensitivity?: number, levels?: $Levels_, noise?: number, ];
 }

@@ -78,7 +78,7 @@ declare module "@package/com/mojang/authlib/minecraft" {
     /**
      * Values that may be interpreted as {@link $MinecraftProfileTextures}.
      */
-    export type $MinecraftProfileTextures_ = { signatureState?: $SignatureState_, elytra?: $MinecraftProfileTexture, skin?: $MinecraftProfileTexture, cape?: $MinecraftProfileTexture,  } | [signatureState?: $SignatureState_, elytra?: $MinecraftProfileTexture, skin?: $MinecraftProfileTexture, cape?: $MinecraftProfileTexture, ];
+    export type $MinecraftProfileTextures_ = { cape?: $MinecraftProfileTexture, skin?: $MinecraftProfileTexture, elytra?: $MinecraftProfileTexture, signatureState?: $SignatureState_,  } | [cape?: $MinecraftProfileTexture, skin?: $MinecraftProfileTexture, elytra?: $MinecraftProfileTexture, signatureState?: $SignatureState_, ];
     export class $UserApiService$UserFlag extends $Enum<$UserApiService$UserFlag> {
         static values(): $UserApiService$UserFlag[];
         static valueOf(arg0: string): $UserApiService$UserFlag;
@@ -112,13 +112,13 @@ declare module "@package/com/mojang/authlib/minecraft" {
     export class $BanDetails extends $Record {
         id(): $UUID;
         reason(): string;
-        expires(): $Instant;
         reasonMessage(): string;
+        expires(): $Instant;
         static MULTIPLAYER_SCOPE: string;
         constructor(id: $UUID_, expires: $Instant, reason: string, reasonMessage: string);
     }
     /**
      * Values that may be interpreted as {@link $BanDetails}.
      */
-    export type $BanDetails_ = { id?: $UUID_, expires?: $Instant, reason?: string, reasonMessage?: string,  } | [id?: $UUID_, expires?: $Instant, reason?: string, reasonMessage?: string, ];
+    export type $BanDetails_ = { reasonMessage?: string, reason?: string, expires?: $Instant, id?: $UUID_,  } | [reasonMessage?: string, reason?: string, expires?: $Instant, id?: $UUID_, ];
 }

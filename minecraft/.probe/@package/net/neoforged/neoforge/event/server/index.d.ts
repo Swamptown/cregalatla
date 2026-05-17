@@ -1,5 +1,5 @@
-import { $Event } from "@package/net/neoforged/bus/api";
 import { $MinecraftServer } from "@package/net/minecraft/server";
+import { $Event } from "@package/net/neoforged/bus/api";
 
 declare module "@package/net/neoforged/neoforge/event/server" {
     export class $ServerLifecycleEvent extends $Event {

@@ -30,10 +30,10 @@ declare module "@package/net/minecraft/resources" {
         withPrefix(arg0: string): $ResourceLocation;
         withSuffix(arg0: string): $ResourceLocation;
         getNamespace(): string;
+        static isValidPath(arg0: string): boolean;
+        static withDefaultNamespace(arg0: string): $ResourceLocation;
         static fromNamespaceAndPath(arg0: string, arg1: string): $ResourceLocation;
         static tryParse(arg0: string): $ResourceLocation;
-        static withDefaultNamespace(arg0: string): $ResourceLocation;
-        static isValidPath(arg0: string): boolean;
         static isValidNamespace(arg0: string): boolean;
         static bySeparator(arg0: string, arg1: string): $ResourceLocation;
         static tryBySeparator(arg0: string, arg1: string): $ResourceLocation;
@@ -89,7 +89,7 @@ declare module "@package/net/minecraft/resources" {
     /**
      * Values that may be interpreted as {@link $RegistryDataLoader$RegistryData}.
      */
-    export type $RegistryDataLoader$RegistryData_<T> = { elementCodec?: $Codec<any>, key?: $ResourceKey_<$Registry<any>>, requiredNonEmpty?: boolean, registryBuilderConsumer?: $Consumer_<$RegistryBuilder<any>>,  } | [elementCodec?: $Codec<any>, key?: $ResourceKey_<$Registry<any>>, requiredNonEmpty?: boolean, registryBuilderConsumer?: $Consumer_<$RegistryBuilder<any>>, ];
+    export type $RegistryDataLoader$RegistryData_<T> = { registryBuilderConsumer?: $Consumer_<$RegistryBuilder<any>>, requiredNonEmpty?: boolean, key?: $ResourceKey_<$Registry<any>>, elementCodec?: $Codec<any>,  } | [registryBuilderConsumer?: $Consumer_<$RegistryBuilder<any>>, requiredNonEmpty?: boolean, key?: $ResourceKey_<$Registry<any>>, elementCodec?: $Codec<any>, ];
     export class $HolderSetCodec<E> implements $Codec<$HolderSet<E>> {
         decode<T>(arg0: $DynamicOps<T>, arg1: T): $DataResult<$Pair<$HolderSet<E>, T>>;
         encode<T>(arg0: $HolderSet_<E>, arg1: $DynamicOps<T>, arg2: T): $DataResult<T>;
@@ -166,7 +166,7 @@ declare module "@package/net/minecraft/resources" {
     /**
      * Values that may be interpreted as {@link $RegistryOps$RegistryInfo}.
      */
-    export type $RegistryOps$RegistryInfo_<T> = { elementsLifecycle?: $Lifecycle, getter?: $HolderGetter<any>, owner?: $HolderOwner<any>,  } | [elementsLifecycle?: $Lifecycle, getter?: $HolderGetter<any>, owner?: $HolderOwner<any>, ];
+    export type $RegistryOps$RegistryInfo_<T> = { owner?: $HolderOwner<any>, getter?: $HolderGetter<any>, elementsLifecycle?: $Lifecycle,  } | [owner?: $HolderOwner<any>, getter?: $HolderGetter<any>, elementsLifecycle?: $Lifecycle, ];
     export class $RegistryOps$RegistryInfoLookup {
     }
     export interface $RegistryOps$RegistryInfoLookup {
@@ -187,8 +187,8 @@ declare module "@package/net/minecraft/resources" {
         createMap(arg0: $Map_<T, T>): T;
         createLong(arg0: number): T;
         createString(arg0: string): T;
-        getStream(arg0: T): $DataResult<$Stream<T>>;
         getStringValue(arg0: T): $DataResult<string>;
+        getStream(arg0: T): $DataResult<$Stream<T>>;
         getList(arg0: T): $DataResult<$Consumer<$Consumer<T>>>;
         createList(arg0: $Stream<T>): T;
         getBooleanValue(arg0: T): $DataResult<boolean>;
@@ -293,11 +293,11 @@ declare module "@package/net/minecraft/resources" {
         compareTo(arg0: $ResourceKey_<never>): number;
         location(): $ResourceLocation;
         static create<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $ResourceLocation_): $ResourceKey<T>;
-        static createRegistryKey<T>(arg0: $ResourceLocation_): $ResourceKey<$Registry<T>>;
-        getNamespace(): string;
-        getPath(): string;
         static streamCodec<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$ByteBuf, $ResourceKey<T>>;
         isFor(arg0: $ResourceKey_<$Registry<never>>): boolean;
+        getNamespace(): string;
+        getPath(): string;
+        static createRegistryKey<T>(arg0: $ResourceLocation_): $ResourceKey<$Registry<T>>;
         registry(): $ResourceLocation;
         static codec<T>(arg0: $ResourceKey_<$Registry<T>>): $Codec<$ResourceKey<T>>;
         specialEquals(o: $Object, shallow: boolean): boolean;
@@ -398,7 +398,7 @@ declare module "@package/net/minecraft/resources" {
     /**
      * Values that may be interpreted as {@link $RegistryDataLoader$Loader}.
      */
-    export type $RegistryDataLoader$Loader_<T> = { loadingErrors?: $Map_<$ResourceKey_<never>, $Exception>, registry?: $WritableRegistry<any>, data?: $RegistryDataLoader$RegistryData_<any>,  } | [loadingErrors?: $Map_<$ResourceKey_<never>, $Exception>, registry?: $WritableRegistry<any>, data?: $RegistryDataLoader$RegistryData_<any>, ];
+    export type $RegistryDataLoader$Loader_<T> = { data?: $RegistryDataLoader$RegistryData_<any>, registry?: $WritableRegistry<any>, loadingErrors?: $Map_<$ResourceKey_<never>, $Exception>,  } | [data?: $RegistryDataLoader$RegistryData_<any>, registry?: $WritableRegistry<any>, loadingErrors?: $Map_<$ResourceKey_<never>, $Exception>, ];
     export class $RegistryOps$HolderLookupAdapter implements $RegistryOps$RegistryInfoLookup {
         lookup<E>(arg0: $ResourceKey_<$Registry<E>>): ($RegistryOps$RegistryInfo<E>) | undefined;
         lookupProvider: $HolderLookup$Provider;

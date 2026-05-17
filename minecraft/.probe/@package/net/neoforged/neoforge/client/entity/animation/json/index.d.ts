@@ -21,11 +21,11 @@ declare module "@package/net/neoforged/neoforge/client/entity/animation/json" {
     export class $AnimationHolder {
         get(): $AnimationDefinition;
         key(): $ResourceLocation;
-        isBound(): boolean;
         getOrNull(): $AnimationDefinition;
+        isBound(): boolean;
         static EMPTY_ANIMATION: $AnimationDefinition;
-        get bound(): boolean;
         get orNull(): $AnimationDefinition;
+        get bound(): boolean;
     }
     export class $AnimationLoader extends $SimpleJsonResourceReloadListener {
         getAnimation(arg0: $ResourceLocation_): $AnimationDefinition;

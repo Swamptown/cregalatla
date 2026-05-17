@@ -9,8 +9,8 @@ declare module "@package/com/simibubi/create/content/kinetics/belt/transport" {
         compareTo(arg0: $TransportedItemStack): number;
         copy(): $TransportedItemStack;
         static read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $TransportedItemStack;
-        getSimilar(): $TransportedItemStack;
         clearFanProcessingData(): void;
+        getSimilar(): $TransportedItemStack;
         getTargetSideOffset(): number;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         lockedExternally: boolean;

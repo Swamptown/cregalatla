@@ -63,11 +63,11 @@ declare module "@package/xaero/common/minimap/waypoints/render" {
         /**
          * @deprecated
          */
-        updateWaypointCollection(arg0: $IXaeroMinimap): void;
+        drawIconOnGUI(arg0: $GuiGraphics, arg1: $MinimapRendererHelper, arg2: $Waypoint, arg3: $ModSettings, arg4: number, arg5: number, arg6: $MultiBufferSource$BufferSource, arg7: $VertexConsumer): void;
         /**
          * @deprecated
          */
-        drawIconOnGUI(arg0: $GuiGraphics, arg1: $MinimapRendererHelper, arg2: $Waypoint, arg3: $ModSettings, arg4: number, arg5: number, arg6: $MultiBufferSource$BufferSource, arg7: $VertexConsumer): void;
+        updateWaypointCollection(arg0: $IXaeroMinimap): void;
         /**
          * @deprecated
          */

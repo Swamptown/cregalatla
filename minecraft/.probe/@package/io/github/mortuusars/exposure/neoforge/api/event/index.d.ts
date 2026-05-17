@@ -43,14 +43,14 @@ declare module "@package/io/github/mortuusars/exposure/neoforge/api/event" {
     }
     export class $ModifyEntityInFrameDataEvent extends $Event {
         getData(): $ExtraData;
-        getCameraHolder(): $CameraHolder;
         getEntityInFrame(): $LivingEntity;
+        getCameraHolder(): $CameraHolder;
         getCameraHolderEntity(): $Entity;
         getCamera(): $ItemStack;
         constructor(cameraHolder: $CameraHolder, camera: $ItemStack_, entityInFrame: $LivingEntity, data: $ExtraData);
         get data(): $ExtraData;
-        get cameraHolder(): $CameraHolder;
         get entityInFrame(): $LivingEntity;
+        get cameraHolder(): $CameraHolder;
         get cameraHolderEntity(): $Entity;
         get camera(): $ItemStack;
     }

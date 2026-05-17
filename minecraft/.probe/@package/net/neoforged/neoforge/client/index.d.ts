@@ -39,7 +39,7 @@ import { $SearchTree_, $SearchTree } from "@package/net/minecraft/client/searcht
 import { $Vec2, $Vec3_, $HitResult } from "@package/net/minecraft/world/phys";
 import { $Matrix4f, $Vector3f } from "@package/org/joml";
 import { $ItemColors } from "@package/net/minecraft/client/color/item";
-import { $BakedModel, $ModelResourceLocation_, $ModelManager, $ModelBakery, $AtlasSet$StitchResult, $Material } from "@package/net/minecraft/client/resources/model";
+import { $BakedModel, $ModelResourceLocation_, $ModelManager, $AtlasSet$StitchResult, $ModelBakery, $Material } from "@package/net/minecraft/client/resources/model";
 import { $UUID_, $Set_, $Map, $Spliterator, $List, $Map_, $Collection_, $List_, $Comparator, $Iterator, $BitSet } from "@package/java/util";
 import { $Model, $HumanoidModel } from "@package/net/minecraft/client/model";
 import { $Supplier_, $BooleanSupplier_, $Consumer_, $Function_, $BooleanSupplier } from "@package/java/util/function";
@@ -105,9 +105,9 @@ declare module "@package/net/neoforged/neoforge/client" {
         static union(arg0: $Iterable_<$ChunkRenderTypeSet>): $ChunkRenderTypeSet;
         static union(arg0: $Collection_<$ChunkRenderTypeSet>): $ChunkRenderTypeSet;
         static union(...arg0: $ChunkRenderTypeSet[]): $ChunkRenderTypeSet;
-        static setChunkRenderTypesList$aeronautics_$md$8e2dbe$0(arg0: $List_<any>): void;
-        static setChunkRenderTypes$aeronautics_$md$8e2dbe$1(arg0: $RenderType[]): void;
-        static create$sodium_$md$8e2dbe$2(arg0: $BitSet): $ChunkRenderTypeSet;
+        static setChunkRenderTypesList$aeronautics_$md$d858b6$0(arg0: $List_<any>): void;
+        static setChunkRenderTypes$aeronautics_$md$d858b6$1(arg0: $RenderType[]): void;
+        static create$sodium_$md$d858b6$2(arg0: $BitSet): $ChunkRenderTypeSet;
         sinytra$firstLayer(): $RenderType;
         static none(): $ChunkRenderTypeSet;
         static intersection(...arg0: $ChunkRenderTypeSet[]): $ChunkRenderTypeSet;
@@ -118,8 +118,8 @@ declare module "@package/net/neoforged/neoforge/client" {
         getBits(): $BitSet;
         [Symbol.iterator](): Iterator<$RenderType>
         get empty(): boolean;
-        static set chunkRenderTypesList$aeronautics_$md$8e2dbe$0(value: $List_<any>);
-        static set chunkRenderTypes$aeronautics_$md$8e2dbe$1(value: $RenderType[]);
+        static set chunkRenderTypesList$aeronautics_$md$d858b6$0(value: $List_<any>);
+        static set chunkRenderTypes$aeronautics_$md$d858b6$1(value: $RenderType[]);
         get bits(): $BitSet;
     }
     export class $ItemDecoratorHandler {
@@ -140,18 +140,18 @@ declare module "@package/net/neoforged/neoforge/client" {
     }
     export class $ClientCommandSourceStack extends $CommandSourceStack implements $FabricClientCommandSource, $VeilClientSuggestionProvider {
         sendError(arg0: $Component_): void;
-        veil$getPostPipelineNames(): $Stream<any>;
         sendFeedback(arg0: $Component_): void;
-        getWorld(): $ClientLevel;
+        veil$getPostPipelineNames(): $Stream<any>;
         getPlayer(): $LocalPlayer;
+        getWorld(): $ClientLevel;
         getClient(): $Minecraft;
         getMeta(arg0: string): $Object;
         source: $CommandSource;
         static ERROR_NOT_ENTITY: $SimpleCommandExceptionType;
         static ERROR_NOT_PLAYER: $SimpleCommandExceptionType;
         constructor(arg0: $CommandSource, arg1: $Vec3_, arg2: $Vec2, arg3: number, arg4: string, arg5: $Component_, arg6: $Entity);
-        get world(): $ClientLevel;
         get player(): $LocalPlayer;
+        get world(): $ClientLevel;
         get client(): $Minecraft;
     }
     export class $BlockEntityRenderBoundsDebugRenderer {
@@ -163,13 +163,11 @@ declare module "@package/net/neoforged/neoforge/client" {
         static init(): void;
     }
     export class $ClientHooks {
-        static getBlockMaterial(arg0: $ResourceLocation_): $Material;
-        static getDetachedCameraDistance(arg0: $Camera, arg1: boolean, arg2: number, arg3: number): number;
-        static onRegisterKeyMappings(arg0: $Options): void;
         static reloadRenderer(): void;
         static isNameplateInRenderDistance(arg0: $Entity, arg1: number): boolean;
         static onModelBake(arg0: $ModelManager, arg1: $Map_<$ModelResourceLocation_, $BakedModel>, arg2: $ModelBakery): void;
         static onRegisterAdditionalModels(arg0: $Set_<$ModelResourceLocation_>): void;
+        static registerLayerDefinition(arg0: $ModelLayerLocation, arg1: $Supplier_<$LayerDefinition>): void;
         static getEntityRenderType(arg0: $RenderType, arg1: boolean): $RenderType;
         static selectMusic(arg0: $Music, arg1: $SoundInstance): $Music;
         static gatherMaterialAtlases(arg0: $Map_<$ResourceLocation_, $ResourceLocation_>): $Map<$ResourceLocation, $ResourceLocation>;
@@ -180,38 +178,34 @@ declare module "@package/net/neoforged/neoforge/client" {
         static onClientSystemChat(arg0: $Component_, arg1: boolean): $Component;
         static onClientChat(arg0: $ChatType$Bound_, arg1: $Component_, arg2: $UUID_): $Component;
         static makeParticleRenderTypeComparator(arg0: $List_<$ParticleRenderType_>): $Comparator<$ParticleRenderType>;
-        static registerLayerDefinition(arg0: $ModelLayerLocation, arg1: $Supplier_<$LayerDefinition>): void;
-        static copyModelProperties<T extends $LivingEntity>(arg0: $HumanoidModel<T>, arg1: $HumanoidModel<never>): void;
+        static getDetachedCameraDistance(arg0: $Camera, arg1: boolean, arg2: number, arg3: number): number;
         static getTooltipFont(arg0: $ItemStack_, arg1: $Font): $Font;
+        static onRegisterKeyMappings(arg0: $Options): void;
+        static copyModelProperties<T extends $LivingEntity>(arg0: $HumanoidModel<T>, arg1: $HumanoidModel<never>): void;
         static onFogRender(arg0: $FogRenderer$FogMode_, arg1: $FogType_, arg2: $Camera, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $FogShape_): void;
-        static isBlockInSolidLayer(arg0: $BlockState_): boolean;
-        static registerSpriteSourceTypes(): void;
-        static getFogColor(arg0: $Camera, arg1: number, arg2: $ClientLevel, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $Vector3f;
-        static getArmorTexture(arg0: $Entity, arg1: $ItemStack_, arg2: $ArmorMaterial$Layer, arg3: boolean, arg4: $EquipmentSlot_): $ResourceLocation;
         static shouldCauseReequipAnimation(arg0: $ItemStack_, arg1: $ItemStack_, arg2: number): boolean;
-        static onMovementInputUpdate(arg0: $Player, arg1: $Input): void;
+        static registerSpriteSourceTypes(): void;
+        static isBlockInSolidLayer(arg0: $BlockState_): boolean;
+        static getArmorTexture(arg0: $Entity, arg1: $ItemStack_, arg2: $ArmorMaterial$Layer, arg3: boolean, arg4: $EquipmentSlot_): $ResourceLocation;
         static getFieldOfViewModifier(arg0: $Player, arg1: number): number;
+        static onMovementInputUpdate(arg0: $Player, arg1: $Input): void;
+        static getFogColor(arg0: $Camera, arg1: number, arg2: $ClientLevel, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $Vector3f;
         static resolveLookup<T>(arg0: $ResourceKey_<$Registry<T>>): $HolderLookup$RegistryLookup<T>;
         static getFilteredRecipeBookTypeValues(): $RecipeBookType[];
+        static getBlockMaterial(arg0: $ResourceLocation_): $Material;
         static drawScreen(arg0: $Screen, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number): void;
-        static onTextureAtlasStitched(arg0: $TextureAtlas): void;
-        static handleCameraTransforms(arg0: $PoseStack, arg1: $BakedModel, arg2: $ItemDisplayContext_, arg3: boolean): $BakedModel;
-        static onScreenPotionSize(arg0: $Screen, arg1: number, arg2: boolean, arg3: number): $ScreenEvent$RenderInventoryMobEffects;
-        static shouldRenderEffect(arg0: $MobEffectInstance): boolean;
-        static getEffectTooltip(arg0: $EffectRenderingInventoryScreen<never>, arg1: $MobEffectInstance, arg2: $List_<$Component_>): $List<$Component>;
-        static getFieldOfView(arg0: $GameRenderer, arg1: $Camera, arg2: number, arg3: number, arg4: boolean): number;
-        static getGuiFarPlane(): number;
-        static dispatchRenderStage(arg0: $RenderLevelStageEvent$Stage, arg1: $LevelRenderer, arg2: $PoseStack, arg3: $Matrix4f, arg4: $Matrix4f, arg5: number, arg6: $Camera, arg7: $Frustum): void;
-        static dispatchRenderStage(arg0: $RenderType, arg1: $LevelRenderer, arg2: $Matrix4f, arg3: $Matrix4f, arg4: number, arg5: $Camera, arg6: $Frustum): void;
-        static onDrawHighlight(arg0: $LevelRenderer, arg1: $Camera, arg2: $HitResult, arg3: $DeltaTracker, arg4: $PoseStack, arg5: $MultiBufferSource_): boolean;
-        static renderMainMenu(arg0: $TitleScreen, arg1: $GuiGraphics, arg2: $Font, arg3: number, arg4: number, arg5: number): void;
-        static gatherTooltipComponents(arg0: $ItemStack_, arg1: $List_<$FormattedText>, arg2: number, arg3: number, arg4: number, arg5: $Font): $List<$ClientTooltipComponent>;
         static gatherTooltipComponents(arg0: $ItemStack_, arg1: $List_<$FormattedText>, arg2: ($TooltipComponent) | undefined, arg3: number, arg4: number, arg5: number, arg6: $Font): $List<$ClientTooltipComponent>;
+        static gatherTooltipComponents(arg0: $ItemStack_, arg1: $List_<$FormattedText>, arg2: number, arg3: number, arg4: number, arg5: $Font): $List<$ClientTooltipComponent>;
         static gatherTooltipComponentsFromElements(arg0: $ItemStack_, arg1: $List_<$Either<$FormattedText, $TooltipComponent>>, arg2: number, arg3: number, arg4: number, arg5: $Font): $List<$ClientTooltipComponent>;
         static onRenderTooltipPre(arg0: $ItemStack_, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $List_<$ClientTooltipComponent>, arg7: $Font, arg8: $ClientTooltipPositioner_): $RenderTooltipEvent$Pre;
         static onRenderTooltipColor(arg0: $ItemStack_, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: $Font, arg5: $List_<$ClientTooltipComponent>): $RenderTooltipEvent$Color;
         static onRegisterParticleProviders(arg0: $ParticleEngine): void;
         static initClientHooks(arg0: $Minecraft, arg1: $ReloadableResourceManager): void;
+        static getGuiFarPlane(): number;
+        static dispatchRenderStage(arg0: $RenderLevelStageEvent$Stage, arg1: $LevelRenderer, arg2: $PoseStack, arg3: $Matrix4f, arg4: $Matrix4f, arg5: number, arg6: $Camera, arg7: $Frustum): void;
+        static dispatchRenderStage(arg0: $RenderType, arg1: $LevelRenderer, arg2: $Matrix4f, arg3: $Matrix4f, arg4: number, arg5: $Camera, arg6: $Frustum): void;
+        static onTextureAtlasStitched(arg0: $TextureAtlas): void;
+        static onDrawHighlight(arg0: $LevelRenderer, arg1: $Camera, arg2: $HitResult, arg3: $DeltaTracker, arg4: $PoseStack, arg5: $MultiBufferSource_): boolean;
         static clearGuiLayers(arg0: $Minecraft): void;
         static fireRenderFramePre(arg0: $DeltaTracker): void;
         static fireRenderFramePost(arg0: $DeltaTracker): void;
@@ -224,25 +218,19 @@ declare module "@package/net/neoforged/neoforge/client" {
         static firePlayerLogout(arg0: $MultiPlayerGameMode, arg1: $LocalPlayer): void;
         static pushGuiLayer(arg0: $Minecraft, arg1: $Screen): void;
         static popGuiLayer(arg0: $Minecraft): void;
+        static handleCameraTransforms(arg0: $PoseStack, arg1: $BakedModel, arg2: $ItemDisplayContext_, arg3: boolean): $BakedModel;
         static playSound(arg0: $SoundEngine, arg1: $SoundInstance): $SoundInstance;
         static loadEntityShader(arg0: $Entity, arg1: $GameRenderer): void;
-        static firePlayerLogin(arg0: $MultiPlayerGameMode, arg1: $LocalPlayer, arg2: $Connection): void;
+        static getFieldOfView(arg0: $GameRenderer, arg1: $Camera, arg2: number, arg3: number, arg4: boolean): number;
+        static renderMainMenu(arg0: $TitleScreen, arg1: $GuiGraphics, arg2: $Font, arg3: number, arg4: number, arg5: number): void;
+        static onScreenPotionSize(arg0: $Screen, arg1: number, arg2: boolean, arg3: number): $ScreenEvent$RenderInventoryMobEffects;
+        static shouldRenderEffect(arg0: $MobEffectInstance): boolean;
+        static getEffectTooltip(arg0: $EffectRenderingInventoryScreen<never>, arg1: $MobEffectInstance, arg2: $List_<$Component_>): $List<$Component>;
         static onToastAdd(arg0: $Toast_): boolean;
+        static firePlayerLogin(arg0: $MultiPlayerGameMode, arg1: $LocalPlayer, arg2: $Connection): void;
         static firePlayerRespawn(arg0: $MultiPlayerGameMode, arg1: $LocalPlayer, arg2: $LocalPlayer, arg3: $Connection): void;
         static onRecipesUpdated(arg0: $RecipeManager): void;
         static onClientSendMessage(arg0: string): string;
-        static onKeyInput(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        static onScreenCharTypedPre(arg0: $Screen, arg1: string, arg2: number): boolean;
-        static onScreenCharTypedPost(arg0: $Screen, arg1: string, arg2: number): void;
-        static onScreenKeyPressedPre(arg0: $Screen, arg1: number, arg2: number, arg3: number): boolean;
-        static onScreenKeyPressedPost(arg0: $Screen, arg1: number, arg2: number, arg3: number): boolean;
-        static onScreenKeyReleasedPre(arg0: $Screen, arg1: number, arg2: number, arg3: number): boolean;
-        static onScreenKeyReleasedPost(arg0: $Screen, arg1: number, arg2: number, arg3: number): boolean;
-        static onMouseButtonPre(arg0: number, arg1: number, arg2: number): boolean;
-        static onMouseButtonPost(arg0: number, arg1: number, arg2: number): void;
-        static onScreenMouseScrollPre(arg0: $MouseHandler, arg1: $Screen, arg2: number, arg3: number): boolean;
-        static onScreenMouseScrollPost(arg0: $MouseHandler, arg1: $Screen, arg2: number, arg3: number): void;
-        static onMouseScroll(arg0: $MouseHandler, arg1: number, arg2: number): boolean;
         static getTurnPlayerValues(arg0: number, arg1: boolean): $CalculatePlayerTurnEvent;
         static onScreenMouseDragPre(arg0: $Screen, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
         static onScreenMouseDragPost(arg0: $Screen, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
@@ -250,6 +238,18 @@ declare module "@package/net/neoforged/neoforge/client" {
         static onScreenMouseReleasedPost(arg0: $Screen, arg1: number, arg2: number, arg3: number, arg4: boolean): boolean;
         static onScreenMouseClickedPre(arg0: $Screen, arg1: number, arg2: number, arg3: number): boolean;
         static onScreenMouseClickedPost(arg0: $Screen, arg1: number, arg2: number, arg3: number, arg4: boolean): boolean;
+        static onMouseButtonPre(arg0: number, arg1: number, arg2: number): boolean;
+        static onMouseButtonPost(arg0: number, arg1: number, arg2: number): void;
+        static onScreenMouseScrollPre(arg0: $MouseHandler, arg1: $Screen, arg2: number, arg3: number): boolean;
+        static onScreenMouseScrollPost(arg0: $MouseHandler, arg1: $Screen, arg2: number, arg3: number): void;
+        static onMouseScroll(arg0: $MouseHandler, arg1: number, arg2: number): boolean;
+        static onKeyInput(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        static onScreenCharTypedPre(arg0: $Screen, arg1: string, arg2: number): boolean;
+        static onScreenCharTypedPost(arg0: $Screen, arg1: string, arg2: number): void;
+        static onScreenKeyPressedPre(arg0: $Screen, arg1: number, arg2: number, arg3: number): boolean;
+        static onScreenKeyPressedPost(arg0: $Screen, arg1: number, arg2: number, arg3: number): boolean;
+        static onScreenKeyReleasedPre(arg0: $Screen, arg1: number, arg2: number, arg3: number): boolean;
+        static onScreenKeyReleasedPost(arg0: $Screen, arg1: number, arg2: number, arg3: number): boolean;
         static renderSpecificFirstPersonHand(arg0: $InteractionHand_, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $ItemStack_): boolean;
         static renderSpecificFirstPersonArm(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer, arg4: $HumanoidArm_): boolean;
         static getArmorModel(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $EquipmentSlot_, arg3: $HumanoidModel<never>): $Model;
@@ -294,7 +294,7 @@ declare module "@package/net/neoforged/neoforge/client" {
     /**
      * Values that may be interpreted as {@link $ExtendedServerListData}.
      */
-    export type $ExtendedServerListData_ = { numberOfMods?: number, type?: string, truncated?: boolean, isCompatible?: boolean, extraReason?: string,  } | [numberOfMods?: number, type?: string, truncated?: boolean, isCompatible?: boolean, extraReason?: string, ];
+    export type $ExtendedServerListData_ = { extraReason?: string, isCompatible?: boolean, truncated?: boolean, type?: string, numberOfMods?: number,  } | [extraReason?: string, isCompatible?: boolean, truncated?: boolean, type?: string, numberOfMods?: number, ];
     export class $RenderTypeGroup extends $Record {
         isEmpty(): boolean;
         block(): $RenderType;
@@ -308,7 +308,7 @@ declare module "@package/net/neoforged/neoforge/client" {
     /**
      * Values that may be interpreted as {@link $RenderTypeGroup}.
      */
-    export type $RenderTypeGroup_ = { block?: $RenderType, entity?: $RenderType, entityFabulous?: $RenderType,  } | [block?: $RenderType, entity?: $RenderType, entityFabulous?: $RenderType, ];
+    export type $RenderTypeGroup_ = { entityFabulous?: $RenderType, entity?: $RenderType, block?: $RenderType,  } | [entityFabulous?: $RenderType, entity?: $RenderType, block?: $RenderType, ];
     export class $RecipeBookManager {
         static init(): void;
         static findCategories<T extends $Recipe<never>>(arg0: $RecipeType_<T>, arg1: $RecipeHolder_<T>): $RecipeBookCategories;
@@ -332,8 +332,8 @@ declare module "@package/net/neoforged/neoforge/client" {
     export class $ChunkRenderTypeSet$None extends $ChunkRenderTypeSet {
     }
     export class $StencilManager {
-        static releaseBit(arg0: number): void;
         static reserveBit(): number;
+        static releaseBit(arg0: number): void;
     }
     export class $FireworkShapeFactoryRegistry$Factory {
     }
@@ -352,10 +352,10 @@ declare module "@package/net/neoforged/neoforge/client" {
     export class $ClientTooltipFlag extends $Record implements $TooltipFlag, $TooltipFlagExtension {
         static of(arg0: $TooltipFlag): $TooltipFlag;
         simulated$setCreativeSearch(arg0: boolean): void;
-        controlDown(): boolean;
         simulated$getCreativeSearch(): boolean;
-        shiftDown(): boolean;
+        controlDown(): boolean;
         altDown(): boolean;
+        shiftDown(): boolean;
         isAdvanced(): boolean;
         hasShiftDown(): boolean;
         hasAltDown(): boolean;
@@ -368,7 +368,7 @@ declare module "@package/net/neoforged/neoforge/client" {
     /**
      * Values that may be interpreted as {@link $ClientTooltipFlag}.
      */
-    export type $ClientTooltipFlag_ = { altDown?: boolean, controlDown?: boolean, shiftDown?: boolean, creative?: boolean, advanced?: boolean,  } | [altDown?: boolean, controlDown?: boolean, shiftDown?: boolean, creative?: boolean, advanced?: boolean, ];
+    export type $ClientTooltipFlag_ = { advanced?: boolean, creative?: boolean, shiftDown?: boolean, controlDown?: boolean, altDown?: boolean,  } | [advanced?: boolean, creative?: boolean, shiftDown?: boolean, controlDown?: boolean, altDown?: boolean, ];
     export class $NeoForgeRenderTypes$CustomizableTextureState extends $RenderStateShard$TextureStateShard {
         static RENDERTYPE_ARMOR_CUTOUT_NO_CULL_SHADER: $RenderStateShard$ShaderStateShard;
         static RENDERTYPE_ENTITY_DECAL_SHADER: $RenderStateShard$ShaderStateShard;
@@ -511,10 +511,10 @@ declare module "@package/net/neoforged/neoforge/client" {
         constructor();
     }
     export class $CreativeModeTabSearchRegistry {
+        static getTagSearchTree(arg0: $SessionSearchTrees$Key): $CompletableFuture<$SearchTree<$ItemStack>>;
         static getNameSearchTree(arg0: $SessionSearchTrees$Key): $CompletableFuture<$SearchTree<$ItemStack>>;
         static putNameSearchTree(arg0: $SessionSearchTrees$Key, arg1: $CompletableFuture<$SearchTree_<$ItemStack>>): void;
         static putTagSearchTree(arg0: $SessionSearchTrees$Key, arg1: $CompletableFuture<$SearchTree_<$ItemStack>>): void;
-        static getTagSearchTree(arg0: $SessionSearchTrees$Key): $CompletableFuture<$SearchTree<$ItemStack>>;
         static getNameSearchKeys(): $Map<$CreativeModeTab, $SessionSearchTrees$Key>;
         static getTagSearchKeys(): $Map<$CreativeModeTab, $SessionSearchTrees$Key>;
         static getTagSearchKey(arg0: $CreativeModeTab_): $SessionSearchTrees$Key;
@@ -543,13 +543,13 @@ declare module "@package/net/neoforged/neoforge/client" {
     }
     export class $ClientCommandHandler {
         static init(): void;
-        static getSource(): $ClientCommandSourceStack;
         static getDispatcher(): $CommandDispatcher<$CommandSourceStack>;
         static mergeServerCommands(arg0: $CommandDispatcher<$SharedSuggestionProvider>, arg1: $CommandBuildContext): $CommandDispatcher<$SharedSuggestionProvider>;
         static runCommand(arg0: string): boolean;
+        static getSource(): $ClientCommandSourceStack;
         constructor();
-        static get source(): $ClientCommandSourceStack;
         static get dispatcher(): $CommandDispatcher<$CommandSourceStack>;
+        static get source(): $ClientCommandSourceStack;
     }
     export class $NamedRenderTypeManager {
         static get(arg0: $ResourceLocation_): $RenderTypeGroup;
@@ -578,11 +578,11 @@ declare module "@package/net/neoforged/neoforge/client" {
         static getItemLayeredCutout(arg0: $ResourceLocation_): $RenderType;
         static getItemLayeredSolid(arg0: $ResourceLocation_): $RenderType;
         static getEntityCutoutMipped(arg0: $ResourceLocation_): $RenderType;
+        static getTextIntensity(arg0: $ResourceLocation_): $RenderType;
         static getTextPolygonOffset(arg0: $ResourceLocation_): $RenderType;
         static getTextIntensityPolygonOffset(arg0: $ResourceLocation_): $RenderType;
         static getTextSeeThrough(arg0: $ResourceLocation_): $RenderType;
         static getTextIntensitySeeThrough(arg0: $ResourceLocation_): $RenderType;
-        static getTextIntensity(arg0: $ResourceLocation_): $RenderType;
         static enableTextTextureLinearFiltering: boolean;
         static TRANSLUCENT_ON_PARTICLES_TARGET: $NeoForgeRenderTypes;
         static ITEM_UNLIT_TRANSLUCENT: $NeoForgeRenderTypes;

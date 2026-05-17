@@ -15,9 +15,9 @@ declare module "@package/com/blamejared/controlling/api/entries" {
         getBtnResetKeyBinding(): $Button;
         getBtnChangeKeyBinding(): $Button;
         categoryName(): $Component;
+        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         render(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean, arg9: number): void;
         mouseReleased(arg0: number, arg1: number, arg2: number): boolean;
-        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         get key(): $KeyMapping;
         get keyDesc(): $Component;
         get btnResetKeyBinding(): $Button;

@@ -28,14 +28,14 @@ import { $Vector3d, $Vector3f } from "@package/org/joml";
 
 declare module "@package/net/neoforged/neoforge/client/extensions/common" {
     export class $RegisterClientExtensionsEvent extends $Event implements $IModBusEvent {
-        isBlockRegistered(arg0: $Block_): boolean;
-        isItemRegistered(arg0: $Item_): boolean;
-        isMobEffectRegistered(arg0: $MobEffect_): boolean;
         registerMobEffect(arg0: $IClientMobEffectExtensions, ...arg1: $Holder_<$MobEffect>[]): void;
         registerMobEffect(arg0: $IClientMobEffectExtensions, ...arg1: $MobEffect_[]): void;
+        isMobEffectRegistered(arg0: $MobEffect_): boolean;
         isFluidTypeRegistered(arg0: $FluidType_): boolean;
-        registerBlock(arg0: $IClientBlockExtensions, ...arg1: $Holder_<$Block>[]): void;
+        isBlockRegistered(arg0: $Block_): boolean;
+        isItemRegistered(arg0: $Item_): boolean;
         registerBlock(arg0: $IClientBlockExtensions, ...arg1: $Block_[]): void;
+        registerBlock(arg0: $IClientBlockExtensions, ...arg1: $Holder_<$Block>[]): void;
         registerItem(arg0: $IClientItemExtensions, ...arg1: $Item_[]): void;
         registerItem(arg0: $IClientItemExtensions, ...arg1: $Holder_<$Item>[]): void;
         registerFluidType(arg0: $IClientFluidTypeExtensions, ...arg1: $FluidType_[]): void;
@@ -48,23 +48,23 @@ declare module "@package/net/neoforged/neoforge/client/extensions/common" {
         static DEFAULT: $IClientFluidTypeExtensions;
     }
     export interface $IClientFluidTypeExtensions {
-        modifyFogColor(arg0: $Camera, arg1: number, arg2: $ClientLevel, arg3: number, arg4: number, arg5: $Vector3f): $Vector3f;
-        modifyFogRender(arg0: $Camera, arg1: $FogRenderer$FogMode_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $FogShape_): void;
+        getTintColor(arg0: $FluidStack_): number;
         getTintColor(): number;
         getTintColor(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
-        getTintColor(arg0: $FluidStack_): number;
-        getStillTexture(arg0: $FluidStack_): $ResourceLocation;
         getStillTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
+        getStillTexture(arg0: $FluidStack_): $ResourceLocation;
         getStillTexture(): $ResourceLocation;
+        getFlowingTexture(arg0: $FluidStack_): $ResourceLocation;
         getFlowingTexture(): $ResourceLocation;
         getFlowingTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
-        getFlowingTexture(arg0: $FluidStack_): $ResourceLocation;
         getRenderOverlayTexture(arg0: $Minecraft): $ResourceLocation;
         renderOverlay(arg0: $Minecraft, arg1: $PoseStack): void;
         renderFluid(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_, arg3: $VertexConsumer, arg4: $BlockState_): boolean;
+        modifyFogColor(arg0: $Camera, arg1: number, arg2: $ClientLevel, arg3: number, arg4: number, arg5: $Vector3f): $Vector3f;
+        modifyFogRender(arg0: $Camera, arg1: $FogRenderer$FogMode_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $FogShape_): void;
         getOverlayTexture(): $ResourceLocation;
-        getOverlayTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
         getOverlayTexture(arg0: $FluidStack_): $ResourceLocation;
+        getOverlayTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
     }
     export class $IClientBlockExtensions {
         static of(arg0: $BlockState_): $IClientBlockExtensions;
@@ -75,8 +75,8 @@ declare module "@package/net/neoforged/neoforge/client/extensions/common" {
         addHitEffects(arg0: $BlockState_, arg1: $Level_, arg2: $HitResult, arg3: $ParticleEngine): boolean;
         addDestroyEffects(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $ParticleEngine): boolean;
         areBreakingParticlesTinted(arg0: $BlockState_, arg1: $ClientLevel, arg2: $BlockPos_): boolean;
-        getFogColor(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Entity, arg4: $Vector3d, arg5: number): $Vector3d;
         playBreakSound(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_): boolean;
+        getFogColor(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Entity, arg4: $Vector3d, arg5: number): $Vector3d;
     }
     export class $IClientItemExtensions {
         static of(arg0: $ItemStack_): $IClientItemExtensions;
@@ -99,8 +99,8 @@ declare module "@package/net/neoforged/neoforge/client/extensions/common" {
         getDefaultDyeColor(arg0: $ItemStack_): number;
         getScopeOverlayTexture(arg0: $ItemStack_): $ResourceLocation;
         getArmPose(arg0: $LivingEntity, arg1: $InteractionHand_, arg2: $ItemStack_): $HumanoidModel$ArmPose;
-        getCustomRenderer(): $BlockEntityWithoutLevelRenderer;
         getFont(arg0: $ItemStack_, arg1: $IClientItemExtensions$FontContext_): $Font;
+        getCustomRenderer(): $BlockEntityWithoutLevelRenderer;
         get customRenderer(): $BlockEntityWithoutLevelRenderer;
     }
     export class $IClientItemExtensions$FontContext extends $Enum<$IClientItemExtensions$FontContext> {
@@ -127,9 +127,9 @@ declare module "@package/net/neoforged/neoforge/client/extensions/common" {
         static DEFAULT: $IClientMobEffectExtensions;
     }
     export interface $IClientMobEffectExtensions {
+        isVisibleInInventory(arg0: $MobEffectInstance): boolean;
         isVisibleInGui(arg0: $MobEffectInstance): boolean;
         renderGuiIcon(arg0: $MobEffectInstance, arg1: $Gui, arg2: $GuiGraphics, arg3: number, arg4: number, arg5: number, arg6: number): boolean;
-        isVisibleInInventory(arg0: $MobEffectInstance): boolean;
         renderInventoryIcon(arg0: $MobEffectInstance, arg1: $EffectRenderingInventoryScreen<never>, arg2: $GuiGraphics, arg3: number, arg4: number, arg5: number): boolean;
         renderInventoryText(arg0: $MobEffectInstance, arg1: $EffectRenderingInventoryScreen<never>, arg2: $GuiGraphics, arg3: number, arg4: number, arg5: number): boolean;
     }

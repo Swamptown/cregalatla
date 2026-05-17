@@ -1,13 +1,14 @@
 import { $List_, $List } from "@package/java/util";
 import { $Record } from "@package/java/lang";
 import { $Axis_ } from "@package/com/zigythebird/playeranimcore/enums";
-import { $EasingType, $EasingType_ } from "@package/com/zigythebird/playeranimcore/easing";
+import { $EasingType_, $EasingType } from "@package/com/zigythebird/playeranimcore/easing";
 import { $Expression } from "@package/team/unnamed/mocha/parser/ast";
 export * as event from "@package/com/zigythebird/playeranimcore/animation/keyframe/event";
 
 declare module "@package/com/zigythebird/playeranimcore/animation/keyframe" {
     export class $KeyframeStack extends $Record {
         static from(otherStack: $KeyframeStack_): $KeyframeStack;
+        getKeyFramesForAxis(axis: $Axis_): $List<$Keyframe>;
         xKeyframes(): $List<$Keyframe>;
         getLastKeyframeTime(): number;
         hasKeyframes(): boolean;
@@ -16,7 +17,6 @@ declare module "@package/com/zigythebird/playeranimcore/animation/keyframe" {
         getLastZAxisKeyframeTime(): number;
         yKeyframes(): $List<$Keyframe>;
         zKeyframes(): $List<$Keyframe>;
-        getKeyFramesForAxis(axis: $Axis_): $List<$Keyframe>;
         constructor();
         constructor(xKeyframes: $List_<$Keyframe_>, yKeyframes: $List_<$Keyframe_>, zKeyframes: $List_<$Keyframe_>);
         get lastKeyframeTime(): number;
@@ -27,7 +27,7 @@ declare module "@package/com/zigythebird/playeranimcore/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $KeyframeStack}.
      */
-    export type $KeyframeStack_ = { zKeyframes?: $List_<$Keyframe_>, yKeyframes?: $List_<$Keyframe_>, xKeyframes?: $List_<$Keyframe_>,  } | [zKeyframes?: $List_<$Keyframe_>, yKeyframes?: $List_<$Keyframe_>, xKeyframes?: $List_<$Keyframe_>, ];
+    export type $KeyframeStack_ = { xKeyframes?: $List_<$Keyframe_>, yKeyframes?: $List_<$Keyframe_>, zKeyframes?: $List_<$Keyframe_>,  } | [xKeyframes?: $List_<$Keyframe_>, yKeyframes?: $List_<$Keyframe_>, zKeyframes?: $List_<$Keyframe_>, ];
     export class $KeyframeLocation<T extends $Keyframe> extends $Record {
         keyframe(): T;
         startTick(): number;
@@ -36,7 +36,7 @@ declare module "@package/com/zigythebird/playeranimcore/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $KeyframeLocation}.
      */
-    export type $KeyframeLocation_<T> = { startTick?: number, keyframe?: $Keyframe_,  } | [startTick?: number, keyframe?: $Keyframe_, ];
+    export type $KeyframeLocation_<T> = { keyframe?: $Keyframe_, startTick?: number,  } | [keyframe?: $Keyframe_, startTick?: number, ];
     export class $BoneAnimation extends $Record {
         rotationKeyFrames(): $KeyframeStack;
         positionKeyFrames(): $KeyframeStack;
@@ -49,21 +49,21 @@ declare module "@package/com/zigythebird/playeranimcore/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $BoneAnimation}.
      */
-    export type $BoneAnimation_ = { rotationKeyFrames?: $KeyframeStack_, bendKeyFrames?: $List_<$Keyframe_>, positionKeyFrames?: $KeyframeStack_, scaleKeyFrames?: $KeyframeStack_,  } | [rotationKeyFrames?: $KeyframeStack_, bendKeyFrames?: $List_<$Keyframe_>, positionKeyFrames?: $KeyframeStack_, scaleKeyFrames?: $KeyframeStack_, ];
+    export type $BoneAnimation_ = { scaleKeyFrames?: $KeyframeStack_, positionKeyFrames?: $KeyframeStack_, bendKeyFrames?: $List_<$Keyframe_>, rotationKeyFrames?: $KeyframeStack_,  } | [scaleKeyFrames?: $KeyframeStack_, positionKeyFrames?: $KeyframeStack_, bendKeyFrames?: $List_<$Keyframe_>, rotationKeyFrames?: $KeyframeStack_, ];
     export class $AnimationPoint extends $Record {
+        transitionLength(): number;
         animationEndValue(): number;
         animationStartValue(): number;
         easingArgs(): $List<$List<$Expression>>;
         easingType(): $EasingType;
         currentTick(): number;
-        transitionLength(): number;
         constructor(keyframe: $Keyframe_, currentTick: number, transitionLength: number, animationStartValue: number, animationEndValue: number);
         constructor(easingType: $EasingType_, easingArgs: $List_<$List_<$Expression>>, currentTick: number, transitionLength: number, animationStartValue: number, animationEndValue: number);
     }
     /**
      * Values that may be interpreted as {@link $AnimationPoint}.
      */
-    export type $AnimationPoint_ = { transitionLength?: number, currentTick?: number, easingType?: $EasingType_, animationStartValue?: number, animationEndValue?: number, easingArgs?: $List_<$List_<$Expression>>,  } | [transitionLength?: number, currentTick?: number, easingType?: $EasingType_, animationStartValue?: number, animationEndValue?: number, easingArgs?: $List_<$List_<$Expression>>, ];
+    export type $AnimationPoint_ = { easingArgs?: $List_<$List_<$Expression>>, animationEndValue?: number, animationStartValue?: number, easingType?: $EasingType_, currentTick?: number, transitionLength?: number,  } | [easingArgs?: $List_<$List_<$Expression>>, animationEndValue?: number, animationStartValue?: number, easingType?: $EasingType_, currentTick?: number, transitionLength?: number, ];
     export class $Keyframe extends $Record {
         length(): number;
         endValue(): $List<$Expression>;
@@ -80,5 +80,5 @@ declare module "@package/com/zigythebird/playeranimcore/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $Keyframe}.
      */
-    export type $Keyframe_ = { startValue?: $List_<$Expression>, easingArgs?: $List_<$List_<$Expression>>, easingType?: $EasingType_, endValue?: $List_<$Expression>, length?: number,  } | [startValue?: $List_<$Expression>, easingArgs?: $List_<$List_<$Expression>>, easingType?: $EasingType_, endValue?: $List_<$Expression>, length?: number, ];
+    export type $Keyframe_ = { length?: number, endValue?: $List_<$Expression>, easingType?: $EasingType_, easingArgs?: $List_<$List_<$Expression>>, startValue?: $List_<$Expression>,  } | [length?: number, endValue?: $List_<$Expression>, easingType?: $EasingType_, easingArgs?: $List_<$List_<$Expression>>, startValue?: $List_<$Expression>, ];
 }

@@ -6,8 +6,8 @@ declare module "@package/dev/ryanhcode/sable/mixinterface/toast" {
     export class $SableToastableServer {
     }
     export interface $SableToastableServer {
+        sable$reportSubLevelPhysicsFailure(arg0: $ServerSubLevel): void;
         sable$reportSubLevelLoadFailure(arg0: $GlobalSavedSubLevelPointer_): void;
         sable$reportSubLevelSaveFailure(arg0: $SubLevelData): void;
-        sable$reportSubLevelPhysicsFailure(arg0: $ServerSubLevel): void;
     }
 }

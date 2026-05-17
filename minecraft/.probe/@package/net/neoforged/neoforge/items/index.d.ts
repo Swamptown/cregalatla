@@ -30,11 +30,11 @@ declare module "@package/net/neoforged/neoforge/items" {
         get itemHandler(): $IItemHandler;
     }
     export class $ItemHandlerHelper {
-        static insertItemStacked(arg0: $IItemHandler, arg1: $ItemStack_, arg2: boolean): $ItemStack;
         static calcRedstoneFromInventory(arg0: $IItemHandler): number;
+        static insertItemStacked(arg0: $IItemHandler, arg1: $ItemStack_, arg2: boolean): $ItemStack;
         static insertItem(arg0: $IItemHandler, arg1: $ItemStack_, arg2: boolean): $ItemStack;
-        static giveItemToPlayer(arg0: $Player, arg1: $ItemStack_, arg2: number): void;
         static giveItemToPlayer(arg0: $Player, arg1: $ItemStack_): void;
+        static giveItemToPlayer(arg0: $Player, arg1: $ItemStack_, arg2: number): void;
         constructor();
     }
     export class $ItemStackHandler implements $IItemHandler, $IItemHandlerModifiable, $INBTSerializable<$CompoundTag>, $ItemStackHandlerAccessor {
@@ -49,19 +49,19 @@ declare module "@package/net/neoforged/neoforge/items" {
         isItemValid(arg0: number, arg1: $ItemStack_): boolean;
         setStackInSlot(arg0: number, arg1: $ItemStack_): void;
         kjs$self(): $IItemHandler;
+        kjs$getBlock(level: $Level_): $LevelBlock;
         kjs$isMutable(): boolean;
         kjs$setStackInSlot(slot: number, stack: $ItemStack_): void;
-        kjs$getBlock(level: $Level_): $LevelBlock;
         isEmpty(): boolean;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
-        clear(): void;
         clear(match: $ItemPredicate_): void;
+        clear(): void;
         find(match: $ItemPredicate_): number;
         find(): number;
         count(match: $ItemPredicate_): number;
         count(): number;
-        countNonEmpty(): number;
         countNonEmpty(match: $ItemPredicate_): number;
+        countNonEmpty(): number;
         getWidth(): number;
         getHeight(): number;
         setChanged(): void;
@@ -96,13 +96,13 @@ declare module "@package/net/neoforged/neoforge/items" {
         getSlots(): number;
         kjs$self(): $IItemHandler;
         getStackInSlot(arg0: number): $ItemStack;
+        kjs$getBlock(level: $Level_): $LevelBlock;
         insertItem(arg0: number, arg1: $ItemStack_, arg2: boolean): $ItemStack;
         extractItem(arg0: number, arg1: number, arg2: boolean): $ItemStack;
         getSlotLimit(arg0: number): number;
         isItemValid(arg0: number, arg1: $ItemStack_): boolean;
         kjs$isMutable(): boolean;
         kjs$setStackInSlot(slot: number, stack: $ItemStack_): void;
-        kjs$getBlock(level: $Level_): $LevelBlock;
         getSlots(): number;
         getStackInSlot(slot: number): $ItemStack;
         insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
@@ -129,19 +129,19 @@ declare module "@package/net/neoforged/neoforge/items" {
         isItemValid(arg0: number, arg1: $ItemStack_): boolean;
         setStackInSlot(arg0: number, arg1: $ItemStack_): void;
         kjs$self(): $IItemHandler;
+        kjs$getBlock(level: $Level_): $LevelBlock;
         kjs$isMutable(): boolean;
         kjs$setStackInSlot(slot: number, stack: $ItemStack_): void;
-        kjs$getBlock(level: $Level_): $LevelBlock;
         isEmpty(): boolean;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
-        clear(): void;
         clear(match: $ItemPredicate_): void;
+        clear(): void;
         find(match: $ItemPredicate_): number;
         find(): number;
         count(match: $ItemPredicate_): number;
         count(): number;
-        countNonEmpty(): number;
         countNonEmpty(match: $ItemPredicate_): number;
+        countNonEmpty(): number;
         getWidth(): number;
         getHeight(): number;
         setChanged(): void;
@@ -168,8 +168,8 @@ declare module "@package/net/neoforged/neoforge/items" {
         constructor(arg0: $HopperBlockEntity);
     }
     export class $VanillaInventoryCodeHooks {
-        static dropperInsertHook(arg0: $Level_, arg1: $BlockPos_, arg2: $DispenserBlockEntity, arg3: number, arg4: $ItemStack_): boolean;
         static insertCrafterOutput(arg0: $Level_, arg1: $BlockPos_, arg2: $CrafterBlockEntity, arg3: $ItemStack_): $ItemStack;
+        static dropperInsertHook(arg0: $Level_, arg1: $BlockPos_, arg2: $DispenserBlockEntity, arg3: number, arg4: $ItemStack_): boolean;
         static insertHook(arg0: $HopperBlockEntity): boolean;
         static extractHook(arg0: $Level_, arg1: $Hopper): boolean;
         constructor();

@@ -11,5 +11,5 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/transluc
     /**
      * Values that may be interpreted as {@link $CameraMovement}.
      */
-    export type $CameraMovement_ = { end?: $Vector3dc, start?: $Vector3dc,  } | [end?: $Vector3dc, start?: $Vector3dc, ];
+    export type $CameraMovement_ = { start?: $Vector3dc, end?: $Vector3dc,  } | [start?: $Vector3dc, end?: $Vector3dc, ];
 }

@@ -135,7 +135,6 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         get holdingBow(): boolean;
     }
     export class $MoveToBlockGoal extends $Goal implements $LithiumMoveToBlockGoal {
-        findNearestBlock(): boolean;
         nextStartTick(arg0: $PathfinderMob): number;
         isReachedTarget(): boolean;
         isValidTarget(arg0: $LevelReader, arg1: $BlockPos_): boolean;
@@ -144,6 +143,7 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         getMoveToTarget(): $BlockPos;
         shouldRecalculatePath(): boolean;
         lithium$findNearestBlock(arg0: $Predicate_<any>, arg1: $BiPredicate_<any, any>, arg2: boolean): boolean;
+        findNearestBlock(): boolean;
         speedModifier: number;
         mob: $PathfinderMob;
         tryTicks: number;
@@ -273,7 +273,7 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
     export class $RemoveBlockGoal extends $MoveToBlockGoal implements $LithiumMoveToBlockGoal {
         playDestroyProgressSound(arg0: $LevelAccessor, arg1: $BlockPos_): void;
         playBreakSound(arg0: $Level_, arg1: $BlockPos_): void;
-        redirect$cln000$lithium$redirectFindNearestBlock(arg0: $RemoveBlockGoal): boolean;
+        redirect$bjm000$lithium$redirectFindNearestBlock(arg0: $RemoveBlockGoal): boolean;
         speedModifier: number;
         mob: $PathfinderMob;
         tryTicks: number;
@@ -304,8 +304,8 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         get running(): boolean;
     }
     export class $FleeSunGoal extends $Goal {
-        setWantedPos(): boolean;
         getHidePos(): $Vec3;
+        setWantedPos(): boolean;
         mob: $PathfinderMob;
         constructor(arg0: $PathfinderMob, arg1: number);
         get hidePos(): $Vec3;
@@ -389,11 +389,11 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         setFlags(arg0: $EnumSet<$Goal$Flag_>): void;
         tick(): void;
         getFlags(): $EnumSet<$Goal$Flag>;
-        canContinueToUse(): boolean;
-        isInterruptable(): boolean;
         requiresUpdateEveryTick(): boolean;
         adjustedTickDelay(arg0: number): number;
         static reducedTickDelay(arg0: number): number;
+        canContinueToUse(): boolean;
+        isInterruptable(): boolean;
         constructor();
         get interruptable(): boolean;
     }

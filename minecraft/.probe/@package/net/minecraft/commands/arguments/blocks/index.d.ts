@@ -20,10 +20,10 @@ import { $ArgumentType } from "@package/com/mojang/brigadier/arguments";
 declare module "@package/net/minecraft/commands/arguments/blocks" {
     export class $BlockStateParser {
         static fillSuggestions(arg0: $HolderLookup<$Block_>, arg1: $SuggestionsBuilder, arg2: boolean, arg3: boolean): $CompletableFuture<$Suggestions>;
-        static parseForBlock(arg0: $HolderLookup<$Block_>, arg1: string, arg2: boolean): $BlockStateParser$BlockResult;
-        static parseForBlock(arg0: $HolderLookup<$Block_>, arg1: $StringReader, arg2: boolean): $BlockStateParser$BlockResult;
-        static parseForTesting(arg0: $HolderLookup<$Block_>, arg1: string, arg2: boolean): $Either<$BlockStateParser$BlockResult, $BlockStateParser$TagResult>;
         static parseForTesting(arg0: $HolderLookup<$Block_>, arg1: $StringReader, arg2: boolean): $Either<$BlockStateParser$BlockResult, $BlockStateParser$TagResult>;
+        static parseForTesting(arg0: $HolderLookup<$Block_>, arg1: string, arg2: boolean): $Either<$BlockStateParser$BlockResult, $BlockStateParser$TagResult>;
+        static parseForBlock(arg0: $HolderLookup<$Block_>, arg1: $StringReader, arg2: boolean): $BlockStateParser$BlockResult;
+        static parseForBlock(arg0: $HolderLookup<$Block_>, arg1: string, arg2: boolean): $BlockStateParser$BlockResult;
         static serialize(arg0: $BlockState_): string;
         static ERROR_EXPECTED_END_OF_PROPERTIES: $SimpleCommandExceptionType;
         static ERROR_EXPECTED_VALUE: $Dynamic2CommandExceptionType;
@@ -43,13 +43,13 @@ declare module "@package/net/minecraft/commands/arguments/blocks" {
     /**
      * Values that may be interpreted as {@link $BlockStateParser$BlockResult}.
      */
-    export type $BlockStateParser$BlockResult_ = { nbt?: $CompoundTag_, blockState?: $BlockState_, properties?: $Map_<$Property<never>, $Comparable_<never>>,  } | [nbt?: $CompoundTag_, blockState?: $BlockState_, properties?: $Map_<$Property<never>, $Comparable_<never>>, ];
+    export type $BlockStateParser$BlockResult_ = { properties?: $Map_<$Property<never>, $Comparable_<never>>, blockState?: $BlockState_, nbt?: $CompoundTag_,  } | [properties?: $Map_<$Property<never>, $Comparable_<never>>, blockState?: $BlockState_, nbt?: $CompoundTag_, ];
     export class $BlockPredicateArgument implements $ArgumentType<$BlockPredicateArgument$Result> {
         static parse(arg0: $HolderLookup<$Block_>, arg1: $StringReader): $BlockPredicateArgument$Result;
-        getExamples(): $Collection<string>;
         static blockPredicate(arg0: $CommandBuildContext): $BlockPredicateArgument;
-        static getBlockPredicate(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Predicate<$BlockInWorld>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static getBlockPredicate(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Predicate<$BlockInWorld>;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): $BlockPredicateArgument$Result;
         parse(arg0: $StringReader): $BlockPredicateArgument$Result;
         constructor(arg0: $CommandBuildContext);
@@ -74,12 +74,12 @@ declare module "@package/net/minecraft/commands/arguments/blocks" {
     /**
      * Values that may be interpreted as {@link $BlockStateParser$TagResult}.
      */
-    export type $BlockStateParser$TagResult_ = { nbt?: $CompoundTag_, tag?: $HolderSet_<$Block>, vagueProperties?: $Map_<string, string>,  } | [nbt?: $CompoundTag_, tag?: $HolderSet_<$Block>, vagueProperties?: $Map_<string, string>, ];
+    export type $BlockStateParser$TagResult_ = { vagueProperties?: $Map_<string, string>, tag?: $HolderSet_<$Block>, nbt?: $CompoundTag_,  } | [vagueProperties?: $Map_<string, string>, tag?: $HolderSet_<$Block>, nbt?: $CompoundTag_, ];
     export class $BlockStateArgument implements $ArgumentType<$BlockInput> {
         parse(arg0: $StringReader): $BlockInput;
         static block(arg0: $CommandBuildContext): $BlockStateArgument;
-        getExamples(): $Collection<string>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        getExamples(): $Collection<string>;
         static getBlock(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $BlockInput;
         parse<S>(arg0: $StringReader, arg1: S): $BlockInput;
         constructor(arg0: $CommandBuildContext);

@@ -132,10 +132,9 @@ declare module "@package/net/minecraft/client/model/geom" {
         visit(arg0: $PoseStack, arg1: $ModelPart$Visitor_): void;
         getChild(arg0: string): $ModelPart;
         offsetScale(arg0: $Vector3f): void;
-        handler$ggm000$xaerominimap$onRender(arg0: $PoseStack$Pose, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         loadPose(arg0: $PartPose): void;
-        hasChild(arg0: string): boolean;
         translateAndRotate(arg0: $PoseStack): void;
+        hasChild(arg0: string): boolean;
         offsetPos(arg0: $Vector3f): void;
         setRotation(arg0: number, arg1: number, arg2: number): void;
         render(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number): void;
@@ -146,7 +145,8 @@ declare module "@package/net/minecraft/client/model/geom" {
         getInitialPose(): $PartPose;
         setInitialPose(arg0: $PartPose): void;
         resetPose(): void;
-        handler$dnf000$skinlayers3d$render(poseStack: $PoseStack, vertexConsumer: $VertexConsumer, light: number, overlay: number, color: number, ci: $CallbackInfo): void;
+        handler$ggm000$skinlayers3d$render(poseStack: $PoseStack, vertexConsumer: $VertexConsumer, light: number, overlay: number, color: number, ci: $CallbackInfo): void;
+        handler$cop000$xaerominimap$onRender(arg0: $PoseStack$Pose, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         getRandomCube(arg0: $RandomSource): $ModelPart$Cube;
         offsetRotation(arg0: $Vector3f): void;
         getAllParts(): $Stream<$ModelPart>;
@@ -189,10 +189,10 @@ declare module "@package/net/minecraft/client/model/geom" {
         z: number;
     }
     export class $ModelLayers implements $EntityModelLayersAccessor {
-        static getKnownLocations(): $Stream<$ModelLayerLocation>;
         static createRaftModelName(arg0: $Boat$Type_): $ModelLayerLocation;
         static createChestRaftModelName(arg0: $Boat$Type_): $ModelLayerLocation;
-        static getLayers$fabric_rendering_v1_$md$8e2dbe$0(): $Set<any>;
+        static getLayers$fabric_rendering_v1_$md$d858b6$0(): $Set<any>;
+        static getKnownLocations(): $Stream<$ModelLayerLocation>;
         static createChestBoatModelName(arg0: $Boat$Type_): $ModelLayerLocation;
         static createBoatModelName(arg0: $Boat$Type_): $ModelLayerLocation;
         static createSignModelName(arg0: $WoodType_): $ModelLayerLocation;
@@ -372,8 +372,8 @@ declare module "@package/net/minecraft/client/model/geom" {
         static BOOK: $ModelLayerLocation;
         static CONDUIT_SHELL: $ModelLayerLocation;
         constructor();
+        static get layers$fabric_rendering_v1_$md$d858b6$0(): $Set<any>;
         static get knownLocations(): $Stream<$ModelLayerLocation>;
-        static get layers$fabric_rendering_v1_$md$8e2dbe$0(): $Set<any>;
     }
     export class $EntityModelSet implements $ResourceManagerReloadListener {
         bakeLayer(arg0: $ModelLayerLocation): $ModelPart;

@@ -47,10 +47,10 @@ declare module "@package/dev/latvian/apps/tinyserver/http/response" {
         jpeg(img: $BufferedImage): $HTTPResponse;
         png(img: $BufferedImage): $HTTPResponse;
         html(text: string): $HTTPResponse;
-        cookie(key: string, value: string, properties: $UnaryOperator_<$CookieResponse$Builder>): $HTTPResponse;
         cookie(key: string, value: string): $HTTPResponse;
-        deflate(): $HTTPResponse;
+        cookie(key: string, value: string, properties: $UnaryOperator_<$CookieResponse$Builder>): $HTTPResponse;
         json(json: string): $HTTPResponse;
+        deflate(): $HTTPResponse;
     }
     export class $HTTPStatus extends $Enum<$HTTPStatus> implements $HTTPResponse {
         static values(): $HTTPStatus[];
@@ -62,12 +62,12 @@ declare module "@package/dev/latvian/apps/tinyserver/http/response" {
         redirect(): boolean;
         statusCode(): $StatusCode;
         defaultResponse(): $HTTPResponse;
+        responseBuffer(): $ByteBuffer;
         informational(): boolean;
         clientError(): boolean;
         serverError(): boolean;
         success(): boolean;
         static fromCode(code: number): $HTTPStatus;
-        responseBuffer(): $ByteBuffer;
         cache(isPublic: boolean, duration: $Duration_): $HTTPResponse;
         encoding(encoding: $ResponseContentEncoding): $HTTPResponse;
         text(text: $Iterable_<string>): $HTTPResponse;
@@ -88,10 +88,10 @@ declare module "@package/dev/latvian/apps/tinyserver/http/response" {
         jpeg(img: $BufferedImage): $HTTPResponse;
         png(img: $BufferedImage): $HTTPResponse;
         html(text: string): $HTTPResponse;
-        cookie(key: string, value: string, properties: $UnaryOperator_<$CookieResponse$Builder>): $HTTPResponse;
         cookie(key: string, value: string): $HTTPResponse;
-        deflate(): $HTTPResponse;
+        cookie(key: string, value: string, properties: $UnaryOperator_<$CookieResponse$Builder>): $HTTPResponse;
         json(json: string): $HTTPResponse;
+        deflate(): $HTTPResponse;
         static ALL: $List<$HTTPStatus>;
         static REQUEST_TIMEOUT: $HTTPStatus;
         static USE_PROXY: $HTTPStatus;
@@ -157,8 +157,8 @@ declare module "@package/dev/latvian/apps/tinyserver/http/response" {
         httpOnly(): $CookieResponse$Builder;
         sameSite(sameSite: string): $CookieResponse$Builder;
         maxAgeYear(): $CookieResponse$Builder;
-        maxAge(maxAge: number): $CookieResponse$Builder;
         secure(): $CookieResponse$Builder;
+        maxAge(maxAge: number): $CookieResponse$Builder;
         domain(domain: string): $CookieResponse$Builder;
         constructor();
     }
@@ -170,12 +170,8 @@ declare module "@package/dev/latvian/apps/tinyserver/http/response" {
         setStatus(status: $HTTPStatus_): void;
         addHeader(header: string, value: $Object): void;
         getUpgrade(): $HTTPUpgrade<never>;
-        setResponse(response: $HTTPResponse): void;
         getCookie(key: string): string;
-        getStatus(): $HTTPStatus;
-        getBody(): $ResponseContent;
-        setBody(body: $ResponseContent_): void;
-        setHeader(header: string, value: $Object): void;
+        setResponse(response: $HTTPResponse): void;
         setCacheControl(cacheControl: string): void;
         getCacheControl(): string;
         setCors(cors: string): void;
@@ -183,6 +179,10 @@ declare module "@package/dev/latvian/apps/tinyserver/http/response" {
         setCookie(key: string, value: string): void;
         setUpgrade(upgrade: $HTTPUpgrade<never>): void;
         addEncoding(encoding: $ResponseContentEncoding): void;
+        getStatus(): $HTTPStatus;
+        getBody(): $ResponseContent;
+        setBody(body: $ResponseContent_): void;
+        setHeader(header: string, value: $Object): void;
         static DATE_TIME_FORMATTER: $DateTimeFormatter;
         constructor(serverName: string, serverTime: $Instant);
         set response(value: $HTTPResponse);

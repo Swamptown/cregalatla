@@ -16,7 +16,7 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pools/alia
     /**
      * Values that may be interpreted as {@link $Random}.
      */
-    export type $Random_ = { alias?: $ResourceKey_<$StructureTemplatePool>, targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>,  } | [alias?: $ResourceKey_<$StructureTemplatePool>, targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, ];
+    export type $Random_ = { targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, alias?: $ResourceKey_<$StructureTemplatePool>,  } | [targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, alias?: $ResourceKey_<$StructureTemplatePool>, ];
     export class $PoolAliasBinding {
         static random(arg0: $ResourceKey_<$StructureTemplatePool>, arg1: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>): $Random;
         static random(arg0: string, arg1: $SimpleWeightedRandomList<string>): $Random;

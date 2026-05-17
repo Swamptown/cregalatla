@@ -394,12 +394,12 @@ declare module "@package/javax/swing/event" {
         get menuSelectionManager(): $MenuSelectionManager;
     }
     export class $ListSelectionEvent extends $EventObject {
-        getFirstIndex(): number;
         getValueIsAdjusting(): boolean;
+        getFirstIndex(): number;
         getLastIndex(): number;
         constructor(arg0: $Object, arg1: number, arg2: number, arg3: boolean);
-        get firstIndex(): number;
         get valueIsAdjusting(): boolean;
+        get firstIndex(): number;
         get lastIndex(): number;
     }
     export class $DocumentEvent$ElementChange {
@@ -534,9 +534,9 @@ declare module "@package/javax/swing/event" {
     export class $ListDataListener {
     }
     export interface $ListDataListener extends $EventListener {
+        contentsChanged(arg0: $ListDataEvent): void;
         intervalAdded(arg0: $ListDataEvent): void;
         intervalRemoved(arg0: $ListDataEvent): void;
-        contentsChanged(arg0: $ListDataEvent): void;
     }
     export class $ChangeEvent extends $EventObject {
         constructor(arg0: $Object);

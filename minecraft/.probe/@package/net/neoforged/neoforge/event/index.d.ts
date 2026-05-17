@@ -84,13 +84,13 @@ declare module "@package/net/neoforged/neoforge/event" {
     }
     export class $AnvilUpdateEvent extends $Event implements $ICancellableEvent {
         getName(): string;
-        getOutput(): $ItemStack;
-        getPlayer(): $Player;
-        getCost(): number;
         setCost(arg0: number): void;
-        setMaterialCost(arg0: number): void;
+        getPlayer(): $Player;
         setOutput(arg0: $ItemStack_): void;
         getMaterialCost(): number;
+        setMaterialCost(arg0: number): void;
+        getCost(): number;
+        getOutput(): $ItemStack;
         getLeft(): $ItemStack;
         getRight(): $ItemStack;
         setCanceled(arg0: boolean): void;
@@ -128,16 +128,16 @@ declare module "@package/net/neoforged/neoforge/event" {
         getCause(): $Entity;
         getContext(): $GameEvent$Context;
         getLevel(): $Level;
-        getVanillaEvent(): $Holder<$GameEvent>;
         getEventPosition(): $Vec3;
+        getVanillaEvent(): $Holder<$GameEvent>;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Level_, arg1: $Holder_<$GameEvent>, arg2: $Vec3_, arg3: $GameEvent$Context_);
         get cause(): $Entity;
         get context(): $GameEvent$Context;
         get level(): $Level;
-        get vanillaEvent(): $Holder<$GameEvent>;
         get eventPosition(): $Vec3;
+        get vanillaEvent(): $Holder<$GameEvent>;
     }
     export class $ModMismatchEvent$MismatchResolutionResult extends $Record {
         resolver(): $ModContainer;
@@ -149,10 +149,10 @@ declare module "@package/net/neoforged/neoforge/event" {
     /**
      * Values that may be interpreted as {@link $ModMismatchEvent$MismatchResolutionResult}.
      */
-    export type $ModMismatchEvent$MismatchResolutionResult_ = { versionDifference?: $ModMismatchEvent$MismatchedVersionInfo_, resolver?: $ModContainer, modid?: string,  } | [versionDifference?: $ModMismatchEvent$MismatchedVersionInfo_, resolver?: $ModContainer, modid?: string, ];
+    export type $ModMismatchEvent$MismatchResolutionResult_ = { modid?: string, resolver?: $ModContainer, versionDifference?: $ModMismatchEvent$MismatchedVersionInfo_,  } | [modid?: string, resolver?: $ModContainer, versionDifference?: $ModMismatchEvent$MismatchedVersionInfo_, ];
     export class $ModifyDefaultComponentsEvent extends $Event implements $IModBusEvent {
-        getAllItems(): $Stream<$Item>;
         modifyMatching(arg0: $Predicate_<$Item>, arg1: $Consumer_<$DataComponentPatch$Builder>): void;
+        getAllItems(): $Stream<$Item>;
         modify(arg0: $ItemLike_, arg1: $Consumer_<$DataComponentPatch$Builder>): void;
         constructor();
         get allItems(): $Stream<$Item>;
@@ -202,9 +202,9 @@ declare module "@package/net/neoforged/neoforge/event" {
         setSound(arg0: $Holder_<$SoundEvent>): void;
         getNewVolume(): number;
         getNewPitch(): number;
-        getSource(): $SoundSource;
         setSource(arg0: $SoundSource_): void;
         getSound(): $Holder<$SoundEvent>;
+        getSource(): $SoundSource;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Level_, arg1: $Holder_<$SoundEvent>, arg2: $SoundSource_, arg3: number, arg4: number);
@@ -227,8 +227,8 @@ declare module "@package/net/neoforged/neoforge/event" {
     export class $EventHooks {
         static checkSpawnPosition(arg0: $Mob, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_): boolean;
         static firePlayerSpawnPhantoms(arg0: $ServerPlayer, arg1: $ServerLevel, arg2: $BlockPos_): $PlayerSpawnPhantomsEvent;
-        static firePlayerLoadingEvent(arg0: $Player, arg1: $File_, arg2: string): void;
         static firePlayerLoadingEvent(arg0: $Player, arg1: $PlayerDataStorage, arg2: string): void;
+        static firePlayerLoadingEvent(arg0: $Player, arg1: $File_, arg2: string): void;
         static firePlayerSavingEvent(arg0: $Player, arg1: $File_, arg2: string): void;
         static fireChunkTicketLevelUpdated(arg0: $ServerLevel, arg1: number, arg2: number, arg3: number, arg4: $ChunkHolder): void;
         static fireChunkWatch(arg0: $ServerPlayer, arg1: $LevelChunk, arg2: $ServerLevel): void;
@@ -245,75 +245,75 @@ declare module "@package/net/neoforged/neoforge/event" {
         static firePlayerHeartTypeEvent(arg0: $Player, arg1: $Gui$HeartType_): $Gui$HeartType;
         static getPotentialSpawns(arg0: $LevelAccessor, arg1: $MobCategory_, arg2: $BlockPos_, arg3: $WeightedRandomList<$MobSpawnSettings$SpawnerData>): $WeightedRandomList<$MobSpawnSettings$SpawnerData>;
         static checkSpawnPlacements(arg0: $EntityType_<never>, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource, arg5: boolean): boolean;
+        static onStopEntityTracking(arg0: $Entity, arg1: $Player): void;
+        static onStartEntityTracking(arg0: $Entity, arg1: $Player): void;
+        /**
+         * @deprecated
+         */
+        static loadLootTable(arg0: $ResourceLocation_, arg1: $LootTable): $LootTable;
+        static loadLootTable(arg0: $HolderLookup$Provider, arg1: $ResourceLocation_, arg2: $LootTable): $LootTable;
         static onCreateWorldSpawn(arg0: $Level_, arg1: $ServerLevelData): boolean;
         static fireServerTickPre(arg0: $BooleanSupplier_, arg1: $MinecraftServer): void;
         static fireServerTickPost(arg0: $BooleanSupplier_, arg1: $MinecraftServer): void;
         static onAdvancementProgressedEvent(arg0: $Player, arg1: $AdvancementHolder_, arg2: $AdvancementProgress, arg3: string, arg4: $AdvancementEvent$AdvancementProgressEvent$ProgressType_): void;
         static onAdvancementEarnedEvent(arg0: $Player, arg1: $AdvancementHolder_): void;
-        static onStopEntityTracking(arg0: $Entity, arg1: $Player): void;
-        static onStartEntityTracking(arg0: $Entity, arg1: $Player): void;
-        static loadLootTable(arg0: $HolderLookup$Provider, arg1: $ResourceLocation_, arg2: $LootTable): $LootTable;
-        /**
-         * @deprecated
-         */
-        static loadLootTable(arg0: $ResourceLocation_, arg1: $LootTable): $LootTable;
-        static getPlayerTabListDisplayName(arg0: $Player): $Component;
-        static onPlayerSpawnSet(arg0: $Player, arg1: $ResourceKey_<$Level>, arg2: $BlockPos_, arg3: boolean): boolean;
-        static canLivingConvert(arg0: $LivingEntity, arg1: $EntityType_<$LivingEntity>, arg2: $Consumer_<number>): boolean;
-        static onLivingConvert(arg0: $LivingEntity, arg1: $LivingEntity): void;
         static checkMobDespawn(arg0: $Mob): boolean;
         static getMaxSpawnClusterSize(arg0: $Mob): number;
-        static onPlaySoundAtPosition(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $Holder_<$SoundEvent>, arg5: $SoundSource_, arg6: number, arg7: number): $PlayLevelSoundEvent$AtPosition;
-        static onPlaySoundAtEntity(arg0: $Entity, arg1: $Holder_<$SoundEvent>, arg2: $SoundSource_, arg3: number, arg4: number): $PlayLevelSoundEvent$AtEntity;
-        static onArrowLoose(arg0: $ItemStack_, arg1: $Level_, arg2: $Player, arg3: number, arg4: boolean): number;
-        static fireBonemealEvent(arg0: $Player, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_, arg4: $ItemStack_): $BonemealEvent;
+        static onMobSplit(arg0: $Mob, arg1: $List_<$Mob>): $MobSplitEvent;
+        static onPotionAttemptBrew(arg0: $NonNullList<$ItemStack_>): boolean;
+        static onPlayerBrewedPotion(arg0: $Player, arg1: $ItemStack_): void;
+        static firePlayerCraftingEvent(arg0: $Player, arg1: $ItemStack_, arg2: $Container): void;
+        static firePlayerSmeltedEvent(arg0: $Player, arg1: $ItemStack_): void;
         static firePlayerChangedDimensionEvent(arg0: $Player, arg1: $ResourceKey_<$Level>, arg2: $ResourceKey_<$Level>): void;
         static canPlayerStartSleeping(arg0: $ServerPlayer, arg1: $BlockPos_, arg2: $Either<$Player$BedSleepingProblem_, $Unit_>): $Either<$Player$BedSleepingProblem, $Unit>;
         static onPlayerClone(arg0: $Player, arg1: $Player, arg2: boolean): void;
-        static getCustomSpawners(arg0: $ServerLevel, arg1: $List_<$CustomSpawner_>): $List<$CustomSpawner>;
-        static fireBlockGrowFeature(arg0: $LevelAccessor, arg1: $RandomSource, arg2: $BlockPos_, arg3: $Holder_<$ConfiguredFeature<never, never>>): $BlockGrowFeatureEvent;
-        static fireFluidPlaceBlockEvent(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $BlockState_): $BlockState;
+        static getPlayerTabListDisplayName(arg0: $Player): $Component;
+        static onPlayerSpawnSet(arg0: $Player, arg1: $ResourceKey_<$Level>, arg2: $BlockPos_, arg3: boolean): boolean;
         static onPistonMovePre(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_, arg3: boolean): boolean;
         static onPistonMovePost(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_, arg3: boolean): void;
-        static canCreateFluidSource(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): boolean;
-        static onMobSplit(arg0: $Mob, arg1: $List_<$Mob>): $MobSplitEvent;
-        static onPotionAttemptBrew(arg0: $NonNullList<$ItemStack_>): boolean;
-        static onPotionBrewed(arg0: $NonNullList<$ItemStack_>): void;
-        static onProjectileImpact(arg0: $Projectile, arg1: $HitResult): boolean;
-        static onEnchantmentLevelSet(arg0: $Level_, arg1: $BlockPos_, arg2: number, arg3: number, arg4: $ItemStack_, arg5: number): number;
-        static onEntityDestroyBlock(arg0: $LivingEntity, arg1: $BlockPos_, arg2: $BlockState_): boolean;
-        static onItemTooltip(arg0: $ItemStack_, arg1: $Player, arg2: $List_<$Component_>, arg3: $TooltipFlag, arg4: $Item$TooltipContext): $ItemTooltipEvent;
-        static getItemBurnTime(arg0: $ItemStack_, arg1: number, arg2: $RecipeType_<never>): number;
-        static getEnchantmentLevelSpecific(arg0: number, arg1: $ItemStack_, arg2: $Holder_<$Enchantment>): number;
-        static getAllEnchantmentLevels(arg0: $ItemEnchantments_, arg1: $ItemStack_, arg2: $HolderLookup$RegistryLookup<$Enchantment_>): $ItemEnchantments;
-        static onArrowNock(arg0: $ItemStack_, arg1: $Level_, arg2: $Player, arg3: $InteractionHand_, arg4: boolean): $InteractionResultHolder<$ItemStack>;
-        static alterGround(arg0: $TreeDecorator$Context, arg1: $List_<$BlockPos_>, arg2: $AlterGroundEvent$StateProvider_): $AlterGroundEvent$StateProvider;
-        static finalizeMobSpawnSpawner(arg0: $Mob, arg1: $ServerLevelAccessor, arg2: $DifficultyInstance, arg3: $MobSpawnType_, arg4: $SpawnGroupData, arg5: $IOwnedSpawner_, arg6: boolean): $FinalizeSpawnEvent;
-        static onStatAward(arg0: $Player, arg1: $Stat_<never>, arg2: number): $StatAwardEvent;
         static onCreativeModeTabBuildContents(arg0: $CreativeModeTab_, arg1: $ResourceKey_<$CreativeModeTab>, arg2: $CreativeModeTab$DisplayItemsGenerator_, arg3: $CreativeModeTab$ItemDisplayParameters_, arg4: $CreativeModeTab$Output_): void;
         static onTrySpawnPortal(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: ($PortalShape) | undefined): ($PortalShape) | undefined;
+        static onPlaySoundAtPosition(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $Holder_<$SoundEvent>, arg5: $SoundSource_, arg6: number, arg7: number): $PlayLevelSoundEvent$AtPosition;
+        static onPlaySoundAtEntity(arg0: $Entity, arg1: $Holder_<$SoundEvent>, arg2: $SoundSource_, arg3: number, arg4: number): $PlayLevelSoundEvent$AtEntity;
+        static getCustomSpawners(arg0: $ServerLevel, arg1: $List_<$CustomSpawner_>): $List<$CustomSpawner>;
         static onSleepFinished(arg0: $ServerLevel, arg1: number, arg2: number): number;
         static onItemExpire(arg0: $ItemEntity): number;
         static fireItemPickupPre(arg0: $ItemEntity, arg1: $Player): $ItemEntityPickupEvent$Pre;
         static fireItemPickupPost(arg0: $ItemEntity, arg1: $Player, arg2: $ItemStack_): void;
+        static canLivingConvert(arg0: $LivingEntity, arg1: $EntityType_<$LivingEntity>, arg2: $Consumer_<number>): boolean;
+        static onLivingConvert(arg0: $LivingEntity, arg1: $LivingEntity): void;
         static onChorusFruitTeleport(arg0: $LivingEntity, arg1: number, arg2: number, arg3: number): $EntityTeleportEvent$ChorusFruit;
-        static onEntityStruckByLightning(arg0: $Entity, arg1: $LightningBolt): boolean;
-        static onExplosionDetonate(arg0: $Level_, arg1: $Explosion, arg2: $List_<$Entity>, arg3: number): void;
-        static getExplosionKnockback(arg0: $Level_, arg1: $Explosion, arg2: $Entity, arg3: $Vec3_): $Vec3;
-        static onMultiBlockPlace(arg0: $Entity, arg1: $List_<$BlockSnapshot>, arg2: $Direction_): boolean;
-        static onBlockPlace(arg0: $Entity, arg1: $BlockSnapshot, arg2: $Direction_): boolean;
+        static fireBonemealEvent(arg0: $Player, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_, arg4: $ItemStack_): $BonemealEvent;
+        static onArrowNock(arg0: $ItemStack_, arg1: $Level_, arg2: $Player, arg3: $InteractionHand_, arg4: boolean): $InteractionResultHolder<$ItemStack>;
+        static onArrowLoose(arg0: $ItemStack_, arg1: $Level_, arg2: $Player, arg3: number, arg4: boolean): number;
         static onAnimalTame(arg0: $Animal, arg1: $Player): boolean;
         static onEnderPearlLand(arg0: $ServerPlayer, arg1: number, arg2: number, arg3: number, arg4: $ThrownEnderpearl, arg5: number, arg6: $HitResult): $EntityTeleportEvent$EnderPearl;
         static onEnderTeleport(arg0: $LivingEntity, arg1: number, arg2: number, arg3: number): $EntityTeleportEvent$EnderEntity;
         static checkSpawnPositionSpawner(arg0: $Mob, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $SpawnData_, arg4: $BaseSpawner): boolean;
-        static firePlayerCraftingEvent(arg0: $Player, arg1: $ItemStack_, arg2: $Container): void;
-        static firePlayerSmeltedEvent(arg0: $Player, arg1: $ItemStack_): void;
-        static onPlayerBrewedPotion(arg0: $Player, arg1: $ItemStack_): void;
+        static finalizeMobSpawnSpawner(arg0: $Mob, arg1: $ServerLevelAccessor, arg2: $DifficultyInstance, arg3: $MobSpawnType_, arg4: $SpawnGroupData, arg5: $IOwnedSpawner_, arg6: boolean): $FinalizeSpawnEvent;
+        static fireFluidPlaceBlockEvent(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $BlockState_): $BlockState;
+        static fireBlockGrowFeature(arg0: $LevelAccessor, arg1: $RandomSource, arg2: $BlockPos_, arg3: $Holder_<$ConfiguredFeature<never, never>>): $BlockGrowFeatureEvent;
+        static onProjectileImpact(arg0: $Projectile, arg1: $HitResult): boolean;
+        static onEnchantmentLevelSet(arg0: $Level_, arg1: $BlockPos_, arg2: number, arg3: number, arg4: $ItemStack_, arg5: number): number;
+        static onPotionBrewed(arg0: $NonNullList<$ItemStack_>): void;
+        static onItemTooltip(arg0: $ItemStack_, arg1: $Player, arg2: $List_<$Component_>, arg3: $TooltipFlag, arg4: $Item$TooltipContext): $ItemTooltipEvent;
+        static getItemBurnTime(arg0: $ItemStack_, arg1: number, arg2: $RecipeType_<never>): number;
+        static getEnchantmentLevelSpecific(arg0: number, arg1: $ItemStack_, arg2: $Holder_<$Enchantment>): number;
+        static getAllEnchantmentLevels(arg0: $ItemEnchantments_, arg1: $ItemStack_, arg2: $HolderLookup$RegistryLookup<$Enchantment_>): $ItemEnchantments;
+        static canCreateFluidSource(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): boolean;
+        static onEntityStruckByLightning(arg0: $Entity, arg1: $LightningBolt): boolean;
+        static onMultiBlockPlace(arg0: $Entity, arg1: $List_<$BlockSnapshot>, arg2: $Direction_): boolean;
+        static onBlockPlace(arg0: $Entity, arg1: $BlockSnapshot, arg2: $Direction_): boolean;
+        static onExplosionDetonate(arg0: $Level_, arg1: $Explosion, arg2: $List_<$Entity>, arg3: number): void;
+        static getExplosionKnockback(arg0: $Level_, arg1: $Explosion, arg2: $Entity, arg3: $Vec3_): $Vec3;
+        static alterGround(arg0: $TreeDecorator$Context, arg1: $List_<$BlockPos_>, arg2: $AlterGroundEvent$StateProvider_): $AlterGroundEvent$StateProvider;
+        static onStatAward(arg0: $Player, arg1: $Stat_<never>, arg2: number): $StatAwardEvent;
+        static onEntityDestroyBlock(arg0: $LivingEntity, arg1: $BlockPos_, arg2: $BlockState_): boolean;
         static finalizeMobSpawn(arg0: $Mob, arg1: $ServerLevelAccessor, arg2: $DifficultyInstance, arg3: $MobSpawnType_, arg4: $SpawnGroupData): $SpawnGroupData;
         static fireLevelTickPre(arg0: $Level_, arg1: $BooleanSupplier_): void;
         static fireLevelTickPost(arg0: $Level_, arg1: $BooleanSupplier_): void;
-        static onEffectRemoved(arg0: $LivingEntity, arg1: $MobEffectInstance, arg2: $EffectCure): boolean;
         static onEffectRemoved(arg0: $LivingEntity, arg1: $Holder_<$MobEffect>, arg2: $EffectCure): boolean;
+        static onEffectRemoved(arg0: $LivingEntity, arg1: $MobEffectInstance, arg2: $EffectCure): boolean;
         static onLivingHeal(arg0: $LivingEntity, arg1: number): number;
         static canEntityGrief(arg0: $Level_, arg1: $Entity): boolean;
         static getExperienceDrop(arg0: $LivingEntity, arg1: $Player, arg2: number): number;
@@ -327,8 +327,8 @@ declare module "@package/net/neoforged/neoforge/event" {
         static onUseItemStop(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number): boolean;
         static onPlayerDestroyItem(arg0: $Player, arg1: $ItemStack_, arg2: $InteractionHand_): void;
         static canEntityContinueSleeping(arg0: $LivingEntity, arg1: $Player$BedSleepingProblem_): boolean;
-        static getEntitySizeForge(arg0: $Entity, arg1: $Pose_, arg2: $EntityDimensions_): $EntityEvent$Size;
         static getEntitySizeForge(arg0: $Entity, arg1: $Pose_, arg2: $EntityDimensions_, arg3: $EntityDimensions_): $EntityEvent$Size;
+        static getEntitySizeForge(arg0: $Entity, arg1: $Pose_, arg2: $EntityDimensions_): $EntityEvent$Size;
         static onPlayerWakeup(arg0: $Player, arg1: boolean, arg2: boolean): void;
         static onPlayerFall(arg0: $Player, arg1: number, arg2: number): void;
         static getPlayerDisplayName(arg0: $Player, arg1: $Component_): $Component;
@@ -369,8 +369,8 @@ declare module "@package/net/neoforged/neoforge/event" {
     export class $AddPackFindersEvent extends $Event implements $IModBusEvent {
         isTrusted(): boolean;
         getPackType(): $PackType;
-        addPackFinders(arg0: $ResourceLocation_, arg1: $PackType_, arg2: $Component_, arg3: $PackSource, arg4: boolean, arg5: $Pack$Position_): void;
         addRepositorySource(arg0: $RepositorySource_): void;
+        addPackFinders(arg0: $ResourceLocation_, arg1: $PackType_, arg2: $Component_, arg3: $PackSource, arg4: boolean, arg5: $Pack$Position_): void;
         constructor(arg0: $PackType_, arg1: $Consumer_<$RepositorySource>, arg2: boolean);
         get trusted(): boolean;
         get packType(): $PackType;
@@ -384,23 +384,23 @@ declare module "@package/net/neoforged/neoforge/event" {
         get registryAccess(): $RegistryAccess;
     }
     export class $BlockEntityTypeAddBlocksEvent extends $Event implements $IModBusEvent {
+        modify(arg0: $ResourceKey_<$BlockEntityType<never>>, ...arg1: $Block_[]): void;
         modify(arg0: $BlockEntityType_<never>, ...arg1: $Block_[]): void;
         modify(arg0: $BiPredicate_<$ResourceKey<$BlockEntityType<never>>, $BlockEntityType<never>>, ...arg1: $Block_[]): void;
-        modify(arg0: $ResourceKey_<$BlockEntityType<never>>, ...arg1: $Block_[]): void;
         constructor();
     }
     export class $CommandEvent extends $Event implements $ICancellableEvent {
         getException(): $Throwable;
-        getParseResults(): $ParseResults<$CommandSourceStack>;
         setParseResults(arg0: $ParseResults<$CommandSourceStack>): void;
+        getParseResults(): $ParseResults<$CommandSourceStack>;
         setException(arg0: $Throwable): void;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $ParseResults<$CommandSourceStack>);
     }
     export class $GrindstoneEvent$OnPlaceItem extends $GrindstoneEvent implements $ICancellableEvent {
-        getOutput(): $ItemStack;
         setOutput(arg0: $ItemStack_): void;
+        getOutput(): $ItemStack;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $ItemStack_, arg1: $ItemStack_, arg2: number);
@@ -450,13 +450,23 @@ declare module "@package/net/neoforged/neoforge/event" {
         get entity(): $Entity;
     }
     export class $GrindstoneEvent extends $Event {
+        setXp(arg0: number): void;
         getTopItem(): $ItemStack;
         getBottomItem(): $ItemStack;
-        setXp(arg0: number): void;
         getXp(): number;
         get topItem(): $ItemStack;
         get bottomItem(): $ItemStack;
     }
+    export class $TagsUpdatedEvent$UpdateCause extends $Enum<$TagsUpdatedEvent$UpdateCause> {
+        static values(): $TagsUpdatedEvent$UpdateCause[];
+        static valueOf(arg0: string): $TagsUpdatedEvent$UpdateCause;
+        static SERVER_DATA_LOAD: $TagsUpdatedEvent$UpdateCause;
+        static CLIENT_PACKET_RECEIVED: $TagsUpdatedEvent$UpdateCause;
+    }
+    /**
+     * Values that may be interpreted as {@link $TagsUpdatedEvent$UpdateCause}.
+     */
+    export type $TagsUpdatedEvent$UpdateCause_ = "server_data_load" | "client_packet_received";
     export class $BuildCreativeModeTabContentsEvent extends $Event implements $IModBusEvent, $CreativeModeTab$Output {
         remove(arg0: $ItemStack_, arg1: $CreativeModeTab$TabVisibility_): void;
         accept(arg0: $ItemStack_, arg1: $CreativeModeTab$TabVisibility_): void;
@@ -467,9 +477,9 @@ declare module "@package/net/neoforged/neoforge/event" {
         insertAfter(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $CreativeModeTab$TabVisibility_): void;
         getTabKey(): $ResourceKey<$CreativeModeTab>;
         insertBefore(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $CreativeModeTab$TabVisibility_): void;
-        hasPermissions(): boolean;
         insertFirst(arg0: $ItemStack_, arg1: $CreativeModeTab$TabVisibility_): void;
         getTab(): $CreativeModeTab;
+        hasPermissions(): boolean;
         accept(arg0: $ItemLike_): void;
         accept(arg0: $ItemLike_, arg1: $CreativeModeTab$TabVisibility_): void;
         accept(arg0: $ItemStack_): void;
@@ -483,16 +493,6 @@ declare module "@package/net/neoforged/neoforge/event" {
         get tabKey(): $ResourceKey<$CreativeModeTab>;
         get tab(): $CreativeModeTab;
     }
-    export class $TagsUpdatedEvent$UpdateCause extends $Enum<$TagsUpdatedEvent$UpdateCause> {
-        static values(): $TagsUpdatedEvent$UpdateCause[];
-        static valueOf(arg0: string): $TagsUpdatedEvent$UpdateCause;
-        static SERVER_DATA_LOAD: $TagsUpdatedEvent$UpdateCause;
-        static CLIENT_PACKET_RECEIVED: $TagsUpdatedEvent$UpdateCause;
-    }
-    /**
-     * Values that may be interpreted as {@link $TagsUpdatedEvent$UpdateCause}.
-     */
-    export type $TagsUpdatedEvent$UpdateCause_ = "server_data_load" | "client_packet_received";
     export class $GrindstoneEvent$OnTakeItem extends $GrindstoneEvent implements $ICancellableEvent {
         getPlayer(): $Player;
         setNewTopItem(arg0: $ItemStack_): void;

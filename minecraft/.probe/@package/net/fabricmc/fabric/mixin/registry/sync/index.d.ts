@@ -6,8 +6,8 @@ declare module "@package/net/fabricmc/fabric/mixin/registry/sync" {
     export class $BaseMappedRegistryAccessor {
     }
     export interface $BaseMappedRegistryAccessor {
-        invokeUnfreeze(): void;
         setSync(arg0: boolean): void;
+        invokeUnfreeze(): void;
         set sync(value: boolean);
     }
     export class $RegistryManagerAccessor {

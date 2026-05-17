@@ -8,7 +8,6 @@ import { $WaypointWorld, $WaypointsManager } from "@package/xaero/common/minimap
 
 declare module "@package/xaero/common/settings" {
     export class $ModSettings {
-        loadDefaultSettings(arg0: boolean): void;
         /**
          * @deprecated
          */
@@ -26,13 +25,14 @@ declare module "@package/xaero/common/settings" {
         /**
          * @deprecated
          */
-        saveWaypoints(arg0: $WaypointWorld): void;
+        saveWaypoints(arg0: $WaypointWorld, arg1: boolean): void;
         /**
          * @deprecated
          */
-        saveWaypoints(arg0: $WaypointWorld, arg1: boolean): void;
+        saveWaypoints(arg0: $WaypointWorld): void;
         readSetting(arg0: string[]): void;
         foundOldRadarSettings(): boolean;
+        loadDefaultSettings(arg0: boolean): void;
         /**
          * @deprecated
          */
@@ -54,26 +54,26 @@ declare module "@package/xaero/common/settings" {
         getEntityRadarBackwardsCompatibilityConfig(): $EntityRadarBackwardsCompatibilityConfig;
         getLoadedWaypointLines(): string;
         removeLoadedWaypointLines(): void;
+        static canEditIngameSettings(): boolean;
         isIgnoreHeightmaps(): boolean;
         getUIScale(arg0: number, arg1: number, arg2: number): number;
-        static canEditIngameSettings(): boolean;
         resetServerSettings(): void;
         resetEntityRadarBackwardsCompatibilityConfig(): void;
         caveMapsDisabled(): boolean;
         deathpointsDisabled(): boolean;
         showWaypointsDisabled(): boolean;
         minimapDisabled(): boolean;
-        loadSettings(arg0: boolean): void;
         static getTranslation(arg0: boolean): string;
+        loadSettings(arg0: boolean): void;
         /**
          * @deprecated
          */
         getMinimap(): boolean;
+        waypointsGUI(arg0: $MinimapSession): boolean;
         /**
          * @deprecated
          */
         waypointsGUI(arg0: $WaypointsManager): boolean;
-        waypointsGUI(arg0: $MinimapSession): boolean;
         saveSettings(): void;
         writeSettings(arg0: $PrintWriter): void;
         /**

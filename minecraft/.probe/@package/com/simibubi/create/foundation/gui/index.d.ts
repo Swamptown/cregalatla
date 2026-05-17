@@ -19,10 +19,10 @@ declare module "@package/com/simibubi/create/foundation/gui" {
         getLocation(): $ResourceLocation;
         getStartX(): number;
         getStartY(): number;
-        getWidth(): number;
-        getHeight(): number;
         render(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: $Color): void;
         render(arg0: $GuiGraphics, arg1: number, arg2: number): void;
+        getWidth(): number;
+        getHeight(): number;
         bind(): void;
         static FROGPORT_HEADER: $AllGuiTextures;
         static CURSEFORGE_LOGO: $AllGuiTextures;
@@ -258,10 +258,10 @@ declare module "@package/com/simibubi/create/foundation/gui" {
     export class $ModularGuiLineBuilder {
         speechBubble(): $ModularGuiLineBuilder;
         addTextInput(arg0: number, arg1: number, arg2: $BiConsumer_<$EditBox, $TooltipArea>, arg3: string): $ModularGuiLineBuilder;
-        addScrollInput(arg0: number, arg1: number, arg2: $BiConsumer_<$ScrollInput, $Label>, arg3: string): $ModularGuiLineBuilder;
         addSelectionScrollInput(arg0: number, arg1: number, arg2: $BiConsumer_<$SelectionScrollInput, $Label>, arg3: string): $ModularGuiLineBuilder;
-        addIntegerTextInput(arg0: number, arg1: number, arg2: $BiConsumer_<$EditBox, $TooltipArea>, arg3: string): $ModularGuiLineBuilder;
+        addScrollInput(arg0: number, arg1: number, arg2: $BiConsumer_<$ScrollInput, $Label>, arg3: string): $ModularGuiLineBuilder;
         customArea(arg0: number, arg1: number): $ModularGuiLineBuilder;
+        addIntegerTextInput(arg0: number, arg1: number, arg2: $BiConsumer_<$EditBox, $TooltipArea>, arg3: string): $ModularGuiLineBuilder;
         constructor(arg0: $Font, arg1: $ModularGuiLine, arg2: number, arg3: number);
     }
 }

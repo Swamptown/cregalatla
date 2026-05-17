@@ -32,8 +32,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/warden" {
         start(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
         tick(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: $Warden, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Warden): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Warden, arg2: number): boolean;
         static setCooldown(arg0: $LivingEntity, arg1: number): void;
         static COOLDOWN: number;
         static DEFAULT_DURATION: number;
@@ -60,8 +60,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/warden" {
     export class $Digging<E extends $Warden> extends $Behavior<E> {
         start(arg0: $ServerLevel, arg1: E, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: E, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: E): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor(arg0: number);

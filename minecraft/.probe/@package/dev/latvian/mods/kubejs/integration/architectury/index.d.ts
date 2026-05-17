@@ -33,7 +33,10 @@ declare module "@package/dev/latvian/mods/kubejs/integration/architectury" {
         static wrapArchFluid(o: $Object): $FluidStack;
         registerTypeWrappers(registry: $TypeWrapperRegistry): void;
         init(): void;
+        attachServerData(event: $AttachedData<$MinecraftServer>): void;
         breakpoint(args: $Object[]): void;
+        registerBuilderTypes(registry: $BuilderTypeRegistry_): void;
+        registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
         registerServerRegistries(registry: $ServerRegistryRegistry_): void;
         registerBindings(bindings: $BindingRegistry_): void;
         registerTypeDescriptions(registry: $TypeDescriptionRegistry): void;
@@ -41,7 +44,6 @@ declare module "@package/dev/latvian/mods/kubejs/integration/architectury" {
         registerRecipeMappings(registry: $RecipeMappingRegistry): void;
         registerRecipeComponents(registry: $RecipeComponentTypeRegistry_): void;
         registerRecipeSchemas(registry: $RecipeSchemaRegistry): void;
-        registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
         registerCustomRecipeSchemaFunctions(registry: $CustomRecipeSchemaFunctionRegistry_): void;
         registerRecipePostProcessors(registry: $RecipePostProcessorTypeRegistry_): void;
         registerBlockEntityAttachments(registry: $BlockEntityAttachmentRegistry_): void;
@@ -59,9 +61,7 @@ declare module "@package/dev/latvian/mods/kubejs/integration/architectury" {
         generateLang(event: $LangKubeEvent_): void;
         exportServerData(_export: $DataExport): void;
         beforeRecipeLoading(event: $RecipesKubeEvent, manager: $RecipeManagerKJS, recipeJsons: $Map_<$ResourceLocation_, $JsonElement_>): void;
-        registerBuilderTypes(registry: $BuilderTypeRegistry_): void;
         registerClasses(filter: $ClassFilter): void;
-        attachServerData(event: $AttachedData<$MinecraftServer>): void;
         initStartup(): void;
         registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
         /**
@@ -70,9 +70,9 @@ declare module "@package/dev/latvian/mods/kubejs/integration/architectury" {
         clearCaches(): void;
         beforeScriptsLoaded(manager: $ScriptManager): void;
         afterScriptsLoaded(manager: $ScriptManager): void;
-        afterInit(): void;
         attachPlayerData(event: $AttachedData<$Player>): void;
         attachLevelData(event: $AttachedData<$Level_>): void;
+        afterInit(): void;
         registerEvents(registry: $EventGroupRegistry_): void;
         constructor();
     }

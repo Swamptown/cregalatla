@@ -109,14 +109,14 @@ declare module "@package/com/railwayteam/railways/mixin_interfaces" {
     export class $IHandcarTrain {
     }
     export interface $IHandcarTrain {
-        railways$isHandcar(): boolean;
         railways$setHandcar(arg0: boolean): void;
+        railways$isHandcar(): boolean;
     }
     export class $IIndexedSchedule {
     }
     export interface $IIndexedSchedule {
-        railways$setIndex(arg0: number): void;
         railways$getIndex(): number;
+        railways$setIndex(arg0: number): void;
     }
     export class $IMonorailBezier {
     }
@@ -139,9 +139,9 @@ declare module "@package/com/railwayteam/railways/mixin_interfaces" {
     export class $IBufferBlockedTrain {
     }
     export interface $IBufferBlockedTrain {
+        railways$setControlBlocked(arg0: boolean, arg1: boolean): void;
         railways$isControlBlocked(): boolean;
         railways$getBlockedSign(): number;
-        railways$setControlBlocked(arg0: boolean, arg1: boolean): void;
     }
     export class $IGenerallySearchableNavigation {
     }
@@ -198,8 +198,8 @@ declare module "@package/com/railwayteam/railways/mixin_interfaces" {
     export class $ILimited {
     }
     export interface $ILimited {
-        isLimitEnabled(): boolean;
         setLimitEnabled(arg0: boolean): void;
+        isLimitEnabled(): boolean;
     }
     export class $AnimatedTextureDuck {
     }

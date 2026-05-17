@@ -68,7 +68,7 @@ declare module "@package/net/minecraft/client/telemetry" {
     /**
      * Values that may be interpreted as {@link $TelemetryEventInstance}.
      */
-    export type $TelemetryEventInstance_ = { properties?: $TelemetryPropertyMap, type?: $TelemetryEventType,  } | [properties?: $TelemetryPropertyMap, type?: $TelemetryEventType, ];
+    export type $TelemetryEventInstance_ = { type?: $TelemetryEventType, properties?: $TelemetryPropertyMap,  } | [type?: $TelemetryEventType, properties?: $TelemetryPropertyMap, ];
     export class $TelemetryEventLogger {
     }
     export interface $TelemetryEventLogger {
@@ -101,10 +101,10 @@ declare module "@package/net/minecraft/client/telemetry" {
         static uuid(arg0: string, arg1: string): $TelemetryProperty<$UUID>;
         title(): $MutableComponent;
         codec(): $Codec<T>;
-        exporter(): $TelemetryProperty$Exporter<T>;
         exportKey(): string;
         static gameLoadMeasurement(arg0: string, arg1: string): $TelemetryProperty<$GameLoadTimesEvent$Measurement>;
         static longSamples(arg0: string, arg1: string): $TelemetryProperty<$LongList>;
+        exporter(): $TelemetryProperty$Exporter<T>;
         static RENDER_TIME_SAMPLES: $TelemetryProperty<$LongList>;
         static LOAD_TIME_BOOTSTRAP_MS: $TelemetryProperty<$GameLoadTimesEvent$Measurement>;
         static USED_MEMORY_SAMPLES: $TelemetryProperty<$LongList>;
@@ -141,7 +141,7 @@ declare module "@package/net/minecraft/client/telemetry" {
     /**
      * Values that may be interpreted as {@link $TelemetryProperty}.
      */
-    export type $TelemetryProperty_<T> = { exporter?: $TelemetryProperty$Exporter_<any>, codec?: $Codec<any>, id?: string, exportKey?: string,  } | [exporter?: $TelemetryProperty$Exporter_<any>, codec?: $Codec<any>, id?: string, exportKey?: string, ];
+    export type $TelemetryProperty_<T> = { exportKey?: string, id?: string, codec?: $Codec<any>, exporter?: $TelemetryProperty$Exporter_<any>,  } | [exportKey?: string, id?: string, codec?: $Codec<any>, exporter?: $TelemetryProperty$Exporter_<any>, ];
     export class $TelemetryPropertyMap {
         get<T>(arg0: $TelemetryProperty_<T>): T;
         static builder(): $TelemetryPropertyMap$Builder;

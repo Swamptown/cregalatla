@@ -22,36 +22,36 @@ declare module "@package/foundry/veil/api/client/render/shader/program" {
     export interface $TextureUniformAccess {
         setFramebufferSamplers(arg0: $AdvancedFbo): void;
         clearSamplers(): void;
-        bindSamplers(arg0: number): void;
-        bindSamplers(arg0: $ShaderTextureSource$Context_, arg1: number): void;
-        removeTexture(arg0: $CharSequence): void;
         setTexture(arg0: $CharSequence, arg1: number, arg2: number, arg3: number): void;
-        setTexture(arg0: $CharSequence, arg1: $ResourceLocation_, arg2: number): void;
-        setTexture(arg0: $CharSequence, arg1: $AbstractTexture): void;
-        setTexture(arg0: $CharSequence, arg1: $AbstractTexture, arg2: number): void;
-        setTexture(arg0: $CharSequence, arg1: number, arg2: number): void;
         setTexture(arg0: $CharSequence, arg1: $ResourceLocation_): void;
+        setTexture(arg0: $CharSequence, arg1: number, arg2: number): void;
+        setTexture(arg0: $CharSequence, arg1: $AbstractTexture): void;
+        setTexture(arg0: $CharSequence, arg1: $ResourceLocation_, arg2: number): void;
+        setTexture(arg0: $CharSequence, arg1: $AbstractTexture, arg2: number): void;
+        bindSamplers(arg0: $ShaderTextureSource$Context_, arg1: number): void;
+        bindSamplers(arg0: number): void;
+        removeTexture(arg0: $CharSequence): void;
     }
     export class $ProgramDefinition extends $Record {
         compute(): $ResourceLocation;
         fragment(): $ResourceLocation;
-        blendMode(): $ShaderBlendMode;
         tesselationControl(): $ResourceLocation;
         tesselationEvaluation(): $ResourceLocation;
-        geometry(): $ResourceLocation;
         getMacros(arg0: $Set_<string>, arg1: $ShaderPreDefinitions): $Map<string, string>;
+        geometry(): $ResourceLocation;
         shaders(): $Int2ObjectMap<$ResourceLocation>;
+        blendMode(): $ShaderBlendMode;
         definitions(): string[];
+        samplers(): $Map<string, $ShaderTextureSource>;
         requiredFeatures(): $ShaderFeature[];
         vertex(): $ResourceLocation;
-        samplers(): $Map<string, $ShaderTextureSource>;
         definitionDefaults(): $Map<string, string>;
         constructor(vertex: $ResourceLocation_, tesselationControl: $ResourceLocation_, tesselationEvaluation: $ResourceLocation_, geometry: $ResourceLocation_, fragment: $ResourceLocation_, compute: $ResourceLocation_, definitions: string[], definitionDefaults: $Map_<string, string>, samplers: $Map_<string, $ShaderTextureSource>, shaders: $Int2ObjectMap<$ResourceLocation_>, requiredFeatures: $ShaderFeature_[], blendMode: $ShaderBlendMode_);
     }
     /**
      * Values that may be interpreted as {@link $ProgramDefinition}.
      */
-    export type $ProgramDefinition_ = { blendMode?: $ShaderBlendMode_, definitionDefaults?: $Map_<string, string>, requiredFeatures?: $ShaderFeature_[], samplers?: $Map_<string, $ShaderTextureSource>, fragment?: $ResourceLocation_, geometry?: $ResourceLocation_, definitions?: string[], tesselationControl?: $ResourceLocation_, compute?: $ResourceLocation_, shaders?: $Int2ObjectMap<$ResourceLocation_>, vertex?: $ResourceLocation_, tesselationEvaluation?: $ResourceLocation_,  } | [blendMode?: $ShaderBlendMode_, definitionDefaults?: $Map_<string, string>, requiredFeatures?: $ShaderFeature_[], samplers?: $Map_<string, $ShaderTextureSource>, fragment?: $ResourceLocation_, geometry?: $ResourceLocation_, definitions?: string[], tesselationControl?: $ResourceLocation_, compute?: $ResourceLocation_, shaders?: $Int2ObjectMap<$ResourceLocation_>, vertex?: $ResourceLocation_, tesselationEvaluation?: $ResourceLocation_, ];
+    export type $ProgramDefinition_ = { tesselationEvaluation?: $ResourceLocation_, vertex?: $ResourceLocation_, shaders?: $Int2ObjectMap<$ResourceLocation_>, compute?: $ResourceLocation_, tesselationControl?: $ResourceLocation_, definitions?: string[], geometry?: $ResourceLocation_, fragment?: $ResourceLocation_, samplers?: $Map_<string, $ShaderTextureSource>, requiredFeatures?: $ShaderFeature_[], definitionDefaults?: $Map_<string, string>, blendMode?: $ShaderBlendMode_,  } | [tesselationEvaluation?: $ResourceLocation_, vertex?: $ResourceLocation_, shaders?: $Int2ObjectMap<$ResourceLocation_>, compute?: $ResourceLocation_, tesselationControl?: $ResourceLocation_, definitions?: string[], geometry?: $ResourceLocation_, fragment?: $ResourceLocation_, samplers?: $Map_<string, $ShaderTextureSource>, requiredFeatures?: $ShaderFeature_[], definitionDefaults?: $Map_<string, string>, blendMode?: $ShaderBlendMode_, ];
     export class $ShaderProgram {
         static unbind(): void;
     }
@@ -63,14 +63,14 @@ declare module "@package/foundry/veil/api/client/render/shader/program" {
         getFormat(): $VertexFormat;
         getDefinitionDependencies(): $Set<string>;
         getRequiredFeatures(): $Set<$ShaderFeature>;
+        getShaders(): $Int2ObjectMap<$CompiledShader>;
+        getProgram(): number;
         /**
          * @deprecated
          */
         toShaderInstance(): $ShaderInstance;
-        getShaders(): $Int2ObjectMap<$CompiledShader>;
         setDefaultUniforms(arg0: $VertexFormat$Mode_): void;
         setDefaultUniforms(arg0: $VertexFormat$Mode_, arg1: $Matrix4fc, arg2: $Matrix4fc): void;
-        getProgram(): number;
         setUniformBlock(arg0: $CharSequence, arg1: number): void;
         setStorageBlock(arg0: $CharSequence, arg1: number): void;
         hasTesselation(): boolean;
@@ -107,11 +107,11 @@ declare module "@package/foundry/veil/api/client/render/shader/program" {
     }
     export interface $UniformAccess {
         getUniformSafe(arg0: $CharSequence): $ShaderUniformAccess;
-        getUniformLocation(arg0: $CharSequence): number;
         hasUniformBlock(arg0: $CharSequence): boolean;
         hasStorageBlock(arg0: $CharSequence): boolean;
-        hasUniform(arg0: $CharSequence): boolean;
+        getUniformLocation(arg0: $CharSequence): number;
         getUniform(arg0: $CharSequence): $ShaderUniformAccess;
+        hasUniform(arg0: $CharSequence): boolean;
         setUniformBlock(arg0: $CharSequence, arg1: number): void;
         setStorageBlock(arg0: $CharSequence, arg1: number): void;
         getUniformBlock(arg0: $CharSequence): number;
@@ -134,5 +134,5 @@ declare module "@package/foundry/veil/api/client/render/shader/program" {
     /**
      * Values that may be interpreted as {@link $ShaderBlendMode}.
      */
-    export type $ShaderBlendMode_ = { colorEquation?: $ShaderBlendMode$BlendEquation, srcColorFactor?: $GlStateManager$SourceFactor_, dstAlphaFactor?: $GlStateManager$DestFactor_, dstColorFactor?: $GlStateManager$DestFactor_, alphaEquation?: $ShaderBlendMode$BlendEquation, srcAlphaFactor?: $GlStateManager$SourceFactor_,  } | [colorEquation?: $ShaderBlendMode$BlendEquation, srcColorFactor?: $GlStateManager$SourceFactor_, dstAlphaFactor?: $GlStateManager$DestFactor_, dstColorFactor?: $GlStateManager$DestFactor_, alphaEquation?: $ShaderBlendMode$BlendEquation, srcAlphaFactor?: $GlStateManager$SourceFactor_, ];
+    export type $ShaderBlendMode_ = { srcAlphaFactor?: $GlStateManager$SourceFactor_, alphaEquation?: $ShaderBlendMode$BlendEquation, dstColorFactor?: $GlStateManager$DestFactor_, dstAlphaFactor?: $GlStateManager$DestFactor_, srcColorFactor?: $GlStateManager$SourceFactor_, colorEquation?: $ShaderBlendMode$BlendEquation,  } | [srcAlphaFactor?: $GlStateManager$SourceFactor_, alphaEquation?: $ShaderBlendMode$BlendEquation, dstColorFactor?: $GlStateManager$DestFactor_, dstAlphaFactor?: $GlStateManager$DestFactor_, srcColorFactor?: $GlStateManager$SourceFactor_, colorEquation?: $ShaderBlendMode$BlendEquation, ];
 }

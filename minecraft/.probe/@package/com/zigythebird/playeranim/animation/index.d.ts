@@ -5,9 +5,9 @@ import { $AnimationStack } from "@package/com/zigythebird/playeranimcore/animati
 
 declare module "@package/com/zigythebird/playeranim/animation" {
     export class $PlayerAnimManager extends $AnimationStack {
+        getTickDelta(): number;
         getPlayer(): $AbstractClientPlayer;
         getLastUpdateTime(): number;
-        getTickDelta(): number;
         setTickDelta(tickDelta: number): void;
         updatedAt(updateTime: number): void;
         isFirstTick(): boolean;

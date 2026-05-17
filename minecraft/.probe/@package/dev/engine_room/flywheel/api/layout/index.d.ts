@@ -7,7 +7,7 @@ declare module "@package/dev/engine_room/flywheel/api/layout" {
     export interface $Layout {
         elements(): $List<$Layout$Element>;
         byteAlignment(): number;
-        byteSize(): number;
         asMap(): $Map<string, $Layout$Element>;
+        byteSize(): number;
     }
 }

@@ -19,13 +19,13 @@ declare module "@package/net/minecraft/world/ticks" {
     }
     export interface $ContainerSingleItem extends $Container {
         isEmpty(): boolean;
-        removeItem(arg0: number, arg1: number): $ItemStack;
         setItem(arg0: number, arg1: $ItemStack_): void;
-        clearContent(): void;
         getTheItem(): $ItemStack;
         setTheItem(arg0: $ItemStack_): void;
+        clearContent(): void;
         removeTheItem(): $ItemStack;
         splitTheItem(arg0: number): $ItemStack;
+        removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
         getContainerSize(): number;
         removeItemNoUpdate(arg0: number): $ItemStack;
@@ -48,17 +48,17 @@ declare module "@package/net/minecraft/world/ticks" {
     /**
      * Values that may be interpreted as {@link $ScheduledTick}.
      */
-    export type $ScheduledTick_<T> = { triggerTick?: number, subTickOrder?: number, type?: any, pos?: $BlockPos_, priority?: $TickPriority_,  } | [triggerTick?: number, subTickOrder?: number, type?: any, pos?: $BlockPos_, priority?: $TickPriority_, ];
+    export type $ScheduledTick_<T> = { priority?: $TickPriority_, pos?: $BlockPos_, type?: any, subTickOrder?: number, triggerTick?: number,  } | [priority?: $TickPriority_, pos?: $BlockPos_, type?: any, subTickOrder?: number, triggerTick?: number, ];
     export class $LevelTicks<T> implements $LevelTickAccess<T> {
         count(): number;
         schedule(arg0: $ScheduledTick_<T>): void;
         tick(arg0: number, arg1: number, arg2: $BiConsumer_<$BlockPos, T>): void;
         copyAreaFrom(arg0: $LevelTicks<T>, arg1: $BoundingBox, arg2: $Vec3i): void;
+        copyArea(arg0: $BoundingBox, arg1: $Vec3i): void;
         clearArea(arg0: $BoundingBox): void;
-        willTickThisTick(arg0: $BlockPos_, arg1: T): boolean;
         hasScheduledTick(arg0: $BlockPos_, arg1: T): boolean;
         removeContainer(arg0: $ChunkPos): void;
-        copyArea(arg0: $BoundingBox, arg1: $Vec3i): void;
+        willTickThisTick(arg0: $BlockPos_, arg1: T): boolean;
         addContainer(arg0: $ChunkPos, arg1: $LevelChunkTicks<T>): void;
         constructor(arg0: $LongPredicate_, arg1: $Supplier_<$ProfilerFiller>);
     }
@@ -103,8 +103,8 @@ declare module "@package/net/minecraft/world/ticks" {
     export class $WorldGenTickAccess<T> implements $LevelTickAccess<T> {
         count(): number;
         schedule(arg0: $ScheduledTick_<T>): void;
-        willTickThisTick(arg0: $BlockPos_, arg1: T): boolean;
         hasScheduledTick(arg0: $BlockPos_, arg1: T): boolean;
+        willTickThisTick(arg0: $BlockPos_, arg1: T): boolean;
         constructor(arg0: $Function_<$BlockPos, $TickContainerAccess<T>>);
     }
     export class $LevelTickAccess<T> {
@@ -177,5 +177,5 @@ declare module "@package/net/minecraft/world/ticks" {
     /**
      * Values that may be interpreted as {@link $SavedTick}.
      */
-    export type $SavedTick_<T> = { type?: any, priority?: $TickPriority_, pos?: $BlockPos_, delay?: number,  } | [type?: any, priority?: $TickPriority_, pos?: $BlockPos_, delay?: number, ];
+    export type $SavedTick_<T> = { delay?: number, pos?: $BlockPos_, priority?: $TickPriority_, type?: any,  } | [delay?: number, pos?: $BlockPos_, priority?: $TickPriority_, type?: any, ];
 }

@@ -119,14 +119,14 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
     export class $TextTexture extends $TransformTexture {
         copy(): $TextTexture;
         setSupplier(arg0: $Supplier_<string>): $TextTexture;
-        setRollSpeed(arg0: number): void;
         setDropShadow(arg0: boolean): $TextTexture;
-        updateTick(): void;
+        setRollSpeed(arg0: number): void;
         updateText(arg0: string): void;
+        updateTick(): void;
         setBackgroundColor(arg0: number): $TextTexture;
-        setType(arg0: $TextTexture$TextType_): $TextTexture;
         getLines(): number;
         setWidth(arg0: number): $TextTexture;
+        setType(arg0: $TextTexture$TextType_): $TextTexture;
         dropShadow: boolean;
         backgroundColor: number;
         color: number;
@@ -206,10 +206,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
     export class $ITextureSize {
     }
     export interface $ITextureSize {
-        getWidth(): number;
-        getHeight(): number;
         ldlib2$getImageWidth(): number;
         ldlib2$getImageHeight(): number;
+        getWidth(): number;
+        getHeight(): number;
         get width(): number;
         get height(): number;
     }
@@ -243,18 +243,19 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
     export type $IGuiTexture_ = ((arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number) => void);
     export class $SpriteTexture extends $TransformTexture {
         copy(): $SpriteTexture;
-        setImageLocation(arg0: $ResourceLocation_): $SpriteTexture;
-        setBorder(arg0: number): $SpriteTexture;
-        setBorder(arg0: number, arg1: number, arg2: number, arg3: number): $SpriteTexture;
-        setWrapMode(arg0: $SpriteTexture$WrapMode_): $SpriteTexture;
+        setColor(arg0: number): $SpriteTexture;
         getImageSize(): $Size;
-        static of(arg0: $ResourceLocation_): $SpriteTexture;
-        setSprite(arg0: number, arg1: number, arg2: number, arg3: number): $SpriteTexture;
         getImageLocation(): $ResourceLocation;
         setSpritePosition(arg0: $Position): $SpriteTexture;
         setSpriteSize(arg0: $Size): $SpriteTexture;
         setBorderLT(arg0: $Position): $SpriteTexture;
         setBorderRB(arg0: $Position): $SpriteTexture;
+        setImageLocation(arg0: $ResourceLocation_): $SpriteTexture;
+        setBorder(arg0: number, arg1: number, arg2: number, arg3: number): $SpriteTexture;
+        setBorder(arg0: number): $SpriteTexture;
+        setWrapMode(arg0: $SpriteTexture$WrapMode_): $SpriteTexture;
+        setSprite(arg0: number, arg1: number, arg2: number, arg3: number): $SpriteTexture;
+        static of(arg0: $ResourceLocation_): $SpriteTexture;
         borderLT: $Position;
         color: number;
         wrapMode: $SpriteTexture$WrapMode;
@@ -280,23 +281,23 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
     }
     export class $AnimationTexture extends $TransformTexture {
         getFrom(): number;
+        setColor(arg0: number): $AnimationTexture;
         setCellSize(arg0: number): $AnimationTexture;
         setAnimation(arg0: number, arg1: number): $AnimationTexture;
         setAnimation(arg0: number): $AnimationTexture;
         getCellSize(): number;
         updateTick(): void;
         getAnimation(): number;
-        setTexture(arg0: string): $AnimationTexture;
         getColor(): number;
         getTo(): number;
+        setTexture(arg0: string): $AnimationTexture;
         imageLocation: $ResourceLocation;
         constructor(arg0: $ResourceLocation_);
         constructor(arg0: string);
         constructor();
         get from(): number;
-        set texture(value: string);
-        get color(): number;
         get to(): number;
+        set texture(value: string);
     }
     export class $TextTexture$TextType extends $Enum<$TextTexture$TextType> {
         static values(): $TextTexture$TextType[];
@@ -327,11 +328,11 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
         scale(arg0: number): $TransformTexture;
         transform(arg0: number, arg1: number): $TransformTexture;
         beforeDeserialize(): void;
+        getTransform2D(): $Transform2D;
         copyTransform(arg0: $TransformTexture): void;
         copyTransform(arg0: $Transform2D): void;
-        getTransform2D(): $Transform2D;
-        draw(arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number): void;
         draw(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        draw(arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number): void;
         copy(): $IGuiTexture;
         transform(arg0: number, arg1: number): $IGuiTexture;
         setColor(arg0: number): $IGuiTexture;
@@ -445,10 +446,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
     export class $VanillaSpriteTexture extends $TransformTexture {
         copy(): $VanillaSpriteTexture;
         setColor(arg0: number): $VanillaSpriteTexture;
-        static of(arg0: $ResourceLocation_): $VanillaSpriteTexture;
         setSprite(arg0: $ResourceLocation_): $VanillaSpriteTexture;
-        getColor(): number;
+        static of(arg0: $ResourceLocation_): $VanillaSpriteTexture;
         getSprite(): $ResourceLocation;
+        getColor(): number;
         constructor();
         constructor(arg0: $ResourceLocation_);
     }

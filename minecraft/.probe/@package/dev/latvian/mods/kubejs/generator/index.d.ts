@@ -32,10 +32,6 @@ declare module "@package/dev/latvian/mods/kubejs/generator" {
     export class $KubeDataGenerator {
     }
     export interface $KubeDataGenerator extends $KubeResourceGenerator {
-        setCompostable(items: $ItemPredicate_, chance: number, canVillagerCompost: boolean): void;
-        removeCompostable(items: $ItemPredicate_): void;
-        setFurnaceFuel(items: $ItemPredicate_, ticks: $TickDuration_): void;
-        removeFurnaceFuel(items: $ItemPredicate_): void;
         setMonsterRoomMobs(entityType: $EntityType_<never>, weight: number): void;
         setOxidizable(from: $Block_, to: $Block_): void;
         setParrotImitation(type: $EntityType_<never>, sound: $SoundEvent_): void;
@@ -43,6 +39,10 @@ declare module "@package/dev/latvian/mods/kubejs/generator" {
         setVibrationFrequency(gameEvent: $GameEvent_, frequency: number): void;
         setVillagerType(biome: $ResourceKey_<$Biome>, villagerType: $VillagerType_): void;
         setWaxable(from: $Block_, to: $Block_): void;
+        setCompostable(items: $ItemPredicate_, chance: number, canVillagerCompost: boolean): void;
+        removeCompostable(items: $ItemPredicate_): void;
+        setFurnaceFuel(items: $ItemPredicate_, ticks: $TickDuration_): void;
+        removeFurnaceFuel(items: $ItemPredicate_): void;
         dataMap<R, T>(type: $DataMapType<R, T>, consumer: $Consumer_<$VirtualDataMapFile<R, T>>): void;
     }
     export class $KubeAssetGenerator {
@@ -54,9 +54,9 @@ declare module "@package/dev/latvian/mods/kubejs/generator" {
     export interface $KubeAssetGenerator extends $KubeResourceGenerator {
         mask(target: $ResourceLocation_, mask: $ResourceLocation_, input: $ResourceLocation_): boolean;
         texture(target: $ResourceLocation_, texture: $LoadedTexture): void;
+        sounds(namespace: string, consumer: $Consumer_<$SoundsGenerator>): void;
         blockModel(id: $ResourceLocation_, consumer: $Consumer_<$ModelGenerator>): void;
         itemModel(id: $ResourceLocation_, consumer: $Consumer_<$ModelGenerator>): void;
-        sounds(namespace: string, consumer: $Consumer_<$SoundsGenerator>): void;
         particle(id: $ResourceLocation_, consumer: $Consumer_<$ParticleGenerator>): void;
         blockState(id: $ResourceLocation_, consumer: $Consumer_<$VariantBlockStateGenerator>): void;
         loadTexture(id: $ResourceLocation_): $LoadedTexture;

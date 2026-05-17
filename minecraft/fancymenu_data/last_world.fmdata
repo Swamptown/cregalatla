@@ -2,6 +2,6 @@ type = last_world
 
 last_world {
   is_server = false
-  world = /home/rasgajag/.local/share/PrismLauncher/instances/cregalatla/minecraft/saves/New World (2)
+  world = /home/rasgajag/.local/share/PrismLauncher/instances/cregalatla/minecraft/saves/New World (4)
 }
 

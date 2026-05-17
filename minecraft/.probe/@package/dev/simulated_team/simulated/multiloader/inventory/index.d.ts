@@ -16,10 +16,8 @@ declare module "@package/dev/simulated_team/simulated/multiloader/inventory" {
     }
     export interface $AbstractContainer extends $NBTSerializable, $Container {
         isEmpty(): boolean;
-        commonInsert(arg0: $ItemInfoWrapper_, arg1: $ContainerSlot, arg2: number, arg3: boolean): number;
         commonExtract(arg0: $ItemInfoWrapper_, arg1: $ContainerSlot, arg2: number, arg3: boolean): number;
         insertGeneral(arg0: $ItemInfoWrapper_, arg1: number, arg2: boolean): number;
-        insertSlot(arg0: $ItemStack_, arg1: number, arg2: boolean): $ItemStack;
         extractGeneral(arg0: $ItemInfoWrapper_, arg1: number, arg2: boolean): number;
         extractSlot(arg0: number, arg1: number, arg2: boolean): $ItemStack;
         canInsertItem(arg0: $ItemInfoWrapper_, arg1: $ContainerSlot): boolean;
@@ -28,9 +26,11 @@ declare module "@package/dev/simulated_team/simulated/multiloader/inventory" {
         onStackItemChange(arg0: $ContainerSlot, arg1: $ItemStack_, arg2: $ItemStack_): void;
         getInventoryAsList(): $List<$ContainerSlot>;
         getPopulatedSlots(): $Set<$ContainerSlot>;
-        removeItem(arg0: number, arg1: number): $ItemStack;
+        commonInsert(arg0: $ItemInfoWrapper_, arg1: $ContainerSlot, arg2: number, arg3: boolean): number;
+        insertSlot(arg0: $ItemStack_, arg1: number, arg2: boolean): $ItemStack;
         setItem(arg0: number, arg1: $ItemStack_): void;
         clearContent(): void;
+        removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
         getMaxStackSize(): number;
         setChanged(): void;
@@ -48,24 +48,24 @@ declare module "@package/dev/simulated_team/simulated/multiloader/inventory" {
         write(arg0: $HolderLookup$Provider): $CompoundTag;
         read(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         insertGeneral(arg0: $ItemInfoWrapper_, arg1: number, arg2: boolean): number;
-        insertSlot(arg0: $ItemStack_, arg1: number, arg2: boolean): $ItemStack;
         extractGeneral(arg0: $ItemInfoWrapper_, arg1: number, arg2: boolean): number;
         extractSlot(arg0: number, arg1: number, arg2: boolean): $ItemStack;
-        canInsertItem(arg0: $ItemInfoWrapper_): boolean;
         canInsertItem(arg0: $ItemInfoWrapper_, arg1: $ContainerSlot): boolean;
+        canInsertItem(arg0: $ItemInfoWrapper_): boolean;
         onStackItemChange(arg0: $ContainerSlot, arg1: $ItemStack_, arg2: $ItemStack_): void;
         getInventoryAsList(): $List<$ContainerSlot>;
         getPopulatedSlots(): $Set<$ContainerSlot>;
+        insertSlot(arg0: $ItemStack_, arg1: number, arg2: boolean): $ItemStack;
         setItem(arg0: number, arg1: $ItemStack_): void;
         clearContent(): void;
         getItem(arg0: number): $ItemStack;
         getMaxStackSize(): number;
         setChanged(): void;
         getContainerSize(): number;
-        commonInsert(arg0: $ItemInfoWrapper_, arg1: $ContainerSlot, arg2: number, arg3: boolean): number;
         commonExtract(arg0: $ItemInfoWrapper_, arg1: $ContainerSlot, arg2: number, arg3: boolean): number;
         canExtractFromSlot(arg0: $ContainerSlot): boolean;
         populateFields(arg0: $ContainerSlot): void;
+        commonInsert(arg0: $ItemInfoWrapper_, arg1: $ContainerSlot, arg2: number, arg3: boolean): number;
         removeItem(arg0: number, arg1: number): $ItemStack;
         stillValid(arg0: $Player): boolean;
         removeItemNoUpdate(arg0: number): $ItemStack;
@@ -81,6 +81,7 @@ declare module "@package/dev/simulated_team/simulated/multiloader/inventory" {
         canReceiveTransferCooldown(): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
         self(): $Container;
+        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -94,7 +95,6 @@ declare module "@package/dev/simulated_team/simulated/multiloader/inventory" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isEmpty(): boolean;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
@@ -102,8 +102,8 @@ declare module "@package/dev/simulated_team/simulated/multiloader/inventory" {
         find(): number;
         count(match: $ItemPredicate_): number;
         count(): number;
-        countNonEmpty(): number;
         countNonEmpty(match: $ItemPredicate_): number;
+        countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
         maxStackSize: number;
         slot: $ContainerSlot;
@@ -134,7 +134,7 @@ declare module "@package/dev/simulated_team/simulated/multiloader/inventory" {
     /**
      * Values that may be interpreted as {@link $ItemInfoWrapper}.
      */
-    export type $ItemInfoWrapper_ = { patchMap?: $DataComponentPatch_, type?: $Item_,  } | [patchMap?: $DataComponentPatch_, type?: $Item_, ];
+    export type $ItemInfoWrapper_ = { type?: $Item_, patchMap?: $DataComponentPatch_,  } | [type?: $Item_, patchMap?: $DataComponentPatch_, ];
     export class $ContainerSlot implements $NBTSerializable {
         clear(): void;
         static of(arg0: number, arg1: $Item_, arg2: $AbstractContainer): $ContainerSlot;
@@ -146,9 +146,9 @@ declare module "@package/dev/simulated_team/simulated/multiloader/inventory" {
         read(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         getIndex(): number;
         getStack(): $ItemStack;
-        canInsert(arg0: $ItemInfoWrapper_): boolean;
         insertStack(arg0: $ItemInfoWrapper_, arg1: number, arg2: boolean): number;
         extractStack(arg0: $ItemInfoWrapper_, arg1: number, arg2: boolean): number;
+        canInsert(arg0: $ItemInfoWrapper_): boolean;
         canExtract(): boolean;
         setStack(arg0: $ItemStack_): void;
         shrink(arg0: number): void;

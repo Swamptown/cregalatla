@@ -10,21 +10,21 @@ import { $Vec3, $BlockHitResult } from "@package/net/minecraft/world/phys";
 declare module "@package/net/minecraft/world/item/context" {
     export class $BlockPlaceContext extends $UseOnContext {
         static at(arg0: $BlockPlaceContext, arg1: $BlockPos_, arg2: $Direction_): $BlockPlaceContext;
+        getNearestLookingVerticalDirection(): $Direction;
         getNearestLookingDirection(): $Direction;
         getNearestLookingDirections(): $Direction[];
+        handler$gic000$moonlight$fixNotAccountingForNullPlayer1(arg0: $CallbackInfoReturnable<any>): void;
+        handler$gic000$moonlight$fixNotAccountingForNullPlayer2(arg0: $CallbackInfoReturnable<any>): void;
+        handler$gic000$moonlight$fixNotAccountingForNullPlayer3(arg0: $CallbackInfoReturnable<any>): void;
         replacingClickedOnBlock(): boolean;
         canPlace(): boolean;
-        getNearestLookingVerticalDirection(): $Direction;
-        handler$ejl000$moonlight$fixNotAccountingForNullPlayer1(arg0: $CallbackInfoReturnable<any>): void;
-        handler$ejl000$moonlight$fixNotAccountingForNullPlayer2(arg0: $CallbackInfoReturnable<any>): void;
-        handler$ejl000$moonlight$fixNotAccountingForNullPlayer3(arg0: $CallbackInfoReturnable<any>): void;
         replaceClicked: boolean;
         constructor(arg0: $Level_, arg1: $Player, arg2: $InteractionHand_, arg3: $ItemStack_, arg4: $BlockHitResult);
         constructor(arg0: $UseOnContext);
         constructor(arg0: $Player, arg1: $InteractionHand_, arg2: $ItemStack_, arg3: $BlockHitResult);
+        get nearestLookingVerticalDirection(): $Direction;
         get nearestLookingDirection(): $Direction;
         get nearestLookingDirections(): $Direction[];
-        get nearestLookingVerticalDirection(): $Direction;
     }
     export class $DirectionalPlaceContext extends $BlockPlaceContext {
         replaceClicked: boolean;
@@ -35,11 +35,11 @@ declare module "@package/net/minecraft/world/item/context" {
         getClickedPos(): $BlockPos;
         getClickedFace(): $Direction;
         getPlayer(): $Player;
+        isInside(): boolean;
         getHorizontalDirection(): $Direction;
+        getHitResult(): $BlockHitResult;
         getClickLocation(): $Vec3;
         getHand(): $InteractionHand;
-        isInside(): boolean;
-        getHitResult(): $BlockHitResult;
         getItemInHand(): $ItemStack;
         getRotation(): number;
         isSecondaryUseActive(): boolean;
@@ -50,11 +50,11 @@ declare module "@package/net/minecraft/world/item/context" {
         get clickedPos(): $BlockPos;
         get clickedFace(): $Direction;
         get player(): $Player;
+        get inside(): boolean;
         get horizontalDirection(): $Direction;
+        get hitResult(): $BlockHitResult;
         get clickLocation(): $Vec3;
         get hand(): $InteractionHand;
-        get inside(): boolean;
-        get hitResult(): $BlockHitResult;
         get itemInHand(): $ItemStack;
         get rotation(): number;
         get secondaryUseActive(): boolean;

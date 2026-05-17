@@ -8,12 +8,12 @@ import { $IItemHandler, $IItemHandlerModifiable } from "@package/net/neoforged/n
 
 declare module "@package/com/simibubi/create/foundation/item" {
     export class $SmartInventory extends $ItemHandlerContainer implements $IItemHandlerModifiable, $INBTSerializable<$CompoundTag> {
-        allowInsertion(): $SmartInventory;
+        getStackLimit(arg0: number, arg1: $ItemStack_): number;
         whenContentsChanged(arg0: $Consumer_<number>): $SmartInventory;
         forbidInsertion(): $SmartInventory;
         withMaxStackSize(arg0: number): $SmartInventory;
+        allowInsertion(): $SmartInventory;
         allowExtraction(): $SmartInventory;
-        getStackLimit(arg0: number, arg1: $ItemStack_): number;
         forbidExtraction(): $SmartInventory;
         getSlots(): number;
         getStackInSlot(arg0: number): $ItemStack;

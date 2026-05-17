@@ -591,9 +591,9 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          */
         toByteArray(arg0: number[]): number[];
         toByteArray(): number[];
+        intParallelStream(): $IntStream;
         intSpliterator(): $IntSpliterator;
         intIterator(): $IntIterator;
-        intParallelStream(): $IntStream;
         spliterator(): $Spliterator<number>;
     }
     export class $ByteIterator {

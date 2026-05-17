@@ -24,24 +24,28 @@ export * as element from "@package/xaero/common/minimap/element";
 declare module "@package/xaero/common/minimap" {
     export class $MinimapProcessor {
         cleanup(): void;
-        getServerModNetworkVersion(): number;
-        getTargetZoom(): number;
-        isConsideringNetherFairPlayMessage(): boolean;
         /**
          * @deprecated
          */
         getEntityRadar(): $MinimapRadar;
-        getSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager$1;
-        getMinimapItem(): $Item;
+        isConsideringNetherFairPlayMessage(): boolean;
+        getTargetZoom(): number;
+        getServerModNetworkVersion(): number;
+        /**
+         * @deprecated
+         */
+        getClientSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager;
+        setServerModNetworkVersion(arg0: number): void;
         checkFBO(): void;
         getMinimapSize(): number;
+        isCaveModeDisplayed(): boolean;
+        getMinimapItem(): $Item;
         getLastMapDimensionScale(): number;
         getLastMapDimension(): $ResourceKey<$Level>;
-        isCaveModeDisplayed(): boolean;
-        updateZoom(): void;
         canUseFrameBuffer(): boolean;
         getMinimapBufferSize(arg0: number): number;
         getFBOBufferSize(): number;
+        updateZoom(): void;
         setLastMapDimensionScale(arg0: number): void;
         setLastMapDimension(arg0: $ResourceKey_<$Level>): void;
         /**
@@ -52,25 +56,21 @@ declare module "@package/xaero/common/minimap" {
          * @deprecated
          */
         getLastPlayerDimDiv(): number;
-        setServerModNetworkVersion(arg0: number): void;
-        /**
-         * @deprecated
-         */
-        getClientSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager;
-        setConsideringNetherFairPlayMessage(arg0: boolean): void;
-        onRender(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: $CustomVertexConsumers): void;
+        getSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager$1;
         setNoMinimapMessageReceived(arg0: boolean): void;
         setFairPlayOnlyMessageReceived(arg0: boolean): void;
+        setConsideringNetherFairPlayMessage(arg0: boolean): void;
         getRadarSession(): $RadarSession;
+        onPlayerTick(): void;
         getMinimapWriter(): $MinimapWriter;
         isEnlargedMap(): boolean;
         isToResetImage(): boolean;
         setToResetImage(arg0: boolean): void;
         isManualCaveMode(): boolean;
         getMinimapZoom(): number;
+        onRender(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: $CustomVertexConsumers): void;
         static hasMinimapItem(arg0: $Player): boolean;
         updateMinimapItem(): void;
-        onPlayerTick(): void;
         getSession(): $MinimapSession;
         onClientTick(): void;
         serverHasMod(): boolean;
@@ -83,14 +83,14 @@ declare module "@package/xaero/common/minimap" {
         static DEBUG: boolean;
         static FRAME: number;
         constructor(arg0: $IXaeroMinimap, arg1: $MinimapSession, arg2: $MinimapWriter, arg3: $RadarSession, arg4: $ClientSyncedTrackedPlayerManager$1);
-        get targetZoom(): number;
         get entityRadar(): $MinimapRadar;
-        get syncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager$1;
-        get minimapItem(): $Item;
+        get targetZoom(): number;
+        get clientSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager;
         get minimapSize(): number;
         get caveModeDisplayed(): boolean;
+        get minimapItem(): $Item;
         get FBOBufferSize(): number;
-        get clientSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager;
+        get syncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager$1;
         set fairPlayOnlyMessageReceived(value: boolean);
         get radarSession(): $RadarSession;
         get minimapWriter(): $MinimapWriter;

@@ -81,7 +81,7 @@ declare module "@package/net/minecraft/server/commands" {
     /**
      * Values that may be interpreted as {@link $CloneCommands$CloneBlockInfo}.
      */
-    export type $CloneCommands$CloneBlockInfo_ = { blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_, state?: $BlockState_, pos?: $BlockPos_,  } | [blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_, state?: $BlockState_, pos?: $BlockPos_, ];
+    export type $CloneCommands$CloneBlockInfo_ = { pos?: $BlockPos_, state?: $BlockState_, blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_,  } | [pos?: $BlockPos_, state?: $BlockState_, blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_, ];
     export class $WhitelistCommand {
         static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
@@ -139,14 +139,14 @@ declare module "@package/net/minecraft/server/commands" {
         static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         static showLocateResult(arg0: $CommandSourceStack, arg1: $ResourceOrTagArgument$Result<never>, arg2: $BlockPos_, arg3: $Pair<$BlockPos_, $Holder_<never>>, arg4: string, arg5: boolean, arg6: $Duration_): number;
         static showLocateResult(arg0: $CommandSourceStack, arg1: $ResourceOrTagKeyArgument$Result<never>, arg2: $BlockPos_, arg3: $Pair<$BlockPos_, $Holder_<never>>, arg4: string, arg5: boolean, arg6: $Duration_): number;
-        static getMaxStructureSearchRadius$structurify_$md$8e2dbe$0(): number;
-        static getStructureNotFoundError$structurify_$md$8e2dbe$1(): $DynamicCommandExceptionType;
-        static getStructureInvalidError$structurify_$md$8e2dbe$2(): $DynamicCommandExceptionType;
-        static invokeGetHolders$structurify_$md$8e2dbe$3(arg0: $ResourceOrTagKeyArgument$Result<any>, arg1: $Registry<any>): $Optional<any>;
+        static getMaxStructureSearchRadius$structurify_$md$d858b6$0(): number;
+        static getStructureNotFoundError$structurify_$md$d858b6$1(): $DynamicCommandExceptionType;
+        static getStructureInvalidError$structurify_$md$d858b6$2(): $DynamicCommandExceptionType;
+        static invokeGetHolders$structurify_$md$d858b6$3(arg0: $ResourceOrTagKeyArgument$Result<any>, arg1: $Registry<any>): $Optional<any>;
         constructor();
-        static get maxStructureSearchRadius$structurify_$md$8e2dbe$0(): number;
-        static get structureNotFoundError$structurify_$md$8e2dbe$1(): $DynamicCommandExceptionType;
-        static get structureInvalidError$structurify_$md$8e2dbe$2(): $DynamicCommandExceptionType;
+        static get maxStructureSearchRadius$structurify_$md$d858b6$0(): number;
+        static get structureNotFoundError$structurify_$md$d858b6$1(): $DynamicCommandExceptionType;
+        static get structureInvalidError$structurify_$md$d858b6$2(): $DynamicCommandExceptionType;
     }
     export class $SpectateCommand {
         static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
@@ -558,9 +558,9 @@ declare module "@package/net/minecraft/server/commands" {
     }
     export class $GameRuleCommand implements $GameRuleCommandAccessor {
         static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
-        static queryRule<T extends $GameRules$Value<T>>(arg0: $CommandSourceStack, arg1: $GameRules$Key<T>): number;
-        static invokeQueryRule$fabric_game_rule_api_v1_$md$8e2dbe$0(arg0: $CommandSourceStack, arg1: $GameRules$Key<any>): number;
         static setRule<T extends $GameRules$Value<T>>(arg0: $CommandContext<$CommandSourceStack>, arg1: $GameRules$Key<T>): number;
+        static queryRule<T extends $GameRules$Value<T>>(arg0: $CommandSourceStack, arg1: $GameRules$Key<T>): number;
+        static invokeQueryRule$fabric_game_rule_api_v1_$md$d858b6$0(arg0: $CommandSourceStack, arg1: $GameRules$Key<any>): number;
         constructor();
     }
     export class $ParticleCommand {
@@ -609,7 +609,7 @@ declare module "@package/net/minecraft/server/commands" {
     /**
      * Values that may be interpreted as {@link $CloneCommands$CloneBlockEntityInfo}.
      */
-    export type $CloneCommands$CloneBlockEntityInfo_ = { tag?: $CompoundTag_, components?: $DataComponentMap_,  } | [tag?: $CompoundTag_, components?: $DataComponentMap_, ];
+    export type $CloneCommands$CloneBlockEntityInfo_ = { components?: $DataComponentMap_, tag?: $CompoundTag_,  } | [components?: $DataComponentMap_, tag?: $CompoundTag_, ];
     export class $FunctionCommand$FunctionCustomExecutor extends $CustomCommandExecutor$WithErrorHandling<$CommandSourceStack> implements $CustomCommandExecutor$CommandAdapter<$CommandSourceStack> {
         run(arg0: $CommandContext<$CommandSourceStack>): number;
     }

@@ -13,8 +13,8 @@ declare module "@package/xaero/common/server/player" {
         getLastSyncedData(): $SyncedTrackedPlayer;
         ensureLastSyncedData(): $SyncedTrackedPlayer;
         getCurrentlySyncedPlayers(): $Set<$UUID>;
-        ensureCurrentlySyncedPlayers(): $Set<$UUID>;
         getLastTrackedPlayerSync(): number;
+        ensureCurrentlySyncedPlayers(): $Set<$UUID>;
         setLastTrackedPlayerSync(arg0: number): void;
         hasMod(): boolean;
         setClientModNetworkVersion(arg0: number): void;

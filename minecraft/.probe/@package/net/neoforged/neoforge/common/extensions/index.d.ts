@@ -88,11 +88,10 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         static TRANSLATION_PREFIX: string;
     }
     export interface $ILevelExtension {
-        getDescription(): $Component;
-        getCapability<T>(arg0: $BlockCapability<T, void>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity): T;
-        getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): T;
         getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: $BlockPos_, arg2: C): T;
+        getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): T;
         getCapability<T>(arg0: $BlockCapability<T, void>, arg1: $BlockPos_): T;
+        getCapability<T>(arg0: $BlockCapability<T, void>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity): T;
         invalidateCapabilities(arg0: $BlockPos_): void;
         invalidateCapabilities(arg0: $ChunkPos): void;
         getModelDataManager(): $ModelDataManager;
@@ -100,11 +99,12 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         getMaxEntityRadius(): number;
         increaseMaxEntityRadius(arg0: number): number;
         getDescriptionKey(): string;
-        get description(): $Component;
+        getDescription(): $Component;
         get modelDataManager(): $ModelDataManager;
         get partEntities(): $Collection<$PartEntity<never>>;
         get maxEntityRadius(): number;
         get descriptionKey(): string;
+        get description(): $Component;
     }
     export class $IPackResourcesExtension {
     }
@@ -117,12 +117,12 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         static FORMAT: $DecimalFormat;
     }
     export interface $IAttributeExtension {
+        getBaseId(): $ResourceLocation;
+        toBaseComponent(arg0: number, arg1: number, arg2: boolean, arg3: $TooltipFlag): $MutableComponent;
         getMergedStyle(arg0: boolean): $TextColor;
         toValueComponent(arg0: $AttributeModifier$Operation_, arg1: number, arg2: $TooltipFlag): $MutableComponent;
         getDebugInfo(arg0: $AttributeModifier_, arg1: $TooltipFlag): $Component;
         toComponent(arg0: $AttributeModifier_, arg1: $TooltipFlag): $MutableComponent;
-        getBaseId(): $ResourceLocation;
-        toBaseComponent(arg0: number, arg1: number, arg2: boolean, arg3: $TooltipFlag): $MutableComponent;
         get baseId(): $ResourceLocation;
     }
     /**
@@ -141,6 +141,7 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         rotate(arg0: $BlockState_, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: $Rotation_): $BlockState;
         makesOpenTrapdoorAboveClimbable(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $BlockState_): boolean;
         getCloneItemStack(arg0: $BlockState_, arg1: $HitResult, arg2: $LevelReader, arg3: $BlockPos_, arg4: $Player): $ItemStack;
+        collisionExtendsVertically(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Entity): boolean;
         addLandingEffects(arg0: $BlockState_, arg1: $ServerLevel, arg2: $BlockPos_, arg3: $BlockState_, arg4: $LivingEntity, arg5: number): boolean;
         getSoundType(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Entity): $SoundType;
         getFriction(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Entity): number;
@@ -148,7 +149,6 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         isBed(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $LivingEntity): boolean;
         setBedOccupied(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $LivingEntity, arg4: boolean): void;
         getBedDirection(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_): $Direction;
-        collisionExtendsVertically(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Entity): boolean;
         addRunningEffects(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Entity): boolean;
         getPistonPushReaction(arg0: $BlockState_): $PushReaction;
         hasDynamicLightEmission(arg0: $BlockState_): boolean;
@@ -244,11 +244,11 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export interface $IPacketFlowExtension {
         self(): $PacketFlow;
         getReceptionSide(): $LogicalSide;
-        isClientbound(): boolean;
         isServerbound(): boolean;
+        isClientbound(): boolean;
         get receptionSide(): $LogicalSide;
-        get clientbound(): boolean;
         get serverbound(): boolean;
+        get clientbound(): boolean;
     }
     export class $IBaseRailBlockExtension {
     }
@@ -412,8 +412,7 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $IItemExtension {
     }
     export interface $IItemExtension extends $FabricItem {
-        isDamaged(arg0: $ItemStack_): boolean;
-        getMaxDamage(arg0: $ItemStack_): number;
+        onDestroyed(arg0: $ItemEntity, arg1: $DamageSource_): void;
         getCraftingRemainingItem(arg0: $ItemStack_): $ItemStack;
         hasCraftingRemainingItem(arg0: $ItemStack_): boolean;
         getEnchantmentValue(arg0: $ItemStack_): number;
@@ -421,33 +420,12 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         isRepairable(arg0: $ItemStack_): boolean;
         isDamageable(arg0: $ItemStack_): boolean;
         canFitInsideContainerItems(arg0: $ItemStack_): boolean;
-        onDroppedByPlayer(arg0: $ItemStack_, arg1: $Player): boolean;
-        getHighlightTip(arg0: $ItemStack_, arg1: $Component_): $Component;
-        onItemUseFirst(arg0: $ItemStack_, arg1: $UseOnContext): $InteractionResult;
-        isPiglinCurrency(arg0: $ItemStack_): boolean;
-        handler$bdj000$connector$redirectIsPiglinCurrency(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
-        getXpRepairRatio(arg0: $ItemStack_): number;
-        onLeftClickEntity(arg0: $ItemStack_, arg1: $Player, arg2: $Entity): boolean;
-        handler$zdh000$fabric_item_api_v1$getCraftingRemainingItem(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
-        handler$zdh000$fabric_item_api_v1$hasCraftingRemainingItem(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
-        getEntityLifespan(arg0: $ItemStack_, arg1: $Level_): number;
-        hasCustomEntity(arg0: $ItemStack_): boolean;
-        onDestroyed(arg0: $ItemEntity, arg1: $DamageSource_): void;
-        onEntityItemUpdate(arg0: $ItemStack_, arg1: $ItemEntity): boolean;
-        doesSneakBypassUse(arg0: $ItemStack_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Player): boolean;
-        canEquip(arg0: $ItemStack_, arg1: $EquipmentSlot_, arg2: $LivingEntity): boolean;
-        handler$zdh000$fabric_item_api_v1$getEquipmentSlot(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
-        isBookEnchantable(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
-        getArmorTexture(arg0: $ItemStack_, arg1: $Entity, arg2: $EquipmentSlot_, arg3: $ArmorMaterial$Layer, arg4: boolean): $ResourceLocation;
-        setDamage(arg0: $ItemStack_, arg1: number): void;
-        isPrimaryItemFor(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): boolean;
-        supportsEnchantment(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): boolean;
         getEnchantmentLevel(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): number;
         getAllEnchantments(arg0: $ItemStack_, arg1: $HolderLookup$RegistryLookup<$Enchantment_>): $ItemEnchantments;
         shouldCauseReequipAnimation(arg0: $ItemStack_, arg1: $ItemStack_, arg2: boolean): boolean;
-        modifyReturnValue$zdm000$fabric_item_api_v1$shouldCauseReequipAnimation(arg0: boolean, arg1: $ItemStack_, arg2: $ItemStack_, arg3: boolean): boolean;
+        modifyReturnValue$ddo000$fabric_item_api_v1$shouldCauseReequipAnimation(arg0: boolean, arg1: $ItemStack_, arg2: $ItemStack_, arg3: boolean): boolean;
         shouldCauseBlockBreakReset(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
-        handler$zdm000$fabric_item_api_v1$shouldCauseBlockBreakReset(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $CallbackInfoReturnable<any>): void;
+        handler$ddo000$fabric_item_api_v1$shouldCauseBlockBreakReset(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $CallbackInfoReturnable<any>): void;
         getCreatorModId(arg0: $ItemStack_): string;
         getBurnTime(arg0: $ItemStack_, arg1: $RecipeType_<never>): number;
         onAnimalArmorTick(arg0: $ItemStack_, arg1: $Level_, arg2: $Mob): void;
@@ -457,6 +435,28 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         canGrindstoneRepair(arg0: $ItemStack_): boolean;
         canBeHurtBy(arg0: $ItemStack_, arg1: $DamageSource_): boolean;
         applyEnchantments(arg0: $ItemStack_, arg1: $List_<$EnchantmentInstance>): $ItemStack;
+        isDamaged(arg0: $ItemStack_): boolean;
+        getMaxDamage(arg0: $ItemStack_): number;
+        onDroppedByPlayer(arg0: $ItemStack_, arg1: $Player): boolean;
+        getHighlightTip(arg0: $ItemStack_, arg1: $Component_): $Component;
+        onItemUseFirst(arg0: $ItemStack_, arg1: $UseOnContext): $InteractionResult;
+        isPiglinCurrency(arg0: $ItemStack_): boolean;
+        handler$ecb000$connector$redirectIsPiglinCurrency(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
+        getXpRepairRatio(arg0: $ItemStack_): number;
+        onLeftClickEntity(arg0: $ItemStack_, arg1: $Player, arg2: $Entity): boolean;
+        handler$ddj000$fabric_item_api_v1$getCraftingRemainingItem(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
+        handler$ddj000$fabric_item_api_v1$hasCraftingRemainingItem(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
+        getEntityLifespan(arg0: $ItemStack_, arg1: $Level_): number;
+        hasCustomEntity(arg0: $ItemStack_): boolean;
+        onEntityItemUpdate(arg0: $ItemStack_, arg1: $ItemEntity): boolean;
+        doesSneakBypassUse(arg0: $ItemStack_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Player): boolean;
+        canEquip(arg0: $ItemStack_, arg1: $EquipmentSlot_, arg2: $LivingEntity): boolean;
+        handler$ddj000$fabric_item_api_v1$getEquipmentSlot(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
+        isBookEnchantable(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
+        getArmorTexture(arg0: $ItemStack_, arg1: $Entity, arg2: $EquipmentSlot_, arg3: $ArmorMaterial$Layer, arg4: boolean): $ResourceLocation;
+        setDamage(arg0: $ItemStack_, arg1: number): void;
+        isPrimaryItemFor(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): boolean;
+        supportsEnchantment(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): boolean;
         createEntity(arg0: $Level_, arg1: $Entity, arg2: $ItemStack_): $Entity;
         getMaxStackSize(arg0: $ItemStack_): number;
         canWalkOnPowderedSnow(arg0: $ItemStack_, arg1: $LivingEntity): boolean;
@@ -517,26 +517,13 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $IItemStackExtension {
     }
     export interface $IItemStackExtension {
+        getAttributeModifiers(): $ItemAttributeModifiers;
+        onDestroyed(arg0: $ItemEntity, arg1: $DamageSource_): void;
         getCraftingRemainingItem(): $ItemStack;
         hasCraftingRemainingItem(): boolean;
         getEnchantmentValue(): number;
         isRepairable(): boolean;
         canFitInsideContainerItems(): boolean;
-        onDroppedByPlayer(arg0: $Player): boolean;
-        getHighlightTip(arg0: $Component_): $Component;
-        onItemUseFirst(arg0: $UseOnContext): $InteractionResult;
-        isPiglinCurrency(): boolean;
-        getXpRepairRatio(): number;
-        getEntityLifespan(arg0: $Level_): number;
-        getAttributeModifiers(): $ItemAttributeModifiers;
-        handler$cbn000$fabric_entity_events_v1$canElytraFly(arg0: $LivingEntity, arg1: $CallbackInfoReturnable<any>): void;
-        onDestroyed(arg0: $ItemEntity, arg1: $DamageSource_): void;
-        onEntityItemUpdate(arg0: $ItemEntity): boolean;
-        doesSneakBypassUse(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Player): boolean;
-        canEquip(arg0: $EquipmentSlot_, arg1: $LivingEntity): boolean;
-        isBookEnchantable(arg0: $ItemStack_): boolean;
-        isPrimaryItemFor(arg0: $Holder_<$Enchantment>): boolean;
-        supportsEnchantment(arg0: $Holder_<$Enchantment>): boolean;
         getEnchantmentLevel(arg0: $Holder_<$Enchantment>): number;
         getAllEnchantments(arg0: $HolderLookup$RegistryLookup<$Enchantment_>): $ItemEnchantments;
         shouldCauseBlockBreakReset(arg0: $ItemStack_): boolean;
@@ -545,6 +532,19 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         isEnderMask(arg0: $Player, arg1: $EnderMan): boolean;
         isNotReplaceableByPickAction(arg0: $Player, arg1: number): boolean;
         canGrindstoneRepair(): boolean;
+        onDroppedByPlayer(arg0: $Player): boolean;
+        getHighlightTip(arg0: $Component_): $Component;
+        onItemUseFirst(arg0: $UseOnContext): $InteractionResult;
+        isPiglinCurrency(): boolean;
+        getXpRepairRatio(): number;
+        getEntityLifespan(arg0: $Level_): number;
+        onEntityItemUpdate(arg0: $ItemEntity): boolean;
+        doesSneakBypassUse(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Player): boolean;
+        canEquip(arg0: $EquipmentSlot_, arg1: $LivingEntity): boolean;
+        isBookEnchantable(arg0: $ItemStack_): boolean;
+        isPrimaryItemFor(arg0: $Holder_<$Enchantment>): boolean;
+        supportsEnchantment(arg0: $Holder_<$Enchantment>): boolean;
+        handler$bgg000$fabric_entity_events_v1$canElytraFly(arg0: $LivingEntity, arg1: $CallbackInfoReturnable<any>): void;
         canWalkOnPowderedSnow(arg0: $LivingEntity): boolean;
         makesPiglinsNeutral(arg0: $LivingEntity): boolean;
         getEquipmentSlot(): $EquipmentSlot;
@@ -560,14 +560,14 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         getFoodProperties(arg0: $LivingEntity): $FoodProperties;
         canDisableShield(arg0: $ItemStack_, arg1: $LivingEntity, arg2: $LivingEntity): boolean;
         getSweepHitBox(arg0: $Player, arg1: $Entity): $AABB;
-        getCapability<T, C>(arg0: $ItemCapability<T, C>, arg1: C): T;
         getCapability<T>(arg0: $ItemCapability<T, void>): T;
+        getCapability<T, C>(arg0: $ItemCapability<T, C>, arg1: C): T;
+        get attributeModifiers(): $ItemAttributeModifiers;
         get craftingRemainingItem(): $ItemStack;
         get enchantmentValue(): number;
         get repairable(): boolean;
         get piglinCurrency(): boolean;
         get xpRepairRatio(): number;
-        get attributeModifiers(): $ItemAttributeModifiers;
         get equipmentSlot(): $EquipmentSlot;
     }
     export class $IBoatExtension {
@@ -606,8 +606,8 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         remove(arg0: $ResourceLocation_): $TagsProvider$TagAppender<T>;
         replace(arg0: boolean): $TagsProvider$TagAppender<T>;
         replace(): $TagsProvider$TagAppender<T>;
-        addOptionalTag(arg0: $TagKey_<T>): $TagsProvider$TagAppender<T>;
         addTags(...arg0: $TagKey_<T>[]): $TagsProvider$TagAppender<T>;
+        addOptionalTag(arg0: $TagKey_<T>): $TagsProvider$TagAppender<T>;
         addOptionalTags(...arg0: $TagKey_<T>[]): $TagsProvider$TagAppender<T>;
     }
     export class $IFluidStateExtension {
@@ -668,17 +668,17 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     }
     export interface $ICommonPacketListener extends $PacketListener {
         getConnectionType(): $ConnectionType;
-        getConnection(): $Connection;
         disconnect(arg0: $Component_): void;
         send(arg0: $Packet<never>): void;
         send(arg0: $CustomPacketPayload_): void;
         hasChannel(arg0: $CustomPacketPayload_): boolean;
-        hasChannel(arg0: $CustomPacketPayload$Type_<never>): boolean;
         hasChannel(arg0: $ResourceLocation_): boolean;
+        hasChannel(arg0: $CustomPacketPayload$Type_<never>): boolean;
         getMainThreadEventLoop(): $ReentrantBlockableEventLoop<never>;
+        getConnection(): $Connection;
         get connectionType(): $ConnectionType;
-        get connection(): $Connection;
         get mainThreadEventLoop(): $ReentrantBlockableEventLoop<never>;
+        get connection(): $Connection;
     }
     export class $IBlockGetterExtension {
     }
@@ -709,6 +709,7 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         isEmpty(): boolean;
         rotate(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $Rotation_): $BlockState;
         getCloneItemStack(arg0: $HitResult, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Player): $ItemStack;
+        collisionExtendsVertically(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Entity): boolean;
         addLandingEffects(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $BlockState_, arg3: $LivingEntity, arg4: number): boolean;
         getSoundType(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Entity): $SoundType;
         getFriction(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Entity): number;
@@ -716,7 +717,6 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         isBed(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $LivingEntity): boolean;
         setBedOccupied(arg0: $Level_, arg1: $BlockPos_, arg2: $LivingEntity, arg3: boolean): void;
         getBedDirection(arg0: $LevelReader, arg1: $BlockPos_): $Direction;
-        collisionExtendsVertically(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Entity): boolean;
         addRunningEffects(arg0: $Level_, arg1: $BlockPos_, arg2: $Entity): boolean;
         hasDynamicLightEmission(): boolean;
         getLightEmission(arg0: $BlockGetter, arg1: $BlockPos_): number;
@@ -754,7 +754,7 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         canDropFromExplosion(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Explosion): boolean;
         onBlockExploded(arg0: $Level_, arg1: $BlockPos_, arg2: $Explosion): void;
         shouldDisplayFluidOverlay(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState): boolean;
-        handler$zdo000$fabric_rendering_fluids_v1$shouldDisplayFluidOverlay(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $CallbackInfoReturnable<any>): void;
+        handler$zcj000$fabric_rendering_fluids_v1$shouldDisplayFluidOverlay(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $CallbackInfoReturnable<any>): void;
         getToolModifiedState(arg0: $UseOnContext, arg1: $ItemAbility_, arg2: boolean): $BlockState;
         canRedstoneConnectTo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
         hidesNeighborFace(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_): boolean;
@@ -789,8 +789,8 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $ICommandSourceStackExtension {
     }
     export interface $ICommandSourceStackExtension {
-        getUnsidedLevel(): $Level;
         getAdvancement(arg0: $ResourceLocation_): $AdvancementHolder;
+        getUnsidedLevel(): $Level;
         getRecipeManager(): $RecipeManager;
         getScoreboard(): $Scoreboard;
         get unsidedLevel(): $Level;

@@ -100,9 +100,10 @@ declare module "@package/java/util/concurrent" {
         static runAsync(arg0: $Runnable_, arg1: $Executor_): $CompletableFuture<void>;
         static runAsync(arg0: $Runnable_): $CompletableFuture<void>;
         static completedFuture<U>(arg0: U): $CompletableFuture<U>;
+        whenComplete(arg0: $BiConsumer_<T, $Throwable>): $CompletableFuture<T>;
         handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>): $CompletableFuture<U>;
-        static supplyAsync<U>(arg0: $Supplier_<U>, arg1: $Executor_): $CompletableFuture<U>;
         static supplyAsync<U>(arg0: $Supplier_<U>): $CompletableFuture<U>;
+        static supplyAsync<U>(arg0: $Supplier_<U>, arg1: $Executor_): $CompletableFuture<U>;
         exceptionallyComposeAsync(arg0: $Function_<$Throwable, $CompletionStage<T>>, arg1: $Executor_): $CompletionStage<T>;
         exceptionallyCompose(arg0: $Function_<$Throwable, $CompletionStage<T>>): $CompletionStage<T>;
         exceptionallyAsync(arg0: $Function_<$Throwable, T>, arg1: $Executor_): $CompletionStage<T>;
@@ -127,7 +128,6 @@ declare module "@package/java/util/concurrent" {
         thenApplyAsync<U>(arg0: $Function_<T, U>): $CompletionStage<U>;
         thenApply<U>(arg0: $Function_<T, U>): $CompletionStage<U>;
         handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>, arg1: $Executor_): $CompletionStage<U>;
-        whenComplete(arg0: $BiConsumer_<T, $Throwable>): $CompletionStage<T>;
         constructor();
         get done(): boolean;
         get cancelled(): boolean;
@@ -305,9 +305,9 @@ declare module "@package/java/util/concurrent" {
         thenApplyAsync<U>(arg0: $Function_<T, U>): $CompletionStage<U>;
         thenApplyAsync<U>(arg0: $Function_<T, U>, arg1: $Executor_): $CompletionStage<U>;
         thenApply<U>(arg0: $Function_<T, U>): $CompletionStage<U>;
-        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>, arg1: $Executor_): $CompletionStage<U>;
-        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>): $CompletionStage<U>;
         whenComplete(arg0: $BiConsumer_<T, $Throwable>): $CompletionStage<T>;
+        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>): $CompletionStage<U>;
+        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>, arg1: $Executor_): $CompletionStage<U>;
     }
     export class $Flow$Subscription {
     }

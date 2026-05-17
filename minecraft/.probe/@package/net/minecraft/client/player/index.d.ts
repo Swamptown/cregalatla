@@ -45,10 +45,10 @@ import { $StatsCounter } from "@package/net/minecraft/stats";
 export * as inventory from "@package/net/minecraft/client/player/inventory";
 
 declare module "@package/net/minecraft/client/player" {
-    export class $LocalPlayer extends $AbstractClientPlayer implements $IMixinLocalPlayer, $LocalClientPlayerKJS, $AccessorLocalPlayer, $PlayerFreezeExtension {
+    export class $LocalPlayer extends $AbstractClientPlayer implements $AccessorLocalPlayer, $IMixinLocalPlayer, $LocalClientPlayerKJS, $PlayerFreezeExtension {
         getRecipeBook(): $ClientRecipeBook;
         getCurrentMood(): number;
-        handler$ggg000$xaerominimap$onTickStart(arg0: $CallbackInfo): void;
+        handler$coj000$xaerominimap$onTickStart(arg0: $CallbackInfo): void;
         clientSideCloseContainer(): void;
         hurtTo(arg0: number): void;
         sendRidingJump(): void;
@@ -69,15 +69,15 @@ declare module "@package/net/minecraft/client/player" {
         getWaterVision(): number;
         onGameModeChanged(arg0: $GameType_): void;
         sable$calculateViewVector2(arg0: number, arg1: number): $Vec3;
-        drop(arg0: boolean): boolean;
         getStatsCounter(): $StatsCounter;
         shouldShowDeathScreen(): boolean;
         isHandsBusy(): boolean;
         sendOpenInventory(): void;
-        getPermissionLevelKonkrete(): number;
-        getMinecraft(): $Minecraft;
+        drop(arg0: boolean): boolean;
         railways$getXRotLast(): number;
         railways$getYRotLast(): number;
+        getPermissionLevelKonkrete(): number;
+        getMinecraft(): $Minecraft;
         serializeNBT(arg0: $HolderLookup$Provider): $Player;
         lerpYRot: number;
         static USE_ITEM_INTERVAL: number;
@@ -312,16 +312,16 @@ declare module "@package/net/minecraft/client/player" {
         down: boolean;
         constructor(arg0: $Options);
     }
-    export class $AbstractClientPlayer extends $Player implements $IAnimatedPlayer, $ClientPlayerKJS, $AbstractClientPlayerAccessor {
-        getPlayerInfo(): $PlayerInfo;
-        getDeltaMovementLerped(arg0: number): $Vec3;
-        getSkin(): $PlayerSkin;
-        handler$ghb000$create_sa$getSkinMixin(arg0: $CallbackInfoReturnable<any>): void;
-        getFieldOfViewModifier(): number;
-        handler$eon000$platform$updateFov(cir: $CallbackInfoReturnable<any>, currentFov: number): void;
+    export class $AbstractClientPlayer extends $Player implements $AbstractClientPlayerAccessor, $ClientPlayerKJS, $IAnimatedPlayer {
+        handler$glb000$platform$updateFov(cir: $CallbackInfoReturnable<any>, currentFov: number): void;
         playerAnimLib$getAnimManager(): $PlayerAnimManager;
         playerAnimLib$getAnimation(id: $ResourceLocation_): $IAnimation;
         playerAnimLib$getAnimProcessor(): $AnimationProcessor;
+        getPlayerInfo(): $PlayerInfo;
+        getDeltaMovementLerped(arg0: number): $Vec3;
+        getSkin(): $PlayerSkin;
+        handler$glo000$create_sa$getSkinMixin(arg0: $CallbackInfoReturnable<any>): void;
+        getFieldOfViewModifier(): number;
         flywheel$getPlayerInfo(): $PlayerInfo;
         serializeNBT(arg0: $HolderLookup$Provider): $Player;
         lerpYRot: number;

@@ -19,8 +19,8 @@ declare module "@package/net/minecraft/world/level/block/state/pattern" {
     export class $BlockInWorld {
         getState(): $BlockState;
         getLevel(): $LevelReader;
-        getEntity(): $BlockEntity;
         static hasState(arg0: $Predicate_<$BlockState>): $Predicate<$BlockInWorld>;
+        getEntity(): $BlockEntity;
         getPos(): $BlockPos;
         constructor(arg0: $LevelReader, arg1: $BlockPos_, arg2: boolean);
         get state(): $BlockState;
@@ -34,30 +34,30 @@ declare module "@package/net/minecraft/world/level/block/state/pattern" {
         lithium$setRequiredBlock(arg0: $Block_, arg1: number): void;
         static createLevelCache(arg0: $LevelReader, arg1: boolean): $LoadingCache<$BlockPos, $BlockInWorld>;
         static translateAndRotate(arg0: $BlockPos_, arg1: $Direction_, arg2: $Direction_, arg3: number, arg4: number, arg5: number): $BlockPos;
+        getDepth(): number;
         getWidth(): number;
         getHeight(): number;
         getPattern(): $Predicate<$BlockInWorld>[][][];
-        getDepth(): number;
         constructor(arg0: $Predicate_<$BlockInWorld>[][][]);
+        get depth(): number;
         get width(): number;
         get height(): number;
         get pattern(): $Predicate<$BlockInWorld>[][][];
-        get depth(): number;
     }
     export class $BlockPattern$BlockPatternMatch {
-        getForwards(): $Direction;
         getFrontTopLeft(): $BlockPos;
         getUp(): $Direction;
+        getForwards(): $Direction;
+        getDepth(): number;
         getWidth(): number;
         getHeight(): number;
         getBlock(arg0: number, arg1: number, arg2: number): $BlockInWorld;
-        getDepth(): number;
         constructor(arg0: $BlockPos_, arg1: $Direction_, arg2: $Direction_, arg3: $LoadingCache<$BlockPos_, $BlockInWorld>, arg4: number, arg5: number, arg6: number);
-        get forwards(): $Direction;
         get frontTopLeft(): $BlockPos;
         get up(): $Direction;
+        get forwards(): $Direction;
+        get depth(): number;
         get width(): number;
         get height(): number;
-        get depth(): number;
     }
 }

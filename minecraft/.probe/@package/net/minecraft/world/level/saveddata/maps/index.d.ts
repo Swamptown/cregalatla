@@ -38,21 +38,21 @@ declare module "@package/net/minecraft/world/level/saveddata/maps" {
     /**
      * Values that may be interpreted as {@link $MapBanner}.
      */
-    export type $MapBanner_ = { name?: ($Component_) | undefined, color?: $DyeColor_, pos?: $BlockPos_,  } | [name?: ($Component_) | undefined, color?: $DyeColor_, pos?: $BlockPos_, ];
+    export type $MapBanner_ = { pos?: $BlockPos_, color?: $DyeColor_, name?: ($Component_) | undefined,  } | [pos?: $BlockPos_, color?: $DyeColor_, name?: ($Component_) | undefined, ];
     export class $MapItemSavedData$MapPatch extends $Record {
         width(): number;
         mapColors(): number[];
-        startX(): number;
-        startY(): number;
         height(): number;
         applyToMap(arg0: $MapItemSavedData): void;
+        startX(): number;
+        startY(): number;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, ($MapItemSavedData$MapPatch) | undefined>;
         constructor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number[]);
     }
     /**
      * Values that may be interpreted as {@link $MapItemSavedData$MapPatch}.
      */
-    export type $MapItemSavedData$MapPatch_ = { startY?: number, startX?: number, height?: number, mapColors?: number[], width?: number,  } | [startY?: number, startX?: number, height?: number, mapColors?: number[], width?: number, ];
+    export type $MapItemSavedData$MapPatch_ = { width?: number, mapColors?: number[], height?: number, startX?: number, startY?: number,  } | [width?: number, mapColors?: number[], height?: number, startX?: number, startY?: number, ];
     export class $MapFrame {
         static load(arg0: $CompoundTag_): $MapFrame;
         getId(): string;
@@ -125,33 +125,31 @@ declare module "@package/net/minecraft/world/level/saveddata/maps" {
      * Values that may be interpreted as {@link $MapId}.
      */
     export type $MapId_ = { id?: number,  } | [id?: number, ];
-    export class $MapItemSavedData extends $SavedData implements $ExpandedMapData, $StationMapData {
+    export class $MapItemSavedData extends $SavedData implements $StationMapData, $ExpandedMapData {
         static load(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $MapItemSavedData;
         static factory(): $SavedData$Factory<$MapItemSavedData>;
         setColor(arg0: number, arg1: number, arg2: number): void;
-        handler$ekf000$moonlight$tickCarriedBy(arg0: $Player, arg1: $ItemStack_, arg2: $CallbackInfo): void;
-        addDecoration(arg0: $Holder_<$MapDecorationType>, arg1: $LevelAccessor, arg2: string, arg3: number, arg4: number, arg5: number, arg6: $Component_): void;
-        handler$ekf000$moonlight$initCustomData(arg0: number, arg1: number, arg2: number, arg3: boolean, arg4: boolean, arg5: boolean, arg6: $ResourceKey_<any>, arg7: $CallbackInfo): void;
-        handler$ekf000$moonlight$save(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: $CallbackInfoReturnable<any>): void;
-        handler$ekf000$moonlight$locked(arg0: $CallbackInfoReturnable<any>): void;
-        handler$ekf000$moonlight$scaled(arg0: $CallbackInfoReturnable<any>): void;
+        handler$gim000$moonlight$save(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: $CallbackInfoReturnable<any>): void;
+        handler$gim000$moonlight$locked(arg0: $CallbackInfoReturnable<any>): void;
+        handler$gim000$moonlight$scaled(arg0: $CallbackInfoReturnable<any>): void;
         removeDecoration(arg0: string): void;
-        handler$ekf000$moonlight$checkCustomDeco(arg0: $BlockGetter, arg1: number, arg2: number, arg3: $CallbackInfo): void;
-        handler$fbo000$create$onCheckBanners(arg0: $BlockGetter, arg1: number, arg2: number, arg3: $CallbackInfo): void;
-        modifyReturnValue$ekf000$moonlight$ml$isExplorationMap(arg0: boolean): boolean;
+        handler$gim000$moonlight$tickCarriedBy(arg0: $Player, arg1: $ItemStack_, arg2: $CallbackInfo): void;
+        handler$fbg000$create$onCheckBanners(arg0: $BlockGetter, arg1: number, arg2: number, arg3: $CallbackInfo): void;
+        handler$gim000$moonlight$checkCustomDeco(arg0: $BlockGetter, arg1: number, arg2: number, arg3: $CallbackInfo): void;
+        modifyReturnValue$gim000$moonlight$ml$isExplorationMap(arg0: boolean): boolean;
         addClientSideDecorations(arg0: $List_<$MapDecoration_>): void;
+        addStationMarker(arg0: $StationMarker): void;
         ml$setCustomDecorationsDirty(): void;
-        ml$setCustomDataDirty(arg0: $CustomMapData$Type_<any, any>, arg1: $Consumer_<any>): void;
         ml$getCustomMarkers(): $Map<any, any>;
         ml$removeCustomMarker(arg0: string): boolean;
         ml$copy(): $MapItemSavedData;
         ml$resetCustomDecoration(): void;
         ml$toggleCustomDecoration(arg0: $LevelAccessor, arg1: $BlockPos_): boolean;
-        addStationMarker(arg0: $StationMarker): void;
+        handler$gim000$moonlight$initCustomData(arg0: number, arg1: number, arg2: number, arg3: boolean, arg4: boolean, arg5: boolean, arg6: $ResourceKey_<any>, arg7: $CallbackInfo): void;
+        addDecoration(arg0: $Holder_<$MapDecorationType>, arg1: $LevelAccessor, arg2: string, arg3: number, arg4: number, arg5: number, arg6: $Component_): void;
         ml$addCustomMarker(arg0: $MLMapMarker<any>): void;
-        toggleStation(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $StationBlockEntity): boolean;
         getBanners(): $Collection<$MapBanner>;
-        static createFresh(arg0: number, arg1: number, arg2: number, arg3: boolean, arg4: boolean, arg5: $ResourceKey_<$Level>): $MapItemSavedData;
+        toggleStation(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $StationBlockEntity): boolean;
         getHoldingPlayer(arg0: $Player): $MapItemSavedData$HoldingPlayer;
         checkBanners(arg0: $BlockGetter, arg1: number, arg2: number): void;
         updateColor(arg0: number, arg1: number, arg2: number): boolean;
@@ -159,16 +157,18 @@ declare module "@package/net/minecraft/world/level/saveddata/maps" {
         scaled(): $MapItemSavedData;
         toggleBanner(arg0: $LevelAccessor, arg1: $BlockPos_): boolean;
         ml$getCustomData(): $Map<any, any>;
+        static createFresh(arg0: number, arg1: number, arg2: number, arg3: boolean, arg4: boolean, arg5: $ResourceKey_<$Level>): $MapItemSavedData;
         removedFromFrame(arg0: $BlockPos_, arg1: number): void;
         isTrackedCountOverLimit(arg0: number): boolean;
-        isExplorationMap(): boolean;
         static addTargetDecoration(arg0: $ItemStack_, arg1: $BlockPos_, arg2: string, arg3: $Holder_<$MapDecorationType>): void;
+        isExplorationMap(): boolean;
         locked(): $MapItemSavedData;
         getDecorations(): $Iterable<$MapDecoration>;
         getUpdatePacket(arg0: $MapId_, arg1: $Player): $Packet<never>;
         static createForClient(arg0: number, arg1: boolean, arg2: $ResourceKey_<$Level>): $MapItemSavedData;
         ml$getCustomDecorations(): $Map<any, any>;
         ml$getVanillaDecorationSize(): number;
+        ml$setCustomDataDirty(arg0: $CustomMapData$Type_<any, any>, arg1: $Consumer_<any>): void;
         centerZ: number;
         static TRACKED_DECORATION_LIMIT: number;
         centerX: number;
@@ -183,11 +183,11 @@ declare module "@package/net/minecraft/world/level/saveddata/maps" {
         get explorationMap(): boolean;
     }
     export class $MapDecorationType extends $Record {
-        assetId(): $ResourceLocation;
         showOnItemFrame(): boolean;
         explorationMapElement(): boolean;
         trackCount(): boolean;
         hasMapColor(): boolean;
+        assetId(): $ResourceLocation;
         mapColor(): number;
         static CODEC: $Codec<$Holder<$MapDecorationType>>;
         static NO_MAP_COLOR: number;
@@ -197,7 +197,7 @@ declare module "@package/net/minecraft/world/level/saveddata/maps" {
     /**
      * Values that may be interpreted as {@link $MapDecorationType}.
      */
-    export type $MapDecorationType_ = RegistryTypes.MapDecorationType | { assetId?: $ResourceLocation_, explorationMapElement?: boolean, trackCount?: boolean, showOnItemFrame?: boolean, mapColor?: number,  } | [assetId?: $ResourceLocation_, explorationMapElement?: boolean, trackCount?: boolean, showOnItemFrame?: boolean, mapColor?: number, ];
+    export type $MapDecorationType_ = RegistryTypes.MapDecorationType | { mapColor?: number, showOnItemFrame?: boolean, trackCount?: boolean, explorationMapElement?: boolean, assetId?: $ResourceLocation_,  } | [mapColor?: number, showOnItemFrame?: boolean, trackCount?: boolean, explorationMapElement?: boolean, assetId?: $ResourceLocation_, ];
     export class $MapDecoration extends $Record {
         name(): ($Component) | undefined;
         type(): $Holder<$MapDecorationType>;
@@ -213,17 +213,17 @@ declare module "@package/net/minecraft/world/level/saveddata/maps" {
     /**
      * Values that may be interpreted as {@link $MapDecoration}.
      */
-    export type $MapDecoration_ = { type?: $Holder_<$MapDecorationType>, y?: number, rot?: number, x?: number, name?: ($Component_) | undefined,  } | [type?: $Holder_<$MapDecorationType>, y?: number, rot?: number, x?: number, name?: ($Component_) | undefined, ];
+    export type $MapDecoration_ = { name?: ($Component_) | undefined, x?: number, rot?: number, y?: number, type?: $Holder_<$MapDecorationType>,  } | [name?: ($Component_) | undefined, x?: number, rot?: number, y?: number, type?: $Holder_<$MapDecorationType>, ];
     export class $MapItemSavedData$HoldingPlayer implements $IHoldingPlayerExtension {
         nextUpdatePacket(arg0: $MapId_): $Packet<never>;
         markColorsDirty(arg0: number, arg1: number): void;
         moonlight$setCustomDataDirty(arg0: $CustomMapData$Type_<any, any>, arg1: $Consumer_<any>): void;
         moonlight$setCustomMarkersDirty(): void;
-        handler$eja000$moonlight$initializeDirty(arg0: $MapItemSavedData, arg1: $Player, arg2: $CallbackInfo): void;
-        handler$eja000$moonlight$checkLocked(arg0: $MapId_, arg1: $CallbackInfoReturnable<any>): void;
-        modifyReturnValue$eja000$moonlight$addExtraPacketData(arg0: $Packet<any>, arg1: $MapId_): $Packet<any>;
-        handler$eja000$moonlight$lockData(arg0: number, arg1: number, arg2: $CallbackInfo): void;
-        handler$eja000$moonlight$sanityCheck(arg0: number, arg1: number, arg2: $CallbackInfo): void;
+        handler$ghh000$moonlight$initializeDirty(arg0: $MapItemSavedData, arg1: $Player, arg2: $CallbackInfo): void;
+        handler$ghh000$moonlight$checkLocked(arg0: $MapId_, arg1: $CallbackInfoReturnable<any>): void;
+        modifyReturnValue$ghh000$moonlight$addExtraPacketData(arg0: $Packet<any>, arg1: $MapId_): $Packet<any>;
+        handler$ghh000$moonlight$lockData(arg0: number, arg1: number, arg2: $CallbackInfo): void;
+        handler$ghh000$moonlight$sanityCheck(arg0: number, arg1: number, arg2: $CallbackInfo): void;
         this$0: $MapItemSavedData;
         step: number;
         player: $Player;

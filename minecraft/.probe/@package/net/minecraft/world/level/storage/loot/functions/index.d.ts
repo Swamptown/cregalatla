@@ -49,8 +49,8 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
     export class $ApplyBonusCount extends $LootItemConditionalFunction implements $ApplyBonusLootFunctionAccessor {
         static addBonusBinomialDistributionCount(arg0: $Holder_<$Enchantment>, arg1: number, arg2: number): $LootItemConditionalFunction$Builder<never>;
         static addOreBonusCount(arg0: $Holder_<$Enchantment>): $LootItemConditionalFunction$Builder<never>;
-        static addUniformBonusCount(arg0: $Holder_<$Enchantment>): $LootItemConditionalFunction$Builder<never>;
         static addUniformBonusCount(arg0: $Holder_<$Enchantment>, arg1: number): $LootItemConditionalFunction$Builder<never>;
+        static addUniformBonusCount(arg0: $Holder_<$Enchantment>): $LootItemConditionalFunction$Builder<never>;
         getEnchantment(): $Holder<$Enchantment>;
         predicates: $List<$LootItemCondition>;
         static CODEC: $MapCodec<$ApplyBonusCount>;
@@ -64,7 +64,9 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
     }
     export class $EnchantWithLevelsFunction$Builder extends $LootItemConditionalFunction$Builder<$EnchantWithLevelsFunction$Builder> {
         fromOptions(arg0: $HolderSet_<$Enchantment>): $EnchantWithLevelsFunction$Builder;
+        getThis(): $EnchantWithLevelsFunction$Builder;
         constructor(arg0: $NumberProvider_);
+        get this(): $EnchantWithLevelsFunction$Builder;
     }
     export class $LimitCount extends $LootItemConditionalFunction implements $LimitCountLootFunctionAccessor {
         static limitCount(arg0: $IntRange): $LootItemConditionalFunction$Builder<never>;
@@ -74,11 +76,11 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
         get limit(): $IntRange;
     }
     export class $CopyCustomDataFunction extends $LootItemConditionalFunction {
+        static copyData(arg0: $LootContext$EntityTarget_): $CopyCustomDataFunction$Builder;
         /**
          * @deprecated
          */
         static copyData(arg0: $NbtProvider): $CopyCustomDataFunction$Builder;
-        static copyData(arg0: $LootContext$EntityTarget_): $CopyCustomDataFunction$Builder;
         predicates: $List<$LootItemCondition>;
         static CODEC: $MapCodec<$CopyCustomDataFunction>;
         constructor(arg0: $List_<$LootItemCondition>, arg1: $NbtProvider, arg2: $List_<$CopyCustomDataFunction$CopyOperation_>);
@@ -110,7 +112,7 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
     /**
      * Values that may be interpreted as {@link $ApplyBonusCount$FormulaType}.
      */
-    export type $ApplyBonusCount$FormulaType_ = { id?: $ResourceLocation_, codec?: $Codec<$ApplyBonusCount$Formula>,  } | [id?: $ResourceLocation_, codec?: $Codec<$ApplyBonusCount$Formula>, ];
+    export type $ApplyBonusCount$FormulaType_ = { codec?: $Codec<$ApplyBonusCount$Formula>, id?: $ResourceLocation_,  } | [codec?: $Codec<$ApplyBonusCount$Formula>, id?: $ResourceLocation_, ];
     export class $SetOminousBottleAmplifierFunction extends $LootItemConditionalFunction implements $SetOminousBottleAmplifierLootFunctionAccessor {
         static setAmplifier(arg0: $NumberProvider_): $LootItemConditionalFunction$Builder<never>;
         amplifier(): $NumberProvider;
@@ -149,8 +151,8 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
         static INSTANCE: $ListOperation$ReplaceAll;
     }
     export class $SetItemCountFunction extends $LootItemConditionalFunction implements $SetCountLootFunctionAccessor {
-        static setCount(arg0: $NumberProvider_, arg1: boolean): $LootItemConditionalFunction$Builder<never>;
         static setCount(arg0: $NumberProvider_): $LootItemConditionalFunction$Builder<never>;
+        static setCount(arg0: $NumberProvider_, arg1: boolean): $LootItemConditionalFunction$Builder<never>;
         getCountRange(): $NumberProvider;
         getAdd(): boolean;
         predicates: $List<$LootItemCondition>;
@@ -208,13 +210,13 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
     }
     export class $LootItemConditionalFunction$Builder<T extends $LootItemConditionalFunction$Builder<T>> implements $LootItemFunction$Builder, $ConditionUserBuilder<T> {
         unwrap(): T;
-        getThis(): T;
         getConditions(): $List<$LootItemCondition>;
+        getThis(): T;
         when<E>(arg0: $Iterable_<E>, arg1: $Function_<E, $LootItemCondition$Builder>): T;
         when(arg0: $LootItemCondition$Builder_): T;
         constructor();
-        get this(): T;
         get conditions(): $List<$LootItemCondition>;
+        get this(): T;
     }
     export class $SetCustomDataFunction extends $LootItemConditionalFunction implements $SetCustomDataLootFunctionAccessor {
         /**
@@ -431,7 +433,7 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
     /**
      * Values that may be interpreted as {@link $SetAttributesFunction$Modifier}.
      */
-    export type $SetAttributesFunction$Modifier_ = { operation?: $AttributeModifier$Operation_, attribute?: $Holder_<$Attribute>, id?: $ResourceLocation_, slots?: $List_<$EquipmentSlotGroup_>, amount?: $NumberProvider_,  } | [operation?: $AttributeModifier$Operation_, attribute?: $Holder_<$Attribute>, id?: $ResourceLocation_, slots?: $List_<$EquipmentSlotGroup_>, amount?: $NumberProvider_, ];
+    export type $SetAttributesFunction$Modifier_ = { amount?: $NumberProvider_, slots?: $List_<$EquipmentSlotGroup_>, id?: $ResourceLocation_, attribute?: $Holder_<$Attribute>, operation?: $AttributeModifier$Operation_,  } | [amount?: $NumberProvider_, slots?: $List_<$EquipmentSlotGroup_>, id?: $ResourceLocation_, attribute?: $Holder_<$Attribute>, operation?: $AttributeModifier$Operation_, ];
     export class $CopyBlockState extends $LootItemConditionalFunction {
         static copyState(arg0: $Block_): $CopyBlockState$Builder;
         predicates: $List<$LootItemCondition>;
@@ -505,15 +507,15 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
      */
     export type $ListOperation$Type_ = "replace_all" | "replace_section" | "insert" | "append";
     export class $SetBookCoverFunction extends $LootItemConditionalFunction implements $SetBookCoverLootFunctionAccessor {
-        getGeneration(): (number) | undefined;
-        getAuthor(): (string) | undefined;
         callApply(arg0: $WrittenBookContent_): $WrittenBookContent;
+        getAuthor(): (string) | undefined;
+        getGeneration(): (number) | undefined;
         getTitle(): ($Filterable<string>) | undefined;
         predicates: $List<$LootItemCondition>;
         static CODEC: $MapCodec<$SetBookCoverFunction>;
         constructor(arg0: $List_<$LootItemCondition>, arg1: ($Filterable_<string>) | undefined, arg2: (string) | undefined, arg3: (number) | undefined);
-        get generation(): (number) | undefined;
         get author(): (string) | undefined;
+        get generation(): (number) | undefined;
         get title(): ($Filterable<string>) | undefined;
     }
     export class $SetBannerPatternFunction$Builder extends $LootItemConditionalFunction$Builder<$SetBannerPatternFunction$Builder> {
@@ -561,13 +563,13 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
         constructor(arg0: $List_<$LootItemCondition>, arg1: $Map_<$ToggleTooltips$ComponentToggle_<never>, boolean>);
     }
     export class $SetEnchantmentsFunction extends $LootItemConditionalFunction implements $SetEnchantmentsLootFunctionAccessor {
-        getEnchantments(): $Map<$Holder<$Enchantment>, $NumberProvider>;
         getAdd(): boolean;
+        getEnchantments(): $Map<$Holder<$Enchantment>, $NumberProvider>;
         predicates: $List<$LootItemCondition>;
         static CODEC: $MapCodec<$SetEnchantmentsFunction>;
         constructor(arg0: $List_<$LootItemCondition>, arg1: $Map_<$Holder_<$Enchantment>, $NumberProvider_>, arg2: boolean);
-        get enchantments(): $Map<$Holder<$Enchantment>, $NumberProvider>;
         get add(): boolean;
+        get enchantments(): $Map<$Holder<$Enchantment>, $NumberProvider>;
     }
     export class $SetEnchantmentsFunction$Builder extends $LootItemConditionalFunction$Builder<$SetEnchantmentsFunction$Builder> {
         withEnchantment(arg0: $Holder_<$Enchantment>, arg1: $NumberProvider_): $SetEnchantmentsFunction$Builder;
@@ -585,7 +587,7 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
     /**
      * Values that may be interpreted as {@link $ToggleTooltips$ComponentToggle}.
      */
-    export type $ToggleTooltips$ComponentToggle_<T> = { setter?: $ToggleTooltips$TooltipWither_<any>, type?: $DataComponentType_<any>,  } | [setter?: $ToggleTooltips$TooltipWither_<any>, type?: $DataComponentType_<any>, ];
+    export type $ToggleTooltips$ComponentToggle_<T> = { type?: $DataComponentType_<any>, setter?: $ToggleTooltips$TooltipWither_<any>,  } | [type?: $DataComponentType_<any>, setter?: $ToggleTooltips$TooltipWither_<any>, ];
     export class $LootItemConditionalFunction implements $LootItemFunction, $ConditionalLootFunctionAccessor {
         run(arg0: $ItemStack_, arg1: $LootContext): $ItemStack;
         apply(arg0: $ItemStack_, arg1: $LootContext): $ItemStack;
@@ -670,8 +672,8 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
         set resolutionContext(value: $LootContext$EntityTarget_);
     }
     export class $SetItemDamageFunction extends $LootItemConditionalFunction implements $SetDamageLootFunctionAccessor {
-        static setDamage(arg0: $NumberProvider_): $LootItemConditionalFunction$Builder<never>;
         static setDamage(arg0: $NumberProvider_, arg1: boolean): $LootItemConditionalFunction$Builder<never>;
+        static setDamage(arg0: $NumberProvider_): $LootItemConditionalFunction$Builder<never>;
         getAdd(): boolean;
         getDurabilityRange(): $NumberProvider;
         predicates: $List<$LootItemCondition>;
@@ -689,8 +691,8 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
     export type $ToggleTooltips$TooltipWither_<T> = (() => void);
     export class $ExplorationMapFunction extends $LootItemConditionalFunction implements $ExplorationMapLootFunctionAccessor {
         static makeExplorationMap(): $ExplorationMapFunction$Builder;
-        getDestination(): $TagKey<$Structure>;
         getDecoration(): $Holder<$MapDecorationType>;
+        getDestination(): $TagKey<$Structure>;
         predicates: $List<$LootItemCondition>;
         static DEFAULT_ZOOM: number;
         static CODEC: $MapCodec<$ExplorationMapFunction>;
@@ -699,8 +701,8 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
         static DEFAULT_DESTINATION: $TagKey<$Structure>;
         static DEFAULT_SEARCH_RADIUS: number;
         constructor(arg0: $List_<$LootItemCondition>, arg1: $TagKey_<$Structure>, arg2: $Holder_<$MapDecorationType>, arg3: number, arg4: number, arg5: boolean);
-        get destination(): $TagKey<$Structure>;
         get decoration(): $Holder<$MapDecorationType>;
+        get destination(): $TagKey<$Structure>;
     }
     export class $ApplyExplosionDecay extends $LootItemConditionalFunction {
         static explosionDecay(): $LootItemConditionalFunction$Builder<never>;
@@ -768,5 +770,5 @@ declare module "@package/net/minecraft/world/level/storage/loot/functions" {
     /**
      * Values that may be interpreted as {@link $CopyCustomDataFunction$CopyOperation}.
      */
-    export type $CopyCustomDataFunction$CopyOperation_ = { op?: $CopyCustomDataFunction$MergeStrategy_, targetPath?: $NbtPathArgument$NbtPath, sourcePath?: $NbtPathArgument$NbtPath,  } | [op?: $CopyCustomDataFunction$MergeStrategy_, targetPath?: $NbtPathArgument$NbtPath, sourcePath?: $NbtPathArgument$NbtPath, ];
+    export type $CopyCustomDataFunction$CopyOperation_ = { sourcePath?: $NbtPathArgument$NbtPath, targetPath?: $NbtPathArgument$NbtPath, op?: $CopyCustomDataFunction$MergeStrategy_,  } | [sourcePath?: $NbtPathArgument$NbtPath, targetPath?: $NbtPathArgument$NbtPath, op?: $CopyCustomDataFunction$MergeStrategy_, ];
 }

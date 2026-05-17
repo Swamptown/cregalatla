@@ -15,10 +15,10 @@ declare module "@package/net/minecraft/client/multiplayer/chat" {
         type(): $LoggedChatEvent$Type;
         profile(): $GameProfile;
         message(): $PlayerChatMessage;
-        toHeadingComponent(): $Component;
         trustLevel(): $ChatTrustLevel;
         toContentComponent(): $Component;
         toNarrationComponent(): $Component;
+        toHeadingComponent(): $Component;
         profileId(): $UUID;
         canReport(arg0: $UUID_): boolean;
         static CODEC: $MapCodec<$LoggedChatMessage$Player>;
@@ -27,7 +27,7 @@ declare module "@package/net/minecraft/client/multiplayer/chat" {
     /**
      * Values that may be interpreted as {@link $LoggedChatMessage$Player}.
      */
-    export type $LoggedChatMessage$Player_ = { message?: $PlayerChatMessage_, trustLevel?: $ChatTrustLevel_, profile?: $GameProfile,  } | [message?: $PlayerChatMessage_, trustLevel?: $ChatTrustLevel_, profile?: $GameProfile, ];
+    export type $LoggedChatMessage$Player_ = { profile?: $GameProfile, trustLevel?: $ChatTrustLevel_, message?: $PlayerChatMessage_,  } | [profile?: $GameProfile, trustLevel?: $ChatTrustLevel_, message?: $PlayerChatMessage_, ];
     export class $LoggedChatEvent$Type extends $Enum<$LoggedChatEvent$Type> implements $StringRepresentable {
         static values(): $LoggedChatEvent$Type[];
         static valueOf(arg0: string): $LoggedChatEvent$Type;
@@ -65,10 +65,10 @@ declare module "@package/net/minecraft/client/multiplayer/chat" {
     export class $ChatListener {
         tick(): void;
         queueSize(): number;
-        handler$zed000$xaeroworldmap$onHandleDisguisedChatMessag(arg0: $Component_, arg1: $ChatType$Bound_, arg2: $CallbackInfo): void;
-        handler$ggf001$xaerominimap$onHandleDisguisedChatMessag(arg0: $Component_, arg1: $ChatType$Bound_, arg2: $CallbackInfo): void;
-        handler$zed000$xaeroworldmap$onHandleSystemChat(arg0: $Component_, arg1: boolean, arg2: $CallbackInfo): void;
-        handler$ggf001$xaerominimap$onHandleSystemChat(arg0: $Component_, arg1: boolean, arg2: $CallbackInfo): void;
+        handler$coi000$xaerominimap$onHandleDisguisedChatMessag(arg0: $Component_, arg1: $ChatType$Bound_, arg2: $CallbackInfo): void;
+        handler$deo001$xaeroworldmap$onHandleDisguisedChatMessag(arg0: $Component_, arg1: $ChatType$Bound_, arg2: $CallbackInfo): void;
+        handler$coi000$xaerominimap$onHandleSystemChat(arg0: $Component_, arg1: boolean, arg2: $CallbackInfo): void;
+        handler$deo001$xaeroworldmap$onHandleSystemChat(arg0: $Component_, arg1: boolean, arg2: $CallbackInfo): void;
         handleSystemMessage(arg0: $Component_, arg1: boolean): void;
         setMessageDelay(arg0: number): void;
         clearQueue(): void;
@@ -95,7 +95,7 @@ declare module "@package/net/minecraft/client/multiplayer/chat" {
     /**
      * Values that may be interpreted as {@link $ChatListener$Message}.
      */
-    export type $ChatListener$Message_ = { signature?: $MessageSignature_, handler?: $BooleanSupplier_,  } | [signature?: $MessageSignature_, handler?: $BooleanSupplier_, ];
+    export type $ChatListener$Message_ = { handler?: $BooleanSupplier_, signature?: $MessageSignature_,  } | [handler?: $BooleanSupplier_, signature?: $MessageSignature_, ];
     export class $LoggedChatMessage$System extends $Record implements $LoggedChatMessage {
         type(): $LoggedChatEvent$Type;
         message(): $Component;
@@ -109,7 +109,7 @@ declare module "@package/net/minecraft/client/multiplayer/chat" {
     /**
      * Values that may be interpreted as {@link $LoggedChatMessage$System}.
      */
-    export type $LoggedChatMessage$System_ = { message?: $Component_, timeStamp?: $Instant,  } | [message?: $Component_, timeStamp?: $Instant, ];
+    export type $LoggedChatMessage$System_ = { timeStamp?: $Instant, message?: $Component_,  } | [timeStamp?: $Instant, message?: $Component_, ];
     export class $LoggedChatEvent {
         static CODEC: $Codec<$LoggedChatEvent>;
     }

@@ -15,7 +15,7 @@ declare module "@package/dev/simulated_team/simulated/client" {
     /**
      * Values that may be interpreted as {@link $BlockPropertiesTooltip$Entry}.
      */
-    export type $BlockPropertiesTooltip$Entry_ = RegistryTypes.SimulatedPropertyTooltip | { priority?: number, tooltipFunction?: $BlockPropertiesTooltip$TooltipFunction_,  } | [priority?: number, tooltipFunction?: $BlockPropertiesTooltip$TooltipFunction_, ];
+    export type $BlockPropertiesTooltip$Entry_ = RegistryTypes.SimulatedPropertyTooltip | { tooltipFunction?: $BlockPropertiesTooltip$TooltipFunction_, priority?: number,  } | [tooltipFunction?: $BlockPropertiesTooltip$TooltipFunction_, priority?: number, ];
     export class $BlockPropertiesTooltip$TooltipFunction {
     }
     export interface $BlockPropertiesTooltip$TooltipFunction {

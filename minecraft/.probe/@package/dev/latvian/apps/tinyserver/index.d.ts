@@ -22,22 +22,22 @@ declare module "@package/dev/latvian/apps/tinyserver" {
         as<T>(mapper: $Function_<string, T>): T;
         as<T>(mapper: $Function_<string, T>, def: T): T;
         isMissing(): boolean;
-        asULong(def: number): number;
         asULong(): number;
+        asULong(def: number): number;
         asZoneId(): $ZoneId;
-        asInt(def: number): number;
-        asInt(): number;
         asDouble(): number;
         asDouble(def: number): number;
-        asString(def: string): string;
         asString(): string;
+        asString(def: string): string;
         asLong(): number;
         asLong(def: number): number;
-        require(): $OptionalString;
-        asBoolean(def: boolean): boolean;
-        asBoolean(): boolean;
-        asFloat(def: number): number;
         asFloat(): number;
+        asFloat(def: number): number;
+        asBoolean(): boolean;
+        asBoolean(def: boolean): boolean;
+        require(): $OptionalString;
+        asInt(def: number): number;
+        asInt(): number;
         static MISSING: $OptionalString;
         static EMPTY: $OptionalString;
         constructor(value: string);
@@ -66,7 +66,7 @@ declare module "@package/dev/latvian/apps/tinyserver" {
     /**
      * Values that may be interpreted as {@link $CompiledPath$Part}.
      */
-    export type $CompiledPath$Part_ = { variable?: boolean, name?: string,  } | [variable?: boolean, name?: string, ];
+    export type $CompiledPath$Part_ = { name?: string, variable?: boolean,  } | [name?: string, variable?: boolean, ];
     export class $HTTPConnection<REQ extends $HTTPRequest> implements $Runnable {
         run(): void;
         write(buffer: $ByteBuffer): void;
@@ -81,10 +81,10 @@ declare module "@package/dev/latvian/apps/tinyserver" {
         readBytes(bytes: number[], off: number, len: number): void;
         readFloat(): number;
         readDouble(): number;
-        readDirectly(buffer: $ByteBuffer): number;
-        writeDirectly(buffer: $ByteBuffer): void;
         readCRLF(): string;
         upgrade(): $HTTPUpgrade<REQ>;
+        readDirectly(buffer: $ByteBuffer): number;
+        writeDirectly(buffer: $ByteBuffer): void;
         server(): $HTTPServer<REQ>;
         static SOCKET_CLOSED: $StatusCode;
         static CLOSED: $StatusCode;
@@ -114,16 +114,16 @@ declare module "@package/dev/latvian/apps/tinyserver" {
         get(path: string, handler: $HTTPHandler_<REQ>): void;
         put(path: string, handler: $HTTPHandler_<REQ>): void;
         delete(path: string, handler: $HTTPHandler_<REQ>): void;
-        ws<WSS extends $WSSession<REQ>>(path: string, factory: $WSSessionFactory_<REQ, WSS>): $WSHandler<REQ, WSS>;
         ws<WSS extends $WSSession<REQ>>(path: string): $WSHandler<REQ, WSS>;
+        ws<WSS extends $WSSession<REQ>>(path: string, factory: $WSSessionFactory_<REQ, WSS>): $WSHandler<REQ, WSS>;
         patch(path: string, handler: $HTTPHandler_<REQ>): void;
         post(path: string, handler: $HTTPHandler_<REQ>): void;
         redirect(path: string, redirect: string): void;
-        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
-        acceptPostTask(path: string, task: $Runnable_): void;
         acceptPostString(path: string, handler: $Consumer_<string>): void;
+        acceptPostTask(path: string, task: $Runnable_): void;
         dynamicFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
         staticFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
+        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
         constructor(requestFactory: $Supplier_<REQ>);
         set daemon(value: boolean);
         set serverName(value: string);
@@ -146,23 +146,23 @@ declare module "@package/dev/latvian/apps/tinyserver" {
     /**
      * Values that may be interpreted as {@link $CompiledPath}.
      */
-    export type $CompiledPath_ = { wildcard?: boolean, string?: string, parts?: $CompiledPath$Part_[], variables?: number,  } | [wildcard?: boolean, string?: string, parts?: $CompiledPath$Part_[], variables?: number, ];
+    export type $CompiledPath_ = { variables?: number, parts?: $CompiledPath$Part_[], string?: string, wildcard?: boolean,  } | [variables?: number, parts?: $CompiledPath$Part_[], string?: string, wildcard?: boolean, ];
     export class $ServerRegistry<REQ extends $HTTPRequest> {
     }
     export interface $ServerRegistry<REQ extends $HTTPRequest> {
         get(path: string, handler: $HTTPHandler_<REQ>): void;
         put(path: string, handler: $HTTPHandler_<REQ>): void;
         delete(path: string, handler: $HTTPHandler_<REQ>): void;
-        ws<WSS extends $WSSession<REQ>>(path: string, factory: $WSSessionFactory_<REQ, WSS>): $WSHandler<REQ, WSS>;
         ws<WSS extends $WSSession<REQ>>(path: string): $WSHandler<REQ, WSS>;
+        ws<WSS extends $WSSession<REQ>>(path: string, factory: $WSSessionFactory_<REQ, WSS>): $WSHandler<REQ, WSS>;
         patch(path: string, handler: $HTTPHandler_<REQ>): void;
         post(path: string, handler: $HTTPHandler_<REQ>): void;
         redirect(path: string, redirect: string): void;
-        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
-        acceptPostTask(path: string, task: $Runnable_): void;
         acceptPostString(path: string, handler: $Consumer_<string>): void;
+        acceptPostTask(path: string, task: $Runnable_): void;
         dynamicFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
         staticFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
+        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
         http(method: $HTTPMethod_, path: string, handler: $HTTPHandler_<REQ>): void;
     }
     /**

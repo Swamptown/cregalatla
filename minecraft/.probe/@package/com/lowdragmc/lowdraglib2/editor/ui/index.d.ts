@@ -34,16 +34,16 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui" {
     /**
      * Values that may be interpreted as {@link $SplittableWindow$LayoutConfig}.
      */
-    export type $SplittableWindow$LayoutConfig_ = { first?: $SplittableWindow$LayoutConfig_, percentage?: number, second?: $SplittableWindow$LayoutConfig_,  } | [first?: $SplittableWindow$LayoutConfig_, percentage?: number, second?: $SplittableWindow$LayoutConfig_, ];
+    export type $SplittableWindow$LayoutConfig_ = { second?: $SplittableWindow$LayoutConfig_, percentage?: number, first?: $SplittableWindow$LayoutConfig_,  } | [second?: $SplittableWindow$LayoutConfig_, percentage?: number, first?: $SplittableWindow$LayoutConfig_, ];
     export class $View extends $UIElement {
         getName(): string;
         setName(arg0: string): void;
+        createTab(): $Tab;
         setCanRemove(arg0: boolean): void;
         getViewContainer(): $ViewContainer;
         isCanRemove(): boolean;
         setOnRemove(arg0: $Runnable_): void;
         setDynamicName(arg0: $Supplier_<$Component>): void;
-        createTab(): $Tab;
         getIcon(): $IGuiTexture;
         setIcon(arg0: $IGuiTexture_): void;
         static CODEC: $Codec<$UIElement>;
@@ -215,10 +215,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui" {
         static init(): void;
         minPercentage(): number;
         minPercentage(arg0: number): $SplittableWindow$SplitStyle;
-        maxPercentage(arg0: number): $SplittableWindow$SplitStyle;
         maxPercentage(): number;
-        percentage(arg0: number): $SplittableWindow$SplitStyle;
+        maxPercentage(arg0: number): $SplittableWindow$SplitStyle;
         percentage(): number;
+        percentage(arg0: number): $SplittableWindow$SplitStyle;
         holder: $UIElement;
         constructor(arg0: $SplittableWindow);
     }

@@ -11,9 +11,9 @@ declare module "@package/com/mojang/brigadier/arguments" {
         static string(): $StringArgumentType;
         static getString(arg0: $CommandContext<never>, arg1: string): string;
         static word(): $StringArgumentType;
-        getExamples(): $Collection<string>;
         static greedyString(): $StringArgumentType;
         static escapeIfRequired(arg0: string): string;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): string;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse(arg0: $StringReader): string;
@@ -24,10 +24,10 @@ declare module "@package/com/mojang/brigadier/arguments" {
         static getFloat(arg0: $CommandContext<never>, arg1: string): number;
         getMaximum(): number;
         getMinimum(): number;
-        getExamples(): $Collection<string>;
         static floatArg(arg0: number): $FloatArgumentType;
         static floatArg(arg0: number, arg1: number): $FloatArgumentType;
         static floatArg(): $FloatArgumentType;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): number;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse(arg0: $StringReader): number;
@@ -40,8 +40,8 @@ declare module "@package/com/mojang/brigadier/arguments" {
     export interface $ArgumentType<T> {
         parse(arg0: $StringReader): T;
         parse<S>(arg0: $StringReader, arg1: S): T;
-        getExamples(): $Collection<string>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        getExamples(): $Collection<string>;
         get examples(): $Collection<string>;
     }
     /**
@@ -65,10 +65,10 @@ declare module "@package/com/mojang/brigadier/arguments" {
         static getDouble(arg0: $CommandContext<never>, arg1: string): number;
         getMaximum(): number;
         getMinimum(): number;
-        getExamples(): $Collection<string>;
         static doubleArg(arg0: number): $DoubleArgumentType;
         static doubleArg(arg0: number, arg1: number): $DoubleArgumentType;
         static doubleArg(): $DoubleArgumentType;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): number;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse(arg0: $StringReader): number;
@@ -80,10 +80,10 @@ declare module "@package/com/mojang/brigadier/arguments" {
         static getLong(arg0: $CommandContext<never>, arg1: string): number;
         getMaximum(): number;
         getMinimum(): number;
-        getExamples(): $Collection<string>;
         static longArg(arg0: number): $LongArgumentType;
         static longArg(arg0: number, arg1: number): $LongArgumentType;
         static longArg(): $LongArgumentType;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): number;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse(arg0: $StringReader): number;

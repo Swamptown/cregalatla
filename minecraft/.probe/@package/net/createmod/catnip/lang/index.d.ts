@@ -25,9 +25,9 @@ declare module "@package/net/createmod/catnip/lang" {
         forGoggles(arg0: $List_<$MutableComponent_>, arg1: number): void;
         sendStatus(arg0: $Player): void;
         json(): string;
-        sendChat(arg0: $Player): void;
         static resolveBuilders(arg0: $Object[]): $Object[];
         translate(arg0: string, ...arg1: $Object[]): $LangBuilder;
+        sendChat(arg0: $Player): void;
         static DEFAULT_SPACE_WIDTH: number;
         constructor(arg0: string);
     }

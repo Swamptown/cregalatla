@@ -30,8 +30,8 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/foliageplace
     }
     export class $FoliagePlacer$FoliageAttachment {
         pos(): $BlockPos;
-        radiusOffset(): number;
         doubleTrunk(): boolean;
+        radiusOffset(): number;
         constructor(arg0: $BlockPos_, arg1: number, arg2: boolean);
     }
     export class $FancyFoliagePlacer extends $BlobFoliagePlacer {

@@ -24,11 +24,11 @@ declare module "@package/net/minecraft/commands/arguments/coordinates" {
     }
     export class $BlockPosArgument implements $ArgumentType<$Coordinates> {
         parse(arg0: $StringReader): $Coordinates;
-        getExamples(): $Collection<string>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static getSpawnablePos(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $BlockPos;
         static getLoadedBlockPos(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $BlockPos;
         static getLoadedBlockPos(arg0: $CommandContext<$CommandSourceStack>, arg1: $ServerLevel, arg2: string): $BlockPos;
-        static getSpawnablePos(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $BlockPos;
+        getExamples(): $Collection<string>;
         static getBlockPos(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $BlockPos;
         static blockPos(): $BlockPosArgument;
         parse<S>(arg0: $StringReader, arg1: S): $Coordinates;
@@ -40,9 +40,9 @@ declare module "@package/net/minecraft/commands/arguments/coordinates" {
     }
     export class $SwizzleArgument implements $ArgumentType<$EnumSet<$Direction$Axis>> {
         parse(arg0: $StringReader): $EnumSet<$Direction$Axis>;
-        getExamples(): $Collection<string>;
         static swizzle(): $SwizzleArgument;
         static getSwizzle(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $EnumSet<$Direction$Axis>;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): $EnumSet<$Direction$Axis>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         constructor();
@@ -74,10 +74,10 @@ declare module "@package/net/minecraft/commands/arguments/coordinates" {
     }
     export class $Vec3Argument implements $ArgumentType<$Coordinates> {
         parse(arg0: $StringReader): $Coordinates;
-        getExamples(): $Collection<string>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getVec3(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Vec3;
         static getCoordinates(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Coordinates;
+        getExamples(): $Collection<string>;
         static vec3(arg0: boolean): $Vec3Argument;
         static vec3(): $Vec3Argument;
         parse<S>(arg0: $StringReader, arg1: S): $Coordinates;
@@ -87,10 +87,10 @@ declare module "@package/net/minecraft/commands/arguments/coordinates" {
         get examples(): $Collection<string>;
     }
     export class $ColumnPosArgument implements $ArgumentType<$Coordinates> {
-        getExamples(): $Collection<string>;
         static columnPos(): $ColumnPosArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getColumnPos(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ColumnPos;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): $Coordinates;
         parse(arg0: $StringReader): $Coordinates;
         static ERROR_NOT_COMPLETE: $SimpleCommandExceptionType;
@@ -129,11 +129,11 @@ declare module "@package/net/minecraft/commands/arguments/coordinates" {
     }
     export class $Vec2Argument implements $ArgumentType<$Coordinates> {
         parse(arg0: $StringReader): $Coordinates;
-        getExamples(): $Collection<string>;
         static vec2(arg0: boolean): $Vec2Argument;
         static vec2(): $Vec2Argument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getVec2(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Vec2;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): $Coordinates;
         static ERROR_NOT_COMPLETE: $SimpleCommandExceptionType;
         constructor(arg0: boolean);

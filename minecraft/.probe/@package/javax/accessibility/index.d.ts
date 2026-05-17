@@ -91,13 +91,13 @@ declare module "@package/javax/accessibility" {
         getCharCount(): number;
         getSelectionStart(): number;
         getSelectionEnd(): number;
+        getCaretPosition(): number;
+        getSelectedText(): string;
         getIndexAtPoint(arg0: $Point): number;
         getCharacterBounds(arg0: number): $Rectangle;
         getAfterIndex(arg0: number, arg1: number): string;
         getBeforeIndex(arg0: number, arg1: number): string;
         getCharacterAttribute(arg0: number): $AttributeSet;
-        getCaretPosition(): number;
-        getSelectedText(): string;
         getAtIndex(arg0: number, arg1: number): string;
         get charCount(): number;
         get selectionStart(): number;
@@ -109,13 +109,13 @@ declare module "@package/javax/accessibility" {
     }
     export interface $AccessibleEditableText extends $AccessibleText {
         delete(arg0: number, arg1: number): void;
+        paste(arg0: number): void;
+        cut(arg0: number, arg1: number): void;
         setTextContents(arg0: string): void;
         insertTextAtIndex(arg0: number, arg1: string): void;
         getTextRange(arg0: number, arg1: number): string;
         replaceText(arg0: number, arg1: number, arg2: string): void;
         selectText(arg0: number, arg1: number): void;
-        paste(arg0: number): void;
-        cut(arg0: number, arg1: number): void;
         setAttributes(arg0: number, arg1: number, arg2: $AttributeSet): void;
         set textContents(value: string);
     }
@@ -138,25 +138,25 @@ declare module "@package/javax/accessibility" {
         isEnabled(): boolean;
         getSize(): $Dimension;
         setSize(arg0: $Dimension): void;
-        isShowing(): boolean;
         getFontMetrics(arg0: $Font): $FontMetrics;
-        getBackground(): $Color;
         setFont(arg0: $Font): void;
+        getBackground(): $Color;
         requestFocus(): void;
+        setBackground(arg0: $Color): void;
+        addFocusListener(arg0: $FocusListener): void;
+        getForeground(): $Color;
+        setForeground(arg0: $Color): void;
+        isShowing(): boolean;
         getAccessibleAt(arg0: $Point): $Accessible;
         getLocationOnScreen(): $Point;
         isFocusTraversable(): boolean;
-        setBackground(arg0: $Color): void;
-        addFocusListener(arg0: $FocusListener): void;
         removeFocusListener(arg0: $FocusListener): void;
-        getForeground(): $Color;
-        setForeground(arg0: $Color): void;
+        getFont(): $Font;
         setLocation(arg0: $Point): void;
         getCursor(): $Cursor;
         setBounds(arg0: $Rectangle): void;
-        setVisible(arg0: boolean): void;
         setEnabled(arg0: boolean): void;
-        getFont(): $Font;
+        setVisible(arg0: boolean): void;
         setCursor(arg0: $Cursor): void;
         isVisible(): boolean;
         get showing(): boolean;

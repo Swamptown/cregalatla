@@ -12,7 +12,7 @@ declare module "@package/dev/ryanhcode/sable/api/physics/object" {
         onUnloaded(arg0: $SubLevelHoldingChunkMap, arg1: $ChunkPos): void;
         onAddition(arg0: $SubLevelPhysicsSystem): void;
         wakeUp(): void;
-        onRemoved(): void;
         getBoundingBox(arg0: $BoundingBox3d): void;
+        onRemoved(): void;
     }
 }

@@ -5,7 +5,7 @@ import { $MinimapDimensionHelper, $MinimapWorldManager } from "@package/xaero/hu
 import { $RadarSession } from "@package/xaero/hud/minimap/radar";
 import { $MinimapWorldManagerIO } from "@package/xaero/hud/minimap/world/io";
 import { $HudMod } from "@package/xaero/common";
-import { $ModuleSession, $HudModule } from "@package/xaero/hud/module";
+import { $HudModule, $ModuleSession } from "@package/xaero/hud/module";
 import { $MultiTextureRenderTypeRendererProvider } from "@package/xaero/common/graphics/renderer/multitexture";
 import { $Minecraft } from "@package/net/minecraft/client";
 import { $MinimapWorldState, $MinimapWorldStateUpdater } from "@package/xaero/hud/minimap/world/state";

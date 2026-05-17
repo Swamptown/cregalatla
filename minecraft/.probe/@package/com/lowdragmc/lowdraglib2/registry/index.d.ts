@@ -1,5 +1,5 @@
 import { $LDLRegisterClient, $LDLRegister } from "@package/com/lowdragmc/lowdraglib2/registry/annotation";
-import { $Consumer_, $Predicate_, $BiFunction_, $Function, $Supplier } from "@package/java/util/function";
+import { $Consumer_, $Predicate_, $BiFunction_, $Supplier, $Function } from "@package/java/util/function";
 import { $Annotation } from "@package/java/lang/annotation";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $Tag_, $Tag } from "@package/net/minecraft/nbt";
@@ -86,7 +86,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/registry" {
     /**
      * Values that may be interpreted as {@link $AutoRegistry$Holder}.
      */
-    export type $AutoRegistry$Holder_<A, C, V> = { annotation?: $Annotation, value?: any, clazz?: $Class<any>,  } | [annotation?: $Annotation, value?: any, clazz?: $Class<any>, ];
+    export type $AutoRegistry$Holder_<A, C, V> = { clazz?: $Class<any>, value?: any, annotation?: $Annotation,  } | [clazz?: $Class<any>, value?: any, annotation?: $Annotation, ];
     export class $LDLRegistry$String<V> extends $LDLRegistry<string, V> {
         static REGISTERED: $Map<$ResourceLocation, $LDLRegistry<never, never>>;
         constructor(arg0: $ResourceLocation_);
@@ -123,8 +123,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/registry" {
         getOrDefaultKey(arg0: V, arg1: K): K;
         getMissingKey(): K;
         containValue(arg0: V): boolean;
-        unfreeze(): void;
         streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, V>;
+        unfreeze(): void;
         getRegistryName(): $ResourceLocation;
         registry(): $Map<K, V>;
         getOptional(arg0: K): (V) | undefined;

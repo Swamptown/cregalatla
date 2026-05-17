@@ -1,8 +1,8 @@
 import { $Serializable } from "@package/java/io";
 import { $DynamicConstantDesc, $MethodHandleDesc, $ClassDesc, $MethodTypeDesc, $Constable } from "@package/java/lang/constant";
 import { $Method, $Member, $Constructor, $Field } from "@package/java/lang/reflect";
-import { $ClassLoader, $Enum, $Object, $Class } from "@package/java/lang";
 import { $List, $List_ } from "@package/java/util";
+import { $ClassLoader, $Enum, $Object, $Class } from "@package/java/lang";
 
 declare module "@package/java/lang/invoke" {
     export class $MethodHandles$Lookup {

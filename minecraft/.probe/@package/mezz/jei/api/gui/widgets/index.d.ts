@@ -71,17 +71,17 @@ declare module "@package/mezz/jei/api/gui/widgets" {
         addSlottedWidget(arg0: $ISlottedRecipeWidget, arg1: $List_<$IRecipeSlotDrawable>): void;
         addInputHandler(arg0: $IJeiInputHandler_): void;
         addScrollGridWidget(arg0: $List_<$IRecipeSlotDrawable>, arg1: number, arg2: number): $IScrollGridWidget;
+        addWidget(arg0: $IRecipeWidget_): void;
+        /**
+         * @deprecated
+         */
+        addText(arg0: $List_<$FormattedText>, arg1: number, arg2: number, arg3: number, arg4: number): $ITextWidget;
         /**
          * @deprecated
          */
         addText(arg0: $FormattedText, arg1: number, arg2: number, arg3: number, arg4: number): $ITextWidget;
         addText(arg0: $List_<$FormattedText>, arg1: number, arg2: number): $ITextWidget;
         addText(arg0: $FormattedText, arg1: number, arg2: number): $ITextWidget;
-        /**
-         * @deprecated
-         */
-        addText(arg0: $List_<$FormattedText>, arg1: number, arg2: number, arg3: number, arg4: number): $ITextWidget;
-        addWidget(arg0: $IRecipeWidget_): void;
         get recipeSlots(): $IRecipeSlotDrawablesView;
     }
     export class $ITextWidget {
@@ -93,11 +93,11 @@ declare module "@package/mezz/jei/api/gui/widgets" {
         /**
          * @deprecated
          */
-        alignHorizontalCenter(): $ITextWidget;
+        alignHorizontalLeft(): $ITextWidget;
         /**
          * @deprecated
          */
-        alignHorizontalLeft(): $ITextWidget;
+        alignHorizontalCenter(): $ITextWidget;
         /**
          * @deprecated
          */
@@ -114,8 +114,8 @@ declare module "@package/mezz/jei/api/gui/widgets" {
          * @deprecated
          */
         alignVerticalBottom(): $ITextWidget;
-        setTextAlignment(arg0: $HorizontalAlignment_): $ITextWidget;
         setTextAlignment(arg0: $VerticalAlignment_): $ITextWidget;
+        setTextAlignment(arg0: $HorizontalAlignment_): $ITextWidget;
         setLineSpacing(arg0: number): $ITextWidget;
         set color(value: number);
         set shadow(value: boolean);

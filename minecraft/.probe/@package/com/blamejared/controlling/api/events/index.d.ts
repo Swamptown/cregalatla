@@ -20,26 +20,26 @@ declare module "@package/com/blamejared/controlling/api/events" {
     }
     export class $KeyEntryRenderEvent extends $Event implements $IKeyEntryRenderEvent {
         getEntry(): $IKeyEntry;
-        getY(): number;
         getSlotIndex(): number;
-        getRowWidth(): number;
-        getRowLeft(): number;
+        getY(): number;
         getPartialTicks(): number;
+        getX(): number;
         getMouseX(): number;
         getMouseY(): number;
-        getX(): number;
+        getRowWidth(): number;
+        getRowLeft(): number;
         isHovered(): boolean;
         getGuiGraphics(): $GuiGraphics;
         constructor(arg0: $IKeyEntry, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: boolean, arg10: number);
         get entry(): $IKeyEntry;
-        get y(): number;
         get slotIndex(): number;
-        get rowWidth(): number;
-        get rowLeft(): number;
+        get y(): number;
         get partialTicks(): number;
+        get x(): number;
         get mouseX(): number;
         get mouseY(): number;
-        get x(): number;
+        get rowWidth(): number;
+        get rowLeft(): number;
         get hovered(): boolean;
         get guiGraphics(): $GuiGraphics;
     }
@@ -75,25 +75,25 @@ declare module "@package/com/blamejared/controlling/api/events" {
     }
     export interface $IKeyEntryRenderEvent {
         getEntry(): $IKeyEntry;
-        getY(): number;
         getSlotIndex(): number;
-        getRowWidth(): number;
-        getRowLeft(): number;
+        getY(): number;
         getPartialTicks(): number;
+        getX(): number;
         getMouseX(): number;
         getMouseY(): number;
-        getX(): number;
+        getRowWidth(): number;
+        getRowLeft(): number;
         isHovered(): boolean;
         getGuiGraphics(): $GuiGraphics;
         get entry(): $IKeyEntry;
-        get y(): number;
         get slotIndex(): number;
-        get rowWidth(): number;
-        get rowLeft(): number;
+        get y(): number;
         get partialTicks(): number;
+        get x(): number;
         get mouseX(): number;
         get mouseY(): number;
-        get x(): number;
+        get rowWidth(): number;
+        get rowLeft(): number;
         get hovered(): boolean;
         get guiGraphics(): $GuiGraphics;
     }

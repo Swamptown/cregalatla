@@ -17,16 +17,16 @@ declare module "@package/software/bernie/geckolib/loading/json/raw" {
         visibleBoundsHeight(): number;
         visibleBoundsOffset(): number[];
         visibleBoundsWidth(): number;
-        identifier(): string;
         static deserializer(): $JsonDeserializer<$ModelProperties>;
         textureWidth(): number;
         textureHeight(): number;
+        identifier(): string;
         constructor(animationArmsDown: boolean, animationArmsOutFront: boolean, animationDontShowArmor: boolean, animationInvertedCrouch: boolean, animationNoHeadBob: boolean, animationSingleArmAnimation: boolean, animationSingleLegAnimation: boolean, animationStationaryLegs: boolean, animationStatueOfLibertyArms: boolean, animationUpsideDown: boolean, identifier: string, preserveModelPose: boolean, textureHeight: number, textureWidth: number, visibleBoundsHeight: number, visibleBoundsOffset: number[], visibleBoundsWidth: number);
     }
     /**
      * Values that may be interpreted as {@link $ModelProperties}.
      */
-    export type $ModelProperties_ = { animationStatueOfLibertyArms?: boolean, visibleBoundsWidth?: number, textureHeight?: number, animationSingleArmAnimation?: boolean, animationSingleLegAnimation?: boolean, animationNoHeadBob?: boolean, animationArmsOutFront?: boolean, animationStationaryLegs?: boolean, preserveModelPose?: boolean, animationDontShowArmor?: boolean, visibleBoundsHeight?: number, animationArmsDown?: boolean, textureWidth?: number, identifier?: string, animationInvertedCrouch?: boolean, animationUpsideDown?: boolean, visibleBoundsOffset?: number[],  } | [animationStatueOfLibertyArms?: boolean, visibleBoundsWidth?: number, textureHeight?: number, animationSingleArmAnimation?: boolean, animationSingleLegAnimation?: boolean, animationNoHeadBob?: boolean, animationArmsOutFront?: boolean, animationStationaryLegs?: boolean, preserveModelPose?: boolean, animationDontShowArmor?: boolean, visibleBoundsHeight?: number, animationArmsDown?: boolean, textureWidth?: number, identifier?: string, animationInvertedCrouch?: boolean, animationUpsideDown?: boolean, visibleBoundsOffset?: number[], ];
+    export type $ModelProperties_ = { visibleBoundsWidth?: number, animationStatueOfLibertyArms?: boolean, visibleBoundsOffset?: number[], animationUpsideDown?: boolean, animationInvertedCrouch?: boolean, identifier?: string, textureWidth?: number, animationArmsDown?: boolean, visibleBoundsHeight?: number, animationDontShowArmor?: boolean, preserveModelPose?: boolean, animationStationaryLegs?: boolean, animationArmsOutFront?: boolean, animationNoHeadBob?: boolean, animationSingleLegAnimation?: boolean, animationSingleArmAnimation?: boolean, textureHeight?: number,  } | [visibleBoundsWidth?: number, animationStatueOfLibertyArms?: boolean, visibleBoundsOffset?: number[], animationUpsideDown?: boolean, animationInvertedCrouch?: boolean, identifier?: string, textureWidth?: number, animationArmsDown?: boolean, visibleBoundsHeight?: number, animationDontShowArmor?: boolean, preserveModelPose?: boolean, animationStationaryLegs?: boolean, animationArmsOutFront?: boolean, animationNoHeadBob?: boolean, animationSingleLegAnimation?: boolean, animationSingleArmAnimation?: boolean, textureHeight?: number, ];
     export class $FaceUV$Rotation extends $Enum<$FaceUV$Rotation> {
         static values(): $FaceUV$Rotation[];
         static valueOf(arg0: string): $FaceUV$Rotation;

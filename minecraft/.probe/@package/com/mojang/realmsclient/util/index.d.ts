@@ -11,8 +11,8 @@ export * as task from "@package/com/mojang/realmsclient/util/task";
 declare module "@package/com/mojang/realmsclient/util" {
     export class $RealmsUtil {
         static renderPlayerFace(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: $UUID_): void;
-        static convertToAgePresentation(arg0: number): $Component;
         static convertToAgePresentationFromInstant(arg0: $Date): $Component;
+        static convertToAgePresentation(arg0: number): $Component;
         constructor();
     }
     export class $RealmsTextureManager$RealmsTexture extends $Record {
@@ -23,7 +23,7 @@ declare module "@package/com/mojang/realmsclient/util" {
     /**
      * Values that may be interpreted as {@link $RealmsTextureManager$RealmsTexture}.
      */
-    export type $RealmsTextureManager$RealmsTexture_ = { image?: string, textureId?: $ResourceLocation_,  } | [image?: string, textureId?: $ResourceLocation_, ];
+    export type $RealmsTextureManager$RealmsTexture_ = { textureId?: $ResourceLocation_, image?: string,  } | [textureId?: $ResourceLocation_, image?: string, ];
     export class $RealmsPersistence {
         save(arg0: $RealmsPersistence$RealmsPersistenceData): void;
         read(): $RealmsPersistence$RealmsPersistenceData;
@@ -53,17 +53,17 @@ declare module "@package/com/mojang/realmsclient/util" {
     /**
      * Values that may be interpreted as {@link $WorldGenerationInfo}.
      */
-    export type $WorldGenerationInfo_ = { seed?: string, experiments?: $Set_<string>, levelType?: $LevelType_, generateStructures?: boolean,  } | [seed?: string, experiments?: $Set_<string>, levelType?: $LevelType_, generateStructures?: boolean, ];
+    export type $WorldGenerationInfo_ = { generateStructures?: boolean, levelType?: $LevelType_, experiments?: $Set_<string>, seed?: string,  } | [generateStructures?: boolean, levelType?: $LevelType_, experiments?: $Set_<string>, seed?: string, ];
     export class $JsonUtils {
         static getRequiredString(arg0: string, arg1: $JsonObject_): string;
         static getLongOr(arg0: string, arg1: $JsonObject_, arg2: number): number;
         static getStringOr(arg0: string, arg1: $JsonObject_, arg2: string): string;
-        static getIntOr(arg0: string, arg1: $JsonObject_, arg2: number): number;
         static getBooleanOr(arg0: string, arg1: $JsonObject_, arg2: boolean): boolean;
         static getUuidOr(arg0: string, arg1: $JsonObject_, arg2: $UUID_): $UUID;
+        static getIntOr(arg0: string, arg1: $JsonObject_, arg2: number): number;
         static getRequired<T>(arg0: string, arg1: $JsonObject_, arg2: $Function_<$JsonObject, T>): T;
-        static getRequiredStringOr(arg0: string, arg1: $JsonObject_, arg2: string): string;
         static getDateOr(arg0: string, arg1: $JsonObject_): $Date;
+        static getRequiredStringOr(arg0: string, arg1: $JsonObject_, arg2: string): string;
         static getOptional<T>(arg0: string, arg1: $JsonObject_, arg2: $Function_<$JsonObject, T>): T;
         constructor();
     }

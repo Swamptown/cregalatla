@@ -1,4 +1,4 @@
-import { $AdvancedContainerSetDataPayload_, $AdvancedOpenScreenPayload_, $FrozenRegistrySyncCompletedPayload, $AuxiliaryLightDataPayload_, $FrozenRegistryPayload_, $ConfigFilePayload_, $ClientboundCustomSetTimePayload_, $AdvancedAddEntityPayload_, $FrozenRegistrySyncStartPayload_, $SyncAttachmentsPayload_ } from "@package/net/neoforged/neoforge/network/payload";
+import { $AdvancedContainerSetDataPayload_, $AdvancedOpenScreenPayload_, $FrozenRegistrySyncCompletedPayload, $AuxiliaryLightDataPayload_, $FrozenRegistryPayload_, $ClientboundCustomSetTimePayload_, $ConfigFilePayload_, $AdvancedAddEntityPayload_, $SyncAttachmentsPayload_, $FrozenRegistrySyncStartPayload_ } from "@package/net/neoforged/neoforge/network/payload";
 import { $IPayloadContext } from "@package/net/neoforged/neoforge/network/handling";
 
 declare module "@package/net/neoforged/neoforge/network/handlers" {

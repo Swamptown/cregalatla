@@ -39,7 +39,6 @@ declare module "@package/com/google/common/hash" {
     export class $HashCode {
         bits(): number;
         asBytes(): number[];
-        asInt(): number;
         static fromString(string: string): $HashCode;
         padToLong(): number;
         static fromLong(hash: number): $HashCode;
@@ -47,6 +46,7 @@ declare module "@package/com/google/common/hash" {
         static fromBytes(bytes: number[]): $HashCode;
         static fromInt(hash: number): $HashCode;
         asLong(): number;
+        asInt(): number;
     }
     export class $Funnel<T> {
     }
@@ -67,17 +67,17 @@ declare module "@package/com/google/common/hash" {
         putBoolean(b: boolean): $Hasher;
         putChar(c: string): $Hasher;
         hash(): $HashCode;
-        putObject<T>(instance: T, funnel: $Funnel_<T>): $Hasher;
         putUnencodedChars(charSequence: $CharSequence): $Hasher;
-        putBytes(bytes: number[], off: number, len: number): $Hasher;
+        putString(charSequence: $CharSequence, charset: $Charset): $Hasher;
+        putObject<T>(instance: T, funnel: $Funnel_<T>): $Hasher;
         putByte(b: number): $PrimitiveSink;
         putShort(s: number): $PrimitiveSink;
         putInt(i: number): $PrimitiveSink;
         putLong(l: number): $PrimitiveSink;
         putFloat(f: number): $PrimitiveSink;
         putDouble(d: number): $PrimitiveSink;
-        putString(charSequence: $CharSequence, charset: $Charset): $PrimitiveSink;
         putBytes(bytes: $ByteBuffer): $PrimitiveSink;
+        putBytes(bytes: number[], off: number, len: number): $PrimitiveSink;
         putBytes(bytes: $ByteBuffer): $PrimitiveSink;
     }
 }

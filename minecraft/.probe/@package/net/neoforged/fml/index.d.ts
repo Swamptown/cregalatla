@@ -52,7 +52,7 @@ declare module "@package/net/neoforged/fml" {
     /**
      * Values that may be interpreted as {@link $ModLoadingIssue}.
      */
-    export type $ModLoadingIssue_ = { affectedModFile?: $IModFile, affectedPath?: $Path_, affectedMod?: $IModInfo, cause?: $Throwable, translationKey?: string, translationArgs?: $List_<$Object>, severity?: $ModLoadingIssue$Severity_,  } | [affectedModFile?: $IModFile, affectedPath?: $Path_, affectedMod?: $IModInfo, cause?: $Throwable, translationKey?: string, translationArgs?: $List_<$Object>, severity?: $ModLoadingIssue$Severity_, ];
+    export type $ModLoadingIssue_ = { severity?: $ModLoadingIssue$Severity_, translationArgs?: $List_<$Object>, translationKey?: string, cause?: $Throwable, affectedMod?: $IModInfo, affectedPath?: $Path_, affectedModFile?: $IModFile,  } | [severity?: $ModLoadingIssue$Severity_, translationArgs?: $List_<$Object>, translationKey?: string, cause?: $Throwable, affectedMod?: $IModInfo, affectedPath?: $Path_, affectedModFile?: $IModFile, ];
     export class $DeferredWorkQueue {
         enqueueWork(arg0: $ModContainer, arg1: $Runnable_): $CompletableFuture<void>;
         enqueueWork<T>(arg0: $ModContainer, arg1: $Supplier_<T>): $CompletableFuture<T>;
@@ -69,11 +69,11 @@ declare module "@package/net/neoforged/fml" {
         /**
          * @deprecated
          */
-        getMessageSupplier<T>(): $Supplier<T>;
+        getSenderModId(): string;
         /**
          * @deprecated
          */
-        getSenderModId(): string;
+        getMessageSupplier<T>(): $Supplier<T>;
         senderModId(): string;
         modId(): string;
         /**
@@ -85,7 +85,7 @@ declare module "@package/net/neoforged/fml" {
     /**
      * Values that may be interpreted as {@link $InterModComms$IMCMessage}.
      */
-    export type $InterModComms$IMCMessage_ = { method?: string, senderModId?: string, modId?: string, messageSupplier?: $Supplier_<never>,  } | [method?: string, senderModId?: string, modId?: string, messageSupplier?: $Supplier_<never>, ];
+    export type $InterModComms$IMCMessage_ = { messageSupplier?: $Supplier_<never>, modId?: string, senderModId?: string, method?: string,  } | [messageSupplier?: $Supplier_<never>, modId?: string, senderModId?: string, method?: string, ];
     export class $LogicalSide extends $Enum<$LogicalSide> {
         static values(): $LogicalSide[];
         static valueOf(arg0: string): $LogicalSide;

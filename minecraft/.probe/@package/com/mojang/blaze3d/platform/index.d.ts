@@ -54,8 +54,6 @@ declare module "@package/com/mojang/blaze3d/platform" {
         srcAlpha: number;
     }
     export class $GlStateManager {
-        static glGetProgrami(arg0: number, arg1: number): number;
-        static glGetShaderi(arg0: number, arg1: number): number;
         static glBlendFuncSeparate(arg0: number, arg1: number, arg2: number, arg3: number): void;
         static glCreateProgram(): number;
         static glDeleteProgram(arg0: number): void;
@@ -70,21 +68,24 @@ declare module "@package/com/mojang/blaze3d/platform" {
         static glGenRenderbuffers(): number;
         static glGenFramebuffers(): number;
         static glCheckFramebufferStatus(arg0: number): number;
+        static glGetProgrami(arg0: number, arg1: number): number;
+        static glGetShaderi(arg0: number, arg1: number): number;
+        static _getError(): number;
+        static _glDeleteFramebuffers(arg0: number): void;
+        static _glBlitFrameBuffer(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         static _vertexAttribPointer(arg0: number, arg1: number, arg2: number, arg3: boolean, arg4: number, arg5: number): void;
         static _vertexAttribIPointer(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
         static _enableVertexAttribArray(arg0: number): void;
         static _disableVertexAttribArray(arg0: number): void;
-        static _disableDepthTest(): void;
-        static _enableDepthTest(): void;
-        static _enableScissorTest(): void;
-        static _scissorBox(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        static _disableScissorTest(): void;
-        static _depthFunc(arg0: number): void;
-        static _depthMask(arg0: boolean): void;
-        static _enableBlend(): void;
-        static _disableBlend(): void;
-        static _blendFunc(arg0: number, arg1: number): void;
-        static _blendFuncSeparate(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        static upload(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $NativeImage$Format_, arg6: $IntBuffer, arg7: $Consumer_<$IntBuffer>): void;
+        static _bindTexture(arg0: number): void;
+        static _texParameter(arg0: number, arg1: number, arg2: number): void;
+        static _texParameter(arg0: number, arg1: number, arg2: number): void;
+        static glActiveTexture(arg0: number): void;
+        static _clearColor(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        static _clear(arg0: number, arg1: boolean): void;
+        static _getActiveTexture(): number;
+        static _activeTexture(arg0: number): void;
         static _blendEquation(arg0: number): void;
         static _enableCull(): void;
         static _disableCull(): void;
@@ -102,34 +103,19 @@ declare module "@package/com/mojang/blaze3d/platform" {
         static _stencilMask(arg0: number): void;
         static _stencilOp(arg0: number, arg1: number, arg2: number): void;
         static _clearDepth(arg0: number): void;
-        static _getActiveTexture(): number;
-        static _activeTexture(arg0: number): void;
-        static glActiveTexture(arg0: number): void;
-        static _glBlitFrameBuffer(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
-        static _glFramebufferTexture2D(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        static _getError(): number;
-        static _glUnmapBuffer(arg0: number): void;
-        static _glMapBuffer(arg0: number, arg1: number): $ByteBuffer;
-        static _glDeleteFramebuffers(arg0: number): void;
-        static _clearColor(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        static _clear(arg0: number, arg1: boolean): void;
-        static upload(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $NativeImage$Format_, arg6: $IntBuffer, arg7: $Consumer_<$IntBuffer>): void;
-        static _bindTexture(arg0: number): void;
-        static _texParameter(arg0: number, arg1: number, arg2: number): void;
-        static _texParameter(arg0: number, arg1: number, arg2: number): void;
         static _clearStencil(arg0: number): void;
         static _drawElements(arg0: number, arg1: number, arg2: number, arg3: number): void;
         static _pixelStore(arg0: number, arg1: number): void;
-        static _readPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $ByteBuffer): void;
         static _readPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
+        static _readPixels(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $ByteBuffer): void;
         static _getString(arg0: number): string;
         static _getInteger(arg0: number): number;
         static _texImage2D(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $IntBuffer): void;
         static _getTexLevelParameter(arg0: number, arg1: number, arg2: number): number;
         static _glBindBuffer(arg0: number, arg1: number): void;
         static _glBindVertexArray(arg0: number): void;
-        static _glBufferData(arg0: number, arg1: number, arg2: number): void;
         static _glBufferData(arg0: number, arg1: $ByteBuffer, arg2: number): void;
+        static _glBufferData(arg0: number, arg1: number, arg2: number): void;
         static _glDeleteBuffers(arg0: number): void;
         static _glDeleteVertexArrays(arg0: number): void;
         static _glUniform1i(arg0: number, arg1: number): void;
@@ -137,10 +123,10 @@ declare module "@package/com/mojang/blaze3d/platform" {
         static _glUniform1(arg0: number, arg1: $IntBuffer): void;
         static _glUniform2(arg0: number, arg1: $FloatBuffer): void;
         static _glUniform2(arg0: number, arg1: $IntBuffer): void;
-        static _glUniform3(arg0: number, arg1: $IntBuffer): void;
         static _glUniform3(arg0: number, arg1: $FloatBuffer): void;
-        static _glUniform4(arg0: number, arg1: $FloatBuffer): void;
+        static _glUniform3(arg0: number, arg1: $IntBuffer): void;
         static _glUniform4(arg0: number, arg1: $IntBuffer): void;
+        static _glUniform4(arg0: number, arg1: $FloatBuffer): void;
         static _glUniformMatrix2(arg0: number, arg1: boolean, arg2: $FloatBuffer): void;
         static _glUniformMatrix3(arg0: number, arg1: boolean, arg2: $FloatBuffer): void;
         static _glUniformMatrix4(arg0: number, arg1: boolean, arg2: $FloatBuffer): void;
@@ -152,6 +138,20 @@ declare module "@package/com/mojang/blaze3d/platform" {
         static _backupGlState(arg0: $GlStateBackup): void;
         static _restoreGlState(arg0: $GlStateBackup): void;
         static _glBindFramebuffer(arg0: number, arg1: number): void;
+        static _disableDepthTest(): void;
+        static _enableDepthTest(): void;
+        static _enableScissorTest(): void;
+        static _scissorBox(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        static _disableScissorTest(): void;
+        static _depthFunc(arg0: number): void;
+        static _depthMask(arg0: boolean): void;
+        static _enableBlend(): void;
+        static _disableBlend(): void;
+        static _blendFunc(arg0: number, arg1: number): void;
+        static _blendFuncSeparate(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        static _glUnmapBuffer(arg0: number): void;
+        static _glFramebufferTexture2D(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
+        static _glMapBuffer(arg0: number, arg1: number): $ByteBuffer;
         static _glUseProgram(arg0: number): void;
         static _glGetUniformLocation(arg0: number, arg1: $CharSequence): number;
         static _glGetAttribLocation(arg0: number, arg1: $CharSequence): number;
@@ -177,24 +177,31 @@ declare module "@package/com/mojang/blaze3d/platform" {
     export class $NativeImage implements $AutoCloseable, $PipelineNativeImageAccessor, $NativeImageAccessor, $NativeImageAccessor$1, $IMixinNativeImage {
         format(): $NativeImage$Format;
         close(): void;
-        static read(arg0: $InputStream): $NativeImage;
         static read(arg0: $NativeImage$Format_, arg1: $InputStream): $NativeImage;
+        static read(arg0: $InputStream): $NativeImage;
         static read(arg0: $NativeImage$Format_, arg1: $ByteBuffer): $NativeImage;
-        static read(arg0: $ByteBuffer): $NativeImage;
         static read(arg0: number[]): $NativeImage;
+        static read(arg0: $ByteBuffer): $NativeImage;
         copyFrom(arg0: $NativeImage): void;
         asByteArray(): number[];
-        getWidth(): number;
-        getHeight(): number;
-        resizeSubRectTo(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $NativeImage): void;
-        writeToFile(arg0: $Path_): void;
         writeToFile(arg0: $File_): void;
-        untrack(): void;
+        writeToFile(arg0: $Path_): void;
         upload(arg0: number, arg1: number, arg2: number, arg3: boolean): void;
         upload(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: boolean): void;
         upload(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: boolean, arg9: boolean, arg10: boolean): void;
+        untrack(): void;
+        resizeSubRectTo(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $NativeImage): void;
         setPixelRGBA(arg0: number, arg1: number, arg2: number): void;
+        downloadTexture(arg0: number, arg1: boolean): void;
+        downloadDepthBuffer(arg0: number): void;
+        drawPixels(): void;
+        copyFromFont(arg0: $FT_Face, arg1: number): boolean;
+        fillRect(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
+        copyRect(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean, arg7: boolean): void;
+        copyRect(arg0: $NativeImage, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: boolean): void;
+        flipY(): void;
         getPixelsRGBA(): number[];
+        getPixelRGBA(arg0: number, arg1: number): number;
         mappedCopy(arg0: $IntUnaryOperator_): $NativeImage;
         applyToAllPixels(arg0: $IntUnaryOperator_): void;
         setPixelLuminance(arg0: number, arg1: number, arg2: number): void;
@@ -207,17 +214,10 @@ declare module "@package/com/mojang/blaze3d/platform" {
          * @deprecated
          */
         makePixelArray(): number[];
-        downloadTexture(arg0: number, arg1: boolean): void;
-        downloadDepthBuffer(arg0: number): void;
-        drawPixels(): void;
-        copyFromFont(arg0: $FT_Face, arg1: number): boolean;
-        fillRect(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        copyRect(arg0: $NativeImage, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: boolean): void;
-        copyRect(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean, arg7: boolean): void;
-        flipY(): void;
         skinlayers$isAllocated(): boolean;
-        static invoke_class_constructor_FancyMenu$fancymenu_$md$8e2dbe$0(arg0: $NativeImage$Format_, arg1: number, arg2: number, arg3: boolean, arg4: number): $NativeImage;
-        getPixelRGBA(arg0: number, arg1: number): number;
+        static invoke_class_constructor_FancyMenu$fancymenu_$md$d858b6$0(arg0: $NativeImage$Format_, arg1: number, arg2: number, arg3: boolean, arg4: number): $NativeImage;
+        getWidth(): number;
+        getHeight(): number;
         getPixels(): number;
         invokeCheckAllocated(): void;
         get_pixels_FancyMenu(): number;
@@ -225,9 +225,9 @@ declare module "@package/com/mojang/blaze3d/platform" {
         pixels: number;
         constructor(arg0: $NativeImage$Format_, arg1: number, arg2: number, arg3: boolean);
         constructor(arg0: number, arg1: number, arg2: boolean);
+        get pixelsRGBA(): number[];
         get width(): number;
         get height(): number;
-        get pixelsRGBA(): number[];
         get _pixels_FancyMenu(): number;
     }
     export class $ClipboardManager {
@@ -239,21 +239,21 @@ declare module "@package/com/mojang/blaze3d/platform" {
     export class $VideoMode {
         write(): string;
         static read(arg0: string): ($VideoMode) | undefined;
-        getWidth(): number;
-        getHeight(): number;
+        getRefreshRate(): number;
         getRedBits(): number;
         getGreenBits(): number;
         getBlueBits(): number;
-        getRefreshRate(): number;
+        getWidth(): number;
+        getHeight(): number;
         constructor(arg0: $GLFWVidMode);
         constructor(arg0: $GLFWVidMode$Buffer);
         constructor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number);
-        get width(): number;
-        get height(): number;
+        get refreshRate(): number;
         get redBits(): number;
         get greenBits(): number;
         get blueBits(): number;
-        get refreshRate(): number;
+        get width(): number;
+        get height(): number;
     }
     export class $GlConst {
         static GL_PROXY_TEXTURE_2D: number;
@@ -376,18 +376,18 @@ declare module "@package/com/mojang/blaze3d/platform" {
         getMode(arg0: number): $VideoMode;
         getY(): number;
         getX(): number;
+        getMonitor(): number;
+        getPreferredVidMode(arg0: ($VideoMode) | undefined): $VideoMode;
         getCurrentMode(): $VideoMode;
         refreshVideoModes(): void;
         getVideoModeIndex(arg0: $VideoMode): number;
         getModeCount(): number;
-        getMonitor(): number;
-        getPreferredVidMode(arg0: ($VideoMode) | undefined): $VideoMode;
         constructor(arg0: number);
         get y(): number;
         get x(): number;
+        get monitor(): number;
         get currentMode(): $VideoMode;
         get modeCount(): number;
-        get monitor(): number;
     }
     export class $GlStateManager$ColorMask {
     }
@@ -420,13 +420,13 @@ declare module "@package/com/mojang/blaze3d/platform" {
         getType(): $InputConstants$Type;
         getDisplayName(): $Component;
         getNumericKeyValue(): $OptionalInt;
-        static getNAME_MAP$controlling_$md$8e2dbe$0(): $Map<any, any>;
+        static getNAME_MAP$controlling_$md$d858b6$0(): $Map<any, any>;
         displayName: $LazyLoadedValue<$Component>;
         get name(): string;
         get value(): number;
         get type(): $InputConstants$Type;
         get numericKeyValue(): $OptionalInt;
-        static get NAME_MAP$controlling_$md$8e2dbe$0(): $Map<any, any>;
+        static get NAME_MAP$controlling_$md$d858b6$0(): $Map<any, any>;
     }
     export class $NativeImage$InternalGlFormat extends $Enum<$NativeImage$InternalGlFormat> {
         static values(): $NativeImage$InternalGlFormat[];
@@ -466,12 +466,12 @@ declare module "@package/com/mojang/blaze3d/platform" {
      */
     export type $GlStateManager$SourceFactor_ = "constant_alpha" | "constant_color" | "dst_alpha" | "dst_color" | "one" | "one_minus_constant_alpha" | "one_minus_constant_color" | "one_minus_dst_alpha" | "one_minus_dst_color" | "one_minus_src_alpha" | "one_minus_src_color" | "src_alpha" | "src_alpha_saturate" | "src_color" | "zero";
     export class $Lighting {
-        static setupNetherLevel(): void;
-        static setupLevel(): void;
-        static setupForEntityInInventory(): void;
-        static setupForEntityInInventory(arg0: $Quaternionf): void;
         static setupForFlatItems(): void;
         static setupFor3DItems(): void;
+        static setupNetherLevel(): void;
+        static setupLevel(): void;
+        static setupForEntityInInventory(arg0: $Quaternionf): void;
+        static setupForEntityInInventory(): void;
         static NETHER_DIFFUSE_LIGHT_1: $Vector3f;
         static NETHER_DIFFUSE_LIGHT_0: $Vector3f;
         static DIFFUSE_LIGHT_0: $Vector3f;
@@ -502,8 +502,8 @@ declare module "@package/com/mojang/blaze3d/platform" {
         static typeToString(arg0: number): string;
         static isDebugEnabled(): boolean;
         static getLastOpenGlDebugMessages(): $List<string>;
-        static sourceToString(arg0: number): string;
         static enableDebugCallback(arg0: number, arg1: boolean): void;
+        static sourceToString(arg0: number): string;
         static severityToString(arg0: number): string;
         constructor();
         static get debugEnabled(): boolean;
@@ -526,8 +526,8 @@ declare module "@package/com/mojang/blaze3d/platform" {
     export class $InputConstants {
         static getKey(arg0: string): $InputConstants$Key;
         static getKey(arg0: number, arg1: number): $InputConstants$Key;
-        static updateRawMouseInput(arg0: number, arg1: boolean): void;
         static isKeyDown(arg0: number, arg1: number): boolean;
+        static updateRawMouseInput(arg0: number, arg1: boolean): void;
         static setupKeyboardCallbacks(arg0: number, arg1: $GLFWKeyCallbackI_, arg2: $GLFWCharModsCallbackI_): void;
         static setupMouseCallbacks(arg0: number, arg1: $GLFWCursorPosCallbackI_, arg2: $GLFWMouseButtonCallbackI_, arg3: $GLFWScrollCallbackI_, arg4: $GLFWDropCallbackI_): void;
         static grabOrReleaseMouse(arg0: number, arg1: number, arg2: number, arg3: number): void;
@@ -664,10 +664,12 @@ declare module "@package/com/mojang/blaze3d/platform" {
     export class $NativeImage$Format extends $Enum<$NativeImage$Format> {
         static values(): $NativeImage$Format[];
         static valueOf(arg0: string): $NativeImage$Format;
-        hasAlpha(): boolean;
         components(): number;
+        setPackPixelStoreState(): void;
+        alphaOffset(): number;
         setUnpackPixelStoreState(): void;
         glFormat(): number;
+        supportedByStb(): boolean;
         hasLuminance(): boolean;
         luminanceOffset(): number;
         hasLuminanceOrRed(): boolean;
@@ -678,15 +680,13 @@ declare module "@package/com/mojang/blaze3d/platform" {
         luminanceOrBlueOffset(): number;
         hasLuminanceOrAlpha(): boolean;
         luminanceOrAlphaOffset(): number;
-        setPackPixelStoreState(): void;
-        alphaOffset(): number;
         hasRed(): boolean;
         hasGreen(): boolean;
         hasBlue(): boolean;
         redOffset(): number;
         greenOffset(): number;
         blueOffset(): number;
-        supportedByStb(): boolean;
+        hasAlpha(): boolean;
         static LUMINANCE_ALPHA: $NativeImage$Format;
         static RGBA: $NativeImage$Format;
         static LUMINANCE: $NativeImage$Format;
@@ -714,17 +714,17 @@ declare module "@package/com/mojang/blaze3d/platform" {
     export class $GlStateManager$StencilState {
     }
     export class $TextureUtil {
-        static writeAsPNG(arg0: $Path_, arg1: string, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $IntUnaryOperator_): void;
-        static writeAsPNG(arg0: $Path_, arg1: string, arg2: number, arg3: number, arg4: number, arg5: number): void;
-        static prepareImage(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        static prepareImage(arg0: number, arg1: number, arg2: number): void;
         static prepareImage(arg0: $NativeImage$InternalGlFormat_, arg1: number, arg2: number, arg3: number, arg4: number): void;
+        static prepareImage(arg0: number, arg1: number, arg2: number, arg3: number): void;
         static prepareImage(arg0: $NativeImage$InternalGlFormat_, arg1: number, arg2: number, arg3: number): void;
+        static prepareImage(arg0: number, arg1: number, arg2: number): void;
         static releaseTextureId(arg0: number): void;
         static generateTextureId(): number;
-        static readResource(arg0: $InputStream): $ByteBuffer;
+        static writeAsPNG(arg0: $Path_, arg1: string, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $IntUnaryOperator_): void;
+        static writeAsPNG(arg0: $Path_, arg1: string, arg2: number, arg3: number, arg4: number, arg5: number): void;
         static getDebugTexturePath(): $Path;
         static getDebugTexturePath(arg0: $Path_): $Path;
+        static readResource(arg0: $InputStream): $ByteBuffer;
         static MIN_MIPMAP_LEVEL: number;
         constructor();
     }
@@ -740,16 +740,12 @@ declare module "@package/com/mojang/blaze3d/platform" {
     export class $Window implements $AutoCloseable, $NativeWindowHandle, $WindowKJS {
         close(): void;
         getY(): number;
-        getWidth(): number;
-        getHeight(): number;
-        getScreenWidth(): number;
-        getScreenHeight(): number;
+        getGuiScale(): number;
+        getX(): number;
         static getPlatform(): string;
-        getWindow(): number;
         getGuiScaledWidth(): number;
         getGuiScaledHeight(): number;
-        getX(): number;
-        getGuiScale(): number;
+        getWindow(): number;
         isFullscreen(): boolean;
         setIcon(arg0: $PackResources, arg1: $IconSet_): void;
         setFramerateLimit(arg0: number): void;
@@ -767,34 +763,38 @@ declare module "@package/com/mojang/blaze3d/platform" {
         setGuiScale(arg0: number): void;
         setWidth(arg0: number): void;
         setHeight(arg0: number): void;
+        getScreenWidth(): number;
+        getScreenHeight(): number;
         getPreferredFullscreenVideoMode(): ($VideoMode) | undefined;
         static checkGlfwError(arg0: $BiConsumer_<number, string>): void;
         defaultErrorCallback(arg0: number, arg1: number): void;
-        modify$zmk000$veil$captureMajorVersion(arg0: number, arg1: $LocalIntRef): number;
-        modify$zmk000$veil$captureMinorVersion(arg0: number, arg1: $LocalIntRef): number;
-        modify$zli000$veil$modifyMajorVersion(arg0: number, arg1: $LocalIntRef): number;
-        modify$zli000$veil$modifyMinorVersion(arg0: number, arg1: $LocalIntRef): number;
+        modify$zkk000$veil$captureMajorVersion(arg0: number, arg1: $LocalIntRef): number;
+        modify$zkk000$veil$captureMinorVersion(arg0: number, arg1: $LocalIntRef): number;
+        modify$zji000$veil$modifyMajorVersion(arg0: number, arg1: $LocalIntRef): number;
+        modify$zji000$veil$modifyMinorVersion(arg0: number, arg1: $LocalIntRef): number;
         getRefreshRate(): number;
         setPreferredFullscreenVideoMode(arg0: ($VideoMode) | undefined): void;
         changeFullscreenVideoMode(): void;
         findBestMonitor(): $Monitor;
-        wrapOperation$dim000$sodium$setAdditionalWindowHints(arg0: number, arg1: number, arg2: $CharSequence, arg3: number, arg4: number, arg5: $Operation_<any>): number;
+        wrapOperation$cfi000$sodium$setAdditionalWindowHints(arg0: number, arg1: number, arg2: $CharSequence, arg3: number, arg4: number, arg5: $Operation_<any>): number;
         getWin32Handle(): number;
+        getWidth(): number;
+        getHeight(): number;
         kjs$loadIcons(original: $List_<$IoSupplier_<$InputStream>>): $List<$IoSupplier<$InputStream>>;
         static BASE_HEIGHT: number;
         static BASE_WIDTH: number;
         constructor(arg0: $WindowEventHandler, arg1: $ScreenManager, arg2: $DisplayData, arg3: string, arg4: string);
         get y(): number;
-        get screenWidth(): number;
-        get screenHeight(): number;
+        get x(): number;
         static get platform(): string;
-        get window(): number;
         get guiScaledWidth(): number;
         get guiScaledHeight(): number;
-        get x(): number;
+        get window(): number;
         get fullscreen(): boolean;
         set errorSection(value: string);
         set title(value: string);
+        get screenWidth(): number;
+        get screenHeight(): number;
         get refreshRate(): number;
         get win32Handle(): number;
     }

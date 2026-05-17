@@ -15,18 +15,18 @@ export * as brigadier from "@package/net/minecraft/commands/synchronization/brig
 
 declare module "@package/net/minecraft/commands/synchronization" {
     export class $SingletonArgumentInfo<A extends $ArgumentType<never>> implements $ArgumentTypeInfo<A, $SingletonArgumentInfo$Template> {
+        serializeToNetwork(arg0: $SingletonArgumentInfo$Template, arg1: $FriendlyByteBuf): void;
+        serializeToJson(arg0: $SingletonArgumentInfo$Template, arg1: $JsonObject_): void;
         static contextFree<T extends $ArgumentType<never>>(arg0: $Supplier_<T>): $SingletonArgumentInfo<T>;
         static contextAware<T extends $ArgumentType<never>>(arg0: $Function_<$CommandBuildContext, T>): $SingletonArgumentInfo<T>;
-        serializeToNetwork(arg0: $SingletonArgumentInfo$Template, arg1: $FriendlyByteBuf): void;
         deserializeFromNetwork(arg0: $FriendlyByteBuf): $SingletonArgumentInfo$Template;
-        serializeToJson(arg0: $SingletonArgumentInfo$Template, arg1: $JsonObject_): void;
         unpack(arg0: A): $SingletonArgumentInfo$Template;
     }
     export class $ArgumentTypeInfos {
         static bootstrap(arg0: $Registry<$ArgumentTypeInfo_<never, never>>): $ArgumentTypeInfo<never, never>;
-        static registerByClass<A extends $ArgumentType<never>, T extends $ArgumentTypeInfo$Template<A>, I extends $ArgumentTypeInfo<A, T>>(arg0: $Class<A>, arg1: I): I;
         static isClassRecognized(arg0: $Class<never>): boolean;
         static byClass<A extends $ArgumentType<never>>(arg0: A): $ArgumentTypeInfo<A, never>;
+        static registerByClass<A extends $ArgumentType<never>, T extends $ArgumentTypeInfo$Template<A>, I extends $ArgumentTypeInfo<A, T>>(arg0: $Class<A>, arg1: I): I;
         static unpack<A extends $ArgumentType<never>>(arg0: A): $ArgumentTypeInfo$Template<A>;
         static BY_CLASS: $Map<$Class<never>, $ArgumentTypeInfo<never, never>>;
         constructor();

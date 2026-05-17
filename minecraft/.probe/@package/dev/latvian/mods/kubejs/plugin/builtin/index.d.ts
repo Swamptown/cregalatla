@@ -31,12 +31,13 @@ export * as event from "@package/dev/latvian/mods/kubejs/plugin/builtin/event";
 
 declare module "@package/dev/latvian/mods/kubejs/plugin/builtin" {
     export class $BuiltinKubeJSPlugin implements $KubeJSPlugin {
+        registerBuilderTypes(registry: $BuilderTypeRegistry_): void;
+        registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
         registerServerRegistries(registry: $ServerRegistryRegistry_): void;
         registerBindings(bindings: $BindingRegistry_): void;
         registerTypeDescriptions(registry: $TypeDescriptionRegistry): void;
         registerRecipeFactories(registry: $RecipeFactoryRegistry): void;
         registerRecipeComponents(registry: $RecipeComponentTypeRegistry_): void;
-        registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
         registerRecipePostProcessors(registry: $RecipePostProcessorTypeRegistry_): void;
         registerBlockEntityAttachments(registry: $BlockEntityAttachmentRegistry_): void;
         registerIngredientActionTypes(registry: $IngredientActionTypeRegistry_): void;
@@ -47,12 +48,12 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin" {
         registerItemNameProviders(registry: $NameProvider$Registry_<$Item, $ItemStack>): void;
         registerIconTypes(registry: $KubeIconTypeRegistry_): void;
         generateData(generator: $KubeDataGenerator): void;
-        registerBuilderTypes(registry: $BuilderTypeRegistry_): void;
         registerTypeWrappers(registry: $TypeWrapperRegistry): void;
         registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
         clearCaches(): void;
         registerEvents(registry: $EventGroupRegistry_): void;
         init(): void;
+        attachServerData(event: $AttachedData<$MinecraftServer>): void;
         breakpoint(args: $Object[]): void;
         registerRecipeMappings(registry: $RecipeMappingRegistry): void;
         registerRecipeSchemas(registry: $RecipeSchemaRegistry): void;
@@ -64,13 +65,12 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin" {
         exportServerData(_export: $DataExport): void;
         beforeRecipeLoading(event: $RecipesKubeEvent, manager: $RecipeManagerKJS, recipeJsons: $Map_<$ResourceLocation_, $JsonElement_>): void;
         registerClasses(filter: $ClassFilter): void;
-        attachServerData(event: $AttachedData<$MinecraftServer>): void;
         initStartup(): void;
         beforeScriptsLoaded(manager: $ScriptManager): void;
         afterScriptsLoaded(manager: $ScriptManager): void;
-        afterInit(): void;
         attachPlayerData(event: $AttachedData<$Player>): void;
         attachLevelData(event: $AttachedData<$Level_>): void;
+        afterInit(): void;
         static GLOBAL: $HashMap<string, $Object>;
         constructor();
     }
@@ -83,14 +83,16 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin" {
         afterScriptsLoaded(manager: $ScriptManager): void;
         registerEvents(registry: $EventGroupRegistry_): void;
         init(): void;
+        attachServerData(event: $AttachedData<$MinecraftServer>): void;
         breakpoint(args: $Object[]): void;
+        registerBuilderTypes(registry: $BuilderTypeRegistry_): void;
+        registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
         registerServerRegistries(registry: $ServerRegistryRegistry_): void;
         registerTypeDescriptions(registry: $TypeDescriptionRegistry): void;
         registerRecipeFactories(registry: $RecipeFactoryRegistry): void;
         registerRecipeMappings(registry: $RecipeMappingRegistry): void;
         registerRecipeComponents(registry: $RecipeComponentTypeRegistry_): void;
         registerRecipeSchemas(registry: $RecipeSchemaRegistry): void;
-        registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
         registerCustomRecipeSchemaFunctions(registry: $CustomRecipeSchemaFunctionRegistry_): void;
         registerRecipePostProcessors(registry: $RecipePostProcessorTypeRegistry_): void;
         registerBlockEntityAttachments(registry: $BlockEntityAttachmentRegistry_): void;
@@ -104,9 +106,7 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin" {
         generateAssets(generator: $KubeAssetGenerator): void;
         exportServerData(_export: $DataExport): void;
         beforeRecipeLoading(event: $RecipesKubeEvent, manager: $RecipeManagerKJS, recipeJsons: $Map_<$ResourceLocation_, $JsonElement_>): void;
-        registerBuilderTypes(registry: $BuilderTypeRegistry_): void;
         registerClasses(filter: $ClassFilter): void;
-        attachServerData(event: $AttachedData<$MinecraftServer>): void;
         initStartup(): void;
         registerTypeWrappers(registry: $TypeWrapperRegistry): void;
         registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
@@ -115,9 +115,9 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin" {
          */
         clearCaches(): void;
         beforeScriptsLoaded(manager: $ScriptManager): void;
-        afterInit(): void;
         attachPlayerData(event: $AttachedData<$Player>): void;
         attachLevelData(event: $AttachedData<$Level_>): void;
+        afterInit(): void;
         constructor();
     }
 }

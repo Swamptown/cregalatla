@@ -15,8 +15,8 @@ declare module "@package/net/minecraft/util/random" {
         static single<E>(arg0: E): $SimpleWeightedRandomList<E>;
         static empty<E>(): $SimpleWeightedRandomList<E>;
         static wrappedCodecAllowingEmpty<E>(arg0: $Codec<E>): $Codec<$SimpleWeightedRandomList<E>>;
-        static wrappedCodec<E>(arg0: $Codec<E>): $Codec<$SimpleWeightedRandomList<E>>;
         getRandomValue(arg0: $RandomSource): ($WeightedEntry$Wrapper<E>) | undefined;
+        static wrappedCodec<E>(arg0: $Codec<E>): $Codec<$SimpleWeightedRandomList<E>>;
         constructor(arg0: $List_<$WeightedEntry$Wrapper_<$WeightedEntry$Wrapper_<E>>>);
     }
     export class $WeightedEntry {
@@ -62,7 +62,7 @@ declare module "@package/net/minecraft/util/random" {
     /**
      * Values that may be interpreted as {@link $WeightedEntry$Wrapper}.
      */
-    export type $WeightedEntry$Wrapper_<T> = { weight?: $Weight, data?: any,  } | [weight?: $Weight, data?: any, ];
+    export type $WeightedEntry$Wrapper_<T> = { data?: any, weight?: $Weight,  } | [data?: any, weight?: $Weight, ];
     export class $WeightedRandom {
         static getTotalWeight(arg0: $List_<$WeightedEntry_>): number;
         static getWeightedItem<T extends $WeightedEntry>(arg0: $List_<T>, arg1: number): (T) | undefined;

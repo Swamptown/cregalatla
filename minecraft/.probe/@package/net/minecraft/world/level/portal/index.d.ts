@@ -29,9 +29,9 @@ declare module "@package/net/minecraft/world/level/portal" {
     export type $DimensionTransition$PostDimensionTransition_ = ((arg0: $Entity) => void);
     export class $PortalShape {
         isValid(): boolean;
-        static findCollisionFreePosition(arg0: $Vec3_, arg1: $ServerLevel, arg2: $Entity, arg3: $EntityDimensions_): $Vec3;
         static findEmptyPortalShape(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $Direction$Axis_): ($PortalShape) | undefined;
         createPortalBlocks(): void;
+        static findCollisionFreePosition(arg0: $Vec3_, arg1: $ServerLevel, arg2: $Entity, arg3: $EntityDimensions_): $Vec3;
         static findPortalShape(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $Predicate_<$PortalShape>, arg3: $Direction$Axis_): ($PortalShape) | undefined;
         isComplete(): boolean;
         static getRelativePosition(arg0: $BlockUtil$FoundRectangle, arg1: $Direction$Axis_, arg2: $Vec3_, arg3: $EntityDimensions_): $Vec3;
@@ -60,5 +60,5 @@ declare module "@package/net/minecraft/world/level/portal" {
     /**
      * Values that may be interpreted as {@link $DimensionTransition}.
      */
-    export type $DimensionTransition_ = { xRot?: number, yRot?: number, speed?: $Vec3_, pos?: $Vec3_, postDimensionTransition?: $DimensionTransition$PostDimensionTransition_, newLevel?: $ServerLevel, missingRespawnBlock?: boolean,  } | [xRot?: number, yRot?: number, speed?: $Vec3_, pos?: $Vec3_, postDimensionTransition?: $DimensionTransition$PostDimensionTransition_, newLevel?: $ServerLevel, missingRespawnBlock?: boolean, ];
+    export type $DimensionTransition_ = { missingRespawnBlock?: boolean, newLevel?: $ServerLevel, postDimensionTransition?: $DimensionTransition$PostDimensionTransition_, pos?: $Vec3_, speed?: $Vec3_, yRot?: number, xRot?: number,  } | [missingRespawnBlock?: boolean, newLevel?: $ServerLevel, postDimensionTransition?: $DimensionTransition$PostDimensionTransition_, pos?: $Vec3_, speed?: $Vec3_, yRot?: number, xRot?: number, ];
 }

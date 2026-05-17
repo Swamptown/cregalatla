@@ -7,8 +7,8 @@ import { $RenderedImage } from "@package/java/awt/image";
 declare module "@package/java/awt/image/renderable" {
     export class $RenderContext implements $Cloneable {
         clone(): $Object;
-        getRenderingHints(): $RenderingHints;
         setTransform(arg0: $AffineTransform): void;
+        getTransform(): $AffineTransform;
         /**
          * @deprecated
          */
@@ -21,8 +21,8 @@ declare module "@package/java/awt/image/renderable" {
         concatenateTransform(arg0: $AffineTransform): void;
         setAreaOfInterest(arg0: $Shape): void;
         getAreaOfInterest(): $Shape;
-        getTransform(): $AffineTransform;
         setRenderingHints(arg0: $RenderingHints): void;
+        getRenderingHints(): $RenderingHints;
         constructor(arg0: $AffineTransform, arg1: $Shape);
         constructor(arg0: $AffineTransform, arg1: $RenderingHints);
         constructor(arg0: $AffineTransform);
@@ -33,9 +33,9 @@ declare module "@package/java/awt/image/renderable" {
     }
     export interface $RenderableImage {
         getProperty(arg0: string): $Object;
+        isDynamic(): boolean;
         createScaledRendering(arg0: number, arg1: number, arg2: $RenderingHints): $RenderedImage;
         createDefaultRendering(): $RenderedImage;
-        isDynamic(): boolean;
         createRendering(arg0: $RenderContext): $RenderedImage;
         getWidth(): number;
         getHeight(): number;

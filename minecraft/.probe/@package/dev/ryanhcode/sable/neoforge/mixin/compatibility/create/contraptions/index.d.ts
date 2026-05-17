@@ -3,6 +3,7 @@ declare module "@package/dev/ryanhcode/sable/neoforge/mixin/compatibility/create
     export class $Matrix3dAccessor {
     }
     export interface $Matrix3dAccessor {
+        getM00(): number;
         setM00(arg0: number): void;
         getM01(): number;
         setM01(arg0: number): void;
@@ -20,6 +21,5 @@ declare module "@package/dev/ryanhcode/sable/neoforge/mixin/compatibility/create
         setM21(arg0: number): void;
         getM22(): number;
         setM22(arg0: number): void;
-        getM00(): number;
     }
 }

@@ -99,11 +99,11 @@ declare module "@package/com/mojang/brigadier" {
         getRoot(): $RootCommandNode<S>;
         getPath(arg0: $CommandNode<S>): $Collection<string>;
         findNode(arg0: $Collection_<string>): $CommandNode<S>;
+        getCompletionSuggestions(arg0: $ParseResults<S>): $CompletableFuture<$Suggestions>;
+        getCompletionSuggestions(arg0: $ParseResults<S>, arg1: number): $CompletableFuture<$Suggestions>;
+        findAmbiguities(arg0: $AmbiguityConsumer_<S>): void;
         getAllUsage(arg0: $CommandNode<S>, arg1: S, arg2: boolean): string[];
         getSmartUsage(arg0: $CommandNode<S>, arg1: S): $Map<$CommandNode<S>, string>;
-        getCompletionSuggestions(arg0: $ParseResults<S>, arg1: number): $CompletableFuture<$Suggestions>;
-        getCompletionSuggestions(arg0: $ParseResults<S>): $CompletableFuture<$Suggestions>;
-        findAmbiguities(arg0: $AmbiguityConsumer_<S>): void;
         setConsumer(arg0: $ResultConsumer_<S>): void;
         static ARGUMENT_SEPARATOR: string;
         static ARGUMENT_SEPARATOR_CHAR: string;

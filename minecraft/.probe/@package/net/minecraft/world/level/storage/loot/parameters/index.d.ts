@@ -42,16 +42,16 @@ declare module "@package/net/minecraft/world/level/storage/loot/parameters" {
     }
     export class $LootContextParamSet {
         static builder(): $LootContextParamSet$Builder;
-        isAllowed(arg0: $LootContextParam<never>): boolean;
         getRequired(): $Set<$LootContextParam<never>>;
         getAllowed(): $Set<$LootContextParam<never>>;
-        validateUser(arg0: $ProblemReporter, arg1: $LootContextUser): void;
         validateUser(arg0: $ValidationContext, arg1: $LootContextUser): void;
+        validateUser(arg0: $ProblemReporter, arg1: $LootContextUser): void;
+        isAllowed(arg0: $LootContextParam<never>): boolean;
         constructor(arg0: $Set_<$LootContextParam<never>>, arg1: $Set_<$LootContextParam<never>>);
         get required(): $Set<$LootContextParam<never>>;
     }
     export class $LootContextParamSets implements $LootContextTypesAccessor {
-        static getREGISTRY$emi_loot_$md$8e2dbe$0(): $BiMap<any, any>;
+        static getREGISTRY$emi_loot_$md$d858b6$0(): $BiMap<any, any>;
         static ENCHANTED_ITEM: $LootContextParamSet;
         static ENCHANTED_LOCATION: $LootContextParamSet;
         static HIT_BLOCK: $LootContextParamSet;
@@ -78,6 +78,6 @@ declare module "@package/net/minecraft/world/level/storage/loot/parameters" {
         static ENCHANTED_ENTITY: $LootContextParamSet;
         static REGISTRY: $BiMap<$ResourceLocation, $LootContextParamSet>;
         constructor();
-        static get REGISTRY$emi_loot_$md$8e2dbe$0(): $BiMap<any, any>;
+        static get REGISTRY$emi_loot_$md$d858b6$0(): $BiMap<any, any>;
     }
 }

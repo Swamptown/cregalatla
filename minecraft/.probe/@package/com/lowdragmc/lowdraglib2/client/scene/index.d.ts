@@ -29,7 +29,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/scene" {
         applyEntity(arg0: $Level_, arg1: $Entity, arg2: $PoseStack, arg3: number): void;
     }
     export class $WorldSceneRenderer {
-        getParticleManager(): $ParticleManager;
         rayTrace(arg0: $Vector3f): $BlockHitResult;
         deleteCacheBuffer(): $WorldSceneRenderer;
         removeAllRenderedBlocks(): $WorldSceneRenderer;
@@ -44,12 +43,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/scene" {
         getLastHit(): $Vector3f;
         getLookAt(): $Vector3f;
         getWorldUp(): $Vector3f;
+        getParticleManager(): $ParticleManager;
         setOnLookingAt(arg0: $Consumer_<$BlockHitResult>): $WorldSceneRenderer;
-        isUseCache(): boolean;
         useOrtho(arg0: boolean): $WorldSceneRenderer;
         useCacheBuffer(arg0: boolean): $WorldSceneRenderer;
-        setCameraOrtho(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         setCameraOrtho(arg0: number, arg1: number, arg2: number): void;
+        setCameraOrtho(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         setCameraLookAt(arg0: $Vector3f, arg1: number, arg2: number, arg3: number): void;
         setCameraLookAt(arg0: $Vector3f, arg1: $Vector3f, arg2: $Vector3f): void;
         setBeforeWorldRender(arg0: $Consumer_<$WorldSceneRenderer>): $WorldSceneRenderer;
@@ -64,10 +63,11 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/scene" {
         getEyePos(): $Vector3f;
         isCompiling(): boolean;
         getCompileProgress(): number;
-        setFov(arg0: number): $WorldSceneRenderer;
+        isUseCache(): boolean;
         setBlocked(arg0: $Set_<$BlockPos_>): $WorldSceneRenderer;
-        getFov(): number;
+        setFov(arg0: number): $WorldSceneRenderer;
         render(arg0: $PoseStack, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
+        getFov(): number;
         project(arg0: $Vector3f): $Vector3f;
         world: $Level;
         renderedBlocksMap: $Map<$Collection<$BlockPos>, $ISceneBlockRenderHook>;
@@ -78,7 +78,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/scene" {
         get lookAt(): $Vector3f;
         get worldUp(): $Vector3f;
         set onLookingAt(value: $Consumer_<$BlockHitResult>);
-        get useCache(): boolean;
         set beforeWorldRender(value: $Consumer_<$WorldSceneRenderer>);
         set beforeBatchEnd(value: $BiConsumer_<$MultiBufferSource, number>);
         set afterWorldRender(value: $Consumer_<$WorldSceneRenderer>);
@@ -86,6 +85,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/scene" {
         get eyePos(): $Vector3f;
         get compiling(): boolean;
         get compileProgress(): number;
+        get useCache(): boolean;
         set blocked(value: $Set_<$BlockPos_>);
     }
     export class $WorldSceneRenderer$VertexConsumerWrapper implements $VertexConsumer {
@@ -93,28 +93,28 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/scene" {
         clearOffset(): void;
         setOffsetX(arg0: number): $WorldSceneRenderer$VertexConsumerWrapper;
         setOffsetY(arg0: number): $WorldSceneRenderer$VertexConsumerWrapper;
-        setOffsetZ(arg0: number): $WorldSceneRenderer$VertexConsumerWrapper;
         setColorMultiplier(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        clearColor(): void;
-        addVertex(arg0: number, arg1: number, arg2: number): $VertexConsumer;
-        setUv(arg0: number, arg1: number): $VertexConsumer;
+        setOffsetZ(arg0: number): $WorldSceneRenderer$VertexConsumerWrapper;
         setUv1(arg0: number, arg1: number): $VertexConsumer;
         setUv2(arg0: number, arg1: number): $VertexConsumer;
         setNormal(arg0: number, arg1: number, arg2: number): $VertexConsumer;
+        addVertex(arg0: number, arg1: number, arg2: number): $VertexConsumer;
+        setUv(arg0: number, arg1: number): $VertexConsumer;
+        clearColor(): void;
         addOffset(arg0: number, arg1: number, arg2: number): void;
         setColor(arg0: number): $VertexConsumer;
         setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
-        addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
-        addVertex(arg0: $Vector3f): $VertexConsumer;
-        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setOverlay(arg0: number): $VertexConsumer;
         setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setLight(arg0: number): $VertexConsumer;
         setWhiteAlpha(arg0: number): $VertexConsumer;
+        setLight(arg0: number): $VertexConsumer;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
+        addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
+        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        addVertex(arg0: $Vector3f): $VertexConsumer;
+        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
+        setOverlay(arg0: number): $VertexConsumer;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
@@ -123,9 +123,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/scene" {
         set offsetX(value: number);
         set offsetY(value: number);
         set offsetZ(value: number);
-        set overlay(value: number);
-        set light(value: number);
         set whiteAlpha(value: number);
+        set light(value: number);
+        set overlay(value: number);
     }
     export class $ParticleManager {
         tick(): void;

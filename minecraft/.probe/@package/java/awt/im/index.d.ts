@@ -9,15 +9,15 @@ declare module "@package/java/awt/im" {
         static getInstance(): $InputContext;
         getLocale(): $Locale;
         dispose(): void;
-        removeNotify(arg0: $Component): void;
+        dispatchEvent(arg0: $AWTEvent): void;
         selectInputMethod(arg0: $Locale): boolean;
         setCharacterSubsets(arg0: $Character$Subset[]): void;
         setCompositionEnabled(arg0: boolean): void;
         isCompositionEnabled(): boolean;
         reconvert(): void;
         getInputMethodControlObject(): $Object;
+        removeNotify(arg0: $Component): void;
         endComposition(): void;
-        dispatchEvent(arg0: $AWTEvent): void;
         static get instance(): $InputContext;
         get locale(): $Locale;
         set characterSubsets(value: $Character$Subset[]);
@@ -45,14 +45,14 @@ declare module "@package/java/awt/im" {
     export class $InputMethodRequests {
     }
     export interface $InputMethodRequests {
+        getCommittedTextLength(): number;
+        cancelLatestCommittedText(arg0: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
         getTextLocation(arg0: $TextHitInfo): $Rectangle;
         getLocationOffset(arg0: number, arg1: number): $TextHitInfo;
         getInsertPositionOffset(): number;
         getCommittedText(arg0: number, arg1: number, arg2: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
-        getCommittedTextLength(): number;
-        cancelLatestCommittedText(arg0: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
         getSelectedText(arg0: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
-        get insertPositionOffset(): number;
         get committedTextLength(): number;
+        get insertPositionOffset(): number;
     }
 }

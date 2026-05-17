@@ -62,19 +62,19 @@ declare module "@package/javax/print" {
     }
     export interface $Doc {
         getAttributes(): $DocAttributeSet;
-        getReaderForText(): $Reader;
         getDocFlavor(): $DocFlavor;
         getPrintData(): $Object;
         getStreamForBytes(): $InputStream;
+        getReaderForText(): $Reader;
         get attributes(): $DocAttributeSet;
-        get readerForText(): $Reader;
         get docFlavor(): $DocFlavor;
         get printData(): $Object;
         get streamForBytes(): $InputStream;
+        get readerForText(): $Reader;
     }
     export class $ServiceUIFactory {
-        getUI(arg0: number, arg1: string): $Object;
         getUIClassNamesForRole(arg0: number): string[];
+        getUI(arg0: number, arg1: string): $Object;
         static ABOUT_UIROLE: number;
         static PANEL_UI: string;
         static RESERVED_UIROLE: number;

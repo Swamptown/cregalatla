@@ -65,15 +65,6 @@ declare module "@package/com/mojang/brigadier/exceptions" {
     export class $BuiltInExceptionProvider {
     }
     export interface $BuiltInExceptionProvider {
-        doubleTooLow(): $Dynamic2CommandExceptionType;
-        doubleTooHigh(): $Dynamic2CommandExceptionType;
-        floatTooLow(): $Dynamic2CommandExceptionType;
-        floatTooHigh(): $Dynamic2CommandExceptionType;
-        integerTooLow(): $Dynamic2CommandExceptionType;
-        integerTooHigh(): $Dynamic2CommandExceptionType;
-        longTooLow(): $Dynamic2CommandExceptionType;
-        longTooHigh(): $Dynamic2CommandExceptionType;
-        literalIncorrect(): $DynamicCommandExceptionType;
         readerExpectedStartOfQuote(): $SimpleCommandExceptionType;
         readerExpectedEndOfQuote(): $SimpleCommandExceptionType;
         readerInvalidEscape(): $DynamicCommandExceptionType;
@@ -92,5 +83,14 @@ declare module "@package/com/mojang/brigadier/exceptions" {
         dispatcherUnknownArgument(): $SimpleCommandExceptionType;
         dispatcherExpectedArgumentSeparator(): $SimpleCommandExceptionType;
         dispatcherParseException(): $DynamicCommandExceptionType;
+        doubleTooLow(): $Dynamic2CommandExceptionType;
+        doubleTooHigh(): $Dynamic2CommandExceptionType;
+        floatTooLow(): $Dynamic2CommandExceptionType;
+        floatTooHigh(): $Dynamic2CommandExceptionType;
+        integerTooLow(): $Dynamic2CommandExceptionType;
+        integerTooHigh(): $Dynamic2CommandExceptionType;
+        longTooLow(): $Dynamic2CommandExceptionType;
+        longTooHigh(): $Dynamic2CommandExceptionType;
+        literalIncorrect(): $DynamicCommandExceptionType;
     }
 }

@@ -2,7 +2,7 @@ import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $MoveControl, $LookControl, $JumpControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $CompoundTag } from "@package/net/minecraft/nbt";
-import { $EntityType_, $Pose, $PortalProcessor, $VariantHolder, $Entity, $AnimationState, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState, $Mob, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
+import { $EntityType_, $Pose, $VariantHolder, $PortalProcessor, $Entity, $AnimationState, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState, $Mob, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $Stack, $Map, $Optional } from "@package/java/util";
@@ -38,8 +38,8 @@ import { $Vec3 } from "@package/net/minecraft/world/phys";
 
 declare module "@package/net/minecraft/world/entity/animal/frog" {
     export class $FrogAi {
-        static initMemories(arg0: $Frog, arg1: $RandomSource): void;
         static getTemptations(): $Predicate<$ItemStack>;
+        static initMemories(arg0: $Frog, arg1: $RandomSource): void;
         static updateActivity(arg0: $Frog): void;
         static makeBrain(arg0: $Brain<$Frog>): $Brain<never>;
         constructor();
@@ -63,8 +63,8 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         start(arg0: $ServerLevel, arg1: $Frog, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Frog, arg2: number): void;
         tick(arg0: $ServerLevel, arg1: $Frog, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: $Frog, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Frog): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Frog, arg2: number): boolean;
         static MAX_UNREACHBLE_TONGUE_TARGETS_IN_MEMORY: number;
         static TIME_OUT_DURATION: number;
         static UNREACHABLE_TONGUE_TARGETS_COOLDOWN_DURATION: number;
@@ -79,10 +79,10 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         setVariant(arg0: $Holder_<$FrogVariant>): void;
         setVariantData(variant: $FrogDataVariant_): void;
         getVariantData(): $Optional<any>;
+        eraseTongueTarget(): void;
         getTongueTarget(): ($Entity) | undefined;
         setTongueTarget(arg0: $Entity): void;
         static checkFrogSpawnRules(arg0: $EntityType_<$Animal>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
-        eraseTongueTarget(): void;
         static canEat(arg0: $LivingEntity): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
         serializeNBT(arg0: $HolderLookup$Provider): $Holder<$FrogVariant>;

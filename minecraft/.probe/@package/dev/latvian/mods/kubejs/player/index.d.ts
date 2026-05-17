@@ -104,10 +104,6 @@ declare module "@package/dev/latvian/mods/kubejs/player" {
          * Kills every entity in the list.
          */
         kill(): void;
-        /**
-         * Results in an entity list containing only item entities.
-         */
-        filterItems(): $EntityArrayList;
         addAllIterable(entities: $Iterable_<$Entity>): void;
         /**
          * Filters the entity list based on distance to the given block position.
@@ -138,13 +134,25 @@ declare module "@package/dev/latvian/mods/kubejs/player" {
          */
         filterPlayers(): $EntityArrayList;
         /**
+         * Results in an entity list containing only item entities.
+         */
+        filterItems(): $EntityArrayList;
+        /**
          * Filters the entity list by passing each entity through all predicates in provided list.
          * Entities that pass at least one of the predicates will end up in the resulting entity list.
          * 
          * @param filterList The list of predicates - functions that take one argument of `Entity` and return boolean values.
          */
         filterList(filterList: $List_<$Predicate_<$Entity>>): $EntityArrayList;
+        /**
+         * Each entity in the list runs the specified console command with their permission level. The command won't output any logs in chat nor console
+         * 
+         * @param command The console command. Slash at the beginning is optional.
+         */
+        runCommandSilent(command: string): void;
+        setActivePostShader(id: $ResourceLocation_): void;
         getName(): $Component;
+        getDisplayName(): $Component;
         /**
          * Sends a message in chat to every entity in the list.
          * 
@@ -158,14 +166,6 @@ declare module "@package/dev/latvian/mods/kubejs/player" {
          * @param command The console command. Slash at the beginning is optional.
          */
         runCommand(command: string): void;
-        /**
-         * Each entity in the list runs the specified console command with their permission level. The command won't output any logs in chat nor console
-         * 
-         * @param command The console command. Slash at the beginning is optional.
-         */
-        runCommandSilent(command: string): void;
-        setActivePostShader(id: $ResourceLocation_): void;
-        getDisplayName(): $Component;
         /**
          * Plays a sound from each entity in the list, unless the entity is silent.
          */
@@ -191,10 +191,10 @@ declare module "@package/dev/latvian/mods/kubejs/player" {
         constructor(level: $Level_, entities: $Iterable_<$Entity>);
         constructor(entities: $Iterable_<$Entity>);
         constructor(size: number);
-        get name(): $Component;
-        set statusMessage(value: $Component_);
         set activePostShader(value: $ResourceLocation_);
+        get name(): $Component;
         get displayName(): $Component;
+        set statusMessage(value: $Component_);
     }
     export class $KubePlayerEvent {
     }
@@ -383,8 +383,8 @@ declare module "@package/dev/latvian/mods/kubejs/player" {
         get entity(): $LivingEntity;
     }
     export class $KubeJSInventoryListener implements $ContainerListener {
-        dataChanged(container: $AbstractContainerMenu, id: number, value: number): void;
         slotChanged(container: $AbstractContainerMenu, index: number, stack: $ItemStack_): void;
+        dataChanged(container: $AbstractContainerMenu, id: number, value: number): void;
         player: $Player;
         constructor(p: $Player);
     }
@@ -498,16 +498,16 @@ declare module "@package/dev/latvian/mods/kubejs/player" {
     }
     export class $ChestKubeEvent extends $InventoryKubeEvent {
         /**
-         * Gets the chest block.
-         */
-        getBlock(): $LevelBlock;
-        /**
          * Gets the chest inventory.
          */
         getInventory(): $Container;
+        /**
+         * Gets the chest block.
+         */
+        getBlock(): $LevelBlock;
         constructor(player: $Player, menu: $AbstractContainerMenu);
-        get block(): $LevelBlock;
         get inventory(): $Container;
+        get block(): $LevelBlock;
     }
     export class $PlayerAdvancementKubeEvent implements $KubePlayerEvent {
         /**

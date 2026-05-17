@@ -25,8 +25,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
         getRadius(): number;
         getIgniter(): $LivingEntity;
         getAffectedPlayers(): $List<$Player>;
-        getBlock(): $LevelBlock;
         getBlockState(): $BlockState;
+        getBlock(): $LevelBlock;
         constructor(level: $Level_, pos: $BlockPos_, explosion: $Explosion);
         get cause(): $Entity;
         get level(): $Level;
@@ -34,8 +34,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
         get radius(): number;
         get igniter(): $LivingEntity;
         get affectedPlayers(): $List<$Player>;
-        get block(): $LevelBlock;
         get blockState(): $BlockState;
+        get block(): $LevelBlock;
     }
     export class $BlockStateModifyCallback {
         /**
@@ -153,6 +153,10 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          */
         getLevel(): $Level;
         /**
+         * Gets the vertical direction (UP/DOWN) closest to where the player is currently looking
+         */
+        getNearestLookingVerticalDirection(): $Direction;
+        /**
          * Gets the clicked position in world
          */
         getClickedPos(): $BlockPos;
@@ -164,6 +168,10 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          * Gets the player placing the block, if available
          */
         getPlayer(): $Player;
+        /**
+         * Returns if the hit posiiton in the block-space is inside the 1x1x1 cube of the block
+         */
+        isInside(): boolean;
         /**
          * Gets the nearest horizontal direction to where the player is looking. NORTH if there is no player
          */
@@ -177,13 +185,13 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          */
         getNearestLookingDirections(): $Direction[];
         /**
-         * Gets the position in the block-space of where it was clicked
-         */
-        getClickLocation(): $Vec3;
-        /**
          * Returns if the block being placed is replacing the block clicked
          */
         replacingClickedOnBlock(): boolean;
+        /**
+         * Gets the position in the block-space of where it was clicked
+         */
+        getClickLocation(): $Vec3;
         /**
          * Returns if the block being placed thinks it can be placed here. This is used for replacement checks, like placing blocks in water or tall grass
          */
@@ -192,14 +200,6 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          * Gets the hand that is placing the block
          */
         getHand(): $InteractionHand;
-        /**
-         * Gets the vertical direction (UP/DOWN) closest to where the player is currently looking
-         */
-        getNearestLookingVerticalDirection(): $Direction;
-        /**
-         * Returns if the hit posiiton in the block-space is inside the 1x1x1 cube of the block
-         */
-        isInside(): boolean;
         /**
          * Checks if the position clicked has a specified fluid there
          */
@@ -246,16 +246,16 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
         block: $LevelBlock;
         constructor(context: $BlockPlaceContext, block: $Block_);
         get level(): $Level;
+        get nearestLookingVerticalDirection(): $Direction;
         get clickedPos(): $BlockPos;
         get clickedFace(): $Direction;
         get player(): $Player;
+        get inside(): boolean;
         get horizontalDirection(): $Direction;
         get nearestLookingDirection(): $Direction;
         get nearestLookingDirections(): $Direction[];
         get clickLocation(): $Vec3;
         get hand(): $InteractionHand;
-        get nearestLookingVerticalDirection(): $Direction;
-        get inside(): boolean;
         get replacingSelf(): boolean;
         get fluidStateAtClickedPos(): $FluidState;
         get clickedBlock(): $LevelBlock;
@@ -287,10 +287,6 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          */
         getEntity(): $Entity;
         /**
-         * Returns the block
-         */
-        getBlock(): $LevelBlock;
-        /**
          * Returns if the entity is suppressing bouncing (for players this is true if the player is crouching)
          */
         isSuppressingBounce(): boolean;
@@ -298,26 +294,30 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          * Returns the block's position
          */
         getPos(): $BlockPos;
+        /**
+         * Returns the block
+         */
+        getBlock(): $LevelBlock;
         constructor(level: $Level_, entity: $Entity, pos: $BlockPos_, state: $BlockState_);
         get state(): $BlockState;
         get level(): $Level;
         get entity(): $Entity;
-        get block(): $LevelBlock;
         get suppressingBounce(): boolean;
         get pos(): $BlockPos;
+        get block(): $LevelBlock;
     }
     export class $CanBeReplacedCallback {
         getLevel(): $Level;
+        getNearestLookingVerticalDirection(): $Direction;
         getClickedPos(): $BlockPos;
         getClickedFace(): $Direction;
         getPlayer(): $Player;
+        isInside(): boolean;
         getHorizontalDirection(): $Direction;
         getNearestLookingDirection(): $Direction;
         getNearestLookingDirections(): $Direction[];
         getClickLocation(): $Vec3;
         getHand(): $InteractionHand;
-        getNearestLookingVerticalDirection(): $Direction;
-        isInside(): boolean;
         isClickedPosIn(fluid: $Fluid_): boolean;
         getFluidStateAtClickedPos(): $FluidState;
         getClickedBlock(): $LevelBlock;
@@ -327,16 +327,16 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
         canBeReplaced(): boolean;
         constructor(blockPlaceContext: $BlockPlaceContext, state: $BlockState_);
         get level(): $Level;
+        get nearestLookingVerticalDirection(): $Direction;
         get clickedPos(): $BlockPos;
         get clickedFace(): $Direction;
         get player(): $Player;
+        get inside(): boolean;
         get horizontalDirection(): $Direction;
         get nearestLookingDirection(): $Direction;
         get nearestLookingDirections(): $Direction[];
         get clickLocation(): $Vec3;
         get hand(): $InteractionHand;
-        get nearestLookingVerticalDirection(): $Direction;
-        get inside(): boolean;
         get fluidStateAtClickedPos(): $FluidState;
         get clickedBlock(): $LevelBlock;
         get item(): $ItemStack;

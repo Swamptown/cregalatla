@@ -55,8 +55,8 @@ declare module "@package/net/minecraft/server/players" {
         constructor();
     }
     export class $GameProfileCache {
-        get(arg0: $UUID_): ($GameProfile) | undefined;
         get(arg0: string): ($GameProfile) | undefined;
+        get(arg0: $UUID_): ($GameProfile) | undefined;
         load(): $List<$GameProfileCache$GameProfileInfo>;
         add(arg0: $GameProfile): void;
         save(): void;
@@ -108,17 +108,17 @@ declare module "@package/net/minecraft/server/players" {
     export class $SleepStatus implements $ServerAware {
         update(arg0: $List_<$ServerPlayer>): boolean;
         comforts$getServer(): $ServerLevel;
-        comforts$setServer(arg0: $ServerLevel): void;
         areEnoughSleeping(arg0: number): boolean;
         areEnoughDeepSleeping(arg0: number, arg1: $List_<$ServerPlayer>): boolean;
         removeAllSleepers(): void;
         amountSleeping(): number;
         sleepersNeeded(arg0: number): number;
+        comforts$setServer(arg0: $ServerLevel): void;
         constructor();
     }
     export class $ServerOpList extends $StoredUserList<$GameProfile, $ServerOpListEntry> {
-        getKeyForUser(arg0: $GameProfile): string;
         canBypassPlayerLimit(arg0: $GameProfile): boolean;
+        getKeyForUser(arg0: $GameProfile): string;
         constructor(arg0: $File_);
     }
     export class $GameProfileCache$GameProfileInfo {
@@ -141,29 +141,26 @@ declare module "@package/net/minecraft/server/players" {
         removeAll(): void;
         broadcast(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $ResourceKey_<any>, arg6: $Packet<any>): void;
         tick(): void;
-        handler$cda000$e4mc$injectListLoads(ci: $CallbackInfo): void;
+        handler$bha000$e4mc$injectListLoads(ci: $CallbackInfo): void;
         placeNewPlayer(arg0: $Connection, arg1: $ServerPlayer, arg2: $CommonListenerCookie_): void;
         updateEntireScoreboard(arg0: $ServerScoreboard, arg1: $ServerPlayer): void;
         canPlayerLogin(arg0: $SocketAddress, arg1: $GameProfile): $Component;
-        handler$cda000$e4mc$allowOwnerLogin(socketAddress: $SocketAddress, gameProfile: $Object, cir: $CallbackInfoReturnable<any>): void;
+        handler$bha000$e4mc$allowOwnerLogin(socketAddress: $SocketAddress, gameProfile: $Object, cir: $CallbackInfoReturnable<any>): void;
         canBypassPlayerLimit(arg0: $GameProfile): boolean;
         getPlayerForLogin(arg0: $GameProfile, arg1: $ClientInformation_): $ServerPlayer;
         disconnectAllPlayersWithProfile(arg0: $GameProfile): boolean;
         getOpNames(): string[];
-        handler$zec000$xaeroworldmap$onSendWorldInfo(arg0: $ServerPlayer, arg1: $ServerLevel, arg2: $CallbackInfo): void;
-        handler$clj000$xaerolib$onSendLevelInfo(arg0: $ServerPlayer, arg1: $ServerLevel, arg2: $CallbackInfo): void;
-        handler$ggc001$xaerominimap$onSendWorldInfo(arg0: $ServerPlayer, arg1: $ServerLevel, arg2: $CallbackInfo): void;
+        handler$cof000$xaerominimap$onSendWorldInfo(arg0: $ServerPlayer, arg1: $ServerLevel, arg2: $CallbackInfo): void;
+        handler$den001$xaeroworldmap$onSendWorldInfo(arg0: $ServerPlayer, arg1: $ServerLevel, arg2: $CallbackInfo): void;
+        handler$epj000$xaerolib$onSendLevelInfo(arg0: $ServerPlayer, arg1: $ServerLevel, arg2: $CallbackInfo): void;
         getPlayersWithAddress(arg0: string): $List<$ServerPlayer>;
-        getIpBans(): $IpBanList;
         reloadWhiteList(): void;
         isUsingWhitelist(): boolean;
         setUsingWhiteList(arg0: boolean): void;
         getWhiteListNames(): string[];
+        getIpBans(): $IpBanList;
         broadcastChatMessage(arg0: $PlayerChatMessage_, arg1: $CommandSourceStack, arg2: $ChatType$Bound_): void;
         broadcastChatMessage(arg0: $PlayerChatMessage_, arg1: $ServerPlayer, arg2: $ChatType$Bound_): void;
-        setViewDistance(arg0: number): void;
-        setSimulationDistance(arg0: number): void;
-        setAllowCommandsForAllPlayers(arg0: boolean): void;
         addWorldborderListener(arg0: $ServerLevel): void;
         getSingleplayerData(): $CompoundTag;
         getMaxPlayers(): number;
@@ -173,27 +170,30 @@ declare module "@package/net/minecraft/server/players" {
         getWhiteList(): $UserWhiteList;
         isWhiteListed(arg0: $GameProfile): boolean;
         isAllowCommandsForAllPlayers(): boolean;
-        getPlayer(arg0: $UUID_): $ServerPlayer;
-        broadcastAll(arg0: $Packet<never>, arg1: $ResourceKey_<$Level>): void;
-        broadcastAll(arg0: $Packet<never>): void;
-        sendActiveEffects(arg0: $LivingEntity, arg1: $ServerGamePacketListenerImpl): void;
+        setViewDistance(arg0: number): void;
+        setSimulationDistance(arg0: number): void;
+        setAllowCommandsForAllPlayers(arg0: boolean): void;
+        getPlayerByName(arg0: string): $ServerPlayer;
         getPlayerStats(arg0: $Player): $ServerStatsCounter;
         getPlayerAdvancements(arg0: $ServerPlayer): $PlayerAdvancements;
-        isOp(arg0: $GameProfile): boolean;
-        saveAll(): void;
-        getPlayers(): $List<$ServerPlayer>;
-        broadcastSystemMessage(arg0: $Component_, arg1: boolean): void;
         broadcastSystemMessage(arg0: $Component_, arg1: $Function_<$ServerPlayer, $Component>, arg2: boolean): void;
+        broadcastSystemMessage(arg0: $Component_, arg1: boolean): void;
         broadcastSystemToTeam(arg0: $Player, arg1: $Component_): void;
         broadcastSystemToAllExceptTeam(arg0: $Player, arg1: $Component_): void;
         sendPlayerPermissionLevel(arg0: $ServerPlayer): void;
         sendLevelInfo(arg0: $ServerPlayer, arg1: $ServerLevel): void;
         sendAllPlayerInfo(arg0: $ServerPlayer): void;
         sendActivePlayerEffects(arg0: $ServerPlayer): void;
+        broadcastAll(arg0: $Packet<never>, arg1: $ResourceKey_<$Level>): void;
+        broadcastAll(arg0: $Packet<never>): void;
+        sendActiveEffects(arg0: $LivingEntity, arg1: $ServerGamePacketListenerImpl): void;
         getBans(): $UserBanList;
+        getPlayer(arg0: $UUID_): $ServerPlayer;
+        isOp(arg0: $GameProfile): boolean;
         getViewDistance(): number;
         getSimulationDistance(): number;
-        getPlayerByName(arg0: string): $ServerPlayer;
+        saveAll(): void;
+        getPlayers(): $List<$ServerPlayer>;
         getOps(): $ServerOpList;
         respawn(arg0: $ServerPlayer, arg1: boolean, arg2: $Entity$RemovalReason_): $ServerPlayer;
         getServer(): $MinecraftServer;
@@ -207,16 +207,16 @@ declare module "@package/net/minecraft/server/players" {
         static DUPLICATE_LOGIN_DISCONNECT_MESSAGE: $Component;
         constructor(arg0: $MinecraftServer, arg1: $LayeredRegistryAccess<$RegistryLayer_>, arg2: $PlayerDataStorage, arg3: number);
         get opNames(): string[];
-        get ipBans(): $IpBanList;
         get usingWhitelist(): boolean;
         set usingWhiteList(value: boolean);
         get whiteListNames(): string[];
+        get ipBans(): $IpBanList;
         get singleplayerData(): $CompoundTag;
         get playerCount(): number;
         get playerNamesArray(): string[];
         get whiteList(): $UserWhiteList;
-        get players(): $List<$ServerPlayer>;
         get bans(): $UserBanList;
+        get players(): $List<$ServerPlayer>;
         get ops(): $ServerOpList;
         get server(): $MinecraftServer;
     }

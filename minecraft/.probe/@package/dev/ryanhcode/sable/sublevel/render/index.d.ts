@@ -11,14 +11,14 @@ declare module "@package/dev/ryanhcode/sable/sublevel/render" {
     export interface $SubLevelRenderData extends $Closeable {
         close(): void;
         setDirty(arg0: number, arg1: number, arg2: number, arg3: boolean): void;
+        rebuild(): void;
+        getTransformation(arg0: number, arg1: number, arg2: number): $Matrix4f;
+        getTransformation(arg0: number, arg1: number, arg2: number, arg3: $Matrix4f): $Matrix4f;
+        getSubLevel(): $ClientSubLevel;
         compileSections(arg0: $PrioritizeChunkUpdates_, arg1: $RenderRegionCache, arg2: $Camera): void;
         isSectionCompiled(arg0: number, arg1: number, arg2: number): boolean;
-        rebuild(): void;
-        getTransformation(arg0: number, arg1: number, arg2: number, arg3: $Matrix4f): $Matrix4f;
-        getTransformation(arg0: number, arg1: number, arg2: number): $Matrix4f;
-        getSubLevel(): $ClientSubLevel;
-        getChunkOffset(arg0: $Vector3d): $Vector3d;
         getChunkOffset(): $Vector3d;
+        getChunkOffset(arg0: $Vector3d): $Vector3d;
         get subLevel(): $ClientSubLevel;
     }
 }

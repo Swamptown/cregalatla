@@ -32,11 +32,11 @@ declare module "@package/net/minecraft/world/entity/ai/attributes" {
     }
     export class $DefaultAttributes implements $DefaultAttributeRegistryAccessor {
         static validate(): void;
-        static getRegistry$fabric_object_builder_api_v1_$md$8e2dbe$0(): $Map<any, any>;
+        static getRegistry$fabric_object_builder_api_v1_$md$d858b6$0(): $Map<any, any>;
         static hasSupplier(arg0: $EntityType_<never>): boolean;
         static getSupplier(arg0: $EntityType_<$LivingEntity>): $AttributeSupplier;
         constructor();
-        static get registry$fabric_object_builder_api_v1_$md$8e2dbe$0(): $Map<any, any>;
+        static get registry$fabric_object_builder_api_v1_$md$d858b6$0(): $Map<any, any>;
     }
     export class $AttributeModifier$Operation extends $Enum<$AttributeModifier$Operation> implements $StringRepresentable {
         static values(): $AttributeModifier$Operation[];
@@ -64,15 +64,15 @@ declare module "@package/net/minecraft/world/entity/ai/attributes" {
         getModifiers(): $Set<$AttributeModifier>;
         save(): $CompoundTag;
         getAttribute(): $Holder<$Attribute>;
+        setDirty(): void;
         addOrUpdateTransientModifier(arg0: $AttributeModifier_): void;
         addPermanentModifier(arg0: $AttributeModifier_): void;
-        setDirty(): void;
         addOrReplacePermanentModifier(arg0: $AttributeModifier_): void;
         hasModifier(arg0: $ResourceLocation_): boolean;
         replaceFrom(arg0: $AttributeInstance): void;
         getModifier(arg0: $ResourceLocation_): $AttributeModifier;
-        removeModifier(arg0: $ResourceLocation_): boolean;
         removeModifier(arg0: $AttributeModifier_): void;
+        removeModifier(arg0: $ResourceLocation_): boolean;
         addTransientModifier(arg0: $AttributeModifier_): void;
         getBaseValue(): number;
         setBaseValue(arg0: number): void;
@@ -91,11 +91,11 @@ declare module "@package/net/minecraft/world/entity/ai/attributes" {
         getMergedStyle(arg0: boolean): $TextColor;
         getDescriptionId(): string;
         getStyle(arg0: boolean): $ChatFormatting;
+        getBaseId(): $ResourceLocation;
+        toBaseComponent(arg0: number, arg1: number, arg2: boolean, arg3: $TooltipFlag): $MutableComponent;
         toValueComponent(arg0: $AttributeModifier$Operation_, arg1: number, arg2: $TooltipFlag): $MutableComponent;
         getDebugInfo(arg0: $AttributeModifier_, arg1: $TooltipFlag): $Component;
         toComponent(arg0: $AttributeModifier_, arg1: $TooltipFlag): $MutableComponent;
-        getBaseId(): $ResourceLocation;
-        toBaseComponent(arg0: number, arg1: number, arg2: boolean, arg3: $TooltipFlag): $MutableComponent;
         static MERGED_GRAY: $TextColor;
         static MERGED_RED: $TextColor;
         static CODEC: $Codec<$Holder<$Attribute>>;
@@ -162,9 +162,9 @@ declare module "@package/net/minecraft/world/entity/ai/attributes" {
         getValue(arg0: $Holder_<$Attribute>): number;
         getInstance(arg0: $Holder_<$Attribute>): $AttributeInstance;
         save(): $ListTag;
-        getModifierValue(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_): number;
         getSyncableAttributes(): $Collection<$AttributeInstance>;
         getAttributesToSync(): $Set<$AttributeInstance>;
+        getModifierValue(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_): number;
         hasAttribute(arg0: $Holder_<$Attribute>): boolean;
         assignBaseValues(arg0: $AttributeMap): void;
         addTransientAttributeModifiers(arg0: $Multimap<$Holder_<$Attribute>, $AttributeModifier_>): void;
@@ -193,7 +193,7 @@ declare module "@package/net/minecraft/world/entity/ai/attributes" {
     /**
      * Values that may be interpreted as {@link $AttributeModifier}.
      */
-    export type $AttributeModifier_ = { id?: $ResourceLocation_, operation?: $AttributeModifier$Operation_, amount?: number,  } | [id?: $ResourceLocation_, operation?: $AttributeModifier$Operation_, amount?: number, ];
+    export type $AttributeModifier_ = { amount?: number, operation?: $AttributeModifier$Operation_, id?: $ResourceLocation_,  } | [amount?: number, operation?: $AttributeModifier$Operation_, id?: $ResourceLocation_, ];
     export class $Attribute$Sentiment extends $Enum<$Attribute$Sentiment> {
         static values(): $Attribute$Sentiment[];
         static valueOf(arg0: string): $Attribute$Sentiment;

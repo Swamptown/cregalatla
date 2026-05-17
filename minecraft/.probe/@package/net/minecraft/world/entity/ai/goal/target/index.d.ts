@@ -1,6 +1,6 @@
 import { $Predicate_ } from "@package/java/util/function";
 import { $Goal } from "@package/net/minecraft/world/entity/ai/goal";
-import { $TamableAnimal, $Mob, $LivingEntity, $PathfinderMob } from "@package/net/minecraft/world/entity";
+import { $Mob, $TamableAnimal, $LivingEntity, $PathfinderMob } from "@package/net/minecraft/world/entity";
 import { $Raider } from "@package/net/minecraft/world/entity/raid";
 import { $TargetingConditions } from "@package/net/minecraft/world/entity/ai/targeting";
 import { $Class } from "@package/java/lang";

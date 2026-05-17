@@ -47,5 +47,5 @@ declare module "@package/net/minecraft/data/structures" {
     /**
      * Values that may be interpreted as {@link $SnbtToNbt$TaskResult}.
      */
-    export type $SnbtToNbt$TaskResult_ = { hash?: $HashCode, name?: string, payload?: number[],  } | [hash?: $HashCode, name?: string, payload?: number[], ];
+    export type $SnbtToNbt$TaskResult_ = { payload?: number[], name?: string, hash?: $HashCode,  } | [payload?: number[], name?: string, hash?: $HashCode, ];
 }

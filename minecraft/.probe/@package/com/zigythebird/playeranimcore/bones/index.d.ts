@@ -5,9 +5,19 @@ import { $Pair } from "@package/it/unimi/dsi/fastutil";
 
 declare module "@package/com/zigythebird/playeranimcore/bones" {
     export class $AdvancedPlayerAnimBone extends $PlayerAnimBone implements $IBoneEnabled {
-        setRotEnabled(enabled: boolean): void;
+        isPositionXEnabled(): boolean;
+        isPositionYEnabled(): boolean;
+        isPositionZEnabled(): boolean;
+        isRotXEnabled(): boolean;
+        isRotYEnabled(): boolean;
+        isRotZEnabled(): boolean;
+        isScaleXEnabled(): boolean;
+        isScaleYEnabled(): boolean;
+        isScaleZEnabled(): boolean;
+        isBendEnabled(): boolean;
         setScaleEnabled(enabled: boolean): void;
         setEnabled(enabled: boolean): void;
+        setRotEnabled(enabled: boolean): void;
         setPositionEnabled(enabled: boolean): void;
         setRotXTransitionLength(rotXTransitionLength: number): void;
         setRotYTransitionLength(rotYTransitionLength: number): void;
@@ -19,16 +29,6 @@ declare module "@package/com/zigythebird/playeranimcore/bones" {
         setScaleYTransitionLength(scaleYTransitionLength: number): void;
         setScaleZTransitionLength(scaleZTransitionLength: number): void;
         setBendTransitionLength(bendTransitionLength: number): void;
-        isPositionXEnabled(): boolean;
-        isPositionYEnabled(): boolean;
-        isPositionZEnabled(): boolean;
-        isRotXEnabled(): boolean;
-        isRotYEnabled(): boolean;
-        isRotZEnabled(): boolean;
-        isScaleXEnabled(): boolean;
-        isScaleYEnabled(): boolean;
-        isScaleZEnabled(): boolean;
-        isBendEnabled(): boolean;
         rotXEnabled: boolean;
         positionZTransitionLength: number;
         scaleZ: number;
@@ -60,47 +60,15 @@ declare module "@package/com/zigythebird/playeranimcore/bones" {
         rotYEnabled: boolean;
         rotZEnabled: boolean;
         constructor(name: string);
-        set rotEnabled(value: boolean);
         set scaleEnabled(value: boolean);
         set enabled(value: boolean);
+        set rotEnabled(value: boolean);
         set positionEnabled(value: boolean);
     }
     export class $PlayerAnimBone {
         getName(): string;
         scale(value: number): $PlayerAnimBone;
         add(bone: $PlayerAnimBone): $PlayerAnimBone;
-        getPosX(): number;
-        getPosY(): number;
-        updatePosition(posX: number, posY: number, posZ: number): void;
-        updateScale(scaleX: number, scaleY: number, scaleZ: number): void;
-        updateRotation(xRot: number, yRot: number, zRot: number): void;
-        getRotY(): number;
-        setRotY(value: number): void;
-        getRotX(): number;
-        setRotX(value: number): void;
-        getRotationVector(): $Vec3f;
-        saveSnapshot(): $BoneSnapshot;
-        addPos(x: number, y: number, z: number): $PlayerAnimBone;
-        addPos(value: number): $PlayerAnimBone;
-        setPosX(value: number): void;
-        setPosY(value: number): void;
-        getScaleX(): number;
-        getScaleY(): number;
-        getScaleZ(): number;
-        getPosZ(): number;
-        setToInitialPose(): void;
-        getRotZ(): number;
-        applyOtherBone(bone: $PlayerAnimBone): $PlayerAnimBone;
-        setRotZ(value: number): void;
-        setPosZ(value: number): void;
-        setScaleX(value: number): void;
-        setScaleY(value: number): void;
-        setScaleZ(value: number): void;
-        setBend(value: number): void;
-        mulScale(x: number, y: number, z: number): $PlayerAnimBone;
-        mulScale(value: number): $PlayerAnimBone;
-        beginOrEndTickLerp(bone: $AdvancedPlayerAnimBone, animTime: number, animation: $Animation_): $PlayerAnimBone;
-        copyOtherBoneIfNotDisabled(bone: $PlayerAnimBone): $PlayerAnimBone;
         getBend(): number;
         getPositionVector(): $Vec3f;
         getScaleVector(): $Vec3f;
@@ -109,10 +77,10 @@ declare module "@package/com/zigythebird/playeranimcore/bones" {
         mulPos(value: number): $PlayerAnimBone;
         divPos(x: number, y: number, z: number): $PlayerAnimBone;
         divPos(value: number): $PlayerAnimBone;
-        addRot(x: number, y: number, z: number): $PlayerAnimBone;
         addRot(value: number): $PlayerAnimBone;
-        mulRot(value: number): $PlayerAnimBone;
+        addRot(x: number, y: number, z: number): $PlayerAnimBone;
         mulRot(x: number, y: number, z: number): $PlayerAnimBone;
+        mulRot(value: number): $PlayerAnimBone;
         divRot(value: number): $PlayerAnimBone;
         divRot(x: number, y: number, z: number): $PlayerAnimBone;
         addScale(value: number): $PlayerAnimBone;
@@ -122,6 +90,38 @@ declare module "@package/com/zigythebird/playeranimcore/bones" {
         copyOtherBone(bone: $PlayerAnimBone): $PlayerAnimBone;
         copySnapshot(snapshot: $BoneSnapshot): void;
         copySnapshotSafe(snapshot: $AdvancedBoneSnapshot): $PlayerAnimBone;
+        getPosX(): number;
+        getPosY(): number;
+        updatePosition(posX: number, posY: number, posZ: number): void;
+        updateScale(scaleX: number, scaleY: number, scaleZ: number): void;
+        getRotY(): number;
+        setRotY(value: number): void;
+        getRotX(): number;
+        setRotX(value: number): void;
+        updateRotation(xRot: number, yRot: number, zRot: number): void;
+        getRotationVector(): $Vec3f;
+        saveSnapshot(): $BoneSnapshot;
+        addPos(x: number, y: number, z: number): $PlayerAnimBone;
+        addPos(value: number): $PlayerAnimBone;
+        setPosX(value: number): void;
+        setPosY(value: number): void;
+        applyOtherBone(bone: $PlayerAnimBone): $PlayerAnimBone;
+        getScaleX(): number;
+        getScaleY(): number;
+        getScaleZ(): number;
+        getPosZ(): number;
+        setToInitialPose(): void;
+        getRotZ(): number;
+        setRotZ(value: number): void;
+        setPosZ(value: number): void;
+        setScaleX(value: number): void;
+        setScaleY(value: number): void;
+        setScaleZ(value: number): void;
+        setBend(value: number): void;
+        mulScale(value: number): $PlayerAnimBone;
+        mulScale(x: number, y: number, z: number): $PlayerAnimBone;
+        beginOrEndTickLerp(bone: $AdvancedPlayerAnimBone, animTime: number, animation: $Animation_): $PlayerAnimBone;
+        copyOtherBoneIfNotDisabled(bone: $PlayerAnimBone): $PlayerAnimBone;
         scaleX: number;
         positionY: number;
         scaleY: number;
@@ -134,9 +134,9 @@ declare module "@package/com/zigythebird/playeranimcore/bones" {
         positionX: number;
         constructor(name: string);
         get name(): string;
-        get rotationVector(): $Vec3f;
         get positionVector(): $Vec3f;
         get scaleVector(): $Vec3f;
+        get rotationVector(): $Vec3f;
     }
     export class $IBoneEnabled {
     }
@@ -177,14 +177,16 @@ declare module "@package/com/zigythebird/playeranimcore/bones" {
         constructor(bone: $PlayerAnimBone);
     }
     export class $BoneSnapshot {
+        getBend(): number;
+        getOffsetZ(): number;
         updateOffset(offsetX: number, offsetY: number, offsetZ: number): void;
         getBone(): $PlayerAnimBone;
-        updateScale(scaleX: number, scaleY: number, scaleZ: number): void;
         getOffsetX(): number;
         getOffsetY(): number;
-        updateRotation(rotX: number, rotY: number, rotZ: number): void;
+        updateScale(scaleX: number, scaleY: number, scaleZ: number): void;
         getRotY(): number;
         getRotX(): number;
+        updateRotation(rotX: number, rotY: number, rotZ: number): void;
         getBendAxis(): number;
         updateBend(bend: $Pair<number, number>): void;
         updateBend(bendAxis: number, bend: number): void;
@@ -194,13 +196,13 @@ declare module "@package/com/zigythebird/playeranimcore/bones" {
         getScaleZ(): number;
         setToInitialPose(): void;
         getRotZ(): number;
-        getBend(): number;
-        getOffsetZ(): number;
         bone: $PlayerAnimBone;
         constructor(bone: $PlayerAnimBone, isInitial: boolean);
         constructor(bone: $BoneSnapshot);
         constructor(bone: $PlayerAnimBone);
         constructor();
+        get bend(): number;
+        get offsetZ(): number;
         get offsetX(): number;
         get offsetY(): number;
         get rotY(): number;
@@ -210,7 +212,5 @@ declare module "@package/com/zigythebird/playeranimcore/bones" {
         get scaleY(): number;
         get scaleZ(): number;
         get rotZ(): number;
-        get bend(): number;
-        get offsetZ(): number;
     }
 }

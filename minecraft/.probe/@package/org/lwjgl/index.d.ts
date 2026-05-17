@@ -1,5 +1,5 @@
 import { $Comparable } from "@package/java/lang";
-import { $DoubleBuffer, $FloatBuffer, $ByteBuffer, $ShortBuffer, $IntBuffer, $LongBuffer } from "@package/java/nio";
+import { $FloatBuffer, $DoubleBuffer, $ByteBuffer, $ShortBuffer, $IntBuffer, $LongBuffer } from "@package/java/nio";
 import { $Pointer_, $CustomBuffer } from "@package/org/lwjgl/system";
 export * as util from "@package/org/lwjgl/util";
 export * as system from "@package/org/lwjgl/system";

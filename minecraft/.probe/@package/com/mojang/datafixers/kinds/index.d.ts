@@ -1,5 +1,5 @@
 import { $Function_, $BiFunction, $BiFunction_, $Function } from "@package/java/util/function";
-import { $Function4_, $Function13_, $Function3, $Function4, $Function5, $Function6, $Function8_, $Function7, $Function8, $Function9, $Function3_, $Function14_, $Function10_, $Function7_, $Function15_, $Function11_, $Function6_, $Function5_, $Function16_, $Function9_, $Function12_ } from "@package/com/mojang/datafixers/util";
+import { $Function4_, $Function13_, $Function3, $Function4, $Function5, $Function6, $Function7, $Function8_, $Function8, $Function9, $Function3_, $Function14_, $Function10_, $Function7_, $Function15_, $Function11_, $Function6_, $Function5_, $Function16_, $Function9_, $Function12_ } from "@package/com/mojang/datafixers/util";
 import { $Products$P10, $Products$P11, $Products$P12, $Products$P13, $Products$P14, $Products$P15, $Products$P16, $Products$P1, $Products$P5, $Products$P4, $Products$P3, $Products$P2, $Products$P9, $Products$P8, $Products$P7, $Products$P6 } from "@package/com/mojang/datafixers";
 
 declare module "@package/com/mojang/datafixers/kinds" {
@@ -17,8 +17,6 @@ declare module "@package/com/mojang/datafixers/kinds" {
     }
     export interface $Applicative<F extends $K1, Mu extends $Applicative$Mu> extends $Functor<F, Mu> {
         point<A>(arg0: A): $App<F, A>;
-        ap<A, R>(arg0: $App<F, $Function_<A, R>>, arg1: $App<F, A>): $App<F, R>;
-        ap<A, R>(arg0: $Function_<A, R>, arg1: $App<F, A>): $App<F, R>;
         ap10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R>(arg0: $App<F, $Function10_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R>>, arg1: $App<F, T1>, arg2: $App<F, T2>, arg3: $App<F, T3>, arg4: $App<F, T4>, arg5: $App<F, T5>, arg6: $App<F, T6>, arg7: $App<F, T7>, arg8: $App<F, T8>, arg9: $App<F, T9>, arg10: $App<F, T10>): $App<F, R>;
         ap11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R>(arg0: $App<F, $Function11_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R>>, arg1: $App<F, T1>, arg2: $App<F, T2>, arg3: $App<F, T3>, arg4: $App<F, T4>, arg5: $App<F, T5>, arg6: $App<F, T6>, arg7: $App<F, T7>, arg8: $App<F, T8>, arg9: $App<F, T9>, arg10: $App<F, T10>, arg11: $App<F, T11>): $App<F, R>;
         ap12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R>(arg0: $App<F, $Function12_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R>>, arg1: $App<F, T1>, arg2: $App<F, T2>, arg3: $App<F, T3>, arg4: $App<F, T4>, arg5: $App<F, T5>, arg6: $App<F, T6>, arg7: $App<F, T7>, arg8: $App<F, T8>, arg9: $App<F, T9>, arg10: $App<F, T10>, arg11: $App<F, T11>, arg12: $App<F, T12>): $App<F, R>;
@@ -51,6 +49,8 @@ declare module "@package/com/mojang/datafixers/kinds" {
         lift8<T1, T2, T3, T4, T5, T6, T7, T8, R>(arg0: $App<F, $Function8_<T1, T2, T3, T4, T5, T6, T7, T8, R>>): $Function8<$App<F, T1>, $App<F, T2>, $App<F, T3>, $App<F, T4>, $App<F, T5>, $App<F, T6>, $App<F, T7>, $App<F, T8>, $App<F, R>>;
         lift9<T1, T2, T3, T4, T5, T6, T7, T8, T9, R>(arg0: $App<F, $Function9_<T1, T2, T3, T4, T5, T6, T7, T8, T9, R>>): $Function9<$App<F, T1>, $App<F, T2>, $App<F, T3>, $App<F, T4>, $App<F, T5>, $App<F, T6>, $App<F, T7>, $App<F, T8>, $App<F, T9>, $App<F, R>>;
         ap14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, R>(arg0: $App<F, $Function14_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, R>>, arg1: $App<F, T1>, arg2: $App<F, T2>, arg3: $App<F, T3>, arg4: $App<F, T4>, arg5: $App<F, T5>, arg6: $App<F, T6>, arg7: $App<F, T7>, arg8: $App<F, T8>, arg9: $App<F, T9>, arg10: $App<F, T10>, arg11: $App<F, T11>, arg12: $App<F, T12>, arg13: $App<F, T13>, arg14: $App<F, T14>): $App<F, R>;
+        ap<A, R>(arg0: $App<F, $Function_<A, R>>, arg1: $App<F, A>): $App<F, R>;
+        ap<A, R>(arg0: $Function_<A, R>, arg1: $App<F, A>): $App<F, R>;
     }
     export class $Functor$Mu {
     }

@@ -10,13 +10,13 @@ declare module "@package/net/minecraft/world/level/redstone" {
     /**
      * Values that may be interpreted as {@link $CollectingNeighborUpdater$ShapeUpdate}.
      */
-    export type $CollectingNeighborUpdater$ShapeUpdate_ = { direction?: $Direction_, neighborPos?: $BlockPos_, pos?: $BlockPos_, updateLimit?: number, updateFlags?: number, state?: $BlockState_,  } | [direction?: $Direction_, neighborPos?: $BlockPos_, pos?: $BlockPos_, updateLimit?: number, updateFlags?: number, state?: $BlockState_, ];
+    export type $CollectingNeighborUpdater$ShapeUpdate_ = { state?: $BlockState_, updateFlags?: number, updateLimit?: number, pos?: $BlockPos_, neighborPos?: $BlockPos_, direction?: $Direction_,  } | [state?: $BlockState_, updateFlags?: number, updateLimit?: number, pos?: $BlockPos_, neighborPos?: $BlockPos_, direction?: $Direction_, ];
     export class $CollectingNeighborUpdater$SimpleNeighborUpdate extends $Record implements $CollectingNeighborUpdater$NeighborUpdates {
     }
     /**
      * Values that may be interpreted as {@link $CollectingNeighborUpdater$SimpleNeighborUpdate}.
      */
-    export type $CollectingNeighborUpdater$SimpleNeighborUpdate_ = { block?: $Block_, neighborPos?: $BlockPos_, pos?: $BlockPos_,  } | [block?: $Block_, neighborPos?: $BlockPos_, pos?: $BlockPos_, ];
+    export type $CollectingNeighborUpdater$SimpleNeighborUpdate_ = { pos?: $BlockPos_, neighborPos?: $BlockPos_, block?: $Block_,  } | [pos?: $BlockPos_, neighborPos?: $BlockPos_, block?: $Block_, ];
     export class $InstantNeighborUpdater implements $NeighborUpdater {
         shapeUpdate(arg0: $Direction_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: number, arg5: number): void;
         neighborChanged(arg0: $BlockState_, arg1: $BlockPos_, arg2: $Block_, arg3: $BlockPos_, arg4: boolean): void;
@@ -50,7 +50,7 @@ declare module "@package/net/minecraft/world/level/redstone" {
     /**
      * Values that may be interpreted as {@link $CollectingNeighborUpdater$FullNeighborUpdate}.
      */
-    export type $CollectingNeighborUpdater$FullNeighborUpdate_ = { block?: $Block_, pos?: $BlockPos_, state?: $BlockState_, movedByPiston?: boolean, neighborPos?: $BlockPos_,  } | [block?: $Block_, pos?: $BlockPos_, state?: $BlockState_, movedByPiston?: boolean, neighborPos?: $BlockPos_, ];
+    export type $CollectingNeighborUpdater$FullNeighborUpdate_ = { neighborPos?: $BlockPos_, movedByPiston?: boolean, state?: $BlockState_, pos?: $BlockPos_, block?: $Block_,  } | [neighborPos?: $BlockPos_, movedByPiston?: boolean, state?: $BlockState_, pos?: $BlockPos_, block?: $Block_, ];
     export class $CollectingNeighborUpdater$MultiNeighborUpdate implements $CollectingNeighborUpdater$NeighborUpdates {
     }
     export class $NeighborUpdater {

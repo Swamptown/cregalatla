@@ -25,13 +25,13 @@ declare module "@package/net/minecraft/world/level/levelgen/heightproviders" {
     export class $TrapezoidHeight extends $HeightProvider implements $TrapezoidHeightAccessor {
         static of(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_, arg2: number): $TrapezoidHeight;
         static of(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_): $TrapezoidHeight;
-        getPlateau(): number;
         getMaxInclusive(): $VerticalAnchor;
         getMinInclusive(): $VerticalAnchor;
+        getPlateau(): number;
         static CODEC: $MapCodec<$TrapezoidHeight>;
-        get plateau(): number;
         get maxInclusive(): $VerticalAnchor;
         get minInclusive(): $VerticalAnchor;
+        get plateau(): number;
     }
     export class $HeightProviderType<P extends $HeightProvider> {
         static VERY_BIASED_TO_BOTTOM: $HeightProviderType<$VeryBiasedToBottomHeight>;

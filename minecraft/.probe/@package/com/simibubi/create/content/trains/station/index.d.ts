@@ -32,24 +32,24 @@ import { $RegisterCapabilitiesEvent } from "@package/net/neoforged/neoforge/capa
 declare module "@package/com/simibubi/create/content/trains/station" {
     export class $StationBlockEntity extends $SmartBlockEntity implements $TransformableBlockEntity {
         transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
-        getAssemblyDirection(): $Direction;
-        getAutoSchedule(): $ItemStack;
-        resolveFlagAngle(): boolean;
-        isAssembling(): boolean;
-        tryEnterAssemblyMode(): boolean;
-        refreshAssemblyInfo(): void;
-        dropSchedule(arg0: $ServerPlayer, arg1: $Train): void;
-        getStation(): $GlobalStation;
         trackClicked(arg0: $Player, arg1: $InteractionHand_, arg2: $ITrackBlock, arg3: $BlockState_, arg4: $BlockPos_): boolean;
+        getStation(): $GlobalStation;
         cancelAssembly(): void;
         updateName(arg0: string): boolean;
+        isValidBogeyOffset(arg0: number): boolean;
+        enterAssemblyMode(arg0: $ServerPlayer): boolean;
         tryDisassembleTrain(arg0: $ServerPlayer): boolean;
         exitAssemblyMode(): boolean;
         updateMapColor(arg0: number): void;
         attachPackagePort(arg0: $PackagePortBlockEntity): void;
         removePackagePort(arg0: $PackagePortBlockEntity): void;
-        isValidBogeyOffset(arg0: number): boolean;
-        enterAssemblyMode(arg0: $ServerPlayer): boolean;
+        isAssembling(): boolean;
+        tryEnterAssemblyMode(): boolean;
+        refreshAssemblyInfo(): void;
+        dropSchedule(arg0: $ServerPlayer, arg1: $Train): void;
+        getAssemblyDirection(): $Direction;
+        resolveFlagAngle(): boolean;
+        getAutoSchedule(): $ItemStack;
         assemble(arg0: $UUID_): void;
         static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         worldPosition: $BlockPos;
@@ -64,13 +64,13 @@ declare module "@package/com/simibubi/create/content/trains/station" {
         computerBehaviour: $AbstractComputerBehaviour;
         edgePoint: $TrackTargetingBehaviour<$GlobalStation>;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
+        get station(): $GlobalStation;
+        get assembling(): boolean;
         get assemblyDirection(): $Direction;
         get autoSchedule(): $ItemStack;
-        get assembling(): boolean;
-        get station(): $GlobalStation;
     }
     export class $GlobalStation extends $SingleBlockEntityEdgePoint implements $ILimitedGlobalStation {
-        isLimitEnabled(): boolean;
+        getPresentTrain(): $Train;
         canApproachFrom(arg0: $TrackNode): boolean;
         reserveFor(arg0: $Train): void;
         getNearestTrain(): $Train;
@@ -82,7 +82,7 @@ declare module "@package/com/simibubi/create/content/trains/station" {
         getDisablingTrain(): $Train;
         orDisablingTrain(arg0: $Train, arg1: $Train): $Train;
         setLimitEnabled(arg0: boolean): void;
-        getPresentTrain(): $Train;
+        isLimitEnabled(): boolean;
         edgeLocation: $Couple<$TrackNodeLocation>;
         blockEntityPos: $BlockPos;
         connectedPorts: $Map<$BlockPos, $GlobalPackagePort>;
@@ -93,10 +93,10 @@ declare module "@package/com/simibubi/create/content/trains/station" {
         position: number;
         nearestTrain: $WeakReference<$Train>;
         constructor();
+        get presentTrain(): $Train;
         get imminentTrain(): $Train;
         get stationEnabled(): boolean;
         get disablingTrain(): $Train;
-        get presentTrain(): $Train;
     }
     export class $GlobalPackagePort {
         saveOfflineBuffer(arg0: $IItemHandlerModifiable): void;

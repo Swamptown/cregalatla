@@ -25,17 +25,17 @@ declare module "@package/com/simibubi/create/content/contraptions/render" {
     }
     export class $ContraptionMatrices {
         static transform(arg0: $PoseStack, arg1: $PoseStack): void;
-        getWorld(): $Matrix4f;
         getViewProjection(): $PoseStack;
         getLight(): $Matrix4f;
         static translateToEntity(arg0: $Matrix4f, arg1: $Entity, arg2: number): void;
+        getWorld(): $Matrix4f;
         static clearStack(arg0: $PoseStack): void;
         getModel(): $PoseStack;
         getModelViewProjection(): $PoseStack;
         constructor();
-        get world(): $Matrix4f;
         get viewProjection(): $PoseStack;
         get light(): $Matrix4f;
+        get world(): $Matrix4f;
         get model(): $PoseStack;
         get modelViewProjection(): $PoseStack;
     }
@@ -47,7 +47,7 @@ declare module "@package/com/simibubi/create/content/contraptions/render" {
     /**
      * Values that may be interpreted as {@link $ClientContraption$RenderedBlocks}.
      */
-    export type $ClientContraption$RenderedBlocks_ = { positions?: $Iterable_<$BlockPos>, lookup?: $Function_<$BlockPos, $BlockState>,  } | [positions?: $Iterable_<$BlockPos>, lookup?: $Function_<$BlockPos, $BlockState>, ];
+    export type $ClientContraption$RenderedBlocks_ = { lookup?: $Function_<$BlockPos, $BlockState>, positions?: $Iterable_<$BlockPos>,  } | [lookup?: $Function_<$BlockPos, $BlockState>, positions?: $Iterable_<$BlockPos>, ];
     export class $ClientContraption {
         structureVersion(): number;
         childrenVersion(): number;

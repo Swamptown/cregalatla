@@ -29,11 +29,11 @@ declare module "@package/software/bernie/geckolib/animation" {
     export class $AnimationProcessor<T extends $GeoAnimatable> {
         getBone(arg0: string): $GeoBone;
         tickAnimation(arg0: T, arg1: $GeoModel<T>, arg2: $AnimatableManager<T>, arg3: number, arg4: $AnimationState<T>, arg5: boolean): void;
-        buildAnimationQueue(arg0: T, arg1: $RawAnimation): $Queue<$AnimationProcessor$QueuedAnimation>;
         getRegisteredBones(): $Collection<$GeoBone>;
         registerGeoBone(arg0: $GeoBone): void;
         setActiveModel(arg0: $BakedGeoModel_): void;
         preAnimationSetup(arg0: $AnimationState<T>, arg1: number): void;
+        buildAnimationQueue(arg0: T, arg1: $RawAnimation): $Queue<$AnimationProcessor$QueuedAnimation>;
         reloadAnimations: boolean;
         constructor(arg0: $GeoModel<T>);
         get registeredBones(): $Collection<$GeoBone>;
@@ -44,12 +44,12 @@ declare module "@package/software/bernie/geckolib/animation" {
         static begin(): $RawAnimation;
         then(arg0: string, arg1: $Animation$LoopType_): $RawAnimation;
         getAnimationStages(): $List<$RawAnimation$Stage>;
-        getStageCount(): number;
         thenPlay(arg0: string): $RawAnimation;
         thenLoop(arg0: string): $RawAnimation;
         thenWait(arg0: number): $RawAnimation;
-        thenPlayXTimes(arg0: string, arg1: number): $RawAnimation;
         thenPlayAndHold(arg0: string): $RawAnimation;
+        thenPlayXTimes(arg0: string, arg1: number): $RawAnimation;
+        getStageCount(): number;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $RawAnimation>;
         get animationStages(): $List<$RawAnimation$Stage>;
         get stageCount(): number;
@@ -74,7 +74,7 @@ declare module "@package/software/bernie/geckolib/animation" {
     /**
      * Values that may be interpreted as {@link $Animation}.
      */
-    export type $Animation_ = { boneAnimations?: $BoneAnimation_[], name?: string, length?: number, keyFrames?: $Animation$Keyframes_, loopType?: $Animation$LoopType_,  } | [boneAnimations?: $BoneAnimation_[], name?: string, length?: number, keyFrames?: $Animation$Keyframes_, loopType?: $Animation$LoopType_, ];
+    export type $Animation_ = { loopType?: $Animation$LoopType_, keyFrames?: $Animation$Keyframes_, length?: number, name?: string, boneAnimations?: $BoneAnimation_[],  } | [loopType?: $Animation$LoopType_, keyFrames?: $Animation$Keyframes_, length?: number, name?: string, boneAnimations?: $BoneAnimation_[], ];
     export class $AnimationProcessor$QueuedAnimation extends $Record {
         loopType(): $Animation$LoopType;
         animation(): $Animation;
@@ -83,7 +83,7 @@ declare module "@package/software/bernie/geckolib/animation" {
     /**
      * Values that may be interpreted as {@link $AnimationProcessor$QueuedAnimation}.
      */
-    export type $AnimationProcessor$QueuedAnimation_ = { animation?: $Animation_, loopType?: $Animation$LoopType_,  } | [animation?: $Animation_, loopType?: $Animation$LoopType_, ];
+    export type $AnimationProcessor$QueuedAnimation_ = { loopType?: $Animation$LoopType_, animation?: $Animation_,  } | [loopType?: $Animation$LoopType_, animation?: $Animation_, ];
     export class $AnimatableManager$ControllerRegistrar extends $Record {
         remove(arg0: string): $AnimatableManager$ControllerRegistrar;
         add(...arg0: $AnimationController<never>[]): $AnimatableManager$ControllerRegistrar;
@@ -99,6 +99,7 @@ declare module "@package/software/bernie/geckolib/animation" {
         getName(): string;
         stop(): void;
         process(arg0: $GeoModel<T>, arg1: $AnimationState<T>, arg2: $Map_<string, $GeoBone>, arg3: $Map_<string, $BoneSnapshot>, arg4: number, arg5: boolean): void;
+        transitionLength(arg0: number): $AnimationController<T>;
         setAnimationSpeed(arg0: number): $AnimationController<T>;
         getAnimationSpeed(): number;
         setAnimation(arg0: $RawAnimation): void;
@@ -120,7 +121,6 @@ declare module "@package/software/bernie/geckolib/animation" {
         getCurrentRawAnimation(): $RawAnimation;
         isPlayingTriggeredAnimation(): boolean;
         tryTriggerAnimation(arg0: string): boolean;
-        transitionLength(arg0: number): $AnimationController<T>;
         constructor(arg0: T, arg1: $AnimationController$AnimationStateHandler_<T>);
         constructor(arg0: T, arg1: string, arg2: number, arg3: $AnimationController$AnimationStateHandler_<T>);
         constructor(arg0: T, arg1: string, arg2: $AnimationController$AnimationStateHandler_<T>);
@@ -228,7 +228,6 @@ declare module "@package/software/bernie/geckolib/animation" {
         setAnimation(arg0: $RawAnimation): void;
         isMoving(): boolean;
         setAndContinue(arg0: $RawAnimation): $PlayState;
-        withController(arg0: $AnimationController<T>): $AnimationState<T>;
         getAnimationTick(): number;
         getLimbSwing(): number;
         getLimbSwingAmount(): number;
@@ -236,8 +235,9 @@ declare module "@package/software/bernie/geckolib/animation" {
         isCurrentAnimationStage(arg0: string): boolean;
         resetCurrentAnimation(): void;
         setControllerSpeed(arg0: number): void;
-        setData<D>(arg0: $DataTicket<D>, arg1: D): void;
+        withController(arg0: $AnimationController<T>): $AnimationState<T>;
         getExtraData(): $Map<$DataTicket<never>, never>;
+        setData<D>(arg0: $DataTicket<D>, arg1: D): void;
         animationTick: number;
         constructor(arg0: T, arg1: number, arg2: number, arg3: number, arg4: boolean);
         get animatable(): T;
@@ -299,7 +299,7 @@ declare module "@package/software/bernie/geckolib/animation" {
     /**
      * Values that may be interpreted as {@link $RawAnimation$Stage}.
      */
-    export type $RawAnimation$Stage_ = { additionalTicks?: number, loopType?: $Animation$LoopType_, animationName?: string,  } | [additionalTicks?: number, loopType?: $Animation$LoopType_, animationName?: string, ];
+    export type $RawAnimation$Stage_ = { animationName?: string, loopType?: $Animation$LoopType_, additionalTicks?: number,  } | [animationName?: string, loopType?: $Animation$LoopType_, additionalTicks?: number, ];
     export class $PlayState extends $Enum<$PlayState> {
         static values(): $PlayState[];
         static valueOf(arg0: string): $PlayState;
@@ -319,14 +319,14 @@ declare module "@package/software/bernie/geckolib/animation" {
         getBoneSnapshotCollection(): $Map<string, $BoneSnapshot>;
         clearSnapshotCache(): void;
         getFirstTickTime(): number;
-        setData<D>(arg0: $DataTicket<D>, arg1: D): void;
         addController(arg0: $AnimationController<any>): void;
         updatedAt(arg0: number): void;
         isFirstTick(): boolean;
-        stopTriggeredAnimation(arg0: string, arg1: string): void;
         stopTriggeredAnimation(arg0: string): void;
-        tryTriggerAnimation(arg0: string): void;
+        stopTriggeredAnimation(arg0: string, arg1: string): void;
         tryTriggerAnimation(arg0: string, arg1: string): void;
+        tryTriggerAnimation(arg0: string): void;
+        setData<D>(arg0: $DataTicket<D>, arg1: D): void;
         constructor(arg0: $GeoAnimatable);
         get lastUpdateTime(): number;
         get animationControllers(): $Map<string, $AnimationController<T>>;
@@ -343,5 +343,5 @@ declare module "@package/software/bernie/geckolib/animation" {
     /**
      * Values that may be interpreted as {@link $Animation$Keyframes}.
      */
-    export type $Animation$Keyframes_ = { particles?: $ParticleKeyframeData[], customInstructions?: $CustomInstructionKeyframeData[], sounds?: $SoundKeyframeData[],  } | [particles?: $ParticleKeyframeData[], customInstructions?: $CustomInstructionKeyframeData[], sounds?: $SoundKeyframeData[], ];
+    export type $Animation$Keyframes_ = { sounds?: $SoundKeyframeData[], customInstructions?: $CustomInstructionKeyframeData[], particles?: $ParticleKeyframeData[],  } | [sounds?: $SoundKeyframeData[], customInstructions?: $CustomInstructionKeyframeData[], particles?: $ParticleKeyframeData[], ];
 }

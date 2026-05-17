@@ -1,6 +1,6 @@
 import { $BlockEntityTickKubeEvent } from "@package/dev/latvian/mods/kubejs/block/entity";
 import { $Level } from "@package/net/minecraft/world/level";
-import { $BlockLeftClickedKubeEvent, $BlockStoppedFallingKubeEvent, $BlockBrokenKubeEvent, $BlockStartedFallingKubeEvent, $DetectorBlockKubeEvent, $BlockPlacedKubeEvent, $BlockRightClickedKubeEvent, $FarmlandTrampledKubeEvent, $BlockPickedKubeEvent } from "@package/dev/latvian/mods/kubejs/block";
+import { $BlockBrokenKubeEvent, $BlockStoppedFallingKubeEvent, $BlockLeftClickedKubeEvent, $BlockStartedFallingKubeEvent, $DetectorBlockKubeEvent, $BlockPlacedKubeEvent, $BlockRightClickedKubeEvent, $FarmlandTrampledKubeEvent, $BlockPickedKubeEvent } from "@package/dev/latvian/mods/kubejs/block";
 import { $ParticleProviderRegistryKubeEvent, $KubeJSKeybinds$TickingKeyEvent, $DebugInfoKubeEvent, $LangKubeEvent, $KubeJSKeybinds$KeyEvent, $AtlasSpriteRegistryKubeEvent, $ClientPlayerKubeEvent } from "@package/dev/latvian/mods/kubejs/client";
 import { $KubeAssetGenerator } from "@package/dev/latvian/mods/kubejs/generator";
 import { $Item, $ItemStack_ } from "@package/net/minecraft/world/item";
@@ -9,11 +9,12 @@ import { $EntityType } from "@package/net/minecraft/world/entity";
 import { $FluidStack_ } from "@package/net/neoforged/neoforge/fluids";
 import { $ExplosionKubeEvent$After, $ExplosionKubeEvent$Before, $SimpleLevelKubeEvent } from "@package/dev/latvian/mods/kubejs/level";
 import { $NetworkKubeEvent } from "@package/dev/latvian/mods/kubejs/net";
-import { $DynamicItemTooltipsKubeEvent, $ItemPredicate_, $ItemCraftedKubeEvent, $ItemDestroyedKubeEvent, $ModifyItemTooltipsKubeEvent, $ItemPickedUpKubeEvent, $FoodEatenKubeEvent, $ItemSmeltedKubeEvent, $ItemEntityInteractedKubeEvent, $ItemClickedKubeEvent, $ItemDroppedKubeEvent } from "@package/dev/latvian/mods/kubejs/item";
+import { $DynamicItemTooltipsKubeEvent, $ItemPredicate_, $ItemCraftedKubeEvent, $ItemDestroyedKubeEvent, $ModifyItemTooltipsKubeEvent, $ItemPickedUpKubeEvent, $FoodEatenKubeEvent, $ItemSmeltedKubeEvent, $ItemEntityInteractedKubeEvent, $ItemDroppedKubeEvent, $ItemClickedKubeEvent } from "@package/dev/latvian/mods/kubejs/item";
 import { $InventoryChangedKubeEvent, $ChestKubeEvent, $StageChangedEvent, $SimplePlayerKubeEvent, $InventoryKubeEvent } from "@package/dev/latvian/mods/kubejs/player";
 import { $LivingEntityDropsKubeEvent, $EntitySpawnedKubeEvent, $AfterLivingEntityHurtKubeEvent, $LivingEntityDeathKubeEvent, $BeforeLivingEntityHurtKubeEvent, $CheckLivingEntitySpawnKubeEvent } from "@package/dev/latvian/mods/kubejs/entity";
 import { $GeneratedDataStage_ } from "@package/dev/latvian/mods/kubejs/script/data";
 import { $FluidIngredient_ } from "@package/net/neoforged/neoforge/fluids/crafting";
+import { $EnchantmentTableTooltipEventJS } from "@package/com/almostreliable/morejs/features/enchantment";
 import { $ResourceLocation_, $ResourceKey_ } from "@package/net/minecraft/resources";
 import { $RemoveRecipesKubeEvent, $GroupEntriesKubeEvent, $RemoveEntriesKubeEvent, $AddEntriesKubeEvent, $AddInformationKubeEvent, $RegisterSubtypesKubeEvent } from "@package/dev/latvian/mods/kubejs/recipe/viewer";
 import { $ModifyEntityInFrameExtraDataEventJS } from "@package/io/github/mortuusars/exposure/neoforge/integration/kubejs/event";
@@ -420,5 +421,8 @@ declare global {
          * Invoked when a player opens or closes a container.
          */
         function inventoryOpened(handler: ((event: $InventoryKubeEvent) => void)): void;
+    }
+    namespace MoreJS {
+        function enchantmentTableTooltip(handler: ((event: $EnchantmentTableTooltipEventJS) => void)): void;
     }
 }

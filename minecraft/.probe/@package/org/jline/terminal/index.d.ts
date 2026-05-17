@@ -147,16 +147,16 @@ declare module "@package/org/jline/terminal" {
     export type $Terminal$MouseTracking_ = "off" | "normal" | "button" | "any";
     export class $Attributes {
         copy(arg0: $Attributes): void;
+        getLocalFlags(): $EnumSet<$Attributes$LocalFlag>;
         getInputFlags(): $EnumSet<$Attributes$InputFlag>;
-        setInputFlags(arg0: $EnumSet<$Attributes$InputFlag_>, arg1: boolean): void;
         setInputFlags(arg0: $EnumSet<$Attributes$InputFlag_>): void;
+        setInputFlags(arg0: $EnumSet<$Attributes$InputFlag_>, arg1: boolean): void;
         getOutputFlags(): $EnumSet<$Attributes$OutputFlag>;
         setOutputFlags(arg0: $EnumSet<$Attributes$OutputFlag_>): void;
         setOutputFlags(arg0: $EnumSet<$Attributes$OutputFlag_>, arg1: boolean): void;
         getControlFlags(): $EnumSet<$Attributes$ControlFlag>;
-        setControlFlags(arg0: $EnumSet<$Attributes$ControlFlag_>, arg1: boolean): void;
         setControlFlags(arg0: $EnumSet<$Attributes$ControlFlag_>): void;
-        getLocalFlags(): $EnumSet<$Attributes$LocalFlag>;
+        setControlFlags(arg0: $EnumSet<$Attributes$ControlFlag_>, arg1: boolean): void;
         setLocalFlags(arg0: $EnumSet<$Attributes$LocalFlag_>): void;
         setLocalFlags(arg0: $EnumSet<$Attributes$LocalFlag_>, arg1: boolean): void;
         getControlChars(): $EnumMap<$Attributes$ControlChar, number>;
@@ -203,14 +203,14 @@ declare module "@package/org/jline/terminal" {
         getModifiers(): $EnumSet<$MouseEvent$Modifier>;
         getType(): $MouseEvent$Type;
         getY(): number;
-        getButton(): $MouseEvent$Button;
         getX(): number;
+        getButton(): $MouseEvent$Button;
         constructor(arg0: $MouseEvent$Type_, arg1: $MouseEvent$Button_, arg2: $EnumSet<$MouseEvent$Modifier_>, arg3: number, arg4: number);
         get modifiers(): $EnumSet<$MouseEvent$Modifier>;
         get type(): $MouseEvent$Type;
         get y(): number;
-        get button(): $MouseEvent$Button;
         get x(): number;
+        get button(): $MouseEvent$Button;
     }
     export class $Attributes$LocalFlag extends $Enum<$Attributes$LocalFlag> {
         static values(): $Attributes$LocalFlag[];
@@ -278,12 +278,9 @@ declare module "@package/org/jline/terminal" {
         raise(arg0: $Terminal$Signal_): void;
         output(): $OutputStream;
         setSize(arg0: $Size): void;
-        getWidth(): number;
-        getHeight(): number;
-        setAttributes(arg0: $Attributes): void;
         getBufferSize(): $Size;
-        echo(arg0: boolean): boolean;
         echo(): boolean;
+        echo(arg0: boolean): boolean;
         pause(arg0: boolean): void;
         pause(): void;
         canPauseResume(): boolean;
@@ -302,11 +299,14 @@ declare module "@package/org/jline/terminal" {
         trackFocus(arg0: boolean): boolean;
         getPalette(): $ColorPalette;
         resume(): void;
+        getWidth(): number;
+        getHeight(): number;
+        setAttributes(arg0: $Attributes): void;
         get name(): string;
         get type(): string;
-        get width(): number;
-        get height(): number;
         get bufferSize(): $Size;
         get palette(): $ColorPalette;
+        get width(): number;
+        get height(): number;
     }
 }

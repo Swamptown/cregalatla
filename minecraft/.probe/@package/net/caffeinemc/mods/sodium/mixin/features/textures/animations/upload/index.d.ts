@@ -15,11 +15,11 @@ declare module "@package/net/caffeinemc/mods/sodium/mixin/features/textures/anim
     }
     export interface $SpriteContentsTickerAccessor {
         getFrameIndex(): number;
-        getAnimationInfo(): $SpriteContents$AnimatedTexture;
         getFrameTicks(): number;
+        getAnimationInfo(): $SpriteContents$AnimatedTexture;
         get frameIndex(): number;
-        get animationInfo(): $SpriteContents$AnimatedTexture;
         get frameTicks(): number;
+        get animationInfo(): $SpriteContents$AnimatedTexture;
     }
     export class $SpriteContentsAccessor {
     }

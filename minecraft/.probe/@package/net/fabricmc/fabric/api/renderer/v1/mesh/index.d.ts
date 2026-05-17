@@ -13,17 +13,9 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/mesh" {
     export interface $QuadEmitter extends $MutableQuadView {
         color(arg0: number, arg1: number): $QuadEmitter;
         normal(arg0: number, arg1: $Vector3fc): $QuadEmitter;
-        copyFrom(arg0: $QuadView): $QuadEmitter;
+        tag(arg0: number): $QuadEmitter;
         square(arg0: $Direction_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): $QuadEmitter;
         spriteBake(arg0: $TextureAtlasSprite, arg1: number): $QuadEmitter;
-        /**
-         * @deprecated
-         */
-        spriteColor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): $QuadEmitter;
-        /**
-         * @deprecated
-         */
-        spriteColor(arg0: number, arg1: number, arg2: number): $QuadEmitter;
         uvUnitSquare(): $QuadEmitter;
         /**
          * @deprecated
@@ -31,37 +23,45 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/mesh" {
         spriteUnitSquare(arg0: number): $QuadEmitter;
         cullFace(arg0: $Direction_): $QuadEmitter;
         uv(arg0: number, arg1: number, arg2: number): $QuadEmitter;
-        emit(): $QuadEmitter;
         /**
          * @deprecated
          */
         fromVanilla(arg0: number[], arg1: number, arg2: boolean): $QuadEmitter;
+        emit(): $QuadEmitter;
+        lightmap(arg0: number, arg1: number, arg2: number, arg3: number): $QuadEmitter;
         lightmap(arg0: number, arg1: number): $QuadEmitter;
-        colorIndex(arg0: number): $QuadEmitter;
+        /**
+         * @deprecated
+         */
+        sprite(arg0: number, arg1: number, arg2: number, arg3: number): $QuadEmitter;
         pos(arg0: number, arg1: $Vector3fc): $MutableQuadView;
         pos(arg0: number, arg1: $Vector3fc): $MutableQuadView;
         pos(arg0: number, arg1: number, arg2: number, arg3: number): $MutableQuadView;
         color(arg0: number, arg1: number, arg2: number, arg3: number): $MutableQuadView;
         normal(arg0: number, arg1: number, arg2: number, arg3: number): $MutableQuadView;
-        tag(arg0: number): $MutableQuadView;
-        nominalFace(arg0: $Direction_): $MutableQuadView;
+        copyFrom(arg0: $QuadView): $MutableQuadView;
         /**
          * @deprecated
          */
         spriteBake(arg0: number, arg1: $TextureAtlasSprite, arg2: number): $MutableQuadView;
+        /**
+         * @deprecated
+         */
+        spriteColor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): $MutableQuadView;
+        /**
+         * @deprecated
+         */
+        spriteColor(arg0: number, arg1: number, arg2: number): $MutableQuadView;
+        nominalFace(arg0: $Direction_): $MutableQuadView;
         uv(arg0: number, arg1: $Vector2f): $MutableQuadView;
         uv(arg0: number, arg1: $Vector2f): $MutableQuadView;
         material(arg0: $RenderMaterial): $MutableQuadView;
         fromVanilla(arg0: number[], arg1: number): $MutableQuadView;
-        lightmap(arg0: number, arg1: number, arg2: number, arg3: number): $MutableQuadView;
         /**
          * @deprecated
          */
         sprite(arg0: number, arg1: number, arg2: $Vec2): $MutableQuadView;
-        /**
-         * @deprecated
-         */
-        sprite(arg0: number, arg1: number, arg2: number, arg3: number): $MutableQuadView;
+        colorIndex(arg0: number): $MutableQuadView;
     }
     export class $Mesh {
     }
@@ -94,12 +94,11 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/mesh" {
         normal(arg0: number, arg1: $Vector3fc): $MutableQuadView;
         tag(arg0: number): $MutableQuadView;
         copyFrom(arg0: $QuadView): $MutableQuadView;
-        nominalFace(arg0: $Direction_): $MutableQuadView;
+        spriteBake(arg0: $TextureAtlasSprite, arg1: number): $MutableQuadView;
         /**
          * @deprecated
          */
         spriteBake(arg0: number, arg1: $TextureAtlasSprite, arg2: number): $MutableQuadView;
-        spriteBake(arg0: $TextureAtlasSprite, arg1: number): $MutableQuadView;
         /**
          * @deprecated
          */
@@ -108,6 +107,7 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/mesh" {
          * @deprecated
          */
         spriteColor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): $MutableQuadView;
+        nominalFace(arg0: $Direction_): $MutableQuadView;
         cullFace(arg0: $Direction_): $MutableQuadView;
         uv(arg0: number, arg1: number, arg2: number): $MutableQuadView;
         uv(arg0: number, arg1: $Vector2f): $MutableQuadView;
@@ -149,7 +149,6 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/mesh" {
         copyTo(arg0: $MutableQuadView): void;
         normalX(arg0: number): number;
         normalY(arg0: number): number;
-        nominalFace(): $Direction;
         /**
          * @deprecated
          */
@@ -165,14 +164,14 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/mesh" {
          * @deprecated
          */
         spriteV(arg0: number, arg1: number): number;
-        toBakedQuad(arg0: $TextureAtlasSprite): $BakedQuad;
+        nominalFace(): $Direction;
         /**
          * @deprecated
          */
         toBakedQuad(arg0: number, arg1: $TextureAtlasSprite, arg2: boolean): $BakedQuad;
+        toBakedQuad(arg0: $TextureAtlasSprite): $BakedQuad;
         lightFace(): $Direction;
         cullFace(): $Direction;
-        faceNormal(): $Vector3f;
         copyPos(arg0: number, arg1: $Vector3f): $Vector3f;
         material(): $RenderMaterial;
         /**
@@ -180,8 +179,9 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/mesh" {
          */
         toVanilla(arg0: number, arg1: number[], arg2: number, arg3: boolean): void;
         toVanilla(arg0: number[], arg1: number): void;
-        hasNormal(arg0: number): boolean;
+        faceNormal(): $Vector3f;
         lightmap(arg0: number): number;
+        hasNormal(arg0: number): boolean;
         normalZ(arg0: number): number;
         colorIndex(): number;
     }

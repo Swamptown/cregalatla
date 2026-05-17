@@ -21,16 +21,16 @@ import { $Runnable_, $Enum, $Record } from "@package/java/lang";
 declare module "@package/net/minecraft/world/entity/ai/village/poi" {
     export class $PoiType extends $Record {
         is(arg0: $BlockState_): boolean;
-        maxTickets(): number;
         matchingStates(): $Set<$BlockState>;
         validRange(): number;
+        maxTickets(): number;
         static NONE: $Predicate<$Holder<$PoiType>>;
         constructor(matchingStates: $Set_<$BlockState_>, maxTickets: number, validRange: number);
     }
     /**
      * Values that may be interpreted as {@link $PoiType}.
      */
-    export type $PoiType_ = RegistryTypes.PointOfInterestType | { validRange?: number, maxTickets?: number, matchingStates?: $Set_<$BlockState_>,  } | [validRange?: number, maxTickets?: number, matchingStates?: $Set_<$BlockState_>, ];
+    export type $PoiType_ = RegistryTypes.PointOfInterestType | { matchingStates?: $Set_<$BlockState_>, maxTickets?: number, validRange?: number,  } | [matchingStates?: $Set_<$BlockState_>, maxTickets?: number, validRange?: number, ];
     export class $PoiManager extends $SectionStorage<$PoiSection> implements $PointOfInterestStorageExtended {
         remove(arg0: $BlockPos_): void;
         add(arg0: $BlockPos_, arg1: $Holder_<$PoiType>): void;
@@ -53,12 +53,12 @@ declare module "@package/net/minecraft/world/entity/ai/village/poi" {
         getInChunk(arg0: $Predicate_<any>, arg1: $ChunkPos, arg2: $PoiManager$Occupancy_): $Stream<any>;
         lithium$findNearestForPortalLogic(arg0: $BlockPos_, arg1: number, arg2: $Holder_<any>, arg3: $PoiManager$Occupancy_, arg4: $Predicate_<any>, arg5: $WorldBorder): $Optional<any>;
         ensureLoadedAndValid(arg0: $LevelReader, arg1: $BlockPos_, arg2: number): void;
+        findAllWithType(arg0: $Predicate_<$Holder<$PoiType>>, arg1: $Predicate_<$BlockPos>, arg2: $BlockPos_, arg3: number, arg4: $PoiManager$Occupancy_): $Stream<$Pair<$Holder<$PoiType>, $BlockPos>>;
         sectionsToVillage(arg0: $SectionPos): number;
         findClosest(arg0: $Predicate_<any>, arg1: $Predicate_<any>, arg2: $BlockPos_, arg3: number, arg4: $PoiManager$Occupancy_): $Optional<any>;
         findClosest(arg0: $Predicate_<any>, arg1: $BlockPos_, arg2: number, arg3: $PoiManager$Occupancy_): $Optional<any>;
         existsAtPosition(arg0: $ResourceKey_<$PoiType>, arg1: $BlockPos_): boolean;
         getInRange(arg0: $Predicate_<any>, arg1: $BlockPos_, arg2: number, arg3: $PoiManager$Occupancy_): $Stream<any>;
-        findAllWithType(arg0: $Predicate_<$Holder<$PoiType>>, arg1: $Predicate_<$BlockPos>, arg2: $BlockPos_, arg3: number, arg4: $PoiManager$Occupancy_): $Stream<$Pair<$Holder<$PoiType>, $BlockPos>>;
         getRandom(arg0: $Predicate_<any>, arg1: $Predicate_<any>, arg2: $PoiManager$Occupancy_, arg3: $BlockPos_, arg4: number, arg5: $RandomSource): $Optional<any>;
         static MAX_VILLAGE_DISTANCE: number;
         static VILLAGE_SECTION_SIZE: number;
@@ -142,8 +142,8 @@ declare module "@package/net/minecraft/world/entity/ai/village/poi" {
         getFreeTickets(arg0: $BlockPos_): number;
         getRecords(arg0: $Predicate_<$Holder<$PoiType>>, arg1: $PoiManager$Occupancy_): $Stream<$PoiRecord>;
         lithium$collectMatchingPoints(arg0: $Predicate_<any>, arg1: $PoiManager$Occupancy_, arg2: $Consumer_<any>): void;
-        refresh(arg0: $Consumer_<$BiConsumer<$BlockPos, $Holder<$PoiType>>>): void;
         static codec(arg0: $Runnable_): $Codec<$PoiSection>;
+        refresh(arg0: $Consumer_<$BiConsumer<$BlockPos, $Holder<$PoiType>>>): void;
         constructor(arg0: $Runnable_);
         get valid(): boolean;
     }

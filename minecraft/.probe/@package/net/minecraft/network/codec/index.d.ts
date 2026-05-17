@@ -61,7 +61,7 @@ declare module "@package/net/minecraft/network/codec" {
     /**
      * Values that may be interpreted as {@link $IdDispatchCodec$Entry}.
      */
-    export type $IdDispatchCodec$Entry_<B, V, T> = { type?: any, serializer?: $StreamCodec<any, any>,  } | [type?: any, serializer?: $StreamCodec<any, any>, ];
+    export type $IdDispatchCodec$Entry_<B, V, T> = { serializer?: $StreamCodec<any, any>, type?: any,  } | [serializer?: $StreamCodec<any, any>, type?: any, ];
     export class $IdDispatchCodec<B extends $ByteBuf, V, T> implements $StreamCodec<B, V> {
         decode(arg0: B): V;
         encode(arg0: B, arg1: V): void;
@@ -109,16 +109,16 @@ declare module "@package/net/minecraft/network/codec" {
         static fromCodecWithRegistries<T>(arg0: $Codec<T>, arg1: $Supplier_<$NbtAccounter>): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         static fromCodecWithRegistriesTrusted<T>(arg0: $Codec<T>): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         static fromCodecTrusted<T>(arg0: $Codec<T>): $StreamCodec<$ByteBuf, T>;
-        static idMapper<T>(arg0: $IdMap<T>): $StreamCodec<$ByteBuf, T>;
-        static idMapper<T>(arg0: $IntFunction_<T>, arg1: $ToIntFunction_<T>): $StreamCodec<$ByteBuf, T>;
-        static holderRegistry<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $Holder<T>>;
-        static holderSet<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $HolderSet<T>>;
         static stringUtf8(arg0: number): $StreamCodec<$ByteBuf, string>;
         static tagCodec(arg0: $Supplier_<$NbtAccounter>): $StreamCodec<$ByteBuf, $Tag>;
         static compoundTagCodec(arg0: $Supplier_<$NbtAccounter>): $StreamCodec<$ByteBuf, $CompoundTag>;
         static fromCodec<T>(arg0: $Codec<T>, arg1: $Supplier_<$NbtAccounter>): $StreamCodec<$ByteBuf, T>;
         static fromCodec<T>(arg0: $Codec<T>): $StreamCodec<$ByteBuf, T>;
         static writeCount(arg0: $ByteBuf, arg1: number, arg2: number): void;
+        static idMapper<T>(arg0: $IntFunction_<T>, arg1: $ToIntFunction_<T>): $StreamCodec<$ByteBuf, T>;
+        static idMapper<T>(arg0: $IdMap<T>): $StreamCodec<$ByteBuf, T>;
+        static holderRegistry<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $Holder<T>>;
+        static holderSet<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $HolderSet<T>>;
         static FLOAT: $StreamCodec<$ByteBuf, number>;
         static QUATERNIONF: $StreamCodec<$ByteBuf, $Quaternionf>;
         static BYTE_ARRAY: $StreamCodec<$ByteBuf, number[]>;

@@ -40,9 +40,9 @@ declare module "@package/com/simibubi/create/content/trains/signal" {
         isForcedRed(arg0: $TrackNode): boolean;
         isForcedRed(arg0: boolean): boolean;
         cycleSignalType(arg0: $BlockPos_): void;
-        queueUpdate(arg0: $TrackNode): void;
         setGroup(arg0: boolean, arg1: $UUID_): void;
         getGroup(arg0: $TrackNode): $UUID;
+        queueUpdate(arg0: $TrackNode): void;
         getTypeFor(arg0: $BlockPos_): $SignalBlock$SignalType;
         edgeLocation: $Couple<$TrackNodeLocation>;
         sidesToUpdate: $Couple<boolean>;
@@ -56,8 +56,8 @@ declare module "@package/com/simibubi/create/content/trains/signal" {
     }
     export class $TrackEdgePoint {
         getId(): $UUID;
-        write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: $DimensionPalette): void;
         write(arg0: $FriendlyByteBuf, arg1: $DimensionPalette): void;
+        write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: $DimensionPalette): void;
         getType(): $EdgePointType<never>;
         read(arg0: $FriendlyByteBuf, arg1: $DimensionPalette): void;
         read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean, arg3: $DimensionPalette): void;
@@ -70,10 +70,10 @@ declare module "@package/com/simibubi/create/content/trains/signal" {
         canNavigateVia(arg0: $TrackNode): boolean;
         isPrimary(arg0: $TrackNode): boolean;
         canMerge(): boolean;
-        setType(arg0: $EdgePointType<never>): void;
         setLocation(arg0: $Couple<$TrackNodeLocation>, arg1: number): void;
         setId(arg0: $UUID_): void;
         onRemoved(arg0: $TrackGraph): void;
+        setType(arg0: $EdgePointType<never>): void;
         edgeLocation: $Couple<$TrackNodeLocation>;
         id: $UUID;
         position: number;
@@ -118,8 +118,8 @@ declare module "@package/com/simibubi/create/content/trains/signal" {
     export class $SignalBlockEntity extends $SmartBlockEntity implements $TransformableBlockEntity {
         transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
         getState(): $SignalBlockEntity$SignalState;
-        getReportedPower(): boolean;
         enterState(arg0: $SignalBlockEntity$SignalState_): void;
+        getReportedPower(): boolean;
         isPowered(): boolean;
         static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         setOverlay(arg0: $SignalBlockEntity$OverlayState_): void;

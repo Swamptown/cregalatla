@@ -64,7 +64,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer" {
     /**
      * Values that may be interpreted as {@link $RecipeViewerEntryType$Component}.
      */
-    export type $RecipeViewerEntryType$Component_<T> = { empty?: $Predicate_<any>, type?: $TypeInfo_, streamCodec?: $StreamCodec<never, any>,  } | [empty?: $Predicate_<any>, type?: $TypeInfo_, streamCodec?: $StreamCodec<never, any>, ];
+    export type $RecipeViewerEntryType$Component_<T> = { streamCodec?: $StreamCodec<never, any>, type?: $TypeInfo_, empty?: $Predicate_<any>,  } | [streamCodec?: $StreamCodec<never, any>, type?: $TypeInfo_, empty?: $Predicate_<any>, ];
     export class $RemoveCategoriesKubeEvent {
     }
     export interface $RemoveCategoriesKubeEvent extends $KubeEvent {

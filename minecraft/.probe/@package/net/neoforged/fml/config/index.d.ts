@@ -21,14 +21,14 @@ declare module "@package/net/neoforged/fml/config" {
         getFileName(): string;
         getLoadedConfig(): $IConfigSpec$ILoadedConfig;
         getSpec(): $IConfigSpec;
-        getFullPath(): $Path;
         getModId(): string;
+        getFullPath(): $Path;
         get type(): $ModConfig$Type;
         get fileName(): string;
         get loadedConfig(): $IConfigSpec$ILoadedConfig;
         get spec(): $IConfigSpec;
-        get fullPath(): $Path;
         get modId(): string;
+        get fullPath(): $Path;
     }
     export class $IConfigSpec$ILoadedConfig {
     }

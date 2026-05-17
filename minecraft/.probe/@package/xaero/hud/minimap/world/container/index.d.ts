@@ -64,11 +64,11 @@ declare module "@package/xaero/hud/minimap/world/container" {
          * @deprecated
          */
         setIgnoreHeightmaps(arg0: boolean): void;
+        isConfigLoaded(): boolean;
         /**
          * @deprecated
          */
         isIgnoreHeightmaps(): boolean;
-        isConfigLoaded(): boolean;
         getConfig(): $RootConfig;
         /**
          * @deprecated

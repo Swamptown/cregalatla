@@ -27,7 +27,7 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
     /**
      * Values that may be interpreted as {@link $NetworkChannel}.
      */
-    export type $NetworkChannel_ = { id?: $ResourceLocation_, chosenVersion?: string,  } | [id?: $ResourceLocation_, chosenVersion?: string, ];
+    export type $NetworkChannel_ = { chosenVersion?: string, id?: $ResourceLocation_,  } | [chosenVersion?: string, id?: $ResourceLocation_, ];
     export class $PayloadRegistration<T extends $CustomPacketPayload> extends $Record {
         type(): $CustomPacketPayload$Type<T>;
         version(): string;
@@ -43,7 +43,7 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
     /**
      * Values that may be interpreted as {@link $PayloadRegistration}.
      */
-    export type $PayloadRegistration_<T> = { handler?: $IPayloadHandler_<$CustomPacketPayload>, optional?: boolean, version?: string, codec?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, protocols?: $List_<$ConnectionProtocol_>, flow?: ($PacketFlow_) | undefined,  } | [handler?: $IPayloadHandler_<$CustomPacketPayload>, optional?: boolean, version?: string, codec?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, protocols?: $List_<$ConnectionProtocol_>, flow?: ($PacketFlow_) | undefined, ];
+    export type $PayloadRegistration_<T> = { flow?: ($PacketFlow_) | undefined, protocols?: $List_<$ConnectionProtocol_>, type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, codec?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, version?: string, optional?: boolean, handler?: $IPayloadHandler_<$CustomPacketPayload>,  } | [flow?: ($PacketFlow_) | undefined, protocols?: $List_<$ConnectionProtocol_>, type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, codec?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, version?: string, optional?: boolean, handler?: $IPayloadHandler_<$CustomPacketPayload>, ];
     export class $NetworkPayloadSetup extends $Record {
         static from(arg0: $Map_<$ConnectionProtocol_, $NegotiationResult_>): $NetworkPayloadSetup;
         static empty(): $NetworkPayloadSetup;
@@ -67,7 +67,7 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
     /**
      * Values that may be interpreted as {@link $ModdedPlayPayloadRegistration}.
      */
-    export type $ModdedPlayPayloadRegistration_<T> = { handler?: $IPayloadHandler_<$CustomPacketPayload>, type?: $Class<$CustomPacketPayload_>, id?: $ResourceLocation_, reader?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>,  } | [handler?: $IPayloadHandler_<$CustomPacketPayload>, type?: $Class<$CustomPacketPayload_>, id?: $ResourceLocation_, reader?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, ];
+    export type $ModdedPlayPayloadRegistration_<T> = { reader?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, id?: $ResourceLocation_, type?: $Class<$CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>,  } | [reader?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, id?: $ResourceLocation_, type?: $Class<$CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>, ];
     export class $HandlerThread extends $Enum<$HandlerThread> {
         static values(): $HandlerThread[];
         static valueOf(arg0: string): $HandlerThread;
@@ -88,26 +88,26 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
     /**
      * Values that may be interpreted as {@link $ModdedConfigurationPayloadRegistration}.
      */
-    export type $ModdedConfigurationPayloadRegistration_<T> = { handler?: $IPayloadHandler_<$CustomPacketPayload>, type?: $Class<$CustomPacketPayload_>, id?: $ResourceLocation_, reader?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>,  } | [handler?: $IPayloadHandler_<$CustomPacketPayload>, type?: $Class<$CustomPacketPayload_>, id?: $ResourceLocation_, reader?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>, ];
+    export type $ModdedConfigurationPayloadRegistration_<T> = { reader?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>, id?: $ResourceLocation_, type?: $Class<$CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>,  } | [reader?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>, id?: $ResourceLocation_, type?: $Class<$CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>, ];
     export class $PayloadRegistrar {
         optional(): $PayloadRegistrar;
+        commonBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
         configurationBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
         configurationToServer<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        commonBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
         commonToClient<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
         commonToServer<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
+        playToClient<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
+        executesOn(arg0: $HandlerThread_): $PayloadRegistrar;
         versioned(arg0: string): $PayloadRegistrar;
         configurationToClient<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        executesOn(arg0: $HandlerThread_): $PayloadRegistrar;
-        playToClient<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        playBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
         playToServer<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
+        playBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
         constructor(arg0: string);
     }
     export class $ChannelAttributes {
+        static getPayloadSetup(arg0: $Connection): $NetworkPayloadSetup;
         static setPayloadSetup(arg0: $Connection, arg1: $NetworkPayloadSetup_): void;
         static setConnectionType(arg0: $Connection, arg1: $ConnectionType_): void;
-        static getPayloadSetup(arg0: $Connection): $NetworkPayloadSetup;
         static getOrCreateAdHocChannels(arg0: $Connection): $Set<$ResourceLocation>;
         static getConnectionType(arg0: $Connection): $ConnectionType;
         static getOrCreateCommonChannels(arg0: $Connection, arg1: $ConnectionProtocol_): $Set<$ResourceLocation>;
@@ -121,8 +121,9 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
         static register<T extends $CustomPacketPayload, B extends $FriendlyByteBuf>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<B, T>, arg2: $IPayloadHandler_<T>, arg3: $List_<$ConnectionProtocol_>, arg4: ($PacketFlow_) | undefined, arg5: string, arg6: boolean): void;
         static setup(): void;
         static guard<T>(arg0: $CompletableFuture<T>, arg1: $ResourceLocation_): $CompletableFuture<T>;
-        static initializeNeoForgeConnection(arg0: $ServerConfigurationPacketListener, arg1: $Map_<$ConnectionProtocol_, $Set_<$ModdedNetworkQueryComponent_>>): void;
+        static handlePacketUnchecked<T extends $PacketListener>(arg0: $Packet<T>, arg1: $PacketListener): void;
         static initializeNeoForgeConnection(arg0: $ClientConfigurationPacketListener, arg1: $NetworkPayloadSetup_): void;
+        static initializeNeoForgeConnection(arg0: $ServerConfigurationPacketListener, arg1: $Map_<$ConnectionProtocol_, $Set_<$ModdedNetworkQueryComponent_>>): void;
         static getInitialListeningChannels(arg0: $PacketFlow_): $Set<$ResourceLocation>;
         static initializeOtherConnection(arg0: $ClientConfigurationPacketListener): void;
         static initializeOtherConnection(arg0: $ServerConfigurationPacketListener): boolean;
@@ -132,10 +133,9 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
         static getInitialServerUnregisterChannels(): $Set<$ResourceLocation>;
         static getCommonPlayChannels(arg0: $PacketFlow_): $Set<$ResourceLocation>;
         static onConfigurationFinished(arg0: $ICommonPacketListener): void;
-        static getPayloadRegistrations$fabric_networking_api_v1_$md$8e2dbe$6(): $Map<any, any>;
-        static getSetup$fabric_networking_api_v1_$md$8e2dbe$7(): boolean;
-        static setSetup$fabric_networking_api_v1_$md$8e2dbe$8(arg0: boolean): void;
-        static handlePacketUnchecked<T extends $PacketListener>(arg0: $Packet<T>, arg1: $PacketListener): void;
+        static getPayloadRegistrations$fabric_networking_api_v1_$md$d858b6$6(): $Map<any, any>;
+        static getSetup$fabric_networking_api_v1_$md$d858b6$7(): boolean;
+        static setSetup$fabric_networking_api_v1_$md$d858b6$8(arg0: boolean): void;
         static getConnectionType(arg0: $Connection): $ConnectionType;
         static getCodec(arg0: $ResourceLocation_, arg1: $ConnectionProtocol_, arg2: $PacketFlow_): $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload>;
         static hasChannel(arg0: $Connection, arg1: $ConnectionProtocol_, arg2: $ResourceLocation_): boolean;
@@ -143,16 +143,16 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
         static checkCommonVersion(arg0: $ICommonPacketListener, arg1: $CommonVersionPayload_): void;
         static onCommonRegister(arg0: $ICommonPacketListener, arg1: $CommonRegisterPayload_): void;
         static isModdedPayload(arg0: $CustomPacketPayload_): boolean;
-        static handleModdedPayload(arg0: $ServerCommonPacketListener, arg1: $ServerboundCustomPayloadPacket_): void;
         static handleModdedPayload(arg0: $ClientCommonPacketListener, arg1: $ClientboundCustomPayloadPacket_): void;
-        static checkPacket(arg0: $Packet<never>, arg1: $ServerCommonPacketListener): void;
+        static handleModdedPayload(arg0: $ServerCommonPacketListener, arg1: $ServerboundCustomPayloadPacket_): void;
         static checkPacket(arg0: $Packet<never>, arg1: $ClientCommonPacketListener): void;
+        static checkPacket(arg0: $Packet<never>, arg1: $ServerCommonPacketListener): void;
         static onMinecraftRegister(arg0: $Connection, arg1: $Set_<$ResourceLocation_>): void;
         static onMinecraftUnregister(arg0: $Connection, arg1: $Set_<$ResourceLocation_>): void;
         static SUPPORTED_COMMON_NETWORKING_VERSIONS: $List<number>;
         static get initialServerUnregisterChannels(): $Set<$ResourceLocation>;
-        static get payloadRegistrations$fabric_networking_api_v1_$md$8e2dbe$6(): $Map<any, any>;
-        static get setup$fabric_networking_api_v1_$md$8e2dbe$7(): boolean;
-        static set setup$fabric_networking_api_v1_$md$8e2dbe$8(value: boolean);
+        static get payloadRegistrations$fabric_networking_api_v1_$md$d858b6$6(): $Map<any, any>;
+        static get setup$fabric_networking_api_v1_$md$d858b6$7(): boolean;
+        static set setup$fabric_networking_api_v1_$md$d858b6$8(value: boolean);
     }
 }

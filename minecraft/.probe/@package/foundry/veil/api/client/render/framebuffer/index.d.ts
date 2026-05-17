@@ -107,29 +107,29 @@ declare module "@package/foundry/veil/api/client/render/framebuffer" {
         build(arg0: boolean): $AdvancedFbo;
         setFormat(arg0: number, arg1: number): $AdvancedFbo$Builder;
         setFormat(arg0: $FramebufferAttachmentDefinition$Format_): $AdvancedFbo$Builder;
-        setFilter(arg0: $TextureFilter_): $AdvancedFbo$Builder;
         setFilter(arg0: boolean, arg1: boolean): $AdvancedFbo$Builder;
-        setCompareFunction(arg0: $TextureFilter$CompareFunction_): $AdvancedFbo$Builder;
-        addColorBuffer(arg0: $AdvancedFboAttachment): $AdvancedFbo$Builder;
-        setWrapS(arg0: number): $AdvancedFbo$Builder;
+        setFilter(arg0: $TextureFilter_): $AdvancedFbo$Builder;
         setWrapS(arg0: $TextureFilter$Wrap_): $AdvancedFbo$Builder;
+        setWrapS(arg0: number): $AdvancedFbo$Builder;
         setWrapT(arg0: number): $AdvancedFbo$Builder;
         setWrapT(arg0: $TextureFilter$Wrap_): $AdvancedFbo$Builder;
+        setCompareFunction(arg0: $TextureFilter$CompareFunction_): $AdvancedFbo$Builder;
+        addColorBuffer(arg0: $AdvancedFboAttachment): $AdvancedFbo$Builder;
         setDepthBuffer(arg0: $AdvancedFboAttachment): $AdvancedFbo$Builder;
         addColorTextureWrapper(arg0: number): $AdvancedFbo$Builder;
         addColorTextureWrapper(arg0: number, arg1: number): $AdvancedFbo$Builder;
-        setDepthTextureBuffer(): $AdvancedFbo$Builder;
         setDepthTextureBuffer(arg0: number, arg1: number): $AdvancedFbo$Builder;
-        setBorderColor(arg0: number): $AdvancedFbo$Builder;
+        setDepthTextureBuffer(): $AdvancedFbo$Builder;
         setWrap(arg0: $TextureFilter$Wrap_, arg1: $TextureFilter$Wrap_): $AdvancedFbo$Builder;
         setWrap(arg0: number, arg1: number): $AdvancedFbo$Builder;
+        setBorderColor(arg0: number): $AdvancedFbo$Builder;
         setLevels(arg0: number): $AdvancedFbo$Builder;
         addAttachments(arg0: $RenderTarget): $AdvancedFbo$Builder;
         addAttachments(arg0: $AdvancedFbo): $AdvancedFbo$Builder;
-        addColorTextureBuffer(): $AdvancedFbo$Builder;
         addColorTextureBuffer(arg0: number, arg1: number): $AdvancedFbo$Builder;
-        setDepthTextureWrapper(arg0: number, arg1: number): $AdvancedFbo$Builder;
+        addColorTextureBuffer(): $AdvancedFbo$Builder;
         setDepthTextureWrapper(arg0: number): $AdvancedFbo$Builder;
+        setDepthTextureWrapper(arg0: number, arg1: number): $AdvancedFbo$Builder;
         setDebugLabel(arg0: string): $AdvancedFbo$Builder;
         addColorRenderBuffer(): $AdvancedFbo$Builder;
         addColorRenderBuffer(arg0: number, arg1: number): $AdvancedFbo$Builder;
@@ -146,13 +146,13 @@ declare module "@package/foundry/veil/api/client/render/framebuffer" {
         set anisotropy(value: number);
     }
     export class $AdvancedFbo {
-        static copy(arg0: $AdvancedFbo): $AdvancedFbo$Builder;
         static copy(arg0: $RenderTarget): $AdvancedFbo$Builder;
-        static unbind(): void;
+        static copy(arg0: $AdvancedFbo): $AdvancedFbo$Builder;
+        static getMainFramebuffer(): $AdvancedFbo;
         static unbindRead(): void;
         static unbindDraw(): void;
         static withSize(arg0: number, arg1: number): $AdvancedFbo$Builder;
-        static getMainFramebuffer(): $AdvancedFbo;
+        static unbind(): void;
         static get mainFramebuffer(): $AdvancedFbo;
     }
     export interface $AdvancedFbo extends $NativeResource {
@@ -166,11 +166,17 @@ declare module "@package/foundry/veil/api/client/render/framebuffer" {
         getId(): number;
         create(): void;
         bind(arg0: boolean): void;
-        getWidth(): number;
-        getHeight(): number;
+        getClearMask(): number;
+        getDrawBuffers(): number[];
+        resolveToAdvancedFbo(arg0: $AdvancedFbo, arg1: number, arg2: number): void;
+        resolveToAdvancedFbo(arg0: $AdvancedFbo): void;
+        resolveToRenderTarget(arg0: $RenderTarget): void;
+        resolveToRenderTarget(arg0: $RenderTarget, arg1: number, arg2: number): void;
+        hasColorAttachment(arg0: number): boolean;
+        getColorAttachment(arg0: number): $AdvancedFboAttachment;
         isColorTextureAttachment(arg0: number): boolean;
-        setColorAttachmentTexture(arg0: number, arg1: number): void;
         setColorAttachmentTexture(arg0: number, arg1: number, arg2: number): void;
+        setColorAttachmentTexture(arg0: number, arg1: number): void;
         isMutableColorTextureAttachment(arg0: number): boolean;
         isColorRenderAttachment(arg0: number): boolean;
         hasDepthAttachment(): boolean;
@@ -185,8 +191,8 @@ declare module "@package/foundry/veil/api/client/render/framebuffer" {
         bindRead(): void;
         bindDraw(arg0: boolean): void;
         resolveToFbo(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        resolveToScreen(arg0: number, arg1: number): void;
         resolveToScreen(): void;
+        resolveToScreen(arg0: number, arg1: number): void;
         getColorAttachments(): number;
         hasStencilAttachment(): boolean;
         getColorTextureAttachment(arg0: number): $AdvancedFboTextureAttachment;
@@ -195,22 +201,16 @@ declare module "@package/foundry/veil/api/client/render/framebuffer" {
         getDepthRenderAttachment(): $AdvancedFboRenderAttachment;
         getDebugLabel(): string;
         toRenderTarget(): $RenderTarget;
-        getClearMask(): number;
-        getDrawBuffers(): number[];
-        resolveToAdvancedFbo(arg0: $AdvancedFbo): void;
-        resolveToAdvancedFbo(arg0: $AdvancedFbo, arg1: number, arg2: number): void;
-        resolveToRenderTarget(arg0: $RenderTarget, arg1: number, arg2: number): void;
-        resolveToRenderTarget(arg0: $RenderTarget): void;
-        hasColorAttachment(arg0: number): boolean;
-        getColorAttachment(arg0: number): $AdvancedFboAttachment;
+        getWidth(): number;
+        getHeight(): number;
         get id(): number;
-        get width(): number;
-        get height(): number;
+        get clearMask(): number;
         get depthAttachment(): $AdvancedFboAttachment;
         get depthMutableTextureAttachment(): boolean;
         get colorAttachments(): number;
         get debugLabel(): string;
-        get clearMask(): number;
+        get width(): number;
+        get height(): number;
     }
     export class $AdvancedFboRenderAttachment implements $AdvancedFboAttachment {
         getName(): string;
@@ -220,9 +220,9 @@ declare module "@package/foundry/veil/api/client/render/framebuffer" {
         attach(arg0: $AdvancedFbo, arg1: number): void;
         getFormat(): number;
         free(): void;
-        bindAttachment(): void;
         unbindAttachment(): void;
         canSample(): boolean;
+        bindAttachment(): void;
         getAttachmentType(): number;
         getLevels(): number;
         close(): void;
@@ -241,9 +241,9 @@ declare module "@package/foundry/veil/api/client/render/framebuffer" {
         create(): void;
         attach(arg0: $AdvancedFbo, arg1: number): void;
         getFormat(): number;
-        bindAttachment(): void;
         unbindAttachment(): void;
         canSample(): boolean;
+        bindAttachment(): void;
         getAttachmentType(): number;
         getLevels(): number;
         get name(): string;
@@ -258,13 +258,13 @@ declare module "@package/foundry/veil/api/client/render/framebuffer" {
         getFilter(): $TextureFilter;
         getFormat(): number;
         free(): void;
-        bindAttachment(): void;
         unbindAttachment(): void;
         canSample(): boolean;
+        bindAttachment(): void;
         getAttachmentType(): number;
+        getLevels(): number;
         getWidth(): number;
         getHeight(): number;
-        getLevels(): number;
         clone(): $AdvancedFboAttachment;
         static NOT_ASSIGNED: number;
         mipmap: boolean;
@@ -275,8 +275,8 @@ declare module "@package/foundry/veil/api/client/render/framebuffer" {
         get filter(): $TextureFilter;
         get format(): number;
         get attachmentType(): number;
+        get levels(): number;
         get width(): number;
         get height(): number;
-        get levels(): number;
     }
 }

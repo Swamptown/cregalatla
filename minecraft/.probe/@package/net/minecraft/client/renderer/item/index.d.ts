@@ -48,9 +48,9 @@ declare module "@package/net/minecraft/client/renderer/item" {
         static registerGeneric(arg0: $ResourceLocation_, arg1: $ClampedItemPropertyFunction_): $ClampedItemPropertyFunction;
         static registerGeneric(arg0: $ResourceLocation_, arg1: $ItemPropertyFunction_): $ItemPropertyFunction;
         static registerCustomModelData(arg0: $ItemPropertyFunction_): void;
-        static getGENERIC_PROPERTIES$platform_$md$8e2dbe$0(): $Map<any, any>;
+        static getGENERIC_PROPERTIES$platform_$md$d858b6$0(): $Map<any, any>;
         constructor();
-        static get GENERIC_PROPERTIES$platform_$md$8e2dbe$0(): $Map<any, any>;
+        static get GENERIC_PROPERTIES$platform_$md$d858b6$0(): $Map<any, any>;
     }
     /**
      * @deprecated

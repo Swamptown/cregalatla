@@ -11,8 +11,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor" {
         copy(arg0: $Supplier_<never>, arg1: $Class<never>): void;
         copy(arg0: $Supplier_<never>): void;
         getClipboardContent(): $Object;
-        getClipboardType(): $Class<never>;
         copyDirect(arg0: $Object): void;
+        getClipboardType(): $Class<never>;
         paste<T>(): T;
         static INSTANCE: $ClipboardManager;
         get clipboardContent(): $Object;

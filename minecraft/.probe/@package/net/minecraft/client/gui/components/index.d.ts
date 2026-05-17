@@ -73,8 +73,8 @@ declare module "@package/net/minecraft/client/gui/components" {
     export class $WidgetTooltipHolder {
         get(): $Tooltip;
         set(arg0: $Tooltip): void;
-        setDelay(arg0: $Duration_): void;
         updateNarration(arg0: $NarrationElementOutput): void;
+        setDelay(arg0: $Duration_): void;
         refreshTooltipForNextRenderPass(arg0: boolean, arg1: boolean, arg2: $ScreenRectangle_): void;
         createTooltipPositioner(arg0: $ScreenRectangle_, arg1: boolean, arg2: boolean): $ClientTooltipPositioner;
         constructor();
@@ -85,7 +85,7 @@ declare module "@package/net/minecraft/client/gui/components" {
     /**
      * Values that may be interpreted as {@link $PopupScreen$ButtonOption}.
      */
-    export type $PopupScreen$ButtonOption_ = { message?: $Component_, action?: $Consumer_<$PopupScreen>,  } | [message?: $Component_, action?: $Consumer_<$PopupScreen>, ];
+    export type $PopupScreen$ButtonOption_ = { action?: $Consumer_<$PopupScreen>, message?: $Component_,  } | [action?: $Consumer_<$PopupScreen>, message?: $Component_, ];
     export class $MultilineTextField$StringView extends $Record {
     }
     /**
@@ -94,8 +94,8 @@ declare module "@package/net/minecraft/client/gui/components" {
     export type $MultilineTextField$StringView_ = { endIndex?: number, beginIndex?: number,  } | [endIndex?: number, beginIndex?: number, ];
     export class $TabButton extends $AbstractWidget {
         tab(): $Tab;
-        isSelected(): boolean;
         renderMenuBackground(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
+        isSelected(): boolean;
         renderString(arg0: $GuiGraphics, arg1: $Font, arg2: number): void;
         packedFGColor: number;
         static UNSET_FG_COLOR: number;
@@ -125,14 +125,14 @@ declare module "@package/net/minecraft/client/gui/components" {
         renderContents(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
         setScrollAmount(arg0: number): void;
         scrollAmount(): number;
-        withinContentAreaPoint(arg0: number, arg1: number): boolean;
-        getMaxScrollAmount(): number;
         scrollRate(): number;
         innerPadding(): number;
         totalInnerPadding(): number;
         withinContentAreaTopBottom(arg0: number, arg1: number): boolean;
-        renderBorder(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
+        withinContentAreaPoint(arg0: number, arg1: number): boolean;
+        getMaxScrollAmount(): number;
         renderBackground(arg0: $GuiGraphics): void;
+        renderBorder(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
         renderDecorations(arg0: $GuiGraphics): void;
         scrollbarVisible(): boolean;
         getInnerHeight(): number;
@@ -181,8 +181,8 @@ declare module "@package/net/minecraft/client/gui/components" {
         create(arg0: $Component_, arg1: $CycleButton$OnValueChange_<T>): $CycleButton<T>;
         create(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Component_): $CycleButton<T>;
         create(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Component_, arg5: $CycleButton$OnValueChange_<T>): $CycleButton<T>;
-        withTooltip(arg0: $OptionInstance$TooltipSupplier_<T>): $CycleButton$Builder<T>;
         withCustomNarration(arg0: $Function_<$CycleButton<T>, $MutableComponent>): $CycleButton$Builder<T>;
+        withTooltip(arg0: $OptionInstance$TooltipSupplier_<T>): $CycleButton$Builder<T>;
         withValues(arg0: $Collection_<T>): $CycleButton$Builder<T>;
         withValues(...arg0: T[]): $CycleButton$Builder<T>;
         withValues(arg0: $List_<T>, arg1: $List_<T>): $CycleButton$Builder<T>;
@@ -223,34 +223,34 @@ declare module "@package/net/minecraft/client/gui/components" {
     }
     export interface $MultiLineLabel {
         renderLeftAligned(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        getWidth(): number;
         renderCentered(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
         renderCentered(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         getLineCount(): number;
         renderLeftAlignedNoShadow(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): number;
-        get width(): number;
+        getWidth(): number;
         get lineCount(): number;
+        get width(): number;
     }
     export class $CommandSuggestions$SuggestionsList implements $IMixinSuggestionsList {
         useSuggestion(): void;
+        getNarrationMessage(): $Component;
+        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
+        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         select(arg0: number): void;
         render(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         cycle(arg0: number): void;
-        getNarrationMessage(): $Component;
         mouseScrolled(arg0: number): boolean;
-        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
-        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
-        getOffsetFancyMenu(): number;
         getLastMouseFancyMenu(): $Vec2;
         setLastMouseFancyMenu(arg0: $Vec2): void;
         getRectFancyMenu(): $Rect2i;
         getCurrentFancyMenu(): number;
+        getOffsetFancyMenu(): number;
         tabCycles: boolean;
         this$0: $CommandSuggestions;
         get narrationMessage(): $Component;
-        get offsetFancyMenu(): number;
         get rectFancyMenu(): $Rect2i;
         get currentFancyMenu(): number;
+        get offsetFancyMenu(): number;
     }
     export class $LogoRenderer {
         renderLogo(arg0: $GuiGraphics, arg1: number, arg2: number): void;
@@ -280,7 +280,7 @@ declare module "@package/net/minecraft/client/gui/components" {
     /**
      * Values that may be interpreted as {@link $PlayerTabOverlay$ScoreDisplayEntry}.
      */
-    export type $PlayerTabOverlay$ScoreDisplayEntry_ = { score?: number, formattedScore?: $Component_, scoreWidth?: number, name?: $Component_,  } | [score?: number, formattedScore?: $Component_, scoreWidth?: number, name?: $Component_, ];
+    export type $PlayerTabOverlay$ScoreDisplayEntry_ = { name?: $Component_, scoreWidth?: number, formattedScore?: $Component_, score?: number,  } | [name?: $Component_, scoreWidth?: number, formattedScore?: $Component_, score?: number, ];
     export class $ImageWidget$Texture extends $ImageWidget {
         packedFGColor: number;
         static UNSET_FG_COLOR: number;
@@ -336,33 +336,32 @@ declare module "@package/net/minecraft/client/gui/components" {
         nextEntry(arg0: $ScreenDirection_): E;
         nextEntry(arg0: $ScreenDirection_, arg1: $Predicate_<E>): E;
         getMaxScroll(): number;
-        renderSelection(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
-        centerScrollOn(arg0: E): void;
-        clearEntries(): void;
         updateSize(arg0: number, arg1: $HeaderAndFooterLayout): void;
+        centerScrollOn(arg0: E): void;
         setScrollAmount(arg0: number): void;
+        renderSelection(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
+        clearEntries(): void;
         getMaxPosition(): number;
         getSelected(): E;
-        ensureVisible(arg0: E): void;
+        enableScissor(arg0: $GuiGraphics): void;
+        renderItem(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): void;
+        getItemCount(): number;
+        setSelected(arg0: E): void;
+        removeEntry(arg0: E): boolean;
+        getFocused(): E;
         getRowWidth(): number;
         getRowLeft(): number;
         getRowRight(): number;
         updateSizeAndPosition(arg0: number, arg1: number, arg2: number): void;
         getScrollAmount(): number;
-        getItemCount(): number;
-        getFocused(): E;
-        removeEntry(arg0: E): boolean;
-        enableScissor(arg0: $GuiGraphics): void;
-        renderItem(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): void;
-        setSelected(arg0: E): void;
         replaceEntries(arg0: $Collection_<E>): void;
+        getScrollbarPosition(): number;
         isSelectedItem(arg0: number): boolean;
         getHovered(): E;
         narrateListElementPosition(arg0: $NarrationElementOutput, arg1: E): void;
         renderHeader(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         setRenderHeader(arg0: boolean, arg1: number): void;
         getFirstElement(): E;
-        getScrollbarPosition(): number;
         addEntryToTop(arg0: E): void;
         removeEntryFromTop(arg0: E): boolean;
         getEntryAtPosition(arg0: number, arg1: number): E;
@@ -380,6 +379,7 @@ declare module "@package/net/minecraft/client/gui/components" {
         isValidMouseClick(arg0: number): boolean;
         getRowBottom(arg0: number): number;
         bindEntryToSelf(arg0: $AbstractSelectionList$Entry<E>): void;
+        ensureVisible(arg0: E): void;
         minecraft: $Minecraft;
         static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
@@ -401,13 +401,13 @@ declare module "@package/net/minecraft/client/gui/components" {
         constructor(arg0: $Minecraft, arg1: number, arg2: number, arg3: number, arg4: number);
         get maxScroll(): number;
         get maxPosition(): number;
+        get itemCount(): number;
+        get focused(): E;
         get rowWidth(): number;
         get rowLeft(): number;
         get rowRight(): number;
-        get itemCount(): number;
-        get focused(): E;
-        get firstElement(): E;
         get scrollbarPosition(): number;
+        get firstElement(): E;
         set clampedScrollAmount(value: number);
         get defaultScrollbarPosition(): number;
     }
@@ -472,33 +472,33 @@ declare module "@package/net/minecraft/client/gui/components" {
         cursor(): number;
         hasSelection(): boolean;
         deleteText(arg0: number): void;
-        setCursorListener(arg0: $Runnable_): void;
         setSelecting(arg0: boolean): void;
-        iterateLines(): $Iterable<$MultilineTextField$StringView>;
         hasCharacterLimit(): boolean;
         characterLimit(): number;
-        getLineView(arg0: number): $MultilineTextField$StringView;
-        getLineAtCursor(): number;
-        seekCursorToPoint(arg0: number, arg1: number): void;
-        seekCursor(arg0: $Whence_, arg1: number): void;
         seekCursorLine(arg0: number): void;
         getSelectedText(): string;
         getPreviousWord(): $MultilineTextField$StringView;
         getNextWord(): $MultilineTextField$StringView;
+        iterateLines(): $Iterable<$MultilineTextField$StringView>;
+        getLineView(arg0: number): $MultilineTextField$StringView;
+        getLineAtCursor(): number;
+        seekCursorToPoint(arg0: number, arg1: number): void;
+        seekCursor(arg0: $Whence_, arg1: number): void;
+        setCursorListener(arg0: $Runnable_): void;
         getSelected(): $MultilineTextField$StringView;
-        getLineCount(): number;
-        insertText(arg0: string): void;
         keyPressed(arg0: number): boolean;
+        insertText(arg0: string): void;
+        getLineCount(): number;
         setCharacterLimit(arg0: number): void;
         setValueListener(arg0: $Consumer_<string>): void;
         static NO_CHARACTER_LIMIT: number;
         constructor(arg0: $Font, arg1: number);
-        set cursorListener(value: $Runnable_);
         set selecting(value: boolean);
-        get lineAtCursor(): number;
         get selectedText(): string;
         get previousWord(): $MultilineTextField$StringView;
         get nextWord(): $MultilineTextField$StringView;
+        get lineAtCursor(): number;
+        set cursorListener(value: $Runnable_);
         get selected(): $MultilineTextField$StringView;
         get lineCount(): number;
         set valueListener(value: $Consumer_<string>);
@@ -510,13 +510,13 @@ declare module "@package/net/minecraft/client/gui/components" {
         constructor(arg0: $List_<$GuiMessage_>, arg1: $List_<string>, arg2: $List_<$ChatComponent$DelayedMessageDeletion_>);
     }
     export class $ContainerObjectSelectionList$Entry<E extends $ContainerObjectSelectionList$Entry<E>> extends $AbstractSelectionList$Entry<E> implements $ContainerEventHandler {
+        focusPathAtIndex(arg0: $FocusNavigationEvent_, arg1: number): $ComponentPath;
         updateNarration(arg0: $NarrationElementOutput): void;
         narratables(): $List<$NarratableEntry>;
         setFocused(arg0: $GuiEventListener): void;
         setDragging(arg0: boolean): void;
         isDragging(): boolean;
         getFocused(): $GuiEventListener;
-        focusPathAtIndex(arg0: $FocusNavigationEvent_, arg1: number): $ComponentPath;
         getChildAt(arg0: number, arg1: number): ($GuiEventListener) | undefined;
         /**
          * @deprecated
@@ -602,9 +602,9 @@ declare module "@package/net/minecraft/client/gui/components" {
     export class $WidgetSprites extends $Record {
         get(arg0: boolean, arg1: boolean): $ResourceLocation;
         enabled(): $ResourceLocation;
-        disabled(): $ResourceLocation;
         enabledFocused(): $ResourceLocation;
         disabledFocused(): $ResourceLocation;
+        disabled(): $ResourceLocation;
         constructor(arg0: $ResourceLocation_, arg1: $ResourceLocation_, arg2: $ResourceLocation_, arg3: $ResourceLocation_);
         constructor(arg0: $ResourceLocation_, arg1: $ResourceLocation_, arg2: $ResourceLocation_);
         constructor(arg0: $ResourceLocation_, arg1: $ResourceLocation_);
@@ -612,7 +612,7 @@ declare module "@package/net/minecraft/client/gui/components" {
     /**
      * Values that may be interpreted as {@link $WidgetSprites}.
      */
-    export type $WidgetSprites_ = { enabled?: $ResourceLocation_, enabledFocused?: $ResourceLocation_, disabled?: $ResourceLocation_, disabledFocused?: $ResourceLocation_,  } | [enabled?: $ResourceLocation_, enabledFocused?: $ResourceLocation_, disabled?: $ResourceLocation_, disabledFocused?: $ResourceLocation_, ];
+    export type $WidgetSprites_ = { disabledFocused?: $ResourceLocation_, disabled?: $ResourceLocation_, enabledFocused?: $ResourceLocation_, enabled?: $ResourceLocation_,  } | [disabledFocused?: $ResourceLocation_, disabled?: $ResourceLocation_, enabledFocused?: $ResourceLocation_, enabled?: $ResourceLocation_, ];
     export class $ImageButton extends $Button implements $ImageButtonAccessor {
         getSprites(): $WidgetSprites;
         static SPRITES: $WidgetSprites;
@@ -676,7 +676,7 @@ declare module "@package/net/minecraft/client/gui/components" {
     /**
      * Values that may be interpreted as {@link $PlayerSkinWidget$Model}.
      */
-    export type $PlayerSkinWidget$Model_ = { slimModel?: $PlayerModel<never>, wideModel?: $PlayerModel<never>,  } | [slimModel?: $PlayerModel<never>, wideModel?: $PlayerModel<never>, ];
+    export type $PlayerSkinWidget$Model_ = { wideModel?: $PlayerModel<never>, slimModel?: $PlayerModel<never>,  } | [wideModel?: $PlayerModel<never>, slimModel?: $PlayerModel<never>, ];
     export class $SubtitleOverlay$SoundPlayedAt extends $Record {
     }
     /**
@@ -692,49 +692,47 @@ declare module "@package/net/minecraft/client/gui/components" {
      * Values that may be interpreted as {@link $Renderable}.
      */
     export type $Renderable_ = ((arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number) => void);
-    export class $AbstractWidget implements $Renderable, $GuiEventListener, $LayoutElement, $NarratableEntry, $IAbstractWidgetExtension, $IMixinAbstractWidget, $AbstractWidgetInvoker, $IMixinAbstractWidget$1, $UniqueWidget, $CustomizableWidget {
+    export class $AbstractWidget implements $Renderable, $GuiEventListener, $LayoutElement, $NarratableEntry, $IAbstractWidgetExtension, $AbstractWidgetInvoker, $IMixinAbstractWidget, $IMixinAbstractWidget$1, $UniqueWidget, $CustomizableWidget {
         getMessage(): $Component;
         isActive(): boolean;
         setSize(arg0: number, arg1: number): void;
         getHitboxRotationDegreesFancyMenu(): number;
+        getTooltip(): $Tooltip;
+        clicked(arg0: number, arg1: number): boolean;
         resetWidgetSizeAndPositionFancyMenu(): void;
         getY(): number;
-        clicked(arg0: number, arg1: number): boolean;
-        getTooltip(): $Tooltip;
-        getWidth(): number;
-        getHeight(): number;
-        isHiddenFancyMenu(): boolean;
-        setTooltip(arg0: $Tooltip): void;
-        resetWidgetCustomizationsFancyMenu(): void;
-        /**
-         * @deprecated
-         */
-        onClick(arg0: number, arg1: number): void;
-        setMessage(arg0: $Component_): void;
-        render(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
-        getRight(): number;
+        isMouseOver(arg0: number, arg1: number): boolean;
         getTabOrderGroup(): number;
         updateNarration(arg0: $NarrationElementOutput): void;
         narrationPriority(): $NarratableEntry$NarrationPriority;
         getRectangle(): $ScreenRectangle;
-        setAlpha(arg0: number): void;
         nextFocusPath(arg0: $FocusNavigationEvent_): $ComponentPath;
-        isMouseOver(arg0: number, arg1: number): boolean;
-        mouseReleased(arg0: number, arg1: number, arg2: number): boolean;
-        mouseDragged(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
-        setFocused(arg0: boolean): void;
-        isFocused(): boolean;
-        setWidgetIdentifierFancyMenu(arg0: string): $AbstractWidget;
-        visitWidgets(arg0: $Consumer_<$AbstractWidget>): void;
         getX(): number;
         mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
-        static renderScrollingString(arg0: $GuiGraphics, arg1: $Font, arg2: $Component_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): void;
+        setMessage(arg0: $Component_): void;
+        render(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
+        getRight(): number;
         static renderScrollingString(arg0: $GuiGraphics, arg1: $Font, arg2: $Component_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        static renderScrollingString(arg0: $GuiGraphics, arg1: $Font, arg2: $Component_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): void;
         renderScrollingString(arg0: $GuiGraphics, arg1: $Font, arg2: number, arg3: number): void;
         setWidth(arg0: number): void;
         setHeight(arg0: number): void;
         setX(arg0: number): void;
         setY(arg0: number): void;
+        setAlpha(arg0: number): void;
+        isHiddenFancyMenu(): boolean;
+        setTooltip(arg0: $Tooltip): void;
+        mouseReleased(arg0: number, arg1: number, arg2: number): boolean;
+        mouseDragged(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
+        setFocused(arg0: boolean): void;
+        isFocused(): boolean;
+        visitWidgets(arg0: $Consumer_<$AbstractWidget>): void;
+        setWidgetIdentifierFancyMenu(arg0: string): $AbstractWidget;
+        resetWidgetCustomizationsFancyMenu(): void;
+        /**
+         * @deprecated
+         */
+        onClick(arg0: number, arg1: number): void;
         isHovered(): boolean;
         renderWidget(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
         setTooltipDelay(arg0: $Duration_): void;
@@ -823,12 +821,14 @@ declare module "@package/net/minecraft/client/gui/components" {
         getHitboxVerticalTiltDegreesFancyMenu(): number;
         getHitboxHorizontalTiltDegreesFancyMenu(): number;
         getWidgetIdentifierFancyMenu(): string;
+        getWidth(): number;
+        getHeight(): number;
+        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
         getCurrentFocusPath(): $ComponentPath;
         mouseMoved(arg0: number, arg1: number): void;
         mouseScrolled(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         keyReleased(arg0: number, arg1: number, arg2: number): boolean;
         charTyped(arg0: string, arg1: number): boolean;
-        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
         setPosition(arg0: number, arg1: number): void;
         onClick(arg0: number, arg1: number, arg2: number): void;
         tickFocusStateListenersFancyMenu(arg0: boolean): void;
@@ -901,32 +901,33 @@ declare module "@package/net/minecraft/client/gui/components" {
     /**
      * Values that may be interpreted as {@link $MultiLineTextWidget$CacheKey}.
      */
-    export type $MultiLineTextWidget$CacheKey_ = { maxRows?: $OptionalInt, maxWidth?: number, message?: $Component_,  } | [maxRows?: $OptionalInt, maxWidth?: number, message?: $Component_, ];
+    export type $MultiLineTextWidget$CacheKey_ = { message?: $Component_, maxWidth?: number, maxRows?: $OptionalInt,  } | [message?: $Component_, maxWidth?: number, maxRows?: $OptionalInt, ];
     export class $DebugScreenOverlay implements $BuggerScreenRenderLinesInvoker {
         reset(): void;
-        handler$hcb000$betterf3$addAutomaticDebugOption(minecraft: $Minecraft, ci: $CallbackInfo): void;
-        handler$zcj000$sodium_extra$preRender(arg0: $GuiGraphics, arg1: $CallbackInfo): void;
-        handler$hbp000$betterf3$renderBefore(context: $GuiGraphics, ci: $CallbackInfo): void;
-        handler$hbp000$betterf3$renderAnimation(context: $GuiGraphics, ci: $CallbackInfo): void;
+        clearChunkCache(): void;
+        getTickTimeLogger(): $LocalSampleLogger;
+        handler$hdl000$betterf3$addAutomaticDebugOption(minecraft: $Minecraft, ci: $CallbackInfo): void;
+        handler$zcf000$sodium_extra$preRender(arg0: $GuiGraphics, arg1: $CallbackInfo): void;
+        handler$hdj000$betterf3$renderBefore(context: $GuiGraphics, ci: $CallbackInfo): void;
+        handler$hdj000$betterf3$renderAnimation(context: $GuiGraphics, ci: $CallbackInfo): void;
         collectGameInformationText(): $List<string>;
         getGameInformation(): $List<string>;
         drawGameInformation(arg0: $GuiGraphics): void;
-        redirect$zcj000$sodium_extra$sodiumExtra$redirectDrawLeftText(arg0: $DebugScreenOverlay, arg1: $GuiGraphics, arg2: $List_<any>, arg3: boolean): void;
+        redirect$zcf000$sodium_extra$sodiumExtra$redirectDrawLeftText(arg0: $DebugScreenOverlay, arg1: $GuiGraphics, arg2: $List_<any>, arg3: boolean): void;
         collectSystemInformationText(): $List<string>;
         getSystemInformation(): $List<string>;
         drawSystemInformation(arg0: $GuiGraphics): void;
-        redirect$zcj000$sodium_extra$sodiumExtra$redirectDrawRightText(arg0: $DebugScreenOverlay, arg1: $GuiGraphics, arg2: $List_<any>, arg3: boolean): void;
-        handler$zzd000$fabric_renderer_api_v1$getLeftText(arg0: $CallbackInfoReturnable<any>): void;
-        handler$gim000$entityculling$getLeftText(callback: $CallbackInfoReturnable<any>): $List<any>;
-        redirect$hbp000$betterf3$allocationRateCalculatorGet(instance: $DebugScreenOverlay$AllocationRateCalculator, allocatedBytes: number): number;
-        localvar$zlp000$veil$modifyGameInformation(arg0: $List_<any>): $List<any>;
-        localvar$flm000$sable$addDebugInfo(arg0: $List_<any>): $List<any>;
+        redirect$zcf000$sodium_extra$sodiumExtra$redirectDrawRightText(arg0: $DebugScreenOverlay, arg1: $GuiGraphics, arg2: $List_<any>, arg3: boolean): void;
+        handler$ckm000$necronomicon$getLeftText(info: $CallbackInfoReturnable<any>): void;
+        handler$dai000$entityculling$getLeftText(callback: $CallbackInfoReturnable<any>): $List<any>;
+        handler$dcn001$fabric_renderer_api_v1$getLeftText(arg0: $CallbackInfoReturnable<any>): void;
+        redirect$hdj000$betterf3$allocationRateCalculatorGet(instance: $DebugScreenOverlay$AllocationRateCalculator, allocatedBytes: number): number;
+        localvar$zjp000$veil$modifyGameInformation(arg0: $List_<any>): $List<any>;
+        localvar$fkf000$sable$addDebugInfo(arg0: $List_<any>): $List<any>;
         showFpsCharts(): boolean;
         getBandwidthLogger(): $LocalSampleLogger;
-        handler$hbp000$betterf3$renderFontScaleBefore(context: $GuiGraphics, ci: $CallbackInfo): void;
-        handler$hbo000$betterf3$drawText(guiGraphics: $GuiGraphics, ci: $CallbackInfo): void;
-        getTickTimeLogger(): $LocalSampleLogger;
-        clearChunkCache(): void;
+        handler$hdj000$betterf3$renderFontScaleBefore(context: $GuiGraphics, ci: $CallbackInfo): void;
+        handler$hdi000$betterf3$drawText(guiGraphics: $GuiGraphics, ci: $CallbackInfo): void;
         render(arg0: $GuiGraphics): void;
         showProfilerChart(): boolean;
         showDebugScreen(): boolean;
@@ -943,10 +944,10 @@ declare module "@package/net/minecraft/client/gui/components" {
         static HEIGHTMAP_NAMES: $Map<$Heightmap$Types, string>;
         renderProfilerChart: boolean;
         constructor(arg0: $Minecraft);
+        get tickTimeLogger(): $LocalSampleLogger;
         get gameInformation(): $List<string>;
         get systemInformation(): $List<string>;
         get bandwidthLogger(): $LocalSampleLogger;
-        get tickTimeLogger(): $LocalSampleLogger;
         get pingLogger(): $LocalSampleLogger;
     }
     export class $PopupScreen extends $Screen {
@@ -973,48 +974,54 @@ declare module "@package/net/minecraft/client/gui/components" {
         bytesAllocatedPerSecond(arg0: number): number;
         constructor();
     }
-    export class $EditBox extends $AbstractWidget implements $Renderable, $IMixinEditBox, $AccessEditBox, $IMixinEditBox$1 {
+    export class $EditBox extends $AbstractWidget implements $Renderable, $AccessEditBox, $IMixinEditBox, $IMixinEditBox$1 {
         getValue(): string;
         setValue(arg0: string): void;
         setFilter(arg0: $Predicate_<string>): void;
         setFormatter(arg0: $BiFunction_<string, number, $FormattedCharSequence>): void;
-        isBordered(): boolean;
-        setSuggestion(arg0: string): void;
-        getScreenX(arg0: number): number;
-        getTextShadow(): boolean;
-        moveCursor(arg0: number, arg1: boolean): void;
         moveCursorToEnd(arg0: boolean): void;
         setTextColorUneditable(arg0: number): void;
-        setEditable(arg0: boolean): void;
-        setCursorPosition(arg0: number): void;
-        setHighlightPos(arg0: number): void;
-        moveCursorTo(arg0: number, arg1: boolean): void;
         deleteChars(arg0: number): void;
         deleteWords(arg0: number): void;
         deleteCharsToPos(arg0: number): void;
         deleteText(arg0: number): void;
         getWordPosition(arg0: number): number;
         getHighlighted(): string;
-        setTextColor(arg0: number): void;
-        setHint(arg0: $Component_): void;
+        setCursorPosition(arg0: number): void;
+        setHighlightPos(arg0: number): void;
+        moveCursorTo(arg0: number, arg1: boolean): void;
+        setEditable(arg0: boolean): void;
+        getCursorPosition(): number;
+        setVisible(arg0: boolean): void;
+        isVisible(): boolean;
         insertText(arg0: string): void;
-        setResponder(arg0: $Consumer_<string>): void;
-        setCanLoseFocus(arg0: boolean): void;
         setMaxLength(arg0: number): void;
         setBordered(arg0: boolean): void;
-        setVisible(arg0: boolean): void;
-        getCursorPosition(): number;
-        isVisible(): boolean;
+        setResponder(arg0: $Consumer_<string>): void;
+        setCanLoseFocus(arg0: boolean): void;
+        setTextColor(arg0: number): void;
+        setHint(arg0: $Component_): void;
         canConsumeInput(): boolean;
         moveCursorToStart(arg0: boolean): void;
         getInnerWidth(): number;
         setTextShadow(arg0: boolean): void;
+        moveCursor(arg0: number, arg1: boolean): void;
+        isBordered(): boolean;
+        setSuggestion(arg0: string): void;
+        getScreenX(arg0: number): number;
+        getTextShadow(): boolean;
+        getHighlightPosFancyMenu(): number;
+        setDisplayPosFancyMenu(arg0: number): void;
+        invokeDeleteTextFancyMenu(arg0: number): void;
+        getDisplayPosFancyMenu(): number;
+        getMaxLengthFancyMenu(): number;
+        getBorderedFancyMenu(): boolean;
+        searchables$getFilter(): $Predicate<string>;
+        searchables$getResponder(): $Consumer<string>;
         getIsEditableKonkrete(): boolean;
         getHightlightPosKonkrete(): number;
         getMaxLengthKonkrete(): number;
         onValueChangeKonkrete(arg0: string): void;
-        searchables$getFilter(): $Predicate<string>;
-        searchables$getResponder(): $Consumer<string>;
         getIsEditableFancyMenu(): boolean;
         getFormatterFancyMenu(): $BiFunction<string, number, $FormattedCharSequence>;
         getTextColorFancyMenu(): number;
@@ -1023,12 +1030,6 @@ declare module "@package/net/minecraft/client/gui/components" {
         getHintFancyMenu(): $Component;
         getSuggestionFancyMenu(): string;
         invokeRenderHighlightFancyMenu(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        getHighlightPosFancyMenu(): number;
-        setDisplayPosFancyMenu(arg0: number): void;
-        invokeDeleteTextFancyMenu(arg0: number): void;
-        getDisplayPosFancyMenu(): number;
-        getMaxLengthFancyMenu(): number;
-        getBorderedFancyMenu(): boolean;
         static SPRITES: $WidgetSprites;
         canLoseFocus: boolean;
         visible: boolean;
@@ -1049,16 +1050,19 @@ declare module "@package/net/minecraft/client/gui/components" {
         constructor(arg0: $Font, arg1: number, arg2: number, arg3: $Component_);
         set filter(value: $Predicate_<string>);
         set formatter(value: $BiFunction_<string, number, $FormattedCharSequence>);
-        set suggestion(value: string);
         set textColorUneditable(value: number);
-        set editable(value: boolean);
-        set highlightPos(value: number);
         get highlighted(): string;
+        set highlightPos(value: number);
+        set editable(value: boolean);
+        set maxLength(value: number);
+        set responder(value: $Consumer_<string>);
         set textColor(value: number);
         set hint(value: $Component_);
-        set responder(value: $Consumer_<string>);
-        set maxLength(value: number);
         get innerWidth(): number;
+        set suggestion(value: string);
+        get highlightPosFancyMenu(): number;
+        get maxLengthFancyMenu(): number;
+        get borderedFancyMenu(): boolean;
         get isEditableKonkrete(): boolean;
         get hightlightPosKonkrete(): number;
         get maxLengthKonkrete(): number;
@@ -1069,9 +1073,6 @@ declare module "@package/net/minecraft/client/gui/components" {
         get focusedTimeFancyMenu(): number;
         get hintFancyMenu(): $Component;
         get suggestionFancyMenu(): string;
-        get highlightPosFancyMenu(): number;
-        get maxLengthFancyMenu(): number;
-        get borderedFancyMenu(): boolean;
     }
     export class $StringWidget extends $AbstractStringWidget {
         alignLeft(): $StringWidget;
@@ -1248,11 +1249,11 @@ declare module "@package/net/minecraft/client/gui/components" {
     export class $BossHealthOverlay implements $IMixinBossHealthOverlay {
         reset(): void;
         update(arg0: $ClientboundBossEventPacket): void;
-        shouldCreateWorldFog(): boolean;
-        shouldDarkenScreen(): boolean;
         render(arg0: $GuiGraphics): void;
         shouldPlayMusic(): boolean;
-        handler$hcc007$betterf3$init(info: $CallbackInfo): void;
+        shouldDarkenScreen(): boolean;
+        shouldCreateWorldFog(): boolean;
+        handler$hdm007$betterf3$init(info: $CallbackInfo): void;
         get_events_FancyMenu(): $Map<$UUID, $LerpingBossEvent>;
         events: $Map<$UUID, $LerpingBossEvent>;
         constructor(arg0: $Minecraft);
@@ -1270,8 +1271,8 @@ declare module "@package/net/minecraft/client/gui/components" {
     }
     export class $AbstractStringWidget extends $AbstractWidget {
         setColor(arg0: number): $AbstractStringWidget;
-        getColor(): number;
         getFont(): $Font;
+        getColor(): number;
         packedFGColor: number;
         static UNSET_FG_COLOR: number;
         visible: boolean;
@@ -1286,13 +1287,15 @@ declare module "@package/net/minecraft/client/gui/components" {
         get font(): $Font;
     }
     export class $AbstractSelectionList$Entry<E extends $AbstractSelectionList$Entry<E>> implements $GuiEventListener {
-        render(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean, arg9: number): void;
         isMouseOver(arg0: number, arg1: number): boolean;
+        render(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean, arg9: number): void;
         setFocused(arg0: boolean): void;
         isFocused(): boolean;
         renderBack(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean, arg9: number): void;
         getRectangle(): $ScreenRectangle;
         nextFocusPath(arg0: $FocusNavigationEvent_): $ComponentPath;
+        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
+        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         getCurrentFocusPath(): $ComponentPath;
         mouseMoved(arg0: number, arg1: number): void;
         mouseReleased(arg0: number, arg1: number, arg2: number): boolean;
@@ -1300,8 +1303,6 @@ declare module "@package/net/minecraft/client/gui/components" {
         mouseScrolled(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         keyReleased(arg0: number, arg1: number, arg2: number): boolean;
         charTyped(arg0: string, arg1: number): boolean;
-        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
-        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         getTabOrderGroup(): number;
         /**
          * @deprecated
@@ -1387,6 +1388,7 @@ declare module "@package/net/minecraft/client/gui/components" {
         list: $AbstractSelectionList<$OptionsList$Entry>;
     }
     export class $MultiLineTextWidget extends $AbstractStringWidget {
+        setColor(arg0: number): $MultiLineTextWidget;
         setCentered(arg0: boolean): $MultiLineTextWidget;
         setMaxWidth(arg0: number): $MultiLineTextWidget;
         setMaxRows(arg0: number): $MultiLineTextWidget;
@@ -1402,6 +1404,7 @@ declare module "@package/net/minecraft/client/gui/components" {
         height: number;
         constructor(arg0: $Component_, arg1: $Font);
         constructor(arg0: number, arg1: number, arg2: $Component_, arg3: $Font);
+        set color(value: number);
         set centered(value: boolean);
         set maxWidth(value: number);
         set maxRows(value: number);
@@ -1422,27 +1425,27 @@ declare module "@package/net/minecraft/client/gui/components" {
         renderUsage(arg0: $GuiGraphics): void;
         showSuggestions(arg0: boolean): void;
         hide(): void;
-        render(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         getUsageNarration(): $Component;
         getNarrationMessage(): $Component;
+        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
+        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
+        render(arg0: $GuiGraphics, arg1: number, arg2: number): void;
+        isVisible(): boolean;
         mouseScrolled(arg0: number): boolean;
         setAllowHiding(arg0: boolean): void;
         updateCommandInfo(): void;
         setAllowSuggestions(arg0: boolean): void;
-        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
-        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
-        isVisible(): boolean;
-        getAllowSuggestionsFancyMenu(): boolean;
-        getKeepSuggestionsFancyMenu(): boolean;
+        setSuggestionsFancyMenu(arg0: $CommandSuggestions$SuggestionsList): void;
+        invokeUpdateUsageInfoFancyMenu(): void;
+        invokeSortSuggestionsFancyMenu(arg0: $Suggestions): $List<$Suggestion>;
         getCurrentParseFancyMenu(): $ParseResults<$SharedSuggestionProvider>;
         setCurrentParseFancyMenu(arg0: $ParseResults<$SharedSuggestionProvider>): void;
         getPendingSuggestionsFancyMenu(): $CompletableFuture<$Suggestions>;
         setPendingSuggestionsFancyMenu(arg0: $CompletableFuture<$Suggestions>): void;
         getCommandUsageFancyMenu(): $List<$FormattedCharSequence>;
         getSuggestionsFancyMenu(): $CommandSuggestions$SuggestionsList;
-        setSuggestionsFancyMenu(arg0: $CommandSuggestions$SuggestionsList): void;
-        invokeUpdateUsageInfoFancyMenu(): void;
-        invokeSortSuggestionsFancyMenu(arg0: $Suggestions): $List<$Suggestion>;
+        getAllowSuggestionsFancyMenu(): boolean;
+        getKeepSuggestionsFancyMenu(): boolean;
         minecraft: $Minecraft;
         fillColor: number;
         input: $EditBox;
@@ -1455,12 +1458,12 @@ declare module "@package/net/minecraft/client/gui/components" {
         constructor(arg0: $Minecraft, arg1: $Screen, arg2: $EditBox, arg3: $Font, arg4: boolean, arg5: boolean, arg6: number, arg7: number, arg8: boolean, arg9: number);
         get usageNarration(): $Component;
         get narrationMessage(): $Component;
+        get visible(): boolean;
         set allowHiding(value: boolean);
         set allowSuggestions(value: boolean);
-        get visible(): boolean;
+        get commandUsageFancyMenu(): $List<$FormattedCharSequence>;
         get allowSuggestionsFancyMenu(): boolean;
         get keepSuggestionsFancyMenu(): boolean;
-        get commandUsageFancyMenu(): $List<$FormattedCharSequence>;
     }
     export class $PopupScreen$Builder {
         build(): $PopupScreen;
@@ -1482,33 +1485,33 @@ declare module "@package/net/minecraft/client/gui/components" {
     }
     export class $ChatComponent {
         tick(): void;
-        static getWidth(arg0: number): number;
-        getWidth(): number;
-        getHeight(): number;
-        static getHeight(arg0: number): number;
-        getClickedComponentStyleAt(arg0: number, arg1: number): $Style;
-        addRecentChat(arg0: string): void;
         render(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: boolean): void;
-        addMessage(arg0: $Component_): void;
         addMessage(arg0: $Component_, arg1: $MessageSignature_, arg2: $GuiMessageTag_): void;
-        getLinesPerPage(): number;
-        scrollChat(arg0: number): void;
-        handleChatQueueClicked(arg0: number, arg1: number): boolean;
-        getMessageTagAt(arg0: number, arg1: number): $GuiMessageTag;
-        resetChatScroll(): void;
-        getRecentChat(): $ArrayListDeque<string>;
+        addMessage(arg0: $Component_): void;
         restoreState(arg0: $ChatComponent$State): void;
         getScale(): number;
+        handleChatQueueClicked(arg0: number, arg1: number): boolean;
+        getMessageTagAt(arg0: number, arg1: number): $GuiMessageTag;
+        getClickedComponentStyleAt(arg0: number, arg1: number): $Style;
+        addRecentChat(arg0: string): void;
+        resetChatScroll(): void;
+        getRecentChat(): $ArrayListDeque<string>;
+        getLinesPerPage(): number;
+        scrollChat(arg0: number): void;
         static defaultUnfocusedPct(): number;
         storeState(): $ChatComponent$State;
         deleteMessage(arg0: $MessageSignature_): void;
         rescaleChat(): void;
         clearMessages(arg0: boolean): void;
         isChatFocused(): boolean;
+        static getWidth(arg0: number): number;
+        getWidth(): number;
+        getHeight(): number;
+        static getHeight(arg0: number): number;
         constructor(arg0: $Minecraft);
-        get linesPerPage(): number;
-        get recentChat(): $ArrayListDeque<string>;
         get scale(): number;
+        get recentChat(): $ArrayListDeque<string>;
+        get linesPerPage(): number;
         get chatFocused(): boolean;
     }
     export class $PlayerTabOverlay {
@@ -1552,8 +1555,8 @@ declare module "@package/net/minecraft/client/gui/components" {
         addSmall(arg0: $List_<$AbstractWidget>): void;
         addSmall(...arg0: $OptionInstance<never>[]): void;
         applyUnsavedChanges(): void;
-        getMouseOver(arg0: number, arg1: number): ($GuiEventListener) | undefined;
         findOption(arg0: $OptionInstance<never>): $AbstractWidget;
+        getMouseOver(arg0: number, arg1: number): ($GuiEventListener) | undefined;
         addBig(arg0: $OptionInstance<never>): void;
         minecraft: $Minecraft;
         static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
@@ -1583,10 +1586,10 @@ declare module "@package/net/minecraft/client/gui/components" {
     export class $AbstractSliderButton extends $AbstractWidget implements $IMixinAbstractSliderButton, $CustomizableSlider {
         setNineSliceSliderHandleBorderX_FancyMenu(arg0: number): void;
         getSprite(): $ResourceLocation;
-        getHandleSprite(): $ResourceLocation;
-        setNineSliceCustomSliderBackground_FancyMenu(arg0: boolean): void;
         updateMessage(): void;
         applyValue(): void;
+        getHandleSprite(): $ResourceLocation;
+        setNineSliceCustomSliderBackground_FancyMenu(arg0: boolean): void;
         isNineSliceCustomSliderBackground_FancyMenu(): boolean;
         setNineSliceSliderBackgroundBorderX_FancyMenu(arg0: number): void;
         getNineSliceSliderBackgroundBorderX_FancyMenu(): number;

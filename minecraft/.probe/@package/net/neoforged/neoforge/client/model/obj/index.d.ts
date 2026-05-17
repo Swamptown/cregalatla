@@ -55,8 +55,8 @@ declare module "@package/net/neoforged/neoforge/client/model/obj" {
     export class $ObjModel$ModelGroup extends $ObjModel$ModelObject {
     }
     export class $ObjLoader implements $IGeometryLoader<$ObjModel>, $ResourceManagerReloadListener {
-        onResourceManagerReload(arg0: $ResourceManager): void;
         loadModel(arg0: $ObjModel$ModelSettings_): $ObjModel;
+        onResourceManagerReload(arg0: $ResourceManager): void;
         loadMaterialLibrary(arg0: $ResourceLocation_): $ObjMaterialLibrary;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
@@ -66,8 +66,8 @@ declare module "@package/net/neoforged/neoforge/client/model/obj" {
         get name(): string;
     }
     export class $ObjModel$ModelSettings extends $Record {
-        flipV(): boolean;
         modelLocation(): $ResourceLocation;
+        flipV(): boolean;
         automaticCulling(): boolean;
         shadeQuads(): boolean;
         emissiveAmbient(): boolean;
@@ -77,7 +77,7 @@ declare module "@package/net/neoforged/neoforge/client/model/obj" {
     /**
      * Values that may be interpreted as {@link $ObjModel$ModelSettings}.
      */
-    export type $ObjModel$ModelSettings_ = { automaticCulling?: boolean, emissiveAmbient?: boolean, shadeQuads?: boolean, flipV?: boolean, modelLocation?: $ResourceLocation_, mtlOverride?: string,  } | [automaticCulling?: boolean, emissiveAmbient?: boolean, shadeQuads?: boolean, flipV?: boolean, modelLocation?: $ResourceLocation_, mtlOverride?: string, ];
+    export type $ObjModel$ModelSettings_ = { mtlOverride?: string, modelLocation?: $ResourceLocation_, flipV?: boolean, shadeQuads?: boolean, emissiveAmbient?: boolean, automaticCulling?: boolean,  } | [mtlOverride?: string, modelLocation?: $ResourceLocation_, flipV?: boolean, shadeQuads?: boolean, emissiveAmbient?: boolean, automaticCulling?: boolean, ];
     export class $ObjMaterialLibrary$Material {
         ambientColorMap: string;
         ambientColor: $Vector4f;

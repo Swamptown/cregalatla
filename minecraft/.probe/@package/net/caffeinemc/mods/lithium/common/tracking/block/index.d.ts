@@ -18,8 +18,8 @@ declare module "@package/net/caffeinemc/mods/lithium/common/tracking/block" {
         register(): void;
         unregister(): void;
         onChunkSectionInvalidated(arg0: $SectionPos): void;
-        isUnchangedSince(arg0: number): boolean;
         static registerAt(arg0: $Level_, arg1: $AABB_, arg2: $ListeningBlockStatePredicate): $SectionedBlockChangeTracker;
+        isUnchangedSince(arg0: number): boolean;
         matchesMovedBox(arg0: $AABB_): boolean;
         listenToAllSections(): void;
         setChanged(arg0: $BlockListeningSection): void;

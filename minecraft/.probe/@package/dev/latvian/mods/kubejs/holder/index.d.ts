@@ -1,6 +1,6 @@
 import { $DeferredRegister } from "@package/net/neoforged/neoforge/registries";
 import { $TypeInfo_, $TypeInfo } from "@package/dev/latvian/mods/rhino/type";
-import { $Holder, $HolderSet$ListBacked, $Registry, $Holder$Reference, $HolderLookup$RegistryLookup, $HolderSet } from "@package/net/minecraft/core";
+import { $Holder, $HolderSet$ListBacked, $Holder$Reference, $Registry, $HolderLookup$RegistryLookup, $HolderSet } from "@package/net/minecraft/core";
 import { $MapCodec } from "@package/com/mojang/serialization";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
 import { $ResourceKey_ } from "@package/net/minecraft/resources";
@@ -12,8 +12,8 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 declare module "@package/dev/latvian/mods/kubejs/holder" {
     export class $HolderWrapper {
         static wrap(from: $Object, param: $TypeInfo_): $Holder<never>;
-        static wrapSet(from: $Object, param: $TypeInfo_): $HolderSet<never>;
         static wrapRef(from: $Object, param: $TypeInfo_): $Holder$Reference<never>;
+        static wrapSet(from: $Object, param: $TypeInfo_): $HolderSet<never>;
         static wrapSimpleSet<T>(registry: $Registry<T>, from: $Object): $HolderSet<T>;
         static HOLDER: $TypeInfo;
         static HOLDER_SET: $TypeInfo;

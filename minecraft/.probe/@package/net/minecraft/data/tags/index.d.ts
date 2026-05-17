@@ -206,8 +206,8 @@ declare module "@package/net/minecraft/data/tags" {
         remove(arg0: $ResourceLocation_): $TagsProvider$TagAppender<T>;
         replace(arg0: boolean): $TagsProvider$TagAppender<T>;
         replace(): $TagsProvider$TagAppender<T>;
-        addOptionalTag(arg0: $TagKey_<T>): $TagsProvider$TagAppender<T>;
         addTags(...arg0: $TagKey_<T>[]): $TagsProvider$TagAppender<T>;
+        addOptionalTag(arg0: $TagKey_<T>): $TagsProvider$TagAppender<T>;
         addOptionalTags(...arg0: $TagKey_<T>[]): $TagsProvider$TagAppender<T>;
         builder: $TagBuilder;
         constructor(arg0: $TagBuilder);
@@ -315,7 +315,7 @@ declare module "@package/net/minecraft/data/tags" {
     /**
      * Values that may be interpreted as {@link $TagsProvider$1CombinedData}.
      */
-    export type $TagsProvider$1CombinedData_<T> = { contents?: $HolderLookup$Provider, parent?: $TagsProvider$TagLookup_<any>,  } | [contents?: $HolderLookup$Provider, parent?: $TagsProvider$TagLookup_<any>, ];
+    export type $TagsProvider$1CombinedData_<T> = { parent?: $TagsProvider$TagLookup_<any>, contents?: $HolderLookup$Provider,  } | [parent?: $TagsProvider$TagLookup_<any>, contents?: $HolderLookup$Provider, ];
     export class $TagsProvider<T> implements $DataProvider {
         getName(): string;
         run(arg0: $CachedOutput_): $CompletableFuture<never>;

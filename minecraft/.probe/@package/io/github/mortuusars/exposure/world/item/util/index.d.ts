@@ -5,10 +5,10 @@ declare module "@package/io/github/mortuusars/exposure/world/item/util" {
     export class $ItemAndStack<T extends $Item> {
         apply(_function: $BiConsumer_<T, $ItemStack>): $ItemAndStack<T>;
         map<R>(mappingFunction: $BiFunction_<T, $ItemStack, R>): R;
-        getItem(): T;
         getItemStack(): $ItemStack;
+        getItem(): T;
         constructor(stack: $ItemStack_);
-        get item(): T;
         get itemStack(): $ItemStack;
+        get item(): T;
     }
 }

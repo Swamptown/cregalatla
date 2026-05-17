@@ -36,7 +36,7 @@ declare module "@package/net/neoforged/neoforge/client/model/renderable" {
     /**
      * Values that may be interpreted as {@link $BakedModelRenderable$Context}.
      */
-    export type $BakedModelRenderable$Context_ = { tint?: $Vector4f, data?: $ModelData, faces?: $Direction_[], randomSource?: $RandomSource, seed?: number, state?: $BlockState_,  } | [tint?: $Vector4f, data?: $ModelData, faces?: $Direction_[], randomSource?: $RandomSource, seed?: number, state?: $BlockState_, ];
+    export type $BakedModelRenderable$Context_ = { state?: $BlockState_, seed?: number, randomSource?: $RandomSource, faces?: $Direction_[], data?: $ModelData, tint?: $Vector4f,  } | [state?: $BlockState_, seed?: number, randomSource?: $RandomSource, faces?: $Direction_[], data?: $ModelData, tint?: $Vector4f, ];
     export class $CompositeRenderable$Mesh {
     }
     export class $IRenderable<T> {

@@ -16,7 +16,7 @@ declare module "@package/net/neoforged/neoforge/client/entity/animation" {
     /**
      * Values that may be interpreted as {@link $AnimationTarget}.
      */
-    export type $AnimationTarget_ = { inverseKeyframeTarget?: $AnimationKeyframeTarget_, keyframeTarget?: $AnimationKeyframeTarget_, channelTarget?: $AnimationChannel$Target_,  } | [inverseKeyframeTarget?: $AnimationKeyframeTarget_, keyframeTarget?: $AnimationKeyframeTarget_, channelTarget?: $AnimationChannel$Target_, ];
+    export type $AnimationTarget_ = { channelTarget?: $AnimationChannel$Target_, keyframeTarget?: $AnimationKeyframeTarget_, inverseKeyframeTarget?: $AnimationKeyframeTarget_,  } | [channelTarget?: $AnimationChannel$Target_, keyframeTarget?: $AnimationKeyframeTarget_, inverseKeyframeTarget?: $AnimationKeyframeTarget_, ];
     export class $AnimationKeyframeTarget {
     }
     export interface $AnimationKeyframeTarget {

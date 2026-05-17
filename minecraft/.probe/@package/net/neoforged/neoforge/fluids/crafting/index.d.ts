@@ -39,7 +39,7 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
     /**
      * Values that may be interpreted as {@link $FluidIngredientType}.
      */
-    export type $FluidIngredientType_<T> = RegistryTypes.NeoforgeFluidIngredientType | { streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>, codec?: $MapCodec_<$FluidIngredient_>,  } | [streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>, codec?: $MapCodec_<$FluidIngredient_>, ];
+    export type $FluidIngredientType_<T> = RegistryTypes.NeoforgeFluidIngredientType | { codec?: $MapCodec_<$FluidIngredient_>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>,  } | [codec?: $MapCodec_<$FluidIngredient_>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>, ];
     export class $DataComponentFluidIngredient extends $FluidIngredient {
         static of(arg0: boolean, arg1: $DataComponentMap_, ...arg2: $Holder_<$Fluid>[]): $FluidIngredient;
         static of(arg0: boolean, arg1: $DataComponentPredicate, ...arg2: $Holder_<$Fluid>[]): $FluidIngredient;
@@ -78,8 +78,8 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
         static of(arg0: $TagKey_<$Fluid>, arg1: number): $SizedFluidIngredient;
         static of(arg0: $FluidStack_): $SizedFluidIngredient;
         amount(): number;
-        getFluids(): $FluidStack[];
         ingredient(): $FluidIngredient;
+        getFluids(): $FluidStack[];
         matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
         matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
         toFlatJson(): $JsonElement;

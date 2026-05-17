@@ -33,9 +33,9 @@ declare module "@package/net/minecraft/world/entity/boss/wither" {
          * @deprecated
          */
         static canDestroy(arg0: $BlockState_): boolean;
+        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
         isPowered(): boolean;
         makeInvulnerable(): void;
-        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
         getInvulnerableTicks(): number;
         setInvulnerableTicks(arg0: number): void;
         getAlternativeTarget(arg0: number): number;

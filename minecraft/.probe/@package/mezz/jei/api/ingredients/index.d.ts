@@ -22,10 +22,10 @@ declare module "@package/mezz/jei/api/ingredients" {
         getFontRenderer(arg0: $Minecraft, arg1: T): $Font;
         getTooltip(arg0: T, arg1: $TooltipFlag): $List<$Component>;
         getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: $TooltipFlag): void;
+        render(arg0: $GuiGraphics, arg1: T): void;
+        render(arg0: $GuiGraphics, arg1: T, arg2: number, arg3: number): void;
         getWidth(): number;
         getHeight(): number;
-        render(arg0: $GuiGraphics, arg1: T, arg2: number, arg3: number): void;
-        render(arg0: $GuiGraphics, arg1: T): void;
         get width(): number;
         get height(): number;
     }
@@ -45,9 +45,9 @@ declare module "@package/mezz/jei/api/ingredients" {
         getType(): $IIngredientType<T>;
         getBaseIngredient<B>(arg0: $IIngredientTypeWithSubtypes<B, T>): B;
         castToItemStackType(): $ITypedIngredient<$ItemStack>;
-        getCastIngredient<V>(arg0: $IIngredientType_<V>): V;
         getIngredient<V>(arg0: $IIngredientType_<V>): (V) | undefined;
         getIngredient(): T;
+        getCastIngredient<V>(arg0: $IIngredientType_<V>): V;
         getItemStack(): ($ItemStack) | undefined;
         get type(): $IIngredientType<T>;
         get itemStack(): ($ItemStack) | undefined;
@@ -81,8 +81,8 @@ declare module "@package/mezz/jei/api/ingredients" {
     export interface $IIngredientHelper<V> {
         getDisplayName(arg0: V): string;
         getCheatItemStack(arg0: V): $ItemStack;
-        getDisplayModId(arg0: V): string;
         getErrorInfo(arg0: V): string;
+        getDisplayModId(arg0: V): string;
         /**
          * @deprecated
          */

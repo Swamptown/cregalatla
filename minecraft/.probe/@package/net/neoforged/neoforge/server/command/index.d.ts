@@ -60,8 +60,8 @@ declare module "@package/net/neoforged/neoforge/server/command" {
     }
     export class $EnumArgument<T extends $Enum<T>> implements $ArgumentType<T> {
         static enumArgument<R extends $Enum<R>>(arg0: $Class<R>): $EnumArgument<R>;
-        getExamples(): $Collection<string>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): T;
         parse(arg0: $StringReader): T;
         get examples(): $Collection<string>;
@@ -70,9 +70,9 @@ declare module "@package/net/neoforged/neoforge/server/command" {
     }
     export class $ModIdArgument implements $ArgumentType<string> {
         parse(arg0: $StringReader): string;
-        getExamples(): $Collection<string>;
-        static modIdArgument(): $ModIdArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static modIdArgument(): $ModIdArgument;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): string;
         constructor();
         get examples(): $Collection<string>;

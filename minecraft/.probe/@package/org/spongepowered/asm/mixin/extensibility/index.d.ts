@@ -15,11 +15,11 @@ declare module "@package/org/spongepowered/asm/mixin/extensibility" {
     }
     export interface $IMixinConfigPlugin {
         onLoad(arg0: string): void;
-        shouldApplyMixin(arg0: string, arg1: string): boolean;
         getMixins(): $List<string>;
         getRefMapperConfig(): string;
         postApply(arg0: string, arg1: $ClassNode, arg2: string, arg3: $IMixinInfo): void;
         preApply(arg0: string, arg1: $ClassNode, arg2: string, arg3: $IMixinInfo): void;
+        shouldApplyMixin(arg0: string, arg1: string): boolean;
         acceptTargets(arg0: $Set_<string>, arg1: $Set_<string>): void;
         get mixins(): $List<string>;
         get refMapperConfig(): string;
@@ -71,8 +71,6 @@ declare module "@package/org/spongepowered/asm/mixin/extensibility" {
     export interface $IMixinConfig {
         getName(): string;
         getPriority(): number;
-        getSource(): $IMixinConfigSource;
-        getEnvironment(): $MixinEnvironment;
         getTargets(): $Set<string>;
         isRequired(): boolean;
         decorate<V>(arg0: string, arg1: V): void;
@@ -81,14 +79,16 @@ declare module "@package/org/spongepowered/asm/mixin/extensibility" {
         getMixinPackage(): string;
         getPlugin(): $IMixinConfigPlugin;
         hasDecoration(arg0: string): boolean;
+        getSource(): $IMixinConfigSource;
+        getEnvironment(): $MixinEnvironment;
         get name(): string;
         get priority(): number;
-        get source(): $IMixinConfigSource;
-        get environment(): $MixinEnvironment;
         get targets(): $Set<string>;
         get required(): boolean;
         get cleanSourceId(): string;
         get mixinPackage(): string;
         get plugin(): $IMixinConfigPlugin;
+        get source(): $IMixinConfigSource;
+        get environment(): $MixinEnvironment;
     }
 }

@@ -7,13 +7,13 @@ declare module "@package/dev/engine_room/flywheel/lib/model/baked" {
     export class $PartialModel implements $AccessorPartialModel {
         get(): $BakedModel;
         static of(modelLocation: $ResourceLocation_): $PartialModel;
+        static getALL$railways_$md$d858b6$0(): $ConcurrentMap<any, any>;
+        static setPopulateOnInit$railways_$md$d858b6$1(arg0: boolean): void;
+        static getPopulateOnInit$railways_$md$d858b6$2(): boolean;
         modelLocation(): $ResourceLocation;
-        static getALL$railways_$md$8e2dbe$0(): $ConcurrentMap<any, any>;
-        static setPopulateOnInit$railways_$md$8e2dbe$1(arg0: boolean): void;
-        static getPopulateOnInit$railways_$md$8e2dbe$2(): boolean;
         railways$setBakedModel(arg0: $BakedModel): void;
-        static get ALL$railways_$md$8e2dbe$0(): $ConcurrentMap<any, any>;
-        static set populateOnInit$railways_$md$8e2dbe$1(value: boolean);
-        static get populateOnInit$railways_$md$8e2dbe$2(): boolean;
+        static get ALL$railways_$md$d858b6$0(): $ConcurrentMap<any, any>;
+        static set populateOnInit$railways_$md$d858b6$1(value: boolean);
+        static get populateOnInit$railways_$md$d858b6$2(): boolean;
     }
 }

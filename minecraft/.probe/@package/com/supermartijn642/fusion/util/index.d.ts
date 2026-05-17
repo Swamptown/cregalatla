@@ -11,5 +11,5 @@ declare module "@package/com/supermartijn642/fusion/util" {
     /**
      * Values that may be interpreted as {@link $Triple}.
      */
-    export type $Triple_<X, Y, Z> = { middle?: any, right?: any, left?: any,  } | [middle?: any, right?: any, left?: any, ];
+    export type $Triple_<X, Y, Z> = { left?: any, right?: any, middle?: any,  } | [left?: any, right?: any, middle?: any, ];
 }

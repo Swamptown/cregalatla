@@ -22,7 +22,7 @@ declare module "@package/dev/ryanhcode/sable/sublevel/storage/holding" {
     /**
      * Values that may be interpreted as {@link $GlobalSavedSubLevelPointer}.
      */
-    export type $GlobalSavedSubLevelPointer_ = { chunkPos?: $ChunkPos, storageIndex?: number, subLevelIndex?: number,  } | [chunkPos?: $ChunkPos, storageIndex?: number, subLevelIndex?: number, ];
+    export type $GlobalSavedSubLevelPointer_ = { subLevelIndex?: number, storageIndex?: number, chunkPos?: $ChunkPos,  } | [subLevelIndex?: number, storageIndex?: number, chunkPos?: $ChunkPos, ];
     export class $SubLevelHoldingChunkMap implements $AutoCloseable {
         close(): void;
         moveToUnloaded(arg0: $ServerSubLevel, arg1: $ChunkPos): void;
@@ -30,8 +30,8 @@ declare module "@package/dev/ryanhcode/sable/sublevel/storage/holding" {
         processChanges(): void;
         queueDeletion(arg0: $ServerSubLevel): void;
         getStorage(): $SubLevelStorage;
-        saveAll(): void;
         updateChunkStatus(arg0: $ChunkPos, arg1: boolean): void;
+        saveAll(): void;
         static VERBOSE: boolean;
         constructor(arg0: $ServerLevel, arg1: $ServerSubLevelContainer);
         get storage(): $SubLevelStorage;
@@ -46,7 +46,7 @@ declare module "@package/dev/ryanhcode/sable/sublevel/storage/holding" {
     /**
      * Values that may be interpreted as {@link $SavedSubLevelPointer}.
      */
-    export type $SavedSubLevelPointer_ = { storageIndex?: number, subLevelIndex?: number,  } | [storageIndex?: number, subLevelIndex?: number, ];
+    export type $SavedSubLevelPointer_ = { subLevelIndex?: number, storageIndex?: number,  } | [subLevelIndex?: number, storageIndex?: number, ];
     export class $SubLevelHoldingChunk {
         static from(arg0: $ChunkPos, arg1: $CompoundTag_): $SubLevelHoldingChunk;
         writeTo(arg0: $CompoundTag_): void;

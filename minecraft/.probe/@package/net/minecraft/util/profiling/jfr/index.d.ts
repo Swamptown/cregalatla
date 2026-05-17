@@ -42,12 +42,12 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
         onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
         onWorldLoadedStarted(): $ProfiledDuration;
         onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
-        isAvailable(): boolean;
+        onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
         isRunning(): boolean;
         onServerTick(arg0: number): void;
+        isAvailable(): boolean;
         static TICK_CATEGORY: string;
         static WORLD_GEN_CATEGORY: string;
         static STORAGE_CATEGORY: string;
@@ -55,8 +55,8 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         recording: $Recording;
         static ROOT_CATEGORY: string;
         static get instance(): $JfrProfiler;
-        get available(): boolean;
         get running(): boolean;
+        get available(): boolean;
     }
     export class $JvmProfiler {
         static INSTANCE: $JvmProfiler;
@@ -67,14 +67,14 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
         onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
         onWorldLoadedStarted(): $ProfiledDuration;
         onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
-        isAvailable(): boolean;
+        onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
         isRunning(): boolean;
         onServerTick(arg0: number): void;
-        get available(): boolean;
+        isAvailable(): boolean;
         get running(): boolean;
+        get available(): boolean;
     }
     export class $Percentiles {
         static evaluate(arg0: number[]): $Map<number, number>;
@@ -87,15 +87,15 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
         onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
         onWorldLoadedStarted(): $ProfiledDuration;
         onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
-        isAvailable(): boolean;
+        onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
         isRunning(): boolean;
         onServerTick(arg0: number): void;
+        isAvailable(): boolean;
         static noOpCommit: $ProfiledDuration;
         constructor();
-        get available(): boolean;
         get running(): boolean;
+        get available(): boolean;
     }
 }

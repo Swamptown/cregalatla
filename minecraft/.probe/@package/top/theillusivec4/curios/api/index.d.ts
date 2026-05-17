@@ -17,7 +17,7 @@ declare module "@package/top/theillusivec4/curios/api" {
     /**
      * Values that may be interpreted as {@link $SlotContext}.
      */
-    export type $SlotContext_ = { entity?: $LivingEntity, visible?: boolean, cosmetic?: boolean, index?: number, identifier?: string,  } | [entity?: $LivingEntity, visible?: boolean, cosmetic?: boolean, index?: number, identifier?: string, ];
+    export type $SlotContext_ = { identifier?: string, index?: number, cosmetic?: boolean, visible?: boolean, entity?: $LivingEntity,  } | [identifier?: string, index?: number, cosmetic?: boolean, visible?: boolean, entity?: $LivingEntity, ];
     export class $SlotResult extends $Record {
         stack(): $ItemStack;
         slotContext(): $SlotContext;

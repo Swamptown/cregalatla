@@ -24,10 +24,10 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/capture" {
         setChromaticChannel(chromaticChannel: $ColorChannel_): $CaptureParameters$Builder;
         setChromaticChannel(chromaticChannel: ($ColorChannel_) | undefined): $CaptureParameters$Builder;
         setFilmProperties(filmProperties: $FilmProperties_): $CaptureParameters$Builder;
+        setFov(fov: number): $CaptureParameters$Builder;
+        setProjection(projection: ($Projection_) | undefined): $CaptureParameters$Builder;
         extraData<T>(type: $ExtraData$Type_<T>, value: T): $CaptureParameters$Builder;
         extraData(extraDataUpdater: $Consumer_<$ExtraData>): $CaptureParameters$Builder;
-        setProjection(projection: ($Projection_) | undefined): $CaptureParameters$Builder;
-        setFov(fov: number): $CaptureParameters$Builder;
         constructor(exposureId: string);
         constructor(params: $CaptureParameters_);
         set filter(value: $ResourceLocation_);
@@ -36,14 +36,14 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/capture" {
         set cameraHolder(value: $CameraHolder);
         set cropFactor(value: number);
         set filmProperties(value: $FilmProperties_);
-        set projection(value: ($Projection_) | undefined);
         set fov(value: number);
+        set projection(value: ($Projection_) | undefined);
     }
     export class $DitherMode extends $Enum<$DitherMode> implements $StringRepresentable {
         static values(): $DitherMode[];
         static valueOf(name: string): $DitherMode;
-        cycle(): $DitherMode;
         translate(): $Component;
+        cycle(): $DitherMode;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static DITHERED: $DitherMode;
@@ -66,10 +66,10 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/capture" {
         exposureId(): string;
         filmProperties(): $FilmProperties;
         singleChannel(): ($ColorChannel) | undefined;
-        extraData(): $ExtraData;
+        fov(): (number) | undefined;
         getLightLevel(): (number) | undefined;
         projection(): ($Projection) | undefined;
-        fov(): (number) | undefined;
+        extraData(): $ExtraData;
         mutable(): $CaptureParameters$Builder;
         cameraHolderId(): (number) | undefined;
         static CODEC: $Codec<$CaptureParameters>;
@@ -85,7 +85,7 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/capture" {
     /**
      * Values that may be interpreted as {@link $CaptureParameters}.
      */
-    export type $CaptureParameters_ = { filmProperties?: $FilmProperties_, extraData?: $ExtraData, fov?: (number) | undefined, cameraHolderId?: (number) | undefined, singleChannel?: ($ColorChannel_) | undefined, exposureId?: string, cameraId?: ($CameraId_) | undefined, filter?: ($ResourceLocation_) | undefined, projection?: ($Projection_) | undefined, cropFactor?: number,  } | [filmProperties?: $FilmProperties_, extraData?: $ExtraData, fov?: (number) | undefined, cameraHolderId?: (number) | undefined, singleChannel?: ($ColorChannel_) | undefined, exposureId?: string, cameraId?: ($CameraId_) | undefined, filter?: ($ResourceLocation_) | undefined, projection?: ($Projection_) | undefined, cropFactor?: number, ];
+    export type $CaptureParameters_ = { filmProperties?: $FilmProperties_, cropFactor?: number, projection?: ($Projection_) | undefined, filter?: ($ResourceLocation_) | undefined, cameraId?: ($CameraId_) | undefined, exposureId?: string, singleChannel?: ($ColorChannel_) | undefined, cameraHolderId?: (number) | undefined, fov?: (number) | undefined, extraData?: $ExtraData,  } | [filmProperties?: $FilmProperties_, cropFactor?: number, projection?: ($Projection_) | undefined, filter?: ($ResourceLocation_) | undefined, cameraId?: ($CameraId_) | undefined, exposureId?: string, singleChannel?: ($ColorChannel_) | undefined, cameraHolderId?: (number) | undefined, fov?: (number) | undefined, extraData?: $ExtraData, ];
     export class $Projection extends $Record {
         mode(): $DitherMode;
         path(): string;

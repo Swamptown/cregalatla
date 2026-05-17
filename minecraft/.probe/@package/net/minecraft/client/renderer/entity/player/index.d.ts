@@ -13,14 +13,14 @@ import { $Vec3 } from "@package/net/minecraft/world/phys";
 declare module "@package/net/minecraft/client/renderer/entity/player" {
     export class $PlayerRenderer extends $LivingEntityRenderer<$AbstractClientPlayer, $PlayerModel<$AbstractClientPlayer>> {
         scale(arg0: $AbstractClientPlayer, arg1: $PoseStack, arg2: number): void;
-        getTextureLocation(arg0: $AbstractClientPlayer): $ResourceLocation;
         renderRightHand(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer): void;
         renderLeftHand(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer): void;
         renderNameTag(arg0: $AbstractClientPlayer, arg1: $Component_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
-        getRenderOffset(arg0: $AbstractClientPlayer, arg1: number): $Vec3;
+        getTextureLocation(arg0: $AbstractClientPlayer): $ResourceLocation;
         render(arg0: $AbstractClientPlayer, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
-        handler$faf000$notenoughanimations$onCreate(info: $CallbackInfo): void;
-        handler$dnb000$skinlayers3d$setModelProperties(abstractClientPlayer: $AbstractClientPlayer, info: $CallbackInfo): void;
+        getRenderOffset(arg0: $AbstractClientPlayer, arg1: number): $Vec3;
+        handler$cng000$notenoughanimations$onCreate(info: $CallbackInfo): void;
+        handler$ggi000$skinlayers3d$setModelProperties(abstractClientPlayer: $AbstractClientPlayer, info: $CallbackInfo): void;
         setupRotations(arg0: $AbstractClientPlayer, arg1: $PoseStack, arg2: number, arg3: number, arg4: number, arg5: number): void;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;

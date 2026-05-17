@@ -18,14 +18,14 @@ declare module "@package/net/caffeinemc/mods/lithium/common/hopper" {
         add(arg0: number, arg1: $ItemStack_): void;
         set(arg0: number, arg1: $ItemStack_): $ItemStack;
         changed(): void;
-        getSignalStrength(arg0: $Container): number;
         removeInventoryModificationCallback(arg0: $InventoryChangeTracker): void;
         setNextInventoryModificationCallback(arg0: $InventoryChangeTracker): void;
+        getSignalStrength(arg0: $Container): number;
+        runComparatorUpdatePatternOnFailedExtract(arg0: $LithiumStackList, arg1: $Container): void;
+        maybeSendsComparatorUpdatesOnFailedExtract(): boolean;
         getModCount(): number;
         getOccupiedSlots(): number;
         getFullSlots(): number;
-        runComparatorUpdatePatternOnFailedExtract(arg0: $LithiumStackList, arg1: $Container): void;
-        maybeSendsComparatorUpdatesOnFailedExtract(): boolean;
         changedALot(): void;
         hasSignalStrengthOverride(): boolean;
         setReducedSignalStrengthOverride(): void;

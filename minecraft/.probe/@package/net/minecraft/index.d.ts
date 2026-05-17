@@ -63,14 +63,14 @@ declare module "@package/net/minecraft" {
         static valueOf(arg0: string): $ChatFormatting;
         getId(): number;
         static getByName(arg0: string): $ChatFormatting;
-        kjs$getRGB(): number;
-        static getNames(arg0: boolean, arg1: boolean): $Collection<string>;
         kjs$getARGB(): number;
-        isFormat(): boolean;
         isColor(): boolean;
         static stripFormatting(arg0: string): string;
         static getById(arg0: number): $ChatFormatting;
         static getByCode(arg0: string): $ChatFormatting;
+        kjs$getRGB(): number;
+        isFormat(): boolean;
+        static getNames(arg0: boolean, arg1: boolean): $Collection<string>;
         getColor(): number;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
@@ -284,9 +284,9 @@ declare module "@package/net/minecraft" {
     export class $Util$OS extends $Enum<$Util$OS> {
         static values(): $Util$OS[];
         static valueOf(arg0: string): $Util$OS;
-        openFile(arg0: $File_): void;
         openUri(arg0: string): void;
         openUri(arg0: $URI): void;
+        openFile(arg0: $File_): void;
         telemetryName(): string;
         openPath(arg0: $Path_): void;
         getOpenUriArguments(arg0: $URI): string[];
@@ -330,13 +330,13 @@ declare module "@package/net/minecraft" {
         static isPathNormalized(arg0: $Path_): boolean;
         static isPathPortable(arg0: $Path_): boolean;
         static getFullResourcePath(arg0: string): string;
-        static normalizeResourcePath(arg0: string): string;
-        static isValidStrictPathSegment(arg0: string): boolean;
         static findAvailableName(arg0: $Path_, arg1: string, arg2: string): string;
         static sanitizeName(arg0: string): string;
         static createDirectoriesSafe(arg0: $Path_): void;
         static validatePath(...arg0: string[]): void;
         static decomposePath(arg0: string): $DataResult<$List<string>>;
+        static normalizeResourcePath(arg0: string): string;
+        static isValidStrictPathSegment(arg0: string): boolean;
         constructor();
     }
     export class $DefaultUncaughtExceptionHandler implements $Thread$UncaughtExceptionHandler {
@@ -368,12 +368,12 @@ declare module "@package/net/minecraft" {
     export class $CrashReportCategory {
         fillInStackTrace(arg0: number): number;
         setStackTrace(arg0: $StackTraceElement[]): void;
-        setDetail(arg0: string, arg1: $Object): $CrashReportCategory;
         setDetail(arg0: string, arg1: $CrashReportDetail_<string>): $CrashReportCategory;
-        static populateBlockDetails(arg0: $CrashReportCategory, arg1: $LevelHeightAccessor, arg2: $BlockPos_, arg3: $BlockState_): void;
+        setDetail(arg0: string, arg1: $Object): $CrashReportCategory;
         getDetails(arg0: $StringBuilder): void;
         getStacktrace(): $StackTraceElement[];
         validateStackTrace(arg0: $StackTraceElement, arg1: $StackTraceElement): boolean;
+        static populateBlockDetails(arg0: $CrashReportCategory, arg1: $LevelHeightAccessor, arg2: $BlockPos_, arg3: $BlockState_): void;
         static formatLocation(arg0: $LevelHeightAccessor, arg1: number, arg2: number, arg3: number): string;
         static formatLocation(arg0: $LevelHeightAccessor, arg1: number, arg2: number, arg3: number): string;
         static formatLocation(arg0: $LevelHeightAccessor, arg1: $BlockPos_): string;
@@ -393,13 +393,13 @@ declare module "@package/net/minecraft" {
         toLineSeparatedString(): string;
         static sizeInMiB(arg0: number): number;
         appendToCrashReportString(arg0: $StringBuilder): void;
-        static getOPERATING_SYSTEM$create_$md$8e2dbe$0(): string;
-        static getJAVA_VERSION$create_$md$8e2dbe$1(): string;
+        static getOPERATING_SYSTEM$create_$md$d858b6$0(): string;
+        static getJAVA_VERSION$create_$md$d858b6$1(): string;
         getEntries(): $Map<string, string>;
         static BYTES_PER_MEBIBYTE: number;
         constructor();
-        static get OPERATING_SYSTEM$create_$md$8e2dbe$0(): string;
-        static get JAVA_VERSION$create_$md$8e2dbe$1(): string;
+        static get OPERATING_SYSTEM$create_$md$d858b6$0(): string;
+        static get JAVA_VERSION$create_$md$d858b6$1(): string;
         get entries(): $Map<string, string>;
     }
     export class $WorldVersion {
@@ -420,8 +420,8 @@ declare module "@package/net/minecraft" {
         get buildTime(): $Date;
     }
     export class $BlockUtil {
-        static getLargestRectangleAround(arg0: $BlockPos_, arg1: $Direction$Axis_, arg2: number, arg3: $Direction$Axis_, arg4: number, arg5: $Predicate_<$BlockPos>): $BlockUtil$FoundRectangle;
         static getTopConnectedBlock(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Block_, arg3: $Direction_, arg4: $Block_): ($BlockPos) | undefined;
+        static getLargestRectangleAround(arg0: $BlockPos_, arg1: $Direction$Axis_, arg2: number, arg3: $Direction$Axis_, arg4: number, arg5: $Predicate_<$BlockPos>): $BlockUtil$FoundRectangle;
         static getMaxRectangleLocation(arg0: number[]): $Pair<$BlockUtil$IntBounds, number>;
         constructor();
     }
@@ -441,7 +441,7 @@ declare module "@package/net/minecraft" {
         getExceptionMessage(): string;
         getDetails(arg0: $StringBuilder): void;
         getDetails(): string;
-        handler$gjc000$yumi_mc_core$yumi$onCrashReportCreate(crashReportBuilder: $StringBuilder, ci: $CallbackInfo): void;
+        handler$dao000$yumi_mc_core$yumi$onCrashReportCreate(crashReportBuilder: $StringBuilder, ci: $CallbackInfo): void;
         constructor(arg0: string, arg1: $Throwable);
         get exception(): $Throwable;
         get title(): string;
@@ -493,47 +493,46 @@ declare module "@package/net/minecraft" {
         static name<T>(arg0: $Supplier_<T>, arg1: $Supplier_<string>): $Supplier<T>;
         static name(arg0: $Runnable_, arg1: $Supplier_<string>): $Runnable;
         static prefix(arg0: string, arg1: $Consumer_<string>): $Consumer<string>;
-        static make<T>(arg0: $Supplier_<T>): T;
         static make<T>(arg0: T, arg1: $Consumer_<T>): T;
+        static make<T>(arg0: $Supplier_<T>): T;
         static toMap<K, V>(): $Collector<$Map$Entry<K, V>, never, $Map<K, V>>;
         static shuffle<T>(arg0: $List_<T>, arg1: $RandomSource): void;
         static sequence<V>(arg0: $List_<$CompletableFuture<V>>): $CompletableFuture<$List<V>>;
         static getMillis(): number;
         static allOf<T>(arg0: $List_<$Predicate_<T>>): $Predicate<T>;
         static lastOf<T>(arg0: $List_<T>): T;
-        static getPropertyName<T extends $Comparable<T>>(arg0: $Property<T>, arg1: $Object): string;
         static anyOf<T>(arg0: $List_<$Predicate_<T>>): $Predicate<T>;
-        static getVmArguments(): $Stream<string>;
+        static getPropertyName<T extends $Comparable<T>>(arg0: $Property<T>, arg1: $Object): string;
         static toMutableList<T>(): $Collector<T, never, $List<T>>;
+        static ifElse<T>(arg0: (T) | undefined, arg1: $Consumer_<T>, arg2: $Runnable_): (T) | undefined;
         static getNanos(): number;
         static getPlatform(): $Util$OS;
-        static memoize<T, U, R>(arg0: $BiFunction_<T, U, R>): $BiFunction<T, U, R>;
         static memoize<T, R>(arg0: $Function_<T, R>): $Function<T, R>;
-        static fixedSize<T>(arg0: $List_<T>, arg1: number): $DataResult<$List<T>>;
+        static memoize<T, U, R>(arg0: $BiFunction_<T, U, R>): $BiFunction<T, U, R>;
         static fixedSize(arg0: $LongStream, arg1: number): $DataResult<number[]>;
+        static fixedSize<T>(arg0: $List_<T>, arg1: number): $DataResult<$List<T>>;
         static fixedSize(arg0: $IntStream, arg1: number): $DataResult<number[]>;
-        static ifElse<T>(arg0: (T) | undefined, arg1: $Consumer_<T>, arg2: $Runnable_): (T) | undefined;
         static nonCriticalIoPool(): $ExecutorService;
+        static createIndexLookup<T>(arg0: $List_<T>): $ToIntFunction<T>;
         static startTimerHackThread(): void;
         static throwAsRuntime(arg0: $Throwable): void;
         static getFilenameFormattedDateTime(): string;
         static shutdownExecutors(): void;
         static ioPool(): $ExecutorService;
-        static createIndexLookup<T>(arg0: $List_<T>): $ToIntFunction<T>;
         static writeAndReadTypedOrThrow<A, B>(arg0: $Typed<A>, arg1: $Type<B>, arg2: $UnaryOperator_<$Dynamic<never>>): $Typed<B>;
-        static readTypedOrThrow<T>(arg0: $Type<T>, arg1: $Dynamic<never>, arg2: boolean): $Typed<T>;
         static readTypedOrThrow<T>(arg0: $Type<T>, arg1: $Dynamic<never>): $Typed<T>;
+        static readTypedOrThrow<T>(arg0: $Type<T>, arg1: $Dynamic<never>, arg2: boolean): $Typed<T>;
+        static getRandom<T>(arg0: $List_<T>, arg1: $RandomSource): T;
         static getRandom<T>(arg0: T[], arg1: $RandomSource): T;
         static getRandom(arg0: number[], arg1: $RandomSource): number;
-        static getRandom<T>(arg0: $List_<T>, arg1: $RandomSource): T;
         static makeDescriptionId(arg0: string, arg1: $ResourceLocation_): string;
         static getEpochMillis(): number;
         static makeExecutor(arg0: string): $ExecutorService;
         static backgroundExecutor(): $ExecutorService;
         static pauseInIde<T extends $Throwable>(arg0: T): T;
         static fetchChoiceType(arg0: $DSL$TypeReference_, arg1: string): $Type<never>;
-        static wrapThreadWithTaskName(arg0: string, arg1: $Runnable_): $Runnable;
         static wrapThreadWithTaskName<V>(arg0: string, arg1: $Supplier_<V>): $Supplier<V>;
+        static wrapThreadWithTaskName(arg0: string, arg1: $Runnable_): $Runnable;
         static getRegisteredName<T>(arg0: $Registry<T>, arg1: T): string;
         static isSymmetrical<T>(arg0: number, arg1: number, arg2: $List_<T>): boolean;
         static parseAndValidateUntrustedUri(arg0: string): $URI;
@@ -541,8 +540,8 @@ declare module "@package/net/minecraft" {
         static findPreviousInIterable<T>(arg0: $Iterable_<T>, arg1: T): T;
         static sequenceFailFast<V>(arg0: $List_<$CompletableFuture<V>>): $CompletableFuture<$List<V>>;
         static sequenceFailFastAndCancel<V>(arg0: $List_<$CompletableFuture<V>>): $CompletableFuture<$List<V>>;
-        static logAndPauseIfInIde(arg0: string): void;
         static logAndPauseIfInIde(arg0: string, arg1: $Throwable): void;
+        static logAndPauseIfInIde(arg0: string): void;
         static setPause(arg0: $Consumer_<string>): void;
         static describeError(arg0: $Throwable): string;
         static getRandomSafe<T>(arg0: $List_<T>, arg1: $RandomSource): (T) | undefined;
@@ -552,16 +551,17 @@ declare module "@package/net/minecraft" {
         static copyBetweenDirs(arg0: $Path_, arg1: $Path_, arg2: $Path_): void;
         static sanitizeName(arg0: string, arg1: $CharPredicate_): string;
         static singleKeyCache<K, V>(arg0: $Function_<K, V>): $SingleKeyCache<K, V>;
-        static toShuffledList(arg0: $IntStream, arg1: $RandomSource): $IntArrayList;
         static toShuffledList<T>(arg0: $Stream<T>, arg1: $RandomSource): $List<T>;
-        static shuffledCopy<T>(arg0: T[], arg1: $RandomSource): $List<T>;
+        static toShuffledList(arg0: $IntStream, arg1: $RandomSource): $IntArrayList;
         static shuffledCopy<T>(arg0: $ObjectArrayList<T>, arg1: $RandomSource): $List<T>;
+        static shuffledCopy<T>(arg0: T[], arg1: $RandomSource): $List<T>;
         static blockUntilDone<T>(arg0: $Function_<$Executor, $CompletableFuture<T>>): $CompletableFuture<T>;
         static blockUntilDone<T>(arg0: $Function_<$Executor, T>, arg1: $Predicate_<T>): T;
         static createIndexIdentityLookup<T>(arg0: $List_<T>): $ToIntFunction<T>;
         static copyAndAdd<T>(arg0: T, arg1: $List_<T>): $List<T>;
         static copyAndAdd<T>(arg0: $List_<T>, arg1: T): $List<T>;
         static copyAndPut<K, V>(arg0: $Map_<K, V>, arg1: K, arg2: V): $Map<K, V>;
+        static getVmArguments(): $Stream<string>;
         static ZIP_FILE_SYSTEM_PROVIDER: $FileSystemProvider;
         static TICKER: $Ticker;
         static LINEAR_LOOKUP_THRESHOLD: number;
@@ -571,11 +571,11 @@ declare module "@package/net/minecraft" {
         static NIL_UUID: $UUID;
         constructor();
         static get millis(): number;
-        static get vmArguments(): $Stream<string>;
         static get nanos(): number;
         static get platform(): $Util$OS;
         static get filenameFormattedDateTime(): string;
         static get epochMillis(): number;
         static set pause(value: $Consumer_<string>);
+        static get vmArguments(): $Stream<string>;
     }
 }

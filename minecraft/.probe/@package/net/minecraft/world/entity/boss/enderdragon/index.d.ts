@@ -113,6 +113,9 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon" {
     export class $EnderDragon extends $Mob implements $Enemy {
         getDragonFight(): $EndDragonFight;
         setDragonFight(arg0: $EndDragonFight): void;
+        findClosestNode(arg0: number, arg1: number, arg2: number): number;
+        findClosestNode(): number;
+        getSubEntities(): $EnderDragonPart[];
         getHeadPartYOffset(arg0: number, arg1: number[], arg2: number[]): number;
         getHeadLookVector(arg0: number): $Vec3;
         getPhaseManager(): $EnderDragonPhaseManager;
@@ -121,9 +124,6 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon" {
         getFightOrigin(): $BlockPos;
         getLatencyPos(arg0: number, arg1: number): number[];
         reallyHurt(arg0: $DamageSource_, arg1: number): boolean;
-        findClosestNode(): number;
-        findClosestNode(arg0: number, arg1: number, arg2: number): number;
-        getSubEntities(): $EnderDragonPart[];
         findPath(arg0: number, arg1: number, arg2: $Node): $Path;
         hurt(arg0: $EnderDragonPart, arg1: $DamageSource_, arg2: number): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
@@ -299,7 +299,7 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon" {
         removeStingerTime: number;
         static BASE_SAFE_FALL_DISTANCE: number;
         constructor(arg0: $EntityType_<$EnderDragon>, arg1: $Level_);
-        get phaseManager(): $EnderDragonPhaseManager;
         get subEntities(): $EnderDragonPart[];
+        get phaseManager(): $EnderDragonPhaseManager;
     }
 }

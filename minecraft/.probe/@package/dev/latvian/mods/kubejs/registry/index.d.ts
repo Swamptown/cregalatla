@@ -288,7 +288,7 @@ declare module "@package/dev/latvian/mods/kubejs/registry" {
     /**
      * Values that may be interpreted as {@link $BuilderType}.
      */
-    export type $BuilderType_<T> = { type?: $ResourceLocation_, factory?: $BuilderFactory_, builderClass?: $Class<$BuilderBase<any>>,  } | [type?: $ResourceLocation_, factory?: $BuilderFactory_, builderClass?: $Class<$BuilderBase<any>>, ];
+    export type $BuilderType_<T> = { builderClass?: $Class<$BuilderBase<any>>, factory?: $BuilderFactory_, type?: $ResourceLocation_,  } | [builderClass?: $Class<$BuilderBase<any>>, factory?: $BuilderFactory_, type?: $ResourceLocation_, ];
     export class $RegistryType<T> extends $Record {
         type(): $TypeInfo;
         static lookup(target: $TypeInfo_): $RegistryType<never>;
@@ -304,7 +304,7 @@ declare module "@package/dev/latvian/mods/kubejs/registry" {
     /**
      * Values that may be interpreted as {@link $RegistryType}.
      */
-    export type $RegistryType_<T> = { type?: $TypeInfo_, key?: $ResourceKey_<$Registry<any>>, baseClass?: $Class<never>,  } | [type?: $TypeInfo_, key?: $ResourceKey_<$Registry<any>>, baseClass?: $Class<never>, ];
+    export type $RegistryType_<T> = { baseClass?: $Class<never>, key?: $ResourceKey_<$Registry<any>>, type?: $TypeInfo_,  } | [baseClass?: $Class<never>, key?: $ResourceKey_<$Registry<any>>, type?: $TypeInfo_, ];
     export class $AdditionalObjectRegistry {
     }
     export interface $AdditionalObjectRegistry {

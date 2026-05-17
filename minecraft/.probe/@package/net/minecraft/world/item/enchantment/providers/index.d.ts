@@ -33,7 +33,7 @@ declare module "@package/net/minecraft/world/item/enchantment/providers" {
     /**
      * Values that may be interpreted as {@link $SingleEnchantment}.
      */
-    export type $SingleEnchantment_ = { level?: $IntProvider_, enchantment?: $Holder_<$Enchantment>,  } | [level?: $IntProvider_, enchantment?: $Holder_<$Enchantment>, ];
+    export type $SingleEnchantment_ = { enchantment?: $Holder_<$Enchantment>, level?: $IntProvider_,  } | [enchantment?: $Holder_<$Enchantment>, level?: $IntProvider_, ];
     export class $EnchantmentProviderTypes {
         static bootstrap(arg0: $Registry<$MapCodec_<$EnchantmentProvider_>>): $MapCodec<$EnchantmentProvider>;
     }
@@ -94,8 +94,8 @@ declare module "@package/net/minecraft/world/item/enchantment/providers" {
     export type $EnchantmentsByCost_ = { enchantments?: $HolderSet_<$Enchantment>, cost?: $IntProvider_,  } | [enchantments?: $HolderSet_<$Enchantment>, cost?: $IntProvider_, ];
     export class $EnchantmentsByCostWithDifficulty extends $Record implements $EnchantmentProvider {
         enchant(arg0: $ItemStack_, arg1: $ItemEnchantments$Mutable, arg2: $RandomSource, arg3: $DifficultyInstance): void;
-        maxCostSpan(): number;
         minCost(): number;
+        maxCostSpan(): number;
         codec(): $MapCodec<$EnchantmentsByCostWithDifficulty>;
         enchantments(): $HolderSet<$Enchantment>;
         static CODEC: $MapCodec<$EnchantmentsByCostWithDifficulty>;
@@ -105,7 +105,7 @@ declare module "@package/net/minecraft/world/item/enchantment/providers" {
     /**
      * Values that may be interpreted as {@link $EnchantmentsByCostWithDifficulty}.
      */
-    export type $EnchantmentsByCostWithDifficulty_ = { enchantments?: $HolderSet_<$Enchantment>, minCost?: number, maxCostSpan?: number,  } | [enchantments?: $HolderSet_<$Enchantment>, minCost?: number, maxCostSpan?: number, ];
+    export type $EnchantmentsByCostWithDifficulty_ = { maxCostSpan?: number, minCost?: number, enchantments?: $HolderSet_<$Enchantment>,  } | [maxCostSpan?: number, minCost?: number, enchantments?: $HolderSet_<$Enchantment>, ];
     export interface $EnchantmentProvider extends RegistryMarked<RegistryTypes.EnchantmentProviderTag, RegistryTypes.EnchantmentProvider> {}
     export class $VanillaEnchantmentProviders {
         static create(arg0: string): $ResourceKey<$EnchantmentProvider>;

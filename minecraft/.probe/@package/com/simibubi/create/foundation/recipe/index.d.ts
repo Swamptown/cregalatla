@@ -1,4 +1,4 @@
-import { $RecipeType, $RecipeSerializer, $RecipeInput, $Recipe } from "@package/net/minecraft/world/item/crafting";
+import { $RecipeInput, $RecipeSerializer, $RecipeType, $Recipe } from "@package/net/minecraft/world/item/crafting";
 import { $ResourceLocation } from "@package/net/minecraft/resources";
 
 declare module "@package/com/simibubi/create/foundation/recipe" {

@@ -7,7 +7,7 @@ import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $ClientSubLevelAccess, $SubLevelAccess } from "@package/dev/ryanhcode/sable/companion";
 import { $PhysicsPipelineBody } from "@package/dev/ryanhcode/sable/api/physics";
 import { $VeilPacketManager$PacketSink } from "@package/foundry/veil/api/network";
-import { $ClientLevelPlot, $LevelPlot, $ServerLevelPlot } from "@package/dev/ryanhcode/sable/sublevel/plot";
+import { $ClientLevelPlot, $LevelPlot } from "@package/dev/ryanhcode/sable/sublevel/plot";
 import { $RigidBodyHandle } from "@package/dev/ryanhcode/sable/api/physics/handle";
 import { $SubLevelHeatMapManager } from "@package/dev/ryanhcode/sable/sublevel/plot/heat";
 import { $PrimaryAssemblerExtension } from "@package/dev/simulated_team/simulated/mixin_interface/assembly_preventer";
@@ -18,7 +18,7 @@ import { $Object2ObjectMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $SubLevelSnapshotInterpolator, $ClientSableInterpolationState } from "@package/dev/ryanhcode/sable/network/client";
 import { $FloatingBlockController } from "@package/dev/ryanhcode/sable/physics/floating_block";
-import { $QueuedForceGroup, $ForceGroup, $ForceGroup_ } from "@package/dev/ryanhcode/sable/api/physics/force";
+import { $QueuedForceGroup, $ForceGroup_, $ForceGroup } from "@package/dev/ryanhcode/sable/api/physics/force";
 import { $SubLevelRenderData } from "@package/dev/ryanhcode/sable/sublevel/render";
 import { $Vector3d } from "@package/org/joml";
 export * as system from "@package/dev/ryanhcode/sable/sublevel/system";
@@ -30,6 +30,9 @@ export * as render from "@package/dev/ryanhcode/sable/sublevel/render";
 
 declare module "@package/dev/ryanhcode/sable/sublevel" {
     export class $ServerSubLevel extends $SubLevel implements $PhysicsPipelineBody, $PrimaryAssemblerExtension {
+        enableIndividualQueuedForcesTracking(arg0: boolean): void;
+        getQueuedForceGroups(): $Object2ObjectMap<$ForceGroup, $QueuedForceGroup>;
+        lastNetworkedPose(): $Pose3d;
         lastNetworkedBoundingBox(): $BoundingBox3i;
         playerSink(): $VeilPacketManager$PacketSink;
         getRuntimeId(): number;
@@ -37,8 +40,6 @@ declare module "@package/dev/ryanhcode/sable/sublevel" {
         setLastNetworkedStopped(arg0: boolean): void;
         isTrackingIndividualQueuedForces(): boolean;
         getOrCreateQueuedForceGroup(arg0: $ForceGroup_): $QueuedForceGroup;
-        enableIndividualQueuedForcesTracking(arg0: boolean): void;
-        getQueuedForceGroups(): $Object2ObjectMap<$ForceGroup, $QueuedForceGroup>;
         deleteAllEntities(): void;
         getHeatMapManager(): $SubLevelHeatMapManager;
         getFloatingBlockController(): $FloatingBlockController;
@@ -54,7 +55,6 @@ declare module "@package/dev/ryanhcode/sable/sublevel" {
         setUserDataTag(arg0: $CompoundTag_): void;
         simulated$setPrimaryAssembler(arg0: $BlockPos_): void;
         simulated$getPrimaryAssembler(): $BlockPos;
-        lastNetworkedPose(): $Pose3d;
         prePhysicsTickBegin(): void;
         updateMergedMassData(arg0: number): void;
         applyQueuedForces(arg0: $SubLevelPhysicsSystem, arg1: $RigidBodyHandle, arg2: number): void;
@@ -62,13 +62,12 @@ declare module "@package/dev/ryanhcode/sable/sublevel" {
         prePhysicsTick(arg0: $SubLevelPhysicsSystem, arg1: $RigidBodyHandle, arg2: number): void;
         getMassTracker(): $MassData;
         getTrackingPlayers(): $Collection<$UUID>;
-        getPlot(): $ServerLevelPlot;
         latestLinearVelocity: $Vector3d;
         latestAngularVelocity: $Vector3d;
         constructor(arg0: $ServerLevel, arg1: number, arg2: number, arg3: $Pose3d);
+        get queuedForceGroups(): $Object2ObjectMap<$ForceGroup, $QueuedForceGroup>;
         get runtimeId(): number;
         get trackingIndividualQueuedForces(): boolean;
-        get queuedForceGroups(): $Object2ObjectMap<$ForceGroup, $QueuedForceGroup>;
         get heatMapManager(): $SubLevelHeatMapManager;
         get floatingBlockController(): $FloatingBlockController;
         get reactionWheelManager(): $ReactionWheelManager;
@@ -77,7 +76,6 @@ declare module "@package/dev/ryanhcode/sable/sublevel" {
         get selfMassTracker(): $MassTracker;
         get massTracker(): $MassData;
         get trackingPlayers(): $Collection<$UUID>;
-        get plot(): $ServerLevelPlot;
     }
     export class $SubLevel implements $SubLevelAccess {
         getName(): string;
@@ -104,9 +102,6 @@ declare module "@package/dev/ryanhcode/sable/sublevel" {
         isFinalized(): boolean;
         renderPose(arg0: number): $Pose3dc;
         renderPose(): $Pose3dc;
-        computeSubLevelSkyLight(arg0: $Pose3dc): number;
-        getLatestSkyLightScale(): number;
-        getInterpolator(): $SubLevelSnapshotInterpolator;
         setInitialPosesFrom(arg0: $ClientSableInterpolationState): void;
         forceUpdateBounds(): void;
         scaleSkyLight(arg0: number): number;
@@ -117,12 +112,15 @@ declare module "@package/dev/ryanhcode/sable/sublevel" {
         receiveServerMovementStop(): void;
         wasSplitFrom(arg0: $ClientSableInterpolationState, arg1: $ClientSubLevel, arg2: $Pose3dc): void;
         setFinalized(): void;
+        computeSubLevelSkyLight(arg0: $Pose3dc): number;
+        getLatestSkyLightScale(): number;
+        getInterpolator(): $SubLevelSnapshotInterpolator;
         getPlot(): $ClientLevelPlot;
         getRenderData(): $SubLevelRenderData;
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: $Pose3d);
+        set initialPosesFrom(value: $ClientSableInterpolationState);
         get latestSkyLightScale(): number;
         get interpolator(): $SubLevelSnapshotInterpolator;
-        set initialPosesFrom(value: $ClientSableInterpolationState);
         get plot(): $ClientLevelPlot;
         get renderData(): $SubLevelRenderData;
     }

@@ -56,36 +56,35 @@ declare module "@package/net/minecraft/client/sounds" {
      * Values that may be interpreted as {@link $LoopingAudioStream$AudioStreamProvider}.
      */
     export type $LoopingAudioStream$AudioStreamProvider_ = ((arg0: $InputStream) => $AudioStream);
-    export class $SoundManager extends $SimplePreparableReloadListener<$SoundManager$Preparations> implements $IMixinSoundManager, $SoundManagerAccessor, $IdentifiableResourceReloadListener {
+    export class $SoundManager extends $SimplePreparableReloadListener<$SoundManager$Preparations> implements $SoundManagerAccessor, $IMixinSoundManager, $IdentifiableResourceReloadListener {
         apply(arg0: $SoundManager$Preparations, arg1: $ResourceManager, arg2: $ProfilerFiller): void;
         stop(arg0: $SoundInstance): void;
         stop(): void;
         stop(arg0: $ResourceLocation_, arg1: $SoundSource_): void;
         destroy(): void;
-        prepare(arg0: $ResourceManager, arg1: $ProfilerFiller): $SoundManager$Preparations;
         isActive(arg0: $SoundInstance): boolean;
         tick(arg0: boolean): void;
         reload(): void;
-        getAvailableSounds(): $Collection<$ResourceLocation>;
         getListenerTransform(): $ListenerTransform;
         static validateSoundResource(arg0: $Sound, arg1: $ResourceLocation_, arg2: $ResourceProvider_): boolean;
         getDebugString(): string;
+        getAvailableSounds(): $Collection<$ResourceLocation>;
         getSoundEvent(arg0: $ResourceLocation_): $WeighedSoundEvents;
-        getFabricId(): $ResourceLocation;
-        getFabricDependencies(): $Collection<any>;
+        playDelayed(arg0: $SoundInstance, arg1: number): void;
         removeListener(arg0: $SoundEventListener_): void;
         addListener(arg0: $SoundEventListener_): void;
-        playDelayed(arg0: $SoundInstance, arg1: number): void;
         play(arg0: $SoundInstance): void;
         pause(): void;
         emergencyShutdown(): void;
         resume(): void;
         updateSource(arg0: $Camera): void;
+        getFabricId(): $ResourceLocation;
+        getFabricDependencies(): $Collection<any>;
         queueTickingSound(arg0: $TickableSoundInstance): void;
         updateSourceVolume(arg0: $SoundSource_, arg1: number): void;
         getAvailableSoundDevices(): $List<string>;
-        getSoundEngineMelody(): $SoundEngine;
         getSoundEngine(): $SoundEngine;
+        getSoundEngineMelody(): $SoundEngine;
         static EMPTY_SOUND: $Sound;
         static INTENTIONALLY_EMPTY_SOUND_EVENT: $WeighedSoundEvents;
         static EMPTY_SOUND_LOCATION: $ResourceLocation;
@@ -94,9 +93,9 @@ declare module "@package/net/minecraft/client/sounds" {
         static INTENTIONALLY_EMPTY_SOUND_LOCATION: $ResourceLocation;
         static INTENTIONALLY_EMPTY_SOUND: $Sound;
         constructor(arg0: $Options);
-        get availableSounds(): $Collection<$ResourceLocation>;
         get listenerTransform(): $ListenerTransform;
         get debugString(): string;
+        get availableSounds(): $Collection<$ResourceLocation>;
         get fabricId(): $ResourceLocation;
         get fabricDependencies(): $Collection<any>;
         get availableSoundDevices(): $List<string>;
@@ -125,7 +124,7 @@ declare module "@package/net/minecraft/client/sounds" {
         getFormat(): $AudioFormat;
         get format(): $AudioFormat;
     }
-    export class $SoundEngine implements $IMixinSoundEngine, $SoundEngineAccessor, $DuckSoundEngine {
+    export class $SoundEngine implements $SoundEngineAccessor, $DuckSoundEngine, $IMixinSoundEngine {
         stop(arg0: $ResourceLocation_, arg1: $SoundSource_): void;
         stop(arg0: $SoundInstance): void;
         destroy(): void;
@@ -149,9 +148,9 @@ declare module "@package/net/minecraft/client/sounds" {
         getAvailableSoundDevices(): $List<string>;
         requestPreload(arg0: $Sound): void;
         isLoaded(): boolean;
-        getLoadedMelody(): boolean;
         getInstanceToChannel(): $Map<$SoundInstance, $ChannelAccess$ChannelHandle>;
         callCalculateVolume(arg0: $SoundInstance): number;
+        getLoadedMelody(): boolean;
         static MISSING_SOUND: string;
         soundManager: $SoundManager;
         static OPEN_AL_SOFT_PREFIX: string;
@@ -161,8 +160,8 @@ declare module "@package/net/minecraft/client/sounds" {
         get debugString(): string;
         get availableSoundDevices(): $List<string>;
         get loaded(): boolean;
-        get loadedMelody(): boolean;
         get instanceToChannel(): $Map<$SoundInstance, $ChannelAccess$ChannelHandle>;
+        get loadedMelody(): boolean;
     }
     export class $SoundBufferLibrary {
         clear(): void;

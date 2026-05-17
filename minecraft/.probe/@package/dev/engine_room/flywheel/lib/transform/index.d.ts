@@ -25,12 +25,12 @@ declare module "@package/dev/engine_room/flywheel/lib/transform" {
         rotateDegrees(degrees: number, axis: $Direction_): Self;
         rotateZDegrees(degrees: number): Self;
         rotateToFace(facing: $Direction_): Self;
-        rotateTo(from: $Vector3fc, to: $Vector3fc): Self;
-        rotateTo(from: $Direction_, to: $Direction_): Self;
-        rotateTo(fromX: number, fromY: number, fromZ: number, toX: number, toY: number, toZ: number): Self;
         rotateX(radians: number): Self;
         rotateY(radians: number): Self;
         rotateZ(radians: number): Self;
+        rotateTo(from: $Vector3fc, to: $Vector3fc): Self;
+        rotateTo(from: $Direction_, to: $Direction_): Self;
+        rotateTo(fromX: number, fromY: number, fromZ: number, toX: number, toY: number, toZ: number): Self;
     }
     /**
      * Values that may be interpreted as {@link $Rotate}.
@@ -63,8 +63,8 @@ declare module "@package/dev/engine_room/flywheel/lib/transform" {
         static of(stack: $PoseStack): $PoseTransformStack;
     }
     export interface $TransformStack<Self extends $TransformStack<Self>> extends $Transform<Self> {
-        pushPose(): Self;
         popPose(): Self;
+        pushPose(): Self;
     }
     export class $Transform<Self extends $Transform<Self>> {
     }
@@ -79,26 +79,26 @@ declare module "@package/dev/engine_room/flywheel/lib/transform" {
         static CENTER: number;
     }
     export interface $Translate<Self extends $Translate<Self>> {
-        translateBack(x: number, y: number, z: number): Self;
-        translateBack(vec: $Vector3fc): Self;
-        translateBack(vec: $Vector3ic): Self;
-        translateBack(vec: $Vec3i): Self;
-        translateBack(v: number): Self;
-        translateBack(vec: $Vec3_): Self;
-        translateBack(x: number, y: number, z: number): Self;
         uncenter(): Self;
         translateY(y: number): Self;
-        translateX(x: number): Self;
         translateZ(z: number): Self;
+        translateBack(vec: $Vec3i): Self;
+        translateBack(vec: $Vector3ic): Self;
+        translateBack(v: number): Self;
+        translateBack(x: number, y: number, z: number): Self;
+        translateBack(vec: $Vec3_): Self;
+        translateBack(x: number, y: number, z: number): Self;
+        translateBack(vec: $Vector3fc): Self;
+        translateX(x: number): Self;
         nudge(seed: number): Self;
-        center(): Self;
+        translate(vec: $Vec3i): Self;
         translate(v: number): Self;
         translate(x: number, y: number, z: number): Self;
         translate(arg0: number, arg1: number, arg2: number): Self;
         translate(vec: $Vec3_): Self;
         translate(vec: $Vector3fc): Self;
         translate(vec: $Vector3ic): Self;
-        translate(vec: $Vec3i): Self;
+        center(): Self;
     }
     /**
      * Values that may be interpreted as {@link $Translate}.
@@ -120,8 +120,7 @@ declare module "@package/dev/engine_room/flywheel/lib/transform" {
     export type $Scale_<Self> = ((arg0: number, arg1: number, arg2: number) => Self);
     export class $PoseTransformStack implements $TransformStack<$PoseTransformStack> {
         unwrap(): $PoseStack;
-        mulPose(pose: $Matrix4fc): $PoseTransformStack;
-        pushPose(): $PoseTransformStack;
+        rotate(quaternion: $Quaternionfc): $PoseTransformStack;
         rotateAround(quaternion: $Quaternionfc, x: number, y: number, z: number): $PoseTransformStack;
         transform(pose: $PoseStack$Pose): $PoseTransformStack;
         transform(stack: $PoseStack): $PoseTransformStack;
@@ -144,25 +143,25 @@ declare module "@package/dev/engine_room/flywheel/lib/transform" {
         rotateXCenteredDegrees(degrees: number): $PoseTransformStack;
         rotateYCenteredDegrees(degrees: number): $PoseTransformStack;
         rotateAround(quaternion: $Quaternionfc, vec: $Vector3fc): $PoseTransformStack;
-        translateBack(x: number, y: number, z: number): $PoseTransformStack;
-        translateBack(vec: $Vector3fc): $PoseTransformStack;
-        translateBack(vec: $Vector3ic): $PoseTransformStack;
-        translateBack(vec: $Vec3i): $PoseTransformStack;
-        translateBack(v: number): $PoseTransformStack;
-        translateBack(vec: $Vec3_): $PoseTransformStack;
-        translateBack(x: number, y: number, z: number): $PoseTransformStack;
         uncenter(): $PoseTransformStack;
         translateY(y: number): $PoseTransformStack;
-        translateX(x: number): $PoseTransformStack;
         translateZ(z: number): $PoseTransformStack;
+        translateBack(vec: $Vec3i): $PoseTransformStack;
+        translateBack(vec: $Vector3ic): $PoseTransformStack;
+        translateBack(v: number): $PoseTransformStack;
+        translateBack(x: number, y: number, z: number): $PoseTransformStack;
+        translateBack(vec: $Vec3_): $PoseTransformStack;
+        translateBack(x: number, y: number, z: number): $PoseTransformStack;
+        translateBack(vec: $Vector3fc): $PoseTransformStack;
+        translateX(x: number): $PoseTransformStack;
         nudge(seed: number): $PoseTransformStack;
-        center(): $PoseTransformStack;
+        translate(vec: $Vec3i): $PoseTransformStack;
         translate(v: number): $PoseTransformStack;
         translate(x: number, y: number, z: number): $PoseTransformStack;
         translate(vec: $Vec3_): $PoseTransformStack;
         translate(vec: $Vector3fc): $PoseTransformStack;
         translate(vec: $Vector3ic): $PoseTransformStack;
-        translate(vec: $Vec3i): $PoseTransformStack;
+        center(): $PoseTransformStack;
         self(): $PoseTransformStack;
         rotate(radians: number, axis: $Vector3fc): $PoseTransformStack;
         rotate(radians: number, axis: $Direction_): $PoseTransformStack;
@@ -179,12 +178,12 @@ declare module "@package/dev/engine_room/flywheel/lib/transform" {
         rotateDegrees(degrees: number, axis: $Direction_): $PoseTransformStack;
         rotateZDegrees(degrees: number): $PoseTransformStack;
         rotateToFace(facing: $Direction_): $PoseTransformStack;
-        rotateTo(from: $Vector3fc, to: $Vector3fc): $PoseTransformStack;
-        rotateTo(from: $Direction_, to: $Direction_): $PoseTransformStack;
-        rotateTo(fromX: number, fromY: number, fromZ: number, toX: number, toY: number, toZ: number): $PoseTransformStack;
         rotateX(radians: number): $PoseTransformStack;
         rotateY(radians: number): $PoseTransformStack;
         rotateZ(radians: number): $PoseTransformStack;
+        rotateTo(from: $Vector3fc, to: $Vector3fc): $PoseTransformStack;
+        rotateTo(from: $Direction_, to: $Direction_): $PoseTransformStack;
+        rotateTo(fromX: number, fromY: number, fromZ: number, toX: number, toY: number, toZ: number): $PoseTransformStack;
         scale(factors: $Vector3fc): $PoseTransformStack;
         scale(factor: number): $PoseTransformStack;
         scaleZ(factor: number): $PoseTransformStack;
@@ -193,6 +192,8 @@ declare module "@package/dev/engine_room/flywheel/lib/transform" {
         scale(arg0: number, arg1: number, arg2: number): $PoseTransformStack;
         mulNormal(arg0: $Matrix3fc): $PoseTransformStack;
         popPose(): $PoseTransformStack;
+        pushPose(): $PoseTransformStack;
+        mulPose(arg0: $Matrix4fc): $PoseTransformStack;
         constructor(stack: $PoseStack);
     }
 }

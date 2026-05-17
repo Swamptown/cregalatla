@@ -50,7 +50,7 @@ declare module "@package/net/minecraft/data" {
     /**
      * Values that may be interpreted as {@link $HashCache$ProviderCacheBuilder}.
      */
-    export type $HashCache$ProviderCacheBuilder_ = { version?: string, data?: $ConcurrentMap<$Path_, $HashCode>,  } | [version?: string, data?: $ConcurrentMap<$Path_, $HashCode>, ];
+    export type $HashCache$ProviderCacheBuilder_ = { data?: $ConcurrentMap<$Path_, $HashCode>, version?: string,  } | [data?: $ConcurrentMap<$Path_, $HashCode>, version?: string, ];
     export class $HashCache$UpdateFunction {
     }
     export interface $HashCache$UpdateFunction {
@@ -119,16 +119,16 @@ declare module "@package/net/minecraft/data" {
     export class $DataGenerator implements $DataGeneratorExtension {
         run(): void;
         merge(arg0: $DataGenerator): void;
-        addProvider<T extends $DataProvider>(arg0: boolean, arg1: $DataProvider$Factory_<T>): T;
         addProvider<T extends $DataProvider>(arg0: boolean, arg1: T): T;
-        createPack(arg0: string, arg1: $PackOutput): $DataGenerator$PackGenerator;
+        addProvider<T extends $DataProvider>(arg0: boolean, arg1: $DataProvider$Factory_<T>): T;
         getPackOutput(): $PackOutput;
         getPackOutput(arg0: string): $PackOutput;
-        getBuiltinDatapack(arg0: boolean, arg1: string, arg2: string): $DataGenerator$PackGenerator;
         getBuiltinDatapack(arg0: boolean, arg1: string): $DataGenerator$PackGenerator;
+        getBuiltinDatapack(arg0: boolean, arg1: string, arg2: string): $DataGenerator$PackGenerator;
         getProvidersView(): $Map<string, $DataProvider>;
         getPackGenerator(arg0: boolean, arg1: string, arg2: string): $DataGenerator$PackGenerator;
         createBuiltinResourcePack(arg0: boolean, arg1: $ResourceLocation_, arg2: $ModContainer, arg3: boolean): $Pair<any, any>;
+        createPack(arg0: string, arg1: $PackOutput): $DataGenerator$PackGenerator;
         getVanillaPack(arg0: boolean): $DataGenerator$PackGenerator;
         vanillaPackOutput: $PackOutput;
         providersToRun: $Map<string, $DataProvider>;
@@ -149,7 +149,7 @@ declare module "@package/net/minecraft/data" {
     /**
      * Values that may be interpreted as {@link $HashCache$ProviderCache}.
      */
-    export type $HashCache$ProviderCache_ = { version?: string, data?: $ImmutableMap<$Path_, $HashCode>,  } | [version?: string, data?: $ImmutableMap<$Path_, $HashCode>, ];
+    export type $HashCache$ProviderCache_ = { data?: $ImmutableMap<$Path_, $HashCode>, version?: string,  } | [data?: $ImmutableMap<$Path_, $HashCode>, version?: string, ];
     export class $HashCache$UpdateResult extends $Record {
         cache(): $HashCache$ProviderCache;
         providerId(): string;
@@ -159,7 +159,7 @@ declare module "@package/net/minecraft/data" {
     /**
      * Values that may be interpreted as {@link $HashCache$UpdateResult}.
      */
-    export type $HashCache$UpdateResult_ = { writes?: number, providerId?: string, cache?: $HashCache$ProviderCache_,  } | [writes?: number, providerId?: string, cache?: $HashCache$ProviderCache_, ];
+    export type $HashCache$UpdateResult_ = { cache?: $HashCache$ProviderCache_, providerId?: string, writes?: number,  } | [cache?: $HashCache$ProviderCache_, providerId?: string, writes?: number, ];
     export class $DataGenerator$PackGenerator {
         addProvider<T extends $DataProvider>(arg0: $DataProvider$Factory_<T>): T;
         this$0: $DataGenerator;
@@ -203,15 +203,15 @@ declare module "@package/net/minecraft/data" {
         mosaic(arg0: $Block_): $BlockFamily$Builder;
         recipeGroupPrefix(arg0: string): $BlockFamily$Builder;
         recipeUnlockedBy(arg0: string): $BlockFamily$Builder;
-        door(arg0: $Block_): $BlockFamily$Builder;
-        slab(arg0: $Block_): $BlockFamily$Builder;
-        trapdoor(arg0: $Block_): $BlockFamily$Builder;
-        stairs(arg0: $Block_): $BlockFamily$Builder;
-        fenceGate(arg0: $Block_): $BlockFamily$Builder;
         pressurePlate(arg0: $Block_): $BlockFamily$Builder;
         polished(arg0: $Block_): $BlockFamily$Builder;
         cut(arg0: $Block_): $BlockFamily$Builder;
         chiseled(arg0: $Block_): $BlockFamily$Builder;
+        stairs(arg0: $Block_): $BlockFamily$Builder;
+        fenceGate(arg0: $Block_): $BlockFamily$Builder;
+        door(arg0: $Block_): $BlockFamily$Builder;
+        slab(arg0: $Block_): $BlockFamily$Builder;
+        trapdoor(arg0: $Block_): $BlockFamily$Builder;
         customFence(arg0: $Block_): $BlockFamily$Builder;
         customFenceGate(arg0: $Block_): $BlockFamily$Builder;
         dontGenerateModel(): $BlockFamily$Builder;

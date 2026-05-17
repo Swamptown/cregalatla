@@ -22,8 +22,8 @@ declare module "@package/com/simibubi/create/content/trains/display" {
         tick(arg0: boolean, arg1: $RandomSource): number;
         getText(): $Component;
         renderCharsIndividually(): boolean;
-        rightAligned(): $FlapDisplaySection;
         wideFlaps(): $FlapDisplaySection;
+        rightAligned(): $FlapDisplaySection;
         setText(arg0: $Component_): void;
         static getFlapCycle(arg0: string): string[];
         refresh(arg0: boolean): void;
@@ -41,20 +41,20 @@ declare module "@package/com/simibubi/create/content/trains/display" {
         constructor(arg0: $Train, arg1: number, arg2: $MutableComponent_, arg3: string);
     }
     export class $FlapDisplayBlockEntity extends $KineticBlockEntity {
-        getMaxCharCount(arg0: number): number;
         getMaxCharCount(): number;
-        wrapOperation$fdg000$dndecor$updateControllerStatus(arg0: $Level_, arg1: $BlockPos_, arg2: $Operation_<any>): $BlockState;
+        getMaxCharCount(arg0: number): number;
+        applyTextManually(arg0: number, arg1: $Component_): void;
+        wrapOperation$fco000$dndecor$updateControllerStatus(arg0: $Level_, arg1: $BlockPos_, arg2: $Operation_<any>): $BlockState;
         updateControllerStatus(): void;
         setColour(arg0: number, arg1: $DyeColor_): void;
         initDefaultSections(): void;
         getLineIndexAt(arg0: number): number;
-        wrapOperation$fdg000$dndecor$getController(arg0: $Level_, arg1: $BlockPos_, arg2: $Operation_<any>): $BlockState;
+        wrapOperation$fco000$dndecor$getController(arg0: $Level_, arg1: $BlockPos_, arg2: $Operation_<any>): $BlockState;
         getLineColor(arg0: number): number;
         isLineGlowing(arg0: number): boolean;
-        applyTextManually(arg0: number, arg1: $Component_): void;
         getController(): $FlapDisplayBlockEntity;
-        getLines(): $List<$FlapDisplayLayout>;
         getDirection(): $Direction;
+        getLines(): $List<$FlapDisplayLayout>;
         setGlowing(arg0: number): void;
         glowingLines: boolean[];
         level: $Level;
@@ -83,9 +83,9 @@ declare module "@package/com/simibubi/create/content/trains/display" {
         write(arg0: $HolderLookup$Provider): $CompoundTag;
         read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         isLayout(arg0: string): boolean;
-        configure(arg0: string, arg1: $List_<$FlapDisplaySection>): void;
         getSections(): $List<$FlapDisplaySection>;
         loadDefault(arg0: number): void;
+        configure(arg0: string, arg1: $List_<$FlapDisplaySection>): void;
         constructor(arg0: number);
         get sections(): $List<$FlapDisplaySection>;
     }

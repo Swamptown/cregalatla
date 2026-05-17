@@ -22,6 +22,7 @@ export * as gg from "@package/gg";
 export * as cc from "@package/cc";
 export * as fzzyhmstrs from "@package/fzzyhmstrs";
 export * as jdk from "@package/jdk";
+export * as betteradvancements from "@package/betteradvancements";
 export * as me from "@package/me";
 export * as terrablender from "@package/terrablender";
 export * as link from "@package/link";

@@ -19,9 +19,9 @@ declare module "@package/xaero/map/gui" {
     export class $MapTileSelection {
         getStartZ(): number;
         getEndZ(): number;
+        setEnd(arg0: number, arg1: number): void;
         getStartX(): number;
         getTop(): number;
-        setEnd(arg0: number, arg1: number): void;
         getLeft(): number;
         getRight(): number;
         getEndX(): number;

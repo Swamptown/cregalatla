@@ -20,13 +20,13 @@ declare module "@package/com/simibubi/create/api/behaviour/display" {
     export class $DisplayTarget {
         static get(arg0: $ResourceLocation_): $DisplayTarget;
         static get(arg0: $LevelAccessor, arg1: $BlockPos_): $DisplayTarget;
-        provideStats(arg0: $DisplayLinkContext): $DisplayTargetStats;
+        static displayTarget<B extends $Block, P>(arg0: $RegistryEntry<$DisplayTarget_, $DisplayTarget_>): $NonNullUnaryOperator<$BlockBuilder<B, P>>;
         getLineOptionText(arg0: number): $Component;
-        getMultiblockBounds(arg0: $LevelAccessor, arg1: $BlockPos_): $AABB;
-        acceptText(arg0: number, arg1: $List_<$MutableComponent_>, arg2: $DisplayLinkContext): void;
         isReserved(arg0: number, arg1: $BlockEntity, arg2: $DisplayLinkContext): boolean;
         requiresComponentSanitization(): boolean;
-        static displayTarget<B extends $Block, P>(arg0: $RegistryEntry<$DisplayTarget_, $DisplayTarget_>): $NonNullUnaryOperator<$BlockBuilder<B, P>>;
+        getMultiblockBounds(arg0: $LevelAccessor, arg1: $BlockPos_): $AABB;
+        acceptText(arg0: number, arg1: $List_<$MutableComponent_>, arg2: $DisplayLinkContext): void;
+        provideStats(arg0: $DisplayLinkContext): $DisplayTargetStats;
         static reserve(arg0: number, arg1: $BlockEntity, arg2: $DisplayLinkContext): void;
         static BY_BLOCK_ENTITY: $SimpleRegistry<$BlockEntityType<never>, $DisplayTarget>;
         static BY_BLOCK: $SimpleRegistry<$Block, $DisplayTarget>;
@@ -40,11 +40,11 @@ declare module "@package/com/simibubi/create/api/behaviour/display" {
         getName(): $Component;
         static get(arg0: $ResourceLocation_): $DisplaySource;
         static getAll(arg0: $LevelAccessor, arg1: $BlockPos_): $List<$DisplaySource>;
-        provideFlapDisplayText(arg0: $DisplayLinkContext, arg1: $DisplayTargetStats_): $List<$List<$MutableComponent>>;
         initConfigurationWidgets(arg0: $DisplayLinkContext, arg1: $ModularGuiLineBuilder, arg2: boolean): void;
         provideText(arg0: $DisplayLinkContext, arg1: $DisplayTargetStats_): $List<$MutableComponent>;
-        loadFlapDisplayLayout(arg0: $DisplayLinkContext, arg1: $FlapDisplayBlockEntity, arg2: $FlapDisplayLayout, arg3: number): void;
+        provideFlapDisplayText(arg0: $DisplayLinkContext, arg1: $DisplayTargetStats_): $List<$List<$MutableComponent>>;
         loadFlapDisplayLayout(arg0: $DisplayLinkContext, arg1: $FlapDisplayBlockEntity, arg2: $FlapDisplayLayout): void;
+        loadFlapDisplayLayout(arg0: $DisplayLinkContext, arg1: $FlapDisplayBlockEntity, arg2: $FlapDisplayLayout, arg3: number): void;
         transferData(arg0: $DisplayLinkContext, arg1: $DisplayTarget_, arg2: number): void;
         onSignalReset(arg0: $DisplayLinkContext): void;
         populateData(arg0: $DisplayLinkContext): void;

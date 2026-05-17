@@ -69,11 +69,11 @@ declare module "@package/com/mojang/realmsclient/gui" {
         set serverData(value: $RealmsServer);
     }
     export class $RowButton {
+        static rowButtonMouseClicked(arg0: $RealmsObjectSelectionList<never>, arg1: $ObjectSelectionList$Entry<never>, arg2: $List_<$RowButton>, arg3: number, arg4: number, arg5: number): void;
         drawForRowAt(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
         static drawButtonsInRow(arg0: $GuiGraphics, arg1: $List_<$RowButton>, arg2: $RealmsObjectSelectionList<never>, arg3: number, arg4: number, arg5: number, arg6: number): void;
-        static rowButtonMouseClicked(arg0: $RealmsObjectSelectionList<never>, arg1: $ObjectSelectionList$Entry<never>, arg2: $List_<$RowButton>, arg3: number, arg4: number, arg5: number): void;
-        onClick(arg0: number): void;
         getRight(): number;
+        onClick(arg0: number): void;
         getBottom(): number;
         yOffset: number;
         xOffset: number;

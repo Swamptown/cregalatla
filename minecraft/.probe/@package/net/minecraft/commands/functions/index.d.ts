@@ -41,7 +41,7 @@ declare module "@package/net/minecraft/commands/functions" {
     /**
      * Values that may be interpreted as {@link $StringTemplate}.
      */
-    export type $StringTemplate_ = { segments?: $List_<string>, variables?: $List_<string>,  } | [segments?: $List_<string>, variables?: $List_<string>, ];
+    export type $StringTemplate_ = { variables?: $List_<string>, segments?: $List_<string>,  } | [variables?: $List_<string>, segments?: $List_<string>, ];
     export class $MacroFunction$PlainTextEntry<T> implements $MacroFunction$Entry<T> {
     }
     export class $FunctionBuilder<T extends $ExecutionCommandSource<T>> {
@@ -57,5 +57,5 @@ declare module "@package/net/minecraft/commands/functions" {
     /**
      * Values that may be interpreted as {@link $PlainTextFunction}.
      */
-    export type $PlainTextFunction_<T> = { entries?: $List_<$UnboundEntryAction_<any>>, id?: $ResourceLocation_,  } | [entries?: $List_<$UnboundEntryAction_<any>>, id?: $ResourceLocation_, ];
+    export type $PlainTextFunction_<T> = { id?: $ResourceLocation_, entries?: $List_<$UnboundEntryAction_<any>>,  } | [id?: $ResourceLocation_, entries?: $List_<$UnboundEntryAction_<any>>, ];
 }

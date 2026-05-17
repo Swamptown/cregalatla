@@ -26,14 +26,14 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/data" {
         getEntityType(): $EntityType<never>;
     }
     export class $BlockInfo implements $IPersistedSerializable, $IConfigurable {
-        getItemStackForm(arg0: $LevelReader, arg1: $BlockPos_): $ItemStack;
+        static fromBlockState(arg0: $BlockState_): $BlockInfo;
         getItemStackForm(): $ItemStack;
+        getItemStackForm(arg0: $LevelReader, arg1: $BlockPos_): $ItemStack;
         setHasBlockEntity(arg0: boolean): void;
         setPostCreate(arg0: $Consumer_<$BlockEntity>): void;
-        static fromBlockState(arg0: $BlockState_): $BlockInfo;
         postEntity(arg0: $BlockEntity): void;
-        static fromBlock(arg0: $Block_): $BlockInfo;
         setItemStack(arg0: $ItemStack_): void;
+        static fromBlock(arg0: $Block_): $BlockInfo;
         setTag(arg0: $CompoundTag_): void;
         getBlockState(): $BlockState;
         hasBlockEntity(): boolean;
@@ -71,5 +71,5 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/data" {
     /**
      * Values that may be interpreted as {@link $BlockPosFace}.
      */
-    export type $BlockPosFace_ = { pos?: $BlockPos_, facing?: $Direction_,  } | [pos?: $BlockPos_, facing?: $Direction_, ];
+    export type $BlockPosFace_ = { facing?: $Direction_, pos?: $BlockPos_,  } | [facing?: $Direction_, pos?: $BlockPos_, ];
 }

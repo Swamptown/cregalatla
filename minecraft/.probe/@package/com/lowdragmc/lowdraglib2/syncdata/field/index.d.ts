@@ -11,9 +11,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/syncdata/field" {
         createRef(arg0: $Object): $IRef<never>;
         isDestSync(): boolean;
         isPersist(): boolean;
-        isDrop(): boolean;
-        getRawField(): $Field;
         isReadOnlyManaged(): boolean;
+        getRawField(): $Field;
+        isDrop(): boolean;
         isLazy(): boolean;
         static getClazzType(arg0: $Type): $Class<never>;
         getClazzType(): $Class<never>;
@@ -28,9 +28,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/syncdata/field" {
         get fieldAccessor(): $IAccessor<never>;
         get destSync(): boolean;
         get persist(): boolean;
-        get drop(): boolean;
-        get rawField(): $Field;
         get readOnlyManaged(): boolean;
+        get rawField(): $Field;
+        get drop(): boolean;
         get lazy(): boolean;
         get onDirtyMethod(): $Method;
         get serializeMethod(): $Method;

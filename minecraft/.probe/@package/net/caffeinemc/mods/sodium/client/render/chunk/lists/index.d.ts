@@ -19,7 +19,7 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/lists" {
     export type $ChunkRenderListIterable_ = ((arg0: boolean) => $Iterator<$ChunkRenderList>);
     export class $SortedRenderLists implements $ChunkRenderListIterable, $SortedRenderListsAccessor {
         static empty(): $SortedRenderLists;
-        static init$veil_$md$8e2dbe$0(arg0: $ObjectArrayList<any>): $SortedRenderLists;
+        static init$veil_$md$d858b6$0(arg0: $ObjectArrayList<any>): $SortedRenderLists;
         iterator(): $Iterator<$ChunkRenderList>;
         iterator(arg0: boolean): $Iterator<$ChunkRenderList>;
     }
@@ -28,8 +28,8 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/lists" {
         reset(arg0: number): void;
         add(arg0: $RenderSection): void;
         getRegion(): $RenderRegion;
-        sortSections(arg0: $SectionPos, arg1: number[]): void;
         sectionsWithGeometryIterator(arg0: boolean): $ByteIterator;
+        sortSections(arg0: $SectionPos, arg1: number[]): void;
         getSectionsWithSpritesCount(): number;
         getSectionsWithEntitiesCount(): number;
         getSectionsWithGeometryCount(): number;

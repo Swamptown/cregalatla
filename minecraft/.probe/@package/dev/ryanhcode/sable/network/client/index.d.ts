@@ -19,10 +19,10 @@ declare module "@package/dev/ryanhcode/sable/network/client" {
         tick(arg0: number): void;
         receiveSnapshot(arg0: number, arg1: $Pose3dc): void;
         setFirstPoses(arg0: $Pose3dc, arg1: $Pose3dc): void;
+        getSampleAt(arg0: number, arg1: $Pose3d): void;
         getInterpolatedPose(): $Pose3dc;
         receiveStop(): void;
         splitFrom(arg0: $SubLevelSnapshotInterpolator, arg1: $Pose3dc): void;
-        getSampleAt(arg0: number, arg1: $Pose3d): void;
         buffer: $ObjectArrayList<$SubLevelSnapshotInterpolator$Snapshot>;
         constructor(arg0: $Pose3d);
         get interpolatedPose(): $Pose3dc;

@@ -7,7 +7,7 @@ import { $Minecraft, $User } from "@package/net/minecraft/client";
 import { $LevelStorageSource } from "@package/net/minecraft/world/level/storage";
 import { $List, $UUID_, $List_ } from "@package/java/util";
 import { $RealmsHttpException } from "@package/com/mojang/realmsclient/exception";
-import { $UploadInfo, $RealmsServer, $RealmsServerPlayerLists, $PendingInvitesList, $Subscription, $RealmsWorldOptions, $RealmsNews, $ServerActivityList, $RealmsServerAddress, $Ops, $RealmsServerList, $BackupList, $WorldTemplatePaginatedList, $RegionPingResult, $PingResult, $WorldDownload, $RealmsServer$WorldType_, $RealmsNotification } from "@package/com/mojang/realmsclient/dto";
+import { $UploadInfo, $RealmsServer, $RealmsServerPlayerLists, $RealmsWorldOptions, $Subscription, $PendingInvitesList, $RealmsNews, $ServerActivityList, $RealmsServerAddress, $Ops, $RealmsServerList, $BackupList, $WorldTemplatePaginatedList, $RegionPingResult, $PingResult, $WorldDownload, $RealmsServer$WorldType_, $RealmsNotification } from "@package/com/mojang/realmsclient/dto";
 import { $InputStreamEntity } from "@package/org/apache/http/entity";
 import { $Consumer_ } from "@package/java/util/function";
 import { $CountingOutputStream } from "@package/org/apache/commons/io/output";
@@ -34,8 +34,8 @@ declare module "@package/com/mojang/realmsclient/client" {
         isExtracting(): boolean;
         isFinished(): boolean;
         static findAvailableFolderName(arg0: string): string;
-        contentLength(arg0: string): number;
         download(arg0: $WorldDownload, arg1: string, arg2: $RealmsDownloadLatestWorldScreen$DownloadStatus, arg3: $LevelStorageSource): void;
+        contentLength(arg0: string): number;
         constructor();
         get error(): boolean;
         get extracting(): boolean;
@@ -54,7 +54,7 @@ declare module "@package/com/mojang/realmsclient/client" {
     /**
      * Values that may be interpreted as {@link $RealmsError$ErrorWithJsonPayload}.
      */
-    export type $RealmsError$ErrorWithJsonPayload_ = { message?: string, httpCode?: number, code?: number, reason?: string,  } | [message?: string, httpCode?: number, code?: number, reason?: string, ];
+    export type $RealmsError$ErrorWithJsonPayload_ = { reason?: string, code?: number, httpCode?: number, message?: string,  } | [reason?: string, code?: number, httpCode?: number, message?: string, ];
     export class $RealmsClient {
         update(arg0: number, arg1: string, arg2: string): void;
         join(arg0: number): $RealmsServerAddress;

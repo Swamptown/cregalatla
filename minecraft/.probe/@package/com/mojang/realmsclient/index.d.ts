@@ -42,7 +42,7 @@ declare module "@package/com/mojang/realmsclient" {
     /**
      * Values that may be interpreted as {@link $RealmsAvailability$Result}.
      */
-    export type $RealmsAvailability$Result_ = { exception?: $RealmsServiceException, type?: $RealmsAvailability$Type_,  } | [exception?: $RealmsServiceException, type?: $RealmsAvailability$Type_, ];
+    export type $RealmsAvailability$Result_ = { type?: $RealmsAvailability$Type_, exception?: $RealmsServiceException,  } | [type?: $RealmsAvailability$Type_, exception?: $RealmsServiceException, ];
     export class $RealmsMainScreen$RealmsCall<T> {
     }
     export interface $RealmsMainScreen$RealmsCall<T> {
@@ -165,10 +165,10 @@ declare module "@package/com/mojang/realmsclient" {
         static refreshPendingInvites(): void;
         static refreshServerList(): void;
         resetScreen(): void;
-        static getVersionComponent(arg0: string, arg1: boolean): $Component;
-        static getVersionComponent(arg0: string, arg1: number): $Component;
         static play(arg0: $RealmsServer, arg1: $Screen, arg2: boolean): void;
         static play(arg0: $RealmsServer, arg1: $Screen): void;
+        static getVersionComponent(arg0: string, arg1: boolean): $Component;
+        static getVersionComponent(arg0: string, arg1: number): $Component;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;

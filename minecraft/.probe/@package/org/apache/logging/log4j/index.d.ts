@@ -27,11 +27,11 @@ declare module "@package/org/apache/logging/log4j" {
         log(message: string, ...params: $Object[]): void;
         log(message: string): void;
         log(message: $CharSequence): void;
-        log(message: $Message): void;
-        log(messageSupplier: $Supplier_<$Message>): void;
         log(message: $Object): void;
-        logAndGet(messageSupplier: $Supplier_<$Message>): $Message;
+        log(messageSupplier: $Supplier_<$Message>): void;
+        log(message: $Message): void;
         withMarker(marker: $Marker): $LogBuilder;
+        logAndGet(messageSupplier: $Supplier_<$Message>): $Message;
         withThrowable(throwable: $Throwable): $LogBuilder;
         withLocation(): $LogBuilder;
         withLocation(location: $StackTraceElement): $LogBuilder;
@@ -476,11 +476,11 @@ declare module "@package/org/apache/logging/log4j" {
         remove(marker: $Marker): boolean;
         equals(obj: $Object): boolean;
         hashCode(): number;
-        isInstanceOf(m: $Marker): boolean;
         isInstanceOf(name: string): boolean;
-        getParents(): $Marker[];
+        isInstanceOf(m: $Marker): boolean;
         hasParents(): boolean;
         setParents(...markers: $Marker[]): $Marker;
+        getParents(): $Marker[];
         addParents(...markers: $Marker[]): $Marker;
         get name(): string;
     }

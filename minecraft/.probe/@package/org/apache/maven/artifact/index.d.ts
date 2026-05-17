@@ -37,6 +37,7 @@ declare module "@package/org/apache/maven/artifact" {
         getFile(): $File;
         setVersion(arg0: string): void;
         getVersion(): string;
+        setOptional(arg0: boolean): void;
         hasClassifier(): boolean;
         getBaseVersion(): string;
         setBaseVersion(arg0: string): void;
@@ -60,18 +61,17 @@ declare module "@package/org/apache/maven/artifact" {
         isRelease(): boolean;
         getAvailableVersions(): $List<$ArtifactVersion>;
         setAvailableVersions(arg0: $List_<$ArtifactVersion>): void;
-        setOptional(arg0: boolean): void;
         isSnapshot(): boolean;
         setScope(arg0: string): void;
         setGroupId(arg0: string): void;
         getRepository(): $ArtifactRepository;
         setFile(arg0: $File_): void;
-        getSelectedVersion(): $ArtifactVersion;
-        isSelectedVersionKnown(): boolean;
         getGroupId(): string;
         getArtifactId(): string;
         getClassifier(): string;
         getDependencyTrail(): $List<string>;
+        getSelectedVersion(): $ArtifactVersion;
+        isSelectedVersionKnown(): boolean;
         getVersionRange(): $VersionRange;
         isOptional(): boolean;
         get id(): string;
@@ -80,8 +80,8 @@ declare module "@package/org/apache/maven/artifact" {
         get metadataList(): $Collection<$ArtifactMetadata>;
         set resolvedVersion(value: string);
         get snapshot(): boolean;
+        get classifier(): string;
         get selectedVersion(): $ArtifactVersion;
         get selectedVersionKnown(): boolean;
-        get classifier(): string;
     }
 }

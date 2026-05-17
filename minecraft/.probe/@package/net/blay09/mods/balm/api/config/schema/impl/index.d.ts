@@ -10,12 +10,12 @@ declare module "@package/net/blay09/mods/balm/api/config/schema/impl" {
         defaults(): $LoadedConfig;
         property(arg0: string): $ConfigPropertyBuilder;
         category(arg0: string): $ConfigCategoryBuilder;
-        findRootProperty(arg0: string): $ConfiguredProperty<never>;
         addAndReturn<T extends $ConfiguredProperty<never>>(arg0: T): T;
         rootProperties(): $Collection<$ConfiguredProperty<never>>;
-        identifier(): $ResourceLocation;
+        findRootProperty(arg0: string): $ConfiguredProperty<never>;
         categories(): $Collection<$ConfigCategory>;
         findProperty(arg0: string, arg1: string): $ConfiguredProperty<never>;
+        identifier(): $ResourceLocation;
         constructor(arg0: $ResourceLocation_);
     }
     export class $ConfigCategoryImpl implements $ConfigCategoryBuilder, $ConfigCategory {
@@ -24,8 +24,8 @@ declare module "@package/net/blay09/mods/balm/api/config/schema/impl" {
         comment(): string;
         comment(arg0: string): $ConfigCategoryImpl;
         property(arg0: string): $ConfigPropertyBuilder;
-        parentSchema(): $BalmConfigSchema;
         via<T>(arg0: $Function_<$ConfigCategoryBuilder, T>): T;
+        parentSchema(): $BalmConfigSchema;
         addProperty<T extends $ConfiguredProperty<never>>(arg0: T): void;
         constructor(arg0: $ConfigSchemaImpl, arg1: string);
     }

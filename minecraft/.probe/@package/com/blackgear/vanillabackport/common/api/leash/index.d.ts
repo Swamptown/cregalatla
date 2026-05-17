@@ -16,7 +16,7 @@ declare module "@package/com/blackgear/vanillabackport/common/api/leash" {
     /**
      * Values that may be interpreted as {@link $LeashExtension$Wrench}.
      */
-    export type $LeashExtension$Wrench_ = { force?: $Vec3_, torque?: number,  } | [force?: $Vec3_, torque?: number, ];
+    export type $LeashExtension$Wrench_ = { torque?: number, force?: $Vec3_,  } | [torque?: number, force?: $Vec3_, ];
     export class $LeashDataExtension {
     }
     export interface $LeashDataExtension {
@@ -30,8 +30,8 @@ declare module "@package/com/blackgear/vanillabackport/common/api/leash" {
         static vb$getKnownMovement(entity: $Entity): $Vec3;
         static vb$createQuadLeashOffsets(entity: $Entity, forwardOffset: number, sideOffset: number, widthOffset: number, heightOffset: number): $Vec3[];
         static vb$leashableLeashedTo(entity: $Entity): $List<$Leashable>;
-        static vb$leashableInArea(entity: $Entity, filter: $Predicate_<$Leashable>): $List<$Leashable>;
         static vb$leashableInArea(level: $Level_, pos: $Vec3_, filter: $Predicate_<$Leashable>): $List<$Leashable>;
+        static vb$leashableInArea(entity: $Entity, filter: $Predicate_<$Leashable>): $List<$Leashable>;
         static vb$getPreciseBodyRotation(entity: $Entity, partialTicks: number): number;
         static QUAD_LEASH_OFFSETS: $Map<$Predicate<$Entity>, $Function<$Entity, $Vec3[]>>;
         static AXIS_SPECIFIC_ELASTICITY: $Vec3;

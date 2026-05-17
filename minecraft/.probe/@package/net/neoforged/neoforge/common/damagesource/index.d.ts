@@ -32,7 +32,6 @@ declare module "@package/net/neoforged/neoforge/common/damagesource" {
         getOriginalDamage(): number;
         getShieldDamage(): number;
         setPostAttackInvulnerabilityTicks(arg0: number): void;
-        getSource(): $DamageSource;
         getNewDamage(): number;
         setBlockedDamage(arg0: $LivingShieldBlockEvent): void;
         getBlockedDamage(): number;
@@ -40,6 +39,7 @@ declare module "@package/net/neoforged/neoforge/common/damagesource" {
         setReduction(arg0: $DamageContainer$Reduction_, arg1: number): void;
         getPostAttackInvulnerabilityTicks(): number;
         getReduction(arg0: $DamageContainer$Reduction_): number;
+        getSource(): $DamageSource;
         constructor(arg0: $DamageSource_, arg1: number);
         get originalDamage(): number;
         get shieldDamage(): number;

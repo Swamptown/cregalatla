@@ -74,17 +74,17 @@ declare module "@package/dev/latvian/mods/kubejs/codec" {
     export class $KubeJSCodecs {
         static filter<T>(result: $DataResult<T>, ifSuccess: $Predicate_<T>, orElse: boolean): boolean;
         static filter<T>(result: $DataResult<T>, ifSuccess: $Predicate_<T>): boolean;
-        static or<V>(first: $Codec<V>, second: $Codec<V>): $Codec<V>;
         static or<V>(codecs: $List_<$Codec<V>>): $Codec<V>;
-        static stringResolverCodec<E>(toStringFunction: $Function_<E, string>, fromStringFunction: $Function_<string, E>): $Codec<E>;
-        static fromJsonOrThrow<E>(json: $JsonElement_, codec: $Codec<E>): E;
+        static or<V>(first: $Codec<V>, second: $Codec<V>): $Codec<V>;
         static fromJsonOrThrow<E, X extends $Throwable>(json: $JsonElement_, codec: $Codec<E>, onError: $Function_<string, X>): E;
+        static fromJsonOrThrow<E>(json: $JsonElement_, codec: $Codec<E>): E;
         static toJsonOrThrow<E>(value: E, codec: $Codec<E>): $JsonElement;
         static toJsonOrThrow<E, X extends $Throwable>(value: E, codec: $Codec<E>, onError: $Function_<string, X>): $JsonElement;
         static listOfOrSelf<T>(listCodec: $Codec<$List_<T>>, codec: $Codec<T>): $Codec<$List<T>>;
         static listOfOrSelf<T>(codec: $Codec<T>): $Codec<$List<T>>;
         static numberProviderJson(gen: $NumberProvider_): $JsonElement;
         static longRangeWithMessage(min: number, max: number, errorMessage: $Function_<number, string>): $Codec<number>;
+        static stringResolverCodec<E>(toStringFunction: $Function_<E, string>, fromStringFunction: $Function_<string, E>): $Codec<E>;
         static byName<E extends $Enum<E>>(codec: $Codec<E>, s: string): E;
         static getUniqueId<T>(input: T, codec: $Codec<T>): string;
         static KUBEJS_ID: $Codec<$ResourceLocation>;

@@ -10,5 +10,5 @@ declare module "@package/com/faboslav/structurify/common/world/level/structure" 
     /**
      * Values that may be interpreted as {@link $StructureSectionClaim}.
      */
-    export type $StructureSectionClaim_ = { token?: number, structureId?: string, structureCenter?: number,  } | [token?: number, structureId?: string, structureCenter?: number, ];
+    export type $StructureSectionClaim_ = { structureCenter?: number, structureId?: string, token?: number,  } | [structureCenter?: number, structureId?: string, token?: number, ];
 }

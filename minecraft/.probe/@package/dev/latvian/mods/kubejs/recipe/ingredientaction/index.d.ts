@@ -58,7 +58,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/ingredientaction" {
     /**
      * Values that may be interpreted as {@link $IngredientActionType}.
      */
-    export type $IngredientActionType_<T> = { id?: $ResourceLocation_, codec?: $MapCodec_<$IngredientAction>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $IngredientAction>,  } | [id?: $ResourceLocation_, codec?: $MapCodec_<$IngredientAction>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $IngredientAction>, ];
+    export type $IngredientActionType_<T> = { streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $IngredientAction>, codec?: $MapCodec_<$IngredientAction>, id?: $ResourceLocation_,  } | [streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $IngredientAction>, codec?: $MapCodec_<$IngredientAction>, id?: $ResourceLocation_, ];
     export class $IngredientAction {
         static getRemaining(input: $CraftingInput, index: number, ingredientActions: $List_<$IngredientActionHolder_>): $ItemStack;
         static CODEC: $Codec<$IngredientAction>;
@@ -81,7 +81,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/ingredientaction" {
     /**
      * Values that may be interpreted as {@link $IngredientActionHolder}.
      */
-    export type $IngredientActionHolder_ = { filter?: $SlotFilter_, action?: $IngredientAction,  } | [filter?: $SlotFilter_, action?: $IngredientAction, ];
+    export type $IngredientActionHolder_ = { action?: $IngredientAction, filter?: $SlotFilter_,  } | [action?: $IngredientAction, filter?: $SlotFilter_, ];
     export class $KeepAction implements $IngredientAction {
         transform(old: $ItemStack_, index: number, input: $CraftingInput): $ItemStack;
         getType(): $IngredientActionType<never>;

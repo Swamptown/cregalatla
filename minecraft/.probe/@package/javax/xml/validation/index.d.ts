@@ -8,22 +8,22 @@ declare module "@package/javax/xml/validation" {
     export class $ValidatorHandler implements $ContentHandler {
         getProperty(arg0: string): $Object;
         setProperty(arg0: string, arg1: $Object): void;
+        getFeature(arg0: string): boolean;
+        setContentHandler(arg0: $ContentHandler): void;
         setResourceResolver(arg0: $LSResourceResolver_): void;
         getResourceResolver(): $LSResourceResolver;
         getTypeInfoProvider(): $TypeInfoProvider;
-        getFeature(arg0: string): boolean;
         setErrorHandler(arg0: $ErrorHandler): void;
         getErrorHandler(): $ErrorHandler;
-        setContentHandler(arg0: $ContentHandler): void;
-        getContentHandler(): $ContentHandler;
         setFeature(arg0: string, arg1: boolean): void;
+        getContentHandler(): $ContentHandler;
         declaration(arg0: string, arg1: string, arg2: string): void;
         get typeInfoProvider(): $TypeInfoProvider;
     }
     export class $TypeInfoProvider {
+        isIdAttribute(arg0: number): boolean;
         getElementTypeInfo(): $TypeInfo;
         getAttributeTypeInfo(arg0: number): $TypeInfo;
-        isIdAttribute(arg0: number): boolean;
         isSpecified(arg0: number): boolean;
         get elementTypeInfo(): $TypeInfo;
     }
@@ -34,12 +34,12 @@ declare module "@package/javax/xml/validation" {
     export class $Validator {
         reset(): void;
         getProperty(arg0: string): $Object;
-        validate(arg0: $Source): void;
         validate(arg0: $Source, arg1: $Result): void;
+        validate(arg0: $Source): void;
         setProperty(arg0: string, arg1: $Object): void;
+        getFeature(arg0: string): boolean;
         setResourceResolver(arg0: $LSResourceResolver_): void;
         getResourceResolver(): $LSResourceResolver;
-        getFeature(arg0: string): boolean;
         setErrorHandler(arg0: $ErrorHandler): void;
         getErrorHandler(): $ErrorHandler;
         setFeature(arg0: string, arg1: boolean): void;

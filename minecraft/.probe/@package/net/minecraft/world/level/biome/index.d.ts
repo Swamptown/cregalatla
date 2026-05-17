@@ -33,17 +33,17 @@ import { $ModifiableBiomeInfo } from "@package/net/neoforged/neoforge/common/wor
 
 declare module "@package/net/minecraft/world/level/biome" {
     export class $AmbientMoodSettings {
+        getSoundEvent(): $Holder<$SoundEvent>;
         getTickDelay(): number;
         getBlockSearchExtent(): number;
         getSoundPositionOffset(): number;
-        getSoundEvent(): $Holder<$SoundEvent>;
         static CODEC: $Codec<$AmbientMoodSettings>;
         static LEGACY_CAVE_SETTINGS: $AmbientMoodSettings;
         constructor(arg0: $Holder_<$SoundEvent>, arg1: number, arg2: number, arg3: number);
+        get soundEvent(): $Holder<$SoundEvent>;
         get tickDelay(): number;
         get blockSearchExtent(): number;
         get soundPositionOffset(): number;
-        get soundEvent(): $Holder<$SoundEvent>;
     }
     export interface $Biome extends RegistryMarked<RegistryTypes.WorldgenBiomeTag, RegistryTypes.WorldgenBiome> {}
     export class $Biome$Precipitation extends $Enum<$Biome$Precipitation> implements $StringRepresentable {
@@ -123,7 +123,7 @@ declare module "@package/net/minecraft/world/level/biome" {
     /**
      * Values that may be interpreted as {@link $FeatureSorter$1FeatureData}.
      */
-    export type $FeatureSorter$1FeatureData_ = { step?: number, feature?: $PlacedFeature_, featureIndex?: number,  } | [step?: number, feature?: $PlacedFeature_, featureIndex?: number, ];
+    export type $FeatureSorter$1FeatureData_ = { featureIndex?: number, feature?: $PlacedFeature_, step?: number,  } | [featureIndex?: number, feature?: $PlacedFeature_, step?: number, ];
     export class $Climate$SpawnFinder {
     }
     export class $Biome$TemperatureModifier extends $Enum<$Biome$TemperatureModifier> implements $StringRepresentable {
@@ -145,11 +145,10 @@ declare module "@package/net/minecraft/world/level/biome" {
     export type $Biome$TemperatureModifier_ = "none" | "frozen";
     export class $BiomeSpecialEffects$Builder {
         build(): $BiomeSpecialEffects;
+        ambientParticle(arg0: $AmbientParticleSettings): $BiomeSpecialEffects$Builder;
         ambientLoopSound(arg0: $Holder_<$SoundEvent>): $BiomeSpecialEffects$Builder;
         ambientMoodSound(arg0: $AmbientMoodSettings): $BiomeSpecialEffects$Builder;
         ambientAdditionsSound(arg0: $AmbientAdditionsSettings): $BiomeSpecialEffects$Builder;
-        ambientParticle(arg0: $AmbientParticleSettings): $BiomeSpecialEffects$Builder;
-        fogColor(arg0: number): $BiomeSpecialEffects$Builder;
         waterColor(arg0: number): $BiomeSpecialEffects$Builder;
         waterFogColor(arg0: number): $BiomeSpecialEffects$Builder;
         skyColor(arg0: number): $BiomeSpecialEffects$Builder;
@@ -157,6 +156,7 @@ declare module "@package/net/minecraft/world/level/biome" {
         grassColorOverride(arg0: number): $BiomeSpecialEffects$Builder;
         grassColorModifier(arg0: $BiomeSpecialEffects$GrassColorModifier_): $BiomeSpecialEffects$Builder;
         backgroundMusic(arg0: $Music): $BiomeSpecialEffects$Builder;
+        fogColor(arg0: number): $BiomeSpecialEffects$Builder;
         ambientLoopSoundEvent: ($Holder<$SoundEvent>) | undefined;
         ambientAdditionsSettings: ($AmbientAdditionsSettings) | undefined;
         ambientMoodSettings: ($AmbientMoodSettings) | undefined;
@@ -172,16 +172,16 @@ declare module "@package/net/minecraft/world/level/biome" {
         depth(): number;
         toParameterArray(): number[];
         temperature(): number;
+        humidity(): number;
         continentalness(): number;
         erosion(): number;
         weirdness(): number;
-        humidity(): number;
         constructor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number);
     }
     /**
      * Values that may be interpreted as {@link $Climate$TargetPoint}.
      */
-    export type $Climate$TargetPoint_ = { humidity?: number, depth?: number, continentalness?: number, weirdness?: number, erosion?: number, temperature?: number,  } | [humidity?: number, depth?: number, continentalness?: number, weirdness?: number, erosion?: number, temperature?: number, ];
+    export type $Climate$TargetPoint_ = { temperature?: number, erosion?: number, weirdness?: number, continentalness?: number, depth?: number, humidity?: number,  } | [temperature?: number, erosion?: number, weirdness?: number, continentalness?: number, depth?: number, humidity?: number, ];
     export class $Biome$BiomeBuilder {
         build(): $Biome;
         temperature(arg0: number): $Biome$BiomeBuilder;
@@ -226,9 +226,9 @@ declare module "@package/net/minecraft/world/level/biome" {
     }
     export class $MobSpawnSettings$Builder {
         build(): $MobSpawnSettings;
+        creatureGenerationProbability(arg0: number): $MobSpawnSettings$Builder;
         addSpawn(arg0: $MobCategory_, arg1: $MobSpawnSettings$SpawnerData): $MobSpawnSettings$Builder;
         addMobCharge(arg0: $EntityType_<never>, arg1: number, arg2: number): $MobSpawnSettings$Builder;
-        creatureGenerationProbability(arg0: number): $MobSpawnSettings$Builder;
         mobSpawnCosts: $Map<$EntityType<never>, $MobSpawnSettings$MobSpawnCost>;
         spawners: $Map<$MobCategory, $List<$MobSpawnSettings$SpawnerData>>;
         constructor();
@@ -244,9 +244,9 @@ declare module "@package/net/minecraft/world/level/biome" {
     export class $BiomeGenerationSettings {
         hasFeature(arg0: $PlacedFeature_): boolean;
         features(): $List<$HolderSet<$PlacedFeature>>;
+        getFlowerFeatures(): $List<$ConfiguredFeature<never, never>>;
         getCarvers(arg0: $GenerationStep$Carving_): $Iterable<$Holder<$ConfiguredWorldCarver<never>>>;
         getCarvingStages(): $Set<$GenerationStep$Carving>;
-        getFlowerFeatures(): $List<$ConfiguredFeature<never, never>>;
         static CODEC: $MapCodec<$BiomeGenerationSettings>;
         carvers: $Map<$GenerationStep$Carving, $HolderSet<$ConfiguredWorldCarver<never>>>;
         featureSet: $Supplier<$Set<$PlacedFeature>>;
@@ -274,8 +274,8 @@ declare module "@package/net/minecraft/world/level/biome" {
         constructor(arg0: $EntityType_<never>, arg1: $Weight, arg2: number, arg3: number);
     }
     export class $MobSpawnSettings$MobSpawnCost extends $Record {
-        energyBudget(): number;
         charge(): number;
+        energyBudget(): number;
         static CODEC: $Codec<$MobSpawnSettings$MobSpawnCost>;
         constructor(energyBudget: number, charge: number);
     }
@@ -288,8 +288,8 @@ declare module "@package/net/minecraft/world/level/biome" {
         static empty(): $Climate$Sampler;
         static parameters(arg0: $Climate$Parameter_, arg1: $Climate$Parameter_, arg2: $Climate$Parameter_, arg3: $Climate$Parameter_, arg4: $Climate$Parameter_, arg5: $Climate$Parameter_, arg6: number): $Climate$ParameterPoint;
         static parameters(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): $Climate$ParameterPoint;
-        static findSpawnPosition(arg0: $List_<$Climate$ParameterPoint_>, arg1: $Climate$Sampler_): $BlockPos;
         static quantizeCoord(arg0: number): number;
+        static findSpawnPosition(arg0: $List_<$Climate$ParameterPoint_>, arg1: $Climate$Sampler_): $BlockPos;
         static unquantizeCoord(arg0: number): number;
         static PARAMETER_COUNT: number;
         constructor();
@@ -310,14 +310,11 @@ declare module "@package/net/minecraft/world/level/biome" {
     export class $TheEndBiomeSource extends $BiomeSource implements $IExtendedTheEndBiomeSource {
         static create(arg0: $HolderGetter<$Biome_>): $TheEndBiomeSource;
         initializeForTerraBlender(arg0: $RegistryAccess, arg1: number): void;
-        handler$eme000$terrablender$onCollectPossibleBiomes(arg0: $CallbackInfoReturnable<any>): void;
-        handler$eme000$terrablender$onGetNoiseBiome(arg0: number, arg1: number, arg2: number, arg3: $Climate$Sampler_, arg4: $CallbackInfoReturnable<any>): void;
+        handler$ckj000$terrablender$onCollectPossibleBiomes(arg0: $CallbackInfoReturnable<any>): void;
+        handler$ckj000$terrablender$onGetNoiseBiome(arg0: number, arg1: number, arg2: number, arg3: $Climate$Sampler_, arg4: $CallbackInfoReturnable<any>): void;
         static CODEC: $MapCodec<$TheEndBiomeSource>;
     }
     export class $BiomeSpecialEffects {
-        getGrassColorOverride(): (number) | undefined;
-        getFoliageColorOverride(): (number) | undefined;
-        getGrassColorModifier(): $BiomeSpecialEffects$GrassColorModifier;
         getSkyColor(): number;
         getFogColor(): number;
         getWaterColor(): number;
@@ -326,6 +323,9 @@ declare module "@package/net/minecraft/world/level/biome" {
         getAmbientLoopSoundEvent(): ($Holder<$SoundEvent>) | undefined;
         getAmbientMoodSettings(): ($AmbientMoodSettings) | undefined;
         getAmbientAdditionsSettings(): ($AmbientAdditionsSettings) | undefined;
+        getGrassColorOverride(): (number) | undefined;
+        getFoliageColorOverride(): (number) | undefined;
+        getGrassColorModifier(): $BiomeSpecialEffects$GrassColorModifier;
         getBackgroundMusic(): ($Music) | undefined;
         skyColor: number;
         static CODEC: $Codec<$BiomeSpecialEffects>;
@@ -357,7 +357,7 @@ declare module "@package/net/minecraft/world/level/biome" {
     /**
      * Values that may be interpreted as {@link $Climate$Parameter}.
      */
-    export type $Climate$Parameter_ = { max?: number, min?: number,  } | [max?: number, min?: number, ];
+    export type $Climate$Parameter_ = { min?: number, max?: number,  } | [min?: number, max?: number, ];
     export class $Climate$ParameterList<T> implements $IExtendedParameterList<any> {
         values(): $List<$Pair<$Climate$ParameterPoint, $Object>>;
         getTree(arg0: number): $Climate$RTree<any>;
@@ -389,13 +389,15 @@ declare module "@package/net/minecraft/world/level/biome" {
     /**
      * Values that may be interpreted as {@link $Biome$ClimateSettings}.
      */
-    export type $Biome$ClimateSettings_ = { hasPrecipitation?: boolean, downfall?: number, temperature?: number, temperatureModifier?: $Biome$TemperatureModifier_,  } | [hasPrecipitation?: boolean, downfall?: number, temperature?: number, temperatureModifier?: $Biome$TemperatureModifier_, ];
+    export type $Biome$ClimateSettings_ = { temperatureModifier?: $Biome$TemperatureModifier_, temperature?: number, downfall?: number, hasPrecipitation?: boolean,  } | [temperatureModifier?: $Biome$TemperatureModifier_, temperature?: number, downfall?: number, hasPrecipitation?: boolean, ];
     export class $FixedBiomeSource extends $BiomeSource implements $BiomeManager$NoiseBiomeSource {
         getNoiseBiome(arg0: number, arg1: number, arg2: number): $Holder<$Biome>;
         static CODEC: $MapCodec<$FixedBiomeSource>;
         constructor(arg0: $Holder_<$Biome>);
     }
     export class $OverworldBiomeBuilder {
+        pickBadlandsBiome(arg0: number, arg1: $Climate$Parameter_): $ResourceKey<$Biome>;
+        static isDeepDarkRegion(arg0: $DensityFunction_, arg1: $DensityFunction_, arg2: $DensityFunction$FunctionContext): boolean;
         addDebugBiomes(arg0: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>): void;
         addOffCoastBiomes(arg0: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>): void;
         addInlandBiomes(arg0: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>): void;
@@ -415,8 +417,6 @@ declare module "@package/net/minecraft/world/level/biome" {
         pickSlopeBiome(arg0: number, arg1: number, arg2: $Climate$Parameter_): $ResourceKey<$Biome>;
         pickBeachBiome(arg0: number, arg1: number): $ResourceKey<$Biome>;
         pickShatteredCoastBiome(arg0: number, arg1: number, arg2: $Climate$Parameter_): $ResourceKey<$Biome>;
-        pickBadlandsBiome(arg0: number, arg1: $Climate$Parameter_): $ResourceKey<$Biome>;
-        static isDeepDarkRegion(arg0: $DensityFunction_, arg1: $DensityFunction_, arg2: $DensityFunction$FunctionContext): boolean;
         static getDebugStringForNoiseValue(arg0: number, arg1: $Climate$Parameter_[]): string;
         getTemperatureThresholds(): $Climate$Parameter[];
         getHumidityThresholds(): $Climate$Parameter[];
@@ -424,16 +424,16 @@ declare module "@package/net/minecraft/world/level/biome" {
         getContinentalnessThresholds(): $Climate$Parameter[];
         getPeaksAndValleysThresholds(): $Climate$Parameter[];
         getWeirdnessThresholds(): $Climate$Parameter[];
-        addBiomes(arg0: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>): void;
         spawnTarget(): $List<$Climate$ParameterPoint>;
+        addBiomes(arg0: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>): void;
         static getDebugStringForPeaksAndValleys(arg0: number): string;
         getDebugStringForContinentalness(arg0: number): string;
         getDebugStringForErosion(arg0: number): string;
         getDebugStringForTemperature(arg0: number): string;
         getDebugStringForHumidity(arg0: number): string;
+        addSurfaceBiome(arg0: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>, arg1: $Climate$Parameter_, arg2: $Climate$Parameter_, arg3: $Climate$Parameter_, arg4: $Climate$Parameter_, arg5: $Climate$Parameter_, arg6: number, arg7: $ResourceKey_<$Biome>): void;
         addUndergroundBiome(arg0: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>, arg1: $Climate$Parameter_, arg2: $Climate$Parameter_, arg3: $Climate$Parameter_, arg4: $Climate$Parameter_, arg5: $Climate$Parameter_, arg6: number, arg7: $ResourceKey_<$Biome>): void;
         addBottomBiome(arg0: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>, arg1: $Climate$Parameter_, arg2: $Climate$Parameter_, arg3: $Climate$Parameter_, arg4: $Climate$Parameter_, arg5: $Climate$Parameter_, arg6: number, arg7: $ResourceKey_<$Biome>): void;
-        addSurfaceBiome(arg0: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>, arg1: $Climate$Parameter_, arg2: $Climate$Parameter_, arg3: $Climate$Parameter_, arg4: $Climate$Parameter_, arg5: $Climate$Parameter_, arg6: number, arg7: $ResourceKey_<$Biome>): void;
         nearInlandContinentalness: $Climate$Parameter;
         static PEAK_SIZE: number;
         static FAR_INLAND_START: number;
@@ -492,16 +492,17 @@ declare module "@package/net/minecraft/world/level/biome" {
      */
     export type $MultiNoiseBiomeSourceParameterList$Preset_ = { id?: $ResourceLocation_, provider?: $MultiNoiseBiomeSourceParameterList$Preset$SourceProvider_,  } | [id?: $ResourceLocation_, provider?: $MultiNoiseBiomeSourceParameterList$Preset$SourceProvider_, ];
     export class $Biome implements $BiomeAccessor {
+        shouldFreeze(arg0: $LevelReader, arg1: $BlockPos_, arg2: boolean): boolean;
+        shouldFreeze(arg0: $LevelReader, arg1: $BlockPos_): boolean;
+        shouldSnow(arg0: $LevelReader, arg1: $BlockPos_): boolean;
         getGenerationSettings(): $BiomeGenerationSettings;
-        getGrassColor(arg0: number, arg1: number): number;
-        getFoliageColor(): number;
         modifiableBiomeInfo(): $ModifiableBiomeInfo;
         getSkyColor(): number;
         getMobSettings(): $MobSpawnSettings;
         hasPrecipitation(): boolean;
         coldEnoughToSnow(arg0: $BlockPos_): boolean;
         getBaseTemperature(): number;
-        wrapMethod$fkb000$sable$preventFreezing(arg0: $LevelReader, arg1: $BlockPos_, arg2: boolean, arg3: $Operation_<any>): boolean;
+        wrapMethod$fik000$sable$preventFreezing(arg0: $LevelReader, arg1: $BlockPos_, arg2: boolean, arg3: $Operation_<any>): boolean;
         warmEnoughToRain(arg0: $BlockPos_): boolean;
         shouldMeltFrozenOceanIcebergSlightly(arg0: $BlockPos_): boolean;
         getFogColor(): number;
@@ -512,9 +513,8 @@ declare module "@package/net/minecraft/world/level/biome" {
         getAmbientLoop(): ($Holder<$SoundEvent>) | undefined;
         getAmbientMood(): ($AmbientMoodSettings) | undefined;
         getAmbientAdditions(): ($AmbientAdditionsSettings) | undefined;
-        shouldFreeze(arg0: $LevelReader, arg1: $BlockPos_): boolean;
-        shouldFreeze(arg0: $LevelReader, arg1: $BlockPos_, arg2: boolean): boolean;
-        shouldSnow(arg0: $LevelReader, arg1: $BlockPos_): boolean;
+        getGrassColor(arg0: number, arg1: number): number;
+        getFoliageColor(): number;
         getModifiedClimateSettings(): $Biome$ClimateSettings;
         getModifiedSpecialEffects(): $BiomeSpecialEffects;
         getBackgroundMusic(): ($Music) | undefined;
@@ -532,7 +532,6 @@ declare module "@package/net/minecraft/world/level/biome" {
         static LIST_CODEC: $Codec<$HolderSet<$Biome>>;
         generationSettings: $BiomeGenerationSettings;
         constructor(arg0: $Biome$ClimateSettings_, arg1: $BiomeSpecialEffects, arg2: $BiomeGenerationSettings, arg3: $MobSpawnSettings);
-        get foliageColor(): number;
         get skyColor(): number;
         get baseTemperature(): number;
         get fogColor(): number;
@@ -543,6 +542,7 @@ declare module "@package/net/minecraft/world/level/biome" {
         get ambientLoop(): ($Holder<$SoundEvent>) | undefined;
         get ambientMood(): ($AmbientMoodSettings) | undefined;
         get ambientAdditions(): ($AmbientAdditionsSettings) | undefined;
+        get foliageColor(): number;
         get modifiedClimateSettings(): $Biome$ClimateSettings;
         get modifiedSpecialEffects(): $BiomeSpecialEffects;
         get backgroundMusic(): ($Music) | undefined;
@@ -587,19 +587,19 @@ declare module "@package/net/minecraft/world/level/biome" {
         fabric_setSeed(arg0: number): void;
         fabric_getSeed(): number;
         temperature(): $DensityFunction;
-        findSpawnPosition(): $BlockPos;
+        humidity(): $DensityFunction;
         spawnTarget(): $List<$Climate$ParameterPoint>;
+        findSpawnPosition(): $BlockPos;
         continentalness(): $DensityFunction;
         erosion(): $DensityFunction;
         weirdness(): $DensityFunction;
-        humidity(): $DensityFunction;
         sample(arg0: number, arg1: number, arg2: number): $Climate$TargetPoint;
         constructor(arg0: $DensityFunction_, arg1: $DensityFunction_, arg2: $DensityFunction_, arg3: $DensityFunction_, arg4: $DensityFunction_, arg5: $DensityFunction_, arg6: $List_<$Climate$ParameterPoint_>);
     }
     /**
      * Values that may be interpreted as {@link $Climate$Sampler}.
      */
-    export type $Climate$Sampler_ = { weirdness?: $DensityFunction_, erosion?: $DensityFunction_, temperature?: $DensityFunction_, depth?: $DensityFunction_, spawnTarget?: $List_<$Climate$ParameterPoint_>, humidity?: $DensityFunction_, continentalness?: $DensityFunction_,  } | [weirdness?: $DensityFunction_, erosion?: $DensityFunction_, temperature?: $DensityFunction_, depth?: $DensityFunction_, spawnTarget?: $List_<$Climate$ParameterPoint_>, humidity?: $DensityFunction_, continentalness?: $DensityFunction_, ];
+    export type $Climate$Sampler_ = { continentalness?: $DensityFunction_, humidity?: $DensityFunction_, spawnTarget?: $List_<$Climate$ParameterPoint_>, depth?: $DensityFunction_, temperature?: $DensityFunction_, erosion?: $DensityFunction_, weirdness?: $DensityFunction_,  } | [continentalness?: $DensityFunction_, humidity?: $DensityFunction_, spawnTarget?: $List_<$Climate$ParameterPoint_>, depth?: $DensityFunction_, temperature?: $DensityFunction_, erosion?: $DensityFunction_, weirdness?: $DensityFunction_, ];
     export class $Climate$SpawnFinder$Result extends $Record {
     }
     /**
@@ -607,30 +607,30 @@ declare module "@package/net/minecraft/world/level/biome" {
      */
     export type $Climate$SpawnFinder$Result_ = { fitness?: number, location?: $BlockPos_,  } | [fitness?: number, location?: $BlockPos_, ];
     export class $AmbientAdditionsSettings {
-        getTickChance(): number;
         getSoundEvent(): $Holder<$SoundEvent>;
+        getTickChance(): number;
         static CODEC: $Codec<$AmbientAdditionsSettings>;
         constructor(arg0: $Holder_<$SoundEvent>, arg1: number);
-        get tickChance(): number;
         get soundEvent(): $Holder<$SoundEvent>;
+        get tickChance(): number;
     }
     export class $Climate$ParameterPoint extends $Record {
         offset(): number;
         depth(): $Climate$Parameter;
         temperature(): $Climate$Parameter;
-        parameterSpace(): $List<$Climate$Parameter>;
+        humidity(): $Climate$Parameter;
         fitness(arg0: $Climate$TargetPoint_): number;
+        parameterSpace(): $List<$Climate$Parameter>;
         continentalness(): $Climate$Parameter;
         erosion(): $Climate$Parameter;
         weirdness(): $Climate$Parameter;
-        humidity(): $Climate$Parameter;
         static CODEC: $Codec<$Climate$ParameterPoint>;
         constructor(arg0: $Climate$Parameter_, arg1: $Climate$Parameter_, arg2: $Climate$Parameter_, arg3: $Climate$Parameter_, arg4: $Climate$Parameter_, arg5: $Climate$Parameter_, arg6: number);
     }
     /**
      * Values that may be interpreted as {@link $Climate$ParameterPoint}.
      */
-    export type $Climate$ParameterPoint_ = { offset?: number, weirdness?: $Climate$Parameter_, erosion?: $Climate$Parameter_, temperature?: $Climate$Parameter_, depth?: $Climate$Parameter_, humidity?: $Climate$Parameter_, continentalness?: $Climate$Parameter_,  } | [offset?: number, weirdness?: $Climate$Parameter_, erosion?: $Climate$Parameter_, temperature?: $Climate$Parameter_, depth?: $Climate$Parameter_, humidity?: $Climate$Parameter_, continentalness?: $Climate$Parameter_, ];
+    export type $Climate$ParameterPoint_ = { continentalness?: $Climate$Parameter_, humidity?: $Climate$Parameter_, depth?: $Climate$Parameter_, temperature?: $Climate$Parameter_, erosion?: $Climate$Parameter_, weirdness?: $Climate$Parameter_, offset?: number,  } | [continentalness?: $Climate$Parameter_, humidity?: $Climate$Parameter_, depth?: $Climate$Parameter_, temperature?: $Climate$Parameter_, erosion?: $Climate$Parameter_, weirdness?: $Climate$Parameter_, offset?: number, ];
     export class $FeatureSorter$StepFeatureData extends $Record {
         features(): $List<$PlacedFeature>;
         indexMapping(): $ToIntFunction<$PlacedFeature>;
@@ -715,9 +715,9 @@ declare module "@package/net/minecraft/world/level/biome" {
     export class $MultiNoiseBiomeSource extends $BiomeSource implements $IExtendedMultiNoiseBiomeSource, $MultiNoiseBiomeSourceAccess {
         clone(): $MultiNoiseBiomeSource;
         parameters(): $Climate$ParameterList<$Holder<$Biome>>;
+        handler$ckf000$terrablender$getNoiseBiome(arg0: number, arg1: number, arg2: number, arg3: $Climate$Sampler_, arg4: $CallbackInfoReturnable<any>): void;
         static createFromPreset(arg0: $Holder_<$MultiNoiseBiomeSourceParameterList>): $MultiNoiseBiomeSource;
-        handler$ema000$terrablender$getNoiseBiome(arg0: number, arg1: number, arg2: number, arg3: $Climate$Sampler_, arg4: $CallbackInfoReturnable<any>): void;
-        handler$ema000$terrablender$addDebugInfo(arg0: $List_<any>, arg1: $BlockPos_, arg2: $Climate$Sampler_, arg3: $CallbackInfo): void;
+        handler$ckf000$terrablender$addDebugInfo(arg0: $List_<any>, arg1: $BlockPos_, arg2: $Climate$Sampler_, arg3: $CallbackInfo): void;
         stable(arg0: $ResourceKey_<$MultiNoiseBiomeSourceParameterList>): boolean;
         static createFromList(arg0: $Climate$ParameterList<$Holder_<$Biome>>): $MultiNoiseBiomeSource;
         getNoiseBiome(arg0: $Climate$TargetPoint_): $Holder<$Biome>;
@@ -728,6 +728,7 @@ declare module "@package/net/minecraft/world/level/biome" {
     }
     export class $BiomeSource implements $BiomeResolver, $IExtendedBiomeSource {
         findClosestBiome3d(arg0: $BlockPos_, arg1: number, arg2: number, arg3: number, arg4: $Predicate_<$Holder<$Biome>>, arg5: $Climate$Sampler_, arg6: $LevelReader): $Pair<$BlockPos, $Holder<$Biome>>;
+        getBiomesWithin(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Climate$Sampler_): $Set<$Holder<$Biome>>;
         collectPossibleBiomes(): $Stream<$Holder<$Biome>>;
         findBiomeHorizontal(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $Predicate_<$Holder<$Biome>>, arg6: $RandomSource, arg7: boolean, arg8: $Climate$Sampler_): $Pair<$BlockPos, $Holder<$Biome>>;
         findBiomeHorizontal(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Predicate_<$Holder<$Biome>>, arg5: $RandomSource, arg6: $Climate$Sampler_): $Pair<$BlockPos, $Holder<$Biome>>;
@@ -735,7 +736,6 @@ declare module "@package/net/minecraft/world/level/biome" {
         addDebugInfo(arg0: $List_<string>, arg1: $BlockPos_, arg2: $Climate$Sampler_): void;
         appendDeferredBiomesList(arg0: $List_<any>): void;
         fabric_modifyBiomeSet(arg0: $Set_<any>): $Set<any>;
-        getBiomesWithin(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Climate$Sampler_): $Set<$Holder<$Biome>>;
         codec(): $MapCodec<$BiomeSource>;
         getNoiseBiome(arg0: number, arg1: number, arg2: number, arg3: $Climate$Sampler_): $Holder<$Biome>;
         static CODEC: $Codec<$BiomeSource>;

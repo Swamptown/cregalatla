@@ -7,9 +7,9 @@ declare module "@package/javassist/bytecode" {
     export class $ExceptionsAttribute extends $AttributeInfo {
         getException(arg0: number): number;
         tableLength(): number;
+        setExceptions(arg0: string[]): void;
         getExceptionIndexes(): number[];
         setExceptionIndexes(arg0: number[]): void;
-        setExceptions(arg0: string[]): void;
         getExceptions(): string[];
         static tag: string;
         constructor(arg0: $ConstPool);
@@ -61,10 +61,10 @@ declare module "@package/javassist/bytecode" {
         setMinorVersion(arg0: number): void;
         setVersionToJava5(): void;
         addField(arg0: $FieldInfo): void;
-        removeAttribute(arg0: string): $AttributeInfo;
         prune(): void;
         addInterface(arg0: string): void;
         getSourceFile(): string;
+        removeAttribute(arg0: string): $AttributeInfo;
         static JAVA_3: number;
         static JAVA_4: number;
         static JAVA_1: number;
@@ -101,12 +101,12 @@ declare module "@package/javassist/bytecode" {
         getClassName(): string;
         getClassInfo(arg0: number): string;
         getPackageInfo(arg0: number): string;
-        renameClass(arg0: string, arg1: string): void;
-        renameClass(arg0: $Map_<string, string>): void;
-        getThisClassInfo(): number;
-        addClassInfo(arg0: $CtClass): number;
-        addClassInfo(arg0: string): number;
         addUtf8Info(arg0: string): number;
+        renameClass(arg0: $Map_<string, string>): void;
+        renameClass(arg0: string, arg1: string): void;
+        getThisClassInfo(): number;
+        addClassInfo(arg0: string): number;
+        addClassInfo(arg0: $CtClass): number;
         getUtf8Info(arg0: number): string;
         getStringInfo(arg0: number): string;
         getFloatInfo(arg0: number): number;
@@ -227,21 +227,21 @@ declare module "@package/javassist/bytecode" {
         setAttribute(arg0: $StackMap): void;
         setAttribute(arg0: $StackMapTable): void;
         getAttribute(arg0: string): $AttributeInfo;
-        getExceptionTable(): $ExceptionTable;
         getCodeLength(): number;
         insertLocalVar(arg0: number, arg1: number): void;
+        getExceptionTable(): $ExceptionTable;
         setMaxLocals(arg0: number): void;
         setMaxStack(arg0: number): void;
         getCode(): number[];
+        computeMaxStack(): number;
         getMaxStack(): number;
         getMaxLocals(): number;
-        computeMaxStack(): number;
         static tag: string;
         constructor(arg0: $ConstPool, arg1: number, arg2: number, arg3: number[], arg4: $ExceptionTable);
         get declaringClass(): string;
         get attributes(): $List<$AttributeInfo>;
-        get exceptionTable(): $ExceptionTable;
         get codeLength(): number;
+        get exceptionTable(): $ExceptionTable;
         get code(): number[];
     }
     export class $MethodInfo {

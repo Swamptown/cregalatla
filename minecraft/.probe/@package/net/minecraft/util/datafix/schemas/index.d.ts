@@ -115,8 +115,8 @@ declare module "@package/net/minecraft/util/datafix/schemas" {
         constructor(arg0: number, arg1: $Schema);
     }
     export class $V1460 extends $NamespacedSchema {
-        static registerInventory(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
         static registerMob(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
+        static registerInventory(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
         static NAMESPACED_STRING_CODEC: $PrimitiveCodec<string>;
         constructor(arg0: number, arg1: $Schema);
     }
@@ -192,8 +192,8 @@ declare module "@package/net/minecraft/util/datafix/schemas" {
         constructor(arg0: number, arg1: $Schema);
     }
     export class $V705 extends $NamespacedSchema {
-        static registerThrowableProjectile(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
         static registerMob(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
+        static registerThrowableProjectile(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
         static ITEM_TO_ENTITY: $Map<string, string>;
         static ADD_NAMES: $Hook$HookFunction;
         static NAMESPACED_STRING_CODEC: $PrimitiveCodec<string>;
@@ -334,12 +334,12 @@ declare module "@package/net/minecraft/util/datafix/schemas" {
         static NAMESPACED_STRING_CODEC: $PrimitiveCodec<string>;
         constructor(arg0: number, arg1: $Schema);
     }
+    export class $V1022 extends $Schema {
+        constructor(arg0: number, arg1: $Schema);
+    }
     export class $V3685 extends $NamespacedSchema {
         static abstractArrow(arg0: $Schema): $TypeTemplate;
         static NAMESPACED_STRING_CODEC: $PrimitiveCodec<string>;
-        constructor(arg0: number, arg1: $Schema);
-    }
-    export class $V1022 extends $Schema {
         constructor(arg0: number, arg1: $Schema);
     }
     export class $V3689 extends $NamespacedSchema {
@@ -348,11 +348,11 @@ declare module "@package/net/minecraft/util/datafix/schemas" {
     }
     export class $V99 extends $Schema {
         static equipment(arg0: $Schema): $TypeTemplate;
+        static registerMob(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
         static registerThrowableProjectile(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
         static registerMinecart(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
         static registerInventory(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
         static addNames<T>(arg0: $Dynamic<T>, arg1: $Map_<string, string>, arg2: $Map_<string, string>): T;
-        static registerMob(arg0: $Schema, arg1: $Map_<string, $Supplier_<$TypeTemplate>>, arg2: string): void;
         static ITEM_TO_ENTITY: $Map<string, string>;
         static ADD_NAMES: $Hook$HookFunction;
         static ITEM_TO_BLOCKENTITY: $Map<string, string>;

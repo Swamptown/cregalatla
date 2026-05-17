@@ -12,7 +12,7 @@ declare module "@package/com/mojang/authlib/yggdrasil/response" {
     /**
      * Values that may be interpreted as {@link $KeyPairResponse}.
      */
-    export type $KeyPairResponse_ = { refreshedAfter?: string, keyPair?: $KeyPairResponse$KeyPair_, expiresAt?: string, publicKeySignature?: $ByteBuffer,  } | [refreshedAfter?: string, keyPair?: $KeyPairResponse$KeyPair_, expiresAt?: string, publicKeySignature?: $ByteBuffer, ];
+    export type $KeyPairResponse_ = { publicKeySignature?: $ByteBuffer, expiresAt?: string, keyPair?: $KeyPairResponse$KeyPair_, refreshedAfter?: string,  } | [publicKeySignature?: $ByteBuffer, expiresAt?: string, keyPair?: $KeyPairResponse$KeyPair_, refreshedAfter?: string, ];
     export class $KeyPairResponse$KeyPair extends $Record {
         publicKey(): string;
         privateKey(): string;
@@ -21,5 +21,5 @@ declare module "@package/com/mojang/authlib/yggdrasil/response" {
     /**
      * Values that may be interpreted as {@link $KeyPairResponse$KeyPair}.
      */
-    export type $KeyPairResponse$KeyPair_ = { privateKey?: string, publicKey?: string,  } | [privateKey?: string, publicKey?: string, ];
+    export type $KeyPairResponse$KeyPair_ = { publicKey?: string, privateKey?: string,  } | [publicKey?: string, privateKey?: string, ];
 }

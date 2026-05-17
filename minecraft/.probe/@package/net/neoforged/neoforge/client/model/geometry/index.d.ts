@@ -17,9 +17,9 @@ declare module "@package/net/neoforged/neoforge/client/model/geometry" {
         getRenderTypeHint(): $ResourceLocation;
         getMaterial(arg0: string): $Material;
         getTransforms(): $ItemTransforms;
-        useBlockLight(): boolean;
         isGui3d(): boolean;
         useAmbientOcclusion(): boolean;
+        useBlockLight(): boolean;
         bake(arg0: $ModelBaker, arg1: $Function_<$Material, $TextureAtlasSprite>, arg2: $ModelState, arg3: $ItemOverrides): $BakedModel;
         hasCustomGeometry(): boolean;
         getCustomGeometry(): $IUnbakedGeometry<never>;
@@ -40,15 +40,15 @@ declare module "@package/net/neoforged/neoforge/client/model/geometry" {
     }
     export class $UnbakedGeometryHelper {
         static composeRootTransformIntoModelState(arg0: $ModelState, arg1: $Transformation): $ModelState;
-        static createUnbakedItemElements(arg0: number, arg1: $TextureAtlasSprite, arg2: $ExtraFaceData_): $List<$BlockElement>;
+        static resolveDirtyMaterial(arg0: string, arg1: $IGeometryBakingContext): $Material;
         static createUnbakedItemElements(arg0: number, arg1: $TextureAtlasSprite): $List<$BlockElement>;
+        static createUnbakedItemElements(arg0: number, arg1: $TextureAtlasSprite, arg2: $ExtraFaceData_): $List<$BlockElement>;
         static bakeElements(arg0: $IModelBuilder<never>, arg1: $List_<$BlockElement>, arg2: $Function_<$Material, $TextureAtlasSprite>, arg3: $ModelState): void;
         static bakeElements(arg0: $List_<$BlockElement>, arg1: $Function_<$Material, $TextureAtlasSprite>, arg2: $ModelState): $List<$BakedQuad>;
-        static createUnbakedItemMaskElements(arg0: number, arg1: $TextureAtlasSprite, arg2: $ExtraFaceData_): $List<$BlockElement>;
-        static createUnbakedItemMaskElements(arg0: number, arg1: $TextureAtlasSprite): $List<$BlockElement>;
-        static bakeElementFace(arg0: $BlockElement, arg1: $BlockElementFace_, arg2: $TextureAtlasSprite, arg3: $Direction_, arg4: $ModelState): $BakedQuad;
         static applyRootTransform(arg0: $ModelState, arg1: $Transformation): $IQuadTransformer;
-        static resolveDirtyMaterial(arg0: string, arg1: $IGeometryBakingContext): $Material;
+        static createUnbakedItemMaskElements(arg0: number, arg1: $TextureAtlasSprite): $List<$BlockElement>;
+        static createUnbakedItemMaskElements(arg0: number, arg1: $TextureAtlasSprite, arg2: $ExtraFaceData_): $List<$BlockElement>;
+        static bakeElementFace(arg0: $BlockElement, arg1: $BlockElementFace_, arg2: $TextureAtlasSprite, arg3: $Direction_, arg4: $ModelState): $BakedQuad;
         static bake(arg0: $BlockModel, arg1: $ModelBaker, arg2: $BlockModel, arg3: $Function_<$Material, $TextureAtlasSprite>, arg4: $ModelState, arg5: boolean): $BakedModel;
         constructor();
     }
@@ -65,9 +65,9 @@ declare module "@package/net/neoforged/neoforge/client/model/geometry" {
         getRenderTypeHint(): $ResourceLocation;
         getMaterial(arg0: string): $Material;
         getTransforms(): $ItemTransforms;
-        useBlockLight(): boolean;
         isGui3d(): boolean;
         useAmbientOcclusion(): boolean;
+        useBlockLight(): boolean;
         getRenderType(arg0: $ResourceLocation_): $RenderTypeGroup;
         getModelName(): string;
         hasMaterial(arg0: string): boolean;
@@ -88,9 +88,9 @@ declare module "@package/net/neoforged/neoforge/client/model/geometry" {
         getRenderTypeHint(): $ResourceLocation;
         getMaterial(arg0: string): $Material;
         getTransforms(): $ItemTransforms;
-        useBlockLight(): boolean;
         isGui3d(): boolean;
         useAmbientOcclusion(): boolean;
+        useBlockLight(): boolean;
         getModelName(): string;
         hasMaterial(arg0: string): boolean;
         getRootTransform(): $Transformation;

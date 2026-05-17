@@ -12,8 +12,8 @@ declare module "@package/net/fabricmc/fabric/api/client/model/loading/v1" {
     }
     export interface $ModelModifier$BeforeBake$Context {
         loader(): $ModelBakery;
-        settings(): $ModelState;
         baker(): $ModelBaker;
+        settings(): $ModelState;
         resourceId(): $ResourceLocation;
         textureGetter(): $Function<$Material, $TextureAtlasSprite>;
         topLevelId(): $ModelResourceLocation;
@@ -50,8 +50,8 @@ declare module "@package/net/fabricmc/fabric/api/client/model/loading/v1" {
     export interface $ModelModifier$AfterBake$Context {
         loader(): $ModelBakery;
         sourceModel(): $UnbakedModel;
-        settings(): $ModelState;
         baker(): $ModelBaker;
+        settings(): $ModelState;
         resourceId(): $ResourceLocation;
         textureGetter(): $Function<$Material, $TextureAtlasSprite>;
         topLevelId(): $ModelResourceLocation;

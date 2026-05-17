@@ -27,10 +27,10 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/frame" {
         getEntitiesInFrame(): $List<$EntityInFrame>;
         getPhotographer(): $Photographer;
         getTag(): $ExtraData;
-        getIdentifier(): $ExposureIdentifier;
-        setType(type: $ExposureType_): $Frame$Mutable;
         toImmutable(): $Frame;
         setTag(tag: $ExtraData): $Frame$Mutable;
+        getIdentifier(): $ExposureIdentifier;
+        setType(type: $ExposureType_): $Frame$Mutable;
         constructor(photographData: $Frame_);
         set chromatic(value: boolean);
     }
@@ -46,8 +46,8 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/frame" {
         isChromatic(): boolean;
         getColorChannel(): ($ColorChannel) | undefined;
         wasTakenWithChromaticFilter(): boolean;
-        extraData(): $ExtraData;
         static intersect(identifier: $ExposureIdentifier, frames: $List_<$Frame_>): $Frame;
+        extraData(): $ExtraData;
         identifier(): $ExposureIdentifier;
         static WEATHER: $ExtraData$Type<string>;
         static CODEC: $Codec<$Frame>;
@@ -81,21 +81,21 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/frame" {
     /**
      * Values that may be interpreted as {@link $Frame}.
      */
-    export type $Frame_ = { photographer?: $Photographer, type?: $ExposureType_, entitiesInFrame?: $List_<$EntityInFrame_>, extraData?: $ExtraData, identifier?: $ExposureIdentifier,  } | [photographer?: $Photographer, type?: $ExposureType_, entitiesInFrame?: $List_<$EntityInFrame_>, extraData?: $ExtraData, identifier?: $ExposureIdentifier, ];
+    export type $Frame_ = { identifier?: $ExposureIdentifier, extraData?: $ExtraData, entitiesInFrame?: $List_<$EntityInFrame_>, type?: $ExposureType_, photographer?: $Photographer,  } | [identifier?: $ExposureIdentifier, extraData?: $ExtraData, entitiesInFrame?: $List_<$EntityInFrame_>, type?: $ExposureType_, photographer?: $Photographer, ];
     export class $Photographer {
         name(): string;
         isEmpty(): boolean;
         matches(entity: $Entity): boolean;
-        isPlayer(): boolean;
         isNPC(): boolean;
+        isPlayer(): boolean;
         uuid(): $UUID;
         static CODEC: $Codec<$Photographer>;
         static EMPTY: $Photographer;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $Photographer>;
         constructor(cameraHolder: $CameraHolder);
         get empty(): boolean;
-        get player(): boolean;
         get NPC(): boolean;
+        get player(): boolean;
     }
     export class $EntityInFrame extends $Record {
         name(): string;
@@ -113,5 +113,5 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/frame" {
     /**
      * Values that may be interpreted as {@link $EntityInFrame}.
      */
-    export type $EntityInFrame_ = { id?: $ResourceLocation_, pos?: $BlockPos_, name?: string, extraData?: $ExtraData, distance?: number,  } | [id?: $ResourceLocation_, pos?: $BlockPos_, name?: string, extraData?: $ExtraData, distance?: number, ];
+    export type $EntityInFrame_ = { distance?: number, extraData?: $ExtraData, name?: string, pos?: $BlockPos_, id?: $ResourceLocation_,  } | [distance?: number, extraData?: $ExtraData, name?: string, pos?: $BlockPos_, id?: $ResourceLocation_, ];
 }

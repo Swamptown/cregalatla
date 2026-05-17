@@ -29,19 +29,19 @@ declare module "@package/net/minecraft/network/protocol" {
     /**
      * Values that may be interpreted as {@link $PacketType}.
      */
-    export type $PacketType_<T> = { id?: $ResourceLocation_, flow?: $PacketFlow_,  } | [id?: $ResourceLocation_, flow?: $PacketFlow_, ];
+    export type $PacketType_<T> = { flow?: $PacketFlow_, id?: $ResourceLocation_,  } | [flow?: $PacketFlow_, id?: $ResourceLocation_, ];
     export class $ProtocolInfoBuilder$CodecEntry<T extends $PacketListener, P extends $Packet<T>, B extends $ByteBuf> extends $Record {
     }
     /**
      * Values that may be interpreted as {@link $ProtocolInfoBuilder$CodecEntry}.
      */
-    export type $ProtocolInfoBuilder$CodecEntry_<T, P, B> = { type?: $PacketType_<$Packet<T>>, serializer?: $StreamCodec<$ByteBuf, $Packet<T>>,  } | [type?: $PacketType_<$Packet<T>>, serializer?: $StreamCodec<$ByteBuf, $Packet<T>>, ];
+    export type $ProtocolInfoBuilder$CodecEntry_<T, P, B> = { serializer?: $StreamCodec<$ByteBuf, $Packet<T>>, type?: $PacketType_<$Packet<T>>,  } | [serializer?: $StreamCodec<$ByteBuf, $Packet<T>>, type?: $PacketType_<$Packet<T>>, ];
     export class $ProtocolInfoBuilder$Implementation<L extends $PacketListener> extends $Record implements $ProtocolInfo<L> {
     }
     /**
      * Values that may be interpreted as {@link $ProtocolInfoBuilder$Implementation}.
      */
-    export type $ProtocolInfoBuilder$Implementation_<L> = { flow?: $PacketFlow_, codec?: $StreamCodec<$ByteBuf, $Packet<$PacketListener>>, bundlerInfo?: $BundlerInfo, id?: $ConnectionProtocol_,  } | [flow?: $PacketFlow_, codec?: $StreamCodec<$ByteBuf, $Packet<$PacketListener>>, bundlerInfo?: $BundlerInfo, id?: $ConnectionProtocol_, ];
+    export type $ProtocolInfoBuilder$Implementation_<L> = { id?: $ConnectionProtocol_, bundlerInfo?: $BundlerInfo, codec?: $StreamCodec<$ByteBuf, $Packet<$PacketListener>>, flow?: $PacketFlow_,  } | [id?: $ConnectionProtocol_, bundlerInfo?: $BundlerInfo, codec?: $StreamCodec<$ByteBuf, $Packet<$PacketListener>>, flow?: $PacketFlow_, ];
     export class $PacketFlow extends $Enum<$PacketFlow> implements $IPacketFlowExtension {
         static values(): $PacketFlow[];
         static valueOf(arg0: string): $PacketFlow;
@@ -49,14 +49,14 @@ declare module "@package/net/minecraft/network/protocol" {
         getOpposite(): $PacketFlow;
         self(): $PacketFlow;
         getReceptionSide(): $LogicalSide;
-        isClientbound(): boolean;
         isServerbound(): boolean;
+        isClientbound(): boolean;
         static CLIENTBOUND: $PacketFlow;
         static SERVERBOUND: $PacketFlow;
         get opposite(): $PacketFlow;
         get receptionSide(): $LogicalSide;
-        get clientbound(): boolean;
         get serverbound(): boolean;
+        get clientbound(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $PacketFlow}.
@@ -67,20 +67,20 @@ declare module "@package/net/minecraft/network/protocol" {
         static BUNDLE_SIZE_LIMIT: number;
     }
     export interface $BundlerInfo {
-        startPacketBundling(arg0: $Packet<never>): $BundlerInfo$Bundler;
+        unbundlePacket(arg0: $Packet<never>, arg1: $Consumer_<$Packet<never>>, arg2: $ChannelHandlerContext): void;
         /**
          * @deprecated
          */
         unbundlePacket(arg0: $Packet<never>, arg1: $Consumer_<$Packet<never>>): void;
-        unbundlePacket(arg0: $Packet<never>, arg1: $Consumer_<$Packet<never>>, arg2: $ChannelHandlerContext): void;
+        startPacketBundling(arg0: $Packet<never>): $BundlerInfo$Bundler;
     }
     export class $ProtocolInfoBuilder<T extends $PacketListener, B extends $ByteBuf> {
         build(arg0: $Function_<$ByteBuf, B>): $ProtocolInfo<T>;
+        buildPacketCodec(arg0: $Function_<$ByteBuf, B>, arg1: $List_<$ProtocolInfoBuilder$CodecEntry_<T, never, B>>): $StreamCodec<$ByteBuf, $Packet<T>>;
+        static clientboundProtocol<T extends $ClientboundPacketListener, B extends $ByteBuf>(arg0: $ConnectionProtocol_, arg1: $Consumer_<$ProtocolInfoBuilder<T, B>>): $ProtocolInfo$Unbound<T, B>;
         addPacket<P extends $Packet<T>>(arg0: $PacketType_<P>, arg1: $StreamCodec<B, P>): $ProtocolInfoBuilder<T, B>;
         static serverboundProtocol<T extends $ServerboundPacketListener, B extends $ByteBuf>(arg0: $ConnectionProtocol_, arg1: $Consumer_<$ProtocolInfoBuilder<T, B>>): $ProtocolInfo$Unbound<T, B>;
         withBundlePacket<P extends $BundlePacket<T>, D extends $BundleDelimiterPacket<T>>(arg0: $PacketType_<P>, arg1: $Function_<$Iterable<$Packet<T>>, P>, arg2: D): $ProtocolInfoBuilder<T, B>;
-        buildPacketCodec(arg0: $Function_<$ByteBuf, B>, arg1: $List_<$ProtocolInfoBuilder$CodecEntry_<T, never, B>>): $StreamCodec<$ByteBuf, $Packet<T>>;
-        static clientboundProtocol<T extends $ClientboundPacketListener, B extends $ByteBuf>(arg0: $ConnectionProtocol_, arg1: $Consumer_<$ProtocolInfoBuilder<T, B>>): $ProtocolInfo$Unbound<T, B>;
         buildUnbound(): $ProtocolInfo$Unbound<T, B>;
         protocol: $ConnectionProtocol;
         flow: $PacketFlow;
@@ -130,8 +130,8 @@ declare module "@package/net/minecraft/network/protocol" {
         get skippable(): boolean;
     }
     export class $PacketUtils {
-        static makeReportedException<T extends $PacketListener>(arg0: $Exception, arg1: $Packet<T>, arg2: T): $ReportedException;
         static fillCrashReport<T extends $PacketListener>(arg0: $CrashReport, arg1: T, arg2: $Packet<T>): void;
+        static makeReportedException<T extends $PacketListener>(arg0: $Exception, arg1: $Packet<T>, arg2: T): $ReportedException;
         static ensureRunningOnSameThread<T extends $PacketListener>(arg0: $Packet<T>, arg1: T, arg2: $BlockableEventLoop<never>): void;
         static ensureRunningOnSameThread<T extends $PacketListener>(arg0: $Packet<T>, arg1: T, arg2: $ServerLevel): void;
         constructor();

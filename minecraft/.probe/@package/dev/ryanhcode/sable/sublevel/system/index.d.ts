@@ -23,7 +23,6 @@ declare module "@package/dev/ryanhcode/sable/sublevel/system" {
         initialize(): void;
         tick(arg0: $SubLevelContainer): void;
         getLevel(): $ServerLevel;
-        wakeUpObjectsAt(arg0: number, arg1: number, arg2: number): void;
         getPartialPhysicsTick(): number;
         updatePose(arg0: $ServerSubLevel): void;
         recoverSubLevel(arg0: $ServerSubLevel): boolean;
@@ -37,13 +36,14 @@ declare module "@package/dev/ryanhcode/sable/sublevel/system" {
         getArbitraryObjects(): $Iterable<$ArbitraryPhysicsObject>;
         getTicketManager(): $PhysicsChunkTicketManager;
         addObject(arg0: $ArbitraryPhysicsObject): void;
+        wakeUpObjectsAt(arg0: number, arg1: number, arg2: number): void;
         handleBlockChange(arg0: $SectionPos, arg1: $LevelChunkSection, arg2: number, arg3: number, arg4: number, arg5: $BlockState_, arg6: $BlockState_): void;
         getPhysicsHandle(arg0: $ServerSubLevel): $RigidBodyHandle;
-        removeObject(arg0: $ArbitraryPhysicsObject): void;
-        getConfig(): $PhysicsConfigData;
         onSubLevelRemoved(arg0: $SubLevel, arg1: $SubLevelRemovalReason_): void;
         onSubLevelAdded(arg0: $SubLevel): void;
         queryIntersecting(arg0: $BoundingBox3dc): $Iterable<$SubLevel>;
+        removeObject(arg0: $ArbitraryPhysicsObject): void;
+        getConfig(): $PhysicsConfigData;
         static require(arg0: $Level_): $SubLevelPhysicsSystem;
         getPipeline(): $PhysicsPipeline;
         static USE_TICKETS_FOR_QUERIES: boolean;

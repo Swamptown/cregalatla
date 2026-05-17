@@ -15,6 +15,10 @@
 	enableEngineDebugLogging = false
 	#Allow engine thrust to exceed standard limits (up to 5000N)
 	brokenBarrier = false
+	#Maximum speed in m/s entities can reach in space before drag kicks in
+	# Default: 80
+	# Range: 0 ~ 320
+	entitySpeedLimit = 80
 
 [Jetpack]
 	#Standard thrust power of the jetpack

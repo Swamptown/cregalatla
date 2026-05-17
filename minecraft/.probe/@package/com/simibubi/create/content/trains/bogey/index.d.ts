@@ -40,7 +40,6 @@ declare module "@package/com/simibubi/create/content/trains/bogey" {
     export class $AbstractBogeyBlock<T extends $AbstractBogeyBlockEntity> extends $Block implements $IBE<T>, $ProperWaterloggedBlock, $SpecialBlockItemRequirement, $IWrenchable {
         getSize(): $BogeySizes$BogeySize;
         getVersion(arg0: $BlockState_, arg1: boolean): $BlockState;
-        getRequiredItems(arg0: $BlockState_, arg1: $BlockEntity): $ItemRequirement;
         isOnIncompatibleTrack(arg0: $Carriage, arg1: boolean): boolean;
         getTrackType(arg0: $BogeyStyle): $TrackMaterial$TrackType;
         getValidPathfindingTypes(arg0: $BogeyStyle): $Set<$TrackMaterial$TrackType>;
@@ -62,17 +61,18 @@ declare module "@package/com/simibubi/create/content/trains/bogey" {
         propertiesToCopy(): $List<$Property<never>>;
         canBeUpsideDown(): boolean;
         isUpsideDown(arg0: $BlockState_): boolean;
+        getRequiredItems(arg0: $BlockState_, arg1: $BlockEntity): $ItemRequirement;
         getRotatedBlockState(arg0: $BlockState_, arg1: $Direction_): $BlockState;
         getDefaultStyle(): $BogeyStyle;
+        newBlockEntity(arg0: $BlockPos_, arg1: $BlockState_): $BlockEntity;
+        getBlockEntityOptional(arg0: $BlockGetter, arg1: $BlockPos_): (T) | undefined;
+        withBlockEntityDo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Consumer_<T>): void;
         onBlockEntityUse(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<T, $InteractionResult>): $InteractionResult;
         onBlockEntityUseItemOn(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<T, $ItemInteractionResult>): $ItemInteractionResult;
-        withBlockEntityDo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Consumer_<T>): void;
-        getBlockEntityOptional(arg0: $BlockGetter, arg1: $BlockPos_): (T) | undefined;
-        newBlockEntity(arg0: $BlockPos_, arg1: $BlockState_): $BlockEntity;
         getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): T;
         getTicker<S extends $BlockEntity>(arg0: $Level_, arg1: $BlockState_, arg2: $BlockEntityType_<S>): $BlockEntityTicker<S>;
-        withWater(arg0: $BlockState_, arg1: $BlockPlaceContext): $BlockState;
         updateWater(arg0: $LevelAccessor, arg1: $BlockState_, arg2: $BlockPos_): void;
+        withWater(arg0: $BlockState_, arg1: $BlockPlaceContext): $BlockState;
         fluidState(arg0: $BlockState_): $FluidState;
         updateAfterWrenched(arg0: $BlockState_, arg1: $UseOnContext): $BlockState;
         onWrenched(arg0: $BlockState_, arg1: $UseOnContext): $InteractionResult;
@@ -130,11 +130,11 @@ declare module "@package/com/simibubi/create/content/trains/bogey" {
      */
     export type $BogeySizes$BogeySize_ = { id?: $ResourceLocation_, wheelRadius?: number,  } | [id?: $ResourceLocation_, wheelRadius?: number, ];
     export class $BogeyStyle implements $AccessorBogeyStyle {
-        createVisual(arg0: $BogeySizes$BogeySize_, arg1: $VisualizationContext, arg2: number, arg3: boolean): $BogeyVisual;
         validSizes(): $Set<$BogeySizes$BogeySize>;
         getBlockForSize(arg0: $BogeySizes$BogeySize_): $AbstractBogeyBlock<never>;
         getNextBlock(arg0: $BogeySizes$BogeySize_): $AbstractBogeyBlock<never>;
         getCycleGroup(): $Map<$ResourceLocation, $BogeyStyle>;
+        createVisual(arg0: $BogeySizes$BogeySize_, arg1: $VisualizationContext, arg2: number, arg3: boolean): $BogeyVisual;
         render(arg0: $BogeySizes$BogeySize_, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: number, arg7: $CompoundTag_, arg8: boolean): void;
         getSizeRenderers(): $Map<$BogeySizes$BogeySize, $BogeyStyle$SizeRenderer>;
         contactParticle: $ParticleOptions;

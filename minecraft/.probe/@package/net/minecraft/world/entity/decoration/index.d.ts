@@ -292,8 +292,8 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         get marker(): boolean;
     }
     export class $LeashFenceKnotEntity extends $BlockAttachedEntity {
-        playPlacementSound(): void;
         static getOrCreateKnot(arg0: $Level_, arg1: $BlockPos_): $LeashFenceKnotEntity;
+        playPlacementSound(): void;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
@@ -504,8 +504,8 @@ declare module "@package/net/minecraft/world/entity/decoration" {
     }
     export class $PaintingVariant extends $Record {
         width(): number;
-        area(): number;
         assetId(): $ResourceLocation;
+        area(): number;
         height(): number;
         static CODEC: $Codec<$Holder<$PaintingVariant>>;
         static DIRECT_CODEC: $Codec<$PaintingVariant>;
@@ -516,20 +516,20 @@ declare module "@package/net/minecraft/world/entity/decoration" {
     /**
      * Values that may be interpreted as {@link $PaintingVariant}.
      */
-    export type $PaintingVariant_ = RegistryTypes.PaintingVariant | { height?: number, width?: number, assetId?: $ResourceLocation_,  } | [height?: number, width?: number, assetId?: $ResourceLocation_, ];
+    export type $PaintingVariant_ = RegistryTypes.PaintingVariant | { assetId?: $ResourceLocation_, width?: number, height?: number,  } | [assetId?: $ResourceLocation_, width?: number, height?: number, ];
     export class $ItemFrame extends $HangingEntity implements $ItemFrameEntityKJS, $ItemFrameAccessor {
-        setItem(arg0: $ItemStack_, arg1: boolean): void;
         setItem(arg0: $ItemStack_): void;
-        getAnalogOutput(): number;
+        setItem(arg0: $ItemStack_, arg1: boolean): void;
         getPlaceSound(): $SoundEvent;
         getBreakSound(): $SoundEvent;
-        setRotation(arg0: number): void;
+        getRemoveItemSound(): $SoundEvent;
         getAddItemSound(): $SoundEvent;
         getRotateItemSound(): $SoundEvent;
         getFrameItemStack(): $ItemStack;
         getFramedMapId(arg0: $ItemStack_): $MapId;
         hasFramedMap(): boolean;
-        getRemoveItemSound(): $SoundEvent;
+        getAnalogOutput(): number;
+        setRotation(arg0: number): void;
         getItem(): $ItemStack;
         getRotation(): number;
         create$getFrameItemStack(): $ItemStack;
@@ -609,13 +609,13 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         constructor(arg0: $EntityType_<$ItemFrame>, arg1: $Level_, arg2: $BlockPos_, arg3: $Direction_);
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_);
         constructor(arg0: $EntityType_<$ItemFrame>, arg1: $Level_);
-        get analogOutput(): number;
         get placeSound(): $SoundEvent;
         get breakSound(): $SoundEvent;
+        get removeItemSound(): $SoundEvent;
         get addItemSound(): $SoundEvent;
         get rotateItemSound(): $SoundEvent;
         get frameItemStack(): $ItemStack;
-        get removeItemSound(): $SoundEvent;
+        get analogOutput(): number;
     }
     export class $Painting extends $HangingEntity implements $VariantHolder<$Holder<$PaintingVariant>> {
         static create(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_): ($Painting) | undefined;

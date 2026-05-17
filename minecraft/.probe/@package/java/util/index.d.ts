@@ -21,12 +21,12 @@ declare module "@package/java/util" {
         timestamp(): number;
         node(): number;
         variant(): number;
+        static fromString(arg0: string): $UUID;
         static randomUUID(): $UUID;
         static nameUUIDFromBytes(arg0: number[]): $UUID;
         getLeastSignificantBits(): number;
         getMostSignificantBits(): number;
         clockSequence(): number;
-        static fromString(arg0: string): $UUID;
         constructor(arg0: number, arg1: number);
         get leastSignificantBits(): number;
         get mostSignificantBits(): number;
@@ -671,8 +671,8 @@ declare module "@package/java/util" {
     export class $Locale$LanguageRange {
         static parse(arg0: string): $List<$Locale$LanguageRange>;
         static parse(arg0: string, arg1: $Map_<string, $List_<string>>): $List<$Locale$LanguageRange>;
-        static mapEquivalents(arg0: $List_<$Locale$LanguageRange>, arg1: $Map_<string, $List_<string>>): $List<$Locale$LanguageRange>;
         getRange(): string;
+        static mapEquivalents(arg0: $List_<$Locale$LanguageRange>, arg1: $Map_<string, $List_<string>>): $List<$Locale$LanguageRange>;
         getWeight(): number;
         static MAX_WEIGHT: number;
         static MIN_WEIGHT: number;

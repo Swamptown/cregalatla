@@ -20,7 +20,7 @@ declare module "@package/com/mojang/blaze3d/audio" {
     /**
      * Values that may be interpreted as {@link $ListenerTransform}.
      */
-    export type $ListenerTransform_ = { up?: $Vec3_, position?: $Vec3_, forward?: $Vec3_,  } | [up?: $Vec3_, position?: $Vec3_, forward?: $Vec3_, ];
+    export type $ListenerTransform_ = { forward?: $Vec3_, position?: $Vec3_, up?: $Vec3_,  } | [forward?: $Vec3_, position?: $Vec3_, up?: $Vec3_, ];
     export class $Library {
         init(arg0: string, arg1: boolean): void;
         cleanup(): void;
@@ -69,14 +69,14 @@ declare module "@package/com/mojang/blaze3d/audio" {
     export class $Channel implements $ChannelAccessor {
         stop(): void;
         destroy(): void;
-        setRelative(arg0: boolean): void;
         unpause(): void;
+        setRelative(arg0: boolean): void;
         setPitch(arg0: number): void;
         playing(): boolean;
         setLooping(arg0: boolean): void;
         stopped(): boolean;
-        play(): void;
         setVolume(arg0: number): void;
+        play(): void;
         pause(): void;
         attachBufferStream(arg0: $AudioStream): void;
         attachStaticBuffer(arg0: $SoundBuffer): void;

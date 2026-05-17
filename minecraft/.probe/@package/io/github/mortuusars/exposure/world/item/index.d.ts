@@ -26,6 +26,7 @@ declare module "@package/io/github/mortuusars/exposure/world/item" {
         getFilmStyle(stack: $ItemStack_): $FilmStyle;
         getFilmProperties(stack: $ItemStack_): $FilmProperties;
         getFrameSize(stack: $ItemStack_): number;
+        hasFrames(stack: $ItemStack_): boolean;
         getDefaultFrameSize(stack: $ItemStack_): number;
         getDefaultMaxFrameCount(stack: $ItemStack_): number;
         getStoredFrames(stack: $ItemStack_): $List<$Frame>;
@@ -33,7 +34,6 @@ declare module "@package/io/github/mortuusars/exposure/world/item" {
         getFullness(stack: $ItemStack_): number;
         getStoredFramesCount(stack: $ItemStack_): number;
         getMaxFrameCount(stack: $ItemStack_): number;
-        hasFrames(stack: $ItemStack_): boolean;
         isFull(stack: $ItemStack_): boolean;
         static BASE_ATTACK_DAMAGE_ID: $ResourceLocation;
         static DEFAULT_MAX_STACK_SIZE: number;
@@ -53,6 +53,7 @@ declare module "@package/io/github/mortuusars/exposure/world/item" {
     export interface $FilmItem {
         getType(): $ExposureType;
         getFrameSize(stack: $ItemStack_): number;
+        hasFrames(stack: $ItemStack_): boolean;
         getDefaultFrameSize(stack: $ItemStack_): number;
         getDefaultMaxFrameCount(stack: $ItemStack_): number;
         getStoredFrames(stack: $ItemStack_): $List<$Frame>;
@@ -60,7 +61,6 @@ declare module "@package/io/github/mortuusars/exposure/world/item" {
         getFullness(stack: $ItemStack_): number;
         getStoredFramesCount(stack: $ItemStack_): number;
         getMaxFrameCount(stack: $ItemStack_): number;
-        hasFrames(stack: $ItemStack_): boolean;
         isFull(stack: $ItemStack_): boolean;
         get type(): $ExposureType;
     }

@@ -82,15 +82,15 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         restore(arg0: number): boolean;
         restoreToLocation(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: number): boolean;
         recreateBlockEntity(arg0: $HolderLookup$Provider): $BlockEntity;
-        getDimension(): $ResourceKey<$Level>;
         getTag(): $CompoundTag;
+        getDimension(): $ResourceKey<$Level>;
         getCurrentState(): $BlockState;
         getPos(): $BlockPos;
         get state(): $BlockState;
         get level(): $LevelAccessor;
         get flags(): number;
-        get dimension(): $ResourceKey<$Level>;
         get tag(): $CompoundTag;
+        get dimension(): $ResourceKey<$Level>;
         get currentState(): $BlockState;
         get pos(): $BlockPos;
     }
@@ -445,20 +445,20 @@ declare module "@package/net/neoforged/neoforge/common/util" {
     }
     export class $NeoForgeExtraCodecs {
         static xor<F, S>(arg0: $MapCodec_<F>, arg1: $MapCodec_<S>): $MapCodec<$Either<F, S>>;
-        static listWithOptionalElements<A>(arg0: $Codec<(A) | undefined>): $Codec<$List<A>>;
         static mapWithAlternative<T>(arg0: $MapCodec_<T>, arg1: $MapCodec_<T>): $MapCodec<T>;
-        static singularOrPluralCodec<T>(arg0: $Codec<T>, arg1: string, arg2: string): $MapCodec<$Set<T>>;
         static singularOrPluralCodec<T>(arg0: $Codec<T>, arg1: string): $MapCodec<$Set<T>>;
-        static singularOrPluralCodecNotEmpty<T>(arg0: $Codec<T>, arg1: string): $MapCodec<$Set<T>>;
+        static singularOrPluralCodec<T>(arg0: $Codec<T>, arg1: string, arg2: string): $MapCodec<$Set<T>>;
         static singularOrPluralCodecNotEmpty<T>(arg0: $Codec<T>, arg1: string, arg2: string): $MapCodec<$Set<T>>;
+        static singularOrPluralCodecNotEmpty<T>(arg0: $Codec<T>, arg1: string): $MapCodec<$Set<T>>;
         static listWithoutEmpty<A>(arg0: $Codec<$List_<(A) | undefined>>): $Codec<$List<A>>;
         static aliasedFieldOf<T>(arg0: $Codec<T>, ...arg1: string[]): $MapCodec<T>;
         static optionalFieldAlwaysWrite<T>(arg0: $Codec<T>, arg1: string, arg2: T): $MapCodec<T>;
         static decodeOnly<A>(arg0: $Decoder_<A>): $Codec<A>;
+        static listWithOptionalElements<A>(arg0: $Codec<(A) | undefined>): $Codec<$List<A>>;
         static dispatchMapOrElse<A, E, B>(arg0: $Codec<A>, arg1: $Function_<E, A>, arg2: $Function_<A, $MapCodec<E>>, arg3: $MapCodec_<B>): $MapCodec<$Either<E, B>>;
         static setOf<T>(arg0: $Codec<T>): $Codec<$Set<T>>;
-        static withAlternative<T>(arg0: $Codec<T>, arg1: $Codec<T>): $Codec<T>;
         static withAlternative<T>(arg0: $MapCodec_<T>, arg1: $MapCodec_<T>): $MapCodec<T>;
+        static withAlternative<T>(arg0: $Codec<T>, arg1: $Codec<T>): $Codec<T>;
         constructor();
         static set of(value: $Codec<T>);
     }
@@ -472,7 +472,7 @@ declare module "@package/net/neoforged/neoforge/common/util" {
     /**
      * Values that may be interpreted as {@link $FakePlayerFactory$FakePlayerKey}.
      */
-    export type $FakePlayerFactory$FakePlayerKey_ = { level?: $ServerLevel, username?: $GameProfile,  } | [level?: $ServerLevel, username?: $GameProfile, ];
+    export type $FakePlayerFactory$FakePlayerKey_ = { username?: $GameProfile, level?: $ServerLevel,  } | [username?: $GameProfile, level?: $ServerLevel, ];
     export class $HexDumper$Instance {
     }
     export class $InsertingContents extends $Record implements $ComponentContents {
@@ -512,9 +512,9 @@ declare module "@package/net/neoforged/neoforge/common/util" {
     export class $AttributeUtil {
         static applyTextFor(arg0: $ItemStack_, arg1: $Consumer_<$Component>, arg2: $Multimap<$Holder_<$Attribute>, $AttributeModifier_>, arg3: $AttributeTooltipContext): void;
         static applyModifierTooltips(arg0: $ItemStack_, arg1: $Consumer_<$Component>, arg2: $AttributeTooltipContext): void;
-        static addAttributeTooltips(arg0: $ItemStack_, arg1: $Consumer_<$Component>, arg2: $AttributeTooltipContext): void;
-        static addPotionTooltip(arg0: $List_<$Pair<$Holder_<$Attribute>, $AttributeModifier_>>, arg1: $Consumer_<$Component>): void;
         static sortedMap(): $Multimap<$Holder<$Attribute>, $AttributeModifier>;
+        static addPotionTooltip(arg0: $List_<$Pair<$Holder_<$Attribute>, $AttributeModifier_>>, arg1: $Consumer_<$Component>): void;
+        static addAttributeTooltips(arg0: $ItemStack_, arg1: $Consumer_<$Component>, arg2: $AttributeTooltipContext): void;
         static getSortedModifiers(arg0: $ItemStack_, arg1: $EquipmentSlotGroup_): $Multimap<$Holder<$Attribute>, $AttributeModifier>;
         static FAKE_MERGED_ID: $ResourceLocation;
         static BASE_ATTACK_DAMAGE_ID: $ResourceLocation;
@@ -847,8 +847,8 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         getSeparator(arg0: string): string;
         formatHeader(arg0: string): string;
         resetWidth(): void;
-        getWidth(): number;
         fit(arg0: string): void;
+        getWidth(): number;
         constructor(arg0: string);
         constructor(arg0: string, arg1: $TextTable$Alignment_);
         get width(): number;

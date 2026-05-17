@@ -12,14 +12,14 @@ import { $ScriptTypePredicate, $ScriptType_, $ScriptTypeHolder_, $ScriptTypePred
 
 declare module "@package/dev/latvian/mods/kubejs/event" {
     export class $EventHandler extends $BaseFunction {
-        post(event: $KubeEvent): $EventResult;
         post(scriptType: $ScriptTypeHolder_, event: $KubeEvent): $EventResult;
-        hasResult(): $EventHandler;
-        requiredTarget<E>(type: $EventTargetType<E>): $TargetedEventHandler<E>;
+        post(event: $KubeEvent): $EventResult;
         supportsTarget<E>(type: $EventTargetType<E>): $TargetedEventHandler<E>;
+        requiredTarget<E>(type: $EventTargetType<E>): $TargetedEventHandler<E>;
+        hasResult(): $EventHandler;
         forEachListener(type: $ScriptType_, callback: $Consumer_<$EventHandlerContainer>): void;
-        hasListeners(): boolean;
         listen(type: $ScriptType_, extraId: $Object, handler: $IEventHandler_): void;
+        hasListeners(): boolean;
         static DONTENUM: number;
         eventType: $Supplier<$Class<$KubeEvent>>;
         scriptTypePredicate: $ScriptTypePredicate;

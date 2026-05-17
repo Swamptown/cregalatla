@@ -33,7 +33,6 @@ declare module "@package/org/spongepowered/asm/util/perf" {
         getSeconds(): number;
         getTotalSeconds(): number;
         isRoot(): boolean;
-        getInfo(): string;
         getBaseName(): string;
         getTimes(): number[];
         getTotalAverageTime(): number;
@@ -42,6 +41,7 @@ declare module "@package/org/spongepowered/asm/util/perf" {
         isFine(): boolean;
         getAverageTime(): number;
         setInfo(arg0: string): void;
+        getInfo(): string;
         get name(): string;
         get count(): number;
         get time(): number;

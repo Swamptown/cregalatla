@@ -42,8 +42,8 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/structures
         constructor(arg0: $CompoundTag_);
     }
     export class $JigsawStructure extends $Structure implements $JigsawStructureAccessor, $ISpawnBoxStructure {
-        modifyExpressionValue$cko001$structurify$findGenerationPointGetMaxDepth(arg0: number): number;
-        modifyExpressionValue$cko001$structurify$findGenerationPointGetMaxDistanceFromCenter(arg0: number): number;
+        modifyExpressionValue$bip001$structurify$findGenerationPointGetMaxDepth(arg0: number): number;
+        modifyExpressionValue$bip001$structurify$findGenerationPointGetMaxDistanceFromCenter(arg0: number): number;
         ml$getSpawnBoxSettings(): $SpawnBoxSettings;
         ml$setSpawnBoxSettings(arg0: $SpawnBoxSettings_): void;
         ml$getSpecialSpawns(arg0: $StructureManager, arg1: $Structure_, arg2: $BlockPos_, arg3: $LongSet, arg4: $MobCategory_): $WeightedRandomList<$MobSpawnSettings$SpawnerData>;
@@ -159,13 +159,13 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/structures
         static CAVE_AIR: $BlockState;
     }
     export class $RuinedPortalStructure$Setup extends $Record {
-        mossiness(): number;
+        vines(): boolean;
         placement(): $RuinedPortalPiece$VerticalPlacement;
-        airPocketProbability(): number;
-        canBeCold(): boolean;
+        mossiness(): number;
         replaceWithBlackstone(): boolean;
         overgrown(): boolean;
-        vines(): boolean;
+        airPocketProbability(): number;
+        canBeCold(): boolean;
         weight(): number;
         static CODEC: $Codec<$RuinedPortalStructure$Setup>;
         constructor(arg0: $RuinedPortalPiece$VerticalPlacement_, arg1: number, arg2: number, arg3: boolean, arg4: boolean, arg5: boolean, arg6: boolean, arg7: number);
@@ -173,7 +173,7 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/structures
     /**
      * Values that may be interpreted as {@link $RuinedPortalStructure$Setup}.
      */
-    export type $RuinedPortalStructure$Setup_ = { placement?: $RuinedPortalPiece$VerticalPlacement_, replaceWithBlackstone?: boolean, mossiness?: number, weight?: number, vines?: boolean, canBeCold?: boolean, overgrown?: boolean, airPocketProbability?: number,  } | [placement?: $RuinedPortalPiece$VerticalPlacement_, replaceWithBlackstone?: boolean, mossiness?: number, weight?: number, vines?: boolean, canBeCold?: boolean, overgrown?: boolean, airPocketProbability?: number, ];
+    export type $RuinedPortalStructure$Setup_ = { airPocketProbability?: number, overgrown?: boolean, canBeCold?: boolean, vines?: boolean, weight?: number, mossiness?: number, replaceWithBlackstone?: boolean, placement?: $RuinedPortalPiece$VerticalPlacement_,  } | [airPocketProbability?: number, overgrown?: boolean, canBeCold?: boolean, vines?: boolean, weight?: number, mossiness?: number, replaceWithBlackstone?: boolean, placement?: $RuinedPortalPiece$VerticalPlacement_, ];
     export class $WoodlandMansionPieces {
         static generateMansion(arg0: $StructureTemplateManager, arg1: $BlockPos_, arg2: $Rotation_, arg3: $List_<$WoodlandMansionPieces$WoodlandMansionPiece>, arg4: $RandomSource): void;
         constructor();
@@ -194,18 +194,18 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/structures
         getName(): string;
         static values(): $MineshaftStructure$Type[];
         static valueOf(arg0: string): $MineshaftStructure$Type;
+        getPlanksState(): $BlockState;
         getWoodState(): $BlockState;
         getFenceState(): $BlockState;
-        getPlanksState(): $BlockState;
         getSerializedName(): string;
         static byId(arg0: number): $MineshaftStructure$Type;
         getRemappedEnumConstantName(): string;
         static MESA: $MineshaftStructure$Type;
         static CODEC: $Codec<$MineshaftStructure$Type>;
         static NORMAL: $MineshaftStructure$Type;
+        get planksState(): $BlockState;
         get woodState(): $BlockState;
         get fenceState(): $BlockState;
-        get planksState(): $BlockState;
         get serializedName(): string;
         get remappedEnumConstantName(): string;
     }
@@ -317,8 +317,8 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/structures
         constructor(arg0: $Structure$StructureSettings_);
     }
     export class $MineshaftPieces$MineShaftCorridor extends $MineshaftPieces$MineShaftPiece {
-        fillPillarDownOrChainUp(arg0: $WorldGenLevel, arg1: $BlockState_, arg2: number, arg3: number, arg4: number, arg5: $BoundingBox): void;
         static findCorridorSize(arg0: $StructurePieceAccessor, arg1: $RandomSource, arg2: number, arg3: number, arg4: number, arg5: $Direction_): $BoundingBox;
+        fillPillarDownOrChainUp(arg0: $WorldGenLevel, arg1: $BlockState_, arg2: number, arg3: number, arg4: number, arg5: $BoundingBox): void;
         boundingBox: $BoundingBox;
         genDepth: number;
         static CAVE_AIR: $BlockState;
@@ -436,8 +436,8 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/structures
         boundingBox: $BoundingBox;
         genDepth: number;
         static CAVE_AIR: $BlockState;
-        constructor(arg0: $CompoundTag_);
         constructor(arg0: number, arg1: $BoundingBox, arg2: $Direction_, arg3: $MineshaftStructure$Type_);
+        constructor(arg0: $CompoundTag_);
     }
     export class $BuriedTreasurePieces$BuriedTreasurePiece extends $StructurePiece {
         boundingBox: $BoundingBox;
@@ -770,8 +770,8 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/structures
         constructor(arg0: $Structure$StructureSettings_);
     }
     export class $StrongholdPieces {
-        static resetPieces(): void;
         static generateAndAddPiece(arg0: $StrongholdPieces$StartPiece, arg1: $StructurePieceAccessor, arg2: $RandomSource, arg3: number, arg4: number, arg5: number, arg6: $Direction_, arg7: number): $StructurePiece;
+        static resetPieces(): void;
         static MAGIC_START_Y: number;
         static imposedPiece: $Class<$StrongholdPieces$StrongholdPiece>;
         static SMOOTH_STONE_SELECTOR: $StrongholdPieces$SmoothStoneSelector;

@@ -3,7 +3,7 @@ import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sen
 import { $SmoothSwimmingMoveControl, $MoveControl, $MoveControl$Operation, $LookControl, $JumpControl, $SmoothSwimmingLookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $CompoundTag_ } from "@package/net/minecraft/nbt";
-import { $EntityType_, $Pose, $VariantHolder, $PortalProcessor, $LerpingModel, $AgeableMob$AgeableMobGroupData, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState, $Mob, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
+import { $EntityType_, $Pose, $PortalProcessor, $VariantHolder, $LerpingModel, $AgeableMob$AgeableMobGroupData, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState, $Mob, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $Stack, $Map } from "@package/java/util";
@@ -37,8 +37,8 @@ import { $Vector3f } from "@package/org/joml";
 declare module "@package/net/minecraft/world/entity/animal/axolotl" {
     export class $PlayDead extends $Behavior<$Axolotl> {
         start(arg0: $ServerLevel, arg1: $Axolotl, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: $Axolotl, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Axolotl): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Axolotl, arg2: number): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();
@@ -82,14 +82,15 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         static MIN_SPEED: number;
     }
     export class $Axolotl extends $Animal implements $LerpingModel, $VariantHolder<$Axolotl$Variant>, $Bucketable {
+        getVariant(): $Axolotl$Variant;
         setVariant(arg0: $Axolotl$Variant_): void;
         getPickupSound(): $SoundEvent;
-        handleAirSupply(arg0: number): void;
         fromBucket(): boolean;
         setFromBucket(arg0: boolean): void;
         saveToBucketTag(arg0: $ItemStack_): void;
         loadFromBucketTag(arg0: $CompoundTag_): void;
         getBucketItemStack(): $ItemStack;
+        handleAirSupply(arg0: number): void;
         getModelRotationValues(): $Map<string, $Vector3f>;
         isPlayingDead(): boolean;
         rehydrate(): void;
@@ -98,7 +99,6 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         applySupportingEffects(arg0: $Player): void;
         static checkAxolotlSpawnRules(arg0: $EntityType_<$LivingEntity>, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        getVariant(): $Axolotl$Variant;
         serializeNBT(arg0: $HolderLookup$Provider): $Axolotl$Variant;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;

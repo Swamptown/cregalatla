@@ -1,4 +1,4 @@
-import { $RenderStateShard$TexturingStateShard, $RenderType$OutlineProperty, $RenderStateShard$LineStateShard, $RenderStateShard$OverlayStateShard, $RenderStateShard$CullStateShard, $RenderStateShard$TransparencyStateShard, $RenderType$OutlineProperty_, $RenderStateShard$EmptyTextureStateShard, $RenderType$CompositeState, $RenderStateShard$OutputStateShard, $RenderStateShard$ShaderStateShard, $RenderStateShard$WriteMaskStateShard, $RenderStateShard, $RenderStateShard$DepthTestStateShard, $RenderStateShard$LightmapStateShard, $RenderStateShard$ColorLogicStateShard, $RenderStateShard$LayeringStateShard } from "@package/net/minecraft/client/renderer";
+import { $RenderStateShard$TexturingStateShard, $RenderType$OutlineProperty, $RenderStateShard$LineStateShard, $RenderStateShard$OverlayStateShard, $RenderStateShard$CullStateShard, $RenderStateShard$TransparencyStateShard, $RenderType$OutlineProperty_, $RenderStateShard$EmptyTextureStateShard, $RenderType$CompositeState, $RenderStateShard$OutputStateShard, $RenderStateShard$ShaderStateShard, $RenderStateShard$WriteMaskStateShard, $RenderStateShard$DepthTestStateShard, $RenderStateShard, $RenderStateShard$LightmapStateShard, $RenderStateShard$ColorLogicStateShard, $RenderStateShard$LayeringStateShard } from "@package/net/minecraft/client/renderer";
 import { $ResourceLocation } from "@package/net/minecraft/resources";
 import { $List } from "@package/java/util";
 export * as layer from "@package/foundry/veil/api/client/render/rendertype/layer";
@@ -21,8 +21,8 @@ declare module "@package/foundry/veil/api/client/render/rendertype" {
         lineState(arg0: $RenderStateShard$LineStateShard): $VeilRenderTypeBuilder;
         colorLogicState(arg0: $RenderStateShard$ColorLogicStateShard): $VeilRenderTypeBuilder;
         addLayer(arg0: $RenderStateShard): $VeilRenderTypeBuilder;
-        textureState(arg0: $RenderStateShard$EmptyTextureStateShard): $VeilRenderTypeBuilder;
         cullState(arg0: $RenderStateShard$CullStateShard): $VeilRenderTypeBuilder;
+        textureState(arg0: $RenderStateShard$EmptyTextureStateShard): $VeilRenderTypeBuilder;
     }
     export class $VeilRenderTypeAccessor {
     }
@@ -40,8 +40,8 @@ declare module "@package/foundry/veil/api/client/render/rendertype" {
         lineState(): $RenderStateShard$LineStateShard;
         colorLogicState(): $RenderStateShard$ColorLogicStateShard;
         veilShaderId(): $ResourceLocation;
-        textureState(): $RenderStateShard$EmptyTextureStateShard;
         cullState(): $RenderStateShard$CullStateShard;
         outlineProperty(): $RenderType$OutlineProperty;
+        textureState(): $RenderStateShard$EmptyTextureStateShard;
     }
 }

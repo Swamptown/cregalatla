@@ -1,5 +1,5 @@
 import { $LinearLayout } from "@package/net/minecraft/client/gui/layouts";
-import { $Tab, $TabManager } from "@package/net/minecraft/client/gui/components/tabs";
+import { $TabManager, $Tab } from "@package/net/minecraft/client/gui/components/tabs";
 import { $TabButton } from "@package/net/minecraft/client/gui/components";
 import { $ImmutableList } from "@package/com/google/common/collect";
 
@@ -7,11 +7,11 @@ declare module "@package/dev/isxander/yacl3/mixin" {
     export class $TabNavigationBarAccessor {
     }
     export interface $TabNavigationBarAccessor {
+        yacl$getLayout(): $LinearLayout;
         yacl$getWidth(): number;
         yacl$getTabManager(): $TabManager;
         yacl$getTabs(): $ImmutableList<$Tab>;
         yacl$getTabButtons(): $ImmutableList<$TabButton>;
-        yacl$getLayout(): $LinearLayout;
     }
     export class $AbstractSelectionListAccessor {
     }

@@ -56,9 +56,10 @@ declare module "@package/net/minecraft/world/entity/raid" {
         setRaidOmenLevel(arg0: number): void;
         absorbRaidOmen(arg0: $ServerPlayer): boolean;
         getHealthOfLivingRaiders(): number;
-        static getLeaderBannerInstance(arg0: $HolderGetter<$BannerPattern_>): $ItemStack;
         getRaidOmenLevel(): number;
         getMaxRaidOmenLevel(): number;
+        static getLeaderBannerInstance(arg0: $HolderGetter<$BannerPattern_>): $ItemStack;
+        isLoss(): boolean;
         getGroupsSpawned(): number;
         joinRaid(arg0: number, arg1: $Raider, arg2: $BlockPos_, arg3: boolean): void;
         removeLeader(arg0: number): void;
@@ -68,7 +69,6 @@ declare module "@package/net/minecraft/world/entity/raid" {
         setLeader(arg0: number, arg1: $Raider): void;
         getLeader(arg0: number): $Raider;
         updateBossbar(): void;
-        isLoss(): boolean;
         isOver(): boolean;
         getEnchantOdds(): number;
         getNumGroups(arg0: $Difficulty_): number;
@@ -94,8 +94,8 @@ declare module "@package/net/minecraft/world/entity/raid" {
         get allRaiders(): $Set<$Raider>;
         get healthOfLivingRaiders(): number;
         get maxRaidOmenLevel(): number;
-        get groupsSpawned(): number;
         get loss(): boolean;
+        get groupsSpawned(): number;
         get over(): boolean;
         get enchantOdds(): number;
         get stopped(): boolean;
@@ -138,9 +138,9 @@ declare module "@package/net/minecraft/world/entity/raid" {
         static load(arg0: $ServerLevel, arg1: $CompoundTag_): $Raids;
         static factory(arg0: $ServerLevel): $SavedData$Factory<$Raids>;
         tick(): void;
+        createOrExtendRaid(arg0: $ServerPlayer, arg1: $BlockPos_): $Raid;
         getNearbyRaid(arg0: $BlockPos_, arg1: number): $Raid;
         static getFileId(arg0: $Holder_<$DimensionType>): string;
-        createOrExtendRaid(arg0: $ServerPlayer, arg1: $BlockPos_): $Raid;
         static canJoinRaid(arg0: $Raider, arg1: $Raid): boolean;
         constructor(arg0: $ServerLevel);
     }

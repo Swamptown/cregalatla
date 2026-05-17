@@ -4,7 +4,7 @@ import { $ControlsHandler } from "@package/xaero/common/controls";
 import { $HudMod } from "@package/xaero/common";
 import { $LocalPlayer } from "@package/net/minecraft/client/player";
 import { $PushboxManager } from "@package/xaero/hud/pushbox";
-import { $ModuleSessionHandler, $ModuleSession, $HudModule, $ModuleManager } from "@package/xaero/hud/module";
+import { $ModuleSessionHandler, $HudModule, $ModuleSession, $ModuleManager } from "@package/xaero/hud/module";
 import { $MultiTextureRenderTypeRendererProvider } from "@package/xaero/common/graphics/renderer/multitexture";
 import { $OldSystemCompatibility } from "@package/xaero/hud/compat";
 import { $HudEventHandler } from "@package/xaero/hud/event";
@@ -25,16 +25,16 @@ export * as compat from "@package/xaero/hud/compat";
 declare module "@package/xaero/hud" {
     export class $Hud {
         getOldSystemCompatibility(): $OldSystemCompatibility;
-        getModuleManager(): $ModuleManager;
         getPushboxManager(): $PushboxManager;
         getPresetManager(): $HudPresetManager;
+        getModuleManager(): $ModuleManager;
         getSessionHandler(): $ModuleSessionHandler;
         getEventHandler(): $HudEventHandler;
         constructor(arg0: $ModuleManager, arg1: $PushboxManager, arg2: $HudPresetManager, arg3: $HudEventHandler, arg4: $ModuleSessionHandler, arg5: $OldSystemCompatibility);
         get oldSystemCompatibility(): $OldSystemCompatibility;
-        get moduleManager(): $ModuleManager;
         get pushboxManager(): $PushboxManager;
         get presetManager(): $HudPresetManager;
+        get moduleManager(): $ModuleManager;
         get sessionHandler(): $ModuleSessionHandler;
         get eventHandler(): $HudEventHandler;
     }

@@ -53,16 +53,16 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/event" {
         static empty(): $HoverTooltips;
         tooltipTexts(): $List<$Component>;
         tooltipFont(): $Font;
-        font(arg0: $Font): $HoverTooltips;
         tooltipStack(): $ItemStack;
-        tooltipComponent(): $TooltipComponent;
         tooltipComponent(arg0: $TooltipComponent): $HoverTooltips;
+        tooltipComponent(): $TooltipComponent;
+        font(arg0: $Font): $HoverTooltips;
         constructor(tooltipTexts: $List_<$Component_>, tooltipComponent: $TooltipComponent, tooltipFont: $Font, tooltipStack: $ItemStack_);
     }
     /**
      * Values that may be interpreted as {@link $HoverTooltips}.
      */
-    export type $HoverTooltips_ = { tooltipComponent?: $TooltipComponent, tooltipStack?: $ItemStack_, tooltipFont?: $Font, tooltipTexts?: $List_<$Component_>,  } | [tooltipComponent?: $TooltipComponent, tooltipStack?: $ItemStack_, tooltipFont?: $Font, tooltipTexts?: $List_<$Component_>, ];
+    export type $HoverTooltips_ = { tooltipTexts?: $List_<$Component_>, tooltipFont?: $Font, tooltipStack?: $ItemStack_, tooltipComponent?: $TooltipComponent,  } | [tooltipTexts?: $List_<$Component_>, tooltipFont?: $Font, tooltipStack?: $ItemStack_, tooltipComponent?: $TooltipComponent, ];
     export class $DragHandler {
         stopDrag(arg0: $UIElement): void;
         stopDrag(): void;
@@ -77,9 +77,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/event" {
         setDragTexture(arg0: number, arg1: number, arg2: number, arg3: number): void;
         setOffsetX(arg0: number): void;
         setOffsetY(arg0: number): void;
-        isDragging(): boolean;
         setWidth(arg0: number): void;
         setHeight(arg0: number): void;
+        isDragging(): boolean;
         dragTexture: $IGuiTexture;
         offsetX: number;
         offsetY: number;

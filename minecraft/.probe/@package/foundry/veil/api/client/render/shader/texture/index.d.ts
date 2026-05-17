@@ -17,8 +17,8 @@ declare module "@package/foundry/veil/api/client/render/shader/texture" {
     export class $ShaderTextureSource$Context {
     }
     export interface $ShaderTextureSource$Context {
-        getTexture(arg0: $ResourceLocation_): number;
         getTextureTarget(arg0: $ResourceLocation_): number;
+        getTexture(arg0: $ResourceLocation_): number;
         getFramebuffer(arg0: $ResourceLocation_): $AdvancedFbo;
     }
     /**

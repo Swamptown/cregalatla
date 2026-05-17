@@ -41,7 +41,7 @@ declare module "@package/net/neoforged/neoforge/common/data/internal" {
     /**
      * Values that may be interpreted as {@link $NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator}.
      */
-    export type $NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator_ = { vanillaProvider?: $AdvancementSubProvider_, criteriaReplacers?: $List_<$BiFunction_<$Criterion<never>, $HolderLookup$Provider, $Criterion<never>>>,  } | [vanillaProvider?: $AdvancementSubProvider_, criteriaReplacers?: $List_<$BiFunction_<$Criterion<never>, $HolderLookup$Provider, $Criterion<never>>>, ];
+    export type $NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator_ = { criteriaReplacers?: $List_<$BiFunction_<$Criterion<never>, $HolderLookup$Provider, $Criterion<never>>>, vanillaProvider?: $AdvancementSubProvider_,  } | [criteriaReplacers?: $List_<$BiFunction_<$Criterion<never>, $HolderLookup$Provider, $Criterion<never>>>, vanillaProvider?: $AdvancementSubProvider_, ];
     export class $NeoForgeFluidTagsProvider extends $FluidTagsProvider {
         registryKey: $ResourceKey<$Registry<$Fluid>>;
         builders: $Map<$ResourceLocation, $TagBuilder>;

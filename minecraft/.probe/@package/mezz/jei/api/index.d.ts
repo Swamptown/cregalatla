@@ -1,4 +1,4 @@
-import { $IVanillaCategoryExtensionRegistration, $IGuiHandlerRegistration, $IAdvancedRegistration, $IRecipeCategoryRegistration, $IIngredientAliasRegistration, $IRecipeRegistration, $IModIngredientRegistration, $IRuntimeRegistration, $ISubtypeRegistration, $IModInfoRegistration_, $IRecipeCatalystRegistration, $IRecipeTransferRegistration, $IExtraIngredientRegistration_ } from "@package/mezz/jei/api/registration";
+import { $IGuiHandlerRegistration, $IVanillaCategoryExtensionRegistration, $IAdvancedRegistration, $IRecipeCategoryRegistration, $IIngredientAliasRegistration, $IModIngredientRegistration, $IRecipeRegistration, $IRuntimeRegistration, $ISubtypeRegistration, $IModInfoRegistration_, $IRecipeCatalystRegistration, $IRecipeTransferRegistration, $IExtraIngredientRegistration_ } from "@package/mezz/jei/api/registration";
 import { $ResourceLocation_, $ResourceLocation } from "@package/net/minecraft/resources";
 import { $IPlatformFluidHelper } from "@package/mezz/jei/api/helpers";
 import { $IJeiConfigManager_ } from "@package/mezz/jei/api/runtime/config";

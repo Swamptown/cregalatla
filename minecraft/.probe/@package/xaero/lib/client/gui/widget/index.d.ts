@@ -1,8 +1,8 @@
 import { $Supplier, $Supplier_ } from "@package/java/util/function";
 import { $Component_, $Component, $Style, $FormattedText } from "@package/net/minecraft/network/chat";
 import { $TooltipInfo } from "@package/xaero/lib/common/gui/widget";
-import { $GuiGraphics } from "@package/net/minecraft/client/gui";
 import { $ArrayList } from "@package/java/util";
+import { $GuiGraphics } from "@package/net/minecraft/client/gui";
 export * as online from "@package/xaero/lib/client/gui/widget/online";
 export * as dropdown from "@package/xaero/lib/client/gui/widget/dropdown";
 
@@ -19,9 +19,9 @@ declare module "@package/xaero/lib/client/gui/widget" {
         setStartWidth(arg0: number): void;
         getPlainText(): string;
         drawBox(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        setAutoLinebreak(arg0: boolean): void;
-        getFullCode(): string;
         withWidth(arg0: number): $Tooltip;
+        getFullCode(): string;
+        setAutoLinebreak(arg0: boolean): void;
         splitWords(arg0: $ArrayList<$Component_>, arg1: $FormattedText): void;
         getLine(arg0: number): $Component;
         constructor(arg0: $Component_);
@@ -33,8 +33,8 @@ declare module "@package/xaero/lib/client/gui/widget" {
         constructor(arg0: string, arg1: $Style, arg2: boolean);
         set startWidth(value: number);
         get plainText(): string;
-        set autoLinebreak(value: boolean);
         get fullCode(): string;
+        set autoLinebreak(value: boolean);
     }
     export class $ITooltipHaver {
     }

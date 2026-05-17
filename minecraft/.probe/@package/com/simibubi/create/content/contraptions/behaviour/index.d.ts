@@ -1,5 +1,5 @@
-import { $Level_, $Level } from "@package/net/minecraft/world/level";
 import { $FilterItemStack } from "@package/com/simibubi/create/content/logistics/filter";
+import { $Level_, $Level } from "@package/net/minecraft/world/level";
 import { $UnaryOperator } from "@package/java/util/function";
 import { $BlockPos } from "@package/net/minecraft/core";
 import { $MountedFluidStorage } from "@package/com/simibubi/create/api/contraption/storage/fluid";
@@ -13,12 +13,12 @@ import { $MountedItemStorage } from "@package/com/simibubi/create/api/contraptio
 
 declare module "@package/com/simibubi/create/content/contraptions/behaviour" {
     export class $MovementContext {
+        static readNBT(arg0: $Level_, arg1: $StructureTemplate$StructureBlockInfo_, arg2: $CompoundTag_, arg3: $Contraption): $MovementContext;
+        getItemStorage(): $MountedItemStorage;
+        getFluidStorage(): $MountedFluidStorage;
         getAnimationSpeed(): number;
         getFilterFromBE(): $FilterItemStack;
         writeToNBT(arg0: $CompoundTag_): $CompoundTag;
-        getItemStorage(): $MountedItemStorage;
-        getFluidStorage(): $MountedFluidStorage;
-        static readNBT(arg0: $Level_, arg1: $StructureTemplate$StructureBlockInfo_, arg2: $CompoundTag_, arg3: $Contraption): $MovementContext;
         localPos: $BlockPos;
         motion: $Vec3;
         data: $CompoundTag;
@@ -34,9 +34,9 @@ declare module "@package/com/simibubi/create/content/contraptions/behaviour" {
         state: $BlockState;
         relativeMotion: $Vec3;
         constructor(arg0: $Level_, arg1: $StructureTemplate$StructureBlockInfo_, arg2: $Contraption);
-        get animationSpeed(): number;
-        get filterFromBE(): $FilterItemStack;
         get itemStorage(): $MountedItemStorage;
         get fluidStorage(): $MountedFluidStorage;
+        get animationSpeed(): number;
+        get filterFromBE(): $FilterItemStack;
     }
 }

@@ -54,8 +54,8 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         lookAtCooldown: number;
     }
     export class $CamelAi {
-        static initMemories(arg0: $Camel, arg1: $RandomSource): void;
         static getTemptations(): $Predicate<$ItemStack>;
+        static initMemories(arg0: $Camel, arg1: $RandomSource): void;
         static updateActivity(arg0: $Camel): void;
         static makeBrain(arg0: $Brain<$Camel>): $Brain<never>;
         static brainProvider(): $Brain$Provider<$Camel>;
@@ -76,7 +76,6 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         constructor(arg0: number);
     }
     export class $Camel extends $AbstractHorse implements $PlayerRideableJumping, $Saddleable {
-        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Camel;
         resetLastPoseChangeTick(arg0: number): void;
         isDashing(): boolean;
         setDashing(arg0: boolean): void;
@@ -89,6 +88,7 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         standUp(): void;
         canCamelChangePose(): boolean;
         sitDown(): void;
+        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Camel;
         static createAttributes(): $AttributeSupplier$Builder;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;

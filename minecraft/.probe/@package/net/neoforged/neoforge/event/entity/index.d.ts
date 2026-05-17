@@ -75,8 +75,8 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
     export class $EntityTeleportEvent$EnderPearl extends $EntityTeleportEvent implements $ICancellableEvent {
         getPearlEntity(): $ThrownEnderpearl;
         setAttackDamage(arg0: number): void;
-        getPlayer(): $ServerPlayer;
         getAttackDamage(): number;
+        getPlayer(): $ServerPlayer;
         getHitResult(): $HitResult;
         constructor(arg0: $ServerPlayer, arg1: number, arg2: number, arg3: number, arg4: $ThrownEnderpearl, arg5: number, arg6: $HitResult);
         get pearlEntity(): $ThrownEnderpearl;
@@ -109,9 +109,9 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
     }
     export class $EntityInvulnerabilityCheckEvent extends $EntityEvent {
         getOriginalInvulnerability(): boolean;
-        getSource(): $DamageSource;
         isInvulnerable(): boolean;
         setInvulnerable(arg0: boolean): void;
+        getSource(): $DamageSource;
         constructor(arg0: $Entity, arg1: $DamageSource_, arg2: boolean);
         get originalInvulnerability(): boolean;
         get source(): $DamageSource;
@@ -134,15 +134,15 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
         get types(): $List<$EntityType<$LivingEntity>>;
     }
     export class $EntityEvent$EnteringSection extends $EntityEvent {
+        getOldPos(): $SectionPos;
         getPackedOldPos(): number;
         getPackedNewPos(): number;
-        getOldPos(): $SectionPos;
-        getNewPos(): $SectionPos;
         didChunkChange(): boolean;
+        getNewPos(): $SectionPos;
         constructor(arg0: $Entity, arg1: number, arg2: number);
+        get oldPos(): $SectionPos;
         get packedOldPos(): number;
         get packedNewPos(): number;
-        get oldPos(): $SectionPos;
         get newPos(): $SectionPos;
     }
     export class $EntityMountEvent extends $EntityEvent implements $ICancellableEvent {
@@ -194,9 +194,9 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
         constructor(arg0: $Map_<$EntityType_<never>, $RegisterSpawnPlacementsEvent$MergedSpawnPredicate<never>>);
     }
     export class $EntityMobGriefingEvent extends $EntityEvent {
-        canGrief(): boolean;
         isMobGriefingEnabled(): boolean;
         setCanGrief(arg0: boolean): void;
+        canGrief(): boolean;
         constructor(arg0: $Level_, arg1: $Entity);
         get mobGriefingEnabled(): boolean;
     }

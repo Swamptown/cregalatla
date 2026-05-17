@@ -36,10 +36,6 @@ declare module "@package/team/unnamed/mocha" {
         eval(arg0: string, arg1: $Consumer_<$Scope>): number;
         eval(arg0: string): number;
         eval(arg0: $List_<$Expression>): number;
-        prepareEval(arg0: string): $MochaFunction;
-        prepareEval(arg0: string, arg1: $Consumer_<$Scope>): $MochaFunction;
-        prepareEval(arg0: $Reader): $MochaFunction;
-        prepareEval(arg0: $Reader, arg1: $Consumer_<$Scope>): $MochaFunction;
         /**
          * @deprecated
          */
@@ -48,5 +44,9 @@ declare module "@package/team/unnamed/mocha" {
         warnOnReflectiveFunctionUsage(arg0: boolean): $MochaEngine<T>;
         handleParseExceptions(arg0: $Consumer_<$ParseException>): $MochaEngine<T>;
         postCompile(arg0: $Consumer_<number[]>): $MochaEngine<T>;
+        prepareEval(arg0: string): $MochaFunction;
+        prepareEval(arg0: string, arg1: $Consumer_<$Scope>): $MochaFunction;
+        prepareEval(arg0: $Reader, arg1: $Consumer_<$Scope>): $MochaFunction;
+        prepareEval(arg0: $Reader): $MochaFunction;
     }
 }

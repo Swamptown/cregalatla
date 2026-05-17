@@ -25,17 +25,17 @@ declare module "@package/net/minecraft/client/resources/language" {
         getLanguages(): $SortedMap<string, $LanguageInfo>;
         onResourceManagerReload(arg0: $ResourceManager): void;
         getSelected(): string;
-        getFabricId(): $ResourceLocation;
-        getFabricDependencies(): $Collection<any>;
         setSelected(arg0: string): void;
         getJavaLocale(): $Locale;
+        getFabricId(): $ResourceLocation;
+        getFabricDependencies(): $Collection<any>;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
         constructor(arg0: string, arg1: $Consumer_<$ClientLanguage>);
         get languages(): $SortedMap<string, $LanguageInfo>;
+        get javaLocale(): $Locale;
         get fabricId(): $ResourceLocation;
         get fabricDependencies(): $Collection<any>;
-        get javaLocale(): $Locale;
         get name(): string;
     }
     export class $ClientLanguage extends $Language implements $IMixinClientLanguage, $IMixinClientLanguage$1 {
@@ -62,5 +62,5 @@ declare module "@package/net/minecraft/client/resources/language" {
     /**
      * Values that may be interpreted as {@link $LanguageInfo}.
      */
-    export type $LanguageInfo_ = { bidirectional?: boolean, region?: string, name?: string,  } | [bidirectional?: boolean, region?: string, name?: string, ];
+    export type $LanguageInfo_ = { name?: string, region?: string, bidirectional?: boolean,  } | [name?: string, region?: string, bidirectional?: boolean, ];
 }

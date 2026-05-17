@@ -27,5 +27,5 @@ declare module "@package/net/neoforged/fml/common/asm/enumextension" {
     /**
      * Values that may be interpreted as {@link $ExtensionInfo}.
      */
-    export type $ExtensionInfo_ = { extended?: boolean, totalCount?: number, vanillaCount?: number, netCheck?: $NetworkedEnum$NetworkCheck_,  } | [extended?: boolean, totalCount?: number, vanillaCount?: number, netCheck?: $NetworkedEnum$NetworkCheck_, ];
+    export type $ExtensionInfo_ = { netCheck?: $NetworkedEnum$NetworkCheck_, vanillaCount?: number, totalCount?: number, extended?: boolean,  } | [netCheck?: $NetworkedEnum$NetworkCheck_, vanillaCount?: number, totalCount?: number, extended?: boolean, ];
 }

@@ -58,14 +58,14 @@ declare module "@package/com/simibubi/create/content/trains/schedule" {
         write(arg0: $HolderLookup$Provider): $CompoundTag;
         read(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         tick(arg0: $Level_): void;
-        returnSchedule(arg0: $HolderLookup$Provider): $ItemStack;
-        getWaitingStatus(arg0: $Level_): $MutableComponent;
-        startCooldown(): void;
         discardSchedule(): void;
+        startCooldown(): void;
+        getWaitingStatus(arg0: $Level_): $MutableComponent;
         startCurrentInstruction(arg0: $Level_): $DiscoveredPath;
         destinationReached(): void;
-        submitPredictions(): $Collection<$GlobalTrainDisplayData$TrainDeparturePrediction>;
+        returnSchedule(arg0: $HolderLookup$Provider): $ItemStack;
         setSchedule(arg0: $Schedule, arg1: boolean): void;
+        submitPredictions(): $Collection<$GlobalTrainDisplayData$TrainDeparturePrediction>;
         setSchedulePresentClientside(arg0: boolean): void;
         transitInterrupted(): void;
         tickConditions(arg0: $Level_): void;

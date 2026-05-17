@@ -16,6 +16,7 @@ declare module "@package/net/minecraft/world/level/gameevent/vibrations" {
     }
     export interface $VibrationSystem$User {
         canReceiveVibration(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $Holder_<$GameEvent>, arg3: $GameEvent$Context_): boolean;
+        getPositionSource(): $PositionSource;
         getListenableEvents(): $TagKey<$GameEvent>;
         canTriggerAvoidVibration(): boolean;
         requiresAdjacentChunksToBeTicking(): boolean;
@@ -24,10 +25,9 @@ declare module "@package/net/minecraft/world/level/gameevent/vibrations" {
         onDataChanged(): void;
         getListenerRadius(): number;
         onReceiveVibration(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $Holder_<$GameEvent>, arg3: $Entity, arg4: $Entity, arg5: number): void;
-        getPositionSource(): $PositionSource;
+        get positionSource(): $PositionSource;
         get listenableEvents(): $TagKey<$GameEvent>;
         get listenerRadius(): number;
-        get positionSource(): $PositionSource;
     }
     export class $VibrationSystem$Data {
         getSelectionStrategy(): $VibrationSelector;
@@ -70,7 +70,7 @@ declare module "@package/net/minecraft/world/level/gameevent/vibrations" {
     /**
      * Values that may be interpreted as {@link $VibrationInfo}.
      */
-    export type $VibrationInfo_ = { projectileOwnerUuid?: $UUID_, entity?: $Entity, distance?: number, pos?: $Vec3_, uuid?: $UUID_, gameEvent?: $Holder_<$GameEvent>,  } | [projectileOwnerUuid?: $UUID_, entity?: $Entity, distance?: number, pos?: $Vec3_, uuid?: $UUID_, gameEvent?: $Holder_<$GameEvent>, ];
+    export type $VibrationInfo_ = { gameEvent?: $Holder_<$GameEvent>, uuid?: $UUID_, pos?: $Vec3_, distance?: number, entity?: $Entity, projectileOwnerUuid?: $UUID_,  } | [gameEvent?: $Holder_<$GameEvent>, uuid?: $UUID_, pos?: $Vec3_, distance?: number, entity?: $Entity, projectileOwnerUuid?: $UUID_, ];
     export class $VibrationSystem$Ticker {
         static tick(arg0: $Level_, arg1: $VibrationSystem$Data, arg2: $VibrationSystem$User): void;
     }

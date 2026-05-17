@@ -65,11 +65,11 @@ declare module "@package/net/minecraft/util/worldupdate" {
     /**
      * Values that may be interpreted as {@link $WorldUpgrader$FileToUpgrade}.
      */
-    export type $WorldUpgrader$FileToUpgrade_ = { file?: $RegionFile, chunksToUpgrade?: $List_<$ChunkPos>,  } | [file?: $RegionFile, chunksToUpgrade?: $List_<$ChunkPos>, ];
+    export type $WorldUpgrader$FileToUpgrade_ = { chunksToUpgrade?: $List_<$ChunkPos>, file?: $RegionFile,  } | [chunksToUpgrade?: $List_<$ChunkPos>, file?: $RegionFile, ];
     export class $WorldUpgrader$DimensionToUpgrade<T> extends $Record {
     }
     /**
      * Values that may be interpreted as {@link $WorldUpgrader$DimensionToUpgrade}.
      */
-    export type $WorldUpgrader$DimensionToUpgrade_<T> = { dimensionKey?: $ResourceKey_<$Level>, storage?: any, files?: $ListIterator<$WorldUpgrader$FileToUpgrade_>,  } | [dimensionKey?: $ResourceKey_<$Level>, storage?: any, files?: $ListIterator<$WorldUpgrader$FileToUpgrade_>, ];
+    export type $WorldUpgrader$DimensionToUpgrade_<T> = { files?: $ListIterator<$WorldUpgrader$FileToUpgrade_>, storage?: any, dimensionKey?: $ResourceKey_<$Level>,  } | [files?: $ListIterator<$WorldUpgrader$FileToUpgrade_>, storage?: any, dimensionKey?: $ResourceKey_<$Level>, ];
 }

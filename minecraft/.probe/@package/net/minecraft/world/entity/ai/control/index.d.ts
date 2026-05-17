@@ -87,13 +87,13 @@ declare module "@package/net/minecraft/world/entity/ai/control" {
     export class $MoveControl implements $Control {
         tick(): void;
         rotlerp(arg0: number, arg1: number, arg2: number): number;
-        getSpeedModifier(): number;
         setWantedPosition(arg0: number, arg1: number, arg2: number, arg3: number): void;
         hasWanted(): boolean;
         strafe(arg0: number, arg1: number): void;
         getWantedX(): number;
         getWantedY(): number;
         getWantedZ(): number;
+        getSpeedModifier(): number;
         speedModifier: number;
         mob: $Mob;
         strafeForwards: number;

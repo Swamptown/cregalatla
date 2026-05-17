@@ -13,8 +13,8 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/worldgen" {
     export class $SpawnBoxSettings extends $Record {
         get(arg0: string, arg1: $MobCategory_): $WeightedRandomList<$MobSpawnSettings$SpawnerData>;
         isEmpty(): boolean;
-        hasCategory(arg0: $MobCategory_): boolean;
         spawnOverrides(): $Map<$MobCategory, $Map<string, $WeightedRandomList<$MobSpawnSettings$SpawnerData>>>;
+        hasCategory(arg0: $MobCategory_): boolean;
         static CODEC: $Codec<$SpawnBoxSettings>;
         static EMPTY: $SpawnBoxSettings;
         constructor(spawnOverrides: $Map_<$MobCategory_, $Map_<string, $WeightedRandomList<$MobSpawnSettings$SpawnerData>>>);

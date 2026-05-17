@@ -58,10 +58,10 @@ declare module "@package/xaero/hud/minimap/element/render" {
         getFilterName(arg0: E): string;
         getMenuTextFillLeftPadding(arg0: E): number;
         getRightClickTitleBackgroundColor(arg0: E): number;
-        isAlwaysHighlightedWhenHovered(arg0: E, arg1: RC): boolean;
         getRenderY(arg0: E, arg1: RC, arg2: number): number;
         getCoordinateScale(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): number;
         shouldScalePartialCoordinates(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): boolean;
+        isAlwaysHighlightedWhenHovered(arg0: E, arg1: RC): boolean;
         getMenuName(arg0: E): string;
         isInteractable(arg0: $MinimapElementRenderLocation, arg1: E): boolean;
         constructor();

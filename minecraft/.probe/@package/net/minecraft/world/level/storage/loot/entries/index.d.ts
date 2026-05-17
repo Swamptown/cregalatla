@@ -22,8 +22,8 @@ declare module "@package/net/minecraft/world/level/storage/loot/entries" {
     export class $LootPoolEntryContainer implements $ComposableEntryContainer, $LootPoolEntryAccessor {
         validate(arg0: $ValidationContext): void;
         getType(): $LootPoolEntryType;
-        canRun(arg0: $LootContext): boolean;
         static commonFields<T extends $LootPoolEntryContainer>(arg0: $RecordCodecBuilder$Instance<T>): $Products$P1<$RecordCodecBuilder$Mu<T>, $List<$LootItemCondition>>;
+        canRun(arg0: $LootContext): boolean;
         getConditions(): $List<$LootItemCondition>;
         conditions: $List<$LootItemCondition>;
         constructor(arg0: $List_<$LootItemCondition>);
@@ -84,7 +84,9 @@ declare module "@package/net/minecraft/world/level/storage/loot/entries" {
      */
     export type $LootPoolSingletonContainer$EntryConstructor_ = (() => void);
     export class $AlternativesEntry$Builder extends $LootPoolEntryContainer$Builder<$AlternativesEntry$Builder> {
+        getThis(): $AlternativesEntry$Builder;
         constructor(...arg0: $LootPoolEntryContainer$Builder<never>[]);
+        get this(): $AlternativesEntry$Builder;
     }
     export class $DynamicLoot extends $LootPoolSingletonContainer {
         static dynamicEntry(arg0: $ResourceLocation_): $LootPoolSingletonContainer$Builder<never>;
@@ -97,7 +99,7 @@ declare module "@package/net/minecraft/world/level/storage/loot/entries" {
         static DEFAULT_WEIGHT: number;
         quality: number;
     }
-    export class $CompositeEntryBase extends $LootPoolEntryContainer implements $CombinedEntryAccessor, $LootUnificationHandler {
+    export class $CompositeEntryBase extends $LootPoolEntryContainer implements $LootUnificationHandler, $CombinedEntryAccessor {
         compose(arg0: $List_<$ComposableEntryContainer_>): $ComposableEntryContainer;
         almostunified$unify(lookup: $UnificationLookup): boolean;
         static createCodec<T extends $CompositeEntryBase>(arg0: $CompositeEntryBase$CompositeEntryConstructor_<T>): $MapCodec<T>;
@@ -128,7 +130,7 @@ declare module "@package/net/minecraft/world/level/storage/loot/entries" {
         quality: number;
         get name(): $TagKey<$Item>;
     }
-    export class $LootItem extends $LootPoolSingletonContainer implements $ItemEntryAccessor, $LootUnificationHandler {
+    export class $LootItem extends $LootPoolSingletonContainer implements $LootUnificationHandler, $ItemEntryAccessor {
         static lootTableItem(arg0: $ItemLike_): $LootPoolSingletonContainer$Builder<never>;
         almostunified$unify(lookup: $UnificationLookup): boolean;
         getItem(): $Holder<$Item>;
@@ -222,14 +224,14 @@ declare module "@package/net/minecraft/world/level/storage/loot/entries" {
         unwrap(): T;
         build(): $LootPoolEntryContainer;
         then(arg0: $LootPoolEntryContainer$Builder<never>): $SequentialEntry$Builder;
-        getThis(): T;
-        otherwise(arg0: $LootPoolEntryContainer$Builder<never>): $AlternativesEntry$Builder;
         getConditions(): $List<$LootItemCondition>;
+        otherwise(arg0: $LootPoolEntryContainer$Builder<never>): $AlternativesEntry$Builder;
+        getThis(): T;
         when<E>(arg0: $Iterable_<E>, arg1: $Function_<E, $LootItemCondition$Builder>): T;
         when(arg0: $LootItemCondition$Builder_): T;
         constructor();
-        get this(): T;
         get conditions(): $List<$LootItemCondition>;
+        get this(): T;
     }
     export class $EntryGroup extends $CompositeEntryBase {
         static list(...arg0: $LootPoolEntryContainer$Builder<never>[]): $EntryGroup$Builder;

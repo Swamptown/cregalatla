@@ -22,13 +22,13 @@ declare module "@package/com/simibubi/create/content/equipment/toolbox" {
     export class $ToolboxBlockEntity extends $SmartBlockEntity implements $MenuProvider, $Nameable, $AccessorToolboxBlockEntity {
         getName(): $Component;
         getDisplayName(): $Component;
-        readInventory(arg0: $ToolboxInventory): void;
-        unequipTracked(): void;
         connectPlayer(arg0: number, arg1: $Player, arg2: number): void;
         isFullyInitialized(): boolean;
+        readInventory(arg0: $ToolboxInventory): void;
+        unequipTracked(): void;
         createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
-        static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         unequip(arg0: number, arg1: $Player, arg2: number, arg3: boolean): void;
+        static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         getColor(): $DyeColor;
         setUniqueId(arg0: $UUID_): void;
         hasCustomName(): boolean;
@@ -55,11 +55,11 @@ declare module "@package/com/simibubi/create/content/equipment/toolbox" {
         get inventory(): $ToolboxInventory;
     }
     export class $ToolboxInventory extends $ItemStackHandler implements $AccessorToolboxInventory {
+        inLimitedMode(arg0: $Consumer_<$ToolboxInventory>): void;
+        static canItemsShareCompartment(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
         takeFromCompartment(arg0: number, arg1: number, arg2: boolean): $ItemStack;
         distributeToCompartment(arg0: $ItemStack_, arg1: number, arg2: boolean): $ItemStack;
         static cleanItemNBT(arg0: $ItemStack_): $ItemStack;
-        static canItemsShareCompartment(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
-        inLimitedMode(arg0: $Consumer_<$ToolboxInventory>): void;
         settle(arg0: number): void;
         getFilters(): $List<$ItemStack>;
         /**

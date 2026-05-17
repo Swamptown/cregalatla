@@ -6,6 +6,7 @@ declare module "@package/net/caffeinemc/mods/sodium/client/model/quad/properties
     export class $ModelQuadFacing extends $Enum<$ModelQuadFacing> {
         static values(): $ModelQuadFacing[];
         static valueOf(arg0: string): $ModelQuadFacing;
+        isAligned(): boolean;
         static fromNormal(arg0: number, arg1: number, arg2: number): $ModelQuadFacing;
         getAlignedNormal(): $Vector3fc;
         getPackedAlignedNormal(): number;
@@ -14,7 +15,6 @@ declare module "@package/net/caffeinemc/mods/sodium/client/model/quad/properties
         static fromPackedNormal(arg0: number): $ModelQuadFacing;
         getSign(): number;
         static fromDirection(arg0: $Direction_): $ModelQuadFacing;
-        isAligned(): boolean;
         getOpposite(): $ModelQuadFacing;
         getAxis(): number;
         static NEG_Z: $ModelQuadFacing;
@@ -35,10 +35,10 @@ declare module "@package/net/caffeinemc/mods/sodium/client/model/quad/properties
         static COUNT: number;
         static NONE: number;
         static DIRECTIONS: number;
+        get aligned(): boolean;
         get alignedNormal(): $Vector3fc;
         get packedAlignedNormal(): number;
         get sign(): number;
-        get aligned(): boolean;
         get opposite(): $ModelQuadFacing;
         get axis(): number;
     }

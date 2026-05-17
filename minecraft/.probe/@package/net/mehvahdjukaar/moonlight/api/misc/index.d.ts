@@ -30,17 +30,17 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/misc" {
     export class $WorldSavedDataType<D extends $WorldSavedData> {
         getName(): string;
         getData(arg0: $Level_): D;
-        isSyncable(): boolean;
         getStreamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, D>;
-        setData(arg0: $Level_, arg1: D): void;
+        isSyncable(): boolean;
         getCodec(): $Codec<D>;
+        setData(arg0: $Level_, arg1: D): void;
         static CODEC: $Codec<$WorldSavedDataType<$WorldSavedData>>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $WorldSavedDataType<$WorldSavedData>>;
         constructor(arg0: $ResourceLocation_, arg1: $Function_<$ServerLevel, D>, arg2: $Supplier_<$Codec<D>>, arg3: $Supplier_<$StreamCodec<$RegistryFriendlyByteBuf, D>>);
         constructor(arg0: $ResourceLocation_, arg1: $Function_<$ServerLevel, D>, arg2: $Supplier_<$Codec<D>>, arg3: $Supplier_<$StreamCodec<$RegistryFriendlyByteBuf, D>>, arg4: $WorldSavedDataType$Scope_);
         get name(): string;
-        get syncable(): boolean;
         get streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, D>;
+        get syncable(): boolean;
         get codec(): $Codec<D>;
     }
     /**
@@ -58,5 +58,5 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/misc" {
     /**
      * Values that may be interpreted as {@link $Triplet}.
      */
-    export type $Triplet_<L, M, R> = { middle?: any, right?: any, left?: any,  } | [middle?: any, right?: any, left?: any, ];
+    export type $Triplet_<L, M, R> = { left?: any, right?: any, middle?: any,  } | [left?: any, right?: any, middle?: any, ];
 }

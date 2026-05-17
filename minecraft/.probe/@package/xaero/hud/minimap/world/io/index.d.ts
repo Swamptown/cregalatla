@@ -16,8 +16,8 @@ declare module "@package/xaero/hud/minimap/world/io" {
         loadWorldFile(arg0: $MinimapWorldContainer, arg1: string, arg2: $Path_): boolean;
         loadWorld(arg0: $MinimapWorld, arg1: $Path_): void;
         checkWorldFileLine(arg0: string[], arg1: $MinimapWorld): boolean;
-        saveAllWorlds(arg0: $MinimapSession): void;
         loadWorldsFromAllSources(arg0: $MinimapSession, arg1: $ClientPacketListener): void;
+        saveAllWorlds(arg0: $MinimapSession): void;
         saveWorld(arg0: $MinimapWorld, arg1: boolean): void;
         saveWorld(arg0: $MinimapWorld): void;
         getRootConfigIO(): $RootConfigIO;

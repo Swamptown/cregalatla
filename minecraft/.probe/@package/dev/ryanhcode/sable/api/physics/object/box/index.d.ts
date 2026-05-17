@@ -13,8 +13,8 @@ declare module "@package/dev/ryanhcode/sable/api/physics/object/box" {
     export interface $BoxHandle {
         remove(): void;
         getRuntimeId(): number;
-        readPose(arg0: $Pose3d): void;
         wakeUp(): void;
+        readPose(arg0: $Pose3d): void;
         get runtimeId(): number;
     }
     export class $BoxPhysicsObject implements $ArbitraryPhysicsObject, $PhysicsPipelineBody {
@@ -22,15 +22,15 @@ declare module "@package/dev/ryanhcode/sable/api/physics/object/box" {
         onUnloaded(arg0: $SubLevelHoldingChunkMap, arg1: $ChunkPos): void;
         getHalfExtents(): $Vector3dc;
         getRuntimeId(): number;
-        getMass(): number;
         updatePose(): void;
+        getMass(): number;
         onAddition(arg0: $SubLevelPhysicsSystem): void;
         wakeUp(): void;
         getMassTracker(): $MassData;
-        onRemoved(): void;
         isRemoved(): boolean;
         getBoundingBox(arg0: $BoundingBox3d): void;
         getPose(): $Pose3dc;
+        onRemoved(): void;
         constructor(arg0: $Pose3dc, arg1: $Vector3dc, arg2: number);
         get active(): boolean;
         get halfExtents(): $Vector3dc;

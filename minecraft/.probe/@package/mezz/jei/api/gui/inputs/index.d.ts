@@ -17,7 +17,7 @@ declare module "@package/mezz/jei/api/gui/inputs" {
     /**
      * Values that may be interpreted as {@link $RecipeSlotUnderMouse}.
      */
-    export type $RecipeSlotUnderMouse_ = { offset?: $ScreenPosition_, slot?: $IRecipeSlotDrawable,  } | [offset?: $ScreenPosition_, slot?: $IRecipeSlotDrawable, ];
+    export type $RecipeSlotUnderMouse_ = { slot?: $IRecipeSlotDrawable, offset?: $ScreenPosition_,  } | [slot?: $IRecipeSlotDrawable, offset?: $ScreenPosition_, ];
     export class $IJeiUserInput {
     }
     export interface $IJeiUserInput {
@@ -34,12 +34,12 @@ declare module "@package/mezz/jei/api/gui/inputs" {
     }
     export interface $IJeiGuiEventListener {
         getArea(): $ScreenRectangle;
+        keyPressed(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
+        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         mouseMoved(arg0: number, arg1: number): void;
         mouseReleased(arg0: number, arg1: number, arg2: number): boolean;
         mouseDragged(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
         mouseScrolled(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
-        keyPressed(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
-        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         get area(): $ScreenRectangle;
     }
     /**

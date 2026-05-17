@@ -30,20 +30,20 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         test(arg0: $ItemStack_): boolean;
         static of(arg0: $Ingredient_, arg1: $Ingredient_): $Ingredient;
         getType(): $IngredientType<never>;
+        subtracted(): $Ingredient;
         getItems(): $Stream<$ItemStack>;
         kjs$canBeUsedForMatching(): boolean;
-        subtracted(): $Ingredient;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        kjs$asIngredient(): $Ingredient;
         kjs$getStackArray(): $ItemStack[];
         kjs$getDisplayStacks(): $ItemStackSet;
-        getStacks(): $ItemStackSet;
+        kjs$asIngredient(): $Ingredient;
         testItem(item: $Item_): boolean;
         getItemStream(): $Stream<$Item>;
         getItemTypes(): $Set<$Item>;
         getItemIds(): $Set<string>;
         getFirst(): $ItemStack;
+        getStacks(): $ItemStackSet;
         isWildcard(): boolean;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
@@ -53,11 +53,11 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get stacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
         get itemIds(): $Set<string>;
         get first(): $ItemStack;
+        get stacks(): $ItemStackSet;
         get wildcard(): boolean;
     }
     /**
@@ -84,16 +84,16 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         getTag(): $TagKey<$Block>;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        kjs$asIngredient(): $Ingredient;
-        kjs$canBeUsedForMatching(): boolean;
         kjs$getStackArray(): $ItemStack[];
         kjs$getDisplayStacks(): $ItemStackSet;
-        getStacks(): $ItemStackSet;
+        kjs$asIngredient(): $Ingredient;
+        kjs$canBeUsedForMatching(): boolean;
         testItem(item: $Item_): boolean;
         getItemStream(): $Stream<$Item>;
         getItemTypes(): $Set<$Item>;
         getItemIds(): $Set<string>;
         getFirst(): $ItemStack;
+        getStacks(): $ItemStackSet;
         isWildcard(): boolean;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
@@ -104,11 +104,11 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         get items(): $Stream<$ItemStack>;
         get tag(): $TagKey<$Block>;
         get simple(): boolean;
-        get stacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
         get itemIds(): $Set<string>;
         get first(): $ItemStack;
+        get stacks(): $ItemStackSet;
         get wildcard(): boolean;
     }
     export class $IntersectionIngredient extends $Record implements $ICustomIngredient, $CustomIngredientKJS {
@@ -120,15 +120,15 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         kjs$canBeUsedForMatching(): boolean;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        kjs$asIngredient(): $Ingredient;
         kjs$getStackArray(): $ItemStack[];
         kjs$getDisplayStacks(): $ItemStackSet;
-        getStacks(): $ItemStackSet;
+        kjs$asIngredient(): $Ingredient;
         testItem(item: $Item_): boolean;
         getItemStream(): $Stream<$Item>;
         getItemTypes(): $Set<$Item>;
         getItemIds(): $Set<string>;
         getFirst(): $ItemStack;
+        getStacks(): $ItemStackSet;
         isWildcard(): boolean;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
@@ -138,11 +138,11 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get stacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
         get itemIds(): $Set<string>;
         get first(): $ItemStack;
+        get stacks(): $ItemStackSet;
         get wildcard(): boolean;
     }
     /**
@@ -167,16 +167,16 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         isSimple(): boolean;
         components(): $DataComponentPredicate;
         toVanilla(): $Ingredient;
-        kjs$asIngredient(): $Ingredient;
-        kjs$canBeUsedForMatching(): boolean;
         kjs$getStackArray(): $ItemStack[];
         kjs$getDisplayStacks(): $ItemStackSet;
-        getStacks(): $ItemStackSet;
+        kjs$asIngredient(): $Ingredient;
+        kjs$canBeUsedForMatching(): boolean;
         testItem(item: $Item_): boolean;
         getItemStream(): $Stream<$Item>;
         getItemTypes(): $Set<$Item>;
         getItemIds(): $Set<string>;
         getFirst(): $ItemStack;
+        getStacks(): $ItemStackSet;
         isWildcard(): boolean;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
@@ -186,11 +186,11 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         get type(): $IngredientType<never>;
         get strict(): boolean;
         get simple(): boolean;
-        get stacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
         get itemIds(): $Set<string>;
         get first(): $ItemStack;
+        get stacks(): $ItemStackSet;
         get wildcard(): boolean;
     }
     export class $CompoundIngredient extends $Record implements $ICustomIngredient, $CustomIngredientKJS {
@@ -202,15 +202,15 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         kjs$canBeUsedForMatching(): boolean;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        kjs$asIngredient(): $Ingredient;
         kjs$getStackArray(): $ItemStack[];
         kjs$getDisplayStacks(): $ItemStackSet;
-        getStacks(): $ItemStackSet;
+        kjs$asIngredient(): $Ingredient;
         testItem(item: $Item_): boolean;
         getItemStream(): $Stream<$Item>;
         getItemTypes(): $Set<$Item>;
         getItemIds(): $Set<string>;
         getFirst(): $ItemStack;
+        getStacks(): $ItemStackSet;
         isWildcard(): boolean;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
@@ -220,11 +220,11 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get stacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
         get itemIds(): $Set<string>;
         get first(): $ItemStack;
+        get stacks(): $ItemStackSet;
         get wildcard(): boolean;
     }
     /**
@@ -248,8 +248,8 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
         static of(arg0: $ItemLike_, arg1: number): $SizedIngredient;
         static of(arg0: $TagKey_<$Item>, arg1: number): $SizedIngredient;
         count(): number;
-        getItems(): $ItemStack[];
         ingredient(): $Ingredient;
+        getItems(): $ItemStack[];
         matches(cx: $RecipeMatchContext, _in: $Ingredient_, exact: boolean): boolean;
         matches(cx: $RecipeMatchContext, item: $ItemStack_, exact: boolean): boolean;
         kjs$toFlatJson(): $JsonElement;
@@ -278,7 +278,7 @@ declare module "@package/net/neoforged/neoforge/common/crafting" {
     /**
      * Values that may be interpreted as {@link $IngredientType}.
      */
-    export type $IngredientType_<T> = RegistryTypes.NeoforgeIngredientSerializer | { streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ICustomIngredient>, codec?: $MapCodec_<$ICustomIngredient>,  } | [streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ICustomIngredient>, codec?: $MapCodec_<$ICustomIngredient>, ];
+    export type $IngredientType_<T> = RegistryTypes.NeoforgeIngredientSerializer | { codec?: $MapCodec_<$ICustomIngredient>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ICustomIngredient>,  } | [codec?: $MapCodec_<$ICustomIngredient>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ICustomIngredient>, ];
     export interface $IngredientType<T> extends RegistryMarked<RegistryTypes.NeoforgeIngredientSerializerTag, RegistryTypes.NeoforgeIngredientSerializer> {}
     export class $IRecipeContainer {
     }

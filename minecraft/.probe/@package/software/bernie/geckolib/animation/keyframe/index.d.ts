@@ -1,4 +1,4 @@
-import { $MathValue_, $MathValue } from "@package/software/bernie/geckolib/loading/math";
+import { $MathValue, $MathValue_ } from "@package/software/bernie/geckolib/loading/math";
 import { $GeoBone } from "@package/software/bernie/geckolib/cache/object";
 import { $List, $List_ } from "@package/java/util";
 import { $Record } from "@package/java/lang";
@@ -20,17 +20,9 @@ declare module "@package/software/bernie/geckolib/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $KeyframeStack}.
      */
-    export type $KeyframeStack_<T> = { zKeyframes?: $List_<$Keyframe_<never>>, yKeyframes?: $List_<$Keyframe_<never>>, xKeyframes?: $List_<$Keyframe_<never>>,  } | [zKeyframes?: $List_<$Keyframe_<never>>, yKeyframes?: $List_<$Keyframe_<never>>, xKeyframes?: $List_<$Keyframe_<never>>, ];
+    export type $KeyframeStack_<T> = { xKeyframes?: $List_<$Keyframe_<never>>, yKeyframes?: $List_<$Keyframe_<never>>, zKeyframes?: $List_<$Keyframe_<never>>,  } | [xKeyframes?: $List_<$Keyframe_<never>>, yKeyframes?: $List_<$Keyframe_<never>>, zKeyframes?: $List_<$Keyframe_<never>>, ];
     export class $BoneAnimationQueue extends $Record {
         bone(): $GeoBone;
-        addNextRotation(arg0: $Keyframe_<never>, arg1: number, arg2: number, arg3: $BoneSnapshot, arg4: $BoneSnapshot, arg5: $AnimationPoint_, arg6: $AnimationPoint_, arg7: $AnimationPoint_): void;
-        addNextPosition(arg0: $Keyframe_<never>, arg1: number, arg2: number, arg3: $BoneSnapshot, arg4: $AnimationPoint_, arg5: $AnimationPoint_, arg6: $AnimationPoint_): void;
-        addNextScale(arg0: $Keyframe_<never>, arg1: number, arg2: number, arg3: $BoneSnapshot, arg4: $AnimationPoint_, arg5: $AnimationPoint_, arg6: $AnimationPoint_): void;
-        addRotations(arg0: $AnimationPoint_, arg1: $AnimationPoint_, arg2: $AnimationPoint_): void;
-        addPositions(arg0: $AnimationPoint_, arg1: $AnimationPoint_, arg2: $AnimationPoint_): void;
-        addScales(arg0: $AnimationPoint_, arg1: $AnimationPoint_, arg2: $AnimationPoint_): void;
-        rotationXQueue(): $AnimationPointQueue;
-        rotationYQueue(): $AnimationPointQueue;
         rotationZQueue(): $AnimationPointQueue;
         positionXQueue(): $AnimationPointQueue;
         positionYQueue(): $AnimationPointQueue;
@@ -47,13 +39,21 @@ declare module "@package/software/bernie/geckolib/animation/keyframe" {
         addRotationXPoint(arg0: $Keyframe_<never>, arg1: number, arg2: number, arg3: number, arg4: number): void;
         addRotationYPoint(arg0: $Keyframe_<never>, arg1: number, arg2: number, arg3: number, arg4: number): void;
         addRotationZPoint(arg0: $Keyframe_<never>, arg1: number, arg2: number, arg3: number, arg4: number): void;
+        rotationXQueue(): $AnimationPointQueue;
+        rotationYQueue(): $AnimationPointQueue;
+        addNextRotation(arg0: $Keyframe_<never>, arg1: number, arg2: number, arg3: $BoneSnapshot, arg4: $BoneSnapshot, arg5: $AnimationPoint_, arg6: $AnimationPoint_, arg7: $AnimationPoint_): void;
+        addNextPosition(arg0: $Keyframe_<never>, arg1: number, arg2: number, arg3: $BoneSnapshot, arg4: $AnimationPoint_, arg5: $AnimationPoint_, arg6: $AnimationPoint_): void;
+        addNextScale(arg0: $Keyframe_<never>, arg1: number, arg2: number, arg3: $BoneSnapshot, arg4: $AnimationPoint_, arg5: $AnimationPoint_, arg6: $AnimationPoint_): void;
+        addRotations(arg0: $AnimationPoint_, arg1: $AnimationPoint_, arg2: $AnimationPoint_): void;
+        addPositions(arg0: $AnimationPoint_, arg1: $AnimationPoint_, arg2: $AnimationPoint_): void;
+        addScales(arg0: $AnimationPoint_, arg1: $AnimationPoint_, arg2: $AnimationPoint_): void;
         constructor(arg0: $GeoBone);
         constructor(bone: $GeoBone, rotationXQueue: $AnimationPointQueue, rotationYQueue: $AnimationPointQueue, rotationZQueue: $AnimationPointQueue, positionXQueue: $AnimationPointQueue, positionYQueue: $AnimationPointQueue, positionZQueue: $AnimationPointQueue, scaleXQueue: $AnimationPointQueue, scaleYQueue: $AnimationPointQueue, scaleZQueue: $AnimationPointQueue);
     }
     /**
      * Values that may be interpreted as {@link $BoneAnimationQueue}.
      */
-    export type $BoneAnimationQueue_ = { rotationZQueue?: $AnimationPointQueue, scaleZQueue?: $AnimationPointQueue, scaleXQueue?: $AnimationPointQueue, rotationXQueue?: $AnimationPointQueue, positionYQueue?: $AnimationPointQueue, bone?: $GeoBone, rotationYQueue?: $AnimationPointQueue, scaleYQueue?: $AnimationPointQueue, positionZQueue?: $AnimationPointQueue, positionXQueue?: $AnimationPointQueue,  } | [rotationZQueue?: $AnimationPointQueue, scaleZQueue?: $AnimationPointQueue, scaleXQueue?: $AnimationPointQueue, rotationXQueue?: $AnimationPointQueue, positionYQueue?: $AnimationPointQueue, bone?: $GeoBone, rotationYQueue?: $AnimationPointQueue, scaleYQueue?: $AnimationPointQueue, positionZQueue?: $AnimationPointQueue, positionXQueue?: $AnimationPointQueue, ];
+    export type $BoneAnimationQueue_ = { positionXQueue?: $AnimationPointQueue, positionZQueue?: $AnimationPointQueue, scaleYQueue?: $AnimationPointQueue, rotationYQueue?: $AnimationPointQueue, bone?: $GeoBone, positionYQueue?: $AnimationPointQueue, rotationXQueue?: $AnimationPointQueue, scaleXQueue?: $AnimationPointQueue, scaleZQueue?: $AnimationPointQueue, rotationZQueue?: $AnimationPointQueue,  } | [positionXQueue?: $AnimationPointQueue, positionZQueue?: $AnimationPointQueue, scaleYQueue?: $AnimationPointQueue, rotationYQueue?: $AnimationPointQueue, bone?: $GeoBone, positionYQueue?: $AnimationPointQueue, rotationXQueue?: $AnimationPointQueue, scaleXQueue?: $AnimationPointQueue, scaleZQueue?: $AnimationPointQueue, rotationZQueue?: $AnimationPointQueue, ];
     export class $BoneAnimation extends $Record {
         rotationKeyFrames(): $KeyframeStack<$Keyframe<$MathValue>>;
         positionKeyFrames(): $KeyframeStack<$Keyframe<$MathValue>>;
@@ -64,7 +64,7 @@ declare module "@package/software/bernie/geckolib/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $BoneAnimation}.
      */
-    export type $BoneAnimation_ = { boneName?: string, rotationKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, positionKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, scaleKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>,  } | [boneName?: string, rotationKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, positionKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, scaleKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, ];
+    export type $BoneAnimation_ = { scaleKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, positionKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, rotationKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, boneName?: string,  } | [scaleKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, positionKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, rotationKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, boneName?: string, ];
     export class $Keyframe<T extends $MathValue> extends $Record {
         length(): number;
         endValue(): T;
@@ -78,5 +78,5 @@ declare module "@package/software/bernie/geckolib/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $Keyframe}.
      */
-    export type $Keyframe_<T> = { startValue?: $MathValue_, easingArgs?: $List_<$MathValue_>, easingType?: $EasingType_, endValue?: $MathValue_, length?: number,  } | [startValue?: $MathValue_, easingArgs?: $List_<$MathValue_>, easingType?: $EasingType_, endValue?: $MathValue_, length?: number, ];
+    export type $Keyframe_<T> = { length?: number, endValue?: $MathValue_, easingType?: $EasingType_, easingArgs?: $List_<$MathValue_>, startValue?: $MathValue_,  } | [length?: number, endValue?: $MathValue_, easingType?: $EasingType_, easingArgs?: $List_<$MathValue_>, startValue?: $MathValue_, ];
 }

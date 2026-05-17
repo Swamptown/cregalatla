@@ -37,7 +37,7 @@ declare module "@package/dev/latvian/apps/tinyserver/http" {
     /**
      * Values that may be interpreted as {@link $HTTPPathHandler}.
      */
-    export type $HTTPPathHandler_<REQ> = { method?: $HTTPMethod_, handler?: $HTTPHandler_<$HTTPRequest>, path?: $CompiledPath_,  } | [method?: $HTTPMethod_, handler?: $HTTPHandler_<$HTTPRequest>, path?: $CompiledPath_, ];
+    export type $HTTPPathHandler_<REQ> = { path?: $CompiledPath_, handler?: $HTTPHandler_<$HTTPRequest>, method?: $HTTPMethod_,  } | [path?: $CompiledPath_, handler?: $HTTPHandler_<$HTTPRequest>, method?: $HTTPMethod_, ];
     export class $Body {
         name(): string;
         fileName(): string;
@@ -72,19 +72,19 @@ declare module "@package/dev/latvian/apps/tinyserver/http" {
         bodyList(): $List<$Body>;
         gitHubSignature(): string;
         gitHubEvent(): string;
-        fullPath(): string;
         variables(): $Map<string, $OptionalString>;
-        preInit(session: $HTTPConnection<never>, startTime: $Instant, method: $HTTPMethod_): void;
+        fullPath(): string;
         cookie(key: string): $OptionalString;
+        preInit(session: $HTTPConnection<never>, startTime: $Instant, method: $HTTPMethod_): void;
         cookies(): $Map<string, $OptionalString>;
-        variable(name: string): $OptionalString;
         server(): $HTTPServer<never>;
         userAgent(): string;
         pathParts(): string[];
         headers(): $List<$Header>;
-        afterInit(): void;
         ipv6(): string;
+        afterInit(): void;
         handleResponse(payload: $HTTPPayload, response: $HTTPResponse, error: $Throwable): $HTTPResponse;
+        variable(name: string): $OptionalString;
         constructor();
     }
     export class $Header extends $Record {

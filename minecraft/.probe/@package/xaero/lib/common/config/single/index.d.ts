@@ -9,10 +9,10 @@ export * as io from "@package/xaero/lib/common/config/single/io";
 declare module "@package/xaero/lib/common/config/single" {
     export class $SingleConfigManager<C extends $Config> {
         getChannel(): $ConfigChannel;
-        getEffective<T>(arg0: $ConfigOption<T>): T;
-        setChangeListener(arg0: $IConfigChangeListener): void;
         getRedirectorManager(): $OptionValueRedirectorManager;
         setRedirectorManager(arg0: $OptionValueRedirectorManager): void;
+        setChangeListener(arg0: $IConfigChangeListener): void;
+        getEffective<T>(arg0: $ConfigOption<T>): T;
         getConfigId(): string;
         setConfig(arg0: C): void;
         getConfig(): C;

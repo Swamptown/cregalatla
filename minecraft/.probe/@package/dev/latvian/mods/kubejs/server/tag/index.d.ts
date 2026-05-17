@@ -67,7 +67,7 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
     /**
      * Values that may be interpreted as {@link $PreTagWrapper$AddAction}.
      */
-    export type $PreTagWrapper$AddAction_ = { filters?: $Object[], tag?: $ResourceLocation_,  } | [filters?: $Object[], tag?: $ResourceLocation_, ];
+    export type $PreTagWrapper$AddAction_ = { tag?: $ResourceLocation_, filters?: $Object[],  } | [tag?: $ResourceLocation_, filters?: $Object[], ];
     export class $PreTagKubeEvent extends $TagKubeEvent {
         static handle(tagEventHolders: $Map_<$ResourceKey_<never>, $PreTagKubeEvent>): void;
         registryKey: $ResourceKey<never>;
@@ -211,7 +211,7 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
     /**
      * Values that may be interpreted as {@link $PreTagWrapper$RemoveAction}.
      */
-    export type $PreTagWrapper$RemoveAction_ = { filters?: $Object[], tag?: $ResourceLocation_,  } | [filters?: $Object[], tag?: $ResourceLocation_, ];
+    export type $PreTagWrapper$RemoveAction_ = { tag?: $ResourceLocation_, filters?: $Object[],  } | [tag?: $ResourceLocation_, filters?: $Object[], ];
     export class $PreTagWrapper extends $TagWrapper {
         preEvent: $PreTagKubeEvent;
         entries: $List<$TagLoader$EntryWithSource>;

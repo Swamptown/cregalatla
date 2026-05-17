@@ -20,13 +20,13 @@ declare module "@package/com/simibubi/create/foundation/blockEntity/behaviour" {
         read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
         unload(): void;
         tick(): void;
+        onBlockChanged(arg0: $BlockState_): void;
         getRequiredItems(): $ItemRequirement;
+        onNeighborChanged(arg0: $BlockPos_): void;
+        setLazyTickRate(arg0: number): void;
         lazyTick(): void;
         writeSafe(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        setLazyTickRate(arg0: number): void;
         isSafeNBT(): boolean;
-        onBlockChanged(arg0: $BlockState_): void;
-        onNeighborChanged(arg0: $BlockPos_): void;
         getWorld(): $Level;
         getPos(): $BlockPos;
         blockEntity: $SmartBlockEntity;

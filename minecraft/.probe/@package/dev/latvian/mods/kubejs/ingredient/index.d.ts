@@ -22,8 +22,6 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         kjs$canBeUsedForMatching(): boolean;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        asIngredient(): $Ingredient;
-        getStacks(): $ItemStackSet;
         getStackArray(): $ItemStack[];
         testItem(item: $Item_): boolean;
         getDisplayStacks(): $ItemStackSet;
@@ -31,6 +29,8 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getItemTypes(): $Set<$Item>;
         getItemIds(): $Set<string>;
         getFirst(): $ItemStack;
+        asIngredient(): $Ingredient;
+        getStacks(): $ItemStackSet;
         isWildcard(): boolean;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
@@ -41,13 +41,13 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get stacks(): $ItemStackSet;
         get stackArray(): $ItemStack[];
         get displayStacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
         get itemIds(): $Set<string>;
         get first(): $ItemStack;
+        get stacks(): $ItemStackSet;
         get wildcard(): boolean;
     }
     /**
@@ -81,8 +81,6 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         kjs$canBeUsedForMatching(): boolean;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        asIngredient(): $Ingredient;
-        getStacks(): $ItemStackSet;
         getStackArray(): $ItemStack[];
         testItem(item: $Item_): boolean;
         getDisplayStacks(): $ItemStackSet;
@@ -90,6 +88,8 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getItemTypes(): $Set<$Item>;
         getItemIds(): $Set<string>;
         getFirst(): $ItemStack;
+        asIngredient(): $Ingredient;
+        getStacks(): $ItemStackSet;
         isWildcard(): boolean;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
@@ -100,13 +100,13 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get stacks(): $ItemStackSet;
         get stackArray(): $ItemStack[];
         get displayStacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
         get itemIds(): $Set<string>;
         get first(): $ItemStack;
+        get stacks(): $ItemStackSet;
         get wildcard(): boolean;
     }
     /**
@@ -122,8 +122,6 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         kjs$canBeUsedForMatching(): boolean;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        asIngredient(): $Ingredient;
-        getStacks(): $ItemStackSet;
         getStackArray(): $ItemStack[];
         testItem(item: $Item_): boolean;
         getDisplayStacks(): $ItemStackSet;
@@ -131,6 +129,8 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getItemTypes(): $Set<$Item>;
         getItemIds(): $Set<string>;
         getFirst(): $ItemStack;
+        asIngredient(): $Ingredient;
+        getStacks(): $ItemStackSet;
         isWildcard(): boolean;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
@@ -142,13 +142,13 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get stacks(): $ItemStackSet;
         get stackArray(): $ItemStack[];
         get displayStacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
         get itemIds(): $Set<string>;
         get first(): $ItemStack;
+        get stacks(): $ItemStackSet;
         get wildcard(): boolean;
     }
     /**
@@ -162,8 +162,6 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         kjs$canBeUsedForMatching(): boolean;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        asIngredient(): $Ingredient;
-        getStacks(): $ItemStackSet;
         getStackArray(): $ItemStack[];
         testItem(item: $Item_): boolean;
         getDisplayStacks(): $ItemStackSet;
@@ -171,6 +169,8 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getItemTypes(): $Set<$Item>;
         getItemIds(): $Set<string>;
         getFirst(): $ItemStack;
+        asIngredient(): $Ingredient;
+        getStacks(): $ItemStackSet;
         isWildcard(): boolean;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
@@ -181,13 +181,13 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get stacks(): $ItemStackSet;
         get stackArray(): $ItemStack[];
         get displayStacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
         get itemIds(): $Set<string>;
         get first(): $ItemStack;
+        get stacks(): $ItemStackSet;
         get wildcard(): boolean;
     }
 }

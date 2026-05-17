@@ -1,6 +1,6 @@
 import { $MetadataSectionType } from "@package/net/minecraft/server/packs/metadata";
-import { $CompletableFuture } from "@package/java/util/concurrent";
 import { $Component_ } from "@package/net/minecraft/network/chat";
+import { $CompletableFuture } from "@package/java/util/concurrent";
 import { $FeatureFlagSet } from "@package/net/minecraft/world/flag";
 import { $DataProvider, $CachedOutput_, $PackOutput } from "@package/net/minecraft/data";
 

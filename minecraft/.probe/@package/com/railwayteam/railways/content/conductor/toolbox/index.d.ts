@@ -15,8 +15,8 @@ declare module "@package/com/railwayteam/railways/content/conductor/toolbox" {
         write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
         static read(arg0: $ConductorEntity, arg1: $CompoundTag_): $MountedToolbox;
         read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
-        readFromItem(arg0: $ItemStack_): void;
         getDisplayStack(): $ItemStack;
+        readFromItem(arg0: $ItemStack_): void;
         getConnectedPlayers(): $List<$Player>;
         getCloneItemStack(): $ItemStack;
         static openMenu(arg0: $ServerPlayer, arg1: $MountedToolbox): void;

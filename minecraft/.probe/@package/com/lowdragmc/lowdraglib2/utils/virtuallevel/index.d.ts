@@ -24,16 +24,16 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
     export class $DummyWorld extends $Level {
         getBounds(): $AABB;
         getParticleManager(): $ParticleManager;
+        tickWorld(): void;
+        setParticleManager(arg0: $ParticleManager): void;
         isFilledBlock(arg0: $BlockPos_): boolean;
         prepareLighting(arg0: $BlockPos_): void;
         getFilledBlocks(): $LongSet;
         getAsClientWorld(): $Supplier<$ClientLevel>;
-        tickWorld(): void;
-        setParticleManager(arg0: $ParticleManager): void;
         addEntity(arg0: $Entity): void;
         removeEntity(arg0: number, arg1: $Entity$RemovalReason_): void;
-        tickEntities(): void;
         createParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): $Particle;
+        tickEntities(): void;
         self(): $EntityGetter;
         restoringBlockSnapshots: boolean;
         neighborUpdater: $NeighborUpdater;
@@ -68,9 +68,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
     }
     export class $TrackedDummyWorld extends $DummyWorld {
         clear(): void;
-        addBlocks(arg0: $Map_<$BlockPos_, $BlockInfo>): void;
-        getAllRenderedEntities(): $Iterable<$Entity>;
         setBlockFilter(arg0: $Predicate_<$BlockPos>): void;
+        getAllRenderedEntities(): $Iterable<$Entity>;
+        addBlocks(arg0: $Map_<$BlockPos_, $BlockInfo>): void;
         addBlock(arg0: $BlockPos_, arg1: $BlockInfo): void;
         removeBlock(arg0: $BlockPos_): void;
         self(): $EntityGetter;
@@ -102,7 +102,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
         captureBlockSnapshots: boolean;
         constructor();
         constructor(arg0: $Level_);
-        get allRenderedEntities(): $Iterable<$Entity>;
         set blockFilter(value: $Predicate_<$BlockPos>);
+        get allRenderedEntities(): $Iterable<$Entity>;
     }
 }

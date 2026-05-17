@@ -131,9 +131,8 @@ export * as server from "@package/net/minecraft/client/server";
 export * as profiling from "@package/net/minecraft/client/profiling";
 
 declare module "@package/net/minecraft/client" {
-    export class $MouseHandler implements $MouseHandlerAccessor$2, $IMixinMouseHandler, $MouseHandlerAccessor$1, $MouseHandlerAccessor {
+    export class $MouseHandler implements $MouseHandlerAccessor$2, $MouseHandlerAccessor$1, $IMixinMouseHandler, $MouseHandlerAccessor {
         setup(arg0: number): void;
-        isRightPressed(): boolean;
         xpos(): number;
         ypos(): number;
         releaseMouse(): void;
@@ -142,46 +141,47 @@ declare module "@package/net/minecraft/client" {
         setIgnoreFirstMove(): void;
         cursorEntered(): void;
         isMouseGrabbed(): boolean;
-        isLeftPressed(): boolean;
-        isMiddlePressed(): boolean;
-        handler$bhn000$ok_zoomer$applyZoomChanges(arg0: number, arg1: $CallbackInfo, arg2: $LocalDoubleRef, arg3: $LocalDoubleRef, arg4: number): void;
+        isRightPressed(): boolean;
+        handler$eef000$ok_zoomer$applyZoomChanges(arg0: number, arg1: $CallbackInfo, arg2: $LocalDoubleRef, arg3: $LocalDoubleRef, arg4: number): void;
         getXVelocity(): number;
         getYVelocity(): number;
+        isLeftPressed(): boolean;
+        isMiddlePressed(): boolean;
         getMouseX(): number;
         getMouseY(): number;
-        getActiveButtonKonkrete(): number;
         getActiveButton(): number;
+        getActiveButtonKonkrete(): number;
         create$setXPos(arg0: number): void;
         create$setYPos(arg0: number): void;
         constructor(arg0: $Minecraft);
         set up(value: number);
-        get rightPressed(): boolean;
         get mouseGrabbed(): boolean;
-        get leftPressed(): boolean;
-        get middlePressed(): boolean;
+        get rightPressed(): boolean;
         get XVelocity(): number;
         get YVelocity(): number;
+        get leftPressed(): boolean;
+        get middlePressed(): boolean;
         get mouseX(): number;
         get mouseY(): number;
-        get activeButtonKonkrete(): number;
         get activeButton(): number;
+        get activeButtonKonkrete(): number;
     }
     export class $User {
         getName(): string;
         getType(): $User$Type;
-        getClientId(): (string) | undefined;
-        getXuid(): (string) | undefined;
-        getSessionId(): string;
         getAccessToken(): string;
         getProfileId(): $UUID;
+        getSessionId(): string;
+        getClientId(): (string) | undefined;
+        getXuid(): (string) | undefined;
         constructor(arg0: string, arg1: $UUID_, arg2: string, arg3: (string) | undefined, arg4: (string) | undefined, arg5: $User$Type_);
         get name(): string;
         get type(): $User$Type;
-        get clientId(): (string) | undefined;
-        get xuid(): (string) | undefined;
-        get sessionId(): string;
         get accessToken(): string;
         get profileId(): $UUID;
+        get sessionId(): string;
+        get clientId(): (string) | undefined;
+        get xuid(): (string) | undefined;
     }
     export class $ClientRecipeBook extends $RecipeBook {
         getCollection(arg0: $RecipeBookCategories_): $List<$RecipeCollection>;
@@ -291,16 +291,16 @@ declare module "@package/net/minecraft/client" {
     export type $AttackIndicatorStatus_ = "off" | "crosshair" | "hotbar";
     export class $OptionInstance$LazyEnum<T> extends $Record implements $OptionInstance$CycleableValueSet<T> {
         values(): $Supplier<$List<T>>;
-        validateValue(): $Function<T, (T) | undefined>;
-        validateValue(arg0: T): (T) | undefined;
         codec(): $Codec<T>;
         valueListSupplier(): $CycleButton$ValueListSupplier<T>;
+        validateValue(arg0: T): (T) | undefined;
+        validateValue(): $Function<T, (T) | undefined>;
         constructor(arg0: $Supplier_<$List<T>>, arg1: $Function_<T, (T) | undefined>, arg2: $Codec<T>);
     }
     /**
      * Values that may be interpreted as {@link $OptionInstance$LazyEnum}.
      */
-    export type $OptionInstance$LazyEnum_<T> = { codec?: $Codec<any>, values?: $Supplier_<$List<any>>, validateValue?: $Function_<any, (T) | undefined>,  } | [codec?: $Codec<any>, values?: $Supplier_<$List<any>>, validateValue?: $Function_<any, (T) | undefined>, ];
+    export type $OptionInstance$LazyEnum_<T> = { validateValue?: $Function_<any, (T) | undefined>, values?: $Supplier_<$List<any>>, codec?: $Codec<any>,  } | [validateValue?: $Function_<any, (T) | undefined>, values?: $Supplier_<$List<any>>, codec?: $Codec<any>, ];
     export class $PeriodicNotificationManager$Notification extends $Record {
         message(): string;
         delay(): number;
@@ -311,7 +311,7 @@ declare module "@package/net/minecraft/client" {
     /**
      * Values that may be interpreted as {@link $PeriodicNotificationManager$Notification}.
      */
-    export type $PeriodicNotificationManager$Notification_ = { period?: number, title?: string, message?: string, delay?: number,  } | [period?: number, title?: string, message?: string, delay?: number, ];
+    export type $PeriodicNotificationManager$Notification_ = { delay?: number, message?: string, title?: string, period?: number,  } | [delay?: number, message?: string, title?: string, period?: number, ];
     export class $StringSplitter$WidthLimitedCharSink implements $FormattedCharSink {
     }
     export class $GameNarrator$NarratorInitException extends $SilentInitException {
@@ -343,45 +343,35 @@ declare module "@package/net/minecraft/client" {
     export interface $OptionInstance$IntRangeBase extends $OptionInstance$SliderableValueSet<number> {
     }
     export class $Options implements $IMixinOptions {
-        load(): void;
         load(arg0: boolean): void;
+        load(): void;
         save(): void;
         getFile(): $File;
         getBackgroundOpacity(arg0: number): number;
+        static isFalse(arg0: string): boolean;
         chatColors(): $OptionInstance<boolean>;
         mainHand(): $OptionInstance<$HumanoidArm>;
         simulationDistance(): $OptionInstance<number>;
-        autoJump(): $OptionInstance<boolean>;
         fov(): $OptionInstance<number>;
-        static isFalse(arg0: string): boolean;
+        autoJump(): $OptionInstance<boolean>;
         hideLightningFlash(): $OptionInstance<boolean>;
-        onboardingAccessibilityFinished(): void;
-        operatorItemsTab(): $OptionInstance<boolean>;
-        fovEffectScale(): $OptionInstance<number>;
-        damageTiltStrength(): $OptionInstance<number>;
-        bobView(): $OptionInstance<boolean>;
-        touchscreen(): $OptionInstance<boolean>;
-        screenEffectScale(): $OptionInstance<number>;
+        getBackgroundColor(arg0: number): number;
+        getBackgroundColor(arg0: number): number;
         static isTrue(arg0: string): boolean;
         setKey(arg0: $KeyMapping, arg1: $InputConstants$Key): void;
         darkMojangStudiosBackground(): $OptionInstance<boolean>;
-        gamma(): $OptionInstance<number>;
-        hideSplashTexts(): $OptionInstance<boolean>;
-        chatLinks(): $OptionInstance<boolean>;
-        chatLinksPrompt(): $OptionInstance<boolean>;
-        glintSpeed(): $OptionInstance<number>;
         getSoundSourceVolume(arg0: $SoundSource_): number;
+        gamma(): $OptionInstance<number>;
         narrator(): $OptionInstance<$NarratorStatus>;
         glintStrength(): $OptionInstance<number>;
         framerateLimit(): $OptionInstance<number>;
-        getBackgroundColor(arg0: number): number;
-        getBackgroundColor(arg0: number): number;
         loadSelectedResourcePacks(arg0: $PackRepository): void;
         mipmapLevels(): $OptionInstance<number>;
         fullscreen(): $OptionInstance<boolean>;
         enableVsync(): $OptionInstance<boolean>;
         rawMouseInput(): $OptionInstance<boolean>;
         chatDelay(): $OptionInstance<number>;
+        screenEffectScale(): $OptionInstance<number>;
         forceUnicodeFont(): $OptionInstance<boolean>;
         graphicsMode(): $OptionInstance<$GraphicsStatus>;
         cloudStatus(): $OptionInstance<$CloudStatus>;
@@ -397,13 +387,22 @@ declare module "@package/net/minecraft/client" {
         getEffectiveRenderDistance(): number;
         renderDistance(): $OptionInstance<number>;
         reducedDebugInfo(): $OptionInstance<boolean>;
-        textBackgroundOpacity(): $OptionInstance<number>;
         chatOpacity(): $OptionInstance<number>;
+        textBackgroundOpacity(): $OptionInstance<number>;
         menuBackgroundBlurriness(): $OptionInstance<number>;
+        glintSpeed(): $OptionInstance<number>;
         getMenuBackgroundBlurriness(): number;
+        fovEffectScale(): $OptionInstance<number>;
+        damageTiltStrength(): $OptionInstance<number>;
+        bobView(): $OptionInstance<boolean>;
+        touchscreen(): $OptionInstance<boolean>;
+        hideSplashTexts(): $OptionInstance<boolean>;
         getCloudsType(): $CloudStatus;
         prioritizeChunkUpdates(): $OptionInstance<$PrioritizeChunkUpdates>;
-        setServerRenderDistance(arg0: number): void;
+        chatLinks(): $OptionInstance<boolean>;
+        chatLinksPrompt(): $OptionInstance<boolean>;
+        onboardingAccessibilityFinished(): void;
+        operatorItemsTab(): $OptionInstance<boolean>;
         notificationDisplayTime(): $OptionInstance<number>;
         sensitivity(): $OptionInstance<number>;
         entityDistanceScaling(): $OptionInstance<number>;
@@ -438,6 +437,7 @@ declare module "@package/net/minecraft/client" {
         updateResourcePacks(arg0: $PackRepository): void;
         getSoundSourceOptionInstance(arg0: $SoundSource_): $OptionInstance<number>;
         static genericValueOrOffLabel(arg0: $Component_, arg1: number): $Component;
+        setServerRenderDistance(arg0: number): void;
         broadcastOptions(): void;
         buildPlayerInformation(): $ClientInformation;
         isModelPartEnabled(arg0: $PlayerModelPart_): boolean;
@@ -514,21 +514,21 @@ declare module "@package/net/minecraft/client" {
     export class $ResourceLoadStateTracker$ReloadState {
     }
     export class $OptionInstance$IntRange extends $Record implements $OptionInstance$IntRangeBase {
-        validateValue(arg0: number): (number) | undefined;
         minInclusive(): number;
         maxInclusive(): number;
         codec(): $Codec<number>;
         applyValueImmediately(): boolean;
+        validateValue(arg0: number): (number) | undefined;
         constructor(arg0: number, arg1: number);
         constructor(arg0: number, arg1: number, arg2: boolean);
     }
     /**
      * Values that may be interpreted as {@link $OptionInstance$IntRange}.
      */
-    export type $OptionInstance$IntRange_ = { applyValueImmediately?: boolean, minInclusive?: number, maxInclusive?: number,  } | [applyValueImmediately?: boolean, minInclusive?: number, maxInclusive?: number, ];
+    export type $OptionInstance$IntRange_ = { maxInclusive?: number, minInclusive?: number, applyValueImmediately?: boolean,  } | [maxInclusive?: number, minInclusive?: number, applyValueImmediately?: boolean, ];
     export class $ToggleKeyMapping extends $KeyMapping {
         reset(): void;
-        modifyReturnValue$ggp000$xaerominimap$onIsDown(arg0: boolean): boolean;
+        modifyReturnValue$cpc000$xaerominimap$onIsDown(arg0: boolean): boolean;
         static ALL: $Map<string, $KeyMapping>;
         static CATEGORY_INTERFACE: string;
         static CATEGORY_MULTIPLAYER: string;
@@ -561,11 +561,11 @@ declare module "@package/net/minecraft/client" {
     export class $OptionInstance$UnitDouble extends $Enum<$OptionInstance$UnitDouble> implements $OptionInstance$SliderableValueSet<number> {
         static values(): $OptionInstance$UnitDouble[];
         static valueOf(arg0: string): $OptionInstance$UnitDouble;
-        validateValue(arg0: number): (number) | undefined;
         xmap<R>(arg0: $DoubleFunction_<R>, arg1: $ToDoubleFunction_<R>): $OptionInstance$SliderableValueSet<R>;
         codec(): $Codec<number>;
-        fromSliderValue(arg0: number): $Object;
         toSliderValue(arg0: number): number;
+        fromSliderValue(arg0: number): number;
+        validateValue(arg0: number): (number) | undefined;
         static INSTANCE: $OptionInstance$UnitDouble;
     }
     /**
@@ -575,10 +575,10 @@ declare module "@package/net/minecraft/client" {
     export class $DeltaTracker$Timer implements $DeltaTracker, $TimerAccessor$1, $TimerAccessor {
         getGameTimeDeltaTicks(): number;
         getRealtimeDeltaTicks(): number;
-        getGameTimeDeltaPartialTick(arg0: boolean): number;
         advanceTime(arg0: number, arg1: boolean): number;
         updatePauseState(arg0: boolean): void;
         updateFrozenState(arg0: boolean): void;
+        getGameTimeDeltaPartialTick(arg0: boolean): number;
         catnip$getDeltaTickResidual(): number;
         getDeltaTickResidual(): number;
         constructor(arg0: number, arg1: number, arg2: $FloatUnaryOperator_);
@@ -612,23 +612,22 @@ declare module "@package/net/minecraft/client" {
     /**
      * Values that may be interpreted as {@link $GuiMessage$Line}.
      */
-    export type $GuiMessage$Line_ = { tag?: $GuiMessageTag_, content?: $FormattedCharSequence_, endOfEntry?: boolean, addedTime?: number,  } | [tag?: $GuiMessageTag_, content?: $FormattedCharSequence_, endOfEntry?: boolean, addedTime?: number, ];
+    export type $GuiMessage$Line_ = { addedTime?: number, endOfEntry?: boolean, content?: $FormattedCharSequence_, tag?: $GuiMessageTag_,  } | [addedTime?: number, endOfEntry?: boolean, content?: $FormattedCharSequence_, tag?: $GuiMessageTag_, ];
     export class $GameNarrator {
         clear(): void;
         destroy(): void;
         isActive(): boolean;
         sayChat(arg0: $Component_): void;
-        say(arg0: $Component_): void;
         updateNarratorStatus(arg0: $NarratorStatus_): void;
         checkStatus(arg0: boolean): void;
-        sayNow(arg0: $Component_): void;
         sayNow(arg0: string): void;
+        sayNow(arg0: $Component_): void;
+        say(arg0: $Component_): void;
         static NO_TITLE: $Component;
         constructor(arg0: $Minecraft);
         get active(): boolean;
     }
     export class $OptionInstance$ClampingLazyMaxIntRange extends $Record implements $OptionInstance$IntRangeBase, $OptionInstance$SliderableOrCyclableValueSet<number> {
-        validateValue(arg0: number): (number) | undefined;
         minInclusive(): number;
         maxInclusive(): number;
         codec(): $Codec<number>;
@@ -636,12 +635,13 @@ declare module "@package/net/minecraft/client" {
         maxSupplier(): $IntSupplier;
         encodableMaxInclusive(): number;
         createCycleButton(): boolean;
+        validateValue(arg0: number): (number) | undefined;
         constructor(arg0: number, arg1: $IntSupplier_, arg2: number);
     }
     /**
      * Values that may be interpreted as {@link $OptionInstance$ClampingLazyMaxIntRange}.
      */
-    export type $OptionInstance$ClampingLazyMaxIntRange_ = { encodableMaxInclusive?: number, maxSupplier?: $IntSupplier_, minInclusive?: number,  } | [encodableMaxInclusive?: number, maxSupplier?: $IntSupplier_, minInclusive?: number, ];
+    export type $OptionInstance$ClampingLazyMaxIntRange_ = { minInclusive?: number, maxSupplier?: $IntSupplier_, encodableMaxInclusive?: number,  } | [minInclusive?: number, maxSupplier?: $IntSupplier_, encodableMaxInclusive?: number, ];
     export class $OptionInstance$SliderableValueSet<T> {
     }
     export interface $OptionInstance$SliderableValueSet<T> extends $OptionInstance$ValueSet<T> {
@@ -661,7 +661,7 @@ declare module "@package/net/minecraft/client" {
     /**
      * Values that may be interpreted as {@link $GuiMessageTag}.
      */
-    export type $GuiMessageTag_ = { icon?: $GuiMessageTag$Icon_, logTag?: string, text?: $Component_, indicatorColor?: number,  } | [icon?: $GuiMessageTag$Icon_, logTag?: string, text?: $Component_, indicatorColor?: number, ];
+    export type $GuiMessageTag_ = { indicatorColor?: number, text?: $Component_, logTag?: string, icon?: $GuiMessageTag$Icon_,  } | [indicatorColor?: number, text?: $Component_, logTag?: string, icon?: $GuiMessageTag$Icon_, ];
     export class $Options$OptionAccess {
     }
     export interface $Options$OptionAccess {
@@ -686,14 +686,14 @@ declare module "@package/net/minecraft/client" {
     /**
      * Values that may be interpreted as {@link $GuiMessage}.
      */
-    export type $GuiMessage_ = { tag?: $GuiMessageTag_, content?: $Component_, signature?: $MessageSignature_, addedTime?: number,  } | [tag?: $GuiMessageTag_, content?: $Component_, signature?: $MessageSignature_, addedTime?: number, ];
+    export type $GuiMessage_ = { addedTime?: number, signature?: $MessageSignature_, content?: $Component_, tag?: $GuiMessageTag_,  } | [addedTime?: number, signature?: $MessageSignature_, content?: $Component_, tag?: $GuiMessageTag_, ];
     export class $RecipeBookCategories extends $Enum<$RecipeBookCategories> implements $IExtensibleEnum, $RecipeBookCategoriesAccessor {
         static values(): $RecipeBookCategories[];
         static valueOf(arg0: string): $RecipeBookCategories;
         static getCategories(arg0: $RecipeBookType_): $List<$RecipeBookCategories>;
         static getExtensionInfo(): $ExtensionInfo;
         getIconItems(): $List<$ItemStack>;
-        static setAGGREGATE_CATEGORIES$connector_$md$8e2dbe$0(arg0: $Map_<any, any>): void;
+        static setAGGREGATE_CATEGORIES$connector_$md$d858b6$0(arg0: $Map_<any, any>): void;
         static CRAFTING_EQUIPMENT: $RecipeBookCategories;
         static BLAST_FURNACE_BLOCKS: $RecipeBookCategories;
         static BLAST_FURNACE_CATEGORIES: $List<$RecipeBookCategories>;
@@ -719,7 +719,7 @@ declare module "@package/net/minecraft/client" {
         static AGGREGATE_CATEGORIES: $Map<$RecipeBookCategories, $List<$RecipeBookCategories>>;
         static get extensionInfo(): $ExtensionInfo;
         get iconItems(): $List<$ItemStack>;
-        static set AGGREGATE_CATEGORIES$connector_$md$8e2dbe$0(value: $Map_<any, any>);
+        static set AGGREGATE_CATEGORIES$connector_$md$d858b6$0(value: $Map_<any, any>);
     }
     /**
      * Values that may be interpreted as {@link $RecipeBookCategories}.
@@ -727,15 +727,15 @@ declare module "@package/net/minecraft/client" {
     export type $RecipeBookCategories_ = "crafting_search" | "crafting_building_blocks" | "crafting_redstone" | "crafting_equipment" | "crafting_misc" | "furnace_search" | "furnace_food" | "furnace_blocks" | "furnace_misc" | "blast_furnace_search" | "blast_furnace_blocks" | "blast_furnace_misc" | "smoker_search" | "smoker_food" | "stonecutter" | "smithing" | "campfire" | "unknown";
     export class $OptionInstance$Enum<T> extends $Record implements $OptionInstance$CycleableValueSet<T> {
         values(): $List<T>;
-        validateValue(arg0: T): (T) | undefined;
         codec(): $Codec<T>;
         valueListSupplier(): $CycleButton$ValueListSupplier<T>;
+        validateValue(arg0: T): (T) | undefined;
         constructor(arg0: $List_<T>, arg1: $Codec<T>);
     }
     /**
      * Values that may be interpreted as {@link $OptionInstance$Enum}.
      */
-    export type $OptionInstance$Enum_<T> = { values?: $List_<any>, codec?: $Codec<any>,  } | [values?: $List_<any>, codec?: $Codec<any>, ];
+    export type $OptionInstance$Enum_<T> = { codec?: $Codec<any>, values?: $List_<any>,  } | [codec?: $Codec<any>, values?: $List_<any>, ];
     export class $OptionInstance$TooltipSupplier<T> {
     }
     export interface $OptionInstance$TooltipSupplier<T> {
@@ -750,41 +750,41 @@ declare module "@package/net/minecraft/client" {
         addCommand(arg0: string): void;
         constructor(arg0: $Path_);
     }
-    export class $Camera implements $CameraAccessor$2, $CameraAccessor$1, $CameraZoomExtension, $CameraWaterOcclusionExtension, $CameraAccessor {
+    export class $Camera implements $CameraZoomExtension, $CameraWaterOcclusionExtension, $CameraAccessor$2, $CameraAccessor$1, $CameraAccessor {
         reset(): void;
         setup(arg0: $BlockGetter, arg1: $Entity, arg2: boolean, arg3: boolean, arg4: number): void;
         move(arg0: number, arg1: number, arg2: number): void;
         tick(): void;
         getPosition(): $Vec3;
         getRoll(): number;
-        handler$zba000$sodium_extra$noLerp(arg0: $CallbackInfo): void;
-        handler$gde000$sable$rotateView(arg0: number, arg1: number, arg2: number, arg3: $CallbackInfo): void;
+        handler$zzm000$sodium_extra$noLerp(arg0: $CallbackInfo): void;
+        handler$gbn000$sable$rotateView(arg0: number, arg1: number, arg2: number, arg3: $CallbackInfo): void;
         getNearPlane(): $Camera$NearPlane;
-        handler$fmp000$sable$getFluidInCamera(arg0: $CallbackInfoReturnable<any>): void;
-        handler$fog001$sable$getFluidInCamera(arg0: $CallbackInfoReturnable<any>): void;
+        handler$fli000$sable$getFluidInCamera(arg0: $CallbackInfoReturnable<any>): void;
+        handler$fmp001$sable$getFluidInCamera(arg0: $CallbackInfoReturnable<any>): void;
         getLeftVector(): $Vector3f;
         getBlockAtCamera(): $BlockState;
         sable$setIgnoreOcclusion(arg0: boolean): void;
         sable$isIgnoreOcclusion(): boolean;
-        getEntity(): $Entity;
+        setRotation(arg0: number, arg1: number, arg2: number): void;
         /**
          * @deprecated
          */
         setRotation(arg0: number, arg1: number): void;
-        setRotation(arg0: number, arg1: number, arg2: number): void;
-        isDetached(): boolean;
-        getFluidInCamera(): $FogType;
-        getPartialTickTime(): number;
+        getEntity(): $Entity;
         isInitialized(): boolean;
-        setPosition(arg0: $Vec3_): void;
-        setPosition(arg0: number, arg1: number, arg2: number): void;
+        getPartialTickTime(): number;
         getXRot(): number;
         getYRot(): number;
         sable$setZoomAmount(arg0: number): void;
         rotation(): $Quaternionf;
         getUpVector(): $Vector3f;
         sable$isOccluded(): boolean;
+        getFluidInCamera(): $FogType;
+        isDetached(): boolean;
         getBlockPosition(): $BlockPos;
+        setPosition(arg0: number, arg1: number, arg2: number): void;
+        setPosition(arg0: $Vec3_): void;
         getLookVector(): $Vector3f;
         sable$getZoomAmount(): number;
         getLevel(): $BlockGetter;
@@ -799,12 +799,12 @@ declare module "@package/net/minecraft/client" {
         get leftVector(): $Vector3f;
         get blockAtCamera(): $BlockState;
         get entity(): $Entity;
-        get fluidInCamera(): $FogType;
-        get partialTickTime(): number;
         get initialized(): boolean;
+        get partialTickTime(): number;
         get XRot(): number;
         get YRot(): number;
         get upVector(): $Vector3f;
+        get fluidInCamera(): $FogType;
         get blockPosition(): $BlockPos;
         get lookVector(): $Vector3f;
         get level(): $BlockGetter;
@@ -839,20 +839,20 @@ declare module "@package/net/minecraft/client" {
     /**
      * Values that may be interpreted as {@link $Minecraft$GameLoadCookie}.
      */
-    export type $Minecraft$GameLoadCookie_ = { quickPlayData?: $GameConfig$QuickPlayData_, realmsClient?: $RealmsClient,  } | [quickPlayData?: $GameConfig$QuickPlayData_, realmsClient?: $RealmsClient, ];
+    export type $Minecraft$GameLoadCookie_ = { realmsClient?: $RealmsClient, quickPlayData?: $GameConfig$QuickPlayData_,  } | [realmsClient?: $RealmsClient, quickPlayData?: $GameConfig$QuickPlayData_, ];
     export class $OptionInstance<T> implements $OptionInstanceAccessor<any> {
         get(): $Object;
         values(): $OptionInstance$ValueSet<$Object>;
         set(arg0: $Object): void;
+        codec(): $Codec<$Object>;
+        static createBoolean(arg0: string, arg1: boolean, arg2: $Consumer_<boolean>): $OptionInstance<boolean>;
+        static createBoolean(arg0: string, arg1: $OptionInstance$TooltipSupplier_<boolean>, arg2: boolean): $OptionInstance<boolean>;
+        static createBoolean(arg0: string, arg1: $OptionInstance$TooltipSupplier_<boolean>, arg2: boolean, arg3: $Consumer_<boolean>): $OptionInstance<boolean>;
+        static createBoolean(arg0: string, arg1: boolean): $OptionInstance<boolean>;
+        static createBoolean(arg0: string, arg1: $OptionInstance$TooltipSupplier_<boolean>, arg2: $OptionInstance$CaptionBasedToString_<boolean>, arg3: boolean, arg4: $Consumer_<boolean>): $OptionInstance<boolean>;
         createButton(arg0: $Options, arg1: number, arg2: number, arg3: number, arg4: $Consumer_<$Object>): $AbstractWidget;
         createButton(arg0: $Options): $AbstractWidget;
         createButton(arg0: $Options, arg1: number, arg2: number, arg3: number): $AbstractWidget;
-        codec(): $Codec<$Object>;
-        static createBoolean(arg0: string, arg1: boolean, arg2: $Consumer_<boolean>): $OptionInstance<boolean>;
-        static createBoolean(arg0: string, arg1: $OptionInstance$TooltipSupplier_<boolean>, arg2: $OptionInstance$CaptionBasedToString_<boolean>, arg3: boolean, arg4: $Consumer_<boolean>): $OptionInstance<boolean>;
-        static createBoolean(arg0: string, arg1: $OptionInstance$TooltipSupplier_<boolean>, arg2: boolean, arg3: $Consumer_<boolean>): $OptionInstance<boolean>;
-        static createBoolean(arg0: string, arg1: boolean): $OptionInstance<boolean>;
-        static createBoolean(arg0: string, arg1: $OptionInstance$TooltipSupplier_<boolean>, arg2: boolean): $OptionInstance<boolean>;
         static noTooltip<T>(): $OptionInstance$TooltipSupplier<T>;
         static cachedConstantTooltip<T>(arg0: $Component_): $OptionInstance$TooltipSupplier<T>;
         static forOptionEnum<T extends $OptionEnum>(): $OptionInstance$CaptionBasedToString<T>;
@@ -869,29 +869,26 @@ declare module "@package/net/minecraft/client" {
         getString(): string;
         get string(): string;
     }
-    export class $Minecraft extends $ReentrantBlockableEventLoop<$Runnable> implements $WindowEventHandler, $IMinecraftExtension, $MinecraftClientAccessor, $IWorldMapMinecraftClient, $MinecraftAccessor, $MinecraftClientAccessor$1, $MinecraftClientKJS, $MinecraftAccessor$1, $IXaeroMinimapMinecraftClient, $IMixinMinecraft {
+    export class $Minecraft extends $ReentrantBlockableEventLoop<$Runnable> implements $WindowEventHandler, $IMinecraftExtension, $MinecraftClientAccessor, $MinecraftAccessor, $IXaeroMinimapMinecraftClient, $IWorldMapMinecraftClient, $MinecraftClientAccessor$1, $MinecraftClientKJS, $MinecraftAccessor$1, $IMixinMinecraft {
         run(): void;
         static getInstance(): $Minecraft;
         stop(): void;
         destroy(): void;
         tick(): void;
         setLevel(arg0: $ClientLevel, arg1: $ReceivingLevelScreen$Reason_): void;
-        getConnection(): $ClientPacketListener;
-        disconnect(arg0: $Screen, arg1: boolean): void;
+        getGuiSprites(): $GuiSpriteManager;
+        renderBuffers(): $RenderBuffers;
         disconnect(): void;
+        disconnect(arg0: $Screen, arg1: boolean): void;
         disconnect(arg0: $Screen): void;
         isRunning(): boolean;
         static crash(arg0: $Minecraft, arg1: $File_, arg2: $CrashReport): void;
+        getVanillaPackResources(): $VanillaPackResources;
         getProfiler(): $ProfilerFiller;
         getTimer(): $DeltaTracker;
-        getCurrentServer(): $ServerData;
-        getProxy(): $Proxy;
+        setOverlay(arg0: $Overlay): void;
         getTextureManager(): $TextureManager;
         getWindow(): $Window;
-        setOverlay(arg0: $Overlay): void;
-        getVanillaPackResources(): $VanillaPackResources;
-        getGuiSprites(): $GuiSpriteManager;
-        renderBuffers(): $RenderBuffers;
         allowsMultiplayer(): boolean;
         realmsDataFetcher(): $RealmsDataFetcher;
         quickPlayLog(): $QuickPlayLog;
@@ -899,24 +896,24 @@ declare module "@package/net/minecraft/client" {
         commandHistory(): $CommandHistory;
         directoryValidator(): $DirectoryValidator;
         setWindowActive(arg0: boolean): void;
-        getItemRenderer(): $ItemRenderer;
         updateFontOptions(): void;
         getBlockRenderer(): $BlockRenderDispatcher;
         getEntityRenderDispatcher(): $EntityRenderDispatcher;
         resizeDisplay(): void;
         setScreen(arg0: $Screen): void;
         isGameLoadFinished(): boolean;
+        getItemRenderer(): $ItemRenderer;
         multiplayerBan(): $BanDetails;
         updateTitle(): void;
         static checkModStatus(): $ModCheck;
         clearResourcePacksOnError(arg0: $Throwable, arg1: $Component_, arg2: $Minecraft$GameLoadCookie_): void;
         reloadResourcePacks(): $CompletableFuture<void>;
         getToasts(): $ToastComponent;
-        handler$bcp000$balm$run(arg0: $CallbackInfo): void;
+        handler$zmn000$balm$run(arg0: $CallbackInfo): void;
         getDebugOverlay(): $DebugScreenOverlay;
         emergencySaveAndCrash(arg0: $CrashReport): void;
         getMainRenderTarget(): $RenderTarget;
-        modifyReturnValue$bgk000$exposure$onGetMainRenderTarget(original: $RenderTarget): $RenderTarget;
+        modifyReturnValue$zon000$exposure$onGetMainRenderTarget(original: $RenderTarget): $RenderTarget;
         getLaunchedVersion(): string;
         getVersionType(): string;
         delayCrash(arg0: $CrashReport): void;
@@ -928,12 +925,12 @@ declare module "@package/net/minecraft/client" {
         getLevelSource(): $LevelStorageSource;
         getChatStatus(): $Minecraft$ChatStatus;
         setLastInputType(arg0: $InputType_): void;
-        handler$bgk000$exposure$onSetScreen(screen: $Screen, ci: $CallbackInfo): void;
-        handler$znf002$veil$close(arg0: $CallbackInfo): void;
-        handler$zeh000$xaeroworldmap$onRunTickStart(arg0: $CallbackInfo): void;
-        handler$zmd000$veil$beginFrame(arg0: $CallbackInfo): void;
-        modify$zeh000$xaeroworldmap$onRenderCall(arg0: boolean): boolean;
-        handler$zmd000$veil$endFrame(arg0: $CallbackInfo): void;
+        handler$zon000$exposure$onSetScreen(screen: $Screen, ci: $CallbackInfo): void;
+        handler$zlf002$veil$close(arg0: $CallbackInfo): void;
+        handler$dfc000$xaeroworldmap$onRunTickStart(arg0: $CallbackInfo): void;
+        handler$zkd000$veil$beginFrame(arg0: $CallbackInfo): void;
+        modify$dfc000$xaeroworldmap$onRenderCall(arg0: boolean): boolean;
+        handler$zkd000$veil$endFrame(arg0: $CallbackInfo): void;
         hasSingleplayerServer(): boolean;
         cursorEntered(): void;
         getFps(): number;
@@ -942,11 +939,11 @@ declare module "@package/net/minecraft/client" {
         getSingleplayerServer(): $IntegratedServer;
         debugFpsMeterKeyPress(arg0: number): void;
         pauseGame(arg0: boolean): void;
-        handler$bgk000$exposure$onStartAttack(cir: $CallbackInfoReturnable<any>): void;
-        handler$bgk000$exposure$onStartUseItem(ci: $CallbackInfo): void;
+        handler$zon000$exposure$onStartAttack(cir: $CallbackInfoReturnable<any>): void;
+        handler$zon000$exposure$onStartUseItem(ci: $CallbackInfo): void;
         getMusicManager(): $MusicManager;
         handleKeybinds(): void;
-        handler$flk000$sable$postCycleCameraType(arg0: $CallbackInfo): void;
+        handler$fkd000$sable$postCycleCameraType(arg0: $CallbackInfo): void;
         getCameraEntity(): $Entity;
         getTelemetryManager(): $ClientTelemetryManager;
         getGpuUtilization(): number;
@@ -955,9 +952,9 @@ declare module "@package/net/minecraft/client" {
         doWorldLoad(arg0: $LevelStorageSource$LevelStorageAccess, arg1: $PackRepository, arg2: $WorldStem_, arg3: boolean): void;
         updateReportEnvironment(arg0: $ReportEnvironment_): void;
         getUser(): $User;
-        handler$bgk000$exposure$onLevelUnload(newLevel: $ClientLevel, reason: $ReceivingLevelScreen$Reason_, ci: $CallbackInfo): void;
+        handler$zon000$exposure$onLevelUnload(newLevel: $ClientLevel, reason: $ReceivingLevelScreen$Reason_, ci: $CallbackInfo): void;
         clearDownloadedResourcePacks(): void;
-        handler$bgk000$exposure$disconnect(nextScreen: $Screen, keepResourcePacks: boolean, ci: $CallbackInfo): void;
+        handler$zon000$exposure$disconnect(nextScreen: $Screen, keepResourcePacks: boolean, ci: $CallbackInfo): void;
         clearClientLevel(arg0: $Screen): void;
         forceSetScreen(arg0: $Screen): void;
         telemetryOptInExtra(): boolean;
@@ -972,9 +969,9 @@ declare module "@package/net/minecraft/client" {
         static useShaderTransparency(): boolean;
         static useAmbientOcclusion(): boolean;
         addCustomNbtData(arg0: $ItemStack_, arg1: $BlockEntity, arg2: $RegistryAccess): void;
-        localvar$hdc000$fabric_events_interaction_v0$modifyItemPick(arg0: $ItemStack_): $ItemStack;
-        handler$hdc000$fabric_events_interaction_v0$cancelItemPick(arg0: $CallbackInfo): void;
-        handler$cee000$transition$fillReport(theCrash: $CrashReport, ci: $CallbackInfoReturnable<any>): void;
+        localvar$hei000$fabric_events_interaction_v0$modifyItemPick(arg0: $ItemStack_): $ItemStack;
+        handler$hei000$fabric_events_interaction_v0$cancelItemPick(arg0: $CallbackInfo): void;
+        handler$bhc000$transition$fillReport(theCrash: $CrashReport, ci: $CallbackInfoReturnable<any>): void;
         static getLauncherBrand(): string;
         getGpuWarnlistManager(): $GpuWarnlistManager;
         delayTextureReload(): $CompletableFuture<void>;
@@ -1020,16 +1017,26 @@ declare module "@package/net/minecraft/client" {
         getNarrator(): $GameNarrator;
         getChatListener(): $ChatListener;
         getReportingContext(): $ReportingContext;
+        getXaeroMinimap_fps(): number;
         getXaeroWorldMap_fps(): number;
         getTitle(): string;
         getScheduledEvents(): $ScheduledEvents;
-        getXaeroMinimap_fps(): number;
-        static getFPS$sodium_extra_$md$8e2dbe$0(): number;
+        static getFPS$sodium_extra_$md$d858b6$0(): number;
+        getCurrentServer(): $ServerData;
+        getProxy(): $Proxy;
+        getConnection(): $ClientPacketListener;
         getLocale(): $Locale;
         pushGuiLayer(arg0: $Screen): void;
         popGuiLayer(): void;
-        isKeyDown(keyName: string): boolean;
+        /**
+         * Runs the specified console command client-side with the player's permission level. The command won't output any logs in chat nor console.
+         * 
+         * @param command The console command. Slash at the beginning is optional.
+         */
+        runCommandSilent(command: string): void;
+        setActivePostShader(id: $ResourceLocation_): void;
         isKeyDown(key: number): boolean;
+        isKeyDown(keyName: string): boolean;
         getName(): $Component;
         getCurrentScreen(): $Screen;
         setCurrentScreen(gui: $Screen): void;
@@ -1042,6 +1049,7 @@ declare module "@package/net/minecraft/client" {
         isCtrlDown(): boolean;
         isAltDown(): boolean;
         getBlockTextureAtlas(): $Function<$ResourceLocation, $TextureAtlasSprite>;
+        getParticleTextureAtlas(): $Function<$ResourceLocation, $TextureAtlasSprite>;
         self(): $Minecraft;
         tell(message: $Component_): void;
         setStatusMessage(message: $Component_): void;
@@ -1051,14 +1059,6 @@ declare module "@package/net/minecraft/client" {
          * @param command The console command. Slash at the beginning is optional.
          */
         runCommand(command: string): void;
-        /**
-         * Runs the specified console command client-side with the player's permission level. The command won't output any logs in chat nor console.
-         * 
-         * @param command The console command. Slash at the beginning is optional.
-         */
-        runCommandSilent(command: string): void;
-        setActivePostShader(id: $ResourceLocation_): void;
-        getParticleTextureAtlas(): $Function<$ResourceLocation, $TextureAtlasSprite>;
         schedule(timer: $TemporalAmount_, callback: $ScheduledEvents$Callback_): $ScheduledEvents$ScheduledEvent;
         scheduleInTicks(ticks: $TickDuration_, callback: $ScheduledEvents$Callback_): $ScheduledEvents$ScheduledEvent;
         scheduleRepeating(timer: $TemporalAmount_, callback: $ScheduledEvents$Callback_): $ScheduledEvents$ScheduledEvent;
@@ -1102,21 +1102,18 @@ declare module "@package/net/minecraft/client" {
         smartCull: boolean;
         font: $Font;
         constructor(arg0: $GameConfig);
-        get connection(): $ClientPacketListener;
+        get guiSprites(): $GuiSpriteManager;
         get running(): boolean;
+        get vanillaPackResources(): $VanillaPackResources;
         get profiler(): $ProfilerFiller;
         get timer(): $DeltaTracker;
-        get currentServer(): $ServerData;
-        get proxy(): $Proxy;
         get textureManager(): $TextureManager;
         get window(): $Window;
-        get vanillaPackResources(): $VanillaPackResources;
-        get guiSprites(): $GuiSpriteManager;
         get localServer(): boolean;
-        get itemRenderer(): $ItemRenderer;
         get blockRenderer(): $BlockRenderDispatcher;
         get entityRenderDispatcher(): $EntityRenderDispatcher;
         get gameLoadFinished(): boolean;
+        get itemRenderer(): $ItemRenderer;
         get toasts(): $ToastComponent;
         get debugOverlay(): $DebugScreenOverlay;
         get mainRenderTarget(): $RenderTarget;
@@ -1168,19 +1165,22 @@ declare module "@package/net/minecraft/client" {
         get narrator(): $GameNarrator;
         get chatListener(): $ChatListener;
         get reportingContext(): $ReportingContext;
+        get xaeroMinimap_fps(): number;
         get xaeroWorldMap_fps(): number;
         get scheduledEvents(): $ScheduledEvents;
-        get xaeroMinimap_fps(): number;
-        static get FPS$sodium_extra_$md$8e2dbe$0(): number;
+        static get FPS$sodium_extra_$md$d858b6$0(): number;
+        get currentServer(): $ServerData;
+        get proxy(): $Proxy;
+        get connection(): $ClientPacketListener;
         get locale(): $Locale;
+        set activePostShader(value: $ResourceLocation_);
         get currentWorldName(): string;
         get shiftDown(): boolean;
         get ctrlDown(): boolean;
         get altDown(): boolean;
         get blockTextureAtlas(): $Function<$ResourceLocation, $TextureAtlasSprite>;
-        set statusMessage(value: $Component_);
-        set activePostShader(value: $ResourceLocation_);
         get particleTextureAtlas(): $Function<$ResourceLocation, $TextureAtlasSprite>;
+        set statusMessage(value: $Component_);
         get displayName(): $Component;
         get reloadStateTrackerFancyMenu(): $ResourceLoadStateTracker;
     }
@@ -1202,7 +1202,7 @@ declare module "@package/net/minecraft/client" {
         static values(): $GuiMessageTag$Icon[];
         static valueOf(arg0: string): $GuiMessageTag$Icon;
         draw(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        static create$nochatreports_$md$8e2dbe$0(arg0: string, arg1: number, arg2: $ResourceLocation_, arg3: number, arg4: number): $GuiMessageTag$Icon;
+        static create$nochatreports_$md$d858b6$0(arg0: string, arg1: number, arg2: $ResourceLocation_, arg3: number, arg4: number): $GuiMessageTag$Icon;
         static CHAT_MODIFIED: $GuiMessageTag$Icon;
         sprite: $ResourceLocation;
         width: number;
@@ -1216,13 +1216,13 @@ declare module "@package/net/minecraft/client" {
         setup(arg0: number): void;
         tick(): void;
         setClipboard(arg0: string): void;
-        handler$zkn000$veil$handleChunkDebugKeys(arg0: number, arg1: $CallbackInfoReturnable<any>): void;
-        handler$hca000$betterf3$processF3(key: number, cir: $CallbackInfoReturnable<any>): void;
-        handler$zkn000$veil$printChunkDebugKeys(arg0: number, arg1: $CallbackInfoReturnable<any>): void;
-        handler$hca000$betterf3$processF3Messages(key: number, cir: $CallbackInfoReturnable<any>): void;
+        handler$zin000$veil$handleChunkDebugKeys(arg0: number, arg1: $CallbackInfoReturnable<any>): void;
+        handler$hdk000$betterf3$processF3(key: number, cir: $CallbackInfoReturnable<any>): void;
+        handler$zin000$veil$printChunkDebugKeys(arg0: number, arg1: $CallbackInfoReturnable<any>): void;
+        handler$hdk000$betterf3$processF3Messages(key: number, cir: $CallbackInfoReturnable<any>): void;
         keyPress(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        handler$doi001$emi$onKey(window: number, key: number, scancode: number, action: number, modifiers: number, info: $CallbackInfo): void;
-        handler$doi000$emi$onChar(window: number, codePoint: number, modifiers: number, info: $CallbackInfo): void;
+        handler$cjn000$emi$onKey(window: number, key: number, scancode: number, action: number, modifiers: number, info: $CallbackInfo): void;
+        handler$cjn000$emi$onChar(window: number, codePoint: number, modifiers: number, info: $CallbackInfo): void;
         getClipboard(): string;
         cached_key_FancyMenu: number;
         cached_scanCode_FancyMenu: number;
@@ -1271,9 +1271,9 @@ declare module "@package/net/minecraft/client" {
     export class $OptionInstance$ValueSet<T> {
     }
     export interface $OptionInstance$ValueSet<T> {
-        validateValue(arg0: T): (T) | undefined;
-        createButton(arg0: $OptionInstance$TooltipSupplier_<T>, arg1: $Options, arg2: number, arg3: number, arg4: number, arg5: $Consumer_<T>): $Function<$OptionInstance<T>, $AbstractWidget>;
         codec(): $Codec<T>;
+        createButton(arg0: $OptionInstance$TooltipSupplier_<T>, arg1: $Options, arg2: number, arg3: number, arg4: number, arg5: $Consumer_<T>): $Function<$OptionInstance<T>, $AbstractWidget>;
+        validateValue(arg0: T): (T) | undefined;
     }
     export class $ComponentCollector {
         reset(): void;
@@ -1292,18 +1292,18 @@ declare module "@package/net/minecraft/client" {
     }
     export class $OptionInstance$AltEnum<T> extends $Record implements $OptionInstance$CycleableValueSet<T> {
         values(): $List<T>;
-        validateValue(arg0: T): (T) | undefined;
         codec(): $Codec<T>;
         valueListSupplier(): $CycleButton$ValueListSupplier<T>;
         valueSetter(): $OptionInstance$CycleableValueSet$ValueSetter<T>;
         altValues(): $List<T>;
         altCondition(): $BooleanSupplier;
+        validateValue(arg0: T): (T) | undefined;
         constructor(arg0: $List_<T>, arg1: $List_<T>, arg2: $BooleanSupplier_, arg3: $OptionInstance$CycleableValueSet$ValueSetter_<T>, arg4: $Codec<T>);
     }
     /**
      * Values that may be interpreted as {@link $OptionInstance$AltEnum}.
      */
-    export type $OptionInstance$AltEnum_<T> = { values?: $List_<any>, altValues?: $List_<any>, codec?: $Codec<any>, valueSetter?: $OptionInstance$CycleableValueSet$ValueSetter_<any>, altCondition?: $BooleanSupplier_,  } | [values?: $List_<any>, altValues?: $List_<any>, codec?: $Codec<any>, valueSetter?: $OptionInstance$CycleableValueSet$ValueSetter_<any>, altCondition?: $BooleanSupplier_, ];
+    export type $OptionInstance$AltEnum_<T> = { altCondition?: $BooleanSupplier_, valueSetter?: $OptionInstance$CycleableValueSet$ValueSetter_<any>, codec?: $Codec<any>, altValues?: $List_<any>, values?: $List_<any>,  } | [altCondition?: $BooleanSupplier_, valueSetter?: $OptionInstance$CycleableValueSet$ValueSetter_<any>, codec?: $Codec<any>, altValues?: $List_<any>, values?: $List_<any>, ];
     export class $StringSplitter$FlatComponents {
     }
     export class $StringSplitter {
@@ -1311,16 +1311,16 @@ declare module "@package/net/minecraft/client" {
         plainHeadByWidth(arg0: string, arg1: number, arg2: $Style): string;
         headByWidth(arg0: $FormattedText, arg1: number, arg2: $Style): $FormattedText;
         static getWordPosition(arg0: string, arg1: number, arg2: number, arg3: boolean): number;
-        stringWidth(arg0: $FormattedCharSequence_): number;
         stringWidth(arg0: string): number;
         stringWidth(arg0: $FormattedText): number;
-        componentStyleAtWidth(arg0: $FormattedCharSequence_, arg1: number): $Style;
-        componentStyleAtWidth(arg0: $FormattedText, arg1: number): $Style;
-        splitLines(arg0: string, arg1: number, arg2: $Style): $List<$FormattedText>;
-        splitLines(arg0: string, arg1: number, arg2: $Style, arg3: boolean, arg4: $StringSplitter$LinePosConsumer_): void;
-        splitLines(arg0: $FormattedText, arg1: number, arg2: $Style): $List<$FormattedText>;
+        stringWidth(arg0: $FormattedCharSequence_): number;
         splitLines(arg0: $FormattedText, arg1: number, arg2: $Style, arg3: $FormattedText): $List<$FormattedText>;
+        splitLines(arg0: string, arg1: number, arg2: $Style, arg3: boolean, arg4: $StringSplitter$LinePosConsumer_): void;
+        splitLines(arg0: string, arg1: number, arg2: $Style): $List<$FormattedText>;
+        splitLines(arg0: $FormattedText, arg1: number, arg2: $Style): $List<$FormattedText>;
         splitLines(arg0: $FormattedText, arg1: number, arg2: $Style, arg3: $BiConsumer_<$FormattedText, boolean>): void;
+        componentStyleAtWidth(arg0: $FormattedText, arg1: number): $Style;
+        componentStyleAtWidth(arg0: $FormattedCharSequence_, arg1: number): $Style;
         plainIndexAtWidth(arg0: string, arg1: number, arg2: $Style): number;
         formattedIndexByWidth(arg0: string, arg1: number, arg2: $Style): number;
         formattedHeadByWidth(arg0: string, arg1: number, arg2: $Style): string;
@@ -1330,7 +1330,7 @@ declare module "@package/net/minecraft/client" {
     }
     export class $PeriodicNotificationManager$NotificationTask extends $TimerTask {
     }
-    export class $KeyMapping implements $Comparable<$KeyMapping>, $IKeyMappingExtension, $KeyMappingAccessor, $AccessKeyMapping, $KeyMappingsAccessor, $KeyMappingAccessor$1, $KeyBindingAccessor, $AccessorKeyMapping, $KeyBindingAccessor$1 {
+    export class $KeyMapping implements $Comparable<$KeyMapping>, $IKeyMappingExtension, $KeyMappingAccessor$1, $KeyMappingAccessor, $AccessKeyMapping, $KeyMappingsAccessor, $AccessorKeyMapping, $KeyBindingAccessor, $KeyBindingAccessor$1 {
         getName(): string;
         compareTo(arg0: $KeyMapping): number;
         matches(arg0: number, arg1: number): boolean;
@@ -1338,9 +1338,8 @@ declare module "@package/net/minecraft/client" {
         isDefault(): boolean;
         static setAll(): void;
         getDefaultKey(): $InputConstants$Key;
-        static resetToggleKeys(): void;
         static click(arg0: $InputConstants$Key): void;
-        matchesMouse(arg0: number): boolean;
+        static resetToggleKeys(): void;
         setKey(arg0: $InputConstants$Key): void;
         getCategory(): string;
         same(arg0: $KeyMapping): boolean;
@@ -1349,6 +1348,7 @@ declare module "@package/net/minecraft/client" {
         static releaseAll(): void;
         consumeClick(): boolean;
         isDown(): boolean;
+        matchesMouse(arg0: number): boolean;
         setDown(arg0: boolean): void;
         static resetMapping(): void;
         getTranslatedKeyMessage(): $Component;
@@ -1358,11 +1358,11 @@ declare module "@package/net/minecraft/client" {
         saveString(): string;
         setKeyConflictContext(arg0: $IKeyConflictContext): void;
         setKeyModifierAndCode(arg0: $KeyModifier_, arg1: $InputConstants$Key): void;
-        static fabric_getCategoryMap$fabric_key_binding_api_v1_$md$8e2dbe$1(): $Map<any, any>;
+        static fabric_getCategoryMap$fabric_key_binding_api_v1_$md$d858b6$1(): $Map<any, any>;
         getDisplayName(): $Component;
         setToDefault(): void;
-        isActiveAndMatches(arg0: $InputConstants$Key): boolean;
         isConflictContextAndModifierActive(): boolean;
+        isActiveAndMatches(arg0: $InputConstants$Key): boolean;
         hasKeyModifierConflict(arg0: $KeyMapping): boolean;
         getKey(): $InputConstants$Key;
         fabric_getTimesPressed(): number;
@@ -1377,12 +1377,12 @@ declare module "@package/net/minecraft/client" {
         static CATEGORY_MISC: string;
         key: $InputConstants$Key;
         static CATEGORY_INVENTORY: string;
+        constructor(arg0: string, arg1: $IKeyConflictContext, arg2: $KeyModifier_, arg3: $InputConstants$Type_, arg4: number, arg5: string);
         constructor(arg0: string, arg1: number, arg2: string);
         constructor(arg0: string, arg1: $InputConstants$Type_, arg2: number, arg3: string);
-        constructor(arg0: string, arg1: $IKeyConflictContext, arg2: $InputConstants$Key, arg3: string);
-        constructor(arg0: string, arg1: $IKeyConflictContext, arg2: $InputConstants$Type_, arg3: number, arg4: string);
-        constructor(arg0: string, arg1: $IKeyConflictContext, arg2: $KeyModifier_, arg3: $InputConstants$Type_, arg4: number, arg5: string);
         constructor(arg0: string, arg1: $IKeyConflictContext, arg2: $KeyModifier_, arg3: $InputConstants$Key, arg4: string);
+        constructor(arg0: string, arg1: $IKeyConflictContext, arg2: $InputConstants$Type_, arg3: number, arg4: string);
+        constructor(arg0: string, arg1: $IKeyConflictContext, arg2: $InputConstants$Key, arg3: string);
         get name(): string;
         get default(): boolean;
         get defaultKey(): $InputConstants$Key;

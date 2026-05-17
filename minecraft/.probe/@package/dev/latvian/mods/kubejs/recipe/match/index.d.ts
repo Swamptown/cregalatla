@@ -27,7 +27,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/match" {
     /**
      * Values that may be interpreted as {@link $ReplacementMatchInfo}.
      */
-    export type $ReplacementMatchInfo_ = { exact?: boolean, componentType?: ($RecipeComponent<never>) | undefined, match?: $ReplacementMatch_,  } | [exact?: boolean, componentType?: ($RecipeComponent<never>) | undefined, match?: $ReplacementMatch_, ];
+    export type $ReplacementMatchInfo_ = { match?: $ReplacementMatch_, componentType?: ($RecipeComponent<never>) | undefined, exact?: boolean,  } | [match?: $ReplacementMatch_, componentType?: ($RecipeComponent<never>) | undefined, exact?: boolean, ];
     export class $FluidMatch {
     }
     export interface $FluidMatch extends $ReplacementMatch {

@@ -31,9 +31,9 @@ declare module "@package/jdk/jfr" {
         getProvider(): string;
         getContents(): string;
         getSettings(): $Map<string, string>;
+        static getConfiguration(arg0: string): $Configuration;
         getDescription(): string;
         static getConfigurations(): $List<$Configuration>;
-        static getConfiguration(arg0: string): $Configuration;
         get name(): string;
         get label(): string;
         get provider(): string;
@@ -92,18 +92,18 @@ declare module "@package/jdk/jfr" {
         getId(): number;
         getLabel(): string;
         static getEventType(arg0: $Class<$Event>): $EventType;
+        getAnnotationElements(): $List<$AnnotationElement>;
         getSettingDescriptors(): $List<$SettingDescriptor>;
         getCategoryNames(): $List<string>;
-        getAnnotationElements(): $List<$AnnotationElement>;
         getDescription(): string;
         get name(): string;
         get fields(): $List<$ValueDescriptor>;
         get enabled(): boolean;
         get id(): number;
         get label(): string;
+        get annotationElements(): $List<$AnnotationElement>;
         get settingDescriptors(): $List<$SettingDescriptor>;
         get categoryNames(): $List<string>;
-        get annotationElements(): $List<$AnnotationElement>;
         get description(): string;
     }
     export class $Recording implements $Closeable {
@@ -134,11 +134,11 @@ declare module "@package/jdk/jfr" {
         getMaxAge(): $Duration;
         getDumpOnExit(): boolean;
         getStopTime(): $Instant;
-        getDestination(): $Path;
-        disable(arg0: $Class<$Event>): $EventSettings;
         disable(arg0: string): $EventSettings;
+        disable(arg0: $Class<$Event>): $EventSettings;
         getStartTime(): $Instant;
         setDestination(arg0: $Path_): void;
+        getDestination(): $Path;
         constructor(arg0: $Configuration);
         constructor();
         constructor(arg0: $Map_<string, string>);

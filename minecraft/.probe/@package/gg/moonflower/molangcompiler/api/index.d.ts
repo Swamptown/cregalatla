@@ -45,11 +45,11 @@ declare module "@package/gg/moonflower/molangcompiler/api" {
         loadLibrary(arg0: string, arg1: $MolangObject): $MolangEnvironmentBuilder<V>;
         create(): V;
         create(arg0: number): V;
+        setVariables(arg0: $MolangVariableProvider_): $MolangEnvironmentBuilder<V>;
         setQuery(arg0: string, arg1: $MolangExpression_): $MolangEnvironmentBuilder<V>;
         setQuery(arg0: string, arg1: number): $MolangEnvironmentBuilder<V>;
         setQuery(arg0: string, arg1: number, arg2: $MolangJavaFunction_): $MolangEnvironmentBuilder<V>;
         setQuery(arg0: string, arg1: $Supplier_<number>): $MolangEnvironmentBuilder<V>;
-        setVariables(arg0: $MolangVariableProvider_): $MolangEnvironmentBuilder<V>;
         setGlobal(arg0: string, arg1: number, arg2: $MolangJavaFunction_): $MolangEnvironmentBuilder<V>;
         setGlobal(arg0: string, arg1: $MolangExpression_): $MolangEnvironmentBuilder<V>;
         setGlobal(arg0: string, arg1: number): $MolangEnvironmentBuilder<V>;

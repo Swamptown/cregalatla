@@ -64,7 +64,7 @@ declare module "@package/com/yungnickyoung/minecraft/yungsapi/world/structure/te
     /**
      * Values that may be interpreted as {@link $EnhancedTerrainAdaptation$Padding}.
      */
-    export type $EnhancedTerrainAdaptation$Padding_ = { z?: number, x?: number, top?: number, bottom?: number,  } | [z?: number, x?: number, top?: number, bottom?: number, ];
+    export type $EnhancedTerrainAdaptation$Padding_ = { bottom?: number, top?: number, x?: number, z?: number,  } | [bottom?: number, top?: number, x?: number, z?: number, ];
     export class $SmallCarvedTopNoBeardAdaptation extends $EnhancedTerrainAdaptation {
         static CODEC: $MapCodec<$SmallCarvedTopNoBeardAdaptation>;
         static NONE: $EnhancedTerrainAdaptation;

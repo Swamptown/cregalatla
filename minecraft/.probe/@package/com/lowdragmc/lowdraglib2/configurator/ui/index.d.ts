@@ -11,23 +11,22 @@ import { $TextField, $Label } from "@package/com/lowdragmc/lowdraglib2/gui/ui/el
 declare module "@package/com/lowdragmc/lowdraglib2/configurator/ui" {
     export class $Configurator extends $UIElement {
         getLabel(): $Component;
-        addChildAt(arg0: $UIElement, arg1: number): $Configurator;
-        getNotifyName(): $Component;
-        setTips(...arg0: $Component_[]): $Configurator;
         setTips(...arg0: string[]): $Configurator;
+        setTips(...arg0: $Component_[]): $Configurator;
+        notifyChanges(arg0: $Configurator): void;
+        notifyChanges(): void;
+        setPastable(arg0: $Predicate_<$Class<never>>, arg1: $Consumer_<never>): $Configurator;
+        setPastable<T>(arg0: $Class<T>, arg1: $Consumer_<T>): $Configurator;
+        getNotifyName(): $Component;
         addInlineChild(arg0: $UIElement): $Configurator;
         addInlineChildren(...arg0: $UIElement[]): $Configurator;
         addInlineChildAt(arg0: $UIElement, arg1: number): $Configurator;
         setCopiable(arg0: $Supplier_<$Supplier<never>>): $Configurator;
         setNotifyName(arg0: $Component_): $Configurator;
-        notifyChanges(arg0: $Configurator): void;
-        notifyChanges(): void;
-        setPastable(arg0: $Predicate_<$Class<never>>, arg1: $Consumer_<never>): $Configurator;
-        setPastable<T>(arg0: $Class<T>, arg1: $Consumer_<T>): $Configurator;
-        addChildren(...arg0: $UIElement[]): $Configurator;
         addChild(arg0: $UIElement): $Configurator;
         setLabel(arg0: $Component_): $Configurator;
         setLabel(arg0: string): $Configurator;
+        addChildren(...arg0: $UIElement[]): $Configurator;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
         lineContainer: $UIElement;
@@ -43,8 +42,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/configurator/ui" {
         getValue(): $CompoundTag;
         setSupplier(arg0: $Supplier_<$CompoundTag>): $ValueConfigurator<$CompoundTag>;
         setDefaultValue(arg0: $CompoundTag_): $ValueConfigurator<$CompoundTag>;
-        setCopiable(arg0: $Function_<$CompoundTag, $CompoundTag>): $ValueConfigurator<$CompoundTag>;
         setCanDropPredicate(arg0: $Predicate_<$Object>): $ValueConfigurator<$CompoundTag>;
+        setCopiable(arg0: $Function_<$CompoundTag, $CompoundTag>): $ValueConfigurator<$CompoundTag>;
         setOnUpdate(arg0: $Consumer_<$CompoundTag>): $ValueConfigurator<$CompoundTag>;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
@@ -57,8 +56,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/configurator/ui" {
         get value(): $CompoundTag;
         set supplier(value: $Supplier_<$CompoundTag>);
         set defaultValue(value: $CompoundTag_);
-        set copiable(value: $Function_<$CompoundTag, $CompoundTag>);
         set canDropPredicate(value: $Predicate_<$Object>);
+        set copiable(value: $Function_<$CompoundTag, $CompoundTag>);
         set onUpdate(value: $Consumer_<$CompoundTag>);
     }
     export class $StringConfigurator extends $ValueConfigurator<string> {

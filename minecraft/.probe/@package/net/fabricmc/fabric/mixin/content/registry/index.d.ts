@@ -4,7 +4,7 @@ import { $UseOnContext } from "@package/net/minecraft/world/item/context";
 import { $Pair } from "@package/com/mojang/datafixers/util";
 import { $BlockState } from "@package/net/minecraft/world/level/block/state";
 import { $ResourceKey } from "@package/net/minecraft/resources";
-import { $Block, $Block_ } from "@package/net/minecraft/world/level/block";
+import { $Block_, $Block } from "@package/net/minecraft/world/level/block";
 import { $Set_, $List, $List_, $Map_, $Map, $Set } from "@package/java/util";
 import { $VillagerProfession } from "@package/net/minecraft/world/entity/npc";
 import { $LootTable } from "@package/net/minecraft/world/level/storage/loot";

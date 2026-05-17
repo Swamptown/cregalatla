@@ -23,14 +23,14 @@ declare module "@package/dev/ryanhcode/sable/api/physics/handle" {
          * @deprecated
          */
         getAngularVelocity(): $Vector3dc;
-        applyForcesAndReset(arg0: $ForceTotal): void;
-        applyLinearImpulse(arg0: $Vector3dc): void;
-        applyAngularImpulse(arg0: $Vector3dc): void;
         addLinearAndAngularVelocity(arg0: $Vector3dc, arg1: $Vector3dc): void;
+        applyForcesAndReset(arg0: $ForceTotal): void;
+        applyAngularImpulse(arg0: $Vector3dc): void;
+        applyLinearImpulse(arg0: $Vector3dc): void;
         applyTorqueImpulse(arg0: $Vector3dc): void;
-        applyImpulseAtPoint(arg0: $Vec3_, arg1: $Vec3_): void;
-        applyImpulseAtPoint(arg0: $Vector3dc, arg1: $Vector3dc): void;
         teleport(arg0: $Vector3dc, arg1: $Quaterniondc): void;
+        applyImpulseAtPoint(arg0: $Vector3dc, arg1: $Vector3dc): void;
+        applyImpulseAtPoint(arg0: $Vec3_, arg1: $Vec3_): void;
         constructor(arg0: $PhysicsPipelineBody, arg1: $SubLevelPhysicsSystem);
         get valid(): boolean;
     }

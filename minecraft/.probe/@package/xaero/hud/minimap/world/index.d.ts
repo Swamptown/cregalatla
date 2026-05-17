@@ -31,10 +31,9 @@ declare module "@package/xaero/hud/minimap/world" {
         getRootContainers(): $Iterable<$MinimapWorldRootContainer>;
         getCurrentRootContainer(): $MinimapWorldRootContainer;
         hasCustomWaypoints(): boolean;
-        getAutoRootContainer(): $MinimapWorldRootContainer;
         getWorldContainer(arg0: $XaeroPath): $MinimapWorldContainer;
-        getCustomWaypoints(arg0: $ResourceLocation_): $Int2ObjectMap<$Waypoint>;
         getCustomWaypoints(): $Iterable<$Waypoint>;
+        getCustomWaypoints(arg0: $ResourceLocation_): $Int2ObjectMap<$Waypoint>;
         addWorld(arg0: $XaeroPath): $MinimapWorld;
         addWorldContainer(arg0: $XaeroPath): $MinimapWorldContainer;
         getWorldContainerNullable(arg0: $XaeroPath): $MinimapWorldContainer;
@@ -43,18 +42,19 @@ declare module "@package/xaero/hud/minimap/world" {
          * @deprecated
          */
         getRootContainersDirect(): $HashMap<string, $MinimapWorldRootContainer>;
-        getWorld(arg0: $XaeroPath): $MinimapWorld;
+        getAutoRootContainer(): $MinimapWorldRootContainer;
         getAutoWorld(): $MinimapWorld;
         removeContainer(arg0: $XaeroPath): boolean;
-        getRootWorldContainer(arg0: $XaeroPath): $MinimapWorldRootContainer;
+        getWorld(arg0: $XaeroPath): $MinimapWorld;
         getRootWorldContainer(arg0: string): $MinimapWorldRootContainer;
-        getCurrentWorld(arg0: $XaeroPath): $MinimapWorld;
+        getRootWorldContainer(arg0: $XaeroPath): $MinimapWorldRootContainer;
         getCurrentWorld(): $MinimapWorld;
+        getCurrentWorld(arg0: $XaeroPath): $MinimapWorld;
         constructor(arg0: $HudMod, arg1: $MinimapSession);
         get rootContainers(): $Iterable<$MinimapWorldRootContainer>;
         get currentRootContainer(): $MinimapWorldRootContainer;
-        get autoRootContainer(): $MinimapWorldRootContainer;
         get rootContainersDirect(): $HashMap<string, $MinimapWorldRootContainer>;
+        get autoRootContainer(): $MinimapWorldRootContainer;
         get autoWorld(): $MinimapWorld;
     }
     export class $MinimapWorld {

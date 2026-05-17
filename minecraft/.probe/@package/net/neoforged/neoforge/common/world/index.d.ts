@@ -33,7 +33,7 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $BiomeModifiers$AddCarversBiomeModifier}.
      */
-    export type $BiomeModifiers$AddCarversBiomeModifier_ = { step?: $GenerationStep$Carving_, biomes?: $HolderSet_<$Biome>, carvers?: $HolderSet_<$ConfiguredWorldCarver<never>>,  } | [step?: $GenerationStep$Carving_, biomes?: $HolderSet_<$Biome>, carvers?: $HolderSet_<$ConfiguredWorldCarver<never>>, ];
+    export type $BiomeModifiers$AddCarversBiomeModifier_ = { carvers?: $HolderSet_<$ConfiguredWorldCarver<never>>, biomes?: $HolderSet_<$Biome>, step?: $GenerationStep$Carving_,  } | [carvers?: $HolderSet_<$ConfiguredWorldCarver<never>>, biomes?: $HolderSet_<$Biome>, step?: $GenerationStep$Carving_, ];
     export class $BiomeModifiers$RemoveSpawnsBiomeModifier extends $Record implements $BiomeModifier {
         codec(): $MapCodec<$BiomeModifier>;
         modify(arg0: $Holder_<$Biome>, arg1: $BiomeModifier$Phase_, arg2: $ModifiableBiomeInfo$BiomeInfo$Builder): void;
@@ -44,10 +44,10 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $BiomeModifiers$RemoveSpawnsBiomeModifier}.
      */
-    export type $BiomeModifiers$RemoveSpawnsBiomeModifier_ = { biomes?: $HolderSet_<$Biome>, entityTypes?: $HolderSet_<$EntityType<never>>,  } | [biomes?: $HolderSet_<$Biome>, entityTypes?: $HolderSet_<$EntityType<never>>, ];
+    export type $BiomeModifiers$RemoveSpawnsBiomeModifier_ = { entityTypes?: $HolderSet_<$EntityType<never>>, biomes?: $HolderSet_<$Biome>,  } | [entityTypes?: $HolderSet_<$EntityType<never>>, biomes?: $HolderSet_<$Biome>, ];
     export class $BiomeGenerationSettingsBuilder extends $BiomeGenerationSettings$PlainBuilder {
-        getCarvers(arg0: $GenerationStep$Carving_): $List<$Holder<$ConfiguredWorldCarver<never>>>;
         getFeatures(arg0: $GenerationStep$Decoration_): $List<$Holder<$PlacedFeature>>;
+        getCarvers(arg0: $GenerationStep$Carving_): $List<$Holder<$ConfiguredWorldCarver<never>>>;
         features: $List<$List<$Holder<$PlacedFeature>>>;
         carvers: $Map<$GenerationStep$Carving, $List<$Holder<$ConfiguredWorldCarver<never>>>>;
         constructor(arg0: $BiomeGenerationSettings);
@@ -75,15 +75,15 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $BiomeModifiers$RemoveCarversBiomeModifier}.
      */
-    export type $BiomeModifiers$RemoveCarversBiomeModifier_ = { steps?: $Set_<$GenerationStep$Carving_>, biomes?: $HolderSet_<$Biome>, carvers?: $HolderSet_<$ConfiguredWorldCarver<never>>,  } | [steps?: $Set_<$GenerationStep$Carving_>, biomes?: $HolderSet_<$Biome>, carvers?: $HolderSet_<$ConfiguredWorldCarver<never>>, ];
+    export type $BiomeModifiers$RemoveCarversBiomeModifier_ = { carvers?: $HolderSet_<$ConfiguredWorldCarver<never>>, biomes?: $HolderSet_<$Biome>, steps?: $Set_<$GenerationStep$Carving_>,  } | [carvers?: $HolderSet_<$ConfiguredWorldCarver<never>>, biomes?: $HolderSet_<$Biome>, steps?: $Set_<$GenerationStep$Carving_>, ];
     export class $MobSpawnSettingsBuilder extends $MobSpawnSettings$Builder {
         removeSpawnCost(...arg0: $EntityType_<never>[]): $MobSpawnSettingsBuilder;
         disablePlayerSpawn(): $MobSpawnSettingsBuilder;
         getSpawner(arg0: $MobCategory_): $List<$MobSpawnSettings$SpawnerData>;
-        getCost(arg0: $EntityType_<never>): $MobSpawnSettings$MobSpawnCost;
         getSpawnerTypes(): $Set<$MobCategory>;
         getEntityTypes(): $Set<$EntityType<never>>;
         getProbability(): number;
+        getCost(arg0: $EntityType_<never>): $MobSpawnSettings$MobSpawnCost;
         mobSpawnCosts: $Map<$EntityType<never>, $MobSpawnSettings$MobSpawnCost>;
         spawners: $Map<$MobCategory, $List<$MobSpawnSettings$SpawnerData>>;
         constructor(arg0: $MobSpawnSettings);
@@ -104,12 +104,12 @@ declare module "@package/net/neoforged/neoforge/common/world" {
         build(): $ModifiableBiomeInfo$BiomeInfo;
         getMobSpawnSettings(): $MobSpawnSettingsBuilder;
         getGenerationSettings(): $BiomeGenerationSettingsBuilder;
-        getClimateSettings(): $ClimateSettingsBuilder;
         getSpecialEffects(): $BiomeSpecialEffectsBuilder;
+        getClimateSettings(): $ClimateSettingsBuilder;
         get mobSpawnSettings(): $MobSpawnSettingsBuilder;
         get generationSettings(): $BiomeGenerationSettingsBuilder;
-        get climateSettings(): $ClimateSettingsBuilder;
         get specialEffects(): $BiomeSpecialEffectsBuilder;
+        get climateSettings(): $ClimateSettingsBuilder;
     }
     export class $PieceBeardifierModifier {
     }
@@ -131,7 +131,7 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $BiomeModifiers$RemoveSpawnCostsBiomeModifier}.
      */
-    export type $BiomeModifiers$RemoveSpawnCostsBiomeModifier_ = { biomes?: $HolderSet_<$Biome>, entityTypes?: $HolderSet_<$EntityType<never>>,  } | [biomes?: $HolderSet_<$Biome>, entityTypes?: $HolderSet_<$EntityType<never>>, ];
+    export type $BiomeModifiers$RemoveSpawnCostsBiomeModifier_ = { entityTypes?: $HolderSet_<$EntityType<never>>, biomes?: $HolderSet_<$Biome>,  } | [entityTypes?: $HolderSet_<$EntityType<never>>, biomes?: $HolderSet_<$Biome>, ];
     export class $ClimateSettingsBuilder {
         static copyOf(arg0: $Biome$ClimateSettings_): $ClimateSettingsBuilder;
         static create(arg0: boolean, arg1: number, arg2: $Biome$TemperatureModifier_, arg3: number): $ClimateSettingsBuilder;
@@ -142,8 +142,8 @@ declare module "@package/net/neoforged/neoforge/common/world" {
         setTemperatureModifier(arg0: $Biome$TemperatureModifier_): void;
         getDownfall(): number;
         setDownfall(arg0: number): void;
-        getTemperature(): number;
         hasPrecipitation(): boolean;
+        getTemperature(): number;
     }
     export class $StructureSettingsBuilder$StructureSpawnOverrideBuilder {
         static copyOf(arg0: $StructureSpawnOverride_): $StructureSettingsBuilder$StructureSpawnOverrideBuilder;
@@ -219,7 +219,7 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $StructureModifiers$AddSpawnsStructureModifier}.
      */
-    export type $StructureModifiers$AddSpawnsStructureModifier_ = { structures?: $HolderSet_<$Structure>, spawners?: $List_<$MobSpawnSettings$SpawnerData>,  } | [structures?: $HolderSet_<$Structure>, spawners?: $List_<$MobSpawnSettings$SpawnerData>, ];
+    export type $StructureModifiers$AddSpawnsStructureModifier_ = { spawners?: $List_<$MobSpawnSettings$SpawnerData>, structures?: $HolderSet_<$Structure>,  } | [spawners?: $List_<$MobSpawnSettings$SpawnerData>, structures?: $HolderSet_<$Structure>, ];
     export class $StructureSettingsBuilder {
         static copyOf(arg0: $Structure$StructureSettings_): $StructureSettingsBuilder;
         build(): $Structure$StructureSettings;
@@ -243,7 +243,7 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $StructureModifiers$RemoveSpawnsStructureModifier}.
      */
-    export type $StructureModifiers$RemoveSpawnsStructureModifier_ = { structures?: $HolderSet_<$Structure>, entityTypes?: $HolderSet_<$EntityType<never>>,  } | [structures?: $HolderSet_<$Structure>, entityTypes?: $HolderSet_<$EntityType<never>>, ];
+    export type $StructureModifiers$RemoveSpawnsStructureModifier_ = { entityTypes?: $HolderSet_<$EntityType<never>>, structures?: $HolderSet_<$Structure>,  } | [entityTypes?: $HolderSet_<$EntityType<never>>, structures?: $HolderSet_<$Structure>, ];
     export class $NoneStructureModifier implements $StructureModifier {
         codec(): $MapCodec<$StructureModifier>;
         modify(arg0: $Holder_<$Structure>, arg1: $StructureModifier$Phase_, arg2: $ModifiableStructureInfo$StructureInfo$Builder): void;
@@ -268,7 +268,7 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $BiomeModifiers$RemoveFeaturesBiomeModifier}.
      */
-    export type $BiomeModifiers$RemoveFeaturesBiomeModifier_ = { steps?: $Set_<$GenerationStep$Decoration_>, biomes?: $HolderSet_<$Biome>, features?: $HolderSet_<$PlacedFeature>,  } | [steps?: $Set_<$GenerationStep$Decoration_>, biomes?: $HolderSet_<$Biome>, features?: $HolderSet_<$PlacedFeature>, ];
+    export type $BiomeModifiers$RemoveFeaturesBiomeModifier_ = { features?: $HolderSet_<$PlacedFeature>, biomes?: $HolderSet_<$Biome>, steps?: $Set_<$GenerationStep$Decoration_>,  } | [features?: $HolderSet_<$PlacedFeature>, biomes?: $HolderSet_<$Biome>, steps?: $Set_<$GenerationStep$Decoration_>, ];
     export interface $StructureModifier extends RegistryMarked<RegistryTypes.NeoforgeStructureModifierTag, RegistryTypes.NeoforgeStructureModifier> {}
     export class $ModifiableStructureInfo$StructureInfo$Builder {
         static copyOf(arg0: $ModifiableStructureInfo$StructureInfo_): $ModifiableStructureInfo$StructureInfo$Builder;
@@ -287,7 +287,7 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $BiomeModifiers$AddFeaturesBiomeModifier}.
      */
-    export type $BiomeModifiers$AddFeaturesBiomeModifier_ = { step?: $GenerationStep$Decoration_, biomes?: $HolderSet_<$Biome>, features?: $HolderSet_<$PlacedFeature>,  } | [step?: $GenerationStep$Decoration_, biomes?: $HolderSet_<$Biome>, features?: $HolderSet_<$PlacedFeature>, ];
+    export type $BiomeModifiers$AddFeaturesBiomeModifier_ = { features?: $HolderSet_<$PlacedFeature>, biomes?: $HolderSet_<$Biome>, step?: $GenerationStep$Decoration_,  } | [features?: $HolderSet_<$PlacedFeature>, biomes?: $HolderSet_<$Biome>, step?: $GenerationStep$Decoration_, ];
     export class $AuxiliaryLightManager {
     }
     export interface $AuxiliaryLightManager extends $AuxiliaryLightManagerMixin, $SodiumAuxiliaryLightManager {
@@ -310,14 +310,14 @@ declare module "@package/net/neoforged/neoforge/common/world" {
         getAmbientLoopSound(): ($Holder<$SoundEvent>) | undefined;
         getAmbientMoodSound(): ($AmbientMoodSettings) | undefined;
         getAmbientAdditionsSound(): ($AmbientAdditionsSettings) | undefined;
-        waterColor(): number;
-        getGrassColorOverride(): (number) | undefined;
-        getFoliageColorOverride(): (number) | undefined;
-        getGrassColorModifier(): $BiomeSpecialEffects$GrassColorModifier;
         getSkyColor(): number;
         getFogColor(): number;
         getWaterFogColor(): number;
         getAmbientParticle(): ($AmbientParticleSettings) | undefined;
+        getGrassColorOverride(): (number) | undefined;
+        getFoliageColorOverride(): (number) | undefined;
+        getGrassColorModifier(): $BiomeSpecialEffects$GrassColorModifier;
+        waterColor(): number;
         getBackgroundMusic(): ($Music) | undefined;
         ambientLoopSoundEvent: ($Holder<$SoundEvent>) | undefined;
         ambientAdditionsSettings: ($AmbientAdditionsSettings) | undefined;
@@ -335,7 +335,7 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $ModifiableBiomeInfo$BiomeInfo}.
      */
-    export type $ModifiableBiomeInfo$BiomeInfo_ = { effects?: $BiomeSpecialEffects, climateSettings?: $Biome$ClimateSettings_, mobSpawnSettings?: $MobSpawnSettings, generationSettings?: $BiomeGenerationSettings,  } | [effects?: $BiomeSpecialEffects, climateSettings?: $Biome$ClimateSettings_, mobSpawnSettings?: $MobSpawnSettings, generationSettings?: $BiomeGenerationSettings, ];
+    export type $ModifiableBiomeInfo$BiomeInfo_ = { generationSettings?: $BiomeGenerationSettings, mobSpawnSettings?: $MobSpawnSettings, climateSettings?: $Biome$ClimateSettings_, effects?: $BiomeSpecialEffects,  } | [generationSettings?: $BiomeGenerationSettings, mobSpawnSettings?: $MobSpawnSettings, climateSettings?: $Biome$ClimateSettings_, effects?: $BiomeSpecialEffects, ];
     export class $BiomeModifiers$AddSpawnCostsBiomeModifier extends $Record implements $BiomeModifier {
         spawnCost(): $MobSpawnSettings$MobSpawnCost;
         codec(): $MapCodec<$BiomeModifier>;
@@ -347,7 +347,7 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $BiomeModifiers$AddSpawnCostsBiomeModifier}.
      */
-    export type $BiomeModifiers$AddSpawnCostsBiomeModifier_ = { entityTypes?: $HolderSet_<$EntityType<never>>, biomes?: $HolderSet_<$Biome>, spawnCost?: $MobSpawnSettings$MobSpawnCost_,  } | [entityTypes?: $HolderSet_<$EntityType<never>>, biomes?: $HolderSet_<$Biome>, spawnCost?: $MobSpawnSettings$MobSpawnCost_, ];
+    export type $BiomeModifiers$AddSpawnCostsBiomeModifier_ = { spawnCost?: $MobSpawnSettings$MobSpawnCost_, biomes?: $HolderSet_<$Biome>, entityTypes?: $HolderSet_<$EntityType<never>>,  } | [spawnCost?: $MobSpawnSettings$MobSpawnCost_, biomes?: $HolderSet_<$Biome>, entityTypes?: $HolderSet_<$EntityType<never>>, ];
     export class $BiomeModifiers$AddSpawnsBiomeModifier extends $Record implements $BiomeModifier {
         static singleSpawn(arg0: $HolderSet_<$Biome>, arg1: $MobSpawnSettings$SpawnerData): $BiomeModifiers$AddSpawnsBiomeModifier;
         spawners(): $List<$MobSpawnSettings$SpawnerData>;
@@ -359,7 +359,7 @@ declare module "@package/net/neoforged/neoforge/common/world" {
     /**
      * Values that may be interpreted as {@link $BiomeModifiers$AddSpawnsBiomeModifier}.
      */
-    export type $BiomeModifiers$AddSpawnsBiomeModifier_ = { spawners?: $List_<$MobSpawnSettings$SpawnerData>, biomes?: $HolderSet_<$Biome>,  } | [spawners?: $List_<$MobSpawnSettings$SpawnerData>, biomes?: $HolderSet_<$Biome>, ];
+    export type $BiomeModifiers$AddSpawnsBiomeModifier_ = { biomes?: $HolderSet_<$Biome>, spawners?: $List_<$MobSpawnSettings$SpawnerData>,  } | [biomes?: $HolderSet_<$Biome>, spawners?: $List_<$MobSpawnSettings$SpawnerData>, ];
     export class $ModifiableBiomeInfo {
         get(): $ModifiableBiomeInfo$BiomeInfo;
         getModifiedBiomeInfo(): $ModifiableBiomeInfo$BiomeInfo;

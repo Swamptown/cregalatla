@@ -43,10 +43,10 @@ declare module "@package/mezz/jei/api/gui/drawable" {
     export class $IDrawable {
     }
     export interface $IDrawable {
-        getWidth(): number;
-        getHeight(): number;
         draw(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         draw(arg0: $GuiGraphics): void;
+        getWidth(): number;
+        getHeight(): number;
         get width(): number;
         get height(): number;
     }

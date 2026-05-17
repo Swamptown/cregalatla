@@ -19,10 +19,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/settings" {
         createSettingsPanel(): $UIElement;
         saveAllSettingsToFile(): void;
         restoreSettings(): void;
-        getSettings(arg0: $ResourceLocation_): ($Settings) | undefined;
         markDirty(): void;
         unregisterSettings(arg0: $ResourceLocation_): void;
         setSettingsFile(arg0: $File_): $EditorSettings;
+        getSettings(arg0: $ResourceLocation_): ($Settings) | undefined;
         getSettingsFile(): $File;
         beforeSerialize(): void;
         writeToBuff(arg0: $ByteBuf): void;

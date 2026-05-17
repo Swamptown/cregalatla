@@ -22,10 +22,10 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas/sources" {
         run(arg0: $ResourceManager, arg1: $SpriteSource$Output): void;
         type(): $SpriteSourceType;
         static loadPaletteEntryFromImage(arg0: $ResourceManager, arg1: $ResourceLocation_): number[];
-        setTextures(arg0: $List_<any>): void;
         getPaletteKey(): $ResourceLocation;
         getPermutations(): $Map<any, any>;
         setPermutations(arg0: $Map_<any, any>): void;
+        setTextures(arg0: $List_<any>): void;
         getTextures(): $List<any>;
         static CODEC: $MapCodec<$PalettedPermutations>;
         static LOGGER: $Logger;
@@ -76,7 +76,7 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas/sources" {
     /**
      * Values that may be interpreted as {@link $PalettedPermutations$PalettedSpriteSupplier}.
      */
-    export type $PalettedPermutations$PalettedSpriteSupplier_ = { palette?: $Supplier_<$IntUnaryOperator>, permutationLocation?: $ResourceLocation_, baseImage?: $LazyLoadedImage,  } | [palette?: $Supplier_<$IntUnaryOperator>, permutationLocation?: $ResourceLocation_, baseImage?: $LazyLoadedImage, ];
+    export type $PalettedPermutations$PalettedSpriteSupplier_ = { baseImage?: $LazyLoadedImage, permutationLocation?: $ResourceLocation_, palette?: $Supplier_<$IntUnaryOperator>,  } | [baseImage?: $LazyLoadedImage, permutationLocation?: $ResourceLocation_, palette?: $Supplier_<$IntUnaryOperator>, ];
     export class $Unstitcher$Region extends $Record {
         x(): number;
         y(): number;
@@ -89,5 +89,5 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas/sources" {
     /**
      * Values that may be interpreted as {@link $Unstitcher$Region}.
      */
-    export type $Unstitcher$Region_ = { y?: number, x?: number, height?: number, sprite?: $ResourceLocation_, width?: number,  } | [y?: number, x?: number, height?: number, sprite?: $ResourceLocation_, width?: number, ];
+    export type $Unstitcher$Region_ = { width?: number, sprite?: $ResourceLocation_, height?: number, x?: number, y?: number,  } | [width?: number, sprite?: $ResourceLocation_, height?: number, x?: number, y?: number, ];
 }

@@ -18,7 +18,7 @@ declare module "@package/com/mojang/authlib/properties" {
     /**
      * Values that may be interpreted as {@link $Property}.
      */
-    export type $Property_ = { value?: string, signature?: string, name?: string,  } | [value?: string, signature?: string, name?: string, ];
+    export type $Property_ = { name?: string, signature?: string, value?: string,  } | [name?: string, signature?: string, value?: string, ];
     export class $PropertyMap extends $ForwardingMultimap<string, $Property> {
         constructor();
     }

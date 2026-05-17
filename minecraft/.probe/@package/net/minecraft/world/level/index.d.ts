@@ -140,10 +140,10 @@ declare module "@package/net/minecraft/world/level" {
         copy(): $GameRules$IntegerValue;
         set(arg0: number, arg1: $MinecraftServer): void;
         static create(arg0: number, arg1: $BiConsumer_<$MinecraftServer, $GameRules$IntegerValue>): $GameRules$Type<$GameRules$IntegerValue>;
-        static create(arg0: number, arg1: number, arg2: number, arg3: $BiConsumer_<$MinecraftServer, $GameRules$IntegerValue>): $GameRules$Type<$GameRules$IntegerValue>;
         static create(arg0: number): $GameRules$Type<$GameRules$IntegerValue>;
-        setFrom(arg0: $GameRules$IntegerValue, arg1: $MinecraftServer): void;
+        static create(arg0: number, arg1: number, arg2: number, arg3: $BiConsumer_<$MinecraftServer, $GameRules$IntegerValue>): $GameRules$Type<$GameRules$IntegerValue>;
         tryDeserialize(arg0: string): boolean;
+        setFrom(arg0: $GameRules$IntegerValue, arg1: $MinecraftServer): void;
         getSelf(): $GameRules$IntegerValue;
         getValue(): number;
         setValue(arg0: number): void;
@@ -169,9 +169,9 @@ declare module "@package/net/minecraft/world/level" {
         getLongDisplayName(): $Component;
         getShortDisplayName(): $Component;
         updatePlayerAbilities(arg0: $Abilities): void;
+        isSurvival(): boolean;
         static getNullableId(arg0: $GameType_): number;
         static byNullableId(arg0: number): $GameType;
-        isSurvival(): boolean;
         static byName(arg0: string, arg1: $GameType_): $GameType;
         static byName(arg0: string): $GameType;
         getSerializedName(): string;
@@ -204,30 +204,30 @@ declare module "@package/net/minecraft/world/level" {
     export interface $SignalGetter extends $BlockGetter {
         getSignal(arg0: $BlockPos_, arg1: $Direction_): number;
         getDirectSignal(arg0: $BlockPos_, arg1: $Direction_): number;
+        getDirectSignalTo(arg0: $BlockPos_): number;
+        getControlInputSignal(arg0: $BlockPos_, arg1: $Direction_, arg2: boolean): number;
         hasSignal(arg0: $BlockPos_, arg1: $Direction_): boolean;
         hasNeighborSignal(arg0: $BlockPos_): boolean;
         getBestNeighborSignal(arg0: $BlockPos_): number;
-        getDirectSignalTo(arg0: $BlockPos_): number;
-        getControlInputSignal(arg0: $BlockPos_, arg1: $Direction_, arg2: boolean): number;
     }
     export class $LevelAccessor {
     }
     export interface $LevelAccessor extends $CommonLevelAccessor, $LevelTimeAccess {
         getLevelData(): $LevelData;
         getChunkSource(): $ChunkSource;
+        levelEvent(arg0: $Player, arg1: number, arg2: $BlockPos_, arg3: number): void;
+        levelEvent(arg0: number, arg1: $BlockPos_, arg2: number): void;
+        gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $Vec3_): void;
         gameEvent(arg0: $ResourceKey_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
         gameEvent(arg0: $Holder_<$GameEvent>, arg1: $Vec3_, arg2: $GameEvent$Context_): void;
-        gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $BlockPos_): void;
-        gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $Vec3_): void;
         gameEvent(arg0: $Holder_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
+        gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $BlockPos_): void;
         getRandom(): $RandomSource;
         addParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
         getDifficulty(): $Difficulty;
-        playSound(arg0: $Player, arg1: $BlockPos_, arg2: $SoundEvent_, arg3: $SoundSource_, arg4: number, arg5: number): void;
         playSound(arg0: $Player, arg1: $BlockPos_, arg2: $SoundEvent_, arg3: $SoundSource_): void;
+        playSound(arg0: $Player, arg1: $BlockPos_, arg2: $SoundEvent_, arg3: $SoundSource_, arg4: number, arg5: number): void;
         getServer(): $MinecraftServer;
-        levelEvent(arg0: number, arg1: $BlockPos_, arg2: number): void;
-        levelEvent(arg0: $Player, arg1: number, arg2: $BlockPos_, arg3: number): void;
         blockUpdated(arg0: $BlockPos_, arg1: $Block_): void;
         hasChunk(arg0: number, arg1: number): boolean;
         getCurrentDifficultyAt(arg0: $BlockPos_): $DifficultyInstance;
@@ -235,9 +235,9 @@ declare module "@package/net/minecraft/world/level" {
         dayTime(): number;
         getBlockTicks(): $LevelTickAccess<$Block>;
         scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number, arg3: $TickPriority_): void;
-        scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number, arg3: $TickPriority_): void;
-        scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number): void;
         scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number): void;
+        scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number): void;
+        scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number, arg3: $TickPriority_): void;
         getFluidTicks(): $LevelTickAccess<$Fluid>;
         neighborShapeChanged(arg0: $Direction_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: number, arg5: number): void;
         get levelData(): $LevelData;
@@ -275,27 +275,27 @@ declare module "@package/net/minecraft/world/level" {
     /**
      * Values that may be interpreted as {@link $WorldDataConfiguration}.
      */
-    export type $WorldDataConfiguration_ = { dataPacks?: $DataPackConfig, enabledFeatures?: $FeatureFlagSet,  } | [dataPacks?: $DataPackConfig, enabledFeatures?: $FeatureFlagSet, ];
+    export type $WorldDataConfiguration_ = { enabledFeatures?: $FeatureFlagSet, dataPacks?: $DataPackConfig,  } | [enabledFeatures?: $FeatureFlagSet, dataPacks?: $DataPackConfig, ];
     export class $StructureManager {
         forWorldGenRegion(arg0: $WorldGenRegion): $StructureManager;
-        wrapMethod$ckj000$structurify$getStartForStructure(arg0: $SectionPos, arg1: $Structure_, arg2: $StructureAccess, arg3: $Operation_<any>): $StructureStart;
+        wrapMethod$bik000$structurify$getStartForStructure(arg0: $SectionPos, arg1: $Structure_, arg2: $StructureAccess, arg3: $Operation_<any>): $StructureStart;
         getStructureAt(arg0: $BlockPos_, arg1: $Structure_): $StructureStart;
         hasAnyStructureAt(arg0: $BlockPos_): boolean;
+        addReference(arg0: $StructureStart): void;
         getAllStructuresAt(arg0: $BlockPos_): $Map<$Structure, $LongSet>;
+        getStructureWithPieceAt(arg0: $BlockPos_, arg1: $Predicate_<$Holder<$Structure>>): $StructureStart;
         getStructureWithPieceAt(arg0: $BlockPos_, arg1: $Structure_): $StructureStart;
         getStructureWithPieceAt(arg0: $BlockPos_, arg1: $HolderSet_<$Structure>): $StructureStart;
-        getStructureWithPieceAt(arg0: $BlockPos_, arg1: $Predicate_<$Holder<$Structure>>): $StructureStart;
         getStructureWithPieceAt(arg0: $BlockPos_, arg1: $TagKey_<$Structure>): $StructureStart;
-        checkStructurePresence(arg0: $ChunkPos, arg1: $Structure_, arg2: $StructurePlacement, arg3: boolean): $StructureCheckResult;
-        shouldGenerateStructures(): boolean;
-        startsForStructure(arg0: $ChunkPos, arg1: $Predicate_<$Structure>): $List<$StructureStart>;
-        startsForStructure(arg0: $SectionPos, arg1: $Structure_): $List<$StructureStart>;
-        structureHasPieceAt(arg0: $BlockPos_, arg1: $StructureStart): boolean;
         getStartForStructure(arg0: $SectionPos, arg1: $Structure_, arg2: $StructureAccess): $StructureStart;
         setStartForStructure(arg0: $SectionPos, arg1: $Structure_, arg2: $StructureStart, arg3: $StructureAccess): void;
-        fillStartsForStructure(arg0: $Structure_, arg1: $LongSet, arg2: $Consumer_<$StructureStart>): void;
         addReferenceForStructure(arg0: $SectionPos, arg1: $Structure_, arg2: number, arg3: $StructureAccess): void;
-        addReference(arg0: $StructureStart): void;
+        fillStartsForStructure(arg0: $Structure_, arg1: $LongSet, arg2: $Consumer_<$StructureStart>): void;
+        checkStructurePresence(arg0: $ChunkPos, arg1: $Structure_, arg2: $StructurePlacement, arg3: boolean): $StructureCheckResult;
+        shouldGenerateStructures(): boolean;
+        startsForStructure(arg0: $SectionPos, arg1: $Structure_): $List<$StructureStart>;
+        startsForStructure(arg0: $ChunkPos, arg1: $Predicate_<$Structure>): $List<$StructureStart>;
+        structureHasPieceAt(arg0: $BlockPos_, arg1: $StructureStart): boolean;
         registryAccess(): $RegistryAccess;
         constructor(arg0: $LevelAccessor, arg1: $WorldOptions, arg2: $StructureCheck);
     }
@@ -315,11 +315,11 @@ declare module "@package/net/minecraft/world/level" {
         copy(): $GameRules;
         static register<T extends $GameRules$Value<T>>(arg0: string, arg1: $GameRules$Category_, arg2: $GameRules$Type<T>): $GameRules$Key<T>;
         assignFrom(arg0: $GameRules, arg1: $MinecraftServer): void;
-        static getRuleTypes$fabric_game_rule_api_v1_$md$8e2dbe$0(): $Map<any, any>;
-        createTag(): $CompoundTag;
+        static getRuleTypes$fabric_game_rule_api_v1_$md$d858b6$0(): $Map<any, any>;
         static visitGameRuleTypes(arg0: $GameRules$GameRuleTypeVisitor): void;
         get(rule: string): $GameRules$Value<any>;
         set(rule: string, value: string): void;
+        createTag(): $CompoundTag;
         getRule<T extends $GameRules$Value<T>>(arg0: $GameRules$Key<T>): T;
         kjs$getString(rule: string): string;
         kjs$getBoolean(rule: string): boolean;
@@ -379,12 +379,14 @@ declare module "@package/net/minecraft/world/level" {
         static RULE_ENDER_PEARLS_VANISH_ON_DEATH: $GameRules$Key<$GameRules$BooleanValue>;
         constructor();
         constructor(arg0: $DynamicLike<never>);
-        static get ruleTypes$fabric_game_rule_api_v1_$md$8e2dbe$0(): $Map<any, any>;
+        static get ruleTypes$fabric_game_rule_api_v1_$md$d858b6$0(): $Map<any, any>;
     }
     export class $ChunkPos {
         static hash(arg0: number, arg1: number): number;
-        static rangeClosed(arg0: $ChunkPos, arg1: number): $Stream<$ChunkPos>;
         static rangeClosed(arg0: $ChunkPos, arg1: $ChunkPos): $Stream<$ChunkPos>;
+        static rangeClosed(arg0: $ChunkPos, arg1: number): $Stream<$ChunkPos>;
+        getMiddleBlockX(): number;
+        getMiddleBlockZ(): number;
         static minFromRegion(arg0: number, arg1: number): $ChunkPos;
         static maxFromRegion(arg0: number, arg1: number): $ChunkPos;
         getRegionX(): number;
@@ -394,23 +396,21 @@ declare module "@package/net/minecraft/world/level" {
         getBlockAt(arg0: number, arg1: number, arg2: number): $BlockPos;
         getMiddleBlockPosition(arg0: number): $BlockPos;
         getWorldPosition(): $BlockPos;
-        getChessboardDistance(arg0: number, arg1: number): number;
         getChessboardDistance(arg0: $ChunkPos): number;
+        getChessboardDistance(arg0: number, arg1: number): number;
         getMaxBlockX(): number;
         getMaxBlockZ(): number;
-        getMiddleBlockX(): number;
-        getMiddleBlockZ(): number;
-        toLong(): number;
-        static asLong(arg0: number, arg1: number): number;
-        static asLong(arg0: $BlockPos_): number;
         static getX(arg0: number): number;
         static getZ(arg0: number): number;
+        static asLong(arg0: number, arg1: number): number;
+        static asLong(arg0: $BlockPos_): number;
+        distanceSquared(arg0: number): number;
+        distanceSquared(arg0: $ChunkPos): number;
         getBlockX(arg0: number): number;
         getBlockZ(arg0: number): number;
-        distanceSquared(arg0: $ChunkPos): number;
-        distanceSquared(arg0: number): number;
         getMinBlockX(): number;
         getMinBlockZ(): number;
+        toLong(): number;
         static ZERO: $ChunkPos;
         static REGION_MAX_INDEX: number;
         static INVALID_CHUNK_POS: number;
@@ -420,6 +420,8 @@ declare module "@package/net/minecraft/world/level" {
         constructor(arg0: number);
         constructor(arg0: $BlockPos_);
         constructor(arg0: number, arg1: number);
+        get middleBlockX(): number;
+        get middleBlockZ(): number;
         get regionX(): number;
         get regionZ(): number;
         get regionLocalX(): number;
@@ -427,8 +429,6 @@ declare module "@package/net/minecraft/world/level" {
         get worldPosition(): $BlockPos;
         get maxBlockX(): number;
         get maxBlockZ(): number;
-        get middleBlockX(): number;
-        get middleBlockZ(): number;
         get minBlockX(): number;
         get minBlockZ(): number;
     }
@@ -450,18 +450,18 @@ declare module "@package/net/minecraft/world/level" {
         static traverseBlocks<T, C>(arg0: $Vec3_, arg1: $Vec3_, arg2: C, arg3: $BiFunction_<C, $BlockPos, T>, arg4: $Function_<C, T>): T;
     }
     export interface $BlockGetter extends $LevelHeightAccessor, $IBlockGetterExtension, $FabricBlockView, $BlockViewMixin {
-        getFluidState(arg0: $BlockPos_): $FluidState;
         getBlockState(arg0: $BlockPos_): $BlockState;
         getBlockEntity(arg0: $BlockPos_): $BlockEntity;
         getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $BlockEntityType_<T>): (T) | undefined;
+        getFluidState(arg0: $BlockPos_): $FluidState;
         clip(arg0: $ClipContext): $BlockHitResult;
         getLightEmission(arg0: $BlockPos_): number;
-        getMaxLightLevel(): number;
-        getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
         isBlockInLine(arg0: $ClipBlockStateContext): $BlockHitResult;
         clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
-        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
         getBlockFloorHeight(arg0: $BlockPos_): number;
+        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
+        getMaxLightLevel(): number;
+        getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
         get maxLightLevel(): number;
     }
     export class $NaturalSpawner$SpawnPredicate {
@@ -476,10 +476,10 @@ declare module "@package/net/minecraft/world/level" {
     export class $GameRules$Value<T extends $GameRules$Value<T>> {
         copy(): T;
         onChanged(arg0: $MinecraftServer): void;
-        setFrom(arg0: T, arg1: $MinecraftServer): void;
         updateFromArgument(arg0: $CommandContext<$CommandSourceStack>, arg1: string): void;
         getCommandResult(): number;
         setFromArgument(arg0: $CommandContext<$CommandSourceStack>, arg1: string): void;
+        setFrom(arg0: T, arg1: $MinecraftServer): void;
         deserialize(arg0: string): void;
         serialize(): string;
         getSelf(): T;
@@ -491,22 +491,22 @@ declare module "@package/net/minecraft/world/level" {
     export class $LevelSettings {
         copy(): $LevelSettings;
         static parse(arg0: $Dynamic<never>, arg1: $WorldDataConfiguration_): $LevelSettings;
-        getLifecycle(): $Lifecycle;
         withGameType(arg0: $GameType_): $LevelSettings;
         withDifficulty(arg0: $Difficulty_): $LevelSettings;
+        gameRules(): $GameRules;
         difficulty(): $Difficulty;
         gameType(): $GameType;
-        gameRules(): $GameRules;
         levelName(): string;
         withLifecycle(arg0: $Lifecycle): $LevelSettings;
         hardcore(): boolean;
         allowCommands(): boolean;
         getDataConfiguration(): $WorldDataConfiguration;
+        getLifecycle(): $Lifecycle;
         withDataConfiguration(arg0: $WorldDataConfiguration_): $LevelSettings;
         constructor(arg0: string, arg1: $GameType_, arg2: boolean, arg3: $Difficulty_, arg4: boolean, arg5: $GameRules, arg6: $WorldDataConfiguration_);
         constructor(arg0: string, arg1: $GameType_, arg2: boolean, arg3: $Difficulty_, arg4: boolean, arg5: $GameRules, arg6: $WorldDataConfiguration_, arg7: $Lifecycle);
-        get lifecycle(): $Lifecycle;
         get dataConfiguration(): $WorldDataConfiguration;
+        get lifecycle(): $Lifecycle;
     }
     export class $Explosion$BlockInteraction extends $Enum<$Explosion$BlockInteraction> {
         static values(): $Explosion$BlockInteraction[];
@@ -544,27 +544,21 @@ declare module "@package/net/minecraft/world/level" {
     export class $LevelReader {
     }
     export interface $LevelReader extends $BlockAndTintGetter, $CollisionGetter, $SignalGetter, $BiomeManager$NoiseBiomeSource, $ILevelReaderExtension, $WorldViewMixin, $RenderAttachedBlockView, $ChunkView {
-        getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
-        getHeight(): number;
         enabledFeatures(): $FeatureFlagSet;
         registryAccess(): $RegistryAccess;
         getBiome(arg0: $BlockPos_): $Holder<$Biome>;
+        getBlockStatesIfLoaded(arg0: $AABB_): $Stream<$BlockState>;
         isClientSide(): boolean;
         /**
          * @deprecated
          */
-        hasChunkAt(arg0: $BlockPos_): boolean;
+        hasChunkAt(arg0: number, arg1: number): boolean;
         /**
          * @deprecated
          */
-        hasChunkAt(arg0: number, arg1: number): boolean;
+        hasChunkAt(arg0: $BlockPos_): boolean;
         getMinBuildHeight(): number;
         containsAnyLiquid(arg0: $AABB_): boolean;
-        getBlockStatesIfLoaded(arg0: $AABB_): $Stream<$BlockState>;
-        /**
-         * @deprecated
-         */
-        hasChunksAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
         /**
          * @deprecated
          */
@@ -573,6 +567,10 @@ declare module "@package/net/minecraft/world/level" {
          * @deprecated
          */
         hasChunksAt(arg0: $BlockPos_, arg1: $BlockPos_): boolean;
+        /**
+         * @deprecated
+         */
+        hasChunksAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
         /**
          * @deprecated
          */
@@ -600,13 +598,15 @@ declare module "@package/net/minecraft/world/level" {
         isEmptyBlock(arg0: $BlockPos_): boolean;
         canSeeSkyFromBelowWater(arg0: $BlockPos_): boolean;
         getPathfindingCostFromLightLevels(arg0: $BlockPos_): number;
-        getMaxLocalRawBrightness(arg0: $BlockPos_): number;
         getMaxLocalRawBrightness(arg0: $BlockPos_, arg1: number): number;
+        getMaxLocalRawBrightness(arg0: $BlockPos_): number;
         isWaterAt(arg0: $BlockPos_): boolean;
         holderLookup<T>(arg0: $ResourceKey_<$Registry<T>>): $HolderLookup<T>;
         hasBiomes(): boolean;
         getBiomeFabric(arg0: $BlockPos_): $Holder<any>;
         lithium$getLoadedChunk(arg0: number, arg1: number): $ChunkAccess;
+        getHeight(): number;
+        getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
         get clientSide(): boolean;
         get minBuildHeight(): number;
         get seaLevel(): number;
@@ -646,9 +646,9 @@ declare module "@package/net/minecraft/world/level" {
     export interface $LevelSimulatedRW extends $LevelSimulatedReader, $LevelWriter {
     }
     export class $GameRules$Type<T extends $GameRules$Value<T>> {
+        createArgument(arg0: string): $RequiredArgumentBuilder<$CommandSourceStack, never>;
         callVisitor(arg0: $GameRules$GameRuleTypeVisitor, arg1: $GameRules$Key<T>): void;
         createRule(): T;
-        createArgument(arg0: string): $RequiredArgumentBuilder<$CommandSourceStack, never>;
         argument: $Supplier<$ArgumentType<never>>;
         callback: $BiConsumer<$MinecraftServer, T>;
         constructor(arg0: $Supplier_<$ArgumentType<never>>, arg1: $Function_<$GameRules$Type<T>, T>, arg2: $BiConsumer_<$MinecraftServer, T>, arg3: $GameRules$VisitorCaller_<T>);
@@ -656,38 +656,38 @@ declare module "@package/net/minecraft/world/level" {
     export class $EmptyBlockGetter extends $Enum<$EmptyBlockGetter> implements $BlockGetter {
         static values(): $EmptyBlockGetter[];
         static valueOf(arg0: string): $EmptyBlockGetter;
-        getHeight(): number;
-        getFluidState(arg0: $BlockPos_): $FluidState;
         getBlockState(arg0: $BlockPos_): $BlockState;
         getBlockEntity(arg0: $BlockPos_): $BlockEntity;
+        getFluidState(arg0: $BlockPos_): $FluidState;
         getMinBuildHeight(): number;
+        getHeight(): number;
         getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $BlockEntityType_<T>): (T) | undefined;
         clip(arg0: $ClipContext): $BlockHitResult;
         getLightEmission(arg0: $BlockPos_): number;
-        getMaxLightLevel(): number;
-        getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
         isBlockInLine(arg0: $ClipBlockStateContext): $BlockHitResult;
         clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
-        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
         getBlockFloorHeight(arg0: $BlockPos_): number;
+        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
+        getMaxLightLevel(): number;
+        getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
         getMaxBuildHeight(): number;
         getSectionsCount(): number;
         getMaxSection(): number;
         getMinSection(): number;
-        isOutsideBuildHeight(arg0: $BlockPos_): boolean;
         isOutsideBuildHeight(arg0: number): boolean;
+        isOutsideBuildHeight(arg0: $BlockPos_): boolean;
         getSectionIndex(arg0: number): number;
         getSectionIndexFromSectionY(arg0: number): number;
         getSectionYFromSectionIndex(arg0: number): number;
         getModelData(arg0: $BlockPos_): $ModelData;
         getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
         getAuxLightManager(arg0: $BlockPos_): $AuxiliaryLightManager;
+        getBlockEntityRenderData(arg0: $BlockPos_): $Object;
         hasBiomes(): boolean;
         getBiomeFabric(arg0: $BlockPos_): $Holder<$Biome>;
-        getBlockEntityRenderData(arg0: $BlockPos_): $Object;
         static INSTANCE: $EmptyBlockGetter;
-        get height(): number;
         get minBuildHeight(): number;
+        get height(): number;
         get maxLightLevel(): number;
         get maxBuildHeight(): number;
         get sectionsCount(): number;
@@ -742,7 +742,7 @@ declare module "@package/net/minecraft/world/level" {
     /**
      * Values that may be interpreted as {@link $BlockEventData}.
      */
-    export type $BlockEventData_ = { paramB?: number, paramA?: number, block?: $Block_, pos?: $BlockPos_,  } | [paramB?: number, paramA?: number, block?: $Block_, pos?: $BlockPos_, ];
+    export type $BlockEventData_ = { pos?: $BlockPos_, block?: $Block_, paramA?: number, paramB?: number,  } | [pos?: $BlockPos_, block?: $Block_, paramA?: number, paramB?: number, ];
     export class $FoliageColor {
         static get(arg0: number, arg1: number): number;
         static init(arg0: number[]): void;
@@ -757,23 +757,21 @@ declare module "@package/net/minecraft/world/level" {
         static get birchColor(): number;
         static get mangroveColor(): number;
     }
-    export class $Level extends $AttachmentHolder implements $LevelAccessor, $AutoCloseable, $ILevelExtension, $LoadedChunksCache, $ChunkRandomSource, $LevelAccessor$2, $BlockEntityGetter, $LithiumData, $LevelHeightAccessor, $LevelKJS, $LevelExtension$1, $LevelExtension, $LevelAccessor$1 {
+    export class $Level extends $AttachmentHolder implements $LevelAccessor, $AutoCloseable, $ILevelExtension, $ChunkRandomSource, $LevelAccessor$2, $BlockEntityGetter, $LithiumData, $LevelHeightAccessor, $LevelExtension$1, $LoadedChunksCache, $LevelKJS, $LevelExtension, $LevelAccessor$1 {
         close(): void;
         isDebug(): boolean;
         isLoaded(arg0: $BlockPos_): boolean;
         getEntity(arg0: number): $Entity;
-        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $AABB_, arg2: $Predicate_<T>, arg3: $List_<T>, arg4: number): void;
-        getEntities(arg0: $Entity, arg1: $AABB_, arg2: $Predicate_<$Entity>): $List<$Entity>;
-        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $AABB_, arg2: $Predicate_<T>): $List<T>;
-        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $AABB_, arg2: $Predicate_<T>, arg3: $List_<T>): void;
         getDimensionKey(): $ResourceKey<$Level>;
-        getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
+        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $AABB_, arg2: $Predicate_<T>): $List<T>;
+        getEntities(arg0: $Entity, arg1: $AABB_, arg2: $Predicate_<$Entity>): $List<$Entity>;
+        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $AABB_, arg2: $Predicate_<T>, arg3: $List_<T>): void;
+        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $AABB_, arg2: $Predicate_<T>, arg3: $List_<T>, arg4: number): void;
         disconnect(): void;
         getProfiler(): $ProfilerFiller;
         flywheel$getAllLoadedEntities(): $Iterable<any>;
         setBlock(arg0: $BlockPos_, arg1: $BlockState_, arg2: number, arg3: number): boolean;
         setBlock(arg0: $BlockPos_, arg1: $BlockState_, arg2: number): boolean;
-        getFluidState(arg0: $BlockPos_): $FluidState;
         getLevelData(): $LevelData;
         getBlockState(arg0: $BlockPos_): $BlockState;
         getWorldBorder(): $WorldBorder;
@@ -783,35 +781,36 @@ declare module "@package/net/minecraft/world/level" {
         registryAccess(): $RegistryAccess;
         getRecipeManager(): $RecipeManager;
         getTime(): number;
+        getFluidState(arg0: $BlockPos_): $FluidState;
         damageSources(): $DamageSources;
         isClientSide(): boolean;
         shouldTickDeath(arg0: $Entity): boolean;
         broadcastEntityEvent(arg0: $Entity, arg1: number): void;
         playSeededSound(arg0: $Player, arg1: $Entity, arg2: $Holder_<$SoundEvent>, arg3: $SoundSource_, arg4: number, arg5: number, arg6: number): void;
-        playSeededSound(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: $Holder_<$SoundEvent>, arg5: $SoundSource_, arg6: number, arg7: number, arg8: number): void;
         playSeededSound(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: $SoundEvent_, arg5: $SoundSource_, arg6: number, arg7: number, arg8: number): void;
+        playSeededSound(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: $Holder_<$SoundEvent>, arg5: $SoundSource_, arg6: number, arg7: number, arg8: number): void;
         getScoreboard(): $Scoreboard;
         getRandom(): $RandomSource;
         addParticle(arg0: $ParticleOptions_, arg1: boolean, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         addParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
         broadcastDamageEvent(arg0: $Entity, arg1: $DamageSource_): void;
-        playSound(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: $Holder_<$SoundEvent>, arg5: $SoundSource_, arg6: number, arg7: number): void;
         playSound(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: $SoundEvent_, arg5: $SoundSource_, arg6: number, arg7: number): void;
+        playSound(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: $SoundEvent_, arg5: $SoundSource_): void;
         playSound(arg0: $Player, arg1: $BlockPos_, arg2: $SoundEvent_, arg3: $SoundSource_, arg4: number, arg5: number): void;
         playSound(arg0: $Entity, arg1: $BlockPos_, arg2: $SoundEvent_, arg3: $SoundSource_, arg4: number, arg5: number): void;
-        playSound(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: $SoundEvent_, arg5: $SoundSource_): void;
         playSound(arg0: $Player, arg1: $Entity, arg2: $SoundEvent_, arg3: $SoundSource_, arg4: number, arg5: number): void;
-        playLocalSound(arg0: number, arg1: number, arg2: number, arg3: $SoundEvent_, arg4: $SoundSource_, arg5: number, arg6: number, arg7: boolean): void;
-        playLocalSound(arg0: $Entity, arg1: $SoundEvent_, arg2: $SoundSource_, arg3: number, arg4: number): void;
+        playSound(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: $Holder_<$SoundEvent>, arg5: $SoundSource_, arg6: number, arg7: number): void;
         playLocalSound(arg0: $BlockPos_, arg1: $SoundEvent_, arg2: $SoundSource_, arg3: number, arg4: number, arg5: boolean): void;
+        playLocalSound(arg0: $Entity, arg1: $SoundEvent_, arg2: $SoundSource_, arg3: number, arg4: number): void;
+        playLocalSound(arg0: number, arg1: number, arg2: number, arg3: $SoundEvent_, arg4: $SoundSource_, arg5: number, arg6: number, arg7: boolean): void;
         getGameRules(): $GameRules;
         getServer(): $MinecraftServer;
         noCollision(arg0: $Entity, arg1: $AABB_): boolean;
+        static isInSpawnableBounds(arg0: $BlockPos_): boolean;
+        getData(): $AttachedData<any>;
         getSharedSpawnPos(): $BlockPos;
         getChunkAt(arg0: $BlockPos_): $LevelChunk;
         isRainingAt(arg0: $BlockPos_): boolean;
-        static isInSpawnableBounds(arg0: $BlockPos_): boolean;
-        getData(): $AttachedData<any>;
         findFreePosition(arg0: $Entity, arg1: $VoxelShape, arg2: $Vec3_, arg3: number, arg4: number, arg5: number): $Optional<any>;
         getChunk(arg0: number, arg1: number, arg2: $ChunkStatus_, arg3: boolean): $ChunkAccess;
         mayInteract(arg0: $Player, arg1: $BlockPos_): boolean;
@@ -819,6 +818,8 @@ declare module "@package/net/minecraft/world/level" {
         isDay(): boolean;
         getDayTimeFraction(): number;
         getDayTime(): number;
+        blockEntityChanged(arg0: $BlockPos_): void;
+        updateNeighbourForOutputSignal(arg0: $BlockPos_, arg1: $Block_): void;
         dimensionTypeRegistration(): $Holder<$DimensionType>;
         isInWorldBounds(arg0: $BlockPos_): boolean;
         markAndNotifyBlock(arg0: $BlockPos_, arg1: $LevelChunk, arg2: $BlockState_, arg3: $BlockState_, arg4: number, arg5: number): void;
@@ -834,11 +835,9 @@ declare module "@package/net/minecraft/world/level" {
         getLightEngine(): $LevelLightEngine;
         dimensionType(): $DimensionType;
         isNight(): boolean;
-        blockEntityChanged(arg0: $BlockPos_): void;
-        updateNeighbourForOutputSignal(arg0: $BlockPos_, arg1: $Block_): void;
         onBlockStateChange(arg0: $BlockPos_, arg1: $BlockState_, arg2: $BlockState_): void;
-        addAlwaysVisibleParticle(arg0: $ParticleOptions_, arg1: boolean, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         addAlwaysVisibleParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
+        addAlwaysVisibleParticle(arg0: $ParticleOptions_, arg1: boolean, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         getSunAngle(arg0: number): number;
         addBlockEntityTicker(arg0: $TickingBlockEntity): void;
         addFreshBlockEntities(arg0: $Collection_<$BlockEntity>): void;
@@ -846,12 +845,12 @@ declare module "@package/net/minecraft/world/level" {
         guardEntityTick<T extends $Entity>(arg0: $Consumer_<T>, arg1: T): void;
         shouldTickBlocksAt(arg0: number): boolean;
         shouldTickBlocksAt(arg0: $BlockPos_): boolean;
+        explode(arg0: $Entity, arg1: $DamageSource_, arg2: $ExplosionDamageCalculator, arg3: $Vec3_, arg4: number, arg5: boolean, arg6: $Level$ExplosionInteraction_): $Explosion;
         explode(arg0: $Entity, arg1: $DamageSource_, arg2: $ExplosionDamageCalculator, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: $Level$ExplosionInteraction_, arg9: $ParticleOptions_, arg10: $ParticleOptions_, arg11: $Holder_<$SoundEvent>): $Explosion;
         explode(arg0: $Entity, arg1: $DamageSource_, arg2: $ExplosionDamageCalculator, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: $Level$ExplosionInteraction_, arg9: boolean, arg10: $ParticleOptions_, arg11: $ParticleOptions_, arg12: $Holder_<$SoundEvent>): $Explosion;
-        explode(arg0: $Entity, arg1: $DamageSource_, arg2: $ExplosionDamageCalculator, arg3: $Vec3_, arg4: number, arg5: boolean, arg6: $Level$ExplosionInteraction_): $Explosion;
+        explode(arg0: $Entity, arg1: number, arg2: number, arg3: number, arg4: number, arg5: boolean, arg6: $Level$ExplosionInteraction_): $Explosion;
         explode(arg0: $Entity, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $Level$ExplosionInteraction_): $Explosion;
         explode(arg0: $Entity, arg1: $DamageSource_, arg2: $ExplosionDamageCalculator, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: $Level$ExplosionInteraction_): $Explosion;
-        explode(arg0: $Entity, arg1: number, arg2: number, arg3: number, arg4: number, arg5: boolean, arg6: $Level$ExplosionInteraction_): $Explosion;
         gatherChunkSourceStats(): string;
         setBlockEntity(arg0: $BlockEntity): void;
         removeBlockEntity(arg0: $BlockPos_): void;
@@ -873,7 +872,7 @@ declare module "@package/net/minecraft/world/level" {
         setMapData(arg0: $MapId_, arg1: $MapItemSavedData): void;
         getFreeMapId(): $MapId;
         globalLevelEvent(arg0: number, arg1: $BlockPos_, arg2: number): void;
-        handler$gje000$yumi_mc_core$yumi$onPopulateCrashDetails(crashReport: $CrashReport, cir: $CallbackInfoReturnable<any>): void;
+        handler$dba000$yumi_mc_core$yumi$onPopulateCrashDetails(crashReport: $CrashReport, cir: $CallbackInfoReturnable<any>): void;
         destroyBlockProgress(arg0: number, arg1: $BlockPos_, arg2: number): void;
         createFireworks(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $List_<$FireworkExplosion_>): void;
         getCurrentDifficultyAt(arg0: $BlockPos_): $DifficultyInstance;
@@ -894,51 +893,59 @@ declare module "@package/net/minecraft/world/level" {
         getDayTimePerTick(): number;
         setDayTimePerTick(arg0: number): void;
         advanceDaytime(): number;
-        fabric_getLoadedChunks(): $Set<any>;
-        fabric_markLoaded(arg0: $LevelChunk): void;
-        fabric_markUnloaded(arg0: $LevelChunk): void;
         lithium$getRandomPosInChunk(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $BlockPos$MutableBlockPos): void;
         lithium$getLoadedExistingBlockEntity(arg0: $BlockPos_): $BlockEntity;
         lithium$getData(): $LithiumData$Data;
+        fabric_getLoadedChunks(): $Set<any>;
+        fabric_markLoaded(arg0: $LevelChunk): void;
+        fabric_markUnloaded(arg0: $LevelChunk): void;
         getMcEntities(): $Iterable<any>;
         getEntityByUUID(id: $UUID_): $Entity;
         getEntityByNetworkID(id: number): $Entity;
         neighborChanged(arg0: $BlockPos_, arg1: $Block_, arg2: $BlockPos_): void;
         neighborChanged(arg0: $BlockState_, arg1: $BlockPos_, arg2: $Block_, arg3: $BlockPos_, arg4: boolean): void;
         neighborShapeChanged(arg0: $Direction_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: number, arg5: number): void;
-        gameEvent(arg0: $ResourceKey_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
-        gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $BlockPos_): void;
+        getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
+        levelEvent(arg0: number, arg1: $BlockPos_, arg2: number): void;
         gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $Vec3_): void;
+        gameEvent(arg0: $ResourceKey_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
         gameEvent(arg0: $Holder_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
+        gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $BlockPos_): void;
         getDifficulty(): $Difficulty;
         playSound(arg0: $Player, arg1: $BlockPos_, arg2: $SoundEvent_, arg3: $SoundSource_): void;
-        levelEvent(arg0: number, arg1: $BlockPos_, arg2: number): void;
         blockUpdated(arg0: $BlockPos_, arg1: $Block_): void;
         hasChunk(arg0: number, arg1: number): boolean;
         dayTime(): number;
         scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number, arg3: $TickPriority_): void;
-        scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number, arg3: $TickPriority_): void;
-        scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number): void;
         scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number): void;
-        getDescription(): $Component;
-        getCapability<T>(arg0: $BlockCapability<T, void>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity): T;
-        getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): T;
+        scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number): void;
+        scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number, arg3: $TickPriority_): void;
         getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: $BlockPos_, arg2: C): T;
+        getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): T;
         getCapability<T>(arg0: $BlockCapability<T, void>, arg1: $BlockPos_): T;
+        getCapability<T>(arg0: $BlockCapability<T, void>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity): T;
         invalidateCapabilities(arg0: $BlockPos_): void;
         invalidateCapabilities(arg0: $ChunkPos): void;
         getModelDataManager(): $ModelDataManager;
         getPartEntities(): $Collection<$PartEntity<never>>;
         getDescriptionKey(): string;
+        getDescription(): $Component;
         getMaxBuildHeight(): number;
         getSectionsCount(): number;
         getMaxSection(): number;
         getMinSection(): number;
-        isOutsideBuildHeight(arg0: $BlockPos_): boolean;
         isOutsideBuildHeight(arg0: number): boolean;
+        isOutsideBuildHeight(arg0: $BlockPos_): boolean;
         getSectionIndex(arg0: number): number;
         getSectionIndexFromSectionY(arg0: number): number;
         getSectionYFromSectionIndex(arg0: number): number;
+        /**
+         * Each player in the level (world) runs the specified console command with their permission level. The command won't output any logs in chat nor console
+         * 
+         * @param command The console command. Slash at the beginning is optional.
+         */
+        runCommandSilent(command: string): void;
+        setActivePostShader(id: $ResourceLocation_): void;
         getName(): $Component;
         self(): $EntityGetter;
         tell(message: $Component_): void;
@@ -949,27 +956,20 @@ declare module "@package/net/minecraft/world/level" {
          * @param command The console command. Slash at the beginning is optional.
          */
         runCommand(command: string): void;
-        /**
-         * Each player in the level (world) runs the specified console command with their permission level. The command won't output any logs in chat nor console
-         * 
-         * @param command The console command. Slash at the beginning is optional.
-         */
-        runCommandSilent(command: string): void;
-        setActivePostShader(id: $ResourceLocation_): void;
         getBlock(x: number, y: number, z: number): $LevelBlock;
-        getBlock(entity: $BlockEntity): $LevelBlock;
         getBlock(pos: $BlockPos_): $LevelBlock;
+        getBlock(entity: $BlockEntity): $LevelBlock;
         getSide(): $ScriptType;
+        spawnEntity(type: $EntityType_<never>, callback: $Consumer_<$Entity>): void;
+        spawnFireworks(x: number, y: number, z: number, fireworks: $Fireworks_, lifetime: number): void;
+        spawnParticles(options: $ParticleOptions_, overrideLimiter: boolean, x: number, y: number, z: number, vx: number, vy: number, vz: number, count: number, speed: number): void;
+        getDimension(): $ResourceLocation;
+        spawnLightning(x: number, y: number, z: number, visualOnly: boolean, cause: $ServerPlayer): void;
+        spawnLightning(x: number, y: number, z: number, visualOnly: boolean): void;
         isOverworld(): boolean;
         setTime(time: number): void;
         explode(x: number, y: number, z: number, properties: $ExplosionProperties_): $Explosion;
         createEntity(type: $EntityType_<never>): $Entity;
-        spawnEntity(type: $EntityType_<never>, callback: $Consumer_<$Entity>): void;
-        spawnFireworks(x: number, y: number, z: number, fireworks: $Fireworks_, lifetime: number): void;
-        spawnParticles(options: $ParticleOptions_, overrideLimiter: boolean, x: number, y: number, z: number, vx: number, vy: number, vz: number, count: number, speed: number): void;
-        spawnLightning(x: number, y: number, z: number, visualOnly: boolean): void;
-        spawnLightning(x: number, y: number, z: number, visualOnly: boolean, cause: $ServerPlayer): void;
-        getDimension(): $ResourceLocation;
         getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $BlockEntityType_<T>): (T) | undefined;
         getHeightmapPos(arg0: $Heightmap$Types_, arg1: $BlockPos_): $BlockPos;
         getEntityCollisions(arg0: $Entity, arg1: $AABB_): $List<$VoxelShape>;
@@ -996,20 +996,16 @@ declare module "@package/net/minecraft/world/level" {
         getNearbyEntities<T extends $LivingEntity>(arg0: $Class<T>, arg1: $TargetingConditions, arg2: $LivingEntity, arg3: $AABB_): $List<T>;
         getPlayerByUUID(arg0: $UUID_): $Player;
         getBiome(arg0: $BlockPos_): $Holder<$Biome>;
-        /**
-         * @deprecated
-         */
-        hasChunkAt(arg0: $BlockPos_): boolean;
-        /**
-         * @deprecated
-         */
-        hasChunkAt(arg0: number, arg1: number): boolean;
-        containsAnyLiquid(arg0: $AABB_): boolean;
         getBlockStatesIfLoaded(arg0: $AABB_): $Stream<$BlockState>;
         /**
          * @deprecated
          */
-        hasChunksAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
+        hasChunkAt(arg0: number, arg1: number): boolean;
+        /**
+         * @deprecated
+         */
+        hasChunkAt(arg0: $BlockPos_): boolean;
+        containsAnyLiquid(arg0: $AABB_): boolean;
         /**
          * @deprecated
          */
@@ -1021,6 +1017,10 @@ declare module "@package/net/minecraft/world/level" {
         /**
          * @deprecated
          */
+        hasChunksAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
+        /**
+         * @deprecated
+         */
         getLightLevelDependentMagicValue(arg0: $BlockPos_): number;
         getChunk(arg0: $BlockPos_): $ChunkAccess;
         getChunk(arg0: number, arg1: number, arg2: $ChunkStatus_): $ChunkAccess;
@@ -1029,8 +1029,8 @@ declare module "@package/net/minecraft/world/level" {
         isEmptyBlock(arg0: $BlockPos_): boolean;
         canSeeSkyFromBelowWater(arg0: $BlockPos_): boolean;
         getPathfindingCostFromLightLevels(arg0: $BlockPos_): number;
-        getMaxLocalRawBrightness(arg0: $BlockPos_): number;
         getMaxLocalRawBrightness(arg0: $BlockPos_, arg1: number): number;
+        getMaxLocalRawBrightness(arg0: $BlockPos_): number;
         isWaterAt(arg0: $BlockPos_): boolean;
         holderLookup<T>(arg0: $ResourceKey_<$Registry<T>>): $HolderLookup<T>;
         hasBiomes(): boolean;
@@ -1041,22 +1041,22 @@ declare module "@package/net/minecraft/world/level" {
         canSeeSky(arg0: $BlockPos_): boolean;
         getBrightness(arg0: $LightLayer_, arg1: $BlockPos_): number;
         getRawBrightness(arg0: $BlockPos_, arg1: number): number;
-        noCollision(arg0: $Entity): boolean;
-        noCollision(arg0: $AABB_): boolean;
-        noBlockCollision(arg0: $Entity, arg1: $AABB_): boolean;
         findSupportingBlock(arg0: $Entity, arg1: $AABB_): ($BlockPos) | undefined;
+        noCollision(arg0: $AABB_): boolean;
+        noCollision(arg0: $Entity): boolean;
+        noBlockCollision(arg0: $Entity, arg1: $AABB_): boolean;
         getBlockCollisions(arg0: $Entity, arg1: $AABB_): $Iterable<$VoxelShape>;
-        isUnobstructed(arg0: $Entity): boolean;
-        isUnobstructed(arg0: $BlockState_, arg1: $BlockPos_, arg2: $CollisionContext): boolean;
         getCollisions(arg0: $Entity, arg1: $AABB_): $Iterable<$VoxelShape>;
         collidesWithSuffocatingBlock(arg0: $Entity, arg1: $AABB_): boolean;
+        isUnobstructed(arg0: $BlockState_, arg1: $BlockPos_, arg2: $CollisionContext): boolean;
+        isUnobstructed(arg0: $Entity): boolean;
         getSignal(arg0: $BlockPos_, arg1: $Direction_): number;
         getDirectSignal(arg0: $BlockPos_, arg1: $Direction_): number;
+        getDirectSignalTo(arg0: $BlockPos_): number;
+        getControlInputSignal(arg0: $BlockPos_, arg1: $Direction_, arg2: boolean): number;
         hasSignal(arg0: $BlockPos_, arg1: $Direction_): boolean;
         hasNeighborSignal(arg0: $BlockPos_): boolean;
         getBestNeighborSignal(arg0: $BlockPos_): number;
-        getDirectSignalTo(arg0: $BlockPos_): number;
-        getControlInputSignal(arg0: $BlockPos_, arg1: $Direction_, arg2: boolean): number;
         holder<T>(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
         holderOrThrow<T>(arg0: $ResourceKey_<T>): $Holder<T>;
         isAreaLoaded(arg0: $BlockPos_, arg1: number): boolean;
@@ -1069,12 +1069,12 @@ declare module "@package/net/minecraft/world/level" {
         destroyBlock(arg0: $BlockPos_, arg1: boolean, arg2: $Entity): boolean;
         clip(arg0: $ClipContext): $BlockHitResult;
         getLightEmission(arg0: $BlockPos_): number;
-        getMaxLightLevel(): number;
-        getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
         isBlockInLine(arg0: $ClipBlockStateContext): $BlockHitResult;
         clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
-        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
         getBlockFloorHeight(arg0: $BlockPos_): number;
+        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
+        getMaxLightLevel(): number;
+        getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
         getShade(arg0: number, arg1: number, arg2: number, arg3: boolean): number;
         getModelData(arg0: $BlockPos_): $ModelData;
         getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
@@ -1118,8 +1118,8 @@ declare module "@package/net/minecraft/world/level" {
         get scoreboard(): $Scoreboard;
         get gameRules(): $GameRules;
         get server(): $MinecraftServer;
-        get sharedSpawnPos(): $BlockPos;
         get data(): $AttachedData<any>;
+        get sharedSpawnPos(): $BlockPos;
         get day(): boolean;
         get seaLevel(): number;
         get lightEngine(): $LevelLightEngine;
@@ -1135,20 +1135,20 @@ declare module "@package/net/minecraft/world/level" {
         get maxEntityRadius(): number;
         get mcEntities(): $Iterable<any>;
         get difficulty(): $Difficulty;
-        get description(): $Component;
         get modelDataManager(): $ModelDataManager;
         get partEntities(): $Collection<$PartEntity<never>>;
         get descriptionKey(): string;
+        get description(): $Component;
         get maxBuildHeight(): number;
         get sectionsCount(): number;
         get maxSection(): number;
         get minSection(): number;
+        set activePostShader(value: $ResourceLocation_);
         get name(): $Component;
         set statusMessage(value: $Component_);
-        set activePostShader(value: $ResourceLocation_);
         get side(): $ScriptType;
-        get overworld(): boolean;
         get dimension(): $ResourceLocation;
+        get overworld(): boolean;
         get moonBrightness(): number;
         get moonPhase(): number;
         get mcPlayers(): $List<$Player>;
@@ -1177,7 +1177,7 @@ declare module "@package/net/minecraft/world/level" {
     /**
      * Values that may be interpreted as {@link $SpawnData}.
      */
-    export type $SpawnData_ = { equipment?: ($EquipmentTable_) | undefined, entityToSpawn?: $CompoundTag_, customSpawnRules?: ($SpawnData$CustomSpawnRules_) | undefined,  } | [equipment?: ($EquipmentTable_) | undefined, entityToSpawn?: $CompoundTag_, customSpawnRules?: ($SpawnData$CustomSpawnRules_) | undefined, ];
+    export type $SpawnData_ = { customSpawnRules?: ($SpawnData$CustomSpawnRules_) | undefined, entityToSpawn?: $CompoundTag_, equipment?: ($EquipmentTable_) | undefined,  } | [customSpawnRules?: ($SpawnData$CustomSpawnRules_) | undefined, entityToSpawn?: $CompoundTag_, equipment?: ($EquipmentTable_) | undefined, ];
     export class $ClipBlockStateContext {
         getFrom(): $Vec3;
         getTo(): $Vec3;
@@ -1215,7 +1215,7 @@ declare module "@package/net/minecraft/world/level" {
     /**
      * Values that may be interpreted as {@link $SpawnData$CustomSpawnRules}.
      */
-    export type $SpawnData$CustomSpawnRules_ = { blockLightLimit?: $InclusiveRange_<number>, skyLightLimit?: $InclusiveRange_<number>,  } | [blockLightLimit?: $InclusiveRange_<number>, skyLightLimit?: $InclusiveRange_<number>, ];
+    export type $SpawnData$CustomSpawnRules_ = { skyLightLimit?: $InclusiveRange_<number>, blockLightLimit?: $InclusiveRange_<number>,  } | [skyLightLimit?: $InclusiveRange_<number>, blockLightLimit?: $InclusiveRange_<number>, ];
     export class $BaseCommandBlock implements $CommandSource {
         getName(): $Component;
         load(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
@@ -1223,17 +1223,17 @@ declare module "@package/net/minecraft/world/level" {
         isValid(): boolean;
         getLevel(): $ServerLevel;
         getPosition(): $Vec3;
-        getSuccessCount(): number;
-        getCommand(): string;
-        setSuccessCount(arg0: number): void;
-        performCommand(arg0: $Level_): boolean;
-        setTrackOutput(arg0: boolean): void;
         usedBy(arg0: $Player): $InteractionResult;
         getLastOutput(): $Component;
         setLastOutput(arg0: $Component_): void;
         setCommand(arg0: string): void;
         onUpdated(): void;
         isTrackOutput(): boolean;
+        getSuccessCount(): number;
+        getCommand(): string;
+        setSuccessCount(arg0: number): void;
+        performCommand(arg0: $Level_): boolean;
+        setTrackOutput(arg0: boolean): void;
         getCustomName(): $Component;
         sendSystemMessage(arg0: $Component_): void;
         createCommandSourceStack(): $CommandSourceStack;
@@ -1261,14 +1261,14 @@ declare module "@package/net/minecraft/world/level" {
         load(arg0: $Level_, arg1: $BlockPos_, arg2: $CompoundTag_): void;
         save(arg0: $CompoundTag_): $CompoundTag;
         getOwner(): $Either<$BlockEntity, $Entity>;
-        getSpin(): number;
-        serverTick(arg0: $ServerLevel, arg1: $BlockPos_): void;
         onEventTriggered(arg0: $Level_, arg1: number): boolean;
         setEntityId(arg0: $EntityType_<never>, arg1: $Level_, arg2: $RandomSource, arg3: $BlockPos_): void;
-        getOrCreateDisplayEntity(arg0: $Level_, arg1: $BlockPos_): $Entity;
+        serverTick(arg0: $ServerLevel, arg1: $BlockPos_): void;
+        getSpin(): number;
         broadcastEvent(arg0: $Level_, arg1: $BlockPos_, arg2: number): void;
         setNextSpawnData(arg0: $Level_, arg1: $BlockPos_, arg2: $SpawnData_): void;
         getoSpin(): number;
+        getOrCreateDisplayEntity(arg0: $Level_, arg1: $BlockPos_): $Entity;
         clientTick(arg0: $Level_, arg1: $BlockPos_): void;
         static SPAWN_DATA_TAG: string;
         spawnPotentials: $SimpleWeightedRandomList<$SpawnData>;
@@ -1286,8 +1286,8 @@ declare module "@package/net/minecraft/world/level" {
         static spawnCategoryForPosition(arg0: $MobCategory_, arg1: $ServerLevel, arg2: $BlockPos_): void;
         static isInNetherFortressBounds(arg0: $BlockPos_, arg1: $ServerLevel, arg2: $MobCategory_, arg3: $StructureManager): boolean;
         static createState(arg0: number, arg1: $Iterable_<$Entity>, arg2: $NaturalSpawner$ChunkGetter_, arg3: $LocalMobCapCalculator): $NaturalSpawner$SpawnState;
-        static spawnMobsForChunkGeneration(arg0: $ServerLevelAccessor, arg1: $Holder_<$Biome>, arg2: $ChunkPos, arg3: $RandomSource): void;
         static isValidEmptySpawnBlock(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $FluidState, arg4: $EntityType_<never>): boolean;
+        static spawnMobsForChunkGeneration(arg0: $ServerLevelAccessor, arg1: $Holder_<$Biome>, arg2: $ChunkPos, arg3: $RandomSource): void;
         static SPAWN_DISTANCE_BLOCK: number;
         static MAGIC_NUMBER: number;
         static SPAWN_DISTANCE_CHUNK: number;
@@ -1306,34 +1306,35 @@ declare module "@package/net/minecraft/world/level" {
     }
     export interface $CollisionGetter extends $BlockGetter {
         getWorldBorder(): $WorldBorder;
-        noCollision(arg0: $Entity): boolean;
+        findSupportingBlock(arg0: $Entity, arg1: $AABB_): ($BlockPos) | undefined;
         noCollision(arg0: $Entity, arg1: $AABB_): boolean;
         noCollision(arg0: $AABB_): boolean;
+        noCollision(arg0: $Entity): boolean;
         noBlockCollision(arg0: $Entity, arg1: $AABB_): boolean;
-        findSupportingBlock(arg0: $Entity, arg1: $AABB_): ($BlockPos) | undefined;
         getBlockCollisions(arg0: $Entity, arg1: $AABB_): $Iterable<$VoxelShape>;
         findFreePosition(arg0: $Entity, arg1: $VoxelShape, arg2: $Vec3_, arg3: number, arg4: number, arg5: number): ($Vec3) | undefined;
-        getChunkForCollisions(arg0: number, arg1: number): $BlockGetter;
-        getEntityCollisions(arg0: $Entity, arg1: $AABB_): $List<$VoxelShape>;
-        isUnobstructed(arg0: $Entity): boolean;
-        isUnobstructed(arg0: $Entity, arg1: $VoxelShape): boolean;
-        isUnobstructed(arg0: $BlockState_, arg1: $BlockPos_, arg2: $CollisionContext): boolean;
         getCollisions(arg0: $Entity, arg1: $AABB_): $Iterable<$VoxelShape>;
         collidesWithSuffocatingBlock(arg0: $Entity, arg1: $AABB_): boolean;
+        getChunkForCollisions(arg0: number, arg1: number): $BlockGetter;
+        getEntityCollisions(arg0: $Entity, arg1: $AABB_): $List<$VoxelShape>;
+        isUnobstructed(arg0: $BlockState_, arg1: $BlockPos_, arg2: $CollisionContext): boolean;
+        isUnobstructed(arg0: $Entity, arg1: $VoxelShape): boolean;
+        isUnobstructed(arg0: $Entity): boolean;
         get worldBorder(): $WorldBorder;
     }
     export class $GameRules$BooleanValue extends $GameRules$Value<$GameRules$BooleanValue> {
         get(): boolean;
+        copy(): $GameRules$BooleanValue;
         set(arg0: boolean, arg1: $MinecraftServer): void;
-        static create(arg0: boolean, arg1: $BiConsumer_<$MinecraftServer, $GameRules$BooleanValue>): $GameRules$Type<$GameRules$BooleanValue>;
         static create(arg0: boolean): $GameRules$Type<$GameRules$BooleanValue>;
+        static create(arg0: boolean, arg1: $BiConsumer_<$MinecraftServer, $GameRules$BooleanValue>): $GameRules$Type<$GameRules$BooleanValue>;
         setFrom(arg0: $GameRules$BooleanValue, arg1: $MinecraftServer): void;
         type: $GameRules$Type<$GameRules$BooleanValue>;
         constructor(arg0: $GameRules$Type<$GameRules$BooleanValue>, arg1: boolean);
     }
     export class $Spawner {
-        static appendHoverText(arg0: $ItemStack_, arg1: $List_<$Component_>, arg2: string): void;
         static getSpawnEntityDisplayName(arg0: $ItemStack_, arg1: string): $Component;
+        static appendHoverText(arg0: $ItemStack_, arg1: $List_<$Component_>, arg2: string): void;
     }
     export interface $Spawner {
         setEntityId(arg0: $EntityType_<never>, arg1: $RandomSource): void;
@@ -1366,8 +1367,8 @@ declare module "@package/net/minecraft/world/level" {
         constructor(arg0: $CollisionGetter, arg1: $Entity, arg2: $AABB_, arg3: boolean, arg4: $BiFunction_<$BlockPos$MutableBlockPos, $VoxelShape, T>);
     }
     export class $NoiseColumn implements $BlockColumn {
-        getBlock(arg0: number): $BlockState;
         setBlock(arg0: number, arg1: $BlockState_): void;
+        getBlock(arg0: number): $BlockState;
         constructor(arg0: number, arg1: $BlockState_[]);
     }
     export class $ItemLike {
@@ -1380,62 +1381,62 @@ declare module "@package/net/minecraft/world/level" {
      */
     export type $ItemLike_ = $Item_ | (() => $Item_);
     export class $PathNavigationRegion implements $BlockGetter, $CollisionGetter, $ChunkView {
-        getHeight(): number;
         getProfiler(): $ProfilerFiller;
-        getFluidState(arg0: $BlockPos_): $FluidState;
         getBlockState(arg0: $BlockPos_): $BlockState;
         getWorldBorder(): $WorldBorder;
         getBlockEntity(arg0: $BlockPos_): $BlockEntity;
+        getFluidState(arg0: $BlockPos_): $FluidState;
         getMinBuildHeight(): number;
         getChunkForCollisions(arg0: number, arg1: number): $BlockGetter;
         getEntityCollisions(arg0: $Entity, arg1: $AABB_): $List<$VoxelShape>;
         lithium$getLoadedChunk(arg0: number, arg1: number): $ChunkAccess;
+        getHeight(): number;
         getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $BlockEntityType_<T>): (T) | undefined;
         clip(arg0: $ClipContext): $BlockHitResult;
         getLightEmission(arg0: $BlockPos_): number;
-        getMaxLightLevel(): number;
-        getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
         isBlockInLine(arg0: $ClipBlockStateContext): $BlockHitResult;
         clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
-        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
         getBlockFloorHeight(arg0: $BlockPos_): number;
-        noCollision(arg0: $Entity): boolean;
+        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
+        getMaxLightLevel(): number;
+        getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
+        findSupportingBlock(arg0: $Entity, arg1: $AABB_): ($BlockPos) | undefined;
         noCollision(arg0: $Entity, arg1: $AABB_): boolean;
         noCollision(arg0: $AABB_): boolean;
+        noCollision(arg0: $Entity): boolean;
         noBlockCollision(arg0: $Entity, arg1: $AABB_): boolean;
-        findSupportingBlock(arg0: $Entity, arg1: $AABB_): ($BlockPos) | undefined;
         getBlockCollisions(arg0: $Entity, arg1: $AABB_): $Iterable<$VoxelShape>;
         findFreePosition(arg0: $Entity, arg1: $VoxelShape, arg2: $Vec3_, arg3: number, arg4: number, arg5: number): ($Vec3) | undefined;
-        isUnobstructed(arg0: $Entity): boolean;
-        isUnobstructed(arg0: $Entity, arg1: $VoxelShape): boolean;
-        isUnobstructed(arg0: $BlockState_, arg1: $BlockPos_, arg2: $CollisionContext): boolean;
         getCollisions(arg0: $Entity, arg1: $AABB_): $Iterable<$VoxelShape>;
         collidesWithSuffocatingBlock(arg0: $Entity, arg1: $AABB_): boolean;
+        isUnobstructed(arg0: $BlockState_, arg1: $BlockPos_, arg2: $CollisionContext): boolean;
+        isUnobstructed(arg0: $Entity, arg1: $VoxelShape): boolean;
+        isUnobstructed(arg0: $Entity): boolean;
         getMaxBuildHeight(): number;
         getSectionsCount(): number;
         getMaxSection(): number;
         getMinSection(): number;
-        isOutsideBuildHeight(arg0: $BlockPos_): boolean;
         isOutsideBuildHeight(arg0: number): boolean;
+        isOutsideBuildHeight(arg0: $BlockPos_): boolean;
         getSectionIndex(arg0: number): number;
         getSectionIndexFromSectionY(arg0: number): number;
         getSectionYFromSectionIndex(arg0: number): number;
         getModelData(arg0: $BlockPos_): $ModelData;
         getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
         getAuxLightManager(arg0: $BlockPos_): $AuxiliaryLightManager;
+        getBlockEntityRenderData(arg0: $BlockPos_): $Object;
         hasBiomes(): boolean;
         getBiomeFabric(arg0: $BlockPos_): $Holder<$Biome>;
-        getBlockEntityRenderData(arg0: $BlockPos_): $Object;
         allEmpty: boolean;
         centerZ: number;
         centerX: number;
         level: $Level;
         chunks: $ChunkAccess[][];
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockPos_);
-        get height(): number;
         get profiler(): $ProfilerFiller;
         get worldBorder(): $WorldBorder;
         get minBuildHeight(): number;
+        get height(): number;
         get maxLightLevel(): number;
         get maxBuildHeight(): number;
         get sectionsCount(): number;
@@ -1471,9 +1472,9 @@ declare module "@package/net/minecraft/world/level" {
     }
     export class $ClipContext implements $ClipContextAccessor, $ClipContextExtension {
         getFrom(): $Vec3;
-        sable$setSubLevelIgnoring(arg0: $Predicate_<any>): void;
         sable$setIgnoreMainLevel(arg0: boolean): void;
         sable$setIgnoredSubLevel(arg0: $SubLevel): void;
+        sable$setSubLevelIgnoring(arg0: $Predicate_<any>): void;
         getTo(): $Vec3;
         getBlockShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): $VoxelShape;
         getFluidShape(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_): $VoxelShape;
@@ -1499,13 +1500,13 @@ declare module "@package/net/minecraft/world/level" {
         static load(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $ForcedChunksSavedData;
         static factory(): $SavedData$Factory<$ForcedChunksSavedData>;
         getChunks(): $LongSet;
-        getBlockForcedChunks(): $ForcedChunkManager$TicketTracker<$BlockPos>;
         getEntityForcedChunks(): $ForcedChunkManager$TicketTracker<$UUID>;
+        getBlockForcedChunks(): $ForcedChunkManager$TicketTracker<$BlockPos>;
         static FILE_ID: string;
         constructor();
         get chunks(): $LongSet;
-        get blockForcedChunks(): $ForcedChunkManager$TicketTracker<$BlockPos>;
         get entityForcedChunks(): $ForcedChunkManager$TicketTracker<$UUID>;
+        get blockForcedChunks(): $ForcedChunkManager$TicketTracker<$BlockPos>;
     }
     export class $Level$ExplosionInteraction extends $Enum<$Level$ExplosionInteraction> implements $StringRepresentable {
         static values(): $Level$ExplosionInteraction[];
@@ -1542,23 +1543,23 @@ declare module "@package/net/minecraft/world/level" {
         static create(arg0: number, arg1: number): $LevelHeightAccessor;
     }
     export interface $LevelHeightAccessor {
-        getHeight(): number;
         getMinBuildHeight(): number;
         getMaxBuildHeight(): number;
         getSectionsCount(): number;
         getMaxSection(): number;
         getMinSection(): number;
-        isOutsideBuildHeight(arg0: $BlockPos_): boolean;
         isOutsideBuildHeight(arg0: number): boolean;
+        isOutsideBuildHeight(arg0: $BlockPos_): boolean;
         getSectionIndex(arg0: number): number;
         getSectionIndexFromSectionY(arg0: number): number;
         getSectionYFromSectionIndex(arg0: number): number;
-        get height(): number;
+        getHeight(): number;
         get minBuildHeight(): number;
         get maxBuildHeight(): number;
         get sectionsCount(): number;
         get maxSection(): number;
         get minSection(): number;
+        get height(): number;
     }
     export class $ClipContext$Fluid extends $Enum<$ClipContext$Fluid> {
         static values(): $ClipContext$Fluid[];
@@ -1577,8 +1578,6 @@ declare module "@package/net/minecraft/world/level" {
         getBlockInteraction(): $Explosion$BlockInteraction;
         getIndirectSourceEntity(): $LivingEntity;
         getDirectSourceEntity(): $Entity;
-        canTriggerBlocks(): boolean;
-        static getSeenPercent(arg0: $Vec3_, arg1: $Entity): number;
         interactsWithBlocks(): boolean;
         clearToBlow(): void;
         getToBlow(): $List<$BlockPos>;
@@ -1586,6 +1585,8 @@ declare module "@package/net/minecraft/world/level" {
         getSmallExplosionParticles(): $ParticleOptions;
         getLargeExplosionParticles(): $ParticleOptions;
         getExplosionSound(): $Holder<$SoundEvent>;
+        canTriggerBlocks(): boolean;
+        static getSeenPercent(arg0: $Vec3_, arg1: $Entity): number;
         center(): $Vec3;
         radius(): number;
         explode(): void;
@@ -1599,10 +1600,10 @@ declare module "@package/net/minecraft/world/level" {
         z: number;
         damageCalculator: $ExplosionDamageCalculator;
         source: $Entity;
-        constructor(arg0: $Level_, arg1: $Entity, arg2: $DamageSource_, arg3: $ExplosionDamageCalculator, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean, arg9: $Explosion$BlockInteraction_, arg10: $ParticleOptions_, arg11: $ParticleOptions_, arg12: $Holder_<$SoundEvent>);
+        constructor(arg0: $Level_, arg1: $Entity, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean, arg7: $Explosion$BlockInteraction_);
         constructor(arg0: $Level_, arg1: $Entity, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean, arg7: $Explosion$BlockInteraction_, arg8: $List_<$BlockPos_>);
         constructor(arg0: $Level_, arg1: $Entity, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $List_<$BlockPos_>, arg7: $Explosion$BlockInteraction_, arg8: $ParticleOptions_, arg9: $ParticleOptions_, arg10: $Holder_<$SoundEvent>);
-        constructor(arg0: $Level_, arg1: $Entity, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean, arg7: $Explosion$BlockInteraction_);
+        constructor(arg0: $Level_, arg1: $Entity, arg2: $DamageSource_, arg3: $ExplosionDamageCalculator, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean, arg9: $Explosion$BlockInteraction_, arg10: $ParticleOptions_, arg11: $ParticleOptions_, arg12: $Holder_<$SoundEvent>);
         get indirectSourceEntity(): $LivingEntity;
         get directSourceEntity(): $Entity;
         get toBlow(): $List<$BlockPos>;

@@ -6,7 +6,7 @@ import { $Collection_, $List } from "@package/java/util";
 declare module "@package/net/minecraft/world/entity/schedule" {
     export class $Activity implements $ActivityAccessor {
         getName(): string;
-        static createActivity$platform_$md$8e2dbe$0(arg0: string): $Activity;
+        static createActivity$platform_$md$d858b6$0(arg0: string): $Activity;
         static CORE: $Activity;
         static ROAR: $Activity;
         static FIGHT: $Activity;
@@ -57,9 +57,9 @@ declare module "@package/net/minecraft/world/entity/schedule" {
     }
     export interface $Schedule extends RegistryMarked<RegistryTypes.ScheduleTag, RegistryTypes.Schedule> {}
     export class $Timeline {
-        addKeyframe(arg0: number, arg1: number): $Timeline;
         getKeyframes(): $ImmutableList<$Keyframe>;
         addKeyframes(arg0: $Collection_<$Keyframe>): $Timeline;
+        addKeyframe(arg0: number, arg1: number): $Timeline;
         getValueAt(arg0: number): number;
         constructor();
         get keyframes(): $ImmutableList<$Keyframe>;

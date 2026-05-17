@@ -33,7 +33,7 @@ declare module "@package/net/neoforged/neoforge/client/textures" {
     /**
      * Values that may be interpreted as {@link $NamespacedDirectoryLister}.
      */
-    export type $NamespacedDirectoryLister_ = { idPrefix?: string, namespace?: string, sourcePath?: string,  } | [idPrefix?: string, namespace?: string, sourcePath?: string, ];
+    export type $NamespacedDirectoryLister_ = { sourcePath?: string, namespace?: string, idPrefix?: string,  } | [sourcePath?: string, namespace?: string, idPrefix?: string, ];
     export class $SpriteContentsConstructor {
     }
     export interface $SpriteContentsConstructor {

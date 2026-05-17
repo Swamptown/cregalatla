@@ -14,16 +14,16 @@ declare module "@package/net/neoforged/neoforge/fluids/capability/wrappers" {
         drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         canFillFluidType(arg0: $FluidStack_): boolean;
+        getContainer(): $ItemStack;
+        getFluid(): $FluidStack;
         getTanks(): number;
         getFluidInTank(arg0: number): $FluidStack;
         getTankCapacity(arg0: number): number;
         isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
-        getContainer(): $ItemStack;
-        getFluid(): $FluidStack;
         constructor(arg0: $ItemStack_);
-        get tanks(): number;
         get container(): $ItemStack;
         get fluid(): $FluidStack;
+        get tanks(): number;
     }
     export class $CauldronWrapper implements $IFluidHandler {
         fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;

@@ -9,9 +9,9 @@ declare module "@package/net/caffeinemc/mods/lithium/common/tracking/entity" {
         onSectionEnteredRange(arg0: $EntityMovementTrackerSection): void;
         onSectionLeftRange(arg0: $EntityMovementTrackerSection): void;
         emitEntityMovement(arg0: number, arg1: $EntityMovementTrackerSection): void;
-        isUnchangedSince(arg0: number): boolean;
         unRegister(arg0: $ServerLevel): void;
         listenToEntityMovementOnce(arg0: $SectionedEntityMovementListener_): void;
+        isUnchangedSince(arg0: number): boolean;
         constructor(arg0: $WorldSectionBox_, arg1: $Class<S>);
     }
     export class $ToggleableMovementTracker {

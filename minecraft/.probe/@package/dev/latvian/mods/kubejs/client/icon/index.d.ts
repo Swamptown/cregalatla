@@ -84,7 +84,7 @@ declare module "@package/dev/latvian/mods/kubejs/client/icon" {
     /**
      * Values that may be interpreted as {@link $KubeIconType}.
      */
-    export type $KubeIconType_<T> = { id?: $ResourceLocation_, codec?: $MapCodec_<$KubeIcon_>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $KubeIcon_>,  } | [id?: $ResourceLocation_, codec?: $MapCodec_<$KubeIcon_>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $KubeIcon_>, ];
+    export type $KubeIconType_<T> = { streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $KubeIcon_>, codec?: $MapCodec_<$KubeIcon_>, id?: $ResourceLocation_,  } | [streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $KubeIcon_>, codec?: $MapCodec_<$KubeIcon_>, id?: $ResourceLocation_, ];
     export class $KubeIconRenderer {
         static from(icon: $KubeIcon_): $KubeIconRenderer;
         static RENDERERS: $Lazy<$Map<$KubeIconType<never>, $Function<never, $KubeIconRenderer>>>;

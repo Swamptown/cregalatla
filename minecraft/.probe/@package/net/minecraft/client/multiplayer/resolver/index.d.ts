@@ -9,8 +9,8 @@ declare module "@package/net/minecraft/client/multiplayer/resolver" {
     export interface $ResolvedServerAddress {
         getPort(): number;
         getHostName(): string;
-        getHostIp(): string;
         asInetSocketAddress(): $InetSocketAddress;
+        getHostIp(): string;
         get port(): number;
         get hostName(): string;
         get hostIp(): string;

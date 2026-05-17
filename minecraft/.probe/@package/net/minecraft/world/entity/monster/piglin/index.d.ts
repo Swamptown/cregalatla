@@ -251,6 +251,8 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         constructor();
     }
     export class $PiglinAi {
+        static maybeRetaliate(arg0: $AbstractPiglin, arg1: $LivingEntity): void;
+        static setAngerTarget(arg0: $AbstractPiglin, arg1: $LivingEntity): void;
         static stopHoldingOffHandItem(arg0: $Piglin, arg1: boolean): void;
         static getAvoidTarget(arg0: $Piglin): ($LivingEntity) | undefined;
         static broadcastAngerTarget(arg0: $AbstractPiglin, arg1: $LivingEntity): void;
@@ -258,12 +260,13 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         static getVisibleAdultPiglins(arg0: $Piglin): $List<$AbstractPiglin>;
         static dontKillAnyMoreHoglinsForAWhile(arg0: $AbstractPiglin): void;
         static getNearestVisibleTargetablePlayer(arg0: $AbstractPiglin): ($Player) | undefined;
-        static maybeRetaliate(arg0: $AbstractPiglin, arg1: $LivingEntity): void;
-        static setAngerTarget(arg0: $AbstractPiglin, arg1: $LivingEntity): void;
-        static angerNearbyPiglins(arg0: $Player, arg1: boolean): void;
         static pickUpItem(arg0: $Piglin, arg1: $ItemEntity): void;
         static mobInteract(arg0: $Piglin, arg1: $Player, arg2: $InteractionHand_): $InteractionResult;
+        static isWearingGold(arg0: $LivingEntity): boolean;
+        static isPlayerHoldingLovedItem(arg0: $LivingEntity): boolean;
+        static isZombified(arg0: $EntityType_<never>): boolean;
         static isBarterCurrency(arg0: $ItemStack_): boolean;
+        static angerNearbyPiglins(arg0: $Player, arg1: boolean): void;
         static initMemories(arg0: $Piglin, arg1: $RandomSource): void;
         static wasHurtBy(arg0: $Piglin, arg1: $LivingEntity): void;
         static getSoundForCurrentActivity(arg0: $Piglin): ($SoundEvent) | undefined;
@@ -272,9 +275,6 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         static isLovedItem(arg0: $ItemStack_): boolean;
         static wantsToPickup(arg0: $Piglin, arg1: $ItemStack_): boolean;
         static isIdle(arg0: $AbstractPiglin): boolean;
-        static isWearingGold(arg0: $LivingEntity): boolean;
-        static isPlayerHoldingLovedItem(arg0: $LivingEntity): boolean;
-        static isZombified(arg0: $EntityType_<never>): boolean;
         static updateActivity(arg0: $Piglin): void;
         static makeBrain(arg0: $Piglin, arg1: $Brain<$Piglin>): $Brain<never>;
         static REPELLENT_DETECTION_RANGE_VERTICAL: number;
@@ -470,9 +470,6 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
     }
     export class $Piglin extends $AbstractPiglin implements $CrossbowAttackMob, $InventoryCarrier {
         canReplaceCurrentItem(arg0: $ItemStack_): boolean;
-        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
-        isDancing(): boolean;
-        setDancing(arg0: boolean): void;
         addToInventory(arg0: $ItemStack_): $ItemStack;
         canAddToInventory(arg0: $ItemStack_): boolean;
         static checkPiglinSpawnRules(arg0: $EntityType_<$Piglin>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
@@ -480,6 +477,9 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         onCrossbowAttackPerformed(): void;
         holdInMainHand(arg0: $ItemStack_): void;
         holdInOffHand(arg0: $ItemStack_): void;
+        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
+        isDancing(): boolean;
+        setDancing(arg0: boolean): void;
         getInventory(): $SimpleContainer;
         static createAttributes(): $AttributeSupplier$Builder;
         performCrossbowAttack(arg0: $LivingEntity, arg1: number): void;

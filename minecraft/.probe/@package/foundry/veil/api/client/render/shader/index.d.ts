@@ -15,11 +15,11 @@ declare module "@package/foundry/veil/api/client/render/shader" {
         set(arg0: string): void;
         set(arg0: string, arg1: string): void;
         getDefinition(arg0: string): string;
-        addListener(arg0: $Consumer_<string>): void;
         getDefinitions(): $Map<string, string>;
-        setStatic(arg0: string): void;
-        setStatic(arg0: string, arg1: string): void;
+        addListener(arg0: $Consumer_<string>): void;
         getStaticDefinitions(): $Map<string, string>;
+        setStatic(arg0: string, arg1: string): void;
+        setStatic(arg0: string): void;
         constructor();
         get definitions(): $Map<string, string>;
         get staticDefinitions(): $Map<string, string>;

@@ -85,6 +85,12 @@ declare module "@package/net/minecraft/data/loot/packs" {
     export type $VanillaFishingLoot_ = { registries?: $HolderLookup$Provider,  } | [registries?: $HolderLookup$Provider, ];
     export class $VanillaChestLoot extends $Record implements $LootTableSubProvider {
         generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
+        ancientCityLootTable(): $LootTable$Builder;
+        desertPyramidLootTable(): $LootTable$Builder;
+        jungleTempleLootTable(): $LootTable$Builder;
+        pillagerOutpostLootTable(): $LootTable$Builder;
+        woodlandMansionLootTable(): $LootTable$Builder;
+        spawnerLootTables(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         bastionBridgeLootTable(): $LootTable$Builder;
         bastionHoglinStableLootTable(): $LootTable$Builder;
         bastionOtherLootTable(): $LootTable$Builder;
@@ -96,12 +102,6 @@ declare module "@package/net/minecraft/data/loot/packs" {
         shipwreckTreasureLootTable(): $LootTable$Builder;
         strongholdCorridorLootTable(): $LootTable$Builder;
         strongholdLibraryLootTable(): $LootTable$Builder;
-        woodlandMansionLootTable(): $LootTable$Builder;
-        spawnerLootTables(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
-        ancientCityLootTable(): $LootTable$Builder;
-        desertPyramidLootTable(): $LootTable$Builder;
-        jungleTempleLootTable(): $LootTable$Builder;
-        pillagerOutpostLootTable(): $LootTable$Builder;
         registries(): $HolderLookup$Provider;
         constructor(arg0: $HolderLookup$Provider);
     }

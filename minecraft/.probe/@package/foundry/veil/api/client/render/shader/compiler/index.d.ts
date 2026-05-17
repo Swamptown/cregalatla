@@ -1,7 +1,7 @@
 import { $Object2IntMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $Record } from "@package/java/lang";
-import { $Set_, $Set } from "@package/java/util";
+import { $Set, $Set_ } from "@package/java/util";
 import { $NativeResource } from "@package/org/lwjgl/system";
 import { $ShaderProgram } from "@package/foundry/veil/api/client/render/shader/program";
 
@@ -20,5 +20,5 @@ declare module "@package/foundry/veil/api/client/render/shader/compiler" {
     /**
      * Values that may be interpreted as {@link $CompiledShader}.
      */
-    export type $CompiledShader_ = { uniformBindings?: $Object2IntMap<string>, definitionDependencies?: $Set_<string>, includes?: $Set_<$ResourceLocation_>, sourceFile?: $ResourceLocation_, id?: number,  } | [uniformBindings?: $Object2IntMap<string>, definitionDependencies?: $Set_<string>, includes?: $Set_<$ResourceLocation_>, sourceFile?: $ResourceLocation_, id?: number, ];
+    export type $CompiledShader_ = { id?: number, sourceFile?: $ResourceLocation_, includes?: $Set_<$ResourceLocation_>, definitionDependencies?: $Set_<string>, uniformBindings?: $Object2IntMap<string>,  } | [id?: number, sourceFile?: $ResourceLocation_, includes?: $Set_<$ResourceLocation_>, definitionDependencies?: $Set_<string>, uniformBindings?: $Object2IntMap<string>, ];
 }

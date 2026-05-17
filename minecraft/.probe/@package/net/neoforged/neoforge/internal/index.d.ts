@@ -6,15 +6,15 @@ export * as versions from "@package/net/neoforged/neoforge/internal/versions";
 
 declare module "@package/net/neoforged/neoforge/internal" {
     export class $RegistrationEvents {
-        static modifyComponents(): void;
         static canModifyComponents(): boolean;
+        static modifyComponents(): void;
         constructor();
     }
     export class $BrandingControl {
         static getServerBranding(): string;
+        static getClientBranding(): string;
         static forEachLine(arg0: boolean, arg1: boolean, arg2: $BiConsumer_<number, string>): void;
         static forEachAboveCopyrightLine(arg0: $BiConsumer_<number, string>): void;
-        static getClientBranding(): string;
         static resourceManagerReloadListener(): $ResourceManagerReloadListener;
         constructor();
         static get serverBranding(): string;

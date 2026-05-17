@@ -19,28 +19,28 @@ declare module "@package/com/simibubi/create/content/redstone/displayLink" {
     export class $DisplayLinkContext {
         level(): $Level;
         getSourceBlockEntity(): $BlockEntity;
-        sourceConfig(): $CompoundTag;
-        getTargetBlockEntity(): $BlockEntity;
         getSourcePos(): $BlockPos;
+        sourceConfig(): $CompoundTag;
         getTargetPos(): $BlockPos;
+        getTargetBlockEntity(): $BlockEntity;
         blockEntity(): $DisplayLinkBlockEntity;
         flapDisplayContext: $Object;
         constructor(arg0: $Level_, arg1: $DisplayLinkBlockEntity);
         get sourceBlockEntity(): $BlockEntity;
-        get targetBlockEntity(): $BlockEntity;
         get sourcePos(): $BlockPos;
         get targetPos(): $BlockPos;
+        get targetBlockEntity(): $BlockEntity;
     }
     export class $DisplayLinkBlockEntity extends $LinkWithBulbBlockEntity implements $TransformableBlockEntity {
         target(arg0: $BlockPos_): void;
         transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
-        tickSource(): void;
-        onNoLongerPowered(): void;
+        getTargetPosition(): $BlockPos;
         getSourceConfig(): $CompoundTag;
         updateGatheredData(): void;
-        getTargetPosition(): $BlockPos;
         setSourceConfig(arg0: $CompoundTag_): void;
-        handler$fpm001$sable$accountForSubLevels(arg0: $CallbackInfoReturnable<any>): void;
+        handler$fof001$sable$accountForSubLevels(arg0: $CallbackInfoReturnable<any>): void;
+        tickSource(): void;
+        onNoLongerPowered(): void;
         static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         getDirection(): $Direction;
         getSourcePosition(): $BlockPos;
@@ -61,10 +61,10 @@ declare module "@package/com/simibubi/create/content/redstone/displayLink" {
     }
     export class $LinkWithBulbBlockEntity extends $SmartBlockEntity {
         pulse(): void;
-        getBulbFacing(arg0: $BlockState_): $Direction;
-        getBulbOffset(arg0: $BlockState_): $Vec3;
         getGlow(arg0: number): number;
         sendPulseNextSync(): void;
+        getBulbFacing(arg0: $BlockState_): $Direction;
+        getBulbOffset(arg0: $BlockState_): $Vec3;
         worldPosition: $BlockPos;
         level: $Level;
         static ATTACHMENTS_NBT_KEY: string;

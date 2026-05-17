@@ -7,14 +7,14 @@ declare module "@package/com/supermartijn642/fusion/entity" {
     export class $VanillaModelLayerProperties {
         static get(location: $ModelLayerLocation, renderer: $EntityRenderer<never>): $VanillaModelLayerProperties;
         transform(poseStack: $PoseStack): void;
+        getOffsetZ(): number;
         getOffsetX(): number;
         getOffsetY(): number;
         shouldFlipX(): boolean;
         shouldFlipY(): boolean;
         shouldFlipZ(): boolean;
-        getOffsetZ(): number;
+        get offsetZ(): number;
         get offsetX(): number;
         get offsetY(): number;
-        get offsetZ(): number;
     }
 }

@@ -35,10 +35,10 @@ declare module "@package/com/google/common/reflect" {
         isPrivate(): boolean;
         isNative(): boolean;
         isSynchronized(): boolean;
-        isPackagePrivate(): boolean;
-        isOverridable(): boolean;
         returning<R1 extends R>(returnType: $Class<R1>): $Invokable<T, R1>;
         returning<R1 extends R>(returnType: $TypeToken<R1>): $Invokable<T, R1>;
+        isPackagePrivate(): boolean;
+        isOverridable(): boolean;
         getOwnerType(): $TypeToken<T>;
         getAnnotationsByType<T extends $Annotation>(arg0: $Class<T>): T[];
         getDeclaredAnnotation<T extends $Annotation>(arg0: $Class<T>): T;

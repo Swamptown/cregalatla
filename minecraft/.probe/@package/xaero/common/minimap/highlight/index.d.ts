@@ -26,8 +26,8 @@ declare module "@package/xaero/common/minimap/highlight" {
     export class $AbstractHighlighter {
         isCoveringOutsideDiscovered(): boolean;
         regionHasHighlights(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): boolean;
-        getChunkHighlitColor(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): number[];
         chunkIsHighlit(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): boolean;
+        getChunkHighlitColor(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): number[];
         addBlockHighlightTooltips(arg0: $InfoDisplayCompiler, arg1: $ResourceKey_<$Level>, arg2: number, arg3: number, arg4: number): void;
         get coveringOutsideDiscovered(): boolean;
     }

@@ -9,9 +9,9 @@ declare module "@package/net/minecraft/client/telemetry/events" {
     export class $GameLoadTimesEvent {
         send(arg0: $TelemetryEventSender_): void;
         endStep(arg0: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>): void;
-        setBootstrapTime(arg0: number): void;
-        beginStep(arg0: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>, arg1: $Stopwatch): void;
         beginStep(arg0: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>): void;
+        beginStep(arg0: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>, arg1: $Stopwatch): void;
+        setBootstrapTime(arg0: number): void;
         static INSTANCE: $GameLoadTimesEvent;
         constructor(arg0: $Ticker);
         set bootstrapTime(value: number);
@@ -31,9 +31,9 @@ declare module "@package/net/minecraft/client/telemetry/events" {
         start(): void;
         stop(): void;
         tick(arg0: $TelemetryEventSender_): void;
-        takeSample(): void;
-        shouldTakeSample(): boolean;
         shouldSentEvent(): boolean;
+        shouldTakeSample(): boolean;
+        takeSample(): void;
         sendEvent(arg0: $TelemetryEventSender_): void;
         getSampleCount(): number;
         constructor();

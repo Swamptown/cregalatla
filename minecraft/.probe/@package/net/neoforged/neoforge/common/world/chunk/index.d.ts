@@ -15,10 +15,10 @@ declare module "@package/net/neoforged/neoforge/common/world/chunk" {
     }
     export class $TicketController extends $Record {
         id(): $ResourceLocation;
+        callback(): $LoadingValidationCallback;
+        forceChunk(arg0: $ServerLevel, arg1: $UUID_, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
         forceChunk(arg0: $ServerLevel, arg1: $BlockPos_, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
         forceChunk(arg0: $ServerLevel, arg1: $Entity, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
-        forceChunk(arg0: $ServerLevel, arg1: $UUID_, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
-        callback(): $LoadingValidationCallback;
         constructor(id: $ResourceLocation_, callback: $LoadingValidationCallback_);
         constructor(arg0: $ResourceLocation_);
     }
@@ -60,12 +60,12 @@ declare module "@package/net/neoforged/neoforge/common/world/chunk" {
     export class $ForcedChunkManager$TicketTracker<T extends $Comparable<T>> {
         remove(arg0: $ForcedChunkManager$TicketOwner<T>, arg1: number, arg2: boolean): boolean;
         isEmpty(): boolean;
-        getChunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
         getTickingChunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
+        getChunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
         constructor();
         get empty(): boolean;
-        get chunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
         get tickingChunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
+        get chunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
     }
     export class $ForcedChunkManager {
         static init(): void;

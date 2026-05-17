@@ -1,9 +1,9 @@
 import { $Consumer_, $Supplier_ } from "@package/java/util/function";
-import { $YogaOverflow_ } from "@package/org/appliedenergistics/yoga";
 import { $FloatOptional } from "@package/org/appliedenergistics/yoga/numeric";
+import { $YogaOverflow_ } from "@package/org/appliedenergistics/yoga";
 import { $UIElement } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 import { $TaffySize, $TaffyRect } from "@package/dev/vfyjxf/taffy/geometry";
-import { $FlexDirection_, $TaffyDisplay_, $TaffyStyle, $GridAutoFlow_, $TaffyPosition_, $AlignItems_, $FlexWrap_, $AlignContent_, $TaffyDirection_, $LengthPercentageAuto, $TaffyDimension, $LengthPercentage } from "@package/dev/vfyjxf/taffy/style";
+import { $FlexDirection_, $TaffyDisplay_, $TaffyStyle, $GridAutoFlow_, $TaffyPosition_, $AlignItems_, $TaffyDirection_, $AlignContent_, $FlexWrap_, $LengthPercentageAuto, $TaffyDimension, $LengthPercentage } from "@package/dev/vfyjxf/taffy/style";
 import { $LPSize_, $GridTemplateAreas_, $LPARect_, $Grid_, $GridTemplate_, $GridAuto_ } from "@package/com/lowdragmc/lowdraglib2/gui/ui/data";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/layout" {
@@ -64,8 +64,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/layout" {
     }
     export class $TaffyLayoutStyle {
         setRight(arg0: $LengthPercentageAuto): void;
+        setMinWidth(arg0: $TaffyDimension): void;
+        setMinHeight(arg0: $TaffyDimension): void;
+        setMaxHeight(arg0: $TaffyDimension): void;
         setFlexGrow(arg0: $FloatOptional): void;
         setFlexShrink(arg0: $FloatOptional): void;
+        setDisplay(arg0: $TaffyDisplay_): void;
         setAlignContent(arg0: $AlignContent_): void;
         setAlignItems(arg0: $AlignItems_): void;
         setAlignSelf(arg0: $AlignItems_): void;
@@ -73,10 +77,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/layout" {
         setFlexBasis(arg0: $TaffyDimension): void;
         setFlexDirection(arg0: $FlexDirection_): void;
         setJustifyContent(arg0: $AlignContent_): void;
-        setMinWidth(arg0: $TaffyDimension): void;
-        setMinHeight(arg0: $TaffyDimension): void;
-        setMaxHeight(arg0: $TaffyDimension): void;
-        setDisplay(arg0: $TaffyDisplay_): void;
         setBottom(arg0: $LengthPercentageAuto): void;
         setTop(arg0: $LengthPercentageAuto): void;
         setLeft(arg0: $LengthPercentageAuto): void;
@@ -94,10 +94,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/layout" {
         setGridRow(arg0: $Grid_): void;
         setGridColumn(arg0: $Grid_): void;
         setDirection(arg0: $TaffyDirection_): void;
-        setMaxWidth(arg0: $TaffyDimension): void;
-        setPosition(arg0: $TaffyPosition_): void;
         setWidth(arg0: $TaffyDimension): void;
         setHeight(arg0: $TaffyDimension): void;
+        setMaxWidth(arg0: $TaffyDimension): void;
+        setPosition(arg0: $TaffyPosition_): void;
         padding: $TaffyLayoutStyle$LPRectData;
         margin: $TaffyLayoutStyle$LPARectData;
         static DEFAULT_TAFFY_STYLE: $TaffyStyle;
@@ -106,8 +106,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/layout" {
         element: $UIElement;
         constructor(arg0: $UIElement);
         set right(value: $LengthPercentageAuto);
+        set minWidth(value: $TaffyDimension);
+        set minHeight(value: $TaffyDimension);
+        set maxHeight(value: $TaffyDimension);
         set flexGrow(value: $FloatOptional);
         set flexShrink(value: $FloatOptional);
+        set display(value: $TaffyDisplay_);
         set alignContent(value: $AlignContent_);
         set alignItems(value: $AlignItems_);
         set alignSelf(value: $AlignItems_);
@@ -115,10 +119,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/layout" {
         set flexBasis(value: $TaffyDimension);
         set flexDirection(value: $FlexDirection_);
         set justifyContent(value: $AlignContent_);
-        set minWidth(value: $TaffyDimension);
-        set minHeight(value: $TaffyDimension);
-        set maxHeight(value: $TaffyDimension);
-        set display(value: $TaffyDisplay_);
         set bottom(value: $LengthPercentageAuto);
         set top(value: $LengthPercentageAuto);
         set left(value: $LengthPercentageAuto);
@@ -136,9 +136,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/layout" {
         set gridRow(value: $Grid_);
         set gridColumn(value: $Grid_);
         set direction(value: $TaffyDirection_);
-        set maxWidth(value: $TaffyDimension);
-        set position(value: $TaffyPosition_);
         set width(value: $TaffyDimension);
         set height(value: $TaffyDimension);
+        set maxWidth(value: $TaffyDimension);
+        set position(value: $TaffyPosition_);
     }
 }

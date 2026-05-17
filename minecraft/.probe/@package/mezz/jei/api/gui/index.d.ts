@@ -20,27 +20,27 @@ declare module "@package/mezz/jei/api/gui" {
     export interface $IRecipeLayoutDrawable<R> {
         tick(): void;
         drawOverlays(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        getRecipeTransferButtonArea(): $Rect2i;
-        getSideButtonArea(arg0: number): $Rect2i;
         /**
          * @deprecated
          */
         getRecipeSlotUnderMouse(arg0: number, arg1: number): ($IRecipeSlotDrawable) | undefined;
         getRectWithBorder(): $Rect2i;
+        getRecipeTransferButtonArea(): $Rect2i;
         getRecipeBookmarkButtonArea(): $Rect2i;
         getInputHandler(): $IJeiInputHandler;
+        getSideButtonArea(arg0: number): $Rect2i;
         getRect(): $Rect2i;
         getRecipeCategory(): $IRecipeCategory<R>;
         getIngredientUnderMouse<T>(arg0: number, arg1: number, arg2: $IIngredientType_<T>): (T) | undefined;
         getItemStackUnderMouse(arg0: number, arg1: number): ($ItemStack) | undefined;
         getRecipe(): R;
-        getSlotUnderMouse(arg0: number, arg1: number): ($RecipeSlotUnderMouse) | undefined;
         isMouseOver(arg0: number, arg1: number): boolean;
         setPosition(arg0: number, arg1: number): void;
+        getSlotUnderMouse(arg0: number, arg1: number): ($RecipeSlotUnderMouse) | undefined;
         getRecipeSlotsView(): $IRecipeSlotsView;
         drawRecipe(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        get recipeTransferButtonArea(): $Rect2i;
         get rectWithBorder(): $Rect2i;
+        get recipeTransferButtonArea(): $Rect2i;
         get recipeBookmarkButtonArea(): $Rect2i;
         get inputHandler(): $IJeiInputHandler;
         get rect(): $Rect2i;

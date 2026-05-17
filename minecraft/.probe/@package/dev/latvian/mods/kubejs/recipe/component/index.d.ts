@@ -1,6 +1,6 @@
 import { $JsonObject_ } from "@package/com/google/gson";
 import { $MapCodec_, $Codec, $MapCodec } from "@package/com/mojang/serialization";
-import { $Ingredient, $Ingredient_, $CraftingBookCategory, $CookingBookCategory } from "@package/net/minecraft/world/item/crafting";
+import { $Ingredient_, $Ingredient, $CraftingBookCategory, $CookingBookCategory } from "@package/net/minecraft/world/item/crafting";
 import { $Either } from "@package/com/mojang/datafixers/util";
 import { $EntityType } from "@package/net/minecraft/world/entity";
 import { $FluidStack_, $FluidStack } from "@package/net/neoforged/neoforge/fluids";
@@ -107,7 +107,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $IngredientComponent}.
      */
-    export type $IngredientComponent_ = { type?: $RecipeComponentType<never>, codec?: $Codec<$Ingredient_>, allowEmpty?: boolean,  } | [type?: $RecipeComponentType<never>, codec?: $Codec<$Ingredient_>, allowEmpty?: boolean, ];
+    export type $IngredientComponent_ = { allowEmpty?: boolean, codec?: $Codec<$Ingredient_>, type?: $RecipeComponentType<never>,  } | [allowEmpty?: boolean, codec?: $Codec<$Ingredient_>, type?: $RecipeComponentType<never>, ];
     export class $RegistryComponent<T> extends $Record implements $RecipeComponent<$Holder<T>> {
         type(): $RecipeComponentType<never>;
         typeInfo(): $TypeInfo;
@@ -150,7 +150,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $RegistryComponent}.
      */
-    export type $RegistryComponent_<T> = { typeInfo?: $TypeInfo_, regType?: $RegistryType_<any>, codec?: $Codec<$Holder_<any>>, registry?: $Registry<any>,  } | [typeInfo?: $TypeInfo_, regType?: $RegistryType_<any>, codec?: $Codec<$Holder_<any>>, registry?: $Registry<any>, ];
+    export type $RegistryComponent_<T> = { registry?: $Registry<any>, codec?: $Codec<$Holder_<any>>, regType?: $RegistryType_<any>, typeInfo?: $TypeInfo_,  } | [registry?: $Registry<any>, codec?: $Codec<$Holder_<any>>, regType?: $RegistryType_<any>, typeInfo?: $TypeInfo_, ];
     export class $NumberComponent$FloatRange extends $Record implements $NumberComponent<$NumberComponent$FloatRange, number> {
         type(): $RecipeComponentType<never>;
         max(): number;
@@ -196,7 +196,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $NumberComponent$FloatRange}.
      */
-    export type $NumberComponent$FloatRange_ = { min?: number, typeOverride?: $RecipeComponentType<never>, codec?: $Codec<number>, max?: number,  } | [min?: number, typeOverride?: $RecipeComponentType<never>, codec?: $Codec<number>, max?: number, ];
+    export type $NumberComponent$FloatRange_ = { max?: number, codec?: $Codec<number>, typeOverride?: $RecipeComponentType<never>, min?: number,  } | [max?: number, codec?: $Codec<number>, typeOverride?: $RecipeComponentType<never>, min?: number, ];
     export class $UniqueIdBuilder extends $Record {
         append(string: string): void;
         append(id: $ResourceLocation_): void;
@@ -258,7 +258,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $MapRecipeComponent}.
      */
-    export type $MapRecipeComponent_<K, V> = { component?: $RecipeComponent<any>, key?: $RecipeComponent<any>, typeInfo?: $TypeInfo_, patternKey?: boolean, codec?: $Codec<$TinyMap_<any, any>>, bounds?: $IntBounds_,  } | [component?: $RecipeComponent<any>, key?: $RecipeComponent<any>, typeInfo?: $TypeInfo_, patternKey?: boolean, codec?: $Codec<$TinyMap_<any, any>>, bounds?: $IntBounds_, ];
+    export type $MapRecipeComponent_<K, V> = { bounds?: $IntBounds_, codec?: $Codec<$TinyMap_<any, any>>, patternKey?: boolean, typeInfo?: $TypeInfo_, key?: $RecipeComponent<any>, component?: $RecipeComponent<any>,  } | [bounds?: $IntBounds_, codec?: $Codec<$TinyMap_<any, any>>, patternKey?: boolean, typeInfo?: $TypeInfo_, key?: $RecipeComponent<any>, component?: $RecipeComponent<any>, ];
     export class $TimeComponent extends $Record implements $RecipeComponent<$TickDuration> {
         type(): $RecipeComponentType<never>;
         scale(): number;
@@ -301,7 +301,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $TimeComponent}.
      */
-    export type $TimeComponent_ = { type?: $RecipeComponentType<never>, codec?: $Codec<$TickDuration_>, scale?: number,  } | [type?: $RecipeComponentType<never>, codec?: $Codec<$TickDuration_>, scale?: number, ];
+    export type $TimeComponent_ = { scale?: number, codec?: $Codec<$TickDuration_>, type?: $RecipeComponentType<never>,  } | [scale?: number, codec?: $Codec<$TickDuration_>, type?: $RecipeComponentType<never>, ];
     export class $CustomObjectRecipeComponent implements $RecipeComponent<$List<$CustomObjectRecipeComponent$Value>> {
         type(): $RecipeComponentType<never>;
         wrap(rcx: $RecipeScriptContext, from: $Object): $List<$CustomObjectRecipeComponent$Value>;
@@ -387,7 +387,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $EitherRecipeComponent}.
      */
-    export type $EitherRecipeComponent_<H, L> = { typeInfo?: $TypeInfo_, left?: $RecipeComponent<any>, codec?: $Codec<$Either<any, any>>, right?: $RecipeComponent<any>,  } | [typeInfo?: $TypeInfo_, left?: $RecipeComponent<any>, codec?: $Codec<$Either<any, any>>, right?: $RecipeComponent<any>, ];
+    export type $EitherRecipeComponent_<H, L> = { right?: $RecipeComponent<any>, codec?: $Codec<$Either<any, any>>, left?: $RecipeComponent<any>, typeInfo?: $TypeInfo_,  } | [right?: $RecipeComponent<any>, codec?: $Codec<$Either<any, any>>, left?: $RecipeComponent<any>, typeInfo?: $TypeInfo_, ];
     export class $IgnoreComponent extends $Enum<$IgnoreComponent> implements $RecipeComponent<$Object> {
         type(): $RecipeComponentType<never>;
         static values(): $IgnoreComponent[];
@@ -490,7 +490,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $ItemStackComponent}.
      */
-    export type $ItemStackComponent_ = { type?: $RecipeComponentType<never>, filter?: $Ingredient_, codec?: $Codec<$ItemStack_>, allowEmpty?: boolean,  } | [type?: $RecipeComponentType<never>, filter?: $Ingredient_, codec?: $Codec<$ItemStack_>, allowEmpty?: boolean, ];
+    export type $ItemStackComponent_ = { allowEmpty?: boolean, codec?: $Codec<$ItemStack_>, filter?: $Ingredient_, type?: $RecipeComponentType<never>,  } | [allowEmpty?: boolean, codec?: $Codec<$ItemStack_>, filter?: $Ingredient_, type?: $RecipeComponentType<never>, ];
     export class $BooleanComponent implements $RecipeComponent<boolean> {
         type(): $RecipeComponentType<never>;
         typeInfo(): $TypeInfo;
@@ -536,7 +536,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $RecipeValidationContext$Impl}.
      */
-    export type $RecipeValidationContext$Impl_ = { errors?: $ErrorStack, recipe?: $KubeRecipe,  } | [errors?: $ErrorStack, recipe?: $KubeRecipe, ];
+    export type $RecipeValidationContext$Impl_ = { recipe?: $KubeRecipe, errors?: $ErrorStack,  } | [recipe?: $KubeRecipe, errors?: $ErrorStack, ];
     export class $TagKeyComponent<T> extends $Record implements $RecipeComponent<$TagKey<T>> {
         type(): $RecipeComponentType<never>;
         typeInfo(): $TypeInfo;
@@ -591,7 +591,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $TagKeyComponent}.
      */
-    export type $TagKeyComponent_<T> = { registryType?: $TypeInfo_, typeOverride?: $RecipeComponentType<never>, typeInfo?: $TypeInfo_, hashed?: boolean, codec?: $Codec<$TagKey_<any>>, registry?: $ResourceKey_<$Registry<any>>,  } | [registryType?: $TypeInfo_, typeOverride?: $RecipeComponentType<never>, typeInfo?: $TypeInfo_, hashed?: boolean, codec?: $Codec<$TagKey_<any>>, registry?: $ResourceKey_<$Registry<any>>, ];
+    export type $TagKeyComponent_<T> = { registry?: $ResourceKey_<$Registry<any>>, codec?: $Codec<$TagKey_<any>>, hashed?: boolean, typeInfo?: $TypeInfo_, typeOverride?: $RecipeComponentType<never>, registryType?: $TypeInfo_,  } | [registry?: $ResourceKey_<$Registry<any>>, codec?: $Codec<$TagKey_<any>>, hashed?: boolean, typeInfo?: $TypeInfo_, typeOverride?: $RecipeComponentType<never>, registryType?: $TypeInfo_, ];
     export class $BlockComponent extends $Record implements $RecipeComponent<$Block> {
         type(): $RecipeComponentType<never>;
         toString(ops: $OpsContainer, value: $Block_): string;
@@ -696,7 +696,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $FluidStackComponent}.
      */
-    export type $FluidStackComponent_ = { type?: $RecipeComponentType<never>, codec?: $Codec<$FluidStack_>, allowEmpty?: boolean,  } | [type?: $RecipeComponentType<never>, codec?: $Codec<$FluidStack_>, allowEmpty?: boolean, ];
+    export type $FluidStackComponent_ = { allowEmpty?: boolean, codec?: $Codec<$FluidStack_>, type?: $RecipeComponentType<never>,  } | [allowEmpty?: boolean, codec?: $Codec<$FluidStack_>, type?: $RecipeComponentType<never>, ];
     export class $CustomObjectRecipeComponent$Value extends $Record implements $Map$Entry<$CustomObjectRecipeComponent$Key, $Object>, $Comparable<$CustomObjectRecipeComponent$Value> {
         index(): number;
         value(): $Object;
@@ -710,7 +710,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $CustomObjectRecipeComponent$Value}.
      */
-    export type $CustomObjectRecipeComponent$Value_ = { value?: $Object, key?: $CustomObjectRecipeComponent$Key_, index?: number,  } | [value?: $Object, key?: $CustomObjectRecipeComponent$Key_, index?: number, ];
+    export type $CustomObjectRecipeComponent$Value_ = { index?: number, key?: $CustomObjectRecipeComponent$Key_, value?: $Object,  } | [index?: number, key?: $CustomObjectRecipeComponent$Key_, value?: $Object, ];
     export class $SimpleRecipeComponent<T> implements $RecipeComponent<T> {
         type(): $RecipeComponentType<never>;
         typeInfo(): $TypeInfo;
@@ -829,7 +829,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $BlockStateComponent}.
      */
-    export type $BlockStateComponent_ = { type?: $RecipeComponentType<never>, preferObjectForm?: boolean, allowEmpty?: boolean,  } | [type?: $RecipeComponentType<never>, preferObjectForm?: boolean, allowEmpty?: boolean, ];
+    export type $BlockStateComponent_ = { allowEmpty?: boolean, preferObjectForm?: boolean, type?: $RecipeComponentType<never>,  } | [allowEmpty?: boolean, preferObjectForm?: boolean, type?: $RecipeComponentType<never>, ];
     export class $ResourceKeyComponent<T> extends $Record implements $RecipeComponent<$ResourceKey<T>> {
         type(): $RecipeComponentType<never>;
         toString(ops: $OpsContainer, value: $ResourceKey_<$ResourceKey<T>>): string;
@@ -872,7 +872,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $ResourceKeyComponent}.
      */
-    export type $ResourceKeyComponent_<T> = { registryKey?: $ResourceKey_<$Registry<any>>, typeInfo?: $TypeInfo_, typeOverride?: $RecipeComponentType<never>, codec?: $Codec<$ResourceKey_<any>>,  } | [registryKey?: $ResourceKey_<$Registry<any>>, typeInfo?: $TypeInfo_, typeOverride?: $RecipeComponentType<never>, codec?: $Codec<$ResourceKey_<any>>, ];
+    export type $ResourceKeyComponent_<T> = { codec?: $Codec<$ResourceKey_<any>>, typeOverride?: $RecipeComponentType<never>, typeInfo?: $TypeInfo_, registryKey?: $ResourceKey_<$Registry<any>>,  } | [codec?: $Codec<$ResourceKey_<any>>, typeOverride?: $RecipeComponentType<never>, typeInfo?: $TypeInfo_, registryKey?: $ResourceKey_<$Registry<any>>, ];
     export class $NumberComponent$LongRange extends $Record implements $NumberComponent<$NumberComponent$LongRange, number> {
         type(): $RecipeComponentType<never>;
         max(): number;
@@ -918,7 +918,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $NumberComponent$LongRange}.
      */
-    export type $NumberComponent$LongRange_ = { min?: number, typeOverride?: $RecipeComponentType<never>, codec?: $Codec<number>, max?: number,  } | [min?: number, typeOverride?: $RecipeComponentType<never>, codec?: $Codec<number>, max?: number, ];
+    export type $NumberComponent$LongRange_ = { max?: number, codec?: $Codec<number>, typeOverride?: $RecipeComponentType<never>, min?: number,  } | [max?: number, codec?: $Codec<number>, typeOverride?: $RecipeComponentType<never>, min?: number, ];
     export class $RecipeComponent<T> {
         static builder(keys: $List_<$CustomObjectRecipeComponent$Key_>): $CustomObjectRecipeComponent;
         static builder(...keys: $CustomObjectRecipeComponent$Key_[]): $CustomObjectRecipeComponent;
@@ -995,7 +995,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $RecipeComponentWithCodec}.
      */
-    export type $RecipeComponentWithCodec_<T> = { codec?: $Codec<any>, parent?: $RecipeComponent<any>,  } | [codec?: $Codec<any>, parent?: $RecipeComponent<any>, ];
+    export type $RecipeComponentWithCodec_<T> = { parent?: $RecipeComponent<any>, codec?: $Codec<any>,  } | [parent?: $RecipeComponent<any>, codec?: $Codec<any>, ];
     export class $FluidIngredientComponent extends $Record implements $RecipeComponent<$FluidIngredient> {
         type(): $RecipeComponentType<never>;
         toString(ops: $OpsContainer, value: $FluidIngredient_): string;
@@ -1035,7 +1035,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $FluidIngredientComponent}.
      */
-    export type $FluidIngredientComponent_ = { type?: $RecipeComponentType<never>, codec?: $Codec<$FluidIngredient_>, allowEmpty?: boolean,  } | [type?: $RecipeComponentType<never>, codec?: $Codec<$FluidIngredient_>, allowEmpty?: boolean, ];
+    export type $FluidIngredientComponent_ = { allowEmpty?: boolean, codec?: $Codec<$FluidIngredient_>, type?: $RecipeComponentType<never>,  } | [allowEmpty?: boolean, codec?: $Codec<$FluidIngredient_>, type?: $RecipeComponentType<never>, ];
     export class $SizedFluidIngredientComponent extends $Record implements $RecipeComponent<$SizedFluidIngredient> {
         type(): $RecipeComponentType<never>;
         isEmpty(value: $SizedFluidIngredient): boolean;
@@ -1077,7 +1077,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $SizedFluidIngredientComponent}.
      */
-    export type $SizedFluidIngredientComponent_ = { type?: $RecipeComponentType<never>, codec?: $Codec<$SizedFluidIngredient>, allowEmpty?: boolean,  } | [type?: $RecipeComponentType<never>, codec?: $Codec<$SizedFluidIngredient>, allowEmpty?: boolean, ];
+    export type $SizedFluidIngredientComponent_ = { allowEmpty?: boolean, codec?: $Codec<$SizedFluidIngredient>, type?: $RecipeComponentType<never>,  } | [allowEmpty?: boolean, codec?: $Codec<$SizedFluidIngredient>, type?: $RecipeComponentType<never>, ];
     export class $NumberComponent<S, T extends $Number> {
         static longRange(min: number, max: number): $NumberComponent$LongRange;
         static intRange(min: number, max: number): $NumberComponent$IntRange;
@@ -1194,7 +1194,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $NumberComponent$IntRange}.
      */
-    export type $NumberComponent$IntRange_ = { min?: number, typeOverride?: $RecipeComponentType<never>, codec?: $Codec<number>, max?: number,  } | [min?: number, typeOverride?: $RecipeComponentType<never>, codec?: $Codec<number>, max?: number, ];
+    export type $NumberComponent$IntRange_ = { max?: number, codec?: $Codec<number>, typeOverride?: $RecipeComponentType<never>, min?: number,  } | [max?: number, codec?: $Codec<number>, typeOverride?: $RecipeComponentType<never>, min?: number, ];
     export class $NumberComponent$DoubleRange extends $Record implements $NumberComponent<$NumberComponent$DoubleRange, number> {
         type(): $RecipeComponentType<never>;
         max(): number;
@@ -1240,7 +1240,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $NumberComponent$DoubleRange}.
      */
-    export type $NumberComponent$DoubleRange_ = { min?: number, typeOverride?: $RecipeComponentType<never>, codec?: $Codec<number>, max?: number,  } | [min?: number, typeOverride?: $RecipeComponentType<never>, codec?: $Codec<number>, max?: number, ];
+    export type $NumberComponent$DoubleRange_ = { max?: number, codec?: $Codec<number>, typeOverride?: $RecipeComponentType<never>, min?: number,  } | [max?: number, codec?: $Codec<number>, typeOverride?: $RecipeComponentType<never>, min?: number, ];
     export class $RecipeComponentValueMap extends $AbstractMap<$RecipeKey<never>, $Object> {
         put(key: $RecipeKey<never>, value: $Object): $Object;
         getHolder(key: $Object): $RecipeComponentValue<never>;
@@ -1290,7 +1290,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $SizedIngredientComponent}.
      */
-    export type $SizedIngredientComponent_ = { type?: $RecipeComponentType<never>, codec?: $Codec<$SizedIngredient_>, allowEmpty?: boolean,  } | [type?: $RecipeComponentType<never>, codec?: $Codec<$SizedIngredient_>, allowEmpty?: boolean, ];
+    export type $SizedIngredientComponent_ = { allowEmpty?: boolean, codec?: $Codec<$SizedIngredient_>, type?: $RecipeComponentType<never>,  } | [allowEmpty?: boolean, codec?: $Codec<$SizedIngredient_>, type?: $RecipeComponentType<never>, ];
     export class $StringComponent extends $Record implements $RecipeComponent<string> {
         type(): $RecipeComponentType<never>;
         toString(ops: $OpsContainer, value: string): string;
@@ -1331,7 +1331,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $StringComponent}.
      */
-    export type $StringComponent_ = { type?: $RecipeComponentType<never>, codec?: $Codec<string>, allowEmpty?: boolean,  } | [type?: $RecipeComponentType<never>, codec?: $Codec<string>, allowEmpty?: boolean, ];
+    export type $StringComponent_ = { allowEmpty?: boolean, codec?: $Codec<string>, type?: $RecipeComponentType<never>,  } | [allowEmpty?: boolean, codec?: $Codec<string>, type?: $RecipeComponentType<never>, ];
     export class $CustomObjectRecipeComponent$Key extends $Record {
         name(): string;
         component(): $RecipeComponent<never>;
@@ -1345,7 +1345,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $CustomObjectRecipeComponent$Key}.
      */
-    export type $CustomObjectRecipeComponent$Key_ = { optional?: boolean, alwaysWrite?: boolean, component?: $RecipeComponent<never>, name?: string,  } | [optional?: boolean, alwaysWrite?: boolean, component?: $RecipeComponent<never>, name?: string, ];
+    export type $CustomObjectRecipeComponent$Key_ = { name?: string, component?: $RecipeComponent<never>, alwaysWrite?: boolean, optional?: boolean,  } | [name?: string, component?: $RecipeComponent<never>, alwaysWrite?: boolean, optional?: boolean, ];
     export class $ListRecipeComponent<T> extends $Record implements $RecipeComponent<$List<T>> {
         type(): $RecipeComponentType<never>;
         wrap(cx: $RecipeScriptContext, from: $Object): $List<$List<T>>;
@@ -1361,16 +1361,16 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
         spread(): ($RecipeComponent<never>) | undefined;
         spread(value: $List_<$List_<T>>): $List<never>;
         allowEmpty(): boolean;
+        spreadWrap(): ($RecipeComponent<never>) | undefined;
         static wrap0<T>(cx: $RecipeScriptContext, component: $RecipeComponent<T>, from: $Object): $List<T>;
         canWriteSelf(): boolean;
         listTypeInfo(): $TypeInfo;
-        spreadWrap(): ($RecipeComponent<never>) | undefined;
         asConditional(): $ListRecipeComponent<$List<T>>;
         withSpread(spread: ($RecipeComponent<never>) | undefined): $ListRecipeComponent<$List<T>>;
+        withBounds(bounds: $IntBounds_): $ListRecipeComponent<$List<T>>;
         orSelf(): $ListRecipeComponent<$List<T>>;
         hasPriority(cx: $RecipeMatchContext, from: $Object): boolean;
         buildUniqueId(builder: $UniqueIdBuilder_, value: $List_<$List_<T>>): void;
-        withBounds(bounds: $IntBounds_): $ListRecipeComponent<$List<T>>;
         listCodec(): $Codec<$List<$List<T>>>;
         codec(): $Codec<$List<$List<T>>>;
         conditional(): boolean;
@@ -1398,7 +1398,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $ListRecipeComponent}.
      */
-    export type $ListRecipeComponent_<T> = { bounds?: $IntBounds_, spread?: ($RecipeComponent<never>) | undefined, spreadWrap?: ($RecipeComponent<never>) | undefined, component?: $RecipeComponent<any>, canWriteSelf?: boolean, listCodec?: $Codec<$List_<any>>, conditional?: boolean, listTypeInfo?: $TypeInfo_,  } | [bounds?: $IntBounds_, spread?: ($RecipeComponent<never>) | undefined, spreadWrap?: ($RecipeComponent<never>) | undefined, component?: $RecipeComponent<any>, canWriteSelf?: boolean, listCodec?: $Codec<$List_<any>>, conditional?: boolean, listTypeInfo?: $TypeInfo_, ];
+    export type $ListRecipeComponent_<T> = { listTypeInfo?: $TypeInfo_, conditional?: boolean, listCodec?: $Codec<$List_<any>>, canWriteSelf?: boolean, component?: $RecipeComponent<any>, spreadWrap?: ($RecipeComponent<never>) | undefined, spread?: ($RecipeComponent<never>) | undefined, bounds?: $IntBounds_,  } | [listTypeInfo?: $TypeInfo_, conditional?: boolean, listCodec?: $Codec<$List_<any>>, canWriteSelf?: boolean, component?: $RecipeComponent<any>, spreadWrap?: ($RecipeComponent<never>) | undefined, spread?: ($RecipeComponent<never>) | undefined, bounds?: $IntBounds_, ];
     export class $EnumComponent<T extends $Enum<T>> extends $Record implements $RecipeComponent<T> {
         type(): $RecipeComponentType<never>;
         toString(ops: $OpsContainer, value: T): string;
@@ -1440,7 +1440,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/component" {
     /**
      * Values that may be interpreted as {@link $EnumComponent}.
      */
-    export type $EnumComponent_<T> = { typeOverride?: $RecipeComponentType<never>, codec?: $Codec<$Enum<T>>, typeInfo?: $EnumTypeInfo,  } | [typeOverride?: $RecipeComponentType<never>, codec?: $Codec<$Enum<T>>, typeInfo?: $EnumTypeInfo, ];
+    export type $EnumComponent_<T> = { typeInfo?: $EnumTypeInfo, codec?: $Codec<$Enum<T>>, typeOverride?: $RecipeComponentType<never>,  } | [typeInfo?: $EnumTypeInfo, codec?: $Codec<$Enum<T>>, typeOverride?: $RecipeComponentType<never>, ];
     export class $RecipeComponentType<T> {
         id(): $ResourceLocation;
         key(name: string, role: $ComponentRole_): $RecipeKey<T>;

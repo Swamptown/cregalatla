@@ -1,14 +1,14 @@
 import { $Consumer_, $Consumer } from "@package/java/util/function";
 import { $Codec } from "@package/com/mojang/serialization";
-import { $Runnable_, $Number, $Runnable } from "@package/java/lang";
+import { $Number, $Runnable_, $Runnable } from "@package/java/lang";
 
 declare module "@package/com/lowdragmc/lowdraglib2/math/interpolate" {
     export class $Interpolator {
         reset(): void;
         update(arg0: number): void;
         getTime(): number;
-        getNormalizedTime(): number;
         isFinished(): boolean;
+        getNormalizedTime(): number;
         getStartTime(): number;
         duration: number;
         ease: $IEase;
@@ -20,8 +20,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/math/interpolate" {
         constructor(arg0: number, arg1: number, arg2: number, arg3: $IEase_, arg4: $Consumer_<$Number>);
         constructor(arg0: number, arg1: number, arg2: number, arg3: $IEase_, arg4: $Consumer_<$Number>, arg5: $Runnable_);
         get time(): number;
-        get normalizedTime(): number;
         get finished(): boolean;
+        get normalizedTime(): number;
         get startTime(): number;
     }
     export class $IEase {

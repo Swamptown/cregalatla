@@ -47,8 +47,8 @@ declare module "@package/dev/latvian/mods/kubejs/server" {
     export type $KubeJSReloadListener_ = { resources?: $ReloadableServerResources,  } | [resources?: $ReloadableServerResources, ];
     export class $DataExport {
         add(path: string, data: $Callable_<number[]>): void;
-        addString(path: string, data: string): void;
         static exportData(): void;
+        addString(path: string, data: string): void;
         addJson(path: string, json: $JsonElement_): void;
         source: $CommandSourceStack;
         constructor();
@@ -57,7 +57,7 @@ declare module "@package/dev/latvian/mods/kubejs/server" {
         static release(): $ServerScriptManager;
         reloadAndCapture(): void;
         static createForDataGen(): $ServerScriptManager;
-        static getStaticInstance$ldlib2_$md$8e2dbe$0(): $ServerScriptManager;
+        static getStaticInstance$ldlib2_$md$d858b6$0(): $ServerScriptManager;
         static createPackResources(original: $List_<$PackResources>): $List<$PackResources>;
         virtualPacks: $Map<$GeneratedDataStage, $VirtualDataPack>;
         scriptType: $ScriptType;
@@ -71,7 +71,7 @@ declare module "@package/dev/latvian/mods/kubejs/server" {
         preTagEvents: $Map<$ResourceKey<never>, $PreTagKubeEvent>;
         serverData: $SyncServerDataPayload;
         contextFactory: $KubeJSContextFactory;
-        static get staticInstance$ldlib2_$md$8e2dbe$0(): $ServerScriptManager;
+        static get staticInstance$ldlib2_$md$d858b6$0(): $ServerScriptManager;
     }
     export class $ScheduledServerEvent extends $ScheduledEvents$ScheduledEvent {
         getServer(): $MinecraftServer;
@@ -98,13 +98,13 @@ declare module "@package/dev/latvian/mods/kubejs/server" {
     /**
      * Values that may be interpreted as {@link $ServerScriptManager$AdditionalServerRegistryHandler}.
      */
-    export type $ServerScriptManager$AdditionalServerRegistryHandler_ = { builders?: $List_<$BuilderBase<never>>, sourceLine?: $SourceLine_,  } | [builders?: $List_<$BuilderBase<never>>, sourceLine?: $SourceLine_, ];
+    export type $ServerScriptManager$AdditionalServerRegistryHandler_ = { sourceLine?: $SourceLine_, builders?: $List_<$BuilderBase<never>>,  } | [sourceLine?: $SourceLine_, builders?: $List_<$BuilderBase<never>>, ];
     export class $CommandKubeEvent extends $ServerKubeEvent {
         getException(): $Throwable;
         getInput(): string;
+        setParseResults(parse: $ParseResults<$CommandSourceStack>): void;
         getCommandName(): string;
         getParseResults(): $ParseResults<$CommandSourceStack>;
-        setParseResults(parse: $ParseResults<$CommandSourceStack>): void;
         setException(exception: $Throwable): void;
         server: $MinecraftServer;
         constructor(event: $CommandEvent);
@@ -215,10 +215,10 @@ declare module "@package/dev/latvian/mods/kubejs/server" {
         static serverLevelSaved(event: $LevelEvent$Save): void;
         static preventPickupDuringChestGUI(event: $ItemEntityPickupEvent$Pre): void;
         static serverStopping(event: $ServerStoppingEvent): void;
-        static registerCommands(event: $RegisterCommandsEvent): void;
         static addReloadListeners(event: $AddReloadListenerEvent): void;
         static serverStarting(event: $ServerStartingEvent): void;
         static serverStopped(event: $ServerStoppedEvent): void;
+        static registerCommands(event: $RegisterCommandsEvent): void;
         constructor();
     }
 }

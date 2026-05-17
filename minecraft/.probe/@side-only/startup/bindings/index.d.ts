@@ -1,3 +1,4 @@
+import { $MoreJSBinding } from "@package/com/almostreliable/morejs";
 import { $JEIUIEvents } from "@package/com/lowdragmc/lowdraglib2/integration/xei/jei";
 import { $XmlUtils } from "@package/com/lowdragmc/lowdraglib2/utils";
 import { $EntityIngredientWrapper, $CastingOutputWrapper } from "@package/fr/lucreeper74/createmetallurgy/compat/kubejs/recipe";
@@ -10,6 +11,7 @@ import { $BlockPos, $Vec3i } from "@package/net/minecraft/core";
 import { $InventorySlots } from "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/inventory";
 import { $CodeEditor } from "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor";
 import { $RotationAxis, $NBTIOWrapper, $MobEffectUtil, $JsonUtils, $NotificationToastData, $JsonIO, $ID, $FluidAmounts } from "@package/dev/latvian/mods/kubejs/util";
+import { $EnchantmentInstance } from "@package/net/minecraft/world/item/enchantment";
 import { $UI, $ModularUI, $UIElement } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 import { $UIEvents, $UIEventListener, $HoverTooltips, $UIEventDispatcher } from "@package/com/lowdragmc/lowdraglib2/gui/ui/event";
 import { $Math } from "@package/java/lang";
@@ -38,6 +40,7 @@ import { $EMIUIEvents } from "@package/com/lowdragmc/lowdraglib2/integration/xei
 import { $LanguageDefinition, $TokenType, $Languages } from "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor/language";
 import { $LDKJSMenuTypes } from "@package/com/lowdragmc/lowdraglib2/integration/kjs/ui";
 import { $SoundType, $Blocks } from "@package/net/minecraft/world/level/block";
+import { $VillagerUtils, $TradeItem } from "@package/com/almostreliable/morejs/features/villager";
 import { $Vec3 } from "@package/net/minecraft/world/phys";
 import { $Stats } from "@package/net/minecraft/stats";
 import { $Matrix4f, $Vector4f, $Vector3f, $Quaternionf, $Matrix3f } from "@package/org/joml";
@@ -188,6 +191,10 @@ declare global {
     let GuiSize: typeof $Size;
     let GuiPos: typeof $Position;
     let coeutil: typeof $COEUtil;
+    let VillagerUtils: typeof $VillagerUtils;
+    let TradeItem: typeof $TradeItem;
+    let MoreUtils: typeof $MoreJSBinding;
+    let EnchantmentInstance: typeof $EnchantmentInstance;
     let CreateItem: typeof $KubeCreateOutput;
     let CreateProcessingOutput: typeof $ProcessingOutput;
     let CastingOutput: typeof $CastingOutputWrapper;

@@ -55,7 +55,7 @@ declare module "@package/net/minecraft/network/protocol/login" {
     /**
      * Values that may be interpreted as {@link $ClientboundGameProfilePacket}.
      */
-    export type $ClientboundGameProfilePacket_ = { strictErrorHandling?: boolean, gameProfile?: $GameProfile,  } | [strictErrorHandling?: boolean, gameProfile?: $GameProfile, ];
+    export type $ClientboundGameProfilePacket_ = { gameProfile?: $GameProfile, strictErrorHandling?: boolean,  } | [gameProfile?: $GameProfile, strictErrorHandling?: boolean, ];
     export class $ClientboundCustomQueryPacket extends $Record implements $Packet<$ClientLoginPacketListener> {
         payload(): $CustomQueryPayload;
         type(): $PacketType<$ClientboundCustomQueryPacket>;
@@ -97,7 +97,7 @@ declare module "@package/net/minecraft/network/protocol/login" {
     /**
      * Values that may be interpreted as {@link $ServerboundHelloPacket}.
      */
-    export type $ServerboundHelloPacket_ = { profileId?: $UUID_, name?: string,  } | [profileId?: $UUID_, name?: string, ];
+    export type $ServerboundHelloPacket_ = { name?: string, profileId?: $UUID_,  } | [name?: string, profileId?: $UUID_, ];
     export class $LoginPacketTypes {
         static CLIENTBOUND_GAME_PROFILE: $PacketType<$ClientboundGameProfilePacket>;
         static CLIENTBOUND_CUSTOM_QUERY: $PacketType<$ClientboundCustomQueryPacket>;

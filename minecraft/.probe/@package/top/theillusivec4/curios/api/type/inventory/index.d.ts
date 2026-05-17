@@ -43,13 +43,12 @@ declare module "@package/top/theillusivec4/curios/api/type/inventory" {
          */
         getSizeShift(): number;
         copyModifiers(arg0: $ICurioStacksHandler): void;
+        updateActiveState(arg0: number): void;
         getDropRule(): $ICurio$DropRule;
         getActiveStates(): $NonNullList<boolean>;
         getCosmeticStacks(): $IDynamicStackHandler;
-        updateActiveState(arg0: number): void;
         addPermanentModifier(arg0: $AttributeModifier_): void;
         clearModifiers(): void;
-        getIdentifier(): string;
         /**
          * @deprecated
          */
@@ -63,6 +62,7 @@ declare module "@package/top/theillusivec4/curios/api/type/inventory" {
         deserializeNBT(arg0: $CompoundTag_): void;
         serializeNBT(): $CompoundTag;
         getSyncTag(): $CompoundTag;
+        getIdentifier(): string;
         get modifiers(): $Map<$ResourceLocation, $AttributeModifier>;
         get permanentModifiers(): $Set<$AttributeModifier>;
         get cachedModifiers(): $Set<$AttributeModifier>;
@@ -70,11 +70,11 @@ declare module "@package/top/theillusivec4/curios/api/type/inventory" {
         get dropRule(): $ICurio$DropRule;
         get activeStates(): $NonNullList<boolean>;
         get cosmeticStacks(): $IDynamicStackHandler;
-        get identifier(): string;
         get slots(): number;
         get stacks(): $IDynamicStackHandler;
         get renders(): $NonNullList<boolean>;
         get visible(): boolean;
         get syncTag(): $CompoundTag;
+        get identifier(): string;
     }
 }

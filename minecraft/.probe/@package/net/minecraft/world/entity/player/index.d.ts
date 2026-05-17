@@ -77,7 +77,7 @@ declare module "@package/net/minecraft/world/entity/player" {
     /**
      * Values that may be interpreted as {@link $ProfileKeyPair}.
      */
-    export type $ProfileKeyPair_ = { privateKey?: $PrivateKey, publicKey?: $ProfilePublicKey_, refreshedAfter?: $Instant,  } | [privateKey?: $PrivateKey, publicKey?: $ProfilePublicKey_, refreshedAfter?: $Instant, ];
+    export type $ProfileKeyPair_ = { refreshedAfter?: $Instant, publicKey?: $ProfilePublicKey_, privateKey?: $PrivateKey,  } | [refreshedAfter?: $Instant, publicKey?: $ProfilePublicKey_, privateKey?: $PrivateKey, ];
     export class $ProfilePublicKey$Data extends $Record {
         key(): $PublicKey;
         write(arg0: $FriendlyByteBuf): void;
@@ -93,7 +93,7 @@ declare module "@package/net/minecraft/world/entity/player" {
     /**
      * Values that may be interpreted as {@link $ProfilePublicKey$Data}.
      */
-    export type $ProfilePublicKey$Data_ = { keySignature?: number[], key?: $PublicKey, expiresAt?: $Instant,  } | [keySignature?: number[], key?: $PublicKey, expiresAt?: $Instant, ];
+    export type $ProfilePublicKey$Data_ = { expiresAt?: $Instant, key?: $PublicKey, keySignature?: number[],  } | [expiresAt?: $Instant, key?: $PublicKey, keySignature?: number[], ];
     export class $Abilities {
         getFlyingSpeed(): number;
         loadSaveData(arg0: $CompoundTag_): void;
@@ -123,14 +123,11 @@ declare module "@package/net/minecraft/world/entity/player" {
         save(arg0: $ListTag_): $ListTag;
         replaceWith(arg0: $Inventory): void;
         tick(): void;
-        removeItem(arg0: $ItemStack_): void;
-        removeItem(arg0: number, arg1: number): $ItemStack;
         removeFromSelected(arg0: boolean): $ItemStack;
         setItem(arg0: number, arg1: $ItemStack_): void;
         placeItemBackInInventory(arg0: $ItemStack_, arg1: boolean): void;
         placeItemBackInInventory(arg0: $ItemStack_): void;
         clearContent(): void;
-        hasAnyMatching(arg0: $Predicate_<any>): boolean;
         fillStackedContents(arg0: $StackedContents): void;
         static getSelectionSize(): number;
         hasRemainingSpaceForItem(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
@@ -142,9 +139,12 @@ declare module "@package/net/minecraft/world/entity/player" {
         clearOrCountMatchingItems(arg0: $Predicate_<$ItemStack>, arg1: number, arg2: $Container): number;
         getSlotWithRemainingSpace(arg0: $ItemStack_): number;
         getArmor(arg0: number): $ItemStack;
-        handler$ejo000$moonlight$ml$fireDropEvent(arg0: $CallbackInfo, arg1: $List_<any>, arg2: number): void;
-        handler$ejo000$moonlight$ml$restoreNotDropped(arg0: $CallbackInfo, arg1: $List_<any>, arg2: number): void;
+        handler$gif000$moonlight$ml$fireDropEvent(arg0: $CallbackInfo, arg1: $List_<any>, arg2: number): void;
+        handler$gif000$moonlight$ml$restoreNotDropped(arg0: $CallbackInfo, arg1: $List_<any>, arg2: number): void;
         getTimesChanged(): number;
+        hasAnyMatching(arg0: $Predicate_<any>): boolean;
+        removeItem(arg0: $ItemStack_): void;
+        removeItem(arg0: number, arg1: number): $ItemStack;
         getSelected(): $ItemStack;
         getItem(arg0: number): $ItemStack;
         addResource(arg0: number, arg1: $ItemStack_): number;
@@ -162,8 +162,8 @@ declare module "@package/net/minecraft/world/entity/player" {
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
         countItem(arg0: $Item_): number;
         hasAnyOf(arg0: $Set_<$Item_>): boolean;
-        getMaxStackSize(): number;
         getMaxStackSize(arg0: $ItemStack_): number;
+        getMaxStackSize(): number;
         canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
         getDisplayName(): $Component;
         hasCustomName(): boolean;
@@ -172,6 +172,7 @@ declare module "@package/net/minecraft/world/entity/player" {
         canReceiveTransferCooldown(): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
         self(): $Container;
+        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -185,7 +186,6 @@ declare module "@package/net/minecraft/world/entity/player" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isEmpty(): boolean;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
@@ -193,8 +193,8 @@ declare module "@package/net/minecraft/world/entity/player" {
         find(): number;
         count(match: $ItemPredicate_): number;
         count(): number;
-        countNonEmpty(): number;
         countNonEmpty(match: $ItemPredicate_): number;
+        countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
         static NOT_FOUND_INDEX: number;
         armor: $NonNullList<$ItemStack>;
@@ -303,24 +303,22 @@ declare module "@package/net/minecraft/world/entity/player" {
         getBiggestCraftableStack(arg0: $RecipeHolder_<never>, arg1: $IntList): number;
         getBiggestCraftableStack(arg0: $RecipeHolder_<never>, arg1: number, arg2: $IntList): number;
         static fromStackingIndex(arg0: number): $ItemStack;
-        accountSimpleStack(arg0: $ItemStack_): void;
-        accountStack(arg0: $ItemStack_, arg1: number): void;
-        accountStack(arg0: $ItemStack_): void;
         static getStackingIndex(arg0: $ItemStack_): number;
-        canCraft(arg0: $Recipe<never>, arg1: $IntList): boolean;
+        accountSimpleStack(arg0: $ItemStack_): void;
         canCraft(arg0: $Recipe<never>, arg1: $IntList, arg2: number): boolean;
+        canCraft(arg0: $Recipe<never>, arg1: $IntList): boolean;
+        accountStack(arg0: $ItemStack_): void;
+        accountStack(arg0: $ItemStack_, arg1: number): void;
         contents: $Int2IntMap;
         constructor();
     }
     export class $ProfilePublicKey$ValidationException extends $ThrowingComponent {
         constructor(arg0: $Component_);
     }
-    export class $Player extends $LivingEntity implements $IPlayerExtension, $PlayerTypewriterExtension, $PlayerLaunchedPlungerExtension, $CameraHolder, $CameraOperator, $EntityDynamicLightSource, $AccessorPlayer, $PlayerSettings, $PlayerData, $PlayerFreezeExtension, $PlayerKJS {
+    export class $Player extends $LivingEntity implements $IPlayerExtension, $CameraHolder, $CameraOperator, $PlayerData, $PlayerTypewriterExtension, $PlayerLaunchedPlungerExtension, $EntityDynamicLightSource, $PlayerFreezeExtension, $AccessorPlayer, $PlayerSettings, $PlayerKJS {
         getData(holder: $DataHolder<any>, builder: $Supplier_<any>): $Object;
-        getPrefixes(): $Collection<$MutableComponent>;
         addItem(arg0: $ItemStack_): boolean;
-        drop(arg0: $ItemStack_, arg1: boolean, arg2: boolean): $ItemEntity;
-        drop(arg0: $ItemStack_, arg1: boolean): $ItemEntity;
+        getPrefixes(): $Collection<$MutableComponent>;
         getCooldowns(): $ItemCooldowns;
         respawn(): void;
         attack(arg0: $Entity): void;
@@ -339,9 +337,9 @@ declare module "@package/net/minecraft/world/entity/player" {
         getActiveExposureCamera(): $Camera;
         getScoreboard(): $Scoreboard;
         awardStat(arg0: $Stat_<never>): void;
-        awardStat(arg0: $Stat_<never>, arg1: number): void;
-        awardStat(arg0: $ResourceLocation_): void;
         awardStat(arg0: $ResourceLocation_, arg1: number): void;
+        awardStat(arg0: $ResourceLocation_): void;
+        awardStat(arg0: $Stat_<never>, arg1: number): void;
         getLuck(): number;
         isDisableBodyRotation(): boolean;
         setDisableBodyRotation(disableBodyRotation: boolean): void;
@@ -377,7 +375,7 @@ declare module "@package/net/minecraft/world/entity/player" {
         tryResetCurrentImpulseContext(): void;
         resetCurrentImpulseContext(): void;
         tryToStartFallFlying(): boolean;
-        handler$cbm000$fabric_entity_events_v1$injectElytraCheck(arg0: $CallbackInfoReturnable<any>): void;
+        handler$bgf000$fabric_entity_events_v1$injectElytraCheck(arg0: $CallbackInfoReturnable<any>): void;
         startFallFlying(): void;
         stopFallFlying(): void;
         giveExperiencePoints(arg0: number): void;
@@ -400,8 +398,8 @@ declare module "@package/net/minecraft/world/entity/player" {
         canUseGameMasterBlocks(): boolean;
         isScoping(): boolean;
         blockInteractionRange(): number;
-        canInteractWithEntity(arg0: $Entity, arg1: number): boolean;
         canInteractWithEntity(arg0: $AABB_, arg1: number): boolean;
+        canInteractWithEntity(arg0: $Entity, arg1: number): boolean;
         canInteractWithBlock(arg0: $BlockPos_, arg1: number): boolean;
         setIgnoreFallDamageFromCurrentImpulse(arg0: boolean): void;
         isIgnoringFallDamageFromCurrentImpulse(): boolean;
@@ -409,10 +407,6 @@ declare module "@package/net/minecraft/world/entity/player" {
         refreshDisplayName(): void;
         setForcedPose(arg0: $Pose_): void;
         getForcedPose(): $Pose;
-        simulated$getCurrentTypewriter(): $BlockPos;
-        simulated$setCurrentTypewriter(arg0: $BlockPos_): void;
-        simulated$setLaunchedPlunger(arg0: $LaunchedPlungerEntity): void;
-        simulated$getLaunchedPlunger(): $LaunchedPlungerEntity;
         getPlayerExecutingExposure(): $Optional<any>;
         getPlayerAwardedForExposure(): $Optional<any>;
         getExposureAuthorEntity(): $Entity;
@@ -420,6 +414,29 @@ declare module "@package/net/minecraft/world/entity/player" {
         setActiveExposureCamera(camera: $Camera): void;
         removeActiveExposureCamera(): void;
         getExposureCameraActionAnim(partialTick: number): number;
+        setRotateBodyToHead(rotateBodyToHead: boolean): void;
+        isUpdated(frameId: number): number;
+        setUpdated(frameId: number): void;
+        getLastHeldItems(): $ItemStack[];
+        getItemSwapAnimationTimer(): number;
+        setItemSwapAnimationTimer(count: number): void;
+        getLastAnimationSwapTick(): number;
+        setLastAnimationSwapTick(count: number): void;
+        setPoseOverwrite(state: $Pose_): void;
+        getPoseOverwrite(): $Pose;
+        getLastRotations(): number[];
+        setLastRotations(lastRotations: number[]): void;
+        getSideSword(): $ItemStack;
+        setSideSword(sideSword: $ItemStack_): void;
+        isRotateBodyToHead(): boolean;
+        simulated$getCurrentTypewriter(): $BlockPos;
+        simulated$setCurrentTypewriter(arg0: $BlockPos_): void;
+        simulated$setLaunchedPlunger(arg0: $LaunchedPlungerEntity): void;
+        simulated$getLaunchedPlunger(): $LaunchedPlungerEntity;
+        sable$getFrozenToSubLevel(): $UUID;
+        sable$getFrozenToSubLevelAnchor(): $Vector3dc;
+        sable$tickStopFreezing(): void;
+        sable$teleport(): void;
         getHeadMesh(): $Mesh;
         setHeadMesh(headMesh: $Mesh): void;
         getTorsoMesh(): $Mesh;
@@ -436,25 +453,6 @@ declare module "@package/net/minecraft/world/entity/player" {
         setCurrentSkin(skin: $ResourceLocation_): void;
         hasThinArms(): boolean;
         setThinArms(thin: boolean): void;
-        setRotateBodyToHead(rotateBodyToHead: boolean): void;
-        isUpdated(frameId: number): number;
-        setUpdated(frameId: number): void;
-        getLastHeldItems(): $ItemStack[];
-        getItemSwapAnimationTimer(): number;
-        setItemSwapAnimationTimer(count: number): void;
-        getLastAnimationSwapTick(): number;
-        setLastAnimationSwapTick(count: number): void;
-        setPoseOverwrite(state: $Pose_): void;
-        getPoseOverwrite(): $Pose;
-        getLastRotations(): number[];
-        setLastRotations(lastRotations: number[]): void;
-        getSideSword(): $ItemStack;
-        setSideSword(sideSword: $ItemStack_): void;
-        isRotateBodyToHead(): boolean;
-        sable$getFrozenToSubLevel(): $UUID;
-        sable$getFrozenToSubLevelAnchor(): $Vector3dc;
-        sable$tickStopFreezing(): void;
-        sable$teleport(): void;
         getStages(): $Stages;
         getInventory(): $InventoryKJS;
         getCraftingGrid(): $InventoryKJS;
@@ -465,15 +463,15 @@ declare module "@package/net/minecraft/world/entity/player" {
         updateIsUnderwater(): boolean;
         closeMenu(): void;
         updatePlayerPose(): void;
-        handler$fad005$notenoughanimations$tick(info: $CallbackInfo): void;
-        handler$fad000$notenoughanimations$overrideMaxHeadRoationRelativeToBody(ci: $CallbackInfoReturnable<any>): void;
+        handler$cne003$notenoughanimations$tick(info: $CallbackInfo): void;
+        handler$cne000$notenoughanimations$overrideMaxHeadRoationRelativeToBody(ci: $CallbackInfoReturnable<any>): void;
         isSecondaryUseActive(): boolean;
         wantsToStopRiding(): boolean;
         isStayingOnGroundSurface(): boolean;
         canPlayerFitWithinBlocksAndEntitiesWhen(arg0: $Pose_): boolean;
         playNotifySound(arg0: $SoundEvent_, arg1: $SoundSource_, arg2: number, arg3: number): void;
         doCloseContainer(): void;
-        redirect$fhm000$sable$fixRidingBoundingBox(arg0: $AABB_, arg1: $AABB_): $AABB;
+        redirect$fgf000$sable$fixRidingBoundingBox(arg0: $AABB_, arg1: $AABB_): $AABB;
         getShoulderEntityLeft(): $CompoundTag;
         getShoulderEntityRight(): $CompoundTag;
         removeEntitiesOnShoulder(): void;
@@ -489,19 +487,21 @@ declare module "@package/net/minecraft/world/entity/player" {
          */
         getDestroySpeed(arg0: $BlockState_): number;
         getDigSpeed(arg0: $BlockState_, arg1: $BlockPos_): number;
+        hasCorrectToolForDrops(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_): boolean;
         /**
          * @deprecated
          */
         hasCorrectToolForDrops(arg0: $BlockState_): boolean;
-        hasCorrectToolForDrops(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_): boolean;
         setShoulderEntityLeft(arg0: $CompoundTag_): void;
         setShoulderEntityRight(arg0: $CompoundTag_): void;
         getLastDeathLocation(): ($GlobalPos) | undefined;
-        handler$eem000$railways$addModDataVersions(arg0: $CompoundTag_, arg1: $CallbackInfo): void;
+        handler$dnk000$railways$addModDataVersions(arg0: $CompoundTag_, arg1: $CallbackInfo): void;
         createItemCooldowns(): $ItemCooldowns;
         blockActionRestricted(arg0: $Level_, arg1: $BlockPos_, arg2: $GameType_): boolean;
         mayBuild(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
+        drop(arg0: $ItemStack_, arg1: boolean, arg2: boolean): $ItemEntity;
+        drop(arg0: $ItemStack_, arg1: boolean): $ItemEntity;
         openMenu(arg0: $MenuProvider, arg1: $Consumer_<$RegistryFriendlyByteBuf>): $OptionalInt;
         openMenu(arg0: $MenuProvider, arg1: $BlockPos_): $OptionalInt;
         mayFly(): boolean;
@@ -514,8 +514,8 @@ declare module "@package/net/minecraft/world/entity/player" {
         asOperatorEntity(): $LivingEntity;
         clearMeshes(): void;
         getSelectedSlot(): number;
-        notify(builder: $NotificationToastData_): void;
         notify(title: $Component_, text: $Component_): void;
+        notify(builder: $NotificationToastData_): void;
         getStats(): $PlayerStatsJS;
         isMiningBlock(): boolean;
         /**
@@ -764,8 +764,8 @@ declare module "@package/net/minecraft/world/entity/player" {
         get playerAwardedForExposure(): $Optional<any>;
         get exposureAuthorEntity(): $Entity;
         get exposureCameraOperator(): $Optional<any>;
-        set thinArms(value: boolean);
         get lastHeldItems(): $ItemStack[];
+        set thinArms(value: boolean);
         get stages(): $Stages;
         get craftingGrid(): $InventoryKJS;
         get inventoryChangeListener(): $KubeJSInventoryListener;

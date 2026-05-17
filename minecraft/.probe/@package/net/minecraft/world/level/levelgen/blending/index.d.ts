@@ -11,13 +11,13 @@ import { $DensityFunction$FunctionContext } from "@package/net/minecraft/world/l
 
 declare module "@package/net/minecraft/world/level/levelgen/blending" {
     export class $BlendingData {
+        getDensity(arg0: number, arg1: number, arg2: number): number;
         static getOrUpdateBlendingData(arg0: $WorldGenRegion, arg1: number, arg2: number): $BlendingData;
         getAreaWithOldGeneration(): $LevelHeightAccessor;
         iterateBiomes(arg0: number, arg1: number, arg2: number, arg3: $BlendingData$BiomeConsumer_): void;
         iterateDensities(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $BlendingData$DensityConsumer_): void;
-        iterateHeights(arg0: number, arg1: number, arg2: $BlendingData$HeightConsumer_): void;
-        getDensity(arg0: number, arg1: number, arg2: number): number;
         static sideByGenerationAge(arg0: $WorldGenLevel, arg1: number, arg2: number, arg3: boolean): $Set<$Direction8>;
+        iterateHeights(arg0: number, arg1: number, arg2: $BlendingData$HeightConsumer_): void;
         getHeight(arg0: number, arg1: number, arg2: number): number;
         static CELL_RATIO: number;
         static CODEC: $Codec<$BlendingData>;
@@ -34,7 +34,7 @@ declare module "@package/net/minecraft/world/level/levelgen/blending" {
     /**
      * Values that may be interpreted as {@link $Blender$BlendingOutput}.
      */
-    export type $Blender$BlendingOutput_ = { blendingOffset?: number, alpha?: number,  } | [blendingOffset?: number, alpha?: number, ];
+    export type $Blender$BlendingOutput_ = { alpha?: number, blendingOffset?: number,  } | [alpha?: number, blendingOffset?: number, ];
     export class $Blender$DistanceGetter {
     }
     export interface $Blender$DistanceGetter {
@@ -71,12 +71,12 @@ declare module "@package/net/minecraft/world/level/levelgen/blending" {
     export class $Blender {
         static of(arg0: $WorldGenRegion): $Blender;
         static empty(): $Blender;
-        blendOffsetAndFactor(arg0: number, arg1: number): $Blender$BlendingOutput;
-        static makeOldChunkDistanceGetter(arg0: $BlendingData, arg1: $Map_<$Direction8_, $BlendingData>): $Blender$DistanceGetter;
         static addAroundOldChunksCarvingMaskFilter(arg0: $WorldGenLevel, arg1: $ProtoChunk): void;
         static generateBorderTicks(arg0: $WorldGenRegion, arg1: $ChunkAccess): void;
         blendDensity(arg0: $DensityFunction$FunctionContext, arg1: number): number;
         getBiomeResolver(arg0: $BiomeResolver_): $BiomeResolver;
+        blendOffsetAndFactor(arg0: number, arg1: number): $Blender$BlendingOutput;
+        static makeOldChunkDistanceGetter(arg0: $BlendingData, arg1: $Map_<$Direction8_, $BlendingData>): $Blender$DistanceGetter;
         constructor(arg0: $Long2ObjectOpenHashMap<$BlendingData>, arg1: $Long2ObjectOpenHashMap<$BlendingData>);
     }
     export class $Blender$CellValueGetter {

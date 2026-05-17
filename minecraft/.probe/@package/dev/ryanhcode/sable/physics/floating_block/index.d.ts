@@ -26,7 +26,7 @@ declare module "@package/dev/ryanhcode/sable/physics/floating_block" {
     /**
      * Values that may be interpreted as {@link $FloatingBlockMaterial}.
      */
-    export type $FloatingBlockMaterial_ = { slowVerticalFriction?: number, scaleWithPressure?: boolean, fastHorizontalFriction?: number, preventSelfLift?: boolean, liftStrength?: number, slowHorizontalFriction?: number, scaleWithGravity?: boolean, fastVerticalFriction?: number, transitionSpeed?: number,  } | [slowVerticalFriction?: number, scaleWithPressure?: boolean, fastHorizontalFriction?: number, preventSelfLift?: boolean, liftStrength?: number, slowHorizontalFriction?: number, scaleWithGravity?: boolean, fastVerticalFriction?: number, transitionSpeed?: number, ];
+    export type $FloatingBlockMaterial_ = { transitionSpeed?: number, fastVerticalFriction?: number, scaleWithGravity?: boolean, slowHorizontalFriction?: number, liftStrength?: number, preventSelfLift?: boolean, fastHorizontalFriction?: number, scaleWithPressure?: boolean, slowVerticalFriction?: number,  } | [transitionSpeed?: number, fastVerticalFriction?: number, scaleWithGravity?: boolean, slowHorizontalFriction?: number, liftStrength?: number, preventSelfLift?: boolean, fastHorizontalFriction?: number, scaleWithPressure?: boolean, slowVerticalFriction?: number, ];
     export class $FloatingBlockCluster {
         getBlockData(): $FloatingBlockData;
         getMaterial(): $FloatingBlockMaterial;
@@ -37,16 +37,16 @@ declare module "@package/dev/ryanhcode/sable/physics/floating_block" {
     export class $FloatingBlockData {
         addFloatingBlock(arg0: $Vector3dc, arg1: number): void;
         translateOrigin(arg0: $Vector3dc): void;
-        removeFloatingBlock(arg0: $Vector3dc, arg1: number): void;
-        computePressureScale(arg0: $SubLevel): void;
         getPressureScale(): number;
+        computePressureScale(arg0: $SubLevel): void;
+        removeFloatingBlock(arg0: $Vector3dc, arg1: number): void;
         constructor();
         get pressureScale(): number;
     }
     export class $FloatingBlockController {
         queueRemoveFloatingBlock(arg0: $BlockState_, arg1: $BlockPos_): void;
-        needsTicking(): boolean;
         queueAddFloatingBlock(arg0: $BlockState_, arg1: $BlockPos_): void;
+        needsTicking(): boolean;
         addFloatingBlock(arg0: $BlockState_, arg1: $Vector3d): void;
         physicsTick(arg0: number, arg1: number, arg2: $Vector3dc, arg3: $Vector3dc, arg4: $Vector3d, arg5: $Vector3d): void;
         removeFloatingBlock(arg0: $BlockState_, arg1: $Vector3d): void;
@@ -54,11 +54,11 @@ declare module "@package/dev/ryanhcode/sable/physics/floating_block" {
     }
     export class $FloatingClusterContainer {
         queueRemoveFloatingBlock(arg0: $BlockState_, arg1: $BlockPos_): void;
-        needsTicking(): boolean;
         queueAddFloatingBlock(arg0: $BlockState_, arg1: $BlockPos_): void;
+        needsTicking(): boolean;
         addFloatingBlock(arg0: $BlockState_, arg1: $Vector3d): void;
-        removeFloatingBlock(arg0: $BlockState_, arg1: $Vector3d): void;
         processBlockChanges(arg0: $Vector3dc): void;
+        removeFloatingBlock(arg0: $BlockState_, arg1: $Vector3d): void;
         positionOffset: $Vector3d;
         velocity: $Vector3d;
         clusters: $List<$FloatingBlockCluster>;

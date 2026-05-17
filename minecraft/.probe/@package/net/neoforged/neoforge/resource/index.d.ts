@@ -23,24 +23,24 @@ declare module "@package/net/neoforged/neoforge/resource" {
         constructor(arg0: $PackLocationInfo_, arg1: $PackMetadataSection_);
     }
     export class $ResourcePackLoader {
-        static getPackFor(arg0: string): ($Pack$ResourcesSupplier) | undefined;
         static reorderNewlyDiscoveredPacks(arg0: $Collection_<string>, arg1: $Collection_<string>, arg2: $PackRepository): void;
+        static getPackFor(arg0: string): ($Pack$ResourcesSupplier) | undefined;
         static getPackNames(arg0: $PackType_): $List<string>;
-        static readWithOptionalMeta(arg0: $PackLocationInfo_, arg1: $Pack$ResourcesSupplier, arg2: $PackType_, arg3: $PackSelectionConfig_): $Pack;
-        static createPackForMod(arg0: $IModFileInfo): $Pack$ResourcesSupplier;
         static expandAndRemoveRootChildren(arg0: $Stream<$Pack>, arg1: $Collection_<$Pack>): $List<$Pack>;
         static buildPackFinder(arg0: $Map_<$IModFile, $Pack$ResourcesSupplier>, arg1: $PackType_): $RepositorySource;
         static populatePackRepository(arg0: $PackRepository, arg1: $PackType_, arg2: boolean): void;
+        static readWithOptionalMeta(arg0: $PackLocationInfo_, arg1: $Pack$ResourcesSupplier, arg2: $PackType_, arg3: $PackSelectionConfig_): $Pack;
+        static createPackForMod(arg0: $IModFileInfo): $Pack$ResourcesSupplier;
         static MOD_RESOURCES_ID: string;
         static MOD_DATA_ID: string;
         static OPTIONAL_FORMAT: $MetadataSectionType<$PackMetadataSection>;
         constructor();
     }
-    export class $ContextAwareReloadListener implements $PreparableReloadListener, $ContextAwareReloadListenerAccessor$1, $ContextAwareReloadListenerAccessor {
+    export class $ContextAwareReloadListener implements $PreparableReloadListener, $ContextAwareReloadListenerAccessor, $ContextAwareReloadListenerAccessor$1 {
         injectContext(arg0: $ICondition$IContext_, arg1: $HolderLookup$Provider): void;
         getName(): string;
-        invokeGetContext(): $ICondition$IContext;
         au$makeConditionalOps(): $ConditionalOps<$JsonElement>;
+        invokeGetContext(): $ICondition$IContext;
         constructor();
         get name(): string;
     }

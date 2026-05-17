@@ -13,10 +13,10 @@ import { $DispenserBlockEntity } from "@package/net/minecraft/world/level/block/
 declare module "@package/net/minecraft/core/dispenser" {
     export class $DefaultDispenseItemBehavior implements $DispenseItemBehavior {
         execute(arg0: $BlockSource_, arg1: $ItemStack_): $ItemStack;
+        static spawnItem(arg0: $Level_, arg1: $ItemStack_, arg2: number, arg3: $Direction_, arg4: $Position): void;
         dispense(arg0: $BlockSource_, arg1: $ItemStack_): $ItemStack;
         playAnimation(arg0: $BlockSource_, arg1: $Direction_): void;
         consumeWithRemainder(arg0: $BlockSource_, arg1: $ItemStack_, arg2: $ItemStack_): $ItemStack;
-        static spawnItem(arg0: $Level_, arg1: $ItemStack_, arg2: number, arg3: $Direction_, arg4: $Position): void;
         playSound(arg0: $BlockSource_): void;
         constructor();
     }
@@ -38,7 +38,7 @@ declare module "@package/net/minecraft/core/dispenser" {
     /**
      * Values that may be interpreted as {@link $BlockSource}.
      */
-    export type $BlockSource_ = { state?: $BlockState_, blockEntity?: $DispenserBlockEntity, pos?: $BlockPos_, level?: $ServerLevel,  } | [state?: $BlockState_, blockEntity?: $DispenserBlockEntity, pos?: $BlockPos_, level?: $ServerLevel, ];
+    export type $BlockSource_ = { level?: $ServerLevel, pos?: $BlockPos_, blockEntity?: $DispenserBlockEntity, state?: $BlockState_,  } | [level?: $ServerLevel, pos?: $BlockPos_, blockEntity?: $DispenserBlockEntity, state?: $BlockState_, ];
     export class $ShearsDispenseItemBehavior extends $OptionalDispenseItemBehavior {
         constructor();
     }

@@ -23,10 +23,10 @@ declare module "@package/xaero/lib/client/gui/config/context" {
         confirmProfile(arg0: $ConfigProfile, arg1: $ConfigChannel): void;
         getSyncMessage(): $Component;
         getEnforcedConfig(arg0: $ConfigChannel): $Config;
-        createProfile(arg0: string, arg1: string, arg2: $ConfigChannel, arg3: string): void;
         hasPermission(arg0: $ConfigChannel): boolean;
-        getCurrentProfile(arg0: $ConfigChannel): $ConfigProfile;
+        createProfile(arg0: string, arg1: string, arg2: $ConfigChannel, arg3: string): void;
         isClientSide(): boolean;
+        getCurrentProfile(arg0: $ConfigChannel): $ConfigProfile;
         profileExists(arg0: string, arg1: $ConfigChannel): boolean;
         get screenTitleFormat(): string;
         get autoConfirm(): boolean;

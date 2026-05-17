@@ -3,7 +3,7 @@ import { $MochaEngine } from "@package/team/unnamed/mocha";
 import { $FirstPersonConfiguration, $FirstPersonMode, $FirstPersonMode_ } from "@package/com/zigythebird/playeranimcore/api/firstPerson";
 import { $UUID, $List, $Map_, $Map } from "@package/java/util";
 import { $Function_, $Consumer_, $Predicate_, $Function, $Supplier } from "@package/java/util/function";
-import { $AbstractModifier, $AbstractFadeModifier } from "@package/com/zigythebird/playeranimcore/animation/layered/modifier";
+import { $AbstractFadeModifier, $AbstractModifier } from "@package/com/zigythebird/playeranimcore/animation/layered/modifier";
 import { $CustomKeyFrameEvents$CustomKeyFrameHandler_ } from "@package/com/zigythebird/playeranimcore/animation/keyframe/event";
 import { $Vec3f_, $Vec3f } from "@package/com/zigythebird/playeranimcore/math";
 import { $SoundKeyframeData, $CustomInstructionKeyframeData, $ParticleKeyframeData } from "@package/com/zigythebird/playeranimcore/animation/keyframe/event/data";
@@ -62,7 +62,7 @@ declare module "@package/com/zigythebird/playeranimcore/animation" {
     /**
      * Values that may be interpreted as {@link $RawAnimation$Stage}.
      */
-    export type $RawAnimation$Stage_ = { additionalTicks?: number, stage?: $AnimationStage_, loopType?: $Animation$LoopType_, animation?: $Animation_,  } | [additionalTicks?: number, stage?: $AnimationStage_, loopType?: $Animation$LoopType_, animation?: $Animation_, ];
+    export type $RawAnimation$Stage_ = { animation?: $Animation_, loopType?: $Animation$LoopType_, stage?: $AnimationStage_, additionalTicks?: number,  } | [animation?: $Animation_, loopType?: $Animation$LoopType_, stage?: $AnimationStage_, additionalTicks?: number, ];
     export class $AnimationProcessor {
         tickAnimation(playerAnimManager: $AnimationStack, state: $AnimationData): void;
         handleAnimations(arg0: number, arg1: boolean): void;
@@ -118,7 +118,7 @@ declare module "@package/com/zigythebird/playeranimcore/animation" {
     /**
      * Values that may be interpreted as {@link $Animation$Keyframes}.
      */
-    export type $Animation$Keyframes_ = { particles?: $ParticleKeyframeData[], customInstructions?: $CustomInstructionKeyframeData[], sounds?: $SoundKeyframeData[],  } | [particles?: $ParticleKeyframeData[], customInstructions?: $CustomInstructionKeyframeData[], sounds?: $SoundKeyframeData[], ];
+    export type $Animation$Keyframes_ = { sounds?: $SoundKeyframeData[], customInstructions?: $CustomInstructionKeyframeData[], particles?: $ParticleKeyframeData[],  } | [sounds?: $SoundKeyframeData[], customInstructions?: $CustomInstructionKeyframeData[], particles?: $ParticleKeyframeData[], ];
     export class $AnimationController$AnimationStateHandler {
     }
     export interface $AnimationController$AnimationStateHandler {
@@ -136,8 +136,8 @@ declare module "@package/com/zigythebird/playeranimcore/animation" {
         thenPlay(animation: $Animation_): $RawAnimation;
         thenLoop(animation: $Animation_): $RawAnimation;
         thenWait(ticks: number): $RawAnimation;
-        thenPlayXTimes(animation: $Animation_, playCount: number): $RawAnimation;
         thenPlayAndHold(animation: $Animation_): $RawAnimation;
+        thenPlayXTimes(animation: $Animation_, playCount: number): $RawAnimation;
         get animationStages(): $List<$RawAnimation$Stage>;
     }
     export class $AnimationProcessor$QueuedAnimation extends $Record {
@@ -148,25 +148,44 @@ declare module "@package/com/zigythebird/playeranimcore/animation" {
     /**
      * Values that may be interpreted as {@link $AnimationProcessor$QueuedAnimation}.
      */
-    export type $AnimationProcessor$QueuedAnimation_ = { animation?: $Animation_, loopType?: $Animation$LoopType_,  } | [animation?: $Animation_, loopType?: $Animation$LoopType_, ];
+    export type $AnimationProcessor$QueuedAnimation_ = { loopType?: $Animation$LoopType_, animation?: $Animation_,  } | [loopType?: $Animation$LoopType_, animation?: $Animation_, ];
     export class $AnimationController implements $IAnimation {
         getModifiers(): $List<$AbstractModifier>;
         stop(): void;
         isActive(): boolean;
         tick(state: $AnimationData): void;
         process(state: $AnimationData): void;
-        getAnimationSpeed(): number;
         get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
         getFirstPersonConfiguration(): $FirstPersonConfiguration;
         getBone(name: string): $AdvancedPlayerAnimBone;
-        setupAnim(state: $AnimationData): void;
         unpause(): void;
+        getAnimationSpeed(): number;
+        setupAnim(state: $AnimationData): void;
         addModifier(modifier: $AbstractModifier, idx: number): $AnimationController;
-        getFirstPersonMode(): $FirstPersonMode;
         pause(): void;
+        getFirstPersonMode(): $FirstPersonMode;
         getModifier(idx: number): $AbstractModifier;
         removeModifier(idx: number): $AnimationController;
         setCustomInstructionKeyframeHandler(customInstructionHandler: $CustomKeyFrameEvents$CustomKeyFrameHandler_<$CustomInstructionKeyframeData>): $AnimationController;
+        stopTriggeredAnimation(): boolean;
+        getBonePosition(arg0: string): $Vec3f;
+        getAnimationTime(): number;
+        getAnimationTicks(): number;
+        hasBeginTick(): boolean;
+        hasEndTick(): boolean;
+        isDisableAxisIfNotModified(): boolean;
+        isAnimationPlayerAnimatorFormat(): boolean;
+        get3DTransformRaw(bone: $PlayerAnimBone): $PlayerAnimBone;
+        setFirstPersonMode(mode: $FirstPersonMode_): void;
+        setFirstPersonModeHandler(modeHandler: $Function_<$AnimationController, $FirstPersonMode>): void;
+        setFirstPersonConfiguration(config: $FirstPersonConfiguration): void;
+        setFirstPersonConfigurationHandler(configHandler: $Function_<$AnimationController, $FirstPersonConfiguration>): void;
+        addModifierBefore(modifier: $AbstractModifier): $AnimationController;
+        removeAllModifiers(): $AnimationController;
+        getModifierCount(): number;
+        removeModifierIf(predicate: $Predicate_<$AbstractModifier>): boolean;
+        registerPlayerAnimBone(bone: $AdvancedPlayerAnimBone): $AdvancedPlayerAnimBone;
+        registerPlayerAnimBone(name: string): $AdvancedPlayerAnimBone;
         isLoopStarted(): boolean;
         registerBones(): void;
         setSoundKeyframeHandler(soundHandler: $CustomKeyFrameEvents$CustomKeyFrameHandler_<$SoundKeyframeData>): $AnimationController;
@@ -185,33 +204,14 @@ declare module "@package/com/zigythebird/playeranimcore/animation" {
         getCurrentRawAnimation(): $RawAnimation;
         isPlayingTriggeredAnimation(): boolean;
         triggerAnimation(newAnimation: $RawAnimation): void;
-        triggerAnimation(newAnimation: $RawAnimation, startAnimFrom: number): void;
-        triggerAnimation(newAnimation: $Animation_): void;
         triggerAnimation(newAnimation: $Animation_, startAnimFrom: number): void;
+        triggerAnimation(newAnimation: $Animation_): void;
+        triggerAnimation(newAnimation: $RawAnimation, startAnimFrom: number): void;
         replaceAnimationWithFade(fadeModifier: $AbstractFadeModifier, newAnimation: $Animation_, fadeFromNothing: boolean): void;
         replaceAnimationWithFade(fadeModifier: $AbstractFadeModifier, newAnimation: $RawAnimation): void;
         replaceAnimationWithFade(fadeModifier: $AbstractFadeModifier, newAnimation: $RawAnimation, fadeFromNothing: boolean): void;
         replaceAnimationWithFade(fadeModifier: $AbstractFadeModifier, newAnimation: $Animation_): void;
         addModifierLast(modifier: $AbstractModifier): $AnimationController;
-        stopTriggeredAnimation(): boolean;
-        getBonePosition(arg0: string): $Vec3f;
-        getAnimationTime(): number;
-        getAnimationTicks(): number;
-        hasBeginTick(): boolean;
-        hasEndTick(): boolean;
-        isDisableAxisIfNotModified(): boolean;
-        isAnimationPlayerAnimatorFormat(): boolean;
-        get3DTransformRaw(bone: $PlayerAnimBone): $PlayerAnimBone;
-        setFirstPersonMode(mode: $FirstPersonMode_): void;
-        setFirstPersonModeHandler(modeHandler: $Function_<$AnimationController, $FirstPersonMode>): void;
-        setFirstPersonConfiguration(config: $FirstPersonConfiguration): void;
-        setFirstPersonConfigurationHandler(configHandler: $Function_<$AnimationController, $FirstPersonConfiguration>): void;
-        addModifierBefore(modifier: $AbstractModifier): $AnimationController;
-        removeAllModifiers(): $AnimationController;
-        getModifierCount(): number;
-        removeModifierIf(predicate: $Predicate_<$AbstractModifier>): boolean;
-        registerPlayerAnimBone(name: string): $AdvancedPlayerAnimBone;
-        registerPlayerAnimBone(bone: $AdvancedPlayerAnimBone): $AdvancedPlayerAnimBone;
         canRemove(): boolean;
         static EMPTY_KEYFRAME_LOCATION: $KeyframeLocation<$Keyframe>;
         static EMPTY_SCALE_KEYFRAME_LOCATION: $KeyframeLocation<$Keyframe>;
@@ -221,6 +221,13 @@ declare module "@package/com/zigythebird/playeranimcore/animation" {
         get animationSpeed(): number;
         set upAnim(value: $AnimationData);
         set customInstructionKeyframeHandler(value: $CustomKeyFrameEvents$CustomKeyFrameHandler_<$CustomInstructionKeyframeData>);
+        get animationTime(): number;
+        get animationTicks(): number;
+        get disableAxisIfNotModified(): boolean;
+        get animationPlayerAnimatorFormat(): boolean;
+        set firstPersonModeHandler(value: $Function_<$AnimationController, $FirstPersonMode>);
+        set firstPersonConfigurationHandler(value: $Function_<$AnimationController, $FirstPersonConfiguration>);
+        get modifierCount(): number;
         get loopStarted(): boolean;
         set soundKeyframeHandler(value: $CustomKeyFrameEvents$CustomKeyFrameHandler_<$SoundKeyframeData>);
         set particleKeyframeHandler(value: $CustomKeyFrameEvents$CustomKeyFrameHandler_<$ParticleKeyframeData>);
@@ -234,26 +241,19 @@ declare module "@package/com/zigythebird/playeranimcore/animation" {
         get animationData(): $AnimationData;
         get currentRawAnimation(): $RawAnimation;
         get playingTriggeredAnimation(): boolean;
-        get animationTime(): number;
-        get animationTicks(): number;
-        get disableAxisIfNotModified(): boolean;
-        get animationPlayerAnimatorFormat(): boolean;
-        set firstPersonModeHandler(value: $Function_<$AnimationController, $FirstPersonMode>);
-        set firstPersonConfigurationHandler(value: $Function_<$AnimationController, $FirstPersonConfiguration>);
-        get modifierCount(): number;
     }
     export class $Animation extends $Record implements $Supplier<$UUID> {
         length(): number;
         data(): $ExtraAnimationData;
         parents(): $Map<string, string>;
         loopType(): $Animation$LoopType;
+        bones(): $Map<string, $Vec3f>;
         boneAnimations(): $Map<string, $BoneAnimation>;
         keyFrames(): $Animation$Keyframes;
         isPlayingAt(tick: number): boolean;
         getBone(id: string): $BoneAnimation;
         getBoneOptional(id: string): ($BoneAnimation) | undefined;
         getNameOrId(): string;
-        bones(): $Map<string, $Vec3f>;
         uuid(): $UUID;
         get(): $UUID;
         constructor(data: $ExtraAnimationData_, length: number, loopType: $Animation$LoopType_, boneAnimations: $Map_<string, $BoneAnimation_>, keyFrames: $Animation$Keyframes_, bones: $Map_<string, $Vec3f_>, parents: $Map_<string, string>);
@@ -262,5 +262,5 @@ declare module "@package/com/zigythebird/playeranimcore/animation" {
     /**
      * Values that may be interpreted as {@link $Animation}.
      */
-    export type $Animation_ = { length?: number, loopType?: $Animation$LoopType_, data?: $ExtraAnimationData_, parents?: $Map_<string, string>, keyFrames?: $Animation$Keyframes_, bones?: $Map_<string, $Vec3f_>, boneAnimations?: $Map_<string, $BoneAnimation_>,  } | [length?: number, loopType?: $Animation$LoopType_, data?: $ExtraAnimationData_, parents?: $Map_<string, string>, keyFrames?: $Animation$Keyframes_, bones?: $Map_<string, $Vec3f_>, boneAnimations?: $Map_<string, $BoneAnimation_>, ];
+    export type $Animation_ = { boneAnimations?: $Map_<string, $BoneAnimation_>, bones?: $Map_<string, $Vec3f_>, keyFrames?: $Animation$Keyframes_, parents?: $Map_<string, string>, data?: $ExtraAnimationData_, loopType?: $Animation$LoopType_, length?: number,  } | [boneAnimations?: $Map_<string, $BoneAnimation_>, bones?: $Map_<string, $Vec3f_>, keyFrames?: $Animation$Keyframes_, parents?: $Map_<string, string>, data?: $ExtraAnimationData_, loopType?: $Animation$LoopType_, length?: number, ];
 }

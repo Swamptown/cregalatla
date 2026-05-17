@@ -14,7 +14,7 @@ declare module "@package/net/minecraft/client/quickplay" {
     /**
      * Values that may be interpreted as {@link $QuickPlayLog$QuickPlayWorld}.
      */
-    export type $QuickPlayLog$QuickPlayWorld_ = { id?: string, type?: $QuickPlayLog$Type_, name?: string,  } | [id?: string, type?: $QuickPlayLog$Type_, name?: string, ];
+    export type $QuickPlayLog$QuickPlayWorld_ = { name?: string, type?: $QuickPlayLog$Type_, id?: string,  } | [name?: string, type?: $QuickPlayLog$Type_, id?: string, ];
     export class $QuickPlay {
         static connect(arg0: $Minecraft, arg1: $GameConfig$QuickPlayData_, arg2: $RealmsClient): void;
         static ERROR_TITLE: $Component;
@@ -31,7 +31,7 @@ declare module "@package/net/minecraft/client/quickplay" {
     /**
      * Values that may be interpreted as {@link $QuickPlayLog$QuickPlayEntry}.
      */
-    export type $QuickPlayLog$QuickPlayEntry_ = { quickPlayWorld?: $QuickPlayLog$QuickPlayWorld_, lastPlayedTime?: $Instant, gamemode?: $GameType_,  } | [quickPlayWorld?: $QuickPlayLog$QuickPlayWorld_, lastPlayedTime?: $Instant, gamemode?: $GameType_, ];
+    export type $QuickPlayLog$QuickPlayEntry_ = { gamemode?: $GameType_, lastPlayedTime?: $Instant, quickPlayWorld?: $QuickPlayLog$QuickPlayWorld_,  } | [gamemode?: $GameType_, lastPlayedTime?: $Instant, quickPlayWorld?: $QuickPlayLog$QuickPlayWorld_, ];
     export class $QuickPlayLog$Type extends $Enum<$QuickPlayLog$Type> implements $StringRepresentable {
         static values(): $QuickPlayLog$Type[];
         static valueOf(arg0: string): $QuickPlayLog$Type;

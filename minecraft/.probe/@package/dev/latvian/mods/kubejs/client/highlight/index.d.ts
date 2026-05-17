@@ -47,7 +47,7 @@ declare module "@package/dev/latvian/mods/kubejs/client/highlight" {
     /**
      * Values that may be interpreted as {@link $KubedexPayloadHandler$SlotItem}.
      */
-    export type $KubedexPayloadHandler$SlotItem_ = { item?: $ItemStack_, slot?: number,  } | [item?: $ItemStack_, slot?: number, ];
+    export type $KubedexPayloadHandler$SlotItem_ = { slot?: number, item?: $ItemStack_,  } | [slot?: number, item?: $ItemStack_, ];
     export class $HighlightRenderer$WrappedRenderType extends $RenderType {
         static RENDERTYPE_ARMOR_CUTOUT_NO_CULL_SHADER: $RenderStateShard$ShaderStateShard;
         static TEXT: $Function<$ResourceLocation, $RenderType>;
@@ -221,8 +221,8 @@ declare module "@package/dev/latvian/mods/kubejs/client/highlight" {
         close(): void;
         renderOutput(): $RenderTarget;
         renderInput(): $RenderTarget;
-        clearDepth(mc: $Minecraft, copy: boolean): void;
         draw(mc: $Minecraft, delta: number): void;
+        clearDepth(mc: $Minecraft, copy: boolean): void;
         clearInput(mc: $Minecraft): void;
         postChain(): $PostChain;
         renderAnything(): $MutableBoolean;
@@ -232,17 +232,17 @@ declare module "@package/dev/latvian/mods/kubejs/client/highlight" {
     /**
      * Values that may be interpreted as {@link $HighlightRenderer$ShaderChain}.
      */
-    export type $HighlightRenderer$ShaderChain_ = { renderAnything?: $MutableBoolean, postChain?: $PostChain, renderOutput?: $RenderTarget, mcDepthInput?: $RenderTarget, renderInput?: $RenderTarget,  } | [renderAnything?: $MutableBoolean, postChain?: $PostChain, renderOutput?: $RenderTarget, mcDepthInput?: $RenderTarget, renderInput?: $RenderTarget, ];
+    export type $HighlightRenderer$ShaderChain_ = { renderInput?: $RenderTarget, mcDepthInput?: $RenderTarget, renderOutput?: $RenderTarget, postChain?: $PostChain, renderAnything?: $MutableBoolean,  } | [renderInput?: $RenderTarget, mcDepthInput?: $RenderTarget, renderOutput?: $RenderTarget, postChain?: $PostChain, renderAnything?: $MutableBoolean, ];
     export class $HighlightKubeEvent extends $ClientPlayerKubeEvent {
-        addTargetEntity(color: $KubeColor_): void;
-        addEntitiesByType(type: $EntityType_<never>, color: $KubeColor_): void;
-        getTargetEntity(): $Entity;
         addTargetBlock(color: $KubeColor_): void;
+        addEntitiesByType(type: $EntityType_<never>, color: $KubeColor_): void;
+        addTargetEntity(color: $KubeColor_): void;
+        getTargetEntity(): $Entity;
         getTargetBlock(): $LevelBlock;
-        addBlocks(from: $BlockPos_, to: $BlockPos_, color: $KubeColor_): void;
         addEntities(selector: $EntitySelector, color: $KubeColor_): void;
-        addEntity(entity: $Entity, color: $KubeColor_): void;
+        addBlocks(from: $BlockPos_, to: $BlockPos_, color: $KubeColor_): void;
         addBlock(pos: $BlockPos_, color: $KubeColor_): void;
+        addEntity(entity: $Entity, color: $KubeColor_): void;
         addTarget(color: $KubeColor_): void;
         constructor(mc: $Minecraft, renderer: $HighlightRenderer);
         get targetEntity(): $Entity;
@@ -254,9 +254,9 @@ declare module "@package/dev/latvian/mods/kubejs/client/highlight" {
         renderAfterEntities(mc: $Minecraft, event: $RenderLevelStageEvent): void;
         renderAfterLevel(mc: $Minecraft, event: $RenderLevelStageEvent): void;
         screen(mc: $Minecraft, graphics: $GuiGraphics, screen: $AbstractContainerScreen<never>, mx: number, my: number, delta: number): void;
-        clearBuffers(mc: $Minecraft): void;
         loadPostChains(mc: $Minecraft): void;
         resizePostChains(width: number, height: number): void;
+        clearBuffers(mc: $Minecraft): void;
         updateDepth(mc: $Minecraft): void;
         highlightedEntities: $Reference2IntMap<$Entity>;
         color: $KubeColor;
@@ -276,33 +276,33 @@ declare module "@package/dev/latvian/mods/kubejs/client/highlight" {
     export class $HighlightRenderer$WrappedVertexConsumer extends $Record implements $VertexConsumer {
         setColor(arg0: number): $VertexConsumer;
         setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
-        addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
-        addVertex(arg0: $Vector3f): $VertexConsumer;
-        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setOverlay(arg0: number): $VertexConsumer;
         setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setLight(arg0: number): $VertexConsumer;
         setWhiteAlpha(arg0: number): $VertexConsumer;
+        setLight(arg0: number): $VertexConsumer;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
+        addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
+        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        addVertex(arg0: $Vector3f): $VertexConsumer;
+        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
+        setOverlay(arg0: number): $VertexConsumer;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
         misc(arg0: $VertexFormatElement_, ...arg1: number[]): $VertexConsumer;
-        set overlay(value: number);
-        set light(value: number);
         set whiteAlpha(value: number);
+        set light(value: number);
+        set overlay(value: number);
     }
     /**
      * Values that may be interpreted as {@link $HighlightRenderer$WrappedVertexConsumer}.
      */
-    export type $HighlightRenderer$WrappedVertexConsumer_ = { blue?: number, red?: number, delegate?: $VertexConsumer, green?: number,  } | [blue?: number, red?: number, delegate?: $VertexConsumer, green?: number, ];
+    export type $HighlightRenderer$WrappedVertexConsumer_ = { green?: number, delegate?: $VertexConsumer, red?: number, blue?: number,  } | [green?: number, delegate?: $VertexConsumer, red?: number, blue?: number, ];
     export class $HighlightRenderer$WrappedMultiBufferSource extends $Record implements $MultiBufferSource {
     }
     /**
      * Values that may be interpreted as {@link $HighlightRenderer$WrappedMultiBufferSource}.
      */
-    export type $HighlightRenderer$WrappedMultiBufferSource_ = { blue?: number, red?: number, delegate?: $MultiBufferSource_, green?: number,  } | [blue?: number, red?: number, delegate?: $MultiBufferSource_, green?: number, ];
+    export type $HighlightRenderer$WrappedMultiBufferSource_ = { green?: number, delegate?: $MultiBufferSource_, red?: number, blue?: number,  } | [green?: number, delegate?: $MultiBufferSource_, red?: number, blue?: number, ];
 }

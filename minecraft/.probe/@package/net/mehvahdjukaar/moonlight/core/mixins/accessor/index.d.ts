@@ -1,5 +1,5 @@
 import { $Behavior } from "@package/net/minecraft/world/entity/ai/behavior";
-import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
+import { $Sensor, $SensorType } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $NonNullList } from "@package/net/minecraft/core";
 import { $Item, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $DispenseItemBehavior } from "@package/net/minecraft/core/dispenser";

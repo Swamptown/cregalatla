@@ -24,12 +24,12 @@ declare module "@package/com/simibubi/create/content/kinetics/mechanicalArm" {
         isValid(): boolean;
         setLevel(arg0: $Level_): void;
         getLevel(): $Level;
+        getSlotCount(arg0: $ArmBlockEntity): number;
         updateCachedState(): void;
         cycleMode(): void;
         getTargetAngles(arg0: $BlockPos_, arg1: boolean): $ArmAngleTarget;
         static transformPos(arg0: $CompoundTag_, arg1: $StructureTransform): void;
         static isInteractable(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): boolean;
-        getSlotCount(arg0: $ArmBlockEntity): number;
         getMode(): $ArmInteractionPoint$Mode;
         static deserialize(arg0: $CompoundTag_, arg1: $Level_, arg2: $BlockPos_): $ArmInteractionPoint;
         serialize(arg0: $BlockPos_): $CompoundTag;
@@ -47,8 +47,8 @@ declare module "@package/com/simibubi/create/content/kinetics/mechanicalArm" {
     export class $ArmBlockEntity extends $KineticBlockEntity implements $TransformableBlockEntity {
         transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
         write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
-        redstoneUpdate(): void;
         writeInteractionPoints(arg0: $CompoundTag_): void;
+        redstoneUpdate(): void;
         static getRange(): number;
         sequenceContext: $SequencedGearshiftBlockEntity$SequenceContext;
         networkDirty: boolean;

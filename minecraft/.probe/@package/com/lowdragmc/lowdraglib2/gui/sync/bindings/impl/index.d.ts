@@ -6,7 +6,7 @@ import { $FluidStack } from "@package/net/neoforged/neoforge/fluids";
 import { $ITickable } from "@package/com/lowdragmc/lowdraglib2/gui/util";
 import { $List, $List_ } from "@package/java/util";
 import { $Consumer_, $Consumer, $Supplier_, $Function_, $Supplier } from "@package/java/util/function";
-import { $SyncStrategy_, $SyncStrategy, $IBinding, $IDataSource, $IDataProvider } from "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings";
+import { $SyncStrategy_, $IBinding, $SyncStrategy, $IDataSource, $IDataProvider } from "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings";
 import { $ISubscription } from "@package/com/lowdragmc/lowdraglib2/syncdata";
 import { $Type } from "@package/java/lang/reflect";
 import { $Block } from "@package/net/minecraft/world/level/block";
@@ -28,8 +28,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings/impl" {
         get supplier(): $Supplier<T>;
     }
     export class $DataBindingBuilder<T> {
-        name(): string;
         name(arg0: string): $DataBindingBuilder<T>;
+        name(): string;
         type(arg0: $Type): $DataBindingBuilder<T>;
         data(arg0: $Supplier_<T>, arg1: $Consumer_<T>): $DataBindingBuilder<T>;
         static component(arg0: $Supplier_<$Component>, arg1: $Consumer_<$Component>): $DataBindingBuilder<$Component>;
@@ -37,20 +37,22 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings/impl" {
         static block(arg0: $Supplier_<$Block>, arg1: $Consumer_<$Block>): $DataBindingBuilder<$Block>;
         static string(arg0: $Supplier_<string>, arg1: $Consumer_<string>): $DataBindingBuilder<string>;
         initialValue(arg0: T): $DataBindingBuilder<T>;
-        build(): $SimpleBinding<T>;
         build(arg0: boolean): $SimpleBinding<T>;
+        build(): $SimpleBinding<T>;
         static tag(arg0: $Supplier_<$Tag>, arg1: $Consumer_<$Tag>): $DataBindingBuilder<$Tag>;
         getter(arg0: $Supplier_<T>): $DataBindingBuilder<T>;
         setter(arg0: $Consumer_<T>): $DataBindingBuilder<T>;
-        static fluidStack(arg0: $Supplier_<$FluidStack>, arg1: $Consumer_<$FluidStack>): $DataBindingBuilder<$FluidStack>;
         static longVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
-        syncType(arg0: $Class<never>): $DataBindingBuilder<T>;
         syncType(arg0: $Type): $DataBindingBuilder<T>;
+        syncType(arg0: $Class<never>): $DataBindingBuilder<T>;
         remoteGetter(arg0: $Supplier_<T>): $DataBindingBuilder<T>;
         static byteVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
         static shortVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
         static charVal(arg0: $Supplier_<string>, arg1: $Consumer_<string>): $DataBindingBuilder<string>;
         static enumVal<T extends $Enum<never>>(arg0: $Class<T>, arg1: $Supplier_<T>, arg2: $Consumer_<T>): $DataBindingBuilder<T>;
+        static componentS2C(arg0: $Supplier_<$Component>): $DataBindingBuilder<$Component>;
+        static componentC2S(arg0: $Consumer_<$Component>): $DataBindingBuilder<$Component>;
+        static boolS2C(arg0: $Supplier_<boolean>): $DataBindingBuilder<boolean>;
         static itemStackS2C(arg0: $Supplier_<$ItemStack>): $DataBindingBuilder<$ItemStack>;
         static itemStackC2S(arg0: $Consumer_<$ItemStack>): $DataBindingBuilder<$ItemStack>;
         static fluidStackC2S(arg0: $Consumer_<$FluidStack>): $DataBindingBuilder<$FluidStack>;
@@ -58,10 +60,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings/impl" {
         static blockC2S(arg0: $Consumer_<$Block>): $DataBindingBuilder<$Block>;
         static tagS2C(arg0: $Supplier_<$Tag>): $DataBindingBuilder<$Tag>;
         static tagC2S(arg0: $Consumer_<$Tag>): $DataBindingBuilder<$Tag>;
-        static componentS2C(arg0: $Supplier_<$Component>): $DataBindingBuilder<$Component>;
-        static componentC2S(arg0: $Consumer_<$Component>): $DataBindingBuilder<$Component>;
         static intValC2S(arg0: $Consumer_<number>): $DataBindingBuilder<number>;
-        static boolS2C(arg0: $Supplier_<boolean>): $DataBindingBuilder<boolean>;
         static boolC2S(arg0: $Consumer_<boolean>): $DataBindingBuilder<boolean>;
         static floatValS2C(arg0: $Supplier_<number>): $DataBindingBuilder<number>;
         static floatValC2S(arg0: $Consumer_<number>): $DataBindingBuilder<number>;
@@ -84,11 +83,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings/impl" {
         remoteSetter(arg0: $Consumer_<T>): $DataBindingBuilder<T>;
         s2cStrategy(arg0: $SyncStrategy_): $DataBindingBuilder<T>;
         c2sStrategy(arg0: $SyncStrategy_): $DataBindingBuilder<T>;
+        static fluidStack(arg0: $Supplier_<$FluidStack>, arg1: $Consumer_<$FluidStack>): $DataBindingBuilder<$FluidStack>;
+        static bool(arg0: $Supplier_<boolean>, arg1: $Consumer_<boolean>): $DataBindingBuilder<boolean>;
+        static itemStack(arg0: $Supplier_<$ItemStack>, arg1: $Consumer_<$ItemStack>): $DataBindingBuilder<$ItemStack>;
         static intVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
         static doubleVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
         static floatVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
-        static bool(arg0: $Supplier_<boolean>, arg1: $Consumer_<boolean>): $DataBindingBuilder<boolean>;
-        static itemStack(arg0: $Supplier_<$ItemStack>, arg1: $Consumer_<$ItemStack>): $DataBindingBuilder<$ItemStack>;
     }
     export class $SimpleBinding<T> implements $IBinding<T> {
         setValueProvider(arg0: $Supplier_<T>): void;
@@ -121,9 +121,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings/impl" {
         setCurrent(arg0: T): void;
         setCounter(arg0: number): void;
         checkUpdate(): void;
-        getCurrent(): T;
         registerListener(arg0: $Consumer_<T>): $ISubscription;
         getListeners(): $List<$Consumer<T>>;
+        getCurrent(): T;
         registerListener(arg0: $Consumer_<T>, arg1: boolean): $ISubscription;
         get value(): T;
         get data(): $List<T>;

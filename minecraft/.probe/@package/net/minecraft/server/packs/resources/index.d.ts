@@ -52,7 +52,7 @@ declare module "@package/net/minecraft/server/packs/resources" {
     /**
      * Values that may be interpreted as {@link $FallbackResourceManager$ResourceWithSource}.
      */
-    export type $FallbackResourceManager$ResourceWithSource_ = { source?: $PackResources, resource?: $IoSupplier_<$InputStream>,  } | [source?: $PackResources, resource?: $IoSupplier_<$InputStream>, ];
+    export type $FallbackResourceManager$ResourceWithSource_ = { resource?: $IoSupplier_<$InputStream>, source?: $PackResources,  } | [resource?: $IoSupplier_<$InputStream>, source?: $PackResources, ];
     export class $ResourceMetadata$Builder {
         put<T>(arg0: $MetadataSectionSerializer<T>, arg1: T): $ResourceMetadata$Builder;
         build(): $ResourceMetadata;
@@ -99,7 +99,7 @@ declare module "@package/net/minecraft/server/packs/resources" {
     /**
      * Values that may be interpreted as {@link $FallbackResourceManager$1ResourceWithSourceAndIndex}.
      */
-    export type $FallbackResourceManager$1ResourceWithSourceAndIndex_ = { packResources?: $PackResources, resource?: $IoSupplier_<$InputStream>, packIndex?: number,  } | [packResources?: $PackResources, resource?: $IoSupplier_<$InputStream>, packIndex?: number, ];
+    export type $FallbackResourceManager$1ResourceWithSourceAndIndex_ = { packIndex?: number, resource?: $IoSupplier_<$InputStream>, packResources?: $PackResources,  } | [packIndex?: number, resource?: $IoSupplier_<$InputStream>, packResources?: $PackResources, ];
     export class $FallbackResourceManager$LeakedResourceWarningInputStream extends $FilterInputStream {
     }
     export class $ResourceMetadata {
@@ -125,7 +125,7 @@ declare module "@package/net/minecraft/server/packs/resources" {
      * Values that may be interpreted as {@link $ResourceManagerReloadListener}.
      */
     export type $ResourceManagerReloadListener_ = ((arg0: $ResourceManager) => void);
-    export class $MultiPackResourceManager implements $CloseableResourceManager, $FabricLifecycledResourceManager, $LifecycledResourceManagerImplExtension {
+    export class $MultiPackResourceManager implements $CloseableResourceManager, $LifecycledResourceManagerImplExtension, $FabricLifecycledResourceManager {
         getResource(arg0: $ResourceLocation_): ($Resource) | undefined;
         close(): void;
         listResourceStacks(arg0: string, arg1: $Predicate_<$ResourceLocation>): $Map<$ResourceLocation, $List<$Resource>>;
@@ -133,8 +133,8 @@ declare module "@package/net/minecraft/server/packs/resources" {
         listResources(arg0: string, arg1: $Predicate_<$ResourceLocation>): $Map<$ResourceLocation, $Resource>;
         getNamespaces(): $Set<string>;
         getResourceStack(arg0: $ResourceLocation_): $List<$Resource>;
-        fabric_getResourceType(): $PackType;
         continuity$getRedirectHandler(): $ResourceRedirectHandler;
+        fabric_getResourceType(): $PackType;
         open(arg0: $ResourceLocation_): $InputStream;
         openAsReader(arg0: $ResourceLocation_): $BufferedReader;
         getResourceOrThrow(arg0: $ResourceLocation_): $Resource;
@@ -166,15 +166,15 @@ declare module "@package/net/minecraft/server/packs/resources" {
     /**
      * Values that may be interpreted as {@link $FallbackResourceManager$PackEntry}.
      */
-    export type $FallbackResourceManager$PackEntry_ = { filter?: $Predicate_<$ResourceLocation>, resources?: $PackResources, name?: string,  } | [filter?: $Predicate_<$ResourceLocation>, resources?: $PackResources, name?: string, ];
+    export type $FallbackResourceManager$PackEntry_ = { name?: string, resources?: $PackResources, filter?: $Predicate_<$ResourceLocation>,  } | [name?: string, resources?: $PackResources, filter?: $Predicate_<$ResourceLocation>, ];
     export class $FallbackResourceManager implements $ResourceManager {
         getResource(arg0: $ResourceLocation_): ($Resource) | undefined;
         push(arg0: $PackResources, arg1: $Predicate_<$ResourceLocation>): void;
         push(arg0: $PackResources): void;
         listResourceStacks(arg0: string, arg1: $Predicate_<$ResourceLocation>): $Map<$ResourceLocation, $List<$Resource>>;
         listPacks(): $Stream<$PackResources>;
-        static parseMetadata(arg0: $IoSupplier_<$InputStream>): $ResourceMetadata;
         listResources(arg0: string, arg1: $Predicate_<$ResourceLocation>): $Map<$ResourceLocation, $Resource>;
+        static parseMetadata(arg0: $IoSupplier_<$InputStream>): $ResourceMetadata;
         getNamespaces(): $Set<string>;
         getResourceStack(arg0: $ResourceLocation_): $List<$Resource>;
         pushFilterOnly(arg0: string, arg1: $Predicate_<$ResourceLocation>): void;
@@ -226,7 +226,7 @@ declare module "@package/net/minecraft/server/packs/resources" {
     /**
      * Values that may be interpreted as {@link $FallbackResourceManager$EntryStack}.
      */
-    export type $FallbackResourceManager$EntryStack_ = { fileLocation?: $ResourceLocation_, metadataLocation?: $ResourceLocation_, fileSources?: $List_<$FallbackResourceManager$ResourceWithSource_>, metaSources?: $Map_<$PackResources, $IoSupplier_<$InputStream>>,  } | [fileLocation?: $ResourceLocation_, metadataLocation?: $ResourceLocation_, fileSources?: $List_<$FallbackResourceManager$ResourceWithSource_>, metaSources?: $Map_<$PackResources, $IoSupplier_<$InputStream>>, ];
+    export type $FallbackResourceManager$EntryStack_ = { metaSources?: $Map_<$PackResources, $IoSupplier_<$InputStream>>, fileSources?: $List_<$FallbackResourceManager$ResourceWithSource_>, metadataLocation?: $ResourceLocation_, fileLocation?: $ResourceLocation_,  } | [metaSources?: $Map_<$PackResources, $IoSupplier_<$InputStream>>, fileSources?: $List_<$FallbackResourceManager$ResourceWithSource_>, metadataLocation?: $ResourceLocation_, fileLocation?: $ResourceLocation_, ];
     export class $ReloadableResourceManager implements $ResourceManager, $AutoCloseable, $PipelineReloadableResourceManagerAccessor, $ReloadableResourceManagerImplAccessor {
         getResource(arg0: $ResourceLocation_): ($Resource) | undefined;
         close(): void;
@@ -274,8 +274,8 @@ declare module "@package/net/minecraft/server/packs/resources" {
         source(): $PackResources;
         open(): $InputStream;
         getFabricPackSource(): $PackSource;
-        openAsReader(): $BufferedReader;
         knownPackInfo(): ($KnownPack) | undefined;
+        openAsReader(): $BufferedReader;
         metadata(): $ResourceMetadata;
         sourcePackId(): string;
         constructor(arg0: $PackResources, arg1: $IoSupplier_<$InputStream>, arg2: $IoSupplier_<$ResourceMetadata>);
@@ -293,8 +293,8 @@ declare module "@package/net/minecraft/server/packs/resources" {
     export interface $ReloadInstance {
         done(): $CompletableFuture<never>;
         isDone(): boolean;
-        getActualProgress(): number;
         checkExceptions(): void;
+        getActualProgress(): number;
         get actualProgress(): number;
     }
 }

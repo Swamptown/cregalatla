@@ -11,8 +11,8 @@ declare module "@package/dev/latvian/mods/kubejs/util/registrypredicate" {
     export class $RegistryRegExpPredicate<T> extends $Record implements $RegistryPredicate<T> {
         test(holder: $Holder_<T>): boolean;
         pattern(): $Pattern;
-        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         getValues(registry: $Registry<T>): $List<T>;
+        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
@@ -25,8 +25,8 @@ declare module "@package/dev/latvian/mods/kubejs/util/registrypredicate" {
     export class $RegistryTagIDPredicate<T> extends $Record implements $RegistryPredicate<T> {
         test(holder: $Holder_<T>): boolean;
         predicate(): $RegistryTagIDPredicate$TagKeyPredicate;
-        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         getValues(registry: $Registry<T>): $List<T>;
+        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
@@ -41,8 +41,8 @@ declare module "@package/dev/latvian/mods/kubejs/util/registrypredicate" {
         static of(from: $Object, target: $TypeInfo_): $RegistryPredicate<never>;
     }
     export interface $RegistryPredicate<T> extends $Predicate<$Holder<T>> {
-        getHolders(registry: $Registry<$Holder_<T>>): $List<$Holder$Reference<$Holder<T>>>;
         getValues(registry: $Registry<$Holder_<T>>): $List<$Holder<T>>;
+        getHolders(registry: $Registry<$Holder_<T>>): $List<$Holder$Reference<$Holder<T>>>;
     }
     /**
      * Values that may be interpreted as {@link $RegistryPredicate}.
@@ -60,8 +60,8 @@ declare module "@package/dev/latvian/mods/kubejs/util/registrypredicate" {
     export class $RegistryTagKeyPredicate<T> extends $Record implements $RegistryPredicate<T> {
         test(holder: $Holder_<T>): boolean;
         key(): $TagKey<T>;
-        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         getValues(registry: $Registry<T>): $List<T>;
+        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
@@ -74,8 +74,8 @@ declare module "@package/dev/latvian/mods/kubejs/util/registrypredicate" {
     export class $EntireRegistryPredicate extends $Record implements $RegistryPredicate<$Object> {
         test(holder: $Holder_<$Object>): boolean;
         match(): boolean;
-        getHolders(registry: $Registry<$Object>): $List<$Holder$Reference<$Object>>;
         getValues(registry: $Registry<$Object>): $List<$Object>;
+        getHolders(registry: $Registry<$Object>): $List<$Holder$Reference<$Object>>;
         or(arg0: $Predicate_<$Object>): $Predicate<$Object>;
         negate(): $Predicate<$Object>;
         and(arg0: $Predicate_<$Object>): $Predicate<$Object>;
@@ -90,8 +90,8 @@ declare module "@package/dev/latvian/mods/kubejs/util/registrypredicate" {
     export class $RegistryHolderPredicate<T> extends $Record implements $RegistryPredicate<T> {
         value(): $Holder<T>;
         test(holder: $Holder_<T>): boolean;
-        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         getValues(registry: $Registry<T>): $List<T>;
+        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
@@ -104,8 +104,8 @@ declare module "@package/dev/latvian/mods/kubejs/util/registrypredicate" {
     export class $RegistryNamespacePredicate<T> extends $Record implements $RegistryPredicate<T> {
         test(holder: $Holder_<T>): boolean;
         namespace(): string;
-        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         getValues(registry: $Registry<T>): $List<T>;
+        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
@@ -118,8 +118,8 @@ declare module "@package/dev/latvian/mods/kubejs/util/registrypredicate" {
     export class $RegistryIDPredicate<T> extends $Record implements $RegistryPredicate<T> {
         test(holder: $Holder_<T>): boolean;
         id(): $ResourceLocation;
-        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         getValues(registry: $Registry<T>): $List<T>;
+        getHolders(registry: $Registry<T>): $List<$Holder$Reference<T>>;
         or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;

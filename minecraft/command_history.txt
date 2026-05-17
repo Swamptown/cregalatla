@@ -1,50 +1,50 @@
-/probejs
-/gamemode survival
-/kubejs reload startup-scripts
-/kubejs errors
-/kubejs errors startup
-/kubejs reload startup-scripts
-/kubejs errors startup
-/gamemode creative
-/kubejs reload startup-scripts
-/kubejs errors startup
-/kubejs reload startup-scripts
-/data get entity @a
-/data get entity @s
-/kubejs errors startup
-/kubejs reload startup-scripts
-/reload
-/kubejs reload startup-scripts
-/datapack list
-/datapack ls
-/datapack list
-/reload
-/datapack list
-/attribute Rasgajag minecraft:generic.attack_damage base get
-/attribute Rasgajag minecraft:generic.attack_damage get
-/attribute Rasgajag minecraft:generic.attack_damage modifier value
-/attribute Rasgajag minecraft:generic.attack_damage modifier value get
-/attribute Rasgajag minecraft:generic.attack_damage modifier value get 1
-/datapack list
-/attribute Rasgajag minecraft:generic.attack_damage get
-/attribute Rasgajag minecraft:generic.attack_damage base get
-/function damagemod:attribute
-/attribute Rasgajag minecraft:generic.attack_damage base get
-/reload
-/attribute Rasgajag minecraft:generic.attack_damage base get
-/attribute Rasgajag minecraft:generic.attack_damage
-/attribute Rasgajag minecraft:generic.attack_damage get
-/kubejs errors server
+/scoreboard objectives setdisplay sidebar health
+/scoreboard objectives setdisplay below_name health
+/scoreboard objectives setdisplay list health
+/advancement grant teeeal only mymod:air
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{buy:{id:"mymod:closed_scroll",count:1},buyB:{id:"mymod:closed_fire_scroll",count:1}}]}}
+/kill @e[type=minecraft:villager]
+/tp ~ ~100 ~
+/fill ~ ~ ~ ~ ~ ~ dirt
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,sell:{id:"mymod:closed_fire_scroll",count:1}}]},NoAI:1b}
+/kill @e[type=minecraft:villager]
+/give Rasgajag mymod:closed_fire_scroll
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,buy:{id:air,count:1},sell:{id:"mymod:closed_fire_scroll",count:1}}]},NoAI:1b}
+/kill @e[type=minecraft:villager]
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,sell:{id:closed_fire_scroll,count:1}}]},NoAI:1b}
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,sell:{id:"mymod:closed_fire_scroll",count:1}}]},NoAI:1b}
+/kill @e[type=minecraft:villager]
+/fill ~ ~ ~ ~ ~ ~ dirt
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,buy:{id:air,count:1},sell:{id:"mymod:closed_fire_scroll",count:1}}]}}
+/kill @e[type=minecraft:villager]
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,buy:{id:air,count:1},sell:{id:"mymod:closed_scroll",count:1}}]}}
+/kill @e[type=minecraft:villager]
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:-1,rewardExp:0b,sell:{id:"mymod:closed_scroll",count:1}}]}}
+/kill @e[type=minecraft:villager]
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:-1,rewardExp:0b,sell:{id:acacia_boat,count:1}}]}}
+/kill @e[type=minecraft:villager]a
+/kill @e[type=minecraft:villager]
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:-1,rewardExp:0b,sell:{id:acacia_boat,count:1}}]}}
+/kill @e[type=minecraft:villager]
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:-1,rewardExp:0b,buy:{id:dirt,count:1},sell:{id:acacia_boat,count:1}}]}}
+/kill @e[type=minecraft:villager]
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:1,rewardExp:0b,buy:{id:dirt,count:1},sell:{id:"mymod:closed_fire_scroll",count:1}}]}}
+/tp Rasgajag mxwl
+/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:1,rewardExp:0b,buy:{id:dirt,count:1},sell:{id:"mymod:closed_fire_scroll",count:1}}]}}
+/kill @e[type=minecraft:villager]
 /give Rasgajag minecraft:command_block
-/gamerule commandBlockOutput false
-/tick freeze
-/data get entity @n[limit=1]
-/data get entity @n[limit=1,type=!minecraft:player]
-/clear
-/data get entity @n[limit=1,type=!minecraft:player]
-/summon create:potato_projectile
-/summon create:potato_projectile ~ ~ ~
-/execute as @e[type=create:potato_projectile] run data modify entity @s damage set value 2.5d
-/data get entity @n[limit=1,type=!minecraft:player]
-/tick unfreeze
-/gamerule commandBlockOutput false
+/probejs
+/kubejs reload server-scripts
+/kubejs dump events
+/kubejs errors server
+/kubejs reload
+/reload
+/kubejs reload server-scripts
+/reload
+/probejs
+/reload
+/kill @e[type=!minecraft:player]
+/gamemode survival
+/gamemode creative
+/kubejs reload server-scripts
+/reload

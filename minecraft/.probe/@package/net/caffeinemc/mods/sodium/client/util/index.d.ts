@@ -8,8 +8,8 @@ declare module "@package/net/caffeinemc/mods/sodium/client/util" {
         static copy(arg0: $ByteBuffer): $NativeBuffer;
         free(): void;
         getDirectBuffer(): $ByteBuffer;
-        static getTotalAllocated(): number;
         static reclaim(arg0: boolean): void;
+        static getTotalAllocated(): number;
         constructor(arg0: number);
         get length(): number;
         get directBuffer(): $ByteBuffer;

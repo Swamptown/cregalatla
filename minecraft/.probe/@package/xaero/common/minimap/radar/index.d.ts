@@ -44,6 +44,10 @@ declare module "@package/xaero/common/minimap/radar" {
         /**
          * @deprecated
          */
+        getMaxDistance(arg0: $MinimapProcessor, arg1: boolean): number;
+        /**
+         * @deprecated
+         */
         getEntityX(arg0: $Entity, arg1: number): number;
         /**
          * @deprecated
@@ -53,10 +57,6 @@ declare module "@package/xaero/common/minimap/radar" {
          * @deprecated
          */
         getEntityZ(arg0: $Entity, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        getMaxDistance(arg0: $MinimapProcessor, arg1: boolean): number;
         /**
          * @deprecated
          */

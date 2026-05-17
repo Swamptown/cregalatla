@@ -31,7 +31,7 @@ declare module "@package/net/minecraft/network/protocol/handshake" {
     /**
      * Values that may be interpreted as {@link $ClientIntentionPacket}.
      */
-    export type $ClientIntentionPacket_ = { port?: number, protocolVersion?: number, intention?: $ClientIntent_, hostName?: string,  } | [port?: number, protocolVersion?: number, intention?: $ClientIntent_, hostName?: string, ];
+    export type $ClientIntentionPacket_ = { hostName?: string, intention?: $ClientIntent_, protocolVersion?: number, port?: number,  } | [hostName?: string, intention?: $ClientIntent_, protocolVersion?: number, port?: number, ];
     export class $HandshakeProtocols {
         static SERVERBOUND_TEMPLATE: $ProtocolInfo$Unbound<$ServerHandshakePacketListener, $FriendlyByteBuf>;
         static SERVERBOUND: $ProtocolInfo<$ServerHandshakePacketListener>;

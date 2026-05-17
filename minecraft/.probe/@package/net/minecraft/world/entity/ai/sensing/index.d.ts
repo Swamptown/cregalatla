@@ -49,7 +49,7 @@ declare module "@package/net/minecraft/world/entity/ai/sensing" {
     }
     export class $SensorType<U extends $Sensor<never>> implements $SensorTypeAccessor {
         create(): U;
-        static createSensorType$platform_$md$8e2dbe$0(arg0: $Supplier_<any>): $SensorType<any>;
+        static createSensorType$platform_$md$d858b6$0(arg0: $Supplier_<any>): $SensorType<any>;
         static FROG_ATTACKABLES: $SensorType<$FrogAttackablesSensor>;
         static AXOLOTL_ATTACKABLES: $SensorType<$AxolotlAttackablesSensor>;
         static ARMADILLO_SCARE_DETECTED: $SensorType<$MobSensor<$Armadillo>>;
@@ -92,17 +92,17 @@ declare module "@package/net/minecraft/world/entity/ai/sensing" {
         constructor();
     }
     export class $PiglinSpecificSensor extends $Sensor<$LivingEntity> {
-        redirect$clm000$lithium$redirectFindNearestRepellent(arg0: $ServerLevel, arg1: $LivingEntity): $Optional<any>;
+        redirect$bjl000$lithium$redirectFindNearestRepellent(arg0: $ServerLevel, arg1: $LivingEntity): $Optional<any>;
         static TARGETING_RANGE: number;
         constructor();
     }
     export class $Sensor<E extends $LivingEntity> implements $SensorAccessor {
         requires(): $Set<$MemoryModuleType<never>>;
         tick(arg0: $ServerLevel, arg1: E): void;
-        doTick(arg0: $ServerLevel, arg1: E): void;
-        static isEntityAttackable(arg0: $LivingEntity, arg1: $LivingEntity): boolean;
         static isEntityTargetable(arg0: $LivingEntity, arg1: $LivingEntity): boolean;
         static isEntityAttackableIgnoringLineOfSight(arg0: $LivingEntity, arg1: $LivingEntity): boolean;
+        doTick(arg0: $ServerLevel, arg1: E): void;
+        static isEntityAttackable(arg0: $LivingEntity, arg1: $LivingEntity): boolean;
         getLastSenseTime(): number;
         getSenseInterval(): number;
         setLastSenseTime(arg0: number): void;
@@ -168,8 +168,8 @@ declare module "@package/net/minecraft/world/entity/ai/sensing" {
         constructor();
     }
     export class $GolemSensor extends $Sensor<$LivingEntity> {
-        static golemDetected(arg0: $LivingEntity): void;
         static checkForNearbyGolem(arg0: $LivingEntity): void;
+        static golemDetected(arg0: $LivingEntity): void;
         static TARGETING_RANGE: number;
         constructor();
         constructor(arg0: number);

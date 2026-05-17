@@ -42,7 +42,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema/function" {
     /**
      * Values that may be interpreted as {@link $SetFunction$Resolved}.
      */
-    export type $SetFunction$Resolved_<T> = { key?: $RecipeKey<any>, to?: any,  } | [key?: $RecipeKey<any>, to?: any, ];
+    export type $SetFunction$Resolved_<T> = { to?: any, key?: $RecipeKey<any>,  } | [to?: any, key?: $RecipeKey<any>, ];
     export class $RecipeFunctionInstance extends $Record {
         name(): string;
         function(): $ResolvedRecipeSchemaFunction;
@@ -53,7 +53,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema/function" {
     /**
      * Values that may be interpreted as {@link $RecipeFunctionInstance}.
      */
-    export type $RecipeFunctionInstance_ = { function?: $ResolvedRecipeSchemaFunction_, name?: string, arguments?: $List_<$RecipeComponent<never>>,  } | [function?: $ResolvedRecipeSchemaFunction_, name?: string, arguments?: $List_<$RecipeComponent<never>>, ];
+    export type $RecipeFunctionInstance_ = { arguments?: $List_<$RecipeComponent<never>>, name?: string, function?: $ResolvedRecipeSchemaFunction_,  } | [arguments?: $List_<$RecipeComponent<never>>, name?: string, function?: $ResolvedRecipeSchemaFunction_, ];
     export class $RecipeSchemaJSFunction extends $BaseFunction {
         call(scope: $Scriptable, thisObj: $Scriptable, args: $Object[]): $KubeRecipe;
         argTypes: $TypeInfo[];
@@ -139,7 +139,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema/function" {
     /**
      * Values that may be interpreted as {@link $RecipeSchemaFunctionType}.
      */
-    export type $RecipeSchemaFunctionType_<T> = { id?: string, mapCodec?: $MapCodec_<$RecipeSchemaFunction>,  } | [id?: string, mapCodec?: $MapCodec_<$RecipeSchemaFunction>, ];
+    export type $RecipeSchemaFunctionType_<T> = { mapCodec?: $MapCodec_<$RecipeSchemaFunction>, id?: string,  } | [mapCodec?: $MapCodec_<$RecipeSchemaFunction>, id?: string, ];
     export class $RecipeSchemaFunctionRegistry {
     }
     export interface $RecipeSchemaFunctionRegistry {

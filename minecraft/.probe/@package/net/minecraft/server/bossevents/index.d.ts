@@ -28,8 +28,8 @@ declare module "@package/net/minecraft/server/bossevents" {
         setValue(arg0: number): void;
         getDisplayName(): $Component;
         getMax(): number;
-        getTextId(): $ResourceLocation;
         onPlayerConnect(arg0: $ServerPlayer): void;
+        getTextId(): $ResourceLocation;
         setPlayers(arg0: $Collection_<$ServerPlayer>): boolean;
         addOfflinePlayer(arg0: $UUID_): void;
         setMax(arg0: number): void;

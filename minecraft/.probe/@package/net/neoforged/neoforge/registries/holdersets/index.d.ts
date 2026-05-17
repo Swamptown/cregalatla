@@ -19,8 +19,8 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         constructor(...arg0: $HolderSet_<T>[]);
     }
     export class $NotHolderSet$Type implements $HolderSetType {
-        makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
         makeStreamCodec<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $ICustomHolderSet<T>>;
+        makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
         constructor();
     }
     export class $OrHolderSet<T> extends $CompositeHolderSet<T> {
@@ -37,10 +37,10 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         stream(): $Stream<$Holder<T>>;
         contains(arg0: $Holder_<T>): boolean;
         unwrap(): $Either<$TagKey<T>, $List<$Holder<T>>>;
-        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
-        canSerializeIn(arg0: $HolderOwner<T>): boolean;
         registryLookup(): $HolderLookup$RegistryLookup<T>;
         addInvalidationListener(arg0: $Runnable_): void;
+        canSerializeIn(arg0: $HolderOwner<T>): boolean;
+        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
         unwrapKey(): ($TagKey<T>) | undefined;
         serializationType(): $IHolderSetExtension$SerializationType;
         spliterator(): $Spliterator<T>;
@@ -51,16 +51,16 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
     export class $HolderSetType {
     }
     export interface $HolderSetType {
-        makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
         makeStreamCodec<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $ICustomHolderSet<T>>;
+        makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
     }
     /**
      * Values that may be interpreted as {@link $HolderSetType}.
      */
     export type $HolderSetType_ = RegistryTypes.NeoforgeHolderSetType;
     export class $OrHolderSet$Type implements $HolderSetType {
-        makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
         makeStreamCodec<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $ICustomHolderSet<T>>;
+        makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
         constructor();
     }
     export class $CompositeHolderSet<T> implements $ICustomHolderSet<T> {
@@ -70,11 +70,11 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         stream(): $Stream<$Holder<T>>;
         contains(arg0: $Holder_<T>): boolean;
         unwrap(): $Either<$TagKey<T>, $List<$Holder<T>>>;
-        homogenize(): $List<$HolderSet<T>>;
-        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
-        canSerializeIn(arg0: $HolderOwner<T>): boolean;
         addInvalidationListener(arg0: $Runnable_): void;
+        canSerializeIn(arg0: $HolderOwner<T>): boolean;
+        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
         isHomogenous(): boolean;
+        homogenize(): $List<$HolderSet<T>>;
         getList(): $List<$Holder<T>>;
         getSet(): $Set<$Holder<T>>;
         getComponents(): $List<$HolderSet<T>>;
@@ -90,8 +90,8 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         get components(): $List<$HolderSet<T>>;
     }
     export class $AnyHolderSet$Type implements $HolderSetType {
-        makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
         makeStreamCodec<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $ICustomHolderSet<T>>;
+        makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
         constructor();
     }
     export class $AnyHolderSet<T> extends $Record implements $ICustomHolderSet<T> {
@@ -102,9 +102,9 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         stream(): $Stream<$Holder<T>>;
         contains(arg0: $Holder_<T>): boolean;
         unwrap(): $Either<$TagKey<T>, $List<$Holder<T>>>;
-        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
-        canSerializeIn(arg0: $HolderOwner<T>): boolean;
         registryLookup(): $HolderLookup$RegistryLookup<T>;
+        canSerializeIn(arg0: $HolderOwner<T>): boolean;
+        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
         unwrapKey(): ($TagKey<T>) | undefined;
         serializationType(): $IHolderSetExtension$SerializationType;
         spliterator(): $Spliterator<T>;
@@ -124,8 +124,8 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         serializationType(): $IHolderSetExtension$SerializationType;
     }
     export class $AndHolderSet$Type implements $HolderSetType {
-        makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
         makeStreamCodec<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $ICustomHolderSet<T>>;
+        makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
         constructor();
     }
 }

@@ -275,14 +275,14 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
          */
         parallelStream(): $Stream<number>;
         rem(arg0: number): boolean;
-        intSpliterator(): $IntSpliterator;
-        intIterator(): $IntIterator;
         intParallelStream(): $IntStream;
+        toShortArray(): number[];
         /**
          * @deprecated
          */
         toShortArray(arg0: number[]): number[];
-        toShortArray(): number[];
+        intSpliterator(): $IntSpliterator;
+        intIterator(): $IntIterator;
         spliterator(): $Spliterator<number>;
     }
     export class $Short2ReferenceFunction<V> {

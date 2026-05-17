@@ -6,10 +6,10 @@ declare module "@package/net/minecraft/world/scores/criteria" {
     export class $ObjectiveCriteria {
         getName(): string;
         isReadOnly(): boolean;
-        static getCustomCriteriaNames(): $Set<string>;
         getDefaultRenderType(): $ObjectiveCriteria$RenderType;
-        static registerCustom(arg0: string): $ObjectiveCriteria;
         static registerCustom(arg0: string, arg1: boolean, arg2: $ObjectiveCriteria$RenderType_): $ObjectiveCriteria;
+        static registerCustom(arg0: string): $ObjectiveCriteria;
+        static getCustomCriteriaNames(): $Set<string>;
         static byName(arg0: string): ($ObjectiveCriteria) | undefined;
         static DEATH_COUNT: $ObjectiveCriteria;
         static ARMOR: $ObjectiveCriteria;
@@ -24,12 +24,12 @@ declare module "@package/net/minecraft/world/scores/criteria" {
         static TEAM_KILL: $ObjectiveCriteria[];
         static KILLED_BY_TEAM: $ObjectiveCriteria[];
         static FOOD: $ObjectiveCriteria;
-        constructor(arg0: string, arg1: boolean, arg2: $ObjectiveCriteria$RenderType_);
         constructor(arg0: string);
+        constructor(arg0: string, arg1: boolean, arg2: $ObjectiveCriteria$RenderType_);
         get name(): string;
         get readOnly(): boolean;
-        static get customCriteriaNames(): $Set<string>;
         get defaultRenderType(): $ObjectiveCriteria$RenderType;
+        static get customCriteriaNames(): $Set<string>;
     }
     export class $ObjectiveCriteria$RenderType extends $Enum<$ObjectiveCriteria$RenderType> implements $StringRepresentable {
         static values(): $ObjectiveCriteria$RenderType[];

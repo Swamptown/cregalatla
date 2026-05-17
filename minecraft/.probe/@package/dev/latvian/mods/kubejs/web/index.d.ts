@@ -77,11 +77,11 @@ declare module "@package/dev/latvian/mods/kubejs/web" {
         patch(path: string, handler: $HTTPHandler_<$KJSHTTPRequest>): void;
         post(path: string, handler: $HTTPHandler_<$KJSHTTPRequest>): void;
         redirect(path: string, redirect: string): void;
-        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
-        acceptPostTask(path: string, task: $Runnable_): void;
         acceptPostString(path: string, handler: $Consumer_<string>): void;
+        acceptPostTask(path: string, task: $Runnable_): void;
         dynamicFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
         staticFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
+        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
     }
     export class $KJSHTTPRequest extends $HTTPRequest {
         id(): $ResourceLocation;
@@ -111,7 +111,7 @@ declare module "@package/dev/latvian/mods/kubejs/web" {
     /**
      * Values that may be interpreted as {@link $LocalWebServer$Endpoint}.
      */
-    export type $LocalWebServer$Endpoint_ = { method?: string, path?: string, auth?: boolean,  } | [method?: string, path?: string, auth?: boolean, ];
+    export type $LocalWebServer$Endpoint_ = { auth?: boolean, path?: string, method?: string,  } | [auth?: boolean, path?: string, method?: string, ];
     export class $RelativeURL extends $Record {
         query(): $Map<string, string>;
         path(): string;
@@ -125,15 +125,15 @@ declare module "@package/dev/latvian/mods/kubejs/web" {
     export type $RelativeURL_ = { query?: $Map_<string, string>, path?: string,  } | [query?: $Map_<string, string>, path?: string, ];
     export class $LocalWebServer extends $Record {
         url(): string;
+        explorerCode(): string;
         server(): $KJSHTTPServer;
         endpoints(): $List<$LocalWebServer$Endpoint>;
-        explorerCode(): string;
         constructor(server: $KJSHTTPServer, url: string, endpoints: $List_<$LocalWebServer$Endpoint_>, explorerCode: string);
     }
     /**
      * Values that may be interpreted as {@link $LocalWebServer}.
      */
-    export type $LocalWebServer_ = { url?: string, endpoints?: $List_<$LocalWebServer$Endpoint_>, explorerCode?: string, server?: $KJSHTTPServer,  } | [url?: string, endpoints?: $List_<$LocalWebServer$Endpoint_>, explorerCode?: string, server?: $KJSHTTPServer, ];
+    export type $LocalWebServer_ = { server?: $KJSHTTPServer, explorerCode?: string, endpoints?: $List_<$LocalWebServer$Endpoint_>, url?: string,  } | [server?: $KJSHTTPServer, explorerCode?: string, endpoints?: $List_<$LocalWebServer$Endpoint_>, url?: string, ];
     export class $SessionInfo extends $Record {
         source(): string;
         tags(): $Set<string>;

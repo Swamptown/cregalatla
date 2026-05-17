@@ -14,16 +14,16 @@ declare module "@package/net/fabricmc/fabric/api/client/command/v2" {
         getPosition(): $Vec3;
         sendError(arg0: $Component_): void;
         sendFeedback(arg0: $Component_): void;
-        getWorld(): $ClientLevel;
-        getEntity(): $Entity;
         getPlayer(): $LocalPlayer;
+        getEntity(): $Entity;
+        getWorld(): $ClientLevel;
         getClient(): $Minecraft;
         getRotation(): $Vec2;
         getMeta(arg0: string): $Object;
         get position(): $Vec3;
-        get world(): $ClientLevel;
-        get entity(): $Entity;
         get player(): $LocalPlayer;
+        get entity(): $Entity;
+        get world(): $ClientLevel;
         get client(): $Minecraft;
         get rotation(): $Vec2;
     }

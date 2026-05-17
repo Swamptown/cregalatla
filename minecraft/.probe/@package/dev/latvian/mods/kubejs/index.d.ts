@@ -117,11 +117,11 @@ declare module "@package/dev/latvian/mods/kubejs" {
     }
     export class $KubeJSMixinPlugin implements $IMixinConfigPlugin {
         onLoad(mixinPackage: string): void;
-        shouldApplyMixin(targetClassName: string, mixinClassName: string): boolean;
         getMixins(): $List<string>;
         getRefMapperConfig(): string;
         postApply(targetClassName: string, targetClass: $ClassNode, mixinClassName: string, mixinInfo: $IMixinInfo): void;
         preApply(targetClassName: string, targetClass: $ClassNode, mixinClassName: string, mixinInfo: $IMixinInfo): void;
+        shouldApplyMixin(targetClassName: string, mixinClassName: string): boolean;
         acceptTargets(myTargets: $Set_<string>, otherTargets: $Set_<string>): void;
         constructor();
         get mixins(): $List<string>;
@@ -188,7 +188,7 @@ declare module "@package/dev/latvian/mods/kubejs" {
     /**
      * Values that may be interpreted as {@link $KubeJSModEventHandler$KubeEntityCapabilityProvider}.
      */
-    export type $KubeJSModEventHandler$KubeEntityCapabilityProvider_<CAP, SRC> = { capability?: $BlockCapability<any, any>, attachment?: $BlockEntityAttachmentInfo_,  } | [capability?: $BlockCapability<any, any>, attachment?: $BlockEntityAttachmentInfo_, ];
+    export type $KubeJSModEventHandler$KubeEntityCapabilityProvider_<CAP, SRC> = { attachment?: $BlockEntityAttachmentInfo_, capability?: $BlockCapability<any, any>,  } | [attachment?: $BlockEntityAttachmentInfo_, capability?: $BlockCapability<any, any>, ];
     export class $KubeJSCommon {
         export(packs: $List_<$ExportablePackResources>): void;
         handleDataFromServerPacket(channel: string, data: $CompoundTag_): void;

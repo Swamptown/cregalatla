@@ -35,8 +35,6 @@ export * as toolbox from "@package/com/railwayteam/railways/content/conductor/to
 declare module "@package/com/railwayteam/railways/content/conductor" {
     export class $ConductorEntity extends $AbstractGolem {
         setColor(arg0: $DyeColor_): void;
-        getForwardSignalStrength(): number;
-        addSchedule(arg0: $ItemStack_): void;
         static colorFrom(arg0: number): $DyeColor;
         teleportToForce(arg0: number, arg1: number, arg2: number): void;
         getJob(): $ConductorEntity$Job;
@@ -63,12 +61,14 @@ declare module "@package/com/railwayteam/railways/content/conductor" {
         hasSentChunks(): boolean;
         setChunkLoadingDistance(arg0: number): void;
         isPossessedAndClient(): boolean;
-        static defaultColor(): $DyeColor;
+        getForwardSignalStrength(): number;
+        addSchedule(arg0: $ItemStack_): void;
         doCheckFallDamage(arg0: number, arg1: boolean): void;
         stopViewing(arg0: $ServerPlayer): void;
+        static defaultColor(): $DyeColor;
         canReach(arg0: $Vec3i): boolean;
-        static canSpyInteract(arg0: $BlockState_): boolean;
         getColor(): $DyeColor;
+        static canSpyInteract(arg0: $BlockState_): boolean;
         static spawn(arg0: $Level_, arg1: $BlockPos_, arg2: $ItemStack_): $ConductorEntity;
         static isPlayerDisguised(arg0: $Player): boolean;
         turnView(arg0: number, arg1: number): void;
@@ -263,7 +263,6 @@ declare module "@package/com/railwayteam/railways/content/conductor" {
         removeStingerTime: number;
         static BASE_SAFE_FALL_DISTANCE: number;
         constructor(arg0: $EntityType_<$AbstractGolem>, arg1: $Level_);
-        get forwardSignalStrength(): number;
         get holdingSchedules(): boolean;
         get carryingToolbox(): boolean;
         get secondaryHeadStack(): $ItemStack;
@@ -275,6 +274,7 @@ declare module "@package/com/railwayteam/railways/content/conductor" {
         get possessed(): boolean;
         set chunkLoadingDistance(value: number);
         get possessedAndClient(): boolean;
+        get forwardSignalStrength(): number;
     }
     export class $ServerPlayerPossessionAccess {
     }

@@ -32,9 +32,9 @@ declare module "@package/de/maxhenkel/voicechat/voice/client" {
         toggleRecording(): boolean;
         getRecorder(): $AudioRecorder;
         setRecording(arg0: boolean): boolean;
-        getConnection(): $ClientVoicechatConnection;
         getStartTime(): number;
         getSoundManager(): $SoundManager;
+        getConnection(): $ClientVoicechatConnection;
         constructor();
         get initializationData(): $InitializationData;
         get micThread(): $MicThread;
@@ -42,9 +42,9 @@ declare module "@package/de/maxhenkel/voicechat/voice/client" {
         get audioChannels(): $Map<$UUID, $AudioChannel>;
         get recorder(): $AudioRecorder;
         set recording(value: boolean);
-        get connection(): $ClientVoicechatConnection;
         get startTime(): number;
         get soundManager(): $SoundManager;
+        get connection(): $ClientVoicechatConnection;
     }
     export class $AudioChannel extends $Thread {
         getQueue(): $BlockingQueue<$SoundPacket<never>>;
@@ -52,9 +52,9 @@ declare module "@package/de/maxhenkel/voicechat/voice/client" {
         closeAndKill(): void;
         getPacketBuffer(): $AudioPacketBuffer;
         getChannelId(): $UUID;
-        addToQueue(arg0: $SoundPacket<never>): void;
         getLostPackets(): number;
         getSpeaker(): $Speaker;
+        addToQueue(arg0: $SoundPacket<never>): void;
         isClosed(): boolean;
         static MIN_PRIORITY: number;
         static MAX_PRIORITY: number;
@@ -73,8 +73,8 @@ declare module "@package/de/maxhenkel/voicechat/voice/client" {
         static create(): $AudioRecorder;
         getDuration(arg0: number): string;
         getDuration(): string;
-        appendChunk(arg0: $UUID_, arg1: number, arg2: number[]): void;
         flushChunkThreaded(arg0: $UUID_): void;
+        appendChunk(arg0: $UUID_, arg1: number, arg2: number[]): void;
         saveAndClose(): void;
         getStorage(): string;
         getStorage(arg0: number): string;
@@ -119,19 +119,19 @@ declare module "@package/de/maxhenkel/voicechat/voice/client" {
     }
     export class $SoundManager {
         close(): void;
-        static create(arg0: string): $SoundManager;
         static create(): $SoundManager;
-        openContext(): boolean;
-        closeContext(): void;
-        static checkAlError(): boolean;
-        static getAlError(arg0: number): string;
-        static cleanDeviceName(arg0: string): string;
+        static create(arg0: string): $SoundManager;
         static checkAlcError(arg0: number): boolean;
         static getAlcError(arg0: number): string;
         static getAllSpeakers(): $List<string>;
         static canEnumerateAll(): boolean;
         static canEnumerate(): boolean;
         runInContext(arg0: $Executor_, arg1: $Runnable_): void;
+        openContext(): boolean;
+        closeContext(): void;
+        static checkAlError(): boolean;
+        static getAlError(arg0: number): string;
+        static cleanDeviceName(arg0: string): string;
         getMaxGain(): number;
         isClosed(): boolean;
         constructor(arg0: string, arg1: number, arg2: number, arg3: $ALCCapabilities, arg4: $ALCapabilities, arg5: number);
@@ -163,9 +163,9 @@ declare module "@package/de/maxhenkel/voicechat/voice/client" {
         getData(): $InitializationData;
         checkTimeout(): void;
         getSocket(): $ClientVoicechatSocket;
-        sendToServer(arg0: $NetworkMessage): boolean;
         disconnect(): void;
         isInitialized(): boolean;
+        sendToServer(arg0: $NetworkMessage): boolean;
         static MIN_PRIORITY: number;
         static MAX_PRIORITY: number;
         static NORM_PRIORITY: number;
@@ -178,21 +178,21 @@ declare module "@package/de/maxhenkel/voicechat/voice/client" {
     }
     export class $MicThread extends $Thread {
         close(): void;
-        isTalking(): boolean;
-        isWhispering(): boolean;
-        pollMic(): number[];
         pollProcessedAudio(arg0: boolean): number[];
         shouldTransmitAudio(): boolean;
+        pollMic(): number[];
         setMicrophoneLocked(arg0: boolean): void;
+        isTalking(): boolean;
+        isWhispering(): boolean;
         isClosed(): boolean;
         getError(arg0: $Consumer_<$MicrophoneException>): void;
         static MIN_PRIORITY: number;
         static MAX_PRIORITY: number;
         static NORM_PRIORITY: number;
         constructor(arg0: $ClientVoicechat, arg1: $ClientVoicechatConnection, arg2: $Consumer_<$MicrophoneException>);
+        set microphoneLocked(value: boolean);
         get talking(): boolean;
         get whispering(): boolean;
-        set microphoneLocked(value: boolean);
         get closed(): boolean;
     }
 }

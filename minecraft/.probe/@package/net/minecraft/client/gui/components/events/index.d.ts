@@ -1,7 +1,7 @@
 import { $ScreenRectangle, $FocusNavigationEvent_ } from "@package/net/minecraft/client/gui/navigation";
 import { $TabOrderedElement } from "@package/net/minecraft/client/gui/components";
-import { $ComponentPath } from "@package/net/minecraft/client/gui";
 import { $List } from "@package/java/util";
+import { $ComponentPath } from "@package/net/minecraft/client/gui";
 
 declare module "@package/net/minecraft/client/gui/components/events" {
     export class $ContainerEventHandler {
@@ -9,6 +9,8 @@ declare module "@package/net/minecraft/client/gui/components/events" {
     export interface $ContainerEventHandler extends $GuiEventListener {
         children(): $List<$GuiEventListener>;
         nextFocusPath(arg0: $FocusNavigationEvent_): $ComponentPath;
+        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
+        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         getCurrentFocusPath(): $ComponentPath;
         mouseMoved(arg0: number, arg1: number): void;
         mouseReleased(arg0: number, arg1: number, arg2: number): boolean;
@@ -23,18 +25,18 @@ declare module "@package/net/minecraft/client/gui/components/events" {
         setDragging(arg0: boolean): void;
         isDragging(): boolean;
         getFocused(): $GuiEventListener;
-        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
-        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         get currentFocusPath(): $ComponentPath;
     }
     export class $GuiEventListener {
         static DOUBLE_CLICK_THRESHOLD_MS: number;
     }
     export interface $GuiEventListener extends $TabOrderedElement {
+        isMouseOver(arg0: number, arg1: number): boolean;
         getRectangle(): $ScreenRectangle;
         nextFocusPath(arg0: $FocusNavigationEvent_): $ComponentPath;
+        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
+        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         getCurrentFocusPath(): $ComponentPath;
-        isMouseOver(arg0: number, arg1: number): boolean;
         mouseMoved(arg0: number, arg1: number): void;
         mouseReleased(arg0: number, arg1: number, arg2: number): boolean;
         mouseDragged(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
@@ -43,8 +45,6 @@ declare module "@package/net/minecraft/client/gui/components/events" {
         charTyped(arg0: string, arg1: number): boolean;
         setFocused(arg0: boolean): void;
         isFocused(): boolean;
-        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
-        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         get rectangle(): $ScreenRectangle;
         get currentFocusPath(): $ComponentPath;
     }
@@ -54,6 +54,8 @@ declare module "@package/net/minecraft/client/gui/components/events" {
         isDragging(): boolean;
         getFocused(): $GuiEventListener;
         nextFocusPath(arg0: $FocusNavigationEvent_): $ComponentPath;
+        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
+        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         getCurrentFocusPath(): $ComponentPath;
         mouseMoved(arg0: number, arg1: number): void;
         mouseReleased(arg0: number, arg1: number, arg2: number): boolean;
@@ -64,10 +66,8 @@ declare module "@package/net/minecraft/client/gui/components/events" {
         setFocused(arg0: boolean): void;
         isFocused(): boolean;
         getChildAt(arg0: number, arg1: number): ($GuiEventListener) | undefined;
-        keyPressed(arg0: number, arg1: number, arg2: number): boolean;
-        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
-        getRectangle(): $ScreenRectangle;
         isMouseOver(arg0: number, arg1: number): boolean;
+        getRectangle(): $ScreenRectangle;
         getTabOrderGroup(): number;
         constructor();
         get currentFocusPath(): $ComponentPath;

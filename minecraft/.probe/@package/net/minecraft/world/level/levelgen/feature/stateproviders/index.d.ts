@@ -112,7 +112,7 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/stateprovide
     /**
      * Values that may be interpreted as {@link $RuleBasedBlockStateProvider}.
      */
-    export type $RuleBasedBlockStateProvider_ = { rules?: $List_<$RuleBasedBlockStateProvider$Rule_>, fallback?: $BlockStateProvider,  } | [rules?: $List_<$RuleBasedBlockStateProvider$Rule_>, fallback?: $BlockStateProvider, ];
+    export type $RuleBasedBlockStateProvider_ = { fallback?: $BlockStateProvider, rules?: $List_<$RuleBasedBlockStateProvider$Rule_>,  } | [fallback?: $BlockStateProvider, rules?: $List_<$RuleBasedBlockStateProvider$Rule_>, ];
     export class $NoiseThresholdProvider extends $NoiseBasedStateProvider {
         static CODEC: $MapCodec<$NoiseThresholdProvider>;
         seed: number;

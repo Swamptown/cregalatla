@@ -206,8 +206,8 @@ declare module "@package/io/github/ocelot/glslprocessor/api/grammar" {
     }
     export class $GlslTypeQualifier$LayoutId extends $Record {
         shared(): boolean;
-        identifier(): string;
         expression(): $GlslNode;
+        identifier(): string;
         static SHARED: $GlslTypeQualifier$LayoutId;
         constructor(identifier: string, expression: $GlslNode);
     }

@@ -35,5 +35,5 @@ declare module "@package/net/minecraft/commands/arguments/selector/options" {
     /**
      * Values that may be interpreted as {@link $EntitySelectorOptions$Option}.
      */
-    export type $EntitySelectorOptions$Option_ = { description?: $Component_, modifier?: $EntitySelectorOptions$Modifier_, canUse?: $Predicate_<$EntitySelectorParser>,  } | [description?: $Component_, modifier?: $EntitySelectorOptions$Modifier_, canUse?: $Predicate_<$EntitySelectorParser>, ];
+    export type $EntitySelectorOptions$Option_ = { canUse?: $Predicate_<$EntitySelectorParser>, modifier?: $EntitySelectorOptions$Modifier_, description?: $Component_,  } | [canUse?: $Predicate_<$EntitySelectorParser>, modifier?: $EntitySelectorOptions$Modifier_, description?: $Component_, ];
 }

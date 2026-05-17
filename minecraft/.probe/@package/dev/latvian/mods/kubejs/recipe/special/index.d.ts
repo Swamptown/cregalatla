@@ -25,11 +25,11 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/special" {
     }
     export class $SpecialRecipeSerializerManager implements $KubeEvent {
         reset(): void;
-        addSpecialFlag(id: $ResourceLocation_): void;
-        ignoreSpecialMod(modid: string): void;
         addSpecialMod(modid: string): void;
-        isSpecial(recipe: $Recipe<never>): boolean;
         ignoreSpecialFlag(id: $ResourceLocation_): void;
+        ignoreSpecialMod(modid: string): void;
+        addSpecialFlag(id: $ResourceLocation_): void;
+        isSpecial(recipe: $Recipe<never>): boolean;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 

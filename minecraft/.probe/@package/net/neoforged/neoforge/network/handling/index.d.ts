@@ -69,7 +69,7 @@ declare module "@package/net/neoforged/neoforge/network/handling" {
     /**
      * Values that may be interpreted as {@link $DirectionalPayloadHandler}.
      */
-    export type $DirectionalPayloadHandler_<T> = { clientSide?: $IPayloadHandler_<$CustomPacketPayload>, serverSide?: $IPayloadHandler_<$CustomPacketPayload>,  } | [clientSide?: $IPayloadHandler_<$CustomPacketPayload>, serverSide?: $IPayloadHandler_<$CustomPacketPayload>, ];
+    export type $DirectionalPayloadHandler_<T> = { serverSide?: $IPayloadHandler_<$CustomPacketPayload>, clientSide?: $IPayloadHandler_<$CustomPacketPayload>,  } | [serverSide?: $IPayloadHandler_<$CustomPacketPayload>, clientSide?: $IPayloadHandler_<$CustomPacketPayload>, ];
     export class $ClientPayloadContext extends $Record implements $IPayloadContext {
         handle(arg0: $CustomPacketPayload_): void;
         finishCurrentTask(arg0: $ConfigurationTask$Type_): void;

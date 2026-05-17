@@ -79,9 +79,9 @@ declare module "@package/com/faboslav/structurify/common/config/data/structure" 
         isOverridingGlobalBiomeCheck(): boolean;
         setBlacklistedBiomes(arg0: $List_<string>): void;
         isUsingDefaultValues(): boolean;
+        getBlacklistedBiomes(): $List<string>;
         setMode(arg0: $BiomeCheckData$BiomeCheckMode_): void;
         getMode(): $BiomeCheckData$BiomeCheckMode;
-        getBlacklistedBiomes(): $List<string>;
         static IS_ENABLED_DEFAULT_VALUE: boolean;
         static MODE_DEFAULT_VALUE: $BiomeCheckData$BiomeCheckMode;
         static BLACKLISTED_BIOMES_DEFAULT_VALUE: $List<string>;

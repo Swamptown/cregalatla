@@ -45,8 +45,8 @@ declare module "@package/org/jline/utils" {
         inverse(): $AttributedStyle;
         hidden(): $AttributedStyle;
         getStyle(): number;
-        bold(): $AttributedStyle;
         italic(): $AttributedStyle;
+        bold(): $AttributedStyle;
         underline(): $AttributedStyle;
         static BOLD_OFF: $AttributedStyle;
         static WHITE: number;
@@ -584,7 +584,6 @@ declare module "@package/org/jline/utils" {
         static fromAnsi(arg0: string, arg1: $List_<number>): $AttributedString;
         static stripAnsi(arg0: string): string;
         styleMatches(arg0: $Pattern, arg1: $AttributedStyle): $AttributedString;
-        subSequence(arg0: number, arg1: number): $AttributedString;
         static NEWLINE: $AttributedString;
         static EMPTY: $AttributedString;
         static TRUE_COLORS: number;
@@ -618,17 +617,17 @@ declare module "@package/org/jline/utils" {
         runStart(arg0: number): number;
         styleAt(arg0: number): $AttributedStyle;
         toAttributedString(): $AttributedString;
+        toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_): string;
         /**
          * @deprecated
          */
         toAnsi(arg0: number, arg1: boolean, arg2: string, arg3: string): string;
-        toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_): string;
-        toAnsi(): string;
-        toAnsi(arg0: $Terminal): string;
         /**
          * @deprecated
          */
         toAnsi(arg0: number, arg1: boolean): string;
+        toAnsi(): string;
+        toAnsi(arg0: $Terminal): string;
         toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_, arg2: $ColorPalette, arg3: string, arg4: string): string;
         toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_, arg2: $ColorPalette): string;
         /**
@@ -646,8 +645,8 @@ declare module "@package/org/jline/utils" {
         runLimit(arg0: number): number;
         columnLength(): number;
         columnSubSequence(arg0: number, arg1: number): $AttributedString;
-        columnSplitLength(arg0: number, arg1: boolean, arg2: boolean): $List<$AttributedString>;
         columnSplitLength(arg0: number): $List<$AttributedString>;
+        columnSplitLength(arg0: number, arg1: boolean, arg2: boolean): $List<$AttributedString>;
         getChars(arg0: number, arg1: number, arg2: string[], arg3: number): void;
         isEmpty(): boolean;
         codePoints(): $IntStream;
