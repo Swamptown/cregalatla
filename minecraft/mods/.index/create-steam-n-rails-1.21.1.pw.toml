@@ -1,17 +1,21 @@
-filename = 'railways-0.2.0-beta.2+neoforge-mc1.21.1.jar'
-name = "Steam 'n' Rails Neoforge"
+filename = 'railways-0.2.0+neoforge-mc1.21.1.jar'
+name = "Create: Steam 'n' Rails 1.21.1"
 side = ''
 x-prismlauncher-loaders = [ 'neoforge' ]
-x-prismlauncher-mc-versions = [ '1.21.1', '1.21.1' ]
-x-prismlauncher-release-type = 'beta'
-x-prismlauncher-version-number = '0.2.0-beta.2+neoforge-mc1.21.1'
+x-prismlauncher-mc-versions = [ '1.21.1' ]
+x-prismlauncher-release-type = 'release'
+x-prismlauncher-version-number = '0.2.0+neoforge-mc1.21.1'
 
 [download]
-hash = 'e5ee20903fed9894a5d7d197fd0c1c8aabc3ff024f13e24a71777257ec20b2703ee2a7c1e091bd88f0878f3821afb6e08e0094d74208e3bd74d244d0401e4095'
+hash = 'e91c7db3fabf9d891981e9af545b39acd74eb8c824338bd58bb677cfbf7fa296a1d5ba5275b84cb025512eaf46e4c85b6fc3f46772c3bbbf4793989c1f4fafd8'
 hash-format = 'sha512'
 mode = 'url'
-url = 'https://cdn.modrinth.com/data/L3Jv0QZI/versions/dZa50kut/railways-0.2.0-beta.2%2Bneoforge-mc1.21.1.jar'
+url = 'https://cdn.modrinth.com/data/L3Jv0QZI/versions/oQKsMKfj/railways-0.2.0%2Bneoforge-mc1.21.1.jar'
 
 [update.modrinth]
 mod-id = 'L3Jv0QZI'
-version = 'dZa50kut'
+version = 'oQKsMKfj'
+
+[[x-prismlauncher-dependencies]]
+addonId = 'LNytGWDc'
+type = 'REQUIRED'

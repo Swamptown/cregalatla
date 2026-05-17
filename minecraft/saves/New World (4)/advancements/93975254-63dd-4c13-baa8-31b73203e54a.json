@@ -5,30 +5,6 @@
     },
     "done": true
   },
-  "minecraft:recipes/decorations/crafting_table": {
-    "criteria": {
-      "unlock_right_away": "2026-05-16 21:38:18 -0400"
-    },
-    "done": true
-  },
-  "mymod:fire": {
-    "criteria": {
-      "fire_0": "2026-05-16 21:38:32 -0400"
-    },
-    "done": true
-  },
-  "global:2mal3": {
-    "criteria": {
-      "trigger": "2026-05-16 21:38:18 -0400"
-    },
-    "done": true
-  },
-  "2mal3:adco/installed": {
-    "criteria": {
-      "trigger": "2026-05-16 21:38:18 -0400"
-    },
-    "done": true
-  },
   "simulated:root": {
     "criteria": {
       "0": "2026-05-16 21:38:17 -0400"
@@ -38,12 +14,6 @@
   "aeronautics:root": {
     "criteria": {
       "0": "2026-05-16 21:38:17 -0400"
-    },
-    "done": true
-  },
-  "mymod:bend": {
-    "criteria": {
-      "bend_0": "2026-05-16 21:38:27 -0400"
     },
     "done": true
   },
@@ -65,9 +35,27 @@
     },
     "done": true
   },
-  "minecraft:adventure/trade": {
+  "minecraft:adventure/adventuring_time": {
     "criteria": {
-      "traded": "2026-05-16 21:38:30 -0400"
+      "minecraft:swamp": "2026-05-16 21:38:17 -0400"
+    },
+    "done": false
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2026-05-16 21:38:18 -0400"
+    },
+    "done": true
+  },
+  "global:2mal3": {
+    "criteria": {
+      "trigger": "2026-05-16 21:38:18 -0400"
+    },
+    "done": true
+  },
+  "2mal3:adco/installed": {
+    "criteria": {
+      "trigger": "2026-05-16 21:38:18 -0400"
     },
     "done": true
   },
@@ -77,11 +65,23 @@
     },
     "done": true
   },
-  "minecraft:adventure/adventuring_time": {
+  "mymod:bend": {
     "criteria": {
-      "minecraft:swamp": "2026-05-16 21:38:17 -0400"
+      "bend_0": "2026-05-16 21:38:27 -0400"
     },
-    "done": false
+    "done": true
+  },
+  "minecraft:adventure/trade": {
+    "criteria": {
+      "traded": "2026-05-16 21:38:30 -0400"
+    },
+    "done": true
+  },
+  "mymod:fire": {
+    "criteria": {
+      "fire_0": "2026-05-16 21:38:32 -0400"
+    },
+    "done": true
   },
   "DataVersion": 3955
 }
