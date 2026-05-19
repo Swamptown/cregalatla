@@ -193,6 +193,7 @@ key_gui.xaero_toggle_tracked_players_on_map:key.keyboard.unknown
 key_gui.xaero_toggle_tracked_players_in_world:key.keyboard.unknown
 key_gui.xaero_toggle_pac_chunk_claims:key.keyboard.unknown
 key_key.cregalatla.air_dash:key.mouse.4
+key_key.cregalatla.hover:key.keyboard.unknown
 key_key.craftingtweaks.rotate:key.keyboard.unknown
 key_key.craftingtweaks.rotate_counter_clockwise:key.keyboard.unknown
 key_key.craftingtweaks.balance:key.keyboard.unknown
@@ -220,6 +221,10 @@ key_simulated.keyinfo.scroll_up:key.keyboard.unknown
 key_simulated.keyinfo.scroll_down:key.keyboard.unknown
 key_railways.keyinfo.bogey_menu:key.keyboard.left.alt
 key_railways.keyinfo.cycle_menu:key.keyboard.left.alt
+key_key.beansbackpacks.action:key.keyboard.unknown
+key_key.beansbackpacks.inventory:key.keyboard.unknown
+key_key.beansbackpacks.instant:key.keyboard.unknown
+key_key.beansbackpacks.spyglass:key.keyboard.b
 key_key.ok_zoomer.zoom:key.keyboard.unknown
 key_key.ok_zoomer.decrease_zoom:key.keyboard.unknown
 key_key.ok_zoomer.increase_zoom:key.keyboard.unknown
