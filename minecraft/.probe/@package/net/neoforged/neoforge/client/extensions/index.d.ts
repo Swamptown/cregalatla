@@ -73,22 +73,22 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
     }
     export interface $IBakedModelExtension {
         getQuads(arg0: $BlockState_, arg1: $Direction_, arg2: $RandomSource, arg3: $ModelData, arg4: $RenderType): $List<$BakedQuad>;
-        getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
+        getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getRenderPasses(arg0: $ItemStack_, arg1: boolean): $List<$BakedModel>;
+        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
-        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
     }
     export class $IDimensionSpecialEffectsExtension {
     }
     export interface $IDimensionSpecialEffectsExtension {
         adjustLightmapColors(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $Vector3f): void;
-        renderSnowAndRain(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $LightTexture, arg4: number, arg5: number, arg6: number): boolean;
         tickRain(arg0: $ClientLevel, arg1: number, arg2: $Camera): boolean;
-        renderSky(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $Camera, arg5: $Matrix4f, arg6: boolean, arg7: $Runnable_): boolean;
         renderClouds(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $PoseStack, arg4: number, arg5: number, arg6: number, arg7: $Matrix4f, arg8: $Matrix4f): boolean;
+        renderSnowAndRain(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $LightTexture, arg4: number, arg5: number, arg6: number): boolean;
+        renderSky(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $Camera, arg5: $Matrix4f, arg6: boolean, arg7: $Runnable_): boolean;
     }
     export class $IAbstractWidgetExtension {
     }
@@ -98,8 +98,8 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
     export class $IKeyMappingExtension {
     }
     export interface $IKeyMappingExtension {
-        getKey(): $InputConstants$Key;
         getDisplayName(): $Component;
+        getKey(): $InputConstants$Key;
         setToDefault(): void;
         isConflictContextAndModifierActive(): boolean;
         isActiveAndMatches(arg0: $InputConstants$Key): boolean;
@@ -109,8 +109,8 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
         setKeyConflictContext(arg0: $IKeyConflictContext): void;
         setKeyModifierAndCode(arg0: $KeyModifier_, arg1: $InputConstants$Key): void;
         hasKeyModifierConflict(arg0: $KeyMapping): boolean;
-        get key(): $InputConstants$Key;
         get displayName(): $Component;
+        get key(): $InputConstants$Key;
         get conflictContextAndModifierActive(): boolean;
         get keyModifier(): $KeyModifier;
         get defaultKeyModifier(): $KeyModifier;
@@ -137,8 +137,8 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
         static ELLIPSIS: $FormattedText;
     }
     export interface $IFontExtension {
-        self(): $Font;
         ellipsize(arg0: $FormattedText, arg1: number): $FormattedText;
+        self(): $Font;
     }
     /**
      * Values that may be interpreted as {@link $IFontExtension}.
@@ -147,10 +147,10 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
     export class $IModelBakerExtension {
     }
     export interface $IModelBakerExtension {
+        getTopLevelModel(arg0: $ModelResourceLocation_): $UnbakedModel;
+        bakeUncached(arg0: $UnbakedModel, arg1: $ModelState, arg2: $Function_<$Material, $TextureAtlasSprite>): $BakedModel;
         getModelTextureGetter(): $Function<$Material, $TextureAtlasSprite>;
         bake(arg0: $ResourceLocation_, arg1: $ModelState, arg2: $Function_<$Material, $TextureAtlasSprite>): $BakedModel;
-        bakeUncached(arg0: $UnbakedModel, arg1: $ModelState, arg2: $Function_<$Material, $TextureAtlasSprite>): $BakedModel;
-        getTopLevelModel(arg0: $ModelResourceLocation_): $UnbakedModel;
         get modelTextureGetter(): $Function<$Material, $TextureAtlasSprite>;
     }
 }

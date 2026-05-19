@@ -28,9 +28,9 @@ declare module "@package/terrablender/api" {
      */
     export type $RegionType_ = "overworld" | "nether";
     export class $Region {
+        addBiomes(arg0: $Registry<$Biome_>, arg1: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>): void;
         getName(): $ResourceLocation;
         getType(): $RegionType;
-        addBiomes(arg0: $Registry<$Biome_>, arg1: $Consumer_<$Pair<$Climate$ParameterPoint, $ResourceKey<$Biome>>>): void;
         getWeight(): number;
         static DEFERRED_PLACEHOLDER: $ResourceKey<$Biome>;
         constructor(arg0: $ResourceLocation_, arg1: $RegionType_, arg2: number);

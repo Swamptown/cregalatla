@@ -48,7 +48,7 @@ declare module "@package/net/minecraft/client/player" {
     export class $LocalPlayer extends $AbstractClientPlayer implements $AccessorLocalPlayer, $IMixinLocalPlayer, $LocalClientPlayerKJS, $PlayerFreezeExtension {
         getRecipeBook(): $ClientRecipeBook;
         getCurrentMood(): number;
-        handler$coj000$xaerominimap$onTickStart(arg0: $CallbackInfo): void;
+        handler$cpa000$xaerominimap$onTickStart(arg0: $CallbackInfo): void;
         clientSideCloseContainer(): void;
         hurtTo(arg0: number): void;
         sendRidingJump(): void;
@@ -69,11 +69,11 @@ declare module "@package/net/minecraft/client/player" {
         getWaterVision(): number;
         onGameModeChanged(arg0: $GameType_): void;
         sable$calculateViewVector2(arg0: number, arg1: number): $Vec3;
+        drop(arg0: boolean): boolean;
         getStatsCounter(): $StatsCounter;
         shouldShowDeathScreen(): boolean;
         isHandsBusy(): boolean;
         sendOpenInventory(): void;
-        drop(arg0: boolean): boolean;
         railways$getXRotLast(): number;
         railways$getYRotLast(): number;
         getPermissionLevelKonkrete(): number;
@@ -313,15 +313,15 @@ declare module "@package/net/minecraft/client/player" {
         constructor(arg0: $Options);
     }
     export class $AbstractClientPlayer extends $Player implements $AbstractClientPlayerAccessor, $ClientPlayerKJS, $IAnimatedPlayer {
-        handler$glb000$platform$updateFov(cir: $CallbackInfoReturnable<any>, currentFov: number): void;
-        playerAnimLib$getAnimManager(): $PlayerAnimManager;
-        playerAnimLib$getAnimation(id: $ResourceLocation_): $IAnimation;
-        playerAnimLib$getAnimProcessor(): $AnimationProcessor;
         getPlayerInfo(): $PlayerInfo;
         getDeltaMovementLerped(arg0: number): $Vec3;
         getSkin(): $PlayerSkin;
-        handler$glo000$create_sa$getSkinMixin(arg0: $CallbackInfoReturnable<any>): void;
+        handler$gmk000$create_sa$getSkinMixin(arg0: $CallbackInfoReturnable<any>): void;
         getFieldOfViewModifier(): number;
+        handler$gln000$platform$updateFov(cir: $CallbackInfoReturnable<any>, currentFov: number): void;
+        playerAnimLib$getAnimManager(): $PlayerAnimManager;
+        playerAnimLib$getAnimation(id: $ResourceLocation_): $IAnimation;
+        playerAnimLib$getAnimProcessor(): $AnimationProcessor;
         flywheel$getPlayerInfo(): $PlayerInfo;
         serializeNBT(arg0: $HolderLookup$Provider): $Player;
         lerpYRot: number;
@@ -526,9 +526,9 @@ declare module "@package/net/minecraft/client/player" {
         get fieldOfViewModifier(): number;
     }
     export class $Input {
-        tick(arg0: boolean, arg1: number): void;
         hasForwardImpulse(): boolean;
         getMoveVector(): $Vec2;
+        tick(arg0: boolean, arg1: number): void;
         forwardImpulse: number;
         jumping: boolean;
         left: boolean;

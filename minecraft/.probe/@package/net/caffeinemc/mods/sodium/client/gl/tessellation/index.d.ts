@@ -5,22 +5,22 @@ import { $Enum, $Record } from "@package/java/lang";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/gl/tessellation" {
     export class $TessellationBinding extends $Record {
-        target(): $GlBufferTarget;
-        buffer(): $GlBuffer;
         static forVertexBuffer(arg0: $GlBuffer, arg1: $GlVertexAttributeBinding[]): $TessellationBinding;
         static forElementBuffer(arg0: $GlBuffer): $TessellationBinding;
         attributeBindings(): $GlVertexAttributeBinding[];
+        target(): $GlBufferTarget;
+        buffer(): $GlBuffer;
         constructor(target: $GlBufferTarget_, buffer: $GlBuffer, attributeBindings: $GlVertexAttributeBinding[]);
     }
     /**
      * Values that may be interpreted as {@link $TessellationBinding}.
      */
-    export type $TessellationBinding_ = { attributeBindings?: $GlVertexAttributeBinding[], buffer?: $GlBuffer, target?: $GlBufferTarget_,  } | [attributeBindings?: $GlVertexAttributeBinding[], buffer?: $GlBuffer, target?: $GlBufferTarget_, ];
+    export type $TessellationBinding_ = { target?: $GlBufferTarget_, buffer?: $GlBuffer, attributeBindings?: $GlVertexAttributeBinding[],  } | [target?: $GlBufferTarget_, buffer?: $GlBuffer, attributeBindings?: $GlVertexAttributeBinding[], ];
     export class $GlIndexType extends $Enum<$GlIndexType> {
-        static values(): $GlIndexType[];
-        static valueOf(arg0: string): $GlIndexType;
         getFormatId(): number;
         getStride(): number;
+        static values(): $GlIndexType[];
+        static valueOf(arg0: string): $GlIndexType;
         static UNSIGNED_BYTE: $GlIndexType;
         static UNSIGNED_SHORT: $GlIndexType;
         static UNSIGNED_INT: $GlIndexType;
@@ -34,10 +34,10 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/tessellation" {
     export class $GlTessellation {
     }
     export interface $GlTessellation {
-        delete(arg0: $CommandList): void;
-        bind(arg0: $CommandList): void;
-        getPrimitiveType(): $GlPrimitiveType;
         unbind(arg0: $CommandList): void;
+        bind(arg0: $CommandList): void;
+        delete(arg0: $CommandList): void;
+        getPrimitiveType(): $GlPrimitiveType;
         get primitiveType(): $GlPrimitiveType;
     }
     export class $GlPrimitiveType extends $Enum<$GlPrimitiveType> {

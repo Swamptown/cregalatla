@@ -10,10 +10,10 @@ declare module "@package/net/minecraft/client/gui/spectator" {
     export class $SpectatorMenuItem {
     }
     export interface $SpectatorMenuItem {
+        selectItem(arg0: $SpectatorMenu): void;
+        renderIcon(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         getName(): $Component;
         isEnabled(): boolean;
-        renderIcon(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        selectItem(arg0: $SpectatorMenu): void;
         get name(): $Component;
         get enabled(): boolean;
     }
@@ -29,11 +29,11 @@ declare module "@package/net/minecraft/client/gui/spectator" {
      */
     export type $SpectatorMenuListener_ = ((arg0: $SpectatorMenu) => void);
     export class $SpectatorMenu {
-        exit(): void;
+        selectCategory(arg0: $SpectatorMenuCategory): void;
         getItems(): $List<$SpectatorMenuItem>;
         getSelectedItem(): $SpectatorMenuItem;
-        selectCategory(arg0: $SpectatorMenuCategory): void;
         getItem(arg0: number): $SpectatorMenuItem;
+        exit(): void;
         selectSlot(arg0: number): void;
         getCurrentPage(): $SpectatorPage;
         getSelectedSlot(): number;
@@ -64,10 +64,10 @@ declare module "@package/net/minecraft/client/gui/spectator" {
         get prompt(): $Component;
     }
     export class $PlayerMenuItem implements $SpectatorMenuItem {
+        selectItem(arg0: $SpectatorMenu): void;
+        renderIcon(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         getName(): $Component;
         isEnabled(): boolean;
-        renderIcon(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        selectItem(arg0: $SpectatorMenu): void;
         constructor(arg0: $GameProfile);
         get name(): $Component;
         get enabled(): boolean;

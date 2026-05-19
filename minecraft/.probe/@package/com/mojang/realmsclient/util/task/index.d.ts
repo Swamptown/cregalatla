@@ -43,12 +43,12 @@ declare module "@package/com/mojang/realmsclient/util/task" {
         constructor(arg0: $Screen, arg1: $RealmsServer, arg2: $RealmsServerAddress);
     }
     export class $LongRunningTask implements $Runnable {
-        init(): void;
-        tick(): void;
-        getTitle(): $Component;
-        static setScreen(arg0: $Screen): void;
         abortTask(): void;
         aborted(): boolean;
+        tick(): void;
+        init(): void;
+        getTitle(): $Component;
+        static setScreen(arg0: $Screen): void;
         constructor();
         get title(): $Component;
         static set screen(value: $Screen);

@@ -1,7 +1,6 @@
 import { $Codec } from "@package/com/mojang/serialization";
 import { $SpawnPrioritySelectors_, $PriorityProvider, $SpawnCondition, $SpawnContext, $SpawnPrioritySelectors, $PriorityProvider$Selector } from "@package/com/blackgear/vanillabackport/common/api/variant/spawn";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
-import { RegistryMarked, RegistryTypes } from "@special/types";
 import { $List } from "@package/java/util";
 import { $Enum, $Record } from "@package/java/lang";
 import { $StreamCodec } from "@package/net/minecraft/network/codec";
@@ -19,44 +18,40 @@ declare module "@package/com/blackgear/vanillabackport/common/level/entities/ani
     /**
      * Values that may be interpreted as {@link $WolfDataVariant$AssetInfo}.
      */
-    export type $WolfDataVariant$AssetInfo_ = { tame?: $ClientAsset_, angry?: $ClientAsset_, wild?: $ClientAsset_,  } | [tame?: $ClientAsset_, angry?: $ClientAsset_, wild?: $ClientAsset_, ];
-    export interface $CowVariant extends RegistryMarked<RegistryTypes.CowVariantTag, RegistryTypes.CowVariant> {}
+    export type $WolfDataVariant$AssetInfo_ = { wild?: $ClientAsset_, angry?: $ClientAsset_, tame?: $ClientAsset_,  } | [wild?: $ClientAsset_, angry?: $ClientAsset_, tame?: $ClientAsset_, ];
     export class $CatDataVariant extends $Record implements $PriorityProvider<$SpawnContext, $SpawnCondition> {
+        assetInfo(): $ClientAsset;
         spawnConditions(): $SpawnPrioritySelectors;
         selectors(): $List<$PriorityProvider$Selector<$SpawnContext, $SpawnCondition>>;
-        assetInfo(): $ClientAsset;
         static CODEC: $Codec<$CatDataVariant>;
         constructor(assetInfo: $ClientAsset_, spawnConditions: $SpawnPrioritySelectors_);
     }
     /**
      * Values that may be interpreted as {@link $CatDataVariant}.
      */
-    export type $CatDataVariant_ = RegistryTypes.VanillabackportCatVariant | { assetInfo?: $ClientAsset_, spawnConditions?: $SpawnPrioritySelectors_,  } | [assetInfo?: $ClientAsset_, spawnConditions?: $SpawnPrioritySelectors_, ];
-    export interface $PigVariant extends RegistryMarked<RegistryTypes.PigVariantTag, RegistryTypes.PigVariant> {}
+    export type $CatDataVariant_ = { spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $ClientAsset_,  } | [spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $ClientAsset_, ];
     export class $WolfDataVariant extends $Record implements $PriorityProvider<$SpawnContext, $SpawnCondition> {
+        assetInfo(): $WolfDataVariant$AssetInfo;
         spawnConditions(): $SpawnPrioritySelectors;
         selectors(): $List<$PriorityProvider$Selector<$SpawnContext, $SpawnCondition>>;
-        assetInfo(): $WolfDataVariant$AssetInfo;
         static CODEC: $Codec<$WolfDataVariant>;
         constructor(assetInfo: $WolfDataVariant$AssetInfo_, spawnConditions: $SpawnPrioritySelectors_);
     }
     /**
      * Values that may be interpreted as {@link $WolfDataVariant}.
      */
-    export type $WolfDataVariant_ = RegistryTypes.VanillabackportWolfVariant | { assetInfo?: $WolfDataVariant$AssetInfo_, spawnConditions?: $SpawnPrioritySelectors_,  } | [assetInfo?: $WolfDataVariant$AssetInfo_, spawnConditions?: $SpawnPrioritySelectors_, ];
-    export interface $WolfDataVariant extends RegistryMarked<RegistryTypes.VanillabackportWolfVariantTag, RegistryTypes.VanillabackportWolfVariant> {}
+    export type $WolfDataVariant_ = { spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $WolfDataVariant$AssetInfo_,  } | [spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $WolfDataVariant$AssetInfo_, ];
     export class $FrogDataVariant extends $Record implements $PriorityProvider<$SpawnContext, $SpawnCondition> {
+        assetInfo(): $ClientAsset;
         spawnConditions(): $SpawnPrioritySelectors;
         selectors(): $List<$PriorityProvider$Selector<$SpawnContext, $SpawnCondition>>;
-        assetInfo(): $ClientAsset;
         static CODEC: $Codec<$FrogDataVariant>;
         constructor(assetInfo: $ClientAsset_, spawnConditions: $SpawnPrioritySelectors_);
     }
     /**
      * Values that may be interpreted as {@link $FrogDataVariant}.
      */
-    export type $FrogDataVariant_ = RegistryTypes.VanillabackportFrogVariant | { assetInfo?: $ClientAsset_, spawnConditions?: $SpawnPrioritySelectors_,  } | [assetInfo?: $ClientAsset_, spawnConditions?: $SpawnPrioritySelectors_, ];
-    export interface $CatDataVariant extends RegistryMarked<RegistryTypes.VanillabackportCatVariantTag, RegistryTypes.VanillabackportCatVariant> {}
+    export type $FrogDataVariant_ = { spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $ClientAsset_,  } | [spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $ClientAsset_, ];
     export class $PigVariant$ModelType extends $Enum<$PigVariant$ModelType> implements $StringRepresentable {
         static values(): $PigVariant$ModelType[];
         static valueOf(name: string): $PigVariant$ModelType;
@@ -83,8 +78,7 @@ declare module "@package/com/blackgear/vanillabackport/common/level/entities/ani
     /**
      * Values that may be interpreted as {@link $ChickenVariant}.
      */
-    export type $ChickenVariant_ = RegistryTypes.ChickenVariant | { spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$ChickenVariant$ModelType_>,  } | [spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$ChickenVariant$ModelType_>, ];
-    export interface $FrogDataVariant extends RegistryMarked<RegistryTypes.VanillabackportFrogVariantTag, RegistryTypes.VanillabackportFrogVariant> {}
+    export type $ChickenVariant_ = { spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$ChickenVariant$ModelType_>,  } | [spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$ChickenVariant$ModelType_>, ];
     export class $CowVariant extends $Record implements $PriorityProvider<$SpawnContext, $SpawnCondition> {
         modelAndTexture(): $ModelAndTexture<$CowVariant$ModelType>;
         spawnConditions(): $SpawnPrioritySelectors;
@@ -96,7 +90,7 @@ declare module "@package/com/blackgear/vanillabackport/common/level/entities/ani
     /**
      * Values that may be interpreted as {@link $CowVariant}.
      */
-    export type $CowVariant_ = RegistryTypes.CowVariant | { spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$CowVariant$ModelType_>,  } | [spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$CowVariant$ModelType_>, ];
+    export type $CowVariant_ = { spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$CowVariant$ModelType_>,  } | [spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$CowVariant$ModelType_>, ];
     export class $ChickenVariant$ModelType extends $Enum<$ChickenVariant$ModelType> implements $StringRepresentable {
         static values(): $ChickenVariant$ModelType[];
         static valueOf(name: string): $ChickenVariant$ModelType;
@@ -128,7 +122,6 @@ declare module "@package/com/blackgear/vanillabackport/common/level/entities/ani
      * Values that may be interpreted as {@link $CowVariant$ModelType}.
      */
     export type $CowVariant$ModelType_ = "normal" | "cold" | "warm";
-    export interface $ChickenVariant extends RegistryMarked<RegistryTypes.ChickenVariantTag, RegistryTypes.ChickenVariant> {}
     export class $PigVariant extends $Record implements $PriorityProvider<$SpawnContext, $SpawnCondition> {
         modelAndTexture(): $ModelAndTexture<$PigVariant$ModelType>;
         spawnConditions(): $SpawnPrioritySelectors;
@@ -140,5 +133,5 @@ declare module "@package/com/blackgear/vanillabackport/common/level/entities/ani
     /**
      * Values that may be interpreted as {@link $PigVariant}.
      */
-    export type $PigVariant_ = RegistryTypes.PigVariant | { spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$PigVariant$ModelType_>,  } | [spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$PigVariant$ModelType_>, ];
+    export type $PigVariant_ = { spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$PigVariant$ModelType_>,  } | [spawnConditions?: $SpawnPrioritySelectors_, modelAndTexture?: $ModelAndTexture_<$PigVariant$ModelType_>, ];
 }

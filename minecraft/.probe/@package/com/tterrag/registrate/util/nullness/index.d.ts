@@ -11,13 +11,13 @@ declare module "@package/com/tterrag/registrate/util/nullness" {
      */
     export type $NonNullBiFunction_<T, U, R> = ((arg0: T, arg1: U) => R);
     export class $NonNullSupplier<T> {
+        static lazy<T>(arg0: $Supplier_<T>): $NonNullSupplier<T>;
         static of<T>(arg0: $Supplier_<T>, arg1: $NonNullSupplier_<string>): $NonNullSupplier<T>;
         static of<T>(arg0: $Supplier_<T>): $NonNullSupplier<T>;
-        static lazy<T>(arg0: $Supplier_<T>): $NonNullSupplier<T>;
     }
     export interface $NonNullSupplier<T> extends $Supplier<T> {
-        get(): T;
         lazy(): $NonNullSupplier<T>;
+        get(): T;
     }
     /**
      * Values that may be interpreted as {@link $NonNullSupplier}.

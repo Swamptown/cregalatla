@@ -29,14 +29,14 @@ declare module "@package/org/jline/reader" {
         expandVar(arg0: string): string;
     }
     export class $Candidate implements $Comparable<$Candidate> {
+        displ(): string;
+        descr(): string;
+        complete(): boolean;
         group(): string;
         value(): string;
         compareTo(arg0: $Candidate): number;
         suffix(): string;
         key(): string;
-        complete(): boolean;
-        displ(): string;
-        descr(): string;
         constructor(arg0: string);
         constructor(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string, arg6: boolean);
     }
@@ -266,22 +266,23 @@ declare module "@package/org/jline/reader" {
         static VI_SWAP_CASE: string;
     }
     export interface $LineReader {
+        getBuffer(): $Buffer;
+        variable(arg0: string, arg1: $Object): $LineReader;
+        getKeys(): $KeyMap<$Binding>;
+        isSet(arg0: $LineReader$Option_): boolean;
+        readLine(arg0: string, arg1: string, arg2: $MaskingCallback, arg3: string): string;
+        readLine(): string;
+        readLine(arg0: string, arg1: string, arg2: string, arg3: string): string;
+        readLine(arg0: string): string;
         readLine(arg0: string): string;
         readLine(arg0: string, arg1: string): string;
-        readLine(arg0: string, arg1: string, arg2: string, arg3: string): string;
-        readLine(arg0: string, arg1: string, arg2: $MaskingCallback, arg3: string): string;
         readLine(arg0: string, arg1: string, arg2: string): string;
-        readLine(): string;
-        readLine(arg0: string): string;
         option(arg0: $LineReader$Option_, arg1: boolean): $LineReader;
-        isSet(arg0: $LineReader$Option_): boolean;
-        getKeys(): $KeyMap<$Binding>;
-        getBuffer(): $Buffer;
         getTerminal(): $Terminal;
-        printAbove(arg0: $AttributedString): void;
         printAbove(arg0: string): void;
-        getWidgets(): $Map<string, $Widget>;
+        printAbove(arg0: $AttributedString): void;
         getParser(): $Parser;
+        getWidgets(): $Map<string, $Widget>;
         readMouseEvent(): $MouseEvent;
         defaultKeyMaps(): $Map<string, $KeyMap<$Binding>>;
         isReading(): boolean;
@@ -311,12 +312,11 @@ declare module "@package/org/jline/reader" {
         setTailTip(arg0: string): void;
         setAutosuggestion(arg0: $LineReader$SuggestionType_): void;
         getAutosuggestion(): $LineReader$SuggestionType;
-        variable(arg0: string, arg1: $Object): $LineReader;
-        get keys(): $KeyMap<$Binding>;
         get buffer(): $Buffer;
+        get keys(): $KeyMap<$Binding>;
         get terminal(): $Terminal;
-        get widgets(): $Map<string, $Widget>;
         get parser(): $Parser;
+        get widgets(): $Map<string, $Widget>;
         get reading(): boolean;
         get variables(): $Map<string, $Object>;
         set opt(value: $LineReader$Option_);
@@ -335,11 +335,11 @@ declare module "@package/org/jline/reader" {
     export class $Highlighter {
     }
     export interface $Highlighter {
-        setErrorIndex(arg0: number): void;
         setErrorPattern(arg0: $Pattern): void;
+        setErrorIndex(arg0: number): void;
         highlight(arg0: $LineReader, arg1: string): $AttributedString;
-        set errorIndex(value: number);
         set errorPattern(value: $Pattern);
+        set errorIndex(value: number);
     }
     export class $MaskingCallback {
     }
@@ -352,10 +352,10 @@ declare module "@package/org/jline/reader" {
     export interface $Binding {
     }
     export class $LineReader$Option extends $Enum<$LineReader$Option> {
+        isDef(): boolean;
         static values(): $LineReader$Option[];
         static valueOf(arg0: string): $LineReader$Option;
         isSet(arg0: $Map_<$LineReader$Option_, boolean>): boolean;
-        isDef(): boolean;
         static BRACKETED_PASTE: $LineReader$Option;
         static LIST_ROWS_FIRST: $LineReader$Option;
         static HISTORY_VERIFY: $LineReader$Option;
@@ -414,12 +414,12 @@ declare module "@package/org/jline/reader" {
     export class $ParsedLine {
     }
     export interface $ParsedLine {
-        line(): string;
+        wordCursor(): number;
         cursor(): number;
         words(): $List<string>;
         wordIndex(): number;
         word(): string;
-        wordCursor(): number;
+        line(): string;
     }
     export class $History$Entry {
     }
@@ -440,31 +440,31 @@ declare module "@package/org/jline/reader" {
     export class $Buffer {
     }
     export interface $Buffer {
-        length(): number;
-        toString(): string;
-        clear(): boolean;
-        copy(): $Buffer;
-        substring(arg0: number, arg1: number): string;
-        substring(arg0: number): string;
-        write(arg0: $CharSequence, arg1: boolean): void;
-        write(arg0: $CharSequence): void;
-        write(arg0: number, arg1: boolean): void;
-        write(arg0: number): void;
-        delete(): boolean;
-        delete(arg0: number): number;
-        nextChar(): number;
-        prevChar(): number;
-        cursor(): number;
-        cursor(arg0: number): boolean;
-        copyFrom(arg0: $Buffer): void;
-        move(arg0: number): number;
-        up(): boolean;
-        down(): boolean;
         atChar(arg0: number): number;
         moveXY(arg0: number, arg1: number): boolean;
         upToCursor(): string;
         backspace(arg0: number): number;
         backspace(): boolean;
+        prevChar(): number;
+        cursor(arg0: number): boolean;
+        cursor(): number;
+        down(): boolean;
+        up(): boolean;
+        move(arg0: number): number;
+        length(): number;
+        toString(): string;
+        clear(): boolean;
+        substring(arg0: number): string;
+        substring(arg0: number, arg1: number): string;
+        write(arg0: $CharSequence, arg1: boolean): void;
+        write(arg0: number): void;
+        write(arg0: number, arg1: boolean): void;
+        write(arg0: $CharSequence): void;
+        delete(arg0: number): number;
+        delete(): boolean;
+        copy(): $Buffer;
+        nextChar(): number;
+        copyFrom(arg0: $Buffer): void;
         currChar(): number;
         currChar(arg0: number): boolean;
     }
@@ -473,11 +473,11 @@ declare module "@package/org/jline/reader" {
         static REGEX_COMMAND: string;
     }
     export interface $Parser {
-        parse(arg0: string, arg1: number, arg2: $Parser$ParseContext_): $ParsedLine;
-        parse(arg0: string, arg1: number): $ParsedLine;
         isEscapeChar(arg0: string): boolean;
         validCommandName(arg0: string): boolean;
         getCommand(arg0: string): string;
+        parse(arg0: string, arg1: number, arg2: $Parser$ParseContext_): $ParsedLine;
+        parse(arg0: string, arg1: number): $ParsedLine;
         getVariable(arg0: string): string;
         validVariableName(arg0: string): boolean;
     }
@@ -495,9 +495,16 @@ declare module "@package/org/jline/reader" {
      */
     export type $Completer_ = ((arg0: $LineReader, arg1: $ParsedLine, arg2: $List<$Candidate>) => void);
     export class $History {
-        [Symbol.iterator](): Iterator<$History$Entry>
     }
     export interface $History extends $Iterable<$History$Entry> {
+        isPersistable(arg0: $History$Entry): boolean;
+        reverseIterator(): $Iterator<$History$Entry>;
+        reverseIterator(arg0: number): $Iterator<$History$Entry>;
+        moveToFirst(): boolean;
+        moveToLast(): boolean;
+        moveToEnd(): void;
+        resetIndex(): void;
+        purge(): void;
         index(): number;
         size(): number;
         get(arg0: number): string;
@@ -506,27 +513,18 @@ declare module "@package/org/jline/reader" {
         isEmpty(): boolean;
         add(arg0: string): void;
         add(arg0: $Instant, arg1: string): void;
+        iterator(): $ListIterator<$History$Entry>;
         iterator(arg0: number): $ListIterator<$History$Entry>;
         next(): boolean;
         last(): number;
         first(): number;
-        current(): string;
         write(arg0: $Path_, arg1: boolean): void;
-        save(): void;
         read(arg0: $Path_, arg1: boolean): void;
+        current(): string;
+        save(): void;
         previous(): boolean;
         attach(arg0: $LineReader): void;
-        purge(): void;
-        reverseIterator(arg0: number): $Iterator<$History$Entry>;
-        reverseIterator(): $Iterator<$History$Entry>;
-        moveToFirst(): boolean;
-        moveToEnd(): void;
-        resetIndex(): void;
-        isPersistable(arg0: $History$Entry): boolean;
-        moveToLast(): boolean;
         moveTo(arg0: number): boolean;
-        iterator(): $Iterator<$History$Entry>;
-        [Symbol.iterator](): Iterator<$History$Entry>
         get empty(): boolean;
     }
     export class $LineReader$RegionType extends $Enum<$LineReader$RegionType> {

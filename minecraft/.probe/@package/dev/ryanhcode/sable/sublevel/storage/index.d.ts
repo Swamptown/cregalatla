@@ -16,8 +16,8 @@ declare module "@package/dev/ryanhcode/sable/sublevel/storage" {
      */
     export type $SubLevelRemovalReason_ = "unloaded" | "removed";
     export class $HoldingSubLevel {
-        data(): $SubLevelData;
         pointer(): $GlobalSavedSubLevelPointer;
+        data(): $SubLevelData;
         setPointer(arg0: $GlobalSavedSubLevelPointer_): void;
         constructor(arg0: $SubLevelData, arg1: $GlobalSavedSubLevelPointer_);
     }

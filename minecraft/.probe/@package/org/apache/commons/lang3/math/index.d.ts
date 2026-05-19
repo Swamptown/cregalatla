@@ -2,23 +2,23 @@ import { $Number, $Comparable } from "@package/java/lang";
 
 declare module "@package/org/apache/commons/lang3/math" {
     export class $Fraction extends $Number implements $Comparable<$Fraction> {
-        abs(): $Fraction;
-        pow(arg0: number): $Fraction;
-        compareTo(arg0: $Fraction): number;
-        add(arg0: $Fraction): $Fraction;
-        reduce(): $Fraction;
-        negate(): $Fraction;
-        subtract(arg0: $Fraction): $Fraction;
+        static getFraction(arg0: string): $Fraction;
+        static getFraction(arg0: number, arg1: number): $Fraction;
+        static getFraction(arg0: number): $Fraction;
+        static getFraction(arg0: number, arg1: number, arg2: number): $Fraction;
+        multiplyBy(arg0: $Fraction): $Fraction;
         static getReducedFraction(arg0: number, arg1: number): $Fraction;
         toProperString(): string;
         getProperNumerator(): number;
         getProperWhole(): number;
         divideBy(arg0: $Fraction): $Fraction;
-        static getFraction(arg0: number, arg1: number): $Fraction;
-        static getFraction(arg0: number, arg1: number, arg2: number): $Fraction;
-        static getFraction(arg0: number): $Fraction;
-        static getFraction(arg0: string): $Fraction;
-        multiplyBy(arg0: $Fraction): $Fraction;
+        negate(): $Fraction;
+        subtract(arg0: $Fraction): $Fraction;
+        abs(): $Fraction;
+        pow(arg0: number): $Fraction;
+        compareTo(arg0: $Fraction): number;
+        add(arg0: $Fraction): $Fraction;
+        reduce(): $Fraction;
         invert(): $Fraction;
         getNumerator(): number;
         getDenominator(): number;

@@ -6,25 +6,25 @@ import { $TypeInfo } from "@package/org/w3c/dom";
 
 declare module "@package/javax/xml/validation" {
     export class $ValidatorHandler implements $ContentHandler {
-        getProperty(arg0: string): $Object;
-        setProperty(arg0: string, arg1: $Object): void;
-        getFeature(arg0: string): boolean;
-        setContentHandler(arg0: $ContentHandler): void;
         setResourceResolver(arg0: $LSResourceResolver_): void;
         getResourceResolver(): $LSResourceResolver;
         getTypeInfoProvider(): $TypeInfoProvider;
         setErrorHandler(arg0: $ErrorHandler): void;
         getErrorHandler(): $ErrorHandler;
-        setFeature(arg0: string, arg1: boolean): void;
+        getFeature(arg0: string): boolean;
+        setContentHandler(arg0: $ContentHandler): void;
         getContentHandler(): $ContentHandler;
+        getProperty(arg0: string): $Object;
+        setProperty(arg0: string, arg1: $Object): void;
+        setFeature(arg0: string, arg1: boolean): void;
         declaration(arg0: string, arg1: string, arg2: string): void;
         get typeInfoProvider(): $TypeInfoProvider;
     }
     export class $TypeInfoProvider {
-        isIdAttribute(arg0: number): boolean;
         getElementTypeInfo(): $TypeInfo;
         getAttributeTypeInfo(arg0: number): $TypeInfo;
         isSpecified(arg0: number): boolean;
+        isIdAttribute(arg0: number): boolean;
         get elementTypeInfo(): $TypeInfo;
     }
     export class $Schema {
@@ -32,16 +32,16 @@ declare module "@package/javax/xml/validation" {
         newValidator(): $Validator;
     }
     export class $Validator {
+        setResourceResolver(arg0: $LSResourceResolver_): void;
+        getResourceResolver(): $LSResourceResolver;
+        setErrorHandler(arg0: $ErrorHandler): void;
+        getErrorHandler(): $ErrorHandler;
+        getFeature(arg0: string): boolean;
         reset(): void;
         getProperty(arg0: string): $Object;
         validate(arg0: $Source, arg1: $Result): void;
         validate(arg0: $Source): void;
         setProperty(arg0: string, arg1: $Object): void;
-        getFeature(arg0: string): boolean;
-        setResourceResolver(arg0: $LSResourceResolver_): void;
-        getResourceResolver(): $LSResourceResolver;
-        setErrorHandler(arg0: $ErrorHandler): void;
-        getErrorHandler(): $ErrorHandler;
         setFeature(arg0: string, arg1: boolean): void;
     }
 }

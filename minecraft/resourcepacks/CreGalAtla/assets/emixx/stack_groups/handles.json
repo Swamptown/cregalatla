@@ -1,0 +1,8 @@
+{
+  "id": "cregalatla:handles",
+  "type": "emixx:group",
+  "contents": [
+    "#simulated:handle_variants",
+    "simulated:iron_handle"
+  ]
+}

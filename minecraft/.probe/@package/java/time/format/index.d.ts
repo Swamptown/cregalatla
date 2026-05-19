@@ -18,11 +18,11 @@ declare module "@package/java/time/format" {
      */
     export type $ResolverStyle_ = "strict" | "smart" | "lenient";
     export class $TextStyle extends $Enum<$TextStyle> {
-        static values(): $TextStyle[];
-        static valueOf(arg0: string): $TextStyle;
         isStandalone(): boolean;
         asStandalone(): $TextStyle;
         asNormal(): $TextStyle;
+        static values(): $TextStyle[];
+        static valueOf(arg0: string): $TextStyle;
         static SHORT_STANDALONE: $TextStyle;
         static NARROW_STANDALONE: $TextStyle;
         static FULL_STANDALONE: $TextStyle;
@@ -36,17 +36,6 @@ declare module "@package/java/time/format" {
      */
     export type $TextStyle_ = "full" | "full_standalone" | "short" | "short_standalone" | "narrow" | "narrow_standalone";
     export class $DateTimeFormatter {
-        format(arg0: $TemporalAccessor): string;
-        parse<T>(arg0: $CharSequence, arg1: $TemporalQuery_<T>): T;
-        parse(arg0: $CharSequence): $TemporalAccessor;
-        parse(arg0: $CharSequence, arg1: $ParsePosition): $TemporalAccessor;
-        getLocale(): $Locale;
-        getZone(): $ZoneId;
-        withZone(arg0: $ZoneId): $DateTimeFormatter;
-        formatTo(arg0: $TemporalAccessor, arg1: $Appendable): void;
-        getChronology(): $Chronology;
-        static ofPattern(arg0: string): $DateTimeFormatter;
-        static ofPattern(arg0: string, arg1: $Locale): $DateTimeFormatter;
         static ofLocalizedDate(arg0: $FormatStyle_): $DateTimeFormatter;
         static ofLocalizedTime(arg0: $FormatStyle_): $DateTimeFormatter;
         static ofLocalizedDateTime(arg0: $FormatStyle_): $DateTimeFormatter;
@@ -62,12 +51,23 @@ declare module "@package/java/time/format" {
         getResolverStyle(): $ResolverStyle;
         withResolverStyle(arg0: $ResolverStyle_): $DateTimeFormatter;
         getResolverFields(): $Set<$TemporalField>;
-        withResolverFields(...arg0: $TemporalField[]): $DateTimeFormatter;
         withResolverFields(arg0: $Set_<$TemporalField>): $DateTimeFormatter;
+        withResolverFields(...arg0: $TemporalField[]): $DateTimeFormatter;
         parseBest(arg0: $CharSequence, ...arg1: $TemporalQuery_<never>[]): $TemporalAccessor;
         parseUnresolved(arg0: $CharSequence, arg1: $ParsePosition): $TemporalAccessor;
         toFormat(): $Format;
         toFormat(arg0: $TemporalQuery_<never>): $Format;
+        getChronology(): $Chronology;
+        getLocale(): $Locale;
+        formatTo(arg0: $TemporalAccessor, arg1: $Appendable): void;
+        getZone(): $ZoneId;
+        format(arg0: $TemporalAccessor): string;
+        parse<T>(arg0: $CharSequence, arg1: $TemporalQuery_<T>): T;
+        parse(arg0: $CharSequence, arg1: $ParsePosition): $TemporalAccessor;
+        parse(arg0: $CharSequence): $TemporalAccessor;
+        static ofPattern(arg0: string, arg1: $Locale): $DateTimeFormatter;
+        static ofPattern(arg0: string): $DateTimeFormatter;
+        withZone(arg0: $ZoneId): $DateTimeFormatter;
         static ISO_OFFSET_TIME: $DateTimeFormatter;
         static ISO_LOCAL_DATE_TIME: $DateTimeFormatter;
         static RFC_1123_DATE_TIME: $DateTimeFormatter;
@@ -83,31 +83,31 @@ declare module "@package/java/time/format" {
         static ISO_LOCAL_DATE: $DateTimeFormatter;
         static BASIC_ISO_DATE: $DateTimeFormatter;
         static ISO_WEEK_DATE: $DateTimeFormatter;
-        get locale(): $Locale;
-        get zone(): $ZoneId;
-        get chronology(): $Chronology;
         get decimalStyle(): $DecimalStyle;
         get resolverStyle(): $ResolverStyle;
         get resolverFields(): $Set<$TemporalField>;
+        get chronology(): $Chronology;
+        get locale(): $Locale;
+        get zone(): $ZoneId;
     }
     export class $DecimalStyle {
-        static of(arg0: $Locale): $DecimalStyle;
-        static getAvailableLocales(): $Set<$Locale>;
-        getZeroDigit(): string;
-        getDecimalSeparator(): string;
         getPositiveSign(): string;
         getNegativeSign(): string;
+        static getAvailableLocales(): $Set<$Locale>;
+        getDecimalSeparator(): string;
         static ofDefaultLocale(): $DecimalStyle;
         withZeroDigit(arg0: string): $DecimalStyle;
         withPositiveSign(arg0: string): $DecimalStyle;
         withNegativeSign(arg0: string): $DecimalStyle;
         withDecimalSeparator(arg0: string): $DecimalStyle;
+        getZeroDigit(): string;
+        static of(arg0: $Locale): $DecimalStyle;
         static STANDARD: $DecimalStyle;
-        static get availableLocales(): $Set<$Locale>;
-        get zeroDigit(): string;
-        get decimalSeparator(): string;
         get positiveSign(): string;
         get negativeSign(): string;
+        static get availableLocales(): $Set<$Locale>;
+        get decimalSeparator(): string;
+        get zeroDigit(): string;
     }
     export class $FormatStyle extends $Enum<$FormatStyle> {
         static values(): $FormatStyle[];

@@ -75,12 +75,12 @@ declare module "@package/dev/tr7zw/skinlayers/accessor" {
     export class $SkullSettings {
     }
     export interface $SkullSettings extends $SkullData {
-        initialized(): boolean;
         getHeadLayers(): $Mesh;
         setupHeadLayers(arg0: $Mesh): void;
         setLastTexture(arg0: $ResourceLocation_): void;
         getLastTexture(): $ResourceLocation;
         getMesh(): $Mesh;
+        initialized(): boolean;
         setInitialized(arg0: boolean): void;
         get headLayers(): $Mesh;
         set upHeadLayers(value: $Mesh);

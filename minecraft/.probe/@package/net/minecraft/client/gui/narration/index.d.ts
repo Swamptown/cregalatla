@@ -6,9 +6,9 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/net/minecraft/client/gui/narration" {
     export class $NarrationThunk<T> {
-        static from(arg0: $List_<$Component_>): $NarrationThunk<never>;
-        static from(arg0: string): $NarrationThunk<never>;
         static from(arg0: $Component_): $NarrationThunk<never>;
+        static from(arg0: string): $NarrationThunk<never>;
+        static from(arg0: $List_<$Component_>): $NarrationThunk<never>;
         getText(arg0: $Consumer_<string>): void;
         static EMPTY: $NarrationThunk<never>;
     }
@@ -22,9 +22,9 @@ declare module "@package/net/minecraft/client/gui/narration" {
         nest(): $NarrationElementOutput;
     }
     export class $NarratableEntry$NarrationPriority extends $Enum<$NarratableEntry$NarrationPriority> {
+        isTerminal(): boolean;
         static values(): $NarratableEntry$NarrationPriority[];
         static valueOf(arg0: string): $NarratableEntry$NarrationPriority;
-        isTerminal(): boolean;
         static HOVERED: $NarratableEntry$NarrationPriority;
         static NONE: $NarratableEntry$NarrationPriority;
         static FOCUSED: $NarratableEntry$NarrationPriority;

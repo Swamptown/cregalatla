@@ -1,0 +1,8 @@
+{
+  "id": "cregalatla:seats",
+  "type": "emixx:group",
+  "contents": [
+    "#create:seats",
+    "#bits_n_bobs:chairs"
+  ]
+}

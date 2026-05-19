@@ -19,9 +19,9 @@ import { $BlockEntityType_, $BlockEntity } from "@package/net/minecraft/world/le
 
 declare module "@package/xaero/map/biome" {
     export class $BiomeColorCalculator {
-        prepare(arg0: boolean): void;
         getBiomeAtPos(arg0: $BlockPos_, arg1: $MapTile, arg2: number, arg3: $MapProcessor): $ResourceKey<$Biome>;
         getBiomeColor(arg0: $ColorResolver_, arg1: boolean, arg2: $BlockPos$MutableBlockPos, arg3: $MapTile, arg4: number, arg5: $Registry<$Biome_>, arg6: $MapProcessor): number;
+        prepare(arg0: boolean): void;
         UNREACHABLE_BIOME: $ResourceKey<$Biome>;
         RIVER_BIOME: $ResourceKey<$Biome>;
         constructor();
@@ -34,24 +34,24 @@ declare module "@package/xaero/map/biome" {
     }
     export class $BlockTintProvider implements $BlockAndTintGetter {
         getBiomeColor(arg0: $BlockPos_, arg1: $BlockState_, arg2: boolean, arg3: $MapTile, arg4: number): number;
+        getHeight(): number;
+        getFluidState(arg0: $BlockPos_): $FluidState;
         getBlockState(arg0: $BlockPos_): $BlockState;
         getBlockEntity(arg0: $BlockPos_): $BlockEntity;
-        getFluidState(arg0: $BlockPos_): $FluidState;
         getMinBuildHeight(): number;
         getLightEngine(): $LevelLightEngine;
         getShade(arg0: $Direction_, arg1: boolean): number;
         getBlockTint(arg0: $BlockPos_, arg1: $ColorResolver_): number;
-        getHeight(): number;
         canSeeSky(arg0: $BlockPos_): boolean;
         getBrightness(arg0: $LightLayer_, arg1: $BlockPos_): number;
         getRawBrightness(arg0: $BlockPos_, arg1: number): number;
         getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $BlockEntityType_<T>): (T) | undefined;
         clip(arg0: $ClipContext): $BlockHitResult;
+        clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
         getLightEmission(arg0: $BlockPos_): number;
         isBlockInLine(arg0: $ClipBlockStateContext): $BlockHitResult;
-        clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
-        getBlockFloorHeight(arg0: $BlockPos_): number;
         getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
+        getBlockFloorHeight(arg0: $BlockPos_): number;
         getMaxLightLevel(): number;
         getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
         getShade(arg0: number, arg1: number, arg2: number, arg3: boolean): number;
@@ -59,21 +59,21 @@ declare module "@package/xaero/map/biome" {
         getSectionsCount(): number;
         getMaxSection(): number;
         getMinSection(): number;
-        isOutsideBuildHeight(arg0: number): boolean;
         isOutsideBuildHeight(arg0: $BlockPos_): boolean;
+        isOutsideBuildHeight(arg0: number): boolean;
         getSectionIndex(arg0: number): number;
         getSectionIndexFromSectionY(arg0: number): number;
         getSectionYFromSectionIndex(arg0: number): number;
-        getModelData(arg0: $BlockPos_): $ModelData;
-        getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
         getAuxLightManager(arg0: $BlockPos_): $AuxiliaryLightManager;
-        getBlockEntityRenderData(arg0: $BlockPos_): $Object;
+        getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
+        getModelData(arg0: $BlockPos_): $ModelData;
         hasBiomes(): boolean;
         getBiomeFabric(arg0: $BlockPos_): $Holder<$Biome>;
+        getBlockEntityRenderData(arg0: $BlockPos_): $Object;
         constructor(arg0: $Registry<$Biome_>, arg1: $BiomeColorCalculator, arg2: $MapProcessor, arg3: $BrokenBlockTintCache, arg4: $MapWriter);
+        get height(): number;
         get minBuildHeight(): number;
         get lightEngine(): $LevelLightEngine;
-        get height(): number;
         get maxLightLevel(): number;
         get maxBuildHeight(): number;
         get sectionsCount(): number;

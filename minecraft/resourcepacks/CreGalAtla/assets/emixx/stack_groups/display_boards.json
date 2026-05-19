@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:display_boards",
+  "type": "emixx:group",
+  "contents": [
+    "#c:create/display_boards"
+  ]
+}

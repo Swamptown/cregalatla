@@ -1,7 +1,7 @@
 import { $InputStream, $OutputStream } from "@package/java/io";
 import { $Function_, $BiFunction_, $BiConsumer_ } from "@package/java/util/function";
 import { $Object, $Cloneable } from "@package/java/lang";
-import { $Map_, $Map, $Map$Entry, $Collection, $Set } from "@package/java/util";
+import { $Map_, $Map, $Collection, $Map$Entry, $Set } from "@package/java/util";
 
 declare module "@package/java/util/jar" {
     export class $Attributes$Name {
@@ -49,6 +49,7 @@ declare module "@package/java/util/jar" {
         get entries(): $Map<string, $Attributes>;
     }
     export class $Attributes implements $Map<$Object, $Object>, $Cloneable {
+        putValue(arg0: string, arg1: string): string;
         remove(arg0: $Object): $Object;
         size(): number;
         get(arg0: $Object): $Object;
@@ -61,10 +62,9 @@ declare module "@package/java/util/jar" {
         isEmpty(): boolean;
         entrySet(): $Set<$Map$Entry<$Object, $Object>>;
         putAll(arg0: $Map_<never, never>): void;
+        containsKey(arg0: $Object): boolean;
         keySet(): $Set<$Object>;
         containsValue(arg0: $Object): boolean;
-        containsKey(arg0: $Object): boolean;
-        putValue(arg0: string, arg1: string): string;
         remove(arg0: $Object, arg1: $Object): boolean;
         replace(arg0: $Object, arg1: $Object, arg2: $Object): boolean;
         replace(arg0: $Object, arg1: $Object): $Object;
@@ -72,13 +72,13 @@ declare module "@package/java/util/jar" {
         merge(arg0: $Object, arg1: $Object, arg2: $BiFunction_<$Object, $Object, $Object>): $Object;
         putIfAbsent(arg0: $Object, arg1: $Object): $Object;
         compute(arg0: $Object, arg1: $BiFunction_<$Object, $Object, $Object>): $Object;
-        computeIfAbsent(arg0: $Object, arg1: $Function_<$Object, $Object>): $Object;
         forEach(arg0: $BiConsumer_<$Object, $Object>): void;
+        computeIfAbsent(arg0: $Object, arg1: $Function_<$Object, $Object>): $Object;
         getOrDefault(arg0: $Object, arg1: $Object): $Object;
         computeIfPresent(arg0: $Object, arg1: $BiFunction_<$Object, $Object, $Object>): $Object;
+        constructor();
         constructor(arg0: $Attributes);
         constructor(arg0: number);
-        constructor();
         get empty(): boolean;
     }
 }

@@ -5,15 +5,15 @@ import { $Map_, $Map$Entry, $Collection_ } from "@package/java/util";
 
 declare module "@package/malte0811/ferritecore/fastmap" {
     export class $FastMap<Value> {
-        getValue(arg0: number, arg1: $Object): $Comparable<never>;
-        getValue<T extends $Comparable<T>>(arg0: number, arg1: $Property<T>): T;
-        getKey(arg0: number): $FastMapKey<never>;
-        with(arg0: number, arg1: $Property<never>, arg2: $Object): Value;
-        getEntry(arg0: number, arg1: number): $Map$Entry<$Property<never>, $Comparable<never>>;
         getIndexOf(arg0: $Map_<$Property<never>, $Comparable_<never>>): number;
         numProperties(): number;
         isSingleState(): boolean;
         getPropertySet(): $ReferenceSet<$Property<never>>;
+        getEntry(arg0: number, arg1: number): $Map$Entry<$Property<never>, $Comparable<never>>;
+        getValue(arg0: number, arg1: $Object): $Comparable<never>;
+        getValue<T extends $Comparable<T>>(arg0: number, arg1: $Property<T>): T;
+        getKey(arg0: number): $FastMapKey<never>;
+        with(arg0: number, arg1: $Property<never>, arg2: $Object): Value;
         constructor(arg0: $Collection_<$Property<never>>, arg1: $Map_<$Map_<$Property<never>, $Comparable_<never>>, Value>, arg2: boolean);
         get singleState(): boolean;
         get propertySet(): $ReferenceSet<$Property<never>>;

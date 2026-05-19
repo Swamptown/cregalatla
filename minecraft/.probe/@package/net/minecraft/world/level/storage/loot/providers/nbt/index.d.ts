@@ -11,11 +11,11 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/nbt" {
     export class $NbtProvider {
     }
     export interface $NbtProvider {
+        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         get(arg0: $LootContext): $Tag;
         getType(): $LootNbtProviderType;
-        getReferencedContextParams(): $Set<$LootContextParam<never>>;
-        get type(): $LootNbtProviderType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
+        get type(): $LootNbtProviderType;
     }
     export class $NbtProviders {
         static STORAGE: $LootNbtProviderType;
@@ -36,25 +36,25 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/nbt" {
      */
     export type $LootNbtProviderType_ = RegistryTypes.LootNbtProviderType | { codec?: $MapCodec_<$NbtProvider>,  } | [codec?: $MapCodec_<$NbtProvider>, ];
     export class $ContextNbtProvider implements $NbtProvider {
+        static forContextEntity(arg0: $LootContext$EntityTarget_): $NbtProvider;
+        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         get(arg0: $LootContext): $Tag;
         getType(): $LootNbtProviderType;
-        getReferencedContextParams(): $Set<$LootContextParam<never>>;
-        static forContextEntity(arg0: $LootContext$EntityTarget_): $NbtProvider;
         static INLINE_CODEC: $Codec<$ContextNbtProvider>;
         static CODEC: $MapCodec<$ContextNbtProvider>;
         static BLOCK_ENTITY: $ContextNbtProvider;
-        get type(): $LootNbtProviderType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
+        get type(): $LootNbtProviderType;
     }
     export class $StorageNbtProvider extends $Record implements $NbtProvider {
+        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         get(arg0: $LootContext): $Tag;
         id(): $ResourceLocation;
         getType(): $LootNbtProviderType;
-        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         static CODEC: $MapCodec<$StorageNbtProvider>;
         constructor(arg0: $ResourceLocation_);
-        get type(): $LootNbtProviderType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
+        get type(): $LootNbtProviderType;
     }
     /**
      * Values that may be interpreted as {@link $StorageNbtProvider}.

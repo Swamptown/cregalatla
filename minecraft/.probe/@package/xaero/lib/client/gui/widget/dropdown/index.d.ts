@@ -3,19 +3,19 @@ import { $GuiGraphics } from "@package/net/minecraft/client/gui";
 
 declare module "@package/xaero/lib/client/gui/widget/dropdown" {
     export class $DropDownWidget extends $AbstractWidget {
-        size(): number;
+        getXWithOffset(): number;
+        getRenderYWithOffset(): number;
         getRenderY(): number;
         selectId(arg0: number, arg1: boolean): void;
         onDropDown(arg0: number, arg1: number, arg2: boolean, arg3: number): boolean;
         onDropDown(arg0: number, arg1: number, arg2: number): boolean;
-        getXWithOffset(): number;
-        getRenderYWithOffset(): number;
         setClosed(arg0: boolean): void;
         getSelected(): number;
-        mouseClicked(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
+        size(): number;
         isClosed(): boolean;
         render(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: boolean): void;
         setActive(arg0: boolean): void;
+        mouseClicked(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         mouseReleased(arg0: number, arg1: number, arg2: number, arg3: number): void;
         mouseScrolled(arg0: number, arg1: number, arg2: number, arg3: number): void;
         visible: boolean;
@@ -35,9 +35,9 @@ declare module "@package/xaero/lib/client/gui/widget/dropdown" {
         static DEFAULT_BACKGROUND: number;
         static TRIM_INSIDE: number;
         height: number;
-        get renderY(): number;
         get XWithOffset(): number;
         get renderYWithOffset(): number;
+        get renderY(): number;
         get selected(): number;
     }
 }

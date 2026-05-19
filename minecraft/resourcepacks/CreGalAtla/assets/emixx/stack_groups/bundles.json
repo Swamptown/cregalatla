@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:bundles",
+  "type": "emixx:group",
+  "contents": [
+    "#minecraft:bundles"
+  ]
+}

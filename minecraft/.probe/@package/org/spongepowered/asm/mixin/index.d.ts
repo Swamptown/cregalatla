@@ -69,12 +69,14 @@ declare module "@package/org/spongepowered/asm/mixin" {
      */
     export type $MixinEnvironment$Side_ = "unknown" | "client" | "server";
     export class $MixinEnvironment implements $ITokenProvider {
-        static init(arg0: $MixinEnvironment$Phase): void;
-        setOption(arg0: $MixinEnvironment$Option_, arg1: boolean): void;
-        getOption(arg0: $MixinEnvironment$Option_): boolean;
-        getOption<E extends $Enum<E>>(arg0: $MixinEnvironment$Option_, arg1: E): E;
-        getVersion(): string;
+        static getEnvironment(arg0: $MixinEnvironment$Phase): $MixinEnvironment;
         getToken(arg0: string): number;
+        setOption(arg0: $MixinEnvironment$Option_, arg1: boolean): void;
+        getOption<E extends $Enum<E>>(arg0: $MixinEnvironment$Option_, arg1: E): E;
+        getOption(arg0: $MixinEnvironment$Option_): boolean;
+        audit(): void;
+        getVersion(): string;
+        static init(arg0: $MixinEnvironment$Phase): void;
         /**
          * @deprecated
          */
@@ -119,8 +121,6 @@ declare module "@package/org/spongepowered/asm/mixin" {
         static setCompatibilityLevel(arg0: $MixinEnvironment$CompatibilityLevel_): void;
         setObfuscationContext(arg0: string): void;
         setSide(arg0: $MixinEnvironment$Side_): $MixinEnvironment;
-        audit(): void;
-        static getEnvironment(arg0: $MixinEnvironment$Phase): $MixinEnvironment;
         get version(): string;
         get transformers(): $List<$ITransformer>;
         static get minCompatibilityLevel(): $MixinEnvironment$CompatibilityLevel;
@@ -137,10 +137,6 @@ declare module "@package/org/spongepowered/asm/mixin" {
         static values(): $MixinEnvironment$CompatibilityLevel[];
         static valueOf(arg0: string): $MixinEnvironment$CompatibilityLevel;
         supports(arg0: number): boolean;
-        /**
-         * @deprecated
-         */
-        supportsMethodsInInterfaces(): boolean;
         canElevateTo(arg0: $MixinEnvironment$CompatibilityLevel_): boolean;
         canSupport(arg0: $MixinEnvironment$CompatibilityLevel_): boolean;
         /**
@@ -154,6 +150,10 @@ declare module "@package/org/spongepowered/asm/mixin" {
         isAtLeast(arg0: $MixinEnvironment$CompatibilityLevel_): boolean;
         isLessThan(arg0: $MixinEnvironment$CompatibilityLevel_): boolean;
         static requiredFor(arg0: number): $MixinEnvironment$CompatibilityLevel;
+        /**
+         * @deprecated
+         */
+        supportsMethodsInInterfaces(): boolean;
         static JAVA_20: $MixinEnvironment$CompatibilityLevel;
         static JAVA_12: $MixinEnvironment$CompatibilityLevel;
         static JAVA_13: $MixinEnvironment$CompatibilityLevel;

@@ -12,8 +12,8 @@ import { $VersionChecker$Status } from "@package/net/neoforged/fml";
 
 declare module "@package/net/neoforged/neoforge/client/loading" {
     export class $ClientModLoader extends $CommonModLoader {
-        static begin(arg0: $Minecraft, arg1: $PackRepository, arg2: $ReloadableResourceManager): void;
         static isLoading(): boolean;
+        static begin(arg0: $Minecraft, arg1: $PackRepository, arg2: $ReloadableResourceManager): void;
         static completeModLoading(arg0: $Runnable_): $Runnable;
         static checkForUpdates(): $VersionChecker$Status;
         constructor();
@@ -24,12 +24,13 @@ declare module "@package/net/neoforged/neoforge/client/loading" {
         static FADE_OUT_TIME: number;
         static MOJANG_STUDIOS_LOGO_LOCATION: $ResourceLocation;
         static FADE_IN_TIME: number;
+        fadeOutStart: number;
         constructor(arg0: $Minecraft, arg1: $ReloadInstance, arg2: $Consumer_<($Throwable) | undefined>, arg3: $DisplayWindow);
     }
     export class $NoVizFallback {
-        static loadingOverlay(arg0: $Supplier_<$Minecraft>, arg1: $Supplier_<$ReloadInstance>, arg2: $Consumer_<($Throwable) | undefined>, arg3: boolean): $Supplier<$LoadingOverlay>;
         static windowHandoff(arg0: $IntSupplier_, arg1: $IntSupplier_, arg2: $Supplier_<string>, arg3: $LongSupplier_): $LongSupplier;
         static windowPositioning(arg0: ($Monitor) | undefined, arg1: $IntConsumer_, arg2: $IntConsumer_, arg3: $IntConsumer_, arg4: $IntConsumer_): boolean;
+        static loadingOverlay(arg0: $Supplier_<$Minecraft>, arg1: $Supplier_<$ReloadInstance>, arg2: $Consumer_<($Throwable) | undefined>, arg3: boolean): $Supplier<$LoadingOverlay>;
         static glVersion(): string;
         constructor();
     }

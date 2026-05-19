@@ -7,9 +7,9 @@ import { $PlayerEvent } from "@package/net/neoforged/neoforge/event/entity/playe
 
 declare module "@package/net/neoforged/neoforge/event/brewing" {
     export class $PotionBrewEvent extends $Event {
-        getLength(): number;
         setItem(arg0: number, arg1: $ItemStack_): void;
         getItem(arg0: number): $ItemStack;
+        getLength(): number;
         get length(): number;
     }
     export class $PlayerBrewedPotionEvent extends $PlayerEvent {

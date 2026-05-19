@@ -13,8 +13,8 @@ declare module "@package/net/minecraft/commands/functions" {
         constructor(arg0: $ResourceLocation_, arg1: $List_<$MacroFunction$Entry<T>>, arg2: $List_<string>);
     }
     export class $CommandFunction<T> {
-        static fromLines<T extends $ExecutionCommandSource<T>>(arg0: $ResourceLocation_, arg1: $CommandDispatcher<T>, arg2: T, arg3: $List_<string>): $CommandFunction<T>;
         static checkCommandLineLength(arg0: $CharSequence): void;
+        static fromLines<T extends $ExecutionCommandSource<T>>(arg0: $ResourceLocation_, arg1: $CommandDispatcher<T>, arg2: T, arg3: $List_<string>): $CommandFunction<T>;
         static parseCommand<T extends $ExecutionCommandSource<T>>(arg0: $CommandDispatcher<T>, arg1: T, arg2: $StringReader): $UnboundEntryAction<T>;
     }
     export interface $CommandFunction<T> {
@@ -32,8 +32,8 @@ declare module "@package/net/minecraft/commands/functions" {
         entries(): $List<$UnboundEntryAction<T>>;
     }
     export class $StringTemplate extends $Record {
-        segments(): $List<string>;
         variables(): $List<string>;
+        segments(): $List<string>;
         static fromString(arg0: string, arg1: number): $StringTemplate;
         substitute(arg0: $List_<string>): string;
         constructor(arg0: $List_<string>, arg1: $List_<string>);
@@ -41,7 +41,7 @@ declare module "@package/net/minecraft/commands/functions" {
     /**
      * Values that may be interpreted as {@link $StringTemplate}.
      */
-    export type $StringTemplate_ = { variables?: $List_<string>, segments?: $List_<string>,  } | [variables?: $List_<string>, segments?: $List_<string>, ];
+    export type $StringTemplate_ = { segments?: $List_<string>, variables?: $List_<string>,  } | [segments?: $List_<string>, variables?: $List_<string>, ];
     export class $MacroFunction$PlainTextEntry<T> implements $MacroFunction$Entry<T> {
     }
     export class $FunctionBuilder<T extends $ExecutionCommandSource<T>> {
@@ -57,5 +57,5 @@ declare module "@package/net/minecraft/commands/functions" {
     /**
      * Values that may be interpreted as {@link $PlainTextFunction}.
      */
-    export type $PlainTextFunction_<T> = { id?: $ResourceLocation_, entries?: $List_<$UnboundEntryAction_<any>>,  } | [id?: $ResourceLocation_, entries?: $List_<$UnboundEntryAction_<any>>, ];
+    export type $PlainTextFunction_<T> = { entries?: $List_<$UnboundEntryAction_<any>>, id?: $ResourceLocation_,  } | [entries?: $List_<$UnboundEntryAction_<any>>, id?: $ResourceLocation_, ];
 }

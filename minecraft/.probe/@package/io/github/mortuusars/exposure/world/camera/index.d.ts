@@ -18,13 +18,13 @@ export * as component from "@package/io/github/mortuusars/exposure/world/camera/
 
 declare module "@package/io/github/mortuusars/exposure/world/camera" {
     export class $ColorChannel extends $Enum<$ColorChannel> implements $StringRepresentable {
-        static values(): $ColorChannel[];
-        static valueOf(name: string): $ColorChannel;
-        getRepresentationColor(): number;
         static fromFilterStack(stack: $ItemStack_): ($ColorChannel) | undefined;
+        getRepresentationColor(): number;
+        static fromStringOrThrow(serializedName: string): $ColorChannel;
         static fromStringOrDefault(serializedName: string, defaultValue: $ColorChannel_): $ColorChannel;
         static fromStringOptional(serializedName: string): ($ColorChannel) | undefined;
-        static fromStringOrThrow(serializedName: string): $ColorChannel;
+        static values(): $ColorChannel[];
+        static valueOf(name: string): $ColorChannel;
         getShader(): $ResourceLocation;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
@@ -43,9 +43,9 @@ declare module "@package/io/github/mortuusars/exposure/world/camera" {
      */
     export type $ColorChannel_ = "red" | "green" | "blue";
     export class $CameraId extends $Record {
+        static ofStack(stack: $ItemStack_): $CameraId;
         matches(stack: $ItemStack_): boolean;
         static create(): $CameraId;
-        static ofStack(stack: $ItemStack_): $CameraId;
         uuid(): $UUID;
         static CODEC: $Codec<$CameraId>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $CameraId>;
@@ -65,40 +65,40 @@ declare module "@package/io/github/mortuusars/exposure/world/camera" {
     /**
      * Values that may be interpreted as {@link $FilmColor}.
      */
-    export type $FilmColor_ = { b?: number, g?: number, a?: number, r?: number,  } | [b?: number, g?: number, a?: number, r?: number, ];
+    export type $FilmColor_ = { a?: number, g?: number, b?: number, r?: number,  } | [a?: number, g?: number, b?: number, r?: number, ];
     export class $Camera {
+        idMatches(id: $CameraId_): boolean;
+        inSelfieMode(): boolean;
+        isShutterOpen(): boolean;
+        mapAttachment<T extends $Item, R>(attachment: $Attachment_<T>, func: $BiFunction_<T, $ItemStack, R>): (R) | undefined;
+        createSyncPacket(): $Packet;
+        ifPresent(ifPresent: $BiConsumer_<$CameraItem, $ItemStack>): $Camera;
+        ifPresent(ifPresent: $BiConsumer_<$CameraItem, $ItemStack>, orElse: $Runnable_): $Camera;
         update(): void;
         isEmpty(): boolean;
+        map<T>(map: $BiFunction_<$CameraItem, $ItemStack, T>, orElse: T): T;
+        map<T>(map: $BiFunction_<$CameraItem, $ItemStack, T>): (T) | undefined;
         map<T>(map: $Function_<$ItemStack, T>, orElse: T): T;
         map<T>(map: $Function_<$ItemStack, T>): (T) | undefined;
-        map<T>(map: $BiFunction_<$CameraItem, $ItemStack, T>): (T) | undefined;
-        map<T>(map: $BiFunction_<$CameraItem, $ItemStack, T>, orElse: T): T;
         getId(): $CameraId;
         release(): void;
         isActive(): boolean;
-        ifPresent(ifPresent: $BiConsumer_<$CameraItem, $ItemStack>, orElse: $Runnable_): $Camera;
-        ifPresent(ifPresent: $BiConsumer_<$CameraItem, $ItemStack>): $Camera;
         deactivate(): boolean;
-        idMatches(id: $CameraId_): boolean;
-        isShutterOpen(): boolean;
-        mapAttachment<T extends $Item, R>(attachment: $Attachment_<T>, func: $BiFunction_<T, $ItemStack, R>): (R) | undefined;
-        inSelfieMode(): boolean;
-        createSyncPacket(): $Packet;
         getItemStack(): $ItemStack;
         getHolder(): $CameraHolder;
         constructor(holder: $CameraHolder, id: $CameraId_);
+        get shutterOpen(): boolean;
         get empty(): boolean;
         get id(): $CameraId;
         get active(): boolean;
-        get shutterOpen(): boolean;
         get itemStack(): $ItemStack;
         get holder(): $CameraHolder;
     }
     export class $ExposureType extends $Enum<$ExposureType> implements $StringRepresentable {
-        static values(): $ExposureType[];
-        static valueOf(name: string): $ExposureType;
         getImageColor(): $Color;
         getFilmColor(): $FilmColor;
+        static values(): $ExposureType[];
+        static valueOf(name: string): $ExposureType;
         static byName(name: string): ($ExposureType) | undefined;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;

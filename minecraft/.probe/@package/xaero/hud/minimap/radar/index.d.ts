@@ -11,15 +11,15 @@ export * as render from "@package/xaero/hud/minimap/radar/render";
 
 declare module "@package/xaero/hud/minimap/radar" {
     export class $RadarSession {
-        update(arg0: $ClientLevel, arg1: $Entity, arg2: $Player): void;
-        getState(): $RadarState;
         getStateUpdater(): $RadarStateUpdater;
         getCategoryManager(): $EntityRadarCategoryManager;
         getColorHelper(): $RadarColorHelper;
+        update(arg0: $ClientLevel, arg1: $Entity, arg2: $Player): void;
+        getState(): $RadarState;
         constructor(arg0: $EntityRadarCategoryManager);
-        get state(): $RadarState;
         get stateUpdater(): $RadarStateUpdater;
         get categoryManager(): $EntityRadarCategoryManager;
         get colorHelper(): $RadarColorHelper;
+        get state(): $RadarState;
     }
 }

@@ -6,16 +6,16 @@ import { $ArgumentBuilder } from "@package/com/mojang/brigadier/builder";
 import { $Comparable } from "@package/java/lang";
 import { $CommandContextBuilder, $CommandContext } from "@package/com/mojang/brigadier/context";
 import { $Collection } from "@package/java/util";
-import { $ArgumentType_, $ArgumentType } from "@package/com/mojang/brigadier/arguments";
+import { $ArgumentType, $ArgumentType_ } from "@package/com/mojang/brigadier/arguments";
 
 declare module "@package/com/mojang/brigadier/tree" {
     export class $ArgumentCommandNode<S, T> extends $CommandNode<S> {
-        getType(): $ArgumentType<$CommandNode<S>>;
         getCustomSuggestions(): $SuggestionProvider<S>;
         isValidInput(arg0: string): boolean;
+        getType(): $ArgumentType<$CommandNode<S>>;
         constructor(arg0: string, arg1: $ArgumentType_<$CommandNode<S>>, arg2: $Command_<S>, arg3: $Predicate_<S>, arg4: $CommandNode<S>, arg5: $RedirectModifier_<S>, arg6: boolean, arg7: $SuggestionProvider_<S>);
-        get type(): $ArgumentType<$CommandNode<S>>;
         get customSuggestions(): $SuggestionProvider<S>;
+        get type(): $ArgumentType<$CommandNode<S>>;
     }
     export class $LiteralCommandNode<S> extends $CommandNode<S> {
         isValidInput(arg0: string): boolean;
@@ -28,32 +28,32 @@ declare module "@package/com/mojang/brigadier/tree" {
         constructor();
     }
     export class $CommandNode<S> implements $Comparable<$CommandNode<S>> {
-        getName(): string;
-        compareTo(arg0: $CommandNode<S>): number;
-        canUse(arg0: S): boolean;
-        parse(arg0: $StringReader, arg1: $CommandContextBuilder<S>): void;
-        getChild(arg0: string): $CommandNode<S>;
-        getChildren(): $Collection<$CommandNode<S>>;
         findAmbiguities(arg0: $AmbiguityConsumer_<S>): void;
         getRelevantNodes(arg0: $StringReader): $Collection<$CommandNode<S>>;
         getRedirect(): $CommandNode<S>;
         getUsageText(): string;
         getRequirement(): $Predicate<S>;
-        getRedirectModifier(): $RedirectModifier<S>;
         isFork(): boolean;
-        addChild(arg0: $CommandNode<S>): void;
+        getRedirectModifier(): $RedirectModifier<S>;
         listSuggestions(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getCommand(): $Command<S>;
+        getChild(arg0: string): $CommandNode<S>;
+        addChild(arg0: $CommandNode<S>): void;
+        getChildren(): $Collection<$CommandNode<S>>;
         getExamples(): $Collection<string>;
+        getName(): string;
+        compareTo(arg0: $CommandNode<S>): number;
+        canUse(arg0: S): boolean;
+        parse(arg0: $StringReader, arg1: $CommandContextBuilder<S>): void;
         createBuilder(): $ArgumentBuilder<S, never>;
-        get name(): string;
-        get children(): $Collection<$CommandNode<S>>;
         get redirect(): $CommandNode<S>;
         get usageText(): string;
         get requirement(): $Predicate<S>;
-        get redirectModifier(): $RedirectModifier<S>;
         get fork(): boolean;
+        get redirectModifier(): $RedirectModifier<S>;
         get command(): $Command<S>;
+        get children(): $Collection<$CommandNode<S>>;
         get examples(): $Collection<string>;
+        get name(): string;
     }
 }

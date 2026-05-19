@@ -7,19 +7,19 @@ declare module "@package/io/netty/channel/nio" {
     export class $NioEventLoopGroup extends $MultithreadEventLoopGroup {
         setIoRatio(arg0: number): void;
         rebuildSelectors(): void;
+        constructor(arg0: number, arg1: $Executor_, arg2: $EventExecutorChooserFactory_, arg3: $SelectorProvider, arg4: $SelectStrategyFactory_, arg5: $RejectedExecutionHandler_, arg6: $EventLoopTaskQueueFactory_);
+        constructor(arg0: number, arg1: $Executor_, arg2: $EventExecutorChooserFactory_, arg3: $SelectorProvider, arg4: $SelectStrategyFactory_, arg5: $RejectedExecutionHandler_);
         constructor(arg0: number, arg1: $Executor_, arg2: $EventExecutorChooserFactory_, arg3: $SelectorProvider, arg4: $SelectStrategyFactory_);
+        constructor(arg0: number, arg1: $Executor_, arg2: $EventExecutorChooserFactory_, arg3: $SelectorProvider, arg4: $SelectStrategyFactory_, arg5: $RejectedExecutionHandler_, arg6: $EventLoopTaskQueueFactory_, arg7: $EventLoopTaskQueueFactory_);
+        constructor();
+        constructor(arg0: number, arg1: $Executor_);
+        constructor(arg0: number, arg1: $ThreadFactory_);
+        constructor(arg0: $ThreadFactory_);
+        constructor(arg0: number);
         constructor(arg0: number, arg1: $Executor_, arg2: $SelectorProvider, arg3: $SelectStrategyFactory_);
         constructor(arg0: number, arg1: $Executor_, arg2: $SelectorProvider);
         constructor(arg0: number, arg1: $ThreadFactory_, arg2: $SelectorProvider, arg3: $SelectStrategyFactory_);
-        constructor(arg0: number, arg1: $Executor_, arg2: $EventExecutorChooserFactory_, arg3: $SelectorProvider, arg4: $SelectStrategyFactory_, arg5: $RejectedExecutionHandler_);
-        constructor(arg0: number, arg1: $Executor_, arg2: $EventExecutorChooserFactory_, arg3: $SelectorProvider, arg4: $SelectStrategyFactory_, arg5: $RejectedExecutionHandler_, arg6: $EventLoopTaskQueueFactory_);
-        constructor(arg0: number, arg1: $Executor_, arg2: $EventExecutorChooserFactory_, arg3: $SelectorProvider, arg4: $SelectStrategyFactory_, arg5: $RejectedExecutionHandler_, arg6: $EventLoopTaskQueueFactory_, arg7: $EventLoopTaskQueueFactory_);
-        constructor();
-        constructor(arg0: number);
-        constructor(arg0: $ThreadFactory_);
         constructor(arg0: number, arg1: $ThreadFactory_, arg2: $SelectorProvider);
-        constructor(arg0: number, arg1: $Executor_);
-        constructor(arg0: number, arg1: $ThreadFactory_);
         set ioRatio(value: number);
     }
 }

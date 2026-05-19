@@ -18,14 +18,14 @@ declare module "@package/mezz/jei/api/ingredients" {
     export class $IIngredientRenderer<T> {
     }
     export interface $IIngredientRenderer<T> {
+        getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: $TooltipFlag): void;
+        getTooltip(arg0: T, arg1: $TooltipFlag): $List<$Component>;
         renderBatch(arg0: $GuiGraphics, arg1: $List_<$BatchRenderElement_<T>>): void;
         getFontRenderer(arg0: $Minecraft, arg1: T): $Font;
-        getTooltip(arg0: T, arg1: $TooltipFlag): $List<$Component>;
-        getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: $TooltipFlag): void;
-        render(arg0: $GuiGraphics, arg1: T): void;
-        render(arg0: $GuiGraphics, arg1: T, arg2: number, arg3: number): void;
         getWidth(): number;
         getHeight(): number;
+        render(arg0: $GuiGraphics, arg1: T, arg2: number, arg3: number): void;
+        render(arg0: $GuiGraphics, arg1: T): void;
         get width(): number;
         get height(): number;
     }
@@ -41,13 +41,13 @@ declare module "@package/mezz/jei/api/ingredients" {
     export class $ITypedIngredient<T> {
     }
     export interface $ITypedIngredient<T> {
-        cast<V>(arg0: $IIngredientType_<V>): $ITypedIngredient<V>;
-        getType(): $IIngredientType<T>;
         getBaseIngredient<B>(arg0: $IIngredientTypeWithSubtypes<B, T>): B;
         castToItemStackType(): $ITypedIngredient<$ItemStack>;
-        getIngredient<V>(arg0: $IIngredientType_<V>): (V) | undefined;
         getIngredient(): T;
+        getIngredient<V>(arg0: $IIngredientType_<V>): (V) | undefined;
         getCastIngredient<V>(arg0: $IIngredientType_<V>): V;
+        cast<V>(arg0: $IIngredientType_<V>): $ITypedIngredient<V>;
+        getType(): $IIngredientType<T>;
         getItemStack(): ($ItemStack) | undefined;
         get type(): $IIngredientType<T>;
         get itemStack(): ($ItemStack) | undefined;
@@ -55,12 +55,12 @@ declare module "@package/mezz/jei/api/ingredients" {
     export class $IIngredientTypeWithSubtypes<B, I> {
     }
     export interface $IIngredientTypeWithSubtypes<B, I> extends $IIngredientType<I> {
-        getBase(arg0: I): B;
+        getIngredientBaseClass(): $Class<B>;
         getIngredientClass(): $Class<I>;
         getDefaultIngredient(arg0: B): I;
-        getIngredientBaseClass(): $Class<B>;
-        get ingredientClass(): $Class<I>;
+        getBase(arg0: I): B;
         get ingredientBaseClass(): $Class<B>;
+        get ingredientClass(): $Class<I>;
     }
     export class $IIngredientType<T> {
     }
@@ -79,16 +79,14 @@ declare module "@package/mezz/jei/api/ingredients" {
     export class $IIngredientHelper<V> {
     }
     export interface $IIngredientHelper<V> {
-        getDisplayName(arg0: V): string;
-        getCheatItemStack(arg0: V): $ItemStack;
-        getErrorInfo(arg0: V): string;
+        getColors(arg0: V): $Iterable<number>;
         getDisplayModId(arg0: V): string;
         /**
          * @deprecated
          */
         getWildcardId(arg0: V): string;
-        getGroupingUid(arg0: V): $Object;
         getGroupingUid(arg0: $ITypedIngredient<V>): $Object;
+        getGroupingUid(arg0: V): $Object;
         getIngredientType(): $IIngredientType<V>;
         copyIngredient(arg0: V): V;
         getTagStream(arg0: V): $Stream<$ResourceLocation>;
@@ -97,6 +95,8 @@ declare module "@package/mezz/jei/api/ingredients" {
         getTagKeyEquivalent(arg0: $Collection_<V>): ($TagKey<never>) | undefined;
         hasSubtypes(arg0: V): boolean;
         copyWithAmount(arg0: V, arg1: number): V;
+        getCheatItemStack(arg0: V): $ItemStack;
+        getErrorInfo(arg0: V): string;
         normalizeIngredient(arg0: V): V;
         isValidIngredient(arg0: V): boolean;
         isIngredientOnServer(arg0: V): boolean;
@@ -104,7 +104,7 @@ declare module "@package/mezz/jei/api/ingredients" {
          * @deprecated
          */
         getTagEquivalent(arg0: $Collection_<V>): ($ResourceLocation) | undefined;
-        getColors(arg0: V): $Iterable<number>;
+        getDisplayName(arg0: V): string;
         getResourceLocation(arg0: V): $ResourceLocation;
         getAmount(arg0: V): number;
         /**

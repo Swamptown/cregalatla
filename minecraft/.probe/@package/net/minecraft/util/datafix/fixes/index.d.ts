@@ -171,8 +171,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(arg0: $Schema);
     }
     export class $ItemWrittenBookPagesStrictJsonFix extends $DataFix {
-        fixTag(arg0: $Dynamic<never>): $Dynamic<never>;
         makeRule(): $TypeRewriteRule;
+        fixTag(arg0: $Dynamic<never>): $Dynamic<never>;
         constructor(arg0: $Schema, arg1: boolean);
     }
     export class $TeamDisplayNameFix extends $DataFix {
@@ -500,9 +500,9 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(arg0: $Schema, arg1: boolean);
     }
     export class $ChunkPalettedStorageFix$Direction$AxisDirection extends $Enum<$ChunkPalettedStorageFix$Direction$AxisDirection> {
+        getStep(): number;
         static values(): $ChunkPalettedStorageFix$Direction$AxisDirection[];
         static valueOf(arg0: string): $ChunkPalettedStorageFix$Direction$AxisDirection;
-        getStep(): number;
         static POSITIVE: $ChunkPalettedStorageFix$Direction$AxisDirection;
         static NEGATIVE: $ChunkPalettedStorageFix$Direction$AxisDirection;
         get step(): number;
@@ -520,13 +520,13 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(arg0: $Schema, arg1: boolean);
     }
     export class $ItemStackComponentizationFix$ItemStackData {
-        is(arg0: string): boolean;
-        is(arg0: $Set_<string>): boolean;
+        hasComponent(arg0: string): boolean;
         write(): $Dynamic<never>;
         static read(arg0: $Dynamic<never>): ($ItemStackComponentizationFix$ItemStackData) | undefined;
-        hasComponent(arg0: string): boolean;
-        setComponent(arg0: string, arg1: $OptionalDynamic<never>): void;
+        is(arg0: string): boolean;
+        is(arg0: $Set_<string>): boolean;
         setComponent(arg0: string, arg1: $Dynamic<never>): void;
+        setComponent(arg0: string, arg1: $OptionalDynamic<never>): void;
         removeTag(arg0: string): $OptionalDynamic<never>;
         moveTagToComponent(arg0: string, arg1: string, arg2: $Dynamic<never>): void;
         moveTagToComponent(arg0: string, arg1: string): void;
@@ -589,15 +589,15 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(arg0: $Schema);
     }
     export class $BlockStateData {
-        static parse(arg0: string): $Dynamic<never>;
         static getTag(arg0: number): $Dynamic<never>;
+        static parse(arg0: string): $Dynamic<never>;
         static upgradeBlockStateTag(arg0: $Dynamic<never>): $Dynamic<never>;
-        static upgradeBlock(arg0: number): string;
         static upgradeBlock(arg0: string): string;
-        static bootstrap0(): void;
-        static bootstrap1(): void;
+        static upgradeBlock(arg0: number): string;
         static bootstrap2(): void;
+        static bootstrap0(): void;
         static bootstrap3(): void;
+        static bootstrap1(): void;
         static bootstrap4(): void;
         static bootstrap5(): void;
         static bootstrap6(): void;
@@ -640,13 +640,13 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(arg0: $Schema, arg1: boolean);
     }
     export class $LeavesFix$Section {
-        write(arg0: $Typed<never>): $Typed<never>;
-        getIndex(): number;
-        getStateId(arg0: string, arg1: boolean, arg2: number): number;
         skippable(): boolean;
         readStorage(arg0: $Dynamic<never>): void;
-        isSkippable(): boolean;
+        getStateId(arg0: string, arg1: boolean, arg2: number): number;
         getBlock(arg0: number): number;
+        write(arg0: $Typed<never>): $Typed<never>;
+        getIndex(): number;
+        isSkippable(): boolean;
         static PROPERTIES_TAG: string;
         static BLOCK_STATES_TAG: string;
         paletteFinder: $OpticFinder<$List<$Pair<string, $Dynamic<never>>>>;
@@ -1057,18 +1057,18 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     }
     export class $StructuresBecomeConfiguredFix$Conversion extends $Record {
         fallback(): string;
-        biomeMapping(): $Map<string, string>;
         static biomeMapped(arg0: $Map_<$List_<string>, string>, arg1: string): $StructuresBecomeConfiguredFix$Conversion;
         static trivial(arg0: string): $StructuresBecomeConfiguredFix$Conversion;
+        biomeMapping(): $Map<string, string>;
         constructor(biomeMapping: $Map_<string, string>, fallback: string);
     }
     /**
      * Values that may be interpreted as {@link $StructuresBecomeConfiguredFix$Conversion}.
      */
-    export type $StructuresBecomeConfiguredFix$Conversion_ = { biomeMapping?: $Map_<string, string>, fallback?: string,  } | [biomeMapping?: $Map_<string, string>, fallback?: string, ];
+    export type $StructuresBecomeConfiguredFix$Conversion_ = { fallback?: string, biomeMapping?: $Map_<string, string>,  } | [fallback?: string, biomeMapping?: $Map_<string, string>, ];
     export class $EntityHealthFix extends $DataFix {
-        fixTag(arg0: $Dynamic<never>): $Dynamic<never>;
         makeRule(): $TypeRewriteRule;
+        fixTag(arg0: $Dynamic<never>): $Dynamic<never>;
         constructor(arg0: $Schema, arg1: boolean);
     }
     export class $SimplestEntityRenameFix extends $DataFix {
@@ -1078,8 +1078,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     }
     export class $WorldGenSettingsFix extends $DataFix {
         makeRule(): $TypeRewriteRule;
-        static vanillaLevels<T>(arg0: $Dynamic<T>, arg1: number, arg2: $Dynamic<T>, arg3: boolean): T;
         static defaultOverworld<T>(arg0: $Dynamic<T>, arg1: number): $Dynamic<T>;
+        static vanillaLevels<T>(arg0: $Dynamic<T>, arg1: number, arg2: $Dynamic<T>, arg3: boolean): T;
         constructor(arg0: $Schema);
     }
     export class $ChunkBedBlockEntityInjecterFix extends $DataFix {

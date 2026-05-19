@@ -24,9 +24,9 @@ declare module "@package/net/minecraft/commands/arguments/item" {
         context: $ComponentPredicateParser$Context<T, C, P>;
     }
     export class $ItemParser {
-        parse(arg0: $StringReader): $ItemParser$ItemResult;
-        parse(arg0: $StringReader, arg1: $ItemParser$Visitor): void;
         fillSuggestions(arg0: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse(arg0: $StringReader, arg1: $ItemParser$Visitor): void;
+        parse(arg0: $StringReader): $ItemParser$ItemResult;
         static ERROR_UNKNOWN_COMPONENT: $DynamicCommandExceptionType;
         static SYNTAX_END_COMPONENTS: string;
         static SUGGEST_NOTHING: $Function<$SuggestionsBuilder, $CompletableFuture<$Suggestions>>;
@@ -45,12 +45,12 @@ declare module "@package/net/minecraft/commands/arguments/item" {
     export class $ItemParser$State {
     }
     export class $ItemArgument implements $ArgumentType<$ItemInput> {
-        parse(arg0: $StringReader): $ItemInput;
-        static item(arg0: $CommandBuildContext): $ItemArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
+        static item(arg0: $CommandBuildContext): $ItemArgument;
         static getItem<S>(arg0: $CommandContext<S>, arg1: string): $ItemInput;
         parse<S>(arg0: $StringReader, arg1: S): $ItemInput;
+        parse(arg0: $StringReader): $ItemInput;
         constructor(arg0: $CommandBuildContext);
         get examples(): $Collection<string>;
     }
@@ -72,7 +72,6 @@ declare module "@package/net/minecraft/commands/arguments/item" {
     export class $ComponentPredicateParser$Context<T, C, P> {
     }
     export interface $ComponentPredicateParser$Context<T, C, P> {
-        negate(arg0: T): T;
         anyOf(arg0: $List_<T>): T;
         forElementType(arg0: $ImmutableStringReader, arg1: $ResourceLocation_): T;
         listElementTypes(): $Stream<$ResourceLocation>;
@@ -85,6 +84,7 @@ declare module "@package/net/minecraft/commands/arguments/item" {
         lookupPredicateType(arg0: $ImmutableStringReader, arg1: $ResourceLocation_): P;
         listPredicateTypes(): $Stream<$ResourceLocation>;
         createPredicateTest(arg0: $ImmutableStringReader, arg1: P, arg2: $Tag_): T;
+        negate(arg0: T): T;
     }
     export class $ComponentPredicateParser$ElementLookupRule<T, C, P> extends $ResourceLookupRule<$ComponentPredicateParser$Context<T, C, P>, T> {
         context: $ComponentPredicateParser$Context<T, C, P>;
@@ -103,12 +103,12 @@ declare module "@package/net/minecraft/commands/arguments/item" {
     /**
      * Values that may be interpreted as {@link $ItemParser$ItemResult}.
      */
-    export type $ItemParser$ItemResult_ = { components?: $DataComponentPatch_, item?: $Holder_<$Item>,  } | [components?: $DataComponentPatch_, item?: $Holder_<$Item>, ];
+    export type $ItemParser$ItemResult_ = { item?: $Holder_<$Item>, components?: $DataComponentPatch_,  } | [item?: $Holder_<$Item>, components?: $DataComponentPatch_, ];
     export class $ItemPredicateArgument implements $ArgumentType<$ItemPredicateArgument$Result> {
-        parse(arg0: $StringReader): $ItemPredicateArgument$Result;
-        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getItemPredicate(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ItemPredicateArgument$Result;
+        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
+        parse(arg0: $StringReader): $ItemPredicateArgument$Result;
         static itemPredicate(arg0: $CommandBuildContext): $ItemPredicateArgument;
         parse<S>(arg0: $StringReader, arg1: S): $ItemPredicateArgument$Result;
         static ERROR_UNKNOWN_ITEM: $DynamicCommandExceptionType;
@@ -127,24 +127,24 @@ declare module "@package/net/minecraft/commands/arguments/item" {
     export class $FunctionArgument$Result {
     }
     export interface $FunctionArgument$Result {
+        unwrapToCollection(arg0: $CommandContext<$CommandSourceStack>): $Pair<$ResourceLocation, $Collection<$CommandFunction<$CommandSourceStack>>>;
         create(arg0: $CommandContext<$CommandSourceStack>): $Collection<$CommandFunction<$CommandSourceStack>>;
         unwrap(arg0: $CommandContext<$CommandSourceStack>): $Pair<$ResourceLocation, $Either<$CommandFunction<$CommandSourceStack>, $Collection<$CommandFunction<$CommandSourceStack>>>>;
-        unwrapToCollection(arg0: $CommandContext<$CommandSourceStack>): $Pair<$ResourceLocation, $Collection<$CommandFunction<$CommandSourceStack>>>;
     }
     export class $ComponentPredicateParser$TagLookupRule<T, C, P> extends $ResourceLookupRule<$ComponentPredicateParser$Context<T, C, P>, T> {
         context: $ComponentPredicateParser$Context<T, C, P>;
     }
     export class $FunctionArgument implements $ArgumentType<$FunctionArgument$Result> {
-        static getFunction(arg0: $CommandContext<$CommandSourceStack>, arg1: $ResourceLocation_): $CommandFunction<$CommandSourceStack>;
-        static functions(): $FunctionArgument;
         static getFunctionTag(arg0: $CommandContext<$CommandSourceStack>, arg1: $ResourceLocation_): $Collection<$CommandFunction<$CommandSourceStack>>;
         static getFunctionOrTag(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Pair<$ResourceLocation, $Either<$CommandFunction<$CommandSourceStack>, $Collection<$CommandFunction<$CommandSourceStack>>>>;
         static getFunctionCollection(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Pair<$ResourceLocation, $Collection<$CommandFunction<$CommandSourceStack>>>;
         getExamples(): $Collection<string>;
-        static getFunctions(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Collection<$CommandFunction<$CommandSourceStack>>;
-        parse<S>(arg0: $StringReader, arg1: S): $FunctionArgument$Result;
-        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse(arg0: $StringReader): $FunctionArgument$Result;
+        static getFunction(arg0: $CommandContext<$CommandSourceStack>, arg1: $ResourceLocation_): $CommandFunction<$CommandSourceStack>;
+        static functions(): $FunctionArgument;
+        static getFunctions(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Collection<$CommandFunction<$CommandSourceStack>>;
+        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $FunctionArgument$Result;
         constructor();
         get examples(): $Collection<string>;
     }
@@ -153,10 +153,10 @@ declare module "@package/net/minecraft/commands/arguments/item" {
     /**
      * Values that may be interpreted as {@link $ItemPredicateArgument$PredicateWrapper}.
      */
-    export type $ItemPredicateArgument$PredicateWrapper_ = { type?: $Decoder_<$Predicate<$ItemStack>>, id?: $ResourceLocation_,  } | [type?: $Decoder_<$Predicate<$ItemStack>>, id?: $ResourceLocation_, ];
+    export type $ItemPredicateArgument$PredicateWrapper_ = { id?: $ResourceLocation_, type?: $Decoder_<$Predicate<$ItemStack>>,  } | [id?: $ResourceLocation_, type?: $Decoder_<$Predicate<$ItemStack>>, ];
     export class $ItemInput {
-        serialize(arg0: $HolderLookup$Provider): string;
         getItem(): $Item;
+        serialize(arg0: $HolderLookup$Provider): string;
         createItemStack(arg0: number, arg1: boolean): $ItemStack;
         constructor(arg0: $Holder_<$Item>, arg1: $DataComponentPatch_);
         get item(): $Item;
@@ -166,7 +166,7 @@ declare module "@package/net/minecraft/commands/arguments/item" {
     /**
      * Values that may be interpreted as {@link $ItemPredicateArgument$ComponentWrapper}.
      */
-    export type $ItemPredicateArgument$ComponentWrapper_ = { presenceChecker?: $Predicate_<$ItemStack>, valueChecker?: $Decoder_<$Predicate<$ItemStack>>, id?: $ResourceLocation_,  } | [presenceChecker?: $Predicate_<$ItemStack>, valueChecker?: $Decoder_<$Predicate<$ItemStack>>, id?: $ResourceLocation_, ];
+    export type $ItemPredicateArgument$ComponentWrapper_ = { id?: $ResourceLocation_, valueChecker?: $Decoder_<$Predicate<$ItemStack>>, presenceChecker?: $Predicate_<$ItemStack>,  } | [id?: $ResourceLocation_, valueChecker?: $Decoder_<$Predicate<$ItemStack>>, presenceChecker?: $Predicate_<$ItemStack>, ];
     export class $ItemParser$Visitor {
     }
     export interface $ItemParser$Visitor {

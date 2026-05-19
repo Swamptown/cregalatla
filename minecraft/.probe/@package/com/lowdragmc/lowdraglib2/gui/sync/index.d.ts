@@ -24,10 +24,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync" {
      */
     export type $IUISyncManagerHolder_ = (() => $UISyncManager);
     export class $UISyncManager {
-        tick(): void;
-        handEvent(arg0: $RegistryFriendlyByteBuf): void;
-        handEventReturn(arg0: $RegistryFriendlyByteBuf): void;
-        getReturnCallbacks(): $Map<number, $Consumer<never>>;
         registerSyncValue(arg0: $SyncValue<never>): $UISyncManager;
         unregisterSyncValue(arg0: $SyncValue<never>): $UISyncManager;
         registerRPCEvent(arg0: $RPCEvent_): $UISyncManager;
@@ -37,14 +33,18 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync" {
         handleSyncPacket(arg0: $RegistryFriendlyByteBuf): void;
         writeInitialData(arg0: $RegistryFriendlyByteBuf): void;
         readInitialData(arg0: $RegistryFriendlyByteBuf): void;
+        handEvent(arg0: $RegistryFriendlyByteBuf): void;
+        handEventReturn(arg0: $RegistryFriendlyByteBuf): void;
+        getReturnCallbacks(): $Map<number, $Consumer<never>>;
+        tick(): void;
         modularUI: $ModularUI;
         constructor(arg0: $ModularUI);
         get returnCallbacks(): $Map<number, $Consumer<never>>;
     }
     export class $SyncValue<T> {
-        update(): void;
-        getValue(): T;
-        setValue(arg0: T): void;
+        writeSyncData(arg0: $RegistryFriendlyByteBuf): void;
+        readSyncData(arg0: $RegistryFriendlyByteBuf): void;
+        hasChanged(): boolean;
         markAsChanged(): void;
         clearChanged(): void;
         setValueProvider(arg0: $Supplier_<T>): void;
@@ -54,9 +54,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync" {
         setToSync(arg0: boolean): void;
         getSyncStrategy(): $SyncStrategy;
         setSyncStrategy(arg0: $SyncStrategy_): void;
-        writeSyncData(arg0: $RegistryFriendlyByteBuf): void;
-        readSyncData(arg0: $RegistryFriendlyByteBuf): void;
-        hasChanged(): boolean;
+        update(): void;
+        getValue(): T;
+        setValue(arg0: T): void;
         addListener(arg0: $Consumer_<T>): $ISubscription;
         toSync: boolean;
         syncValueHolder: $SyncValueHolder<T>;

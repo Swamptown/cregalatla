@@ -22,14 +22,13 @@ declare module "@package/xaero/hud/minimap/radar/category" {
     export class $EntityRadarCategory extends $FilterObjectCategory<$Entity, $Player, $EntityRadarCategoryData, $EntityRadarCategory> {
     }
     export class $EntityRadarCategoryManager {
-        init(): void;
-        fetchDefaultClientCategory(arg0: number): $EntityRadarCategory;
         fetchDefaultClientCategory(): $EntityRadarCategory;
-        fetchDefaultServerCategory(arg0: number): $EntityRadarCategory;
+        fetchDefaultClientCategory(arg0: number): $EntityRadarCategory;
         fetchDefaultServerCategory(): $EntityRadarCategory;
+        fetchDefaultServerCategory(arg0: number): $EntityRadarCategory;
         getSyncedRootCategory(): $EntityRadarCategory;
-        storeEditedCategory(arg0: $EntityRadarCategory, arg1: boolean): void;
         storeEditedCategory(arg0: boolean): void;
+        storeEditedCategory(arg0: $EntityRadarCategory, arg1: boolean): void;
         editedCategoryNeedsSaving(): boolean;
         updateFromConfigChange(arg0: $Config): void;
         getRuleResolver(): $ObjectCategoryRuleResolver;
@@ -44,6 +43,7 @@ declare module "@package/xaero/hud/minimap/radar/category" {
         getMainIO(): $EntityRadarCategoryConfigIO;
         resetRootCategorySettings(arg0: $IEditConfigScreenContext): void;
         setEditedCategoryNeedsSaving(arg0: boolean): void;
+        init(): void;
         get syncedRootCategory(): $EntityRadarCategory;
         get ruleResolver(): $ObjectCategoryRuleResolver;
         get rootCategory(): $EntityRadarCategory;

@@ -14,11 +14,11 @@ export * as over from "@package/xaero/hud/minimap/element/render/over";
 
 declare module "@package/xaero/hud/minimap/element/render" {
     export class $MinimapElementRenderProvider<E, RC> {
-        hasNext(arg0: $MinimapElementRenderLocation, arg1: RC): boolean;
-        begin(arg0: $MinimapElementRenderLocation, arg1: RC): void;
-        end(arg0: $MinimapElementRenderLocation, arg1: RC): void;
         setupContextAndGetNext(arg0: $MinimapElementRenderLocation, arg1: RC): E;
         getNext(arg0: $MinimapElementRenderLocation, arg1: RC): E;
+        begin(arg0: $MinimapElementRenderLocation, arg1: RC): void;
+        end(arg0: $MinimapElementRenderLocation, arg1: RC): void;
+        hasNext(arg0: $MinimapElementRenderLocation, arg1: RC): boolean;
         constructor();
     }
     export class $MinimapElementRendererHandler {
@@ -41,9 +41,13 @@ declare module "@package/xaero/hud/minimap/element/render" {
         constructor(arg0: $MinimapElementRenderLocation, arg1: $Entity, arg2: $Player, arg3: $Vec3_, arg4: boolean, arg5: number, arg6: $RenderTarget, arg7: number, arg8: $ResourceKey_<$Level>);
     }
     export class $MinimapElementReader<E, RC> {
-        isHidden(arg0: E, arg1: RC): boolean;
+        getRenderY(arg0: E, arg1: RC, arg2: number): number;
+        getCoordinateScale(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): number;
+        shouldScalePartialCoordinates(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): boolean;
+        isAlwaysHighlightedWhenHovered(arg0: E, arg1: RC): boolean;
+        getFilterName(arg0: E): string;
+        getMenuTextFillLeftPadding(arg0: E): number;
         shouldScaleBoxWithOptionalScale(): boolean;
-        getRenderX(arg0: E, arg1: RC, arg2: number): number;
         getLeftSideLength(arg0: E, arg1: $Minecraft): number;
         getBoxScale(arg0: $MinimapElementRenderLocation, arg1: E, arg2: RC): number;
         getInteractionBoxLeft(arg0: E, arg1: RC, arg2: number): number;
@@ -55,32 +59,28 @@ declare module "@package/xaero/hud/minimap/element/render" {
         getRenderBoxRight(arg0: E, arg1: RC, arg2: number): number;
         getRenderBoxTop(arg0: E, arg1: RC, arg2: number): number;
         getRenderBoxBottom(arg0: E, arg1: RC, arg2: number): number;
-        getFilterName(arg0: E): string;
-        getMenuTextFillLeftPadding(arg0: E): number;
+        getRenderX(arg0: E, arg1: RC, arg2: number): number;
         getRightClickTitleBackgroundColor(arg0: E): number;
-        getRenderY(arg0: E, arg1: RC, arg2: number): number;
-        getCoordinateScale(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): number;
-        shouldScalePartialCoordinates(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): boolean;
-        isAlwaysHighlightedWhenHovered(arg0: E, arg1: RC): boolean;
-        getMenuName(arg0: E): string;
         isInteractable(arg0: $MinimapElementRenderLocation, arg1: E): boolean;
+        getMenuName(arg0: E): string;
+        isHidden(arg0: E, arg1: RC): boolean;
         constructor();
     }
     export class $MinimapElementRenderer<E, RC> implements $Comparable<$MinimapElementRenderer<never, never>> {
-        compareTo(arg0: $MinimapElementRenderer<never, never>): number;
-        getContext(): RC;
-        getProvider(): $MinimapElementRenderProvider<E, RC>;
-        postRender(arg0: $MinimapElementRenderInfo, arg1: $MultiBufferSource$BufferSource, arg2: $MultiTextureRenderTypeRendererProvider): void;
         getElementReader(): $MinimapElementReader<E, RC>;
         renderElement(arg0: E, arg1: boolean, arg2: boolean, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $MinimapElementRenderInfo, arg8: $GuiGraphics, arg9: $MultiBufferSource$BufferSource): boolean;
         preRender(arg0: $MinimapElementRenderInfo, arg1: $MultiBufferSource$BufferSource, arg2: $MultiTextureRenderTypeRendererProvider): void;
+        postRender(arg0: $MinimapElementRenderInfo, arg1: $MultiBufferSource$BufferSource, arg2: $MultiTextureRenderTypeRendererProvider): void;
         getOrder(): number;
+        getProvider(): $MinimapElementRenderProvider<E, RC>;
+        compareTo(arg0: $MinimapElementRenderer<never, never>): number;
+        getContext(): RC;
         shouldRender(arg0: $MinimapElementRenderLocation): boolean;
         constructor(arg0: $MinimapElementReader<E, RC>, arg1: $MinimapElementRenderProvider<E, RC>, arg2: RC);
-        get context(): RC;
-        get provider(): $MinimapElementRenderProvider<E, RC>;
         get elementReader(): $MinimapElementReader<E, RC>;
         get order(): number;
+        get provider(): $MinimapElementRenderProvider<E, RC>;
+        get context(): RC;
     }
     export class $MinimapElementRenderLocation {
         static fromIndex(arg0: number): $MinimapElementRenderLocation;

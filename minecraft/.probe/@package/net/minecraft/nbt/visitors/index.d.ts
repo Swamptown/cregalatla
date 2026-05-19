@@ -7,25 +7,25 @@ declare module "@package/net/minecraft/nbt/visitors" {
         constructor(...arg0: $FieldSelector_[]);
     }
     export class $CollectToTag implements $StreamTagVisitor {
-        depth(): number;
         getResult(): $Tag;
-        visit(arg0: number): $StreamTagVisitor$ValueResult;
-        visit(arg0: number): $StreamTagVisitor$ValueResult;
-        visit(arg0: number): $StreamTagVisitor$ValueResult;
+        depth(): number;
         visit(arg0: number[]): $StreamTagVisitor$ValueResult;
         visit(arg0: number[]): $StreamTagVisitor$ValueResult;
+        visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number[]): $StreamTagVisitor$ValueResult;
         visit(arg0: string): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
+        visit(arg0: number): $StreamTagVisitor$ValueResult;
+        visit(arg0: number): $StreamTagVisitor$ValueResult;
         visitEnd(): $StreamTagVisitor$ValueResult;
-        visitEntry(arg0: $TagType<never>): $StreamTagVisitor$EntryResult;
         visitEntry(arg0: $TagType<never>, arg1: string): $StreamTagVisitor$EntryResult;
+        visitEntry(arg0: $TagType<never>): $StreamTagVisitor$EntryResult;
         visitRootEntry(arg0: $TagType<never>): $StreamTagVisitor$ValueResult;
         visitContainerEnd(): $StreamTagVisitor$ValueResult;
-        visitList(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$ValueResult;
         visitElement(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$EntryResult;
+        visitList(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$ValueResult;
         constructor();
         get result(): $Tag;
     }
@@ -48,22 +48,22 @@ declare module "@package/net/minecraft/nbt/visitors" {
         visitEntry(arg0: $TagType<never>): $StreamTagVisitor$EntryResult;
         visitRootEntry(arg0: $TagType<never>): $StreamTagVisitor$ValueResult;
         visitContainerEnd(): $StreamTagVisitor$ValueResult;
-        visitList(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$ValueResult;
         visitElement(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$EntryResult;
+        visitList(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$ValueResult;
     }
     export class $FieldTree extends $Record {
-        depth(): number;
-        addEntry(arg0: $FieldSelector_): void;
-        selectedFields(): $Map<string, $TagType<never>>;
         static createRoot(): $FieldTree;
         fieldsToRecurse(): $Map<string, $FieldTree>;
+        selectedFields(): $Map<string, $TagType<never>>;
+        depth(): number;
+        addEntry(arg0: $FieldSelector_): void;
         isSelected(arg0: $TagType<never>, arg1: string): boolean;
         constructor(arg0: number, arg1: $Map_<string, $TagType<never>>, arg2: $Map_<string, $FieldTree_>);
     }
     /**
      * Values that may be interpreted as {@link $FieldTree}.
      */
-    export type $FieldTree_ = { selectedFields?: $Map_<string, $TagType<never>>, depth?: number, fieldsToRecurse?: $Map_<string, $FieldTree_>,  } | [selectedFields?: $Map_<string, $TagType<never>>, depth?: number, fieldsToRecurse?: $Map_<string, $FieldTree_>, ];
+    export type $FieldTree_ = { fieldsToRecurse?: $Map_<string, $FieldTree_>, depth?: number, selectedFields?: $Map_<string, $TagType<never>>,  } | [fieldsToRecurse?: $Map_<string, $FieldTree_>, depth?: number, selectedFields?: $Map_<string, $TagType<never>>, ];
     export class $CollectFields extends $CollectToTag {
         getMissingFieldCount(): number;
         constructor(...arg0: $FieldSelector_[]);
@@ -81,5 +81,5 @@ declare module "@package/net/minecraft/nbt/visitors" {
     /**
      * Values that may be interpreted as {@link $FieldSelector}.
      */
-    export type $FieldSelector_ = { path?: $List_<string>, name?: string, type?: $TagType<never>,  } | [path?: $List_<string>, name?: string, type?: $TagType<never>, ];
+    export type $FieldSelector_ = { type?: $TagType<never>, name?: string, path?: $List_<string>,  } | [type?: $TagType<never>, name?: string, path?: $List_<string>, ];
 }

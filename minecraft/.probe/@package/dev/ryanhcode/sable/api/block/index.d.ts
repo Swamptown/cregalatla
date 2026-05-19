@@ -24,7 +24,7 @@ declare module "@package/dev/ryanhcode/sable/api/block" {
     /**
      * Values that may be interpreted as {@link $BlockSubLevelLiftProvider$LiftProviderContext}.
      */
-    export type $BlockSubLevelLiftProvider$LiftProviderContext_ = { pos?: $BlockPos_, state?: $BlockState_, dir?: $Vec3_,  } | [pos?: $BlockPos_, state?: $BlockState_, dir?: $Vec3_, ];
+    export type $BlockSubLevelLiftProvider$LiftProviderContext_ = { dir?: $Vec3_, state?: $BlockState_, pos?: $BlockPos_,  } | [dir?: $Vec3_, state?: $BlockState_, pos?: $BlockPos_, ];
     export class $BlockEntitySubLevelActor {
     }
     export interface $BlockEntitySubLevelActor {

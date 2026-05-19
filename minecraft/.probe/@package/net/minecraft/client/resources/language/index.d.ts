@@ -15,27 +15,27 @@ import { $Record, $Object } from "@package/java/lang";
 
 declare module "@package/net/minecraft/client/resources/language" {
     export class $I18n {
+        static setLanguage(arg0: $Language): void;
         static get(arg0: string, ...arg1: $Object[]): string;
         static exists(arg0: string): boolean;
-        static setLanguage(arg0: $Language): void;
         static set language(value: $Language);
     }
     export class $LanguageManager implements $ResourceManagerReloadListener, $IdentifiableResourceReloadListener {
-        getLanguage(arg0: string): $LanguageInfo;
-        getLanguages(): $SortedMap<string, $LanguageInfo>;
         onResourceManagerReload(arg0: $ResourceManager): void;
+        getLanguages(): $SortedMap<string, $LanguageInfo>;
         getSelected(): string;
-        setSelected(arg0: string): void;
-        getJavaLocale(): $Locale;
+        getLanguage(arg0: string): $LanguageInfo;
         getFabricId(): $ResourceLocation;
         getFabricDependencies(): $Collection<any>;
+        setSelected(arg0: string): void;
+        getJavaLocale(): $Locale;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
         constructor(arg0: string, arg1: $Consumer_<$ClientLanguage>);
         get languages(): $SortedMap<string, $LanguageInfo>;
-        get javaLocale(): $Locale;
         get fabricId(): $ResourceLocation;
         get fabricDependencies(): $Collection<any>;
+        get javaLocale(): $Locale;
         get name(): string;
     }
     export class $ClientLanguage extends $Language implements $IMixinClientLanguage, $IMixinClientLanguage$1 {
@@ -52,15 +52,15 @@ declare module "@package/net/minecraft/client/resources/language" {
         constructor();
     }
     export class $LanguageInfo extends $Record {
-        name(): string;
-        region(): string;
-        bidirectional(): boolean;
         toComponent(): $Component;
+        bidirectional(): boolean;
+        region(): string;
+        name(): string;
         static CODEC: $Codec<$LanguageInfo>;
         constructor(arg0: string, arg1: string, arg2: boolean);
     }
     /**
      * Values that may be interpreted as {@link $LanguageInfo}.
      */
-    export type $LanguageInfo_ = { name?: string, region?: string, bidirectional?: boolean,  } | [name?: string, region?: string, bidirectional?: boolean, ];
+    export type $LanguageInfo_ = { bidirectional?: boolean, region?: string, name?: string,  } | [bidirectional?: boolean, region?: string, name?: string, ];
 }

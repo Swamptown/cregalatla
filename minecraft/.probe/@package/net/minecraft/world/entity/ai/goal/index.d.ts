@@ -27,13 +27,13 @@ export * as target from "@package/net/minecraft/world/entity/ai/goal/target";
 
 declare module "@package/net/minecraft/world/entity/ai/goal" {
     export class $WrappedGoal extends $Goal {
-        getPriority(): number;
         canBeReplacedBy(arg0: $WrappedGoal): boolean;
         getGoal(): $Goal;
+        getPriority(): number;
         isRunning(): boolean;
         constructor(arg0: number, arg1: $Goal);
-        get priority(): number;
         get goal(): $Goal;
+        get priority(): number;
         get running(): boolean;
     }
     export class $MoveTowardsRestrictionGoal extends $Goal {
@@ -84,22 +84,22 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         constructor(arg0: $PathfinderMob, arg1: number);
     }
     export class $DoorInteractGoal extends $Goal {
-        isOpen(): boolean;
         setOpen(arg0: boolean): void;
+        isOpen(): boolean;
         mob: $Mob;
         hasDoor: boolean;
         doorPos: $BlockPos;
         constructor(arg0: $Mob);
     }
     export class $GoalSelector {
-        tick(): void;
-        tickRunningGoals(arg0: boolean): void;
         getAvailableGoals(): $Set<$WrappedGoal>;
         enableControlFlag(arg0: $Goal$Flag_): void;
         addGoal(arg0: number, arg1: $Goal): void;
+        tickRunningGoals(arg0: boolean): void;
         disableControlFlag(arg0: $Goal$Flag_): void;
         removeAllGoals(arg0: $Predicate_<$Goal>): void;
         removeGoal(arg0: $Goal): void;
+        tick(): void;
         setControlFlag(arg0: $Goal$Flag_, arg1: boolean): void;
         constructor(arg0: $Supplier_<$ProfilerFiller>);
         get availableGoals(): $Set<$WrappedGoal>;
@@ -116,9 +116,9 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         avoidPredicate: $Predicate<$LivingEntity>;
         predicateOnAvoidEntity: $Predicate<$LivingEntity>;
         pathNav: $PathNavigation;
-        constructor(arg0: $PathfinderMob, arg1: $Class<T>, arg2: number, arg3: number, arg4: number, arg5: $Predicate_<$LivingEntity>);
-        constructor(arg0: $PathfinderMob, arg1: $Class<T>, arg2: $Predicate_<$LivingEntity>, arg3: number, arg4: number, arg5: number, arg6: $Predicate_<$LivingEntity>);
         constructor(arg0: $PathfinderMob, arg1: $Class<T>, arg2: number, arg3: number, arg4: number);
+        constructor(arg0: $PathfinderMob, arg1: $Class<T>, arg2: $Predicate_<$LivingEntity>, arg3: number, arg4: number, arg5: number, arg6: $Predicate_<$LivingEntity>);
+        constructor(arg0: $PathfinderMob, arg1: $Class<T>, arg2: number, arg3: number, arg4: number, arg5: $Predicate_<$LivingEntity>);
     }
     export class $LeapAtTargetGoal extends $Goal {
         constructor(arg0: $Mob, arg1: number);
@@ -127,14 +127,15 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         constructor(arg0: $TamableAnimal);
     }
     export class $RangedBowAttackGoal<T extends $Mob> extends $Goal {
-        setMinAttackInterval(arg0: number): void;
         isHoldingBow(): boolean;
+        setMinAttackInterval(arg0: number): void;
         constructor<M extends $Monster>(arg0: M, arg1: number, arg2: number, arg3: number);
         constructor(arg0: T, arg1: number, arg2: number, arg3: number);
-        set minAttackInterval(value: number);
         get holdingBow(): boolean;
+        set minAttackInterval(value: number);
     }
     export class $MoveToBlockGoal extends $Goal implements $LithiumMoveToBlockGoal {
+        findNearestBlock(): boolean;
         nextStartTick(arg0: $PathfinderMob): number;
         isReachedTarget(): boolean;
         isValidTarget(arg0: $LevelReader, arg1: $BlockPos_): boolean;
@@ -143,7 +144,6 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         getMoveToTarget(): $BlockPos;
         shouldRecalculatePath(): boolean;
         lithium$findNearestBlock(arg0: $Predicate_<any>, arg1: $BiPredicate_<any, any>, arg2: boolean): boolean;
-        findNearestBlock(): boolean;
         speedModifier: number;
         mob: $PathfinderMob;
         tryTicks: number;
@@ -170,8 +170,8 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
     }
     export class $RangedCrossbowAttackGoal<T extends $Mob> extends $Goal {
         static PATHFINDING_DELAY_RANGE: $UniformInt;
-        constructor<M extends $Monster>(arg0: M, arg1: number, arg2: number);
         constructor(arg0: T, arg1: number, arg2: number);
+        constructor<M extends $Monster>(arg0: M, arg1: number, arg2: number);
     }
     export class $TradeWithPlayerGoal extends $Goal {
         constructor(arg0: $AbstractVillager);
@@ -211,9 +211,9 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         lookAt: $Entity;
         lookAtContext: $TargetingConditions;
         lookDistance: number;
+        constructor(arg0: $Mob, arg1: $Class<$LivingEntity>, arg2: number);
         constructor(arg0: $Mob, arg1: $Class<$LivingEntity>, arg2: number, arg3: number, arg4: boolean);
         constructor(arg0: $Mob, arg1: $Class<$LivingEntity>, arg2: number, arg3: number);
-        constructor(arg0: $Mob, arg1: $Class<$LivingEntity>, arg2: number);
     }
     export class $BoatGoals extends $Enum<$BoatGoals> {
     }
@@ -273,7 +273,7 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
     export class $RemoveBlockGoal extends $MoveToBlockGoal implements $LithiumMoveToBlockGoal {
         playDestroyProgressSound(arg0: $LevelAccessor, arg1: $BlockPos_): void;
         playBreakSound(arg0: $Level_, arg1: $BlockPos_): void;
-        redirect$bjm000$lithium$redirectFindNearestBlock(arg0: $RemoveBlockGoal): boolean;
+        redirect$bkd000$lithium$redirectFindNearestBlock(arg0: $RemoveBlockGoal): boolean;
         speedModifier: number;
         mob: $PathfinderMob;
         tryTicks: number;
@@ -304,8 +304,8 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         get running(): boolean;
     }
     export class $FleeSunGoal extends $Goal {
-        getHidePos(): $Vec3;
         setWantedPos(): boolean;
+        getHidePos(): $Vec3;
         mob: $PathfinderMob;
         constructor(arg0: $PathfinderMob, arg1: number);
         get hidePos(): $Vec3;
@@ -352,9 +352,9 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         mob: $PathfinderMob;
         posY: number;
         posZ: number;
+        constructor(arg0: $PathfinderMob, arg1: number);
         constructor(arg0: $PathfinderMob, arg1: number, arg2: $Function_<$PathfinderMob, $TagKey<$DamageType>>);
         constructor(arg0: $PathfinderMob, arg1: number, arg2: $TagKey_<$DamageType>);
-        constructor(arg0: $PathfinderMob, arg1: number);
         get running(): boolean;
     }
     export class $JumpGoal extends $Goal {
@@ -383,17 +383,17 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         get attackInterval(): number;
     }
     export class $Goal {
+        canContinueToUse(): boolean;
+        isInterruptable(): boolean;
+        requiresUpdateEveryTick(): boolean;
+        adjustedTickDelay(arg0: number): number;
+        static reducedTickDelay(arg0: number): number;
+        getFlags(): $EnumSet<$Goal$Flag>;
+        tick(): void;
         start(): void;
         stop(): void;
         canUse(): boolean;
         setFlags(arg0: $EnumSet<$Goal$Flag_>): void;
-        tick(): void;
-        getFlags(): $EnumSet<$Goal$Flag>;
-        requiresUpdateEveryTick(): boolean;
-        adjustedTickDelay(arg0: number): number;
-        static reducedTickDelay(arg0: number): number;
-        canContinueToUse(): boolean;
-        isInterruptable(): boolean;
         constructor();
         get interruptable(): boolean;
     }
@@ -401,9 +401,9 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         constructor(arg0: $PathfinderMob);
     }
     export class $RandomStrollGoal extends $Goal {
-        trigger(): void;
-        getPosition(): $Vec3;
         setInterval(arg0: number): void;
+        getPosition(): $Vec3;
+        trigger(): void;
         speedModifier: number;
         mob: $PathfinderMob;
         static DEFAULT_INTERVAL: number;
@@ -412,9 +412,9 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         wantedY: number;
         wantedX: number;
         interval: number;
-        constructor(arg0: $PathfinderMob, arg1: number, arg2: number, arg3: boolean);
         constructor(arg0: $PathfinderMob, arg1: number, arg2: number);
         constructor(arg0: $PathfinderMob, arg1: number);
+        constructor(arg0: $PathfinderMob, arg1: number, arg2: number, arg3: boolean);
         get position(): $Vec3;
     }
     export class $BreedGoal extends $Goal {
@@ -422,8 +422,8 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         partner: $Animal;
         level: $Level;
         animal: $Animal;
-        constructor(arg0: $Animal, arg1: number);
         constructor(arg0: $Animal, arg1: number, arg2: $Class<$Animal>);
+        constructor(arg0: $Animal, arg1: number);
     }
     export class $OpenDoorGoal extends $DoorInteractGoal {
         mob: $Mob;
@@ -449,8 +449,8 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         probability: number;
         wantedX: number;
         interval: number;
-        constructor(arg0: $PathfinderMob, arg1: number);
         constructor(arg0: $PathfinderMob, arg1: number, arg2: number);
+        constructor(arg0: $PathfinderMob, arg1: number);
     }
     export class $UseItemGoal<T extends $Mob> extends $Goal {
         constructor(arg0: T, arg1: $ItemStack_, arg2: $SoundEvent_, arg3: $Predicate_<T>);

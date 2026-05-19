@@ -22,5 +22,5 @@ declare module "@package/dev/ryanhcode/sable/api/physics/callback" {
     /**
      * Values that may be interpreted as {@link $BlockSubLevelCollisionCallback$CollisionResult}.
      */
-    export type $BlockSubLevelCollisionCallback$CollisionResult_ = { removeCollision?: boolean, tangentMotion?: $Vector3dc,  } | [removeCollision?: boolean, tangentMotion?: $Vector3dc, ];
+    export type $BlockSubLevelCollisionCallback$CollisionResult_ = { tangentMotion?: $Vector3dc, removeCollision?: boolean,  } | [tangentMotion?: $Vector3dc, removeCollision?: boolean, ];
 }

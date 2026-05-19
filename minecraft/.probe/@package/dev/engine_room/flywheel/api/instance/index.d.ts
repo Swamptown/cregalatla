@@ -24,9 +24,9 @@ declare module "@package/dev/engine_room/flywheel/api/instance" {
     export class $Instancer<I extends $Instance> {
     }
     export interface $Instancer<I extends $Instance> {
-        createInstance(): I;
-        createInstances(arr: I[]): void;
         stealInstance(arg0: I): void;
+        createInstances(arr: I[]): void;
+        createInstance(): I;
     }
     export class $InstanceWriter<I extends $Instance> {
     }
@@ -40,18 +40,18 @@ declare module "@package/dev/engine_room/flywheel/api/instance" {
     export class $InstanceType<I extends $Instance> {
     }
     export interface $InstanceType<I extends $Instance> {
-        writer(): $InstanceWriter<I>;
-        create(arg0: $InstanceHandle): I;
         cullShader(): $ResourceLocation;
         vertexShader(): $ResourceLocation;
+        writer(): $InstanceWriter<I>;
+        create(arg0: $InstanceHandle): I;
         layout(): $Layout;
     }
     export class $Instance {
     }
     export interface $Instance {
         type(): $InstanceType<never>;
-        handle(): $InstanceHandle;
         delete(): void;
+        handle(): $InstanceHandle;
         setVisible(visible: boolean): void;
         setChanged(): void;
         set visible(value: boolean);

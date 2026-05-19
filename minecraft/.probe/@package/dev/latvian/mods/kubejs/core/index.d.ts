@@ -80,14 +80,6 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     }
     export interface $EntityKJS extends $WithPersistentData, $MessageSenderKJS, $ScriptTypeHolder {
         /**
-         * Runs the specified console command with permission level of the entity. The command won't output any logs in chat nor console.
-         * 
-         * @param command The console command. Slash at the beginning is optional.
-         */
-        runCommandSilent(command: string): void;
-        getName(): $Component;
-        getDisplayName(): $Component;
-        /**
          * Sends a message in chat to the entity.
          * 
          * @param message A text component. It may be a string, which will be implicitly wrapped into a text component.
@@ -99,8 +91,16 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
          * @param command The console command. Slash at the beginning is optional.
          */
         runCommand(command: string): void;
-        rayTrace(distance: number): $KubeRayTraceResult;
+        /**
+         * Runs the specified console command with permission level of the entity. The command won't output any logs in chat nor console.
+         * 
+         * @param command The console command. Slash at the beginning is optional.
+         */
+        runCommandSilent(command: string): void;
+        getName(): $Component;
+        getDisplayName(): $Component;
         rayTrace(distance: number, fluids: boolean): $KubeRayTraceResult;
+        rayTrace(distance: number): $KubeRayTraceResult;
         rayTraceEntity(distance: number, filter: $Predicate_<$Entity>): $Entity;
         /**
          * Checks if the entity is a `LivingEntity`.
@@ -353,17 +353,17 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         set<T extends keyof DataComponentTypes.InputMap>(type: T, data: DataComponentTypes.InputMap[T]): this;
     }
     export interface $FluidStackKJS extends $Replaceable, $SpecialEquality, $WithCodec, $FluidLike, $FluidMatch, $MutableDataComponentHolderFunctions, $RegistryObjectKJS<$Fluid> {
-        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, ingredient: $FluidIngredient_, exact: boolean): boolean;
+        kjs$getFluid(): $Fluid;
         kjs$getAmount(): number;
         kjs$copy(amount: number): $FluidLike;
-        kjs$getFluid(): $Fluid;
         kjs$equalsIgnoringCount(stack: $FluidStack_): boolean;
+        matches(cx: $RecipeMatchContext, ingredient: $FluidIngredient_, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
         getCodec(): $Codec<never>;
-        kjs$getKey(): $ResourceKey<$Fluid>;
         kjs$self(): $FluidStack;
-        kjs$isEmpty(): boolean;
+        kjs$getKey(): $ResourceKey<$Fluid>;
         specialEquals(o: $Object, shallow: boolean): boolean;
+        kjs$isEmpty(): boolean;
         kjs$getId(): string;
         kjs$asHolder(): $Holder<$Fluid>;
         kjs$getIdLocation(): $ResourceLocation;
@@ -393,11 +393,11 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $SizedIngredientKJS {
     }
     export interface $SizedIngredientKJS extends $Replaceable, $IngredientSupplierKJS, $ItemMatch {
-        matches(cx: $RecipeMatchContext, _in: $Ingredient_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, item: $ItemStack_, exact: boolean): boolean;
+        kjs$asIngredient(): $Ingredient;
         kjs$toFlatJson(): $JsonElement;
         kjs$toNestedJson(): $JsonElement;
-        kjs$asIngredient(): $Ingredient;
+        matches(cx: $RecipeMatchContext, _in: $Ingredient_, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, item: $ItemStack_, exact: boolean): boolean;
         kjs$self(): $SizedIngredient;
         replaceThisWith(cx: $RecipeScriptContext, _with: $Object): $Object;
     }
@@ -513,14 +513,16 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     }
     export interface $LivingEntityKJS extends $EntityKJS {
         foodEaten(eatenStack: $ItemStack_, food: $FoodProperties_): void;
+        getDefaultMovementSpeed(): number;
+        setDefaultMovementSpeed(speed: number): void;
         getEquipment(slot: $EquipmentSlot_): $ItemStack;
         setEquipment(slot: $EquipmentSlot_, item: $ItemStack_): void;
-        damageEquipment(slot: $EquipmentSlot_, amount: number, onBroken: $Consumer_<$ItemStack>): void;
         damageEquipment(slot: $EquipmentSlot_, amount: number): void;
+        damageEquipment(slot: $EquipmentSlot_, amount: number, onBroken: $Consumer_<$ItemStack>): void;
         damageEquipment(slot: $EquipmentSlot_): void;
-        damageHeldItem(hand: $InteractionHand_, amount: number, onBroken: $Consumer_<$ItemStack>): void;
-        damageHeldItem(hand: $InteractionHand_, amount: number): void;
         damageHeldItem(): void;
+        damageHeldItem(hand: $InteractionHand_, amount: number): void;
+        damageHeldItem(hand: $InteractionHand_, amount: number, onBroken: $Consumer_<$ItemStack>): void;
         getReachDistance(): number;
         rayTrace(): $KubeRayTraceResult;
         rayTraceEntity(filter: $Predicate_<$Entity>): $Entity;
@@ -533,8 +535,8 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         setMaxHealth(hp: number): void;
         isUndead(): boolean;
         getPotionEffects(): $EntityPotionEffectsJS;
-        swing(hand: $InteractionHand_): void;
         swing(): void;
+        swing(hand: $InteractionHand_): void;
         getHeldItem(hand: $InteractionHand_): $ItemStack;
         setHeldItem(hand: $InteractionHand_, item: $ItemStack_): void;
         getMainHandItem(): $ItemStack;
@@ -551,8 +553,6 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         setFeetArmorItem(item: $ItemStack_): void;
         isHoldingInAnyHand(itemPredicate: $ItemPredicate_): boolean;
         getTotalMovementSpeed(): number;
-        getDefaultMovementSpeed(): number;
-        setDefaultMovementSpeed(speed: number): void;
         setMovementSpeedAddition(speed: number): void;
         setDefaultMovementSpeedMultiplier(speed: number): void;
         setTotalMovementSpeedMultiplier(speed: number): void;
@@ -598,14 +598,6 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         getAdvancement(id: $ResourceLocation_): $AdvancementNode;
         restoreInventories(): $Map<$UUID, $Map<number, $ItemStack>>;
         getPlayer(selector: $PlayerSelector_): $ServerPlayer;
-        /**
-         * Runs the specified console command. The command won't output any logs in chat nor console.
-         * 
-         * @param command The console command. Slash at the beginning is optional.
-         */
-        runCommandSilent(command: string): void;
-        setActivePostShader(id: $ResourceLocation_): void;
-        getName(): $Component;
         self(): $MinecraftServer;
         tell(message: $Component_): void;
         setStatusMessage(message: $Component_): void;
@@ -615,6 +607,14 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
          * @param command The console command. Slash at the beginning is optional.
          */
         runCommand(command: string): void;
+        /**
+         * Runs the specified console command. The command won't output any logs in chat nor console.
+         * 
+         * @param command The console command. Slash at the beginning is optional.
+         */
+        runCommandSilent(command: string): void;
+        setActivePostShader(id: $ResourceLocation_): void;
+        getName(): $Component;
         getLevel(dimension: $ResourceLocation_): $ServerLevel;
         sendData(channel: string, data: $CompoundTag_): void;
         getMcEntities(): $Iterable<$Entity>;
@@ -623,9 +623,9 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         getMcPlayers(): $List<$Player>;
         getPlayers(): $EntityArrayList;
         get overworld(): $ServerLevel;
+        set statusMessage(value: $Component_);
         set activePostShader(value: $ResourceLocation_);
         get name(): $Component;
-        set statusMessage(value: $Component_);
         get mcEntities(): $Iterable<$Entity>;
         get mcPlayers(): $List<$Player>;
         get players(): $EntityArrayList;
@@ -645,36 +645,28 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $RecipeLikeKJS {
     }
     export interface $RecipeLikeKJS {
+        getGroup(): string;
+        setGroup(group: string): void;
+        getOrCreateId(): $ResourceLocation;
         getSchema(): $RecipeSchema;
         replaceInput(cx: $RecipeScriptContext, match: $ReplacementMatchInfo_, _with: $Object): boolean;
-        hasOutput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
         replaceOutput(cx: $RecipeScriptContext, match: $ReplacementMatchInfo_, _with: $Object): boolean;
+        hasInput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
         getTypeKey(): $ResourceKey<$RecipeSerializer<never>>;
         getSerializer(): $RecipeSerializer<never>;
-        getGroup(): string;
-        getOrCreateId(): $ResourceLocation;
-        setGroup(group: string): void;
-        hasInput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
+        hasOutput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
         getType(): $ResourceLocation;
         getMod(): string;
+        get orCreateId(): $ResourceLocation;
         get schema(): $RecipeSchema;
         get typeKey(): $ResourceKey<$RecipeSerializer<never>>;
         get serializer(): $RecipeSerializer<never>;
-        get orCreateId(): $ResourceLocation;
         get type(): $ResourceLocation;
         get mod(): string;
     }
     export class $LevelKJS {
     }
     export interface $LevelKJS extends $WithAttachedData<$Level>, $ScriptTypeHolder, $EntityGetterKJS {
-        /**
-         * Each player in the level (world) runs the specified console command with their permission level. The command won't output any logs in chat nor console
-         * 
-         * @param command The console command. Slash at the beginning is optional.
-         */
-        runCommandSilent(command: string): void;
-        setActivePostShader(id: $ResourceLocation_): void;
-        getName(): $Component;
         self(): $EntityGetter;
         tell(message: $Component_): void;
         setStatusMessage(message: $Component_): void;
@@ -684,13 +676,18 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
          * @param command The console command. Slash at the beginning is optional.
          */
         runCommand(command: string): void;
-        getBlock(x: number, y: number, z: number): $LevelBlock;
+        /**
+         * Each player in the level (world) runs the specified console command with their permission level. The command won't output any logs in chat nor console
+         * 
+         * @param command The console command. Slash at the beginning is optional.
+         */
+        runCommandSilent(command: string): void;
+        setActivePostShader(id: $ResourceLocation_): void;
+        getName(): $Component;
         getBlock(pos: $BlockPos_): $LevelBlock;
+        getBlock(x: number, y: number, z: number): $LevelBlock;
         getBlock(entity: $BlockEntity): $LevelBlock;
         getSide(): $ScriptType;
-        spawnEntity(type: $EntityType_<never>, callback: $Consumer_<$Entity>): void;
-        spawnFireworks(x: number, y: number, z: number, fireworks: $Fireworks_, lifetime: number): void;
-        spawnParticles(options: $ParticleOptions_, overrideLimiter: boolean, x: number, y: number, z: number, vx: number, vy: number, vz: number, count: number, speed: number): void;
         getDimension(): $ResourceLocation;
         spawnLightning(x: number, y: number, z: number, visualOnly: boolean, cause: $ServerPlayer): void;
         spawnLightning(x: number, y: number, z: number, visualOnly: boolean): void;
@@ -698,9 +695,12 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         setTime(time: number): void;
         explode(x: number, y: number, z: number, properties: $ExplosionProperties_): $Explosion;
         createEntity(type: $EntityType_<never>): $Entity;
+        spawnEntity(type: $EntityType_<never>, callback: $Consumer_<$Entity>): void;
+        spawnFireworks(x: number, y: number, z: number, fireworks: $Fireworks_, lifetime: number): void;
+        spawnParticles(options: $ParticleOptions_, overrideLimiter: boolean, x: number, y: number, z: number, vx: number, vy: number, vz: number, count: number, speed: number): void;
+        set statusMessage(value: $Component_);
         set activePostShader(value: $ResourceLocation_);
         get name(): $Component;
-        set statusMessage(value: $Component_);
         get side(): $ScriptType;
         get dimension(): $ResourceLocation;
         get overworld(): boolean;
@@ -713,9 +713,9 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $FluidIngredientKJS {
     }
     export interface $FluidIngredientKJS extends $WithCodec, $FluidMatch {
-        matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
         withAmount(amount: number): $SizedFluidIngredient;
+        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
         getCodec(): $Codec<never>;
         self(): $FluidIngredient;
         get codec(): $Codec<never>;
@@ -731,16 +731,16 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
      */
     export type $WindowKJS$KJSScaledIconProvider_ = { target?: number, original?: $BufferedImage,  } | [target?: number, original?: $BufferedImage, ];
     export class $PlayerSelector {
+        static fuzzyName(name: string): $PlayerSelector;
         static name(name: string): $PlayerSelector;
         static wrap(o: $Object): $PlayerSelector;
         static identity(player: $ServerPlayer): $PlayerSelector;
-        static fuzzyName(name: string): $PlayerSelector;
         static uuid(uuid: $UUID_): $PlayerSelector;
         static TYPE_INFO: $TypeInfo;
     }
     export interface $PlayerSelector {
-        or(fallback: $PlayerSelector_): $PlayerSelector;
         getPlayer(server: $MinecraftServer): $ServerPlayer;
+        or(fallback: $PlayerSelector_): $PlayerSelector;
     }
     /**
      * Values that may be interpreted as {@link $PlayerSelector}.
@@ -751,18 +751,18 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export interface $LocalClientPlayerKJS extends $ClientPlayerKJS {
         getMinecraft(): $Minecraft;
         /**
+         * Runs the specified console command client-side with the player's permission level.
+         * 
+         * @param command The console command. Slash at the beginning is optional.
+         */
+        runCommand(command: string): void;
+        /**
          * Runs the specified console command client-side with the player's permission level. The command won't output any logs in chat nor console.
          * 
          * @param command The console command. Slash at the beginning is optional.
          */
         runCommandSilent(command: string): void;
         setActivePostShader(id: $ResourceLocation_): void;
-        /**
-         * Runs the specified console command client-side with the player's permission level.
-         * 
-         * @param command The console command. Slash at the beginning is optional.
-         */
-        runCommand(command: string): void;
         /**
          * Checks, whether the entity is a reference to yourself - that is - the client player you are controlling.
          */
@@ -806,11 +806,11 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $CustomIngredientKJS {
     }
     export interface $CustomIngredientKJS extends $ItemPredicate {
+        kjs$asIngredient(): $Ingredient;
+        kjs$canBeUsedForMatching(): boolean;
         kjs$getStackArray(): $ItemStack[];
         kjs$getDisplayStacks(): $ItemStackSet;
-        kjs$asIngredient(): $Ingredient;
         getItems(): $Stream<$ItemStack>;
-        kjs$canBeUsedForMatching(): boolean;
         get items(): $Stream<$ItemStack>;
     }
     /**
@@ -820,13 +820,13 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $FluidKJS {
     }
     export interface $FluidKJS extends $RegistryObjectKJS<$Fluid>, $FluidLike {
-        getAmount(): number;
         getFluid(): $Fluid;
+        getAmount(): number;
         isEmpty(): boolean;
         getRegistryId(): $ResourceKey<$Registry<$Fluid>>;
         getRegistry(): $Registry<$Fluid>;
-        get amount(): number;
         get fluid(): $Fluid;
+        get amount(): number;
         get empty(): boolean;
         get registryId(): $ResourceKey<$Registry<$Fluid>>;
         get registry(): $Registry<$Fluid>;
@@ -843,7 +843,11 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $PlayerKJS {
     }
     export interface $PlayerKJS extends $LivingEntityKJS, $DataSenderKJS, $WithAttachedData<$Player> {
+        getInventoryChangeListener(): $KubeJSInventoryListener;
         setStatusMessage(message: $Component_): void;
+        getStages(): $Stages;
+        getInventory(): $InventoryKJS;
+        getCraftingGrid(): $InventoryKJS;
         /**
          * Gets the player's profile.
          */
@@ -857,10 +861,6 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
          */
         isPlayer(): this is $Player;
         spawn(): void;
-        getStages(): $Stages;
-        getInventory(): $InventoryKJS;
-        getCraftingGrid(): $InventoryKJS;
-        getInventoryChangeListener(): $KubeJSInventoryListener;
         getSelectedSlot(): number;
         notify(title: $Component_, text: $Component_): void;
         notify(builder: $NotificationToastData_): void;
@@ -891,14 +891,14 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         boostElytraFlight(): void;
         getOpenInventory(): $AbstractContainerMenu;
         addItemCooldown(item: $Item_, ticks: number): void;
+        get inventoryChangeListener(): $KubeJSInventoryListener;
         set statusMessage(value: $Component_);
-        get profile(): $GameProfile;
-        get username(): string;
-        get player(): boolean;
         get stages(): $Stages;
         get inventory(): $InventoryKJS;
         get craftingGrid(): $InventoryKJS;
-        get inventoryChangeListener(): $KubeJSInventoryListener;
+        get profile(): $GameProfile;
+        get username(): string;
+        get player(): boolean;
         get stats(): $PlayerStatsJS;
         get miningBlock(): boolean;
         get fake(): boolean;
@@ -921,33 +921,33 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $SizedFluidIngredientKJS {
     }
     export interface $SizedFluidIngredientKJS extends $Replaceable, $FluidMatch {
-        matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
         toFlatJson(): $JsonElement;
         toNestedJson(): $JsonElement;
+        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
         self(): $SizedFluidIngredient;
         replaceThisWith(cx: $RecipeScriptContext, _with: $Object): $Object;
     }
     export class $RecipeHolderKJS {
     }
     export interface $RecipeHolderKJS extends $RecipeLikeKJS {
-        getSchema(): $RecipeSchema;
-        replaceInput(cx: $RecipeScriptContext, match: $ReplacementMatchInfo_, _with: $Object): boolean;
-        hasOutput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
-        replaceOutput(cx: $RecipeScriptContext, match: $ReplacementMatchInfo_, _with: $Object): boolean;
-        getTypeKey(): $ResourceKey<$RecipeSerializer<never>>;
-        getSerializer(): $RecipeSerializer<never>;
         getRecipe(): $Recipe<never>;
         getGroup(): string;
-        getOrCreateId(): $ResourceLocation;
         setGroup(group: string): void;
+        getOrCreateId(): $ResourceLocation;
+        getSchema(): $RecipeSchema;
+        replaceInput(cx: $RecipeScriptContext, match: $ReplacementMatchInfo_, _with: $Object): boolean;
+        replaceOutput(cx: $RecipeScriptContext, match: $ReplacementMatchInfo_, _with: $Object): boolean;
         hasInput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
+        getTypeKey(): $ResourceKey<$RecipeSerializer<never>>;
+        getSerializer(): $RecipeSerializer<never>;
+        hasOutput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
         self(): $RecipeHolder<never>;
+        get recipe(): $Recipe<never>;
+        get orCreateId(): $ResourceLocation;
         get schema(): $RecipeSchema;
         get typeKey(): $ResourceKey<$RecipeSerializer<never>>;
         get serializer(): $RecipeSerializer<never>;
-        get recipe(): $Recipe<never>;
-        get orCreateId(): $ResourceLocation;
     }
     export class $ReloadableServerResourcesKJS {
     }
@@ -958,15 +958,6 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $MessageSenderKJS {
     }
     export interface $MessageSenderKJS {
-        /**
-         * Runs the specified console command. The command won't output any logs in chat nor console.
-         * 
-         * @param command The console command. Slash at the beginning is optional.
-         */
-        runCommandSilent(command: string): void;
-        setActivePostShader(id: $ResourceLocation_): void;
-        getName(): $Component;
-        getDisplayName(): $Component;
         /**
          * Sends a message in chat to something.
          * 
@@ -980,10 +971,19 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
          * @param command The console command. Slash at the beginning is optional.
          */
         runCommand(command: string): void;
+        /**
+         * Runs the specified console command. The command won't output any logs in chat nor console.
+         * 
+         * @param command The console command. Slash at the beginning is optional.
+         */
+        runCommandSilent(command: string): void;
+        setActivePostShader(id: $ResourceLocation_): void;
+        getName(): $Component;
+        getDisplayName(): $Component;
+        set statusMessage(value: $Component_);
         set activePostShader(value: $ResourceLocation_);
         get name(): $Component;
         get displayName(): $Component;
-        set statusMessage(value: $Component_);
     }
     export class $AdvancementNodeKJS {
     }
@@ -1015,10 +1015,10 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $RecipeInputKJS {
     }
     export interface $RecipeInputKJS {
-        find(filter: $SlotFilter_): $ItemStack;
-        find(filter: $SlotFilter_, skip: number): $ItemStack;
         findAll(): $List<$ItemStack>;
         findAll(filter: $SlotFilter_): $List<$ItemStack>;
+        find(filter: $SlotFilter_, skip: number): $ItemStack;
+        find(filter: $SlotFilter_): $ItemStack;
         self(): $RecipeInput;
     }
     export class $InventoryKJS {
@@ -1096,8 +1096,8 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         openInventoryGUI(inventory: $InventoryKJS, title: $Component_, columns: number, rows: number): void;
         openInventoryGUI(inventory: $InventoryKJS, title: $Component_, columns: number): void;
         openInventoryGUI(inventory: $InventoryKJS, title: $Component_): void;
-        openChestGUI(gui: $Consumer_<$KubeJSGUI>): void;
         openChestGUI(title: $Component_, rows: number, gui: $Consumer_<$ChestMenuData>): void;
+        openChestGUI(gui: $Consumer_<$KubeJSGUI>): void;
         captureInventory(autoRestore: boolean): $Container;
         /**
          * Switches the player's gamemode between Creative and Survival.
@@ -1182,11 +1182,11 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $MinecraftEnvironmentKJS {
     }
     export interface $MinecraftEnvironmentKJS extends $MessageSenderKJS {
+        getScheduledEvents(): $ScheduledEvents;
         schedule(timer: $TemporalAmount_, callback: $ScheduledEvents$Callback_): $ScheduledEvents$ScheduledEvent;
         scheduleInTicks(ticks: $TickDuration_, callback: $ScheduledEvents$Callback_): $ScheduledEvents$ScheduledEvent;
         scheduleRepeating(timer: $TemporalAmount_, callback: $ScheduledEvents$Callback_): $ScheduledEvents$ScheduledEvent;
         scheduleRepeatingInTicks(ticks: $TickDuration_, callback: $ScheduledEvents$Callback_): $ScheduledEvents$ScheduledEvent;
-        getScheduledEvents(): $ScheduledEvents;
         get scheduledEvents(): $ScheduledEvents;
     }
     /**
@@ -1314,6 +1314,16 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $MinecraftClientKJS {
     }
     export interface $MinecraftClientKJS extends $MinecraftEnvironmentKJS {
+        self(): $Minecraft;
+        getTitle(): string;
+        tell(message: $Component_): void;
+        setStatusMessage(message: $Component_): void;
+        /**
+         * Runs the specified console command client-side with the player's permission level.
+         * 
+         * @param command The console command. Slash at the beginning is optional.
+         */
+        runCommand(command: string): void;
         /**
          * Runs the specified console command client-side with the player's permission level. The command won't output any logs in chat nor console.
          * 
@@ -1321,8 +1331,8 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
          */
         runCommandSilent(command: string): void;
         setActivePostShader(id: $ResourceLocation_): void;
-        isKeyDown(key: number): boolean;
         isKeyDown(keyName: string): boolean;
+        isKeyDown(key: number): boolean;
         getName(): $Component;
         getCurrentScreen(): $Screen;
         setCurrentScreen(gui: $Screen): void;
@@ -1336,16 +1346,7 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         isAltDown(): boolean;
         getBlockTextureAtlas(): $Function<$ResourceLocation, $TextureAtlasSprite>;
         getParticleTextureAtlas(): $Function<$ResourceLocation, $TextureAtlasSprite>;
-        self(): $Minecraft;
-        getTitle(): string;
-        tell(message: $Component_): void;
-        setStatusMessage(message: $Component_): void;
-        /**
-         * Runs the specified console command client-side with the player's permission level.
-         * 
-         * @param command The console command. Slash at the beginning is optional.
-         */
-        runCommand(command: string): void;
+        set statusMessage(value: $Component_);
         set activePostShader(value: $ResourceLocation_);
         get name(): $Component;
         get currentWorldName(): string;
@@ -1354,7 +1355,6 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         get altDown(): boolean;
         get blockTextureAtlas(): $Function<$ResourceLocation, $TextureAtlasSprite>;
         get particleTextureAtlas(): $Function<$ResourceLocation, $TextureAtlasSprite>;
-        set statusMessage(value: $Component_);
     }
     /**
      * Values that may be interpreted as {@link $MinecraftClientKJS}.
@@ -1397,8 +1397,7 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $IngredientKJS {
     }
     export interface $IngredientKJS extends $ItemPredicate, $Replaceable, $WithCodec, $ItemMatch {
-        matches(cx: $RecipeMatchContext, _in: $Ingredient_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, item: $ItemStack_, exact: boolean): boolean;
+        asIngredient(): $Ingredient;
         getStackArray(): $ItemStack[];
         and(ingredient: $Ingredient_): $Ingredient;
         or(ingredient: $Ingredient_): $Ingredient;
@@ -1407,8 +1406,9 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         getTagKey(): $TagKey<$Item>;
         containsAnyTag(): boolean;
         toIngredientString(ops: $DynamicOps<$Tag_>): string;
-        asIngredient(): $Ingredient;
         withCount(count: number): $SizedIngredient;
+        matches(cx: $RecipeMatchContext, item: $ItemStack_, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, _in: $Ingredient_, exact: boolean): boolean;
         getCodec(): $Codec<never>;
         self(): $Ingredient;
         isWildcard(): boolean;
@@ -1446,8 +1446,8 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
     export class $ReloadableServerResourceHolderKJS {
     }
     export interface $ReloadableServerResourceHolderKJS {
-        kjs$setResources(resources: $ReloadableServerResourcesKJS): void;
         kjs$getResources(): $ReloadableServerResourcesKJS;
+        kjs$setResources(resources: $ReloadableServerResourcesKJS): void;
     }
     export class $ItemStackKJS {
         get<T extends keyof DataComponentTypes.OutputMap>(type: T): DataComponentTypes.OutputMap[T] | null;
@@ -1456,11 +1456,9 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         set<T extends keyof DataComponentTypes.InputMap>(type: T, data: DataComponentTypes.InputMap[T]): this;
     }
     export interface $ItemStackKJS extends $SpecialEquality, $WithCodec, $IngredientSupplierKJS, $ToStringJS, $Replaceable, $ItemComponentFunctions, $MutableDataComponentHolderFunctions, $ItemMatch, $RegistryObjectKJS<$Item> {
-        matches(cx: $RecipeMatchContext, s: $ItemStack_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, itemLike: $ItemLike_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, _in: $Ingredient_, exact: boolean): boolean;
-        asIngredient(): $Ingredient;
         getTypeData(): $Map<string, $Object>;
+        asIngredient(): $Ingredient;
+        getComponentString(): string;
         equalsIgnoringCount(stack: $ItemStack_): boolean;
         getEnchantments(): $ItemEnchantments;
         getHarvestSpeed(): number;
@@ -1469,8 +1467,8 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         withCount(c: number): this;
         withCustomName(name: $Component_): this;
         hasEnchantment(enchantment: $Holder_<$Enchantment>, level: number): boolean;
-        enchant(enchantments: $ItemEnchantments_): this;
         enchant(enchantment: $Holder_<$Enchantment>, level: number): this;
+        enchant(enchantments: $ItemEnchantments_): this;
         areItemsEqual(other: $ItemStack_): boolean;
         areComponentsEqual(other: $ItemStack_): boolean;
         toStringJS(): string;
@@ -1481,10 +1479,12 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         withChance(chance: number): $ItemStack;
         withLore(lines: $Component_[], styledLines: $Component_[]): this;
         withLore(lines: $Component_[]): this;
-        getComponentString(): string;
+        matches(cx: $RecipeMatchContext, s: $ItemStack_, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, _in: $Ingredient_, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, itemLike: $ItemLike_, exact: boolean): boolean;
         getCodec(): $Codec<$ItemStack>;
-        getKey(): $ResourceKey<$Item>;
         self(): $ItemStack;
+        getKey(): $ResourceKey<$Item>;
         specialEquals(o: $Object, shallow: boolean): boolean;
         getId(): string;
         getBlock(): $Block;
@@ -1500,8 +1500,8 @@ declare module "@package/dev/latvian/mods/kubejs/core" {
         set(components: $DataComponentMap_): this;
         set<T extends keyof DataComponentTypes.InputMap>(type: T, data: DataComponentTypes.InputMap[T]): this;
         get typeData(): $Map<string, $Object>;
-        get enchantments(): $ItemEnchantments;
         get componentString(): string;
+        get enchantments(): $ItemEnchantments;
         get codec(): $Codec<$ItemStack>;
         get key(): $ResourceKey<$Item>;
         get id(): string;

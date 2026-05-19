@@ -40,8 +40,8 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(arg0: $RenderLayerParent<$IronGolem, $IronGolemModel<$IronGolem>>, arg1: $BlockRenderDispatcher);
     }
     export class $VillagerProfessionLayer<T extends $LivingEntity, M extends $EntityModel<T>> extends $RenderLayer<T, M> {
-        render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         getHatData<K>(arg0: $Object2ObjectMap<K, $VillagerMetaDataSection$Hat_>, arg1: string, arg2: $DefaultedRegistry<K>, arg3: K): $VillagerMetaDataSection$Hat;
+        render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         renderer: $RenderLayerParent<T, M>;
         constructor(arg0: $RenderLayerParent<T, M>, arg1: $ResourceManager, arg2: string);
     }
@@ -103,8 +103,8 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(arg0: $RenderLayerParent<T, M>);
     }
     export class $SpinAttackEffectLayer<T extends $LivingEntity> extends $RenderLayer<T, $PlayerModel<T>> {
-        render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         static createLayer(): $LayerDefinition;
+        render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         static TEXTURE: $ResourceLocation;
         renderer: $RenderLayerParent<T, $PlayerModel<T>>;
         static BOX: string;
@@ -131,31 +131,31 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(arg0: $RenderLayerParent<T, M>, arg1: $ItemInHandRenderer);
     }
     export class $HumanoidArmorLayer<T extends $LivingEntity, M extends $HumanoidModel<T>, A extends $HumanoidModel<T>> extends $RenderLayer<T, M> implements $HumanoidArmorLayerAccessor {
-        render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
-        static getArmorLocationCache$create_$md$d858b6$0(): $Map<any, any>;
-        wrapWithCondition$ddc000$geckolib$wrapArmorPieceRender(arg0: $HumanoidArmorLayer<any, any, any>, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: $LivingEntity, arg4: $EquipmentSlot_, arg5: number, arg6: $HumanoidModel<any>, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): boolean;
         setPartVisibility(arg0: A, arg1: $EquipmentSlot_): void;
         getArmorModelHook(arg0: T, arg1: $ItemStack_, arg2: $EquipmentSlot_, arg3: A): $Model;
+        wrapWithCondition$ddo000$geckolib$wrapArmorPieceRender(arg0: $HumanoidArmorLayer<any, any, any>, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: $LivingEntity, arg4: $EquipmentSlot_, arg5: number, arg6: $HumanoidModel<any>, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): boolean;
+        static getArmorLocationCache$create_$md$4ca6b6$0(): $Map<any, any>;
+        render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         create$getInnerModel(): $HumanoidModel<never>;
         create$callSetPartVisibility(arg0: $HumanoidModel<never>, arg1: $EquipmentSlot_): void;
         create$getOuterModel(): $HumanoidModel<never>;
         renderer: $RenderLayerParent<T, M>;
         constructor(arg0: $RenderLayerParent<T, M>, arg1: A, arg2: A, arg3: $ModelManager);
-        static get armorLocationCache$create_$md$d858b6$0(): $Map<any, any>;
+        static get armorLocationCache$create_$md$4ca6b6$0(): $Map<any, any>;
     }
     export class $EnderEyesLayer<T extends $LivingEntity> extends $EyesLayer<T, $EndermanModel<T>> {
         renderer: $RenderLayerParent<T, $EndermanModel<T>>;
         constructor(arg0: $RenderLayerParent<T, $EndermanModel<T>>);
     }
     export class $PlayerItemInHandLayer<T extends $Player, M extends $EntityModel<T>> extends $ItemInHandLayer<T, M> {
-        handler$gkd000$moonlight$poseRightArm(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: $HumanoidArm_, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: $CallbackInfo): void;
+        handler$gkp000$moonlight$poseRightArm(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: $HumanoidArm_, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: $CallbackInfo): void;
         renderer: $RenderLayerParent<T, M>;
         constructor(arg0: $RenderLayerParent<T, M>, arg1: $ItemInHandRenderer);
     }
     export class $ElytraLayer<T extends $LivingEntity, M extends $EntityModel<T>> extends $RenderLayer<T, M> {
+        getElytraTexture(arg0: $ItemStack_, arg1: T): $ResourceLocation;
         render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         shouldRender(arg0: $ItemStack_, arg1: T): boolean;
-        getElytraTexture(arg0: $ItemStack_, arg1: T): $ResourceLocation;
         renderer: $RenderLayerParent<T, M>;
         constructor(arg0: $RenderLayerParent<T, M>, arg1: $EntityModelSet);
     }
@@ -204,8 +204,8 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(arg0: $RenderLayerParent<$Panda, $PandaModel<$Panda>>, arg1: $ItemInHandRenderer);
     }
     export class $EnergySwirlLayer<T extends $Entity, M extends $EntityModel<T>> extends $RenderLayer<T, M> {
-        model(): $EntityModel<T>;
         getTextureLocation(): $ResourceLocation;
+        model(): $EntityModel<T>;
         xOffset(arg0: number): number;
         renderer: $RenderLayerParent<T, M>;
         constructor(arg0: $RenderLayerParent<T, M>);
@@ -216,7 +216,7 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(arg0: $LivingEntityRenderer<T, M>);
     }
     export class $CapeLayer extends $RenderLayer<$AbstractClientPlayer, $PlayerModel<$AbstractClientPlayer>> implements $ICapeLayer {
-        handler$cdg000$fabric_rendering_v1$injectCapeRenderCheck(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CallbackInfo): void;
+        handler$cdn000$fabric_rendering_v1$injectCapeRenderCheck(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CallbackInfo): void;
         render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         applyBend(cape: $ModelPart, torso: $ModelPart, bend: number): void;
         resetBend(cape: $ModelPart): void;
@@ -238,12 +238,12 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
      */
     export type $WardenEmissiveLayer$DrawSelector_<T, M> = ((arg0: M) => $List_<$ModelPart>);
     export class $CustomHeadLayer<T extends $LivingEntity, M extends $EntityModel<T>> extends $RenderLayer<T, M> {
-        render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
-        handler$ggl000$skinlayers3d$render(poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, i: number, livingEntity: $LivingEntity, f: number, g: number, h: number, j: number, k: number, l: number, info: $CallbackInfo): void;
+        handler$ghi000$skinlayers3d$render(poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, i: number, livingEntity: $LivingEntity, f: number, g: number, h: number, j: number, k: number, l: number, info: $CallbackInfo): void;
         static translateToHead(arg0: $PoseStack, arg1: boolean): void;
+        render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         renderer: $RenderLayerParent<T, M>;
-        constructor(arg0: $RenderLayerParent<T, M>, arg1: $EntityModelSet, arg2: $ItemInHandRenderer);
         constructor(arg0: $RenderLayerParent<T, M>, arg1: $EntityModelSet, arg2: number, arg3: number, arg4: number, arg5: $ItemInHandRenderer);
+        constructor(arg0: $RenderLayerParent<T, M>, arg1: $EntityModelSet, arg2: $ItemInHandRenderer);
     }
     export class $CarriedBlockLayer extends $RenderLayer<$EnderMan, $EndermanModel<$EnderMan>> {
         render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $EnderMan, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
@@ -265,8 +265,8 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(arg0: $RenderLayerParent<$Sheep, $SheepModel<$Sheep>>, arg1: $EntityModelSet);
     }
     export class $RenderLayer<T extends $Entity, M extends $EntityModel<T>> {
-        getTextureLocation(arg0: T): $ResourceLocation;
         static coloredCutoutModelCopyLayerRender<T extends $LivingEntity>(arg0: $EntityModel<T>, arg1: $EntityModel<T>, arg2: $ResourceLocation_, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: T, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number, arg13: number): void;
+        getTextureLocation(arg0: T): $ResourceLocation;
         static renderColoredCutoutModel<T extends $LivingEntity>(arg0: $EntityModel<T>, arg1: $ResourceLocation_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: T, arg6: number): void;
         getParentModel(): M;
         render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;

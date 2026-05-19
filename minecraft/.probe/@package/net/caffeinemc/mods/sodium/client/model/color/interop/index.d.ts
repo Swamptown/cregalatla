@@ -6,8 +6,8 @@ import { $Block } from "@package/net/minecraft/world/level/block";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/model/color/interop" {
     export class $BlockColorsExtension {
-        static getProviders(arg0: $BlockColors): $Reference2ReferenceMap<$Block, $BlockColor>;
         static getOverridenVanillaBlocks(arg0: $BlockColors): $ReferenceSet<$Block>;
+        static getProviders(arg0: $BlockColors): $Reference2ReferenceMap<$Block, $BlockColor>;
     }
     export interface $BlockColorsExtension {
         sodium$getProviders(): $Reference2ReferenceMap<$Block, $BlockColor>;

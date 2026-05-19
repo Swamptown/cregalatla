@@ -31,10 +31,10 @@ declare module "@package/javax/print/event" {
         printJobRequiresAttention(arg0: $PrintJobEvent): void;
     }
     export class $PrintServiceAttributeEvent extends $PrintEvent {
-        getAttributes(): $PrintServiceAttributeSet;
         getPrintService(): $PrintService;
+        getAttributes(): $PrintServiceAttributeSet;
         constructor(arg0: $PrintService, arg1: $PrintServiceAttributeSet);
-        get attributes(): $PrintServiceAttributeSet;
         get printService(): $PrintService;
+        get attributes(): $PrintServiceAttributeSet;
     }
 }

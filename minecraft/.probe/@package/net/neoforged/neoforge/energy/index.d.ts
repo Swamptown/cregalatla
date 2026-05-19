@@ -37,10 +37,10 @@ declare module "@package/net/neoforged/neoforge/energy" {
         serializeNBT(arg0: $HolderLookup$Provider): $Tag;
         getEnergyStored(): number;
         getMaxEnergyStored(): number;
-        constructor(arg0: number, arg1: number, arg2: number, arg3: number);
-        constructor(arg0: number, arg1: number, arg2: number);
-        constructor(arg0: number, arg1: number);
         constructor(arg0: number);
+        constructor(arg0: number, arg1: number);
+        constructor(arg0: number, arg1: number, arg2: number);
+        constructor(arg0: number, arg1: number, arg2: number, arg3: number);
         get energyStored(): number;
         get maxEnergyStored(): number;
     }
@@ -51,9 +51,9 @@ declare module "@package/net/neoforged/neoforge/energy" {
         canReceive(): boolean;
         getEnergyStored(): number;
         getMaxEnergyStored(): number;
-        constructor(arg0: $MutableDataComponentHolder, arg1: $DataComponentType_<number>, arg2: number);
-        constructor(arg0: $MutableDataComponentHolder, arg1: $DataComponentType_<number>, arg2: number, arg3: number);
         constructor(arg0: $MutableDataComponentHolder, arg1: $DataComponentType_<number>, arg2: number, arg3: number, arg4: number);
+        constructor(arg0: $MutableDataComponentHolder, arg1: $DataComponentType_<number>, arg2: number, arg3: number);
+        constructor(arg0: $MutableDataComponentHolder, arg1: $DataComponentType_<number>, arg2: number);
         get energyStored(): number;
         get maxEnergyStored(): number;
     }

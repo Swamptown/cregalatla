@@ -6,14 +6,14 @@ declare module "@package/org/apache/maven/artifact/versioning" {
     export class $ArtifactVersion {
     }
     export interface $ArtifactVersion extends $Comparable<$ArtifactVersion> {
-        getMajorVersion(): number;
         getMinorVersion(): number;
+        getMajorVersion(): number;
         getIncrementalVersion(): number;
         getBuildNumber(): number;
         getQualifier(): string;
         parseVersion(arg0: string): void;
-        get majorVersion(): number;
         get minorVersion(): number;
+        get majorVersion(): number;
         get incrementalVersion(): number;
         get buildNumber(): number;
         get qualifier(): string;

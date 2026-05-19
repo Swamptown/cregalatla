@@ -22,15 +22,15 @@ import { $TickingBlockEntity } from "@package/net/minecraft/world/level/block/en
 
 declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
     export class $DummyWorld extends $Level {
-        getBounds(): $AABB;
-        getParticleManager(): $ParticleManager;
+        isFilledBlock(arg0: $BlockPos_): boolean;
         tickWorld(): void;
         setParticleManager(arg0: $ParticleManager): void;
-        isFilledBlock(arg0: $BlockPos_): boolean;
         prepareLighting(arg0: $BlockPos_): void;
         getFilledBlocks(): $LongSet;
         getAsClientWorld(): $Supplier<$ClientLevel>;
+        getParticleManager(): $ParticleManager;
         addEntity(arg0: $Entity): void;
+        getBounds(): $AABB;
         removeEntity(arg0: number, arg1: $Entity$RemovalReason_): void;
         createParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): $Particle;
         tickEntities(): void;
@@ -62,16 +62,16 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
         captureBlockSnapshots: boolean;
         constructor();
         constructor(arg0: $RegistryAccess);
-        get bounds(): $AABB;
         get filledBlocks(): $LongSet;
         get asClientWorld(): $Supplier<$ClientLevel>;
+        get bounds(): $AABB;
     }
     export class $TrackedDummyWorld extends $DummyWorld {
-        clear(): void;
-        setBlockFilter(arg0: $Predicate_<$BlockPos>): void;
         getAllRenderedEntities(): $Iterable<$Entity>;
         addBlocks(arg0: $Map_<$BlockPos_, $BlockInfo>): void;
+        setBlockFilter(arg0: $Predicate_<$BlockPos>): void;
         addBlock(arg0: $BlockPos_, arg1: $BlockInfo): void;
+        clear(): void;
         removeBlock(arg0: $BlockPos_): void;
         self(): $EntityGetter;
         restoringBlockSnapshots: boolean;
@@ -102,7 +102,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
         captureBlockSnapshots: boolean;
         constructor();
         constructor(arg0: $Level_);
-        set blockFilter(value: $Predicate_<$BlockPos>);
         get allRenderedEntities(): $Iterable<$Entity>;
+        set blockFilter(value: $Predicate_<$BlockPos>);
     }
 }

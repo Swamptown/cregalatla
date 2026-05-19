@@ -9,9 +9,9 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/com/simibubi/create/content/trains/schedule/condition" {
     export class $ScheduleWaitCondition extends $ScheduleDataEntry {
-        write(arg0: $HolderLookup$Provider): $CompoundTag;
-        getWaitingStatus(arg0: $Level_, arg1: $Train, arg2: $CompoundTag_): $MutableComponent;
         tickCompletion(arg0: $Level_, arg1: $Train, arg2: $CompoundTag_): boolean;
+        getWaitingStatus(arg0: $Level_, arg1: $Train, arg2: $CompoundTag_): $MutableComponent;
+        write(arg0: $HolderLookup$Provider): $CompoundTag;
         static fromTag(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $ScheduleWaitCondition;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ScheduleWaitCondition>;
         constructor();

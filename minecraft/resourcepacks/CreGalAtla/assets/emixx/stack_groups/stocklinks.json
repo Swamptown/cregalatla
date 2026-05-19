@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:stock_links",
+  "type": "emixx:group",
+  "contents": [
+    "#create_vibrant_vaults:stock_links"
+  ]
+}

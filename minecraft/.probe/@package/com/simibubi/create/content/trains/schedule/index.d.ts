@@ -42,8 +42,8 @@ declare module "@package/com/simibubi/create/content/trains/schedule" {
         constructor(arg0: $ScheduleInstruction, arg1: $List_<$List_<$ScheduleWaitCondition>>);
     }
     export class $Schedule {
-        write(arg0: $HolderLookup$Provider): $CompoundTag;
         static getTypeOptions<T>(arg0: $List_<$Pair<$ResourceLocation_, T>>): $List<$Component>;
+        write(arg0: $HolderLookup$Provider): $CompoundTag;
         static fromTag(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $Schedule;
         entries: $List<$ScheduleEntry>;
         static CONDITION_TYPES: $List<$Pair<$ResourceLocation, $Supplier<$ScheduleWaitCondition>>>;
@@ -55,20 +55,20 @@ declare module "@package/com/simibubi/create/content/trains/schedule" {
         constructor();
     }
     export class $ScheduleRuntime implements $AccessorScheduleRuntime {
-        write(arg0: $HolderLookup$Provider): $CompoundTag;
-        read(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
-        tick(arg0: $Level_): void;
-        discardSchedule(): void;
-        startCooldown(): void;
-        getWaitingStatus(arg0: $Level_): $MutableComponent;
-        startCurrentInstruction(arg0: $Level_): $DiscoveredPath;
-        destinationReached(): void;
-        returnSchedule(arg0: $HolderLookup$Provider): $ItemStack;
-        setSchedule(arg0: $Schedule, arg1: boolean): void;
-        submitPredictions(): $Collection<$GlobalTrainDisplayData$TrainDeparturePrediction>;
         setSchedulePresentClientside(arg0: boolean): void;
         transitInterrupted(): void;
         tickConditions(arg0: $Level_): void;
+        startCooldown(): void;
+        returnSchedule(arg0: $HolderLookup$Provider): $ItemStack;
+        startCurrentInstruction(arg0: $Level_): $DiscoveredPath;
+        destinationReached(): void;
+        getWaitingStatus(arg0: $Level_): $MutableComponent;
+        discardSchedule(): void;
+        submitPredictions(): $Collection<$GlobalTrainDisplayData$TrainDeparturePrediction>;
+        setSchedule(arg0: $Schedule, arg1: boolean): void;
+        tick(arg0: $Level_): void;
+        write(arg0: $HolderLookup$Provider): $CompoundTag;
+        read(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         getSchedule(): $Schedule;
         getTrain(): $Train;
         setCooldown(arg0: number): void;

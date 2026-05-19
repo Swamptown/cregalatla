@@ -59,11 +59,11 @@ declare module "@package/dev/emi/emi/mixin/accessor" {
     export class $SmithingTransformRecipeAccessor {
     }
     export interface $SmithingTransformRecipeAccessor {
-        getBase(): $Ingredient;
         getAddition(): $Ingredient;
+        getBase(): $Ingredient;
         getTemplate(): $Ingredient;
-        get base(): $Ingredient;
         get addition(): $Ingredient;
+        get base(): $Ingredient;
         get template(): $Ingredient;
     }
     export class $ShovelItemAccessor {
@@ -109,11 +109,11 @@ declare module "@package/dev/emi/emi/mixin/accessor" {
     export class $SmithingTrimRecipeAccessor {
     }
     export interface $SmithingTrimRecipeAccessor {
-        getBase(): $Ingredient;
         getAddition(): $Ingredient;
+        getBase(): $Ingredient;
         getTemplate(): $Ingredient;
-        get base(): $Ingredient;
         get addition(): $Ingredient;
+        get base(): $Ingredient;
         get template(): $Ingredient;
     }
     export class $BrewingRecipeRegistryAccessor {

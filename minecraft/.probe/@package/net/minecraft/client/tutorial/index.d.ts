@@ -13,9 +13,9 @@ import { $HitResult } from "@package/net/minecraft/world/phys";
 
 declare module "@package/net/minecraft/client/tutorial" {
     export class $MovementTutorialStepInstance implements $TutorialStepInstance {
-        clear(): void;
-        tick(): void;
         onInput(arg0: $Input): void;
+        tick(): void;
+        clear(): void;
         onMouse(arg0: number, arg1: number): void;
         onLookAt(arg0: $ClientLevel, arg1: $HitResult): void;
         onOpenInventory(): void;
@@ -26,8 +26,8 @@ declare module "@package/net/minecraft/client/tutorial" {
     export class $Tutorial$TimedToast {
     }
     export class $CraftPlanksTutorialStep implements $TutorialStepInstance {
-        clear(): void;
         tick(): void;
+        clear(): void;
         onGetItem(arg0: $ItemStack_): void;
         static hasCraftedPlanksPreviously(arg0: $LocalPlayer, arg1: $TagKey_<$Item>): boolean;
         onInput(arg0: $Input): void;
@@ -40,9 +40,9 @@ declare module "@package/net/minecraft/client/tutorial" {
     export class $TutorialStepInstance {
     }
     export interface $TutorialStepInstance {
-        clear(): void;
-        tick(): void;
         onInput(arg0: $Input): void;
+        tick(): void;
+        clear(): void;
         onLookAt(arg0: $ClientLevel, arg1: $HitResult): void;
         onOpenInventory(): void;
         onGetItem(arg0: $ItemStack_): void;
@@ -54,8 +54,8 @@ declare module "@package/net/minecraft/client/tutorial" {
         constructor(arg0: $Tutorial, arg1: $Options);
     }
     export class $FindTreeTutorialStepInstance implements $TutorialStepInstance {
-        clear(): void;
         tick(): void;
+        clear(): void;
         onLookAt(arg0: $ClientLevel, arg1: $HitResult): void;
         onGetItem(arg0: $ItemStack_): void;
         static hasPunchedTreesPreviously(arg0: $LocalPlayer): boolean;
@@ -66,9 +66,9 @@ declare module "@package/net/minecraft/client/tutorial" {
         constructor(arg0: $Tutorial);
     }
     export class $CompletedTutorialStepInstance implements $TutorialStepInstance {
-        clear(): void;
-        tick(): void;
         onInput(arg0: $Input): void;
+        tick(): void;
+        clear(): void;
         onLookAt(arg0: $ClientLevel, arg1: $HitResult): void;
         onOpenInventory(): void;
         onGetItem(arg0: $ItemStack_): void;
@@ -77,13 +77,13 @@ declare module "@package/net/minecraft/client/tutorial" {
         constructor(arg0: $Tutorial);
     }
     export class $Tutorial {
-        static key(arg0: string): $Component;
-        start(): void;
-        stop(): void;
-        tick(): void;
         onInput(arg0: $Input): void;
         onInventoryAction(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $ClickAction_): void;
         isSurvival(): boolean;
+        tick(): void;
+        static key(arg0: string): $Component;
+        start(): void;
+        stop(): void;
         getMinecraft(): $Minecraft;
         onLookAt(arg0: $ClientLevel, arg1: $HitResult): void;
         addTimedToast(arg0: $TutorialToast, arg1: number): void;
@@ -99,8 +99,8 @@ declare module "@package/net/minecraft/client/tutorial" {
         set step(value: $TutorialSteps_);
     }
     export class $OpenInventoryTutorialStep implements $TutorialStepInstance {
-        clear(): void;
         tick(): void;
+        clear(): void;
         onOpenInventory(): void;
         onInput(arg0: $Input): void;
         onLookAt(arg0: $ClientLevel, arg1: $HitResult): void;
@@ -110,8 +110,8 @@ declare module "@package/net/minecraft/client/tutorial" {
         constructor(arg0: $Tutorial);
     }
     export class $PunchTreeTutorialStepInstance implements $TutorialStepInstance {
-        clear(): void;
         tick(): void;
+        clear(): void;
         onGetItem(arg0: $ItemStack_): void;
         onDestroyBlock(arg0: $ClientLevel, arg1: $BlockPos_, arg2: $BlockState_, arg3: number): void;
         onInput(arg0: $Input): void;

@@ -9,28 +9,28 @@ import { $Animation, $AnimationProcessor, $AnimationState } from "@package/softw
 
 declare module "@package/software/bernie/geckolib/model" {
     export class $GeoModel<T extends $GeoAnimatable> {
-        getBone(arg0: string): ($GeoBone) | undefined;
-        getBakedModel(arg0: $ResourceLocation_): $BakedGeoModel;
-        handleAnimations(arg0: T, arg1: number, arg2: $AnimationState<T>, arg3: number): void;
-        getAnimation(arg0: T, arg1: string): $Animation;
         applyMolangQueries(arg0: $AnimationState<T>, arg1: number): void;
         getAnimationProcessor(): $AnimationProcessor<T>;
+        addAdditionalStateData(arg0: T, arg1: number, arg2: $BiConsumer_<$DataTicket<T>, T>): void;
+        getModelResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
         /**
          * @deprecated
          */
         getModelResource(arg0: T): $ResourceLocation;
-        getModelResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
-        addAdditionalStateData(arg0: T, arg1: number, arg2: $BiConsumer_<$DataTicket<T>, T>): void;
         getAnimationResource(arg0: T): $ResourceLocation;
         getAnimationResourceFallbacks(arg0: T): $ResourceLocation[];
         crashIfBoneMissing(): boolean;
         setCustomAnimations(arg0: T, arg1: number, arg2: $AnimationState<T>): void;
-        getRenderType(arg0: T, arg1: $ResourceLocation_): $RenderType;
+        getTextureResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
         /**
          * @deprecated
          */
         getTextureResource(arg0: T): $ResourceLocation;
-        getTextureResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
+        getBakedModel(arg0: $ResourceLocation_): $BakedGeoModel;
+        getBone(arg0: string): ($GeoBone) | undefined;
+        getAnimation(arg0: T, arg1: string): $Animation;
+        handleAnimations(arg0: T, arg1: number, arg2: $AnimationState<T>, arg3: number): void;
+        getRenderType(arg0: T, arg1: $ResourceLocation_): $RenderType;
         constructor();
         get animationProcessor(): $AnimationProcessor<T>;
     }

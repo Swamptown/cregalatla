@@ -15,6 +15,9 @@ declare module "@package/foundry/veil/api/quasar/emitters/module/render" {
      */
     export type $TrailSettings$TrailWidthModifier_ = ((arg0: number, arg1: number) => number);
     export class $TrailSettings {
+        setParentRotation(arg0: boolean): void;
+        getParentRotation(): boolean;
+        setBillboard(arg0: boolean): void;
         getBillboard(): boolean;
         setTilingMode(arg0: $Trail$TilingMode_): void;
         getTilingMode(): $Trail$TilingMode;
@@ -31,9 +34,6 @@ declare module "@package/foundry/veil/api/quasar/emitters/module/render" {
         getTrailWidthModifier(): $TrailSettings$TrailWidthModifier;
         getTrailTexture(): $ResourceLocation;
         renderImGuiSettings(): void;
-        setParentRotation(arg0: boolean): void;
-        getParentRotation(): boolean;
-        setBillboard(arg0: boolean): void;
         static CODEC: $Codec<$TrailSettings>;
         constructor(arg0: number, arg1: number, arg2: $Vector4fc, arg3: $TrailSettings$TrailWidthModifier_, arg4: $ResourceLocation_, arg5: $TrailSettings$TrailPointModifier_, arg6: $Trail$TilingMode_, arg7: boolean, arg8: boolean);
     }

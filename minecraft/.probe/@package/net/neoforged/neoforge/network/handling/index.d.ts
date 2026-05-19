@@ -23,19 +23,19 @@ declare module "@package/net/neoforged/neoforge/network/handling" {
      */
     export type $IPayloadHandler_<T> = ((arg0: T, arg1: $IPayloadContext) => void);
     export class $ServerPayloadContext extends $Record implements $IPayloadContext {
-        handle(arg0: $CustomPacketPayload_): void;
-        listener(): $ServerCommonPacketListener;
         finishCurrentTask(arg0: $ConfigurationTask$Type_): void;
+        handle(arg0: $CustomPacketPayload_): void;
         flow(): $PacketFlow;
         enqueueWork<T>(arg0: $Supplier_<T>): $CompletableFuture<T>;
         enqueueWork(arg0: $Runnable_): $CompletableFuture<void>;
         payloadId(): $ResourceLocation;
+        reply(arg0: $CustomPacketPayload_): void;
+        channelHandlerContext(): $ChannelHandlerContext;
         handle(arg0: $Packet<never>): void;
         protocol(): $ConnectionProtocol;
         connection(): $Connection;
-        reply(arg0: $CustomPacketPayload_): void;
-        channelHandlerContext(): $ChannelHandlerContext;
         disconnect(arg0: $Component_): void;
+        listener(): $ICommonPacketListener;
         player(): $Player;
         constructor(listener: $ServerCommonPacketListener, payloadId: $ResourceLocation_);
     }
@@ -46,19 +46,19 @@ declare module "@package/net/neoforged/neoforge/network/handling" {
     export class $IPayloadContext {
     }
     export interface $IPayloadContext {
-        handle(arg0: $Packet<never>): void;
-        handle(arg0: $CustomPacketPayload_): void;
-        protocol(): $ConnectionProtocol;
-        connection(): $Connection;
-        listener(): $ICommonPacketListener;
         reply(arg0: $CustomPacketPayload_): void;
         channelHandlerContext(): $ChannelHandlerContext;
         finishCurrentTask(arg0: $ConfigurationTask$Type_): void;
+        listener(): $ICommonPacketListener;
+        handle(arg0: $CustomPacketPayload_): void;
+        handle(arg0: $Packet<never>): void;
+        protocol(): $ConnectionProtocol;
+        connection(): $Connection;
         disconnect(arg0: $Component_): void;
         player(): $Player;
         flow(): $PacketFlow;
-        enqueueWork(arg0: $Runnable_): $CompletableFuture<void>;
         enqueueWork<T>(arg0: $Supplier_<T>): $CompletableFuture<T>;
+        enqueueWork(arg0: $Runnable_): $CompletableFuture<void>;
     }
     export class $DirectionalPayloadHandler<T extends $CustomPacketPayload> extends $Record implements $IPayloadHandler<T> {
         handle(arg0: T, arg1: $IPayloadContext): void;
@@ -69,20 +69,20 @@ declare module "@package/net/neoforged/neoforge/network/handling" {
     /**
      * Values that may be interpreted as {@link $DirectionalPayloadHandler}.
      */
-    export type $DirectionalPayloadHandler_<T> = { serverSide?: $IPayloadHandler_<$CustomPacketPayload>, clientSide?: $IPayloadHandler_<$CustomPacketPayload>,  } | [serverSide?: $IPayloadHandler_<$CustomPacketPayload>, clientSide?: $IPayloadHandler_<$CustomPacketPayload>, ];
+    export type $DirectionalPayloadHandler_<T> = { clientSide?: $IPayloadHandler_<$CustomPacketPayload>, serverSide?: $IPayloadHandler_<$CustomPacketPayload>,  } | [clientSide?: $IPayloadHandler_<$CustomPacketPayload>, serverSide?: $IPayloadHandler_<$CustomPacketPayload>, ];
     export class $ClientPayloadContext extends $Record implements $IPayloadContext {
-        handle(arg0: $CustomPacketPayload_): void;
         finishCurrentTask(arg0: $ConfigurationTask$Type_): void;
+        handle(arg0: $CustomPacketPayload_): void;
         player(): $Player;
         flow(): $PacketFlow;
         enqueueWork<T>(arg0: $Supplier_<T>): $CompletableFuture<T>;
         enqueueWork(arg0: $Runnable_): $CompletableFuture<void>;
         payloadId(): $ResourceLocation;
+        reply(arg0: $CustomPacketPayload_): void;
+        channelHandlerContext(): $ChannelHandlerContext;
         handle(arg0: $Packet<never>): void;
         protocol(): $ConnectionProtocol;
         connection(): $Connection;
-        reply(arg0: $CustomPacketPayload_): void;
-        channelHandlerContext(): $ChannelHandlerContext;
         disconnect(arg0: $Component_): void;
         listener(): $ICommonPacketListener;
         constructor(listener: $ClientCommonPacketListener, payloadId: $ResourceLocation_);

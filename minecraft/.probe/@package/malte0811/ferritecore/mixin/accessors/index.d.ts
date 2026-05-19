@@ -63,27 +63,27 @@ declare module "@package/malte0811/ferritecore/mixin/accessors" {
     export class $SubShapeAccess {
     }
     export interface $SubShapeAccess extends $DiscreteVSAccess {
-        getParent(): $DiscreteVoxelShape;
         getStartZ(): number;
         getEndZ(): number;
         getStartX(): number;
         getStartY(): number;
+        getParent(): $DiscreteVoxelShape;
         getEndX(): number;
         getEndY(): number;
-        get parent(): $DiscreteVoxelShape;
         get startZ(): number;
         get endZ(): number;
         get startX(): number;
         get startY(): number;
+        get parent(): $DiscreteVoxelShape;
         get endX(): number;
         get endY(): number;
     }
     export class $VoxelShapeAccess {
     }
     export interface $VoxelShapeAccess {
-        getShape(): $DiscreteVoxelShape;
         getFaces(): $VoxelShape[];
         setShape(arg0: $DiscreteVoxelShape): void;
         setFaces(arg0: $VoxelShape[]): void;
+        getShape(): $DiscreteVoxelShape;
     }
 }

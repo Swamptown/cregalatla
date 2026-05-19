@@ -12,11 +12,11 @@ declare module "@package/net/neoforged/neoforge/network/filters" {
         isNecessary(arg0: $Connection): boolean;
     }
     export class $NetworkFilters {
-        static injectIfNecessary(arg0: $Connection): void;
         static cleanIfNecessary(arg0: $Connection): void;
+        static injectIfNecessary(arg0: $Connection): void;
     }
     export class $GenericPacketSplitter extends $MessageToMessageEncoder<$Packet<never>> implements $DynamicChannelHandler {
-        handler$eja000$fabric_networking_api_v1$encode(arg0: $ChannelHandlerContext, arg1: $Packet<any>, arg2: $List_<any>, arg3: $CallbackInfo): void;
+        handler$ejn000$fabric_networking_api_v1$encode(arg0: $ChannelHandlerContext, arg1: $Packet<any>, arg2: $List_<any>, arg3: $CallbackInfo): void;
         isNecessary(arg0: $Connection): boolean;
         static isRemoteCompatible(arg0: $Connection): boolean;
         static getRemoteCompatibility(arg0: $Connection): $GenericPacketSplitter$RemoteCompatibility;
@@ -47,7 +47,7 @@ declare module "@package/net/neoforged/neoforge/network/filters" {
     /**
      * Values that may be interpreted as {@link $GenericPacketSplitter$SizeLimits}.
      */
-    export type $GenericPacketSplitter$SizeLimits_ = { part?: number, packet?: number,  } | [part?: number, packet?: number, ];
+    export type $GenericPacketSplitter$SizeLimits_ = { packet?: number, part?: number,  } | [packet?: number, part?: number, ];
     export class $CommandTreeCleaner {
     }
 }

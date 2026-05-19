@@ -37,37 +37,37 @@ declare module "@package/net/minecraft/world/level/dimension" {
     /**
      * Values that may be interpreted as {@link $LevelStem}.
      */
-    export type $LevelStem_ = { type?: $Holder_<$DimensionType>, generator?: $ChunkGenerator,  } | [type?: $Holder_<$DimensionType>, generator?: $ChunkGenerator, ];
+    export type $LevelStem_ = { generator?: $ChunkGenerator, type?: $Holder_<$DimensionType>,  } | [generator?: $ChunkGenerator, type?: $Holder_<$DimensionType>, ];
     export interface $DimensionType extends RegistryMarked<RegistryTypes.DimensionTypeTag, RegistryTypes.DimensionType> {}
     export class $DimensionType extends $Record {
-        timeOfDay(arg0: number): number;
-        monsterSpawnBlockLightLimit(): number;
-        monsterSpawnLightTest(): $IntProvider;
-        respawnAnchorWorks(): boolean;
-        bedWorks(): boolean;
         infiniburn(): $TagKey<$Block>;
+        ultraWarm(): boolean;
         fixedTime(): $OptionalLong;
         effectsLocation(): $ResourceLocation;
         monsterSettings(): $DimensionType$MonsterSettings;
         static getStorageFolder(arg0: $ResourceKey_<$Level>, arg1: $Path_): $Path;
         hasRaids(): boolean;
+        respawnAnchorWorks(): boolean;
+        monsterSpawnBlockLightLimit(): number;
+        monsterSpawnLightTest(): $IntProvider;
         logicalHeight(): number;
-        piglinSafe(): boolean;
-        ultraWarm(): boolean;
+        bedWorks(): boolean;
         static getTeleportationScale(arg0: $DimensionType_, arg1: $DimensionType_): number;
-        height(): number;
-        natural(): boolean;
-        coordinateScale(): number;
-        hasFixedTime(): boolean;
-        hasSkyLight(): boolean;
-        hasCeiling(): boolean;
-        moonPhase(arg0: number): number;
-        ambientLight(): number;
-        minY(): number;
+        piglinSafe(): boolean;
         /**
          * @deprecated
          */
         static parseLegacy(arg0: $Dynamic<never>): $DataResult<$ResourceKey<$Level>>;
+        timeOfDay(arg0: number): number;
+        minY(): number;
+        height(): number;
+        natural(): boolean;
+        hasFixedTime(): boolean;
+        hasSkyLight(): boolean;
+        hasCeiling(): boolean;
+        coordinateScale(): number;
+        moonPhase(arg0: number): number;
+        ambientLight(): number;
         static MIN_Y: number;
         static CODEC: $Codec<$Holder<$DimensionType>>;
         static MIN_HEIGHT: number;
@@ -84,11 +84,11 @@ declare module "@package/net/minecraft/world/level/dimension" {
     /**
      * Values that may be interpreted as {@link $DimensionType}.
      */
-    export type $DimensionType_ = RegistryTypes.DimensionType | { hasSkyLight?: boolean, logicalHeight?: number, hasCeiling?: boolean, height?: number, bedWorks?: boolean, ultraWarm?: boolean, minY?: number, respawnAnchorWorks?: boolean, infiniburn?: $TagKey_<$Block>, coordinateScale?: number, fixedTime?: $OptionalLong, natural?: boolean, monsterSettings?: $DimensionType$MonsterSettings_, effectsLocation?: $ResourceLocation_, ambientLight?: number,  } | [hasSkyLight?: boolean, logicalHeight?: number, hasCeiling?: boolean, height?: number, bedWorks?: boolean, ultraWarm?: boolean, minY?: number, respawnAnchorWorks?: boolean, infiniburn?: $TagKey_<$Block>, coordinateScale?: number, fixedTime?: $OptionalLong, natural?: boolean, monsterSettings?: $DimensionType$MonsterSettings_, effectsLocation?: $ResourceLocation_, ambientLight?: number, ];
+    export type $DimensionType_ = RegistryTypes.DimensionType | { ambientLight?: number, effectsLocation?: $ResourceLocation_, monsterSettings?: $DimensionType$MonsterSettings_, natural?: boolean, fixedTime?: $OptionalLong, coordinateScale?: number, infiniburn?: $TagKey_<$Block>, respawnAnchorWorks?: boolean, minY?: number, ultraWarm?: boolean, bedWorks?: boolean, height?: number, hasCeiling?: boolean, logicalHeight?: number, hasSkyLight?: boolean,  } | [ambientLight?: number, effectsLocation?: $ResourceLocation_, monsterSettings?: $DimensionType$MonsterSettings_, natural?: boolean, fixedTime?: $OptionalLong, coordinateScale?: number, infiniburn?: $TagKey_<$Block>, respawnAnchorWorks?: boolean, minY?: number, ultraWarm?: boolean, bedWorks?: boolean, height?: number, hasCeiling?: boolean, logicalHeight?: number, hasSkyLight?: boolean, ];
     export class $DimensionType$MonsterSettings extends $Record {
+        hasRaids(): boolean;
         monsterSpawnBlockLightLimit(): number;
         monsterSpawnLightTest(): $IntProvider;
-        hasRaids(): boolean;
         piglinSafe(): boolean;
         static CODEC: $MapCodec<$DimensionType$MonsterSettings>;
         constructor(arg0: boolean, arg1: boolean, arg2: $IntProvider_, arg3: number);
@@ -96,7 +96,7 @@ declare module "@package/net/minecraft/world/level/dimension" {
     /**
      * Values that may be interpreted as {@link $DimensionType$MonsterSettings}.
      */
-    export type $DimensionType$MonsterSettings_ = { monsterSpawnLightTest?: $IntProvider_, hasRaids?: boolean, monsterSpawnBlockLightLimit?: number, piglinSafe?: boolean,  } | [monsterSpawnLightTest?: $IntProvider_, hasRaids?: boolean, monsterSpawnBlockLightLimit?: number, piglinSafe?: boolean, ];
+    export type $DimensionType$MonsterSettings_ = { monsterSpawnBlockLightLimit?: number, hasRaids?: boolean, monsterSpawnLightTest?: $IntProvider_, piglinSafe?: boolean,  } | [monsterSpawnBlockLightLimit?: number, hasRaids?: boolean, monsterSpawnLightTest?: $IntProvider_, piglinSafe?: boolean, ];
     export class $DimensionDefaults {
         static OVERWORLD_MIN_Y: number;
         static OVERWORLD_LEVEL_HEIGHT: number;

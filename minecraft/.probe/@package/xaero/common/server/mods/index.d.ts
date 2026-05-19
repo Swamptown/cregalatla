@@ -8,7 +8,6 @@ export * as opac from "@package/xaero/common/server/mods/opac";
 
 declare module "@package/xaero/common/server/mods" {
     export class $SupportServerMods {
-        check(arg0: $IXaeroMinimap): void;
         hasFtbTeams(): boolean;
         getFtbTeams(): $SupportFTBTeamsServer;
         hasArgonauts(): boolean;
@@ -17,6 +16,7 @@ declare module "@package/xaero/common/server/mods" {
         getOpac(): $SupportOPACServer;
         hasWorldmap(): boolean;
         getWorldmap(): $SupportWorldMapServer;
+        check(arg0: $IXaeroMinimap): void;
         constructor();
         get ftbTeams(): $SupportFTBTeamsServer;
         get argonauts(): $SupportArgonautsServer;

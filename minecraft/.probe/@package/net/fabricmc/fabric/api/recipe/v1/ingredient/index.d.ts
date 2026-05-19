@@ -10,11 +10,11 @@ declare module "@package/net/fabricmc/fabric/api/recipe/v1/ingredient" {
     export class $CustomIngredient {
     }
     export interface $CustomIngredient {
-        test(arg0: $ItemStack_): boolean;
-        requiresTesting(): boolean;
-        toVanilla(): $Ingredient;
         getMatchingStacks(): $List<$ItemStack>;
+        toVanilla(): $Ingredient;
+        requiresTesting(): boolean;
         getSerializer(): $CustomIngredientSerializer<never>;
+        test(arg0: $ItemStack_): boolean;
         get matchingStacks(): $List<$ItemStack>;
         get serializer(): $CustomIngredientSerializer<never>;
     }
@@ -31,8 +31,8 @@ declare module "@package/net/fabricmc/fabric/api/recipe/v1/ingredient" {
     }
     export interface $CustomIngredientSerializer<T extends $CustomIngredient> {
         getPacketCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
-        getCodec(arg0: boolean): $MapCodec<T>;
         getIdentifier(): $ResourceLocation;
+        getCodec(arg0: boolean): $MapCodec<T>;
         get packetCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         get identifier(): $ResourceLocation;
     }

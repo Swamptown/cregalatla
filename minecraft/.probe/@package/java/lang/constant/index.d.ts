@@ -1,48 +1,48 @@
 import { $MethodHandles$Lookup, $TypeDescriptor$OfMethod, $MethodType, $TypeDescriptor$OfField } from "@package/java/lang/invoke";
-import { $Object, $Enum, $Class } from "@package/java/lang";
+import { $Object, $Enum } from "@package/java/lang";
 import { $List, $List_ } from "@package/java/util";
 
 declare module "@package/java/lang/constant" {
     export class $ClassDesc {
-        static of(arg0: string): $ClassDesc;
-        static of(arg0: string, arg1: string): $ClassDesc;
         static ofInternalName(arg0: string): $ClassDesc;
+        static of(arg0: string, arg1: string): $ClassDesc;
+        static of(arg0: string): $ClassDesc;
         static ofDescriptor(arg0: string): $ClassDesc;
     }
     export interface $ClassDesc extends $ConstantDesc, $TypeDescriptor$OfField<$ClassDesc> {
+        isClassOrInterface(): boolean;
         equals(arg0: $Object): boolean;
-        componentType(): $ClassDesc;
-        resolveConstantDesc(arg0: $MethodHandles$Lookup): $Class<never>;
-        isPrimitive(): boolean;
         isArray(): boolean;
+        isPrimitive(): boolean;
         packageName(): string;
+        descriptorString(): string;
         arrayType(): $ClassDesc;
         arrayType(arg0: number): $ClassDesc;
-        descriptorString(): string;
         displayName(): string;
         nested(arg0: string): $ClassDesc;
         nested(arg0: string, ...arg1: string[]): $ClassDesc;
-        isClassOrInterface(): boolean;
-        get primitive(): boolean;
-        get array(): boolean;
+        componentType(): $ClassDesc;
+        resolveConstantDesc(arg0: $MethodHandles$Lookup): $Object;
         get classOrInterface(): boolean;
+        get array(): boolean;
+        get primitive(): boolean;
     }
     export class $DirectMethodHandleDesc {
     }
     export interface $DirectMethodHandleDesc extends $MethodHandleDesc {
+        lookupDescriptor(): string;
+        isOwnerInterface(): boolean;
         methodName(): string;
         kind(): $DirectMethodHandleDesc$Kind;
         owner(): $ClassDesc;
         refKind(): number;
-        lookupDescriptor(): string;
-        isOwnerInterface(): boolean;
         get ownerInterface(): boolean;
     }
     export class $DirectMethodHandleDesc$Kind extends $Enum<$DirectMethodHandleDesc$Kind> {
         static values(): $DirectMethodHandleDesc$Kind[];
-        static valueOf(arg0: number): $DirectMethodHandleDesc$Kind;
         static valueOf(arg0: number, arg1: boolean): $DirectMethodHandleDesc$Kind;
         static valueOf(arg0: string): $DirectMethodHandleDesc$Kind;
+        static valueOf(arg0: number): $DirectMethodHandleDesc$Kind;
         static INTERFACE_SPECIAL: $DirectMethodHandleDesc$Kind;
         refKind: number;
         static SETTER: $DirectMethodHandleDesc$Kind;
@@ -71,10 +71,10 @@ declare module "@package/java/lang/constant" {
      */
     export type $Constable_ = (() => ($ConstantDesc) | undefined);
     export class $MethodHandleDesc {
+        static ofConstructor(arg0: $ClassDesc, ...arg1: $ClassDesc[]): $DirectMethodHandleDesc;
         static of(arg0: $DirectMethodHandleDesc$Kind_, arg1: $ClassDesc, arg2: string, arg3: string): $DirectMethodHandleDesc;
         static ofField(arg0: $DirectMethodHandleDesc$Kind_, arg1: $ClassDesc, arg2: string, arg3: $ClassDesc): $DirectMethodHandleDesc;
         static ofMethod(arg0: $DirectMethodHandleDesc$Kind_, arg1: $ClassDesc, arg2: string, arg3: $MethodTypeDesc): $DirectMethodHandleDesc;
-        static ofConstructor(arg0: $ClassDesc, ...arg1: $ClassDesc[]): $DirectMethodHandleDesc;
     }
     export interface $MethodHandleDesc extends $ConstantDesc {
         equals(arg0: $Object): boolean;
@@ -93,35 +93,35 @@ declare module "@package/java/lang/constant" {
     export type $ConstantDesc_ = ((arg0: $MethodHandles$Lookup) => $Object);
     export class $MethodTypeDesc {
         static of(arg0: $ClassDesc, ...arg1: $ClassDesc[]): $MethodTypeDesc;
-        static of(arg0: $ClassDesc, arg1: $List_<$ClassDesc>): $MethodTypeDesc;
         static of(arg0: $ClassDesc): $MethodTypeDesc;
+        static of(arg0: $ClassDesc, arg1: $List_<$ClassDesc>): $MethodTypeDesc;
         static ofDescriptor(arg0: string): $MethodTypeDesc;
     }
     export interface $MethodTypeDesc extends $ConstantDesc, $TypeDescriptor$OfMethod<$ClassDesc, $MethodTypeDesc> {
-        returnType(): $ClassDesc;
+        displayDescriptor(): string;
         equals(arg0: $Object): boolean;
         resolveConstantDesc(arg0: $MethodHandles$Lookup): $MethodType;
         descriptorString(): string;
         insertParameterTypes(arg0: number, ...arg1: $ClassDesc[]): $MethodTypeDesc;
         changeReturnType(arg0: $ClassDesc): $MethodTypeDesc;
         parameterCount(): number;
-        parameterList(): $List<$ClassDesc>;
-        changeParameterType(arg0: number, arg1: $ClassDesc): $MethodTypeDesc;
         parameterArray(): $ClassDesc[];
-        displayDescriptor(): string;
+        changeParameterType(arg0: number, arg1: $ClassDesc): $MethodTypeDesc;
+        parameterList(): $List<$ClassDesc>;
+        returnType(): $ClassDesc;
         parameterType(arg0: number): $ClassDesc;
         dropParameterTypes(arg0: number, arg1: number): $MethodTypeDesc;
     }
     export class $DynamicConstantDesc<T> implements $ConstantDesc {
-        static of<T>(arg0: $DirectMethodHandleDesc, ...arg1: $ConstantDesc_[]): $DynamicConstantDesc<T>;
-        static of<T>(arg0: $DirectMethodHandleDesc): $DynamicConstantDesc<T>;
-        resolveConstantDesc(arg0: $MethodHandles$Lookup): T;
-        bootstrapMethod(): $DirectMethodHandleDesc;
-        static ofNamed<T>(arg0: $DirectMethodHandleDesc, arg1: string, arg2: $ClassDesc, ...arg3: $ConstantDesc_[]): $DynamicConstantDesc<T>;
         constantName(): string;
         constantType(): $ClassDesc;
         bootstrapArgs(): $ConstantDesc[];
         static ofCanonical<T>(arg0: $DirectMethodHandleDesc, arg1: string, arg2: $ClassDesc, arg3: $ConstantDesc_[]): $ConstantDesc;
         bootstrapArgsList(): $List<$ConstantDesc>;
+        static of<T>(arg0: $DirectMethodHandleDesc, ...arg1: $ConstantDesc_[]): $DynamicConstantDesc<T>;
+        static of<T>(arg0: $DirectMethodHandleDesc): $DynamicConstantDesc<T>;
+        resolveConstantDesc(arg0: $MethodHandles$Lookup): T;
+        bootstrapMethod(): $DirectMethodHandleDesc;
+        static ofNamed<T>(arg0: $DirectMethodHandleDesc, arg1: string, arg2: $ClassDesc, ...arg3: $ConstantDesc_[]): $DynamicConstantDesc<T>;
     }
 }

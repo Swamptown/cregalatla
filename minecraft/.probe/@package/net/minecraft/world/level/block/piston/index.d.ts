@@ -22,7 +22,7 @@ import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 
 declare module "@package/net/minecraft/world/level/block/piston" {
     export class $PistonBaseBlock extends $DirectionalBlock implements $IWrenchable {
-        handler$hfi002$dndesires$getStateForPlacement(arg0: $BlockPlaceContext, arg1: $CallbackInfoReturnable<any>): void;
+        handler$hhd002$dndesires$getStateForPlacement(arg0: $BlockPlaceContext, arg1: $CallbackInfoReturnable<any>): void;
         static isPushable(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Direction_, arg4: boolean, arg5: $Direction_): boolean;
         getRotatedBlockState(arg0: $BlockState_, arg1: $Direction_): $BlockState;
         updateAfterWrenched(arg0: $BlockState_, arg1: $UseOnContext): $BlockState;
@@ -162,24 +162,23 @@ declare module "@package/net/minecraft/world/level/block/piston" {
         constructor(arg0: $BlockBehaviour$Properties);
     }
     export class $PistonStructureResolver {
-        resolve(): boolean;
+        getPushDirection(): $Direction;
         getToPush(): $List<$BlockPos>;
         getToDestroy(): $List<$BlockPos>;
-        getPushDirection(): $Direction;
+        resolve(): boolean;
         static MAX_PUSH_DEPTH: number;
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_, arg3: boolean);
+        get pushDirection(): $Direction;
         get toPush(): $List<$BlockPos>;
         get toDestroy(): $List<$BlockPos>;
-        get pushDirection(): $Direction;
     }
     export class $PistonMovingBlockEntity extends $BlockEntity implements $IExtendedPistonTile, $IBlockHolder {
-        static tick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $PistonMovingBlockEntity): void;
         isSourcePiston(): boolean;
         getXOff(arg0: number): number;
         getYOff(arg0: number): number;
         getZOff(arg0: number): number;
         getMovementDirection(): $Direction;
-        handler$gip000$moonlight$onFinishedShortPulse(arg0: $CallbackInfo): void;
+        handler$gjm000$moonlight$onFinishedShortPulse(arg0: $CallbackInfo): void;
         getHeldBlock(): $BlockState;
         setHeldBlock(arg0: $BlockState_): boolean;
         tickMovedBlock(arg0: $Level_, arg1: $BlockPos_): void;
@@ -188,6 +187,7 @@ declare module "@package/net/minecraft/world/level/block/piston" {
         getLastTicked(): number;
         finalTick(): void;
         getMovedState(): $BlockState;
+        static tick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $PistonMovingBlockEntity): void;
         getDirection(): $Direction;
         getCollisionShape(arg0: $BlockGetter, arg1: $BlockPos_): $VoxelShape;
         worldPosition: $BlockPos;

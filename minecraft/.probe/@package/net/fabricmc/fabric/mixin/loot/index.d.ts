@@ -10,11 +10,11 @@ declare module "@package/net/fabricmc/fabric/mixin/loot" {
     export class $LootPoolAccessor {
     }
     export interface $LootPoolAccessor {
+        fabric_getFunctions(): $List<$LootItemFunction>;
         fabric_getRolls(): $NumberProvider;
         fabric_getBonusRolls(): $NumberProvider;
         fabric_getEntries(): $List<$LootPoolEntryContainer>;
         fabric_getConditions(): $List<$LootItemCondition>;
-        fabric_getFunctions(): $List<$LootItemFunction>;
     }
     export class $LootTableAccessor {
     }

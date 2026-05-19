@@ -23,6 +23,7 @@ declare module "@package/mezz/jei/api/recipe/category/extensions" {
     export class $IRecipeCategoryExtension<T> {
     }
     export interface $IRecipeCategoryExtension<T> {
+        getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: number, arg3: number): void;
         /**
          * @deprecated
          */
@@ -31,16 +32,16 @@ declare module "@package/mezz/jei/api/recipe/category/extensions" {
         /**
          * @deprecated
          */
-        getTooltipStrings(arg0: number, arg1: number): $List<$Component>;
-        /**
-         * @deprecated
-         */
         getTooltipStrings(arg0: T, arg1: number, arg2: number): $List<$Component>;
         /**
          * @deprecated
          */
-        createRecipeExtras(arg0: T, arg1: $IRecipeExtrasBuilder, arg2: $IRecipeSlotsView_, arg3: $ICraftingGridHelper, arg4: $IFocusGroup): void;
+        getTooltipStrings(arg0: number, arg1: number): $List<$Component>;
         createRecipeExtras(arg0: T, arg1: $IRecipeExtrasBuilder, arg2: $ICraftingGridHelper, arg3: $IFocusGroup): void;
+        /**
+         * @deprecated
+         */
+        createRecipeExtras(arg0: T, arg1: $IRecipeExtrasBuilder, arg2: $IRecipeSlotsView_, arg3: $ICraftingGridHelper, arg4: $IFocusGroup): void;
         /**
          * @deprecated
          */
@@ -50,6 +51,5 @@ declare module "@package/mezz/jei/api/recipe/category/extensions" {
          */
         handleInput(arg0: T, arg1: number, arg2: number, arg3: $InputConstants$Key): boolean;
         isHandled(arg0: T): boolean;
-        getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: number, arg3: number): void;
     }
 }

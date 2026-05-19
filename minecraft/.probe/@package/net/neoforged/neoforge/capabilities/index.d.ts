@@ -31,23 +31,23 @@ declare module "@package/net/neoforged/neoforge/capabilities" {
      */
     export type $IBlockCapabilityProvider_<T, C> = ((arg0: $Level, arg1: $BlockPos, arg2: $BlockState, arg3: $BlockEntity, arg4: C) => T);
     export class $BaseCapability<T, C> {
-        name(): $ResourceLocation;
         contextClass(): $Class<C>;
+        name(): $ResourceLocation;
         typeClass(): $Class<T>;
     }
     export class $BlockCapabilityCache<T, C> {
+        level(): $ServerLevel;
+        context(): C;
         static create<T, C>(arg0: $BlockCapability<T, C>, arg1: $ServerLevel, arg2: $BlockPos_, arg3: C): $BlockCapabilityCache<T, C>;
         static create<T, C>(arg0: $BlockCapability<T, C>, arg1: $ServerLevel, arg2: $BlockPos_, arg3: C, arg4: $BooleanSupplier_, arg5: $Runnable_): $BlockCapabilityCache<T, C>;
         pos(): $BlockPos;
-        context(): C;
-        level(): $ServerLevel;
         getCapability(): T;
         get capability(): T;
     }
     export class $ItemCapability<T, C> extends $BaseCapability<T, C> {
-        static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $ItemCapability<T, C>;
-        static getAll(): $List<$ItemCapability<never, never>>;
         static createVoid<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $ItemCapability<T, void>;
+        static getAll(): $List<$ItemCapability<never, never>>;
+        static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $ItemCapability<T, C>;
         getCapability(arg0: $ItemStack_, arg1: C): T;
         static get all(): $List<$ItemCapability<never, never>>;
     }
@@ -56,7 +56,7 @@ declare module "@package/net/neoforged/neoforge/capabilities" {
     /**
      * Values that may be interpreted as {@link $CapabilityRegistry$StoredCap}.
      */
-    export type $CapabilityRegistry$StoredCap_<C> = { cap?: any, typeClass?: $Class<never>, contextClass?: $Class<never>,  } | [cap?: any, typeClass?: $Class<never>, contextClass?: $Class<never>, ];
+    export type $CapabilityRegistry$StoredCap_<C> = { contextClass?: $Class<never>, typeClass?: $Class<never>, cap?: any,  } | [contextClass?: $Class<never>, typeClass?: $Class<never>, cap?: any, ];
     export class $Capabilities {
     }
     export class $ICapabilityProvider<O, C, T> {
@@ -93,27 +93,27 @@ declare module "@package/net/neoforged/neoforge/capabilities" {
         static BLOCK: $BlockCapability<$IEnergyStorage, $Direction>;
     }
     export class $CapabilityHooks {
-        static init(): void;
         static markProxyableCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         static registerVanillaProviders(arg0: $RegisterCapabilitiesEvent): void;
         static registerFallbackVanillaProviders(arg0: $RegisterCapabilitiesEvent): void;
         static invalidateCapsOnChunkLoad(arg0: $ChunkEvent$Load): void;
         static invalidateCapsOnChunkUnload(arg0: $ChunkEvent$Unload): void;
         static cleanCapabilityListenerReferencesOnTick(arg0: $LevelTickEvent$Post): void;
+        static init(): void;
         constructor();
     }
     export class $CapabilityRegistry<C> {
-        create(arg0: $ResourceLocation_, arg1: $Class<never>, arg2: $Class<never>): C;
         getAll(): $List<C>;
+        create(arg0: $ResourceLocation_, arg1: $Class<never>, arg2: $Class<never>): C;
         constructor(arg0: $CapabilityRegistry$CapabilityConstructor_<C>);
         get all(): $List<C>;
     }
     export class $CapabilityListenerHolder$ListenerReference extends $WeakReference<$ICapabilityInvalidationListener> {
     }
     export class $CapabilityListenerHolder {
-        clean(): void;
         invalidatePos(arg0: $BlockPos_): void;
         invalidateChunk(arg0: $ChunkPos): void;
+        clean(): void;
         addListener(arg0: $BlockPos_, arg1: $ICapabilityInvalidationListener_): void;
         constructor();
     }
@@ -142,23 +142,23 @@ declare module "@package/net/neoforged/neoforge/capabilities" {
      */
     export type $ICapabilityInvalidationListener_ = (() => boolean);
     export class $BlockCapability<T, C> extends $BaseCapability<T, C> {
-        static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $BlockCapability<T, C>;
-        static getAll(): $List<$BlockCapability<never, never>>;
-        isProxyable(): boolean;
         static createVoid<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $BlockCapability<T, void>;
+        isProxyable(): boolean;
         static getAllProxyable(): $List<$BlockCapability<never, never>>;
-        getCapability(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): T;
+        static getAll(): $List<$BlockCapability<never, never>>;
+        static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $BlockCapability<T, C>;
         static createSided<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $BlockCapability<T, $Direction>;
-        static get all(): $List<$BlockCapability<never, never>>;
+        getCapability(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): T;
         get proxyable(): boolean;
         static get allProxyable(): $List<$BlockCapability<never, never>>;
+        static get all(): $List<$BlockCapability<never, never>>;
     }
     export class $EntityCapability<T, C> extends $BaseCapability<T, C> {
-        static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $EntityCapability<T, C>;
-        static getAll(): $List<$EntityCapability<never, never>>;
         static createVoid<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $EntityCapability<T, void>;
-        getCapability(arg0: $Entity, arg1: C): T;
+        static getAll(): $List<$EntityCapability<never, never>>;
+        static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $EntityCapability<T, C>;
         static createSided<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $EntityCapability<T, $Direction>;
+        getCapability(arg0: $Entity, arg1: C): T;
         static get all(): $List<$EntityCapability<never, never>>;
     }
 }

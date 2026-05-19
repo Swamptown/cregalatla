@@ -18,42 +18,42 @@ declare module "@package/mezz/jei/api/gui" {
     export class $IRecipeLayoutDrawable<R> {
     }
     export interface $IRecipeLayoutDrawable<R> {
-        tick(): void;
-        drawOverlays(arg0: $GuiGraphics, arg1: number, arg2: number): void;
+        getRecipeSlotsView(): $IRecipeSlotsView;
+        drawRecipe(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         /**
          * @deprecated
          */
         getRecipeSlotUnderMouse(arg0: number, arg1: number): ($IRecipeSlotDrawable) | undefined;
-        getRectWithBorder(): $Rect2i;
-        getRecipeTransferButtonArea(): $Rect2i;
         getRecipeBookmarkButtonArea(): $Rect2i;
         getInputHandler(): $IJeiInputHandler;
         getSideButtonArea(arg0: number): $Rect2i;
-        getRect(): $Rect2i;
+        drawOverlays(arg0: $GuiGraphics, arg1: number, arg2: number): void;
+        getRectWithBorder(): $Rect2i;
+        getRecipeTransferButtonArea(): $Rect2i;
+        getRecipe(): R;
         getRecipeCategory(): $IRecipeCategory<R>;
         getIngredientUnderMouse<T>(arg0: number, arg1: number, arg2: $IIngredientType_<T>): (T) | undefined;
         getItemStackUnderMouse(arg0: number, arg1: number): ($ItemStack) | undefined;
-        getRecipe(): R;
+        getRect(): $Rect2i;
+        tick(): void;
         isMouseOver(arg0: number, arg1: number): boolean;
-        setPosition(arg0: number, arg1: number): void;
         getSlotUnderMouse(arg0: number, arg1: number): ($RecipeSlotUnderMouse) | undefined;
-        getRecipeSlotsView(): $IRecipeSlotsView;
-        drawRecipe(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        get rectWithBorder(): $Rect2i;
-        get recipeTransferButtonArea(): $Rect2i;
+        setPosition(arg0: number, arg1: number): void;
+        get recipeSlotsView(): $IRecipeSlotsView;
         get recipeBookmarkButtonArea(): $Rect2i;
         get inputHandler(): $IJeiInputHandler;
-        get rect(): $Rect2i;
-        get recipeCategory(): $IRecipeCategory<R>;
+        get rectWithBorder(): $Rect2i;
+        get recipeTransferButtonArea(): $Rect2i;
         get recipe(): R;
-        get recipeSlotsView(): $IRecipeSlotsView;
+        get recipeCategory(): $IRecipeCategory<R>;
+        get rect(): $Rect2i;
     }
     export class $ITickTimer {
     }
     export interface $ITickTimer {
-        getValue(): number;
         getMaxValue(): number;
-        get value(): number;
+        getValue(): number;
         get maxValue(): number;
+        get value(): number;
     }
 }

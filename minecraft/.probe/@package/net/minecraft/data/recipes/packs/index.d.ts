@@ -18,7 +18,7 @@ declare module "@package/net/minecraft/data/recipes/packs" {
     /**
      * Values that may be interpreted as {@link $VanillaRecipeProvider$TrimTemplate}.
      */
-    export type $VanillaRecipeProvider$TrimTemplate_ = { template?: $Item_, id?: $ResourceLocation_,  } | [template?: $Item_, id?: $ResourceLocation_, ];
+    export type $VanillaRecipeProvider$TrimTemplate_ = { id?: $ResourceLocation_, template?: $Item_,  } | [id?: $ResourceLocation_, template?: $Item_, ];
     export class $BundleRecipeProvider extends $RecipeProvider {
         advancementPathProvider: $PackOutput$PathProvider;
         recipePathProvider: $PackOutput$PathProvider;

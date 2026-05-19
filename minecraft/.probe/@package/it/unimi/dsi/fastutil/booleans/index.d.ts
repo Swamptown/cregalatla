@@ -6,27 +6,21 @@ import { $Object2LongFunction_, $Reference2ShortFunction, $Reference2FloatFuncti
 import { $Byte2ReferenceFunction, $Byte2LongFunction_, $Byte2BooleanFunction_, $Byte2DoubleFunction, $Byte2ShortFunction, $Byte2LongFunction, $Byte2ShortFunction_, $Byte2ByteFunction, $Byte2IntFunction_, $Byte2ObjectFunction_, $Byte2FloatFunction, $Byte2DoubleFunction_, $Byte2CharFunction, $Byte2ObjectFunction, $Byte2ByteFunction_, $Byte2CharFunction_, $Byte2ReferenceFunction_, $Byte2IntFunction, $Byte2FloatFunction_ } from "@package/it/unimi/dsi/fastutil/bytes";
 import { $Double2FloatFunction, $Double2IntFunction, $Double2IntFunction_, $Double2ByteFunction_, $Double2ByteFunction, $Double2ReferenceFunction, $Double2ObjectFunction_, $Double2ShortFunction, $Double2FloatFunction_, $Double2LongFunction_, $Double2DoubleFunction_, $Double2LongFunction, $Double2DoubleFunction, $Double2ObjectFunction, $Double2BooleanFunction_, $Double2CharFunction_, $Double2CharFunction, $Double2ReferenceFunction_, $Double2ShortFunction_ } from "@package/it/unimi/dsi/fastutil/doubles";
 import { $Char2ObjectFunction_, $Char2LongFunction, $Char2ShortFunction_, $Char2FloatFunction, $Char2IntFunction_, $Char2DoubleFunction_, $Char2BooleanFunction_, $Char2ObjectFunction, $Char2CharFunction_, $Char2IntFunction, $Char2FloatFunction_, $Char2ByteFunction_, $Char2CharFunction, $Char2ShortFunction, $Char2LongFunction_, $Char2ReferenceFunction_, $Char2DoubleFunction, $Char2ByteFunction, $Char2ReferenceFunction } from "@package/it/unimi/dsi/fastutil/chars";
-import { $PrimitiveIterator, $Spliterator, $Collection, $Iterator } from "@package/java/util";
+import { $Spliterator, $Collection, $Iterator } from "@package/java/util";
 import { $Function } from "@package/it/unimi/dsi/fastutil";
 import { $Iterable, $Object } from "@package/java/lang";
 import { $Short2IntFunction_, $Short2BooleanFunction_, $Short2ReferenceFunction_, $Short2FloatFunction, $Short2ShortFunction, $Short2ByteFunction, $Short2ByteFunction_, $Short2CharFunction_, $Short2ObjectFunction, $Short2IntFunction, $Short2LongFunction, $Short2LongFunction_, $Short2FloatFunction_, $Short2DoubleFunction, $Short2ObjectFunction_, $Short2ReferenceFunction, $Short2ShortFunction_, $Short2DoubleFunction_, $Short2CharFunction } from "@package/it/unimi/dsi/fastutil/shorts";
 
 declare module "@package/it/unimi/dsi/fastutil/booleans" {
-    export class $BooleanIterator {
+    export class $BooleanCollection {
+        [Symbol.iterator](): Iterator<boolean>
     }
-    export interface $BooleanIterator extends $PrimitiveIterator<boolean, $BooleanConsumer> {
-        forEachRemaining(arg0: $BooleanConsumer_): void;
+    export interface $BooleanCollection extends $Collection<boolean>, $BooleanIterable {
         /**
          * @deprecated
          */
-        forEachRemaining(arg0: $Consumer_<boolean>): void;
-        skip(arg0: number): number;
-        nextBoolean(): boolean;
-        next(): boolean;
-    }
-    export class $BooleanCollection {
-    }
-    export interface $BooleanCollection extends $Collection<boolean>, $BooleanIterable {
+        toBooleanArray(arg0: boolean[]): boolean[];
+        toBooleanArray(): boolean[];
         /**
          * @deprecated
          */
@@ -37,36 +31,28 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
         add(arg0: boolean): boolean;
         add(arg0: boolean): boolean;
         toArray(arg0: boolean[]): boolean[];
-        iterator(): $BooleanIterator;
         /**
          * @deprecated
          */
         contains(arg0: $Object): boolean;
         contains(arg0: boolean): boolean;
         addAll(arg0: $BooleanCollection): boolean;
-        /**
-         * @deprecated
-         */
-        removeIf(arg0: $Predicate_<boolean>): boolean;
-        removeIf(arg0: $BooleanPredicate_): boolean;
         removeAll(arg0: $BooleanCollection): boolean;
         retainAll(arg0: $BooleanCollection): boolean;
         containsAll(arg0: $BooleanCollection): boolean;
         rem(arg0: boolean): boolean;
+        removeIf(arg0: $BooleanPredicate_): boolean;
         /**
          * @deprecated
          */
-        toBooleanArray(arg0: boolean[]): boolean[];
-        toBooleanArray(): boolean[];
+        removeIf(arg0: $Predicate_<boolean>): boolean;
+        iterator(): $Iterator<boolean>;
         spliterator(): $Spliterator<boolean>;
+        [Symbol.iterator](): Iterator<boolean>
     }
     export class $Boolean2DoubleFunction {
     }
     export interface $Boolean2DoubleFunction extends $Function<boolean, number> {
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         remove(arg0: boolean): number;
         /**
          * @deprecated
@@ -96,8 +82,8 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<number, T>): $Function$1<boolean, T>;
-        defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         andThenByte(arg0: $Double2ByteFunction_): $Boolean2ByteFunction;
         composeByte(arg0: $Byte2BooleanFunction_): $Byte2DoubleFunction;
         andThenShort(arg0: $Double2ShortFunction_): $Boolean2ShortFunction;
@@ -124,10 +110,6 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
     export class $Boolean2LongFunction {
     }
     export interface $Boolean2LongFunction extends $Function<boolean, number> {
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         remove(arg0: boolean): number;
         /**
          * @deprecated
@@ -157,8 +139,8 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<number, T>): $Function$1<boolean, T>;
-        defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         andThenByte(arg0: $Long2ByteFunction_): $Boolean2ByteFunction;
         composeByte(arg0: $Byte2BooleanFunction_): $Byte2LongFunction;
         andThenShort(arg0: $Long2ShortFunction_): $Boolean2ShortFunction;
@@ -185,10 +167,6 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
     export class $Boolean2FloatFunction {
     }
     export interface $Boolean2FloatFunction extends $Function<boolean, number> {
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         remove(arg0: boolean): number;
         /**
          * @deprecated
@@ -218,8 +196,8 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<number, T>): $Function$1<boolean, T>;
-        defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         andThenByte(arg0: $Float2ByteFunction_): $Boolean2ByteFunction;
         composeByte(arg0: $Byte2BooleanFunction_): $Byte2FloatFunction;
         andThenShort(arg0: $Float2ShortFunction_): $Boolean2ShortFunction;
@@ -246,10 +224,6 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
     export class $Boolean2IntFunction {
     }
     export interface $Boolean2IntFunction extends $Function<boolean, number> {
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         remove(arg0: boolean): number;
         /**
          * @deprecated
@@ -279,8 +253,8 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<number, T>): $Function$1<boolean, T>;
-        defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         andThenByte(arg0: $Int2ByteFunction_): $Boolean2ByteFunction;
         composeByte(arg0: $Byte2BooleanFunction_): $Byte2IntFunction;
         andThenShort(arg0: $Int2ShortFunction_): $Boolean2ShortFunction;
@@ -307,10 +281,6 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
     export class $Boolean2ShortFunction {
     }
     export interface $Boolean2ShortFunction extends $Function<boolean, number> {
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         remove(arg0: boolean): number;
         /**
          * @deprecated
@@ -340,8 +310,8 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<number, T>): $Function$1<boolean, T>;
-        defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         andThenByte(arg0: $Short2ByteFunction_): $Boolean2ByteFunction;
         composeByte(arg0: $Byte2BooleanFunction_): $Byte2ShortFunction;
         andThenShort(arg0: $Short2ShortFunction_): $Boolean2ShortFunction;
@@ -368,10 +338,6 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
     export class $Boolean2CharFunction {
     }
     export interface $Boolean2CharFunction extends $Function<boolean, string> {
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): string;
         remove(arg0: boolean): string;
         /**
          * @deprecated
@@ -401,8 +367,8 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<string, T>): $Function$1<boolean, T>;
-        defaultReturnValue(): string;
         defaultReturnValue(arg0: string): void;
+        defaultReturnValue(): string;
         andThenByte(arg0: $Char2ByteFunction_): $Boolean2ByteFunction;
         composeByte(arg0: $Byte2BooleanFunction_): $Byte2CharFunction;
         andThenShort(arg0: $Char2ShortFunction_): $Boolean2ShortFunction;
@@ -429,10 +395,6 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
     export class $Boolean2ByteFunction {
     }
     export interface $Boolean2ByteFunction extends $Function<boolean, number> {
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         remove(arg0: boolean): number;
         /**
          * @deprecated
@@ -462,8 +424,8 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<number, T>): $Function$1<boolean, T>;
-        defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         andThenByte(arg0: $Byte2ByteFunction_): $Boolean2ByteFunction;
         composeByte(arg0: $Byte2BooleanFunction_): $Byte2ByteFunction;
         andThenShort(arg0: $Byte2ShortFunction_): $Boolean2ShortFunction;
@@ -545,17 +507,17 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        getOrDefault(arg0: boolean, arg1: V): V;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: V): V;
+        getOrDefault(arg0: boolean, arg1: V): V;
         /**
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, boolean>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Reference2ByteFunction_<V>): $Boolean2ByteFunction;
         composeByte(arg0: $Byte2BooleanFunction_): $Byte2ReferenceFunction<V>;
         andThenShort(arg0: $Reference2ShortFunction_<V>): $Boolean2ShortFunction;
@@ -584,22 +546,22 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
         static negation(): $BooleanPredicate;
     }
     export interface $BooleanPredicate extends $Predicate<boolean> {
-        /**
-         * @deprecated
-         */
-        test(arg0: boolean): boolean;
-        test(arg0: boolean): boolean;
-        or(arg0: $BooleanPredicate_): $BooleanPredicate;
-        /**
-         * @deprecated
-         */
-        or(arg0: $Predicate_<boolean>): $Predicate<boolean>;
+        negate(): $BooleanPredicate;
+        and(arg0: $BooleanPredicate_): $BooleanPredicate;
         /**
          * @deprecated
          */
         and(arg0: $Predicate_<boolean>): $Predicate<boolean>;
-        and(arg0: $BooleanPredicate_): $BooleanPredicate;
-        negate(): $Predicate<boolean>;
+        /**
+         * @deprecated
+         */
+        test(arg0: boolean): boolean;
+        test(arg0: boolean): boolean;
+        /**
+         * @deprecated
+         */
+        or(arg0: $Predicate_<boolean>): $Predicate<boolean>;
+        or(arg0: $BooleanPredicate_): $BooleanPredicate;
     }
     /**
      * Values that may be interpreted as {@link $BooleanPredicate}.
@@ -628,17 +590,17 @@ declare module "@package/it/unimi/dsi/fastutil/booleans" {
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        getOrDefault(arg0: boolean, arg1: V): V;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: V): V;
+        getOrDefault(arg0: boolean, arg1: V): V;
         /**
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, boolean>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Object2ByteFunction_<V>): $Boolean2ByteFunction;
         composeByte(arg0: $Byte2BooleanFunction_): $Byte2ObjectFunction<V>;
         andThenShort(arg0: $Object2ShortFunction_<V>): $Boolean2ShortFunction;

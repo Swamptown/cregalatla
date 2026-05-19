@@ -3,31 +3,31 @@ import { $MethodInfo } from "@package/javassist/bytecode";
 
 declare module "@package/javassist/expr" {
     export class $Handler extends $Expr {
-        getType(): $CtClass;
-        isFinally(): boolean;
         insertBefore(arg0: string): void;
-        get type(): $CtClass;
+        isFinally(): boolean;
+        getType(): $CtClass;
         get finally(): boolean;
+        get type(): $CtClass;
     }
     export class $ConstructorCall extends $MethodCall {
         getConstructor(): $CtConstructor;
         get constructor(): $CtConstructor;
     }
     export class $FieldAccess extends $Expr {
+        isReader(): boolean;
+        isWriter(): boolean;
+        getFieldName(): string;
         isStatic(): boolean;
         getField(): $CtField;
         getSignature(): string;
         getClassName(): string;
-        getFieldName(): string;
-        isReader(): boolean;
-        isWriter(): boolean;
+        get reader(): boolean;
+        get writer(): boolean;
+        get fieldName(): string;
         get static(): boolean;
         get field(): $CtField;
         get signature(): string;
         get className(): string;
-        get fieldName(): string;
-        get reader(): boolean;
-        get writer(): boolean;
     }
     export class $Instanceof extends $Expr {
         getType(): $CtClass;
@@ -47,23 +47,23 @@ declare module "@package/javassist/expr" {
     }
     export class $ExprEditor {
         doit(arg0: $CtClass, arg1: $MethodInfo): boolean;
-        edit(arg0: $Instanceof): void;
-        edit(arg0: $FieldAccess): void;
         edit(arg0: $ConstructorCall): void;
-        edit(arg0: $Cast): void;
+        edit(arg0: $FieldAccess): void;
         edit(arg0: $Handler): void;
-        edit(arg0: $NewExpr): void;
+        edit(arg0: $Instanceof): void;
+        edit(arg0: $Cast): void;
         edit(arg0: $NewArray): void;
+        edit(arg0: $NewExpr): void;
         edit(arg0: $MethodCall): void;
         constructor();
     }
     export class $NewArray extends $Expr {
-        getComponentType(): $CtClass;
         getCreatedDimensions(): number;
         getDimension(): number;
-        get componentType(): $CtClass;
+        getComponentType(): $CtClass;
         get createdDimensions(): number;
         get dimension(): number;
+        get componentType(): $CtClass;
     }
     export class $MethodCall extends $Expr {
         getMethod(): $CtMethod;

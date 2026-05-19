@@ -78,13 +78,13 @@ declare module "@package/net/neoforged/neoforge/registries/datamaps/builtin" {
         chance(): number;
         static CODEC: $Codec<$Compostable>;
         static CHANCE_CODEC: $Codec<$Compostable>;
-        constructor(arg0: number);
         constructor(chance: number, canVillagerCompost: boolean);
+        constructor(arg0: number);
     }
     /**
      * Values that may be interpreted as {@link $Compostable}.
      */
-    export type $Compostable_ = { canVillagerCompost?: boolean, chance?: number,  } | [canVillagerCompost?: boolean, chance?: number, ];
+    export type $Compostable_ = { chance?: number, canVillagerCompost?: boolean,  } | [chance?: number, canVillagerCompost?: boolean, ];
     export class $BiomeVillagerType extends $Record {
         type(): $VillagerType;
         static TYPE_CODEC: $Codec<$BiomeVillagerType>;

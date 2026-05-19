@@ -5,9 +5,9 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/net/fabricmc/fabric/api/renderer/v1/material" {
     export class $BlendMode extends $Enum<$BlendMode> {
+        static fromRenderLayer(arg0: $RenderType): $BlendMode;
         static values(): $BlendMode[];
         static valueOf(arg0: string): $BlendMode;
-        static fromRenderLayer(arg0: $RenderType): $BlendMode;
         static CUTOUT: $BlendMode;
         static TRANSLUCENT: $BlendMode;
         static CUTOUT_MIPPED: $BlendMode;
@@ -33,10 +33,10 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/material" {
     }
     export interface $MaterialView {
         emissive(): boolean;
-        blendMode(): $BlendMode;
         disableColorIndex(): boolean;
         disableDiffuse(): boolean;
         shadeMode(): $ShadeMode;
+        blendMode(): $BlendMode;
         ambientOcclusion(): $TriState;
         glint(): $TriState;
     }

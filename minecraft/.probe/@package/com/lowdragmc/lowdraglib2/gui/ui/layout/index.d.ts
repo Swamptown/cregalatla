@@ -1,75 +1,75 @@
 import { $Consumer_, $Supplier_ } from "@package/java/util/function";
-import { $FloatOptional } from "@package/org/appliedenergistics/yoga/numeric";
 import { $YogaOverflow_ } from "@package/org/appliedenergistics/yoga";
+import { $FloatOptional } from "@package/org/appliedenergistics/yoga/numeric";
 import { $UIElement } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 import { $TaffySize, $TaffyRect } from "@package/dev/vfyjxf/taffy/geometry";
-import { $FlexDirection_, $TaffyDisplay_, $TaffyStyle, $GridAutoFlow_, $TaffyPosition_, $AlignItems_, $TaffyDirection_, $AlignContent_, $FlexWrap_, $LengthPercentageAuto, $TaffyDimension, $LengthPercentage } from "@package/dev/vfyjxf/taffy/style";
+import { $FlexDirection_, $TaffyDisplay_, $TaffyStyle, $GridAutoFlow_, $TaffyPosition_, $AlignItems_, $FlexWrap_, $AlignContent_, $TaffyDirection_, $LengthPercentageAuto, $TaffyDimension, $LengthPercentage } from "@package/dev/vfyjxf/taffy/style";
 import { $LPSize_, $GridTemplateAreas_, $LPARect_, $Grid_, $GridTemplate_, $GridAuto_ } from "@package/com/lowdragmc/lowdraglib2/gui/ui/data";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/layout" {
     export class $TaffyLayoutStyle$LPARectData {
-        setAll(arg0: $LengthPercentageAuto): void;
-        onChanged(): void;
         setRight(arg0: $LengthPercentageAuto): void;
         setHorizontal(arg0: $LengthPercentageAuto): void;
         setVertical(arg0: $LengthPercentageAuto): void;
+        setRect(arg0: $LPARect_): void;
         setBottom(arg0: $LengthPercentageAuto): void;
         setTop(arg0: $LengthPercentageAuto): void;
         setLeft(arg0: $LengthPercentageAuto): void;
-        setRect(arg0: $LPARect_): void;
+        onChanged(): void;
+        setAll(arg0: $LengthPercentageAuto): void;
         constructor(arg0: $Supplier_<$TaffyRect<$LengthPercentageAuto>>, arg1: $Consumer_<$TaffyRect<$LengthPercentageAuto>>);
-        set all(value: $LengthPercentageAuto);
         set right(value: $LengthPercentageAuto);
         set horizontal(value: $LengthPercentageAuto);
         set vertical(value: $LengthPercentageAuto);
+        set rect(value: $LPARect_);
         set bottom(value: $LengthPercentageAuto);
         set top(value: $LengthPercentageAuto);
         set left(value: $LengthPercentageAuto);
-        set rect(value: $LPARect_);
+        set all(value: $LengthPercentageAuto);
     }
     export class $TaffyLayoutStyle$LPSizeData {
-        setAll(arg0: $LengthPercentageAuto): void;
-        setSize(arg0: $LPSize_): void;
-        onChanged(): void;
+        static toLP(arg0: $LengthPercentageAuto): $LengthPercentage;
         setHorizontal(arg0: $LengthPercentageAuto): void;
         setVertical(arg0: $LengthPercentageAuto): void;
-        static toLP(arg0: $LengthPercentageAuto): $LengthPercentage;
+        onChanged(): void;
+        setAll(arg0: $LengthPercentageAuto): void;
+        setSize(arg0: $LPSize_): void;
         constructor(arg0: $Supplier_<$TaffySize<$LengthPercentage>>, arg1: $Consumer_<$TaffySize<$LengthPercentage>>);
-        set all(value: $LengthPercentageAuto);
-        set size(value: $LPSize_);
         set horizontal(value: $LengthPercentageAuto);
         set vertical(value: $LengthPercentageAuto);
+        set all(value: $LengthPercentageAuto);
+        set size(value: $LPSize_);
     }
     export class $TaffyLayoutStyle$LPRectData {
-        setAll(arg0: $LengthPercentageAuto): void;
-        onChanged(): void;
+        static lpaEquals(arg0: $LengthPercentageAuto, arg1: $LengthPercentage): boolean;
+        static toLP(arg0: $LengthPercentageAuto): $LengthPercentage;
         setRight(arg0: $LengthPercentageAuto): void;
         setHorizontal(arg0: $LengthPercentageAuto): void;
         setVertical(arg0: $LengthPercentageAuto): void;
+        setRect(arg0: $LPARect_): void;
         setBottom(arg0: $LengthPercentageAuto): void;
         setTop(arg0: $LengthPercentageAuto): void;
         setLeft(arg0: $LengthPercentageAuto): void;
-        static lpaEquals(arg0: $LengthPercentageAuto, arg1: $LengthPercentage): boolean;
-        static toLP(arg0: $LengthPercentageAuto): $LengthPercentage;
-        setRect(arg0: $LPARect_): void;
+        onChanged(): void;
+        setAll(arg0: $LengthPercentageAuto): void;
         constructor(arg0: $Supplier_<$TaffyRect<$LengthPercentage>>, arg1: $Consumer_<$TaffyRect<$LengthPercentage>>);
-        set all(value: $LengthPercentageAuto);
         set right(value: $LengthPercentageAuto);
         set horizontal(value: $LengthPercentageAuto);
         set vertical(value: $LengthPercentageAuto);
+        set rect(value: $LPARect_);
         set bottom(value: $LengthPercentageAuto);
         set top(value: $LengthPercentageAuto);
         set left(value: $LengthPercentageAuto);
-        set rect(value: $LPARect_);
+        set all(value: $LengthPercentageAuto);
     }
     export class $TaffyLayoutStyle {
         setRight(arg0: $LengthPercentageAuto): void;
+        setDisplay(arg0: $TaffyDisplay_): void;
+        setFlexGrow(arg0: $FloatOptional): void;
+        setFlexShrink(arg0: $FloatOptional): void;
         setMinWidth(arg0: $TaffyDimension): void;
         setMinHeight(arg0: $TaffyDimension): void;
         setMaxHeight(arg0: $TaffyDimension): void;
-        setFlexGrow(arg0: $FloatOptional): void;
-        setFlexShrink(arg0: $FloatOptional): void;
-        setDisplay(arg0: $TaffyDisplay_): void;
         setAlignContent(arg0: $AlignContent_): void;
         setAlignItems(arg0: $AlignItems_): void;
         setAlignSelf(arg0: $AlignItems_): void;
@@ -106,12 +106,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/layout" {
         element: $UIElement;
         constructor(arg0: $UIElement);
         set right(value: $LengthPercentageAuto);
+        set display(value: $TaffyDisplay_);
+        set flexGrow(value: $FloatOptional);
+        set flexShrink(value: $FloatOptional);
         set minWidth(value: $TaffyDimension);
         set minHeight(value: $TaffyDimension);
         set maxHeight(value: $TaffyDimension);
-        set flexGrow(value: $FloatOptional);
-        set flexShrink(value: $FloatOptional);
-        set display(value: $TaffyDisplay_);
         set alignContent(value: $AlignContent_);
         set alignItems(value: $AlignItems_);
         set alignSelf(value: $AlignItems_);

@@ -5,9 +5,9 @@ declare module "@package/de/maxhenkel/voicechat/api" {
     export class $ClientVoicechatSocket {
     }
     export interface $ClientVoicechatSocket {
+        read(): $RawUdpPacket;
         close(): void;
         open(): void;
-        read(): $RawUdpPacket;
         isClosed(): boolean;
         send(arg0: number[], arg1: $SocketAddress): void;
         get closed(): boolean;
@@ -25,10 +25,10 @@ declare module "@package/de/maxhenkel/voicechat/api" {
     export class $VoicechatSocket {
     }
     export interface $VoicechatSocket {
+        getLocalPort(): number;
+        read(): $RawUdpPacket;
         close(): void;
         open(arg0: number, arg1: string): void;
-        read(): $RawUdpPacket;
-        getLocalPort(): number;
         isClosed(): boolean;
         send(arg0: number[], arg1: $SocketAddress): void;
         get localPort(): number;

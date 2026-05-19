@@ -25,7 +25,6 @@ declare module "@package/net/minecraft/world/entity/ai/control" {
      */
     export type $MoveControl$Operation_ = "wait" | "move_to" | "strafe" | "jumping";
     export class $LookControl implements $Control {
-        tick(): void;
         clampHeadRotationToBody(): void;
         getWantedX(): number;
         getWantedY(): number;
@@ -34,12 +33,13 @@ declare module "@package/net/minecraft/world/entity/ai/control" {
         getYRotD(): (number) | undefined;
         getXRotD(): (number) | undefined;
         isLookingAtTarget(): boolean;
-        rotateTowards(arg0: number, arg1: number, arg2: number): number;
-        setLookAt(arg0: number, arg1: number, arg2: number): void;
-        setLookAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        setLookAt(arg0: $Vec3_): void;
+        tick(): void;
         setLookAt(arg0: $Entity, arg1: number, arg2: number): void;
+        setLookAt(arg0: $Vec3_): void;
         setLookAt(arg0: $Entity): void;
+        setLookAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
+        setLookAt(arg0: number, arg1: number, arg2: number): void;
+        rotateTowards(arg0: number, arg1: number, arg2: number): number;
         mob: $Mob;
         wantedZ: number;
         wantedY: number;
@@ -85,15 +85,15 @@ declare module "@package/net/minecraft/world/entity/ai/control" {
         constructor(arg0: $Mob);
     }
     export class $MoveControl implements $Control {
-        tick(): void;
         rotlerp(arg0: number, arg1: number, arg2: number): number;
+        getSpeedModifier(): number;
         setWantedPosition(arg0: number, arg1: number, arg2: number, arg3: number): void;
         hasWanted(): boolean;
         strafe(arg0: number, arg1: number): void;
         getWantedX(): number;
         getWantedY(): number;
         getWantedZ(): number;
-        getSpeedModifier(): number;
+        tick(): void;
         speedModifier: number;
         mob: $Mob;
         strafeForwards: number;

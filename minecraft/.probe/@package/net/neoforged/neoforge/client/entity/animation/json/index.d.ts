@@ -6,15 +6,15 @@ import { $SimpleJsonResourceReloadListener } from "@package/net/minecraft/server
 
 declare module "@package/net/neoforged/neoforge/client/entity/animation/json" {
     export class $AnimationTypeManager {
-        static init(): void;
-        static getTarget(arg0: $ResourceLocation_): $AnimationTarget;
-        static getInterpolation(arg0: $ResourceLocation_): $AnimationChannel$Interpolation;
-        static getTargetName(arg0: $AnimationTarget_): $ResourceLocation;
         static getTargetFromChannelTarget(arg0: $AnimationChannel$Target_): $AnimationTarget;
         static getKeyframeCodec(arg0: $AnimationTarget_): $Codec<$Keyframe>;
         static getInterpolationName(arg0: $AnimationChannel$Interpolation_): $ResourceLocation;
         static getTargetList(): string;
         static getInterpolationList(): string;
+        static init(): void;
+        static getTarget(arg0: $ResourceLocation_): $AnimationTarget;
+        static getInterpolation(arg0: $ResourceLocation_): $AnimationChannel$Interpolation;
+        static getTargetName(arg0: $AnimationTarget_): $ResourceLocation;
         static get targetList(): string;
         static get interpolationList(): string;
     }

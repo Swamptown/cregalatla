@@ -6,13 +6,13 @@ declare module "@package/dev/architectury/utils" {
     export class $OptionalSupplier<T> {
     }
     export interface $OptionalSupplier<T> extends $Supplier<T> {
-        stream(): $Stream<T>;
-        orElse(other: T): T;
-        isPresent(): boolean;
+        toOptional(): (T) | undefined;
         ifPresent(action: $Consumer_<T>): void;
+        stream(): $Stream<T>;
+        isPresent(): boolean;
+        orElse(other: T): T;
         ifPresentOrElse(action: $Consumer_<T>, emptyAction: $Runnable_): void;
         orElseGet(supplier: $Supplier_<T>): T;
-        toOptional(): (T) | undefined;
         getOrNull(): T;
         get present(): boolean;
         get orNull(): T;

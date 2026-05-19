@@ -27,7 +27,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/match" {
     /**
      * Values that may be interpreted as {@link $ReplacementMatchInfo}.
      */
-    export type $ReplacementMatchInfo_ = { match?: $ReplacementMatch_, componentType?: ($RecipeComponent<never>) | undefined, exact?: boolean,  } | [match?: $ReplacementMatch_, componentType?: ($RecipeComponent<never>) | undefined, exact?: boolean, ];
+    export type $ReplacementMatchInfo_ = { exact?: boolean, componentType?: ($RecipeComponent<never>) | undefined, match?: $ReplacementMatch_,  } | [exact?: boolean, componentType?: ($RecipeComponent<never>) | undefined, match?: $ReplacementMatch_, ];
     export class $FluidMatch {
     }
     export interface $FluidMatch extends $ReplacementMatch {
@@ -37,10 +37,10 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/match" {
     export class $ItemMatch {
     }
     export interface $ItemMatch extends $ReplacementMatch {
+        matchesAny(cx: $RecipeMatchContext, itemLikes: $Iterable_<$ItemLike>, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, item: $ItemStack_, exact: boolean): boolean;
         matches(cx: $RecipeMatchContext, itemLike: $ItemLike_, exact: boolean): boolean;
         matches(cx: $RecipeMatchContext, _in: $Ingredient_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, item: $ItemStack_, exact: boolean): boolean;
-        matchesAny(cx: $RecipeMatchContext, itemLikes: $Iterable_<$ItemLike>, exact: boolean): boolean;
     }
     export class $ReplacementMatch {
         static wrap(o: $Object): $ReplacementMatch;

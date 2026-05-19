@@ -34,12 +34,8 @@ export * as toolbox from "@package/com/railwayteam/railways/content/conductor/to
 
 declare module "@package/com/railwayteam/railways/content/conductor" {
     export class $ConductorEntity extends $AbstractGolem {
-        setColor(arg0: $DyeColor_): void;
-        static colorFrom(arg0: number): $DyeColor;
-        teleportToForce(arg0: number, arg1: number, arg2: number): void;
-        getJob(): $ConductorEntity$Job;
-        startViewing(arg0: $ServerPlayer): boolean;
-        static idFrom(arg0: $DyeColor_): number;
+        getForwardSignalStrength(): number;
+        addSchedule(arg0: $ItemStack_): void;
         isHoldingSchedules(): boolean;
         isCarryingToolbox(): boolean;
         setJob(arg0: $ConductorEntity$Job_): void;
@@ -56,23 +52,27 @@ declare module "@package/com/railwayteam/railways/content/conductor" {
         getToolbox(): $MountedToolbox;
         isInMinecart(): boolean;
         canUseBlock(arg0: $BlockState_): boolean;
-        getOrCreateToolboxHolder(): $MountedToolbox;
+        static colorFrom(arg0: number): $DyeColor;
+        teleportToForce(arg0: number, arg1: number, arg2: number): void;
+        getJob(): $ConductorEntity$Job;
+        startViewing(arg0: $ServerPlayer): boolean;
+        static idFrom(arg0: $DyeColor_): number;
         isPossessed(): boolean;
         hasSentChunks(): boolean;
         setChunkLoadingDistance(arg0: number): void;
         isPossessedAndClient(): boolean;
-        getForwardSignalStrength(): number;
-        addSchedule(arg0: $ItemStack_): void;
+        getOrCreateToolboxHolder(): $MountedToolbox;
+        static defaultColor(): $DyeColor;
         doCheckFallDamage(arg0: number, arg1: boolean): void;
         stopViewing(arg0: $ServerPlayer): void;
-        static defaultColor(): $DyeColor;
         canReach(arg0: $Vec3i): boolean;
-        getColor(): $DyeColor;
+        setColor(arg0: $DyeColor_): void;
         static canSpyInteract(arg0: $BlockState_): boolean;
+        getColor(): $DyeColor;
         static spawn(arg0: $Level_, arg1: $BlockPos_, arg2: $ItemStack_): $ConductorEntity;
         static isPlayerDisguised(arg0: $Player): boolean;
-        turnView(arg0: number, arg1: number): void;
         static createAttributes(): $AttributeSupplier$Builder;
+        turnView(arg0: number, arg1: number): void;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
@@ -263,6 +263,7 @@ declare module "@package/com/railwayteam/railways/content/conductor" {
         removeStingerTime: number;
         static BASE_SAFE_FALL_DISTANCE: number;
         constructor(arg0: $EntityType_<$AbstractGolem>, arg1: $Level_);
+        get forwardSignalStrength(): number;
         get holdingSchedules(): boolean;
         get carryingToolbox(): boolean;
         get secondaryHeadStack(): $ItemStack;
@@ -270,11 +271,10 @@ declare module "@package/com/railwayteam/railways/content/conductor" {
         get toolboxDisplayStack(): $ItemStack;
         get toolbox(): $MountedToolbox;
         get inMinecart(): boolean;
-        get orCreateToolboxHolder(): $MountedToolbox;
         get possessed(): boolean;
         set chunkLoadingDistance(value: number);
         get possessedAndClient(): boolean;
-        get forwardSignalStrength(): number;
+        get orCreateToolboxHolder(): $MountedToolbox;
     }
     export class $ServerPlayerPossessionAccess {
     }

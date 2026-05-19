@@ -25,8 +25,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/slot" {
         x: number;
         index: number;
         y: number;
-        constructor(arg0: $IItemHandlerModifiable, arg1: number);
         constructor(arg0: $IItemHandlerModifiable, arg1: number, arg2: number, arg3: number);
+        constructor(arg0: $IItemHandlerModifiable, arg1: number);
         get itemHandler(): $IItemHandlerModifiable;
     }
 }

@@ -6,9 +6,9 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/arena/staging" {
     export class $StagingBuffer {
     }
     export interface $StagingBuffer {
+        enqueueCopy(arg0: $CommandList, arg1: $ByteBuffer, arg2: $GlBuffer, arg3: number): void;
         flush(arg0: $CommandList): void;
         delete(arg0: $CommandList): void;
         flip(): void;
-        enqueueCopy(arg0: $CommandList, arg1: $ByteBuffer, arg2: $GlBuffer, arg3: number): void;
     }
 }

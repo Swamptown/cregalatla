@@ -15,17 +15,17 @@ declare module "@package/mezz/jei/api/gui/handlers" {
         static createBasic(arg0: number, arg1: number, arg2: number, arg3: number, ...arg4: $RecipeType<never>[]): $IGuiClickableArea;
     }
     export interface $IGuiClickableArea {
-        getArea(): $Rect2i;
+        isTooltipEnabled(): boolean;
+        getTooltip(arg0: $ITooltipBuilder): void;
         /**
          * @deprecated
          */
         getTooltipStrings(): $List<$Component>;
-        getTooltip(arg0: $ITooltipBuilder): void;
-        isTooltipEnabled(): boolean;
+        getArea(): $Rect2i;
         onClick(arg0: $IFocusFactory, arg1: $IRecipesGui): void;
-        get area(): $Rect2i;
-        get tooltipStrings(): $List<$Component>;
         get tooltipEnabled(): boolean;
+        get tooltipStrings(): $List<$Component>;
+        get area(): $Rect2i;
     }
     export class $IGuiContainerHandler<T extends $AbstractContainerScreen<never>> {
     }
@@ -50,11 +50,11 @@ declare module "@package/mezz/jei/api/gui/handlers" {
     export interface $IGuiProperties {
         guiXSize(): number;
         guiYSize(): number;
-        guiLeft(): number;
-        guiTop(): number;
+        screenClass(): $Class<$Screen>;
         screenWidth(): number;
         screenHeight(): number;
-        screenClass(): $Class<$Screen>;
+        guiLeft(): number;
+        guiTop(): number;
     }
     export class $IScreenHandler<T extends $Screen> {
     }
@@ -68,8 +68,8 @@ declare module "@package/mezz/jei/api/gui/handlers" {
     export class $IGhostIngredientHandler$Target<I> {
     }
     export interface $IGhostIngredientHandler$Target<I> extends $Consumer<I> {
-        accept(arg0: I): void;
         getArea(): $Rect2i;
+        accept(arg0: I): void;
         get area(): $Rect2i;
     }
     export class $IGlobalGuiHandler {

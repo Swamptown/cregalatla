@@ -9,15 +9,15 @@ declare module "@package/net/neoforged/neoforge/server/command/generation" {
     export class $GenerationTask$Listener {
     }
     export interface $GenerationTask$Listener {
-        update(arg0: number, arg1: number, arg2: number, arg3: number): void;
         complete(arg0: number): void;
+        update(arg0: number, arg1: number, arg2: number, arg3: number): void;
     }
     export class $GenerationTask {
-        run(arg0: $GenerationTask$Listener): void;
-        stop(): void;
         getOkCount(): number;
         getErrorCount(): number;
         getSkippedCount(): number;
+        run(arg0: $GenerationTask$Listener): void;
+        stop(): void;
         getTotalCount(): number;
         static NEOFORGE_GENERATE_FORCED: $TicketType<$ChunkPos>;
         constructor(arg0: $ServerLevel, arg1: number, arg2: number, arg3: number);
@@ -27,9 +27,9 @@ declare module "@package/net/neoforged/neoforge/server/command/generation" {
         get totalCount(): number;
     }
     export class $GenerationBar implements $AutoCloseable {
+        addPlayer(arg0: $ServerPlayer): void;
         update(arg0: number, arg1: number, arg2: number, arg3: number): void;
         close(): void;
-        addPlayer(arg0: $ServerPlayer): void;
         constructor();
     }
     export class $CoarseOnionIterator$CellIterator implements $Iterator<$ChunkPos> {

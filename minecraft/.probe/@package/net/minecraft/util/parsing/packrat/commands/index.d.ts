@@ -45,11 +45,11 @@ declare module "@package/net/minecraft/util/parsing/packrat/commands" {
      */
     export type $ResourceSuggestion_ = (() => $Stream<$ResourceLocation_>);
     export class $Grammar<T> extends $Record {
+        parseForSuggestions(arg0: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parseForCommands(arg0: $StringReader): T;
+        rules(): $Dictionary<$StringReader>;
         parse(arg0: $ParseState<$StringReader>): (T) | undefined;
         top(): $Atom<T>;
-        rules(): $Dictionary<$StringReader>;
-        parseForCommands(arg0: $StringReader): T;
-        parseForSuggestions(arg0: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         constructor(arg0: $Dictionary<$StringReader>, arg1: $Atom_<T>);
     }
     /**
@@ -66,8 +66,8 @@ declare module "@package/net/minecraft/util/parsing/packrat/commands" {
      */
     export type $StringReaderTerms$TerminalWord_ = { value?: string,  } | [value?: string, ];
     export class $ResourceLookupRule<C, V> implements $Rule<$StringReader, V>, $ResourceSuggestion {
-        parse(arg0: $ParseState<$StringReader>): (V) | undefined;
         validateElement(arg0: $ImmutableStringReader, arg1: $ResourceLocation_): V;
+        parse(arg0: $ParseState<$StringReader>): (V) | undefined;
         possibleValues(arg0: $ParseState<$StringReader>): $Stream<string>;
         context: C;
         constructor(arg0: $Atom_<$ResourceLocation_>, arg1: C);

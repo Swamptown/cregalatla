@@ -2,12 +2,14 @@ import { $ClientLevel } from "@package/net/minecraft/client/multiplayer";
 import { $BlockRenderCache } from "@package/net/caffeinemc/mods/sodium/client/render/chunk/compile/pipeline";
 import { $RenderSection } from "@package/net/caffeinemc/mods/sodium/client/render/chunk";
 import { $NativeBuffer } from "@package/net/caffeinemc/mods/sodium/client/util";
-import { $BuiltSectionMeshParts, $BuiltSectionInfo } from "@package/net/caffeinemc/mods/sodium/client/render/chunk/data";
+import { $ChunkModelBuilder } from "@package/net/caffeinemc/mods/sodium/client/render/chunk/compile/buffers";
+import { $BuiltSectionMeshParts, $BuiltSectionInfo$Builder, $BuiltSectionInfo } from "@package/net/caffeinemc/mods/sodium/client/render/chunk/data";
 import { $ChunkVertexType } from "@package/net/caffeinemc/mods/sodium/client/render/chunk/vertex/format";
 import { $TerrainRenderPass } from "@package/net/caffeinemc/mods/sodium/client/render/chunk/terrain";
 import { $Map_, $Map } from "@package/java/util";
 import { $IntBuffer } from "@package/java/nio";
 import { $Sorter, $TranslucentData, $DynamicTopoData$DynamicTopoSorter, $SortData } from "@package/net/caffeinemc/mods/sodium/client/render/chunk/translucent_sorting/data";
+import { $Material } from "@package/net/caffeinemc/mods/sodium/client/render/chunk/terrain/material";
 export * as tasks from "@package/net/caffeinemc/mods/sodium/client/render/chunk/compile/tasks";
 export * as executor from "@package/net/caffeinemc/mods/sodium/client/render/chunk/compile/executor";
 export * as pipeline from "@package/net/caffeinemc/mods/sodium/client/render/chunk/compile/pipeline";
@@ -22,8 +24,8 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/compile"
         getIntBuffer(): $IntBuffer;
         submitTime: number;
         render: $RenderSection;
-        constructor(arg0: $RenderSection, arg1: number);
         constructor(arg0: $RenderSection, arg1: number, arg2: $Sorter);
+        constructor(arg0: $RenderSection, arg1: number);
         get reusingUploadedIndexData(): boolean;
         get indexBuffer(): $NativeBuffer;
         get topoSorter(): $DynamicTopoData$DynamicTopoSorter;
@@ -49,5 +51,13 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/compile"
         meshes: $Map<$TerrainRenderPass, $BuiltSectionMeshParts>;
         info: $BuiltSectionInfo;
         constructor(arg0: $RenderSection, arg1: number, arg2: $TranslucentData, arg3: $BuiltSectionInfo, arg4: $Map_<$TerrainRenderPass, $BuiltSectionMeshParts>);
+    }
+    export class $ChunkBuildBuffers {
+        createMesh(arg0: $TerrainRenderPass, arg1: boolean): $BuiltSectionMeshParts;
+        get(arg0: $TerrainRenderPass): $ChunkModelBuilder;
+        get(arg0: $Material): $ChunkModelBuilder;
+        init(arg0: $BuiltSectionInfo$Builder, arg1: number): void;
+        destroy(): void;
+        constructor(arg0: $ChunkVertexType);
     }
 }

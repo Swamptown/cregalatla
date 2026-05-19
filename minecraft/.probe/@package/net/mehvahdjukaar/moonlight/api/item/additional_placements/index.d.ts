@@ -4,7 +4,7 @@ import { $Item$Properties, $BlockItem, $Item } from "@package/net/minecraft/worl
 import { $FoodProperties_ } from "@package/net/minecraft/world/food";
 import { $BlockState } from "@package/net/minecraft/world/level/block/state";
 import { $ResourceLocation } from "@package/net/minecraft/resources";
-import { $SoundType_, $Block_, $Block } from "@package/net/minecraft/world/level/block";
+import { $SoundType_, $Block, $Block_ } from "@package/net/minecraft/world/level/block";
 import { $Object } from "@package/java/lang";
 import { $Map } from "@package/java/util";
 
@@ -21,15 +21,19 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/item/additional_placeme
         get placedBlock(): $Block;
     }
     export class $BlockPlacerItem extends $BlockItem {
-        static get(): $BlockPlacerItem;
         mimicGetPlacementState(arg0: $BlockPlaceContext, arg1: $Block_): $BlockState;
         mimicUseOn(arg0: $UseOnContext, arg1: $Block_, arg2: $FoodProperties_): $InteractionResult;
         mimicPlace(arg0: $BlockPlaceContext, arg1: $Block_, arg2: $SoundType_): $InteractionResult;
+        static get(): $BlockPlacerItem;
         static BASE_ATTACK_DAMAGE_ID: $ResourceLocation;
         static DEFAULT_MAX_STACK_SIZE: number;
         static MAX_BAR_WIDTH: number;
         static BASE_ATTACK_SPEED_ID: $ResourceLocation;
         static ABSOLUTE_MAX_STACK_SIZE: number;
+        /**
+         * @deprecated
+         */
+        block: $Block;
         canRepair: boolean;
         moonlight$clientAnimationProvider: $Object;
         static BY_BLOCK: $Map<$Block, $Item>;

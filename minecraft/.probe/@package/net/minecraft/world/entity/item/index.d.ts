@@ -25,14 +25,8 @@ import { $ChangeSubscriber$CountChangeSubscriber, $ChangeSubscriber, $ChangePubl
 
 declare module "@package/net/minecraft/world/entity/item" {
     export class $ItemEntity extends $Entity implements $TraceableEntity, $ItemEntityAccessor, $ChangePublisher<any>, $ChangeSubscriber$CountChangeSubscriber<any>, $ItemEntityKJS {
-        copy(): $ItemEntity;
-        static merge(arg0: $ItemStack_, arg1: $ItemStack_, arg2: number): $ItemStack;
-        getTarget(): $UUID;
-        setTarget(arg0: $UUID_): void;
-        getOwner(): $Entity;
         setItem(arg0: $ItemStack_): void;
-        static areMergable(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
-        handler$dfh000$item_obliterator$discardItemEntities(arg0: $CompoundTag_, arg1: $CallbackInfo): void;
+        handler$dgd000$item_obliterator$discardItemEntities(arg0: $CompoundTag_, arg1: $CallbackInfo): void;
         setNoPickUpDelay(): void;
         setNeverPickUp(): void;
         hasPickUpDelay(): boolean;
@@ -41,15 +35,21 @@ declare module "@package/net/minecraft/world/entity/item" {
         makeFakeItem(): void;
         getSpin(arg0: number): number;
         lithium$unsubscribe(arg0: $ChangeSubscriber<any>): number;
+        static areMergable(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
         getItem(): $ItemStack;
+        static merge(arg0: $ItemStack_, arg1: $ItemStack_, arg2: number): $ItemStack;
+        copy(): $ItemEntity;
+        getTarget(): $UUID;
+        setTarget(arg0: $UUID_): void;
+        getOwner(): $Entity;
         getAge(): number;
+        setPickUpDelay(arg0: number): void;
+        setThrower(arg0: $Entity): void;
         lithium$notify(arg0: $ItemStack_, arg1: number): void;
         lithium$notifyCount(arg0: $ItemStack_, arg1: number, arg2: number): void;
         lithium$forceUnsubscribe(arg0: $ItemStack_, arg1: number): void;
         lithium$subscribe(arg0: $ChangeSubscriber<any>, arg1: number): void;
         setDefaultPickUpDelay(): void;
-        setPickUpDelay(arg0: number): void;
-        setThrower(arg0: $Entity): void;
         lithium$isSubscribedWithData(arg0: $ChangeSubscriber<$ItemStack_>, arg1: number): boolean;
         lithium$unsubscribeWithData(arg0: $ChangeSubscriber<$Object>, arg1: number): void;
         getLifespan(): number;
@@ -135,8 +135,8 @@ declare module "@package/net/minecraft/world/entity/item" {
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
-        constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_, arg5: number, arg6: number, arg7: number);
         constructor(arg0: $EntityType_<$ItemEntity>, arg1: $Level_);
+        constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_, arg5: number, arg6: number, arg7: number);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_);
         get owner(): $Entity;
         set pickUpDelay(value: number);
@@ -145,10 +145,10 @@ declare module "@package/net/minecraft/world/entity/item" {
     export class $PrimedTnt extends $Entity implements $TraceableEntity, $EntityDynamicLightSource {
         getFuse(): number;
         setFuse(arg0: number): void;
+        getOwner(): $LivingEntity;
         getBlockState(): $BlockState;
         setBlockState(arg0: $BlockState_): void;
         explode(): void;
-        getOwner(): $Entity;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
@@ -219,19 +219,19 @@ declare module "@package/net/minecraft/world/entity/item" {
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
-        constructor(arg0: $EntityType_<$PrimedTnt>, arg1: $Level_);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $LivingEntity);
-        get owner(): $Entity;
+        constructor(arg0: $EntityType_<$PrimedTnt>, arg1: $Level_);
+        get owner(): $LivingEntity;
     }
     export class $FallingBlockEntity extends $Entity implements $FallingBlockEntityAccessor {
         static fall(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $FallingBlockEntity;
-        disableDrop(): void;
-        setStartPos(arg0: $BlockPos_): void;
-        getStartPos(): $BlockPos;
-        handler$ehe000$architectury$handleLand(ci: $CallbackInfo, block: $Block_, blockPos2: $BlockPos_, bl: boolean, bl2: boolean, d: number, blockState: $BlockState_): void;
         callOnBrokenAfterFall(arg0: $Block_, arg1: $BlockPos_): void;
         setBlockState(state: $BlockState_): void;
-        static callInit$create_$md$d858b6$0(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $BlockState_): $FallingBlockEntity;
+        static callInit$create_$md$4ca6b6$0(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $BlockState_): $FallingBlockEntity;
+        setStartPos(arg0: $BlockPos_): void;
+        getStartPos(): $BlockPos;
+        handler$eib000$architectury$handleLand(ci: $CallbackInfo, block: $Block_, blockPos2: $BlockPos_, bl: boolean, bl2: boolean, d: number, blockState: $BlockState_): void;
+        disableDrop(): void;
         setHurtsEntities(arg0: number, arg1: number): void;
         getBlockState(): $BlockState;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;

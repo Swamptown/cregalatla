@@ -231,10 +231,10 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
     export class $Allay$VibrationUser implements $VibrationSystem$User {
         getListenableEvents(): $TagKey<$GameEvent>;
         canTriggerAvoidVibration(): boolean;
-        requiresAdjacentChunksToBeTicking(): boolean;
         calculateTravelTimeInTicks(arg0: number): number;
         isValidVibration(arg0: $Holder_<$GameEvent>, arg1: $GameEvent$Context_): boolean;
         onDataChanged(): void;
+        requiresAdjacentChunksToBeTicking(): boolean;
         get listenableEvents(): $TagKey<$GameEvent>;
     }
 }

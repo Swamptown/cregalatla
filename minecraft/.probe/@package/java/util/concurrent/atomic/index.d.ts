@@ -22,8 +22,8 @@ declare module "@package/java/util/concurrent/atomic" {
         weakCompareAndSetAcquire(arg0: boolean, arg1: boolean): boolean;
         weakCompareAndSetRelease(arg0: boolean, arg1: boolean): boolean;
         getAndSet(arg0: boolean): boolean;
-        weakCompareAndSetVolatile(arg0: boolean, arg1: boolean): boolean;
         lazySet(arg0: boolean): void;
+        weakCompareAndSetVolatile(arg0: boolean, arg1: boolean): boolean;
         getPlain(): boolean;
         setPlain(arg0: boolean): void;
         constructor(arg0: boolean);
@@ -51,8 +51,8 @@ declare module "@package/java/util/concurrent/atomic" {
         weakCompareAndSetAcquire(arg0: number, arg1: E, arg2: E): boolean;
         weakCompareAndSetRelease(arg0: number, arg1: E, arg2: E): boolean;
         getAndSet(arg0: number, arg1: E): E;
-        weakCompareAndSetVolatile(arg0: number, arg1: E, arg2: E): boolean;
         lazySet(arg0: number, arg1: E): void;
+        weakCompareAndSetVolatile(arg0: number, arg1: E, arg2: E): boolean;
         getAndUpdate(arg0: number, arg1: $UnaryOperator_<E>): E;
         updateAndGet(arg0: number, arg1: $UnaryOperator_<E>): E;
         getAndAccumulate(arg0: number, arg1: E, arg2: $BinaryOperator_<E>): E;
@@ -82,9 +82,9 @@ declare module "@package/java/util/concurrent/atomic" {
         weakCompareAndSetRelease(arg0: number, arg1: number): boolean;
         getAndSet(arg0: number): number;
         getAndAdd(arg0: number): number;
+        lazySet(arg0: number): void;
         incrementAndGet(): number;
         weakCompareAndSetVolatile(arg0: number, arg1: number): boolean;
-        lazySet(arg0: number): void;
         getAndIncrement(): number;
         getAndDecrement(): number;
         decrementAndGet(): number;
@@ -121,8 +121,8 @@ declare module "@package/java/util/concurrent/atomic" {
         weakCompareAndSetAcquire(arg0: V, arg1: V): boolean;
         weakCompareAndSetRelease(arg0: V, arg1: V): boolean;
         getAndSet(arg0: V): V;
-        weakCompareAndSetVolatile(arg0: V, arg1: V): boolean;
         lazySet(arg0: V): void;
+        weakCompareAndSetVolatile(arg0: V, arg1: V): boolean;
         getAndUpdate(arg0: $UnaryOperator_<V>): V;
         updateAndGet(arg0: $UnaryOperator_<V>): V;
         getAndAccumulate(arg0: V, arg1: $BinaryOperator_<V>): V;
@@ -154,9 +154,9 @@ declare module "@package/java/util/concurrent/atomic" {
         weakCompareAndSetRelease(arg0: number, arg1: number): boolean;
         getAndSet(arg0: number): number;
         getAndAdd(arg0: number): number;
+        lazySet(arg0: number): void;
         incrementAndGet(): number;
         weakCompareAndSetVolatile(arg0: number, arg1: number): boolean;
-        lazySet(arg0: number): void;
         getAndIncrement(): number;
         getAndDecrement(): number;
         decrementAndGet(): number;
@@ -167,8 +167,8 @@ declare module "@package/java/util/concurrent/atomic" {
         accumulateAndGet(arg0: number, arg1: $LongBinaryOperator_): number;
         getPlain(): number;
         setPlain(arg0: number): void;
-        constructor(arg0: number);
         constructor();
+        constructor(arg0: number);
         get acquire(): number;
         set release(value: number);
         get andIncrement(): number;

@@ -29,15 +29,7 @@ declare module "@package/org/apache/maven/artifact" {
         static LATEST_VERSION: string;
     }
     export interface $Artifact extends $Comparable<$Artifact> {
-        getId(): string;
-        getType(): string;
-        getScope(): string;
-        isResolved(): boolean;
-        setRelease(arg0: boolean): void;
-        getFile(): $File;
-        setVersion(arg0: string): void;
-        getVersion(): string;
-        setOptional(arg0: boolean): void;
+        setGroupId(arg0: string): void;
         hasClassifier(): boolean;
         getBaseVersion(): string;
         setBaseVersion(arg0: string): void;
@@ -61,10 +53,18 @@ declare module "@package/org/apache/maven/artifact" {
         isRelease(): boolean;
         getAvailableVersions(): $List<$ArtifactVersion>;
         setAvailableVersions(arg0: $List_<$ArtifactVersion>): void;
+        setOptional(arg0: boolean): void;
         isSnapshot(): boolean;
-        setScope(arg0: string): void;
-        setGroupId(arg0: string): void;
         getRepository(): $ArtifactRepository;
+        setScope(arg0: string): void;
+        setVersion(arg0: string): void;
+        getVersion(): string;
+        getId(): string;
+        getType(): string;
+        getScope(): string;
+        isResolved(): boolean;
+        setRelease(arg0: boolean): void;
+        getFile(): $File;
         setFile(arg0: $File_): void;
         getGroupId(): string;
         getArtifactId(): string;
@@ -74,12 +74,12 @@ declare module "@package/org/apache/maven/artifact" {
         isSelectedVersionKnown(): boolean;
         getVersionRange(): $VersionRange;
         isOptional(): boolean;
-        get id(): string;
-        get type(): string;
         get dependencyConflictId(): string;
         get metadataList(): $Collection<$ArtifactMetadata>;
         set resolvedVersion(value: string);
         get snapshot(): boolean;
+        get id(): string;
+        get type(): string;
         get classifier(): string;
         get selectedVersion(): $ArtifactVersion;
         get selectedVersionKnown(): boolean;

@@ -35,9 +35,9 @@ declare module "@package/com/yungnickyoung/minecraft/yungsapi/world/structure/te
      */
     export type $EnhancedTerrainAdaptationType_<C> = (() => $MapCodec_<C>);
     export class $EnhancedTerrainAdaptation$TerrainAction extends $Enum<$EnhancedTerrainAdaptation$TerrainAction> implements $StringRepresentable {
+        getDensityModifier(): number;
         static values(): $EnhancedTerrainAdaptation$TerrainAction[];
         static valueOf(arg0: string): $EnhancedTerrainAdaptation$TerrainAction;
-        getDensityModifier(): number;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static CODEC: $Codec<$EnhancedTerrainAdaptation$TerrainAction>;
@@ -64,32 +64,32 @@ declare module "@package/com/yungnickyoung/minecraft/yungsapi/world/structure/te
     /**
      * Values that may be interpreted as {@link $EnhancedTerrainAdaptation$Padding}.
      */
-    export type $EnhancedTerrainAdaptation$Padding_ = { bottom?: number, top?: number, x?: number, z?: number,  } | [bottom?: number, top?: number, x?: number, z?: number, ];
+    export type $EnhancedTerrainAdaptation$Padding_ = { x?: number, top?: number, bottom?: number, z?: number,  } | [x?: number, top?: number, bottom?: number, z?: number, ];
     export class $SmallCarvedTopNoBeardAdaptation extends $EnhancedTerrainAdaptation {
         static CODEC: $MapCodec<$SmallCarvedTopNoBeardAdaptation>;
         static NONE: $EnhancedTerrainAdaptation;
         constructor();
     }
     export class $EnhancedTerrainAdaptation {
-        type(): $EnhancedTerrainAdaptationType<never>;
-        getKernelRadius(): number;
-        getPadding(): $EnhancedTerrainAdaptation$Padding;
         getAquiferOverride(): $AquiferOverride;
+        computeDensityFactor(arg0: number, arg1: number, arg2: number, arg3: number): number;
         topAction(): $EnhancedTerrainAdaptation$TerrainAction;
         bottomAction(): $EnhancedTerrainAdaptation$TerrainAction;
         getKernelSize(): number;
         getKernelDistance(): number;
         getBottomOffset(): number;
         getKernel(): number[];
-        computeDensityFactor(arg0: number, arg1: number, arg2: number, arg3: number): number;
+        getKernelRadius(): number;
+        getPadding(): $EnhancedTerrainAdaptation$Padding;
+        type(): $EnhancedTerrainAdaptationType<never>;
         static NONE: $EnhancedTerrainAdaptation;
-        get kernelRadius(): number;
-        get padding(): $EnhancedTerrainAdaptation$Padding;
         get aquiferOverride(): $AquiferOverride;
         get kernelSize(): number;
         get kernelDistance(): number;
         get bottomOffset(): number;
         get kernel(): number[];
+        get kernelRadius(): number;
+        get padding(): $EnhancedTerrainAdaptation$Padding;
     }
     export class $CustomAdaptation extends $EnhancedTerrainAdaptation {
         static CODEC: $MapCodec<$CustomAdaptation>;

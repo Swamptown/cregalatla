@@ -25,20 +25,20 @@ export * as bundle from "@package/net/neoforged/neoforge/network/bundle";
 
 declare module "@package/net/neoforged/neoforge/network" {
     export class $ConfigSync {
-        static syncConfigs(): $List<$ConfigFilePayload>;
         static receiveSyncedConfig(arg0: number[], arg1: string): void;
+        static syncConfigs(): $List<$ConfigFilePayload>;
     }
     export class $DualStackUtils {
-        static getLocalAddress(): $InetAddress;
         static checkIPv6(arg0: string): boolean;
         static checkIPv6(arg0: $InetAddress): boolean;
         static getMulticastGroup(): string;
         static logInitialPreferences(): void;
         static getAddressString(arg0: $SocketAddress): string;
         static initialise(): void;
+        static getLocalAddress(): $InetAddress;
         constructor();
-        static get localAddress(): $InetAddress;
         static get multicastGroup(): string;
+        static get localAddress(): $InetAddress;
     }
     export class $ConfigurationInitialization {
         static configureEarlyTasks(arg0: $ServerConfigurationPacketListener, arg1: $Consumer_<$ConfigurationTask>): void;
@@ -58,12 +58,12 @@ declare module "@package/net/neoforged/neoforge/network" {
      */
     export type $IContainerFactory_<T> = ((arg0: number, arg1: $Inventory, arg2: $RegistryFriendlyByteBuf) => T);
     export class $PacketDistributor {
+        static sendToPlayersInDimension(arg0: $ServerLevel, arg1: $CustomPacketPayload_, ...arg2: $CustomPacketPayload_[]): void;
+        static sendToPlayersTrackingEntityAndSelf(arg0: $Entity, arg1: $CustomPacketPayload_, ...arg2: $CustomPacketPayload_[]): void;
         static sendToAllPlayers(arg0: $CustomPacketPayload_, ...arg1: $CustomPacketPayload_[]): void;
         static sendToPlayersTrackingEntity(arg0: $Entity, arg1: $CustomPacketPayload_, ...arg2: $CustomPacketPayload_[]): void;
-        static sendToPlayersNear(arg0: $ServerLevel, arg1: $ServerPlayer, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $CustomPacketPayload_, ...arg7: $CustomPacketPayload_[]): void;
-        static sendToPlayersTrackingEntityAndSelf(arg0: $Entity, arg1: $CustomPacketPayload_, ...arg2: $CustomPacketPayload_[]): void;
         static sendToPlayersTrackingChunk(arg0: $ServerLevel, arg1: $ChunkPos, arg2: $CustomPacketPayload_, ...arg3: $CustomPacketPayload_[]): void;
-        static sendToPlayersInDimension(arg0: $ServerLevel, arg1: $CustomPacketPayload_, ...arg2: $CustomPacketPayload_[]): void;
+        static sendToPlayersNear(arg0: $ServerLevel, arg1: $ServerPlayer, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $CustomPacketPayload_, ...arg7: $CustomPacketPayload_[]): void;
         static sendToServer(arg0: $CustomPacketPayload_, ...arg1: $CustomPacketPayload_[]): void;
         static sendToPlayer(arg0: $ServerPlayer, arg1: $CustomPacketPayload_, ...arg2: $CustomPacketPayload_[]): void;
     }

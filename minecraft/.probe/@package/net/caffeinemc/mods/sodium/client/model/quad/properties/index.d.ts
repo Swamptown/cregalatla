@@ -4,17 +4,17 @@ import { $Vector3fc } from "@package/org/joml";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/model/quad/properties" {
     export class $ModelQuadFacing extends $Enum<$ModelQuadFacing> {
-        static values(): $ModelQuadFacing[];
-        static valueOf(arg0: string): $ModelQuadFacing;
+        static fromPackedNormal(arg0: number): $ModelQuadFacing;
         isAligned(): boolean;
         static fromNormal(arg0: number, arg1: number, arg2: number): $ModelQuadFacing;
         getAlignedNormal(): $Vector3fc;
         getPackedAlignedNormal(): number;
         static bitmapIsOpposingAligned(arg0: number): boolean;
         static bitmapHasUnassigned(arg0: number): boolean;
-        static fromPackedNormal(arg0: number): $ModelQuadFacing;
         getSign(): number;
         static fromDirection(arg0: $Direction_): $ModelQuadFacing;
+        static values(): $ModelQuadFacing[];
+        static valueOf(arg0: string): $ModelQuadFacing;
         getOpposite(): $ModelQuadFacing;
         getAxis(): number;
         static NEG_Z: $ModelQuadFacing;

@@ -95,17 +95,17 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor();
     }
     export class $ClientChatReceivedEvent extends $Event implements $ICancellableEvent {
-        getMessage(): $Component;
-        isSystem(): boolean;
         getSender(): $UUID;
         getBoundChatType(): $ChatType$Bound;
+        isSystem(): boolean;
+        getMessage(): $Component;
         setMessage(arg0: $Component_): void;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $ChatType$Bound_, arg1: $Component_, arg2: $UUID_);
-        get system(): boolean;
         get sender(): $UUID;
         get boundChatType(): $ChatType$Bound;
+        get system(): boolean;
     }
     export class $RegisterKeyMappingsEvent extends $Event implements $IModBusEvent {
         register(arg0: $KeyMapping): void;
@@ -152,17 +152,17 @@ declare module "@package/net/neoforged/neoforge/client/event" {
     }
     export class $RenderTooltipEvent extends $Event {
         getY(): number;
+        getGraphics(): $GuiGraphics;
+        getComponents(): $List<$ClientTooltipComponent>;
         getX(): number;
         getFont(): $Font;
         getItemStack(): $ItemStack;
-        getComponents(): $List<$ClientTooltipComponent>;
-        getGraphics(): $GuiGraphics;
         get y(): number;
+        get graphics(): $GuiGraphics;
+        get components(): $List<$ClientTooltipComponent>;
         get x(): number;
         get font(): $Font;
         get itemStack(): $ItemStack;
-        get components(): $List<$ClientTooltipComponent>;
-        get graphics(): $GuiGraphics;
     }
     export class $RecipesUpdatedEvent extends $Event {
         getRecipeManager(): $RecipeManager;
@@ -170,16 +170,16 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get recipeManager(): $RecipeManager;
     }
     export class $RenderPlayerEvent extends $PlayerEvent {
+        getPartialTick(): number;
         getMultiBufferSource(): $MultiBufferSource;
         getPackedLight(): number;
-        getPartialTick(): number;
-        getRenderer(): $PlayerRenderer;
         getPoseStack(): $PoseStack;
+        getRenderer(): $PlayerRenderer;
+        get partialTick(): number;
         get multiBufferSource(): $MultiBufferSource;
         get packedLight(): number;
-        get partialTick(): number;
-        get renderer(): $PlayerRenderer;
         get poseStack(): $PoseStack;
+        get renderer(): $PlayerRenderer;
     }
     export class $RegisterDimensionSpecialEffectsEvent extends $Event implements $IModBusEvent {
         register(arg0: $ResourceLocation_, arg1: $DimensionSpecialEffects): void;
@@ -189,24 +189,24 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor();
     }
     export class $ComputeFovModifierEvent extends $Event {
+        getFovModifier(): number;
+        getNewFovModifier(): number;
         setNewFovModifier(arg0: number): void;
         getPlayer(): $Player;
-        getNewFovModifier(): number;
-        getFovModifier(): number;
         constructor(arg0: $Player, arg1: number);
-        get player(): $Player;
         get fovModifier(): number;
+        get player(): $Player;
     }
     export class $CustomizeGuiOverlayEvent$Chat extends $CustomizeGuiOverlayEvent {
-        getPosX(): number;
-        getPosY(): number;
         setPosX(arg0: number): void;
         setPosY(arg0: number): void;
+        getPosX(): number;
+        getPosY(): number;
         constructor(arg0: $Window, arg1: $GuiGraphics, arg2: $DeltaTracker, arg3: number, arg4: number);
     }
     export class $EntityRenderersEvent$RegisterRenderers extends $EntityRenderersEvent {
-        registerBlockEntityRenderer<T extends $BlockEntity>(arg0: $BlockEntityType_<T>, arg1: $BlockEntityRendererProvider_<T>): void;
         registerEntityRenderer<T extends $Entity>(arg0: $EntityType_<T>, arg1: $EntityRendererProvider_<T>): void;
+        registerBlockEntityRenderer<T extends $BlockEntity>(arg0: $BlockEntityType_<T>, arg1: $BlockEntityRendererProvider_<T>): void;
         constructor();
     }
     export class $ScreenEvent$MouseButtonReleased$Pre extends $ScreenEvent$MouseButtonReleased implements $ICancellableEvent {
@@ -249,9 +249,9 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get input(): $Input;
     }
     export class $CustomizeGuiOverlayEvent$BossEventProgress extends $CustomizeGuiOverlayEvent implements $ICancellableEvent {
+        getIncrement(): number;
         getBossEvent(): $LerpingBossEvent;
         setIncrement(arg0: number): void;
-        getIncrement(): number;
         getY(): number;
         getX(): number;
         setCanceled(arg0: boolean): void;
@@ -268,17 +268,17 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get resourceProvider(): $ResourceProvider;
     }
     export class $RegisterJsonAnimationTypesEvent extends $Event implements $IModBusEvent {
-        registerTarget(arg0: $ResourceLocation_, arg1: $AnimationTarget_): void;
         registerInterpolation(arg0: $ResourceLocation_, arg1: $AnimationChannel$Interpolation_): void;
+        registerTarget(arg0: $ResourceLocation_, arg1: $AnimationTarget_): void;
         constructor(arg0: $ImmutableMap$Builder<$ResourceLocation_, $AnimationTarget_>, arg1: $ImmutableMap$Builder<$ResourceLocation_, $AnimationChannel$Interpolation_>);
     }
     export class $ScreenEvent$RenderInventoryMobEffects extends $ScreenEvent implements $ICancellableEvent {
-        getHorizontalOffset(): number;
-        getAvailableSpace(): number;
-        setHorizontalOffset(arg0: number): void;
-        addHorizontalOffset(arg0: number): void;
         setCompact(arg0: boolean): void;
+        setHorizontalOffset(arg0: number): void;
+        getAvailableSpace(): number;
         isCompact(): boolean;
+        getHorizontalOffset(): number;
+        addHorizontalOffset(arg0: number): void;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Screen, arg1: number, arg2: boolean, arg3: number);
@@ -292,9 +292,9 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get target(): $EntityHitResult;
     }
     export class $RegisterParticleProvidersEvent extends $Event implements $IModBusEvent {
-        registerSprite<T extends $ParticleOptions>(arg0: $ParticleType_<T>, arg1: $ParticleProvider$Sprite_<T>): void;
         registerSpriteSet<T extends $ParticleOptions>(arg0: $ParticleType_<T>, arg1: $ParticleEngine$SpriteParticleRegistration_<T>): void;
         registerSpecial<T extends $ParticleOptions>(arg0: $ParticleType_<T>, arg1: $ParticleProvider_<T>): void;
+        registerSprite<T extends $ParticleOptions>(arg0: $ParticleType_<T>, arg1: $ParticleProvider$Sprite_<T>): void;
         constructor(arg0: $ParticleEngine);
     }
     export class $ScreenEvent$MouseDragged$Post extends $ScreenEvent$MouseDragged {
@@ -327,21 +327,21 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor(arg0: $DeltaTracker);
     }
     export class $ViewportEvent$RenderFog extends $ViewportEvent implements $ICancellableEvent {
-        getType(): $FogType;
-        setNearPlaneDistance(arg0: number): void;
-        setFarPlaneDistance(arg0: number): void;
         getNearPlaneDistance(): number;
         getFarPlaneDistance(): number;
         getFogShape(): $FogShape;
+        setFogShape(arg0: $FogShape_): void;
+        setFarPlaneDistance(arg0: number): void;
+        setNearPlaneDistance(arg0: number): void;
         scaleFarPlaneDistance(arg0: number): void;
         scaleNearPlaneDistance(arg0: number): void;
-        setFogShape(arg0: $FogShape_): void;
         getMode(): $FogRenderer$FogMode;
+        getType(): $FogType;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $FogRenderer$FogMode_, arg1: $FogType_, arg2: $Camera, arg3: number, arg4: number, arg5: number, arg6: $FogShape_);
-        get type(): $FogType;
         get mode(): $FogRenderer$FogMode;
+        get type(): $FogType;
     }
     export class $ScreenEvent$MouseButtonPressed$Pre extends $ScreenEvent$MouseButtonPressed implements $ICancellableEvent {
         setCanceled(arg0: boolean): void;
@@ -366,13 +366,13 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor(arg0: $LivingEntity, arg1: $LivingEntityRenderer<T, M>, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number);
     }
     export class $ScreenEvent$MouseDragged extends $ScreenEvent$MouseInput {
-        getMouseButton(): number;
         getDragX(): number;
         getDragY(): number;
+        getMouseButton(): number;
         constructor(arg0: $Screen, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number);
-        get mouseButton(): number;
         get dragX(): number;
         get dragY(): number;
+        get mouseButton(): number;
     }
     export class $RenderTooltipEvent$Color extends $RenderTooltipEvent {
         setBackgroundStart(arg0: number): void;
@@ -409,19 +409,19 @@ declare module "@package/net/neoforged/neoforge/client/event" {
     export class $RenderTooltipEvent$Pre extends $RenderTooltipEvent implements $ICancellableEvent {
         getTooltipPositioner(): $ClientTooltipPositioner;
         setFont(arg0: $Font): void;
-        setX(arg0: number): void;
-        setY(arg0: number): void;
         getScreenWidth(): number;
         getScreenHeight(): number;
+        setX(arg0: number): void;
+        setY(arg0: number): void;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $ItemStack_, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $Font, arg7: $List_<$ClientTooltipComponent>, arg8: $ClientTooltipPositioner_);
         get tooltipPositioner(): $ClientTooltipPositioner;
         set font(value: $Font);
-        set x(value: number);
-        set y(value: number);
         get screenWidth(): number;
         get screenHeight(): number;
+        set x(value: number);
+        set y(value: number);
     }
     export class $ViewportEvent$ComputeFogColor extends $ViewportEvent {
         setRed(arg0: number): void;
@@ -449,23 +449,23 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get target(): $BlockHitResult;
     }
     export class $RenderNameTagEvent extends $EntityEvent {
-        getContent(): $Component;
+        getPartialTick(): number;
+        getOriginalContent(): $Component;
+        getEntityRenderer(): $EntityRenderer<never>;
+        setCanRender(arg0: $TriState_): void;
         getMultiBufferSource(): $MultiBufferSource;
         getPackedLight(): number;
         canRender(): $TriState;
-        getPartialTick(): number;
         setContent(arg0: $Component_): void;
+        getContent(): $Component;
         getPoseStack(): $PoseStack;
-        setCanRender(arg0: $TriState_): void;
-        getOriginalContent(): $Component;
-        getEntityRenderer(): $EntityRenderer<never>;
         constructor(arg0: $Entity, arg1: $Component_, arg2: $EntityRenderer<never>, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number);
-        get multiBufferSource(): $MultiBufferSource;
-        get packedLight(): number;
         get partialTick(): number;
-        get poseStack(): $PoseStack;
         get originalContent(): $Component;
         get entityRenderer(): $EntityRenderer<never>;
+        get multiBufferSource(): $MultiBufferSource;
+        get packedLight(): number;
+        get poseStack(): $PoseStack;
     }
     export class $RegisterGuiLayersEvent$Ordering extends $Enum<$RegisterGuiLayersEvent$Ordering> {
     }
@@ -476,41 +476,41 @@ declare module "@package/net/neoforged/neoforge/client/event" {
     export class $RenderTooltipEvent$GatherComponents extends $Event implements $ICancellableEvent {
         getTooltipElements(): $List<$Either<$FormattedText, $TooltipComponent>>;
         getMaxWidth(): number;
-        getItemStack(): $ItemStack;
         getScreenWidth(): number;
         getScreenHeight(): number;
+        getItemStack(): $ItemStack;
         setMaxWidth(arg0: number): void;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $ItemStack_, arg1: number, arg2: number, arg3: $List_<$Either<$FormattedText, $TooltipComponent>>, arg4: number);
         get tooltipElements(): $List<$Either<$FormattedText, $TooltipComponent>>;
-        get itemStack(): $ItemStack;
         get screenWidth(): number;
         get screenHeight(): number;
+        get itemStack(): $ItemStack;
     }
     export class $RegisterMenuScreensEvent extends $Event implements $IModBusEvent {
         register<M extends $AbstractContainerMenu, U extends $Screen>(arg0: $MenuType_<M>, arg1: $MenuScreens$ScreenConstructor_<M, U>): void;
         constructor(arg0: $Map_<$MenuType_<never>, $MenuScreens$ScreenConstructor_<never, never>>);
     }
     export class $RenderHandEvent extends $Event implements $ICancellableEvent {
-        getEquipProgress(): number;
+        getPartialTick(): number;
         getInterpolatedPitch(): number;
+        getSwingProgress(): number;
+        getEquipProgress(): number;
         getMultiBufferSource(): $MultiBufferSource;
         getPackedLight(): number;
-        getPartialTick(): number;
-        getSwingProgress(): number;
         getHand(): $InteractionHand;
         getPoseStack(): $PoseStack;
         getItemStack(): $ItemStack;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $InteractionHand_, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $ItemStack_);
-        get equipProgress(): number;
+        get partialTick(): number;
         get interpolatedPitch(): number;
+        get swingProgress(): number;
+        get equipProgress(): number;
         get multiBufferSource(): $MultiBufferSource;
         get packedLight(): number;
-        get partialTick(): number;
-        get swingProgress(): number;
         get hand(): $InteractionHand;
         get poseStack(): $PoseStack;
         get itemStack(): $ItemStack;
@@ -584,13 +584,13 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get screen(): $Screen;
     }
     export class $AddAttributeTooltipsEvent extends $Event {
-        getStack(): $ItemStack;
-        getContext(): $AttributeTooltipContext;
         addTooltipLines(...arg0: $Component_[]): void;
+        getContext(): $AttributeTooltipContext;
+        getStack(): $ItemStack;
         shouldShow(): boolean;
         constructor(arg0: $ItemStack_, arg1: $Consumer_<$Component>, arg2: $AttributeTooltipContext);
-        get stack(): $ItemStack;
         get context(): $AttributeTooltipContext;
+        get stack(): $ItemStack;
     }
     export class $RegisterPresetEditorsEvent extends $Event implements $IModBusEvent {
         register(arg0: $ResourceKey_<$WorldPreset>, arg1: $PresetEditor_): void;
@@ -604,16 +604,16 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor(arg0: $Screen);
     }
     export class $RenderHighlightEvent extends $Event {
-        getTarget(): $HitResult;
-        getMultiBufferSource(): $MultiBufferSource;
         getDeltaTracker(): $DeltaTracker;
+        getMultiBufferSource(): $MultiBufferSource;
         getCamera(): $Camera;
+        getTarget(): $HitResult;
         getLevelRenderer(): $LevelRenderer;
         getPoseStack(): $PoseStack;
-        get target(): $HitResult;
-        get multiBufferSource(): $MultiBufferSource;
         get deltaTracker(): $DeltaTracker;
+        get multiBufferSource(): $MultiBufferSource;
         get camera(): $Camera;
+        get target(): $HitResult;
         get levelRenderer(): $LevelRenderer;
         get poseStack(): $PoseStack;
     }
@@ -643,16 +643,16 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get guiGraphics(): $GuiGraphics;
     }
     export class $EntityRenderersEvent$AddLayers extends $EntityRenderersEvent {
-        getContext(): $EntityRendererProvider$Context;
         getSkins(): $Set<$PlayerSkin$Model>;
         getEntityTypes(): $Set<$EntityType<never>>;
         getSkin<R extends $EntityRenderer<$Player>>(arg0: $PlayerSkin$Model_): R;
+        getContext(): $EntityRendererProvider$Context;
         getRenderer<T extends $Entity, R extends $EntityRenderer<T>>(arg0: $EntityType_<T>): R;
         getEntityModels(): $EntityModelSet;
         constructor(arg0: $Map_<$EntityType_<never>, $EntityRenderer<never>>, arg1: $Map_<$PlayerSkin$Model_, $EntityRenderer<$Player>>, arg2: $EntityRendererProvider$Context);
-        get context(): $EntityRendererProvider$Context;
         get skins(): $Set<$PlayerSkin$Model>;
         get entityTypes(): $Set<$EntityType<never>>;
+        get context(): $EntityRendererProvider$Context;
         get entityModels(): $EntityModelSet;
     }
     export class $AddSectionGeometryEvent extends $Event {
@@ -681,12 +681,12 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get containerScreen(): $AbstractContainerScreen<never>;
     }
     export class $RegisterGuiLayersEvent extends $Event implements $IModBusEvent {
+        wrapLayer(arg0: $ResourceLocation_, arg1: $UnaryOperator_<$LayeredDraw$Layer>): void;
         registerBelowAll(arg0: $ResourceLocation_, arg1: $LayeredDraw$Layer_): void;
         registerBelow(arg0: $ResourceLocation_, arg1: $ResourceLocation_, arg2: $LayeredDraw$Layer_): void;
         registerAbove(arg0: $ResourceLocation_, arg1: $ResourceLocation_, arg2: $LayeredDraw$Layer_): void;
         registerAboveAll(arg0: $ResourceLocation_, arg1: $LayeredDraw$Layer_): void;
         replaceLayer(arg0: $ResourceLocation_, arg1: $LayeredDraw$Layer_): void;
-        wrapLayer(arg0: $ResourceLocation_, arg1: $UnaryOperator_<$LayeredDraw$Layer>): void;
         constructor(arg0: $List_<$GuiLayerManager$NamedLayer_>);
     }
     export class $ScreenEvent$Init extends $ScreenEvent {
@@ -743,9 +743,9 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor(arg0: $Screen, arg1: number, arg2: number, arg3: number, arg4: number);
     }
     export class $ViewportEvent$ComputeFov extends $ViewportEvent {
+        setFOV(arg0: number): void;
         getFOV(): number;
         usedConfiguredFov(): boolean;
-        setFOV(arg0: number): void;
         constructor(arg0: $GameRenderer, arg1: $Camera, arg2: number, arg3: number, arg4: boolean);
     }
     export class $ModelEvent extends $Event {
@@ -757,21 +757,21 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor(arg0: $AbstractContainerScreen<never>, arg1: $GuiGraphics, arg2: number, arg3: number);
     }
     export class $InputEvent$InteractionKeyMappingTriggered extends $InputEvent implements $ICancellableEvent {
-        isAttack(): boolean;
         isPickBlock(): boolean;
-        getKeyMapping(): $KeyMapping;
         isUseItem(): boolean;
         setSwingHand(arg0: boolean): void;
+        isAttack(): boolean;
+        getKeyMapping(): $KeyMapping;
         getHand(): $InteractionHand;
         shouldSwingHand(): boolean;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: number, arg1: $KeyMapping, arg2: $InteractionHand_);
-        get attack(): boolean;
         get pickBlock(): boolean;
-        get keyMapping(): $KeyMapping;
         get useItem(): boolean;
         set swingHand(value: boolean);
+        get attack(): boolean;
+        get keyMapping(): $KeyMapping;
         get hand(): $InteractionHand;
     }
     export class $InputEvent$Key extends $InputEvent {
@@ -819,11 +819,11 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor(arg0: number, arg1: number, arg2: number);
     }
     export class $SelectMusicEvent extends $Event implements $ICancellableEvent {
-        getMusic(): $Music;
         getOriginalMusic(): $Music;
         getPlayingMusic(): $SoundInstance;
         setMusic(arg0: $Music): void;
         overrideMusic(arg0: $Music): void;
+        getMusic(): $Music;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Music, arg1: $SoundInstance);
@@ -836,21 +836,21 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get overlay(): boolean;
     }
     export class $RenderItemInFrameEvent extends $Event implements $ICancellableEvent {
+        getItemFrameEntity(): $ItemFrame;
         getMultiBufferSource(): $MultiBufferSource;
         getPackedLight(): number;
-        getRenderer(): $ItemFrameRenderer<never>;
         getPoseStack(): $PoseStack;
+        getRenderer(): $ItemFrameRenderer<never>;
         getItemStack(): $ItemStack;
-        getItemFrameEntity(): $ItemFrame;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $ItemFrame, arg1: $ItemFrameRenderer<never>, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number);
+        get itemFrameEntity(): $ItemFrame;
         get multiBufferSource(): $MultiBufferSource;
         get packedLight(): number;
-        get renderer(): $ItemFrameRenderer<never>;
         get poseStack(): $PoseStack;
+        get renderer(): $ItemFrameRenderer<never>;
         get itemStack(): $ItemStack;
-        get itemFrameEntity(): $ItemFrame;
     }
     export class $InputEvent$MouseButton extends $InputEvent {
         getModifiers(): number;
@@ -882,17 +882,17 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor(arg0: $Screen, arg1: number, arg2: number, arg3: number, arg4: number);
     }
     export class $ViewportEvent$ComputeCameraAngles extends $ViewportEvent {
+        getRoll(): number;
         setPitch(arg0: number): void;
         setYaw(arg0: number): void;
         setRoll(arg0: number): void;
-        getRoll(): number;
         getYaw(): number;
         getPitch(): number;
         constructor(arg0: $Camera, arg1: number, arg2: number, arg3: number, arg4: number);
     }
     export class $AddSectionGeometryEvent$SectionRenderingContext {
-        getRegion(): $BlockAndTintGetter;
         getOrCreateChunkBuffer(arg0: $RenderType): $VertexConsumer;
+        getRegion(): $BlockAndTintGetter;
         getPoseStack(): $PoseStack;
         getQuadLighter(arg0: boolean): $QuadLighter;
         constructor(arg0: $Function_<$RenderType, $VertexConsumer>, arg1: $BlockAndTintGetter, arg2: $PoseStack);
@@ -948,27 +948,27 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor(arg0: $AbstractContainerScreen<never>, arg1: $GuiGraphics, arg2: number, arg3: number);
     }
     export class $ModelEvent$ModifyBakingResult extends $ModelEvent implements $IModBusEvent {
-        getTextureGetter(): $Function<$Material, $TextureAtlasSprite>;
         getModelBakery(): $ModelBakery;
+        getTextureGetter(): $Function<$Material, $TextureAtlasSprite>;
         getModels(): $Map<$ModelResourceLocation, $BakedModel>;
         constructor(arg0: $Map_<$ModelResourceLocation_, $BakedModel>, arg1: $Function_<$Material, $TextureAtlasSprite>, arg2: $ModelBakery);
-        get textureGetter(): $Function<$Material, $TextureAtlasSprite>;
         get modelBakery(): $ModelBakery;
+        get textureGetter(): $Function<$Material, $TextureAtlasSprite>;
         get models(): $Map<$ModelResourceLocation, $BakedModel>;
     }
     export class $RenderLivingEvent<T extends $LivingEntity, M extends $EntityModel<T>> extends $Event {
+        getPartialTick(): number;
         getMultiBufferSource(): $MultiBufferSource;
         getPackedLight(): number;
-        getPartialTick(): number;
         getEntity(): $LivingEntity;
-        getRenderer(): $LivingEntityRenderer<T, M>;
         getPoseStack(): $PoseStack;
+        getRenderer(): $LivingEntityRenderer<T, M>;
+        get partialTick(): number;
         get multiBufferSource(): $MultiBufferSource;
         get packedLight(): number;
-        get partialTick(): number;
         get entity(): $LivingEntity;
-        get renderer(): $LivingEntityRenderer<T, M>;
         get poseStack(): $PoseStack;
+        get renderer(): $LivingEntityRenderer<T, M>;
     }
     export class $ClientChatEvent extends $Event implements $ICancellableEvent {
         getMessage(): string;
@@ -980,13 +980,13 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get originalMessage(): string;
     }
     export class $RenderGuiLayerEvent extends $Event {
+        getPartialTick(): $DeltaTracker;
         getName(): $ResourceLocation;
         getLayer(): $LayeredDraw$Layer;
-        getPartialTick(): $DeltaTracker;
         getGuiGraphics(): $GuiGraphics;
+        get partialTick(): $DeltaTracker;
         get name(): $ResourceLocation;
         get layer(): $LayeredDraw$Layer;
-        get partialTick(): $DeltaTracker;
         get guiGraphics(): $GuiGraphics;
     }
     export class $ScreenEvent$KeyPressed extends $ScreenEvent$KeyInput {
@@ -1002,8 +1002,8 @@ declare module "@package/net/neoforged/neoforge/client/event" {
     }
     export class $InputEvent$MouseScrollingEvent extends $InputEvent implements $ICancellableEvent {
         isLeftDown(): boolean;
-        isRightDown(): boolean;
         isMiddleDown(): boolean;
+        isRightDown(): boolean;
         getMouseX(): number;
         getMouseY(): number;
         getScrollDeltaX(): number;
@@ -1012,8 +1012,8 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         isCanceled(): boolean;
         constructor(arg0: number, arg1: number, arg2: boolean, arg3: boolean, arg4: boolean, arg5: number, arg6: number);
         get leftDown(): boolean;
-        get rightDown(): boolean;
         get middleDown(): boolean;
+        get rightDown(): boolean;
         get mouseX(): number;
         get mouseY(): number;
         get scrollDeltaX(): number;
@@ -1033,18 +1033,18 @@ declare module "@package/net/neoforged/neoforge/client/event" {
     export class $ScreenEvent$KeyInput extends $ScreenEvent {
     }
     export class $ScreenEvent$MouseButtonReleased$Post extends $ScreenEvent$MouseButtonReleased {
-        getResult(): $ScreenEvent$MouseButtonReleased$Post$Result;
-        setResult(arg0: $ScreenEvent$MouseButtonReleased$Post$Result_): void;
         wasReleaseHandled(): boolean;
         getReleaseResult(): boolean;
+        getResult(): $ScreenEvent$MouseButtonReleased$Post$Result;
+        setResult(arg0: $ScreenEvent$MouseButtonReleased$Post$Result_): void;
         constructor(arg0: $Screen, arg1: number, arg2: number, arg3: number, arg4: boolean);
         get releaseResult(): boolean;
     }
     export class $ScreenEvent$MouseButtonPressed$Post extends $ScreenEvent$MouseButtonPressed {
-        getResult(): $ScreenEvent$MouseButtonPressed$Post$Result;
-        setResult(arg0: $ScreenEvent$MouseButtonPressed$Post$Result_): void;
         wasClickHandled(): boolean;
         getClickResult(): boolean;
+        getResult(): $ScreenEvent$MouseButtonPressed$Post$Result;
+        setResult(arg0: $ScreenEvent$MouseButtonPressed$Post$Result_): void;
         constructor(arg0: $Screen, arg1: number, arg2: number, arg3: number, arg4: boolean);
         get clickResult(): boolean;
     }
@@ -1052,19 +1052,19 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         constructor(arg0: $DeltaTracker);
     }
     export class $GatherSkippedAttributeTooltipsEvent extends $Event {
-        getStack(): $ItemStack;
-        getContext(): $AttributeTooltipContext;
-        isSkipped(arg0: $EquipmentSlotGroup_): boolean;
-        isSkipped(arg0: $ResourceLocation_): boolean;
-        isSkippingAll(): boolean;
         skipId(arg0: $ResourceLocation_): void;
         skipGroup(arg0: $EquipmentSlotGroup_): void;
         setSkipAll(arg0: boolean): void;
+        isSkippingAll(): boolean;
+        isSkipped(arg0: $EquipmentSlotGroup_): boolean;
+        isSkipped(arg0: $ResourceLocation_): boolean;
+        getContext(): $AttributeTooltipContext;
+        getStack(): $ItemStack;
         constructor(arg0: $ItemStack_, arg1: $AttributeTooltipContext);
-        get stack(): $ItemStack;
-        get context(): $AttributeTooltipContext;
-        get skippingAll(): boolean;
         set skipAll(value: boolean);
+        get skippingAll(): boolean;
+        get context(): $AttributeTooltipContext;
+        get stack(): $ItemStack;
     }
     export class $ScreenEvent$Render extends $ScreenEvent {
         getPartialTick(): number;
@@ -1121,33 +1121,33 @@ declare module "@package/net/neoforged/neoforge/client/event" {
         get partialTick(): $DeltaTracker;
     }
     export class $ClientPlayerChangeGameTypeEvent extends $Event {
+        getInfo(): $PlayerInfo;
         getCurrentGameType(): $GameType;
         getNewGameType(): $GameType;
-        getInfo(): $PlayerInfo;
         constructor(arg0: $PlayerInfo, arg1: $GameType_, arg2: $GameType_);
+        get info(): $PlayerInfo;
         get currentGameType(): $GameType;
         get newGameType(): $GameType;
-        get info(): $PlayerInfo;
     }
     export class $RenderLevelStageEvent extends $Event {
-        getRenderTick(): number;
         getPartialTick(): $DeltaTracker;
+        getRenderTick(): number;
         getCamera(): $Camera;
         getLevelRenderer(): $LevelRenderer;
-        getPoseStack(): $PoseStack;
-        getModelViewMatrix(): $Matrix4f;
         getFrustum(): $Frustum;
+        getPoseStack(): $PoseStack;
         getProjectionMatrix(): $Matrix4f;
+        getModelViewMatrix(): $Matrix4f;
         getStage(): $RenderLevelStageEvent$Stage;
         constructor(arg0: $RenderLevelStageEvent$Stage, arg1: $LevelRenderer, arg2: $PoseStack, arg3: $Matrix4f, arg4: $Matrix4f, arg5: number, arg6: $DeltaTracker, arg7: $Camera, arg8: $Frustum);
-        get renderTick(): number;
         get partialTick(): $DeltaTracker;
+        get renderTick(): number;
         get camera(): $Camera;
         get levelRenderer(): $LevelRenderer;
-        get poseStack(): $PoseStack;
-        get modelViewMatrix(): $Matrix4f;
         get frustum(): $Frustum;
+        get poseStack(): $PoseStack;
         get projectionMatrix(): $Matrix4f;
+        get modelViewMatrix(): $Matrix4f;
         get stage(): $RenderLevelStageEvent$Stage;
     }
     export class $ClientChatReceivedEvent$Player extends $ClientChatReceivedEvent {

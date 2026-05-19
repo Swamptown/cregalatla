@@ -15,6 +15,11 @@ import { $Short2IntFunction_, $Short2ReferenceFunction_, $Short2FloatFunction, $
 
 declare module "@package/it/unimi/dsi/fastutil/longs" {
     export class $AbstractLongCollection extends $AbstractCollection<number> implements $LongCollection {
+        toLongArray(): number[];
+        /**
+         * @deprecated
+         */
+        toLongArray(arg0: number[]): number[];
         /**
          * @deprecated
          */
@@ -24,16 +29,11 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         contains(arg0: number): boolean;
         addAll(arg0: $LongCollection): boolean;
         forEach(arg0: $LongConsumer_): void;
-        removeIf(arg0: $LongPredicate_): boolean;
         removeAll(arg0: $LongCollection): boolean;
         retainAll(arg0: $LongCollection): boolean;
         containsAll(arg0: $LongCollection): boolean;
         rem(arg0: number): boolean;
-        /**
-         * @deprecated
-         */
-        toLongArray(arg0: number[]): number[];
-        toLongArray(): number[];
+        removeIf(arg0: $LongPredicate_): boolean;
         removeIf(arg0: $LongPredicate_$1): boolean;
         longStream(): $LongStream;
         longSpliterator(): $LongSpliterator;
@@ -65,87 +65,82 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         merge(arg0: number, arg1: V, arg2: $BiFunction_<V, V, V>): V;
         putIfAbsent(arg0: number, arg1: V): V;
         compute(arg0: number, arg1: $BiFunction_<number, V, V>): V;
-        computeIfAbsent(arg0: number, arg1: $Long2ObjectFunction_<V>): V;
-        computeIfAbsent(arg0: number, arg1: $LongFunction_<V>): V;
         forEach(arg0: $BiConsumer_<number, V>): void;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
+        computeIfAbsent(arg0: number, arg1: $Long2ObjectFunction_<V>): V;
+        computeIfAbsent(arg0: number, arg1: $LongFunction_<V>): V;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: V): V;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, V, V>): V;
-        defaultReturnValue(arg0: V): void;
-        defaultReturnValue(): V;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Long2ObjectFunction_<V>): V;
+        defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         long2ObjectEntrySet(): $ObjectSet<$Long2ObjectMap$Entry<V>>;
         entrySet(): $Set<$Map$Entry<number, V>>;
         keySet(): $Set<number>;
     }
     export class $LongLinkedOpenHashSet extends $AbstractLongSortedSet implements $Serializable, $Cloneable, $Hash {
-        clone(): $LongLinkedOpenHashSet;
-        static of(): $LongLinkedOpenHashSet;
-        static of(arg0: number): $LongLinkedOpenHashSet;
-        static of(arg0: number, arg1: number, arg2: number): $LongLinkedOpenHashSet;
-        static of(...arg0: number[]): $LongLinkedOpenHashSet;
-        static of(arg0: number, arg1: number): $LongLinkedOpenHashSet;
-        iterator(arg0: number): $LongListIterator;
+        removeLastLong(): number;
+        removeFirstLong(): number;
+        clone(): $Object;
         trim(): boolean;
         trim(arg0: number): boolean;
+        static of(...arg0: number[]): $LongLinkedOpenHashSet;
+        static of(arg0: number): $LongLinkedOpenHashSet;
+        static of(): $LongLinkedOpenHashSet;
+        static of(arg0: number, arg1: number): $LongLinkedOpenHashSet;
+        static of(arg0: number, arg1: number, arg2: number): $LongLinkedOpenHashSet;
         static toSet(arg0: $LongStream): $LongLinkedOpenHashSet;
         ensureCapacity(arg0: number): void;
-        removeFirstLong(): number;
-        removeLastLong(): number;
         static toSetWithExpectedSize(arg0: $LongStream, arg1: number): $LongLinkedOpenHashSet;
         addAndMoveToFirst(arg0: number): boolean;
         addAndMoveToLast(arg0: number): boolean;
         comparator(): $Comparator<number>;
         last(): number;
-        reversed(): $SequencedSet<number>;
-        constructor(arg0: $Iterator<never>);
-        constructor(arg0: $Iterator<never>, arg1: number);
-        constructor(arg0: $LongIterator);
-        constructor(arg0: $LongIterator, arg1: number);
-        constructor(arg0: number[]);
-        constructor(arg0: number[], arg1: number);
-        constructor(arg0: number[], arg1: number, arg2: number);
+        first(): number;
         constructor(arg0: number[], arg1: number, arg2: number, arg3: number);
-        constructor(arg0: $Collection_<number>, arg1: number);
-        constructor();
-        constructor(arg0: number);
+        constructor(arg0: number[], arg1: number, arg2: number);
+        constructor(arg0: number[], arg1: number);
+        constructor(arg0: number[]);
         constructor(arg0: number, arg1: number);
         constructor(arg0: $LongCollection);
         constructor(arg0: $LongCollection, arg1: number);
         constructor(arg0: $Collection_<number>);
+        constructor(arg0: $Collection_<number>, arg1: number);
+        constructor();
+        constructor(arg0: number);
+        constructor(arg0: $LongIterator);
+        constructor(arg0: $LongIterator, arg1: number);
+        constructor(arg0: $Iterator<never>);
+        constructor(arg0: $Iterator<never>, arg1: number);
     }
     export class $Long2ReferenceOpenHashMap<V> extends $AbstractLong2ReferenceMap<V> implements $Serializable, $Cloneable, $Hash {
         clone(): $Long2ReferenceOpenHashMap<V>;
-        trim(): boolean;
         trim(arg0: number): boolean;
+        trim(): boolean;
         ensureCapacity(arg0: number): void;
-        entrySet(): $Set<$Map$Entry<number, V>>;
-        constructor(arg0: $Map_<number, V>);
-        constructor(arg0: $Long2ReferenceMap<V>, arg1: number);
-        constructor(arg0: $Long2ReferenceMap<V>);
+        keySet(): $Set<number>;
         constructor(arg0: number[], arg1: V[], arg2: number);
+        constructor(arg0: $Long2ReferenceMap<V>);
         constructor(arg0: number[], arg1: V[]);
         constructor(arg0: number, arg1: number);
-        constructor(arg0: number);
         constructor();
+        constructor(arg0: number);
         constructor(arg0: $Map_<number, V>, arg1: number);
+        constructor(arg0: $Map_<number, V>);
+        constructor(arg0: $Long2ReferenceMap<V>, arg1: number);
     }
     export class $AbstractLong2ObjectSortedMap<V> extends $AbstractLong2ObjectMap<V> implements $Long2ObjectSortedMap<V> {
-        /**
-         * @deprecated
-         */
-        entrySet(): $ObjectSortedSet<$Map$Entry<number, V>>;
         /**
          * @deprecated
          */
@@ -158,9 +153,17 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         tailMap(arg0: number): $Long2ObjectSortedMap<V>;
-        reversed(): $SortedMap<number, V>;
+        /**
+         * @deprecated
+         */
+        lastKey(): number;
+        /**
+         * @deprecated
+         */
+        entrySet(): $ObjectSortedSet<$Map$Entry<number, V>>;
         putFirst(arg0: number, arg1: V): V;
         putLast(arg0: number, arg1: V): V;
+        reversed(): $SortedMap<number, V>;
         sequencedKeySet(): $SequencedSet<number>;
         sequencedValues(): $SequencedCollection<V>;
         sequencedEntrySet(): $SequencedSet<$Map$Entry<number, V>>;
@@ -171,7 +174,7 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         values(): $ObjectCollection<V>;
         keySet(): $LongSortedSet;
         firstKey(): number;
-        lastKey(): number;
+        comparator(): $Comparator<number>;
     }
     export class $AbstractLong2ReferenceMap<V> extends $AbstractLong2ReferenceFunction<V> implements $Long2ReferenceMap<V>, $Serializable {
         values(): $ReferenceCollection<V>;
@@ -179,14 +182,18 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         putAll(arg0: $Map_<number, V>): void;
         containsValue(arg0: $Object): boolean;
         remove(arg0: number, arg1: $Object): boolean;
-        replace(arg0: number, arg1: V, arg2: V): boolean;
         replace(arg0: number, arg1: V): V;
+        replace(arg0: number, arg1: V, arg2: V): boolean;
         merge(arg0: number, arg1: V, arg2: $BiFunction_<V, V, V>): V;
+        /**
+         * @deprecated
+         */
+        entrySet(): $ObjectSet<$Map$Entry<number, V>>;
         putIfAbsent(arg0: number, arg1: V): V;
         compute(arg0: number, arg1: $BiFunction_<number, V, V>): V;
-        computeIfAbsent(arg0: number, arg1: $Long2ReferenceFunction_<V>): V;
-        computeIfAbsent(arg0: number, arg1: $LongFunction_<V>): V;
         forEach(arg0: $BiConsumer_<number, V>): void;
+        computeIfAbsent(arg0: number, arg1: $LongFunction_<V>): V;
+        computeIfAbsent(arg0: number, arg1: $Long2ReferenceFunction_<V>): V;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, V, V>): V;
         /**
          * @deprecated
@@ -202,12 +209,12 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         computeIfAbsent(arg0: number, arg1: $Function_<number, V>): V;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, V, V>): V;
         keySet(): $Set<number>;
-        entrySet(): $Set<$Map$Entry<number, V>>;
         get empty(): boolean;
     }
     export class $Long2ReferenceMap<V> {
     }
     export interface $Long2ReferenceMap<V> extends $Long2ReferenceFunction<V>, $Map<number, V> {
+        long2ReferenceEntrySet(): $ObjectSet<$Long2ReferenceMap$Entry<V>>;
         /**
          * @deprecated
          */
@@ -222,45 +229,43 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         put(arg0: number, arg1: V): V;
-        values(): $ReferenceCollection<V>;
         clear(): void;
-        replace(arg0: number, arg1: V, arg2: V): boolean;
         replace(arg0: number, arg1: V): V;
+        replace(arg0: number, arg1: V, arg2: V): boolean;
         merge(arg0: number, arg1: V, arg2: $BiFunction_<V, V, V>): V;
+        /**
+         * @deprecated
+         */
+        entrySet(): $ObjectSet<$Map$Entry<number, V>>;
         putIfAbsent(arg0: number, arg1: V): V;
         compute(arg0: number, arg1: $BiFunction_<number, V, V>): V;
-        computeIfAbsent(arg0: number, arg1: $Long2ReferenceFunction_<V>): V;
-        computeIfAbsent(arg0: number, arg1: $LongFunction_<V>): V;
         forEach(arg0: $BiConsumer_<number, V>): void;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
+        computeIfAbsent(arg0: number, arg1: $LongFunction_<V>): V;
+        computeIfAbsent(arg0: number, arg1: $Long2ReferenceFunction_<V>): V;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: V): V;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, V, V>): V;
-        long2ReferenceEntrySet(): $ObjectSet<$Long2ReferenceMap$Entry<V>>;
-        defaultReturnValue(arg0: V): void;
-        defaultReturnValue(): V;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Long2ReferenceFunction_<V>): V;
-        entrySet(): $Set<$Map$Entry<number, V>>;
+        defaultReturnValue(): V;
+        defaultReturnValue(arg0: V): void;
+        values(): $Collection<V>;
         keySet(): $Set<number>;
     }
     export class $Long2ByteFunction {
     }
     export interface $Long2ByteFunction extends $Function<number, number>, $LongToIntFunction {
         remove(arg0: number): number;
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         /**
          * @deprecated
          */
@@ -271,16 +276,16 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsInt(arg0: number): number;
         /**
          * @deprecated
@@ -335,51 +340,48 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
      */
     export type $LongUnaryOperator_ = ((arg0: number) => number);
     export class $AbstractLong2LongMap extends $AbstractLong2LongFunction implements $Long2LongMap, $Serializable {
+        mergeLong(arg0: number, arg1: number, arg2: $LongBinaryOperator_): number;
         isEmpty(): boolean;
         putAll(arg0: $Map_<number, number>): void;
         containsValue(arg0: number): boolean;
-        mergeLong(arg0: number, arg1: number, arg2: $LongBinaryOperator_): number;
+        mergeLong(arg0: number, arg1: number, arg2: $LongBinaryOperator_$1): number;
         remove(arg0: number, arg1: number): boolean;
         /**
          * @deprecated
          */
         remove(arg0: $Object, arg1: $Object): boolean;
         replace(arg0: number, arg1: number): number;
+        replace(arg0: number, arg1: number, arg2: number): boolean;
         /**
          * @deprecated
          */
         replace(arg0: number, arg1: number): number;
-        replace(arg0: number, arg1: number, arg2: number): boolean;
         /**
          * @deprecated
          */
         replace(arg0: number, arg1: number, arg2: number): boolean;
-        merge(arg0: number, arg1: number, arg2: $BiFunction_<number, number, number>): number;
         /**
          * @deprecated
          */
         merge(arg0: number, arg1: number, arg2: $BiFunction_<number, number, number>): number;
-        /**
-         * @deprecated
-         */
-        entrySet(): $ObjectSet<$Map$Entry<number, number>>;
-        /**
-         * @deprecated
-         */
+        merge(arg0: number, arg1: number, arg2: $BiFunction_<number, number, number>): number;
         putIfAbsent(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
         putIfAbsent(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         compute(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         compute(arg0: number, arg1: $BiFunction_<number, number, number>): number;
+        forEach(arg0: $BiConsumer_<number, number>): void;
         computeIfAbsent(arg0: number, arg1: $LongUnaryOperator_$1): number;
         /**
          * @deprecated
          */
         computeIfAbsent(arg0: number, arg1: $Function_<number, number>): number;
         computeIfAbsent(arg0: number, arg1: $Long2LongFunction_): number;
-        forEach(arg0: $BiConsumer_<number, number>): void;
         /**
          * @deprecated
          */
@@ -389,7 +391,6 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          */
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
-        mergeLong(arg0: number, arg1: number, arg2: $LongBinaryOperator_$1): number;
         /**
          * @deprecated
          */
@@ -398,14 +399,17 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         replaceAll(arg0: $BiFunction_<number, number, number>): void;
         values(): $LongCollection;
         keySet(): $LongSet;
+        remove(arg0: number): number;
+        get(arg0: number): number;
+        entrySet(): $Set<$Map$Entry<number, number>>;
         get empty(): boolean;
     }
     export class $LongSet {
         static of(arg0: number, arg1: number): $LongSet;
+        static of(): $LongSet;
         static of(...arg0: number[]): $LongSet;
         static of(arg0: number): $LongSet;
         static of(arg0: number, arg1: number, arg2: number): $LongSet;
-        static of(): $LongSet;
     }
     export interface $LongSet extends $LongCollection, $Set<number> {
         remove(arg0: number): boolean;
@@ -431,11 +435,11 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
     export class $Long2BooleanFunction {
     }
     export interface $Long2BooleanFunction extends $Function<number, boolean>, $LongPredicate$1 {
-        remove(arg0: number): boolean;
         /**
          * @deprecated
          */
         remove(arg0: $Object): boolean;
+        remove(arg0: number): boolean;
         /**
          * @deprecated
          */
@@ -465,8 +469,8 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<boolean, T>): $Function$1<number, T>;
-        defaultReturnValue(arg0: boolean): void;
         defaultReturnValue(): boolean;
+        defaultReturnValue(arg0: boolean): void;
         andThenByte(arg0: $Boolean2ByteFunction_): $Long2ByteFunction;
         composeByte(arg0: $Byte2LongFunction_): $Byte2BooleanFunction;
         andThenShort(arg0: $Boolean2ShortFunction_): $Long2ShortFunction;
@@ -493,10 +497,9 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
     export class $Long2LongMap {
     }
     export interface $Long2LongMap extends $Long2LongFunction, $Map<number, number> {
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
+        long2LongEntrySet(): $ObjectSet<$Long2LongMap$Entry>;
+        mergeLong(arg0: number, arg1: number, arg2: $LongBinaryOperator_): number;
+        mergeLong(arg0: number, arg1: number, arg2: $LongBinaryOperator_$1): number;
         remove(arg0: number, arg1: number): boolean;
         /**
          * @deprecated
@@ -506,111 +509,106 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         /**
          * @deprecated
          */
-        get(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         put(arg0: number, arg1: number): number;
         values(): $LongCollection;
         clear(): void;
         replace(arg0: number, arg1: number): number;
+        replace(arg0: number, arg1: number, arg2: number): boolean;
         /**
          * @deprecated
          */
         replace(arg0: number, arg1: number): number;
-        replace(arg0: number, arg1: number, arg2: number): boolean;
         /**
          * @deprecated
          */
         replace(arg0: number, arg1: number, arg2: number): boolean;
-        merge(arg0: number, arg1: number, arg2: $BiFunction_<number, number, number>): number;
         /**
          * @deprecated
          */
         merge(arg0: number, arg1: number, arg2: $BiFunction_<number, number, number>): number;
-        /**
-         * @deprecated
-         */
-        entrySet(): $ObjectSet<$Map$Entry<number, number>>;
-        /**
-         * @deprecated
-         */
+        merge(arg0: number, arg1: number, arg2: $BiFunction_<number, number, number>): number;
         putIfAbsent(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
         putIfAbsent(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         compute(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         compute(arg0: number, arg1: $BiFunction_<number, number, number>): number;
+        forEach(arg0: $BiConsumer_<number, number>): void;
+        /**
+         * @deprecated
+         */
+        containsKey(arg0: $Object): boolean;
+        containsKey(arg0: number): boolean;
         computeIfAbsent(arg0: number, arg1: $LongUnaryOperator_$1): number;
         /**
          * @deprecated
          */
         computeIfAbsent(arg0: number, arg1: $Function_<number, number>): number;
         computeIfAbsent(arg0: number, arg1: $Long2LongFunction_): number;
-        forEach(arg0: $BiConsumer_<number, number>): void;
         keySet(): $LongSet;
-        /**
-         * @deprecated
-         */
-        containsValue(arg0: $Object): boolean;
         containsValue(arg0: number): boolean;
         /**
          * @deprecated
          */
-        containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
-        getOrDefault(arg0: number, arg1: number): number;
+        containsValue(arg0: $Object): boolean;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: number): number;
+        getOrDefault(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
-        long2LongEntrySet(): $ObjectSet<$Long2LongMap$Entry>;
-        mergeLong(arg0: number, arg1: number, arg2: $LongBinaryOperator_): number;
-        mergeLong(arg0: number, arg1: number, arg2: $LongBinaryOperator_$1): number;
-        defaultReturnValue(arg0: number): void;
-        defaultReturnValue(): number;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Long2LongFunction_): number;
+        defaultReturnValue(): number;
+        defaultReturnValue(arg0: number): void;
         computeIfAbsentNullable(arg0: number, arg1: $LongFunction_<number>): number;
+        remove(arg0: number): number;
+        get(arg0: number): number;
+        entrySet(): $Set<$Map$Entry<number, number>>;
     }
     export class $Long2ObjectSortedMap<V> {
     }
     export interface $Long2ObjectSortedMap<V> extends $Long2ObjectMap<V>, $SortedMap<number, V> {
+        firstLongKey(): number;
+        lastLongKey(): number;
+        subMap(arg0: number, arg1: number): $Long2ObjectSortedMap<V>;
+        /**
+         * @deprecated
+         */
+        subMap(arg0: number, arg1: number): $Long2ObjectSortedMap<V>;
+        headMap(arg0: number): $Long2ObjectSortedMap<V>;
+        /**
+         * @deprecated
+         */
+        headMap(arg0: number): $Long2ObjectSortedMap<V>;
+        /**
+         * @deprecated
+         */
+        tailMap(arg0: number): $Long2ObjectSortedMap<V>;
+        tailMap(arg0: number): $Long2ObjectSortedMap<V>;
+        /**
+         * @deprecated
+         */
+        lastKey(): number;
         /**
          * @deprecated
          */
         entrySet(): $ObjectSortedSet<$Map$Entry<number, V>>;
         keySet(): $LongSortedSet;
-        comparator(): $LongComparator;
-        /**
-         * @deprecated
-         */
-        subMap(arg0: number, arg1: number): $Long2ObjectSortedMap<V>;
-        subMap(arg0: number, arg1: number): $Long2ObjectSortedMap<V>;
-        headMap(arg0: number): $Long2ObjectSortedMap<V>;
-        /**
-         * @deprecated
-         */
-        headMap(arg0: number): $Long2ObjectSortedMap<V>;
-        /**
-         * @deprecated
-         */
-        tailMap(arg0: number): $Long2ObjectSortedMap<V>;
-        tailMap(arg0: number): $Long2ObjectSortedMap<V>;
-        firstLongKey(): number;
-        lastLongKey(): number;
         long2ObjectEntrySet(): $ObjectSortedSet<$Long2ObjectMap$Entry<V>>;
-        values(): $ObjectCollection<V>;
         firstKey(): number;
-        lastKey(): number;
+        values(): $ObjectCollection<V>;
+        comparator(): $Comparator<number>;
     }
     export class $AbstractLong2IntMap extends $AbstractLong2IntFunction implements $Long2IntMap, $Serializable {
         isEmpty(): boolean;
@@ -651,21 +649,21 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          */
         compute(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         compute(arg0: number, arg1: $BiFunction_<number, number, number>): number;
+        forEach(arg0: $BiConsumer_<number, number>): void;
         computeIfAbsent(arg0: number, arg1: $LongToIntFunction_): number;
         /**
          * @deprecated
          */
         computeIfAbsent(arg0: number, arg1: $Function_<number, number>): number;
         computeIfAbsent(arg0: number, arg1: $Long2IntFunction_): number;
-        forEach(arg0: $BiConsumer_<number, number>): void;
         /**
          * @deprecated
          */
         containsValue(arg0: $Object): boolean;
+        computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         /**
          * @deprecated
          */
-        computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         /**
          * @deprecated
@@ -675,7 +673,7 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         computeIfAbsentNullable(arg0: number, arg1: $LongFunction_<number>): number;
         replaceAll(arg0: $BiFunction_<number, number, number>): void;
         values(): $IntCollection;
-        keySet(): $LongSet;
+        keySet(): $Set<number>;
         get empty(): boolean;
     }
     export class $LongIterator {
@@ -691,29 +689,29 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         next(): number;
     }
     export class $LongOpenHashSet extends $AbstractLongSet implements $Serializable, $Cloneable, $Hash {
-        clone(): $LongOpenHashSet;
-        static of(): $LongOpenHashSet;
-        static of(arg0: number, arg1: number): $LongOpenHashSet;
-        static of(arg0: number): $LongOpenHashSet;
-        static of(arg0: number, arg1: number, arg2: number): $LongOpenHashSet;
-        static of(...arg0: number[]): $LongOpenHashSet;
+        clone(): $Object;
         trim(): boolean;
         trim(arg0: number): boolean;
+        static of(arg0: number): $LongOpenHashSet;
+        static of(arg0: number, arg1: number): $LongOpenHashSet;
+        static of(): $LongOpenHashSet;
+        static of(...arg0: number[]): $LongOpenHashSet;
+        static of(arg0: number, arg1: number, arg2: number): $LongOpenHashSet;
         static toSet(arg0: $LongStream): $LongOpenHashSet;
         ensureCapacity(arg0: number): void;
         static toSetWithExpectedSize(arg0: $LongStream, arg1: number): $LongOpenHashSet;
+        constructor(arg0: number[], arg1: number, arg2: number, arg3: number);
         constructor(arg0: $Iterator<never>);
         constructor(arg0: $Iterator<never>, arg1: number);
         constructor(arg0: $LongIterator);
-        constructor(arg0: $LongIterator, arg1: number);
-        constructor(arg0: number[]);
-        constructor(arg0: number[], arg1: number);
         constructor(arg0: number[], arg1: number, arg2: number);
-        constructor(arg0: number[], arg1: number, arg2: number, arg3: number);
+        constructor(arg0: number[], arg1: number);
+        constructor(arg0: number[]);
         constructor(arg0: $Collection_<number>, arg1: number);
         constructor();
         constructor(arg0: number);
         constructor(arg0: number, arg1: number);
+        constructor(arg0: $LongIterator, arg1: number);
         constructor(arg0: $LongCollection);
         constructor(arg0: $LongCollection, arg1: number);
         constructor(arg0: $Collection_<number>);
@@ -727,22 +725,26 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         remove(arg0: $Object): number;
-        get(arg0: number): number;
-        put(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
+        get(arg0: $Object): number;
+        get(arg0: number): number;
+        /**
+         * @deprecated
+         */
+        put(arg0: number, arg1: number): number;
         put(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
+        getOrDefault(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: number): number;
-        getOrDefault(arg0: number, arg1: number): number;
         applyAsLong(arg0: number): number;
         /**
          * @deprecated
@@ -752,8 +754,8 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<number, T>): $Function$1<number, T>;
-        defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         andThenByte(arg0: $Long2ByteFunction_): $Long2ByteFunction;
         composeByte(arg0: $Byte2LongFunction_): $Byte2LongFunction;
         andThenShort(arg0: $Long2ShortFunction_): $Long2ShortFunction;
@@ -780,31 +782,28 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
     export class $LongSortedSet {
     }
     export interface $LongSortedSet extends $LongSet, $SortedSet<number>, $LongBidirectionalIterable {
+        /**
+         * @deprecated
+         */
+        subSet(arg0: number, arg1: number): $LongSortedSet;
+        subSet(arg0: number, arg1: number): $LongSortedSet;
+        headSet(arg0: number): $LongSortedSet;
+        /**
+         * @deprecated
+         */
+        headSet(arg0: number): $LongSortedSet;
+        tailSet(arg0: number): $LongSortedSet;
+        /**
+         * @deprecated
+         */
+        tailSet(arg0: number): $LongSortedSet;
         iterator(arg0: number): $LongBidirectionalIterator;
-        /**
-         * @deprecated
-         */
-        first(): number;
-        subSet(arg0: number, arg1: number): $LongSortedSet;
-        /**
-         * @deprecated
-         */
-        subSet(arg0: number, arg1: number): $LongSortedSet;
-        headSet(arg0: number): $LongSortedSet;
-        /**
-         * @deprecated
-         */
-        headSet(arg0: number): $LongSortedSet;
-        /**
-         * @deprecated
-         */
-        tailSet(arg0: number): $LongSortedSet;
-        tailSet(arg0: number): $LongSortedSet;
+        spliterator(): $LongSpliterator;
         firstLong(): number;
         lastLong(): number;
         iterator(): $LongIterator;
         last(): number;
-        spliterator(): $LongSpliterator;
+        first(): number;
         comparator(): $Comparator<number>;
     }
     export class $LongBinaryOperator {
@@ -840,10 +839,6 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): string;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): string;
         get(arg0: number): string;
         put(arg0: number, arg1: string): string;
@@ -851,16 +846,16 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         put(arg0: number, arg1: string): string;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: string): string;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: string): string;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: string): string;
         applyAsInt(arg0: number): number;
         /**
          * @deprecated
@@ -896,21 +891,23 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
      */
     export type $Long2CharFunction_ = ((arg0: number) => string);
     export class $Long2IntOpenHashMap extends $AbstractLong2IntMap implements $Serializable, $Cloneable, $Hash {
-        clone(): $Long2IntOpenHashMap;
-        trim(arg0: number): boolean;
-        trim(): boolean;
-        ensureCapacity(arg0: number): void;
         addTo(arg0: number, arg1: number): number;
-        keySet(): $LongSet;
-        constructor(arg0: $Map_<number, number>);
-        constructor(arg0: $Long2IntMap, arg1: number);
+        clone(): $Long2IntOpenHashMap;
+        trim(): boolean;
+        trim(arg0: number): boolean;
+        ensureCapacity(arg0: number): void;
+        long2IntEntrySet(): $Long2IntMap$FastEntrySet;
+        values(): $IntCollection;
+        keySet(): $Set<number>;
         constructor(arg0: $Long2IntMap);
         constructor(arg0: number[], arg1: number[], arg2: number);
         constructor(arg0: number[], arg1: number[]);
         constructor(arg0: number, arg1: number);
-        constructor(arg0: number);
         constructor();
+        constructor(arg0: number);
         constructor(arg0: $Map_<number, number>, arg1: number);
+        constructor(arg0: $Map_<number, number>);
+        constructor(arg0: $Long2IntMap, arg1: number);
     }
     export class $Long2IntMap {
     }
@@ -964,44 +961,50 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          */
         compute(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         compute(arg0: number, arg1: $BiFunction_<number, number, number>): number;
+        forEach(arg0: $BiConsumer_<number, number>): void;
+        containsKey(arg0: number): boolean;
+        /**
+         * @deprecated
+         */
+        containsKey(arg0: $Object): boolean;
         computeIfAbsent(arg0: number, arg1: $LongToIntFunction_): number;
         /**
          * @deprecated
          */
         computeIfAbsent(arg0: number, arg1: $Function_<number, number>): number;
         computeIfAbsent(arg0: number, arg1: $Long2IntFunction_): number;
-        forEach(arg0: $BiConsumer_<number, number>): void;
-        keySet(): $LongSet;
-        /**
-         * @deprecated
-         */
-        containsValue(arg0: $Object): boolean;
         containsValue(arg0: number): boolean;
         /**
          * @deprecated
          */
-        containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
+        containsValue(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: number): number;
+        computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         /**
          * @deprecated
          */
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
-        computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
-        defaultReturnValue(): number;
-        defaultReturnValue(arg0: number): void;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Long2IntFunction_): number;
-        mergeInt(arg0: number, arg1: number, arg2: $IntBinaryOperator_): number;
+        defaultReturnValue(): number;
+        defaultReturnValue(arg0: number): void;
         mergeInt(arg0: number, arg1: number, arg2: $IntBinaryOperator_$1): number;
+        mergeInt(arg0: number, arg1: number, arg2: $IntBinaryOperator_): number;
         computeIfAbsentNullable(arg0: number, arg1: $LongFunction_<number>): number;
         long2IntEntrySet(): $ObjectSet<$Long2IntMap$Entry>;
+        keySet(): $Set<number>;
+    }
+    export class $Long2ObjectSortedMap$FastSortedEntrySet<V> {
+    }
+    export interface $Long2ObjectSortedMap$FastSortedEntrySet<V> extends $ObjectSortedSet<$Long2ObjectMap$Entry<V>>, $Long2ObjectMap$FastEntrySet<V> {
+        fastIterator(): $ObjectBidirectionalIterator<$Long2ObjectMap$Entry<V>>;
+        fastIterator(arg0: $Long2ObjectMap$Entry<V>): $ObjectBidirectionalIterator<$Long2ObjectMap$Entry<V>>;
     }
     export class $Long2ObjectFunction<V> {
     }
@@ -1036,8 +1039,8 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(arg0: V): void;
         defaultReturnValue(): V;
+        defaultReturnValue(arg0: V): void;
         andThenByte(arg0: $Object2ByteFunction_<V>): $Long2ByteFunction;
         composeByte(arg0: $Byte2LongFunction_): $Byte2ObjectFunction<V>;
         andThenShort(arg0: $Object2ShortFunction_<V>): $Long2ShortFunction;
@@ -1072,26 +1075,21 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         getAndMoveToLast(arg0: number): V;
         putAndMoveToFirst(arg0: number, arg1: V): V;
         putAndMoveToLast(arg0: number, arg1: V): V;
+        long2ObjectEntrySet(): $Long2ObjectSortedMap$FastSortedEntrySet<V>;
         values(): $ObjectCollection<V>;
-        keySet(): $LongSortedSet;
-        comparator(): $LongComparator;
+        comparator(): $Comparator<number>;
         firstKey(): number;
-        lastKey(): number;
-        constructor(arg0: $Map_<number, V>);
-        constructor(arg0: $Long2ObjectMap<V>, arg1: number);
-        constructor(arg0: $Long2ObjectMap<V>);
-        constructor(arg0: number[], arg1: V[], arg2: number);
-        constructor(arg0: number[], arg1: V[]);
         constructor(arg0: number, arg1: number);
+        constructor(arg0: number[], arg1: V[]);
+        constructor(arg0: $Long2ObjectMap<V>);
+        constructor(arg0: $Map_<number, V>, arg1: number);
+        constructor(arg0: $Long2ObjectMap<V>, arg1: number);
+        constructor(arg0: $Map_<number, V>);
+        constructor(arg0: number[], arg1: V[], arg2: number);
         constructor(arg0: number);
         constructor();
-        constructor(arg0: $Map_<number, V>, arg1: number);
     }
     export class $AbstractLongSortedSet extends $AbstractLongSet implements $LongSortedSet {
-        /**
-         * @deprecated
-         */
-        first(): number;
         /**
          * @deprecated
          */
@@ -1104,6 +1102,7 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         tailSet(arg0: number): $LongSortedSet;
+        reversed(): $SortedSet<number>;
         getFirst(): number;
         getLast(): number;
         addFirst(arg0: number): void;
@@ -1111,12 +1110,17 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         removeFirst(): number;
         removeLast(): number;
         last(): number;
+        first(): number;
         comparator(): $Comparator<number>;
-        reversed(): $SequencedSet<number>;
     }
     export class $LongPredicate {
     }
     export interface $LongPredicate extends $Predicate<number>, $LongPredicate$1 {
+        and(arg0: $LongPredicate_): $LongPredicate;
+        /**
+         * @deprecated
+         */
+        and(arg0: $Predicate_<number>): $Predicate<number>;
         /**
          * @deprecated
          */
@@ -1127,11 +1131,6 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         or(arg0: $Predicate_<number>): $Predicate<number>;
         or(arg0: $LongPredicate_$1): $LongPredicate;
         or(arg0: $LongPredicate_): $LongPredicate;
-        and(arg0: $LongPredicate_): $LongPredicate;
-        /**
-         * @deprecated
-         */
-        and(arg0: $Predicate_<number>): $Predicate<number>;
         negate(): $Predicate<number>;
     }
     /**
@@ -1147,11 +1146,16 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): boolean;
-        add(arg0: number): boolean;
+        toLongArray(arg0: number[]): number[];
+        toLongArray(): number[];
         /**
          * @deprecated
          */
+        remove(arg0: $Object): boolean;
+        /**
+         * @deprecated
+         */
+        add(arg0: number): boolean;
         add(arg0: number): boolean;
         toArray(arg0: number[]): number[];
         iterator(): $LongIterator;
@@ -1165,12 +1169,6 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          */
         contains(arg0: $Object): boolean;
         addAll(arg0: $LongCollection): boolean;
-        removeIf(arg0: $LongPredicate_$1): boolean;
-        /**
-         * @deprecated
-         */
-        removeIf(arg0: $Predicate_<number>): boolean;
-        removeIf(arg0: $LongPredicate_): boolean;
         removeAll(arg0: $LongCollection): boolean;
         retainAll(arg0: $LongCollection): boolean;
         containsAll(arg0: $LongCollection): boolean;
@@ -1179,22 +1177,17 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          */
         parallelStream(): $Stream<number>;
         rem(arg0: number): boolean;
-        longStream(): $LongStream;
+        removeIf(arg0: $LongPredicate_$1): boolean;
+        removeIf(arg0: $LongPredicate_): boolean;
         /**
          * @deprecated
          */
-        toLongArray(arg0: number[]): number[];
-        toLongArray(): number[];
+        removeIf(arg0: $Predicate_<number>): boolean;
+        longStream(): $LongStream;
         longSpliterator(): $LongSpliterator;
         longIterator(): $LongIterator;
         longParallelStream(): $LongStream;
         spliterator(): $Spliterator<number>;
-    }
-    export class $Long2LongSortedMap$FastSortedEntrySet {
-    }
-    export interface $Long2LongSortedMap$FastSortedEntrySet extends $ObjectSortedSet<$Long2LongMap$Entry>, $Long2LongMap$FastEntrySet {
-        fastIterator(): $ObjectBidirectionalIterator<$Long2LongMap$Entry>;
-        fastIterator(arg0: $Long2LongMap$Entry): $ObjectBidirectionalIterator<$Long2LongMap$Entry>;
     }
     export class $AbstractLong2ObjectMap<V> extends $AbstractLong2ObjectFunction<V> implements $Long2ObjectMap<V>, $Serializable {
         values(): $ObjectCollection<V>;
@@ -1207,9 +1200,9 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         merge(arg0: number, arg1: V, arg2: $BiFunction_<V, V, V>): V;
         putIfAbsent(arg0: number, arg1: V): V;
         compute(arg0: number, arg1: $BiFunction_<number, V, V>): V;
+        forEach(arg0: $BiConsumer_<number, V>): void;
         computeIfAbsent(arg0: number, arg1: $Long2ObjectFunction_<V>): V;
         computeIfAbsent(arg0: number, arg1: $LongFunction_<V>): V;
-        forEach(arg0: $BiConsumer_<number, V>): void;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, V, V>): V;
         /**
          * @deprecated
@@ -1232,10 +1225,6 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         /**
          * @deprecated
          */
-        entrySet(): $ObjectSortedSet<$Map$Entry<number, number>>;
-        /**
-         * @deprecated
-         */
         subMap(arg0: number, arg1: number): $Long2LongSortedMap;
         /**
          * @deprecated
@@ -1245,9 +1234,17 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         tailMap(arg0: number): $Long2LongSortedMap;
-        reversed(): $SortedMap<number, number>;
+        /**
+         * @deprecated
+         */
+        firstKey(): number;
+        /**
+         * @deprecated
+         */
+        entrySet(): $ObjectSortedSet<$Map$Entry<number, number>>;
         putFirst(arg0: number, arg1: number): number;
         putLast(arg0: number, arg1: number): number;
+        reversed(): $SortedMap<number, number>;
         sequencedKeySet(): $SequencedSet<number>;
         sequencedValues(): $SequencedCollection<number>;
         sequencedEntrySet(): $SequencedSet<$Map$Entry<number, number>>;
@@ -1257,17 +1254,15 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         pollLastEntry(): $Map$Entry<number, number>;
         values(): $LongCollection;
         keySet(): $LongSortedSet;
-        firstKey(): number;
         lastKey(): number;
+        comparator(): $Comparator<number>;
+        remove(arg0: number): number;
+        get(arg0: number): number;
     }
     export class $Long2DoubleFunction {
     }
     export interface $Long2DoubleFunction extends $Function<number, number>, $LongToDoubleFunction {
         remove(arg0: number): number;
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         /**
          * @deprecated
          */
@@ -1278,16 +1273,16 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsDouble(arg0: number): number;
         /**
          * @deprecated
@@ -1322,15 +1317,10 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
      * Values that may be interpreted as {@link $Long2DoubleFunction}.
      */
     export type $Long2DoubleFunction_ = ((arg0: number) => number);
-    export class $Long2LongMap$FastEntrySet {
-    }
-    export interface $Long2LongMap$FastEntrySet extends $ObjectSet<$Long2LongMap$Entry> {
-        fastIterator(): $ObjectIterator<$Long2LongMap$Entry>;
-        fastForEach(arg0: $Consumer_<$Long2LongMap$Entry>): void;
-    }
     export class $Long2LongMap$Entry {
     }
     export interface $Long2LongMap$Entry extends $Map$Entry<number, number> {
+        getLongValue(): number;
         /**
          * @deprecated
          */
@@ -1340,12 +1330,17 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          */
         setValue(arg0: number): number;
         setValue(arg0: number): number;
-        getLongValue(): number;
         getLongKey(): number;
         getKey(): number;
         get longValue(): number;
         get longKey(): number;
         get key(): number;
+    }
+    export class $Long2IntMap$FastEntrySet {
+    }
+    export interface $Long2IntMap$FastEntrySet extends $ObjectSet<$Long2IntMap$Entry> {
+        fastIterator(): $ObjectIterator<$Long2IntMap$Entry>;
+        fastForEach(arg0: $Consumer_<$Long2IntMap$Entry>): void;
     }
     export class $LongConsumer {
     }
@@ -1367,14 +1362,14 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
     export class $LongComparator {
     }
     export interface $LongComparator extends $Comparator<number> {
+        compare(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         compare(arg0: number, arg1: number): number;
-        compare(arg0: number, arg1: number): number;
-        reversed(): $LongComparator;
         thenComparing(arg0: $Comparator<number>): $Comparator<number>;
         thenComparing(arg0: $LongComparator): $LongComparator;
+        reversed(): $Comparator<number>;
     }
     export class $Long2ObjectMap$Entry<V> {
     }
@@ -1414,10 +1409,6 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -1425,16 +1416,16 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsInt(arg0: number): number;
         /**
          * @deprecated
@@ -1471,27 +1462,22 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
     export type $Long2ShortFunction_ = ((arg0: number) => number);
     export class $LongList {
         static of(...arg0: number[]): $LongList;
-        static of(arg0: number, arg1: number): $LongList;
         static of(): $LongList;
+        static of(arg0: number, arg1: number): $LongList;
         static of(arg0: number): $LongList;
         static of(arg0: number, arg1: number, arg2: number): $LongList;
-        [Symbol.iterator](): Iterator<number>
     }
     export interface $LongList extends $List<number>, $Comparable<$List<number>>, $LongCollection {
+        getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
+        /**
+         * @deprecated
+         */
+        remove(arg0: number): number;
         /**
          * @deprecated
          */
         remove(arg0: $Object): boolean;
         size(arg0: number): void;
-        /**
-         * @deprecated
-         */
-        get(arg0: number): number;
-        sort(arg0: $LongComparator): void;
-        /**
-         * @deprecated
-         */
-        sort(arg0: $Comparator<number>): void;
         /**
          * @deprecated
          */
@@ -1503,81 +1489,85 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         lastIndexOf(arg0: $Object): number;
+        replaceAll(arg0: $LongUnaryOperator_$1): void;
         /**
          * @deprecated
          */
         replaceAll(arg0: $UnaryOperator_<number>): void;
         replaceAll(arg0: $LongUnaryOperator_): void;
-        replaceAll(arg0: $LongUnaryOperator_$1): void;
-        /**
-         * @deprecated
-         */
         add(arg0: number): boolean;
+        add(arg0: number, arg1: number): void;
         /**
          * @deprecated
          */
         add(arg0: number, arg1: number): void;
-        add(arg0: number, arg1: number): void;
+        /**
+         * @deprecated
+         */
         add(arg0: number): boolean;
-        subList(arg0: number, arg1: number): $LongList;
+        iterator(): $LongListIterator;
         /**
          * @deprecated
          */
         contains(arg0: $Object): boolean;
-        spliterator(): $LongSpliterator;
         addAll(arg0: number, arg1: $LongCollection): boolean;
         addAll(arg0: number, arg1: $LongList): boolean;
         addAll(arg0: $LongList): boolean;
+        set(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         set(arg0: number, arg1: number): number;
-        set(arg0: number, arg1: number): number;
-        listIterator(arg0: number): $LongListIterator;
-        getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
+        /**
+         * @deprecated
+         */
+        sort(arg0: $Comparator<number>): void;
+        sort(arg0: $LongComparator): void;
         /**
          * @deprecated
          */
         unstableSort(arg0: $Comparator<number>): void;
         unstableSort(arg0: $LongComparator): void;
+        setElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         setElements(arg0: number[]): void;
         setElements(arg0: number, arg1: number[]): void;
-        setElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         removeElements(arg0: number, arg1: number): void;
         addElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         addElements(arg0: number, arg1: number[]): void;
         removeLong(arg0: number): number;
-        iterator(): $Iterator<number>;
+        get(arg0: number): number;
+        subList(arg0: number, arg1: number): $List<number>;
+        spliterator(): $Spliterator<number>;
         listIterator(): $ListIterator<number>;
-        [Symbol.iterator](): Iterator<number>
+        listIterator(arg0: number): $ListIterator<number>;
     }
     export class $Long2LongLinkedOpenHashMap extends $AbstractLong2LongSortedMap implements $Serializable, $Cloneable, $Hash {
-        clone(): $Object;
-        trim(arg0: number): boolean;
-        trim(): boolean;
-        ensureCapacity(arg0: number): void;
-        addTo(arg0: number, arg1: number): number;
-        removeFirstLong(): number;
         removeLastLong(): number;
-        long2LongEntrySet(): $Long2LongSortedMap$FastSortedEntrySet;
+        removeFirstLong(): number;
+        addTo(arg0: number, arg1: number): number;
+        clone(): $Long2LongLinkedOpenHashMap;
+        trim(): boolean;
+        trim(arg0: number): boolean;
+        ensureCapacity(arg0: number): void;
         getAndMoveToFirst(arg0: number): number;
         getAndMoveToLast(arg0: number): number;
         putAndMoveToFirst(arg0: number, arg1: number): number;
         putAndMoveToLast(arg0: number, arg1: number): number;
         values(): $LongCollection;
         keySet(): $LongSortedSet;
-        comparator(): $LongComparator;
-        firstKey(): number;
+        comparator(): $Comparator<number>;
         lastKey(): number;
-        constructor(arg0: $Map_<number, number>);
+        remove(arg0: number): number;
+        get(arg0: number): number;
         constructor(arg0: $Long2LongMap, arg1: number);
-        constructor(arg0: $Long2LongMap);
-        constructor(arg0: number[], arg1: number[], arg2: number);
-        constructor(arg0: number[], arg1: number[]);
-        constructor(arg0: number, arg1: number);
-        constructor(arg0: number);
-        constructor();
+        constructor(arg0: $Map_<number, number>);
         constructor(arg0: $Map_<number, number>, arg1: number);
+        constructor();
+        constructor(arg0: number);
+        constructor(arg0: number, arg1: number);
+        constructor(arg0: number[], arg1: number[]);
+        constructor(arg0: number[], arg1: number[], arg2: number);
+        constructor(arg0: $Long2LongMap);
     }
     export class $Long2ReferenceFunction<V> {
     }
@@ -1612,8 +1602,8 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(arg0: V): void;
         defaultReturnValue(): V;
+        defaultReturnValue(arg0: V): void;
         andThenByte(arg0: $Reference2ByteFunction_<V>): $Long2ByteFunction;
         composeByte(arg0: $Byte2LongFunction_): $Byte2ReferenceFunction<V>;
         andThenShort(arg0: $Reference2ShortFunction_<V>): $Long2ShortFunction;
@@ -1640,44 +1630,44 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
     export class $LongBidirectionalIterator {
     }
     export interface $LongBidirectionalIterator extends $LongIterator, $ObjectBidirectionalIterator<number> {
-        skip(arg0: number): number;
-        /**
-         * @deprecated
-         */
-        previous(): number;
         back(arg0: number): number;
+        skip(arg0: number): number;
         previousLong(): number;
+        previous(): number;
     }
     export class $Long2LongSortedMap {
     }
     export interface $Long2LongSortedMap extends $Long2LongMap, $SortedMap<number, number> {
+        firstLongKey(): number;
+        lastLongKey(): number;
+        subMap(arg0: number, arg1: number): $Long2LongSortedMap;
+        /**
+         * @deprecated
+         */
+        subMap(arg0: number, arg1: number): $Long2LongSortedMap;
+        headMap(arg0: number): $Long2LongSortedMap;
+        /**
+         * @deprecated
+         */
+        headMap(arg0: number): $Long2LongSortedMap;
+        /**
+         * @deprecated
+         */
+        tailMap(arg0: number): $Long2LongSortedMap;
+        tailMap(arg0: number): $Long2LongSortedMap;
+        /**
+         * @deprecated
+         */
+        firstKey(): number;
         /**
          * @deprecated
          */
         entrySet(): $ObjectSortedSet<$Map$Entry<number, number>>;
         keySet(): $LongSortedSet;
-        comparator(): $LongComparator;
-        /**
-         * @deprecated
-         */
-        subMap(arg0: number, arg1: number): $Long2LongSortedMap;
-        subMap(arg0: number, arg1: number): $Long2LongSortedMap;
-        headMap(arg0: number): $Long2LongSortedMap;
-        /**
-         * @deprecated
-         */
-        headMap(arg0: number): $Long2LongSortedMap;
-        /**
-         * @deprecated
-         */
-        tailMap(arg0: number): $Long2LongSortedMap;
-        tailMap(arg0: number): $Long2LongSortedMap;
-        firstLongKey(): number;
-        lastLongKey(): number;
-        values(): $LongCollection;
-        firstKey(): number;
-        lastKey(): number;
         long2LongEntrySet(): $ObjectSet<$Long2LongMap$Entry>;
+        lastKey(): number;
+        values(): $LongCollection;
+        comparator(): $Comparator<number>;
     }
     export class $AbstractLong2ObjectFunction<V> implements $Long2ObjectFunction<V>, $Serializable {
         defaultReturnValue(arg0: V): void;
@@ -1741,26 +1731,22 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         put(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsInt(arg0: number): number;
         /**
          * @deprecated
@@ -1792,14 +1778,16 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         clear(): void;
         apply(arg0: number): number;
     }
+    export class $Long2ObjectMap$FastEntrySet<V> {
+    }
+    export interface $Long2ObjectMap$FastEntrySet<V> extends $ObjectSet<$Long2ObjectMap$Entry<V>> {
+        fastIterator(): $ObjectIterator<$Long2ObjectMap$Entry<V>>;
+        fastForEach(arg0: $Consumer_<$Long2ObjectMap$Entry<V>>): void;
+    }
     export class $Long2IntFunction {
     }
     export interface $Long2IntFunction extends $Function<number, number>, $LongToIntFunction {
         remove(arg0: number): number;
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         /**
          * @deprecated
          */
@@ -1810,16 +1798,16 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsInt(arg0: number): number;
         /**
          * @deprecated
@@ -1890,14 +1878,14 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         /**
          * @deprecated
          */
-        forEachRemaining(arg0: $Consumer_<number>): void;
-        forEachRemaining(arg0: $LongConsumer_): void;
-        skip(arg0: number): number;
+        tryAdvance(arg0: $Consumer_<number>): boolean;
+        tryAdvance(arg0: $LongConsumer_): boolean;
         /**
          * @deprecated
          */
-        tryAdvance(arg0: $Consumer_<number>): boolean;
-        tryAdvance(arg0: $LongConsumer_): boolean;
+        forEachRemaining(arg0: $Consumer_<number>): void;
+        forEachRemaining(arg0: $LongConsumer_): void;
+        skip(arg0: number): number;
         trySplit(): $Spliterator<number>;
         getComparator(): $Comparator<number>;
         get comparator(): $Comparator<number>;
@@ -1962,25 +1950,22 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         trim(): boolean;
         trim(arg0: number): boolean;
         ensureCapacity(arg0: number): void;
+        keySet(): $Set<number>;
         entrySet(): $Set<$Map$Entry<number, V>>;
-        constructor(arg0: $Map_<number, V>);
-        constructor(arg0: $Long2ObjectMap<V>, arg1: number);
-        constructor(arg0: $Long2ObjectMap<V>);
         constructor(arg0: number[], arg1: V[], arg2: number);
+        constructor(arg0: $Long2ObjectMap<V>);
+        constructor(arg0: $Long2ObjectMap<V>, arg1: number);
         constructor(arg0: number[], arg1: V[]);
         constructor(arg0: number, arg1: number);
         constructor(arg0: number);
         constructor();
         constructor(arg0: $Map_<number, V>, arg1: number);
+        constructor(arg0: $Map_<number, V>);
     }
     export class $Long2FloatFunction {
     }
     export interface $Long2FloatFunction extends $Function<number, number>, $LongToDoubleFunction {
         remove(arg0: number): number;
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         /**
          * @deprecated
          */
@@ -1991,16 +1976,16 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsDouble(arg0: number): number;
         /**
          * @deprecated
@@ -2050,14 +2035,12 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         set(arg0: number): void;
         set(arg0: number): void;
         next(): number;
-        /**
-         * @deprecated
-         */
         previous(): number;
     }
     export class $Long2ByteMap$Entry {
     }
     export interface $Long2ByteMap$Entry extends $Map$Entry<number, number> {
+        getByteValue(): number;
         /**
          * @deprecated
          */
@@ -2067,7 +2050,6 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          */
         setValue(arg0: number): number;
         setValue(arg0: number): number;
-        getByteValue(): number;
         getLongKey(): number;
         getKey(): number;
         get byteValue(): number;
@@ -2077,11 +2059,14 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
     export class $Long2ByteMap {
     }
     export interface $Long2ByteMap extends $Long2ByteFunction, $Map<number, number> {
+        long2ByteEntrySet(): $ObjectSet<$Long2ByteMap$Entry>;
+        mergeByte(arg0: number, arg1: number, arg2: $ByteBinaryOperator_): number;
+        mergeByte(arg0: number, arg1: number, arg2: $IntBinaryOperator_): number;
+        remove(arg0: number, arg1: number): boolean;
         /**
          * @deprecated
          */
         remove(arg0: $Object): number;
-        remove(arg0: number, arg1: number): boolean;
         /**
          * @deprecated
          */
@@ -2090,19 +2075,15 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         /**
          * @deprecated
          */
-        get(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         put(arg0: number, arg1: number): number;
         values(): $ByteCollection;
         clear(): void;
         replace(arg0: number, arg1: number): number;
+        replace(arg0: number, arg1: number, arg2: number): boolean;
         /**
          * @deprecated
          */
         replace(arg0: number, arg1: number): number;
-        replace(arg0: number, arg1: number, arg2: number): boolean;
         /**
          * @deprecated
          */
@@ -2116,54 +2097,52 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         entrySet(): $ObjectSet<$Map$Entry<number, number>>;
+        putIfAbsent(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
-        putIfAbsent(arg0: number, arg1: number): number;
         putIfAbsent(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         compute(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         compute(arg0: number, arg1: $BiFunction_<number, number, number>): number;
-        computeIfAbsent(arg0: number, arg1: $LongToIntFunction_): number;
-        /**
-         * @deprecated
-         */
-        computeIfAbsent(arg0: number, arg1: $Function_<number, number>): number;
-        computeIfAbsent(arg0: number, arg1: $Long2ByteFunction_): number;
         forEach(arg0: $BiConsumer_<number, number>): void;
-        keySet(): $LongSet;
-        /**
-         * @deprecated
-         */
-        containsValue(arg0: $Object): boolean;
-        containsValue(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
+        computeIfAbsent(arg0: number, arg1: $LongToIntFunction_): number;
+        computeIfAbsent(arg0: number, arg1: $Long2ByteFunction_): number;
+        /**
+         * @deprecated
+         */
+        computeIfAbsent(arg0: number, arg1: $Function_<number, number>): number;
+        keySet(): $LongSet;
+        containsValue(arg0: number): boolean;
+        /**
+         * @deprecated
+         */
+        containsValue(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: number): number;
+        computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         /**
          * @deprecated
          */
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
-        computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
-        long2ByteEntrySet(): $ObjectSet<$Long2ByteMap$Entry>;
-        mergeByte(arg0: number, arg1: number, arg2: $ByteBinaryOperator_): number;
-        mergeByte(arg0: number, arg1: number, arg2: $IntBinaryOperator_): number;
-        defaultReturnValue(arg0: number): void;
-        defaultReturnValue(): number;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Long2ByteFunction_): number;
+        defaultReturnValue(): number;
+        defaultReturnValue(arg0: number): void;
         computeIfAbsentNullable(arg0: number, arg1: $LongFunction_<number>): number;
+        get(arg0: number): number;
     }
     export class $AbstractLong2LongFunction implements $Long2LongFunction, $Serializable {
         defaultReturnValue(arg0: number): void;
@@ -2173,21 +2152,25 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
          * @deprecated
          */
         remove(arg0: $Object): number;
-        put(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
+        get(arg0: $Object): number;
+        /**
+         * @deprecated
+         */
+        put(arg0: number, arg1: number): number;
         put(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
+        getOrDefault(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: number): number;
-        getOrDefault(arg0: number, arg1: number): number;
         applyAsLong(arg0: number): number;
         /**
          * @deprecated
@@ -2220,6 +2203,5 @@ declare module "@package/it/unimi/dsi/fastutil/longs" {
         apply(arg0: number): number;
         compose(arg0: $LongUnaryOperator_$1): $LongUnaryOperator$1;
         andThen(arg0: $LongUnaryOperator_$1): $LongUnaryOperator$1;
-        get(arg0: number): number;
     }
 }

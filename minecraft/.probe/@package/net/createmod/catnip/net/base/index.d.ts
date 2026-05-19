@@ -16,14 +16,14 @@ declare module "@package/net/createmod/catnip/net/base" {
     export class $ClientboundPacketPayload {
     }
     export interface $ClientboundPacketPayload extends $BasePacketPayload {
-        handle(arg0: $LocalPlayer): void;
         handleInternal(arg0: $Player): void;
+        handle(arg0: $LocalPlayer): void;
     }
     export class $BasePacketPayload {
     }
     export interface $BasePacketPayload extends $CustomPacketPayload {
-        type(): $CustomPacketPayload$Type<$CustomPacketPayload>;
         getTypeProvider(): $BasePacketPayload$PacketTypeProvider;
+        type(): $CustomPacketPayload$Type<$CustomPacketPayload>;
         get typeProvider(): $BasePacketPayload$PacketTypeProvider;
     }
     /**

@@ -17,16 +17,16 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/utils" {
     /**
      * Values that may be interpreted as {@link $IHistoryStack$HistoryItem}.
      */
-    export type $IHistoryStack$HistoryItem_ = { name?: $Component_, action?: $EditAction, source?: $Object,  } | [name?: $Component_, action?: $EditAction, source?: $Object, ];
+    export type $IHistoryStack$HistoryItem_ = { source?: $Object, action?: $EditAction, name?: $Component_,  } | [source?: $Object, action?: $EditAction, name?: $Component_, ];
     export class $ModularUITooltipComponent implements $TooltipComponent {
         modularUI: $ModularUI;
         constructor(arg0: $ModularUI);
         constructor(arg0: $UIElement);
     }
     export class $UIElementProvider<T> {
-        static text<T>(arg0: $Function_<T, $Component>): $UIElementProvider<T>;
         static iconText<T>(arg0: $Function_<T, $IGuiTexture>, arg1: $Function_<T, $Component>): $UIElementProvider<T>;
         static optionalIconText<T>(arg0: $Function_<T, $IGuiTexture>, arg1: $Function_<T, $Component>): $UIElementProvider<T>;
+        static text<T>(arg0: $Function_<T, $Component>): $UIElementProvider<T>;
     }
     export interface $UIElementProvider<T> extends $Function<T, $UIElement> {
         createUI(arg0: T): $UIElement;
@@ -39,12 +39,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/utils" {
     export class $IHistoryStack {
     }
     export interface $IHistoryStack {
-        jumpToHistory(arg0: $IHistoryStack$HistoryItem_): void;
-        pushHistory(arg0: $Component_, arg1: $EditAction, arg2: $Object, arg3: boolean): void;
         pushHistory(arg0: $Component_, arg1: $EditAction, arg2: boolean): void;
         pushHistory(arg0: $Component_, arg1: $EditAction): void;
+        pushHistory(arg0: $Component_, arg1: $EditAction, arg2: $Object, arg3: boolean): void;
         recordSerializableObject<T extends $INBTSerializable<never>>(arg0: $Component_, arg1: T): $SerializableRecordAction<T>;
         recordSerializableObject<T extends $INBTSerializable<never>>(arg0: $Component_, arg1: T, arg2: $Object): $SerializableRecordAction<T>;
+        jumpToHistory(arg0: $IHistoryStack$HistoryItem_): void;
         undo(): void;
         redo(): void;
     }

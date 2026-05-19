@@ -12,9 +12,9 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/util" {
      */
     export type $EnumBit_ = (() => number);
     export class $EnumBitField<T extends $Enum<T>> {
+        getBitField(): number;
         static of<T extends $Enum<T>>(...arg0: T[]): $EnumBitField<T>;
         contains(arg0: T): boolean;
-        getBitField(): number;
         get bitField(): number;
     }
 }

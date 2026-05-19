@@ -5,15 +5,15 @@ export * as commands from "@package/net/minecraft/util/parsing/packrat/commands"
 
 declare module "@package/net/minecraft/util/parsing/packrat" {
     export class $ErrorEntry<S> extends $Record {
-        reason(): $Object;
-        cursor(): number;
         suggestions(): $SuggestionSupplier<S>;
+        cursor(): number;
+        reason(): $Object;
         constructor(arg0: number, arg1: $SuggestionSupplier_<S>, arg2: $Object);
     }
     /**
      * Values that may be interpreted as {@link $ErrorEntry}.
      */
-    export type $ErrorEntry_<S> = { reason?: $Object, suggestions?: $SuggestionSupplier_<any>, cursor?: number,  } | [reason?: $Object, suggestions?: $SuggestionSupplier_<any>, cursor?: number, ];
+    export type $ErrorEntry_<S> = { cursor?: number, suggestions?: $SuggestionSupplier_<any>, reason?: $Object,  } | [cursor?: number, suggestions?: $SuggestionSupplier_<any>, reason?: $Object, ];
     export class $ParseState$CacheEntry<T> extends $Record {
     }
     /**
@@ -28,10 +28,10 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
         constructor();
     }
     export class $ErrorCollector$LongestOnly<S> implements $ErrorCollector<S> {
+        cursor(): number;
         store(arg0: number, arg1: $SuggestionSupplier_<S>, arg2: $Object): void;
         entries(): $List<$ErrorEntry<S>>;
         finish(arg0: number): void;
-        cursor(): number;
         store(arg0: number, arg1: $Object): void;
         constructor();
     }
@@ -64,10 +64,10 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
      */
     export type $Term$Reference_<S, T> = { name?: $Atom_<any>,  } | [name?: $Atom_<any>, ];
     export class $Term<S> {
+        static cut<S>(): $Term<S>;
         static empty<S>(): $Term<S>;
         static optional<S>(arg0: $Term_<S>): $Term<S>;
         static sequence<S>(...arg0: $Term_<S>[]): $Term<S>;
-        static cut<S>(): $Term<S>;
         static alternative<S>(...arg0: $Term_<S>[]): $Term<S>;
         static named<S>(arg0: $Atom_<never>): $Term<S>;
         static marker<S, T>(arg0: $Atom_<T>, arg1: T): $Term<S>;
@@ -106,11 +106,11 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
         finish(arg0: number): void;
     }
     export class $Scope {
+        getAnyOrThrow<T>(...arg0: $Atom_<T>[]): T;
         get<T>(arg0: $Atom_<T>): T;
         put<T>(arg0: $Atom_<T>, arg1: T): void;
         putAll(arg0: $Scope): void;
         getOrDefault<T>(arg0: $Atom_<T>, arg1: T): T;
-        getAnyOrThrow<T>(...arg0: $Atom_<T>[]): T;
         getAny<T>(...arg0: $Atom_<T>[]): T;
         getOrThrow<T>(arg0: $Atom_<T>): T;
         constructor();
@@ -122,12 +122,12 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
      */
     export type $ParseState$CacheKey_<T> = { name?: $Atom_<any>, mark?: number,  } | [name?: $Atom_<any>, mark?: number, ];
     export class $ParseState<S> {
+        parseTopRule<T>(arg0: $Atom_<T>): (T) | undefined;
+        restore(arg0: number): void;
+        errorCollector(): $ErrorCollector<S>;
         parse<T>(arg0: $Atom_<T>): (T) | undefined;
         input(): S;
         mark(): number;
-        parseTopRule<T>(arg0: $Atom_<T>): (T) | undefined;
-        errorCollector(): $ErrorCollector<S>;
-        restore(arg0: number): void;
         constructor(arg0: $Dictionary<S>, arg1: $ErrorCollector<S>);
     }
     export class $Rule$RuleAction<S, T> {
@@ -178,7 +178,7 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
     /**
      * Values that may be interpreted as {@link $Rule$WrappedTerm}.
      */
-    export type $Rule$WrappedTerm_<S, T> = { action?: $Rule$RuleAction_<any, any>, child?: $Term_<any>,  } | [action?: $Rule$RuleAction_<any, any>, child?: $Term_<any>, ];
+    export type $Rule$WrappedTerm_<S, T> = { child?: $Term_<any>, action?: $Rule$RuleAction_<any, any>,  } | [child?: $Term_<any>, action?: $Rule$RuleAction_<any, any>, ];
     export class $Rule$SimpleRuleAction<T> {
     }
     export interface $Rule$SimpleRuleAction<T> {
@@ -189,8 +189,8 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
      */
     export type $Rule$SimpleRuleAction_<T> = ((arg0: $Scope) => T);
     export class $Term$Maybe<S> extends $Record implements $Term<S> {
-        parse(arg0: $ParseState<S>, arg1: $Scope, arg2: $Control_): boolean;
         term(): $Term<S>;
+        parse(arg0: $ParseState<S>, arg1: $Scope, arg2: $Control_): boolean;
         constructor(arg0: $Term_<S>);
     }
     /**

@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:valve_handles",
+  "type": "emixx:group",
+  "contents": [
+    "#create:valve_handles"
+  ]
+}

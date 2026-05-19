@@ -21,9 +21,9 @@ declare module "@package/net/minecraft/client/searchtree" {
         searchPath(arg0: string): $List<T>;
     }
     export class $IdSearchTree<T> implements $SearchTree<T> {
-        search(arg0: string): $List<T>;
         searchPlainText(arg0: string): $List<T>;
         searchResourceLocation(arg0: string, arg1: string): $List<T>;
+        search(arg0: string): $List<T>;
         resourceLocationSearchTree: $ResourceLocationSearchTree<T>;
         additionOrder: $Comparator<T>;
         constructor(arg0: $Function_<T, $Stream<$ResourceLocation>>, arg1: $List_<T>);
@@ -42,8 +42,8 @@ declare module "@package/net/minecraft/client/searchtree" {
         constructor(arg0: $Iterator<T>, arg1: $Iterator<T>, arg2: $Comparator<T>);
     }
     export class $SearchTree<T> {
-        static empty<T>(): $SearchTree<T>;
         static plainText<T>(arg0: $List_<T>, arg1: $Function_<T, $Stream<string>>): $SearchTree<T>;
+        static empty<T>(): $SearchTree<T>;
     }
     export interface $SearchTree<T> {
         search(arg0: string): $List<T>;

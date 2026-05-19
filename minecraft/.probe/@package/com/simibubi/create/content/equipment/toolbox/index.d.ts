@@ -20,17 +20,17 @@ import { $RegisterCapabilitiesEvent } from "@package/net/neoforged/neoforge/capa
 
 declare module "@package/com/simibubi/create/content/equipment/toolbox" {
     export class $ToolboxBlockEntity extends $SmartBlockEntity implements $MenuProvider, $Nameable, $AccessorToolboxBlockEntity {
-        getName(): $Component;
-        getDisplayName(): $Component;
-        connectPlayer(arg0: number, arg1: $Player, arg2: number): void;
-        isFullyInitialized(): boolean;
         readInventory(arg0: $ToolboxInventory): void;
         unequipTracked(): void;
+        connectPlayer(arg0: number, arg1: $Player, arg2: number): void;
+        isFullyInitialized(): boolean;
         createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
         unequip(arg0: number, arg1: $Player, arg2: number, arg3: boolean): void;
         static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
-        getColor(): $DyeColor;
+        getDisplayName(): $Component;
+        getName(): $Component;
         setUniqueId(arg0: $UUID_): void;
+        getColor(): $DyeColor;
         hasCustomName(): boolean;
         getCustomName(): $Component;
         setCustomName(arg0: $Component_): void;
@@ -47,20 +47,20 @@ declare module "@package/com/simibubi/create/content/equipment/toolbox" {
         static ATTACHMENTS_NBT_KEY: string;
         hasComparators: number;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
-        get name(): $Component;
-        get displayName(): $Component;
         get fullyInitialized(): boolean;
+        get displayName(): $Component;
+        get name(): $Component;
         get color(): $DyeColor;
         get connectedPlayers(): $Map<number, $WeakHashMap<$Player, number>>;
         get inventory(): $ToolboxInventory;
     }
     export class $ToolboxInventory extends $ItemStackHandler implements $AccessorToolboxInventory {
-        inLimitedMode(arg0: $Consumer_<$ToolboxInventory>): void;
         static canItemsShareCompartment(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
         takeFromCompartment(arg0: number, arg1: number, arg2: boolean): $ItemStack;
         distributeToCompartment(arg0: $ItemStack_, arg1: number, arg2: boolean): $ItemStack;
         static cleanItemNBT(arg0: $ItemStack_): $ItemStack;
         settle(arg0: number): void;
+        inLimitedMode(arg0: $Consumer_<$ToolboxInventory>): void;
         getFilters(): $List<$ItemStack>;
         /**
          * @deprecated

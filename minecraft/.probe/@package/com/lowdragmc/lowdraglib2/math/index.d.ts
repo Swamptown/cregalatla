@@ -7,16 +7,16 @@ export * as interpolate from "@package/com/lowdragmc/lowdraglib2/math/interpolat
 
 declare module "@package/com/lowdragmc/lowdraglib2/math" {
     export class $Position {
-        static of(arg0: number, arg1: number): $Position;
-        add(arg0: $Position): $Position;
-        add(arg0: $Size): $Position;
-        add(arg0: number, arg1: number): $Position;
-        subtract(arg0: $Position): $Position;
+        addY(arg0: number): $Position;
         vector2f(): $Vector2f;
         addX(arg0: number): $Position;
-        addY(arg0: number): $Position;
         vec2(): $Vec2;
         getY(): number;
+        subtract(arg0: $Position): $Position;
+        add(arg0: $Size): $Position;
+        add(arg0: $Position): $Position;
+        add(arg0: number, arg1: number): $Position;
+        static of(arg0: number, arg1: number): $Position;
         getX(): number;
         static ORIGIN: $Position;
         static CODEC: $Codec<$Position>;
@@ -25,26 +25,26 @@ declare module "@package/com/lowdragmc/lowdraglib2/math" {
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $Position>;
     }
     export class $PositionedRect {
+        getPosition(): $Position;
+        intersects(arg0: $Position): boolean;
+        intersects(arg0: $PositionedRect): boolean;
         static of(arg0: $Position, arg1: $Size): $PositionedRect;
         static of(arg0: number, arg1: number, arg2: number, arg3: number): $PositionedRect;
         static of(arg0: $Position, arg1: $Position): $PositionedRect;
         getSize(): $Size;
-        intersects(arg0: $Position): boolean;
-        intersects(arg0: $PositionedRect): boolean;
-        getPosition(): $Position;
         size: $Size;
         position: $Position;
     }
     export class $Size {
-        static of(arg0: number, arg1: number): $Size;
-        add(arg0: number, arg1: number): $Size;
-        static add(arg0: $Position): $Size;
-        add(arg0: $Size): $Size;
-        subtract(arg0: $Size): $Size;
         addWidth(arg0: number): $Size;
         addHeight(arg0: number): $Size;
+        subtract(arg0: $Size): $Size;
         getWidth(): number;
         getHeight(): number;
+        static add(arg0: $Position): $Size;
+        add(arg0: $Size): $Size;
+        add(arg0: number, arg1: number): $Size;
+        static of(arg0: number, arg1: number): $Size;
         static ZERO: $Size;
         static CODEC: $Codec<$Size>;
         width: number;
@@ -52,17 +52,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/math" {
         height: number;
     }
     export class $Rect {
-        expand(arg0: number): $Rect;
-        expand(arg0: number, arg1: number): $Rect;
-        static of(arg0: $Position, arg1: $Size): $Rect;
-        static of(arg0: number, arg1: number, arg2: number, arg3: number): $Rect;
-        move(arg0: $Size): $Rect;
-        move(arg0: $Position): $Rect;
-        move(arg0: number, arg1: number): $Rect;
-        intersects(arg0: $Rect): $Rect;
-        isCollide(arg0: $Rect): boolean;
-        getDown(): number;
-        getUp(): number;
         withLeft(arg0: number): $Rect;
         withRight(arg0: number): $Rect;
         static ofAbsolute(arg0: number, arg1: number, arg2: number, arg3: number): $Rect;
@@ -98,10 +87,21 @@ declare module "@package/com/lowdragmc/lowdraglib2/math" {
         moveHorizontal(arg0: number): $Rect;
         moveVertical(arg0: number): $Rect;
         unions(arg0: $Rect): $Rect;
-        getLeft(): number;
-        getRight(): number;
+        isCollide(arg0: $Rect): boolean;
+        getDown(): number;
+        getUp(): number;
+        intersects(arg0: $Rect): $Rect;
         getWidth(): number;
         getHeight(): number;
+        move(arg0: $Size): $Rect;
+        move(arg0: $Position): $Rect;
+        move(arg0: number, arg1: number): $Rect;
+        expand(arg0: number): $Rect;
+        expand(arg0: number, arg1: number): $Rect;
+        static of(arg0: $Position, arg1: $Size): $Rect;
+        static of(arg0: number, arg1: number, arg2: number, arg3: number): $Rect;
+        getLeft(): number;
+        getRight(): number;
         static ZERO: $Rect;
         left: number;
         up: number;

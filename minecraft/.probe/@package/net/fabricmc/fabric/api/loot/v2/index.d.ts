@@ -19,11 +19,19 @@ declare module "@package/net/fabricmc/fabric/api/loot/v2" {
         /**
          * @deprecated
          */
-        apply(arg0: $LootItemFunction): $LootPool$Builder;
+        conditionally(arg0: $Collection_<$LootItemCondition>): $LootPool$Builder;
+        /**
+         * @deprecated
+         */
+        conditionally(arg0: $LootItemCondition): $LootPool$Builder;
         /**
          * @deprecated
          */
         apply(arg0: $Collection_<$LootItemFunction>): $LootPool$Builder;
+        /**
+         * @deprecated
+         */
+        apply(arg0: $LootItemFunction): $LootPool$Builder;
         /**
          * @deprecated
          */
@@ -32,14 +40,6 @@ declare module "@package/net/fabricmc/fabric/api/loot/v2" {
          * @deprecated
          */
         with(arg0: $Collection_<$LootPoolEntryContainer>): $LootPool$Builder;
-        /**
-         * @deprecated
-         */
-        conditionally(arg0: $LootItemCondition): $LootPool$Builder;
-        /**
-         * @deprecated
-         */
-        conditionally(arg0: $Collection_<$LootItemCondition>): $LootPool$Builder;
     }
     /**
      * @deprecated
@@ -54,6 +54,14 @@ declare module "@package/net/fabricmc/fabric/api/loot/v2" {
         /**
          * @deprecated
          */
+        modifyPools(arg0: $Consumer_<$LootPool$Builder>): $LootTable$Builder;
+        /**
+         * @deprecated
+         */
+        pools(arg0: $Collection_<$LootPool>): $LootTable$Builder;
+        /**
+         * @deprecated
+         */
         apply(arg0: $Collection_<$LootItemFunction>): $LootTable$Builder;
         /**
          * @deprecated
@@ -63,13 +71,5 @@ declare module "@package/net/fabricmc/fabric/api/loot/v2" {
          * @deprecated
          */
         pool(arg0: $LootPool): $LootTable$Builder;
-        /**
-         * @deprecated
-         */
-        modifyPools(arg0: $Consumer_<$LootPool$Builder>): $LootTable$Builder;
-        /**
-         * @deprecated
-         */
-        pools(arg0: $Collection_<$LootPool>): $LootTable$Builder;
     }
 }

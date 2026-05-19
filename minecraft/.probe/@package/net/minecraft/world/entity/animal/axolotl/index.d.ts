@@ -3,7 +3,7 @@ import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sen
 import { $SmoothSwimmingMoveControl, $MoveControl, $MoveControl$Operation, $LookControl, $JumpControl, $SmoothSwimmingLookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $CompoundTag_ } from "@package/net/minecraft/nbt";
-import { $EntityType_, $Pose, $PortalProcessor, $VariantHolder, $LerpingModel, $AgeableMob$AgeableMobGroupData, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState, $Mob, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
+import { $EntityType_, $Pose, $VariantHolder, $PortalProcessor, $LerpingModel, $AgeableMob$AgeableMobGroupData, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState, $Mob, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $Stack, $Map } from "@package/java/util";
@@ -36,9 +36,9 @@ import { $Vector3f } from "@package/org/joml";
 
 declare module "@package/net/minecraft/world/entity/animal/axolotl" {
     export class $PlayDead extends $Behavior<$Axolotl> {
-        start(arg0: $ServerLevel, arg1: $Axolotl, arg2: number): void;
-        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Axolotl): boolean;
         canStillUse(arg0: $ServerLevel, arg1: $Axolotl, arg2: number): boolean;
+        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Axolotl): boolean;
+        start(arg0: $ServerLevel, arg1: $Axolotl, arg2: number): void;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();
@@ -82,8 +82,6 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         static MIN_SPEED: number;
     }
     export class $Axolotl extends $Animal implements $LerpingModel, $VariantHolder<$Axolotl$Variant>, $Bucketable {
-        getVariant(): $Axolotl$Variant;
-        setVariant(arg0: $Axolotl$Variant_): void;
         getPickupSound(): $SoundEvent;
         fromBucket(): boolean;
         setFromBucket(arg0: boolean): void;
@@ -91,13 +89,15 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         loadFromBucketTag(arg0: $CompoundTag_): void;
         getBucketItemStack(): $ItemStack;
         handleAirSupply(arg0: number): void;
+        static checkAxolotlSpawnRules(arg0: $EntityType_<$LivingEntity>, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         getModelRotationValues(): $Map<string, $Vector3f>;
         isPlayingDead(): boolean;
         rehydrate(): void;
         setPlayingDead(arg0: boolean): void;
         static onStopAttacking(arg0: $Axolotl, arg1: $LivingEntity): void;
         applySupportingEffects(arg0: $Player): void;
-        static checkAxolotlSpawnRules(arg0: $EntityType_<$LivingEntity>, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
+        setVariant(arg0: $Axolotl$Variant_): void;
+        getVariant(): $Axolotl$Variant;
         static createAttributes(): $AttributeSupplier$Builder;
         serializeNBT(arg0: $HolderLookup$Provider): $Axolotl$Variant;
         static MAX_WEARING_ARMOR_CHANCE: number;
@@ -278,12 +278,12 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         get modelRotationValues(): $Map<string, $Vector3f>;
     }
     export class $Axolotl$Variant extends $Enum<$Axolotl$Variant> implements $StringRepresentable {
+        static getCommonSpawnVariant(arg0: $RandomSource): $Axolotl$Variant;
+        static getRareSpawnVariant(arg0: $RandomSource): $Axolotl$Variant;
         getName(): string;
         static values(): $Axolotl$Variant[];
         static valueOf(arg0: string): $Axolotl$Variant;
         getId(): number;
-        static getCommonSpawnVariant(arg0: $RandomSource): $Axolotl$Variant;
-        static getRareSpawnVariant(arg0: $RandomSource): $Axolotl$Variant;
         getSerializedName(): string;
         static byId(arg0: number): $Axolotl$Variant;
         getRemappedEnumConstantName(): string;

@@ -35,20 +35,20 @@ declare module "@package/net/fabricmc/loader/api/metadata" {
         get contact(): $ContactInformation;
     }
     export class $ModDependency$Kind extends $Enum<$ModDependency$Kind> {
+        isSoft(): boolean;
+        isPositive(): boolean;
         static values(): $ModDependency$Kind[];
         static valueOf(name: string): $ModDependency$Kind;
         getKey(): string;
         static parse(key: string): $ModDependency$Kind;
-        isSoft(): boolean;
-        isPositive(): boolean;
         static CONFLICTS: $ModDependency$Kind;
         static RECOMMENDS: $ModDependency$Kind;
         static BREAKS: $ModDependency$Kind;
         static DEPENDS: $ModDependency$Kind;
         static SUGGESTS: $ModDependency$Kind;
-        get key(): string;
         get soft(): boolean;
         get positive(): boolean;
+        get key(): string;
     }
     /**
      * Values that may be interpreted as {@link $ModDependency$Kind}.
@@ -107,10 +107,12 @@ declare module "@package/net/fabricmc/loader/api/metadata" {
     export class $ModMetadata {
     }
     export interface $ModMetadata {
+        getEnvironment(): $ModEnvironment;
+        getDescription(): string;
+        getVersion(): $Version;
         getName(): string;
         getId(): string;
         getType(): string;
-        getVersion(): $Version;
         getLicense(): $Collection<string>;
         getDependencies(): $Collection<$ModDependency>;
         getProvides(): $Collection<string>;
@@ -145,12 +147,12 @@ declare module "@package/net/fabricmc/loader/api/metadata" {
          * @deprecated
          */
         containsCustomElement(arg0: string): boolean;
-        getDescription(): string;
-        getEnvironment(): $ModEnvironment;
+        get environment(): $ModEnvironment;
+        get description(): string;
+        get version(): $Version;
         get name(): string;
         get id(): string;
         get type(): string;
-        get version(): $Version;
         get license(): $Collection<string>;
         get dependencies(): $Collection<$ModDependency>;
         get provides(): $Collection<string>;
@@ -163,21 +165,19 @@ declare module "@package/net/fabricmc/loader/api/metadata" {
         get contributors(): $Collection<$Person>;
         get contact(): $ContactInformation;
         get customValues(): $Map<string, $CustomValue>;
-        get description(): string;
-        get environment(): $ModEnvironment;
     }
     export class $CustomValue {
     }
     export interface $CustomValue {
         getType(): $CustomValue$CvType;
-        getAsBoolean(): boolean;
         getAsString(): string;
+        getAsBoolean(): boolean;
         getAsNumber(): $Number;
         getAsObject(): $CustomValue$CvObject;
         getAsArray(): $CustomValue$CvArray;
         get type(): $CustomValue$CvType;
-        get asBoolean(): boolean;
         get asString(): string;
+        get asBoolean(): boolean;
         get asNumber(): $Number;
         get asObject(): $CustomValue$CvObject;
         get asArray(): $CustomValue$CvArray;

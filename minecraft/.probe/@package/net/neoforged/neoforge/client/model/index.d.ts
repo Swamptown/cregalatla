@@ -35,16 +35,16 @@ export * as geometry from "@package/net/neoforged/neoforge/client/model/geometry
 
 declare module "@package/net/neoforged/neoforge/client/model" {
     export class $QuadTransformers {
-        static empty(): $IQuadTransformer;
         static applying(arg0: $Transformation): $IQuadTransformer;
         static settingEmissivity(arg0: number): $IQuadTransformer;
         static settingMaxEmissivity(): $IQuadTransformer;
+        static empty(): $IQuadTransformer;
         static toABGR(arg0: number): number;
         static applyingLightmap(arg0: number, arg1: number): $IQuadTransformer;
         static applyingLightmap(arg0: number): $IQuadTransformer;
+        static applyingColor(arg0: number, arg1: number, arg2: number, arg3: number): $IQuadTransformer;
         static applyingColor(arg0: number, arg1: number, arg2: number): $IQuadTransformer;
         static applyingColor(arg0: number): $IQuadTransformer;
-        static applyingColor(arg0: number, arg1: number, arg2: number, arg3: number): $IQuadTransformer;
         static set tingEmissivity(value: number);
     }
     export class $ItemLayerModel implements $IUnbakedGeometry<$ItemLayerModel> {
@@ -59,11 +59,11 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         getTransforms(): $ItemTransforms;
         getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getOverrides(): $ItemOverrides;
+        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         isGui3d(): boolean;
         usesBlockLight(): boolean;
         getParticleIcon(): $TextureAtlasSprite;
         useAmbientOcclusion(): boolean;
-        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getQuads(arg0: $BlockState_, arg1: $Direction_, arg2: $RandomSource): $List<$BakedQuad>;
         emitBlockQuads(arg0: $BlockAndTintGetter, arg1: $BlockState_, arg2: $BlockPos_, arg3: $Supplier_<any>, arg4: $RenderContext): void;
         emitItemQuads(arg0: $ItemStack_, arg1: $Supplier_<any>, arg2: $RenderContext): void;
@@ -132,11 +132,11 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         static NORMAL: number;
     }
     export interface $IQuadTransformer {
+        processInPlace(arg0: $BakedQuad): void;
+        processInPlace(arg0: $List_<$BakedQuad>): void;
         andThen(arg0: $IQuadTransformer_): $IQuadTransformer;
         process(arg0: $List_<$BakedQuad>): $List<$BakedQuad>;
         process(arg0: $BakedQuad): $BakedQuad;
-        processInPlace(arg0: $List_<$BakedQuad>): void;
-        processInPlace(arg0: $BakedQuad): void;
     }
     /**
      * Values that may be interpreted as {@link $IQuadTransformer}.
@@ -165,7 +165,7 @@ declare module "@package/net/neoforged/neoforge/client/model" {
     /**
      * Values that may be interpreted as {@link $ExtraFaceData}.
      */
-    export type $ExtraFaceData_ = { color?: number, ambientOcclusion?: boolean, skyLight?: number, blockLight?: number,  } | [color?: number, ambientOcclusion?: boolean, skyLight?: number, blockLight?: number, ];
+    export type $ExtraFaceData_ = { blockLight?: number, skyLight?: number, ambientOcclusion?: boolean, color?: number,  } | [blockLight?: number, skyLight?: number, ambientOcclusion?: boolean, color?: number, ];
     export class $SimpleModelState implements $ModelState {
         isUvLocked(): boolean;
         getRotation(): $Transformation;
@@ -192,17 +192,17 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         getQuads(arg0: $BlockState_, arg1: $Direction_, arg2: $RandomSource): $List<$BakedQuad>;
         isCustomRenderer(): boolean;
         getTransforms(): $ItemTransforms;
-        getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
+        getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getRenderPasses(arg0: $ItemStack_, arg1: boolean): $List<$BakedModel>;
         getOverrides(): $ItemOverrides;
+        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         isGui3d(): boolean;
         usesBlockLight(): boolean;
-        getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         getParticleIcon(): $TextureAtlasSprite;
+        getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
         useAmbientOcclusion(): boolean;
-        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
         emitBlockQuads(arg0: $BlockAndTintGetter, arg1: $BlockState_, arg2: $BlockPos_, arg3: $Supplier_<any>, arg4: $RenderContext): void;
         emitItemQuads(arg0: $ItemStack_, arg1: $Supplier_<any>, arg2: $RenderContext): void;
@@ -215,14 +215,14 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         get vanillaAdapter(): boolean;
     }
     export class $CompositeModel$Baked implements $IDynamicBakedModel {
-        static builder(arg0: $IGeometryBakingContext, arg1: $TextureAtlasSprite, arg2: $ItemOverrides, arg3: $ItemTransforms): $CompositeModel$Baked$Builder;
-        static builder(arg0: boolean, arg1: boolean, arg2: boolean, arg3: $TextureAtlasSprite, arg4: $ItemOverrides, arg5: $ItemTransforms): $CompositeModel$Baked$Builder;
         getPart(arg0: string): $BakedModel;
         getQuads(arg0: $BlockState_, arg1: $Direction_, arg2: $RandomSource, arg3: $ModelData, arg4: $RenderType): $List<$BakedQuad>;
         isCustomRenderer(): boolean;
         getTransforms(): $ItemTransforms;
         getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getRenderPasses(arg0: $ItemStack_, arg1: boolean): $List<$BakedModel>;
+        static builder(arg0: $IGeometryBakingContext, arg1: $TextureAtlasSprite, arg2: $ItemOverrides, arg3: $ItemTransforms): $CompositeModel$Baked$Builder;
+        static builder(arg0: boolean, arg1: boolean, arg2: boolean, arg3: $TextureAtlasSprite, arg4: $ItemOverrides, arg5: $ItemTransforms): $CompositeModel$Baked$Builder;
         getOverrides(): $ItemOverrides;
         isGui3d(): boolean;
         usesBlockLight(): boolean;
@@ -233,9 +233,9 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         emitBlockQuads(arg0: $BlockAndTintGetter, arg1: $BlockState_, arg2: $BlockPos_, arg3: $Supplier_<any>, arg4: $RenderContext): void;
         emitItemQuads(arg0: $ItemStack_, arg1: $Supplier_<any>, arg2: $RenderContext): void;
         getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
+        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
-        applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         isVanillaAdapter(): boolean;
         constructor(arg0: boolean, arg1: boolean, arg2: boolean, arg3: $TextureAtlasSprite, arg4: $ItemTransforms, arg5: $ItemOverrides, arg6: $ImmutableMap<string, $BakedModel>, arg7: $ImmutableList<$BakedModel>);
         get customRenderer(): boolean;
@@ -265,8 +265,8 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         overrides: $ItemOverrides;
     }
     export class $IModelBuilder<T extends $IModelBuilder<T>> {
-        static of(arg0: boolean, arg1: boolean, arg2: boolean, arg3: $ItemTransforms, arg4: $ItemOverrides, arg5: $TextureAtlasSprite, arg6: $RenderTypeGroup_): $IModelBuilder<never>;
         static collecting(arg0: $List_<$BakedQuad>): $IModelBuilder<never>;
+        static of(arg0: boolean, arg1: boolean, arg2: boolean, arg3: $ItemTransforms, arg4: $ItemOverrides, arg5: $TextureAtlasSprite, arg6: $RenderTypeGroup_): $IModelBuilder<never>;
     }
     export interface $IModelBuilder<T extends $IModelBuilder<T>> {
         build(): $BakedModel;
@@ -279,10 +279,10 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         constructor(arg0: $ModelManager);
     }
     export class $CompositeModel$Baked$Builder {
-        build(): $BakedModel;
         addQuads(arg0: $RenderTypeGroup_, arg1: $Collection_<$BakedQuad>): $CompositeModel$Baked$Builder;
         addQuads(arg0: $RenderTypeGroup_, ...arg1: $BakedQuad[]): $CompositeModel$Baked$Builder;
         setParticle(arg0: $TextureAtlasSprite): $CompositeModel$Baked$Builder;
+        build(): $BakedModel;
         addLayer(arg0: $BakedModel): void;
         set particle(value: $TextureAtlasSprite);
     }
@@ -291,8 +291,8 @@ declare module "@package/net/neoforged/neoforge/client/model" {
         constructor();
     }
     export class $DynamicFluidContainerModel implements $IUnbakedGeometry<$DynamicFluidContainerModel> {
-        withFluid(arg0: $Fluid_): $DynamicFluidContainerModel;
         static getLayerRenderTypes(arg0: boolean): $RenderTypeGroup;
+        withFluid(arg0: $Fluid_): $DynamicFluidContainerModel;
         bake(arg0: $IGeometryBakingContext, arg1: $ModelBaker, arg2: $Function_<$Material, $TextureAtlasSprite>, arg3: $ModelState, arg4: $ItemOverrides): $BakedModel;
         resolveParents(arg0: $Function_<$ResourceLocation, $UnbakedModel>, arg1: $IGeometryBakingContext): void;
         getConfigurableComponentNames(): $Set<string>;

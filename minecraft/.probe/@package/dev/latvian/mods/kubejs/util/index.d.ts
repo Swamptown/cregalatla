@@ -67,13 +67,13 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
      */
     export type $StringReaderFunction_<T> = ((reader: $StringReader) => T);
     export class $TinyMap<K, V> extends $Record {
+        static ofMap<K, V>(map: $Map_<K, V>): $TinyMap<K, V>;
         isEmpty(): boolean;
         toMap(): $Map<K, V>;
         entries(): $TinyMap$Entry<K, V>[];
-        static ofMap<K, V>(map: $Map_<K, V>): $TinyMap<K, V>;
+        constructor(collection: $Collection_<$TinyMap$Entry_<K, V>>);
         constructor(entries: $TinyMap$Entry_<K, V>[]);
         constructor(map: $TinyMap_<K, V>);
-        constructor(collection: $Collection_<$TinyMap$Entry_<K, V>>);
         get empty(): boolean;
     }
     /**
@@ -100,13 +100,13 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
      */
     export type $ClassWrapper_<T> = { wrappedClass?: $Class<any>,  } | [wrappedClass?: $Class<any>, ];
     export class $TickDuration extends $Record implements $TemporalAmount {
-        get(unit: $TemporalUnit): number;
-        static of(ticks: number): $TickDuration;
-        static wrap(from: $Object): $TickDuration;
+        intTicks(): number;
         getUnits(): $List<$TemporalUnit>;
         addTo(temporal: $Temporal): $Temporal;
         subtractFrom(temporal: $Temporal): $Temporal;
-        intTicks(): number;
+        get(unit: $TemporalUnit): number;
+        static wrap(from: $Object): $TickDuration;
+        static of(ticks: number): $TickDuration;
         ticks(): number;
         static ZERO: $TickDuration;
         static CODEC: $Codec<$TickDuration>;
@@ -126,19 +126,19 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         constructor();
     }
     export class $JsonIO {
+        static toPrettyString(json: $JsonElement_): string;
+        static parseRaw(string: string): $JsonElement;
+        static writeJsonHash(stream: $DataOutputStream, element: $JsonElement_): void;
+        static getJsonHashBytes(json: $JsonElement_): number[];
+        static getJsonHashString(json: $JsonElement_): string;
+        static readString(path: $Path_): string;
         static toString(json: $JsonElement_): string;
         static toArray(element: $JsonElement_): $JsonArray;
         static write(path: $Path_, json: $JsonElement_): void;
-        static parse(string: string): $Object;
         static read(path: $Path_): $Map<never, never>;
-        static readString(path: $Path_): string;
-        static getJsonHashBytes(json: $JsonElement_): number[];
-        static getJsonHashString(json: $JsonElement_): string;
-        static toPrettyString(json: $JsonElement_): string;
-        static writeJsonHash(stream: $DataOutputStream, element: $JsonElement_): void;
-        static parseRaw(string: string): $JsonElement;
-        static toObject(json: $JsonElement_): $Object;
+        static parse(string: string): $Object;
         static toPrimitive(element: $JsonElement_): $Object;
+        static toObject(json: $JsonElement_): $Object;
         static readJson(path: $Path_): $JsonElement;
         constructor();
     }
@@ -152,9 +152,9 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         constructor();
     }
     export class $JSObjectType extends $Enum<$JSObjectType> {
+        checkList(): boolean;
         static values(): $JSObjectType[];
         static valueOf(name: string): $JSObjectType;
-        checkList(): boolean;
         checkMap(): boolean;
         static ANY: $JSObjectType;
         static MAP: $JSObjectType;
@@ -186,9 +186,9 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         entrySet(): $Set<$Map$Entry<K, V>>;
         putAll(m: $Map_<K, V>): void;
         putAll(m: $Map_<K, V>): void;
+        containsKey(key: $Object): boolean;
         keySet(): $Set<K>;
         containsValue(value: $Object): boolean;
-        containsKey(key: $Object): boolean;
         convertJavaToJs(scope: $Scriptable, staticType: $TypeInfo_): $Scriptable;
         remove(arg0: $Object, arg1: $Object): boolean;
         replace(arg0: K, arg1: V, arg2: V): boolean;
@@ -197,21 +197,21 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         merge(arg0: K, arg1: V, arg2: $BiFunction_<V, V, V>): V;
         putIfAbsent(arg0: K, arg1: V): V;
         compute(arg0: K, arg1: $BiFunction_<K, V, V>): V;
-        computeIfAbsent(arg0: K, arg1: $Function_<K, V>): V;
         forEach(arg0: $BiConsumer_<K, V>): void;
+        computeIfAbsent(arg0: K, arg1: $Function_<K, V>): V;
         getOrDefault(arg0: $Object, arg1: V): V;
         computeIfPresent(arg0: K, arg1: $BiFunction_<K, V, V>): V;
         constructor(map: $Map_<K, V>);
         get empty(): boolean;
     }
     export class $CachedComponentObject<T extends $RegistryObjectKJS<T>, S> extends $Record {
+        static writeCacheKey<T extends $RegistryObjectKJS<T>>(buf: $FriendlyByteBuf, value: T, components: $DataComponentPatch_): void;
+        static ofItemStack(stack: $ItemStack_, visual: boolean): $CachedComponentObject<$Item, $ItemStack>;
+        static ofFluidStack(stack: $FluidStack_, visual: boolean): $CachedComponentObject<$Fluid, $FluidStack>;
+        cacheKey(): $UUID;
         stack(): S;
         value(): T;
         static of<T extends $RegistryObjectKJS<T>, S>(value: T, stack: S, components: $DataComponentPatch_): $CachedComponentObject<T, S>;
-        cacheKey(): $UUID;
-        static ofItemStack(stack: $ItemStack_, visual: boolean): $CachedComponentObject<$Item, $ItemStack>;
-        static ofFluidStack(stack: $FluidStack_, visual: boolean): $CachedComponentObject<$Fluid, $FluidStack>;
-        static writeCacheKey<T extends $RegistryObjectKJS<T>>(buf: $FriendlyByteBuf, value: T, components: $DataComponentPatch_): void;
         components(): $DataComponentPatch;
         iconPath(): $Mutable<string>;
         constructor(cacheKey: $UUID_, value: T, stack: S, components: $DataComponentPatch_, iconPath: $Mutable<string>);
@@ -219,7 +219,7 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
     /**
      * Values that may be interpreted as {@link $CachedComponentObject}.
      */
-    export type $CachedComponentObject_<T, S> = { stack?: any, cacheKey?: $UUID_, iconPath?: $Mutable<string>, components?: $DataComponentPatch_, value?: $RegistryObjectKJS<T>,  } | [stack?: any, cacheKey?: $UUID_, iconPath?: $Mutable<string>, components?: $DataComponentPatch_, value?: $RegistryObjectKJS<T>, ];
+    export type $CachedComponentObject_<T, S> = { value?: $RegistryObjectKJS<T>, components?: $DataComponentPatch_, iconPath?: $Mutable<string>, cacheKey?: $UUID_, stack?: any,  } | [value?: $RegistryObjectKJS<T>, components?: $DataComponentPatch_, iconPath?: $Mutable<string>, cacheKey?: $UUID_, stack?: any, ];
     export class $LogType extends $Enum<$LogType> {
         static values(): $LogType[];
         static valueOf(name: string): $LogType;
@@ -241,9 +241,9 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         access(): $RegistryAccess$Frozen;
         damageSources(): $DamageSources;
         getAllTags<T>(key: $ResourceKey_<$Registry<T>>): $Map<$ResourceLocation, $Collection<$Holder<T>>>;
-        cacheTags<T>(registry: $Registry<T>, map: $Map_<$ResourceLocation_, $List_<$TagLoader$EntryWithSource_>>): void;
         wrapRegistry(id: $ResourceLocation_): $RegistryWrapper<never>;
         itemStackParseCache(): $Map<string, $ItemStack>;
+        cacheTags<T>(registry: $Registry<T>, map: $Map_<$ResourceLocation_, $List_<$TagLoader$EntryWithSource_>>): void;
         getTag<T>(arg0: $TagKey_<T>): $Collection<$Holder<T>>;
         static current: $RegistryAccessContainer;
         cachedBlockTags: $CachedTagLookup<$Block>;
@@ -296,14 +296,14 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
      */
     export type $NBTSerializable_ = (() => $Tag_);
     export class $NotificationToastData extends $Record {
-        duration(): $Duration;
-        text(): $Component;
-        iconSize(): number;
-        outlineColor(): ($KubeColor) | undefined;
-        static ofText(text: $Component_): $NotificationToastData;
         textShadow(): boolean;
         borderColor(): ($KubeColor) | undefined;
         backgroundColor(): ($KubeColor) | undefined;
+        iconSize(): number;
+        outlineColor(): ($KubeColor) | undefined;
+        static ofText(text: $Component_): $NotificationToastData;
+        text(): $Component;
+        duration(): $Duration;
         icon(): ($KubeIcon) | undefined;
         static ofTitle(title: $Component_, text: $Component_): $NotificationToastData;
         static CODEC: $MapCodec<$NotificationToastData>;
@@ -317,7 +317,7 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
     /**
      * Values that may be interpreted as {@link $NotificationToastData}.
      */
-    export type $NotificationToastData_ = { borderColor?: ($KubeColor_) | undefined, icon?: ($KubeIcon_) | undefined, iconSize?: number, text?: $Component_, textShadow?: boolean, outlineColor?: ($KubeColor_) | undefined, duration?: $Duration_, backgroundColor?: ($KubeColor_) | undefined,  } | [borderColor?: ($KubeColor_) | undefined, icon?: ($KubeIcon_) | undefined, iconSize?: number, text?: $Component_, textShadow?: boolean, outlineColor?: ($KubeColor_) | undefined, duration?: $Duration_, backgroundColor?: ($KubeColor_) | undefined, ];
+    export type $NotificationToastData_ = { duration?: $Duration_, outlineColor?: ($KubeColor_) | undefined, textShadow?: boolean, text?: $Component_, iconSize?: number, icon?: ($KubeIcon_) | undefined, borderColor?: ($KubeColor_) | undefined, backgroundColor?: ($KubeColor_) | undefined,  } | [duration?: $Duration_, outlineColor?: ($KubeColor_) | undefined, textShadow?: boolean, text?: $Component_, iconSize?: number, icon?: ($KubeIcon_) | undefined, borderColor?: ($KubeColor_) | undefined, backgroundColor?: ($KubeColor_) | undefined, ];
     export class $WrappedJSObjectChangeListener<T> {
     }
     export interface $WrappedJSObjectChangeListener<T> {
@@ -334,9 +334,9 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         constructor(scope: $Scriptable, jo: $Object, map: $Map_<any, any>, type: $TypeInfo_, errorMessage: string);
     }
     export class $RotationAxis extends $Enum<$RotationAxis> {
+        deg(f: number): $Quaternionf;
         static values(): $RotationAxis[];
         static valueOf(name: string): $RotationAxis;
-        deg(f: number): $Quaternionf;
         rad(f: number): $Quaternionf;
         static ZN: $RotationAxis;
         static YN: $RotationAxis;
@@ -354,18 +354,18 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
     }
     export class $Lazy<T> implements $Supplier<T> {
         get(): T;
+        static map<K, V>(supplier: $Consumer_<$Map<K, V>>): $Lazy<$Map<K, V>>;
         static of<T>(supplier: $Supplier_<T>): $Lazy<T>;
         static of<T>(supplier: $Supplier_<T>, expires: $Duration_): $Lazy<T>;
-        static map<K, V>(supplier: $Consumer_<$Map<K, V>>): $Lazy<$Map<K, V>>;
         static serviceLoader<T>(type: $Class<T>): $Lazy<T>;
         forget(): void;
         static identityMap<K, V>(supplier: $Consumer_<$Map<K, V>>): $Lazy<$Map<K, V>>;
     }
     export class $KubeResourceLocation extends $Record {
-        static wrap(from: $Object): $ResourceLocation_;
         wrapped(): $ResourceLocation;
-        withPath(path: string): $ResourceLocation_;
+        static wrap(from: $Object): $ResourceLocation_;
         withPath(path: $UnaryOperator_<string>): $ResourceLocation_;
+        withPath(path: string): $ResourceLocation_;
         static CODEC: $Codec<$ResourceLocation_>;
         constructor(wrapped: $ResourceLocation_);
     }
@@ -374,12 +374,12 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
      */
     export type $KubeResourceLocation_ = { wrapped?: $ResourceLocation_,  } | [wrapped?: $ResourceLocation_, ];
     export class $ErrorStack {
-        push(parent: $Object): void;
-        pop(): void;
         stringAt(): string;
         atString(): string;
-        setKey(key: $Object): void;
+        push(parent: $Object): void;
+        pop(): void;
         setKey(index: number): void;
+        setKey(key: $Object): void;
         static NONE: $ErrorStack;
         constructor();
     }
@@ -392,17 +392,17 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         constructor(stackTrace: $Collection_<string>, exitPattern: $Pattern, reduce: $Function_<string, string>);
     }
     export class $ListJS {
-        static of(array: number[]): $List<number>;
-        static of(array: number[]): $List<number>;
+        static ofSet(o: $Object): $Set<never>;
+        static orSelf(o: $Object): $List<never>;
+        static ofArray(array: $Object): $List<never>;
         static of(array: number[]): $List<number>;
         static of(array: number[]): $List<number>;
         static of(array: string[]): $List<string>;
         static of(o: $Object): $List<never>;
         static of(array: number[]): $List<number>;
         static of(array: number[]): $List<number>;
-        static ofArray(array: $Object): $List<never>;
-        static ofSet(o: $Object): $Set<never>;
-        static orSelf(o: $Object): $List<never>;
+        static of(array: number[]): $List<number>;
+        static of(array: number[]): $List<number>;
     }
     export interface $ListJS {
     }
@@ -420,7 +420,7 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
     /**
      * Values that may be interpreted as {@link $IntBounds}.
      */
-    export type $IntBounds_ = { min?: number, max?: number,  } | [min?: number, max?: number, ];
+    export type $IntBounds_ = { max?: number, min?: number,  } | [max?: number, min?: number, ];
     export class $BaseProperties {
         remove(key: string): void;
         get(key: string, def: boolean): boolean;
@@ -467,33 +467,33 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         constructor();
     }
     export class $Tags {
-        static block(id: $ResourceLocation_): $TagKey<$Block>;
-        static item(id: $ResourceLocation_): $TagKey<$Item>;
-        static forType<T>(object: T, registry: $Registry<T>): $Stream<$TagKey<T>>;
-        static byBlock(block: $Block_): $Stream<$TagKey<$Block>>;
-        static byItem(item: $Item_): $Stream<$TagKey<$Item>>;
-        static entityType(id: $ResourceLocation_): $TagKey<$EntityType<never>>;
-        static byEntity(entity: $Entity): $Stream<$TagKey<$EntityType<never>>>;
-        static byFluid(fluid: $Fluid_): $Stream<$TagKey<$Fluid>>;
         static byEntityType(entityType: $EntityType_<never>): $Stream<$TagKey<$EntityType<never>>>;
         static byItemStack(stack: $ItemStack_): $Stream<$TagKey<$Item>>;
         static byBlockState(state: $BlockState_): $Stream<$TagKey<$Block>>;
+        static byFluid(fluid: $Fluid_): $Stream<$TagKey<$Fluid>>;
+        static byEntity(entity: $Entity): $Stream<$TagKey<$EntityType<never>>>;
+        static entityType(id: $ResourceLocation_): $TagKey<$EntityType<never>>;
+        static byItem(item: $Item_): $Stream<$TagKey<$Item>>;
+        static byBlock(block: $Block_): $Stream<$TagKey<$Block>>;
+        static forType<T>(object: T, registry: $Registry<T>): $Stream<$TagKey<T>>;
+        static item(id: $ResourceLocation_): $TagKey<$Item>;
+        static block(id: $ResourceLocation_): $TagKey<$Block>;
         static biome(id: $ResourceLocation_): $TagKey<$Biome>;
         static fluid(id: $ResourceLocation_): $TagKey<$Fluid>;
         constructor();
     }
     export class $ModResourceBindings$InvokeBindingProvider extends $Record implements $ModResourceBindings$BindingProvider {
         getValidTypes(): $List<$ScriptType>;
-        or(arg0: $Predicate_<$ScriptType>): $Predicate<$ScriptType>;
         negate(): $Predicate<$ScriptType>;
         and(arg0: $Predicate_<$ScriptType>): $Predicate<$ScriptType>;
+        or(arg0: $Predicate_<$ScriptType>): $Predicate<$ScriptType>;
         test(type: $ScriptType_): boolean;
         get validTypes(): $List<$ScriptType>;
     }
     /**
      * Values that may be interpreted as {@link $ModResourceBindings$InvokeBindingProvider}.
      */
-    export type $ModResourceBindings$InvokeBindingProvider_ = { parent?: $ModResourceBindings$ClassBindingProvider_, methodOrField?: string,  } | [parent?: $ModResourceBindings$ClassBindingProvider_, methodOrField?: string, ];
+    export type $ModResourceBindings$InvokeBindingProvider_ = { methodOrField?: string, parent?: $ModResourceBindings$ClassBindingProvider_,  } | [methodOrField?: string, parent?: $ModResourceBindings$ClassBindingProvider_, ];
     export class $Object2LongEntry implements $Comparable<$Object2LongEntry> {
         compareTo(o: $Object2LongEntry): number;
         value: number;
@@ -513,16 +513,16 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         constructor(code: string);
     }
     export class $JsonUtils {
-        static toString(json: $JsonElement_): string;
-        static of(o: $Object): $JsonElement;
-        static copy(element: $JsonElement_): $JsonElement;
         static objectOf(map: $Object): $JsonObject;
         static primitiveOf(o: $Object): $JsonPrimitive;
         static toPrettyString(json: $JsonElement_): string;
-        static toObject(json: $JsonElement_): $Object;
+        static toString(json: $JsonElement_): string;
+        static of(o: $Object): $JsonElement;
+        static copy(element: $JsonElement_): $JsonElement;
         static arrayOf(array: $Object): $JsonArray;
         static fromString(string: string): $JsonElement;
         static toPrimitive(element: $JsonElement_): $Object;
+        static toObject(json: $JsonElement_): $Object;
         static MAP_LIKE: $MapLike<$JsonElement>;
     }
     export interface $JsonUtils {
@@ -538,22 +538,22 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
     export type $TinyMap$Entry_<K, V> = { key?: any, value?: any,  } | [key?: any, value?: any, ];
     export class $ModResourceBindings$ClassBindingProvider extends $Record implements $ModResourceBindings$BindingProvider {
         getValidTypes(): $List<$ScriptType>;
-        or(arg0: $Predicate_<$ScriptType>): $Predicate<$ScriptType>;
         negate(): $Predicate<$ScriptType>;
         and(arg0: $Predicate_<$ScriptType>): $Predicate<$ScriptType>;
+        or(arg0: $Predicate_<$ScriptType>): $Predicate<$ScriptType>;
         test(type: $ScriptType_): boolean;
         get validTypes(): $List<$ScriptType>;
     }
     /**
      * Values that may be interpreted as {@link $ModResourceBindings$ClassBindingProvider}.
      */
-    export type $ModResourceBindings$ClassBindingProvider_ = { name?: string, className?: string, filter?: $ScriptTypePredicate_,  } | [name?: string, className?: string, filter?: $ScriptTypePredicate_, ];
+    export type $ModResourceBindings$ClassBindingProvider_ = { filter?: $ScriptTypePredicate_, className?: string, name?: string,  } | [filter?: $ScriptTypePredicate_, className?: string, name?: string, ];
     export class $SlotFilter extends $Record {
-        index(): number;
-        static of(ingredient: $Ingredient_, index: number): $SlotFilter;
-        static wrap(o: $Object, target: $TypeInfo_): $SlotFilter;
-        item(): $Ingredient;
         checkFilter(index: number, stack: $ItemStack_): boolean;
+        item(): $Ingredient;
+        index(): number;
+        static wrap(o: $Object, target: $TypeInfo_): $SlotFilter;
+        static of(ingredient: $Ingredient_, index: number): $SlotFilter;
         static CODEC: $Codec<$SlotFilter>;
         static TYPE_INFO: $TypeInfo;
         static EMPTY: $SlotFilter;
@@ -563,7 +563,7 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
     /**
      * Values that may be interpreted as {@link $SlotFilter}.
      */
-    export type $SlotFilter_ = { index?: number, item?: $Ingredient_,  } | [index?: number, item?: $Ingredient_, ];
+    export type $SlotFilter_ = { item?: $Ingredient_, index?: number,  } | [item?: $Ingredient_, index?: number, ];
     export class $AttachedData<T> extends $HashMap<string, $Object> {
         add(key: string, data: $Object): void;
         getParent(): T;
@@ -600,9 +600,9 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
     }
     export class $ModResourceBindings$InstanceBindingProvider extends $Record implements $ModResourceBindings$BindingProvider {
         getValidTypes(): $List<$ScriptType>;
-        or(arg0: $Predicate_<$ScriptType>): $Predicate<$ScriptType>;
         negate(): $Predicate<$ScriptType>;
         and(arg0: $Predicate_<$ScriptType>): $Predicate<$ScriptType>;
+        or(arg0: $Predicate_<$ScriptType>): $Predicate<$ScriptType>;
         test(type: $ScriptType_): boolean;
         get validTypes(): $List<$ScriptType>;
     }
@@ -611,9 +611,9 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
      */
     export type $ModResourceBindings$InstanceBindingProvider_ = { parent?: $ModResourceBindings$ClassBindingProvider_,  } | [parent?: $ModResourceBindings$ClassBindingProvider_, ];
     export class $NBTUtils {
+        static accessTagMap(tag: $CompoundTag_): $Map<string, $Tag>;
         static read(buf: $FriendlyByteBuf): $OrderedCompoundTag;
         static convertType(tagType: $TagType<never>): $TagType<never>;
-        static accessTagMap(tag: $CompoundTag_): $Map<string, $Tag>;
         static toJson(t: $Tag_): $JsonElement;
         static quoteAndEscape(stringBuilder: $StringBuilder, string: string): void;
         static COMPOUND_TYPE: $TagType<$OrderedCompoundTag>;
@@ -622,18 +622,18 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
     export interface $NBTUtils {
     }
     export class $ID {
-        static of(o: $Object, preferKJS: boolean): $ResourceLocation;
-        static url(id: $ResourceLocation_): string;
-        static mc(o: $Object): $ResourceLocation;
-        static read(reader: $StringReader): $DataResult<$ResourceLocation>;
-        static path(s: string): string;
-        static reduce(id: $ResourceLocation_): string;
-        static string(id: string): string;
-        static isKey(from: $Object): boolean;
         static reduceKjs(id: $ResourceLocation_): string;
         static kjsString(id: string): string;
         static kjs(o: $Object): $ResourceLocation;
         static namespace(s: string): string;
+        static isKey(from: $Object): boolean;
+        static of(o: $Object, preferKJS: boolean): $ResourceLocation;
+        static url(id: $ResourceLocation_): string;
+        static read(reader: $StringReader): $DataResult<$ResourceLocation>;
+        static mc(o: $Object): $ResourceLocation;
+        static path(s: string): string;
+        static reduce(id: $ResourceLocation_): string;
+        static string(id: string): string;
         static resourcePath(id: $ResourceLocation_): string;
         static ITEM: $UnaryOperator<string>;
         static PNG_TEXTURE_MCMETA: $UnaryOperator<string>;
@@ -651,20 +651,20 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
     export interface $ID {
     }
     export class $TickTemporalUnit implements $TemporalUnit {
-        between(temporal1Inclusive: $Temporal, temporal2Exclusive: $Temporal): number;
-        isDurationEstimated(): boolean;
         getDuration(): $Duration;
-        addTo<R extends $Temporal>(temporal: R, amount: number): R;
-        isTimeBased(): boolean;
+        isDurationEstimated(): boolean;
         isDateBased(): boolean;
+        isTimeBased(): boolean;
+        addTo<R extends $Temporal>(temporal: R, amount: number): R;
+        between(temporal1Inclusive: $Temporal, temporal2Exclusive: $Temporal): number;
         isSupportedBy(arg0: $Temporal): boolean;
         static INSTANCE: $TickTemporalUnit;
         static DURATION: $Duration;
         constructor();
-        get durationEstimated(): boolean;
         get duration(): $Duration;
-        get timeBased(): boolean;
+        get durationEstimated(): boolean;
         get dateBased(): boolean;
+        get timeBased(): boolean;
     }
     export class $NameProvider<T> {
         static create<K, T>(registry: $Consumer_<$NameProvider$Registry<K, T>>): $Map<K, $NameProvider<T>>;
@@ -704,6 +704,8 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         constructor();
     }
     export class $CountingMap {
+        getValues(): $Collection<number>;
+        getKeys(): $Set<$Object>;
         get(key: $Object): number;
         clear(): void;
         add(key: $Object, value: number): number;
@@ -711,14 +713,12 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         forEach(forEach: $Consumer_<$Object2LongEntry>): void;
         getSize(): number;
         getEntries(): $List<$Object2LongEntry>;
-        getKeys(): $Set<$Object>;
-        getValues(): $Collection<number>;
         getTotalCount(): number;
         constructor();
+        get values(): $Collection<number>;
+        get keys(): $Set<$Object>;
         get size(): number;
         get entries(): $List<$Object2LongEntry>;
-        get keys(): $Set<$Object>;
-        get values(): $Collection<number>;
         get totalCount(): number;
     }
     export class $WithCodec {
@@ -762,8 +762,8 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
     }
     export class $Tristate extends $Enum<$Tristate> implements $StringRepresentable {
         static values(): $Tristate[];
-        test(enabled: boolean): boolean;
         test(enabled: $BooleanSupplier_): boolean;
+        test(enabled: boolean): boolean;
         static valueOf(name: string): $Tristate;
         static wrap(from: $Object): $Tristate;
         getSerializedName(): string;
@@ -791,13 +791,13 @@ declare module "@package/dev/latvian/mods/kubejs/util" {
         constructor(nbt: $DynamicOps<$Tag_>, json: $DynamicOps<$JsonElement_>, java: $DynamicOps<$Object>);
     }
     export class $RegExpKJS {
-        static wrap(o: $Object): $Pattern;
-        static read(reader: $StringReader): $Pattern;
-        static ofString(string: string): $Pattern;
-        static getFlags(f: string): number;
-        static tryRead(reader: $StringReader): $DataResult<$Pattern>;
         static isValidFlag(c: string): boolean;
         static toRegExpString(pattern: $Pattern): string;
+        static ofString(string: string): $Pattern;
+        static tryRead(reader: $StringReader): $DataResult<$Pattern>;
+        static getFlags(f: string): number;
+        static wrap(o: $Object): $Pattern;
+        static read(reader: $StringReader): $Pattern;
         static CODEC: $Codec<$Pattern>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $Pattern>;
     }

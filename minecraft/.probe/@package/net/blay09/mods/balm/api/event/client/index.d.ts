@@ -52,14 +52,14 @@ declare module "@package/net/blay09/mods/balm/api/event/client" {
         get minecraft(): $Minecraft;
     }
     export class $ItemTooltipEvent extends $BalmEvent {
-        getFlags(): $TooltipFlag;
         getToolTip(): $List<$Component>;
         getPlayer(): $Player;
+        getFlags(): $TooltipFlag;
         getItemStack(): $ItemStack;
         constructor(arg0: $ItemStack_, arg1: $Player, arg2: $List_<$Component_>, arg3: $TooltipFlag);
-        get flags(): $TooltipFlag;
         get toolTip(): $List<$Component>;
         get player(): $Player;
+        get flags(): $TooltipFlag;
         get itemStack(): $ItemStack;
     }
     export class $UseItemInputEvent extends $BalmEvent {

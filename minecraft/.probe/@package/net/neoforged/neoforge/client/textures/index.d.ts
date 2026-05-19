@@ -21,10 +21,10 @@ declare module "@package/net/neoforged/neoforge/client/textures" {
         u1: number;
     }
     export class $NamespacedDirectoryLister extends $Record implements $SpriteSource {
-        run(arg0: $ResourceManager, arg1: $SpriteSource$Output): void;
-        type(): $SpriteSourceType;
         idPrefix(): string;
         namespace(): string;
+        run(arg0: $ResourceManager, arg1: $SpriteSource$Output): void;
+        type(): $SpriteSourceType;
         sourcePath(): string;
         static ID: $ResourceLocation;
         static TYPE: $SpriteSourceType;
@@ -33,7 +33,7 @@ declare module "@package/net/neoforged/neoforge/client/textures" {
     /**
      * Values that may be interpreted as {@link $NamespacedDirectoryLister}.
      */
-    export type $NamespacedDirectoryLister_ = { sourcePath?: string, namespace?: string, idPrefix?: string,  } | [sourcePath?: string, namespace?: string, idPrefix?: string, ];
+    export type $NamespacedDirectoryLister_ = { idPrefix?: string, namespace?: string, sourcePath?: string,  } | [idPrefix?: string, namespace?: string, sourcePath?: string, ];
     export class $SpriteContentsConstructor {
     }
     export interface $SpriteContentsConstructor {

@@ -26,7 +26,7 @@ declare module "@package/com/yungnickyoung/minecraft/yungsapi/world/structure/te
     /**
      * Values that may be interpreted as {@link $EnhancedBeardifierRigid}.
      */
-    export type $EnhancedBeardifierRigid_ = { pieceBoundingBox?: $BoundingBox, rotation?: $Rotation_, pieceGroundLevelDelta?: number, pieceTerrainAdaptation?: $EnhancedTerrainAdaptation,  } | [pieceBoundingBox?: $BoundingBox, rotation?: $Rotation_, pieceGroundLevelDelta?: number, pieceTerrainAdaptation?: $EnhancedTerrainAdaptation, ];
+    export type $EnhancedBeardifierRigid_ = { pieceGroundLevelDelta?: number, rotation?: $Rotation_, pieceBoundingBox?: $BoundingBox, pieceTerrainAdaptation?: $EnhancedTerrainAdaptation,  } | [pieceGroundLevelDelta?: number, rotation?: $Rotation_, pieceBoundingBox?: $BoundingBox, pieceTerrainAdaptation?: $EnhancedTerrainAdaptation, ];
     export class $EnhancedBeardifierData {
     }
     export interface $EnhancedBeardifierData {

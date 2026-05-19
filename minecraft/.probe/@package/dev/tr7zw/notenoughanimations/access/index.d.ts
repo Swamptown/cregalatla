@@ -8,8 +8,6 @@ declare module "@package/dev/tr7zw/notenoughanimations/access" {
     }
     export interface $PlayerData {
         getData<T>(arg0: $DataHolder<T>, arg1: $Supplier_<T>): T;
-        isDisableBodyRotation(): boolean;
-        setDisableBodyRotation(arg0: boolean): void;
         setRotateBodyToHead(arg0: boolean): void;
         isUpdated(arg0: number): number;
         setUpdated(arg0: number): void;
@@ -24,6 +22,8 @@ declare module "@package/dev/tr7zw/notenoughanimations/access" {
         getSideSword(): $ItemStack;
         setSideSword(arg0: $ItemStack_): void;
         isRotateBodyToHead(): boolean;
+        isDisableBodyRotation(): boolean;
+        setDisableBodyRotation(arg0: boolean): void;
         get lastHeldItems(): $ItemStack[];
         get lastRotations(): number[];
     }

@@ -3,14 +3,14 @@ import { $LivingEntity } from "@package/net/minecraft/world/entity";
 
 declare module "@package/net/minecraft/world/entity/ai/targeting" {
     export class $TargetingConditions {
+        static forCombat(): $TargetingConditions;
+        ignoreLineOfSight(): $TargetingConditions;
+        ignoreInvisibilityTesting(): $TargetingConditions;
+        static forNonCombat(): $TargetingConditions;
+        selector(arg0: $Predicate_<$LivingEntity>): $TargetingConditions;
         test(arg0: $LivingEntity, arg1: $LivingEntity): boolean;
         copy(): $TargetingConditions;
         range(arg0: number): $TargetingConditions;
-        selector(arg0: $Predicate_<$LivingEntity>): $TargetingConditions;
-        ignoreInvisibilityTesting(): $TargetingConditions;
-        static forNonCombat(): $TargetingConditions;
-        ignoreLineOfSight(): $TargetingConditions;
-        static forCombat(): $TargetingConditions;
         static DEFAULT: $TargetingConditions;
     }
 }

@@ -12,9 +12,9 @@ declare module "@package/foundry/veil/api/client/render/post" {
     export class $PostPipeline$Context {
     }
     export interface $PostPipeline$Context extends $ShaderTextureSource$Context {
-        getFramebufferOrDraw(arg0: $ResourceLocation_): $AdvancedFbo;
         applySamplers(arg0: $TextureUniformAccess): void;
         clearSamplers(arg0: $TextureUniformAccess): void;
+        getFramebufferOrDraw(arg0: $ResourceLocation_): $AdvancedFbo;
         getShader(arg0: $ResourceLocation_): $ShaderProgram;
         setFramebuffer(arg0: $ResourceLocation_, arg1: $AdvancedFbo): void;
         setTexture(arg0: $CharSequence, arg1: number, arg2: number, arg3: number): void;
@@ -26,13 +26,13 @@ declare module "@package/foundry/veil/api/client/render/post" {
         static CODEC: $Codec<$PostPipeline>;
     }
     export interface $PostPipeline extends $UniformAccess, $NativeResource {
+        hasUniformBlock(arg0: $CharSequence): boolean;
+        hasStorageBlock(arg0: $CharSequence): boolean;
+        getUniformSafe(arg0: $CharSequence): $ShaderUniformAccess;
+        getUniformLocation(arg0: $CharSequence): number;
         apply(arg0: $PostPipeline$Context): void;
         getType(): $PostPipelineStageRegistry$PipelineType<$PostPipeline>;
         free(): void;
-        getUniformSafe(arg0: $CharSequence): $ShaderUniformAccess;
-        hasUniformBlock(arg0: $CharSequence): boolean;
-        hasStorageBlock(arg0: $CharSequence): boolean;
-        getUniformLocation(arg0: $CharSequence): number;
         getUniform(arg0: $CharSequence): $ShaderUniformAccess;
         hasUniform(arg0: $CharSequence): boolean;
         setUniformBlock(arg0: $CharSequence, arg1: number): void;

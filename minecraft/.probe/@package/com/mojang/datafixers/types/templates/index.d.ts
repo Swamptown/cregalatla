@@ -10,17 +10,17 @@ import { $RecursiveTypeFamily, $TypeFamily, $TypeFamily_ } from "@package/com/mo
 
 declare module "@package/com/mojang/datafixers/types/templates" {
     export class $RecursivePoint$RecursivePointType<A> extends $Type<A> {
+        family(): $RecursiveTypeFamily;
         index(): number;
         out(): $View<A, A>;
         in(): $View<A, A>;
-        family(): $RecursiveTypeFamily;
         unfold(): $Type<A>;
         constructor(arg0: $RecursiveTypeFamily, arg1: number, arg2: $Supplier_<$Type<A>>);
     }
     export class $TaggedChoice$TaggedChoiceType<K> extends $Type<$Pair<K, never>> {
+        point(arg0: $DynamicOps<never>, arg1: K, arg2: $Object): ($Typed<$Pair<K, never>>) | undefined;
         getName(): string;
         types(): $Map<K, $Type<never>>;
-        point(arg0: $DynamicOps<never>, arg1: K, arg2: $Object): ($Typed<$Pair<K, never>>) | undefined;
         static elementResult<K, FT, FR>(arg0: K, arg1: $TaggedChoice$TaggedChoiceType<K>, arg2: $RewriteResult_<FT, FR>): $RewriteResult<$Pair<K, never>, $Pair<K, never>>;
         getKeyType(): $Type<K>;
         hasType(arg0: K): boolean;

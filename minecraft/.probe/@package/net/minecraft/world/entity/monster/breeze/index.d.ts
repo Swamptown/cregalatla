@@ -30,8 +30,8 @@ import { $Vec3_, $Vec3 } from "@package/net/minecraft/world/phys";
 
 declare module "@package/net/minecraft/world/entity/monster/breeze" {
     export class $Slide extends $Behavior<$Breeze> {
-        start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();
@@ -47,20 +47,20 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         constructor(arg0: number, arg1: number);
     }
     export class $LongJump extends $Behavior<$Breeze> {
+        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
+        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        static canRun(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        tick(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
-        tick(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
-        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
-        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
-        static canRun(arg0: $ServerLevel, arg1: $Breeze): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();
     }
     export class $ShootWhenStuck extends $Behavior<$Breeze> {
-        start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
-        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
         canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
+        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();
@@ -247,12 +247,12 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         get snoutYPosition(): number;
     }
     export class $Shoot extends $Behavior<$Breeze> {
+        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
+        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        static isFacingTarget(arg0: $Breeze, arg1: $LivingEntity): boolean;
+        tick(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
-        tick(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
-        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
-        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
-        static isFacingTarget(arg0: $Breeze, arg1: $LivingEntity): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();

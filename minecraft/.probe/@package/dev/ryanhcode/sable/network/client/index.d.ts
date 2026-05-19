@@ -16,31 +16,31 @@ declare module "@package/dev/ryanhcode/sable/network/client" {
      */
     export type $SubLevelSnapshotInterpolator$Snapshot_ = { gameTick?: number, pose?: $Pose3dc,  } | [gameTick?: number, pose?: $Pose3dc, ];
     export class $SubLevelSnapshotInterpolator {
-        tick(arg0: number): void;
         receiveSnapshot(arg0: number, arg1: $Pose3dc): void;
         setFirstPoses(arg0: $Pose3dc, arg1: $Pose3dc): void;
-        getSampleAt(arg0: number, arg1: $Pose3d): void;
+        tick(arg0: number): void;
         getInterpolatedPose(): $Pose3dc;
         receiveStop(): void;
         splitFrom(arg0: $SubLevelSnapshotInterpolator, arg1: $Pose3dc): void;
+        getSampleAt(arg0: number, arg1: $Pose3d): void;
         buffer: $ObjectArrayList<$SubLevelSnapshotInterpolator$Snapshot>;
         constructor(arg0: $Pose3d);
         get interpolatedPose(): $Pose3dc;
     }
     export class $ClientSableInterpolationState {
-        tick(): void;
         getInterpolationDelay(): number;
         receiveSnapshot(arg0: $ClientSubLevel, arg1: number, arg2: $Pose3dc, arg3: $PacketReceiveMode_): void;
         receiveInfo(arg0: number, arg1: number, arg2: boolean): void;
         addDebugInfo(arg0: $Consumer_<string>): void;
-        isStopped(): boolean;
+        tick(): void;
         getTickPointer(): number;
+        isStopped(): boolean;
         mostRecentInterpolationTick: number;
         static RENDER_INTERPOLATION_BOUNDS: boolean;
         lastInterpolationTick: number;
         constructor();
         get interpolationDelay(): number;
-        get stopped(): boolean;
         get tickPointer(): number;
+        get stopped(): boolean;
     }
 }

@@ -44,10 +44,10 @@ declare module "@package/dev/tr7zw/skinlayers/api" {
         static EMPTY: $Mesh;
     }
     export interface $Mesh {
-        reset(): void;
-        copyFrom(arg0: $ModelPart): void;
         loadPose(arg0: $PartPose): void;
         setRotation(arg0: number, arg1: number, arg2: number): void;
+        reset(): void;
+        copyFrom(arg0: $ModelPart): void;
         render(poseStack: $PoseStack, vertexConsumer: $VertexConsumer, light: number, overlay: number): void;
         render(arg0: $ModelPart, arg1: $PoseStack, arg2: $VertexConsumer, arg3: number, arg4: number, arg5: number): void;
         render(vanillaModel: $ModelPart, poseStack: $PoseStack, vertexConsumer: $VertexConsumer, light: number, overlay: number, red: number, green: number, blue: number, alpha: number): void;

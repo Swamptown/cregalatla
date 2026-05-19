@@ -13,8 +13,8 @@ import { $Vector3f } from "@package/org/joml";
 
 declare module "@package/net/minecraft/core/particles" {
     export class $SculkChargeParticleOptions extends $Record implements $ParticleOptions {
-        getType(): $ParticleType<$SculkChargeParticleOptions>;
         roll(): number;
+        getType(): $ParticleType<$SculkChargeParticleOptions>;
         static CODEC: $MapCodec<$SculkChargeParticleOptions>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $SculkChargeParticleOptions>;
         constructor(arg0: number);
@@ -26,13 +26,13 @@ declare module "@package/net/minecraft/core/particles" {
     export type $SculkChargeParticleOptions_ = { roll?: number,  } | [roll?: number, ];
     export interface $ParticleType<T> extends RegistryMarked<RegistryTypes.ParticleTypeTag, RegistryTypes.ParticleType> {}
     export class $ShriekParticleOption implements $ParticleOptions {
-        getType(): $ParticleType<$ShriekParticleOption>;
         getDelay(): number;
+        getType(): $ParticleType<$ShriekParticleOption>;
         static CODEC: $MapCodec<$ShriekParticleOption>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ShriekParticleOption>;
         constructor(arg0: number);
-        get type(): $ParticleType<$ShriekParticleOption>;
         get delay(): number;
+        get type(): $ParticleType<$ShriekParticleOption>;
     }
     export class $ParticleTypes {
         static SOUL_FIRE_FLAME: $SimpleParticleType;
@@ -149,7 +149,7 @@ declare module "@package/net/minecraft/core/particles" {
         constructor();
     }
     export class $SimpleParticleType extends $ParticleType<$SimpleParticleType> implements $ParticleOptions, $SimpleParticleTypeAccessor {
-        static createSimpleParticleType$platform_$md$d858b6$0(arg0: boolean): $SimpleParticleType;
+        static createSimpleParticleType$platform_$md$4ca6b6$0(arg0: boolean): $SimpleParticleType;
         getType(): $ParticleType<never>;
         constructor(arg0: boolean);
         get type(): $ParticleType<never>;
@@ -167,31 +167,31 @@ declare module "@package/net/minecraft/core/particles" {
         get color(): $Vector3f;
     }
     export class $ColorParticleOption implements $ParticleOptions {
-        getType(): $ParticleType<$ColorParticleOption>;
-        static create(arg0: $ParticleType_<$ColorParticleOption>, arg1: number, arg2: number, arg3: number): $ColorParticleOption;
-        static create(arg0: $ParticleType_<$ColorParticleOption>, arg1: number): $ColorParticleOption;
         getRed(): number;
         getGreen(): number;
         getBlue(): number;
         getAlpha(): number;
         static streamCodec(arg0: $ParticleType_<$ColorParticleOption>): $StreamCodec<$ByteBuf, $ColorParticleOption>;
+        getType(): $ParticleType<$ColorParticleOption>;
+        static create(arg0: $ParticleType_<$ColorParticleOption>, arg1: number, arg2: number, arg3: number): $ColorParticleOption;
+        static create(arg0: $ParticleType_<$ColorParticleOption>, arg1: number): $ColorParticleOption;
         static codec(arg0: $ParticleType_<$ColorParticleOption>): $MapCodec<$ColorParticleOption>;
-        get type(): $ParticleType<$ColorParticleOption>;
         get red(): number;
         get green(): number;
         get blue(): number;
         get alpha(): number;
+        get type(): $ParticleType<$ColorParticleOption>;
     }
     export class $VibrationParticleOption implements $ParticleOptions {
+        getDestination(): $PositionSource;
         getType(): $ParticleType<$VibrationParticleOption>;
         getArrivalInTicks(): number;
-        getDestination(): $PositionSource;
         static CODEC: $MapCodec<$VibrationParticleOption>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $VibrationParticleOption>;
         constructor(arg0: $PositionSource, arg1: number);
+        get destination(): $PositionSource;
         get type(): $ParticleType<$VibrationParticleOption>;
         get arrivalInTicks(): number;
-        get destination(): $PositionSource;
     }
     export class $ParticleGroup {
         getLimit(): number;
@@ -210,9 +210,9 @@ declare module "@package/net/minecraft/core/particles" {
      */
     export type $ParticleOptions_ = string | (() => $ParticleType_<never>);
     export class $BlockParticleOption implements $ParticleOptions {
+        static streamCodec(arg0: $ParticleType_<$BlockParticleOption>): $StreamCodec<$RegistryFriendlyByteBuf, $BlockParticleOption>;
         getState(): $BlockState;
         getType(): $ParticleType<$BlockParticleOption>;
-        static streamCodec(arg0: $ParticleType_<$BlockParticleOption>): $StreamCodec<$RegistryFriendlyByteBuf, $BlockParticleOption>;
         static codec(arg0: $ParticleType_<$BlockParticleOption>): $MapCodec<$BlockParticleOption>;
         setPos(arg0: $BlockPos_): $BlockParticleOption;
         getPos(): $BlockPos;
@@ -229,13 +229,13 @@ declare module "@package/net/minecraft/core/particles" {
         get scale(): number;
     }
     export class $ItemParticleOption implements $ParticleOptions {
-        getType(): $ParticleType<$ItemParticleOption>;
         static streamCodec(arg0: $ParticleType_<$ItemParticleOption>): $StreamCodec<$RegistryFriendlyByteBuf, $ItemParticleOption>;
         getItem(): $ItemStack;
+        getType(): $ParticleType<$ItemParticleOption>;
         static codec(arg0: $ParticleType_<$ItemParticleOption>): $MapCodec<$ItemParticleOption>;
         constructor(arg0: $ParticleType_<$ItemParticleOption>, arg1: $ItemStack_);
-        get type(): $ParticleType<$ItemParticleOption>;
         get item(): $ItemStack;
+        get type(): $ParticleType<$ItemParticleOption>;
     }
     export class $ParticleType<T extends $ParticleOptions> {
         getOverrideLimiter(): boolean;

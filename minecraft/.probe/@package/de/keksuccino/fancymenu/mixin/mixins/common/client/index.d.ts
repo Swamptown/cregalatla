@@ -52,20 +52,20 @@ declare module "@package/de/keksuccino/fancymenu/mixin/mixins/common/client" {
     export class $IMixinCommandSuggestions {
     }
     export interface $IMixinCommandSuggestions {
-        setSuggestionsFancyMenu(arg0: $CommandSuggestions$SuggestionsList): void;
-        invokeUpdateUsageInfoFancyMenu(): void;
-        invokeSortSuggestionsFancyMenu(arg0: $Suggestions): $List<$Suggestion>;
+        getAllowSuggestionsFancyMenu(): boolean;
+        getKeepSuggestionsFancyMenu(): boolean;
         getCurrentParseFancyMenu(): $ParseResults<$SharedSuggestionProvider>;
         setCurrentParseFancyMenu(arg0: $ParseResults<$SharedSuggestionProvider>): void;
         getPendingSuggestionsFancyMenu(): $CompletableFuture<$Suggestions>;
         setPendingSuggestionsFancyMenu(arg0: $CompletableFuture<$Suggestions>): void;
         getCommandUsageFancyMenu(): $List<$FormattedCharSequence>;
         getSuggestionsFancyMenu(): $CommandSuggestions$SuggestionsList;
-        getAllowSuggestionsFancyMenu(): boolean;
-        getKeepSuggestionsFancyMenu(): boolean;
-        get commandUsageFancyMenu(): $List<$FormattedCharSequence>;
+        setSuggestionsFancyMenu(arg0: $CommandSuggestions$SuggestionsList): void;
+        invokeUpdateUsageInfoFancyMenu(): void;
+        invokeSortSuggestionsFancyMenu(arg0: $Suggestions): $List<$Suggestion>;
         get allowSuggestionsFancyMenu(): boolean;
         get keepSuggestionsFancyMenu(): boolean;
+        get commandUsageFancyMenu(): $List<$FormattedCharSequence>;
     }
     export class $IMixinProgressScreen {
     }
@@ -94,10 +94,10 @@ declare module "@package/de/keksuccino/fancymenu/mixin/mixins/common/client" {
     export class $IMixinCompositePackResources {
     }
     export interface $IMixinCompositePackResources {
-        getPackResourcesStack_FancyMenu(): $List<$PackResources>;
         getPrimaryPackResources_FancyMenu(): $PackResources;
-        get packResourcesStack_FancyMenu(): $List<$PackResources>;
+        getPackResourcesStack_FancyMenu(): $List<$PackResources>;
         get primaryPackResources_FancyMenu(): $PackResources;
+        get packResourcesStack_FancyMenu(): $List<$PackResources>;
     }
     export class $IMixinEditBox {
     }
@@ -259,8 +259,8 @@ declare module "@package/de/keksuccino/fancymenu/mixin/mixins/common/client" {
     export class $IMixinSpectatorGui {
     }
     export interface $IMixinSpectatorGui {
-        get_menu_FancyMenu(): $SpectatorMenu;
         invoke_getHotbarAlpha_FancyMenu(): number;
+        get_menu_FancyMenu(): $SpectatorMenu;
         get _menu_FancyMenu(): $SpectatorMenu;
     }
     export class $IMixinConnectScreen {

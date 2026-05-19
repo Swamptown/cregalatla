@@ -7,25 +7,25 @@ import { $ByteBuffer } from "@package/java/nio";
 
 declare module "@package/dev/latvian/apps/tinyserver/ws" {
     export class $FrameInfo extends $Record {
-        size(): number;
-        put(buf: $ByteBuffer): void;
-        bytes(): number;
-        mask(): boolean;
-        static read(connection: $HTTPConnection<any>): $FrameInfo;
-        opcode(): $Opcode;
         rsv1(): boolean;
         rsv2(): boolean;
         rsv3(): boolean;
         maskKey(): number;
         applyMask(payload: number[]): void;
         maskZero(): boolean;
+        size(): number;
+        put(buf: $ByteBuffer): void;
+        bytes(): number;
+        static read(connection: $HTTPConnection<any>): $FrameInfo;
+        mask(): boolean;
+        opcode(): $Opcode;
         fin(): boolean;
         constructor(opcode: $Opcode_, mask: boolean, fin: boolean, rsv1: boolean, rsv2: boolean, rsv3: boolean, maskKey: number, size: number);
     }
     /**
      * Values that may be interpreted as {@link $FrameInfo}.
      */
-    export type $FrameInfo_ = { fin?: boolean, rsv1?: boolean, rsv2?: boolean, rsv3?: boolean, opcode?: $Opcode_, mask?: boolean, size?: number, maskKey?: number,  } | [fin?: boolean, rsv1?: boolean, rsv2?: boolean, rsv3?: boolean, opcode?: $Opcode_, mask?: boolean, size?: number, maskKey?: number, ];
+    export type $FrameInfo_ = { maskKey?: number, size?: number, mask?: boolean, opcode?: $Opcode_, rsv3?: boolean, rsv2?: boolean, rsv1?: boolean, fin?: boolean,  } | [maskKey?: number, size?: number, mask?: boolean, opcode?: $Opcode_, rsv3?: boolean, rsv2?: boolean, rsv1?: boolean, fin?: boolean, ];
     export class $WSSessionFactory<REQ extends $HTTPRequest, WSS extends $WSSession<REQ>> {
         static DEFAULT: $WSSessionFactory<$HTTPRequest, $WSSession<$HTTPRequest>>;
     }
@@ -37,20 +37,20 @@ declare module "@package/dev/latvian/apps/tinyserver/ws" {
      */
     export type $WSSessionFactory_<REQ, WSS> = (() => WSS);
     export class $Frame extends $Record {
+        applyMask(): void;
+        static ping(buffer: number[]): $Frame;
+        static binary(buffer: number[]): $Frame;
+        static text(text: string): $Frame;
         payload(): number[];
         info(): $FrameInfo;
-        static text(text: string): $Frame;
-        static ping(buffer: number[]): $Frame;
-        applyMask(): void;
-        static simple(opcode: $Opcode_, mask: number, payload: number[]): $Frame;
-        static binary(buffer: number[]): $Frame;
         appendTo(previous: $Frame_): $Frame;
+        static simple(opcode: $Opcode_, mask: number, payload: number[]): $Frame;
         constructor(info: $FrameInfo_, payload: number[]);
     }
     /**
      * Values that may be interpreted as {@link $Frame}.
      */
-    export type $Frame_ = { payload?: number[], info?: $FrameInfo_,  } | [payload?: number[], info?: $FrameInfo_, ];
+    export type $Frame_ = { info?: $FrameInfo_, payload?: number[],  } | [info?: $FrameInfo_, payload?: number[], ];
     export class $WSCloseStatus extends $Enum<$WSCloseStatus> {
         static values(): $WSCloseStatus[];
         static valueOf(name: string): $WSCloseStatus;
@@ -65,19 +65,19 @@ declare module "@package/dev/latvian/apps/tinyserver/ws" {
      */
     export type $WSCloseStatus_ = "closed" | "going_away" | "protocol_error" | "unsupported_data";
     export class $WSSession<REQ extends $HTTPRequest> implements $HTTPUpgrade<REQ> {
-        id(): $UUID;
-        start(req: REQ): void;
-        close(status: $WSCloseStatus_, reason: string): void;
-        protocol(): string;
-        onClose(reason: $StatusCode_, remote: boolean): void;
+        onBinaryMessage(message: number[]): void;
+        onOpen(req: REQ): void;
         onTextMessage(message: string): void;
         sendText(payload: string): void;
         sendBinary(payload: number[]): void;
         sendPing(payload: number[]): void;
-        onBinaryMessage(message: number[]): void;
         onPing(payload: number[]): void;
         onPong(payload: number[]): void;
-        onOpen(req: REQ): void;
+        onClose(reason: $StatusCode_, remote: boolean): void;
+        id(): $UUID;
+        start(req: REQ): void;
+        close(status: $WSCloseStatus_, reason: string): void;
+        protocol(): string;
         isClosed(): boolean;
         send(frame: $Frame_): void;
         onError(error: $Throwable): void;
@@ -105,16 +105,16 @@ declare module "@package/dev/latvian/apps/tinyserver/ws" {
         [Symbol.iterator](): Iterator<WSS>
     }
     export interface $WSHandler<REQ extends $HTTPRequest, WSS extends $WSSession<REQ>> extends $Iterable<WSS> {
+        broadcastText(payload: string): void;
+        broadcastText(payload: $Supplier_<string>): void;
+        broadcastBinary(payload: number[]): void;
+        broadcastBinary(payload: $Supplier_<number[]>): void;
+        broadcastPing(payload: number[]): void;
+        broadcastPing(payload: $Supplier_<number[]>): void;
+        sessions(): $Map<$UUID, WSS>;
         iterator(): $Iterator<WSS>;
         spliterator(): $Spliterator<WSS>;
         broadcast(frame: $Frame_): void;
-        sessions(): $Map<$UUID, WSS>;
-        broadcastText(payload: $Supplier_<string>): void;
-        broadcastText(payload: string): void;
-        broadcastBinary(payload: $Supplier_<number[]>): void;
-        broadcastBinary(payload: number[]): void;
-        broadcastPing(payload: number[]): void;
-        broadcastPing(payload: $Supplier_<number[]>): void;
         [Symbol.iterator](): Iterator<WSS>
     }
     /**

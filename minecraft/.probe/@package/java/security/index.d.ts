@@ -11,7 +11,7 @@ export * as spec from "@package/java/security/spec";
 export * as cert from "@package/java/security/cert";
 
 declare module "@package/java/security" {
-    export class $KeyPair implements $Serializable, $DEREncodable {
+    export class $KeyPair implements $Serializable {
         getPrivate(): $PrivateKey;
         getPublic(): $PublicKey;
         constructor(arg0: $PublicKey, arg1: $PrivateKey);
@@ -29,54 +29,50 @@ declare module "@package/java/security" {
         get name(): string;
     }
     export class $Signature extends $SignatureSpi {
-        update(arg0: number[]): void;
-        update(arg0: number[], arg1: number, arg2: number): void;
-        update(arg0: number): void;
-        update(arg0: $ByteBuffer): void;
-        static getInstance(arg0: string): $Signature;
-        static getInstance(arg0: string, arg1: string): $Signature;
-        static getInstance(arg0: string, arg1: $Provider): $Signature;
-        getParameters(): $AlgorithmParameters;
-        sign(arg0: number[], arg1: number, arg2: number): number;
-        sign(): number[];
-        verify(arg0: number[]): boolean;
-        verify(arg0: number[], arg1: number, arg2: number): boolean;
-        getProvider(): $Provider;
-        getAlgorithm(): string;
-        initVerify(arg0: $Certificate): void;
-        initVerify(arg0: $PublicKey): void;
-        initSign(arg0: $PrivateKey, arg1: $SecureRandom): void;
-        initSign(arg0: $PrivateKey): void;
         setParameter(arg0: $AlgorithmParameterSpec): void;
         /**
          * @deprecated
          */
         setParameter(arg0: string, arg1: $Object): void;
+        initVerify(arg0: $Certificate): void;
+        initVerify(arg0: $PublicKey): void;
+        initSign(arg0: $PrivateKey): void;
+        initSign(arg0: $PrivateKey, arg1: $SecureRandom): void;
+        getProvider(): $Provider;
+        verify(arg0: number[], arg1: number, arg2: number): boolean;
+        verify(arg0: number[]): boolean;
+        update(arg0: number[]): void;
+        update(arg0: number[], arg1: number, arg2: number): void;
+        update(arg0: $ByteBuffer): void;
+        update(arg0: number): void;
+        static getInstance(arg0: string, arg1: $Provider): $Signature;
+        static getInstance(arg0: string): $Signature;
+        static getInstance(arg0: string, arg1: string): $Signature;
+        getParameters(): $AlgorithmParameters;
+        sign(arg0: number[], arg1: number, arg2: number): number;
+        sign(): number[];
+        getAlgorithm(): string;
         /**
          * @deprecated
          */
         getParameter(arg0: string): $Object;
-        get parameters(): $AlgorithmParameters;
         get provider(): $Provider;
+        get parameters(): $AlgorithmParameters;
         get algorithm(): string;
-    }
-    export class $DEREncodable {
-    }
-    export interface $DEREncodable {
     }
     export class $ProtectionDomain {
         getClassLoader(): $ClassLoader;
         getCodeSource(): $CodeSource;
         implies(arg0: $Permission): boolean;
-        getPrincipals(): $Principal[];
         getPermissions(): $PermissionCollection;
+        getPrincipals(): $Principal[];
         staticPermissionsOnly(): boolean;
         constructor(arg0: $CodeSource, arg1: $PermissionCollection);
         constructor(arg0: $CodeSource, arg1: $PermissionCollection, arg2: $ClassLoader, arg3: $Principal[]);
         get classLoader(): $ClassLoader;
         get codeSource(): $CodeSource;
-        get principals(): $Principal[];
         get permissions(): $PermissionCollection;
+        get principals(): $Principal[];
     }
     export class $SignatureSpi {
         clone(): $Object;
@@ -123,47 +119,47 @@ declare module "@package/java/security" {
      */
     export type $PrivilegedAction_<T> = (() => T);
     export class $Provider extends $Properties {
-        getName(): string;
-        /**
-         * @deprecated
-         */
-        getVersion(): number;
-        getService(arg0: string, arg1: string): $Provider$Service;
-        getServices(): $Set<$Provider$Service>;
         configure(arg0: string): $Provider;
         isConfigured(): boolean;
         getVersionStr(): string;
         getInfo(): string;
-        get name(): string;
-        get version(): number;
-        get services(): $Set<$Provider$Service>;
+        getService(arg0: string, arg1: string): $Provider$Service;
+        getServices(): $Set<$Provider$Service>;
+        /**
+         * @deprecated
+         */
+        getVersion(): number;
+        getName(): string;
         get configured(): boolean;
         get versionStr(): string;
         get info(): string;
+        get services(): $Set<$Provider$Service>;
+        get version(): number;
+        get name(): string;
     }
     export class $SecureRandom extends $Random {
-        static getInstance(arg0: string, arg1: $SecureRandomParameters, arg2: $Provider): $SecureRandom;
-        static getInstance(arg0: string, arg1: $SecureRandomParameters, arg2: string): $SecureRandom;
+        setSeed(arg0: number[]): void;
+        generateSeed(arg0: number): number[];
+        static getSeed(arg0: number): number[];
+        static getInstanceStrong(): $SecureRandom;
+        reseed(): void;
+        reseed(arg0: $SecureRandomParameters): void;
+        getProvider(): $Provider;
+        nextBytes(arg0: number[], arg1: $SecureRandomParameters): void;
         static getInstance(arg0: string, arg1: $SecureRandomParameters): $SecureRandom;
         static getInstance(arg0: string, arg1: $Provider): $SecureRandom;
         static getInstance(arg0: string, arg1: string): $SecureRandom;
         static getInstance(arg0: string): $SecureRandom;
+        static getInstance(arg0: string, arg1: $SecureRandomParameters, arg2: string): $SecureRandom;
+        static getInstance(arg0: string, arg1: $SecureRandomParameters, arg2: $Provider): $SecureRandom;
         getParameters(): $SecureRandomParameters;
-        nextBytes(arg0: number[], arg1: $SecureRandomParameters): void;
-        getProvider(): $Provider;
-        setSeed(arg0: number[]): void;
-        static getSeed(arg0: number): number[];
         getAlgorithm(): string;
-        generateSeed(arg0: number): number[];
-        static getInstanceStrong(): $SecureRandom;
-        reseed(arg0: $SecureRandomParameters): void;
-        reseed(): void;
         constructor(arg0: number[]);
         constructor();
-        get parameters(): $SecureRandomParameters;
-        get provider(): $Provider;
-        get algorithm(): string;
         static get instanceStrong(): $SecureRandom;
+        get provider(): $Provider;
+        get parameters(): $SecureRandomParameters;
+        get algorithm(): string;
     }
     export class $PrivateKey {
         /**
@@ -171,7 +167,7 @@ declare module "@package/java/security" {
          */
         static serialVersionUID: number;
     }
-    export interface $PrivateKey extends $AsymmetricKey, $Destroyable {
+    export interface $PrivateKey extends $Key, $Destroyable {
     }
     export class $Guard {
     }
@@ -188,69 +184,63 @@ declare module "@package/java/security" {
          */
         static serialVersionUID: number;
     }
-    export interface $PublicKey extends $AsymmetricKey {
+    export interface $PublicKey extends $Key {
     }
     export class $Provider$Service {
+        supportsParameter(arg0: $Object): boolean;
+        getProvider(): $Provider;
+        getAttribute(arg0: string): string;
         newInstance(arg0: $Object): $Object;
         getType(): string;
         getClassName(): string;
-        getAttribute(arg0: string): string;
-        getProvider(): $Provider;
         getAlgorithm(): string;
-        supportsParameter(arg0: $Object): boolean;
         constructor(arg0: $Provider, arg1: string, arg2: string, arg3: string, arg4: $List_<string>, arg5: $Map_<string, string>);
+        get provider(): $Provider;
         get type(): string;
         get className(): string;
-        get provider(): $Provider;
         get algorithm(): string;
     }
     /**
      * @deprecated
      */
     export class $AccessControlContext {
-        getDomainCombiner(): $DomainCombiner;
         checkPermission(arg0: $Permission): void;
-        constructor(arg0: $ProtectionDomain[]);
+        getDomainCombiner(): $DomainCombiner;
         constructor(arg0: $AccessControlContext, arg1: $DomainCombiner);
+        constructor(arg0: $ProtectionDomain[]);
         get domainCombiner(): $DomainCombiner;
     }
     export class $PermissionCollection implements $Serializable {
+        elementsAsStream(): $Stream<$Permission>;
         add(arg0: $Permission): void;
         elements(): $Enumeration<$Permission>;
         setReadOnly(): void;
         implies(arg0: $Permission): boolean;
         isReadOnly(): boolean;
-        elementsAsStream(): $Stream<$Permission>;
         constructor();
     }
     export class $Permission implements $Guard, $Serializable {
+        newPermissionCollection(): $PermissionCollection;
+        checkGuard(arg0: $Object): void;
         getName(): string;
         implies(arg0: $Permission): boolean;
-        newPermissionCollection(): $PermissionCollection;
         getActions(): string;
-        checkGuard(arg0: $Object): void;
         constructor(arg0: string);
         get name(): string;
         get actions(): string;
     }
-    export class $AsymmetricKey {
-    }
-    export interface $AsymmetricKey extends $Key, $DEREncodable {
-        getParams(): $AlgorithmParameterSpec;
-        get params(): $AlgorithmParameterSpec;
-    }
     export class $AlgorithmParameters {
-        static getInstance(arg0: string, arg1: $Provider): $AlgorithmParameters;
-        static getInstance(arg0: string, arg1: string): $AlgorithmParameters;
-        static getInstance(arg0: string): $AlgorithmParameters;
-        init(arg0: number[]): void;
-        init(arg0: number[], arg1: string): void;
-        init(arg0: $AlgorithmParameterSpec): void;
-        getEncoded(): number[];
-        getEncoded(arg0: string): number[];
-        getProvider(): $Provider;
-        getAlgorithm(): string;
         getParameterSpec<T extends $AlgorithmParameterSpec>(arg0: $Class<T>): T;
+        getProvider(): $Provider;
+        static getInstance(arg0: string): $AlgorithmParameters;
+        static getInstance(arg0: string, arg1: string): $AlgorithmParameters;
+        static getInstance(arg0: string, arg1: $Provider): $AlgorithmParameters;
+        init(arg0: $AlgorithmParameterSpec): void;
+        init(arg0: number[], arg1: string): void;
+        init(arg0: number[]): void;
+        getEncoded(arg0: string): number[];
+        getEncoded(): number[];
+        getAlgorithm(): string;
         get provider(): $Provider;
         get algorithm(): string;
     }
@@ -261,11 +251,11 @@ declare module "@package/java/security" {
         static serialVersionUID: number;
     }
     export interface $Key extends $Serializable {
-        getEncoded(): number[];
         getFormat(): string;
+        getEncoded(): number[];
         getAlgorithm(): string;
-        get encoded(): number[];
         get format(): string;
+        get encoded(): number[];
         get algorithm(): string;
     }
     export class $Timestamp implements $Serializable {

@@ -35,8 +35,6 @@ declare module "@package/net/minecraft/server/packs" {
         getResource(arg0: $PackType_, arg1: $ResourceLocation_): $IoSupplier<$InputStream>;
         location(): $PackLocationInfo;
         close(): void;
-        getRootResource(...arg0: string[]): $IoSupplier<$InputStream>;
-        getMetadataSection<T>(arg0: $MetadataSectionSerializer<T>): T;
         listResources(arg0: $PackType_, arg1: string, arg2: string, arg3: $PackResources$ResourceOutput_): void;
         getNamespaces(arg0: $PackType_): $Set<string>;
         asProvider(): $ResourceProvider;
@@ -46,6 +44,8 @@ declare module "@package/net/minecraft/server/packs" {
         veil$getRawResourceRoots(): $List<any>;
         veil$getIcon(): $IoSupplier<any>;
         veil$blurIcon(): boolean;
+        getRootResource(...arg0: string[]): $IoSupplier<$InputStream>;
+        getMetadataSection<T>(arg0: $MetadataSectionSerializer<T>): T;
         knownPackInfo(): ($KnownPack) | undefined;
         packId(): string;
         veil$listPacks(): $Stream<$PackResources>;
@@ -67,7 +67,7 @@ declare module "@package/net/minecraft/server/packs" {
     /**
      * Values that may be interpreted as {@link $DownloadQueue$LogEntry}.
      */
-    export type $DownloadQueue$LogEntry_ = { id?: $UUID_, url?: string, hash?: (string) | undefined, time?: $Instant, errorOrFileInfo?: $Either<string, $DownloadQueue$FileInfoEntry_>,  } | [id?: $UUID_, url?: string, hash?: (string) | undefined, time?: $Instant, errorOrFileInfo?: $Either<string, $DownloadQueue$FileInfoEntry_>, ];
+    export type $DownloadQueue$LogEntry_ = { time?: $Instant, hash?: (string) | undefined, url?: string, id?: $UUID_, errorOrFileInfo?: $Either<string, $DownloadQueue$FileInfoEntry_>,  } | [time?: $Instant, hash?: (string) | undefined, url?: string, id?: $UUID_, errorOrFileInfo?: $Either<string, $DownloadQueue$FileInfoEntry_>, ];
     export class $DownloadCacheCleaner$PathAndTime extends $Record {
     }
     /**
@@ -109,21 +109,21 @@ declare module "@package/net/minecraft/server/packs" {
         getResource(arg0: $PackType_, arg1: $ResourceLocation_): $IoSupplier<$InputStream>;
         location(): $PackLocationInfo;
         close(): void;
-        getRootResource(...arg0: string[]): $IoSupplier<$InputStream>;
-        getMetadataSection<T>(arg0: $MetadataSectionSerializer<T>): T;
         listResources(arg0: $PackType_, arg1: string, arg2: string, arg3: $PackResources$ResourceOutput_): void;
         getNamespaces(arg0: $PackType_): $Set<string>;
         setFusionOverridesFolder(folder: string): void;
+        getRootResource(...arg0: string[]): $IoSupplier<$InputStream>;
+        getMetadataSection<T>(arg0: $MetadataSectionSerializer<T>): T;
         knownPackInfo(): ($KnownPack) | undefined;
         packId(): string;
         isHidden(): boolean;
-        getPackResourcesStack_FancyMenu(): $List<$PackResources>;
         getPrimaryPackResources_FancyMenu(): $PackResources;
+        getPackResourcesStack_FancyMenu(): $List<$PackResources>;
         constructor(arg0: $PackResources, arg1: $List_<$PackResources>);
         set fusionOverridesFolder(value: string);
         get hidden(): boolean;
-        get packResourcesStack_FancyMenu(): $List<$PackResources>;
         get primaryPackResources_FancyMenu(): $PackResources;
+        get packResourcesStack_FancyMenu(): $List<$PackResources>;
     }
     export class $FeatureFlagsMetadataSection extends $Record {
         flags(): $FeatureFlagSet;
@@ -149,15 +149,15 @@ declare module "@package/net/minecraft/server/packs" {
         static METADATA_EXTENSION: string;
     }
     export interface $PackResources extends $AutoCloseable, $IPackResourcesExtension {
+        knownPackInfo(): ($KnownPack) | undefined;
         getResource(arg0: $PackType_, arg1: $ResourceLocation_): $IoSupplier<$InputStream>;
         location(): $PackLocationInfo;
         close(): void;
-        knownPackInfo(): ($KnownPack) | undefined;
-        getRootResource(...arg0: string[]): $IoSupplier<$InputStream>;
-        getMetadataSection<T>(arg0: $MetadataSectionSerializer<T>): T;
+        packId(): string;
         listResources(arg0: $PackType_, arg1: string, arg2: string, arg3: $PackResources$ResourceOutput_): void;
         getNamespaces(arg0: $PackType_): $Set<string>;
-        packId(): string;
+        getRootResource(...arg0: string[]): $IoSupplier<$InputStream>;
+        getMetadataSection<T>(arg0: $MetadataSectionSerializer<T>): T;
     }
     export class $FilePackResources extends $AbstractPackResources implements $PackResourcesExtension$1, $IMixinFilePackResources {
         setFusionOverridesFolder(folder: string): void;
@@ -188,9 +188,9 @@ declare module "@package/net/minecraft/server/packs" {
      */
     export type $OverlayMetadataSection_ = { overlays?: $List_<$OverlayMetadataSection$OverlayEntry_>,  } | [overlays?: $List_<$OverlayMetadataSection$OverlayEntry_>, ];
     export class $DownloadQueue$BatchConfig extends $Record {
+        listener(): $HttpUtil$DownloadProgressListener;
         maxSize(): number;
         proxy(): $Proxy;
-        listener(): $HttpUtil$DownloadProgressListener;
         headers(): $Map<string, string>;
         hashFunction(): $HashFunction;
         constructor(arg0: $HashFunction, arg1: number, arg2: $Map_<string, string>, arg3: $Proxy, arg4: $HttpUtil$DownloadProgressListener);
@@ -198,11 +198,11 @@ declare module "@package/net/minecraft/server/packs" {
     /**
      * Values that may be interpreted as {@link $DownloadQueue$BatchConfig}.
      */
-    export type $DownloadQueue$BatchConfig_ = { listener?: $HttpUtil$DownloadProgressListener, proxy?: $Proxy, maxSize?: number, headers?: $Map_<string, string>, hashFunction?: $HashFunction,  } | [listener?: $HttpUtil$DownloadProgressListener, proxy?: $Proxy, maxSize?: number, headers?: $Map_<string, string>, hashFunction?: $HashFunction, ];
+    export type $DownloadQueue$BatchConfig_ = { hashFunction?: $HashFunction, headers?: $Map_<string, string>, maxSize?: number, proxy?: $Proxy, listener?: $HttpUtil$DownloadProgressListener,  } | [hashFunction?: $HashFunction, headers?: $Map_<string, string>, maxSize?: number, proxy?: $Proxy, listener?: $HttpUtil$DownloadProgressListener, ];
     export class $PackLocationInfo extends $Record {
+        knownPackInfo(): ($KnownPack) | undefined;
         id(): string;
         source(): $PackSource;
-        knownPackInfo(): ($KnownPack) | undefined;
         title(): $Component;
         createChatLink(arg0: boolean, arg1: $Component_): $Component;
         constructor(arg0: string, arg1: $Component_, arg2: $PackSource, arg3: ($KnownPack_) | undefined);
@@ -210,7 +210,7 @@ declare module "@package/net/minecraft/server/packs" {
     /**
      * Values that may be interpreted as {@link $PackLocationInfo}.
      */
-    export type $PackLocationInfo_ = { id?: string, source?: $PackSource, title?: $Component_, knownPackInfo?: ($KnownPack_) | undefined,  } | [id?: string, source?: $PackSource, title?: $Component_, knownPackInfo?: ($KnownPack_) | undefined, ];
+    export type $PackLocationInfo_ = { title?: $Component_, source?: $PackSource, id?: string, knownPackInfo?: ($KnownPack_) | undefined,  } | [title?: $Component_, source?: $PackSource, id?: string, knownPackInfo?: ($KnownPack_) | undefined, ];
     export class $VanillaPackResourcesBuilder {
         build(arg0: $PackLocationInfo_): $VanillaPackResources;
         setMetadata(arg0: $BuiltInMetadata): $VanillaPackResourcesBuilder;
@@ -225,8 +225,8 @@ declare module "@package/net/minecraft/server/packs" {
         set metadata(value: $BuiltInMetadata);
     }
     export class $PathPackResources extends $AbstractPackResources implements $PackResources, $PackResourcesExtension, $PackResourcesExtension$1, $IMixinPathPackResources, $ICachingResourcePack {
-        static getResource(arg0: $ResourceLocation_, arg1: $Path_): $IoSupplier<$InputStream>;
         invalidateCache(): void;
+        static getResource(arg0: $ResourceLocation_, arg1: $Path_): $IoSupplier<$InputStream>;
         static validatePath(arg0: $Path_): boolean;
         static listPath(arg0: string, arg1: $Path_, arg2: $List_<string>, arg3: $PackResources$ResourceOutput_): void;
         veil$listResources(arg0: $PackResourcesExtension$PackResourceConsumer_): void;
@@ -256,7 +256,7 @@ declare module "@package/net/minecraft/server/packs" {
     /**
      * Values that may be interpreted as {@link $DownloadQueue$DownloadRequest}.
      */
-    export type $DownloadQueue$DownloadRequest_ = { hash?: $HashCode, url?: $URL,  } | [hash?: $HashCode, url?: $URL, ];
+    export type $DownloadQueue$DownloadRequest_ = { url?: $URL, hash?: $HashCode,  } | [url?: $URL, hash?: $HashCode, ];
     export class $PackResources$ResourceOutput {
     }
     export interface $PackResources$ResourceOutput extends $BiConsumer<$ResourceLocation, $IoSupplier<$InputStream>> {
@@ -283,8 +283,8 @@ declare module "@package/net/minecraft/server/packs" {
     export type $PackType_ = "client_resources" | "server_data";
     export class $AbstractPackResources implements $PackResources {
         location(): $PackLocationInfo;
-        getMetadataSection<T>(arg0: $MetadataSectionSerializer<T>): T;
         static getMetadataFromStream<T>(arg0: $MetadataSectionSerializer<T>, arg1: $InputStream): T;
+        getMetadataSection<T>(arg0: $MetadataSectionSerializer<T>): T;
         knownPackInfo(): ($KnownPack) | undefined;
         packId(): string;
         isHidden(): boolean;
@@ -300,10 +300,10 @@ declare module "@package/net/minecraft/server/packs" {
     /**
      * Values that may be interpreted as {@link $PackSelectionConfig}.
      */
-    export type $PackSelectionConfig_ = { defaultPosition?: $Pack$Position_, fixedPosition?: boolean, required?: boolean,  } | [defaultPosition?: $Pack$Position_, fixedPosition?: boolean, required?: boolean, ];
+    export type $PackSelectionConfig_ = { required?: boolean, fixedPosition?: boolean, defaultPosition?: $Pack$Position_,  } | [required?: boolean, fixedPosition?: boolean, defaultPosition?: $Pack$Position_, ];
     export class $OverlayMetadataSection$OverlayEntry extends $Record {
-        format(): $InclusiveRange<number>;
         isApplicable(arg0: number): boolean;
+        format(): $InclusiveRange<number>;
         overlay(): string;
         static CODEC: $Codec<$OverlayMetadataSection$OverlayEntry>;
         constructor(format: $InclusiveRange_<number>, overlay: string);
@@ -311,5 +311,5 @@ declare module "@package/net/minecraft/server/packs" {
     /**
      * Values that may be interpreted as {@link $OverlayMetadataSection$OverlayEntry}.
      */
-    export type $OverlayMetadataSection$OverlayEntry_ = { format?: $InclusiveRange_<number>, overlay?: string,  } | [format?: $InclusiveRange_<number>, overlay?: string, ];
+    export type $OverlayMetadataSection$OverlayEntry_ = { overlay?: string, format?: $InclusiveRange_<number>,  } | [overlay?: string, format?: $InclusiveRange_<number>, ];
 }

@@ -11,8 +11,8 @@ declare module "@package/team/unnamed/mocha/parser/ast" {
         constructor(arg0: string);
     }
     export class $StatementExpression implements $Expression {
-        op(): $StatementExpression$Op;
         write(arg0: $ByteBuf): void;
+        op(): $StatementExpression$Op;
         visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: $StatementExpression$Op_);
@@ -30,16 +30,16 @@ declare module "@package/team/unnamed/mocha/parser/ast" {
     export class $ExpressionVisitor<R> {
     }
     export interface $ExpressionVisitor<R> {
-        visit(arg0: $Expression): R;
         visitArrayAccess(arg0: $ArrayAccessExpression): R;
         visitIdentifier(arg0: $IdentifierExpression): R;
         visitTernaryConditional(arg0: $TernaryConditionalExpression): R;
         visitExecutionScope(arg0: $ExecutionScopeExpression): R;
         visitBinary(arg0: $BinaryExpression): R;
         visitAccess(arg0: $AccessExpression): R;
+        visitUnary(arg0: $UnaryExpression): R;
         visitStatement(arg0: $StatementExpression): R;
         visitCall(arg0: $CallExpression): R;
-        visitUnary(arg0: $UnaryExpression): R;
+        visit(arg0: $Expression): R;
         visitString(arg0: $StringExpression): R;
         visitFloat(arg0: $FloatExpression): R;
     }
@@ -80,8 +80,8 @@ declare module "@package/team/unnamed/mocha/parser/ast" {
      */
     export type $BinaryExpression$Op_ = "and" | "or" | "lt" | "lte" | "gt" | "gte" | "add" | "sub" | "mul" | "div" | "arrow" | "null_coalesce" | "assign" | "conditional" | "eq" | "neq";
     export class $BinaryExpression implements $Expression {
-        op(): $BinaryExpression$Op;
         write(arg0: $ByteBuf): void;
+        op(): $BinaryExpression$Op;
         left(): $Expression;
         left(arg0: $Expression): void;
         right(arg0: $Expression): void;
@@ -102,29 +102,29 @@ declare module "@package/team/unnamed/mocha/parser/ast" {
      */
     export type $UnaryExpression$Op_ = "logical_negation" | "arithmetical_negation" | "return";
     export class $AccessExpression implements $Expression {
+        object(arg0: $Expression): void;
+        object(): $Expression;
         write(arg0: $ByteBuf): void;
         property(): string;
-        object(): $Expression;
-        object(arg0: $Expression): void;
         visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: $Expression, arg1: string);
     }
     export class $TernaryConditionalExpression implements $Expression {
-        write(arg0: $ByteBuf): void;
-        condition(arg0: $Expression): void;
-        condition(): $Expression;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
-        trueExpression(arg0: $Expression): void;
         trueExpression(): $Expression;
-        falseExpression(arg0: $Expression): void;
+        trueExpression(arg0: $Expression): void;
         falseExpression(): $Expression;
+        falseExpression(arg0: $Expression): void;
+        write(arg0: $ByteBuf): void;
+        condition(): $Expression;
+        condition(arg0: $Expression): void;
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: $Expression, arg1: $Expression, arg2: $Expression);
     }
     export class $UnaryExpression implements $Expression {
-        op(): $UnaryExpression$Op;
         write(arg0: $ByteBuf): void;
+        op(): $UnaryExpression$Op;
         visit<R>(arg0: $ExpressionVisitor_<R>): R;
         expression(arg0: $Expression): void;
         expression(): $Expression;

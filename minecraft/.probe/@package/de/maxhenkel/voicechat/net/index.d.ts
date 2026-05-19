@@ -8,30 +8,30 @@ import { $ClientboundCustomPayloadPacket, $ServerboundCustomPayloadPacket } from
 
 declare module "@package/de/maxhenkel/voicechat/net" {
     export class $SecretPacket implements $Packet<$SecretPacket> {
-        type(): $CustomPacketPayload$Type<$SecretPacket>;
-        toBytes(arg0: $FriendlyByteBuf): void;
+        getMtuSize(): number;
         getVoiceHost(): string;
         getServerPort(): number;
-        getMtuSize(): number;
+        getPlayerUUID(): $UUID;
         getSecret(): $Secret;
         getVoiceChatDistance(): number;
         allowRecording(): boolean;
         groupsEnabled(): boolean;
-        getPlayerUUID(): $UUID;
         getKeepAlive(): number;
+        type(): $CustomPacketPayload$Type<$SecretPacket>;
+        toBytes(arg0: $FriendlyByteBuf): void;
         getCodec(): $ServerConfig$Codec;
-        fromBytes(arg0: $FriendlyByteBuf): $SecretPacket;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
+        fromBytes(arg0: $FriendlyByteBuf): $SecretPacket;
         static SECRET: $CustomPacketPayload$Type<$SecretPacket>;
         constructor();
         constructor(arg0: $ServerPlayer, arg1: $Secret, arg2: number, arg3: $ServerConfig);
+        get mtuSize(): number;
         get voiceHost(): string;
         get serverPort(): number;
-        get mtuSize(): number;
+        get playerUUID(): $UUID;
         get secret(): $Secret;
         get voiceChatDistance(): number;
-        get playerUUID(): $UUID;
         get keepAlive(): number;
     }
     export class $Packet<T extends $Packet<T>> {

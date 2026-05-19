@@ -10,8 +10,8 @@ declare module "@package/xaero/lib/common/packet" {
     export class $IPacketHandler {
     }
     export interface $IPacketHandler {
-        register<P>(arg0: number, arg1: $Class<P>, arg2: $BiConsumer_<P, $FriendlyByteBuf>, arg3: $Function_<$FriendlyByteBuf, P>, arg4: $BiConsumer_<P, $ServerPlayer>, arg5: $Consumer_<P>): void;
         getChannelId(): $ResourceLocation;
+        register<P>(arg0: number, arg1: $Class<P>, arg2: $BiConsumer_<P, $FriendlyByteBuf>, arg3: $Function_<$FriendlyByteBuf, P>, arg4: $BiConsumer_<P, $ServerPlayer>, arg5: $Consumer_<P>): void;
         sendToServer<T>(arg0: T): void;
         sendToPlayer<T>(arg0: $ServerPlayer, arg1: T): void;
         sendToPlayer<T>(arg0: $ServerPlayerData, arg1: T): void;

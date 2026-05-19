@@ -10,29 +10,29 @@ import { $VoidFluidHandler } from "@package/net/neoforged/neoforge/fluids/capabi
 
 declare module "@package/net/neoforged/neoforge/fluids/capability/wrappers" {
     export class $FluidBucketWrapper implements $IFluidHandlerItem {
-        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
-        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         canFillFluidType(arg0: $FluidStack_): boolean;
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
+        getTanks(): number;
+        getFluidInTank(arg0: number): $FluidStack;
+        getTankCapacity(arg0: number): number;
         getContainer(): $ItemStack;
         getFluid(): $FluidStack;
-        getTanks(): number;
-        getFluidInTank(arg0: number): $FluidStack;
-        getTankCapacity(arg0: number): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
-        constructor(arg0: $ItemStack_);
-        get container(): $ItemStack;
-        get fluid(): $FluidStack;
-        get tanks(): number;
-    }
-    export class $CauldronWrapper implements $IFluidHandler {
-        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
         drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
+        constructor(arg0: $ItemStack_);
+        get tanks(): number;
+        get container(): $ItemStack;
+        get fluid(): $FluidStack;
+    }
+    export class $CauldronWrapper implements $IFluidHandler {
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         getTanks(): number;
         getFluidInTank(arg0: number): $FluidStack;
         getTankCapacity(arg0: number): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
+        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
         constructor(arg0: $Level_, arg1: $BlockPos_);
         get tanks(): number;
     }
@@ -45,13 +45,13 @@ declare module "@package/net/neoforged/neoforge/fluids/capability/wrappers" {
         constructor(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_);
     }
     export class $BucketPickupHandlerWrapper implements $IFluidHandler {
-        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
-        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         getTanks(): number;
         getFluidInTank(arg0: number): $FluidStack;
         getTankCapacity(arg0: number): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
+        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
         constructor(arg0: $Player, arg1: $BucketPickup, arg2: $Level_, arg3: $BlockPos_);
         get tanks(): number;
     }

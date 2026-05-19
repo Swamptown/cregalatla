@@ -24,9 +24,9 @@ declare module "@package/net/neoforged/neoforge/client/model/obj" {
     export class $ObjModel$ModelMesh {
     }
     export class $ObjModel extends $SimpleUnbakedGeometry<$ObjModel> implements $ObjModelAccessor {
-        static parse(arg0: $ObjTokenizer, arg1: $ObjModel$ModelSettings_): $ObjModel;
         getRootComponentNames(): $Set<string>;
         bakeRenderable(arg0: $IGeometryBakingContext): $CompositeRenderable;
+        static parse(arg0: $ObjTokenizer, arg1: $ObjModel$ModelSettings_): $ObjModel;
         invokeMakeQuad(arg0: number[][], arg1: number, arg2: $Vector4f, arg3: $Vector4f, arg4: $TextureAtlasSprite, arg5: $Transformation): $Pair<$BakedQuad, $Direction>;
         emissiveAmbient: boolean;
         automaticCulling: boolean;
@@ -42,13 +42,13 @@ declare module "@package/net/neoforged/neoforge/client/model/obj" {
         constructor(arg0: $ObjTokenizer);
     }
     export class $ObjTokenizer implements $AutoCloseable {
-        close(): void;
         readAndSplitLine(arg0: boolean): string[];
+        close(): void;
         constructor(arg0: $InputStream);
     }
     export class $ObjModel$ModelObject {
-        name(): string;
         addQuads(arg0: $IGeometryBakingContext, arg1: $IModelBuilder<never>, arg2: $ModelBaker, arg3: $Function_<$Material, $TextureAtlasSprite>, arg4: $ModelState): void;
+        name(): string;
         getTextures(arg0: $IGeometryBakingContext, arg1: $Function_<$ResourceLocation, $UnbakedModel>, arg2: $Set_<$Pair$1<string, string>>): $Collection<$Material>;
         bake(arg0: $CompositeRenderable$PartBuilder<never>, arg1: $IGeometryBakingContext): void;
     }
@@ -57,17 +57,17 @@ declare module "@package/net/neoforged/neoforge/client/model/obj" {
     export class $ObjLoader implements $IGeometryLoader<$ObjModel>, $ResourceManagerReloadListener {
         loadModel(arg0: $ObjModel$ModelSettings_): $ObjModel;
         onResourceManagerReload(arg0: $ResourceManager): void;
+        read(arg0: $JsonObject_, arg1: $JsonDeserializationContext_): $ObjModel;
         loadMaterialLibrary(arg0: $ResourceLocation_): $ObjMaterialLibrary;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
-        read(arg0: $JsonObject_, arg1: $JsonDeserializationContext_): $ObjModel;
         static INSTANCE: $ObjLoader;
         constructor();
         get name(): string;
     }
     export class $ObjModel$ModelSettings extends $Record {
-        modelLocation(): $ResourceLocation;
         flipV(): boolean;
+        modelLocation(): $ResourceLocation;
         automaticCulling(): boolean;
         shadeQuads(): boolean;
         emissiveAmbient(): boolean;
@@ -77,7 +77,7 @@ declare module "@package/net/neoforged/neoforge/client/model/obj" {
     /**
      * Values that may be interpreted as {@link $ObjModel$ModelSettings}.
      */
-    export type $ObjModel$ModelSettings_ = { mtlOverride?: string, modelLocation?: $ResourceLocation_, flipV?: boolean, shadeQuads?: boolean, emissiveAmbient?: boolean, automaticCulling?: boolean,  } | [mtlOverride?: string, modelLocation?: $ResourceLocation_, flipV?: boolean, shadeQuads?: boolean, emissiveAmbient?: boolean, automaticCulling?: boolean, ];
+    export type $ObjModel$ModelSettings_ = { automaticCulling?: boolean, emissiveAmbient?: boolean, shadeQuads?: boolean, flipV?: boolean, modelLocation?: $ResourceLocation_, mtlOverride?: string,  } | [automaticCulling?: boolean, emissiveAmbient?: boolean, shadeQuads?: boolean, flipV?: boolean, modelLocation?: $ResourceLocation_, mtlOverride?: string, ];
     export class $ObjMaterialLibrary$Material {
         ambientColorMap: string;
         ambientColor: $Vector4f;

@@ -5,13 +5,13 @@ declare module "@package/dev/ryanhcode/sable/api/physics/constraint" {
     export class $PhysicsConstraintHandle {
     }
     export interface $PhysicsConstraintHandle {
-        remove(): void;
-        isValid(): boolean;
         getJointImpulses(arg0: $Vector3d, arg1: $Vector3d): void;
         setMotor(arg0: $ConstraintJointAxis_, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: number): void;
         setContactsEnabled(arg0: boolean): void;
-        get valid(): boolean;
+        isValid(): boolean;
+        remove(): void;
         set contactsEnabled(value: boolean);
+        get valid(): boolean;
     }
     export class $ConstraintJointAxis extends $Enum<$ConstraintJointAxis> {
         static values(): $ConstraintJointAxis[];

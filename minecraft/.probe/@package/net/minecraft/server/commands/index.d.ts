@@ -81,7 +81,7 @@ declare module "@package/net/minecraft/server/commands" {
     /**
      * Values that may be interpreted as {@link $CloneCommands$CloneBlockInfo}.
      */
-    export type $CloneCommands$CloneBlockInfo_ = { pos?: $BlockPos_, state?: $BlockState_, blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_,  } | [pos?: $BlockPos_, state?: $BlockState_, blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_, ];
+    export type $CloneCommands$CloneBlockInfo_ = { blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_, state?: $BlockState_, pos?: $BlockPos_,  } | [blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_, state?: $BlockState_, pos?: $BlockPos_, ];
     export class $WhitelistCommand {
         static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
@@ -95,8 +95,8 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $SummonCommand {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         static createEntity(arg0: $CommandSourceStack, arg1: $Holder$Reference<$EntityType_<never>>, arg2: $Vec3_, arg3: $CompoundTag_, arg4: boolean): $Entity;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         constructor();
     }
     export class $RaidCommand {
@@ -136,17 +136,17 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $LocateCommand implements $LocateCommandInvoker {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         static showLocateResult(arg0: $CommandSourceStack, arg1: $ResourceOrTagArgument$Result<never>, arg2: $BlockPos_, arg3: $Pair<$BlockPos_, $Holder_<never>>, arg4: string, arg5: boolean, arg6: $Duration_): number;
         static showLocateResult(arg0: $CommandSourceStack, arg1: $ResourceOrTagKeyArgument$Result<never>, arg2: $BlockPos_, arg3: $Pair<$BlockPos_, $Holder_<never>>, arg4: string, arg5: boolean, arg6: $Duration_): number;
-        static getMaxStructureSearchRadius$structurify_$md$d858b6$0(): number;
-        static getStructureNotFoundError$structurify_$md$d858b6$1(): $DynamicCommandExceptionType;
-        static getStructureInvalidError$structurify_$md$d858b6$2(): $DynamicCommandExceptionType;
-        static invokeGetHolders$structurify_$md$d858b6$3(arg0: $ResourceOrTagKeyArgument$Result<any>, arg1: $Registry<any>): $Optional<any>;
+        static getMaxStructureSearchRadius$structurify_$md$4ca6b6$0(): number;
+        static getStructureNotFoundError$structurify_$md$4ca6b6$1(): $DynamicCommandExceptionType;
+        static getStructureInvalidError$structurify_$md$4ca6b6$2(): $DynamicCommandExceptionType;
+        static invokeGetHolders$structurify_$md$4ca6b6$3(arg0: $ResourceOrTagKeyArgument$Result<any>, arg1: $Registry<any>): $Optional<any>;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         constructor();
-        static get maxStructureSearchRadius$structurify_$md$d858b6$0(): number;
-        static get structureNotFoundError$structurify_$md$d858b6$1(): $DynamicCommandExceptionType;
-        static get structureInvalidError$structurify_$md$d858b6$2(): $DynamicCommandExceptionType;
+        static get maxStructureSearchRadius$structurify_$md$4ca6b6$0(): number;
+        static get structureNotFoundError$structurify_$md$4ca6b6$1(): $DynamicCommandExceptionType;
+        static get structureInvalidError$structurify_$md$4ca6b6$2(): $DynamicCommandExceptionType;
     }
     export class $SpectateCommand {
         static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
@@ -198,14 +198,14 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $ExecuteCommand {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         static scheduleFunctionConditionsAndTest<T extends $ExecutionCommandSource<T>>(arg0: T, arg1: $List_<T>, arg2: $Function_<T, T>, arg3: $IntPredicate_, arg4: $ContextChain<T>, arg5: $CompoundTag_, arg6: $ExecutionControl<T>, arg7: $ExecuteCommand$CommandGetter_<T, $Collection<$CommandFunction<T>>>, arg8: $ChainModifiers_): void;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         static ERROR_FUNCTION_CONDITION_INSTANTATION_FAILURE: $Dynamic2CommandExceptionType;
         constructor();
     }
     export class $PublishCommand {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static getSuccessMessage(arg0: number): $MutableComponent;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
     }
     export class $ExecuteCommand$CommandNumericPredicate {
@@ -217,10 +217,10 @@ declare module "@package/net/minecraft/server/commands" {
      */
     export type $ExecuteCommand$CommandNumericPredicate_ = (() => void);
     export class $FunctionCommand {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static getArgumentTag(arg0: $NbtPathArgument$NbtPath, arg1: $DataAccessor): $CompoundTag;
         static modifySenderForExecution(arg0: $CommandSourceStack): $CommandSourceStack;
         static queueFunctions<T extends $ExecutionCommandSource<T>>(arg0: $Collection_<$CommandFunction<T>>, arg1: $CompoundTag_, arg2: T, arg3: T, arg4: $ExecutionControl<T>, arg5: $FunctionCommand$Callbacks_<T>, arg6: $ChainModifiers_): void;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static ERROR_FUNCTION_INSTANTATION_FAILURE: $Dynamic2CommandExceptionType;
         static SUGGEST_FUNCTION: $SuggestionProvider<$CommandSourceStack>;
         static FULL_CONTEXT_CALLBACKS: $FunctionCommand$Callbacks<$CommandSourceStack>;
@@ -228,11 +228,11 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $PlaceCommand {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static placeJigsaw(arg0: $CommandSourceStack, arg1: $Holder_<$StructureTemplatePool>, arg2: $ResourceLocation_, arg3: number, arg4: $BlockPos_): number;
         static placeTemplate(arg0: $CommandSourceStack, arg1: $ResourceLocation_, arg2: $BlockPos_, arg3: $Rotation_, arg4: $Mirror_, arg5: number, arg6: number): number;
-        static placeStructure(arg0: $CommandSourceStack, arg1: $Holder$Reference<$Structure_>, arg2: $BlockPos_): number;
         static placeFeature(arg0: $CommandSourceStack, arg1: $Holder$Reference<$ConfiguredFeature_<never, never>>, arg2: $BlockPos_): number;
+        static placeStructure(arg0: $CommandSourceStack, arg1: $Holder$Reference<$Structure_>, arg2: $BlockPos_): number;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
     }
     export class $DebugCommand$Tracer implements $CommandSource, $TraceCallbacks {
@@ -352,8 +352,8 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $TriggerCommand {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static suggestObjectives(arg0: $CommandSourceStack, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
     }
     export class $ReturnCommand$ReturnFailCustomExecutor<T extends $ExecutionCommandSource<T>> implements $CustomCommandExecutor$CommandAdapter<T> {
@@ -399,8 +399,8 @@ declare module "@package/net/minecraft/server/commands" {
      */
     export type $LootCommand$Callback_ = (() => void);
     export class $TeleportCommand {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static performTeleport(arg0: $CommandSourceStack, arg1: $Entity, arg2: $ServerLevel, arg3: number, arg4: number, arg5: number, arg6: $Set_<$RelativeMovement_>, arg7: number, arg8: number, arg9: $TeleportCommand$LookAt_): void;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
     }
     export class $GameModeCommand {
@@ -453,8 +453,8 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $ReloadCommand {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static reloadPacks(arg0: $Collection_<string>, arg1: $CommandSourceStack): void;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
     }
     export class $FillCommand {
@@ -463,8 +463,8 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $ItemCommands {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         static getContainer(arg0: $CommandSourceStack, arg1: $BlockPos_, arg2: $Dynamic3CommandExceptionType): $Container;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         static ERROR_TARGET_INAPPLICABLE_SLOT: $DynamicCommandExceptionType;
         static ERROR_SOURCE_NOT_A_CONTAINER: $Dynamic3CommandExceptionType;
         static ERROR_TARGET_NOT_A_CONTAINER: $Dynamic3CommandExceptionType;
@@ -547,8 +547,8 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $BossBarCommands {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         static getBossBar(arg0: $CommandContext<$CommandSourceStack>): $CustomBossEvent;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>, arg1: $CommandBuildContext): void;
         static SUGGEST_BOSS_BAR: $SuggestionProvider<$CommandSourceStack>;
         constructor();
     }
@@ -557,10 +557,10 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $GameRuleCommand implements $GameRuleCommandAccessor {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static setRule<T extends $GameRules$Value<T>>(arg0: $CommandContext<$CommandSourceStack>, arg1: $GameRules$Key<T>): number;
         static queryRule<T extends $GameRules$Value<T>>(arg0: $CommandSourceStack, arg1: $GameRules$Key<T>): number;
-        static invokeQueryRule$fabric_game_rule_api_v1_$md$d858b6$0(arg0: $CommandSourceStack, arg1: $GameRules$Key<any>): number;
+        static invokeQueryRule$fabric_game_rule_api_v1_$md$4ca6b6$0(arg0: $CommandSourceStack, arg1: $GameRules$Key<any>): number;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
     }
     export class $ParticleCommand {
@@ -609,7 +609,7 @@ declare module "@package/net/minecraft/server/commands" {
     /**
      * Values that may be interpreted as {@link $CloneCommands$CloneBlockEntityInfo}.
      */
-    export type $CloneCommands$CloneBlockEntityInfo_ = { components?: $DataComponentMap_, tag?: $CompoundTag_,  } | [components?: $DataComponentMap_, tag?: $CompoundTag_, ];
+    export type $CloneCommands$CloneBlockEntityInfo_ = { tag?: $CompoundTag_, components?: $DataComponentMap_,  } | [tag?: $CompoundTag_, components?: $DataComponentMap_, ];
     export class $FunctionCommand$FunctionCustomExecutor extends $CustomCommandExecutor$WithErrorHandling<$CommandSourceStack> implements $CustomCommandExecutor$CommandAdapter<$CommandSourceStack> {
         run(arg0: $CommandContext<$CommandSourceStack>): number;
     }

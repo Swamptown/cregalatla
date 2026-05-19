@@ -282,13 +282,13 @@ declare module "@package/net/neoforged/neoforge/items/wrapper" {
      */
     export type $SidedInvWrapper$InsertLimit_ = (() => void);
     export class $RecipeWrapper implements $RecipeInput {
-        size(): number;
         getItem(arg0: number): $ItemStack;
+        size(): number;
         isEmpty(): boolean;
-        find(filter: $SlotFilter_): $ItemStack;
-        find(filter: $SlotFilter_, skip: number): $ItemStack;
         findAll(): $List<$ItemStack>;
         findAll(filter: $SlotFilter_): $List<$ItemStack>;
+        find(filter: $SlotFilter_, skip: number): $ItemStack;
+        find(filter: $SlotFilter_): $ItemStack;
         self(): $RecipeInput;
         constructor(arg0: $IItemHandler);
         get empty(): boolean;

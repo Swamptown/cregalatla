@@ -19,11 +19,11 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
     export class $PackSelectionScreen$Watcher implements $AutoCloseable {
     }
     export class $PackSelectionModel {
-        commit(): void;
         updateRepoSelectedList(): void;
-        getSelected(): $Stream<$PackSelectionModel$Entry>;
         getUnselected(): $Stream<$PackSelectionModel$Entry>;
         findNewPacks(): void;
+        getSelected(): $Stream<$PackSelectionModel$Entry>;
+        commit(): void;
         iconGetter: $Function<$Pack, $ResourceLocation>;
         onListChanged: $Runnable;
         unselected: $List<$Pack>;
@@ -73,38 +73,38 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
         constructor(arg0: $Minecraft, arg1: $PackSelectionScreen, arg2: number, arg3: number, arg4: $Component_);
     }
     export class $PackSelectionModel$EntryBase implements $PackSelectionModel$Entry {
-        getId(): string;
-        move(arg0: number): void;
-        getIconTexture(): $ResourceLocation;
-        moveUp(): void;
-        moveDown(): void;
-        canMoveUp(): boolean;
-        canMoveDown(): boolean;
         getSelfList(): $List<$Pack>;
         getOtherList(): $List<$Pack>;
         toggleSelection(): void;
+        canMoveUp(): boolean;
+        canMoveDown(): boolean;
+        getIconTexture(): $ResourceLocation;
+        moveUp(): void;
+        moveDown(): void;
+        getDescription(): $Component;
+        move(arg0: number): void;
+        getId(): string;
         getTitle(): $Component;
         isRequired(): boolean;
         getCompatibility(): $PackCompatibility;
         isFixedPosition(): boolean;
         getPackSource(): $PackSource;
-        getDescription(): $Component;
         getExtendedDescription(): $Component;
         canSelect(): boolean;
         canUnselect(): boolean;
         this$0: $PackSelectionModel;
         pack: $Pack;
         constructor(arg0: $PackSelectionModel, arg1: $Pack);
-        get id(): string;
-        get iconTexture(): $ResourceLocation;
         get selfList(): $List<$Pack>;
         get otherList(): $List<$Pack>;
+        get iconTexture(): $ResourceLocation;
+        get description(): $Component;
+        get id(): string;
         get title(): $Component;
         get required(): boolean;
         get compatibility(): $PackCompatibility;
         get fixedPosition(): boolean;
         get packSource(): $PackSource;
-        get description(): $Component;
         get extendedDescription(): $Component;
     }
     export class $PackSelectionScreen extends $Screen {
@@ -147,16 +147,17 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
     export class $PackSelectionModel$Entry {
     }
     export interface $PackSelectionModel$Entry {
-        getId(): string;
-        getIconTexture(): $ResourceLocation;
-        moveUp(): void;
-        moveDown(): void;
         getExtendedDescription(): $Component;
         unselect(): void;
         canSelect(): boolean;
         canUnselect(): boolean;
         canMoveUp(): boolean;
         canMoveDown(): boolean;
+        getIconTexture(): $ResourceLocation;
+        moveUp(): void;
+        moveDown(): void;
+        getDescription(): $Component;
+        getId(): string;
         select(): void;
         isSelected(): boolean;
         getTitle(): $Component;
@@ -164,16 +165,15 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
         getCompatibility(): $PackCompatibility;
         isFixedPosition(): boolean;
         getPackSource(): $PackSource;
-        getDescription(): $Component;
-        get id(): string;
-        get iconTexture(): $ResourceLocation;
         get extendedDescription(): $Component;
+        get iconTexture(): $ResourceLocation;
+        get description(): $Component;
+        get id(): string;
         get selected(): boolean;
         get title(): $Component;
         get required(): boolean;
         get compatibility(): $PackCompatibility;
         get fixedPosition(): boolean;
         get packSource(): $PackSource;
-        get description(): $Component;
     }
 }

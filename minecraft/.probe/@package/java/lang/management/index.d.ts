@@ -3,27 +3,22 @@ import { $Thread$State, $StackTraceElement } from "@package/java/lang";
 
 declare module "@package/java/lang/management" {
     export class $MonitorInfo extends $LockInfo {
-        static from(arg0: $CompositeData): $MonitorInfo;
-        getLockedStackFrame(): $StackTraceElement;
         getLockedStackDepth(): number;
+        getLockedStackFrame(): $StackTraceElement;
+        static from(arg0: $CompositeData): $MonitorInfo;
         constructor(arg0: string, arg1: number, arg2: number, arg3: $StackTraceElement);
-        get lockedStackFrame(): $StackTraceElement;
         get lockedStackDepth(): number;
+        get lockedStackFrame(): $StackTraceElement;
     }
     export class $LockInfo {
+        getIdentityHashCode(): number;
         static from(arg0: $CompositeData): $LockInfo;
         getClassName(): string;
-        getIdentityHashCode(): number;
         constructor(arg0: string, arg1: number);
-        get className(): string;
         get identityHashCode(): number;
+        get className(): string;
     }
     export class $ThreadInfo {
-        getStackTrace(): $StackTraceElement[];
-        static from(arg0: $CompositeData): $ThreadInfo;
-        getPriority(): number;
-        isDaemon(): boolean;
-        getThreadId(): number;
         getThreadState(): $Thread$State;
         getLockName(): string;
         getLockOwnerName(): string;
@@ -37,11 +32,12 @@ declare module "@package/java/lang/management" {
         getWaitedTime(): number;
         getWaitedCount(): number;
         getLockedMonitors(): $MonitorInfo[];
+        getStackTrace(): $StackTraceElement[];
+        static from(arg0: $CompositeData): $ThreadInfo;
+        getPriority(): number;
+        isDaemon(): boolean;
+        getThreadId(): number;
         getThreadName(): string;
-        get stackTrace(): $StackTraceElement[];
-        get priority(): number;
-        get daemon(): boolean;
-        get threadId(): number;
         get threadState(): $Thread$State;
         get lockName(): string;
         get lockOwnerName(): string;
@@ -55,6 +51,10 @@ declare module "@package/java/lang/management" {
         get waitedTime(): number;
         get waitedCount(): number;
         get lockedMonitors(): $MonitorInfo[];
+        get stackTrace(): $StackTraceElement[];
+        get priority(): number;
+        get daemon(): boolean;
+        get threadId(): number;
         get threadName(): string;
     }
 }

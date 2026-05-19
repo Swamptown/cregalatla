@@ -13,22 +13,22 @@ declare module "@package/com/mojang/authlib/yggdrasil/request" {
      */
     export type $AbuseReportRequest$RealmInfo_ = { realmId?: string, slotId?: number,  } | [realmId?: string, slotId?: number, ];
     export class $AbuseReportRequest extends $Record {
-        version(): number;
-        id(): $UUID;
+        reportType(): string;
         clientInfo(): $AbuseReportRequest$ClientInfo;
         thirdPartyServerInfo(): $AbuseReportRequest$ThirdPartyServerInfo;
         realmInfo(): $AbuseReportRequest$RealmInfo;
         report(): $AbuseReport;
-        reportType(): string;
+        version(): number;
+        id(): $UUID;
         constructor(version: number, id: $UUID_, report: $AbuseReport_, clientInfo: $AbuseReportRequest$ClientInfo_, thirdPartyServerInfo: $AbuseReportRequest$ThirdPartyServerInfo_, realmInfo: $AbuseReportRequest$RealmInfo_, reportType: string);
     }
     /**
      * Values that may be interpreted as {@link $AbuseReportRequest}.
      */
-    export type $AbuseReportRequest_ = { clientInfo?: $AbuseReportRequest$ClientInfo_, thirdPartyServerInfo?: $AbuseReportRequest$ThirdPartyServerInfo_, realmInfo?: $AbuseReportRequest$RealmInfo_, id?: $UUID_, report?: $AbuseReport_, version?: number, reportType?: string,  } | [clientInfo?: $AbuseReportRequest$ClientInfo_, thirdPartyServerInfo?: $AbuseReportRequest$ThirdPartyServerInfo_, realmInfo?: $AbuseReportRequest$RealmInfo_, id?: $UUID_, report?: $AbuseReport_, version?: number, reportType?: string, ];
+    export type $AbuseReportRequest_ = { version?: number, report?: $AbuseReport_, id?: $UUID_, realmInfo?: $AbuseReportRequest$RealmInfo_, thirdPartyServerInfo?: $AbuseReportRequest$ThirdPartyServerInfo_, clientInfo?: $AbuseReportRequest$ClientInfo_, reportType?: string,  } | [version?: number, report?: $AbuseReport_, id?: $UUID_, realmInfo?: $AbuseReportRequest$RealmInfo_, thirdPartyServerInfo?: $AbuseReportRequest$ThirdPartyServerInfo_, clientInfo?: $AbuseReportRequest$ClientInfo_, reportType?: string, ];
     export class $AbuseReportRequest$ClientInfo extends $Record {
-        locale(): string;
         clientVersion(): string;
+        locale(): string;
         constructor(clientVersion: string, locale: string);
     }
     /**

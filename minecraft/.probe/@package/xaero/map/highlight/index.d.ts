@@ -8,34 +8,34 @@ import { $PoolTextureDirectBufferUnit } from "@package/xaero/map/pool/buffer";
 
 declare module "@package/xaero/map/highlight" {
     export class $AbstractHighlighter {
-        isCoveringOutsideDiscovered(): boolean;
+        addMinimapBlockHighlightTooltips(arg0: $List_<$Component_>, arg1: $ResourceKey_<$Level>, arg2: number, arg3: number, arg4: number): void;
+        getBlockHighlightSubtleTooltip(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): $Component;
+        getBlockHighlightBluntTooltip(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): $Component;
         regionHasHighlights(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): boolean;
         chunkIsHighlit(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): boolean;
         getChunkHighlitColor(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): number[];
         calculateRegionHash(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): number;
-        getBlockHighlightSubtleTooltip(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): $Component;
-        getBlockHighlightBluntTooltip(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): $Component;
-        addMinimapBlockHighlightTooltips(arg0: $List_<$Component_>, arg1: $ResourceKey_<$Level>, arg2: number, arg3: number, arg4: number): void;
+        isCoveringOutsideDiscovered(): boolean;
         get coveringOutsideDiscovered(): boolean;
     }
     export class $DimensionHighlighterHandler {
-        static getKey(arg0: number, arg1: number): number;
+        shouldApplyRegionHighlights(arg0: number, arg1: number, arg2: boolean): boolean;
+        getRegionHash(arg0: number, arg1: number): number;
+        getBlockHighlightSubtleTooltip(arg0: number, arg1: number, arg2: boolean): $Component;
+        getBlockHighlightBluntTooltip(arg0: number, arg1: number, arg2: boolean): $Component;
         clearCachedHashes(): void;
         clearCachedHash(arg0: number, arg1: number): void;
         static getXFromKey(arg0: number): number;
         static getZFromKey(arg0: number): number;
-        getRegionHash(arg0: number, arg1: number): number;
-        getBlockHighlightSubtleTooltip(arg0: number, arg1: number, arg2: boolean): $Component;
-        getBlockHighlightBluntTooltip(arg0: number, arg1: number, arg2: boolean): $Component;
-        shouldApplyRegionHighlights(arg0: number, arg1: number, arg2: boolean): boolean;
         shouldApplyTileChunkHighlights(arg0: number, arg1: number, arg2: number, arg3: number, arg4: boolean): boolean;
         applyChunkHighlightColors(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $PoolTextureDirectBufferUnit, arg5: $PoolTextureDirectBufferUnit, arg6: boolean, arg7: boolean, arg8: boolean): $PoolTextureDirectBufferUnit;
+        static getKey(arg0: number, arg1: number): number;
         constructor(arg0: $MapDimension, arg1: $ResourceKey_<$Level>, arg2: $HighlighterRegistry);
     }
     export class $HighlighterRegistry {
+        getHighlighters(): $List<$AbstractHighlighter>;
         end(): void;
         register(arg0: $AbstractHighlighter): void;
-        getHighlighters(): $List<$AbstractHighlighter>;
         constructor();
         get highlighters(): $List<$AbstractHighlighter>;
     }

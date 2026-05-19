@@ -96,9 +96,9 @@ declare module "@package/org/appliedenergistics/yoga" {
      */
     export type $YogaDirection_ = "inherit" | "ltr" | "rtl";
     export class $YogaValue {
+        static point(arg0: number): $YogaValue;
         static percent(arg0: number): $YogaValue;
         neg(): $YogaValue;
-        static point(arg0: number): $YogaValue;
         static ZERO: $YogaValue;
         static AUTO: $YogaValue;
         unit: $YogaUnit;

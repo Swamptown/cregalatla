@@ -26,10 +26,10 @@ declare module "@package/dev/latvian/mods/kubejs/block/predicate" {
      */
     export type $BlockPredicate_ = ((block: $LevelBlock) => boolean);
     export class $BlockIDPredicate implements $BlockPredicate {
-        with(key: string, value: string): $BlockIDPredicate;
-        check(b: $LevelBlock): boolean;
-        checkState(state: $BlockState_): boolean;
         getBlockProperties(): $List<$BlockIDPredicate$PropertyObject>;
+        with(key: string, value: string): $BlockIDPredicate;
+        checkState(state: $BlockState_): boolean;
+        check(b: $LevelBlock): boolean;
         getBlockState(): $BlockState;
         constructor(i: $ResourceLocation_);
         get blockProperties(): $List<$BlockIDPredicate$PropertyObject>;

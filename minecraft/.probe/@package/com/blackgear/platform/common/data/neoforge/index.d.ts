@@ -5,7 +5,7 @@ declare module "@package/com/blackgear/platform/common/data/neoforge" {
     export class $LootPoolAccess {
     }
     export interface $LootPoolAccess {
-        getEntries(): $List<$LootPoolEntryContainer>;
         setEntries(arg0: $List_<$LootPoolEntryContainer>): void;
+        getEntries(): $List<$LootPoolEntryContainer>;
     }
 }

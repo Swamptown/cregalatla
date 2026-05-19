@@ -5,16 +5,16 @@ import { $WeakReference } from "@package/java/lang/ref";
 
 declare module "@package/net/neoforged/neoforge/server/timings" {
     export class $ObjectTimings<T> {
-        getObject(): $WeakReference<T>;
         getAverageTimings(): number;
+        getObject(): $WeakReference<T>;
         constructor(arg0: T, arg1: number[]);
-        get object(): $WeakReference<T>;
         get averageTimings(): number;
+        get object(): $WeakReference<T>;
     }
     export class $TimeTracker<T> {
-        reset(): void;
-        enable(arg0: number): void;
         getTimingData(): $ImmutableList<$ObjectTimings<T>>;
+        enable(arg0: number): void;
+        reset(): void;
         trackStart(arg0: T): void;
         trackEnd(arg0: T): void;
         static ENTITY_UPDATE: $TimeTracker<$Entity>;

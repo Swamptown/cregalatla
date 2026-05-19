@@ -24,8 +24,8 @@ declare module "@package/dev/simulated_team/simulated/mixin_interface" {
     export class $TickerExtension {
     }
     export interface $TickerExtension {
-        simulated$isPlaying(): boolean;
         simulated$setPlaying(arg0: boolean): void;
+        simulated$isPlaying(): boolean;
     }
     export class $PlayerTypewriterExtension {
     }
@@ -36,9 +36,9 @@ declare module "@package/dev/simulated_team/simulated/mixin_interface" {
     export class $PrimaryLevelDataExtension {
     }
     export interface $PrimaryLevelDataExtension {
-        getPreset(): $ResourceLocation;
         setPreset(arg0: $ResourceLocation_): void;
         setEndDragonFight(arg0: $EndDragonFight$Data_): void;
+        getPreset(): $ResourceLocation;
         set endDragonFight(value: $EndDragonFight$Data_);
     }
 }

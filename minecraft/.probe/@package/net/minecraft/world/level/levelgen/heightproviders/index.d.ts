@@ -1,8 +1,9 @@
-import { $TrapezoidHeightAccessor, $UniformHeightAccessor } from "@package/cc/abbie/emi_ores/mixin/accessor";
+import { $TrapezoidHeightAccessor as $TrapezoidHeightAccessor$1, $UniformHeightAccessor as $UniformHeightAccessor$1 } from "@package/cc/abbie/emi_ores/mixin/accessor";
 import { $MapCodec_, $MapCodec, $Codec } from "@package/com/mojang/serialization";
 import { RegistryMarked, RegistryTypes } from "@special/types";
 import { $SimpleWeightedRandomList } from "@package/net/minecraft/util/random";
 import { $VerticalAnchor, $WorldGenerationContext, $VerticalAnchor_ } from "@package/net/minecraft/world/level/levelgen";
+import { $TrapezoidHeightAccessor, $UniformHeightAccessor, $BiasedToBottomHeightAccessor, $VeryBiasedToBottomHeightAccessor } from "@package/com/faboslav/structurify/common/mixin/level";
 import { $RandomSource } from "@package/net/minecraft/util";
 
 declare module "@package/net/minecraft/world/level/levelgen/heightproviders" {
@@ -18,19 +19,25 @@ declare module "@package/net/minecraft/world/level/levelgen/heightproviders" {
         get type(): $HeightProviderType<never>;
     }
     export interface $HeightProviderType<P> extends RegistryMarked<RegistryTypes.HeightProviderTypeTag, RegistryTypes.HeightProviderType> {}
-    export class $BiasedToBottomHeight extends $HeightProvider {
+    export class $BiasedToBottomHeight extends $HeightProvider implements $BiasedToBottomHeightAccessor {
         static of(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_, arg2: number): $BiasedToBottomHeight;
-        static CODEC: $MapCodec<$BiasedToBottomHeight>;
-    }
-    export class $TrapezoidHeight extends $HeightProvider implements $TrapezoidHeightAccessor {
-        static of(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_, arg2: number): $TrapezoidHeight;
-        static of(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_): $TrapezoidHeight;
-        getMaxInclusive(): $VerticalAnchor;
         getMinInclusive(): $VerticalAnchor;
+        getMaxInclusive(): $VerticalAnchor;
+        getInner(): number;
+        static CODEC: $MapCodec<$BiasedToBottomHeight>;
+        get minInclusive(): $VerticalAnchor;
+        get maxInclusive(): $VerticalAnchor;
+        get inner(): number;
+    }
+    export class $TrapezoidHeight extends $HeightProvider implements $TrapezoidHeightAccessor, $TrapezoidHeightAccessor$1 {
+        static of(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_): $TrapezoidHeight;
+        static of(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_, arg2: number): $TrapezoidHeight;
+        getMinInclusive(): $VerticalAnchor;
+        getMaxInclusive(): $VerticalAnchor;
         getPlateau(): number;
         static CODEC: $MapCodec<$TrapezoidHeight>;
-        get maxInclusive(): $VerticalAnchor;
         get minInclusive(): $VerticalAnchor;
+        get maxInclusive(): $VerticalAnchor;
         get plateau(): number;
     }
     export class $HeightProviderType<P extends $HeightProvider> {
@@ -49,22 +56,28 @@ declare module "@package/net/minecraft/world/level/levelgen/heightproviders" {
      */
     export type $HeightProviderType_<P> = RegistryTypes.HeightProviderType | (() => $MapCodec_<P>);
     export class $ConstantHeight extends $HeightProvider {
-        static of(arg0: $VerticalAnchor_): $ConstantHeight;
         getValue(): $VerticalAnchor;
+        static of(arg0: $VerticalAnchor_): $ConstantHeight;
         static ZERO: $ConstantHeight;
         static CODEC: $MapCodec<$ConstantHeight>;
         get value(): $VerticalAnchor;
     }
-    export class $UniformHeight extends $HeightProvider implements $UniformHeightAccessor {
+    export class $UniformHeight extends $HeightProvider implements $UniformHeightAccessor, $UniformHeightAccessor$1 {
         static of(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_): $UniformHeight;
-        getMaxInclusive(): $VerticalAnchor;
         getMinInclusive(): $VerticalAnchor;
+        getMaxInclusive(): $VerticalAnchor;
         static CODEC: $MapCodec<$UniformHeight>;
-        get maxInclusive(): $VerticalAnchor;
         get minInclusive(): $VerticalAnchor;
+        get maxInclusive(): $VerticalAnchor;
     }
-    export class $VeryBiasedToBottomHeight extends $HeightProvider {
+    export class $VeryBiasedToBottomHeight extends $HeightProvider implements $VeryBiasedToBottomHeightAccessor {
         static of(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_, arg2: number): $VeryBiasedToBottomHeight;
+        getMinInclusive(): $VerticalAnchor;
+        getMaxInclusive(): $VerticalAnchor;
+        getInner(): number;
         static CODEC: $MapCodec<$VeryBiasedToBottomHeight>;
+        get minInclusive(): $VerticalAnchor;
+        get maxInclusive(): $VerticalAnchor;
+        get inner(): number;
     }
 }

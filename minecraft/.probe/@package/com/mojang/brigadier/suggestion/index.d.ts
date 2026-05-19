@@ -6,32 +6,32 @@ import { $List_, $Collection_, $List } from "@package/java/util";
 
 declare module "@package/com/mojang/brigadier/suggestion" {
     export class $SuggestionsBuilder {
+        restart(): $SuggestionsBuilder;
+        suggest(arg0: string): $SuggestionsBuilder;
+        suggest(arg0: string, arg1: $Message_): $SuggestionsBuilder;
+        suggest(arg0: number): $SuggestionsBuilder;
+        suggest(arg0: number, arg1: $Message_): $SuggestionsBuilder;
+        buildFuture(): $CompletableFuture<$Suggestions>;
+        createOffset(arg0: number): $SuggestionsBuilder;
+        getRemainingLowerCase(): string;
+        getInput(): string;
         add(arg0: $SuggestionsBuilder): $SuggestionsBuilder;
         build(): $Suggestions;
         getRemaining(): string;
-        getInput(): string;
-        restart(): $SuggestionsBuilder;
-        getRemainingLowerCase(): string;
-        createOffset(arg0: number): $SuggestionsBuilder;
-        suggest(arg0: number): $SuggestionsBuilder;
-        suggest(arg0: number, arg1: $Message_): $SuggestionsBuilder;
-        suggest(arg0: string): $SuggestionsBuilder;
-        suggest(arg0: string, arg1: $Message_): $SuggestionsBuilder;
-        buildFuture(): $CompletableFuture<$Suggestions>;
         getStart(): number;
-        constructor(arg0: string, arg1: string, arg2: number);
         constructor(arg0: string, arg1: number);
-        get remaining(): string;
-        get input(): string;
+        constructor(arg0: string, arg1: string, arg2: number);
         get remainingLowerCase(): string;
+        get input(): string;
+        get remaining(): string;
         get start(): number;
     }
     export class $Suggestions {
+        getRange(): $StringRange;
         isEmpty(): boolean;
         static merge(arg0: string, arg1: $Collection_<$Suggestions>): $Suggestions;
         static empty(): $CompletableFuture<$Suggestions>;
         static create(arg0: string, arg1: $Collection_<$Suggestion>): $Suggestions;
-        getRange(): $StringRange;
         getList(): $List<$Suggestion>;
         constructor(arg0: $StringRange, arg1: $List_<$Suggestion>);
         get range(): $StringRange;
@@ -47,17 +47,17 @@ declare module "@package/com/mojang/brigadier/suggestion" {
      */
     export type $SuggestionProvider_<S> = ((arg0: $CommandContext<S>, arg1: $SuggestionsBuilder) => $CompletableFuture<$Suggestions>);
     export class $Suggestion implements $Comparable<$Suggestion> {
+        getRange(): $StringRange;
+        getTooltip(): $Message;
         expand(arg0: string, arg1: $StringRange): $Suggestion;
         compareTo(arg0: $Suggestion): number;
         apply(arg0: string): string;
         compareToIgnoreCase(arg0: $Suggestion): number;
         getText(): string;
-        getTooltip(): $Message;
-        getRange(): $StringRange;
-        constructor(arg0: $StringRange, arg1: string);
         constructor(arg0: $StringRange, arg1: string, arg2: $Message_);
-        get text(): string;
-        get tooltip(): $Message;
+        constructor(arg0: $StringRange, arg1: string);
         get range(): $StringRange;
+        get tooltip(): $Message;
+        get text(): string;
     }
 }

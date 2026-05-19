@@ -6,7 +6,7 @@ declare module "@package/terrablender/mixin" {
     export class $MultiNoiseBiomeSourceAccess {
     }
     export interface $MultiNoiseBiomeSourceAccess {
-        getParameters(): $Either<$Climate$ParameterList<$Holder<$Biome>>, $Holder<$MultiNoiseBiomeSourceParameterList>>;
         setParameters(arg0: $Either<$Climate$ParameterList<$Holder_<$Biome>>, $Holder_<$MultiNoiseBiomeSourceParameterList>>): void;
+        getParameters(): $Either<$Climate$ParameterList<$Holder<$Biome>>, $Holder<$MultiNoiseBiomeSourceParameterList>>;
     }
 }

@@ -78,11 +78,11 @@ declare module "@package/xaero/common/minimap/waypoints/render" {
      * @deprecated
      */
     export class $WaypointRenderProvider extends $WaypointRenderProvider$1 {
-        hasNext(arg0: number, arg1: $WaypointMapRenderContext): boolean;
-        begin(arg0: number, arg1: $WaypointMapRenderContext): void;
-        end(arg0: number, arg1: $WaypointMapRenderContext): void;
         setupContextAndGetNext(arg0: number, arg1: $WaypointMapRenderContext): $Waypoint;
         getNext(arg0: number, arg1: $WaypointMapRenderContext): $Waypoint;
+        begin(arg0: number, arg1: $WaypointMapRenderContext): void;
+        end(arg0: number, arg1: $WaypointMapRenderContext): void;
+        hasNext(arg0: number, arg1: $WaypointMapRenderContext): boolean;
         filter: $Predicate<$Waypoint>;
         constructor();
     }

@@ -1,6 +1,6 @@
 import { $DeferredRegister } from "@package/net/neoforged/neoforge/registries";
 import { $TypeInfo_, $TypeInfo } from "@package/dev/latvian/mods/rhino/type";
-import { $Holder, $HolderSet$ListBacked, $Holder$Reference, $Registry, $HolderLookup$RegistryLookup, $HolderSet } from "@package/net/minecraft/core";
+import { $Holder, $HolderSet$ListBacked, $Registry, $Holder$Reference, $HolderLookup$RegistryLookup, $HolderSet } from "@package/net/minecraft/core";
 import { $MapCodec } from "@package/com/mojang/serialization";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
 import { $ResourceKey_ } from "@package/net/minecraft/resources";
@@ -11,10 +11,10 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/dev/latvian/mods/kubejs/holder" {
     export class $HolderWrapper {
-        static wrap(from: $Object, param: $TypeInfo_): $Holder<never>;
+        static wrapSimpleSet<T>(registry: $Registry<T>, from: $Object): $HolderSet<T>;
         static wrapRef(from: $Object, param: $TypeInfo_): $Holder$Reference<never>;
         static wrapSet(from: $Object, param: $TypeInfo_): $HolderSet<never>;
-        static wrapSimpleSet<T>(registry: $Registry<T>, from: $Object): $HolderSet<T>;
+        static wrap(from: $Object, param: $TypeInfo_): $Holder<never>;
         static HOLDER: $TypeInfo;
         static HOLDER_SET: $TypeInfo;
     }
@@ -28,17 +28,17 @@ declare module "@package/dev/latvian/mods/kubejs/holder" {
     export interface $KubeJSHolderSets {
     }
     export class $RegExHolderSet<T> extends $HolderSet$ListBacked<T> implements $ICustomHolderSet<T> {
+        static streamCodec<T>(registryKey: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $RegExHolderSet<T>>;
         type(): $HolderSetType;
         static of<T>(registryLookup: $HolderLookup$RegistryLookup<T>, pattern: $Pattern): $HolderSet<T>;
-        static streamCodec<T>(registryKey: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $RegExHolderSet<T>>;
         static codec<T>(registryKey: $ResourceKey_<$Registry<T>>): $MapCodec<$RegExHolderSet<T>>;
         registryLookup: $HolderLookup$RegistryLookup<T>;
         pattern: $Pattern;
     }
     export class $NamespaceHolderSet<T> extends $HolderSet$ListBacked<T> implements $ICustomHolderSet<T> {
+        static streamCodec<T>(registryKey: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $NamespaceHolderSet<T>>;
         type(): $HolderSetType;
         static of<T>(registryLookup: $HolderLookup$RegistryLookup<T>, namespace: string): $HolderSet<T>;
-        static streamCodec<T>(registryKey: $ResourceKey_<$Registry<T>>): $StreamCodec<$RegistryFriendlyByteBuf, $NamespaceHolderSet<T>>;
         static codec<T>(registryKey: $ResourceKey_<$Registry<T>>): $MapCodec<$NamespaceHolderSet<T>>;
         registryLookup: $HolderLookup$RegistryLookup<T>;
         namespace: string;

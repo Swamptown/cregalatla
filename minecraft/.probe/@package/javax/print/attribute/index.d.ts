@@ -20,8 +20,8 @@ declare module "@package/javax/print/attribute" {
         add(arg0: $Attribute): boolean;
         toArray(): $Attribute[];
         addAll(arg0: $AttributeSet): boolean;
-        containsValue(arg0: $Attribute): boolean;
         containsKey(arg0: $Class<never>): boolean;
+        containsValue(arg0: $Attribute): boolean;
         get empty(): boolean;
     }
     export class $PrintRequestAttributeSet {

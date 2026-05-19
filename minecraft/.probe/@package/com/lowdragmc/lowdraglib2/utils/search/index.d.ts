@@ -13,8 +13,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/search" {
     export class $IResultHandler<T> {
     }
     export interface $IResultHandler<T> extends $Consumer<T> {
-        accept(arg0: T): void;
         acceptResult(arg0: T): void;
+        accept(arg0: T): void;
     }
     /**
      * Values that may be interpreted as {@link $IResultHandler}.

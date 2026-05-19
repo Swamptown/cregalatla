@@ -1,6 +1,6 @@
 import { $Predicate_ } from "@package/java/util/function";
 import { $Goal } from "@package/net/minecraft/world/entity/ai/goal";
-import { $Mob, $TamableAnimal, $LivingEntity, $PathfinderMob } from "@package/net/minecraft/world/entity";
+import { $TamableAnimal, $Mob, $LivingEntity, $PathfinderMob } from "@package/net/minecraft/world/entity";
 import { $Raider } from "@package/net/minecraft/world/entity/raid";
 import { $TargetingConditions } from "@package/net/minecraft/world/entity/ai/targeting";
 import { $Class } from "@package/java/lang";
@@ -92,8 +92,8 @@ declare module "@package/net/minecraft/world/entity/ai/goal/target" {
         constructor(arg0: $Raider, arg1: $Class<T>, arg2: number, arg3: boolean, arg4: boolean, arg5: $Predicate_<$LivingEntity>);
     }
     export class $NearestAttackableTargetGoal<T extends $LivingEntity> extends $TargetGoal {
-        setTarget(arg0: $LivingEntity): void;
         getTargetSearchArea(arg0: number): $AABB;
+        setTarget(arg0: $LivingEntity): void;
         findTarget(): void;
         randomInterval: number;
         mob: $Mob;
@@ -103,9 +103,9 @@ declare module "@package/net/minecraft/world/entity/ai/goal/target" {
         targetMob: $LivingEntity;
         targetConditions: $TargetingConditions;
         target: $LivingEntity;
-        constructor(arg0: $Mob, arg1: $Class<T>, arg2: number, arg3: boolean, arg4: boolean, arg5: $Predicate_<$LivingEntity>);
-        constructor(arg0: $Mob, arg1: $Class<T>, arg2: boolean, arg3: boolean);
-        constructor(arg0: $Mob, arg1: $Class<T>, arg2: boolean, arg3: $Predicate_<$LivingEntity>);
         constructor(arg0: $Mob, arg1: $Class<T>, arg2: boolean);
+        constructor(arg0: $Mob, arg1: $Class<T>, arg2: boolean, arg3: $Predicate_<$LivingEntity>);
+        constructor(arg0: $Mob, arg1: $Class<T>, arg2: boolean, arg3: boolean);
+        constructor(arg0: $Mob, arg1: $Class<T>, arg2: number, arg3: boolean, arg4: boolean, arg5: $Predicate_<$LivingEntity>);
     }
 }

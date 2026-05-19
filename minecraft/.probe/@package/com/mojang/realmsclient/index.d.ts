@@ -32,17 +32,17 @@ declare module "@package/com/mojang/realmsclient" {
         list: $AbstractSelectionList<$RealmsMainScreen$Entry>;
     }
     export class $RealmsAvailability$Result extends $Record {
+        createErrorScreen(arg0: $Screen): $Screen;
         type(): $RealmsAvailability$Type;
         exception(): $RealmsServiceException;
-        createErrorScreen(arg0: $Screen): $Screen;
+        constructor(arg0: $RealmsAvailability$Type_);
         constructor(arg0: $RealmsAvailability$Type_, arg1: $RealmsServiceException);
         constructor(arg0: $RealmsServiceException);
-        constructor(arg0: $RealmsAvailability$Type_);
     }
     /**
      * Values that may be interpreted as {@link $RealmsAvailability$Result}.
      */
-    export type $RealmsAvailability$Result_ = { type?: $RealmsAvailability$Type_, exception?: $RealmsServiceException,  } | [type?: $RealmsAvailability$Type_, exception?: $RealmsServiceException, ];
+    export type $RealmsAvailability$Result_ = { exception?: $RealmsServiceException, type?: $RealmsAvailability$Type_,  } | [exception?: $RealmsServiceException, type?: $RealmsAvailability$Type_, ];
     export class $RealmsMainScreen$RealmsCall<T> {
     }
     export interface $RealmsMainScreen$RealmsCall<T> {
@@ -139,12 +139,12 @@ declare module "@package/com/mojang/realmsclient" {
         list: $AbstractSelectionList<$RealmsMainScreen$Entry>;
     }
     export class $Unit extends $Enum<$Unit> {
+        static humanReadable(arg0: number): string;
+        static humanReadable(arg0: number, arg1: $Unit_): string;
+        static getLargest(arg0: number): $Unit;
         static values(): $Unit[];
         static valueOf(arg0: string): $Unit;
         static convertTo(arg0: number, arg1: $Unit_): number;
-        static humanReadable(arg0: number, arg1: $Unit_): string;
-        static humanReadable(arg0: number): string;
-        static getLargest(arg0: number): $Unit;
         static B: $Unit;
         static MB: $Unit;
         static KB: $Unit;
@@ -165,10 +165,10 @@ declare module "@package/com/mojang/realmsclient" {
         static refreshPendingInvites(): void;
         static refreshServerList(): void;
         resetScreen(): void;
-        static play(arg0: $RealmsServer, arg1: $Screen, arg2: boolean): void;
-        static play(arg0: $RealmsServer, arg1: $Screen): void;
         static getVersionComponent(arg0: string, arg1: boolean): $Component;
         static getVersionComponent(arg0: string, arg1: number): $Component;
+        static play(arg0: $RealmsServer, arg1: $Screen, arg2: boolean): void;
+        static play(arg0: $RealmsServer, arg1: $Screen): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;

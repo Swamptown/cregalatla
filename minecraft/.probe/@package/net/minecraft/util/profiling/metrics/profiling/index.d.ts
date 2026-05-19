@@ -22,9 +22,9 @@ declare module "@package/net/minecraft/util/profiling/metrics/profiling" {
         get recording(): boolean;
     }
     export class $ActiveMetricsRecorder implements $MetricsRecorder {
+        static registerGlobalCompletionCallback(arg0: $Consumer_<$Path>): void;
         end(): void;
         cancel(): void;
-        static registerGlobalCompletionCallback(arg0: $Consumer_<$Path>): void;
         getProfiler(): $ProfilerFiller;
         static createStarted(arg0: $MetricsSamplerProvider_, arg1: $LongSupplier_, arg2: $Executor_, arg3: $MetricsPersister, arg4: $Consumer_<$ProfileResults>, arg5: $Consumer_<$Path>): $ActiveMetricsRecorder;
         startTick(): void;
@@ -35,8 +35,8 @@ declare module "@package/net/minecraft/util/profiling/metrics/profiling" {
         get recording(): boolean;
     }
     export class $ServerMetricsSamplersProvider implements $MetricsSamplerProvider {
-        static tickTimeSampler(arg0: $LongSupplier_): $MetricSampler;
         static runtimeIndependentSamplers(): $Set<$MetricSampler>;
+        static tickTimeSampler(arg0: $LongSupplier_): $MetricSampler;
         samplers(arg0: $Supplier_<$ProfileCollector>): $Set<$MetricSampler>;
         constructor(arg0: $LongSupplier_, arg1: boolean);
     }

@@ -22,38 +22,38 @@ declare module "@package/com/supermartijn642/fusion/api/model" {
         static of<T>(modelType: $ModelType<T>, modelData: T): $ModelInstance<T>;
     }
     export interface $ModelInstance<T> {
-        getAsVanillaModel(): $BlockModel;
         getModelDependencies(): $Collection<$ResourceLocation>;
-        getParentModels(): $List<$ResourceLocation>;
         getModelType(): $ModelType<T>;
+        getParentModels(): $List<$ResourceLocation>;
+        getAsVanillaModel(): $BlockModel;
         getModelData(): T;
         bake(context: $ModelBakingContext): $BakedModel;
-        get asVanillaModel(): $BlockModel;
         get modelDependencies(): $Collection<$ResourceLocation>;
-        get parentModels(): $List<$ResourceLocation>;
         get modelType(): $ModelType<T>;
+        get parentModels(): $List<$ResourceLocation>;
+        get asVanillaModel(): $BlockModel;
         get modelData(): T;
     }
     export class $ModelBakingContext {
     }
     export interface $ModelBakingContext {
-        getModelBaker(): $ModelBaker;
         getModelIdentifier(): $ResourceLocation;
+        getBlockTexture(texture: $ResourceLocation_): $TextureAtlasSprite;
+        getModelBaker(): $ModelBaker;
+        getTransformation(): $ModelState;
         getTexture(identifier: $SpriteIdentifier): $TextureAtlasSprite;
         getTexture(atlas: $ResourceLocation_, texture: $ResourceLocation_): $TextureAtlasSprite;
         getModel(identifier: $ResourceLocation_): $ModelInstance<never>;
-        getTransformation(): $ModelState;
-        getBlockTexture(texture: $ResourceLocation_): $TextureAtlasSprite;
-        get modelBaker(): $ModelBaker;
         get modelIdentifier(): $ResourceLocation;
+        get modelBaker(): $ModelBaker;
         get transformation(): $ModelState;
     }
     export class $ModelType<T> {
     }
     export interface $ModelType<T> extends $Serializer<T> {
-        getAsVanillaModel(data: T): $BlockModel;
         getModelDependencies(data: T): $Collection<$ResourceLocation>;
         getParentModels(data: T): $List<$ResourceLocation>;
+        getAsVanillaModel(data: T): $BlockModel;
         bake(context: $ModelBakingContext, data: T): $BakedModel;
     }
 }

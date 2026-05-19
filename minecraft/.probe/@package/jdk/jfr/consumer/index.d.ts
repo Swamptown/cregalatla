@@ -13,27 +13,27 @@ declare module "@package/jdk/jfr/consumer" {
     }
     export class $RecordedMethod extends $RecordedObject {
         getName(): string;
-        isHidden(): boolean;
         getModifiers(): number;
+        isHidden(): boolean;
         getDescriptor(): string;
         getType(): $RecordedClass;
         get name(): string;
-        get hidden(): boolean;
         get modifiers(): number;
+        get hidden(): boolean;
         get descriptor(): string;
         get type(): $RecordedClass;
     }
     export class $RecordedFrame extends $RecordedObject {
+        isJavaFrame(): boolean;
+        getBytecodeIndex(): number;
         getMethod(): $RecordedMethod;
         getType(): string;
         getLineNumber(): number;
-        isJavaFrame(): boolean;
-        getBytecodeIndex(): number;
+        get javaFrame(): boolean;
+        get bytecodeIndex(): number;
         get method(): $RecordedMethod;
         get type(): string;
         get lineNumber(): number;
-        get javaFrame(): boolean;
-        get bytecodeIndex(): number;
     }
     export class $RecordedClass extends $RecordedObject {
         getName(): string;
@@ -52,6 +52,10 @@ declare module "@package/jdk/jfr/consumer" {
         get frames(): $List<$RecordedFrame>;
     }
     export class $RecordedObject {
+        hasField(arg0: string): boolean;
+        getInstant(arg0: string): $Instant;
+        getDuration(arg0: string): $Duration;
+        getString(arg0: string): string;
         getClass(arg0: string): $RecordedClass;
         getBoolean(arg0: string): boolean;
         getByte(arg0: string): number;
@@ -63,11 +67,7 @@ declare module "@package/jdk/jfr/consumer" {
         getDouble(arg0: string): number;
         getValue<T>(arg0: string): T;
         getFields(): $List<$ValueDescriptor>;
-        getString(arg0: string): string;
-        getDuration(arg0: string): $Duration;
-        hasField(arg0: string): boolean;
         getThread(arg0: string): $RecordedThread;
-        getInstant(arg0: string): $Instant;
         get fields(): $List<$ValueDescriptor>;
     }
     export class $RecordedThreadGroup extends $RecordedObject {
@@ -77,32 +77,32 @@ declare module "@package/jdk/jfr/consumer" {
         get parent(): $RecordedThreadGroup;
     }
     export class $RecordedThread extends $RecordedObject {
-        getThreadGroup(): $RecordedThreadGroup;
-        isVirtual(): boolean;
-        getId(): number;
+        getJavaName(): string;
         getOSName(): string;
         getOSThreadId(): number;
         getJavaThreadId(): number;
-        getJavaName(): string;
-        get threadGroup(): $RecordedThreadGroup;
-        get virtual(): boolean;
-        get id(): number;
+        isVirtual(): boolean;
+        getThreadGroup(): $RecordedThreadGroup;
+        getId(): number;
+        get javaName(): string;
         get OSName(): string;
         get OSThreadId(): number;
         get javaThreadId(): number;
-        get javaName(): string;
+        get virtual(): boolean;
+        get threadGroup(): $RecordedThreadGroup;
+        get id(): number;
     }
     export class $RecordedEvent extends $RecordedObject {
-        getStackTrace(): $RecordedStackTrace;
-        getDuration(): $Duration;
         getEventType(): $EventType;
+        getDuration(): $Duration;
         getEndTime(): $Instant;
+        getStackTrace(): $RecordedStackTrace;
         getStartTime(): $Instant;
         getThread(): $RecordedThread;
-        get stackTrace(): $RecordedStackTrace;
-        get duration(): $Duration;
         get eventType(): $EventType;
+        get duration(): $Duration;
         get endTime(): $Instant;
+        get stackTrace(): $RecordedStackTrace;
         get startTime(): $Instant;
         get thread(): $RecordedThread;
     }

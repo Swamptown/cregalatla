@@ -86,20 +86,20 @@ declare module "@package/net/minecraft/world/food" {
         constructor();
     }
     export class $FoodData {
-        tick(arg0: $Player): void;
         getLastFoodLevel(): number;
         getExhaustionLevel(): number;
         setExhaustion(arg0: number): void;
+        tick(arg0: $Player): void;
         addAdditionalSaveData(arg0: $CompoundTag_): void;
         readAdditionalSaveData(arg0: $CompoundTag_): void;
-        eat(arg0: $FoodProperties_): void;
-        eat(arg0: number, arg1: number): void;
-        addExhaustion(arg0: number): void;
         getSaturationLevel(): number;
         setSaturation(arg0: number): void;
         needsFood(): boolean;
         getFoodLevel(): number;
         setFoodLevel(arg0: number): void;
+        addExhaustion(arg0: number): void;
+        eat(arg0: number, arg1: number): void;
+        eat(arg0: $FoodProperties_): void;
         constructor();
         get lastFoodLevel(): number;
         get exhaustionLevel(): number;
@@ -109,10 +109,10 @@ declare module "@package/net/minecraft/world/food" {
     }
     export class $FoodProperties extends $Record {
         saturation(): number;
-        eatDurationTicks(): number;
         canAlwaysEat(): boolean;
-        eatSeconds(): number;
+        eatDurationTicks(): number;
         nutrition(): number;
+        eatSeconds(): number;
         effects(): $List<$FoodProperties$PossibleEffect>;
         usingConvertsTo(): ($ItemStack) | undefined;
         static DIRECT_CODEC: $Codec<$FoodProperties>;
@@ -122,7 +122,7 @@ declare module "@package/net/minecraft/world/food" {
     /**
      * Values that may be interpreted as {@link $FoodProperties}.
      */
-    export type $FoodProperties_ = { nutrition?: number, saturation?: number, effects?: $List_<$FoodProperties$PossibleEffect_>, eatSeconds?: number, usingConvertsTo?: ($ItemStack_) | undefined, canAlwaysEat?: boolean,  } | [nutrition?: number, saturation?: number, effects?: $List_<$FoodProperties$PossibleEffect_>, eatSeconds?: number, usingConvertsTo?: ($ItemStack_) | undefined, canAlwaysEat?: boolean, ];
+    export type $FoodProperties_ = { canAlwaysEat?: boolean, usingConvertsTo?: ($ItemStack_) | undefined, eatSeconds?: number, effects?: $List_<$FoodProperties$PossibleEffect_>, saturation?: number, nutrition?: number,  } | [canAlwaysEat?: boolean, usingConvertsTo?: ($ItemStack_) | undefined, eatSeconds?: number, effects?: $List_<$FoodProperties$PossibleEffect_>, saturation?: number, nutrition?: number, ];
     export class $FoodProperties$PossibleEffect extends $Record {
         effectSupplier(): $Supplier<$MobEffectInstance>;
         effect(): $MobEffectInstance;
@@ -136,11 +136,11 @@ declare module "@package/net/minecraft/world/food" {
      */
     export type $FoodProperties$PossibleEffect_ = { effectSupplier?: $Supplier_<$MobEffectInstance>, probability?: number,  } | [effectSupplier?: $Supplier_<$MobEffectInstance>, probability?: number, ];
     export class $FoodProperties$Builder implements $InjectedFoodPropertiesBuilderExtension {
-        build(): $FoodProperties;
         saturationModifier(arg0: number): $FoodProperties$Builder;
         alwaysEdible(): $FoodProperties$Builder;
         fast(): $FoodProperties$Builder;
         nutrition(arg0: number): $FoodProperties$Builder;
+        build(): $FoodProperties;
         /**
          * @deprecated
          */

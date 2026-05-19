@@ -31,10 +31,10 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
     export class $BlockEntityAttachmentHandler {
     }
     export interface $BlockEntityAttachmentHandler {
-        attach(id: string, type: $ResourceLocation_, directions: $Set_<$Direction_>, args: $Object): void;
-        attachCustomCapability(id: string, directions: $Set_<$Direction_>, capability: $BlockCapability<never, never>, dataFactory: $Supplier_<never>): void;
-        fluidTank(id: string, directions: $Set_<$Direction_>, capacity: number): void;
         fluidTank(id: string, directions: $Set_<$Direction_>, capacity: number, inputFilter: $FluidIngredient_): void;
+        fluidTank(id: string, directions: $Set_<$Direction_>, capacity: number): void;
+        attachCustomCapability(id: string, directions: $Set_<$Direction_>, capability: $BlockCapability<never, never>, dataFactory: $Supplier_<never>): void;
+        attach(id: string, type: $ResourceLocation_, directions: $Set_<$Direction_>, args: $Object): void;
         inventory(id: string, directions: $Set_<$Direction_>, width: number, height: number): void;
         inventory(id: string, directions: $Set_<$Direction_>, width: number, height: number, inputFilter: $ItemPredicate_): void;
         energyStorage(id: string, directions: $Set_<$Direction_>, capacity: number, maxReceive: number, maxExtract: number, autoOutput: number): void;
@@ -44,11 +44,11 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
      */
     export type $BlockEntityAttachmentHandler_ = (() => void);
     export class $KubeBlockEntity extends $BlockEntity {
+        getPlacer(): $Entity;
+        sendEvent(eventId: number, data: number): void;
+        getBlock(): $LevelBlock;
         save(): void;
         sync(): void;
-        sendEvent(eventId: number, data: number): void;
-        getPlacer(): $Entity;
-        getBlock(): $LevelBlock;
         attachments: $Map<string, $Object>;
         data: $CompoundTag;
         level: $Level;
@@ -72,8 +72,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
     export class $BlockEntityAttachment {
     }
     export interface $BlockEntityAttachment {
-        serverTick(): void;
         getWrappedObject(): $Object;
+        serverTick(): void;
         deserialize(registries: $HolderLookup$Provider, tag: $Tag_): void;
         serialize(registries: $HolderLookup$Provider): $Tag;
         onRemove(level: $ServerLevel, blockEntity: $KubeBlockEntity, newState: $BlockState_): void;
@@ -88,13 +88,13 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
         constructor(i: $ResourceLocation_, info: $BlockEntityInfo);
     }
     export class $EnergyStorageAttachment$Factory extends $Record implements $BlockEntityAttachmentFactory {
-        create(info: $BlockEntityAttachmentInfo_, entity: $KubeBlockEntity): $BlockEntityAttachment;
-        capacity(): number;
         maxExtract(): (number) | undefined;
         maxReceive(): (number) | undefined;
-        autoOutput(): (number) | undefined;
         isTicking(): boolean;
+        autoOutput(): (number) | undefined;
         getCapabilities(): $List<$BlockCapability<never, never>>;
+        create(info: $BlockEntityAttachmentInfo_, entity: $KubeBlockEntity): $BlockEntityAttachment;
+        capacity(): number;
         constructor(capacity: number, maxReceive: (number) | undefined, maxExtract: (number) | undefined, autoOutput: (number) | undefined);
         get ticking(): boolean;
         get capabilities(): $List<$BlockCapability<never, never>>;
@@ -102,7 +102,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
     /**
      * Values that may be interpreted as {@link $EnergyStorageAttachment$Factory}.
      */
-    export type $EnergyStorageAttachment$Factory_ = { maxExtract?: (number) | undefined, maxReceive?: (number) | undefined, autoOutput?: (number) | undefined, capacity?: number,  } | [maxExtract?: (number) | undefined, maxReceive?: (number) | undefined, autoOutput?: (number) | undefined, capacity?: number, ];
+    export type $EnergyStorageAttachment$Factory_ = { autoOutput?: (number) | undefined, maxReceive?: (number) | undefined, maxExtract?: (number) | undefined, capacity?: number,  } | [autoOutput?: (number) | undefined, maxReceive?: (number) | undefined, maxExtract?: (number) | undefined, capacity?: number, ];
     export class $BlockEntityAttachmentRegistry {
     }
     export interface $BlockEntityAttachmentRegistry {
@@ -114,8 +114,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
      */
     export type $BlockEntityAttachmentRegistry_ = ((type: $BlockEntityAttachmentType) => void);
     export class $EnergyStorageAttachment implements $BlockEntityAttachment {
-        serverTick(): void;
         getWrappedObject(): $Object;
+        serverTick(): void;
         getCapability<CAP, SRC>(capability: $BlockCapability<CAP, SRC>): CAP;
         deserialize(registries: $HolderLookup$Provider, tag: $Tag_): void;
         serialize(registries: $HolderLookup$Provider): $Tag;
@@ -128,10 +128,10 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
         get wrappedObject(): $Object;
     }
     export class $CustomCapabilityAttachment$Factory extends $Record implements $BlockEntityAttachmentFactory {
-        type(): $BlockCapability<never, never>;
-        create(info: $BlockEntityAttachmentInfo_, entity: $KubeBlockEntity): $BlockEntityAttachment;
         dataFactory(): $Supplier<never>;
         getCapabilities(): $List<$BlockCapability<never, never>>;
+        type(): $BlockCapability<never, never>;
+        create(info: $BlockEntityAttachmentInfo_, entity: $KubeBlockEntity): $BlockEntityAttachment;
         isTicking(): boolean;
         constructor(type: $BlockCapability<never, never>, dataFactory: $Supplier_<never>);
         get capabilities(): $List<$BlockCapability<never, never>>;
@@ -140,7 +140,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
     /**
      * Values that may be interpreted as {@link $CustomCapabilityAttachment$Factory}.
      */
-    export type $CustomCapabilityAttachment$Factory_ = { type?: $BlockCapability<never, never>, dataFactory?: $Supplier_<never>,  } | [type?: $BlockCapability<never, never>, dataFactory?: $Supplier_<never>, ];
+    export type $CustomCapabilityAttachment$Factory_ = { dataFactory?: $Supplier_<never>, type?: $BlockCapability<never, never>,  } | [dataFactory?: $Supplier_<never>, type?: $BlockCapability<never, never>, ];
     export class $BlockEntityAttachmentHolder extends $Record {
         info(): $BlockEntityAttachmentInfo;
         attachment(): $BlockEntityAttachment;
@@ -150,7 +150,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
     /**
      * Values that may be interpreted as {@link $BlockEntityAttachmentHolder}.
      */
-    export type $BlockEntityAttachmentHolder_ = { info?: $BlockEntityAttachmentInfo_, attachment?: $BlockEntityAttachment,  } | [info?: $BlockEntityAttachmentInfo_, attachment?: $BlockEntityAttachment, ];
+    export type $BlockEntityAttachmentHolder_ = { attachment?: $BlockEntityAttachment, info?: $BlockEntityAttachmentInfo_,  } | [attachment?: $BlockEntityAttachment, info?: $BlockEntityAttachmentInfo_, ];
     export class $InventoryAttachment implements $BlockEntityAttachment {
         getWrappedObject(): $Object;
         deserialize(registries: $HolderLookup$Provider, tag: $Tag_): void;
@@ -168,36 +168,36 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
         get wrappedObject(): $Object;
     }
     export class $EnergyStorageAttachment$Wrapped extends $EnergyStorage {
-        setEnergyStored(energy: number): void;
-        addEnergy(add: number, simulate: boolean): number;
         removeEnergy(remove: number, simulate: boolean): number;
         useEnergy(use: number, simulate: boolean): boolean;
+        setEnergyStored(energy: number): void;
+        addEnergy(add: number, simulate: boolean): number;
         constructor(attachment: $EnergyStorageAttachment, capacity: number, maxReceive: number, maxExtract: number);
         set energyStored(value: number);
     }
     export class $BlockEntityInfo implements $BlockEntityAttachmentHandler {
+        tickOffset(offset: number): void;
         initialData(data: $CompoundTag_): void;
         serverTicking(): void;
         clientTicking(): void;
         tickFrequency(frequency: number): void;
-        tickOffset(offset: number): void;
         ticking(): void;
         enableSync(): void;
         rightClickOpensInventory(id: string): void;
         rightClickFillsTank(id: string): void;
         eventHandler(eventId: number, callback: $BlockEntityEventCallback_): void;
-        attach(id: string, type: $ResourceLocation_, directions: $Set_<$Direction_>, args: $Object): void;
-        attachCustomCapability(id: string, directions: $Set_<$Direction_>, capability: $BlockCapability<never, never>, dataFactory: $Supplier_<never>): void;
-        fluidTank(id: string, directions: $Set_<$Direction_>, capacity: number): void;
         fluidTank(id: string, directions: $Set_<$Direction_>, capacity: number, inputFilter: $FluidIngredient_): void;
+        fluidTank(id: string, directions: $Set_<$Direction_>, capacity: number): void;
+        attachCustomCapability(id: string, directions: $Set_<$Direction_>, capability: $BlockCapability<never, never>, dataFactory: $Supplier_<never>): void;
+        attach(id: string, type: $ResourceLocation_, directions: $Set_<$Direction_>, args: $Object): void;
         inventory(id: string, directions: $Set_<$Direction_>, width: number, height: number): void;
         inventory(id: string, directions: $Set_<$Direction_>, width: number, height: number, inputFilter: $ItemPredicate_): void;
         energyStorage(id: string, directions: $Set_<$Direction_>, capacity: number, maxReceive: number, maxExtract: number, autoOutput: number): void;
         constructor(blockBuilder: $BlockBuilder);
     }
     export class $CustomCapabilityAttachment extends $Record implements $BlockEntityAttachment {
-        data(): $Object;
         getWrappedObject(): $Object;
+        data(): $Object;
         getCapability<CAP, SRC>(c: $BlockCapability<CAP, SRC>): CAP;
         capability(): $BlockCapability<never, never>;
         serverTick(): void;
@@ -211,19 +211,19 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
     /**
      * Values that may be interpreted as {@link $CustomCapabilityAttachment}.
      */
-    export type $CustomCapabilityAttachment_ = { data?: $Object, capability?: $BlockCapability<never, never>,  } | [data?: $Object, capability?: $BlockCapability<never, never>, ];
+    export type $CustomCapabilityAttachment_ = { capability?: $BlockCapability<never, never>, data?: $Object,  } | [capability?: $BlockCapability<never, never>, data?: $Object, ];
     export class $BlockEntityAttachmentInfo extends $Record {
+        directions(): $EnumSet<$Direction>;
         index(): number;
         type(): $BlockEntityAttachmentType;
         factory(): $BlockEntityAttachmentFactory;
         id(): string;
-        directions(): $EnumSet<$Direction>;
         constructor(id: string, type: $BlockEntityAttachmentType_, index: number, directions: $EnumSet<$Direction_>, factory: $BlockEntityAttachmentFactory_);
     }
     /**
      * Values that may be interpreted as {@link $BlockEntityAttachmentInfo}.
      */
-    export type $BlockEntityAttachmentInfo_ = { id?: string, index?: number, factory?: $BlockEntityAttachmentFactory_, directions?: $EnumSet<$Direction_>, type?: $BlockEntityAttachmentType_,  } | [id?: string, index?: number, factory?: $BlockEntityAttachmentFactory_, directions?: $EnumSet<$Direction_>, type?: $BlockEntityAttachmentType_, ];
+    export type $BlockEntityAttachmentInfo_ = { type?: $BlockEntityAttachmentType_, directions?: $EnumSet<$Direction_>, factory?: $BlockEntityAttachmentFactory_, index?: number, id?: string,  } | [type?: $BlockEntityAttachmentType_, directions?: $EnumSet<$Direction_>, factory?: $BlockEntityAttachmentFactory_, index?: number, id?: string, ];
     export class $BlockEntityEventCallback {
     }
     export interface $BlockEntityEventCallback {
@@ -234,10 +234,10 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
      */
     export type $BlockEntityEventCallback_ = ((entity: $KubeBlockEntity, data: number) => void);
     export class $FluidTankAttachment$Factory extends $Record implements $BlockEntityAttachmentFactory {
-        create(info: $BlockEntityAttachmentInfo_, entity: $KubeBlockEntity): $BlockEntityAttachment;
-        capacity(): number;
         inputFilter(): ($FluidIngredient) | undefined;
         getCapabilities(): $List<$BlockCapability<never, never>>;
+        create(info: $BlockEntityAttachmentInfo_, entity: $KubeBlockEntity): $BlockEntityAttachment;
+        capacity(): number;
         isTicking(): boolean;
         constructor(capacity: number, inputFilter: ($FluidIngredient_) | undefined);
         get capabilities(): $List<$BlockCapability<never, never>>;
@@ -246,7 +246,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
     /**
      * Values that may be interpreted as {@link $FluidTankAttachment$Factory}.
      */
-    export type $FluidTankAttachment$Factory_ = { inputFilter?: ($FluidIngredient_) | undefined, capacity?: number,  } | [inputFilter?: ($FluidIngredient_) | undefined, capacity?: number, ];
+    export type $FluidTankAttachment$Factory_ = { capacity?: number, inputFilter?: ($FluidIngredient_) | undefined,  } | [capacity?: number, inputFilter?: ($FluidIngredient_) | undefined, ];
     export class $FluidTankAttachment$Wrapped extends $FluidTank {
         constructor(attachment: $FluidTankAttachment, capacity: number, inputFilter: $Predicate_<$FluidStack>);
     }
@@ -264,36 +264,12 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
         get wrappedObject(): $Object;
     }
     export class $BlockEntityTickKubeEvent implements $KubeLevelEvent {
-        getLevel(): $Level;
         getCycle(): number;
-        getTick(): number;
+        getLevel(): $Level;
         getBlock(): $LevelBlock;
+        getTick(): number;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -306,11 +282,35 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         constructor(entity: $KubeBlockEntity);
-        get level(): $Level;
         get cycle(): number;
-        get tick(): number;
+        get level(): $Level;
         get block(): $LevelBlock;
+        get tick(): number;
         get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
     }
@@ -328,13 +328,13 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
     /**
      * Values that may be interpreted as {@link $BlockEntityAttachmentType}.
      */
-    export type $BlockEntityAttachmentType_ = { id?: $ResourceLocation_, typeInfo?: $TypeInfo_,  } | [id?: $ResourceLocation_, typeInfo?: $TypeInfo_, ];
+    export type $BlockEntityAttachmentType_ = { typeInfo?: $TypeInfo_, id?: $ResourceLocation_,  } | [typeInfo?: $TypeInfo_, id?: $ResourceLocation_, ];
     export class $InventoryAttachment$Factory extends $Record implements $BlockEntityAttachmentFactory {
+        inputFilter(): ($ItemPredicate) | undefined;
+        getCapabilities(): $List<$BlockCapability<never, never>>;
         create(info: $BlockEntityAttachmentInfo_, entity: $KubeBlockEntity): $BlockEntityAttachment;
         width(): number;
-        inputFilter(): ($ItemPredicate) | undefined;
         height(): number;
-        getCapabilities(): $List<$BlockCapability<never, never>>;
         isTicking(): boolean;
         constructor(width: number, height: number, inputFilter: ($ItemPredicate_) | undefined);
         get capabilities(): $List<$BlockCapability<never, never>>;
@@ -343,13 +343,13 @@ declare module "@package/dev/latvian/mods/kubejs/block/entity" {
     /**
      * Values that may be interpreted as {@link $InventoryAttachment$Factory}.
      */
-    export type $InventoryAttachment$Factory_ = { width?: number, height?: number, inputFilter?: ($ItemPredicate_) | undefined,  } | [width?: number, height?: number, inputFilter?: ($ItemPredicate_) | undefined, ];
+    export type $InventoryAttachment$Factory_ = { inputFilter?: ($ItemPredicate_) | undefined, height?: number, width?: number,  } | [inputFilter?: ($ItemPredicate_) | undefined, height?: number, width?: number, ];
     export class $BlockEntityAttachmentFactory {
     }
     export interface $BlockEntityAttachmentFactory {
-        create(info: $BlockEntityAttachmentInfo_, entity: $KubeBlockEntity): $BlockEntityAttachment;
         isTicking(): boolean;
         getCapabilities(): $List<$BlockCapability<never, never>>;
+        create(info: $BlockEntityAttachmentInfo_, entity: $KubeBlockEntity): $BlockEntityAttachment;
         get ticking(): boolean;
         get capabilities(): $List<$BlockCapability<never, never>>;
     }

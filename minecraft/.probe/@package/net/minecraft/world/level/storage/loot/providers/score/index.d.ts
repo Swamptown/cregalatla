@@ -8,16 +8,16 @@ import { $LootContextParam } from "@package/net/minecraft/world/level/storage/lo
 
 declare module "@package/net/minecraft/world/level/storage/loot/providers/score" {
     export class $ContextScoreboardNameProvider extends $Record implements $ScoreboardNameProvider {
-        target(): $LootContext$EntityTarget;
-        getType(): $LootScoreProviderType;
         static forTarget(arg0: $LootContext$EntityTarget_): $ScoreboardNameProvider;
         getScoreHolder(arg0: $LootContext): $ScoreHolder;
         getReferencedContextParams(): $Set<$LootContextParam<never>>;
+        target(): $LootContext$EntityTarget;
+        getType(): $LootScoreProviderType;
         static INLINE_CODEC: $Codec<$ContextScoreboardNameProvider>;
         static CODEC: $MapCodec<$ContextScoreboardNameProvider>;
         constructor(arg0: $LootContext$EntityTarget_);
-        get type(): $LootScoreProviderType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
+        get type(): $LootScoreProviderType;
     }
     /**
      * Values that may be interpreted as {@link $ContextScoreboardNameProvider}.
@@ -26,11 +26,11 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/score"
     export class $ScoreboardNameProvider {
     }
     export interface $ScoreboardNameProvider {
-        getType(): $LootScoreProviderType;
         getScoreHolder(arg0: $LootContext): $ScoreHolder;
         getReferencedContextParams(): $Set<$LootContextParam<never>>;
-        get type(): $LootScoreProviderType;
+        getType(): $LootScoreProviderType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
+        get type(): $LootScoreProviderType;
     }
     export class $LootScoreProviderType extends $Record {
         codec(): $MapCodec<$ScoreboardNameProvider>;
@@ -48,15 +48,15 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/score"
         constructor();
     }
     export class $FixedScoreboardNameProvider extends $Record implements $ScoreboardNameProvider {
+        getScoreHolder(arg0: $LootContext): $ScoreHolder;
+        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         name(): string;
         static forName(arg0: string): $ScoreboardNameProvider;
         getType(): $LootScoreProviderType;
-        getScoreHolder(arg0: $LootContext): $ScoreHolder;
-        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         static CODEC: $MapCodec<$FixedScoreboardNameProvider>;
         constructor(arg0: string);
-        get type(): $LootScoreProviderType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
+        get type(): $LootScoreProviderType;
     }
     /**
      * Values that may be interpreted as {@link $FixedScoreboardNameProvider}.

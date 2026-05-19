@@ -19,11 +19,11 @@ declare module "@package/cc/abbie/emi_ores/mixin/accessor" {
     export class $TrapezoidHeightAccessor {
     }
     export interface $TrapezoidHeightAccessor {
-        getMaxInclusive(): $VerticalAnchor;
         getMinInclusive(): $VerticalAnchor;
+        getMaxInclusive(): $VerticalAnchor;
         getPlateau(): number;
-        get maxInclusive(): $VerticalAnchor;
         get minInclusive(): $VerticalAnchor;
+        get maxInclusive(): $VerticalAnchor;
         get plateau(): number;
     }
     export class $NoiseProviderAccessor {
@@ -87,10 +87,10 @@ declare module "@package/cc/abbie/emi_ores/mixin/accessor" {
     export class $UniformHeightAccessor {
     }
     export interface $UniformHeightAccessor {
-        getMaxInclusive(): $VerticalAnchor;
         getMinInclusive(): $VerticalAnchor;
-        get maxInclusive(): $VerticalAnchor;
+        getMaxInclusive(): $VerticalAnchor;
         get minInclusive(): $VerticalAnchor;
+        get maxInclusive(): $VerticalAnchor;
     }
     export class $HeightRangePlacementAccessor {
     }

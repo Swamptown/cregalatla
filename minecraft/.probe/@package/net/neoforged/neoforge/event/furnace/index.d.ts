@@ -5,8 +5,8 @@ import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 declare module "@package/net/neoforged/neoforge/event/furnace" {
     export class $FurnaceFuelBurnTimeEvent extends $Event implements $ICancellableEvent {
         setBurnTime(arg0: number): void;
-        getBurnTime(): number;
         getRecipeType(): $RecipeType<never>;
+        getBurnTime(): number;
         getItemStack(): $ItemStack;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;

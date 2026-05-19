@@ -53,20 +53,20 @@ export * as blocks from "@package/net/minecraft/commands/arguments/blocks";
 
 declare module "@package/net/minecraft/commands/arguments" {
     export class $EntityAnchorArgument implements $ArgumentType<$EntityAnchorArgument$Anchor> {
-        static anchor(): $EntityAnchorArgument;
         static getAnchor(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $EntityAnchorArgument$Anchor;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
-        parse<S>(arg0: $StringReader, arg1: S): $EntityAnchorArgument$Anchor;
         parse(arg0: $StringReader): $EntityAnchorArgument$Anchor;
+        static anchor(): $EntityAnchorArgument;
+        parse<S>(arg0: $StringReader, arg1: S): $EntityAnchorArgument$Anchor;
         constructor();
         get examples(): $Collection<string>;
     }
     export class $NbtPathArgument$AllElementsNode implements $NbtPathArgument$Node {
     }
     export class $ScoreboardSlotArgument implements $ArgumentType<$DisplaySlot> {
-        static displaySlot(): $ScoreboardSlotArgument;
         static getDisplaySlot(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $DisplaySlot;
+        static displaySlot(): $ScoreboardSlotArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): $DisplaySlot;
@@ -96,7 +96,7 @@ declare module "@package/net/minecraft/commands/arguments" {
     /**
      * Values that may be interpreted as {@link $ArgumentSignatures$Entry}.
      */
-    export type $ArgumentSignatures$Entry_ = { name?: string, signature?: $MessageSignature_,  } | [name?: string, signature?: $MessageSignature_, ];
+    export type $ArgumentSignatures$Entry_ = { signature?: $MessageSignature_, name?: string,  } | [signature?: $MessageSignature_, name?: string, ];
     export class $ResourceOrIdArgument<T> implements $ArgumentType<$Holder<T>> {
         static getLootModifier(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder<$LootItemFunction>;
         static getLootPredicate(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder<$LootItemCondition>;
@@ -106,21 +106,21 @@ declare module "@package/net/minecraft/commands/arguments" {
         static lootModifier(arg0: $CommandBuildContext): $ResourceOrIdArgument$LootModifierArgument;
         getExamples(): $Collection<string>;
         static getLootTable(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder<$LootTable>;
-        parse<S>(arg0: $StringReader, arg1: S): $Holder<T>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $Holder<T>;
         parse(arg0: $StringReader): $Holder<T>;
         static ERROR_FAILED_TO_PARSE: $DynamicCommandExceptionType;
         constructor(arg0: $CommandBuildContext, arg1: $ResourceKey_<$Registry<$Holder<T>>>, arg2: $Codec<$Holder_<$Holder<T>>>);
         get examples(): $Collection<string>;
     }
     export class $ObjectiveArgument implements $ArgumentType<string> {
-        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getObjective(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Objective;
         static getWritableObjective(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Objective;
+        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
+        parse(arg0: $StringReader): string;
         static objective(): $ObjectiveArgument;
         parse<S>(arg0: $StringReader, arg1: S): string;
-        parse(arg0: $StringReader): string;
         constructor();
         get examples(): $Collection<string>;
     }
@@ -139,14 +139,14 @@ declare module "@package/net/minecraft/commands/arguments" {
         constructor(arg0: $CommandBuildContext);
     }
     export class $ScoreHolderArgument implements $ArgumentType<$ScoreHolderArgument$Result> {
-        static getName(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ScoreHolder;
-        parse<S>(arg0: $StringReader, arg1: S): $ScoreHolderArgument$Result;
         static getNamesWithDefaultWildcard(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Collection<$ScoreHolder>;
         static scoreHolder(): $ScoreHolderArgument;
         static scoreHolders(): $ScoreHolderArgument;
-        static getNames(arg0: $CommandContext<$CommandSourceStack>, arg1: string, arg2: $Supplier_<$Collection<$ScoreHolder>>): $Collection<$ScoreHolder>;
         static getNames(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Collection<$ScoreHolder>;
+        static getNames(arg0: $CommandContext<$CommandSourceStack>, arg1: string, arg2: $Supplier_<$Collection<$ScoreHolder>>): $Collection<$ScoreHolder>;
         getExamples(): $Collection<string>;
+        static getName(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ScoreHolder;
+        parse<S>(arg0: $StringReader, arg1: S): $ScoreHolderArgument$Result;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse(arg0: $StringReader): $ScoreHolderArgument$Result;
         static SUGGEST_SCORE_HOLDERS: $SuggestionProvider<$CommandSourceStack>;
@@ -155,12 +155,12 @@ declare module "@package/net/minecraft/commands/arguments" {
         get examples(): $Collection<string>;
     }
     export class $UuidArgument implements $ArgumentType<$UUID> {
-        parse(arg0: $StringReader): $UUID;
         getExamples(): $Collection<string>;
+        parse(arg0: $StringReader): $UUID;
         static uuid(): $UuidArgument;
         static getUuid(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $UUID;
-        parse<S>(arg0: $StringReader, arg1: S): $UUID;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $UUID;
         static ERROR_INVALID_UUID: $SimpleCommandExceptionType;
         constructor();
         get examples(): $Collection<string>;
@@ -170,11 +170,11 @@ declare module "@package/net/minecraft/commands/arguments" {
         static getRotation(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Rotation;
     }
     export class $MessageArgument$Message extends $Record {
-        parts(): $MessageArgument$Part[];
-        text(): string;
-        static parseText(arg0: $StringReader, arg1: boolean): $MessageArgument$Message;
-        toComponent(arg0: $CommandSourceStack, arg1: boolean): $Component;
         resolveComponent(arg0: $CommandSourceStack): $Component;
+        toComponent(arg0: $CommandSourceStack, arg1: boolean): $Component;
+        static parseText(arg0: $StringReader, arg1: boolean): $MessageArgument$Message;
+        text(): string;
+        parts(): $MessageArgument$Part[];
         constructor(text: string, parts: $MessageArgument$Part_[]);
     }
     /**
@@ -182,12 +182,12 @@ declare module "@package/net/minecraft/commands/arguments" {
      */
     export type $MessageArgument$Message_ = { parts?: $MessageArgument$Part_[], text?: string,  } | [parts?: $MessageArgument$Part_[], text?: string, ];
     export class $AngleArgument implements $ArgumentType<$AngleArgument$SingleAngle> {
-        parse(arg0: $StringReader): $AngleArgument$SingleAngle;
         static getAngle(arg0: $CommandContext<$CommandSourceStack>, arg1: string): number;
         getExamples(): $Collection<string>;
         static angle(): $AngleArgument;
-        parse<S>(arg0: $StringReader, arg1: S): $AngleArgument$SingleAngle;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $AngleArgument$SingleAngle;
+        parse(arg0: $StringReader): $AngleArgument$SingleAngle;
         static ERROR_INVALID_ANGLE: $SimpleCommandExceptionType;
         static ERROR_NOT_COMPLETE: $SimpleCommandExceptionType;
         constructor();
@@ -227,8 +227,8 @@ declare module "@package/net/minecraft/commands/arguments" {
         convertId(arg0: string): string;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
-        parse<S>(arg0: $StringReader, arg1: S): T;
         parse(arg0: $StringReader): T;
+        parse<S>(arg0: $StringReader, arg1: S): T;
         constructor(arg0: $Codec<T>, arg1: $Supplier_<T[]>);
         get examples(): $Collection<string>;
     }
@@ -236,9 +236,9 @@ declare module "@package/net/minecraft/commands/arguments" {
     }
     export class $DimensionArgument implements $ArgumentType<$ResourceLocation> {
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
-        getExamples(): $Collection<string>;
         static getDimension(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ServerLevel;
         static dimension(): $DimensionArgument;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): $ResourceLocation;
         parse(arg0: $StringReader): $ResourceLocation;
         constructor();
@@ -251,8 +251,8 @@ declare module "@package/net/minecraft/commands/arguments" {
     export class $RangeArgument$Floats implements $RangeArgument<$MinMaxBounds$Doubles> {
         static getRange(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $MinMaxBounds$Doubles;
         getExamples(): $Collection<string>;
-        parse<S>(arg0: $StringReader, arg1: S): $MinMaxBounds$Doubles;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $MinMaxBounds$Doubles;
         parse(arg0: $StringReader): $MinMaxBounds$Doubles;
         constructor();
         get examples(): $Collection<string>;
@@ -269,9 +269,9 @@ declare module "@package/net/minecraft/commands/arguments" {
     export class $ResourceOrTagArgument$Result<T> {
     }
     export interface $ResourceOrTagArgument$Result<T> extends $Predicate<$Holder<T>> {
+        asPrintable(): string;
         cast<E>(arg0: $ResourceKey_<$Registry<E>>): ($ResourceOrTagArgument$Result<E>) | undefined;
         unwrap(): $Either<$Holder$Reference<$Holder<T>>, $HolderSet$Named<$Holder<T>>>;
-        asPrintable(): string;
     }
     export class $NbtPathArgument$MatchRootObjectNode implements $NbtPathArgument$Node {
     }
@@ -280,26 +280,26 @@ declare module "@package/net/minecraft/commands/arguments" {
     export interface $NbtPathArgument$Node {
     }
     export class $ResourceKeyArgument<T> implements $ArgumentType<$ResourceKey<T>>, $ResourceKeyArgumentInvoker {
-        static key<T>(arg0: $ResourceKey_<$Registry<T>>): $ResourceKeyArgument<T>;
-        parse(arg0: $StringReader): $ResourceKey<$ResourceKey<T>>;
         static getStructureTemplatePool(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$StructureTemplatePool>;
-        static invokegetRegistryKey$structurify_$md$d858b6$0(arg0: $CommandContext<any>, arg1: string, arg2: $ResourceKey_<any>, arg3: $DynamicCommandExceptionType): $ResourceKey<any>;
+        static invokegetRegistryKey$structurify_$md$4ca6b6$0(arg0: $CommandContext<any>, arg1: string, arg2: $ResourceKey_<any>, arg3: $DynamicCommandExceptionType): $ResourceKey<any>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getConfiguredFeature(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$ConfiguredFeature<never, never>>;
         getExamples(): $Collection<string>;
+        static key<T>(arg0: $ResourceKey_<$Registry<T>>): $ResourceKeyArgument<T>;
         static getStructure(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$Structure>;
         parse<S>(arg0: $StringReader, arg1: S): $ResourceKey<T>;
+        parse(arg0: $StringReader): $ResourceKey<T>;
         registryKey: $ResourceKey<$Registry<$ResourceKey<T>>>;
         constructor(arg0: $ResourceKey_<$Registry<$ResourceKey<T>>>);
         get examples(): $Collection<string>;
     }
     export class $TimeArgument implements $ArgumentType<number> {
-        static time(): $TimeArgument;
-        static time(arg0: number): $TimeArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
-        parse<S>(arg0: $StringReader, arg1: S): number;
+        static time(): $TimeArgument;
+        static time(arg0: number): $TimeArgument;
         parse(arg0: $StringReader): number;
+        parse<S>(arg0: $StringReader, arg1: S): number;
         minimum: number;
         get examples(): $Collection<string>;
     }
@@ -307,9 +307,9 @@ declare module "@package/net/minecraft/commands/arguments" {
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getGameProfiles(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Collection<$GameProfile>;
         getExamples(): $Collection<string>;
+        parse<S>(arg0: $StringReader, arg1: S): $GameProfileArgument$Result;
         static gameProfile(): $GameProfileArgument;
         parse(arg0: $StringReader): $GameProfileArgument$Result;
-        parse<S>(arg0: $StringReader, arg1: S): $GameProfileArgument$Result;
         static ERROR_UNKNOWN_PLAYER: $SimpleCommandExceptionType;
         constructor();
         get examples(): $Collection<string>;
@@ -322,11 +322,11 @@ declare module "@package/net/minecraft/commands/arguments" {
         constructor();
     }
     export class $MessageArgument implements $SignedArgument<$MessageArgument$Message> {
+        static resolveChatMessage(arg0: $CommandContext<$CommandSourceStack>, arg1: string, arg2: $Consumer_<$PlayerChatMessage>): void;
+        getExamples(): $Collection<string>;
         static getMessage(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Component;
         static message(): $MessageArgument;
         parse(arg0: $StringReader): $MessageArgument$Message;
-        static resolveChatMessage(arg0: $CommandContext<$CommandSourceStack>, arg1: string, arg2: $Consumer_<$PlayerChatMessage>): void;
-        getExamples(): $Collection<string>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse<S>(arg0: $StringReader, arg1: S): $MessageArgument$Message;
         static TOO_LONG: $Dynamic2CommandExceptionType;
@@ -334,22 +334,22 @@ declare module "@package/net/minecraft/commands/arguments" {
         get examples(): $Collection<string>;
     }
     export class $ComponentArgument implements $ArgumentType<$Component> {
-        static getComponent(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Component;
         static textComponent(arg0: $CommandBuildContext): $ComponentArgument;
         getExamples(): $Collection<string>;
-        parse<S>(arg0: $StringReader, arg1: S): $Component;
-        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse(arg0: $StringReader): $Component;
+        static getComponent(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Component;
+        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $Component;
         static ERROR_INVALID_JSON: $DynamicCommandExceptionType;
         get examples(): $Collection<string>;
     }
     export class $SlotArgument implements $ArgumentType<number> {
-        static slot(): $SlotArgument;
-        parse(arg0: $StringReader): number;
-        static getSlot(arg0: $CommandContext<$CommandSourceStack>, arg1: string): number;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
+        static slot(): $SlotArgument;
+        static getSlot(arg0: $CommandContext<$CommandSourceStack>, arg1: string): number;
         parse<S>(arg0: $StringReader, arg1: S): number;
+        parse(arg0: $StringReader): number;
         constructor();
         get examples(): $Collection<string>;
     }
@@ -365,9 +365,9 @@ declare module "@package/net/minecraft/commands/arguments" {
     export class $ResourceOrTagKeyArgument$Result<T> {
     }
     export interface $ResourceOrTagKeyArgument$Result<T> extends $Predicate<$Holder<T>> {
+        asPrintable(): string;
         cast<E>(arg0: $ResourceKey_<$Registry<E>>): ($ResourceOrTagKeyArgument$Result<E>) | undefined;
         unwrap(): $Either<$ResourceKey<$Holder<T>>, $TagKey<$Holder<T>>>;
-        asPrintable(): string;
     }
     export class $ResourceKeyArgument$Info$Template implements $ArgumentTypeInfo$Template<$ResourceKeyArgument<T>> {
         type(): $ArgumentTypeInfo<$ResourceKeyArgument<T>, never>;
@@ -385,9 +385,9 @@ declare module "@package/net/minecraft/commands/arguments" {
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getGameMode(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $GameType;
         getExamples(): $Collection<string>;
+        parse(arg0: $StringReader): $GameType;
         static gameMode(): $GameModeArgument;
         parse<S>(arg0: $StringReader, arg1: S): $GameType;
-        parse(arg0: $StringReader): $GameType;
         constructor();
         get examples(): $Collection<string>;
     }
@@ -404,20 +404,20 @@ declare module "@package/net/minecraft/commands/arguments" {
      */
     export type $ArgumentSignatures_ = { entries?: $List_<$ArgumentSignatures$Entry_>,  } | [entries?: $List_<$ArgumentSignatures$Entry_>, ];
     export class $EntityArgument implements $ArgumentType<$EntitySelector> {
-        parse<S>(arg0: $StringReader, arg1: S): $EntitySelector;
-        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static getEntities(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Collection<$Entity>;
+        static entities(): $EntityArgument;
+        static entity(): $EntityArgument;
         static getPlayer(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ServerPlayer;
+        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getOptionalEntities(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Collection<$Entity>;
         static getOptionalPlayers(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Collection<$ServerPlayer>;
         static getPlayers(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Collection<$ServerPlayer>;
         static getEntity(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Entity;
         getExamples(): $Collection<string>;
-        static getEntities(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Collection<$Entity>;
-        static entities(): $EntityArgument;
-        static entity(): $EntityArgument;
+        parse(arg0: $StringReader): $EntitySelector;
         static player(): $EntityArgument;
         static players(): $EntityArgument;
-        parse(arg0: $StringReader): $EntitySelector;
+        parse<S>(arg0: $StringReader, arg1: S): $EntitySelector;
         static ERROR_SELECTORS_NOT_ALLOWED: $SimpleCommandExceptionType;
         single: boolean;
         playersOnly: boolean;
@@ -473,39 +473,39 @@ declare module "@package/net/minecraft/commands/arguments" {
         constructor(arg0: $ScoreHolderArgument$Info, arg1: boolean);
     }
     export class $MessageArgument$Part extends $Record {
+        toComponent(arg0: $CommandSourceStack): $Component;
+        selector(): $EntitySelector;
         end(): number;
         start(): number;
-        selector(): $EntitySelector;
-        toComponent(arg0: $CommandSourceStack): $Component;
         constructor(start: number, end: number, selector: $EntitySelector);
     }
     /**
      * Values that may be interpreted as {@link $MessageArgument$Part}.
      */
-    export type $MessageArgument$Part_ = { end?: number, start?: number, selector?: $EntitySelector,  } | [end?: number, start?: number, selector?: $EntitySelector, ];
+    export type $MessageArgument$Part_ = { selector?: $EntitySelector, start?: number, end?: number,  } | [selector?: $EntitySelector, start?: number, end?: number, ];
     export class $ParticleArgument implements $ArgumentType<$ParticleOptions> {
         static readParticle(arg0: $StringReader, arg1: $HolderLookup$Provider): $ParticleOptions;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getParticle(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ParticleOptions;
         getExamples(): $Collection<string>;
+        parse(arg0: $StringReader): $ParticleOptions;
         static particle(arg0: $CommandBuildContext): $ParticleArgument;
         parse<S>(arg0: $StringReader, arg1: S): $ParticleOptions;
-        parse(arg0: $StringReader): $ParticleOptions;
         static ERROR_INVALID_OPTIONS: $DynamicCommandExceptionType;
         static ERROR_UNKNOWN_PARTICLE: $DynamicCommandExceptionType;
         constructor(arg0: $CommandBuildContext);
         get examples(): $Collection<string>;
     }
     export class $NbtPathArgument$NbtPath {
+        countMatching(arg0: $Tag_): number;
+        static isTooDeep(arg0: $Tag_, arg1: number): boolean;
+        getOrCreate(arg0: $Tag_, arg1: $Supplier_<$Tag>): $List<$Tag>;
         remove(arg0: $Tag_): number;
         get(arg0: $Tag_): $List<$Tag>;
         insert(arg0: number, arg1: $CompoundTag_, arg2: $List_<$Tag_>): number;
         static of(arg0: string): $NbtPathArgument$NbtPath;
         set(arg0: $Tag_, arg1: $Tag_): number;
-        countMatching(arg0: $Tag_): number;
-        static isTooDeep(arg0: $Tag_, arg1: number): boolean;
         asString(): string;
-        getOrCreate(arg0: $Tag_, arg1: $Supplier_<$Tag>): $List<$Tag>;
         static CODEC: $Codec<$NbtPathArgument$NbtPath>;
         constructor(arg0: string, arg1: $NbtPathArgument$Node[], arg2: $Object2IntMap<$NbtPathArgument$Node>);
     }
@@ -524,9 +524,9 @@ declare module "@package/net/minecraft/commands/arguments" {
      */
     export type $EntityAnchorArgument$Anchor_ = "feet" | "eyes";
     export class $ResourceOrTagKeyArgument$ResourceResult<T> extends $Record implements $ResourceOrTagKeyArgument$Result<T> {
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
     }
     /**
      * Values that may be interpreted as {@link $ResourceOrTagKeyArgument$ResourceResult}.
@@ -541,12 +541,12 @@ declare module "@package/net/minecraft/commands/arguments" {
         constructor(arg0: $EntityArgument$Info, arg1: boolean, arg2: boolean);
     }
     export class $SlotsArgument implements $ArgumentType<$SlotRange> {
-        static slots(): $SlotsArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
+        parse(arg0: $StringReader): $SlotRange;
+        static slots(): $SlotsArgument;
         static getSlots(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $SlotRange;
         parse<S>(arg0: $StringReader, arg1: S): $SlotRange;
-        parse(arg0: $StringReader): $SlotRange;
         constructor();
         get examples(): $Collection<string>;
     }
@@ -560,23 +560,23 @@ declare module "@package/net/minecraft/commands/arguments" {
      */
     export type $GameProfileArgument$Result_ = ((arg0: $CommandSourceStack) => $Collection_<$GameProfile>);
     export class $NbtTagArgument implements $ArgumentType<$Tag> {
-        parse(arg0: $StringReader): $Tag;
-        static nbtTag(): $NbtTagArgument;
         static getNbtTag<S>(arg0: $CommandContext<S>, arg1: string): $Tag;
+        static nbtTag(): $NbtTagArgument;
         getExamples(): $Collection<string>;
-        parse<S>(arg0: $StringReader, arg1: S): $Tag;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $Tag;
+        parse(arg0: $StringReader): $Tag;
         get examples(): $Collection<string>;
     }
     export class $ResourceLocationArgument implements $ArgumentType<$ResourceLocation> {
+        static getRecipe(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $RecipeHolder<never>;
+        static getAdvancement(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $AdvancementHolder;
+        getExamples(): $Collection<string>;
         static id(): $ResourceLocationArgument;
         static getId(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ResourceLocation;
         parse(arg0: $StringReader): $ResourceLocation;
-        static getAdvancement(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $AdvancementHolder;
-        static getRecipe(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $RecipeHolder<never>;
-        getExamples(): $Collection<string>;
-        parse<S>(arg0: $StringReader, arg1: S): $ResourceLocation;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $ResourceLocation;
         constructor();
         get examples(): $Collection<string>;
     }
@@ -594,9 +594,9 @@ declare module "@package/net/minecraft/commands/arguments" {
         this$0: $ResourceOrTagKeyArgument$Info<any>;
     }
     export class $ResourceOrTagArgument$TagResult<T> extends $Record implements $ResourceOrTagArgument$Result<T> {
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
     }
     /**
      * Values that may be interpreted as {@link $ResourceOrTagArgument$TagResult}.
@@ -605,26 +605,26 @@ declare module "@package/net/minecraft/commands/arguments" {
     export class $TeamArgument implements $ArgumentType<string> {
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
+        parse(arg0: $StringReader): string;
         static team(): $TeamArgument;
         static getTeam(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $PlayerTeam;
         parse<S>(arg0: $StringReader, arg1: S): string;
-        parse(arg0: $StringReader): string;
         constructor();
         get examples(): $Collection<string>;
     }
     export class $CompoundTagArgument implements $ArgumentType<$CompoundTag> {
-        parse(arg0: $StringReader): $CompoundTag;
         static getCompoundTag<S>(arg0: $CommandContext<S>, arg1: string): $CompoundTag;
         getExamples(): $Collection<string>;
         static compoundTag(): $CompoundTagArgument;
-        parse<S>(arg0: $StringReader, arg1: S): $CompoundTag;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $CompoundTag;
+        parse(arg0: $StringReader): $CompoundTag;
         get examples(): $Collection<string>;
     }
     export class $ResourceOrTagKeyArgument$TagResult<T> extends $Record implements $ResourceOrTagKeyArgument$Result<T> {
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
     }
     /**
      * Values that may be interpreted as {@link $ResourceOrTagKeyArgument$TagResult}.
@@ -642,13 +642,13 @@ declare module "@package/net/minecraft/commands/arguments" {
         constructor();
     }
     export class $NbtPathArgument implements $ArgumentType<$NbtPathArgument$NbtPath> {
-        static getPath(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $NbtPathArgument$NbtPath;
-        static nbtPath(): $NbtPathArgument;
         static createTagPredicate(arg0: $CompoundTag_): $Predicate<$Tag>;
+        static nbtPath(): $NbtPathArgument;
         getExamples(): $Collection<string>;
-        parse<S>(arg0: $StringReader, arg1: S): $NbtPathArgument$NbtPath;
-        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse(arg0: $StringReader): $NbtPathArgument$NbtPath;
+        static getPath(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $NbtPathArgument$NbtPath;
+        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $NbtPathArgument$NbtPath;
         static ERROR_EXPECTED_LIST: $DynamicCommandExceptionType;
         static ERROR_DATA_TOO_DEEP: $SimpleCommandExceptionType;
         static ERROR_NOTHING_FOUND: $DynamicCommandExceptionType;
@@ -665,19 +665,19 @@ declare module "@package/net/minecraft/commands/arguments" {
         constructor();
     }
     export class $ResourceArgument<T> implements $ArgumentType<$Holder$Reference<T>> {
-        static getResource<T>(arg0: $CommandContext<$CommandSourceStack>, arg1: string, arg2: $ResourceKey_<$Registry<T>>): $Holder$Reference<T>;
-        static getAttribute(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$Attribute>;
-        static resource<T>(arg0: $CommandBuildContext, arg1: $ResourceKey_<$Registry<T>>): $ResourceArgument<T>;
         static getSummonableEntityType(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$EntityType<never>>;
         static getMobEffect(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$MobEffect>;
         static getEnchantment(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$Enchantment>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getConfiguredFeature(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$ConfiguredFeature<never, never>>;
+        static resource<T>(arg0: $CommandBuildContext, arg1: $ResourceKey_<$Registry<T>>): $ResourceArgument<T>;
+        static getAttribute(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$Attribute>;
         getExamples(): $Collection<string>;
+        static getResource<T>(arg0: $CommandContext<$CommandSourceStack>, arg1: string, arg2: $ResourceKey_<$Registry<T>>): $Holder$Reference<T>;
+        parse(arg0: $StringReader): $Holder$Reference<$Holder$Reference<T>>;
         static getEntityType(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$EntityType<never>>;
         static getStructure(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Holder$Reference<$Structure>;
         parse<S>(arg0: $StringReader, arg1: S): $Holder$Reference<T>;
-        parse(arg0: $StringReader): $Holder$Reference<T>;
         registryKey: $ResourceKey<$Registry<$Holder$Reference<T>>>;
         static ERROR_UNKNOWN_RESOURCE: $Dynamic2CommandExceptionType;
         static ERROR_INVALID_RESOURCE_TYPE: $Dynamic3CommandExceptionType;
@@ -689,9 +689,9 @@ declare module "@package/net/minecraft/commands/arguments" {
         constructor(arg0: $EntitySelector);
     }
     export class $ResourceOrTagArgument$ResourceResult<T> extends $Record implements $ResourceOrTagArgument$Result<T> {
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
     }
     /**
      * Values that may be interpreted as {@link $ResourceOrTagArgument$ResourceResult}.
@@ -718,8 +718,8 @@ declare module "@package/net/minecraft/commands/arguments" {
     export class $RangeArgument$Ints implements $RangeArgument<$MinMaxBounds$Ints> {
         static getRange(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $MinMaxBounds$Ints;
         getExamples(): $Collection<string>;
-        parse<S>(arg0: $StringReader, arg1: S): $MinMaxBounds$Ints;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $MinMaxBounds$Ints;
         parse(arg0: $StringReader): $MinMaxBounds$Ints;
         constructor();
         get examples(): $Collection<string>;
@@ -729,12 +729,12 @@ declare module "@package/net/minecraft/commands/arguments" {
         constructor(arg0: number, arg1: boolean);
     }
     export class $StyleArgument implements $ArgumentType<$Style> {
-        static style(arg0: $CommandBuildContext): $StyleArgument;
         getExamples(): $Collection<string>;
-        static getStyle(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Style;
-        parse<S>(arg0: $StringReader, arg1: S): $Style;
-        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse(arg0: $StringReader): $Style;
+        static style(arg0: $CommandBuildContext): $StyleArgument;
+        static getStyle(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Style;
+        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): $Style;
         static ERROR_INVALID_JSON: $DynamicCommandExceptionType;
         get examples(): $Collection<string>;
     }
@@ -747,10 +747,10 @@ declare module "@package/net/minecraft/commands/arguments" {
      */
     export type $OperationArgument$SimpleOperation_ = (() => void);
     export class $ObjectiveCriteriaArgument implements $ArgumentType<$ObjectiveCriteria> {
-        getName<T>(arg0: $StatType_<T>, arg1: $Object): string;
-        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getCriteria(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ObjectiveCriteria;
+        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
+        getName<T>(arg0: $StatType_<T>, arg1: $Object): string;
         static criteria(): $ObjectiveCriteriaArgument;
         parse<S>(arg0: $StringReader, arg1: S): $ObjectiveCriteria;
         parse(arg0: $StringReader): $ObjectiveCriteria;
@@ -766,12 +766,12 @@ declare module "@package/net/minecraft/commands/arguments" {
         static getMirror(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Mirror;
     }
     export class $ColorArgument implements $ArgumentType<$ChatFormatting> {
-        static color(): $ColorArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
+        parse(arg0: $StringReader): $ChatFormatting;
+        static color(): $ColorArgument;
         static getColor(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ChatFormatting;
         parse<S>(arg0: $StringReader, arg1: S): $ChatFormatting;
-        parse(arg0: $StringReader): $ChatFormatting;
         static ERROR_INVALID_VALUE: $DynamicCommandExceptionType;
         get examples(): $Collection<string>;
     }

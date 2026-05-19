@@ -6,11 +6,11 @@ import { $List } from "@package/java/util";
 
 declare module "@package/betteradvancements/neoforge/api/event" {
     export class $AdvancementDrawConnectionsEvent extends $Event implements $IAdvancementDrawConnectionsEvent {
-        getAdvancement(): $AdvancementNode;
         getExtraConnections(): $List<$AdvancementHolder>;
+        getAdvancement(): $AdvancementNode;
         constructor(advancement: $AdvancementNode);
-        get advancement(): $AdvancementNode;
         get extraConnections(): $List<$AdvancementHolder>;
+        get advancement(): $AdvancementNode;
     }
     export class $AdvancementMovedEvent extends $Event implements $IAdvancementMovedEvent {
         getAdvancement(): $AdvancementNode;

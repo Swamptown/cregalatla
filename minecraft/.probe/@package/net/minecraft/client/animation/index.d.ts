@@ -30,7 +30,7 @@ declare module "@package/net/minecraft/client/animation" {
     /**
      * Values that may be interpreted as {@link $AnimationDefinition}.
      */
-    export type $AnimationDefinition_ = { looping?: boolean, boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, lengthInSeconds?: number,  } | [looping?: boolean, boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, lengthInSeconds?: number, ];
+    export type $AnimationDefinition_ = { lengthInSeconds?: number, boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, looping?: boolean,  } | [lengthInSeconds?: number, boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, looping?: boolean, ];
     export class $AnimationChannel$Interpolation {
     }
     export interface $AnimationChannel$Interpolation {
@@ -41,36 +41,36 @@ declare module "@package/net/minecraft/client/animation" {
      */
     export type $AnimationChannel$Interpolation_ = ((arg0: $Vector3f, arg1: number, arg2: $Keyframe[], arg3: number, arg4: number, arg5: number) => $Vector3f);
     export class $KeyframeAnimations {
-        static animate(arg0: $HierarchicalModel<never>, arg1: $AnimationDefinition_, arg2: number, arg3: number, arg4: $Vector3f): void;
         static posVec(arg0: number, arg1: number, arg2: number): $Vector3f;
         static degreeVec(arg0: number, arg1: number, arg2: number): $Vector3f;
         static scaleVec(arg0: number, arg1: number, arg2: number): $Vector3f;
+        static animate(arg0: $HierarchicalModel<never>, arg1: $AnimationDefinition_, arg2: number, arg3: number, arg4: $Vector3f): void;
         constructor();
     }
     export class $AnimationDefinition$Builder {
-        build(): $AnimationDefinition;
-        addAnimation(arg0: string, arg1: $AnimationChannel_): $AnimationDefinition$Builder;
         static withLength(arg0: number): $AnimationDefinition$Builder;
+        addAnimation(arg0: string, arg1: $AnimationChannel_): $AnimationDefinition$Builder;
+        build(): $AnimationDefinition;
         looping(): $AnimationDefinition$Builder;
     }
     export class $Keyframe extends $Record {
+        interpolation(): $AnimationChannel$Interpolation;
         target(): $Vector3f;
         timestamp(): number;
-        interpolation(): $AnimationChannel$Interpolation;
         constructor(arg0: number, arg1: $Vector3f, arg2: $AnimationChannel$Interpolation_);
     }
     /**
      * Values that may be interpreted as {@link $Keyframe}.
      */
-    export type $Keyframe_ = { timestamp?: number, interpolation?: $AnimationChannel$Interpolation_, target?: $Vector3f,  } | [timestamp?: number, interpolation?: $AnimationChannel$Interpolation_, target?: $Vector3f, ];
+    export type $Keyframe_ = { target?: $Vector3f, interpolation?: $AnimationChannel$Interpolation_, timestamp?: number,  } | [target?: $Vector3f, interpolation?: $AnimationChannel$Interpolation_, timestamp?: number, ];
     export class $AnimationChannel$Interpolations {
         static CATMULLROM: $AnimationChannel$Interpolation;
         static LINEAR: $AnimationChannel$Interpolation;
         constructor();
     }
     export class $AnimationChannel extends $Record {
-        target(): $AnimationChannel$Target;
         keyframes(): $Keyframe[];
+        target(): $AnimationChannel$Target;
         constructor(arg0: $AnimationChannel$Target_, ...arg1: $Keyframe_[]);
     }
     /**

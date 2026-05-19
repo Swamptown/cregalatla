@@ -6,9 +6,7 @@ import { $Map_, $Locale, $Map } from "@package/java/util";
 
 declare module "@package/java/awt/im" {
     export class $InputContext {
-        static getInstance(): $InputContext;
-        getLocale(): $Locale;
-        dispose(): void;
+        removeNotify(arg0: $Component): void;
         dispatchEvent(arg0: $AWTEvent): void;
         selectInputMethod(arg0: $Locale): boolean;
         setCharacterSubsets(arg0: $Character$Subset[]): void;
@@ -16,16 +14,18 @@ declare module "@package/java/awt/im" {
         isCompositionEnabled(): boolean;
         reconvert(): void;
         getInputMethodControlObject(): $Object;
-        removeNotify(arg0: $Component): void;
         endComposition(): void;
-        static get instance(): $InputContext;
-        get locale(): $Locale;
+        getLocale(): $Locale;
+        dispose(): void;
+        static getInstance(): $InputContext;
         set characterSubsets(value: $Character$Subset[]);
         get inputMethodControlObject(): $Object;
+        get locale(): $Locale;
+        static get instance(): $InputContext;
     }
     export class $InputMethodHighlight {
-        getState(): number;
         getVariation(): number;
+        getState(): number;
         isSelected(): boolean;
         getStyle(): $Map<$TextAttribute, never>;
         static UNSELECTED_CONVERTED_TEXT_HIGHLIGHT: $InputMethodHighlight;
@@ -37,22 +37,22 @@ declare module "@package/java/awt/im" {
         constructor(arg0: boolean, arg1: number, arg2: number, arg3: $Map_<$TextAttribute, never>);
         constructor(arg0: boolean, arg1: number, arg2: number);
         constructor(arg0: boolean, arg1: number);
-        get state(): number;
         get variation(): number;
+        get state(): number;
         get selected(): boolean;
         get style(): $Map<$TextAttribute, never>;
     }
     export class $InputMethodRequests {
     }
     export interface $InputMethodRequests {
-        getCommittedTextLength(): number;
-        cancelLatestCommittedText(arg0: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
+        getSelectedText(arg0: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
         getTextLocation(arg0: $TextHitInfo): $Rectangle;
         getLocationOffset(arg0: number, arg1: number): $TextHitInfo;
         getInsertPositionOffset(): number;
         getCommittedText(arg0: number, arg1: number, arg2: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
-        getSelectedText(arg0: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
-        get committedTextLength(): number;
+        getCommittedTextLength(): number;
+        cancelLatestCommittedText(arg0: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
         get insertPositionOffset(): number;
+        get committedTextLength(): number;
     }
 }

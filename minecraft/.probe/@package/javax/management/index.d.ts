@@ -8,27 +8,27 @@ declare module "@package/javax/management" {
     export class $MBeanConstructorInfo extends $MBeanFeatureInfo implements $Cloneable {
         clone(): $Object;
         getSignature(): $MBeanParameterInfo[];
+        constructor(arg0: string, arg1: $Constructor<never>);
         constructor(arg0: string, arg1: string, arg2: $MBeanParameterInfo[], arg3: $Descriptor);
         constructor(arg0: string, arg1: string, arg2: $MBeanParameterInfo[]);
-        constructor(arg0: string, arg1: $Constructor<never>);
         get signature(): $MBeanParameterInfo[];
     }
     export class $MBeanNotificationInfo extends $MBeanFeatureInfo implements $Cloneable {
-        clone(): $Object;
         getNotifTypes(): string[];
+        clone(): $Object;
         constructor(arg0: string[], arg1: string, arg2: string);
         constructor(arg0: string[], arg1: string, arg2: string, arg3: $Descriptor);
         get notifTypes(): string[];
     }
     export class $MBeanFeatureInfo implements $Serializable, $DescriptorRead {
+        getDescription(): string;
         getName(): string;
         getDescriptor(): $Descriptor;
-        getDescription(): string;
         constructor(arg0: string, arg1: string);
         constructor(arg0: string, arg1: string, arg2: $Descriptor);
+        get description(): string;
         get name(): string;
         get descriptor(): $Descriptor;
-        get description(): string;
     }
     export class $DescriptorRead {
     }
@@ -43,48 +43,48 @@ declare module "@package/javax/management" {
     export class $Descriptor {
     }
     export interface $Descriptor extends $Serializable, $Cloneable {
+        getFieldValues(...arg0: string[]): $Object[];
+        setField(arg0: string, arg1: $Object): void;
+        removeField(arg0: string): void;
+        setFields(arg0: string[], arg1: $Object[]): void;
+        isValid(): boolean;
         equals(arg0: $Object): boolean;
         hashCode(): number;
         clone(): $Object;
         getFields(): string[];
-        isValid(): boolean;
-        setFields(arg0: string[], arg1: $Object[]): void;
-        setField(arg0: string, arg1: $Object): void;
-        removeField(arg0: string): void;
-        getFieldValues(...arg0: string[]): $Object[];
         getFieldNames(): string[];
         getFieldValue(arg0: string): $Object;
         get valid(): boolean;
         get fieldNames(): string[];
     }
     export class $MBeanInfo implements $Cloneable, $Serializable, $DescriptorRead {
+        getOperations(): $MBeanOperationInfo[];
+        getNotifications(): $MBeanNotificationInfo[];
+        getDescription(): string;
         clone(): $Object;
         getDescriptor(): $Descriptor;
         getConstructors(): $MBeanConstructorInfo[];
         getClassName(): string;
         getAttributes(): $MBeanAttributeInfo[];
-        getOperations(): $MBeanOperationInfo[];
-        getNotifications(): $MBeanNotificationInfo[];
-        getDescription(): string;
         constructor(arg0: string, arg1: string, arg2: $MBeanAttributeInfo[], arg3: $MBeanConstructorInfo[], arg4: $MBeanOperationInfo[], arg5: $MBeanNotificationInfo[]);
         constructor(arg0: string, arg1: string, arg2: $MBeanAttributeInfo[], arg3: $MBeanConstructorInfo[], arg4: $MBeanOperationInfo[], arg5: $MBeanNotificationInfo[], arg6: $Descriptor);
+        get operations(): $MBeanOperationInfo[];
+        get notifications(): $MBeanNotificationInfo[];
+        get description(): string;
         get descriptor(): $Descriptor;
         get constructors(): $MBeanConstructorInfo[];
         get className(): string;
         get attributes(): $MBeanAttributeInfo[];
-        get operations(): $MBeanOperationInfo[];
-        get notifications(): $MBeanNotificationInfo[];
-        get description(): string;
     }
     export class $DynamicMBean {
     }
     export interface $DynamicMBean {
-        invoke(arg0: string, arg1: $Object[], arg2: string[]): $Object;
-        getAttributes(arg0: string[]): $AttributeList;
-        setAttribute(arg0: $Attribute): void;
-        getAttribute(arg0: string): $Object;
         getMBeanInfo(): $MBeanInfo;
         setAttributes(arg0: $AttributeList): $AttributeList;
+        getAttribute(arg0: string): $Object;
+        setAttribute(arg0: $Attribute): void;
+        invoke(arg0: string, arg1: $Object[], arg2: string[]): $Object;
+        getAttributes(arg0: string[]): $AttributeList;
         get MBeanInfo(): $MBeanInfo;
     }
     export class $Attribute implements $Serializable {
@@ -95,18 +95,18 @@ declare module "@package/javax/management" {
         get value(): $Object;
     }
     export class $MBeanAttributeInfo extends $MBeanFeatureInfo implements $Cloneable {
+        isIs(): boolean;
+        isReadable(): boolean;
+        isWritable(): boolean;
         clone(): $Object;
         getType(): string;
-        isWritable(): boolean;
-        isReadable(): boolean;
-        isIs(): boolean;
+        constructor(arg0: string, arg1: string, arg2: string, arg3: boolean, arg4: boolean, arg5: boolean);
         constructor(arg0: string, arg1: string, arg2: $Method, arg3: $Method);
         constructor(arg0: string, arg1: string, arg2: string, arg3: boolean, arg4: boolean, arg5: boolean, arg6: $Descriptor);
-        constructor(arg0: string, arg1: string, arg2: string, arg3: boolean, arg4: boolean, arg5: boolean);
-        get type(): string;
-        get writable(): boolean;
-        get readable(): boolean;
         get is(): boolean;
+        get readable(): boolean;
+        get writable(): boolean;
+        get type(): string;
     }
     export class $MBeanParameterInfo extends $MBeanFeatureInfo implements $Cloneable {
         clone(): $Object;
@@ -116,20 +116,20 @@ declare module "@package/javax/management" {
         get type(): string;
     }
     export class $MBeanOperationInfo extends $MBeanFeatureInfo implements $Cloneable {
+        getImpact(): number;
         clone(): $Object;
         getReturnType(): string;
         getSignature(): $MBeanParameterInfo[];
-        getImpact(): number;
         static ACTION_INFO: number;
         static ACTION: number;
         static UNKNOWN: number;
         static INFO: number;
-        constructor(arg0: string, arg1: string, arg2: $MBeanParameterInfo[], arg3: string, arg4: number, arg5: $Descriptor);
-        constructor(arg0: string, arg1: string, arg2: $MBeanParameterInfo[], arg3: string, arg4: number);
         constructor(arg0: string, arg1: $Method);
+        constructor(arg0: string, arg1: string, arg2: $MBeanParameterInfo[], arg3: string, arg4: number);
+        constructor(arg0: string, arg1: string, arg2: $MBeanParameterInfo[], arg3: string, arg4: number, arg5: $Descriptor);
+        get impact(): number;
         get returnType(): string;
         get signature(): $MBeanParameterInfo[];
-        get impact(): number;
     }
     export class $AttributeList extends $ArrayList<$Object> {
         add(arg0: number, arg1: $Attribute): void;

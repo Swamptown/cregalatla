@@ -20,9 +20,9 @@ declare module "@package/net/minecraft/client/multiplayer/prediction" {
      */
     export type $PredictiveAction_ = ((arg0: number) => $Packet<$ServerGamePacketListener>);
     export class $BlockStatePredictionHandler implements $AutoCloseable {
-        close(): void;
         startPredicting(): $BlockStatePredictionHandler;
         currentSequence(): number;
+        close(): void;
         endPredictionsUpTo(arg0: number, arg1: $ClientLevel): void;
         updateKnownServerState(arg0: $BlockPos_, arg1: $BlockState_): boolean;
         isPredicting(): boolean;

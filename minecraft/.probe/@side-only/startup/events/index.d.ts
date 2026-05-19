@@ -2,7 +2,7 @@ import { $SpecialFluidHandlerEvent, $BoilerHeaterHandlerEvent, $SpecialSpoutHand
 import { $BlockModificationKubeEvent } from "@package/dev/latvian/mods/kubejs/block";
 import { $MenuScreenRegistryKubeEvent, $BlockEntityRendererRegistryKubeEvent, $KeybindRegistryKubeEvent, $EntityRendererRegistryKubeEvent } from "@package/dev/latvian/mods/kubejs/client";
 import { $ResourceLocation_ } from "@package/net/minecraft/resources";
-import { VillagerProfession, Fluid, Block, Potion, Item, MobEffect, VillagerType, PointOfInterestType, ParticleType, CustomStat, CreativeModeTab, NeoforgeFluidType, Attribute, SoundEvent, ArmorMaterial } from "@side-only/startup/events/registry";
+import { VillagerProfession, Fluid, Potion, Block, Item, MobEffect, VillagerType, PointOfInterestType, ParticleType, CustomStat, CreativeModeTab, NeoforgeFluidType, Attribute, SoundEvent, ArmorMaterial } from "@side-only/startup/events/registry";
 import { $KJSPlayerUIMenuType$PlayerUIEventJS, $KJSHeldItemUIMenuType$ItemUIEventJS, $KJSBlockUIMenuType$BlockUIEventJS } from "@package/com/lowdragmc/lowdraglib2/integration/kjs/ui";
 import { $CreativeTabKubeEvent } from "@package/dev/latvian/mods/kubejs/item/creativetab";
 import { $KubeStartupEvent } from "@package/dev/latvian/mods/kubejs/event";
@@ -17,20 +17,20 @@ export {};
 
 declare global {
     namespace StartupEvents {
-        function registry(type: "creative_mode_tab", handler: ((event: CreativeModeTab) => void)): void;
-        function registry(type: "attribute", handler: ((event: Attribute) => void)): void;
-        function registry(type: "neoforge:fluid_type", handler: ((event: NeoforgeFluidType) => void)): void;
-        function registry(type: "potion", handler: ((event: Potion) => void)): void;
-        function registry(type: "fluid", handler: ((event: Fluid) => void)): void;
-        function registry(type: "particle_type", handler: ((event: ParticleType) => void)): void;
-        function registry(type: "villager_type", handler: ((event: VillagerType) => void)): void;
-        function registry(type: "item", handler: ((event: Item) => void)): void;
-        function registry(type: "point_of_interest_type", handler: ((event: PointOfInterestType) => void)): void;
         function registry(type: "sound_event", handler: ((event: SoundEvent) => void)): void;
-        function registry(type: "mob_effect", handler: ((event: MobEffect) => void)): void;
-        function registry(type: "custom_stat", handler: ((event: CustomStat) => void)): void;
+        function registry(type: "potion", handler: ((event: Potion) => void)): void;
+        function registry(type: "particle_type", handler: ((event: ParticleType) => void)): void;
+        function registry(type: "item", handler: ((event: Item) => void)): void;
+        function registry(type: "creative_mode_tab", handler: ((event: CreativeModeTab) => void)): void;
         function registry(type: "armor_material", handler: ((event: ArmorMaterial) => void)): void;
         function registry(type: "villager_profession", handler: ((event: VillagerProfession) => void)): void;
+        function registry(type: "custom_stat", handler: ((event: CustomStat) => void)): void;
+        function registry(type: "neoforge:fluid_type", handler: ((event: NeoforgeFluidType) => void)): void;
+        function registry(type: "attribute", handler: ((event: Attribute) => void)): void;
+        function registry(type: "point_of_interest_type", handler: ((event: PointOfInterestType) => void)): void;
+        function registry(type: "mob_effect", handler: ((event: MobEffect) => void)): void;
+        function registry(type: "fluid", handler: ((event: Fluid) => void)): void;
+        function registry(type: "villager_type", handler: ((event: VillagerType) => void)): void;
         function registry(type: "block", handler: ((event: Block) => void)): void;
     }
     namespace CreateEvents {

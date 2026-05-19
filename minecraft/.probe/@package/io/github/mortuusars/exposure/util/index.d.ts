@@ -16,9 +16,9 @@ export * as color from "@package/io/github/mortuusars/exposure/util/color";
 
 declare module "@package/io/github/mortuusars/exposure/util" {
     export class $TranslatableError extends $Record {
+        casual(): $MutableComponent;
         code(): string;
         key(): string;
-        casual(): $MutableComponent;
         technical(): $MutableComponent;
         static GENERIC: $TranslatableError;
         static CODEC: $Codec<$TranslatableError>;
@@ -34,7 +34,9 @@ declare module "@package/io/github/mortuusars/exposure/util" {
         remove<T>(type: $ExtraData$Type_<T>): void;
         get<T>(type: $ExtraData$Type_<T>): (T) | undefined;
         put<T>(type: $ExtraData$Type_<T>, value: T): void;
+        merge(other: $CompoundTag_): $ExtraData;
         getOrDefault<T>(type: $ExtraData$Type_<T>, defaultValue: T): T;
+        copy(): $ExtraData;
         static CODEC: $Codec<$ExtraData>;
         static EMPTY: $ExtraData;
         static TYPE: $TagType<$CompoundTag>;
@@ -44,14 +46,14 @@ declare module "@package/io/github/mortuusars/exposure/util" {
         constructor();
     }
     export class $PointOfView extends $Record {
+        reverseDirection(): $PointOfView;
+        limitMaxDistance(holder: $CameraHolder, distance: number): $PointOfView;
+        limitMaxDistance(entity: $Entity, distance: number): $PointOfView;
+        move(x: number, y: number, z: number): $PointOfView;
         static of(entity: $Entity): $PointOfView;
         static of(holder: $CameraHolder): $PointOfView;
         pos(): $Vec3;
         dir(): $Vec3;
-        move(x: number, y: number, z: number): $PointOfView;
-        reverseDirection(): $PointOfView;
-        limitMaxDistance(holder: $CameraHolder, distance: number): $PointOfView;
-        limitMaxDistance(entity: $Entity, distance: number): $PointOfView;
         rotateX(degrees: number): $PointOfView;
         rotateY(degrees: number): $PointOfView;
         constructor(pos: $Vec3_, dir: $Vec3_);
@@ -61,24 +63,24 @@ declare module "@package/io/github/mortuusars/exposure/util" {
      */
     export type $PointOfView_ = { pos?: $Vec3_, dir?: $Vec3_,  } | [pos?: $Vec3_, dir?: $Vec3_, ];
     export class $ExtraData$Type<T> extends $Record {
+        static stringBasedList<T>(key: string, extractFunc: $Function_<string, T>, packFunc: $Function_<T, string>): $ExtraData$Type<$List<T>>;
+        static longVal(key: string): $ExtraData$Type<number>;
+        static doubleVal(key: string): $ExtraData$Type<number>;
+        static floatVal(key: string): $ExtraData$Type<number>;
+        static intVal(key: string): $ExtraData$Type<number>;
+        getter(): $BiFunction<$ExtraData, string, T>;
+        setter(): $TriConsumer<$ExtraData, string, T>;
         static list<T>(key: string, tagType: number, extractFunc: $Function_<$Tag, T>, packFunc: $Function_<T, $Tag>): $ExtraData$Type<$List<T>>;
         key(): string;
         static string(key: string): $ExtraData$Type<string>;
-        getter(): $BiFunction<$ExtraData, string, T>;
-        setter(): $TriConsumer<$ExtraData, string, T>;
-        static longVal(key: string): $ExtraData$Type<number>;
-        static stringBasedList<T>(key: string, extractFunc: $Function_<string, T>, packFunc: $Function_<T, string>): $ExtraData$Type<$List<T>>;
         static bool(key: string): $ExtraData$Type<boolean>;
         static resourceLocation(key: string): $ExtraData$Type<$ResourceLocation>;
         static stringRepresentable<T extends $StringRepresentable>(key: string, deserializeFunction: $Function_<string, T>): $ExtraData$Type<T>;
         static vec3(key: string): $ExtraData$Type<$Vec3>;
-        static intVal(key: string): $ExtraData$Type<number>;
-        static doubleVal(key: string): $ExtraData$Type<number>;
-        static floatVal(key: string): $ExtraData$Type<number>;
         constructor(key: string, getter: $BiFunction_<$ExtraData, string, T>, setter: $TriConsumer_<$ExtraData, string, T>);
     }
     /**
      * Values that may be interpreted as {@link $ExtraData$Type}.
      */
-    export type $ExtraData$Type_<T> = { getter?: $BiFunction_<$ExtraData, string, any>, setter?: $TriConsumer_<$ExtraData, string, any>, key?: string,  } | [getter?: $BiFunction_<$ExtraData, string, any>, setter?: $TriConsumer_<$ExtraData, string, any>, key?: string, ];
+    export type $ExtraData$Type_<T> = { key?: string, setter?: $TriConsumer_<$ExtraData, string, any>, getter?: $BiFunction_<$ExtraData, string, any>,  } | [key?: string, setter?: $TriConsumer_<$ExtraData, string, any>, getter?: $BiFunction_<$ExtraData, string, any>, ];
 }

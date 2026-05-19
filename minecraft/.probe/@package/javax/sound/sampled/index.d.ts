@@ -11,25 +11,25 @@ declare module "@package/javax/sound/sampled" {
         constructor(arg0: string);
     }
     export class $AudioFormat {
+        getSampleSizeInBits(): number;
+        getChannels(): number;
+        getSampleRate(): number;
+        getFrameSize(): number;
+        getFrameRate(): number;
         getProperty(arg0: string): $Object;
         matches(arg0: $AudioFormat): boolean;
         properties(): $Map<string, $Object>;
         isBigEndian(): boolean;
         getEncoding(): $AudioFormat$Encoding;
-        getSampleSizeInBits(): number;
-        getFrameRate(): number;
-        getFrameSize(): number;
-        getChannels(): number;
-        getSampleRate(): number;
-        constructor(arg0: number, arg1: number, arg2: number, arg3: boolean, arg4: boolean);
-        constructor(arg0: $AudioFormat$Encoding, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean, arg7: $Map_<string, $Object>);
         constructor(arg0: $AudioFormat$Encoding, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean);
-        get bigEndian(): boolean;
-        get encoding(): $AudioFormat$Encoding;
+        constructor(arg0: $AudioFormat$Encoding, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean, arg7: $Map_<string, $Object>);
+        constructor(arg0: number, arg1: number, arg2: number, arg3: boolean, arg4: boolean);
         get sampleSizeInBits(): number;
-        get frameRate(): number;
-        get frameSize(): number;
         get channels(): number;
         get sampleRate(): number;
+        get frameSize(): number;
+        get frameRate(): number;
+        get bigEndian(): boolean;
+        get encoding(): $AudioFormat$Encoding;
     }
 }

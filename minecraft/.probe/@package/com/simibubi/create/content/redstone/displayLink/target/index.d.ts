@@ -3,13 +3,13 @@ import { $Record } from "@package/java/lang";
 
 declare module "@package/com/simibubi/create/content/redstone/displayLink/target" {
     export class $DisplayTargetStats extends $Record {
-        type(): $DisplayTarget;
         maxRows(): number;
         maxColumns(): number;
+        type(): $DisplayTarget;
         constructor(maxRows: number, maxColumns: number, type: $DisplayTarget_);
     }
     /**
      * Values that may be interpreted as {@link $DisplayTargetStats}.
      */
-    export type $DisplayTargetStats_ = { maxColumns?: number, type?: $DisplayTarget_, maxRows?: number,  } | [maxColumns?: number, type?: $DisplayTarget_, maxRows?: number, ];
+    export type $DisplayTargetStats_ = { maxRows?: number, type?: $DisplayTarget_, maxColumns?: number,  } | [maxRows?: number, type?: $DisplayTarget_, maxColumns?: number, ];
 }

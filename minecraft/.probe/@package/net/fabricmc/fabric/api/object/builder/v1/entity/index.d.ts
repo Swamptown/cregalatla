@@ -9,8 +9,8 @@ declare module "@package/net/fabricmc/fabric/api/object/builder/v1/entity" {
         static createMob<T extends $Mob>(arg0: $EntityType$EntityFactory_<T>, arg1: $MobCategory_, arg2: $UnaryOperator_<$FabricEntityType$Builder$Mob<T>>): $EntityType$Builder<T>;
     }
     export interface $FabricEntityType$Builder<T extends $Entity> {
-        build(): $EntityType<T>;
         alwaysUpdateVelocity(arg0: boolean): $EntityType$Builder<T>;
+        build(): $EntityType<T>;
     }
     export class $FabricEntityType$Builder$Mob<T extends $Mob> {
     }

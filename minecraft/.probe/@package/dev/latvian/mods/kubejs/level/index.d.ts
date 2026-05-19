@@ -28,14 +28,6 @@ export * as ruletest from "@package/dev/latvian/mods/kubejs/level/ruletest";
 declare module "@package/dev/latvian/mods/kubejs/level" {
     export class $ExplosionKubeEvent$After extends $ExplosionKubeEvent {
         /**
-         * Gets a list of all blocks affected by the explosion.
-         */
-        getAffectedBlocks(): $List<$LevelBlock>;
-        /**
-         * Gets a list of all entities affected by the explosion.
-         */
-        getAffectedEntities(): $EntityArrayList;
-        /**
          * Remove an entity from the list of affected entities.
          */
         removeAffectedEntity(entity: $Entity): void;
@@ -55,15 +47,23 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
          * Remove all knockback from all affected *players*.
          */
         removeKnockback(): void;
+        /**
+         * Gets a list of all blocks affected by the explosion.
+         */
+        getAffectedBlocks(): $List<$LevelBlock>;
+        /**
+         * Gets a list of all entities affected by the explosion.
+         */
+        getAffectedEntities(): $EntityArrayList;
         constructor(level: $Level_, explosion: $Explosion, affectedEntities: $List_<$Entity>);
         get affectedBlocks(): $List<$LevelBlock>;
         get affectedEntities(): $EntityArrayList;
     }
     export class $WrappedSpawner extends $Record {
-        static of(spawner: $Either<$BlockEntity, $Entity>): $WrappedSpawner;
-        block(): $LevelBlock;
         isWorldgen(): boolean;
         entity(): $Entity;
+        static of(spawner: $Either<$BlockEntity, $Entity>): $WrappedSpawner;
+        block(): $LevelBlock;
         constructor(entity: $Entity, block: $LevelBlock);
         get worldgen(): boolean;
     }
@@ -86,26 +86,20 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
      */
     export type $KubeLevelEvent_ = (() => $Level_);
     export class $CachedLevelBlock implements $LevelBlock {
-        clearCache(): void;
         getLevel(): $Level;
         getEntity(): $BlockEntity;
+        clearCache(): void;
         getBlockState(): $BlockState;
         setBlockState(state: $BlockState_, flags: number): void;
         getPos(): $BlockPos;
-        offset(f: $Direction_, d: number): $LevelBlock;
-        offset(x: number, y: number, z: number): $LevelBlock;
-        offset(f: $Direction_): $LevelBlock;
-        set(block: $Block_, properties: $Map_<never, never>, flags: number): void;
-        set(block: $Block_, properties: $Map_<never, never>): void;
-        set(block: $Block_): void;
-        getProperties(): $Map<string, string>;
+        createEntity(type: $EntityType_<never>): $Entity;
         setEntityData(tag: $CompoundTag_): void;
         getCenterY(): number;
+        spawnLightning(): void;
         spawnLightning(effectOnly: boolean): void;
         spawnLightning(effectOnly: boolean, player: $ServerPlayer): void;
-        spawnLightning(): void;
-        getPlayersInRadius(radius: number): $EntityArrayList;
         getPlayersInRadius(): $EntityArrayList;
+        getPlayersInRadius(radius: number): $EntityArrayList;
         getDown(): $LevelBlock;
         getUp(): $LevelBlock;
         getNorth(): $LevelBlock;
@@ -125,12 +119,18 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         toBlockStateString(): string;
         getY(): number;
         getDimension(): $ResourceLocation;
-        createEntity(type: $EntityType_<never>): $Entity;
+        getItem(): $ItemStack;
+        offset(x: number, y: number, z: number): $LevelBlock;
+        offset(f: $Direction_, d: number): $LevelBlock;
+        offset(f: $Direction_): $LevelBlock;
+        set(block: $Block_): void;
+        set(block: $Block_, properties: $Map_<never, never>, flags: number): void;
+        set(block: $Block_, properties: $Map_<never, never>): void;
+        getProperties(): $Map<string, string>;
         getX(): number;
         getZ(): number;
-        getItem(): $ItemStack;
-        getInventory(facing: $Direction_): $InventoryKJS;
         getInventory(): $InventoryKJS;
+        getInventory(facing: $Direction_): $InventoryKJS;
         getEntityData(): $CompoundTag;
         getBlock(): $Block;
         setBlockState(state: $BlockState_): void;
@@ -158,7 +158,6 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         get level(): $Level;
         get entity(): $BlockEntity;
         get pos(): $BlockPos;
-        get properties(): $Map<string, string>;
         get centerY(): number;
         get down(): $LevelBlock;
         get up(): $LevelBlock;
@@ -174,9 +173,10 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         get biomeId(): $ResourceLocation;
         get y(): number;
         get dimension(): $ResourceLocation;
+        get item(): $ItemStack;
+        get properties(): $Map<string, string>;
         get x(): number;
         get z(): number;
-        get item(): $ItemStack;
         get block(): $Block;
         get centerX(): number;
         get centerZ(): number;
@@ -192,13 +192,13 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         get tags(): $List<$ResourceLocation>;
     }
     export class $ExplosionProperties extends $Record {
-        mode(): $Level$ExplosionInteraction;
-        source(): $Entity;
+        largeParticles(): $ParticleOptions;
+        smallParticles(): $ParticleOptions;
+        causesFire(): (boolean) | undefined;
         damageCalculator(): $ExplosionDamageCalculator;
         explosionSound(): $Holder<$SoundEvent>;
-        causesFire(): (boolean) | undefined;
-        smallParticles(): $ParticleOptions;
-        largeParticles(): $ParticleOptions;
+        mode(): $Level$ExplosionInteraction;
+        source(): $Entity;
         particles(): (boolean) | undefined;
         strength(): (number) | undefined;
         damageSource(): $DamageSource;
@@ -208,35 +208,11 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
     /**
      * Values that may be interpreted as {@link $ExplosionProperties}.
      */
-    export type $ExplosionProperties_ = { causesFire?: (boolean) | undefined, mode?: $Level$ExplosionInteraction_, source?: $Entity, strength?: (number) | undefined, smallParticles?: $ParticleOptions_, damageCalculator?: $ExplosionDamageCalculator, largeParticles?: $ParticleOptions_, explosionSound?: $Holder_<$SoundEvent>, damageSource?: $DamageSource_, particles?: (boolean) | undefined,  } | [causesFire?: (boolean) | undefined, mode?: $Level$ExplosionInteraction_, source?: $Entity, strength?: (number) | undefined, smallParticles?: $ParticleOptions_, damageCalculator?: $ExplosionDamageCalculator, largeParticles?: $ParticleOptions_, explosionSound?: $Holder_<$SoundEvent>, damageSource?: $DamageSource_, particles?: (boolean) | undefined, ];
+    export type $ExplosionProperties_ = { particles?: (boolean) | undefined, damageSource?: $DamageSource_, explosionSound?: $Holder_<$SoundEvent>, largeParticles?: $ParticleOptions_, damageCalculator?: $ExplosionDamageCalculator, smallParticles?: $ParticleOptions_, strength?: (number) | undefined, source?: $Entity, mode?: $Level$ExplosionInteraction_, causesFire?: (boolean) | undefined,  } | [particles?: (boolean) | undefined, damageSource?: $DamageSource_, explosionSound?: $Holder_<$SoundEvent>, largeParticles?: $ParticleOptions_, damageCalculator?: $ExplosionDamageCalculator, smallParticles?: $ParticleOptions_, strength?: (number) | undefined, source?: $Entity, mode?: $Level$ExplosionInteraction_, causesFire?: (boolean) | undefined, ];
     export class $SimpleLevelKubeEvent implements $KubeLevelEvent {
         getLevel(): $Level;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -249,37 +225,54 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         constructor(l: $Level_);
         get level(): $Level;
         get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
     }
     export class $KubeJSWorldEventHandler {
+        static serverTickEvent(event: $LevelTickEvent$Post): void;
         static serverLevelLoad(event: $LevelEvent$Load): void;
         static serverLevelUnload(event: $LevelEvent$Unload): void;
         static preExplosion(event: $ExplosionEvent$Start): void;
         static detonateExplosion(event: $ExplosionEvent$Detonate): void;
-        static serverTickEvent(event: $LevelTickEvent$Post): void;
         constructor();
     }
     export class $LevelBlock {
     }
     export interface $LevelBlock extends $BlockProviderKJS {
-        offset(f: $Direction_, d: number): $LevelBlock;
-        offset(x: number, y: number, z: number): $LevelBlock;
-        offset(f: $Direction_): $LevelBlock;
-        set(block: $Block_, properties: $Map_<never, never>, flags: number): void;
-        set(block: $Block_, properties: $Map_<never, never>): void;
-        set(block: $Block_): void;
-        getProperties(): $Map<string, string>;
-        getLevel(): $Level;
+        createEntity(type: $EntityType_<never>): $Entity;
         setEntityData(tag: $CompoundTag_): void;
         getCenterY(): number;
+        spawnLightning(): void;
         spawnLightning(effectOnly: boolean): void;
         spawnLightning(effectOnly: boolean, player: $ServerPlayer): void;
-        spawnLightning(): void;
-        getPlayersInRadius(radius: number): $EntityArrayList;
         getPlayersInRadius(): $EntityArrayList;
+        getPlayersInRadius(radius: number): $EntityArrayList;
         getDown(): $LevelBlock;
         getUp(): $LevelBlock;
         getNorth(): $LevelBlock;
@@ -297,20 +290,27 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         popItemFromFace(item: $ItemStack_, dir: $Direction_): void;
         getBiomeId(): $ResourceLocation;
         toBlockStateString(): string;
-        getEntity(): $BlockEntity;
+        getLevel(): $Level;
         getY(): number;
+        getEntity(): $BlockEntity;
         getDimension(): $ResourceLocation;
-        createEntity(type: $EntityType_<never>): $Entity;
+        getItem(): $ItemStack;
+        offset(x: number, y: number, z: number): $LevelBlock;
+        offset(f: $Direction_, d: number): $LevelBlock;
+        offset(f: $Direction_): $LevelBlock;
+        set(block: $Block_): void;
+        set(block: $Block_, properties: $Map_<never, never>, flags: number): void;
+        set(block: $Block_, properties: $Map_<never, never>): void;
+        getProperties(): $Map<string, string>;
         getX(): number;
         getZ(): number;
-        getItem(): $ItemStack;
         getBlockState(): $BlockState;
-        getInventory(facing: $Direction_): $InventoryKJS;
         getInventory(): $InventoryKJS;
+        getInventory(facing: $Direction_): $InventoryKJS;
         getEntityData(): $CompoundTag;
         getBlock(): $Block;
-        setBlockState(state: $BlockState_): void;
         setBlockState(state: $BlockState_, flags: number): void;
+        setBlockState(state: $BlockState_): void;
         getPos(): $BlockPos;
         explode(properties: $ExplosionProperties_): $Explosion;
         getCenterX(): number;
@@ -319,8 +319,6 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         getDrops(): $List<$ItemStack>;
         getDrops(entity: $Entity, heldItem: $ItemStack_): $List<$ItemStack>;
         canSeeSkyFromBelowWater(): boolean;
-        get properties(): $Map<string, string>;
-        get level(): $Level;
         get centerY(): number;
         get down(): $LevelBlock;
         get up(): $LevelBlock;
@@ -334,12 +332,14 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         get blockLight(): number;
         get canSeeSky(): boolean;
         get biomeId(): $ResourceLocation;
-        get entity(): $BlockEntity;
+        get level(): $Level;
         get y(): number;
+        get entity(): $BlockEntity;
         get dimension(): $ResourceLocation;
+        get item(): $ItemStack;
+        get properties(): $Map<string, string>;
         get x(): number;
         get z(): number;
-        get item(): $ItemStack;
         get block(): $Block;
         get pos(): $BlockPos;
         get centerX(): number;
@@ -358,39 +358,15 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
         constructor(level: $Level_, explosion: $Explosion);
     }
     export class $ExplosionKubeEvent implements $KubeLevelEvent {
-        getLevel(): $Level;
-        getPosition(): $Vec3;
-        getY(): number;
         getExploder(): $LivingEntity;
+        getLevel(): $Level;
+        getY(): number;
+        getPosition(): $Vec3;
+        getBlock(): $LevelBlock;
         getX(): number;
         getZ(): number;
-        getBlock(): $LevelBlock;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -403,14 +379,38 @@ declare module "@package/dev/latvian/mods/kubejs/level" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         constructor(level: $Level_, explosion: $Explosion);
-        get level(): $Level;
-        get position(): $Vec3;
-        get y(): number;
         get exploder(): $LivingEntity;
+        get level(): $Level;
+        get y(): number;
+        get position(): $Vec3;
+        get block(): $LevelBlock;
         get x(): number;
         get z(): number;
-        get block(): $LevelBlock;
         get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
     }

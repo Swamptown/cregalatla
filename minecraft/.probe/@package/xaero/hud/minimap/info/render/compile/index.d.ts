@@ -6,9 +6,9 @@ import { $List } from "@package/java/util";
 
 declare module "@package/xaero/hud/minimap/info/render/compile" {
     export class $InfoDisplayCompiler {
-        compile<T>(arg0: $InfoDisplay<T>, arg1: $MinimapSession, arg2: number, arg3: $BlockPos_): $List<$Component>;
         addWords(arg0: string): void;
         addLine(arg0: $Component_): void;
         addLine(arg0: string): void;
+        compile<T>(arg0: $InfoDisplay<T>, arg1: $MinimapSession, arg2: number, arg3: $BlockPos_): $List<$Component>;
     }
 }

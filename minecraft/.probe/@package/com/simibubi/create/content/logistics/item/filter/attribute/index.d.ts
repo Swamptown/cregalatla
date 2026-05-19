@@ -20,21 +20,21 @@ declare module "@package/com/simibubi/create/content/logistics/item/filter/attri
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ItemAttribute>;
     }
     export interface $ItemAttribute {
-        format(arg0: boolean): $MutableComponent;
-        getType(): $ItemAttributeType;
         getTranslationParameters(): $Object[];
         getTranslationKey(): string;
         appliesTo(arg0: $ItemStack_, arg1: $Level_): boolean;
-        get type(): $ItemAttributeType;
+        format(arg0: boolean): $MutableComponent;
+        getType(): $ItemAttributeType;
         get translationParameters(): $Object[];
         get translationKey(): string;
+        get type(): $ItemAttributeType;
     }
     export class $ItemAttributeType {
     }
     export interface $ItemAttributeType {
         getAllAttributes(arg0: $ItemStack_, arg1: $Level_): $List<$ItemAttribute>;
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ItemAttribute>;
         createAttribute(): $ItemAttribute;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ItemAttribute>;
         codec(): $MapCodec<$ItemAttribute>;
     }
     /**

@@ -32,14 +32,6 @@ declare module "@package/net/minecraft/world/effect" {
         constructor(arg0: $MobEffectCategory_, arg1: number);
     }
     export class $MobEffect implements $FeatureElement, $IMobEffectExtension {
-        getDisplayName(): $Component;
-        addAttributeModifier(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_, arg2: number, arg3: $AttributeModifier$Operation_): $MobEffect;
-        addAttributeModifier(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_, arg2: $AttributeModifier$Operation_, arg3: $Int2DoubleFunction_): $MobEffect;
-        withSoundOnAdded(arg0: $SoundEvent_): $MobEffect;
-        setBlendDuration(arg0: number): $MobEffect;
-        getBlendDurationTicks(): number;
-        applyEffectTick(arg0: $LivingEntity, arg1: number): boolean;
-        applyInstantenousEffect(arg0: $Entity, arg1: $Entity, arg2: $LivingEntity, arg3: number, arg4: number): void;
         shouldApplyEffectTickThisTick(arg0: number, arg1: number): boolean;
         isInstantenous(): boolean;
         getOrCreateDescriptionId(): string;
@@ -50,11 +42,19 @@ declare module "@package/net/minecraft/world/effect" {
          * @deprecated
          */
         initializeClient(arg0: $Consumer_<$IClientMobEffectExtensions>): void;
+        withSoundOnAdded(arg0: $SoundEvent_): $MobEffect;
+        setBlendDuration(arg0: number): $MobEffect;
+        getBlendDurationTicks(): number;
+        applyEffectTick(arg0: $LivingEntity, arg1: number): boolean;
+        applyInstantenousEffect(arg0: $Entity, arg1: $Entity, arg2: $LivingEntity, arg3: number, arg4: number): void;
+        addAttributeModifier(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_, arg2: $AttributeModifier$Operation_, arg3: $Int2DoubleFunction_): $MobEffect;
+        addAttributeModifier(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_, arg2: number, arg3: $AttributeModifier$Operation_): $MobEffect;
+        getDisplayName(): $Component;
         getCategory(): $MobEffectCategory;
         getColor(): number;
-        getDescriptionId(): string;
-        requiredFeatures(...arg0: $FeatureFlag[]): $MobEffect;
         requiredFeatures(): $FeatureFlagSet;
+        requiredFeatures(...arg0: $FeatureFlag[]): $MobEffect;
+        getDescriptionId(): string;
         onMobRemoved(arg0: $LivingEntity, arg1: number, arg2: $Entity$RemovalReason_): void;
         onEffectAdded(arg0: $LivingEntity, arg1: number): void;
         onEffectStarted(arg0: $LivingEntity, arg1: number): void;
@@ -69,12 +69,12 @@ declare module "@package/net/minecraft/world/effect" {
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $Holder<$MobEffect>>;
         constructor(arg0: $MobEffectCategory_, arg1: number);
         constructor(arg0: $MobEffectCategory_, arg1: number, arg2: $ParticleOptions_);
-        get displayName(): $Component;
-        set blendDuration(value: number);
-        get blendDurationTicks(): number;
         get instantenous(): boolean;
         get orCreateDescriptionId(): string;
         get beneficial(): boolean;
+        set blendDuration(value: number);
+        get blendDurationTicks(): number;
+        get displayName(): $Component;
         get category(): $MobEffectCategory;
         get color(): number;
         get descriptionId(): string;
@@ -88,7 +88,7 @@ declare module "@package/net/minecraft/world/effect" {
     /**
      * Values that may be interpreted as {@link $MobEffectInstance$Details}.
      */
-    export type $MobEffectInstance$Details_ = { hiddenEffect?: ($MobEffectInstance$Details_) | undefined, showIcon?: boolean, cures?: ($Set_<$EffectCure>) | undefined, showParticles?: boolean, amplifier?: number, ambient?: boolean, duration?: number,  } | [hiddenEffect?: ($MobEffectInstance$Details_) | undefined, showIcon?: boolean, cures?: ($Set_<$EffectCure>) | undefined, showParticles?: boolean, amplifier?: number, ambient?: boolean, duration?: number, ];
+    export type $MobEffectInstance$Details_ = { ambient?: boolean, amplifier?: number, showParticles?: boolean, cures?: ($Set_<$EffectCure>) | undefined, showIcon?: boolean, hiddenEffect?: ($MobEffectInstance$Details_) | undefined, duration?: number,  } | [ambient?: boolean, amplifier?: number, showParticles?: boolean, cures?: ($Set_<$EffectCure>) | undefined, showIcon?: boolean, hiddenEffect?: ($MobEffectInstance$Details_) | undefined, duration?: number, ];
     export class $HealOrHarmMobEffect extends $InstantenousMobEffect {
         static CODEC: $Codec<$Holder<$MobEffect>>;
         attributeModifiers: $Map<$Holder<$Attribute>, $MobEffect$AttributeTemplate>;
@@ -148,20 +148,20 @@ declare module "@package/net/minecraft/world/effect" {
         constructor();
     }
     export class $MobEffectInstance implements $Comparable<$MobEffectInstance>, $MobEffectInstanceAccessor {
-        compareTo(arg0: $MobEffectInstance): number;
-        update(arg0: $MobEffectInstance): boolean;
-        static load(arg0: $CompoundTag_): $MobEffectInstance;
-        is(arg0: $Holder_<$MobEffect>): boolean;
-        save(): $Tag;
-        tick(arg0: $LivingEntity, arg1: $Runnable_): boolean;
-        getDuration(): number;
+        showIcon(): boolean;
         setDetailsFrom(arg0: $MobEffectInstance): void;
         getBlendFactor(arg0: $LivingEntity, arg1: number): number;
         isInfiniteDuration(): boolean;
         endsWithin(arg0: number): boolean;
         mapDuration(arg0: $Int2IntFunction_): number;
         skipBlending(): void;
-        showIcon(): boolean;
+        getDuration(): number;
+        tick(arg0: $LivingEntity, arg1: $Runnable_): boolean;
+        compareTo(arg0: $MobEffectInstance): number;
+        update(arg0: $MobEffectInstance): boolean;
+        static load(arg0: $CompoundTag_): $MobEffectInstance;
+        save(): $Tag;
+        is(arg0: $Holder_<$MobEffect>): boolean;
         getDescriptionId(): string;
         onMobRemoved(arg0: $LivingEntity, arg1: $Entity$RemovalReason_): void;
         getEffect(): $Holder<$MobEffect>;
@@ -180,16 +180,16 @@ declare module "@package/net/minecraft/world/effect" {
         static INFINITE_DURATION: number;
         static MIN_AMPLIFIER: number;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $MobEffectInstance>;
+        constructor(arg0: $MobEffectInstance);
         constructor(arg0: $Holder_<$MobEffect>, arg1: number, arg2: number, arg3: boolean, arg4: boolean, arg5: boolean);
         constructor(arg0: $Holder_<$MobEffect>, arg1: number, arg2: number, arg3: boolean, arg4: boolean, arg5: boolean, arg6: $MobEffectInstance);
-        constructor(arg0: $MobEffectInstance);
         constructor(arg0: $Holder_<$MobEffect>);
         constructor(arg0: $Holder_<$MobEffect>, arg1: number);
         constructor(arg0: $Holder_<$MobEffect>, arg1: number, arg2: number);
         constructor(arg0: $Holder_<$MobEffect>, arg1: number, arg2: number, arg3: boolean, arg4: boolean);
-        get duration(): number;
         set detailsFrom(value: $MobEffectInstance);
         get infiniteDuration(): boolean;
+        get duration(): number;
         get descriptionId(): string;
         get effect(): $Holder<$MobEffect>;
         get visible(): boolean;
@@ -210,8 +210,8 @@ declare module "@package/net/minecraft/world/effect" {
     }
     export class $MobEffectUtil {
         static formatDuration(arg0: $MobEffectInstance, arg1: number, arg2: number): $Component;
-        static addEffectToPlayersAround(arg0: $ServerLevel, arg1: $Entity, arg2: $Vec3_, arg3: number, arg4: $MobEffectInstance, arg5: number): $List<$ServerPlayer>;
         static hasWaterBreathing(arg0: $LivingEntity): boolean;
+        static addEffectToPlayersAround(arg0: $ServerLevel, arg1: $Entity, arg2: $Vec3_, arg3: number, arg4: $MobEffectInstance, arg5: number): $List<$ServerPlayer>;
         static hasDigSpeed(arg0: $LivingEntity): boolean;
         static getDigSpeedAmplification(arg0: $LivingEntity): number;
         constructor();
@@ -227,9 +227,9 @@ declare module "@package/net/minecraft/world/effect" {
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $Holder<$MobEffect>>;
     }
     export class $MobEffectCategory extends $Enum<$MobEffectCategory> {
+        getTooltipFormatting(): $ChatFormatting;
         static values(): $MobEffectCategory[];
         static valueOf(arg0: string): $MobEffectCategory;
-        getTooltipFormatting(): $ChatFormatting;
         static HARMFUL: $MobEffectCategory;
         static BENEFICIAL: $MobEffectCategory;
         static NEUTRAL: $MobEffectCategory;
@@ -241,10 +241,10 @@ declare module "@package/net/minecraft/world/effect" {
     export type $MobEffectCategory_ = "beneficial" | "harmful" | "neutral";
     export interface $MobEffect extends RegistryMarked<RegistryTypes.MobEffectTag, RegistryTypes.MobEffect> {}
     export class $MobEffect$AttributeTemplate extends $Record {
+        curve(): $Int2DoubleFunction;
+        amount(): number;
         id(): $ResourceLocation;
         create(arg0: number): $AttributeModifier;
-        amount(): number;
-        curve(): $Int2DoubleFunction;
         operation(): $AttributeModifier$Operation;
         constructor(arg0: $ResourceLocation_, arg1: number, arg2: $AttributeModifier$Operation_);
         constructor(id: $ResourceLocation_, amount: number, operation: $AttributeModifier$Operation_, curve: $Int2DoubleFunction_);
@@ -252,7 +252,7 @@ declare module "@package/net/minecraft/world/effect" {
     /**
      * Values that may be interpreted as {@link $MobEffect$AttributeTemplate}.
      */
-    export type $MobEffect$AttributeTemplate_ = { id?: $ResourceLocation_, curve?: $Int2DoubleFunction_, amount?: number, operation?: $AttributeModifier$Operation_,  } | [id?: $ResourceLocation_, curve?: $Int2DoubleFunction_, amount?: number, operation?: $AttributeModifier$Operation_, ];
+    export type $MobEffect$AttributeTemplate_ = { operation?: $AttributeModifier$Operation_, amount?: number, curve?: $Int2DoubleFunction_, id?: $ResourceLocation_,  } | [operation?: $AttributeModifier$Operation_, amount?: number, curve?: $Int2DoubleFunction_, id?: $ResourceLocation_, ];
     export class $WeavingMobEffect extends $MobEffect {
         static CODEC: $Codec<$Holder<$MobEffect>>;
         attributeModifiers: $Map<$Holder<$Attribute>, $MobEffect$AttributeTemplate>;

@@ -1,4 +1,5 @@
 import { $JsonElement_, $JsonElement } from "@package/com/google/gson";
+import { $GlobalMixin } from "@package/dev/emi/emi/mixin";
 import { $EmiIngredient } from "@package/dev/emi/emi/api/stack";
 
 declare module "@package/dev/emi/emi/api/stack/serializer" {
@@ -6,7 +7,7 @@ declare module "@package/dev/emi/emi/api/stack/serializer" {
         static getDeserialized(element: $JsonElement_): $EmiIngredient;
         static getSerialized(ingredient: $EmiIngredient): $JsonElement;
     }
-    export interface $EmiIngredientSerializer<T extends $EmiIngredient> {
+    export interface $EmiIngredientSerializer<T extends $EmiIngredient> extends $GlobalMixin {
         getType(): string;
         deserialize(arg0: $JsonElement_): $EmiIngredient;
         serialize(arg0: T): $JsonElement;

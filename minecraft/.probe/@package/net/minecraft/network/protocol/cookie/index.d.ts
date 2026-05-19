@@ -46,7 +46,7 @@ declare module "@package/net/minecraft/network/protocol/cookie" {
     /**
      * Values that may be interpreted as {@link $ServerboundCookieResponsePacket}.
      */
-    export type $ServerboundCookieResponsePacket_ = { payload?: number[], key?: $ResourceLocation_,  } | [payload?: number[], key?: $ResourceLocation_, ];
+    export type $ServerboundCookieResponsePacket_ = { key?: $ResourceLocation_, payload?: number[],  } | [key?: $ResourceLocation_, payload?: number[], ];
     export class $ClientCookiePacketListener {
     }
     export interface $ClientCookiePacketListener extends $ClientboundPacketListener {

@@ -20,10 +20,6 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -31,16 +27,16 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */
@@ -85,10 +81,6 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -96,16 +88,16 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */
@@ -161,51 +153,49 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
      */
     export type $ByteBinaryOperator_ = ((arg0: number, arg1: number) => number);
     export class $ByteList {
-        static of(): $ByteList;
-        static of(arg0: number, arg1: number): $ByteList;
         static of(arg0: number): $ByteList;
-        static of(...arg0: number[]): $ByteList;
+        static of(arg0: number, arg1: number): $ByteList;
+        static of(): $ByteList;
         static of(arg0: number, arg1: number, arg2: number): $ByteList;
+        static of(...arg0: number[]): $ByteList;
         [Symbol.iterator](): Iterator<number>
     }
     export interface $ByteList extends $List<number>, $Comparable<$List<number>>, $ByteCollection {
+        getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
+        removeByte(arg0: number): number;
         /**
          * @deprecated
          */
         remove(arg0: $Object): boolean;
         size(arg0: number): void;
-        sort(arg0: $ByteComparator): void;
-        /**
-         * @deprecated
-         */
-        sort(arg0: $Comparator<number>): void;
-        indexOf(arg0: number): number;
         /**
          * @deprecated
          */
         indexOf(arg0: $Object): number;
+        indexOf(arg0: number): number;
         getByte(arg0: number): number;
         /**
          * @deprecated
          */
         lastIndexOf(arg0: $Object): number;
         lastIndexOf(arg0: number): number;
+        replaceAll(arg0: $ByteUnaryOperator_): void;
+        replaceAll(arg0: $IntUnaryOperator_): void;
         /**
          * @deprecated
          */
         replaceAll(arg0: $UnaryOperator_<number>): void;
-        replaceAll(arg0: $IntUnaryOperator_): void;
-        replaceAll(arg0: $ByteUnaryOperator_): void;
         /**
          * @deprecated
          */
         add(arg0: number): boolean;
         add(arg0: number): boolean;
+        add(arg0: number, arg1: number): void;
         /**
          * @deprecated
          */
         add(arg0: number, arg1: number): void;
-        add(arg0: number, arg1: number): void;
+        subList(arg0: number, arg1: number): $ByteList;
         /**
          * @deprecated
          */
@@ -214,26 +204,28 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
         addAll(arg0: number, arg1: $ByteCollection): boolean;
         addAll(arg0: number, arg1: $ByteList): boolean;
         addAll(arg0: $ByteList): boolean;
+        set(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         set(arg0: number, arg1: number): number;
-        set(arg0: number, arg1: number): number;
-        removeByte(arg0: number): number;
-        getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
+        sort(arg0: $ByteComparator): void;
+        /**
+         * @deprecated
+         */
+        sort(arg0: $Comparator<number>): void;
         /**
          * @deprecated
          */
         unstableSort(arg0: $Comparator<number>): void;
         unstableSort(arg0: $ByteComparator): void;
-        setElements(arg0: number[]): void;
         setElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
+        setElements(arg0: number[]): void;
         setElements(arg0: number, arg1: number[]): void;
         removeElements(arg0: number, arg1: number): void;
         addElements(arg0: number, arg1: number[]): void;
         addElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         get(arg0: number): number;
-        subList(arg0: number, arg1: number): $List<number>;
         iterator(): $Iterator<number>;
         listIterator(arg0: number): $ListIterator<number>;
         listIterator(): $ListIterator<number>;
@@ -246,10 +238,6 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -257,16 +245,16 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */
@@ -311,10 +299,6 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -322,16 +306,16 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */
@@ -391,27 +375,27 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
     export class $BytePredicate {
     }
     export interface $BytePredicate extends $Predicate<number>, $IntPredicate {
-        /**
-         * @deprecated
-         */
-        test(arg0: number): boolean;
-        test(arg0: number): boolean;
-        /**
-         * @deprecated
-         */
-        test(arg0: number): boolean;
-        or(arg0: $BytePredicate_): $BytePredicate;
-        or(arg0: $IntPredicate_): $BytePredicate;
-        /**
-         * @deprecated
-         */
-        or(arg0: $Predicate_<number>): $Predicate<number>;
-        and(arg0: $BytePredicate_): $BytePredicate;
+        negate(): $BytePredicate;
         /**
          * @deprecated
          */
         and(arg0: $Predicate_<number>): $Predicate<number>;
-        negate(): $Predicate<number>;
+        and(arg0: $BytePredicate_): $BytePredicate;
+        /**
+         * @deprecated
+         */
+        test(arg0: number): boolean;
+        /**
+         * @deprecated
+         */
+        test(arg0: number): boolean;
+        test(arg0: number): boolean;
+        /**
+         * @deprecated
+         */
+        or(arg0: $Predicate_<number>): $Predicate<number>;
+        or(arg0: $BytePredicate_): $BytePredicate;
+        or(arg0: $IntPredicate_): $BytePredicate;
     }
     /**
      * Values that may be interpreted as {@link $BytePredicate}.
@@ -420,11 +404,11 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
     export class $Byte2BooleanFunction {
     }
     export interface $Byte2BooleanFunction extends $Function<number, boolean>, $IntPredicate {
-        remove(arg0: number): boolean;
         /**
          * @deprecated
          */
         remove(arg0: $Object): boolean;
+        remove(arg0: number): boolean;
         /**
          * @deprecated
          */
@@ -457,8 +441,8 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<boolean, T>): $Function$1<number, T>;
-        defaultReturnValue(arg0: boolean): void;
         defaultReturnValue(): boolean;
+        defaultReturnValue(arg0: boolean): void;
         andThenByte(arg0: $Boolean2ByteFunction_): $Byte2ByteFunction;
         composeByte(arg0: $Byte2ByteFunction_): $Byte2BooleanFunction;
         andThenShort(arg0: $Boolean2ShortFunction_): $Byte2ShortFunction;
@@ -489,10 +473,6 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -500,16 +480,16 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */
@@ -553,11 +533,16 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): boolean;
-        add(arg0: number): boolean;
+        toByteArray(arg0: number[]): number[];
+        toByteArray(): number[];
         /**
          * @deprecated
          */
+        remove(arg0: $Object): boolean;
+        /**
+         * @deprecated
+         */
+        add(arg0: number): boolean;
         add(arg0: number): boolean;
         toArray(arg0: number[]): number[];
         iterator(): $ByteIterator;
@@ -572,12 +557,6 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
         contains(arg0: $Object): boolean;
         contains(arg0: number): boolean;
         addAll(arg0: $ByteCollection): boolean;
-        /**
-         * @deprecated
-         */
-        removeIf(arg0: $Predicate_<number>): boolean;
-        removeIf(arg0: $BytePredicate_): boolean;
-        removeIf(arg0: $IntPredicate_): boolean;
         removeAll(arg0: $ByteCollection): boolean;
         retainAll(arg0: $ByteCollection): boolean;
         containsAll(arg0: $ByteCollection): boolean;
@@ -586,27 +565,28 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          */
         parallelStream(): $Stream<number>;
         rem(arg0: number): boolean;
+        removeIf(arg0: $IntPredicate_): boolean;
+        removeIf(arg0: $BytePredicate_): boolean;
         /**
          * @deprecated
          */
-        toByteArray(arg0: number[]): number[];
-        toByteArray(): number[];
-        intParallelStream(): $IntStream;
+        removeIf(arg0: $Predicate_<number>): boolean;
         intSpliterator(): $IntSpliterator;
         intIterator(): $IntIterator;
+        intParallelStream(): $IntStream;
         spliterator(): $Spliterator<number>;
     }
     export class $ByteIterator {
     }
     export interface $ByteIterator extends $PrimitiveIterator<number, $ByteConsumer> {
+        nextByte(): number;
         forEachRemaining(arg0: $IntConsumer_): void;
-        forEachRemaining(arg0: $ByteConsumer_): void;
         /**
          * @deprecated
          */
         forEachRemaining(arg0: $Consumer_<number>): void;
+        forEachRemaining(arg0: $ByteConsumer_): void;
         skip(arg0: number): number;
-        nextByte(): number;
         next(): number;
     }
     export class $ByteConsumer {
@@ -634,23 +614,19 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
     export class $ByteComparator {
     }
     export interface $ByteComparator extends $Comparator<number> {
+        compare(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         compare(arg0: number, arg1: number): number;
-        compare(arg0: number, arg1: number): number;
-        reversed(): $ByteComparator;
         thenComparing(arg0: $Comparator<number>): $Comparator<number>;
         thenComparing(arg0: $ByteComparator): $ByteComparator;
+        reversed(): $Comparator<number>;
     }
     export class $Byte2CharFunction {
     }
     export interface $Byte2CharFunction extends $Function<number, string>, $IntUnaryOperator {
         remove(arg0: number): string;
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): string;
         /**
          * @deprecated
          */
@@ -661,16 +637,16 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         put(arg0: number, arg1: string): string;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: string): string;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: string): string;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: string): string;
         /**
          * @deprecated
          */
@@ -744,8 +720,8 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(arg0: V): void;
         defaultReturnValue(): V;
+        defaultReturnValue(arg0: V): void;
         andThenByte(arg0: $Reference2ByteFunction_<V>): $Byte2ByteFunction;
         composeByte(arg0: $Byte2ByteFunction_): $Byte2ReferenceFunction<V>;
         andThenShort(arg0: $Reference2ShortFunction_<V>): $Byte2ShortFunction;
@@ -778,22 +754,26 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         remove(arg0: $Object): number;
-        get(arg0: number): number;
-        put(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
+        get(arg0: $Object): number;
+        get(arg0: number): number;
+        /**
+         * @deprecated
+         */
+        put(arg0: number, arg1: number): number;
         put(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
+        getOrDefault(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: number): number;
-        getOrDefault(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
@@ -806,8 +786,8 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<number, T>): $Function$1<number, T>;
-        defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         andThenByte(arg0: $Byte2ByteFunction_): $Byte2ByteFunction;
         composeByte(arg0: $Byte2ByteFunction_): $Byte2ByteFunction;
         andThenShort(arg0: $Byte2ShortFunction_): $Byte2ShortFunction;
@@ -867,8 +847,8 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(arg0: V): void;
         defaultReturnValue(): V;
+        defaultReturnValue(arg0: V): void;
         andThenByte(arg0: $Object2ByteFunction_<V>): $Byte2ByteFunction;
         composeByte(arg0: $Byte2ByteFunction_): $Byte2ObjectFunction<V>;
         andThenShort(arg0: $Object2ShortFunction_<V>): $Byte2ShortFunction;
@@ -918,13 +898,13 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
         /**
          * @deprecated
          */
-        forEachRemaining(arg0: $Consumer_<number>): void;
-        skip(arg0: number): number;
+        tryAdvance(arg0: $Consumer_<number>): boolean;
+        trySplit(): $ByteSpliterator;
         /**
          * @deprecated
          */
-        tryAdvance(arg0: $Consumer_<number>): boolean;
-        trySplit(): $Spliterator<number>;
+        forEachRemaining(arg0: $Consumer_<number>): void;
+        skip(arg0: number): number;
         getComparator(): $Comparator<number>;
         get comparator(): $Comparator<number>;
     }

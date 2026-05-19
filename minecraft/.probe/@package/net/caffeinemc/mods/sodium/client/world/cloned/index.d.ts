@@ -13,7 +13,6 @@ import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/world/cloned" {
     export class $ClonedChunkSection {
-        getPosition(): $SectionPos;
         getBiomeData(): $PalettedContainerRO<$Holder<$Biome>>;
         getLightArray(arg0: $LightLayer_): $DataLayer;
         getBlockEntityMap(): $Int2ReferenceMap<$BlockEntity>;
@@ -22,14 +21,15 @@ declare module "@package/net/caffeinemc/mods/sodium/client/world/cloned" {
         setLastUsedTimestamp(arg0: number): void;
         getLastUsedTimestamp(): number;
         getBlockData(): $PalettedContainerRO<$BlockState>;
+        getPosition(): $SectionPos;
         getAuxLightManager(): $SodiumAuxiliaryLightManager;
         constructor(arg0: $Level_, arg1: $LevelChunk, arg2: $LevelChunkSection, arg3: $SectionPos);
-        get position(): $SectionPos;
         get biomeData(): $PalettedContainerRO<$Holder<$Biome>>;
         get blockEntityMap(): $Int2ReferenceMap<$BlockEntity>;
         get blockEntityRenderDataMap(): $Int2ReferenceMap<$Object>;
         get modelMap(): $SodiumModelDataContainer;
         get blockData(): $PalettedContainerRO<$BlockState>;
+        get position(): $SectionPos;
         get auxLightManager(): $SodiumAuxiliaryLightManager;
     }
     export class $ChunkRenderContext {

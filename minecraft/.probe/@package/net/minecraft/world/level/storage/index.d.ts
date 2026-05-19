@@ -45,10 +45,10 @@ declare module "@package/net/minecraft/world/level/storage" {
     export class $CommandStorage$Container extends $SavedData {
     }
     export class $LevelStorageSource$LevelDirectory extends $Record {
-        path(): $Path;
         rawDataFile(arg0: $LocalDateTime): $Path;
         lockFile(): $Path;
         corruptedDataFile(arg0: $LocalDateTime): $Path;
+        path(): $Path;
         resourcePath(arg0: $LevelResource): $Path;
         dataFile(): $Path;
         directoryName(): string;
@@ -74,24 +74,24 @@ declare module "@package/net/minecraft/world/level/storage" {
         static MCREGION_VERSION_ID: number;
     }
     export interface $WorldData {
-        getVersion(): number;
-        getLevelName(): string;
-        getGameType(): $GameType;
+        createTag(arg0: $RegistryAccess, arg1: $CompoundTag_): $CompoundTag;
         isDifficultyLocked(): boolean;
-        isFlatWorld(): boolean;
+        getGameType(): $GameType;
         setGameType(arg0: $GameType_): void;
         worldGenOptions(): $WorldOptions;
         endDragonFightData(): $EndDragonFight$Data;
         setEndDragonFightData(arg0: $EndDragonFight$Data_): void;
-        createTag(arg0: $RegistryAccess, arg1: $CompoundTag_): $CompoundTag;
+        isFlatWorld(): boolean;
+        getVersion(): number;
+        getLevelName(): string;
         isHardcore(): boolean;
         enabledFeatures(): $FeatureFlagSet;
-        fillCrashReportCategory(arg0: $CrashReportCategory): void;
         getDifficulty(): $Difficulty;
         getGameRules(): $GameRules;
-        wasModded(): boolean;
+        fillCrashReportCategory(arg0: $CrashReportCategory): void;
         getDataConfiguration(): $WorldDataConfiguration;
         setDataConfiguration(arg0: $WorldDataConfiguration_): void;
+        wasModded(): boolean;
         getKnownServerBrands(): $Set<string>;
         getRemovedFeatureFlags(): $Set<string>;
         setModdedInfo(arg0: string, arg1: boolean): void;
@@ -106,9 +106,9 @@ declare module "@package/net/minecraft/world/level/storage" {
         getLoadedPlayerTag(): $CompoundTag;
         isDebugWorld(): boolean;
         worldGenSettingsLifecycle(): $Lifecycle;
+        get flatWorld(): boolean;
         get version(): number;
         get levelName(): string;
-        get flatWorld(): boolean;
         get hardcore(): boolean;
         get gameRules(): $GameRules;
         get knownServerBrands(): $Set<string>;
@@ -139,17 +139,15 @@ declare module "@package/net/minecraft/world/level/storage" {
         get series(): string;
     }
     export class $DerivedLevelData implements $ServerLevelData {
-        getLevelName(): string;
-        getWanderingTraderSpawnDelay(): number;
         setWanderingTraderSpawnDelay(arg0: number): void;
         getWanderingTraderSpawnChance(): number;
         setWanderingTraderSpawnChance(arg0: number): void;
         getWanderingTraderId(): $UUID;
         setWanderingTraderId(arg0: $UUID_): void;
+        getWanderingTraderSpawnDelay(): number;
         setWorldBorder(arg0: $WorldBorder$Settings): void;
-        getGameType(): $GameType;
         isDifficultyLocked(): boolean;
-        setSpawn(arg0: $BlockPos_, arg1: number): void;
+        getGameType(): $GameType;
         setGameType(arg0: $GameType_): void;
         setClearWeatherTime(arg0: number): void;
         setRainTime(arg0: number): void;
@@ -161,16 +159,18 @@ declare module "@package/net/minecraft/world/level/storage" {
         getClearWeatherTime(): number;
         getThunderTime(): number;
         getRainTime(): number;
+        setSpawn(arg0: $BlockPos_, arg1: number): void;
+        getLevelName(): string;
         setInitialized(arg0: boolean): void;
         isInitialized(): boolean;
         isHardcore(): boolean;
         getWorldBorder(): $WorldBorder$Settings;
         getGameTime(): number;
-        fillCrashReportCategory(arg0: $CrashReportCategory, arg1: $LevelHeightAccessor): void;
         getDifficulty(): $Difficulty;
         getGameRules(): $GameRules;
         getDayTimeFraction(): number;
         getDayTime(): number;
+        fillCrashReportCategory(arg0: $CrashReportCategory, arg1: $LevelHeightAccessor): void;
         getSpawnPos(): $BlockPos;
         getSpawnAngle(): number;
         isRaining(): boolean;
@@ -181,9 +181,9 @@ declare module "@package/net/minecraft/world/level/storage" {
         setGameTime(arg0: number): void;
         isAllowCommands(): boolean;
         constructor(arg0: $WorldData, arg1: $ServerLevelData);
-        get levelName(): string;
         get difficultyLocked(): boolean;
         get scheduledEvents(): $TimerQueue<$MinecraftServer>;
+        get levelName(): string;
         get hardcore(): boolean;
         get difficulty(): $Difficulty;
         get gameRules(): $GameRules;
@@ -208,10 +208,10 @@ declare module "@package/net/minecraft/world/level/storage" {
         setRaining(arg0: boolean): void;
         isHardcore(): boolean;
         getGameTime(): number;
-        fillCrashReportCategory(arg0: $CrashReportCategory, arg1: $LevelHeightAccessor): void;
         getDifficulty(): $Difficulty;
         getGameRules(): $GameRules;
         getDayTime(): number;
+        fillCrashReportCategory(arg0: $CrashReportCategory, arg1: $LevelHeightAccessor): void;
         getSpawnPos(): $BlockPos;
         getSpawnAngle(): number;
         isRaining(): boolean;
@@ -227,58 +227,58 @@ declare module "@package/net/minecraft/world/level/storage" {
         get thundering(): boolean;
     }
     export class $DimensionDataStorage {
+        readTagFromDisk(arg0: string, arg1: $DataFixTypes_, arg2: number): $CompoundTag;
         get<T extends $SavedData>(arg0: $SavedData$Factory_<T>, arg1: string): T;
         set(arg0: string, arg1: $SavedData): void;
         computeIfAbsent<T extends $SavedData>(arg0: $SavedData$Factory_<T>, arg1: string): T;
         save(): void;
-        readTagFromDisk(arg0: string, arg1: $DataFixTypes_, arg2: number): $CompoundTag;
         dataFolder: $File;
         constructor(arg0: $File_, arg1: $DataFixer, arg2: $HolderLookup$Provider);
     }
     export class $LevelSummary$BackupStatus extends $Enum<$LevelSummary$BackupStatus> {
+        getTranslationKey(): string;
+        isSevere(): boolean;
         static values(): $LevelSummary$BackupStatus[];
         static valueOf(arg0: string): $LevelSummary$BackupStatus;
-        isSevere(): boolean;
-        getTranslationKey(): string;
         shouldBackup(): boolean;
         static UPGRADE_TO_SNAPSHOT: $LevelSummary$BackupStatus;
         static DOWNGRADE: $LevelSummary$BackupStatus;
         static NONE: $LevelSummary$BackupStatus;
-        get severe(): boolean;
         get translationKey(): string;
+        get severe(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $LevelSummary$BackupStatus}.
      */
     export type $LevelSummary$BackupStatus_ = "none" | "downgrade" | "upgrade_to_snapshot";
     export class $LevelStorageSource$LevelStorageAccess implements $AutoCloseable {
-        parent(): $LevelStorageSource;
-        close(): void;
-        getSummary(arg0: $Dynamic<never>): $LevelSummary;
         createPlayerStorage(): $PlayerDataStorage;
+        getSummary(arg0: $Dynamic<never>): $LevelSummary;
+        getLevelDirectory(): $LevelStorageSource$LevelDirectory;
+        readAdditionalLevelSaveData(arg0: boolean): void;
+        getDimensionPath(arg0: $ResourceKey_<$Level>): $Path;
         safeClose(): void;
         getDataTag(): $Dynamic<never>;
         checkForLowDiskSpace(): boolean;
         estimateDiskSpace(): number;
         getDataTagFallback(): $Dynamic<never>;
         getWorldDir(): $Path;
-        handler$con000$xaerominimap$onDeleteLevel(arg0: $CallbackInfo): void;
-        handler$dfa001$xaeroworldmap$onDeleteLevel(arg0: $CallbackInfo): void;
+        handler$cpe000$xaerominimap$onDeleteLevel(arg0: $CallbackInfo): void;
+        handler$dfm001$xaeroworldmap$onDeleteLevel(arg0: $CallbackInfo): void;
         renameLevel(arg0: string): void;
         renameAndDropPlayer(arg0: string): void;
         makeWorldBackup(): number;
         restoreLevelDataFromOld(): boolean;
-        getDimensionPath(arg0: $ResourceKey_<$Level>): $Path;
-        getLevelDirectory(): $LevelStorageSource$LevelDirectory;
-        readAdditionalLevelSaveData(arg0: boolean): void;
+        parent(): $LevelStorageSource;
+        close(): void;
         saveDataTag(arg0: $RegistryAccess, arg1: $WorldData): void;
         saveDataTag(arg0: $RegistryAccess, arg1: $WorldData, arg2: $CompoundTag_): void;
         getLevelId(): string;
         getLevelPath(arg0: $LevelResource): $Path;
         getIconFile(): ($Path) | undefined;
+        getFileModificationTime(arg0: boolean): $Instant;
         hasWorldData(): boolean;
         deleteLevel(): void;
-        getFileModificationTime(arg0: boolean): $Instant;
         levelDirectory: $LevelStorageSource$LevelDirectory;
         this$0: $LevelStorageSource;
         lock: $DirectoryLock;
@@ -290,9 +290,9 @@ declare module "@package/net/minecraft/world/level/storage" {
         get iconFile(): ($Path) | undefined;
     }
     export class $PlayerDataStorage {
+        getPlayerDir(): $File;
         load(arg0: $Player): ($CompoundTag) | undefined;
         save(arg0: $Player): void;
-        getPlayerDir(): $File;
         fixerUpper: $DataFixer;
         constructor(arg0: $LevelStorageSource$LevelStorageAccess, arg1: $DataFixer);
         get playerDir(): $File;
@@ -300,13 +300,12 @@ declare module "@package/net/minecraft/world/level/storage" {
     export class $ServerLevelData {
     }
     export interface $ServerLevelData extends $WritableLevelData {
-        getLevelName(): string;
-        getWanderingTraderSpawnDelay(): number;
         setWanderingTraderSpawnDelay(arg0: number): void;
         getWanderingTraderSpawnChance(): number;
         setWanderingTraderSpawnChance(arg0: number): void;
         getWanderingTraderId(): $UUID;
         setWanderingTraderId(arg0: $UUID_): void;
+        getWanderingTraderSpawnDelay(): number;
         setWorldBorder(arg0: $WorldBorder$Settings): void;
         getGameType(): $GameType;
         setGameType(arg0: $GameType_): void;
@@ -319,20 +318,21 @@ declare module "@package/net/minecraft/world/level/storage" {
         getClearWeatherTime(): number;
         getThunderTime(): number;
         getRainTime(): number;
+        getLevelName(): string;
         setInitialized(arg0: boolean): void;
         isInitialized(): boolean;
         getWorldBorder(): $WorldBorder$Settings;
-        fillCrashReportCategory(arg0: $CrashReportCategory, arg1: $LevelHeightAccessor): void;
         getDayTimeFraction(): number;
+        fillCrashReportCategory(arg0: $CrashReportCategory, arg1: $LevelHeightAccessor): void;
         setDayTimeFraction(arg0: number): void;
         getDayTimePerTick(): number;
         setDayTimePerTick(arg0: number): void;
         setGameTime(arg0: number): void;
         isAllowCommands(): boolean;
-        get levelName(): string;
         set thundering(value: boolean);
         set dayTime(value: number);
         get scheduledEvents(): $TimerQueue<$MinecraftServer>;
+        get levelName(): string;
         set gameTime(value: number);
         get allowCommands(): boolean;
     }
@@ -349,7 +349,6 @@ declare module "@package/net/minecraft/world/level/storage" {
         static parseValidator(arg0: $Path_): $DirectoryValidator;
         static createDefault(arg0: $Path_): $LevelStorageSource;
         getLevelPath(arg0: string): $Path;
-        createAccess(arg0: string): $LevelStorageSource$LevelStorageAccess;
         static readDataConfig(arg0: $Dynamic<never>): $WorldDataConfiguration;
         static getPackConfig(arg0: $Dynamic<never>, arg1: $PackRepository, arg2: boolean): $WorldLoader$PackConfig;
         static getLevelDataAndDimensions(arg0: $Dynamic<never>, arg1: $WorldDataConfiguration_, arg2: $Registry<$LevelStem_>, arg3: $RegistryAccess$Frozen): $LevelDataAndDimensions;
@@ -365,6 +364,7 @@ declare module "@package/net/minecraft/world/level/storage" {
         getBackupPath(): $Path;
         validateAndCreateAccess(arg0: string): $LevelStorageSource$LevelStorageAccess;
         getWorldDirValidator(): $DirectoryValidator;
+        createAccess(arg0: string): $LevelStorageSource$LevelStorageAccess;
         fixerUpper: $DataFixer;
         static ALLOWED_SYMLINKS_CONFIG_NAME: string;
         static FORMATTER: $DateTimeFormatter;
@@ -376,23 +376,19 @@ declare module "@package/net/minecraft/world/level/storage" {
         get worldDirValidator(): $DirectoryValidator;
     }
     export class $PrimaryLevelData implements $ServerLevelData, $WorldData, $PrimaryLevelDataExtension {
-        static parse<T>(arg0: $Dynamic<T>, arg1: $LevelSettings, arg2: $PrimaryLevelData$SpecialWorldProperty_, arg3: $WorldOptions, arg4: $Lifecycle): $PrimaryLevelData;
-        getVersion(): number;
-        getLevelName(): string;
-        getWanderingTraderSpawnDelay(): number;
+        setPreset(arg0: $ResourceLocation_): void;
+        setEndDragonFight(arg0: $EndDragonFight$Data_): void;
         setWanderingTraderSpawnDelay(arg0: number): void;
         getWanderingTraderSpawnChance(): number;
         setWanderingTraderSpawnChance(arg0: number): void;
         getWanderingTraderId(): $UUID;
         setWanderingTraderId(arg0: $UUID_): void;
-        getPreset(): $ResourceLocation;
+        getWanderingTraderSpawnDelay(): number;
         setWorldBorder(arg0: $WorldBorder$Settings): void;
-        hasConfirmedExperimentalWarning(): boolean;
-        withConfirmedWarning(arg0: boolean): $PrimaryLevelData;
-        getGameType(): $GameType;
+        getPreset(): $ResourceLocation;
+        createTag(arg0: $RegistryAccess, arg1: $CompoundTag_): $CompoundTag;
         isDifficultyLocked(): boolean;
-        setSpawn(arg0: $BlockPos_, arg1: number): void;
-        isFlatWorld(): boolean;
+        getGameType(): $GameType;
         setGameType(arg0: $GameType_): void;
         worldGenOptions(): $WorldOptions;
         endDragonFightData(): $EndDragonFight$Data;
@@ -407,17 +403,23 @@ declare module "@package/net/minecraft/world/level/storage" {
         getThunderTime(): number;
         getRainTime(): number;
         setEndDragonFightData(arg0: $EndDragonFight$Data_): void;
-        createTag(arg0: $RegistryAccess, arg1: $CompoundTag_): $CompoundTag;
+        setSpawn(arg0: $BlockPos_, arg1: number): void;
+        isFlatWorld(): boolean;
+        hasConfirmedExperimentalWarning(): boolean;
+        withConfirmedWarning(arg0: boolean): $PrimaryLevelData;
+        getVersion(): number;
+        getLevelName(): string;
+        static parse<T>(arg0: $Dynamic<T>, arg1: $LevelSettings, arg2: $PrimaryLevelData$SpecialWorldProperty_, arg3: $WorldOptions, arg4: $Lifecycle): $PrimaryLevelData;
         setInitialized(arg0: boolean): void;
         isInitialized(): boolean;
         isHardcore(): boolean;
         getWorldBorder(): $WorldBorder$Settings;
         getGameTime(): number;
-        fillCrashReportCategory(arg0: $CrashReportCategory, arg1: $LevelHeightAccessor): void;
         getDifficulty(): $Difficulty;
         getGameRules(): $GameRules;
         getDayTimeFraction(): number;
         getDayTime(): number;
+        fillCrashReportCategory(arg0: $CrashReportCategory, arg1: $LevelHeightAccessor): void;
         getSpawnPos(): $BlockPos;
         getSpawnAngle(): number;
         isRaining(): boolean;
@@ -426,9 +428,9 @@ declare module "@package/net/minecraft/world/level/storage" {
         getDayTimePerTick(): number;
         setDayTimePerTick(arg0: number): void;
         setGameTime(arg0: number): void;
-        wasModded(): boolean;
         getDataConfiguration(): $WorldDataConfiguration;
         setDataConfiguration(arg0: $WorldDataConfiguration_): void;
+        wasModded(): boolean;
         getKnownServerBrands(): $Set<string>;
         getRemovedFeatureFlags(): $Set<string>;
         setModdedInfo(arg0: string, arg1: boolean): void;
@@ -442,8 +444,6 @@ declare module "@package/net/minecraft/world/level/storage" {
         getLoadedPlayerTag(): $CompoundTag;
         isDebugWorld(): boolean;
         worldGenSettingsLifecycle(): $Lifecycle;
-        setPreset(arg0: $ResourceLocation_): void;
-        setEndDragonFight(arg0: $EndDragonFight$Data_): void;
         enabledFeatures(): $FeatureFlagSet;
         fillCrashReportCategory(arg0: $CrashReportCategory): void;
         getStorageVersionName(arg0: number): string;
@@ -452,10 +452,11 @@ declare module "@package/net/minecraft/world/level/storage" {
         static WORLD_GEN_SETTINGS: string;
         static LEVEL_NAME: string;
         constructor(arg0: $LevelSettings, arg1: $WorldOptions, arg2: $PrimaryLevelData$SpecialWorldProperty_, arg3: $Lifecycle);
+        set endDragonFight(value: $EndDragonFight$Data_);
+        get scheduledEvents(): $TimerQueue<$MinecraftServer>;
+        get flatWorld(): boolean;
         get version(): number;
         get levelName(): string;
-        get flatWorld(): boolean;
-        get scheduledEvents(): $TimerQueue<$MinecraftServer>;
         get hardcore(): boolean;
         get gameRules(): $GameRules;
         get spawnPos(): $BlockPos;
@@ -466,16 +467,16 @@ declare module "@package/net/minecraft/world/level/storage" {
         get allowCommands(): boolean;
         get loadedPlayerTag(): $CompoundTag;
         get debugWorld(): boolean;
-        set endDragonFight(value: $EndDragonFight$Data_);
     }
     export class $LevelSummary implements $Comparable<$LevelSummary> {
-        compareTo(arg0: $LevelSummary): number;
-        isLocked(): boolean;
-        getLevelName(): string;
-        isExperimental(): boolean;
+        getSettings(): $LevelSettings;
         isDisabled(): boolean;
         getGameMode(): $GameType;
-        getSettings(): $LevelSettings;
+        isExperimental(): boolean;
+        getInfo(): $Component;
+        getLevelName(): string;
+        compareTo(arg0: $LevelSummary): number;
+        isLocked(): boolean;
         getIcon(): $Path;
         canDelete(): boolean;
         isHardcore(): boolean;
@@ -494,15 +495,15 @@ declare module "@package/net/minecraft/world/level/storage" {
         canUpload(): boolean;
         canEdit(): boolean;
         canRecreate(): boolean;
-        getInfo(): $Component;
         static PLAY_WORLD: $Component;
         constructor(arg0: $LevelSettings, arg1: $LevelVersion, arg2: string, arg3: boolean, arg4: boolean, arg5: boolean, arg6: $Path_);
-        get locked(): boolean;
-        get levelName(): string;
-        get experimental(): boolean;
+        get settings(): $LevelSettings;
         get disabled(): boolean;
         get gameMode(): $GameType;
-        get settings(): $LevelSettings;
+        get experimental(): boolean;
+        get info(): $Component;
+        get levelName(): string;
+        get locked(): boolean;
         get icon(): $Path;
         get hardcore(): boolean;
         get levelId(): string;
@@ -510,15 +511,14 @@ declare module "@package/net/minecraft/world/level/storage" {
         get lastPlayed(): number;
         get worldVersionName(): $MutableComponent;
         get downgrade(): boolean;
-        get info(): $Component;
     }
     export class $FileNameDateFormatter {
         static create(): $DateTimeFormatter;
         constructor();
     }
     export class $LevelResource implements $LevelResourceAccessor {
+        static createLevelResource$platform_$md$4ca6b6$0(arg0: string): $LevelResource;
         getId(): string;
-        static createLevelResource$platform_$md$d858b6$0(arg0: string): $LevelResource;
         static PLAYER_ADVANCEMENTS_DIR: $LevelResource;
         static PLAYER_OLD_DATA_DIR: $LevelResource;
         static GENERATED_DIR: $LevelResource;
@@ -549,9 +549,9 @@ declare module "@package/net/minecraft/world/level/storage" {
      */
     export type $PrimaryLevelData$SpecialWorldProperty_ = "none" | "flat" | "debug";
     export class $LevelStorageSource$LevelCandidates extends $Record implements $Iterable<$LevelStorageSource$LevelDirectory> {
+        levels(): $List<$LevelStorageSource$LevelDirectory>;
         isEmpty(): boolean;
         iterator(): $Iterator<$LevelStorageSource$LevelDirectory>;
-        levels(): $List<$LevelStorageSource$LevelDirectory>;
         spliterator(): $Spliterator<$LevelStorageSource$LevelDirectory>;
         forEach(arg0: $Consumer_<$LevelStorageSource$LevelDirectory>): void;
         constructor(levels: $List_<$LevelStorageSource$LevelDirectory_>);

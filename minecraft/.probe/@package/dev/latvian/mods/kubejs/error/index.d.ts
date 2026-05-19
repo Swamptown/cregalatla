@@ -7,13 +7,13 @@ import { $RecipeComponentValue, $RecipeComponent } from "@package/dev/latvian/mo
 
 declare module "@package/dev/latvian/mods/kubejs/error" {
     export class $KubeRuntimeException extends $RuntimeException implements $MutedError {
+        customData(key: string, data: $Object): $KubeRuntimeException;
         apply(line: $ConsoleLine): void;
         source(sourceLine: $SourceLine_): $KubeRuntimeException;
-        customData(key: string, data: $Object): $KubeRuntimeException;
         isMuted(): boolean;
+        constructor(m: string);
         constructor(cause: $Throwable);
         constructor(m: string, cause: $Throwable);
-        constructor(m: string);
         get muted(): boolean;
     }
     export class $InvalidRecipeComponentValueException extends $RecipeComponentException {

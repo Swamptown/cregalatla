@@ -1,4 +1,4 @@
-import { $IntConsumer_, $Supplier_, $IntSupplier_, $Consumer_, $Supplier, $LongSupplier_ } from "@package/java/util/function";
+import { $Supplier_, $IntConsumer_, $IntSupplier_, $Consumer_, $Supplier, $LongSupplier_ } from "@package/java/util/function";
 import { $ImmediateWindowProvider } from "@package/net/neoforged/neoforgespi/earlywindow";
 import { $ModuleLayer, $Throwable, $Runnable, $Enum, $Record } from "@package/java/lang";
 
@@ -16,20 +16,20 @@ declare module "@package/net/neoforged/fml/earlydisplay" {
      */
     export type $ColourScheme_ = "red" | "black";
     export class $ElementShader {
-        clear(): void;
-        init(): void;
-        close(): void;
         program(): number;
         updateTextureUniform(arg0: number): void;
         updateRenderTypeUniform(arg0: $ElementShader$RenderType_): void;
+        clear(): void;
+        init(): void;
+        close(): void;
         activate(): void;
         updateScreenSizeUniform(arg0: number, arg1: number): void;
         constructor();
     }
     export class $RenderElement$DisplayContext extends $Record {
+        performance(): $PerformanceInfo;
         scale(): number;
         width(): number;
-        performance(): $PerformanceInfo;
         height(): number;
         colourScheme(): $ColourScheme;
         scaledWidth(): number;
@@ -40,7 +40,7 @@ declare module "@package/net/neoforged/fml/earlydisplay" {
     /**
      * Values that may be interpreted as {@link $RenderElement$DisplayContext}.
      */
-    export type $RenderElement$DisplayContext_ = { performance?: $PerformanceInfo, elementShader?: $ElementShader, width?: number, scale?: number, colourScheme?: $ColourScheme_, height?: number,  } | [performance?: $PerformanceInfo, elementShader?: $ElementShader, width?: number, scale?: number, colourScheme?: $ColourScheme_, height?: number, ];
+    export type $RenderElement$DisplayContext_ = { height?: number, colourScheme?: $ColourScheme_, scale?: number, width?: number, elementShader?: $ElementShader, performance?: $PerformanceInfo,  } | [height?: number, colourScheme?: $ColourScheme_, scale?: number, width?: number, elementShader?: $ElementShader, performance?: $PerformanceInfo, ];
     export class $ColourScheme$Colour extends $Record {
         red(): number;
         blue(): number;
@@ -54,7 +54,7 @@ declare module "@package/net/neoforged/fml/earlydisplay" {
     /**
      * Values that may be interpreted as {@link $ColourScheme$Colour}.
      */
-    export type $ColourScheme$Colour_ = { red?: number, blue?: number, green?: number,  } | [red?: number, blue?: number, green?: number, ];
+    export type $ColourScheme$Colour_ = { green?: number, blue?: number, red?: number,  } | [green?: number, blue?: number, red?: number, ];
     export class $ElementShader$RenderType extends $Enum<$ElementShader$RenderType> {
         static values(): $ElementShader$RenderType[];
         static valueOf(arg0: string): $ElementShader$RenderType;
@@ -67,11 +67,6 @@ declare module "@package/net/neoforged/fml/earlydisplay" {
      */
     export type $ElementShader$RenderType_ = "font" | "texture" | "bar";
     export class $DisplayWindow implements $ImmediateWindowProvider {
-        name(): string;
-        initialize(arg0: string[]): $Runnable;
-        start(arg0: string, arg1: string): $Runnable;
-        close(): void;
-        context(): $RenderElement$DisplayContext;
         updateFramebufferSize(arg0: $IntConsumer_, arg1: $IntConsumer_): void;
         setupMinecraftWindow(arg0: $IntSupplier_, arg1: $IntSupplier_, arg2: $Supplier_<string>, arg3: $LongSupplier_): number;
         positionWindow(arg0: (never) | undefined, arg1: $IntConsumer_, arg2: $IntConsumer_, arg3: $IntConsumer_, arg4: $IntConsumer_): boolean;
@@ -79,6 +74,11 @@ declare module "@package/net/neoforged/fml/earlydisplay" {
         updateModuleReads(arg0: $ModuleLayer): void;
         periodicTick(): void;
         getGLVersion(): string;
+        name(): string;
+        context(): $RenderElement$DisplayContext;
+        initialize(arg0: string[]): $Runnable;
+        start(arg0: string, arg1: string): $Runnable;
+        close(): void;
         render(arg0: number): void;
         crash(arg0: string): void;
         initWindow(arg0: string): void;

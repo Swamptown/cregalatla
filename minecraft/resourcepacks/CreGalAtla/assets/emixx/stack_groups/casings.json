@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:casings",
+  "type": "emixx:group",
+  "contents": [
+    "#create:casing"
+  ]
+}

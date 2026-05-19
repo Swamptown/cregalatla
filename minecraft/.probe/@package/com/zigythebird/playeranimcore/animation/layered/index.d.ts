@@ -10,16 +10,16 @@ declare module "@package/com/zigythebird/playeranimcore/animation/layered" {
         static DEFAULT_FIRST_PERSON_CONFIG: $FirstPersonConfiguration;
     }
     export interface $IAnimation {
-        isActive(): boolean;
-        tick(state: $AnimationData): void;
-        get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
-        getFirstPersonConfiguration(): $FirstPersonConfiguration;
         setupAnim(state: $AnimationData): void;
-        canRemove(): boolean;
+        getFirstPersonConfiguration(): $FirstPersonConfiguration;
+        get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
+        tick(state: $AnimationData): void;
+        isActive(): boolean;
         getFirstPersonMode(): $FirstPersonMode;
-        get active(): boolean;
-        get firstPersonConfiguration(): $FirstPersonConfiguration;
+        canRemove(): boolean;
         set upAnim(value: $AnimationData);
+        get firstPersonConfiguration(): $FirstPersonConfiguration;
+        get active(): boolean;
         get firstPersonMode(): $FirstPersonMode;
     }
     /**
@@ -27,41 +27,41 @@ declare module "@package/com/zigythebird/playeranimcore/animation/layered" {
      */
     export type $IAnimation_ = (() => boolean);
     export class $AnimationStack implements $IAnimation {
+        addAnimLayer(priority: number, layer: $IAnimation_): void;
+        removeLayer(layer: $IAnimation_): boolean;
+        removeLayer(layerLevel: number): boolean;
+        setupAnim(state: $AnimationData): void;
+        getFirstPersonConfiguration(): $FirstPersonConfiguration;
+        get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
+        getLayers(): $List<$Pair<number, $IAnimation>>;
+        tick(state: $AnimationData): void;
         getPriority(): number;
         isActive(): boolean;
-        tick(state: $AnimationData): void;
-        get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
-        getFirstPersonConfiguration(): $FirstPersonConfiguration;
-        setupAnim(state: $AnimationData): void;
-        getLayers(): $List<$Pair<number, $IAnimation>>;
         getFirstPersonMode(): $FirstPersonMode;
-        addAnimLayer(priority: number, layer: $IAnimation_): void;
-        removeLayer(layerLevel: number): boolean;
-        removeLayer(layer: $IAnimation_): boolean;
         canRemove(): boolean;
         constructor();
+        set upAnim(value: $AnimationData);
+        get firstPersonConfiguration(): $FirstPersonConfiguration;
+        get layers(): $List<$Pair<number, $IAnimation>>;
         get priority(): number;
         get active(): boolean;
-        get firstPersonConfiguration(): $FirstPersonConfiguration;
-        set upAnim(value: $AnimationData);
-        get layers(): $List<$Pair<number, $IAnimation>>;
         get firstPersonMode(): $FirstPersonMode;
     }
     export class $AnimationContainer<T extends $IAnimation> implements $IAnimation {
-        isActive(): boolean;
-        tick(state: $AnimationData): void;
-        getAnim(): T;
-        get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
-        getFirstPersonConfiguration(): $FirstPersonConfiguration;
-        setupAnim(state: $AnimationData): void;
-        getFirstPersonMode(): $FirstPersonMode;
         setAnim(newAnim: T): void;
+        getAnim(): T;
+        setupAnim(state: $AnimationData): void;
+        getFirstPersonConfiguration(): $FirstPersonConfiguration;
+        get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
+        tick(state: $AnimationData): void;
+        isActive(): boolean;
+        getFirstPersonMode(): $FirstPersonMode;
         canRemove(): boolean;
         constructor(anim: T);
         constructor();
-        get active(): boolean;
-        get firstPersonConfiguration(): $FirstPersonConfiguration;
         set upAnim(value: $AnimationData);
+        get firstPersonConfiguration(): $FirstPersonConfiguration;
+        get active(): boolean;
         get firstPersonMode(): $FirstPersonMode;
     }
 }

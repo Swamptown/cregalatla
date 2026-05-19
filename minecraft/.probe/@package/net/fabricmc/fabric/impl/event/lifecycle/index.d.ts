@@ -1,4 +1,4 @@
-import { $FullChunkStatus_, $FullChunkStatus } from "@package/net/minecraft/server/level";
+import { $FullChunkStatus, $FullChunkStatus_ } from "@package/net/minecraft/server/level";
 import { $LevelChunk } from "@package/net/minecraft/world/level/chunk";
 import { $Set } from "@package/java/util";
 

@@ -3,16 +3,16 @@ import { $Throwable, $Enum } from "@package/java/lang";
 
 declare module "@package/net/fabricmc/fabric/api/util" {
     export class $TriState extends $Enum<$TriState> {
+        getBoxed(): boolean;
         get(): boolean;
         static values(): $TriState[];
         static valueOf(arg0: string): $TriState;
-        static of(arg0: boolean): $TriState;
-        static of(arg0: boolean): $TriState;
         map<T>(arg0: $BooleanFunction_<T>): (T) | undefined;
+        static of(arg0: boolean): $TriState;
+        static of(arg0: boolean): $TriState;
         orElse(arg0: boolean): boolean;
         orElseThrow<X extends $Throwable>(arg0: $Supplier_<X>): boolean;
         orElseGet(arg0: $BooleanSupplier_): boolean;
-        getBoxed(): boolean;
         static TRUE: $TriState;
         static FALSE: $TriState;
         static DEFAULT: $TriState;

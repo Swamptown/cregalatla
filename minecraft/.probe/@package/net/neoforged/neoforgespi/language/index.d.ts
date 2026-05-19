@@ -31,7 +31,7 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $ModFileScanData$ClassData}.
      */
-    export type $ModFileScanData$ClassData_ = { interfaces?: $Set_<$Type>, clazz?: $Type, parent?: $Type,  } | [interfaces?: $Set_<$Type>, clazz?: $Type, parent?: $Type, ];
+    export type $ModFileScanData$ClassData_ = { parent?: $Type, clazz?: $Type, interfaces?: $Set_<$Type>,  } | [parent?: $Type, clazz?: $Type, interfaces?: $Set_<$Type>, ];
     export class $IModInfo$DependencySide extends $Enum<$IModInfo$DependencySide> {
         static values(): $IModInfo$DependencySide[];
         static valueOf(arg0: string): $IModInfo$DependencySide;
@@ -57,21 +57,21 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $ModFileScanData$AnnotationData}.
      */
-    export type $ModFileScanData$AnnotationData_ = { annotationType?: $Type, targetType?: $ElementType_, memberName?: string, clazz?: $Type, annotationData?: $Map_<string, $Object>,  } | [annotationType?: $Type, targetType?: $ElementType_, memberName?: string, clazz?: $Type, annotationData?: $Map_<string, $Object>, ];
+    export type $ModFileScanData$AnnotationData_ = { clazz?: $Type, memberName?: string, targetType?: $ElementType_, annotationType?: $Type, annotationData?: $Map_<string, $Object>,  } | [clazz?: $Type, memberName?: string, targetType?: $ElementType_, annotationType?: $Type, annotationData?: $Map_<string, $Object>, ];
     export class $IModInfo$ModVersion {
     }
     export interface $IModInfo$ModVersion {
+        getReason(): (string) | undefined;
+        setOwner(arg0: $IModInfo): void;
         getType(): $IModInfo$DependencyType;
         getOwner(): $IModInfo;
-        setOwner(arg0: $IModInfo): void;
-        getReason(): (string) | undefined;
         getSide(): $IModInfo$DependencySide;
         getModId(): string;
         getVersionRange(): $VersionRange;
         getOrdering(): $IModInfo$Ordering;
         getReferralURL(): ($URL) | undefined;
-        get type(): $IModInfo$DependencyType;
         get reason(): (string) | undefined;
+        get type(): $IModInfo$DependencyType;
         get side(): $IModInfo$DependencySide;
         get modId(): string;
         get versionRange(): $VersionRange;
@@ -105,11 +105,13 @@ declare module "@package/net/neoforged/neoforgespi/language" {
         static UNBOUNDED: $VersionRange;
     }
     export interface $IModInfo {
-        getLoader(): $IModLanguageLoader;
+        getNamespace(): string;
+        getDescription(): string;
         getDisplayName(): string;
         getVersion(): $ArtifactVersion;
-        getNamespace(): string;
+        getLoader(): $IModLanguageLoader;
         getConfig(): $IConfigurable;
+        getModId(): string;
         getOwningFile(): $IModFileInfo;
         getDependencies(): $List<$IModInfo$ModVersion>;
         getForgeFeatures(): $List<$ForgeFeature$Bound>;
@@ -118,13 +120,13 @@ declare module "@package/net/neoforged/neoforgespi/language" {
         getModURL(): ($URL) | undefined;
         getLogoFile(): (string) | undefined;
         getLogoBlur(): boolean;
-        getModId(): string;
-        getDescription(): string;
-        get loader(): $IModLanguageLoader;
+        get namespace(): string;
+        get description(): string;
         get displayName(): string;
         get version(): $ArtifactVersion;
-        get namespace(): string;
+        get loader(): $IModLanguageLoader;
         get config(): $IConfigurable;
+        get modId(): string;
         get owningFile(): $IModFileInfo;
         get dependencies(): $List<$IModInfo$ModVersion>;
         get forgeFeatures(): $List<$ForgeFeature$Bound>;
@@ -133,15 +135,13 @@ declare module "@package/net/neoforged/neoforgespi/language" {
         get modURL(): ($URL) | undefined;
         get logoFile(): (string) | undefined;
         get logoBlur(): boolean;
-        get modId(): string;
-        get description(): string;
     }
     export class $IModFileInfo {
     }
     export interface $IModFileInfo {
+        versionString(): string;
         moduleName(): string;
         getFile(): $IModFile;
-        versionString(): string;
         getConfig(): $IConfigurable;
         getMods(): $List<$IModInfo>;
         requiredLanguageLoaders(): $List<$IModFileInfo$LanguageSpec>;
@@ -178,5 +178,5 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $IModFileInfo$LanguageSpec}.
      */
-    export type $IModFileInfo$LanguageSpec_ = { acceptedVersions?: $VersionRange, languageName?: string,  } | [acceptedVersions?: $VersionRange, languageName?: string, ];
+    export type $IModFileInfo$LanguageSpec_ = { languageName?: string, acceptedVersions?: $VersionRange,  } | [languageName?: string, acceptedVersions?: $VersionRange, ];
 }

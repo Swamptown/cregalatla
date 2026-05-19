@@ -4,7 +4,7 @@ import { $ControlsHandler } from "@package/xaero/common/controls";
 import { $HudMod } from "@package/xaero/common";
 import { $LocalPlayer } from "@package/net/minecraft/client/player";
 import { $PushboxManager } from "@package/xaero/hud/pushbox";
-import { $ModuleSessionHandler, $HudModule, $ModuleSession, $ModuleManager } from "@package/xaero/hud/module";
+import { $ModuleSessionHandler, $ModuleSession, $HudModule, $ModuleManager } from "@package/xaero/hud/module";
 import { $MultiTextureRenderTypeRendererProvider } from "@package/xaero/common/graphics/renderer/multitexture";
 import { $OldSystemCompatibility } from "@package/xaero/hud/compat";
 import { $HudEventHandler } from "@package/xaero/hud/event";
@@ -25,39 +25,39 @@ export * as compat from "@package/xaero/hud/compat";
 declare module "@package/xaero/hud" {
     export class $Hud {
         getOldSystemCompatibility(): $OldSystemCompatibility;
+        getSessionHandler(): $ModuleSessionHandler;
         getPushboxManager(): $PushboxManager;
         getPresetManager(): $HudPresetManager;
         getModuleManager(): $ModuleManager;
-        getSessionHandler(): $ModuleSessionHandler;
         getEventHandler(): $HudEventHandler;
         constructor(arg0: $ModuleManager, arg1: $PushboxManager, arg2: $HudPresetManager, arg3: $HudEventHandler, arg4: $ModuleSessionHandler, arg5: $OldSystemCompatibility);
         get oldSystemCompatibility(): $OldSystemCompatibility;
+        get sessionHandler(): $ModuleSessionHandler;
         get pushboxManager(): $PushboxManager;
         get presetManager(): $HudPresetManager;
         get moduleManager(): $ModuleManager;
-        get sessionHandler(): $ModuleSessionHandler;
         get eventHandler(): $HudEventHandler;
     }
     export class $HudSession {
-        init(arg0: $ClientPacketListener): void;
-        static getForPlayer(arg0: $LocalPlayer): $HudSession;
-        getHudMod(): $HudMod;
         /**
          * @deprecated
          */
         getMultiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
         tryCleanup(): void;
         getKeyMappingTickHandler(): $KeyMappingTickHandler;
+        static getForPlayer(arg0: $LocalPlayer): $HudSession;
+        getHudMod(): $HudMod;
+        getSession<MS extends $ModuleSession<MS>>(arg0: $HudModule<MS>): MS;
         /**
          * @deprecated
          */
         getControls(): $ControlsHandler;
-        getSession<MS extends $ModuleSession<MS>>(arg0: $HudModule<MS>): MS;
+        init(arg0: $ClientPacketListener): void;
         static getCurrentSession(): $HudSession;
         constructor(arg0: $HudMod);
-        get hudMod(): $HudMod;
         get multiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
         get keyMappingTickHandler(): $KeyMappingTickHandler;
+        get hudMod(): $HudMod;
         get controls(): $ControlsHandler;
         static get currentSession(): $HudSession;
     }

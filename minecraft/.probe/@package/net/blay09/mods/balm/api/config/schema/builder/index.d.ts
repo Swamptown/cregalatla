@@ -16,16 +16,16 @@ declare module "@package/net/blay09/mods/balm/api/config/schema/builder" {
         constructor(arg0: $ConfigPropertyBuilder, arg1: $ResourceLocation_);
     }
     export class $ConfigPropertyBuilder {
+        synced(): $ConfigPropertyBuilder;
+        resourceLocationOf(arg0: $ResourceLocation_): $ResourceLocationConfigProperty;
+        intOf(arg0: number): $IntConfigProperty;
+        longOf(arg0: number): $LongConfigProperty;
+        floatOf(arg0: number): $FloatConfigProperty;
+        doubleOf(arg0: number): $DoubleConfigProperty;
+        boolOf(arg0: boolean): $BooleanConfigProperty;
+        enumOf<T extends $Enum<T>>(arg0: T): $EnumConfigProperty<T>;
         comment(arg0: string): $ConfigPropertyBuilder;
         stringOf(arg0: string): $StringConfigProperty;
-        boolOf(arg0: boolean): $BooleanConfigProperty;
-        floatOf(arg0: number): $FloatConfigProperty;
-        intOf(arg0: number): $IntConfigProperty;
-        enumOf<T extends $Enum<T>>(arg0: T): $EnumConfigProperty<T>;
-        doubleOf(arg0: number): $DoubleConfigProperty;
-        longOf(arg0: number): $LongConfigProperty;
-        resourceLocationOf(arg0: $ResourceLocation_): $ResourceLocationConfigProperty;
-        synced(): $ConfigPropertyBuilder;
         setOf<T>(arg0: $Class<T>, arg1: $Set_<T>): $SetConfigProperty<T>;
         listOf<T>(arg0: $Class<T>, arg1: $List_<T>): $ListConfigProperty<T>;
         constructor(arg0: $ConfigSchemaImpl, arg1: string);
@@ -43,19 +43,18 @@ declare module "@package/net/blay09/mods/balm/api/config/schema/builder" {
     export class $ConfigCategory {
     }
     export interface $ConfigCategory {
+        parentSchema(): $BalmConfigSchema;
         name(): string;
         properties(): $List<$ConfiguredProperty<never>>;
         comment(): string;
-        parentSchema(): $BalmConfigSchema;
     }
     export class $ConfigCategoryBuilder {
     }
     export interface $ConfigCategoryBuilder extends $PropertyHolderBuilder {
-        comment(arg0: string): $ConfigCategoryImpl;
         via<T>(arg0: $Function_<$ConfigCategoryBuilder, T>): T;
+        comment(arg0: string): $ConfigCategoryImpl;
     }
     export class $LongConfigProperty extends $AbstractConfigProperty<number> implements $ConfiguredLong {
-        defaultValue(): number;
         get(arg0: $LoadedConfig): number;
         get(): number;
         set(arg0: number): void;
@@ -64,7 +63,6 @@ declare module "@package/net/blay09/mods/balm/api/config/schema/builder" {
         constructor(arg0: $ConfigPropertyBuilder, arg1: number);
     }
     export class $DoubleConfigProperty extends $AbstractConfigProperty<number> implements $ConfiguredDouble {
-        defaultValue(): number;
         get(arg0: $LoadedConfig): number;
         get(): number;
         set(arg0: number): void;
@@ -82,7 +80,6 @@ declare module "@package/net/blay09/mods/balm/api/config/schema/builder" {
      */
     export type $PropertyHolderBuilder_ = ((arg0: string) => $ConfigPropertyBuilder);
     export class $FloatConfigProperty extends $AbstractConfigProperty<number> implements $ConfiguredFloat {
-        defaultValue(): number;
         get(arg0: $LoadedConfig): number;
         get(): number;
         set(arg0: number): void;
@@ -113,7 +110,6 @@ declare module "@package/net/blay09/mods/balm/api/config/schema/builder" {
         constructor(arg0: $ConfigPropertyBuilder, arg1: T);
     }
     export class $IntConfigProperty extends $AbstractConfigProperty<number> implements $ConfiguredInt {
-        defaultValue(): number;
         get(arg0: $LoadedConfig): number;
         get(): number;
         set(arg0: number): void;
@@ -122,13 +118,13 @@ declare module "@package/net/blay09/mods/balm/api/config/schema/builder" {
         constructor(arg0: $ConfigPropertyBuilder, arg1: number);
     }
     export class $AbstractConfigProperty<T> implements $ConfiguredProperty<T> {
+        synced(): boolean;
+        category(): string;
         name(): string;
         comment(): string;
-        category(): string;
-        parentSchema(): $ConfigSchemaImpl;
-        synced(): boolean;
         setRaw(arg0: $MutableLoadedConfig, arg1: T): void;
         getRaw(arg0: $LoadedConfig): T;
+        parentSchema(): $BalmConfigSchema;
         constructor(arg0: $ConfigPropertyBuilder);
     }
     export class $SetConfigProperty<T> extends $AbstractConfigProperty<$Set<T>> implements $ConfiguredSet<T> {

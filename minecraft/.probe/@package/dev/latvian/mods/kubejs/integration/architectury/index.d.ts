@@ -30,13 +30,18 @@ import { $RecipeManagerKJS } from "@package/dev/latvian/mods/kubejs/core";
 
 declare module "@package/dev/latvian/mods/kubejs/integration/architectury" {
     export class $ArchitecturyIntegration implements $KubeJSPlugin {
-        static wrapArchFluid(o: $Object): $FluidStack;
         registerTypeWrappers(registry: $TypeWrapperRegistry): void;
-        init(): void;
+        static wrapArchFluid(o: $Object): $FluidStack;
         attachServerData(event: $AttachedData<$MinecraftServer>): void;
-        breakpoint(args: $Object[]): void;
+        registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
+        /**
+         * @deprecated
+         */
+        clearCaches(): void;
+        beforeScriptsLoaded(manager: $ScriptManager): void;
+        initStartup(): void;
+        afterScriptsLoaded(manager: $ScriptManager): void;
         registerBuilderTypes(registry: $BuilderTypeRegistry_): void;
-        registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
         registerServerRegistries(registry: $ServerRegistryRegistry_): void;
         registerBindings(bindings: $BindingRegistry_): void;
         registerTypeDescriptions(registry: $TypeDescriptionRegistry): void;
@@ -52,6 +57,8 @@ declare module "@package/dev/latvian/mods/kubejs/integration/architectury" {
         registerDataComponentTypeDescriptions(registry: $DataComponentTypeInfoRegistry_): void;
         registerLocalWebServerAPIs(registry: $LocalWebServerAPIRegistry_): void;
         registerLocalWebServer(registry: $LocalWebServerRegistry): void;
+        registerClasses(filter: $ClassFilter): void;
+        registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
         registerLocalWebServerWithAuth(registry: $LocalWebServerRegistry): void;
         localWebServerStarted(server: $LocalWebServer_): void;
         registerItemNameProviders(registry: $NameProvider$Registry_<$Item, $ItemStack>): void;
@@ -61,15 +68,8 @@ declare module "@package/dev/latvian/mods/kubejs/integration/architectury" {
         generateLang(event: $LangKubeEvent_): void;
         exportServerData(_export: $DataExport): void;
         beforeRecipeLoading(event: $RecipesKubeEvent, manager: $RecipeManagerKJS, recipeJsons: $Map_<$ResourceLocation_, $JsonElement_>): void;
-        registerClasses(filter: $ClassFilter): void;
-        initStartup(): void;
-        registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
-        /**
-         * @deprecated
-         */
-        clearCaches(): void;
-        beforeScriptsLoaded(manager: $ScriptManager): void;
-        afterScriptsLoaded(manager: $ScriptManager): void;
+        breakpoint(args: $Object[]): void;
+        init(): void;
         attachPlayerData(event: $AttachedData<$Player>): void;
         attachLevelData(event: $AttachedData<$Level_>): void;
         afterInit(): void;

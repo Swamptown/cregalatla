@@ -17,11 +17,11 @@ import { $Heightmap$Types_, $RandomState, $WorldgenRandom } from "@package/net/m
 
 declare module "@package/net/minecraft/world/level/levelgen/structure/pieces" {
     export class $PiecesContainer extends $Record {
+        isInsidePiece(arg0: $BlockPos_): boolean;
+        calculateBoundingBox(): $BoundingBox;
         static load(arg0: $ListTag_, arg1: $StructurePieceSerializationContext_): $PiecesContainer;
         isEmpty(): boolean;
         save(arg0: $StructurePieceSerializationContext_): $Tag;
-        calculateBoundingBox(): $BoundingBox;
-        isInsidePiece(arg0: $BlockPos_): boolean;
         pieces(): $List<$StructurePiece>;
         constructor(arg0: $List_<$StructurePiece>);
         get empty(): boolean;
@@ -42,23 +42,20 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pieces" {
      */
     export type $PieceGeneratorSupplier_<C> = ((arg0: $PieceGeneratorSupplier$Context<C>) => ($PieceGenerator<C>) | undefined);
     export class $PieceGenerator$Context<C extends $FeatureConfiguration> extends $Record {
-        seed(): number;
-        config(): C;
-        random(): $WorldgenRandom;
         heightAccessor(): $LevelHeightAccessor;
         structureTemplateManager(): $StructureTemplateManager;
         chunkGenerator(): $ChunkGenerator;
+        seed(): number;
+        random(): $WorldgenRandom;
+        config(): C;
         chunkPos(): $ChunkPos;
         constructor(arg0: C, arg1: $ChunkGenerator, arg2: $StructureTemplateManager, arg3: $ChunkPos, arg4: $LevelHeightAccessor, arg5: $WorldgenRandom, arg6: number);
     }
     /**
      * Values that may be interpreted as {@link $PieceGenerator$Context}.
      */
-    export type $PieceGenerator$Context_<C> = { seed?: number, random?: $WorldgenRandom, config?: $FeatureConfiguration, heightAccessor?: $LevelHeightAccessor, chunkGenerator?: $ChunkGenerator, structureTemplateManager?: $StructureTemplateManager, chunkPos?: $ChunkPos,  } | [seed?: number, random?: $WorldgenRandom, config?: $FeatureConfiguration, heightAccessor?: $LevelHeightAccessor, chunkGenerator?: $ChunkGenerator, structureTemplateManager?: $StructureTemplateManager, chunkPos?: $ChunkPos, ];
+    export type $PieceGenerator$Context_<C> = { chunkPos?: $ChunkPos, structureTemplateManager?: $StructureTemplateManager, chunkGenerator?: $ChunkGenerator, heightAccessor?: $LevelHeightAccessor, config?: $FeatureConfiguration, random?: $WorldgenRandom, seed?: number,  } | [chunkPos?: $ChunkPos, structureTemplateManager?: $StructureTemplateManager, chunkGenerator?: $ChunkGenerator, heightAccessor?: $LevelHeightAccessor, config?: $FeatureConfiguration, random?: $WorldgenRandom, seed?: number, ];
     export class $StructurePiecesBuilder implements $StructurePieceAccessor {
-        clear(): void;
-        isEmpty(): boolean;
-        build(): $PiecesContainer;
         addPiece(arg0: $StructurePiece): void;
         findCollisionPiece(arg0: $BoundingBox): $StructurePiece;
         moveInsideHeights(arg0: $RandomSource, arg1: number, arg2: number): void;
@@ -70,6 +67,9 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pieces" {
          * @deprecated
          */
         moveBelowSeaLevel(arg0: number, arg1: number, arg2: $RandomSource, arg3: number): number;
+        clear(): void;
+        isEmpty(): boolean;
+        build(): $PiecesContainer;
         getBoundingBox(): $BoundingBox;
         constructor();
         get empty(): boolean;
@@ -161,15 +161,15 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pieces" {
      */
     export type $StructurePieceType$StructureTemplateType_ = ((arg0: $StructureTemplateManager, arg1: $CompoundTag) => $StructurePiece);
     export class $PieceGeneratorSupplier$Context<C extends $FeatureConfiguration> extends $Record {
-        seed(): number;
-        config(): C;
+        validBiomeOnTop(arg0: $Heightmap$Types_): boolean;
         heightAccessor(): $LevelHeightAccessor;
         validBiome(): $Predicate<$Holder<$Biome>>;
         structureTemplateManager(): $StructureTemplateManager;
-        randomState(): $RandomState;
         chunkGenerator(): $ChunkGenerator;
         biomeSource(): $BiomeSource;
-        validBiomeOnTop(arg0: $Heightmap$Types_): boolean;
+        randomState(): $RandomState;
+        seed(): number;
+        config(): C;
         registryAccess(): $RegistryAccess;
         chunkPos(): $ChunkPos;
         constructor(arg0: $ChunkGenerator, arg1: $BiomeSource, arg2: $RandomState, arg3: number, arg4: $ChunkPos, arg5: C, arg6: $LevelHeightAccessor, arg7: $Predicate_<$Holder<$Biome>>, arg8: $StructureTemplateManager, arg9: $RegistryAccess);
@@ -177,7 +177,7 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pieces" {
     /**
      * Values that may be interpreted as {@link $PieceGeneratorSupplier$Context}.
      */
-    export type $PieceGeneratorSupplier$Context_<C> = { chunkPos?: $ChunkPos, config?: $FeatureConfiguration, validBiome?: $Predicate_<$Holder<$Biome>>, seed?: number, registryAccess?: $RegistryAccess, heightAccessor?: $LevelHeightAccessor, chunkGenerator?: $ChunkGenerator, structureTemplateManager?: $StructureTemplateManager, biomeSource?: $BiomeSource, randomState?: $RandomState,  } | [chunkPos?: $ChunkPos, config?: $FeatureConfiguration, validBiome?: $Predicate_<$Holder<$Biome>>, seed?: number, registryAccess?: $RegistryAccess, heightAccessor?: $LevelHeightAccessor, chunkGenerator?: $ChunkGenerator, structureTemplateManager?: $StructureTemplateManager, biomeSource?: $BiomeSource, randomState?: $RandomState, ];
+    export type $PieceGeneratorSupplier$Context_<C> = { biomeSource?: $BiomeSource, structureTemplateManager?: $StructureTemplateManager, chunkGenerator?: $ChunkGenerator, heightAccessor?: $LevelHeightAccessor, registryAccess?: $RegistryAccess, seed?: number, validBiome?: $Predicate_<$Holder<$Biome>>, config?: $FeatureConfiguration, chunkPos?: $ChunkPos, randomState?: $RandomState,  } | [biomeSource?: $BiomeSource, structureTemplateManager?: $StructureTemplateManager, chunkGenerator?: $ChunkGenerator, heightAccessor?: $LevelHeightAccessor, registryAccess?: $RegistryAccess, seed?: number, validBiome?: $Predicate_<$Holder<$Biome>>, config?: $FeatureConfiguration, chunkPos?: $ChunkPos, randomState?: $RandomState, ];
     export class $PieceGenerator<C extends $FeatureConfiguration> {
     }
     export interface $PieceGenerator<C extends $FeatureConfiguration> {
@@ -197,6 +197,6 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pieces" {
     /**
      * Values that may be interpreted as {@link $StructurePieceSerializationContext}.
      */
-    export type $StructurePieceSerializationContext_ = { resourceManager?: $ResourceManager, structureTemplateManager?: $StructureTemplateManager, registryAccess?: $RegistryAccess,  } | [resourceManager?: $ResourceManager, structureTemplateManager?: $StructureTemplateManager, registryAccess?: $RegistryAccess, ];
+    export type $StructurePieceSerializationContext_ = { registryAccess?: $RegistryAccess, structureTemplateManager?: $StructureTemplateManager, resourceManager?: $ResourceManager,  } | [registryAccess?: $RegistryAccess, structureTemplateManager?: $StructureTemplateManager, resourceManager?: $ResourceManager, ];
     export interface $StructurePieceType extends RegistryMarked<RegistryTypes.WorldgenStructurePieceTag, RegistryTypes.WorldgenStructurePiece> {}
 }

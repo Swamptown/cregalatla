@@ -111,19 +111,19 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon" {
         set showBottom(value: boolean);
     }
     export class $EnderDragon extends $Mob implements $Enemy {
-        getDragonFight(): $EndDragonFight;
         setDragonFight(arg0: $EndDragonFight): void;
-        findClosestNode(arg0: number, arg1: number, arg2: number): number;
-        findClosestNode(): number;
-        getSubEntities(): $EnderDragonPart[];
-        getHeadPartYOffset(arg0: number, arg1: number[], arg2: number[]): number;
-        getHeadLookVector(arg0: number): $Vec3;
-        getPhaseManager(): $EnderDragonPhaseManager;
-        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_): void;
+        getDragonFight(): $EndDragonFight;
         setFightOrigin(arg0: $BlockPos_): void;
         getFightOrigin(): $BlockPos;
         getLatencyPos(arg0: number, arg1: number): number[];
         reallyHurt(arg0: $DamageSource_, arg1: number): boolean;
+        findClosestNode(arg0: number, arg1: number, arg2: number): number;
+        findClosestNode(): number;
+        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_): void;
+        getSubEntities(): $EnderDragonPart[];
+        getHeadPartYOffset(arg0: number, arg1: number[], arg2: number[]): number;
+        getHeadLookVector(arg0: number): $Vec3;
+        getPhaseManager(): $EnderDragonPhaseManager;
         findPath(arg0: number, arg1: number, arg2: $Node): $Path;
         hurt(arg0: $EnderDragonPart, arg1: $DamageSource_, arg2: number): boolean;
         static createAttributes(): $AttributeSupplier$Builder;

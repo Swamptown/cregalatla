@@ -1,9 +1,11 @@
 import { $StructureSectionClaim } from "@package/com/faboslav/structurify/common/world/level/structure";
 import { $HolderSet_, $HolderSet } from "@package/net/minecraft/core";
 import { $StructureNamespaceData, $StructureData } from "@package/com/faboslav/structurify/common/config/data";
-import { $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
+import { $ResourceLocation_, $ResourceLocation } from "@package/net/minecraft/resources";
 import { $Biome } from "@package/net/minecraft/world/level/biome";
 import { $Map } from "@package/java/util";
+import { $Heightmap$Types, $Heightmap$Types_ } from "@package/net/minecraft/world/level/levelgen";
+import { $HeightProvider } from "@package/net/minecraft/world/level/levelgen/heightproviders";
 
 declare module "@package/com/faboslav/structurify/common/api" {
     export class $StructurifyChunkGenerator {
@@ -41,9 +43,9 @@ declare module "@package/com/faboslav/structurify/common/api" {
     export class $StructurifyStructure {
     }
     export interface $StructurifyStructure {
-        structurify$getGlobalStructureNamespaceData(): $StructureNamespaceData;
         structurify$setStructureResourceLocation(arg0: $ResourceLocation_): void;
         structurify$getStructureResourceLocation(): $ResourceLocation;
+        structurify$getGlobalStructureNamespaceData(): $StructureNamespaceData;
         structurify$getStructureNamespaceData(arg0: $ResourceLocation_): $StructureNamespaceData;
         structurify$getStructureNamespaceData(): $StructureNamespaceData;
         structurify$getStructureData(arg0: $ResourceLocation_): $StructureData;
@@ -52,5 +54,22 @@ declare module "@package/com/faboslav/structurify/common/api" {
         structurify$getStructureBiomes(): $HolderSet<$Biome>;
         structurify$setStructureBlacklistedBiomes(arg0: $HolderSet_<$Biome>): void;
         structurify$getStructureBlacklistedBiomes(): $HolderSet<$Biome>;
+    }
+    export class $StructurifyJigsawStructure {
+    }
+    export interface $StructurifyJigsawStructure extends $StructurifyStructure {
+        structurify$getMaxDistanceFromCenter(): number;
+        structurify$getMaxDistanceFromCenter(arg0: number): number;
+        structurify$setMaxDistanceFromCenter(arg0: number): void;
+        invalidateStructureJigsawData(): void;
+        structurify$getMaxDepth(arg0: number): number;
+        structurify$getMaxDepth(): number;
+        structurify$setMaxDepth(arg0: number): void;
+        structurify$getStartHeight(arg0: $HeightProvider): $HeightProvider;
+        structurify$getStartHeight(): $HeightProvider;
+        structurify$setStartHeight(arg0: $HeightProvider): void;
+        structurify$getProjectStartToHeightmap(): ($Heightmap$Types) | undefined;
+        structurify$getProjectStartToHeightmap(arg0: ($Heightmap$Types_) | undefined): ($Heightmap$Types) | undefined;
+        structurify$setProjectStartToHeightmap(arg0: ($Heightmap$Types_) | undefined): void;
     }
 }

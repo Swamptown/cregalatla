@@ -10,13 +10,13 @@ import { $ServerLoginNetworking$LoginQueryResponseHandler, $LoginPacketSender } 
 
 declare module "@package/net/fabricmc/fabric/impl/networking/server" {
     export class $ServerLoginNetworkAddon extends $AbstractNetworkAddon<$ServerLoginNetworking$LoginQueryResponseHandler> implements $LoginPacketSender {
-        handle(arg0: $ServerboundCustomQueryAnswerPacket_): boolean;
         queryTick(): boolean;
         registerOutgoingPacket(arg0: $ClientboundCustomQueryPacket_): void;
+        handle(arg0: $ServerboundCustomQueryAnswerPacket_): boolean;
         disconnect(arg0: $Component_): void;
         sendPacket(arg0: $Packet<never>, arg1: $PacketSendListener): void;
-        createPacket(arg0: $CustomPacketPayload_): $Packet<never>;
         createPacket(arg0: $ResourceLocation_, arg1: $FriendlyByteBuf): $Packet<never>;
+        createPacket(arg0: $CustomPacketPayload_): $Packet<never>;
         sendPacket(arg0: $ResourceLocation_, arg1: $FriendlyByteBuf): void;
         sendPacket(arg0: $ResourceLocation_, arg1: $FriendlyByteBuf, arg2: $PacketSendListener): void;
         sendPacket(arg0: $CustomPacketPayload_, arg1: $PacketSendListener): void;

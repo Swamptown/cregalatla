@@ -28,14 +28,14 @@ declare module "@package/net/minecraft/client/telemetry/events" {
         set time(value: number);
     }
     export class $AggregatedTelemetryEvent {
-        start(): void;
-        stop(): void;
-        tick(arg0: $TelemetryEventSender_): void;
-        shouldSentEvent(): boolean;
+        getSampleCount(): number;
         shouldTakeSample(): boolean;
+        shouldSentEvent(): boolean;
         takeSample(): void;
         sendEvent(arg0: $TelemetryEventSender_): void;
-        getSampleCount(): number;
+        tick(arg0: $TelemetryEventSender_): void;
+        start(): void;
+        stop(): void;
         constructor();
         get sampleCount(): number;
     }

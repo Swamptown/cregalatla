@@ -10,9 +10,9 @@ declare module "@package/com/mojang/blaze3d/audio" {
     export class $Library$CountingChannelPool implements $Library$ChannelPool {
     }
     export class $ListenerTransform extends $Record {
+        up(): $Vec3;
         position(): $Vec3;
         right(): $Vec3;
-        up(): $Vec3;
         forward(): $Vec3;
         static INITIAL: $ListenerTransform;
         constructor(arg0: $Vec3_, arg1: $Vec3_, arg2: $Vec3_);
@@ -20,12 +20,12 @@ declare module "@package/com/mojang/blaze3d/audio" {
     /**
      * Values that may be interpreted as {@link $ListenerTransform}.
      */
-    export type $ListenerTransform_ = { forward?: $Vec3_, position?: $Vec3_, up?: $Vec3_,  } | [forward?: $Vec3_, position?: $Vec3_, up?: $Vec3_, ];
+    export type $ListenerTransform_ = { up?: $Vec3_, position?: $Vec3_, forward?: $Vec3_,  } | [up?: $Vec3_, position?: $Vec3_, forward?: $Vec3_, ];
     export class $Library {
-        init(arg0: string, arg1: boolean): void;
-        cleanup(): void;
         getDebugString(): string;
         getListener(): $Listener;
+        init(arg0: string, arg1: boolean): void;
+        cleanup(): void;
         getAvailableSoundDevices(): $List<string>;
         static getDefaultDeviceName(): string;
         acquireChannel(arg0: $Library$Pool_): $Channel;
@@ -56,9 +56,9 @@ declare module "@package/com/mojang/blaze3d/audio" {
     export interface $Library$ChannelPool {
     }
     export class $Listener {
-        reset(): void;
         setTransform(arg0: $ListenerTransform_): void;
         getTransform(): $ListenerTransform;
+        reset(): void;
         setGain(arg0: number): void;
         getGain(): number;
         constructor();
@@ -67,16 +67,16 @@ declare module "@package/com/mojang/blaze3d/audio" {
         constructor();
     }
     export class $Channel implements $ChannelAccessor {
-        stop(): void;
-        destroy(): void;
-        unpause(): void;
-        setRelative(arg0: boolean): void;
-        setPitch(arg0: number): void;
         playing(): boolean;
         setLooping(arg0: boolean): void;
+        unpause(): void;
+        setPitch(arg0: number): void;
+        setRelative(arg0: boolean): void;
+        stop(): void;
+        destroy(): void;
         stopped(): boolean;
-        setVolume(arg0: number): void;
         play(): void;
+        setVolume(arg0: number): void;
         pause(): void;
         attachBufferStream(arg0: $AudioStream): void;
         attachStaticBuffer(arg0: $SoundBuffer): void;
@@ -86,9 +86,9 @@ declare module "@package/com/mojang/blaze3d/audio" {
         updateStream(): void;
         getSource(): number;
         static BUFFER_DURATION_SECONDS: number;
-        set relative(value: boolean);
-        set pitch(value: number);
         set looping(value: boolean);
+        set pitch(value: number);
+        set relative(value: boolean);
         set volume(value: number);
         set selfPosition(value: $Vec3_);
         get source(): number;

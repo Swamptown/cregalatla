@@ -12,9 +12,9 @@ import { $BlockEntityType_ } from "@package/net/minecraft/world/level/block/enti
 
 declare module "@package/com/simibubi/create/api/event" {
     export class $BlockEntityBehaviourEvent extends $Event {
+        forType<T extends $SmartBlockEntity>(arg0: $BlockEntityType_<T>, arg1: $Consumer_<T>): void;
         remove(arg0: $BehaviourType<never>): $BlockEntityBehaviour;
         attach(arg0: $BlockEntityBehaviour): void;
-        forType<T extends $SmartBlockEntity>(arg0: $BlockEntityType_<T>, arg1: $Consumer_<T>): void;
         constructor(arg0: $SmartBlockEntity, arg1: $Map_<$BehaviourType<never>, $BlockEntityBehaviour>);
     }
     export class $TrackGraphMergeEvent extends $Event {
@@ -32,9 +32,9 @@ declare module "@package/com/simibubi/create/api/event" {
         get worldFluid(): $Fluid;
     }
     export class $PipeCollisionEvent extends $Event {
+        getLevel(): $Level;
         getState(): $BlockState;
         setState(arg0: $BlockState_): void;
-        getLevel(): $Level;
         getPos(): $BlockPos;
         get level(): $Level;
         get pos(): $BlockPos;

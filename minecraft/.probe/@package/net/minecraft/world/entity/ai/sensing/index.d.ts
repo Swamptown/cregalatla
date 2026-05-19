@@ -48,8 +48,8 @@ declare module "@package/net/minecraft/world/entity/ai/sensing" {
         constructor(arg0: number, arg1: $BiPredicate_<T, $LivingEntity>, arg2: $Predicate_<T>, arg3: $MemoryModuleType_<boolean>, arg4: number);
     }
     export class $SensorType<U extends $Sensor<never>> implements $SensorTypeAccessor {
+        static createSensorType$platform_$md$4ca6b6$0(arg0: $Supplier_<any>): $SensorType<any>;
         create(): U;
-        static createSensorType$platform_$md$d858b6$0(arg0: $Supplier_<any>): $SensorType<any>;
         static FROG_ATTACKABLES: $SensorType<$FrogAttackablesSensor>;
         static AXOLOTL_ATTACKABLES: $SensorType<$AxolotlAttackablesSensor>;
         static ARMADILLO_SCARE_DETECTED: $SensorType<$MobSensor<$Armadillo>>;
@@ -92,23 +92,23 @@ declare module "@package/net/minecraft/world/entity/ai/sensing" {
         constructor();
     }
     export class $PiglinSpecificSensor extends $Sensor<$LivingEntity> {
-        redirect$bjl000$lithium$redirectFindNearestRepellent(arg0: $ServerLevel, arg1: $LivingEntity): $Optional<any>;
+        redirect$bkc000$lithium$redirectFindNearestRepellent(arg0: $ServerLevel, arg1: $LivingEntity): $Optional<any>;
         static TARGETING_RANGE: number;
         constructor();
     }
     export class $Sensor<E extends $LivingEntity> implements $SensorAccessor {
-        requires(): $Set<$MemoryModuleType<never>>;
-        tick(arg0: $ServerLevel, arg1: E): void;
+        doTick(arg0: $ServerLevel, arg1: E): void;
         static isEntityTargetable(arg0: $LivingEntity, arg1: $LivingEntity): boolean;
         static isEntityAttackableIgnoringLineOfSight(arg0: $LivingEntity, arg1: $LivingEntity): boolean;
-        doTick(arg0: $ServerLevel, arg1: E): void;
         static isEntityAttackable(arg0: $LivingEntity, arg1: $LivingEntity): boolean;
+        tick(arg0: $ServerLevel, arg1: E): void;
+        requires(): $Set<$MemoryModuleType<never>>;
         getLastSenseTime(): number;
         getSenseInterval(): number;
         setLastSenseTime(arg0: number): void;
         static TARGETING_RANGE: number;
-        constructor(arg0: number);
         constructor();
+        constructor(arg0: number);
         get senseInterval(): number;
     }
     export class $VillagerBabiesSensor extends $Sensor<$LivingEntity> {
@@ -171,8 +171,8 @@ declare module "@package/net/minecraft/world/entity/ai/sensing" {
         static checkForNearbyGolem(arg0: $LivingEntity): void;
         static golemDetected(arg0: $LivingEntity): void;
         static TARGETING_RANGE: number;
-        constructor();
         constructor(arg0: number);
+        constructor();
     }
     export class $AxolotlAttackablesSensor extends $NearestVisibleLivingEntitySensor {
         static TARGETING_RANGE: number;

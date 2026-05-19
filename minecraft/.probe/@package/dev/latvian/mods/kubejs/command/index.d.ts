@@ -24,12 +24,12 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
         constructor();
     }
     export class $ArgumentTypeWrappers extends $Enum<$ArgumentTypeWrappers> implements $ArgumentTypeWrapper {
+        static printAll(): void;
+        getResult(context: $CommandContext<$CommandSourceStack>, input: string): $Object;
         static values(): $ArgumentTypeWrappers[];
         static valueOf(name: string): $ArgumentTypeWrappers;
         time(minRequired: number): $ArgumentTypeWrapper;
         create(event: $CommandRegistryKubeEvent): $ArgumentType<never>;
-        getResult(context: $CommandContext<$CommandSourceStack>, input: string): $Object;
-        static printAll(): void;
         static registry<T>(event: $CommandRegistryKubeEvent, reg: $ResourceLocation_): $ArgumentTypeWrapper;
         static byName(name: $ResourceLocation_): typeof never;
         static ROTATION: $ArgumentTypeWrappers;
@@ -87,8 +87,8 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
     export class $ArgumentTypeWrapper {
     }
     export interface $ArgumentTypeWrapper {
-        create(event: $CommandRegistryKubeEvent): $ArgumentType<never>;
         getResult(context: $CommandContext<$CommandSourceStack>, input: string): $Object;
+        create(event: $CommandRegistryKubeEvent): $ArgumentType<never>;
     }
     export class $KubeJSClientCommands {
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>): void;
@@ -104,37 +104,13 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
         constructor();
     }
     export class $CommandRegistryKubeEvent implements $KubeEvent {
-        register(command: $LiteralArgumentBuilder<$CommandSourceStack>): $LiteralCommandNode<$CommandSourceStack>;
         isForSinglePlayer(): boolean;
         isForMultiPlayer(): boolean;
         getBuiltinSuggestions(): typeof $SharedSuggestionProvider;
+        register(command: $LiteralArgumentBuilder<$CommandSourceStack>): $LiteralCommandNode<$CommandSourceStack>;
         getArguments(): typeof $ArgumentTypeWrappers;
         getRegistry(): $CommandBuildContext;
         getCommands(): typeof $Commands;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -147,6 +123,30 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         selection: $Commands$CommandSelection;
         context: $CommandBuildContext;
         dispatcher: $CommandDispatcher<$CommandSourceStack>;
@@ -177,9 +177,9 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
         static EMPTY_LIST: $SimpleCommandExceptionType;
     }
     export interface $PersistentDataCommands$PersistentDataFactory {
-        apply(ctx: $CommandContext<$CommandSourceStack>): $Collection<$WithPersistentData>;
-        getAll(ctx: $CommandContext<$CommandSourceStack>): $Collection<$WithPersistentData>;
         getOne(ctx: $CommandContext<$CommandSourceStack>): $WithPersistentData;
+        getAll(ctx: $CommandContext<$CommandSourceStack>): $Collection<$WithPersistentData>;
+        apply(ctx: $CommandContext<$CommandSourceStack>): $Collection<$WithPersistentData>;
     }
     /**
      * Values that may be interpreted as {@link $PersistentDataCommands$PersistentDataFactory}.

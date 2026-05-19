@@ -21,10 +21,10 @@ declare module "@package/net/neoforged/neoforge/common/world/poi" {
         iterator(): $Iterator<$BlockState>;
         contains(arg0: $Object): boolean;
         addAll(arg0: $Collection_<$BlockState_>): boolean;
-        removeIf(arg0: $Predicate_<$BlockState>): boolean;
         removeAll(arg0: $Collection_<never>): boolean;
         retainAll(arg0: $Collection_<never>): boolean;
         containsAll(arg0: $Collection_<never>): boolean;
+        removeIf(arg0: $Predicate_<$BlockState>): boolean;
         spliterator(): $Spliterator<$BlockState>;
         toArray<T>(arg0: $IntFunction_<T[]>): T[];
         stream(): $Stream<$BlockState>;

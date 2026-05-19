@@ -1,4 +1,4 @@
-import { $OutputStream, $FilterOutputStream } from "@package/java/io";
+import { $FilterOutputStream, $OutputStream } from "@package/java/io";
 
 declare module "@package/org/apache/commons/io/output" {
     export class $ProxyOutputStream extends $FilterOutputStream {

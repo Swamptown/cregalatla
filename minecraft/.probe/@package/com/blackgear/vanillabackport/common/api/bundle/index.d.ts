@@ -3,8 +3,8 @@ declare module "@package/com/blackgear/vanillabackport/common/api/bundle" {
     export class $IBundle$Mutable {
     }
     export interface $IBundle$Mutable {
-        toggleSelectedItem(arg0: number): void;
         indexIsOutsideAllowedBounds(arg0: number): boolean;
+        toggleSelectedItem(arg0: number): void;
     }
     export class $IBundle {
     }

@@ -4,15 +4,15 @@ import { $EasingType_ } from "@package/com/zigythebird/playeranimcore/easing";
 
 declare module "@package/com/zigythebird/playeranimcore/animation/layered/modifier" {
     export class $AbstractFadeModifier extends $AbstractModifier {
+        setTransitionAnimation(transitionAnimation: $IAnimation_): void;
         static standardFadeIn(length: number, ease: $EasingType_): $AbstractFadeModifier;
         static standardFadeIn(length: number, ease: $EasingType_, easingVariable: number): $AbstractFadeModifier;
         static standardFade(length: number, ease: $EasingType_, easingVariable: number, fadeType: $FadeType_): $AbstractFadeModifier;
         static functionalFadeIn(length: number, _function: $AbstractFadeModifier$EasingFunction_): $AbstractFadeModifier;
         static functionalFade(length: number, _function: $AbstractFadeModifier$EasingFunction_, fadeType: $FadeType_): $AbstractFadeModifier;
-        static standardFadeOut(length: number, ease: $EasingType_): $AbstractFadeModifier;
         static standardFadeOut(length: number, ease: $EasingType_, easingVariable: number): $AbstractFadeModifier;
+        static standardFadeOut(length: number, ease: $EasingType_): $AbstractFadeModifier;
         static functionalFadeOut(length: number, _function: $AbstractFadeModifier$EasingFunction_): $AbstractFadeModifier;
-        setTransitionAnimation(transitionAnimation: $IAnimation_): void;
         set transitionAnimation(value: $IAnimation_);
     }
     export class $AbstractFadeModifier$EasingFunction {

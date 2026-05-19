@@ -26,12 +26,13 @@ declare module "@package/net/minecraft/data/registries" {
     export class $RegistriesDatapackGenerator implements $DataProvider {
         getName(): string;
         run(arg0: $CachedOutput_): $CompletableFuture<never>;
+        registries: $CompletableFuture<$HolderLookup$Provider>;
         /**
          * @deprecated
          */
         constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>);
-        constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>, arg2: $Set_<string>, arg3: $Map_<$ResourceKey_<never>, $List_<$ICondition>>);
         constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>, arg2: $Set_<string>);
+        constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>, arg2: $Set_<string>, arg3: $Map_<$ResourceKey_<never>, $List_<$ICondition>>);
         get name(): string;
     }
     export class $RegistryPatchGenerator {

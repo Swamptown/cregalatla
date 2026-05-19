@@ -3,41 +3,41 @@ import { $FloatOptional } from "@package/org/appliedenergistics/yoga/numeric";
 
 declare module "@package/org/appliedenergistics/yoga/style" {
     export class $StyleLength {
-        value(): $FloatOptional;
-        resolve(arg0: number): $FloatOptional;
-        isDefined(): boolean;
-        static percent(arg0: number): $StyleLength;
+        static ofAuto(): $StyleLength;
         isAuto(): boolean;
         isPercent(): boolean;
         isPoints(): boolean;
-        static ofAuto(): $StyleLength;
+        inexactEquals(arg0: $StyleLength): boolean;
         asYogaValue(): $YogaValue;
         static fromYogaValue(arg0: $YogaValue): $StyleLength;
-        inexactEquals(arg0: $StyleLength): boolean;
-        static undefined(): $StyleLength;
-        isUndefined(): boolean;
-        static points(arg0: number): $StyleLength;
-        get defined(): boolean;
-        get auto(): boolean;
-    }
-    export class $StyleSizeLength {
+        static percent(arg0: number): $StyleLength;
         value(): $FloatOptional;
         resolve(arg0: number): $FloatOptional;
         isDefined(): boolean;
-        static percent(arg0: number): $StyleSizeLength;
+        static undefined(): $StyleLength;
+        isUndefined(): boolean;
+        static points(arg0: number): $StyleLength;
+        get auto(): boolean;
+        get defined(): boolean;
+    }
+    export class $StyleSizeLength {
+        static ofAuto(): $StyleSizeLength;
         isAuto(): boolean;
         isPercent(): boolean;
         isPoints(): boolean;
         isFitContent(): boolean;
         isMaxContent(): boolean;
         isStretch(): boolean;
-        static ofAuto(): $StyleSizeLength;
+        static ofStretch(): $StyleSizeLength;
+        inexactEquals(arg0: $StyleSizeLength): boolean;
         asYogaValue(): $YogaValue;
         static ofMaxContent(): $StyleSizeLength;
         static ofFitContent(): $StyleSizeLength;
-        static ofStretch(): $StyleSizeLength;
         static fromYogaValue(arg0: $YogaValue): $StyleSizeLength;
-        inexactEquals(arg0: $StyleSizeLength): boolean;
+        static percent(arg0: number): $StyleSizeLength;
+        value(): $FloatOptional;
+        resolve(arg0: number): $FloatOptional;
+        isDefined(): boolean;
         static undefined(): $StyleSizeLength;
         isUndefined(): boolean;
         static points(arg0: number): $StyleSizeLength;
@@ -46,10 +46,10 @@ declare module "@package/org/appliedenergistics/yoga/style" {
         static MAX_CONTENT: $StyleSizeLength;
         static UNDEFINED: $StyleSizeLength;
         static FIT_CONTENT: $StyleSizeLength;
-        get defined(): boolean;
         get auto(): boolean;
         get fitContent(): boolean;
         get maxContent(): boolean;
         get stretch(): boolean;
+        get defined(): boolean;
     }
 }

@@ -12,10 +12,10 @@ declare module "@package/net/minecraft/data/structures" {
         constructor();
     }
     export class $NbtToSnbt implements $DataProvider {
-        getName(): string;
-        run(arg0: $CachedOutput_): $CompletableFuture<never>;
         static convertStructure(arg0: $CachedOutput_, arg1: $Path_, arg2: string, arg3: $Path_): $Path;
         static writeSnbt(arg0: $CachedOutput_, arg1: $Path_, arg2: string): void;
+        getName(): string;
+        run(arg0: $CachedOutput_): $CompletableFuture<never>;
         constructor(arg0: $PackOutput, arg1: $Collection_<$Path_>);
         get name(): string;
     }
@@ -47,5 +47,5 @@ declare module "@package/net/minecraft/data/structures" {
     /**
      * Values that may be interpreted as {@link $SnbtToNbt$TaskResult}.
      */
-    export type $SnbtToNbt$TaskResult_ = { payload?: number[], name?: string, hash?: $HashCode,  } | [payload?: number[], name?: string, hash?: $HashCode, ];
+    export type $SnbtToNbt$TaskResult_ = { hash?: $HashCode, name?: string, payload?: number[],  } | [hash?: $HashCode, name?: string, payload?: number[], ];
 }

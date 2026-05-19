@@ -7,31 +7,31 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/com/zigythebird/playeranimcore/easing" {
     export class $EasingType extends $Enum<$EasingType> implements $EasingTypeTransformer {
-        static values(): $EasingType[];
-        static pow(n: number): $Float2FloatFunction;
-        static exp(n: number): number;
-        static valueOf(name: string): $EasingType;
-        apply(startValue: number, endValue: number, easingValue: number, lerpValue: number): number;
-        apply(env: $MochaEngine<never>, animationPoint: $AnimationPoint_): number;
-        apply(startValue: number, endValue: number, lerpValue: number): number;
-        apply(env: $MochaEngine<never>, animationPoint: $AnimationPoint_, easingValue: number, lerpValue: number): number;
-        static step(n: number): $Float2FloatFunction;
-        static back(n: number): $Float2FloatFunction;
+        static easeIn(_function: $Float2FloatFunction_): $Float2FloatFunction;
+        static easeOut(_function: $Float2FloatFunction_): $Float2FloatFunction;
+        static lerpWithOverride(env: $MochaEngine<never>, animationPoint: $AnimationPoint_, override: $EasingType_): number;
         buildTransformer(value: number): $Float2FloatFunction;
         static easeInOut(_function: $Float2FloatFunction_): $Float2FloatFunction;
         static quadratic(n: number): number;
         static cubic(n: number): number;
         static elastic(n: number): $Float2FloatFunction;
-        static easeIn(_function: $Float2FloatFunction_): $Float2FloatFunction;
-        static easeOut(_function: $Float2FloatFunction_): $Float2FloatFunction;
-        static sine(n: number): number;
         static circle(n: number): number;
         static bounce(n: number): $Float2FloatFunction;
+        static sine(n: number): number;
         static linear(n: number): number;
         static fromId(id: number): $EasingType;
+        static back(n: number): $Float2FloatFunction;
+        static values(): $EasingType[];
+        static pow(n: number): $Float2FloatFunction;
+        static exp(n: number): number;
+        static valueOf(name: string): $EasingType;
+        apply(startValue: number, endValue: number, lerpValue: number): number;
+        apply(env: $MochaEngine<never>, animationPoint: $AnimationPoint_, easingValue: number, lerpValue: number): number;
+        apply(env: $MochaEngine<never>, animationPoint: $AnimationPoint_): number;
+        apply(startValue: number, endValue: number, easingValue: number, lerpValue: number): number;
+        static step(n: number): $Float2FloatFunction;
         static fromJson(json: $JsonElement_): $EasingType;
         static fromString(name: string): $EasingType;
-        static lerpWithOverride(env: $MochaEngine<never>, animationPoint: $AnimationPoint_, override: $EasingType_): number;
         static EASE_OUT_QUAD: $EasingType;
         static EASE_OUT_SINE: $EasingType;
         static CATMULLROM: $EasingType;
@@ -77,11 +77,11 @@ declare module "@package/com/zigythebird/playeranimcore/easing" {
     export class $EasingTypeTransformer {
     }
     export interface $EasingTypeTransformer extends $ObjectValue$FloatFunction3 {
-        apply(startValue: number, endValue: number, lerpValue: number): number;
-        apply(startValue: number, endValue: number, easingValue: number, lerpValue: number): number;
-        apply(env: $MochaEngine<never>, animationPoint: $AnimationPoint_): number;
-        apply(env: $MochaEngine<never>, animationPoint: $AnimationPoint_, easingValue: number, lerpValue: number): number;
         buildTransformer(arg0: number): $Float2FloatFunction;
+        apply(startValue: number, endValue: number, easingValue: number, lerpValue: number): number;
+        apply(startValue: number, endValue: number, lerpValue: number): number;
+        apply(env: $MochaEngine<never>, animationPoint: $AnimationPoint_, easingValue: number, lerpValue: number): number;
+        apply(env: $MochaEngine<never>, animationPoint: $AnimationPoint_): number;
     }
     /**
      * Values that may be interpreted as {@link $EasingTypeTransformer}.

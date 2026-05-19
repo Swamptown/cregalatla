@@ -4,9 +4,9 @@ import { $AABB, $AABB_, $Vec3, $Vec3_ } from "@package/net/minecraft/world/phys"
 
 declare module "@package/net/neoforged/neoforge/common/ticket" {
     export class $ChunkTicketManager<T> implements $ITicketGetter<T> {
+        getTickets(): $Collection<$SimpleTicket<T>>;
         remove(arg0: $SimpleTicket<T>): void;
         add(arg0: $SimpleTicket<T>): void;
-        getTickets(): $Collection<$SimpleTicket<T>>;
         pos: $ChunkPos;
         constructor(arg0: $ChunkPos);
         get tickets(): $Collection<$SimpleTicket<T>>;
@@ -18,12 +18,12 @@ declare module "@package/net/neoforged/neoforge/common/ticket" {
         get tickets(): $Collection<$SimpleTicket<T>>;
     }
     export class $SimpleTicket<T> {
+        setManager(arg0: $ITicketManager<T>, ...arg1: $ITicketManager<T>[]): void;
+        invalidate(): void;
+        isValid(): boolean;
         matches(arg0: T): boolean;
         validate(): void;
         unload(arg0: $ITicketManager<T>): boolean;
-        invalidate(): void;
-        isValid(): boolean;
-        setManager(arg0: $ITicketManager<T>, ...arg1: $ITicketManager<T>[]): void;
         constructor();
         get valid(): boolean;
     }

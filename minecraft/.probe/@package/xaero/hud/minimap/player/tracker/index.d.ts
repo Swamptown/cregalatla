@@ -24,11 +24,11 @@ declare module "@package/xaero/hud/minimap/player/tracker" {
         constructor();
     }
     export class $PlayerTrackerMinimapElementCollector {
-        update(arg0: $Minecraft): void;
         playerExists(arg0: $UUID_): boolean;
         confirmPlayerRadarRender(arg0: $Player): void;
         resetRenderedOnRadarFlags(): void;
         getElements(): $Iterable<$PlayerTrackerMinimapElement<never>>;
+        update(arg0: $Minecraft): void;
         constructor(arg0: $RenderedPlayerTrackerManager);
         get elements(): $Iterable<$PlayerTrackerMinimapElement<never>>;
     }
@@ -39,8 +39,8 @@ declare module "@package/xaero/hud/minimap/player/tracker" {
         get collector(): $PlayerTrackerMinimapElementCollector;
     }
     export class $PlayerTrackerMinimapElement<P> {
-        setRenderedOnRadar(arg0: boolean): void;
         getSystem(): $IRenderedPlayerTracker<P>;
+        setRenderedOnRadar(arg0: boolean): void;
         wasRenderedOnRadar(): boolean;
         getPlayer(): P;
         getY(): number;
@@ -49,8 +49,8 @@ declare module "@package/xaero/hud/minimap/player/tracker" {
         getZ(): number;
         getPlayerId(): $UUID;
         constructor(arg0: P, arg1: $IRenderedPlayerTracker<P>);
-        set renderedOnRadar(value: boolean);
         get system(): $IRenderedPlayerTracker<P>;
+        set renderedOnRadar(value: boolean);
         get player(): P;
         get y(): number;
         get dimension(): $ResourceKey<$Level>;

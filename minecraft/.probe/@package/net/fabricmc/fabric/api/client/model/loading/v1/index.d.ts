@@ -11,9 +11,9 @@ declare module "@package/net/fabricmc/fabric/api/client/model/loading/v1" {
     export class $ModelModifier$BeforeBake$Context {
     }
     export interface $ModelModifier$BeforeBake$Context {
-        loader(): $ModelBakery;
         baker(): $ModelBaker;
         settings(): $ModelState;
+        loader(): $ModelBakery;
         resourceId(): $ResourceLocation;
         textureGetter(): $Function<$Material, $TextureAtlasSprite>;
         topLevelId(): $ModelResourceLocation;
@@ -21,8 +21,8 @@ declare module "@package/net/fabricmc/fabric/api/client/model/loading/v1" {
     export class $ModelModifier$OnLoad$Context {
     }
     export interface $ModelModifier$OnLoad$Context {
-        loader(): $ModelBakery;
         getOrLoadModel(arg0: $ResourceLocation_): $UnbakedModel;
+        loader(): $ModelBakery;
         resourceId(): $ResourceLocation;
         topLevelId(): $ModelResourceLocation;
     }
@@ -48,10 +48,10 @@ declare module "@package/net/fabricmc/fabric/api/client/model/loading/v1" {
     export class $ModelModifier$AfterBake$Context {
     }
     export interface $ModelModifier$AfterBake$Context {
-        loader(): $ModelBakery;
         sourceModel(): $UnbakedModel;
         baker(): $ModelBaker;
         settings(): $ModelState;
+        loader(): $ModelBakery;
         resourceId(): $ResourceLocation;
         textureGetter(): $Function<$Material, $TextureAtlasSprite>;
         topLevelId(): $ModelResourceLocation;
@@ -68,9 +68,9 @@ declare module "@package/net/fabricmc/fabric/api/client/model/loading/v1" {
     export class $ModelResolver$Context {
     }
     export interface $ModelResolver$Context {
+        getOrLoadModel(arg0: $ResourceLocation_): $UnbakedModel;
         loader(): $ModelBakery;
         id(): $ResourceLocation;
-        getOrLoadModel(arg0: $ResourceLocation_): $UnbakedModel;
     }
     export class $ModelModifier$OnLoad {
     }
@@ -84,10 +84,10 @@ declare module "@package/net/fabricmc/fabric/api/client/model/loading/v1" {
     export class $BlockStateResolver$Context {
     }
     export interface $BlockStateResolver$Context {
-        loader(): $ModelBakery;
-        block(): $Block;
         setModel(arg0: $BlockState_, arg1: $UnbakedModel): void;
         getOrLoadModel(arg0: $ResourceLocation_): $UnbakedModel;
+        loader(): $ModelBakery;
+        block(): $Block;
     }
     export class $BlockStateResolver {
     }

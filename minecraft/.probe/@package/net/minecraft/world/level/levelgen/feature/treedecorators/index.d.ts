@@ -31,7 +31,7 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/treedecorato
         constructor(arg0: number);
     }
     export class $TreeDecoratorType<P extends $TreeDecorator> implements $TreeDecoratorTypeAccessor {
-        static createTreeDecorator$vanillabackport_$md$d858b6$0(arg0: $MapCodec_<any>): $TreeDecoratorType<any>;
+        static createTreeDecorator$vanillabackport_$md$4ca6b6$0(arg0: $MapCodec_<any>): $TreeDecoratorType<any>;
         codec(): $MapCodec<P>;
         static BEEHIVE: $TreeDecoratorType<$BeehiveDecorator>;
         static LEAVE_VINE: $TreeDecoratorType<$LeaveVineDecorator>;
@@ -46,12 +46,12 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/treedecorato
      */
     export type $TreeDecoratorType_<P> = RegistryTypes.WorldgenTreeDecoratorType;
     export class $TreeDecorator$Context {
+        leaves(): $ObjectArrayList<$BlockPos>;
+        logs(): $ObjectArrayList<$BlockPos>;
+        placeVine(arg0: $BlockPos_, arg1: $BooleanProperty): void;
+        level(): $LevelSimulatedReader;
         roots(): $ObjectArrayList<$BlockPos>;
         random(): $RandomSource;
-        level(): $LevelSimulatedReader;
-        logs(): $ObjectArrayList<$BlockPos>;
-        leaves(): $ObjectArrayList<$BlockPos>;
-        placeVine(arg0: $BlockPos_, arg1: $BooleanProperty): void;
         setBlock(arg0: $BlockPos_, arg1: $BlockState_): void;
         isAir(arg0: $BlockPos_): boolean;
         constructor(arg0: $LevelSimulatedReader, arg1: $BiConsumer_<$BlockPos, $BlockState>, arg2: $RandomSource, arg3: $Set_<$BlockPos_>, arg4: $Set_<$BlockPos_>, arg5: $Set_<$BlockPos_>);
@@ -71,8 +71,8 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/treedecorato
         constructor(arg0: $BlockStateProvider);
     }
     export class $TreeDecorator {
-        type(): $TreeDecoratorType<never>;
         place(arg0: $TreeDecorator$Context): void;
+        type(): $TreeDecoratorType<never>;
         static CODEC: $Codec<$TreeDecorator>;
         constructor();
     }

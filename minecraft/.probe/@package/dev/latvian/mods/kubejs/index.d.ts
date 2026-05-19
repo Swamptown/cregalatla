@@ -58,11 +58,11 @@ export * as ingredient from "@package/dev/latvian/mods/kubejs/ingredient";
 
 declare module "@package/dev/latvian/mods/kubejs" {
     export class $CommonProperties extends $BaseProperties {
-        static get(): $CommonProperties;
-        static reload(): void;
         getMaxSlotSize(original: number): number;
         setPackMode(s: string): void;
         getCreativeModeTabName(): $Component;
+        static reload(): void;
+        static get(): $CommonProperties;
         getMaxStackSize(original: number): number;
         matchJsonRecipes: boolean;
         allowAsyncStreams: boolean;
@@ -84,9 +84,9 @@ declare module "@package/dev/latvian/mods/kubejs" {
     export interface $KubeJSComponents {
     }
     export class $KubeJS {
-        static id(path: string): $ResourceLocation;
         static getStartupScriptManager(): $ScriptManager;
         static getClientScriptManager(): $ScriptManager;
+        static id(path: string): $ResourceLocation;
         static thisMod: $ModContainer;
         static PROXY: $KubeJSCommon;
         static MC_VERSION_STRING: string;
@@ -128,8 +128,8 @@ declare module "@package/dev/latvian/mods/kubejs" {
         get refMapperConfig(): string;
     }
     export class $DevProperties extends $BaseProperties {
-        static get(): $DevProperties;
         static reload(): void;
+        static get(): $DevProperties;
         logRegistryTypes: boolean;
         logSkippedTags: boolean;
         logSkippedRecipes: boolean;
@@ -153,11 +153,11 @@ declare module "@package/dev/latvian/mods/kubejs" {
         kubedexSound: string;
     }
     export class $KubeJSPaths {
-        static get(type: $PackType_): $Path;
-        static dir(dir: $Path_, markFirstRun: boolean): $Path;
-        static dir(dir: $Path_): $Path;
         static getLocalDevProperties(): $Path;
         static verifyFilePath(path: $Path_): $Path;
+        static get(type: $PackType_): $Path;
+        static dir(dir: $Path_): $Path;
+        static dir(dir: $Path_, markFirstRun: boolean): $Path;
         static ASSETS: $Path;
         static CLIENT_PROPERTIES: $Path;
         static WEB_SERVER_PROPERTIES: $Path;
@@ -188,9 +188,9 @@ declare module "@package/dev/latvian/mods/kubejs" {
     /**
      * Values that may be interpreted as {@link $KubeJSModEventHandler$KubeEntityCapabilityProvider}.
      */
-    export type $KubeJSModEventHandler$KubeEntityCapabilityProvider_<CAP, SRC> = { attachment?: $BlockEntityAttachmentInfo_, capability?: $BlockCapability<any, any>,  } | [attachment?: $BlockEntityAttachmentInfo_, capability?: $BlockCapability<any, any>, ];
+    export type $KubeJSModEventHandler$KubeEntityCapabilityProvider_<CAP, SRC> = { capability?: $BlockCapability<any, any>, attachment?: $BlockEntityAttachmentInfo_,  } | [capability?: $BlockCapability<any, any>, attachment?: $BlockEntityAttachmentInfo_, ];
     export class $KubeJSCommon {
-        export(packs: $List_<$ExportablePackResources>): void;
+        runInMainThread(runnable: $Runnable_): void;
         handleDataFromServerPacket(channel: string, data: $CompoundTag_): void;
         getClientPlayer(): $Player;
         generateTypings(source: $CommandSourceStack): void;
@@ -200,7 +200,7 @@ declare module "@package/dev/latvian/mods/kubejs" {
         openErrors(type: $ScriptType_): void;
         updateServerData(data: $KubeServerData_): void;
         getWebServerWindowTitle(): string;
-        runInMainThread(runnable: $Runnable_): void;
+        export(packs: $List_<$ExportablePackResources>): void;
         constructor();
         get clientPlayer(): $Player;
         get webServerWindowTitle(): string;

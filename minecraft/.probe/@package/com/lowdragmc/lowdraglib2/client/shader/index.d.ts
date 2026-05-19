@@ -24,11 +24,11 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/shader" {
         get shaderInstanceAccessor(): $ShaderInstanceAccessor;
     }
     export class $LDShaderInstance extends $ShaderInstance implements $ILDShaderInstance {
-        static create(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderInstance;
-        static create(arg0: $ResourceLocation_, arg1: $VertexFormat, arg2: $Set_<string>): $LDShaderInstance;
-        applySamplers(): void;
-        isSamplerCacheDirty(): boolean;
         getGeometry(): $Program;
+        isSamplerCacheDirty(): boolean;
+        applySamplers(): void;
+        static create(arg0: $ResourceLocation_, arg1: $VertexFormat, arg2: $Set_<string>): $LDShaderInstance;
+        static create(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderInstance;
         FOG_START: $Uniform;
         shaderLocation: $ResourceLocation;
         static lastProgramId: number;
@@ -51,23 +51,23 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/shader" {
         FOG_SHAPE: $Uniform;
         GAME_TIME: $Uniform;
         LIGHT1_DIRECTION: $Uniform;
-        get samplerCacheDirty(): boolean;
         get geometry(): $Program;
+        get samplerCacheDirty(): boolean;
     }
     export class $LDShaderHolder implements $IConfigurable, $INBTSerializable<$CompoundTag>, $AutoCloseable {
-        close(): void;
-        static create(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderHolder;
-        isBuiltinUniform(arg0: $Uniform, arg1: $ShaderInstance): boolean;
-        serializeSampler(arg0: $Object): $CompoundTag;
-        deserializeSampler(arg0: $CompoundTag_): $Object;
-        isBuiltinSampler(arg0: string): boolean;
-        removeDynamicSampler(arg0: string): void;
         buildConfigurator(arg0: $ConfiguratorGroup): void;
         addDynamicUniform(arg0: string, arg1: $Consumer_<$Uniform>): void;
         removeDynamicUniform(arg0: string): void;
         getShaderInstance(): $LDShaderInstance;
         getShaderInstance(arg0: $Collection_<string>): $LDShaderInstance;
         addDynamicSampler(arg0: string, arg1: $Supplier_<$Object>): void;
+        isBuiltinUniform(arg0: $Uniform, arg1: $ShaderInstance): boolean;
+        serializeSampler(arg0: $Object): $CompoundTag;
+        deserializeSampler(arg0: $CompoundTag_): $Object;
+        isBuiltinSampler(arg0: string): boolean;
+        removeDynamicSampler(arg0: string): void;
+        close(): void;
+        static create(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderHolder;
         static createSafe(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderHolder;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         createDirectConfigurator(): $Configurator;

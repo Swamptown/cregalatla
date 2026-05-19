@@ -7,15 +7,15 @@ export * as settings from "@package/com/lowdragmc/lowdraglib2/editor/settings";
 
 declare module "@package/com/lowdragmc/lowdraglib2/editor" {
     export class $ClipboardManager {
-        clear(): void;
-        copy(arg0: $Supplier_<never>, arg1: $Class<never>): void;
-        copy(arg0: $Supplier_<never>): void;
-        getClipboardContent(): $Object;
-        copyDirect(arg0: $Object): void;
         getClipboardType(): $Class<never>;
         paste<T>(): T;
+        copyDirect(arg0: $Object): void;
+        getClipboardContent(): $Object;
+        clear(): void;
+        copy(arg0: $Supplier_<never>): void;
+        copy(arg0: $Supplier_<never>, arg1: $Class<never>): void;
         static INSTANCE: $ClipboardManager;
-        get clipboardContent(): $Object;
         get clipboardType(): $Class<never>;
+        get clipboardContent(): $Object;
     }
 }

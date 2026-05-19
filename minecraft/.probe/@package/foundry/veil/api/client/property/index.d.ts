@@ -8,15 +8,15 @@ import { $PropertyRegistry$PropertyType, $PropertyRegistry$PropertyType_ } from 
 
 declare module "@package/foundry/veil/api/client/property" {
     export class $Property<T> {
-        getType(): $PropertyRegistry$PropertyType<T, $Property<T>>;
         resetOverrideValue(): void;
+        getEnvironment(): $Supplier<$MolangEnvironment>;
+        getType(): $PropertyRegistry$PropertyType<T, $Property<T>>;
         static codec<T, M extends $Property<T>>(arg0: $PropertyRegistry$PropertyType_<T, M>): $MapCodec<M>;
         modify(arg0: T, arg1: $PropertyModifier$PropertyModifierMode_, arg2: ($List_<$MolangExpression_>) | undefined): void;
         static createCodec<T, M extends $Property<T>>(arg0: $Function_<T, M>, arg1: $Codec<T>): $MapCodec<M>;
         applyValue(arg0: string, arg1: $ShaderInstance): void;
-        getEnvironment(): $Supplier<$MolangEnvironment>;
         constructor(arg0: $PropertyRegistry$PropertyType_<T, $Property<T>>, arg1: T);
-        get type(): $PropertyRegistry$PropertyType<T, $Property<T>>;
         get environment(): $Supplier<$MolangEnvironment>;
+        get type(): $PropertyRegistry$PropertyType<T, $Property<T>>;
     }
 }

@@ -17,7 +17,6 @@ declare module "@package/xaero/common/minimap/write" {
         constructor();
     }
     export class $MinimapWriter {
-        cleanup(): void;
         setupDimensionHighlightHandler(arg0: $ResourceKey_<$Level>): void;
         getLoadSide(): number;
         getUpdateRadiusInChunks(): number;
@@ -41,6 +40,7 @@ declare module "@package/xaero/common/minimap/write" {
         getDimensionHighlightHandler(): $DimensionHighlighterHandler;
         getLoadedSideInChunks(): number;
         isLoadedNonWorldMap(): boolean;
+        cleanup(): void;
         maxTime: number;
         static NO_Y_VALUE: number;
         loadingLightOverlayMaxLight: number;

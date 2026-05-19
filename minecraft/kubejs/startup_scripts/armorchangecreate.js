@@ -41,4 +41,25 @@ ItemEvents.modification(event => {
             )
         item.setAttributeModifiersWithTooltip(modifiedAttributeModifer.modifiers())
         })
+    event.modify("rocketnautics:jetpack", item => {
+        let modifiedAttributeModifer = Item.of(item.item().id).attributeModifiers
+            .withModifierAdded('generic.armor',
+                {amount: 6, id: 'minecraft:armor.chestplate', operation: 'add_value'}, 'chest'
+            )
+        item.setAttributeModifiersWithTooltip(modifiedAttributeModifer.modifiers())
+        })
+    event.modify("create:copper_backtank", item => {
+        let modifiedAttributeModifer = Item.of(item.item().id).attributeModifiers
+            .withModifierAdded('generic.armor',
+                {amount: 3, id: 'minecraft:armor.chestplate', operation: 'add_value'}, 'chest'
+            )
+        item.setAttributeModifiersWithTooltip(modifiedAttributeModifer.modifiers())
+        })
+    event.modify("create:netherite_backtank", item => {
+        let modifiedAttributeModifer = Item.of(item.item().id).attributeModifiers
+            .withModifierAdded('generic.armor',
+                {amount: 6, id: 'minecraft:armor.chestplate', operation: 'add_value'}, 'chest'
+            )
+        item.setAttributeModifiersWithTooltip(modifiedAttributeModifer.modifiers())
+        })
 })

@@ -6,8 +6,8 @@ declare module "@package/dev/ryanhcode/sable/companion" {
     export class $SubLevelAccess {
     }
     export interface $SubLevelAccess {
-        getName(): string;
         boundingBox(): $BoundingBox3dc;
+        getName(): string;
         logicalPose(): $Pose3dc;
         lastPose(): $Pose3dc;
         getUniqueId(): $UUID;

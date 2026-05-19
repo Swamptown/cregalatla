@@ -6,9 +6,9 @@ export * as objects from "@package/it/unimi/dsi/fastutil/objects";
 export * as bytes from "@package/it/unimi/dsi/fastutil/bytes";
 export * as ints from "@package/it/unimi/dsi/fastutil/ints";
 export * as longs from "@package/it/unimi/dsi/fastutil/longs";
-export * as booleans from "@package/it/unimi/dsi/fastutil/booleans";
 export * as shorts from "@package/it/unimi/dsi/fastutil/shorts";
 export * as floats from "@package/it/unimi/dsi/fastutil/floats";
+export * as booleans from "@package/it/unimi/dsi/fastutil/booleans";
 export * as chars from "@package/it/unimi/dsi/fastutil/chars";
 
 declare module "@package/it/unimi/dsi/fastutil" {
@@ -62,8 +62,8 @@ declare module "@package/it/unimi/dsi/fastutil" {
     }
     export interface $Stack<K> {
         isEmpty(): boolean;
-        top(): K;
         peek(arg0: number): K;
+        top(): K;
         push(arg0: K): void;
         pop(): K;
         get empty(): boolean;

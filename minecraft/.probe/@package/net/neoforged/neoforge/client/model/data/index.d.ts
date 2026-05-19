@@ -14,8 +14,8 @@ declare module "@package/net/neoforged/neoforge/client/model/data" {
     export class $ModelDataManager {
         snapshotSectionRegion(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): $Long2ObjectFunction<$ModelData>;
         static onChunkUnload(arg0: $ChunkEvent$Unload): void;
-        getAt(arg0: $SectionPos): $Long2ObjectMap<$ModelData>;
         getAt(arg0: $BlockPos_): $ModelData;
+        getAt(arg0: $SectionPos): $Long2ObjectMap<$ModelData>;
         requestRefresh(arg0: $BlockEntity): void;
         static EMPTY_SNAPSHOT: $Long2ObjectFunction<$ModelData>;
         constructor(arg0: $Level_);
@@ -26,12 +26,12 @@ declare module "@package/net/neoforged/neoforge/client/model/data" {
         constructor();
     }
     export class $ModelData implements $SodiumModelData {
+        derive(): $ModelData$Builder;
+        has(arg0: $ModelProperty<never>): boolean;
         get<T>(arg0: $ModelProperty<T>): T;
         static of<T>(arg0: $ModelProperty<T>, arg1: T): $ModelData;
         static builder(): $ModelData$Builder;
         getProperties(): $Set<$ModelProperty<never>>;
-        has(arg0: $ModelProperty<never>): boolean;
-        derive(): $ModelData$Builder;
         static EMPTY: $ModelData;
         get properties(): $Set<$ModelProperty<never>>;
     }
@@ -41,9 +41,9 @@ declare module "@package/net/neoforged/neoforge/client/model/data" {
     }
     export class $ModelProperty<T> implements $Predicate<T> {
         test(arg0: T): boolean;
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
         constructor();
         constructor(arg0: $Predicate_<T>);
     }

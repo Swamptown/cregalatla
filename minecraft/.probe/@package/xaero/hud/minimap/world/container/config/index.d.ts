@@ -4,10 +4,7 @@ export * as io from "@package/xaero/hud/minimap/world/container/config/io";
 
 declare module "@package/xaero/hud/minimap/world/container/config" {
     export class $RootConfig {
-        isLoaded(): boolean;
         setIgnoreHeightmaps(arg0: boolean): void;
-        isIgnoreHeightmaps(): boolean;
-        setLoaded(arg0: boolean): void;
         getSortType(): $WaypointsSort;
         isTeleportationEnabled(): boolean;
         isSortReversed(): boolean;
@@ -17,10 +14,8 @@ declare module "@package/xaero/hud/minimap/world/container/config" {
         setUsingDefaultTeleportCommand(arg0: boolean): void;
         setServerTeleportCommandFormat(arg0: string): void;
         setServerTeleportCommandRotationFormat(arg0: string): void;
-        resetSubWorldConnections(arg0: boolean): void;
-        getSubWorldConnections(): $MinimapWorldConnectionManager;
-        isUsingMultiworldDetection(): boolean;
         setUsingMultiworldDetection(arg0: boolean): void;
+        isUsingMultiworldDetection(): boolean;
         getDefaultMultiworldId(): string;
         setDefaultMultiworldId(arg0: string): void;
         setTeleportationEnabled(arg0: boolean): void;
@@ -30,6 +25,11 @@ declare module "@package/xaero/hud/minimap/world/container/config" {
         toggleSortReversed(): void;
         isIgnoreServerLevelId(): boolean;
         setIgnoreServerLevelId(arg0: boolean): void;
+        resetSubWorldConnections(arg0: boolean): void;
+        getSubWorldConnections(): $MinimapWorldConnectionManager;
+        isIgnoreHeightmaps(): boolean;
+        setLoaded(arg0: boolean): void;
+        isLoaded(): boolean;
         loaded: boolean;
         constructor(arg0: boolean);
         get subWorldConnections(): $MinimapWorldConnectionManager;

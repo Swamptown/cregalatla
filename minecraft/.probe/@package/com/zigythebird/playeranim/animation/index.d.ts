@@ -5,16 +5,16 @@ import { $AnimationStack } from "@package/com/zigythebird/playeranimcore/animati
 
 declare module "@package/com/zigythebird/playeranim/animation" {
     export class $PlayerAnimManager extends $AnimationStack {
-        getTickDelta(): number;
-        getPlayer(): $AbstractClientPlayer;
-        getLastUpdateTime(): number;
+        updatePart(part: $ModelPart, secondLayer: $ModelPart, bone: $PlayerAnimBone): void;
         setTickDelta(tickDelta: number): void;
         updatedAt(updateTime: number): void;
         isFirstTick(): boolean;
-        updatePart(part: $ModelPart, secondLayer: $ModelPart, bone: $PlayerAnimBone): void;
+        getTickDelta(): number;
+        getPlayer(): $AbstractClientPlayer;
+        getLastUpdateTime(): number;
         constructor(player: $AbstractClientPlayer);
+        get firstTick(): boolean;
         get player(): $AbstractClientPlayer;
         get lastUpdateTime(): number;
-        get firstTick(): boolean;
     }
 }

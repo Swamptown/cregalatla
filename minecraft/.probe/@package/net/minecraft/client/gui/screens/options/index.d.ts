@@ -144,9 +144,9 @@ declare module "@package/net/minecraft/client/gui/screens/options" {
         constructor(arg0: $Screen, arg1: $Options);
     }
     export class $LanguageSelectScreen extends $OptionsSubScreen {
+        onDone(): void;
         static access$000(arg0: $LanguageSelectScreen): $Font;
         static access$200(arg0: $LanguageSelectScreen): $Font;
-        onDone(): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -290,7 +290,7 @@ declare module "@package/net/minecraft/client/gui/screens/options" {
     }
     export class $OptionsScreen extends $Screen {
         static createDifficultyButton(arg0: number, arg1: number, arg2: string, arg3: $Minecraft): $CycleButton<$Difficulty>;
-        handler$flj000$sable$createSableButton(arg0: $CallbackInfoReturnable<any>): void;
+        handler$fmg000$sable$createSableButton(arg0: $CallbackInfoReturnable<any>): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static TELEMETRY: $Component;

@@ -14,19 +14,19 @@ declare module "@package/net/neoforged/neoforge/client/settings" {
         get active(): boolean;
     }
     export class $KeyMappingLookup {
+        getAll(arg0: $InputConstants$Key, arg1: boolean): $List<$KeyMapping>;
+        getAll(arg0: $InputConstants$Key): $List<$KeyMapping>;
         remove(arg0: $KeyMapping): void;
         put(arg0: $InputConstants$Key, arg1: $KeyMapping): void;
         clear(): void;
-        getAll(arg0: $InputConstants$Key, arg1: boolean): $List<$KeyMapping>;
-        getAll(arg0: $InputConstants$Key): $List<$KeyMapping>;
         constructor();
     }
     export class $KeyModifier extends $Enum<$KeyModifier> {
+        codes(): $InputConstants$Key[];
         static values(): $KeyModifier[];
         static valueOf(arg0: string): $KeyModifier;
         matches(arg0: $InputConstants$Key): boolean;
         isActive(arg0: $IKeyConflictContext): boolean;
-        codes(): $InputConstants$Key[];
         static getKeyModifier(arg0: $InputConstants$Key): $KeyModifier;
         getCombinedName(arg0: $InputConstants$Key, arg1: $Supplier_<$Component>): $Component;
         static valueFromString(arg0: string): $KeyModifier;

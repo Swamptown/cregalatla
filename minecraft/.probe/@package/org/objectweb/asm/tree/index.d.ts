@@ -1,6 +1,6 @@
 import { $Consumer_ } from "@package/java/util/function";
 import { $ClassVisitor, $FieldVisitor, $Label, $MethodVisitor, $AnnotationVisitor, $ModuleVisitor, $Attribute, $RecordComponentVisitor, $TypePath } from "@package/org/objectweb/asm";
-import { $Spliterator, $List, $Map_, $ListIterator, $List_ } from "@package/java/util";
+import { $Spliterator, $Iterator, $List, $Map_, $ListIterator, $List_ } from "@package/java/util";
 import { $Object, $Iterable } from "@package/java/lang";
 
 declare module "@package/org/objectweb/asm/tree" {
@@ -108,8 +108,8 @@ declare module "@package/org/objectweb/asm/tree" {
         get label(): $Label;
     }
     export class $MethodNode extends $MethodVisitor {
-        accept(arg0: $ClassVisitor): void;
         accept(arg0: $MethodVisitor): void;
+        accept(arg0: $ClassVisitor): void;
         check(arg0: number): void;
         visibleTypeAnnotations: $List<$TypeAnnotationNode>;
         invisibleAnnotableParameterCount: number;
@@ -135,9 +135,9 @@ declare module "@package/org/objectweb/asm/tree" {
         visibleAnnotableParameterCount: number;
         desc: string;
         constructor();
-        constructor(arg0: number, arg1: number, arg2: string, arg3: string, arg4: string, arg5: string[]);
         constructor(arg0: number);
         constructor(arg0: number, arg1: string, arg2: string, arg3: string, arg4: string[]);
+        constructor(arg0: number, arg1: number, arg2: string, arg3: string, arg4: string, arg5: string[]);
     }
     export class $TryCatchBlockNode {
         accept(arg0: $MethodVisitor): void;
@@ -151,31 +151,32 @@ declare module "@package/org/objectweb/asm/tree" {
         constructor(arg0: $LabelNode, arg1: $LabelNode, arg2: $LabelNode, arg3: string);
     }
     export class $InsnList implements $Iterable<$AbstractInsnNode> {
+        insertBefore(arg0: $AbstractInsnNode, arg1: $AbstractInsnNode): void;
+        insertBefore(arg0: $AbstractInsnNode, arg1: $InsnList): void;
         remove(arg0: $AbstractInsnNode): void;
         size(): number;
         get(arg0: number): $AbstractInsnNode;
         indexOf(arg0: $AbstractInsnNode): number;
         insert(arg0: $AbstractInsnNode): void;
-        insert(arg0: $InsnList): void;
         insert(arg0: $AbstractInsnNode, arg1: $AbstractInsnNode): void;
         insert(arg0: $AbstractInsnNode, arg1: $InsnList): void;
+        insert(arg0: $InsnList): void;
         clear(): void;
-        add(arg0: $AbstractInsnNode): void;
         add(arg0: $InsnList): void;
+        add(arg0: $AbstractInsnNode): void;
         toArray(): $AbstractInsnNode[];
-        iterator(): $ListIterator<$AbstractInsnNode>;
         iterator(arg0: number): $ListIterator<$AbstractInsnNode>;
         contains(arg0: $AbstractInsnNode): boolean;
         set(arg0: $AbstractInsnNode, arg1: $AbstractInsnNode): void;
         accept(arg0: $MethodVisitor): void;
         getFirst(): $AbstractInsnNode;
         getLast(): $AbstractInsnNode;
-        insertBefore(arg0: $AbstractInsnNode, arg1: $InsnList): void;
-        insertBefore(arg0: $AbstractInsnNode, arg1: $AbstractInsnNode): void;
         resetLabels(): void;
         spliterator(): $Spliterator<$AbstractInsnNode>;
         forEach(arg0: $Consumer_<$AbstractInsnNode>): void;
+        iterator(): $Iterator<$AbstractInsnNode>;
         constructor();
+        [Symbol.iterator](): Iterator<$AbstractInsnNode>
         get first(): $AbstractInsnNode;
         get last(): $AbstractInsnNode;
     }
@@ -249,10 +250,10 @@ declare module "@package/org/objectweb/asm/tree" {
         constructor(arg0: number);
     }
     export class $AbstractInsnNode {
+        getNext(): $AbstractInsnNode;
         clone(arg0: $Map_<$LabelNode, $LabelNode>): $AbstractInsnNode;
         accept(arg0: $MethodVisitor): void;
         getType(): number;
-        getNext(): $AbstractInsnNode;
         getOpcode(): number;
         getPrevious(): $AbstractInsnNode;
         static INT_INSN: number;
@@ -273,8 +274,8 @@ declare module "@package/org/objectweb/asm/tree" {
         static MULTIANEWARRAY_INSN: number;
         static VAR_INSN: number;
         static JUMP_INSN: number;
-        get type(): number;
         get next(): $AbstractInsnNode;
+        get type(): number;
         get opcode(): number;
         get previous(): $AbstractInsnNode;
     }

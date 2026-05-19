@@ -3,8 +3,8 @@ import { $LootTable, $LootPool } from "@package/net/minecraft/world/level/storag
 
 declare module "@package/com/almostreliable/unified/unification/loot" {
     export class $LootUnificationHandler {
-        static cast(pool: $LootPool): $LootUnificationHandler;
         static cast(table: $LootTable): $LootUnificationHandler;
+        static cast(pool: $LootPool): $LootUnificationHandler;
     }
     export interface $LootUnificationHandler {
         almostunified$unify(arg0: $UnificationLookup): boolean;

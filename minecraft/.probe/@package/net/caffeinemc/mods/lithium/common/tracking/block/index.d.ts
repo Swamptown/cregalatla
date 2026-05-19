@@ -6,24 +6,24 @@ import { $WorldSectionBox_, $WorldSectionBox } from "@package/net/caffeinemc/mod
 
 declare module "@package/net/caffeinemc/mods/lithium/common/tracking/block" {
     export class $ChunkSectionChangeCallback {
-        static init(): void;
-        static create(arg0: number, arg1: $Level_): $ChunkSectionChangeCallback;
         onChunkSectionInvalidated(arg0: $SectionPos): void;
         addTracker(arg0: $SectionedBlockChangeTracker, arg1: $ListeningBlockStatePredicate): number;
         removeTracker(arg0: $SectionedBlockChangeTracker, arg1: $ListeningBlockStatePredicate): number;
         onBlockChange(arg0: number, arg1: $BlockListeningSection): number;
+        static init(): void;
+        static create(arg0: number, arg1: $Level_): $ChunkSectionChangeCallback;
         constructor();
     }
     export class $SectionedBlockChangeTracker {
-        register(): void;
-        unregister(): void;
-        onChunkSectionInvalidated(arg0: $SectionPos): void;
-        static registerAt(arg0: $Level_, arg1: $AABB_, arg2: $ListeningBlockStatePredicate): $SectionedBlockChangeTracker;
-        isUnchangedSince(arg0: number): boolean;
         matchesMovedBox(arg0: $AABB_): boolean;
         listenToAllSections(): void;
-        setChanged(arg0: $BlockListeningSection): void;
+        onChunkSectionInvalidated(arg0: $SectionPos): void;
+        isUnchangedSince(arg0: number): boolean;
+        static registerAt(arg0: $Level_, arg1: $AABB_, arg2: $ListeningBlockStatePredicate): $SectionedBlockChangeTracker;
+        unregister(): void;
+        register(): void;
         setChanged(arg0: number): void;
+        setChanged(arg0: $BlockListeningSection): void;
         trackedWorldSections: $WorldSectionBox;
         blockGroup: $ListeningBlockStatePredicate;
         constructor(arg0: $WorldSectionBox_, arg1: $ListeningBlockStatePredicate);

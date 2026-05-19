@@ -16,7 +16,7 @@ import { $SlotRange } from "@package/net/minecraft/world/inventory";
 import { $ArmorTrim, $TrimPattern, $TrimMaterial } from "@package/net/minecraft/world/item/armortrim";
 import { $Structure } from "@package/net/minecraft/world/level/levelgen/structure";
 import { $Axolotl$Variant } from "@package/net/minecraft/world/entity/animal/axolotl";
-import { $Item, $Item_, $JukeboxSong, $JukeboxPlayable_, $ItemStack_, $ItemStack, $JukeboxPlayable } from "@package/net/minecraft/world/item";
+import { $Item, $Item_, $JukeboxPlayable_, $JukeboxSong, $ItemStack_, $ItemStack, $JukeboxPlayable } from "@package/net/minecraft/world/item";
 import { $BlockInWorld } from "@package/net/minecraft/world/level/block/state/pattern";
 import { $Component_, $Component } from "@package/net/minecraft/network/chat";
 import { $Biome } from "@package/net/minecraft/world/level/biome";
@@ -59,16 +59,16 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/minecraft/advancements/critereon" {
     export class $LightPredicate$Builder {
+        setComposite(arg0: $MinMaxBounds$Ints_): $LightPredicate$Builder;
         build(): $LightPredicate;
         static light(): $LightPredicate$Builder;
-        setComposite(arg0: $MinMaxBounds$Ints_): $LightPredicate$Builder;
         constructor();
         set composite(value: $MinMaxBounds$Ints_);
     }
     export class $ItemContainerPredicate extends $Record implements $SingleComponentItemPredicate<$ItemContainerContents> {
+        items(): ($CollectionPredicate<$ItemStack, $ItemPredicate>) | undefined;
         componentType(): $DataComponentType<$ItemContainerContents>;
         matches(arg0: $ItemStack_, arg1: $ItemContainerContents): boolean;
-        items(): ($CollectionPredicate<$ItemStack, $ItemPredicate>) | undefined;
         matches(arg0: $ItemStack_): boolean;
         static CODEC: $Codec<$ItemContainerPredicate>;
         constructor(arg0: ($CollectionPredicate_<$ItemStack_, $ItemPredicate_>) | undefined);
@@ -78,20 +78,20 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $ItemContainerPredicate_ = { items?: ($CollectionPredicate_<$ItemStack_, $ItemPredicate_>) | undefined,  } | [items?: ($CollectionPredicate_<$ItemStack_, $ItemPredicate_>) | undefined, ];
     export class $MinMaxBounds$Ints extends $Record implements $MinMaxBounds<number> {
+        minSq(): (number) | undefined;
+        maxSq(): (number) | undefined;
+        matchesSqr(arg0: number): boolean;
+        static exactly(arg0: number): $MinMaxBounds$Ints;
+        static atLeast(arg0: number): $MinMaxBounds$Ints;
         min(): (number) | undefined;
         max(): (number) | undefined;
         matches(arg0: number): boolean;
         static between(arg0: number, arg1: number): $MinMaxBounds$Ints;
-        static atLeast(arg0: number): $MinMaxBounds$Ints;
-        static exactly(arg0: number): $MinMaxBounds$Ints;
-        minSq(): (number) | undefined;
-        maxSq(): (number) | undefined;
-        matchesSqr(arg0: number): boolean;
         static atMost(arg0: number): $MinMaxBounds$Ints;
         static fromReader(arg0: $StringReader, arg1: $Function_<number, number>): $MinMaxBounds$Ints;
         static fromReader(arg0: $StringReader): $MinMaxBounds$Ints;
-        isAny(): boolean;
         unwrapPoint(): (number) | undefined;
+        isAny(): boolean;
         static CODEC: $Codec<$MinMaxBounds$Ints>;
         static ANY: $MinMaxBounds$Ints;
         constructor(arg0: (number) | undefined, arg1: (number) | undefined, arg2: (number) | undefined, arg3: (number) | undefined);
@@ -100,7 +100,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $MinMaxBounds$Ints}.
      */
-    export type $MinMaxBounds$Ints_ = { maxSq?: (number) | undefined, max?: (number) | undefined, minSq?: (number) | undefined, min?: (number) | undefined,  } | [maxSq?: (number) | undefined, max?: (number) | undefined, minSq?: (number) | undefined, min?: (number) | undefined, ];
+    export type $MinMaxBounds$Ints_ = { minSq?: (number) | undefined, max?: (number) | undefined, maxSq?: (number) | undefined, min?: (number) | undefined,  } | [minSq?: (number) | undefined, max?: (number) | undefined, maxSq?: (number) | undefined, min?: (number) | undefined, ];
     export class $PlayerPredicate$AdvancementPredicate {
         static CODEC: $Codec<$PlayerPredicate$AdvancementPredicate>;
     }
@@ -115,9 +115,9 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $EntityTypePredicate extends $Record {
+        matches(arg0: $EntityType_<never>): boolean;
         static of(arg0: $TagKey_<$EntityType<never>>): $EntityTypePredicate;
         static of(arg0: $EntityType_<never>): $EntityTypePredicate;
-        matches(arg0: $EntityType_<never>): boolean;
         types(): $HolderSet<$EntityType<never>>;
         static CODEC: $Codec<$EntityTypePredicate>;
         constructor(arg0: $HolderSet_<$EntityType<never>>);
@@ -127,16 +127,16 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $EntityTypePredicate_ = { types?: $HolderSet_<$EntityType<never>>,  } | [types?: $HolderSet_<$EntityType<never>>, ];
     export class $MovementPredicate extends $Record {
-        matches(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
-        x(): $MinMaxBounds$Doubles;
-        z(): $MinMaxBounds$Doubles;
-        y(): $MinMaxBounds$Doubles;
         static horizontalSpeed(arg0: $MinMaxBounds$Doubles_): $MovementPredicate;
         horizontalSpeed(): $MinMaxBounds$Doubles;
         verticalSpeed(): $MinMaxBounds$Doubles;
         static verticalSpeed(arg0: $MinMaxBounds$Doubles_): $MovementPredicate;
-        static speed(arg0: $MinMaxBounds$Doubles_): $MovementPredicate;
+        matches(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
+        x(): $MinMaxBounds$Doubles;
+        z(): $MinMaxBounds$Doubles;
+        y(): $MinMaxBounds$Doubles;
         speed(): $MinMaxBounds$Doubles;
+        static speed(arg0: $MinMaxBounds$Doubles_): $MovementPredicate;
         static fallDistance(arg0: $MinMaxBounds$Doubles_): $MovementPredicate;
         fallDistance(): $MinMaxBounds$Doubles;
         static CODEC: $Codec<$MovementPredicate>;
@@ -145,12 +145,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $MovementPredicate}.
      */
-    export type $MovementPredicate_ = { horizontalSpeed?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, y?: $MinMaxBounds$Doubles_, fallDistance?: $MinMaxBounds$Doubles_, z?: $MinMaxBounds$Doubles_, speed?: $MinMaxBounds$Doubles_, verticalSpeed?: $MinMaxBounds$Doubles_,  } | [horizontalSpeed?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, y?: $MinMaxBounds$Doubles_, fallDistance?: $MinMaxBounds$Doubles_, z?: $MinMaxBounds$Doubles_, speed?: $MinMaxBounds$Doubles_, verticalSpeed?: $MinMaxBounds$Doubles_, ];
+    export type $MovementPredicate_ = { verticalSpeed?: $MinMaxBounds$Doubles_, speed?: $MinMaxBounds$Doubles_, z?: $MinMaxBounds$Doubles_, fallDistance?: $MinMaxBounds$Doubles_, y?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, horizontalSpeed?: $MinMaxBounds$Doubles_,  } | [verticalSpeed?: $MinMaxBounds$Doubles_, speed?: $MinMaxBounds$Doubles_, z?: $MinMaxBounds$Doubles_, fallDistance?: $MinMaxBounds$Doubles_, y?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, horizontalSpeed?: $MinMaxBounds$Doubles_, ];
     export class $UsedTotemTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ItemStack_): boolean;
-        item(): ($ItemPredicate) | undefined;
         static usedTotem(arg0: $ItemLike_): $Criterion<$UsedTotemTrigger$TriggerInstance>;
         static usedTotem(arg0: $ItemPredicate_): $Criterion<$UsedTotemTrigger$TriggerInstance>;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $ItemStack_): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$UsedTotemTrigger$TriggerInstance>;
@@ -161,19 +161,19 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $UsedTotemTrigger$TriggerInstance_ = { item?: ($ItemPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [item?: ($ItemPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
     export class $DamagePredicate extends $Record {
-        type(): ($DamageSourcePredicate) | undefined;
-        matches(arg0: $ServerPlayer, arg1: $DamageSource_, arg2: number, arg3: number, arg4: boolean): boolean;
         takenDamage(): $MinMaxBounds$Doubles;
+        sourceEntity(): ($EntityPredicate) | undefined;
         blocked(): (boolean) | undefined;
         dealtDamage(): $MinMaxBounds$Doubles;
-        sourceEntity(): ($EntityPredicate) | undefined;
+        type(): ($DamageSourcePredicate) | undefined;
+        matches(arg0: $ServerPlayer, arg1: $DamageSource_, arg2: number, arg3: number, arg4: boolean): boolean;
         static CODEC: $Codec<$DamagePredicate>;
         constructor(arg0: $MinMaxBounds$Doubles_, arg1: $MinMaxBounds$Doubles_, arg2: ($EntityPredicate_) | undefined, arg3: (boolean) | undefined, arg4: ($DamageSourcePredicate_) | undefined);
     }
     /**
      * Values that may be interpreted as {@link $DamagePredicate}.
      */
-    export type $DamagePredicate_ = { takenDamage?: $MinMaxBounds$Doubles_, blocked?: (boolean) | undefined, dealtDamage?: $MinMaxBounds$Doubles_, type?: ($DamageSourcePredicate_) | undefined, sourceEntity?: ($EntityPredicate_) | undefined,  } | [takenDamage?: $MinMaxBounds$Doubles_, blocked?: (boolean) | undefined, dealtDamage?: $MinMaxBounds$Doubles_, type?: ($DamageSourcePredicate_) | undefined, sourceEntity?: ($EntityPredicate_) | undefined, ];
+    export type $DamagePredicate_ = { sourceEntity?: ($EntityPredicate_) | undefined, type?: ($DamageSourcePredicate_) | undefined, dealtDamage?: $MinMaxBounds$Doubles_, blocked?: (boolean) | undefined, takenDamage?: $MinMaxBounds$Doubles_,  } | [sourceEntity?: ($EntityPredicate_) | undefined, type?: ($DamageSourcePredicate_) | undefined, dealtDamage?: $MinMaxBounds$Doubles_, blocked?: (boolean) | undefined, takenDamage?: $MinMaxBounds$Doubles_, ];
     export class $FluidPredicate extends $Record {
         matches(arg0: $ServerLevel, arg1: $BlockPos_): boolean;
         properties(): ($StatePropertiesPredicate) | undefined;
@@ -189,9 +189,9 @@ declare module "@package/net/minecraft/advancements/critereon" {
         test(arg0: $Iterable_<T>): boolean;
         entry(): $CollectionCountsPredicate$Entry<T, P>;
         unpack(): $List<$CollectionCountsPredicate$Entry<T, P>>;
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
         constructor(arg0: $CollectionCountsPredicate$Entry_<T, P>);
     }
     /**
@@ -205,17 +205,17 @@ declare module "@package/net/minecraft/advancements/critereon" {
         static ERROR_EMPTY: $SimpleCommandExceptionType;
     }
     export interface $MinMaxBounds<T extends $Number> {
+        unwrapPoint(): (T) | undefined;
+        isAny(): boolean;
         min(): (T) | undefined;
         max(): (T) | undefined;
-        isAny(): boolean;
-        unwrapPoint(): (T) | undefined;
         get any(): boolean;
     }
     export class $EnchantedItemTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ItemStack_, arg1: number): boolean;
-        item(): ($ItemPredicate) | undefined;
-        levels(): $MinMaxBounds$Ints;
         static enchantedItem(): $Criterion<$EnchantedItemTrigger$TriggerInstance>;
+        levels(): $MinMaxBounds$Ints;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $ItemStack_, arg1: number): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$EnchantedItemTrigger$TriggerInstance>;
@@ -224,12 +224,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $EnchantedItemTrigger$TriggerInstance}.
      */
-    export type $EnchantedItemTrigger$TriggerInstance_ = { item?: ($ItemPredicate_) | undefined, levels?: $MinMaxBounds$Ints_, player?: ($ContextAwarePredicate) | undefined,  } | [item?: ($ItemPredicate_) | undefined, levels?: $MinMaxBounds$Ints_, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $EnchantedItemTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, levels?: $MinMaxBounds$Ints_, item?: ($ItemPredicate_) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, levels?: $MinMaxBounds$Ints_, item?: ($ItemPredicate_) | undefined, ];
     export class $ItemPotionsPredicate extends $Record implements $SingleComponentItemPredicate<$PotionContents> {
-        componentType(): $DataComponentType<$PotionContents>;
-        matches(arg0: $ItemStack_, arg1: $PotionContents_): boolean;
         static potions(arg0: $HolderSet_<$Potion>): $ItemSubPredicate;
         potions(): $HolderSet<$Potion>;
+        componentType(): $DataComponentType<$PotionContents>;
+        matches(arg0: $ItemStack_, arg1: $PotionContents_): boolean;
         matches(arg0: $ItemStack_): boolean;
         static CODEC: $Codec<$ItemPotionsPredicate>;
         constructor(arg0: $HolderSet_<$Potion>);
@@ -239,10 +239,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $ItemPotionsPredicate_ = { potions?: $HolderSet_<$Potion>,  } | [potions?: $HolderSet_<$Potion>, ];
     export class $PlayerPredicate extends $Record implements $EntitySubPredicate {
-        matches(arg0: $Entity, arg1: $ServerLevel, arg2: $Vec3_): boolean;
+        gameType(): $GameTypePredicate;
         level(): $MinMaxBounds$Ints;
         lookingAt(): ($EntityPredicate) | undefined;
-        gameType(): $GameTypePredicate;
+        matches(arg0: $Entity, arg1: $ServerLevel, arg2: $Vec3_): boolean;
         codec(): $MapCodec<$PlayerPredicate>;
         stats(): $List<$PlayerPredicate$StatMatcher<never>>;
         advancements(): $Map<$ResourceLocation, $PlayerPredicate$AdvancementPredicate>;
@@ -254,16 +254,16 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $PlayerPredicate}.
      */
-    export type $PlayerPredicate_ = { advancements?: $Map_<$ResourceLocation_, $PlayerPredicate$AdvancementPredicate_>, level?: $MinMaxBounds$Ints_, recipes?: $Object2BooleanMap<$ResourceLocation_>, lookingAt?: ($EntityPredicate_) | undefined, stats?: $List_<$PlayerPredicate$StatMatcher_<never>>, gameType?: $GameTypePredicate_,  } | [advancements?: $Map_<$ResourceLocation_, $PlayerPredicate$AdvancementPredicate_>, level?: $MinMaxBounds$Ints_, recipes?: $Object2BooleanMap<$ResourceLocation_>, lookingAt?: ($EntityPredicate_) | undefined, stats?: $List_<$PlayerPredicate$StatMatcher_<never>>, gameType?: $GameTypePredicate_, ];
+    export type $PlayerPredicate_ = { gameType?: $GameTypePredicate_, stats?: $List_<$PlayerPredicate$StatMatcher_<never>>, lookingAt?: ($EntityPredicate_) | undefined, recipes?: $Object2BooleanMap<$ResourceLocation_>, level?: $MinMaxBounds$Ints_, advancements?: $Map_<$ResourceLocation_, $PlayerPredicate$AdvancementPredicate_>,  } | [gameType?: $GameTypePredicate_, stats?: $List_<$PlayerPredicate$StatMatcher_<never>>, lookingAt?: ($EntityPredicate_) | undefined, recipes?: $Object2BooleanMap<$ResourceLocation_>, level?: $MinMaxBounds$Ints_, advancements?: $Map_<$ResourceLocation_, $PlayerPredicate$AdvancementPredicate_>, ];
     export class $ItemDurabilityTrigger extends $SimpleCriterionTrigger<$ItemDurabilityTrigger$TriggerInstance> {
         trigger(arg0: $ServerPlayer, arg1: $ItemStack_, arg2: number): void;
         constructor();
     }
     export class $ItemTrimPredicate extends $Record implements $SingleComponentItemPredicate<$ArmorTrim> {
+        material(): ($HolderSet<$TrimMaterial>) | undefined;
         componentType(): $DataComponentType<$ArmorTrim>;
         matches(arg0: $ItemStack_, arg1: $ArmorTrim): boolean;
         pattern(): ($HolderSet<$TrimPattern>) | undefined;
-        material(): ($HolderSet<$TrimMaterial>) | undefined;
         matches(arg0: $ItemStack_): boolean;
         static CODEC: $Codec<$ItemTrimPredicate>;
         constructor(arg0: ($HolderSet_<$TrimMaterial>) | undefined, arg1: ($HolderSet_<$TrimPattern>) | undefined);
@@ -271,33 +271,33 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $ItemTrimPredicate}.
      */
-    export type $ItemTrimPredicate_ = { material?: ($HolderSet_<$TrimMaterial>) | undefined, pattern?: ($HolderSet_<$TrimPattern>) | undefined,  } | [material?: ($HolderSet_<$TrimMaterial>) | undefined, pattern?: ($HolderSet_<$TrimPattern>) | undefined, ];
+    export type $ItemTrimPredicate_ = { pattern?: ($HolderSet_<$TrimPattern>) | undefined, material?: ($HolderSet_<$TrimMaterial>) | undefined,  } | [pattern?: ($HolderSet_<$TrimPattern>) | undefined, material?: ($HolderSet_<$TrimMaterial>) | undefined, ];
     export class $ConsumeItemTrigger extends $SimpleCriterionTrigger<$ConsumeItemTrigger$TriggerInstance> {
         trigger(arg0: $ServerPlayer, arg1: $ItemStack_): void;
         constructor();
     }
     export class $ItemAttributeModifiersPredicate$EntryPredicate extends $Record implements $Predicate<$ItemAttributeModifiers$Entry> {
+        amount(): $MinMaxBounds$Doubles;
+        attribute(): ($HolderSet<$Attribute>) | undefined;
         slot(): ($EquipmentSlotGroup) | undefined;
         test(arg0: $ItemAttributeModifiers$Entry_): boolean;
         id(): ($ResourceLocation) | undefined;
-        attribute(): ($HolderSet<$Attribute>) | undefined;
-        amount(): $MinMaxBounds$Doubles;
         operation(): ($AttributeModifier$Operation) | undefined;
-        or(arg0: $Predicate_<$ItemAttributeModifiers$Entry>): $Predicate<$ItemAttributeModifiers$Entry>;
         negate(): $Predicate<$ItemAttributeModifiers$Entry>;
         and(arg0: $Predicate_<$ItemAttributeModifiers$Entry>): $Predicate<$ItemAttributeModifiers$Entry>;
+        or(arg0: $Predicate_<$ItemAttributeModifiers$Entry>): $Predicate<$ItemAttributeModifiers$Entry>;
         static CODEC: $Codec<$ItemAttributeModifiersPredicate$EntryPredicate>;
         constructor(attribute: ($HolderSet_<$Attribute>) | undefined, id: ($ResourceLocation_) | undefined, amount: $MinMaxBounds$Doubles_, operation: ($AttributeModifier$Operation_) | undefined, slot: ($EquipmentSlotGroup_) | undefined);
     }
     /**
      * Values that may be interpreted as {@link $ItemAttributeModifiersPredicate$EntryPredicate}.
      */
-    export type $ItemAttributeModifiersPredicate$EntryPredicate_ = { amount?: $MinMaxBounds$Doubles_, id?: ($ResourceLocation_) | undefined, attribute?: ($HolderSet_<$Attribute>) | undefined, slot?: ($EquipmentSlotGroup_) | undefined, operation?: ($AttributeModifier$Operation_) | undefined,  } | [amount?: $MinMaxBounds$Doubles_, id?: ($ResourceLocation_) | undefined, attribute?: ($HolderSet_<$Attribute>) | undefined, slot?: ($EquipmentSlotGroup_) | undefined, operation?: ($AttributeModifier$Operation_) | undefined, ];
+    export type $ItemAttributeModifiersPredicate$EntryPredicate_ = { operation?: ($AttributeModifier$Operation_) | undefined, slot?: ($EquipmentSlotGroup_) | undefined, attribute?: ($HolderSet_<$Attribute>) | undefined, id?: ($ResourceLocation_) | undefined, amount?: $MinMaxBounds$Doubles_,  } | [operation?: ($AttributeModifier$Operation_) | undefined, slot?: ($EquipmentSlotGroup_) | undefined, attribute?: ($HolderSet_<$Attribute>) | undefined, id?: ($ResourceLocation_) | undefined, amount?: $MinMaxBounds$Doubles_, ];
     export class $LightningBoltPredicate extends $Record implements $EntitySubPredicate {
-        matches(arg0: $Entity, arg1: $ServerLevel, arg2: $Vec3_): boolean;
         blocksSetOnFire(): $MinMaxBounds$Ints;
         entityStruck(): ($EntityPredicate) | undefined;
         static blockSetOnFire(arg0: $MinMaxBounds$Ints_): $LightningBoltPredicate;
+        matches(arg0: $Entity, arg1: $ServerLevel, arg2: $Vec3_): boolean;
         codec(): $MapCodec<$LightningBoltPredicate>;
         static CODEC: $MapCodec<$LightningBoltPredicate>;
         constructor(arg0: $MinMaxBounds$Ints_, arg1: ($EntityPredicate_) | undefined);
@@ -307,12 +307,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $LightningBoltPredicate_ = { entityStruck?: ($EntityPredicate_) | undefined, blocksSetOnFire?: $MinMaxBounds$Ints_,  } | [entityStruck?: ($EntityPredicate_) | undefined, blocksSetOnFire?: $MinMaxBounds$Ints_, ];
     export class $InventoryChangeTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
+        static hasItems(...arg0: $ItemLike_[]): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
+        static hasItems(...arg0: $ItemPredicate_[]): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
+        static hasItems(...arg0: $ItemPredicate$Builder[]): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
+        items(): $List<$ItemPredicate>;
         matches(arg0: $Inventory, arg1: $ItemStack_, arg2: number, arg3: number, arg4: number): boolean;
         slots(): $InventoryChangeTrigger$TriggerInstance$Slots;
-        static hasItems(...arg0: $ItemLike_[]): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
-        static hasItems(...arg0: $ItemPredicate$Builder[]): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
-        static hasItems(...arg0: $ItemPredicate_[]): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
-        items(): $List<$ItemPredicate>;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$InventoryChangeTrigger$TriggerInstance>;
@@ -321,11 +321,11 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $InventoryChangeTrigger$TriggerInstance}.
      */
-    export type $InventoryChangeTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, items?: $List_<$ItemPredicate_>, slots?: $InventoryChangeTrigger$TriggerInstance$Slots_,  } | [player?: ($ContextAwarePredicate) | undefined, items?: $List_<$ItemPredicate_>, slots?: $InventoryChangeTrigger$TriggerInstance$Slots_, ];
+    export type $InventoryChangeTrigger$TriggerInstance_ = { slots?: $InventoryChangeTrigger$TriggerInstance$Slots_, items?: $List_<$ItemPredicate_>, player?: ($ContextAwarePredicate) | undefined,  } | [slots?: $InventoryChangeTrigger$TriggerInstance$Slots_, items?: $List_<$ItemPredicate_>, player?: ($ContextAwarePredicate) | undefined, ];
     export class $LootTableTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ResourceKey_<$LootTable>): boolean;
         static lootTableUsed(arg0: $ResourceKey_<$LootTable>): $Criterion<$LootTableTrigger$TriggerInstance>;
         lootTable(): $ResourceKey<$LootTable>;
+        matches(arg0: $ResourceKey_<$LootTable>): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$LootTableTrigger$TriggerInstance>;
@@ -351,7 +351,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $PlayerPredicate$StatMatcher}.
      */
-    export type $PlayerPredicate$StatMatcher_<T> = { stat?: $Supplier_<$Stat<any>>, range?: $MinMaxBounds$Ints_, value?: $Holder_<any>, type?: $StatType_<any>,  } | [stat?: $Supplier_<$Stat<any>>, range?: $MinMaxBounds$Ints_, value?: $Holder_<any>, type?: $StatType_<any>, ];
+    export type $PlayerPredicate$StatMatcher_<T> = { value?: $Holder_<any>, range?: $MinMaxBounds$Ints_, stat?: $Supplier_<$Stat<any>>, type?: $StatType_<any>,  } | [value?: $Holder_<any>, range?: $MinMaxBounds$Ints_, stat?: $Supplier_<$Stat<any>>, type?: $StatType_<any>, ];
     export class $CollectionContentsPredicate<T, P extends $Predicate<T>> {
         static of<T, P extends $Predicate<T>>(arg0: $List_<P>): $CollectionContentsPredicate<T, P>;
         static of<T, P extends $Predicate<T>>(...arg0: P[]): $CollectionContentsPredicate<T, P>;
@@ -370,10 +370,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $MinMaxBounds$BoundsFromReaderFactory_<T, R> = ((arg0: $StringReader, arg1: (T) | undefined, arg2: (T) | undefined) => R);
     export class $EnterBlockTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
+        static entersBlock(arg0: $Block_): $Criterion<$EnterBlockTrigger$TriggerInstance>;
         matches(arg0: $BlockState_): boolean;
         state(): ($StatePropertiesPredicate) | undefined;
         block(): ($Holder<$Block>) | undefined;
-        static entersBlock(arg0: $Block_): $Criterion<$EnterBlockTrigger$TriggerInstance>;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$EnterBlockTrigger$TriggerInstance>;
@@ -382,16 +382,16 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $EnterBlockTrigger$TriggerInstance}.
      */
-    export type $EnterBlockTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, state?: ($StatePropertiesPredicate_) | undefined, block?: ($Holder_<$Block>) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, state?: ($StatePropertiesPredicate_) | undefined, block?: ($Holder_<$Block>) | undefined, ];
+    export type $EnterBlockTrigger$TriggerInstance_ = { block?: ($Holder_<$Block>) | undefined, state?: ($StatePropertiesPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [block?: ($Holder_<$Block>) | undefined, state?: ($StatePropertiesPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
     export class $PlayerTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        static tick(): $Criterion<$PlayerTrigger$TriggerInstance>;
         static sleptInBed(): $Criterion<$PlayerTrigger$TriggerInstance>;
         static raidWon(): $Criterion<$PlayerTrigger$TriggerInstance>;
         static avoidVibration(): $Criterion<$PlayerTrigger$TriggerInstance>;
         static walkOnBlockWithEquipment(arg0: $Block_, arg1: $Item_): $Criterion<$PlayerTrigger$TriggerInstance>;
-        static located(arg0: ($EntityPredicate_) | undefined): $Criterion<$PlayerTrigger$TriggerInstance>;
-        static located(arg0: $EntityPredicate$Builder): $Criterion<$PlayerTrigger$TriggerInstance>;
         static located(arg0: $LocationPredicate$Builder): $Criterion<$PlayerTrigger$TriggerInstance>;
+        static located(arg0: $EntityPredicate$Builder): $Criterion<$PlayerTrigger$TriggerInstance>;
+        static located(arg0: ($EntityPredicate_) | undefined): $Criterion<$PlayerTrigger$TriggerInstance>;
+        static tick(): $Criterion<$PlayerTrigger$TriggerInstance>;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$PlayerTrigger$TriggerInstance>;
@@ -402,8 +402,8 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $PlayerTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, ];
     export class $RecipeUnlockedTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $RecipeHolder_<never>): boolean;
         recipe(): $ResourceLocation;
+        matches(arg0: $RecipeHolder_<never>): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$RecipeUnlockedTrigger$TriggerInstance>;
@@ -414,10 +414,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $RecipeUnlockedTrigger$TriggerInstance_ = { recipe?: $ResourceLocation_, player?: ($ContextAwarePredicate) | undefined,  } | [recipe?: $ResourceLocation_, player?: ($ContextAwarePredicate) | undefined, ];
     export class $ItemJukeboxPlayablePredicate extends $Record implements $SingleComponentItemPredicate<$JukeboxPlayable> {
+        song(): ($HolderSet<$JukeboxSong>) | undefined;
+        static any(): $ItemJukeboxPlayablePredicate;
         componentType(): $DataComponentType<$JukeboxPlayable>;
         matches(arg0: $ItemStack_, arg1: $JukeboxPlayable_): boolean;
-        static any(): $ItemJukeboxPlayablePredicate;
-        song(): ($HolderSet<$JukeboxSong>) | undefined;
         matches(arg0: $ItemStack_): boolean;
         static CODEC: $Codec<$ItemJukeboxPlayablePredicate>;
         constructor(arg0: ($HolderSet_<$JukeboxSong>) | undefined);
@@ -439,8 +439,8 @@ declare module "@package/net/minecraft/advancements/critereon" {
     export class $ItemAttributeModifiersPredicate extends $Record implements $SingleComponentItemPredicate<$ItemAttributeModifiers> {
         modifiers(): ($CollectionPredicate<$ItemAttributeModifiers$Entry, $ItemAttributeModifiersPredicate$EntryPredicate>) | undefined;
         componentType(): $DataComponentType<$ItemAttributeModifiers>;
-        matches(arg0: $ItemStack_): boolean;
         matches(arg0: $ItemStack_, arg1: $ItemAttributeModifiers_): boolean;
+        matches(arg0: $ItemStack_): boolean;
         static CODEC: $Codec<$ItemAttributeModifiersPredicate>;
         constructor(modifiers: ($CollectionPredicate_<$ItemAttributeModifiers$Entry_, $ItemAttributeModifiersPredicate$EntryPredicate_>) | undefined);
     }
@@ -449,9 +449,9 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $ItemAttributeModifiersPredicate_ = { modifiers?: ($CollectionPredicate_<$ItemAttributeModifiers$Entry_, $ItemAttributeModifiersPredicate$EntryPredicate_>) | undefined,  } | [modifiers?: ($CollectionPredicate_<$ItemAttributeModifiers$Entry_, $ItemAttributeModifiersPredicate$EntryPredicate_>) | undefined, ];
     export class $RaiderPredicate extends $Record implements $EntitySubPredicate {
-        matches(arg0: $Entity, arg1: $ServerLevel, arg2: $Vec3_): boolean;
         isCaptain(): boolean;
         hasRaid(): boolean;
+        matches(arg0: $Entity, arg1: $ServerLevel, arg2: $Vec3_): boolean;
         codec(): $MapCodec<$RaiderPredicate>;
         static CODEC: $MapCodec<$RaiderPredicate>;
         static CAPTAIN_WITHOUT_RAID: $RaiderPredicate;
@@ -461,16 +461,16 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $RaiderPredicate}.
      */
-    export type $RaiderPredicate_ = { isCaptain?: boolean, hasRaid?: boolean,  } | [isCaptain?: boolean, hasRaid?: boolean, ];
+    export type $RaiderPredicate_ = { hasRaid?: boolean, isCaptain?: boolean,  } | [hasRaid?: boolean, isCaptain?: boolean, ];
     export class $BredAnimalsTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        parent(): ($ContextAwarePredicate) | undefined;
-        matches(arg0: $LootContext, arg1: $LootContext, arg2: $LootContext): boolean;
-        validate(arg0: $CriterionValidator): void;
-        child(): ($ContextAwarePredicate) | undefined;
         static bredAnimals(arg0: $EntityPredicate$Builder): $Criterion<$BredAnimalsTrigger$TriggerInstance>;
         static bredAnimals(): $Criterion<$BredAnimalsTrigger$TriggerInstance>;
         static bredAnimals(arg0: ($EntityPredicate_) | undefined, arg1: ($EntityPredicate_) | undefined, arg2: ($EntityPredicate_) | undefined): $Criterion<$BredAnimalsTrigger$TriggerInstance>;
         partner(): ($ContextAwarePredicate) | undefined;
+        parent(): ($ContextAwarePredicate) | undefined;
+        matches(arg0: $LootContext, arg1: $LootContext, arg2: $LootContext): boolean;
+        validate(arg0: $CriterionValidator): void;
+        child(): ($ContextAwarePredicate) | undefined;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$BredAnimalsTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ContextAwarePredicate) | undefined, arg2: ($ContextAwarePredicate) | undefined, arg3: ($ContextAwarePredicate) | undefined);
@@ -478,7 +478,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $BredAnimalsTrigger$TriggerInstance}.
      */
-    export type $BredAnimalsTrigger$TriggerInstance_ = { child?: ($ContextAwarePredicate) | undefined, partner?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, parent?: ($ContextAwarePredicate) | undefined,  } | [child?: ($ContextAwarePredicate) | undefined, partner?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, parent?: ($ContextAwarePredicate) | undefined, ];
+    export type $BredAnimalsTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, partner?: ($ContextAwarePredicate) | undefined, child?: ($ContextAwarePredicate) | undefined, parent?: ($ContextAwarePredicate) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, partner?: ($ContextAwarePredicate) | undefined, child?: ($ContextAwarePredicate) | undefined, parent?: ($ContextAwarePredicate) | undefined, ];
     export class $ItemSubPredicate {
         static CODEC: $Codec<$Map<$ItemSubPredicate$Type<never>, $ItemSubPredicate>>;
     }
@@ -499,17 +499,17 @@ declare module "@package/net/minecraft/advancements/critereon" {
     export class $CollectionContentsPredicate$Zero<T, P extends $Predicate<T>> implements $CollectionContentsPredicate<T, P> {
         test(arg0: $Iterable_<T>): boolean;
         unpack(): $List<P>;
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
         constructor();
     }
     export class $PlayerPredicate$AdvancementDonePredicate extends $Record implements $PlayerPredicate$AdvancementPredicate {
         test(arg0: $AdvancementProgress): boolean;
         state(): boolean;
-        or(arg0: $Predicate_<$AdvancementProgress>): $Predicate<$AdvancementProgress>;
         negate(): $Predicate<$AdvancementProgress>;
         and(arg0: $Predicate_<$AdvancementProgress>): $Predicate<$AdvancementProgress>;
+        or(arg0: $Predicate_<$AdvancementProgress>): $Predicate<$AdvancementProgress>;
         static CODEC: $Codec<$PlayerPredicate$AdvancementDonePredicate>;
         constructor(arg0: boolean);
     }
@@ -518,9 +518,9 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $PlayerPredicate$AdvancementDonePredicate_ = { state?: boolean,  } | [state?: boolean, ];
     export class $FishingHookPredicate extends $Record implements $EntitySubPredicate {
-        matches(arg0: $Entity, arg1: $ServerLevel, arg2: $Vec3_): boolean;
-        inOpenWater(): (boolean) | undefined;
         static inOpenWater(arg0: boolean): $FishingHookPredicate;
+        inOpenWater(): (boolean) | undefined;
+        matches(arg0: $Entity, arg1: $ServerLevel, arg2: $Vec3_): boolean;
         codec(): $MapCodec<$FishingHookPredicate>;
         static CODEC: $MapCodec<$FishingHookPredicate>;
         static ANY: $FishingHookPredicate;
@@ -531,43 +531,43 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $FishingHookPredicate_ = { inOpenWater?: (boolean) | undefined,  } | [inOpenWater?: (boolean) | undefined, ];
     export class $CollectionPredicate<T, P extends $Predicate<T>> extends $Record implements $Predicate<$Iterable<T>> {
+        counts(): ($CollectionCountsPredicate<$Iterable<T>, P>) | undefined;
         size(): ($MinMaxBounds$Ints) | undefined;
         test(arg0: $Iterable_<$Iterable<T>>): boolean;
         contains(): ($CollectionContentsPredicate<$Iterable<T>, P>) | undefined;
-        counts(): ($CollectionCountsPredicate<$Iterable<T>, P>) | undefined;
         static codec<T, P extends $Predicate<T>>(arg0: $Codec<P>): $Codec<$CollectionPredicate<T, P>>;
-        or(arg0: $Predicate_<$Iterable<T>>): $Predicate<$Iterable<T>>;
         negate(): $Predicate<$Iterable<T>>;
         and(arg0: $Predicate_<$Iterable<T>>): $Predicate<$Iterable<T>>;
+        or(arg0: $Predicate_<$Iterable<T>>): $Predicate<$Iterable<T>>;
         constructor(arg0: ($CollectionContentsPredicate<$Iterable_<T>, P>) | undefined, arg1: ($CollectionCountsPredicate<$Iterable_<T>, P>) | undefined, arg2: ($MinMaxBounds$Ints_) | undefined);
     }
     /**
      * Values that may be interpreted as {@link $CollectionPredicate}.
      */
-    export type $CollectionPredicate_<T, P> = { counts?: ($CollectionCountsPredicate<T, P>) | undefined, size?: ($MinMaxBounds$Ints_) | undefined, contains?: ($CollectionContentsPredicate<T, P>) | undefined,  } | [counts?: ($CollectionCountsPredicate<T, P>) | undefined, size?: ($MinMaxBounds$Ints_) | undefined, contains?: ($CollectionContentsPredicate<T, P>) | undefined, ];
+    export type $CollectionPredicate_<T, P> = { contains?: ($CollectionContentsPredicate<T, P>) | undefined, size?: ($MinMaxBounds$Ints_) | undefined, counts?: ($CollectionCountsPredicate<T, P>) | undefined,  } | [contains?: ($CollectionContentsPredicate<T, P>) | undefined, size?: ($MinMaxBounds$Ints_) | undefined, counts?: ($CollectionCountsPredicate<T, P>) | undefined, ];
     export class $EntityFlagsPredicate extends $Record {
         matches(arg0: $Entity): boolean;
-        isCrouching(): (boolean) | undefined;
-        isSwimming(): (boolean) | undefined;
         isBaby(): (boolean) | undefined;
         isSprinting(): (boolean) | undefined;
         isFlying(): (boolean) | undefined;
         isOnFire(): (boolean) | undefined;
+        isCrouching(): (boolean) | undefined;
+        isSwimming(): (boolean) | undefined;
         isOnGround(): (boolean) | undefined;
         static CODEC: $Codec<$EntityFlagsPredicate>;
         constructor(arg0: (boolean) | undefined, arg1: (boolean) | undefined, arg2: (boolean) | undefined, arg3: (boolean) | undefined, arg4: (boolean) | undefined, arg5: (boolean) | undefined, arg6: (boolean) | undefined);
-        get crouching(): (boolean) | undefined;
-        get swimming(): (boolean) | undefined;
         get baby(): (boolean) | undefined;
         get sprinting(): (boolean) | undefined;
         get flying(): (boolean) | undefined;
         get onFire(): (boolean) | undefined;
+        get crouching(): (boolean) | undefined;
+        get swimming(): (boolean) | undefined;
         get onGround(): (boolean) | undefined;
     }
     /**
      * Values that may be interpreted as {@link $EntityFlagsPredicate}.
      */
-    export type $EntityFlagsPredicate_ = { isOnFire?: (boolean) | undefined, isOnGround?: (boolean) | undefined, isBaby?: (boolean) | undefined, isSwimming?: (boolean) | undefined, isCrouching?: (boolean) | undefined, isSprinting?: (boolean) | undefined, isFlying?: (boolean) | undefined,  } | [isOnFire?: (boolean) | undefined, isOnGround?: (boolean) | undefined, isBaby?: (boolean) | undefined, isSwimming?: (boolean) | undefined, isCrouching?: (boolean) | undefined, isSprinting?: (boolean) | undefined, isFlying?: (boolean) | undefined, ];
+    export type $EntityFlagsPredicate_ = { isFlying?: (boolean) | undefined, isSprinting?: (boolean) | undefined, isCrouching?: (boolean) | undefined, isSwimming?: (boolean) | undefined, isBaby?: (boolean) | undefined, isOnGround?: (boolean) | undefined, isOnFire?: (boolean) | undefined,  } | [isFlying?: (boolean) | undefined, isSprinting?: (boolean) | undefined, isCrouching?: (boolean) | undefined, isSwimming?: (boolean) | undefined, isBaby?: (boolean) | undefined, isOnGround?: (boolean) | undefined, isOnFire?: (boolean) | undefined, ];
     export class $BeeNestDestroyedTrigger extends $SimpleCriterionTrigger<$BeeNestDestroyedTrigger$TriggerInstance> {
         trigger(arg0: $ServerPlayer, arg1: $BlockState_, arg2: $ItemStack_, arg3: number): void;
         constructor();
@@ -599,12 +599,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $StatePropertiesPredicate_ = { properties?: $List_<$StatePropertiesPredicate$PropertyMatcher_>,  } | [properties?: $List_<$StatePropertiesPredicate$PropertyMatcher_>, ];
     export class $FishingRodHookedTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ItemStack_, arg1: $LootContext, arg2: $Collection_<$ItemStack_>): boolean;
-        validate(arg0: $CriterionValidator): void;
-        item(): ($ItemPredicate) | undefined;
         rod(): ($ItemPredicate) | undefined;
         static fishedItem(arg0: ($ItemPredicate_) | undefined, arg1: ($EntityPredicate_) | undefined, arg2: ($ItemPredicate_) | undefined): $Criterion<$FishingRodHookedTrigger$TriggerInstance>;
         entity(): ($ContextAwarePredicate) | undefined;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $ItemStack_, arg1: $LootContext, arg2: $Collection_<$ItemStack_>): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$FishingRodHookedTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ItemPredicate_) | undefined, arg2: ($ContextAwarePredicate) | undefined, arg3: ($ItemPredicate_) | undefined);
@@ -612,7 +612,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $FishingRodHookedTrigger$TriggerInstance}.
      */
-    export type $FishingRodHookedTrigger$TriggerInstance_ = { item?: ($ItemPredicate_) | undefined, entity?: ($ContextAwarePredicate) | undefined, rod?: ($ItemPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [item?: ($ItemPredicate_) | undefined, entity?: ($ContextAwarePredicate) | undefined, rod?: ($ItemPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $FishingRodHookedTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, rod?: ($ItemPredicate_) | undefined, entity?: ($ContextAwarePredicate) | undefined, item?: ($ItemPredicate_) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, rod?: ($ItemPredicate_) | undefined, entity?: ($ContextAwarePredicate) | undefined, item?: ($ItemPredicate_) | undefined, ];
     export class $AnyBlockInteractionTrigger extends $SimpleCriterionTrigger<$AnyBlockInteractionTrigger$TriggerInstance> {
         trigger(arg0: $ServerPlayer, arg1: $BlockPos_, arg2: $ItemStack_): void;
         constructor();
@@ -629,13 +629,13 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $InventoryChangeTrigger$TriggerInstance$Slots}.
      */
-    export type $InventoryChangeTrigger$TriggerInstance$Slots_ = { full?: $MinMaxBounds$Ints_, occupied?: $MinMaxBounds$Ints_, empty?: $MinMaxBounds$Ints_,  } | [full?: $MinMaxBounds$Ints_, occupied?: $MinMaxBounds$Ints_, empty?: $MinMaxBounds$Ints_, ];
+    export type $InventoryChangeTrigger$TriggerInstance$Slots_ = { empty?: $MinMaxBounds$Ints_, occupied?: $MinMaxBounds$Ints_, full?: $MinMaxBounds$Ints_,  } | [empty?: $MinMaxBounds$Ints_, occupied?: $MinMaxBounds$Ints_, full?: $MinMaxBounds$Ints_, ];
     export class $BeeNestDestroyedTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $BlockState_, arg1: $ItemStack_, arg2: number): boolean;
-        block(): ($Holder<$Block>) | undefined;
-        item(): ($ItemPredicate) | undefined;
         beesInside(): $MinMaxBounds$Ints;
         static destroyedBeeNest(arg0: $Block_, arg1: $ItemPredicate$Builder, arg2: $MinMaxBounds$Ints_): $Criterion<$BeeNestDestroyedTrigger$TriggerInstance>;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $BlockState_, arg1: $ItemStack_, arg2: number): boolean;
+        block(): ($Holder<$Block>) | undefined;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$BeeNestDestroyedTrigger$TriggerInstance>;
@@ -644,7 +644,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $BeeNestDestroyedTrigger$TriggerInstance}.
      */
-    export type $BeeNestDestroyedTrigger$TriggerInstance_ = { item?: ($ItemPredicate_) | undefined, block?: ($Holder_<$Block>) | undefined, beesInside?: $MinMaxBounds$Ints_, player?: ($ContextAwarePredicate) | undefined,  } | [item?: ($ItemPredicate_) | undefined, block?: ($Holder_<$Block>) | undefined, beesInside?: $MinMaxBounds$Ints_, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $BeeNestDestroyedTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, beesInside?: $MinMaxBounds$Ints_, block?: ($Holder_<$Block>) | undefined, item?: ($ItemPredicate_) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, beesInside?: $MinMaxBounds$Ints_, block?: ($Holder_<$Block>) | undefined, item?: ($ItemPredicate_) | undefined, ];
     export class $StatePropertiesPredicate$ExactMatcher extends $Record implements $StatePropertiesPredicate$ValueMatcher {
         value(): string;
         match<T extends $Comparable<T>>(arg0: $StateHolder<never, never>, arg1: $Property<T>): boolean;
@@ -657,10 +657,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $StatePropertiesPredicate$ExactMatcher_ = { value?: string,  } | [value?: string, ];
     export class $ItemDamagePredicate extends $Record implements $SingleComponentItemPredicate<number> {
-        componentType(): $DataComponentType<number>;
-        matches(arg0: $ItemStack_, arg1: number): boolean;
         durability(): $MinMaxBounds$Ints;
         static durability(arg0: $MinMaxBounds$Ints_): $ItemDamagePredicate;
+        componentType(): $DataComponentType<number>;
+        matches(arg0: $ItemStack_, arg1: number): boolean;
         damage(): $MinMaxBounds$Ints;
         matches(arg0: $ItemStack_): boolean;
         static CODEC: $Codec<$ItemDamagePredicate>;
@@ -671,12 +671,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $ItemDamagePredicate_ = { damage?: $MinMaxBounds$Ints_, durability?: $MinMaxBounds$Ints_,  } | [damage?: $MinMaxBounds$Ints_, durability?: $MinMaxBounds$Ints_, ];
     export class $CollectionContentsPredicate$Multiple<T, P extends $Predicate<T>> extends $Record implements $CollectionContentsPredicate<T, P> {
-        test(arg0: $Iterable_<T>): boolean;
         tests(): $List<P>;
+        test(arg0: $Iterable_<T>): boolean;
         unpack(): $List<P>;
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
         constructor(arg0: $List_<P>);
     }
     /**
@@ -684,9 +684,9 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $CollectionContentsPredicate$Multiple_<T, P> = { tests?: $List_<$Predicate_<T>>,  } | [tests?: $List_<$Predicate_<T>>, ];
     export class $FilledBucketTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ItemStack_): boolean;
-        item(): ($ItemPredicate) | undefined;
         static filledBucket(arg0: $ItemPredicate$Builder): $Criterion<$FilledBucketTrigger$TriggerInstance>;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $ItemStack_): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$FilledBucketTrigger$TriggerInstance>;
@@ -731,10 +731,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $SummonedEntityTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $LootContext): boolean;
-        validate(arg0: $CriterionValidator): void;
         static summonedEntity(arg0: $EntityPredicate$Builder): $Criterion<$SummonedEntityTrigger$TriggerInstance>;
         entity(): ($ContextAwarePredicate) | undefined;
+        matches(arg0: $LootContext): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$SummonedEntityTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ContextAwarePredicate) | undefined);
@@ -751,14 +751,14 @@ declare module "@package/net/minecraft/advancements/critereon" {
         codec(): $MapCodec<$EntitySubPredicate>;
     }
     export class $WrappedMinMaxBounds extends $Record {
+        matchesSqr(arg0: number): boolean;
+        static exactly(arg0: number): $WrappedMinMaxBounds;
+        serializeToJson(): $JsonElement;
+        static atLeast(arg0: number): $WrappedMinMaxBounds;
         min(): number;
         max(): number;
         matches(arg0: number): boolean;
         static between(arg0: number, arg1: number): $WrappedMinMaxBounds;
-        static atLeast(arg0: number): $WrappedMinMaxBounds;
-        serializeToJson(): $JsonElement;
-        static exactly(arg0: number): $WrappedMinMaxBounds;
-        matchesSqr(arg0: number): boolean;
         static fromJson(arg0: $JsonElement_): $WrappedMinMaxBounds;
         static atMost(arg0: number): $WrappedMinMaxBounds;
         static fromReader(arg0: $StringReader, arg1: boolean, arg2: $Function_<number, number>): $WrappedMinMaxBounds;
@@ -770,7 +770,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $WrappedMinMaxBounds}.
      */
-    export type $WrappedMinMaxBounds_ = { min?: number, max?: number,  } | [min?: number, max?: number, ];
+    export type $WrappedMinMaxBounds_ = { max?: number, min?: number,  } | [max?: number, min?: number, ];
     export class $ItemFireworkExplosionPredicate extends $Record implements $SingleComponentItemPredicate<$FireworkExplosion> {
         componentType(): $DataComponentType<$FireworkExplosion>;
         matches(arg0: $ItemStack_, arg1: $FireworkExplosion_): boolean;
@@ -784,10 +784,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $ItemFireworkExplosionPredicate_ = { predicate?: $ItemFireworkExplosionPredicate$FireworkPredicate_,  } | [predicate?: $ItemFireworkExplosionPredicate$FireworkPredicate_, ];
     export class $StatePropertiesPredicate$PropertyMatcher extends $Record {
+        valueMatcher(): $StatePropertiesPredicate$ValueMatcher;
         name(): string;
         match<S extends $StateHolder<never, S>>(arg0: $StateDefinition<never, S>, arg1: S): boolean;
         checkState(arg0: $StateDefinition<never, never>): (string) | undefined;
-        valueMatcher(): $StatePropertiesPredicate$ValueMatcher;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $StatePropertiesPredicate$PropertyMatcher>;
         constructor(arg0: string, arg1: $StatePropertiesPredicate$ValueMatcher_);
     }
@@ -796,22 +796,22 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $StatePropertiesPredicate$PropertyMatcher_ = { name?: string, valueMatcher?: $StatePropertiesPredicate$ValueMatcher_,  } | [name?: string, valueMatcher?: $StatePropertiesPredicate$ValueMatcher_, ];
     export class $EnchantmentPredicate extends $Record {
-        level(): $MinMaxBounds$Ints;
         containedIn(arg0: $ItemEnchantments_): boolean;
+        level(): $MinMaxBounds$Ints;
         enchantments(): ($HolderSet<$Enchantment>) | undefined;
         static CODEC: $Codec<$EnchantmentPredicate>;
+        constructor(arg0: $Holder_<$Enchantment>, arg1: $MinMaxBounds$Ints_);
         constructor(arg0: ($HolderSet_<$Enchantment>) | undefined, arg1: $MinMaxBounds$Ints_);
         constructor(arg0: $HolderSet_<$Enchantment>, arg1: $MinMaxBounds$Ints_);
-        constructor(arg0: $Holder_<$Enchantment>, arg1: $MinMaxBounds$Ints_);
     }
     /**
      * Values that may be interpreted as {@link $EnchantmentPredicate}.
      */
     export type $EnchantmentPredicate_ = { level?: $MinMaxBounds$Ints_, enchantments?: ($HolderSet_<$Enchantment>) | undefined,  } | [level?: $MinMaxBounds$Ints_, enchantments?: ($HolderSet_<$Enchantment>) | undefined, ];
     export class $ItemFireworksPredicate extends $Record implements $SingleComponentItemPredicate<$Fireworks> {
+        flightDuration(): $MinMaxBounds$Ints;
         componentType(): $DataComponentType<$Fireworks>;
         matches(arg0: $ItemStack_, arg1: $Fireworks_): boolean;
-        flightDuration(): $MinMaxBounds$Ints;
         explosions(): ($CollectionPredicate<$FireworkExplosion, $ItemFireworkExplosionPredicate$FireworkPredicate>) | undefined;
         matches(arg0: $ItemStack_): boolean;
         static CODEC: $Codec<$ItemFireworksPredicate>;
@@ -820,14 +820,14 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $ItemFireworksPredicate}.
      */
-    export type $ItemFireworksPredicate_ = { explosions?: ($CollectionPredicate_<$FireworkExplosion_, $ItemFireworkExplosionPredicate$FireworkPredicate_>) | undefined, flightDuration?: $MinMaxBounds$Ints_,  } | [explosions?: ($CollectionPredicate_<$FireworkExplosion_, $ItemFireworkExplosionPredicate$FireworkPredicate_>) | undefined, flightDuration?: $MinMaxBounds$Ints_, ];
+    export type $ItemFireworksPredicate_ = { flightDuration?: $MinMaxBounds$Ints_, explosions?: ($CollectionPredicate_<$FireworkExplosion_, $ItemFireworkExplosionPredicate$FireworkPredicate_>) | undefined,  } | [flightDuration?: $MinMaxBounds$Ints_, explosions?: ($CollectionPredicate_<$FireworkExplosion_, $ItemFireworkExplosionPredicate$FireworkPredicate_>) | undefined, ];
     export class $PickedUpItemTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ServerPlayer, arg1: $ItemStack_, arg2: $LootContext): boolean;
-        validate(arg0: $CriterionValidator): void;
-        item(): ($ItemPredicate) | undefined;
         static thrownItemPickedUpByEntity(arg0: $ContextAwarePredicate, arg1: ($ItemPredicate_) | undefined, arg2: ($ContextAwarePredicate) | undefined): $Criterion<$PickedUpItemTrigger$TriggerInstance>;
         static thrownItemPickedUpByPlayer(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ItemPredicate_) | undefined, arg2: ($ContextAwarePredicate) | undefined): $Criterion<$PickedUpItemTrigger$TriggerInstance>;
         entity(): ($ContextAwarePredicate) | undefined;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $ServerPlayer, arg1: $ItemStack_, arg2: $LootContext): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$PickedUpItemTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ItemPredicate_) | undefined, arg2: ($ContextAwarePredicate) | undefined);
@@ -835,7 +835,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $PickedUpItemTrigger$TriggerInstance}.
      */
-    export type $PickedUpItemTrigger$TriggerInstance_ = { item?: ($ItemPredicate_) | undefined, entity?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [item?: ($ItemPredicate_) | undefined, entity?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $PickedUpItemTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, entity?: ($ContextAwarePredicate) | undefined, item?: ($ItemPredicate_) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, entity?: ($ContextAwarePredicate) | undefined, item?: ($ItemPredicate_) | undefined, ];
     export class $DistanceTrigger extends $SimpleCriterionTrigger<$DistanceTrigger$TriggerInstance> {
         trigger(arg0: $ServerPlayer, arg1: $Vec3_): void;
         constructor();
@@ -845,11 +845,11 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $LightningStrikeTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $LootContext, arg1: $List_<$LootContext>): boolean;
-        validate(arg0: $CriterionValidator): void;
         bystander(): ($ContextAwarePredicate) | undefined;
         static lightningStrike(arg0: ($EntityPredicate_) | undefined, arg1: ($EntityPredicate_) | undefined): $Criterion<$LightningStrikeTrigger$TriggerInstance>;
         lightning(): ($ContextAwarePredicate) | undefined;
+        matches(arg0: $LootContext, arg1: $List_<$LootContext>): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$LightningStrikeTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ContextAwarePredicate) | undefined, arg2: ($ContextAwarePredicate) | undefined);
@@ -857,11 +857,11 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $LightningStrikeTrigger$TriggerInstance}.
      */
-    export type $LightningStrikeTrigger$TriggerInstance_ = { bystander?: ($ContextAwarePredicate) | undefined, lightning?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [bystander?: ($ContextAwarePredicate) | undefined, lightning?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $LightningStrikeTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, lightning?: ($ContextAwarePredicate) | undefined, bystander?: ($ContextAwarePredicate) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, lightning?: ($ContextAwarePredicate) | undefined, bystander?: ($ContextAwarePredicate) | undefined, ];
     export class $MobEffectsPredicate$MobEffectInstancePredicate extends $Record {
+        visible(): (boolean) | undefined;
         matches(arg0: $MobEffectInstance): boolean;
         duration(): $MinMaxBounds$Ints;
-        visible(): (boolean) | undefined;
         ambient(): (boolean) | undefined;
         amplifier(): $MinMaxBounds$Ints;
         static CODEC: $Codec<$MobEffectsPredicate$MobEffectInstancePredicate>;
@@ -871,12 +871,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $MobEffectsPredicate$MobEffectInstancePredicate}.
      */
-    export type $MobEffectsPredicate$MobEffectInstancePredicate_ = { duration?: $MinMaxBounds$Ints_, ambient?: (boolean) | undefined, amplifier?: $MinMaxBounds$Ints_, visible?: (boolean) | undefined,  } | [duration?: $MinMaxBounds$Ints_, ambient?: (boolean) | undefined, amplifier?: $MinMaxBounds$Ints_, visible?: (boolean) | undefined, ];
+    export type $MobEffectsPredicate$MobEffectInstancePredicate_ = { amplifier?: $MinMaxBounds$Ints_, ambient?: (boolean) | undefined, duration?: $MinMaxBounds$Ints_, visible?: (boolean) | undefined,  } | [amplifier?: $MinMaxBounds$Ints_, ambient?: (boolean) | undefined, duration?: $MinMaxBounds$Ints_, visible?: (boolean) | undefined, ];
     export class $SlideDownBlockTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
+        static slidesDownBlock(arg0: $Block_): $Criterion<$SlideDownBlockTrigger$TriggerInstance>;
         matches(arg0: $BlockState_): boolean;
         state(): ($StatePropertiesPredicate) | undefined;
         block(): ($Holder<$Block>) | undefined;
-        static slidesDownBlock(arg0: $Block_): $Criterion<$SlideDownBlockTrigger$TriggerInstance>;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$SlideDownBlockTrigger$TriggerInstance>;
@@ -885,15 +885,15 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $SlideDownBlockTrigger$TriggerInstance}.
      */
-    export type $SlideDownBlockTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, state?: ($StatePropertiesPredicate_) | undefined, block?: ($Holder_<$Block>) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, state?: ($StatePropertiesPredicate_) | undefined, block?: ($Holder_<$Block>) | undefined, ];
+    export type $SlideDownBlockTrigger$TriggerInstance_ = { block?: ($Holder_<$Block>) | undefined, state?: ($StatePropertiesPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [block?: ($Holder_<$Block>) | undefined, state?: ($StatePropertiesPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
     export class $ItemUsedOnLocationTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $LootContext): boolean;
-        validate(arg0: $CriterionValidator): void;
-        location(): ($ContextAwarePredicate) | undefined;
         static itemUsedOnBlock(arg0: $LocationPredicate$Builder, arg1: $ItemPredicate$Builder): $Criterion<$ItemUsedOnLocationTrigger$TriggerInstance>;
         static allayDropItemOnBlock(arg0: $LocationPredicate$Builder, arg1: $ItemPredicate$Builder): $Criterion<$ItemUsedOnLocationTrigger$TriggerInstance>;
         static placedBlock(arg0: $Block_): $Criterion<$ItemUsedOnLocationTrigger$TriggerInstance>;
         static placedBlock(...arg0: $LootItemCondition$Builder_[]): $Criterion<$ItemUsedOnLocationTrigger$TriggerInstance>;
+        matches(arg0: $LootContext): boolean;
+        validate(arg0: $CriterionValidator): void;
+        location(): ($ContextAwarePredicate) | undefined;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$ItemUsedOnLocationTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ContextAwarePredicate) | undefined);
@@ -903,13 +903,13 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $ItemUsedOnLocationTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, location?: ($ContextAwarePredicate) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, location?: ($ContextAwarePredicate) | undefined, ];
     export class $EntityEquipmentPredicate$Builder {
+        chest(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
+        feet(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
+        mainhand(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
+        legs(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
         head(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
         build(): $EntityEquipmentPredicate;
         body(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
-        mainhand(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
-        legs(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
-        feet(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
-        chest(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
         static equipment(): $EntityEquipmentPredicate$Builder;
         offhand(arg0: $ItemPredicate$Builder): $EntityEquipmentPredicate$Builder;
         constructor();
@@ -919,26 +919,26 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $DistancePredicate extends $Record {
+        static vertical(arg0: $MinMaxBounds$Doubles_): $DistancePredicate;
         matches(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
         x(): $MinMaxBounds$Doubles;
         z(): $MinMaxBounds$Doubles;
         y(): $MinMaxBounds$Doubles;
         static absolute(arg0: $MinMaxBounds$Doubles_): $DistancePredicate;
         absolute(): $MinMaxBounds$Doubles;
-        static vertical(arg0: $MinMaxBounds$Doubles_): $DistancePredicate;
-        static horizontal(arg0: $MinMaxBounds$Doubles_): $DistancePredicate;
         horizontal(): $MinMaxBounds$Doubles;
+        static horizontal(arg0: $MinMaxBounds$Doubles_): $DistancePredicate;
         static CODEC: $Codec<$DistancePredicate>;
         constructor(arg0: $MinMaxBounds$Doubles_, arg1: $MinMaxBounds$Doubles_, arg2: $MinMaxBounds$Doubles_, arg3: $MinMaxBounds$Doubles_, arg4: $MinMaxBounds$Doubles_);
     }
     /**
      * Values that may be interpreted as {@link $DistancePredicate}.
      */
-    export type $DistancePredicate_ = { horizontal?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, absolute?: $MinMaxBounds$Doubles_, y?: $MinMaxBounds$Doubles_, z?: $MinMaxBounds$Doubles_,  } | [horizontal?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, absolute?: $MinMaxBounds$Doubles_, y?: $MinMaxBounds$Doubles_, z?: $MinMaxBounds$Doubles_, ];
+    export type $DistancePredicate_ = { y?: $MinMaxBounds$Doubles_, absolute?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, horizontal?: $MinMaxBounds$Doubles_, z?: $MinMaxBounds$Doubles_,  } | [y?: $MinMaxBounds$Doubles_, absolute?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, horizontal?: $MinMaxBounds$Doubles_, z?: $MinMaxBounds$Doubles_, ];
     export class $SlimePredicate extends $Record implements $EntitySubPredicate {
+        static sized(arg0: $MinMaxBounds$Ints_): $SlimePredicate;
         size(): $MinMaxBounds$Ints;
         matches(arg0: $Entity, arg1: $ServerLevel, arg2: $Vec3_): boolean;
-        static sized(arg0: $MinMaxBounds$Ints_): $SlimePredicate;
         codec(): $MapCodec<$SlimePredicate>;
         static CODEC: $MapCodec<$SlimePredicate>;
         constructor(arg0: $MinMaxBounds$Ints_);
@@ -948,8 +948,8 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $SlimePredicate_ = { size?: $MinMaxBounds$Ints_,  } | [size?: $MinMaxBounds$Ints_, ];
     export class $GameTypePredicate extends $Record {
-        static of(...arg0: $GameType_[]): $GameTypePredicate;
         matches(arg0: $GameType_): boolean;
+        static of(...arg0: $GameType_[]): $GameTypePredicate;
         types(): $List<$GameType>;
         static CODEC: $Codec<$GameTypePredicate>;
         static SURVIVAL_LIKE: $GameTypePredicate;
@@ -1018,11 +1018,11 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $SlotsPredicate_ = { slots?: $Map_<$SlotRange, $ItemPredicate_>,  } | [slots?: $Map_<$SlotRange, $ItemPredicate_>, ];
     export class $NbtPredicate extends $Record {
-        matches(arg0: $ItemStack_): boolean;
-        matches(arg0: $Entity): boolean;
-        matches(arg0: $Tag_): boolean;
-        tag(): $CompoundTag;
         static getEntityTagToCompare(arg0: $Entity): $CompoundTag;
+        tag(): $CompoundTag;
+        matches(arg0: $Tag_): boolean;
+        matches(arg0: $Entity): boolean;
+        matches(arg0: $ItemStack_): boolean;
         static CODEC: $Codec<$NbtPredicate>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $NbtPredicate>;
         constructor(arg0: $CompoundTag_);
@@ -1032,12 +1032,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $NbtPredicate_ = { tag?: $CompoundTag_,  } | [tag?: $CompoundTag_, ];
     export class $ItemDurabilityTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
+        static changedDurability(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ItemPredicate_) | undefined, arg2: $MinMaxBounds$Ints_): $Criterion<$ItemDurabilityTrigger$TriggerInstance>;
+        static changedDurability(arg0: ($ItemPredicate_) | undefined, arg1: $MinMaxBounds$Ints_): $Criterion<$ItemDurabilityTrigger$TriggerInstance>;
+        durability(): $MinMaxBounds$Ints;
+        item(): ($ItemPredicate) | undefined;
         matches(arg0: $ItemStack_, arg1: number): boolean;
         delta(): $MinMaxBounds$Ints;
-        item(): ($ItemPredicate) | undefined;
-        static changedDurability(arg0: ($ItemPredicate_) | undefined, arg1: $MinMaxBounds$Ints_): $Criterion<$ItemDurabilityTrigger$TriggerInstance>;
-        static changedDurability(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ItemPredicate_) | undefined, arg2: $MinMaxBounds$Ints_): $Criterion<$ItemDurabilityTrigger$TriggerInstance>;
-        durability(): $MinMaxBounds$Ints;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$ItemDurabilityTrigger$TriggerInstance>;
@@ -1046,14 +1046,14 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $ItemDurabilityTrigger$TriggerInstance}.
      */
-    export type $ItemDurabilityTrigger$TriggerInstance_ = { item?: ($ItemPredicate_) | undefined, delta?: $MinMaxBounds$Ints_, durability?: $MinMaxBounds$Ints_, player?: ($ContextAwarePredicate) | undefined,  } | [item?: ($ItemPredicate_) | undefined, delta?: $MinMaxBounds$Ints_, durability?: $MinMaxBounds$Ints_, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $ItemDurabilityTrigger$TriggerInstance_ = { durability?: $MinMaxBounds$Ints_, delta?: $MinMaxBounds$Ints_, item?: ($ItemPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [durability?: $MinMaxBounds$Ints_, delta?: $MinMaxBounds$Ints_, item?: ($ItemPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
     export class $KilledByCrossbowTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $Collection_<$LootContext>, arg1: number): boolean;
-        validate(arg0: $CriterionValidator): void;
-        victims(): $List<$ContextAwarePredicate>;
         uniqueEntityTypes(): $MinMaxBounds$Ints;
         static crossbowKilled(arg0: $MinMaxBounds$Ints_): $Criterion<$KilledByCrossbowTrigger$TriggerInstance>;
         static crossbowKilled(...arg0: $EntityPredicate$Builder[]): $Criterion<$KilledByCrossbowTrigger$TriggerInstance>;
+        victims(): $List<$ContextAwarePredicate>;
+        matches(arg0: $Collection_<$LootContext>, arg1: number): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$KilledByCrossbowTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: $List_<$ContextAwarePredicate>, arg2: $MinMaxBounds$Ints_);
@@ -1061,13 +1061,13 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $KilledByCrossbowTrigger$TriggerInstance}.
      */
-    export type $KilledByCrossbowTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, uniqueEntityTypes?: $MinMaxBounds$Ints_, victims?: $List_<$ContextAwarePredicate>,  } | [player?: ($ContextAwarePredicate) | undefined, uniqueEntityTypes?: $MinMaxBounds$Ints_, victims?: $List_<$ContextAwarePredicate>, ];
+    export type $KilledByCrossbowTrigger$TriggerInstance_ = { victims?: $List_<$ContextAwarePredicate>, uniqueEntityTypes?: $MinMaxBounds$Ints_, player?: ($ContextAwarePredicate) | undefined,  } | [victims?: $List_<$ContextAwarePredicate>, uniqueEntityTypes?: $MinMaxBounds$Ints_, player?: ($ContextAwarePredicate) | undefined, ];
     export class $PlayerPredicate$AdvancementCriterionsPredicate extends $Record implements $PlayerPredicate$AdvancementPredicate {
-        test(arg0: $AdvancementProgress): boolean;
         criterions(): $Object2BooleanMap<string>;
-        or(arg0: $Predicate_<$AdvancementProgress>): $Predicate<$AdvancementProgress>;
+        test(arg0: $AdvancementProgress): boolean;
         negate(): $Predicate<$AdvancementProgress>;
         and(arg0: $Predicate_<$AdvancementProgress>): $Predicate<$AdvancementProgress>;
+        or(arg0: $Predicate_<$AdvancementProgress>): $Predicate<$AdvancementProgress>;
         static CODEC: $Codec<$PlayerPredicate$AdvancementCriterionsPredicate>;
         constructor(arg0: $Object2BooleanMap<string>);
     }
@@ -1076,30 +1076,30 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $PlayerPredicate$AdvancementCriterionsPredicate_ = { criterions?: $Object2BooleanMap<string>,  } | [criterions?: $Object2BooleanMap<string>, ];
     export class $PlayerPredicate$Builder {
-        build(): $PlayerPredicate;
-        setLevel(arg0: $MinMaxBounds$Ints_): $PlayerPredicate$Builder;
-        addRecipe(arg0: $ResourceLocation_, arg1: boolean): $PlayerPredicate$Builder;
-        setGameType(arg0: $GameTypePredicate_): $PlayerPredicate$Builder;
+        addStat<T>(arg0: $StatType_<T>, arg1: $Holder$Reference<T>, arg2: $MinMaxBounds$Ints_): $PlayerPredicate$Builder;
         setLookingAt(arg0: $EntityPredicate$Builder): $PlayerPredicate$Builder;
         checkAdvancementDone(arg0: $ResourceLocation_, arg1: boolean): $PlayerPredicate$Builder;
         checkAdvancementCriterions(arg0: $ResourceLocation_, arg1: $Map_<string, boolean>): $PlayerPredicate$Builder;
-        addStat<T>(arg0: $StatType_<T>, arg1: $Holder$Reference<T>, arg2: $MinMaxBounds$Ints_): $PlayerPredicate$Builder;
+        addRecipe(arg0: $ResourceLocation_, arg1: boolean): $PlayerPredicate$Builder;
+        setGameType(arg0: $GameTypePredicate_): $PlayerPredicate$Builder;
+        setLevel(arg0: $MinMaxBounds$Ints_): $PlayerPredicate$Builder;
+        build(): $PlayerPredicate;
         static player(): $PlayerPredicate$Builder;
         constructor();
-        set level(value: $MinMaxBounds$Ints_);
-        set gameType(value: $GameTypePredicate_);
         set lookingAt(value: $EntityPredicate$Builder);
+        set gameType(value: $GameTypePredicate_);
+        set level(value: $MinMaxBounds$Ints_);
     }
     export class $EffectsChangedTrigger extends $SimpleCriterionTrigger<$EffectsChangedTrigger$TriggerInstance> {
         trigger(arg0: $ServerPlayer, arg1: $Entity): void;
         constructor();
     }
     export class $DamageSourcePredicate extends $Record {
-        matches(arg0: $ServerPlayer, arg1: $DamageSource_): boolean;
-        matches(arg0: $ServerLevel, arg1: $Vec3_, arg2: $DamageSource_): boolean;
-        isDirect(): (boolean) | undefined;
-        tags(): $List<$TagPredicate<$DamageType>>;
         sourceEntity(): ($EntityPredicate) | undefined;
+        tags(): $List<$TagPredicate<$DamageType>>;
+        matches(arg0: $ServerLevel, arg1: $Vec3_, arg2: $DamageSource_): boolean;
+        matches(arg0: $ServerPlayer, arg1: $DamageSource_): boolean;
+        isDirect(): (boolean) | undefined;
         directEntity(): ($EntityPredicate) | undefined;
         static CODEC: $Codec<$DamageSourcePredicate>;
         constructor(arg0: $List_<$TagPredicate_<$DamageType_>>, arg1: ($EntityPredicate_) | undefined, arg2: ($EntityPredicate_) | undefined, arg3: (boolean) | undefined);
@@ -1108,17 +1108,17 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $DamageSourcePredicate}.
      */
-    export type $DamageSourcePredicate_ = { isDirect?: (boolean) | undefined, directEntity?: ($EntityPredicate_) | undefined, sourceEntity?: ($EntityPredicate_) | undefined, tags?: $List_<$TagPredicate_<$DamageType_>>,  } | [isDirect?: (boolean) | undefined, directEntity?: ($EntityPredicate_) | undefined, sourceEntity?: ($EntityPredicate_) | undefined, tags?: $List_<$TagPredicate_<$DamageType_>>, ];
+    export type $DamageSourcePredicate_ = { tags?: $List_<$TagPredicate_<$DamageType_>>, sourceEntity?: ($EntityPredicate_) | undefined, directEntity?: ($EntityPredicate_) | undefined, isDirect?: (boolean) | undefined,  } | [tags?: $List_<$TagPredicate_<$DamageType_>>, sourceEntity?: ($EntityPredicate_) | undefined, directEntity?: ($EntityPredicate_) | undefined, isDirect?: (boolean) | undefined, ];
     export class $PlayerHurtEntityTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
+        static playerHurtEntity(arg0: $DamagePredicate$Builder, arg1: ($EntityPredicate_) | undefined): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
+        static playerHurtEntity(arg0: ($DamagePredicate_) | undefined, arg1: ($EntityPredicate_) | undefined): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
+        static playerHurtEntity(arg0: ($EntityPredicate_) | undefined): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
+        static playerHurtEntity(): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
+        static playerHurtEntityWithDamage(arg0: $DamagePredicate$Builder): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
+        static playerHurtEntityWithDamage(arg0: ($DamagePredicate_) | undefined): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
+        entity(): ($ContextAwarePredicate) | undefined;
         matches(arg0: $ServerPlayer, arg1: $LootContext, arg2: $DamageSource_, arg3: number, arg4: number, arg5: boolean): boolean;
         validate(arg0: $CriterionValidator): void;
-        static playerHurtEntity(arg0: ($EntityPredicate_) | undefined): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
-        static playerHurtEntity(arg0: ($DamagePredicate_) | undefined, arg1: ($EntityPredicate_) | undefined): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
-        static playerHurtEntity(): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
-        static playerHurtEntity(arg0: $DamagePredicate$Builder, arg1: ($EntityPredicate_) | undefined): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
-        static playerHurtEntityWithDamage(arg0: ($DamagePredicate_) | undefined): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
-        static playerHurtEntityWithDamage(arg0: $DamagePredicate$Builder): $Criterion<$PlayerHurtEntityTrigger$TriggerInstance>;
-        entity(): ($ContextAwarePredicate) | undefined;
         player(): ($ContextAwarePredicate) | undefined;
         damage(): ($DamagePredicate) | undefined;
         static CODEC: $Codec<$PlayerHurtEntityTrigger$TriggerInstance>;
@@ -1127,7 +1127,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $PlayerHurtEntityTrigger$TriggerInstance}.
      */
-    export type $PlayerHurtEntityTrigger$TriggerInstance_ = { damage?: ($DamagePredicate_) | undefined, entity?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [damage?: ($DamagePredicate_) | undefined, entity?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $PlayerHurtEntityTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, entity?: ($ContextAwarePredicate) | undefined, damage?: ($DamagePredicate_) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, entity?: ($ContextAwarePredicate) | undefined, damage?: ($DamagePredicate_) | undefined, ];
     export class $SummonedEntityTrigger extends $SimpleCriterionTrigger<$SummonedEntityTrigger$TriggerInstance> {
         trigger(arg0: $ServerPlayer, arg1: $Entity): void;
         constructor();
@@ -1145,11 +1145,11 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $AnyBlockInteractionTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, location?: ($ContextAwarePredicate) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, location?: ($ContextAwarePredicate) | undefined, ];
     export class $ConsumeItemTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ItemStack_): boolean;
-        item(): ($ItemPredicate) | undefined;
         static usedItem(arg0: $ItemLike_): $Criterion<$ConsumeItemTrigger$TriggerInstance>;
-        static usedItem(arg0: $ItemPredicate$Builder): $Criterion<$ConsumeItemTrigger$TriggerInstance>;
         static usedItem(): $Criterion<$ConsumeItemTrigger$TriggerInstance>;
+        static usedItem(arg0: $ItemPredicate$Builder): $Criterion<$ConsumeItemTrigger$TriggerInstance>;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $ItemStack_): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$ConsumeItemTrigger$TriggerInstance>;
@@ -1172,12 +1172,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $UsedEnderEyeTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, distance?: $MinMaxBounds$Doubles_,  } | [player?: ($ContextAwarePredicate) | undefined, distance?: $MinMaxBounds$Doubles_, ];
     export class $DamageSourcePredicate$Builder {
+        static damageType(): $DamageSourcePredicate$Builder;
+        tag(arg0: $TagPredicate_<$DamageType_>): $DamageSourcePredicate$Builder;
         isDirect(arg0: boolean): $DamageSourcePredicate$Builder;
         source(arg0: $EntityPredicate$Builder): $DamageSourcePredicate$Builder;
         build(): $DamageSourcePredicate;
-        tag(arg0: $TagPredicate_<$DamageType_>): $DamageSourcePredicate$Builder;
         direct(arg0: $EntityPredicate$Builder): $DamageSourcePredicate$Builder;
-        static damageType(): $DamageSourcePredicate$Builder;
         constructor();
     }
     export class $FishingRodHookedTrigger extends $SimpleCriterionTrigger<$FishingRodHookedTrigger$TriggerInstance> {
@@ -1185,10 +1185,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $TagPredicate<T> extends $Record {
+        tag(): $TagKey<T>;
         matches(arg0: $Holder_<T>): boolean;
         static is<T>(arg0: $TagKey_<T>): $TagPredicate<T>;
         expected(): boolean;
-        tag(): $TagKey<T>;
         static codec<T>(arg0: $ResourceKey_<$Registry<T>>): $Codec<$TagPredicate<T>>;
         static isNot<T>(arg0: $TagKey_<T>): $TagPredicate<T>;
         constructor(arg0: $TagKey_<T>, arg1: boolean);
@@ -1196,17 +1196,17 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $TagPredicate}.
      */
-    export type $TagPredicate_<T> = { tag?: $TagKey_<any>, expected?: boolean,  } | [tag?: $TagKey_<any>, expected?: boolean, ];
+    export type $TagPredicate_<T> = { expected?: boolean, tag?: $TagKey_<any>,  } | [expected?: boolean, tag?: $TagKey_<any>, ];
     export class $ItemEnchantmentsPredicate$StoredEnchantments extends $ItemEnchantmentsPredicate {
         static CODEC: $Codec<$ItemEnchantmentsPredicate$StoredEnchantments>;
         constructor(arg0: $List_<$EnchantmentPredicate_>);
     }
     export class $TameAnimalTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $LootContext): boolean;
-        validate(arg0: $CriterionValidator): void;
         static tamedAnimal(arg0: $EntityPredicate$Builder): $Criterion<$TameAnimalTrigger$TriggerInstance>;
         static tamedAnimal(): $Criterion<$TameAnimalTrigger$TriggerInstance>;
         entity(): ($ContextAwarePredicate) | undefined;
+        matches(arg0: $LootContext): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$TameAnimalTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ContextAwarePredicate) | undefined);
@@ -1216,26 +1216,26 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $TameAnimalTrigger$TriggerInstance_ = { entity?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [entity?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
     export class $ItemFireworkExplosionPredicate$FireworkPredicate extends $Record implements $Predicate<$FireworkExplosion> {
-        test(arg0: $FireworkExplosion_): boolean;
-        shape(): ($FireworkExplosion$Shape) | undefined;
-        trail(): (boolean) | undefined;
         twinkle(): (boolean) | undefined;
-        or(arg0: $Predicate_<$FireworkExplosion>): $Predicate<$FireworkExplosion>;
+        shape(): ($FireworkExplosion$Shape) | undefined;
+        test(arg0: $FireworkExplosion_): boolean;
+        trail(): (boolean) | undefined;
         negate(): $Predicate<$FireworkExplosion>;
         and(arg0: $Predicate_<$FireworkExplosion>): $Predicate<$FireworkExplosion>;
+        or(arg0: $Predicate_<$FireworkExplosion>): $Predicate<$FireworkExplosion>;
         static CODEC: $Codec<$ItemFireworkExplosionPredicate$FireworkPredicate>;
         constructor(arg0: ($FireworkExplosion$Shape_) | undefined, arg1: (boolean) | undefined, arg2: (boolean) | undefined);
     }
     /**
      * Values that may be interpreted as {@link $ItemFireworkExplosionPredicate$FireworkPredicate}.
      */
-    export type $ItemFireworkExplosionPredicate$FireworkPredicate_ = { shape?: ($FireworkExplosion$Shape_) | undefined, trail?: (boolean) | undefined, twinkle?: (boolean) | undefined,  } | [shape?: ($FireworkExplosion$Shape_) | undefined, trail?: (boolean) | undefined, twinkle?: (boolean) | undefined, ];
+    export type $ItemFireworkExplosionPredicate$FireworkPredicate_ = { twinkle?: (boolean) | undefined, trail?: (boolean) | undefined, shape?: ($FireworkExplosion$Shape_) | undefined,  } | [twinkle?: (boolean) | undefined, trail?: (boolean) | undefined, shape?: ($FireworkExplosion$Shape_) | undefined, ];
     export class $ItemWrittenBookPredicate$PagePredicate extends $Record implements $Predicate<$Filterable<$Component>> {
-        test(arg0: $Filterable_<$Component_>): boolean;
         contents(): $Component;
-        or(arg0: $Predicate_<$Filterable<$Component>>): $Predicate<$Filterable<$Component>>;
+        test(arg0: $Filterable_<$Component_>): boolean;
         negate(): $Predicate<$Filterable<$Component>>;
         and(arg0: $Predicate_<$Filterable<$Component>>): $Predicate<$Filterable<$Component>>;
+        or(arg0: $Predicate_<$Filterable<$Component>>): $Predicate<$Filterable<$Component>>;
         static CODEC: $Codec<$ItemWrittenBookPredicate$PagePredicate>;
         constructor(arg0: $Component_);
     }
@@ -1257,12 +1257,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $CollectionCountsPredicate$Entry}.
      */
-    export type $CollectionCountsPredicate$Entry_<T, P> = { test?: $Predicate_<T>, count?: $MinMaxBounds$Ints_,  } | [test?: $Predicate_<T>, count?: $MinMaxBounds$Ints_, ];
+    export type $CollectionCountsPredicate$Entry_<T, P> = { count?: $MinMaxBounds$Ints_, test?: $Predicate_<T>,  } | [count?: $MinMaxBounds$Ints_, test?: $Predicate_<T>, ];
     export class $ShotCrossbowTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ItemStack_): boolean;
-        item(): ($ItemPredicate) | undefined;
         static shotCrossbow(arg0: $ItemLike_): $Criterion<$ShotCrossbowTrigger$TriggerInstance>;
         static shotCrossbow(arg0: ($ItemPredicate_) | undefined): $Criterion<$ShotCrossbowTrigger$TriggerInstance>;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $ItemStack_): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$ShotCrossbowTrigger$TriggerInstance>;
@@ -1273,12 +1273,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $ShotCrossbowTrigger$TriggerInstance_ = { item?: ($ItemPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [item?: ($ItemPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
     export class $FallAfterExplosionTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
+        static fallAfterExplosion(arg0: $DistancePredicate_, arg1: $EntityPredicate$Builder): $Criterion<$FallAfterExplosionTrigger$TriggerInstance>;
+        startPosition(): ($LocationPredicate) | undefined;
         matches(arg0: $ServerLevel, arg1: $Vec3_, arg2: $Vec3_, arg3: $LootContext): boolean;
         cause(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         distance(): ($DistancePredicate) | undefined;
-        static fallAfterExplosion(arg0: $DistancePredicate_, arg1: $EntityPredicate$Builder): $Criterion<$FallAfterExplosionTrigger$TriggerInstance>;
-        startPosition(): ($LocationPredicate) | undefined;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$FallAfterExplosionTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($LocationPredicate_) | undefined, arg2: ($DistancePredicate_) | undefined, arg3: ($ContextAwarePredicate) | undefined);
@@ -1286,12 +1286,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $FallAfterExplosionTrigger$TriggerInstance}.
      */
-    export type $FallAfterExplosionTrigger$TriggerInstance_ = { startPosition?: ($LocationPredicate_) | undefined, distance?: ($DistancePredicate_) | undefined, cause?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [startPosition?: ($LocationPredicate_) | undefined, distance?: ($DistancePredicate_) | undefined, cause?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $FallAfterExplosionTrigger$TriggerInstance_ = { cause?: ($ContextAwarePredicate) | undefined, distance?: ($DistancePredicate_) | undefined, startPosition?: ($LocationPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [cause?: ($ContextAwarePredicate) | undefined, distance?: ($DistancePredicate_) | undefined, startPosition?: ($LocationPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
     export class $TargetBlockTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $LootContext, arg1: $Vec3_, arg2: number): boolean;
-        validate(arg0: $CriterionValidator): void;
         static targetHit(arg0: $MinMaxBounds$Ints_, arg1: ($ContextAwarePredicate) | undefined): $Criterion<$TargetBlockTrigger$TriggerInstance>;
         signalStrength(): $MinMaxBounds$Ints;
+        matches(arg0: $LootContext, arg1: $Vec3_, arg2: number): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         projectile(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$TargetBlockTrigger$TriggerInstance>;
@@ -1300,7 +1300,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $TargetBlockTrigger$TriggerInstance}.
      */
-    export type $TargetBlockTrigger$TriggerInstance_ = { signalStrength?: $MinMaxBounds$Ints_, projectile?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [signalStrength?: $MinMaxBounds$Ints_, projectile?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $TargetBlockTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, projectile?: ($ContextAwarePredicate) | undefined, signalStrength?: $MinMaxBounds$Ints_,  } | [player?: ($ContextAwarePredicate) | undefined, projectile?: ($ContextAwarePredicate) | undefined, signalStrength?: $MinMaxBounds$Ints_, ];
     export class $StatePropertiesPredicate$Builder {
         static properties(): $StatePropertiesPredicate$Builder;
         build(): ($StatePropertiesPredicate) | undefined;
@@ -1310,11 +1310,11 @@ declare module "@package/net/minecraft/advancements/critereon" {
         hasProperty(arg0: $Property<never>, arg1: string): $StatePropertiesPredicate$Builder;
     }
     export class $ItemWritableBookPredicate$PagePredicate extends $Record implements $Predicate<$Filterable<string>> {
-        test(arg0: $Filterable_<string>): boolean;
         contents(): string;
-        or(arg0: $Predicate_<$Filterable<string>>): $Predicate<$Filterable<string>>;
+        test(arg0: $Filterable_<string>): boolean;
         negate(): $Predicate<$Filterable<string>>;
         and(arg0: $Predicate_<$Filterable<string>>): $Predicate<$Filterable<string>>;
+        or(arg0: $Predicate_<$Filterable<string>>): $Predicate<$Filterable<string>>;
         static CODEC: $Codec<$ItemWritableBookPredicate$PagePredicate>;
         constructor(arg0: string);
     }
@@ -1327,28 +1327,28 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $CriterionValidator {
+        validateEntities(arg0: $List_<$ContextAwarePredicate>, arg1: string): void;
+        validateEntity(arg0: $ContextAwarePredicate, arg1: string): void;
+        validateEntity(arg0: ($ContextAwarePredicate) | undefined, arg1: string): void;
         validate(arg0: $ContextAwarePredicate, arg1: $LootContextParamSet, arg2: string): void;
         validate(arg0: $List_<$ContextAwarePredicate>, arg1: $LootContextParamSet, arg2: string): void;
-        validateEntities(arg0: $List_<$ContextAwarePredicate>, arg1: string): void;
-        validateEntity(arg0: ($ContextAwarePredicate) | undefined, arg1: string): void;
-        validateEntity(arg0: $ContextAwarePredicate, arg1: string): void;
         constructor(arg0: $ProblemReporter, arg1: $HolderGetter$Provider_);
     }
     export class $EntitySubPredicates$EntityVariantPredicateType<V> {
+        createPredicate(arg0: V): $EntitySubPredicate;
         static create<V>(arg0: $Registry<V>, arg1: $Function_<$Entity, (V) | undefined>): $EntitySubPredicates$EntityVariantPredicateType<V>;
         static create<V>(arg0: $Codec<V>, arg1: $Function_<$Entity, (V) | undefined>): $EntitySubPredicates$EntityVariantPredicateType<V>;
-        createPredicate(arg0: V): $EntitySubPredicate;
         codec: $MapCodec<$EntitySubPredicates$EntityVariantPredicateType$Instance>;
         getter: $Function<$Entity, (V) | undefined>;
         constructor(arg0: $Codec<V>, arg1: $Function_<$Entity, (V) | undefined>);
     }
     export class $DistanceTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ServerLevel, arg1: $Vec3_, arg2: $Vec3_): boolean;
-        distance(): ($DistancePredicate) | undefined;
         static fallFromHeight(arg0: $EntityPredicate$Builder, arg1: $DistancePredicate_, arg2: $LocationPredicate$Builder): $Criterion<$DistanceTrigger$TriggerInstance>;
         static rideEntityInLava(arg0: $EntityPredicate$Builder, arg1: $DistancePredicate_): $Criterion<$DistanceTrigger$TriggerInstance>;
         static travelledThroughNether(arg0: $DistancePredicate_): $Criterion<$DistanceTrigger$TriggerInstance>;
         startPosition(): ($LocationPredicate) | undefined;
+        matches(arg0: $ServerLevel, arg1: $Vec3_, arg2: $Vec3_): boolean;
+        distance(): ($DistancePredicate) | undefined;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$DistanceTrigger$TriggerInstance>;
@@ -1357,11 +1357,11 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $DistanceTrigger$TriggerInstance}.
      */
-    export type $DistanceTrigger$TriggerInstance_ = { distance?: ($DistancePredicate_) | undefined, startPosition?: ($LocationPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [distance?: ($DistancePredicate_) | undefined, startPosition?: ($LocationPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $DistanceTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, startPosition?: ($LocationPredicate_) | undefined, distance?: ($DistancePredicate_) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, startPosition?: ($LocationPredicate_) | undefined, distance?: ($DistancePredicate_) | undefined, ];
     export class $ItemCustomDataPredicate extends $Record implements $ItemSubPredicate {
+        static customData(arg0: $NbtPredicate_): $ItemCustomDataPredicate;
         value(): $NbtPredicate;
         matches(arg0: $ItemStack_): boolean;
-        static customData(arg0: $NbtPredicate_): $ItemCustomDataPredicate;
         static CODEC: $Codec<$ItemCustomDataPredicate>;
         constructor(arg0: $NbtPredicate_);
     }
@@ -1374,8 +1374,8 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $StatePropertiesPredicate$RangedMatcher extends $Record implements $StatePropertiesPredicate$ValueMatcher {
-        match<T extends $Comparable<T>>(arg0: $StateHolder<never, never>, arg1: $Property<T>): boolean;
         maxValue(): (string) | undefined;
+        match<T extends $Comparable<T>>(arg0: $StateHolder<never, never>, arg1: $Property<T>): boolean;
         minValue(): (string) | undefined;
         static CODEC: $Codec<$StatePropertiesPredicate$RangedMatcher>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $StatePropertiesPredicate$RangedMatcher>;
@@ -1385,23 +1385,23 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $StatePropertiesPredicate$RangedMatcher_ = { minValue?: (string) | undefined, maxValue?: (string) | undefined,  } | [minValue?: (string) | undefined, maxValue?: (string) | undefined, ];
     export class $ItemEnchantmentsPredicate implements $SingleComponentItemPredicate<$ItemEnchantments>, $EnchantmentsPredicateAccessor {
-        matches(arg0: $ItemStack_, arg1: $ItemEnchantments_): boolean;
         static storedEnchantments(arg0: $List_<$EnchantmentPredicate_>): $ItemEnchantmentsPredicate$StoredEnchantments;
+        matches(arg0: $ItemStack_, arg1: $ItemEnchantments_): boolean;
         static codec<T extends $ItemEnchantmentsPredicate>(arg0: $Function_<$List<$EnchantmentPredicate>, T>): $Codec<T>;
-        static enchantments(arg0: $List_<$EnchantmentPredicate_>): $ItemEnchantmentsPredicate$Enchantments;
         enchantments(): $List<$EnchantmentPredicate>;
+        static enchantments(arg0: $List_<$EnchantmentPredicate_>): $ItemEnchantmentsPredicate$Enchantments;
         matches(arg0: $ItemStack_): boolean;
         getEnchantments(): $List<$EnchantmentPredicate>;
         constructor(arg0: $List_<$EnchantmentPredicate_>);
     }
     export class $BlockPredicate$Builder {
-        of(arg0: $TagKey_<$Block>): $BlockPredicate$Builder;
+        hasNbt(arg0: $CompoundTag_): $BlockPredicate$Builder;
         of(arg0: $Collection_<$Block_>): $BlockPredicate$Builder;
+        of(arg0: $TagKey_<$Block>): $BlockPredicate$Builder;
         of(...arg0: $Block_[]): $BlockPredicate$Builder;
         setProperties(arg0: $StatePropertiesPredicate$Builder): $BlockPredicate$Builder;
         static block(): $BlockPredicate$Builder;
         build(): $BlockPredicate;
-        hasNbt(arg0: $CompoundTag_): $BlockPredicate$Builder;
         set properties(value: $StatePropertiesPredicate$Builder);
     }
     export class $ItemSubPredicate$Type<T extends $ItemSubPredicate> extends $Record {
@@ -1418,61 +1418,61 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $LocationPredicate$Builder {
-        static location(): $LocationPredicate$Builder;
-        build(): $LocationPredicate;
-        setBiomes(arg0: $HolderSet_<$Biome>): $LocationPredicate$Builder;
+        static inBiome(arg0: $Holder_<$Biome>): $LocationPredicate$Builder;
+        static inDimension(arg0: $ResourceKey_<$Level>): $LocationPredicate$Builder;
         setDimension(arg0: $ResourceKey_<$Level>): $LocationPredicate$Builder;
-        setCanSeeSky(arg0: boolean): $LocationPredicate$Builder;
-        setFluid(arg0: $FluidPredicate$Builder): $LocationPredicate$Builder;
         static inStructure(arg0: $Holder_<$Structure>): $LocationPredicate$Builder;
         setStructures(arg0: $HolderSet_<$Structure>): $LocationPredicate$Builder;
-        static inDimension(arg0: $ResourceKey_<$Level>): $LocationPredicate$Builder;
-        setSmokey(arg0: boolean): $LocationPredicate$Builder;
-        static inBiome(arg0: $Holder_<$Biome>): $LocationPredicate$Builder;
         static atYLocation(arg0: $MinMaxBounds$Doubles_): $LocationPredicate$Builder;
-        setLight(arg0: $LightPredicate$Builder): $LocationPredicate$Builder;
+        setSmokey(arg0: boolean): $LocationPredicate$Builder;
+        setCanSeeSky(arg0: boolean): $LocationPredicate$Builder;
+        setBiomes(arg0: $HolderSet_<$Biome>): $LocationPredicate$Builder;
+        setFluid(arg0: $FluidPredicate$Builder): $LocationPredicate$Builder;
+        static location(): $LocationPredicate$Builder;
+        build(): $LocationPredicate;
         setBlock(arg0: $BlockPredicate$Builder): $LocationPredicate$Builder;
+        setLight(arg0: $LightPredicate$Builder): $LocationPredicate$Builder;
         setX(arg0: $MinMaxBounds$Doubles_): $LocationPredicate$Builder;
         setY(arg0: $MinMaxBounds$Doubles_): $LocationPredicate$Builder;
         setZ(arg0: $MinMaxBounds$Doubles_): $LocationPredicate$Builder;
         constructor();
-        set biomes(value: $HolderSet_<$Biome>);
         set dimension(value: $ResourceKey_<$Level>);
-        set canSeeSky(value: boolean);
-        set fluid(value: $FluidPredicate$Builder);
         set structures(value: $HolderSet_<$Structure>);
         set smokey(value: boolean);
-        set light(value: $LightPredicate$Builder);
+        set canSeeSky(value: boolean);
+        set biomes(value: $HolderSet_<$Biome>);
+        set fluid(value: $FluidPredicate$Builder);
         set block(value: $BlockPredicate$Builder);
+        set light(value: $LightPredicate$Builder);
         set x(value: $MinMaxBounds$Doubles_);
         set y(value: $MinMaxBounds$Doubles_);
         set z(value: $MinMaxBounds$Doubles_);
     }
     export class $EntityFlagsPredicate$Builder {
+        setIsFlying(arg0: boolean): $EntityFlagsPredicate$Builder;
+        setIsBaby(arg0: boolean): $EntityFlagsPredicate$Builder;
+        setCrouching(arg0: boolean): $EntityFlagsPredicate$Builder;
+        setOnFire(arg0: boolean): $EntityFlagsPredicate$Builder;
         static flags(): $EntityFlagsPredicate$Builder;
         build(): $EntityFlagsPredicate;
-        setIsFlying(arg0: boolean): $EntityFlagsPredicate$Builder;
-        setOnFire(arg0: boolean): $EntityFlagsPredicate$Builder;
         setSprinting(arg0: boolean): $EntityFlagsPredicate$Builder;
         setOnGround(arg0: boolean): $EntityFlagsPredicate$Builder;
         setSwimming(arg0: boolean): $EntityFlagsPredicate$Builder;
-        setIsBaby(arg0: boolean): $EntityFlagsPredicate$Builder;
-        setCrouching(arg0: boolean): $EntityFlagsPredicate$Builder;
         constructor();
         set isFlying(value: boolean);
+        set isBaby(value: boolean);
+        set crouching(value: boolean);
         set onFire(value: boolean);
         set sprinting(value: boolean);
         set onGround(value: boolean);
         set swimming(value: boolean);
-        set isBaby(value: boolean);
-        set crouching(value: boolean);
     }
     export class $CollectionCountsPredicate$Zero<T, P extends $Predicate<T>> implements $CollectionCountsPredicate<T, P> {
         test(arg0: $Iterable_<T>): boolean;
         unpack(): $List<$CollectionCountsPredicate$Entry<T, P>>;
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
         constructor();
     }
     export class $ShotCrossbowTrigger extends $SimpleCriterionTrigger<$ShotCrossbowTrigger$TriggerInstance> {
@@ -1496,8 +1496,8 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor(arg0: $List_<$LootItemCondition>);
     }
     export class $BrewedPotionTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $Holder_<$Potion>): boolean;
         static brewedPotion(): $Criterion<$BrewedPotionTrigger$TriggerInstance>;
+        matches(arg0: $Holder_<$Potion>): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         potion(): ($Holder<$Potion>) | undefined;
         validate(arg0: $CriterionValidator): void;
@@ -1529,24 +1529,24 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $DefaultBlockInteractionTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, location?: ($ContextAwarePredicate) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, location?: ($ContextAwarePredicate) | undefined, ];
     export class $ItemPredicate$Builder {
+        withSubPredicate<T extends $ItemSubPredicate>(arg0: $ItemSubPredicate$Type_<T>, arg1: T): $ItemPredicate$Builder;
+        withCount(arg0: $MinMaxBounds$Ints_): $ItemPredicate$Builder;
+        hasComponents(arg0: $DataComponentPredicate): $ItemPredicate$Builder;
+        static item(): $ItemPredicate$Builder;
         of(arg0: $TagKey_<$Item>): $ItemPredicate$Builder;
         of(...arg0: $ItemLike_[]): $ItemPredicate$Builder;
         build(): $ItemPredicate;
-        static item(): $ItemPredicate$Builder;
-        withCount(arg0: $MinMaxBounds$Ints_): $ItemPredicate$Builder;
-        hasComponents(arg0: $DataComponentPredicate): $ItemPredicate$Builder;
-        withSubPredicate<T extends $ItemSubPredicate>(arg0: $ItemSubPredicate$Type_<T>, arg1: T): $ItemPredicate$Builder;
     }
     export class $MobEffectsPredicate$Builder {
-        build(): ($MobEffectsPredicate) | undefined;
-        and(arg0: $Holder_<$MobEffect>, arg1: $MobEffectsPredicate$MobEffectInstancePredicate_): $MobEffectsPredicate$Builder;
         and(arg0: $Holder_<$MobEffect>): $MobEffectsPredicate$Builder;
+        and(arg0: $Holder_<$MobEffect>, arg1: $MobEffectsPredicate$MobEffectInstancePredicate_): $MobEffectsPredicate$Builder;
+        build(): ($MobEffectsPredicate) | undefined;
         static effects(): $MobEffectsPredicate$Builder;
         constructor();
     }
     export class $LocationPredicate$PositionPredicate extends $Record {
-        static of(arg0: $MinMaxBounds$Doubles_, arg1: $MinMaxBounds$Doubles_, arg2: $MinMaxBounds$Doubles_): ($LocationPredicate$PositionPredicate) | undefined;
         matches(arg0: number, arg1: number, arg2: number): boolean;
+        static of(arg0: $MinMaxBounds$Doubles_, arg1: $MinMaxBounds$Doubles_, arg2: $MinMaxBounds$Doubles_): ($LocationPredicate$PositionPredicate) | undefined;
         x(): $MinMaxBounds$Doubles;
         z(): $MinMaxBounds$Doubles;
         y(): $MinMaxBounds$Doubles;
@@ -1555,7 +1555,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $LocationPredicate$PositionPredicate}.
      */
-    export type $LocationPredicate$PositionPredicate_ = { z?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, y?: $MinMaxBounds$Doubles_,  } | [z?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, y?: $MinMaxBounds$Doubles_, ];
+    export type $LocationPredicate$PositionPredicate_ = { y?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, z?: $MinMaxBounds$Doubles_,  } | [y?: $MinMaxBounds$Doubles_, x?: $MinMaxBounds$Doubles_, z?: $MinMaxBounds$Doubles_, ];
     export class $StartRidingTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
         static playerStartsRiding(arg0: $EntityPredicate$Builder): $Criterion<$StartRidingTrigger$TriggerInstance>;
         player(): ($ContextAwarePredicate) | undefined;
@@ -1568,12 +1568,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $StartRidingTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, ];
     export class $PlayerInteractTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ItemStack_, arg1: $LootContext): boolean;
-        validate(arg0: $CriterionValidator): void;
-        item(): ($ItemPredicate) | undefined;
         static itemUsedOnEntity(arg0: $ItemPredicate$Builder, arg1: ($ContextAwarePredicate) | undefined): $Criterion<$PlayerInteractTrigger$TriggerInstance>;
         static itemUsedOnEntity(arg0: ($ContextAwarePredicate) | undefined, arg1: $ItemPredicate$Builder, arg2: ($ContextAwarePredicate) | undefined): $Criterion<$PlayerInteractTrigger$TriggerInstance>;
         entity(): ($ContextAwarePredicate) | undefined;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $ItemStack_, arg1: $LootContext): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$PlayerInteractTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ItemPredicate_) | undefined, arg2: ($ContextAwarePredicate) | undefined);
@@ -1581,7 +1581,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $PlayerInteractTrigger$TriggerInstance}.
      */
-    export type $PlayerInteractTrigger$TriggerInstance_ = { item?: ($ItemPredicate_) | undefined, entity?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [item?: ($ItemPredicate_) | undefined, entity?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $PlayerInteractTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, entity?: ($ContextAwarePredicate) | undefined, item?: ($ItemPredicate_) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, entity?: ($ContextAwarePredicate) | undefined, item?: ($ItemPredicate_) | undefined, ];
     export class $SlideDownBlockTrigger extends $SimpleCriterionTrigger<$SlideDownBlockTrigger$TriggerInstance> {
         trigger(arg0: $ServerPlayer, arg1: $BlockState_): void;
         constructor();
@@ -1597,10 +1597,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $LightPredicate_ = { composite?: $MinMaxBounds$Ints_,  } | [composite?: $MinMaxBounds$Ints_, ];
     export class $ConstructBeaconTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: number): boolean;
-        level(): $MinMaxBounds$Ints;
         static constructedBeacon(arg0: $MinMaxBounds$Ints_): $Criterion<$ConstructBeaconTrigger$TriggerInstance>;
         static constructedBeacon(): $Criterion<$ConstructBeaconTrigger$TriggerInstance>;
+        level(): $MinMaxBounds$Ints;
+        matches(arg0: number): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$ConstructBeaconTrigger$TriggerInstance>;
@@ -1619,21 +1619,21 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $EntityPredicate$Builder {
-        flags(arg0: $EntityFlagsPredicate$Builder): $EntityPredicate$Builder;
-        of(arg0: $TagKey_<$EntityType<never>>): $EntityPredicate$Builder;
-        of(arg0: $EntityType_<never>): $EntityPredicate$Builder;
-        slots(arg0: $SlotsPredicate_): $EntityPredicate$Builder;
-        distance(arg0: $DistancePredicate_): $EntityPredicate$Builder;
-        build(): $EntityPredicate;
         movementAffectedBy(arg0: $LocationPredicate$Builder): $EntityPredicate$Builder;
         periodicTick(arg0: number): $EntityPredicate$Builder;
+        static entity(): $EntityPredicate$Builder;
+        entityType(arg0: $EntityTypePredicate_): $EntityPredicate$Builder;
         moving(arg0: $MovementPredicate_): $EntityPredicate$Builder;
         subPredicate(arg0: $EntitySubPredicate): $EntityPredicate$Builder;
         targetedEntity(arg0: $EntityPredicate$Builder): $EntityPredicate$Builder;
         located(arg0: $LocationPredicate$Builder): $EntityPredicate$Builder;
         steppingOn(arg0: $LocationPredicate$Builder): $EntityPredicate$Builder;
-        entityType(arg0: $EntityTypePredicate_): $EntityPredicate$Builder;
-        static entity(): $EntityPredicate$Builder;
+        flags(arg0: $EntityFlagsPredicate$Builder): $EntityPredicate$Builder;
+        of(arg0: $EntityType_<never>): $EntityPredicate$Builder;
+        of(arg0: $TagKey_<$EntityType<never>>): $EntityPredicate$Builder;
+        slots(arg0: $SlotsPredicate_): $EntityPredicate$Builder;
+        distance(arg0: $DistancePredicate_): $EntityPredicate$Builder;
+        build(): $EntityPredicate;
         nbt(arg0: $NbtPredicate_): $EntityPredicate$Builder;
         team(arg0: string): $EntityPredicate$Builder;
         effects(arg0: $MobEffectsPredicate$Builder): $EntityPredicate$Builder;
@@ -1652,9 +1652,9 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $UsingItemTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ItemStack_): boolean;
-        item(): ($ItemPredicate) | undefined;
         static lookingAt(arg0: $EntityPredicate$Builder, arg1: $ItemPredicate$Builder): $Criterion<$UsingItemTrigger$TriggerInstance>;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $ItemStack_): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$UsingItemTrigger$TriggerInstance>;
@@ -1669,25 +1669,25 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $KilledTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ServerPlayer, arg1: $LootContext, arg2: $DamageSource_): boolean;
-        validate(arg0: $CriterionValidator): void;
+        entityPredicate(): ($ContextAwarePredicate) | undefined;
         static playerKilledEntityNearSculkCatalyst(): $Criterion<$KilledTrigger$TriggerInstance>;
-        static entityKilledPlayer(arg0: ($EntityPredicate_) | undefined, arg1: ($DamageSourcePredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
-        static entityKilledPlayer(arg0: $EntityPredicate$Builder, arg1: ($DamageSourcePredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
-        static entityKilledPlayer(arg0: $EntityPredicate$Builder, arg1: $DamageSourcePredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
-        static entityKilledPlayer(arg0: ($EntityPredicate_) | undefined, arg1: $DamageSourcePredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
-        static entityKilledPlayer(arg0: ($EntityPredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
-        static entityKilledPlayer(arg0: $EntityPredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
-        static entityKilledPlayer(): $Criterion<$KilledTrigger$TriggerInstance>;
         killingBlow(): ($DamageSourcePredicate) | undefined;
+        static playerKilledEntity(arg0: $EntityPredicate$Builder, arg1: ($DamageSourcePredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
+        static playerKilledEntity(arg0: ($EntityPredicate_) | undefined, arg1: $DamageSourcePredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
+        static playerKilledEntity(arg0: $EntityPredicate$Builder, arg1: $DamageSourcePredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
+        static playerKilledEntity(arg0: ($EntityPredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
+        static playerKilledEntity(arg0: $EntityPredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
         static playerKilledEntity(): $Criterion<$KilledTrigger$TriggerInstance>;
         static playerKilledEntity(arg0: ($EntityPredicate_) | undefined, arg1: ($DamageSourcePredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
-        static playerKilledEntity(arg0: $EntityPredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
-        static playerKilledEntity(arg0: ($EntityPredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
-        static playerKilledEntity(arg0: $EntityPredicate$Builder, arg1: $DamageSourcePredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
-        static playerKilledEntity(arg0: ($EntityPredicate_) | undefined, arg1: $DamageSourcePredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
-        static playerKilledEntity(arg0: $EntityPredicate$Builder, arg1: ($DamageSourcePredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
-        entityPredicate(): ($ContextAwarePredicate) | undefined;
+        static entityKilledPlayer(arg0: $EntityPredicate$Builder, arg1: $DamageSourcePredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
+        static entityKilledPlayer(arg0: ($EntityPredicate_) | undefined, arg1: $DamageSourcePredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
+        static entityKilledPlayer(arg0: $EntityPredicate$Builder, arg1: ($DamageSourcePredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
+        static entityKilledPlayer(arg0: $EntityPredicate$Builder): $Criterion<$KilledTrigger$TriggerInstance>;
+        static entityKilledPlayer(arg0: ($EntityPredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
+        static entityKilledPlayer(arg0: ($EntityPredicate_) | undefined, arg1: ($DamageSourcePredicate_) | undefined): $Criterion<$KilledTrigger$TriggerInstance>;
+        static entityKilledPlayer(): $Criterion<$KilledTrigger$TriggerInstance>;
+        matches(arg0: $ServerPlayer, arg1: $LootContext, arg2: $DamageSource_): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$KilledTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ContextAwarePredicate) | undefined, arg2: ($DamageSourcePredicate_) | undefined);
@@ -1695,12 +1695,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $KilledTrigger$TriggerInstance}.
      */
-    export type $KilledTrigger$TriggerInstance_ = { killingBlow?: ($DamageSourcePredicate_) | undefined, entityPredicate?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [killingBlow?: ($DamageSourcePredicate_) | undefined, entityPredicate?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $KilledTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, entityPredicate?: ($ContextAwarePredicate) | undefined, killingBlow?: ($DamageSourcePredicate_) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, entityPredicate?: ($ContextAwarePredicate) | undefined, killingBlow?: ($DamageSourcePredicate_) | undefined, ];
     export class $BlockPredicate extends $Record {
-        matches(arg0: $ServerLevel, arg1: $BlockPos_): boolean;
-        matches(arg0: $BlockInWorld): boolean;
-        properties(): ($StatePropertiesPredicate) | undefined;
         requiresNbt(): boolean;
+        matches(arg0: $BlockInWorld): boolean;
+        matches(arg0: $ServerLevel, arg1: $BlockPos_): boolean;
+        properties(): ($StatePropertiesPredicate) | undefined;
         blocks(): ($HolderSet<$Block>) | undefined;
         nbt(): ($NbtPredicate) | undefined;
         static CODEC: $Codec<$BlockPredicate>;
@@ -1710,15 +1710,15 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $BlockPredicate}.
      */
-    export type $BlockPredicate_ = { blocks?: ($HolderSet_<$Block>) | undefined, properties?: ($StatePropertiesPredicate_) | undefined, nbt?: ($NbtPredicate_) | undefined,  } | [blocks?: ($HolderSet_<$Block>) | undefined, properties?: ($StatePropertiesPredicate_) | undefined, nbt?: ($NbtPredicate_) | undefined, ];
+    export type $BlockPredicate_ = { nbt?: ($NbtPredicate_) | undefined, properties?: ($StatePropertiesPredicate_) | undefined, blocks?: ($HolderSet_<$Block>) | undefined,  } | [nbt?: ($NbtPredicate_) | undefined, properties?: ($StatePropertiesPredicate_) | undefined, blocks?: ($HolderSet_<$Block>) | undefined, ];
     export class $ChangeDimensionTrigger extends $SimpleCriterionTrigger<$ChangeDimensionTrigger$TriggerInstance> {
         trigger(arg0: $ServerPlayer, arg1: $ResourceKey_<$Level>, arg2: $ResourceKey_<$Level>): void;
         constructor();
     }
     export class $ItemBundlePredicate extends $Record implements $SingleComponentItemPredicate<$BundleContents> {
+        items(): ($CollectionPredicate<$ItemStack, $ItemPredicate>) | undefined;
         componentType(): $DataComponentType<$BundleContents>;
         matches(arg0: $ItemStack_, arg1: $BundleContents): boolean;
-        items(): ($CollectionPredicate<$ItemStack, $ItemPredicate>) | undefined;
         matches(arg0: $ItemStack_): boolean;
         static CODEC: $Codec<$ItemBundlePredicate>;
         constructor(arg0: ($CollectionPredicate_<$ItemStack_, $ItemPredicate_>) | undefined);
@@ -1736,14 +1736,14 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $LocationPredicate extends $Record {
+        smokey(): (boolean) | undefined;
+        dimension(): ($ResourceKey<$Level>) | undefined;
         position(): ($LocationPredicate$PositionPredicate) | undefined;
         matches(arg0: $ServerLevel, arg1: number, arg2: number, arg3: number): boolean;
         block(): ($BlockPredicate) | undefined;
-        smokey(): (boolean) | undefined;
-        dimension(): ($ResourceKey<$Level>) | undefined;
         light(): ($LightPredicate) | undefined;
-        biomes(): ($HolderSet<$Biome>) | undefined;
         structures(): ($HolderSet<$Structure>) | undefined;
+        biomes(): ($HolderSet<$Biome>) | undefined;
         fluid(): ($FluidPredicate) | undefined;
         canSeeSky(): (boolean) | undefined;
         static CODEC: $Codec<$LocationPredicate>;
@@ -1752,7 +1752,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $LocationPredicate}.
      */
-    export type $LocationPredicate_ = { block?: ($BlockPredicate_) | undefined, light?: ($LightPredicate_) | undefined, position?: ($LocationPredicate$PositionPredicate_) | undefined, fluid?: ($FluidPredicate_) | undefined, biomes?: ($HolderSet_<$Biome>) | undefined, smokey?: (boolean) | undefined, dimension?: ($ResourceKey_<$Level>) | undefined, canSeeSky?: (boolean) | undefined, structures?: ($HolderSet_<$Structure>) | undefined,  } | [block?: ($BlockPredicate_) | undefined, light?: ($LightPredicate_) | undefined, position?: ($LocationPredicate$PositionPredicate_) | undefined, fluid?: ($FluidPredicate_) | undefined, biomes?: ($HolderSet_<$Biome>) | undefined, smokey?: (boolean) | undefined, dimension?: ($ResourceKey_<$Level>) | undefined, canSeeSky?: (boolean) | undefined, structures?: ($HolderSet_<$Structure>) | undefined, ];
+    export type $LocationPredicate_ = { structures?: ($HolderSet_<$Structure>) | undefined, canSeeSky?: (boolean) | undefined, dimension?: ($ResourceKey_<$Level>) | undefined, smokey?: (boolean) | undefined, biomes?: ($HolderSet_<$Biome>) | undefined, fluid?: ($FluidPredicate_) | undefined, position?: ($LocationPredicate$PositionPredicate_) | undefined, light?: ($LightPredicate_) | undefined, block?: ($BlockPredicate_) | undefined,  } | [structures?: ($HolderSet_<$Structure>) | undefined, canSeeSky?: (boolean) | undefined, dimension?: ($ResourceKey_<$Level>) | undefined, smokey?: (boolean) | undefined, biomes?: ($HolderSet_<$Biome>) | undefined, fluid?: ($FluidPredicate_) | undefined, position?: ($LocationPredicate$PositionPredicate_) | undefined, light?: ($LightPredicate_) | undefined, block?: ($BlockPredicate_) | undefined, ];
     export class $CuredZombieVillagerTrigger extends $SimpleCriterionTrigger<$CuredZombieVillagerTrigger$TriggerInstance> {
         trigger(arg0: $ServerPlayer, arg1: $Zombie, arg2: $Villager): void;
         constructor();
@@ -1762,10 +1762,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $LevitationTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
+        static levitated(arg0: $DistancePredicate_): $Criterion<$LevitationTrigger$TriggerInstance>;
         matches(arg0: $ServerPlayer, arg1: $Vec3_, arg2: number): boolean;
         duration(): $MinMaxBounds$Ints;
         distance(): ($DistancePredicate) | undefined;
-        static levitated(arg0: $DistancePredicate_): $Criterion<$LevitationTrigger$TriggerInstance>;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$LevitationTrigger$TriggerInstance>;
@@ -1774,12 +1774,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $LevitationTrigger$TriggerInstance}.
      */
-    export type $LevitationTrigger$TriggerInstance_ = { distance?: ($DistancePredicate_) | undefined, duration?: $MinMaxBounds$Ints_, player?: ($ContextAwarePredicate) | undefined,  } | [distance?: ($DistancePredicate_) | undefined, duration?: $MinMaxBounds$Ints_, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $LevitationTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, duration?: $MinMaxBounds$Ints_, distance?: ($DistancePredicate_) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, duration?: $MinMaxBounds$Ints_, distance?: ($DistancePredicate_) | undefined, ];
     export class $EntitySubPredicates {
-        static bootstrap(arg0: $Registry<$MapCodec_<$EntitySubPredicate>>): $MapCodec<$EntitySubPredicate>;
         static catVariant(arg0: $Holder_<$CatVariant>): $EntitySubPredicate;
         static frogVariant(arg0: $Holder_<$FrogVariant>): $EntitySubPredicate;
         static wolfVariant(arg0: $HolderSet_<$WolfVariant>): $EntitySubPredicate;
+        static bootstrap(arg0: $Registry<$MapCodec_<$EntitySubPredicate>>): $MapCodec<$EntitySubPredicate>;
         static MOOSHROOM: $EntitySubPredicates$EntityVariantPredicateType<$MushroomCow$MushroomType>;
         static FISHING_HOOK: $MapCodec<$FishingHookPredicate>;
         static FROG: $EntitySubPredicates$EntityHolderVariantPredicateType<$FrogVariant>;
@@ -1802,12 +1802,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $RecipeCraftedTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ResourceLocation_, arg1: $List_<$ItemStack_>): boolean;
         static craftedItem(arg0: $ResourceLocation_): $Criterion<$RecipeCraftedTrigger$TriggerInstance>;
         static craftedItem(arg0: $ResourceLocation_, arg1: $List_<$ItemPredicate$Builder>): $Criterion<$RecipeCraftedTrigger$TriggerInstance>;
         static crafterCraftedItem(arg0: $ResourceLocation_): $Criterion<$RecipeCraftedTrigger$TriggerInstance>;
         recipeId(): $ResourceLocation;
         ingredients(): $List<$ItemPredicate>;
+        matches(arg0: $ResourceLocation_, arg1: $List_<$ItemStack_>): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$RecipeCraftedTrigger$TriggerInstance>;
@@ -1816,21 +1816,21 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $RecipeCraftedTrigger$TriggerInstance}.
      */
-    export type $RecipeCraftedTrigger$TriggerInstance_ = { recipeId?: $ResourceLocation_, ingredients?: $List_<$ItemPredicate_>, player?: ($ContextAwarePredicate) | undefined,  } | [recipeId?: $ResourceLocation_, ingredients?: $List_<$ItemPredicate_>, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $RecipeCraftedTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, ingredients?: $List_<$ItemPredicate_>, recipeId?: $ResourceLocation_,  } | [player?: ($ContextAwarePredicate) | undefined, ingredients?: $List_<$ItemPredicate_>, recipeId?: $ResourceLocation_, ];
     export class $SimpleCriterionTrigger<T extends $SimpleCriterionTrigger$SimpleInstance> implements $CriterionTrigger<T> {
-        trigger(arg0: $ServerPlayer, arg1: $Predicate_<T>): void;
         addPlayerListener(arg0: $PlayerAdvancements, arg1: $CriterionTrigger$Listener_<T>): void;
         removePlayerListener(arg0: $PlayerAdvancements, arg1: $CriterionTrigger$Listener_<T>): void;
         removePlayerListeners(arg0: $PlayerAdvancements): void;
+        trigger(arg0: $ServerPlayer, arg1: $Predicate_<T>): void;
         createCriterion(arg0: T): $Criterion<T>;
         constructor();
     }
     export class $EffectsChangedTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
+        static gotEffectsFrom(arg0: $EntityPredicate$Builder): $Criterion<$EffectsChangedTrigger$TriggerInstance>;
+        static hasEffects(arg0: $MobEffectsPredicate$Builder): $Criterion<$EffectsChangedTrigger$TriggerInstance>;
         matches(arg0: $ServerPlayer, arg1: $LootContext): boolean;
         validate(arg0: $CriterionValidator): void;
         source(): ($ContextAwarePredicate) | undefined;
-        static gotEffectsFrom(arg0: $EntityPredicate$Builder): $Criterion<$EffectsChangedTrigger$TriggerInstance>;
-        static hasEffects(arg0: $MobEffectsPredicate$Builder): $Criterion<$EffectsChangedTrigger$TriggerInstance>;
         player(): ($ContextAwarePredicate) | undefined;
         effects(): ($MobEffectsPredicate) | undefined;
         static CODEC: $Codec<$EffectsChangedTrigger$TriggerInstance>;
@@ -1839,10 +1839,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $EffectsChangedTrigger$TriggerInstance}.
      */
-    export type $EffectsChangedTrigger$TriggerInstance_ = { source?: ($ContextAwarePredicate) | undefined, effects?: ($MobEffectsPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [source?: ($ContextAwarePredicate) | undefined, effects?: ($MobEffectsPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $EffectsChangedTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, effects?: ($MobEffectsPredicate_) | undefined, source?: ($ContextAwarePredicate) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, effects?: ($MobEffectsPredicate_) | undefined, source?: ($ContextAwarePredicate) | undefined, ];
     export class $RecipeUnlockedTrigger extends $SimpleCriterionTrigger<$RecipeUnlockedTrigger$TriggerInstance> {
-        trigger(arg0: $ServerPlayer, arg1: $RecipeHolder_<never>): void;
         static unlocked(arg0: $ResourceLocation_): $Criterion<$RecipeUnlockedTrigger$TriggerInstance>;
+        trigger(arg0: $ServerPlayer, arg1: $RecipeHolder_<never>): void;
         constructor();
     }
     export class $ImpossibleTrigger$TriggerInstance extends $Record implements $CriterionTriggerInstance {
@@ -1859,20 +1859,20 @@ declare module "@package/net/minecraft/advancements/critereon" {
         constructor();
     }
     export class $MinMaxBounds$Doubles extends $Record implements $MinMaxBounds<number> {
+        minSq(): (number) | undefined;
+        maxSq(): (number) | undefined;
+        matchesSqr(arg0: number): boolean;
+        static exactly(arg0: number): $MinMaxBounds$Doubles;
+        static atLeast(arg0: number): $MinMaxBounds$Doubles;
         min(): (number) | undefined;
         max(): (number) | undefined;
         matches(arg0: number): boolean;
         static between(arg0: number, arg1: number): $MinMaxBounds$Doubles;
-        static atLeast(arg0: number): $MinMaxBounds$Doubles;
-        static exactly(arg0: number): $MinMaxBounds$Doubles;
-        minSq(): (number) | undefined;
-        maxSq(): (number) | undefined;
-        matchesSqr(arg0: number): boolean;
         static atMost(arg0: number): $MinMaxBounds$Doubles;
-        static fromReader(arg0: $StringReader): $MinMaxBounds$Doubles;
         static fromReader(arg0: $StringReader, arg1: $Function_<number, number>): $MinMaxBounds$Doubles;
-        isAny(): boolean;
+        static fromReader(arg0: $StringReader): $MinMaxBounds$Doubles;
         unwrapPoint(): (number) | undefined;
+        isAny(): boolean;
         static CODEC: $Codec<$MinMaxBounds$Doubles>;
         static ANY: $MinMaxBounds$Doubles;
         constructor(arg0: (number) | undefined, arg1: (number) | undefined, arg2: (number) | undefined, arg3: (number) | undefined);
@@ -1881,16 +1881,16 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $MinMaxBounds$Doubles}.
      */
-    export type $MinMaxBounds$Doubles_ = { maxSq?: (number) | undefined, max?: (number) | undefined, minSq?: (number) | undefined, min?: (number) | undefined,  } | [maxSq?: (number) | undefined, max?: (number) | undefined, minSq?: (number) | undefined, min?: (number) | undefined, ];
+    export type $MinMaxBounds$Doubles_ = { minSq?: (number) | undefined, max?: (number) | undefined, maxSq?: (number) | undefined, min?: (number) | undefined,  } | [minSq?: (number) | undefined, max?: (number) | undefined, maxSq?: (number) | undefined, min?: (number) | undefined, ];
     export class $EntityEquipmentPredicate extends $Record {
+        static captainPredicate(arg0: $HolderGetter<$BannerPattern_>): $EntityEquipmentPredicate;
+        chest(): ($ItemPredicate) | undefined;
+        feet(): ($ItemPredicate) | undefined;
+        mainhand(): ($ItemPredicate) | undefined;
+        legs(): ($ItemPredicate) | undefined;
         matches(arg0: $Entity): boolean;
         head(): ($ItemPredicate) | undefined;
         body(): ($ItemPredicate) | undefined;
-        static captainPredicate(arg0: $HolderGetter<$BannerPattern_>): $EntityEquipmentPredicate;
-        mainhand(): ($ItemPredicate) | undefined;
-        legs(): ($ItemPredicate) | undefined;
-        feet(): ($ItemPredicate) | undefined;
-        chest(): ($ItemPredicate) | undefined;
         offhand(): ($ItemPredicate) | undefined;
         static CODEC: $Codec<$EntityEquipmentPredicate>;
         constructor(arg0: ($ItemPredicate_) | undefined, arg1: ($ItemPredicate_) | undefined, arg2: ($ItemPredicate_) | undefined, arg3: ($ItemPredicate_) | undefined, arg4: ($ItemPredicate_) | undefined, arg5: ($ItemPredicate_) | undefined, arg6: ($ItemPredicate_) | undefined);
@@ -1898,14 +1898,14 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $EntityEquipmentPredicate}.
      */
-    export type $EntityEquipmentPredicate_ = { head?: ($ItemPredicate_) | undefined, mainhand?: ($ItemPredicate_) | undefined, feet?: ($ItemPredicate_) | undefined, legs?: ($ItemPredicate_) | undefined, body?: ($ItemPredicate_) | undefined, chest?: ($ItemPredicate_) | undefined, offhand?: ($ItemPredicate_) | undefined,  } | [head?: ($ItemPredicate_) | undefined, mainhand?: ($ItemPredicate_) | undefined, feet?: ($ItemPredicate_) | undefined, legs?: ($ItemPredicate_) | undefined, body?: ($ItemPredicate_) | undefined, chest?: ($ItemPredicate_) | undefined, offhand?: ($ItemPredicate_) | undefined, ];
+    export type $EntityEquipmentPredicate_ = { chest?: ($ItemPredicate_) | undefined, body?: ($ItemPredicate_) | undefined, legs?: ($ItemPredicate_) | undefined, feet?: ($ItemPredicate_) | undefined, mainhand?: ($ItemPredicate_) | undefined, head?: ($ItemPredicate_) | undefined, offhand?: ($ItemPredicate_) | undefined,  } | [chest?: ($ItemPredicate_) | undefined, body?: ($ItemPredicate_) | undefined, legs?: ($ItemPredicate_) | undefined, feet?: ($ItemPredicate_) | undefined, mainhand?: ($ItemPredicate_) | undefined, head?: ($ItemPredicate_) | undefined, offhand?: ($ItemPredicate_) | undefined, ];
     export class $TradeTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $LootContext, arg1: $ItemStack_): boolean;
-        validate(arg0: $CriterionValidator): void;
-        item(): ($ItemPredicate) | undefined;
         static tradedWithVillager(arg0: $EntityPredicate$Builder): $Criterion<$TradeTrigger$TriggerInstance>;
         static tradedWithVillager(): $Criterion<$TradeTrigger$TriggerInstance>;
         villager(): ($ContextAwarePredicate) | undefined;
+        item(): ($ItemPredicate) | undefined;
+        matches(arg0: $LootContext, arg1: $ItemStack_): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$TradeTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: ($ContextAwarePredicate) | undefined, arg2: ($ItemPredicate_) | undefined);
@@ -1913,12 +1913,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $TradeTrigger$TriggerInstance}.
      */
-    export type $TradeTrigger$TriggerInstance_ = { villager?: ($ContextAwarePredicate) | undefined, item?: ($ItemPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [villager?: ($ContextAwarePredicate) | undefined, item?: ($ItemPredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $TradeTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, item?: ($ItemPredicate_) | undefined, villager?: ($ContextAwarePredicate) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, item?: ($ItemPredicate_) | undefined, villager?: ($ContextAwarePredicate) | undefined, ];
     export class $EntityHurtPlayerTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $ServerPlayer, arg1: $DamageSource_, arg2: number, arg3: number, arg4: boolean): boolean;
         static entityHurtPlayer(arg0: $DamagePredicate_): $Criterion<$EntityHurtPlayerTrigger$TriggerInstance>;
         static entityHurtPlayer(): $Criterion<$EntityHurtPlayerTrigger$TriggerInstance>;
         static entityHurtPlayer(arg0: $DamagePredicate$Builder): $Criterion<$EntityHurtPlayerTrigger$TriggerInstance>;
+        matches(arg0: $ServerPlayer, arg1: $DamageSource_, arg2: number, arg3: number, arg4: boolean): boolean;
         player(): ($ContextAwarePredicate) | undefined;
         damage(): ($DamagePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
@@ -1930,9 +1930,9 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $EntityHurtPlayerTrigger$TriggerInstance_ = { damage?: ($DamagePredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [damage?: ($DamagePredicate_) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
     export class $ItemWrittenBookPredicate extends $Record implements $SingleComponentItemPredicate<$WrittenBookContent> {
+        resolved(): (boolean) | undefined;
         componentType(): $DataComponentType<$WrittenBookContent>;
         matches(arg0: $ItemStack_, arg1: $WrittenBookContent_): boolean;
-        resolved(): (boolean) | undefined;
         title(): (string) | undefined;
         pages(): ($CollectionPredicate<$Filterable<$Component>, $ItemWrittenBookPredicate$PagePredicate>) | undefined;
         author(): (string) | undefined;
@@ -1944,23 +1944,23 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $ItemWrittenBookPredicate}.
      */
-    export type $ItemWrittenBookPredicate_ = { title?: (string) | undefined, resolved?: (boolean) | undefined, pages?: ($CollectionPredicate_<$Filterable_<$Component_>, $ItemWrittenBookPredicate$PagePredicate_>) | undefined, generation?: $MinMaxBounds$Ints_, author?: (string) | undefined,  } | [title?: (string) | undefined, resolved?: (boolean) | undefined, pages?: ($CollectionPredicate_<$Filterable_<$Component_>, $ItemWrittenBookPredicate$PagePredicate_>) | undefined, generation?: $MinMaxBounds$Ints_, author?: (string) | undefined, ];
+    export type $ItemWrittenBookPredicate_ = { generation?: $MinMaxBounds$Ints_, pages?: ($CollectionPredicate_<$Filterable_<$Component_>, $ItemWrittenBookPredicate$PagePredicate_>) | undefined, resolved?: (boolean) | undefined, title?: (string) | undefined, author?: (string) | undefined,  } | [generation?: $MinMaxBounds$Ints_, pages?: ($CollectionPredicate_<$Filterable_<$Component_>, $ItemWrittenBookPredicate$PagePredicate_>) | undefined, resolved?: (boolean) | undefined, title?: (string) | undefined, author?: (string) | undefined, ];
     export class $ItemPredicate extends $Record implements $Predicate<$ItemStack> {
-        test(arg0: $ItemStack_): boolean;
-        count(): $MinMaxBounds$Ints;
         subPredicates(): $Map<$ItemSubPredicate$Type<never>, $ItemSubPredicate>;
         items(): ($HolderSet<$Item>) | undefined;
+        test(arg0: $ItemStack_): boolean;
+        count(): $MinMaxBounds$Ints;
         components(): $DataComponentPredicate;
-        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
         and(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
+        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         static CODEC: $Codec<$ItemPredicate>;
         constructor(arg0: ($HolderSet_<$Item>) | undefined, arg1: $MinMaxBounds$Ints_, arg2: $DataComponentPredicate, arg3: $Map_<$ItemSubPredicate$Type_<never>, $ItemSubPredicate_>);
     }
     /**
      * Values that may be interpreted as {@link $ItemPredicate}.
      */
-    export type $ItemPredicate_ = { subPredicates?: $Map_<$ItemSubPredicate$Type_<never>, $ItemSubPredicate_>, components?: $DataComponentPredicate, count?: $MinMaxBounds$Ints_, items?: ($HolderSet_<$Item>) | undefined,  } | [subPredicates?: $Map_<$ItemSubPredicate$Type_<never>, $ItemSubPredicate_>, components?: $DataComponentPredicate, count?: $MinMaxBounds$Ints_, items?: ($HolderSet_<$Item>) | undefined, ];
+    export type $ItemPredicate_ = { items?: ($HolderSet_<$Item>) | undefined, count?: $MinMaxBounds$Ints_, components?: $DataComponentPredicate, subPredicates?: $Map_<$ItemSubPredicate$Type_<never>, $ItemSubPredicate_>,  } | [items?: ($HolderSet_<$Item>) | undefined, count?: $MinMaxBounds$Ints_, components?: $DataComponentPredicate, subPredicates?: $Map_<$ItemSubPredicate$Type_<never>, $ItemSubPredicate_>, ];
     export class $EntityPredicate$LocationWrapper extends $Record {
         located(): ($LocationPredicate) | undefined;
         steppingOn(): ($LocationPredicate) | undefined;
@@ -1971,37 +1971,37 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $EntityPredicate$LocationWrapper}.
      */
-    export type $EntityPredicate$LocationWrapper_ = { steppingOn?: ($LocationPredicate_) | undefined, located?: ($LocationPredicate_) | undefined, affectsMovement?: ($LocationPredicate_) | undefined,  } | [steppingOn?: ($LocationPredicate_) | undefined, located?: ($LocationPredicate_) | undefined, affectsMovement?: ($LocationPredicate_) | undefined, ];
+    export type $EntityPredicate$LocationWrapper_ = { affectsMovement?: ($LocationPredicate_) | undefined, located?: ($LocationPredicate_) | undefined, steppingOn?: ($LocationPredicate_) | undefined,  } | [affectsMovement?: ($LocationPredicate_) | undefined, located?: ($LocationPredicate_) | undefined, steppingOn?: ($LocationPredicate_) | undefined, ];
     export class $EntitySubPredicates$EntityHolderVariantPredicateType<V> {
-        static create<V>(arg0: $ResourceKey_<$Registry<V>>, arg1: $Function_<$Entity, ($Holder<V>) | undefined>): $EntitySubPredicates$EntityHolderVariantPredicateType<V>;
         createPredicate(arg0: $HolderSet_<V>): $EntitySubPredicate;
+        static create<V>(arg0: $ResourceKey_<$Registry<V>>, arg1: $Function_<$Entity, ($Holder<V>) | undefined>): $EntitySubPredicates$EntityHolderVariantPredicateType<V>;
         codec: $MapCodec<$EntitySubPredicates$EntityHolderVariantPredicateType$Instance>;
         getter: $Function<$Entity, ($Holder<V>) | undefined>;
         constructor(arg0: $ResourceKey_<$Registry<V>>, arg1: $Function_<$Entity, ($Holder<V>) | undefined>);
     }
     export class $EntityPredicate extends $Record {
+        periodicTick(): (number) | undefined;
+        entityType(): ($EntityTypePredicate) | undefined;
+        distanceToPlayer(): ($DistancePredicate) | undefined;
+        subPredicate(): ($EntitySubPredicate) | undefined;
+        targetedEntity(): ($EntityPredicate) | undefined;
         flags(): ($EntityFlagsPredicate) | undefined;
-        static wrap(arg0: $EntityPredicate$Builder): $ContextAwarePredicate;
         static wrap(arg0: ($EntityPredicate_) | undefined): ($ContextAwarePredicate) | undefined;
         static wrap(arg0: $EntityPredicate_): $ContextAwarePredicate;
         static wrap(...arg0: $EntityPredicate$Builder[]): $List<$ContextAwarePredicate>;
+        static wrap(arg0: $EntityPredicate$Builder): $ContextAwarePredicate;
         matches(arg0: $ServerPlayer, arg1: $Entity): boolean;
         matches(arg0: $ServerLevel, arg1: $Vec3_, arg2: $Entity): boolean;
         location(): $EntityPredicate$LocationWrapper;
         slots(): ($SlotsPredicate) | undefined;
-        periodicTick(): (number) | undefined;
-        distanceToPlayer(): ($DistancePredicate) | undefined;
-        subPredicate(): ($EntitySubPredicate) | undefined;
-        targetedEntity(): ($EntityPredicate) | undefined;
-        entityType(): ($EntityTypePredicate) | undefined;
         static createContext(arg0: $ServerPlayer, arg1: $Entity): $LootContext;
         nbt(): ($NbtPredicate) | undefined;
         team(): (string) | undefined;
         effects(): ($MobEffectsPredicate) | undefined;
         equipment(): ($EntityEquipmentPredicate) | undefined;
         vehicle(): ($EntityPredicate) | undefined;
-        passenger(): ($EntityPredicate) | undefined;
         movement(): ($MovementPredicate) | undefined;
+        passenger(): ($EntityPredicate) | undefined;
         static ADVANCEMENT_CODEC: $Codec<$ContextAwarePredicate>;
         static CODEC: $Codec<$EntityPredicate>;
         constructor(arg0: ($EntityTypePredicate_) | undefined, arg1: ($DistancePredicate_) | undefined, arg2: ($MovementPredicate_) | undefined, arg3: $EntityPredicate$LocationWrapper_, arg4: ($MobEffectsPredicate_) | undefined, arg5: ($NbtPredicate_) | undefined, arg6: ($EntityFlagsPredicate_) | undefined, arg7: ($EntityEquipmentPredicate_) | undefined, arg8: ($EntitySubPredicate) | undefined, arg9: (number) | undefined, arg10: ($EntityPredicate_) | undefined, arg11: ($EntityPredicate_) | undefined, arg12: ($EntityPredicate_) | undefined, arg13: (string) | undefined, arg14: ($SlotsPredicate_) | undefined);
@@ -2009,12 +2009,12 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $EntityPredicate}.
      */
-    export type $EntityPredicate_ = { flags?: ($EntityFlagsPredicate_) | undefined, targetedEntity?: ($EntityPredicate_) | undefined, subPredicate?: ($EntitySubPredicate) | undefined, periodicTick?: (number) | undefined, nbt?: ($NbtPredicate_) | undefined, equipment?: ($EntityEquipmentPredicate_) | undefined, effects?: ($MobEffectsPredicate_) | undefined, slots?: ($SlotsPredicate_) | undefined, passenger?: ($EntityPredicate_) | undefined, distanceToPlayer?: ($DistancePredicate_) | undefined, entityType?: ($EntityTypePredicate_) | undefined, team?: (string) | undefined, movement?: ($MovementPredicate_) | undefined, vehicle?: ($EntityPredicate_) | undefined, location?: $EntityPredicate$LocationWrapper_,  } | [flags?: ($EntityFlagsPredicate_) | undefined, targetedEntity?: ($EntityPredicate_) | undefined, subPredicate?: ($EntitySubPredicate) | undefined, periodicTick?: (number) | undefined, nbt?: ($NbtPredicate_) | undefined, equipment?: ($EntityEquipmentPredicate_) | undefined, effects?: ($MobEffectsPredicate_) | undefined, slots?: ($SlotsPredicate_) | undefined, passenger?: ($EntityPredicate_) | undefined, distanceToPlayer?: ($DistancePredicate_) | undefined, entityType?: ($EntityTypePredicate_) | undefined, team?: (string) | undefined, movement?: ($MovementPredicate_) | undefined, vehicle?: ($EntityPredicate_) | undefined, location?: $EntityPredicate$LocationWrapper_, ];
+    export type $EntityPredicate_ = { location?: $EntityPredicate$LocationWrapper_, vehicle?: ($EntityPredicate_) | undefined, movement?: ($MovementPredicate_) | undefined, team?: (string) | undefined, entityType?: ($EntityTypePredicate_) | undefined, distanceToPlayer?: ($DistancePredicate_) | undefined, passenger?: ($EntityPredicate_) | undefined, slots?: ($SlotsPredicate_) | undefined, effects?: ($MobEffectsPredicate_) | undefined, equipment?: ($EntityEquipmentPredicate_) | undefined, nbt?: ($NbtPredicate_) | undefined, periodicTick?: (number) | undefined, subPredicate?: ($EntitySubPredicate) | undefined, targetedEntity?: ($EntityPredicate_) | undefined, flags?: ($EntityFlagsPredicate_) | undefined,  } | [location?: $EntityPredicate$LocationWrapper_, vehicle?: ($EntityPredicate_) | undefined, movement?: ($MovementPredicate_) | undefined, team?: (string) | undefined, entityType?: ($EntityTypePredicate_) | undefined, distanceToPlayer?: ($DistancePredicate_) | undefined, passenger?: ($EntityPredicate_) | undefined, slots?: ($SlotsPredicate_) | undefined, effects?: ($MobEffectsPredicate_) | undefined, equipment?: ($EntityEquipmentPredicate_) | undefined, nbt?: ($NbtPredicate_) | undefined, periodicTick?: (number) | undefined, subPredicate?: ($EntitySubPredicate) | undefined, targetedEntity?: ($EntityPredicate_) | undefined, flags?: ($EntityFlagsPredicate_) | undefined, ];
     export class $MobEffectsPredicate extends $Record {
-        matches(arg0: $LivingEntity): boolean;
+        effectMap(): $Map<$Holder<$MobEffect>, $MobEffectsPredicate$MobEffectInstancePredicate>;
         matches(arg0: $Map_<$Holder_<$MobEffect>, $MobEffectInstance>): boolean;
         matches(arg0: $Entity): boolean;
-        effectMap(): $Map<$Holder<$MobEffect>, $MobEffectsPredicate$MobEffectInstancePredicate>;
+        matches(arg0: $LivingEntity): boolean;
         static CODEC: $Codec<$MobEffectsPredicate>;
         constructor(arg0: $Map_<$Holder_<$MobEffect>, $MobEffectsPredicate$MobEffectInstancePredicate_>);
     }
@@ -2023,10 +2023,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $MobEffectsPredicate_ = { effectMap?: $Map_<$Holder_<$MobEffect>, $MobEffectsPredicate$MobEffectInstancePredicate_>,  } | [effectMap?: $Map_<$Holder_<$MobEffect>, $MobEffectsPredicate$MobEffectInstancePredicate_>, ];
     export class $CuredZombieVillagerTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
+        villager(): ($ContextAwarePredicate) | undefined;
         matches(arg0: $LootContext, arg1: $LootContext): boolean;
         validate(arg0: $CriterionValidator): void;
         static curedZombieVillager(): $Criterion<$CuredZombieVillagerTrigger$TriggerInstance>;
-        villager(): ($ContextAwarePredicate) | undefined;
         player(): ($ContextAwarePredicate) | undefined;
         zombie(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$CuredZombieVillagerTrigger$TriggerInstance>;
@@ -2035,14 +2035,14 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $CuredZombieVillagerTrigger$TriggerInstance}.
      */
-    export type $CuredZombieVillagerTrigger$TriggerInstance_ = { villager?: ($ContextAwarePredicate) | undefined, zombie?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [villager?: ($ContextAwarePredicate) | undefined, zombie?: ($ContextAwarePredicate) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $CuredZombieVillagerTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, zombie?: ($ContextAwarePredicate) | undefined, villager?: ($ContextAwarePredicate) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, zombie?: ($ContextAwarePredicate) | undefined, villager?: ($ContextAwarePredicate) | undefined, ];
     export class $CollectionCountsPredicate$Multiple<T, P extends $Predicate<T>> extends $Record implements $CollectionCountsPredicate<T, P> {
         test(arg0: $Iterable_<T>): boolean;
         entries(): $List<$CollectionCountsPredicate$Entry<T, P>>;
         unpack(): $List<$CollectionCountsPredicate$Entry<T, P>>;
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
         constructor(arg0: $List_<$CollectionCountsPredicate$Entry_<T, P>>);
     }
     /**
@@ -2050,23 +2050,23 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $CollectionCountsPredicate$Multiple_<T, P> = { entries?: $List_<$CollectionCountsPredicate$Entry_<any, $Predicate_<T>>>,  } | [entries?: $List_<$CollectionCountsPredicate$Entry_<any, $Predicate_<T>>>, ];
     export class $DamagePredicate$Builder {
-        type(arg0: $DamageSourcePredicate_): $DamagePredicate$Builder;
-        type(arg0: $DamageSourcePredicate$Builder): $DamagePredicate$Builder;
-        build(): $DamagePredicate;
+        static damageInstance(): $DamagePredicate$Builder;
         takenDamage(arg0: $MinMaxBounds$Doubles_): $DamagePredicate$Builder;
+        sourceEntity(arg0: $EntityPredicate_): $DamagePredicate$Builder;
         blocked(arg0: boolean): $DamagePredicate$Builder;
         dealtDamage(arg0: $MinMaxBounds$Doubles_): $DamagePredicate$Builder;
-        sourceEntity(arg0: $EntityPredicate_): $DamagePredicate$Builder;
-        static damageInstance(): $DamagePredicate$Builder;
+        type(arg0: $DamageSourcePredicate$Builder): $DamagePredicate$Builder;
+        type(arg0: $DamageSourcePredicate_): $DamagePredicate$Builder;
+        build(): $DamagePredicate;
         constructor();
     }
     export class $CollectionContentsPredicate$Single<T, P extends $Predicate<T>> extends $Record implements $CollectionContentsPredicate<T, P> {
         test(arg0: $Iterable_<T>): boolean;
         test(): P;
         unpack(): $List<P>;
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
         constructor(arg0: P);
     }
     /**
@@ -2074,13 +2074,13 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $CollectionContentsPredicate$Single_<T, P> = { test?: $Predicate_<T>,  } | [test?: $Predicate_<T>, ];
     export class $ChangeDimensionTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
+        static changedDimensionTo(arg0: $ResourceKey_<$Level>): $Criterion<$ChangeDimensionTrigger$TriggerInstance>;
+        static changedDimensionFrom(arg0: $ResourceKey_<$Level>): $Criterion<$ChangeDimensionTrigger$TriggerInstance>;
+        static changedDimension(): $Criterion<$ChangeDimensionTrigger$TriggerInstance>;
+        static changedDimension(arg0: $ResourceKey_<$Level>, arg1: $ResourceKey_<$Level>): $Criterion<$ChangeDimensionTrigger$TriggerInstance>;
         matches(arg0: $ResourceKey_<$Level>, arg1: $ResourceKey_<$Level>): boolean;
         from(): ($ResourceKey<$Level>) | undefined;
         to(): ($ResourceKey<$Level>) | undefined;
-        static changedDimensionFrom(arg0: $ResourceKey_<$Level>): $Criterion<$ChangeDimensionTrigger$TriggerInstance>;
-        static changedDimensionTo(arg0: $ResourceKey_<$Level>): $Criterion<$ChangeDimensionTrigger$TriggerInstance>;
-        static changedDimension(arg0: $ResourceKey_<$Level>, arg1: $ResourceKey_<$Level>): $Criterion<$ChangeDimensionTrigger$TriggerInstance>;
-        static changedDimension(): $Criterion<$ChangeDimensionTrigger$TriggerInstance>;
         player(): ($ContextAwarePredicate) | undefined;
         validate(arg0: $CriterionValidator): void;
         static CODEC: $Codec<$ChangeDimensionTrigger$TriggerInstance>;
@@ -2089,7 +2089,7 @@ declare module "@package/net/minecraft/advancements/critereon" {
     /**
      * Values that may be interpreted as {@link $ChangeDimensionTrigger$TriggerInstance}.
      */
-    export type $ChangeDimensionTrigger$TriggerInstance_ = { from?: ($ResourceKey_<$Level>) | undefined, to?: ($ResourceKey_<$Level>) | undefined, player?: ($ContextAwarePredicate) | undefined,  } | [from?: ($ResourceKey_<$Level>) | undefined, to?: ($ResourceKey_<$Level>) | undefined, player?: ($ContextAwarePredicate) | undefined, ];
+    export type $ChangeDimensionTrigger$TriggerInstance_ = { player?: ($ContextAwarePredicate) | undefined, to?: ($ResourceKey_<$Level>) | undefined, from?: ($ResourceKey_<$Level>) | undefined,  } | [player?: ($ContextAwarePredicate) | undefined, to?: ($ResourceKey_<$Level>) | undefined, from?: ($ResourceKey_<$Level>) | undefined, ];
     export class $SimpleCriterionTrigger$SimpleInstance {
     }
     export interface $SimpleCriterionTrigger$SimpleInstance extends $CriterionTriggerInstance {
@@ -2101,10 +2101,10 @@ declare module "@package/net/minecraft/advancements/critereon" {
      */
     export type $SimpleCriterionTrigger$SimpleInstance_ = (() => ($ContextAwarePredicate) | undefined);
     export class $ChanneledLightningTrigger$TriggerInstance extends $Record implements $SimpleCriterionTrigger$SimpleInstance {
-        matches(arg0: $Collection_<$LootContext>): boolean;
-        validate(arg0: $CriterionValidator): void;
         static channeledLightning(...arg0: $EntityPredicate$Builder[]): $Criterion<$ChanneledLightningTrigger$TriggerInstance>;
         victims(): $List<$ContextAwarePredicate>;
+        matches(arg0: $Collection_<$LootContext>): boolean;
+        validate(arg0: $CriterionValidator): void;
         player(): ($ContextAwarePredicate) | undefined;
         static CODEC: $Codec<$ChanneledLightningTrigger$TriggerInstance>;
         constructor(arg0: ($ContextAwarePredicate) | undefined, arg1: $List_<$ContextAwarePredicate>);

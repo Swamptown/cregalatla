@@ -9,19 +9,19 @@ import { $Vec3, $BlockHitResult } from "@package/net/minecraft/world/phys";
 
 declare module "@package/net/minecraft/world/item/context" {
     export class $BlockPlaceContext extends $UseOnContext {
-        static at(arg0: $BlockPlaceContext, arg1: $BlockPos_, arg2: $Direction_): $BlockPlaceContext;
         getNearestLookingVerticalDirection(): $Direction;
+        handler$gip000$moonlight$fixNotAccountingForNullPlayer1(arg0: $CallbackInfoReturnable<any>): void;
+        handler$gip000$moonlight$fixNotAccountingForNullPlayer2(arg0: $CallbackInfoReturnable<any>): void;
+        handler$gip000$moonlight$fixNotAccountingForNullPlayer3(arg0: $CallbackInfoReturnable<any>): void;
         getNearestLookingDirection(): $Direction;
         getNearestLookingDirections(): $Direction[];
-        handler$gic000$moonlight$fixNotAccountingForNullPlayer1(arg0: $CallbackInfoReturnable<any>): void;
-        handler$gic000$moonlight$fixNotAccountingForNullPlayer2(arg0: $CallbackInfoReturnable<any>): void;
-        handler$gic000$moonlight$fixNotAccountingForNullPlayer3(arg0: $CallbackInfoReturnable<any>): void;
         replacingClickedOnBlock(): boolean;
         canPlace(): boolean;
+        static at(arg0: $BlockPlaceContext, arg1: $BlockPos_, arg2: $Direction_): $BlockPlaceContext;
         replaceClicked: boolean;
+        constructor(arg0: $Player, arg1: $InteractionHand_, arg2: $ItemStack_, arg3: $BlockHitResult);
         constructor(arg0: $Level_, arg1: $Player, arg2: $InteractionHand_, arg3: $ItemStack_, arg4: $BlockHitResult);
         constructor(arg0: $UseOnContext);
-        constructor(arg0: $Player, arg1: $InteractionHand_, arg2: $ItemStack_, arg3: $BlockHitResult);
         get nearestLookingVerticalDirection(): $Direction;
         get nearestLookingDirection(): $Direction;
         get nearestLookingDirections(): $Direction[];
@@ -31,30 +31,30 @@ declare module "@package/net/minecraft/world/item/context" {
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_, arg3: $ItemStack_, arg4: $Direction_);
     }
     export class $UseOnContext implements $UseOnContextAccessor {
-        getLevel(): $Level;
         getClickedPos(): $BlockPos;
         getClickedFace(): $Direction;
         getPlayer(): $Player;
-        isInside(): boolean;
-        getHorizontalDirection(): $Direction;
-        getHitResult(): $BlockHitResult;
-        getClickLocation(): $Vec3;
         getHand(): $InteractionHand;
+        getHitResult(): $BlockHitResult;
+        isInside(): boolean;
+        getClickLocation(): $Vec3;
+        getHorizontalDirection(): $Direction;
+        getLevel(): $Level;
         getItemInHand(): $ItemStack;
         getRotation(): number;
         isSecondaryUseActive(): boolean;
         create$getHitResult(): $BlockHitResult;
         constructor(arg0: $Player, arg1: $InteractionHand_, arg2: $BlockHitResult);
         constructor(arg0: $Level_, arg1: $Player, arg2: $InteractionHand_, arg3: $ItemStack_, arg4: $BlockHitResult);
-        get level(): $Level;
         get clickedPos(): $BlockPos;
         get clickedFace(): $Direction;
         get player(): $Player;
-        get inside(): boolean;
-        get horizontalDirection(): $Direction;
-        get hitResult(): $BlockHitResult;
-        get clickLocation(): $Vec3;
         get hand(): $InteractionHand;
+        get hitResult(): $BlockHitResult;
+        get inside(): boolean;
+        get clickLocation(): $Vec3;
+        get horizontalDirection(): $Direction;
+        get level(): $Level;
         get itemInHand(): $ItemStack;
         get rotation(): number;
         get secondaryUseActive(): boolean;

@@ -21,12 +21,12 @@ declare module "@package/net/fabricmc/fabric/mixin/object/builder" {
     }
     export interface $AbstractBlockSettingsAccessor {
         getHasCollision(): boolean;
+        isRequiresCorrectToolForDrops(): boolean;
         getDestroyTime(): number;
         getIsRandomlyTicking(): boolean;
         getDynamicShape(): boolean;
         getCanOcclude(): boolean;
         getIsAir(): boolean;
-        isRequiresCorrectToolForDrops(): boolean;
         getIsValidSpawn(): $BlockBehaviour$StateArgumentPredicate<$EntityType<never>>;
         getIsRedstoneConductor(): $BlockBehaviour$StatePredicate;
         getIsSuffocating(): $BlockBehaviour$StatePredicate;
@@ -59,11 +59,11 @@ declare module "@package/net/fabricmc/fabric/mixin/object/builder" {
         setForceSolidOn(arg0: boolean): void;
         setReplaceable(arg0: boolean): void;
         getLiquid(): boolean;
-        getJumpFactor(): number;
-        getSpeedFactor(): number;
         getSoundType(): $SoundType;
         getFriction(): number;
         getLuminance(): $ToIntFunction<$BlockState>;
+        getJumpFactor(): number;
+        getSpeedFactor(): number;
         getExplosionResistance(): number;
         getMapColor(): $Function<$BlockState, $MapColor>;
         getDrops(): $ResourceKey<$LootTable>;
@@ -76,11 +76,11 @@ declare module "@package/net/fabricmc/fabric/mixin/object/builder" {
         get emissiveRendering(): $BlockBehaviour$StatePredicate;
         get pushReaction(): $PushReaction;
         get instrument(): $NoteBlockInstrument;
-        get jumpFactor(): number;
-        get speedFactor(): number;
         get soundType(): $SoundType;
         get friction(): number;
         get luminance(): $ToIntFunction<$BlockState>;
+        get jumpFactor(): number;
+        get speedFactor(): number;
         get explosionResistance(): number;
     }
     export class $AbstractBlockAccessor {

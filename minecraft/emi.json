@@ -1,6 +1,192 @@
 {
   "favorites": [],
   "lookup_history": [
+    "item:create:small_asurine_bricks",
+    "item:create:yellow_postbox",
+    "item:create:orange_table_cloth",
+    "item:create:brown_toolbox",
+    "item:create:light_blue_valve_handle",
+    "item:create_vibrant_vaults:light_blue_stock_link",
+    "item:create_vibrant_vaults:white_stock_link",
+    "item:tfmg:cyan_concrete_slab",
+    "item:dndecor:white_velvet_block",
+    "item:dndecor:gray_velvet_block",
+    "item:dndecor:light_blue_velvet_block",
+    "item:dndecor:stone_metal",
+    {
+      "type": "fluid",
+      "id": "tfmg:liquid_concrete",
+      "amount": 0
+    },
+    {
+      "type": "fluid",
+      "id": "create_dragons_plus:blue_dye",
+      "amount": 0
+    },
+    "item:tfmg:steel_flywheel",
+    "item:tfmg:nickel_flywheel",
+    "item:tfmg:lime_caution_block",
+    "item:tfmg:magenta_concrete",
+    "item:tfmg:steel_chemical_vat",
+    "item:dndecor:calcite_millstone",
+    "item:dndecor:polished_cut_netherrack",
+    "item:dndecor:deepslate_tiles",
+    "item:dndecor:cut_netherrack",
+    "item:dndecor:blue_stone_metal",
+    "item:dndecor:layered_netherrack",
+    "item:dndecor:tuff_crushing_wheel",
+    "item:dndecor:white_flywheel",
+    "item:dndecor:lime_flywheel",
+    "item:dndecor:yellow_display_board",
+    "item:dndecor:asurine_millstone",
+    "item:dndecor:light_blue_display_board",
+    "item:dndecor:amethyst_pillar",
+    "item:create_mixed_casing:iron_dark_oak_gearbox",
+    "item:create_mixed_casing:vertical_railway_gearbox",
+    "item:create_mixed_casing:railway_iron_casing",
+    "item:create_mixed_casing:iron_dark_oak_casing",
+    "item:railways:white_locometal_boiler",
+    "item:railways:white_copper_wrapped_locometal",
+    "item:railways:white_brass_wrapped_locometal",
+    "item:railways:gray_iron_wrapped_locometal",
+    "item:railways:white_locometal_pillar",
+    "item:railways:white_riveted_locometal",
+    "item:railways:plated_locometal",
+    "item:railways:locometal_smokebox",
+    "item:railways:yellow_slashed_locometal",
+    "item:railways:light_blue_slashed_locometal",
+    "item:railways:light_blue_conductor_cap",
+    "item:railways:magenta_conductor_cap",
+    "item:simulated:spring",
+    "item:rocketnautics:rcs_thruster",
+    "item:rocketnautics:booster_thruster",
+    "item:rocketnautics:sputnik",
+    "item:minecraft:dead_brain_coral",
+    "item:minecraft:light_weighted_pressure_plate",
+    "item:minecraft:polished_cinnabar",
+    "item:createdeco:decal_left",
+    "item:railways:white_plated_locometal",
+    "item:minecraft:written_book{\"minecraft:item_name\":\u0027{\"color\":\"gold\",\"translate\":\"item.rocketnautics.credits_book\"}\u0027,\"minecraft:written_book_content\":{author:\"webyep\",pages:[{raw:\u0027{\"extra\":[{\"bold\":true,\"color\":\"gold\",\"text\":\"   Cosmonautics\\\\n\\\\n\"},{\"color\":\"dark_gray\",\"italic\":true,\"text\":\"This book is dedicated\\\\nto everyone who helped\\\\nmake this project\\\\npossible!\\\\n\\\\n\"},{\"color\":\"dark_red\",\"text\":\"Thank you all!\"}],\"text\":\"\"}\u0027},{raw:\u0027{\"extra\":[{\"bold\":true,\"color\":\"gold\",\"text\":\"      Credits\\\\n\\\\n\"},{\"color\":\"dark_blue\",\"text\":\"Maintainer: \"},\"web\\\\n\",{\"color\":\"dark_blue\",\"text\":\"Contributor: \"},\"SSnowly, M_W_K, snusxd, TechTastic\\\\n\",{\"color\":\"dark_blue\",\"text\":\"Artist: \"},\"LordAret, Mruranium\\\\n\",{\"color\":\"dark_green\",\"text\":\"Ideas: \"},\"6j, Harbinger\\\\n\",{\"color\":\"dark_red\",\"text\":\"Testers: \"},\"ABOBA, Kernos, MrFeddy\\\\n\",{\"color\":\"dark_aqua\",\"text\":\"Music: \"},\"Kevin Macleod\\\\n\",{\"color\":\"dark_green\",\"text\":\"Localization: \"},\"PigeonNian\"],\"text\":\"\"}\u0027},{raw:\u0027{\"extra\":[{\"bold\":true,\"color\":\"gold\",\"text\":\"    Hall of Fame\\\\n\\\\n\"},{\"bold\":true,\"color\":\"dark_blue\",\"text\":\"Apollo1641\\\\n\"},{\"color\":\"dark_gray\",\"italic\":true,\"text\":\"Winner of the First Rocket Contest!\"}],\"text\":\"\"}\u0027}],resolved:1b,title:{raw:\"Credits\"}}}",
+    "item:railways:pink_conductor_cap",
+    "item:simulated:blue_nameplate",
+    "item:aeronautics:smart_propeller",
+    "item:simulated:white_portable_engine",
+    "item:dndesires:splashing_sail",
+    "item:dndesires:breccia_pillar",
+    "item:dndesires:polished_cut_breccia",
+    "item:dndesires:breccia",
+    "item:dndesires:bore_block",
+    "item:dndesires:yellow_bore_block",
+    "item:dndesires:lime_asphalt",
+    "item:dndesires:light_blue_asphalt",
+    "item:createmetallurgy:molten_electrum_bucket",
+    "item:createmetallurgy:molten_iron_bucket",
+    "item:tfmg:lead_flywheel",
+    "item:tfmg:pink_caution_block",
+    "item:create_vibrant_vaults:orange_redstone_requester",
+    "item:create_vibrant_vaults:blue_redstone_requester",
+    "item:tfmg:cast_iron_sheet",
+    "item:tfmg:etched_circuit_board",
+    {
+      "type": "fluid",
+      "id": "dndesires:glowberry_milkshake",
+      "amount": 0
+    },
+    "item:tfmg:light_gray_multimeter",
+    "item:createdeco:short_red_bricks",
+    "item:createdeco:dean_bricks",
+    "item:createdeco:mossy_blue_bricks",
+    "item:createdeco:brass_bars",
+    "item:createdeco:brass_bars_overlay",
+    "item:createdeco:andesite_bars",
+    "item:createdeco:andesite_bars_overlay",
+    "item:createdeco:long_red_brick_slab",
+    "item:createdeco:decal_warning",
+    "item:createdeco:decal_skull",
+    "item:createdeco:industrial_iron_catwalk_stairs",
+    "item:createdeco:green_brass_lamp",
+    "item:create_vibrant_vaults:orange_package_frogport",
+    "item:create_vibrant_vaults:white_package_frogport",
+    "item:create:repackager",
+    "item:create_vibrant_vaults:red_packager",
+    "item:create_vibrant_vaults:light_gray_packager",
+    "item:create_vibrant_vaults:cyan_redstone_requester",
+    "item:bits_n_bobs:white_chair",
+    "item:create:white_seat",
+    "item:create_ore_excavation_plus:cut_raw_diamond",
+    "item:create_ore_excavation_plus:cut_raw_emerald",
+    "item:simulated:orange_handle",
+    "item:simulated:iron_handle",
+    "item:simulated:copper_handle",
+    "item:simulated:black_handle",
+    "item:comforts:hammock_brown",
+    "item:createdeco:black_shipping_container",
+    "item:createdeco:cyan_shipping_container",
+    "item:createdeco:brown_shipping_container",
+    "item:createdeco:blue_shipping_container",
+    "item:createdeco:orange_shipping_container",
+    "item:create_vibrant_vaults:magenta_shipping_container",
+    "item:dndecor:storage_container",
+    "item:create_vibrant_vaults:white_shipping_container",
+    "item:createdeco:magenta_shipping_container",
+    "item:createdeco:purple_shipping_container",
+    "item:minecraft:white_harness",
+    "item:minecraft:bundle",
+    "item:comforts:sleeping_bag_white",
+    [
+      "item:comforts:sleeping_bag_orange",
+      "item:comforts:sleeping_bag_magenta",
+      "item:comforts:sleeping_bag_light_blue",
+      "item:comforts:sleeping_bag_yellow",
+      "item:comforts:sleeping_bag_lime",
+      "item:comforts:sleeping_bag_pink",
+      "item:comforts:sleeping_bag_gray",
+      "item:comforts:sleeping_bag_light_gray",
+      "item:comforts:sleeping_bag_cyan",
+      "item:comforts:sleeping_bag_purple",
+      "item:comforts:sleeping_bag_blue",
+      "item:comforts:sleeping_bag_brown",
+      "item:comforts:sleeping_bag_green",
+      "item:comforts:sleeping_bag_red",
+      "item:comforts:sleeping_bag_black"
+    ],
+    [
+      "item:comforts:sleeping_bag_white",
+      "item:comforts:sleeping_bag_orange",
+      "item:comforts:sleeping_bag_magenta",
+      "item:comforts:sleeping_bag_light_blue",
+      "item:comforts:sleeping_bag_yellow",
+      "item:comforts:sleeping_bag_lime",
+      "item:comforts:sleeping_bag_pink",
+      "item:comforts:sleeping_bag_gray",
+      "item:comforts:sleeping_bag_light_gray",
+      "item:comforts:sleeping_bag_cyan",
+      "item:comforts:sleeping_bag_purple",
+      "item:comforts:sleeping_bag_blue",
+      "item:comforts:sleeping_bag_brown",
+      "item:comforts:sleeping_bag_red",
+      "item:comforts:sleeping_bag_black"
+    ],
+    "item:comforts:sleeping_bag_green",
+    "item:minecraft:chiseled_bookshelf",
+    "item:minecraft:cartography_table",
+    "item:minecraft:stonecutter",
+    "item:minecraft:glow_item_frame",
+    "item:minecraft:cobblestone",
+    "item:minecraft:iron_chestplate",
+    "item:minecraft:fishing_rod",
+    "item:minecraft:cracked_stone_bricks",
+    "item:minecraft:polished_diorite",
+    "item:minecraft:polished_deepslate",
+    "item:create:netherite_backtank{\"create:banktank_air\":900}",
+    "item:create:copper_backtank{\"create:banktank_air\":900}",
+    "item:rocketnautics:jetpack",
+    "item:create_sa:netherite_jetpack_chestplate",
+    "item:create_sa:copper_jetpack_chestplate",
+    "item:create_sa:andesite_jetpack_chestplate",
+    "item:create_sa:brass_jetpack_chestplate",
+    "item:create_sa:heat_engine",
+    "item:minecraft:elytra",
     "item:minecraft:light_gray_banner",
     "item:create_vibrant_vaults:light_blue_vertical_basic_shipping_container"
   ],
@@ -146,6 +332,778 @@
       "type": "jemi",
       "uid": "mymod:shieldy"
     },
-    "mob_effect:mymod:water_consentrated"
+    "mob_effect:mymod:water_consentrated",
+    "item:dndecor:lead_cross_bolt",
+    "item:dndecor:lead_dash_bolt",
+    "item:dndecor:lead_dot_bolt",
+    "item:dndecor:lead_flat_bolt",
+    "item:dndecor:aluminum_dash_bolt",
+    "item:dndecor:aluminum_cross_bolt",
+    "item:dndecor:aluminum_dot_bolt",
+    "item:dndecor:aluminum_flat_bolt",
+    "item:dndecor:nickel_cross_bolt",
+    "item:dndecor:nickel_dash_bolt",
+    "item:dndecor:nickel_dot_bolt",
+    "item:dndecor:nickel_flat_bolt",
+    "item:dndecor:tungsten_cross_bolt",
+    "item:dndecor:tungsten_dash_bolt",
+    "item:dndecor:tungsten_dot_bolt",
+    "item:dndecor:tungsten_flat_bolt",
+    "item:dndecor:steel_cross_bolt",
+    "item:dndecor:steel_dash_bolt",
+    "item:dndecor:steel_dot_bolt",
+    "item:dndecor:steel_flat_bolt",
+    "item:dndecor:cast_iron_cross_bolt",
+    "item:dndecor:cast_iron_dash_bolt",
+    "item:dndecor:cast_iron_dot_bolt",
+    "item:dndecor:cast_iron_flat_bolt",
+    {
+      "type": "jemi",
+      "uid": "createmetallurgy:ladle"
+    },
+    "item:immersive_paintings:glow_graffiti",
+    {
+      "type": "jemi",
+      "uid": "immersive_paintings:glow_graffiti"
+    },
+    "item:immersive_paintings:graffiti",
+    {
+      "type": "jemi",
+      "uid": "immersive_paintings:graffiti"
+    },
+    "item:immersive_paintings:glow_painting",
+    {
+      "type": "jemi",
+      "uid": "immersive_paintings:glow_painting"
+    },
+    "item:immersive_paintings:painting",
+    {
+      "type": "jemi",
+      "uid": "immersive_paintings:painting"
+    },
+    {
+      "type": "jemi",
+      "uid": "create_sa:lifted_block"
+    },
+    {
+      "type": "jemi",
+      "uid": "create_sa:flamethrower_pr_2"
+    },
+    {
+      "type": "jemi",
+      "uid": "create_sa:flamethrower_pr"
+    },
+    {
+      "type": "jemi",
+      "uid": "create_sa:brass_cube_r"
+    },
+    {
+      "type": "jemi",
+      "uid": "create_sa:vault_module"
+    },
+    {
+      "type": "jemi",
+      "uid": "create_sa:magnet_module"
+    },
+    {
+      "type": "jemi",
+      "uid": "create_sa:fan_module"
+    },
+    "item:simulated:contraption_diagram",
+    {
+      "type": "jemi",
+      "uid": "simulated:contraption_diagram"
+    },
+    "item:railways:benchcart",
+    {
+      "type": "jemi",
+      "uid": "railways:benchcart"
+    },
+    "item:railways:jukeboxcart",
+    {
+      "type": "jemi",
+      "uid": "railways:jukeboxcart"
+    },
+    {
+      "type": "jemi",
+      "uid": "railways:conductor"
+    },
+    {
+      "type": "jemi",
+      "uid": "xercapaint:canvas"
+    },
+    {
+      "type": "jemi",
+      "uid": "xercapaint:easel"
+    },
+    {
+      "type": "jemi",
+      "uid": "create:contraption"
+    },
+    {
+      "type": "jemi",
+      "uid": "create:stationary_contraption"
+    },
+    {
+      "type": "jemi",
+      "uid": "create:gantry_contraption"
+    },
+    {
+      "type": "jemi",
+      "uid": "create:carriage_contraption"
+    },
+    {
+      "type": "jemi",
+      "uid": "create:super_glue"
+    },
+    {
+      "type": "jemi",
+      "uid": "create:crafting_blueprint"
+    },
+    {
+      "type": "jemi",
+      "uid": "create:seat"
+    },
+    {
+      "type": "jemi",
+      "uid": "create:potato_projectile"
+    },
+    {
+      "type": "jemi",
+      "uid": "create:package"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:pipe_bomb"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:napalm_potato"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:zinc_grenade"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:thermite_grenade"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:napalm_bomb_entity"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:copper_grenade"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:spark"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:green_spark"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:lithium_spark"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:blue_spark"
+    },
+    {
+      "type": "jemi",
+      "uid": "tfmg:dry_ice_flake"
+    },
+    {
+      "type": "jemi",
+      "uid": "create_sa:brass_drone"
+    },
+    {
+      "type": "jemi",
+      "uid": "create_sa:drill_module"
+    },
+    {
+      "type": "jemi",
+      "uid": "simulated:launched_plunger"
+    },
+    {
+      "type": "jemi",
+      "uid": "simulated:honey_glue"
+    },
+    {
+      "type": "jemi",
+      "uid": "offroad:borehead_contraption_entity"
+    },
+    {
+      "type": "jemi",
+      "uid": "strawstatues:straw_statue"
+    },
+    {
+      "type": "jemi",
+      "uid": "aeronautics:propeller_bearing_contraption"
+    },
+    {
+      "type": "jemi",
+      "uid": "aeronautics:gust"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:sulfur_cube"
+    },
+    {
+      "type": "jemi",
+      "uid": "bits_n_bobs:inert_stationary_contraption"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:pale_oak_chest_boat"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:pale_oak_boat"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:happy_ghast"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:creaking"
+    },
+    {
+      "type": "jemi",
+      "uid": "exposure:camera_stand"
+    },
+    {
+      "type": "jemi",
+      "uid": "exposure:glass_photograph_frame"
+    },
+    {
+      "type": "jemi",
+      "uid": "exposure:photograph_frame"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:fishing_bobber"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:player"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:zombified_piglin"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:zombie_villager"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:zombie_horse"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:zombie"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:zoglin"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:wolf"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:wither_skull"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:wither_skeleton"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:witch"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:wind_charge"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:wither"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:warden"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:vindicator"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:wandering_trader"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:villager"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:turtle"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:vex"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:tropical_fish"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:trader_llama"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:trident"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:tnt_minecart"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:tnt"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:text_display"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:tadpole"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:strider"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:stray"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:squid"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:spider"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:spectral_arrow"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:spawner_minecart"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:snowball"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:snow_golem"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:small_fireball"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:sniffer"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:slime"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:skeleton_horse"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:skeleton"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:shulker_bullet"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:silverfish"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:fireball"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:ominous_item_spawner"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:enderman"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:endermite"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:axolotl"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:bat"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:bee"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:evoker"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:leash_knot"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:lightning_bolt"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:evoker_fangs"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:blaze"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:block_display"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:experience_bottle"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:llama"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:llama_spit"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:experience_orb"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:boat"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:bogged"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:eye_of_ender"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:magma_cube"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:marker"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:falling_block"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:breeze"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:breeze_wind_charge"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:firework_rocket"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:minecart"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:mooshroom"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:fox"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:camel"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:cat"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:frog"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:mule"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:ocelot"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:furnace_minecart"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:cave_spider"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:chest_boat"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:ghast"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:painting"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:panda"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:giant"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:chest_minecart"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:chicken"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:glow_item_frame"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:parrot"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:phantom"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:glow_squid"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:cod"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:command_block_minecart"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:goat"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:pig"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:piglin"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:guardian"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:cow"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:creeper"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:hoglin"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:piglin_brute"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:pillager"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:hopper_minecart"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:dolphin"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:donkey"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:horse"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:polar_bear"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:potion"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:husk"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:dragon_fireball"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:drowned"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:illusioner"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:pufferfish"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:rabbit"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:interaction"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:egg"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:elder_guardian"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:iron_golem"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:ravager"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:salmon"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:item"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:end_crystal"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:ender_dragon"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:item_display"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:shulker"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:sheep"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:item_frame"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:ender_pearl"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:arrow"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:armor_stand"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:armadillo"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:area_effect_cloud"
+    },
+    {
+      "type": "jemi",
+      "uid": "minecraft:allay"
+    },
+    "item:minecraft:written_book{\"minecraft:item_name\":\u0027{\"color\":\"gold\",\"translate\":\"item.rocketnautics.credits_book\"}\u0027,\"minecraft:written_book_content\":{author:\"webyep\",pages:[{raw:\u0027{\"extra\":[{\"bold\":true,\"color\":\"gold\",\"text\":\"   Cosmonautics\\\\n\\\\n\"},{\"color\":\"dark_gray\",\"italic\":true,\"text\":\"This book is dedicated\\\\nto everyone who helped\\\\nmake this project\\\\npossible!\\\\n\\\\n\"},{\"color\":\"dark_red\",\"text\":\"Thank you all!\"}],\"text\":\"\"}\u0027},{raw:\u0027{\"extra\":[{\"bold\":true,\"color\":\"gold\",\"text\":\"      Credits\\\\n\\\\n\"},{\"color\":\"dark_blue\",\"text\":\"Maintainer: \"},\"web\\\\n\",{\"color\":\"dark_blue\",\"text\":\"Contributor: \"},\"SSnowly, M_W_K, snusxd, TechTastic\\\\n\",{\"color\":\"dark_blue\",\"text\":\"Artist: \"},\"LordAret, Mruranium\\\\n\",{\"color\":\"dark_green\",\"text\":\"Ideas: \"},\"6j, Harbinger\\\\n\",{\"color\":\"dark_red\",\"text\":\"Testers: \"},\"ABOBA, Kernos, MrFeddy\\\\n\",{\"color\":\"dark_aqua\",\"text\":\"Music: \"},\"Kevin Macleod\\\\n\",{\"color\":\"dark_green\",\"text\":\"Localization: \"},\"PigeonNian\"],\"text\":\"\"}\u0027},{raw:\u0027{\"extra\":[{\"bold\":true,\"color\":\"gold\",\"text\":\"    Hall of Fame\\\\n\\\\n\"},{\"bold\":true,\"color\":\"dark_blue\",\"text\":\"Apollo1641\\\\n\"},{\"color\":\"dark_gray\",\"italic\":true,\"text\":\"Winner of the First Rocket Contest!\"}],\"text\":\"\"}\u0027}],resolved:1b,title:{raw:\"Credits\"}}}"
   ]
 }

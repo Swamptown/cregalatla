@@ -50,10 +50,10 @@ declare module "@package/net/minecraft/util/debugchart" {
      */
     export type $TpsDebugDimensions_ = "full_tick" | "tick_server_method" | "scheduled_tasks" | "idle";
     export class $DebugSampleSubscriptionTracker {
-        broadcast(arg0: $ClientboundDebugSamplePacket_): void;
-        tick(arg0: number): void;
         shouldLogSamples(arg0: $RemoteDebugSampleType_): boolean;
+        tick(arg0: number): void;
         subscribe(arg0: $ServerPlayer, arg1: $RemoteDebugSampleType_): void;
+        broadcast(arg0: $ClientboundDebugSamplePacket_): void;
         static STOP_SENDING_AFTER_MS: number;
         static STOP_SENDING_AFTER_TICKS: number;
         constructor(arg0: $PlayerList);

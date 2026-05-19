@@ -16,15 +16,11 @@ declare module "@package/xaero/common/minimap/radar" {
         /**
          * @deprecated
          */
-        updateRadar(arg0: $ClientLevel, arg1: $Player, arg2: $Entity, arg3: $MinimapProcessor): void;
+        setLastRenderViewEntity(arg0: $Entity): void;
         /**
          * @deprecated
          */
-        getEntityColour(arg0: $Player, arg1: $Entity, arg2: number, arg3: boolean, arg4: $EntityRadarCategory, arg5: number, arg6: number, arg7: boolean, arg8: number): number;
-        /**
-         * @deprecated
-         */
-        getEntityBrightness(arg0: number, arg1: number, arg2: number, arg3: boolean): number;
+        getTeamColour(arg0: $Entity): number;
         /**
          * @deprecated
          */
@@ -36,11 +32,15 @@ declare module "@package/xaero/common/minimap/radar" {
         /**
          * @deprecated
          */
-        getTeamColour(arg0: $Entity): number;
+        updateRadar(arg0: $ClientLevel, arg1: $Player, arg2: $Entity, arg3: $MinimapProcessor): void;
         /**
          * @deprecated
          */
-        setLastRenderViewEntity(arg0: $Entity): void;
+        getEntityColour(arg0: $Player, arg1: $Entity, arg2: number, arg3: boolean, arg4: $EntityRadarCategory, arg5: number, arg6: number, arg7: boolean, arg8: number): number;
+        /**
+         * @deprecated
+         */
+        getEntityBrightness(arg0: number, arg1: number, arg2: number, arg3: boolean): number;
         /**
          * @deprecated
          */
@@ -61,9 +61,9 @@ declare module "@package/xaero/common/minimap/radar" {
          * @deprecated
          */
         constructor(arg0: $EntityRadarCategoryManager);
+        set lastRenderViewEntity(value: $Entity);
         get entityCategoryManager(): $EntityRadarCategoryManager;
         get radarListsIterator(): $Iterator<$MinimapRadarList>;
-        set lastRenderViewEntity(value: $Entity);
     }
     /**
      * @deprecated
@@ -72,6 +72,11 @@ declare module "@package/xaero/common/minimap/radar" {
         /**
          * @deprecated
          */
+        setClientCategory(arg0: $EntityRadarCategory): $MinimapRadarList;
+        /**
+         * @deprecated
+         */
         constructor();
+        set clientCategory(value: $EntityRadarCategory);
     }
 }

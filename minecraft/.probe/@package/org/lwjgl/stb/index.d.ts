@@ -7,8 +7,8 @@ declare module "@package/org/lwjgl/stb" {
         static CIF: $FFICIF;
     }
     export interface $STBIWriteCallbackI extends $CallbackI {
-        invoke(arg0: number, arg1: number, arg2: number): void;
         callback(arg0: number, arg1: number): void;
+        invoke(arg0: number, arg1: number, arg2: number): void;
         getCallInterface(): $FFICIF;
         get callInterface(): $FFICIF;
     }

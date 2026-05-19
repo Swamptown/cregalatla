@@ -13,12 +13,12 @@ declare module "@package/xaero/map/file/export" {
         constructor(arg0: $Path_);
     }
     export class $PNGExportResult {
+        getFolderToOpen(): $Path;
         getMessage(): $Component;
         getType(): $PNGExportResultType;
-        getFolderToOpen(): $Path;
         constructor(arg0: $PNGExportResultType, arg1: $Path_);
+        get folderToOpen(): $Path;
         get message(): $Component;
         get type(): $PNGExportResultType;
-        get folderToOpen(): $Path;
     }
 }

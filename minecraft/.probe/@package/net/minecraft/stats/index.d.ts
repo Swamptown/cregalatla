@@ -1,6 +1,6 @@
 import { $File_ } from "@package/java/io";
 import { $Item } from "@package/net/minecraft/world/item";
-import { $RecipeManager, $RecipeHolder_ } from "@package/net/minecraft/world/item/crafting";
+import { $RecipeHolder_, $RecipeManager } from "@package/net/minecraft/world/item/crafting";
 import { $MinecraftServer } from "@package/net/minecraft/server";
 import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $Component_, $Component } from "@package/net/minecraft/network/chat";
@@ -124,26 +124,19 @@ declare module "@package/net/minecraft/stats" {
         constructor();
     }
     export class $RecipeBookSettings {
-        copy(): $RecipeBookSettings;
-        isOpen(arg0: $RecipeBookType_): boolean;
-        write(arg0: $CompoundTag_): void;
-        write(arg0: $FriendlyByteBuf): void;
-        static read(arg0: $FriendlyByteBuf): $RecipeBookSettings;
-        static read(arg0: $CompoundTag_): $RecipeBookSettings;
         setOpen(arg0: $RecipeBookType_, arg1: boolean): void;
         isFiltering(arg0: $RecipeBookType_): boolean;
         setFiltering(arg0: $RecipeBookType_, arg1: boolean): void;
+        isOpen(arg0: $RecipeBookType_): boolean;
+        write(arg0: $CompoundTag_): void;
+        write(arg0: $FriendlyByteBuf): void;
+        static read(arg0: $CompoundTag_): $RecipeBookSettings;
+        static read(arg0: $FriendlyByteBuf): $RecipeBookSettings;
+        copy(): $RecipeBookSettings;
         replaceFrom(arg0: $RecipeBookSettings): void;
         constructor();
     }
     export class $RecipeBook {
-        remove(arg0: $ResourceLocation_): void;
-        remove(arg0: $RecipeHolder_<never>): void;
-        add(arg0: $ResourceLocation_): void;
-        add(arg0: $RecipeHolder_<never>): void;
-        contains(arg0: $ResourceLocation_): boolean;
-        contains(arg0: $RecipeHolder_<never>): boolean;
-        isOpen(arg0: $RecipeBookType_): boolean;
         copyOverData(arg0: $RecipeBook): void;
         willHighlight(arg0: $RecipeHolder_<never>): boolean;
         removeHighlight(arg0: $RecipeHolder_<never>): void;
@@ -156,6 +149,13 @@ declare module "@package/net/minecraft/stats" {
         setBookSettings(arg0: $RecipeBookSettings): void;
         getBookSettings(): $RecipeBookSettings;
         setBookSetting(arg0: $RecipeBookType_, arg1: boolean, arg2: boolean): void;
+        remove(arg0: $ResourceLocation_): void;
+        remove(arg0: $RecipeHolder_<never>): void;
+        add(arg0: $RecipeHolder_<never>): void;
+        add(arg0: $ResourceLocation_): void;
+        contains(arg0: $ResourceLocation_): boolean;
+        contains(arg0: $RecipeHolder_<never>): boolean;
+        isOpen(arg0: $RecipeBookType_): boolean;
         highlight: $Set<$ResourceLocation>;
         known: $Set<$ResourceLocation>;
         constructor();
@@ -169,10 +169,10 @@ declare module "@package/net/minecraft/stats" {
         constructor();
     }
     export class $Stat<T> extends $ObjectiveCriteria {
+        static buildName<T>(arg0: $StatType_<T>, arg1: T): string;
         getValue(): T;
         format(arg0: number): string;
         getType(): $StatType<T>;
-        static buildName<T>(arg0: $StatType_<T>, arg1: T): string;
         static DEATH_COUNT: $ObjectiveCriteria;
         static ARMOR: $ObjectiveCriteria;
         static TRIGGER: $ObjectiveCriteria;
@@ -197,10 +197,10 @@ declare module "@package/net/minecraft/stats" {
     export type $Stat_<T> = string;
     export interface $StatType<T> extends RegistryMarked<RegistryTypes.StatTypeTag, RegistryTypes.StatType> {}
     export class $ServerStatsCounter extends $StatsCounter {
-        save(): void;
         parseLocal(arg0: $DataFixer, arg1: string): void;
         markAllDirty(): void;
         sendStats(arg0: $ServerPlayer): void;
+        save(): void;
         toJson(): string;
         stats: $Object2IntMap<$Stat<never>>;
         constructor(arg0: $MinecraftServer, arg1: $File_);
@@ -220,12 +220,12 @@ declare module "@package/net/minecraft/stats" {
      */
     export type $StatFormatter_ = ((arg0: number) => string);
     export class $StatType<T> implements $Iterable<$Stat<T>> {
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $Stat<$Stat<T>>>;
+        getDisplayName(): $Component;
         get(arg0: $Stat_<T>): $Stat<$Stat<T>>;
         get(arg0: $Stat_<T>, arg1: $StatFormatter_): $Stat<$Stat<T>>;
         iterator(): $Iterator<$Stat<$Stat<T>>>;
         contains(arg0: $Stat_<T>): boolean;
-        getDisplayName(): $Component;
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $Stat<$Stat<T>>>;
         getRegistry(): $Registry<$Stat<T>>;
         spliterator(): $Spliterator<$Stat<T>>;
         forEach(arg0: $Consumer_<$Stat<T>>): void;

@@ -8,42 +8,18 @@ import { $KubeEntityEvent } from "@package/dev/latvian/mods/kubejs/entity";
 
 declare module "@package/com/almostreliable/morejs/features/teleport" {
     export class $EntityTeleportsEventJS implements $KubeEntityEvent {
-        getType(): $TeleportType;
-        getEntity(): $Entity;
         getY(): number;
+        getEntity(): $Entity;
+        getType(): $TeleportType;
         getX(): number;
         getZ(): number;
         setX(arg0: number): void;
         setY(arg0: number): void;
         setZ(arg0: number): void;
-        getLevel(): $Level;
         getPlayer(): $Player;
+        getLevel(): $Level;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -56,12 +32,36 @@ declare module "@package/com/almostreliable/morejs/features/teleport" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         constructor(arg0: $Entity, arg1: number, arg2: number, arg3: number, arg4: $TeleportType_);
         constructor(arg0: $Entity, arg1: number, arg2: number, arg3: number, arg4: $Level_, arg5: $TeleportType_);
-        get type(): $TeleportType;
         get entity(): $Entity;
-        get level(): $Level;
+        get type(): $TeleportType;
         get player(): $Player;
+        get level(): $Level;
         get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
     }

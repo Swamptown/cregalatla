@@ -141,8 +141,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(p: $BlockBuilder);
     }
     export class $FenceGateBlockBuilder extends $ShapedBlockBuilder {
-        behaviour(wt: string): this;
         behaviour(wt: $WoodType_): this;
+        behaviour(wt: string): this;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         static FENCE_GATE_TAGS: $ResourceLocation[];
@@ -245,8 +245,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(i: $ResourceLocation_);
     }
     export class $DoorBlockBuilder extends $ShapedBlockBuilder {
-        wooden(): this;
         behaviour(wt: $BlockSetType_): this;
+        wooden(): this;
         static DOOR_TAGS: $ResourceLocation[];
         sourceLine: $SourceLine;
         id: $ResourceLocation;
@@ -316,8 +316,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
     export class $BasicKubeBlock extends $Block implements $SimpleWaterloggedBlock {
         getPickupSound(): ($SoundEvent) | undefined;
         placeLiquid(levelAccessor: $LevelAccessor, blockPos: $BlockPos_, blockState: $BlockState_, fluidState: $FluidState): boolean;
-        pickupBlock(player: $Player, levelAccessor: $LevelAccessor, blockPos: $BlockPos_, blockState: $BlockState_): $ItemStack;
         canPlaceLiquid(player: $Player, blockGetter: $BlockGetter, blockPos: $BlockPos_, blockState: $BlockState_, fluid: $Fluid_): boolean;
+        pickupBlock(player: $Player, levelAccessor: $LevelAccessor, blockPos: $BlockPos_, blockState: $BlockState_): $ItemStack;
         getPickupSound(arg0: $BlockState_): ($SoundEvent) | undefined;
         explosionResistance: number;
         static UPDATE_SHAPE_ORDER: $Direction[];
@@ -353,8 +353,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
     export class $ButtonOrPressurePlateBuilder {
     }
     export interface $ButtonOrPressurePlateBuilder {
-        ticksToStayPressed(ticks: $TickDuration_): this;
         behaviour(behaviour: $BlockSetType_): this;
+        ticksToStayPressed(ticks: $TickDuration_): this;
     }
     export class $PillarBlockBuilder$WithEntity extends $PillarBlockBuilder$PillarKubeBlock implements $EntityBlock {
         newBlockEntity(pos: $BlockPos_, state: $BlockState_): $BlockEntity;
@@ -396,11 +396,6 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(p: $BlockBuilder);
     }
     export class $CropBlockBuilder$ShapeBuilder {
-        /**
-         * Describe the shape of the crop at a specific age.
-         * min/max coordinates are double values between 0 and 16.
-         */
-        shape(age: number, minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): $CropBlockBuilder$ShapeBuilder;
         getShapes(): $List<$VoxelShape>;
         /**
          * Makes the block to have a box like beetroot for each stage.
@@ -418,6 +413,11 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
          * Makes the block to have a box like wheat for each stage.
          */
         wheat(): $CropBlockBuilder$ShapeBuilder;
+        /**
+         * Describe the shape of the crop at a specific age.
+         * min/max coordinates are double values between 0 and 16.
+         */
+        shape(age: number, minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): $CropBlockBuilder$ShapeBuilder;
         constructor(age: number);
         get shapes(): $List<$VoxelShape>;
     }
@@ -458,30 +458,30 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(p: $BlockBuilder);
     }
     export class $CropBlockBuilder extends $BlockBuilder {
+        /**
+         * Remove seed drops from the loot table, does not prevent seed item from creating.
+         */
+        noSeeds(): this;
         farmersCanPlant(): this;
         bonemeal(bonemealCallback: $ToIntFunction_<$RandomTickCallback>): this;
         survive(surviveCallback: $CropBlockBuilder$SurviveCallback_): this;
         growTick(growSpeedCallback: $ToDoubleFunction_<$RandomTickCallback>): this;
         /**
-         * Remove seed drops from the loot table, does not prevent seed item from creating.
+         * Add a crop output with a specific amount.
          */
-        noSeeds(): this;
+        crop(output: $Holder_<$Item>, chance: $NumberProvider_): this;
         /**
          * Add a crop output with exactly one output.
          */
         crop(output: $Holder_<$Item>): this;
         /**
-         * Add a crop output with a specific amount.
+         * Set the age of the crop. Note that the box will be the same for all ages (A full block size).
          */
-        crop(output: $Holder_<$Item>, chance: $NumberProvider_): this;
+        age(age: number): this;
         /**
          * Set the age of the crop and the shape of the crop at that age.
          */
         age(age: number, builder: $Consumer_<$CropBlockBuilder$ShapeBuilder>): this;
-        /**
-         * Set the age of the crop. Note that the box will be the same for all ages (A full block size).
-         */
-        age(age: number): this;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         static CROP_ITEM_TAGS: $ResourceLocation[];

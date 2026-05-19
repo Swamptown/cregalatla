@@ -1,21 +1,3 @@
-/scoreboard objectives setdisplay sidebar health
-/scoreboard objectives setdisplay below_name health
-/scoreboard objectives setdisplay list health
-/advancement grant teeeal only mymod:air
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{buy:{id:"mymod:closed_scroll",count:1},buyB:{id:"mymod:closed_fire_scroll",count:1}}]}}
-/kill @e[type=minecraft:villager]
-/tp ~ ~100 ~
-/fill ~ ~ ~ ~ ~ ~ dirt
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,sell:{id:"mymod:closed_fire_scroll",count:1}}]},NoAI:1b}
-/kill @e[type=minecraft:villager]
-/give Rasgajag mymod:closed_fire_scroll
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,buy:{id:air,count:1},sell:{id:"mymod:closed_fire_scroll",count:1}}]},NoAI:1b}
-/kill @e[type=minecraft:villager]
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,sell:{id:closed_fire_scroll,count:1}}]},NoAI:1b}
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,sell:{id:"mymod:closed_fire_scroll",count:1}}]},NoAI:1b}
-/kill @e[type=minecraft:villager]
-/fill ~ ~ ~ ~ ~ ~ dirt
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,buy:{id:air,count:1},sell:{id:"mymod:closed_fire_scroll",count:1}}]}}
 /kill @e[type=minecraft:villager]
 /summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{rewardExp:0b,buy:{id:air,count:1},sell:{id:"mymod:closed_scroll",count:1}}]}}
 /kill @e[type=minecraft:villager]
@@ -48,3 +30,21 @@
 /gamemode creative
 /kubejs reload server-scripts
 /reload
+/kill @e
+/time set day
+/reload
+/give Rasgajag rocketnautics:jetpack
+/kubejs reload
+/kubejs reload startup-scripts
+/vre craftinggrid
+/vre maingui
+/reload
+/gamemode survival
+/gamemode creative
+/kubejs reload client-scripts
+/probejs
+/kubejs reload client-scripts
+/kubejs errors client
+/probejs
+/reload
+/tag Rasgajag list

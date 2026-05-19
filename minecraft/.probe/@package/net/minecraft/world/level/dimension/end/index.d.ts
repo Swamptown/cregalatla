@@ -8,9 +8,9 @@ import { $DamageSource_ } from "@package/net/minecraft/world/damagesource";
 
 declare module "@package/net/minecraft/world/level/dimension/end" {
     export class $DragonRespawnAnimation extends $Enum<$DragonRespawnAnimation> {
+        tick(arg0: $ServerLevel, arg1: $EndDragonFight, arg2: $List_<$EndCrystal>, arg3: number, arg4: $BlockPos_): void;
         static values(): $DragonRespawnAnimation[];
         static valueOf(arg0: string): $DragonRespawnAnimation;
-        tick(arg0: $ServerLevel, arg1: $EndDragonFight, arg2: $List_<$EndCrystal>, arg3: number, arg4: $BlockPos_): void;
         static SUMMONING_PILLARS: $DragonRespawnAnimation;
         static START: $DragonRespawnAnimation;
         static END: $DragonRespawnAnimation;
@@ -22,7 +22,6 @@ declare module "@package/net/minecraft/world/level/dimension/end" {
      */
     export type $DragonRespawnAnimation_ = "start" | "preparing_to_summon_pillars" | "summoning_pillars" | "summoning_dragon" | "end";
     export class $EndDragonFight {
-        tick(): void;
         /**
          * @deprecated
          */
@@ -33,25 +32,26 @@ declare module "@package/net/minecraft/world/level/dimension/end" {
          */
         removeAllGateways(): void;
         resetSpikeCrystals(): void;
-        addPlayer(arg0: $ServerPlayer): void;
-        saveData(): $EndDragonFight$Data;
+        removePlayer(arg0: $ServerPlayer): void;
         tryRespawn(): void;
+        saveData(): $EndDragonFight$Data;
+        addPlayer(arg0: $ServerPlayer): void;
+        getDragonUUID(): $UUID;
+        updateDragon(arg0: $EnderDragon): void;
         setDragonKilled(arg0: $EnderDragon): void;
         hasPreviouslyKilledDragon(): boolean;
         getCrystalsAlive(): number;
         onCrystalDestroyed(arg0: $EndCrystal, arg1: $DamageSource_): void;
-        getDragonUUID(): $UUID;
-        updateDragon(arg0: $EnderDragon): void;
-        removePlayer(arg0: $ServerPlayer): void;
+        tick(): void;
         static TIME_BETWEEN_PLAYER_SCANS: number;
         static ARENA_TICKET_LEVEL: number;
         static DRAGON_SPAWN_Y: number;
-        constructor(arg0: $ServerLevel, arg1: number, arg2: $EndDragonFight$Data_);
         constructor(arg0: $ServerLevel, arg1: number, arg2: $EndDragonFight$Data_, arg3: $BlockPos_);
+        constructor(arg0: $ServerLevel, arg1: number, arg2: $EndDragonFight$Data_);
         set respawnStage(value: $DragonRespawnAnimation_);
+        get dragonUUID(): $UUID;
         set dragonKilled(value: $EnderDragon);
         get crystalsAlive(): number;
-        get dragonUUID(): $UUID;
     }
     export class $EndDragonFight$Data extends $Record {
         needsStateScanning(): boolean;
@@ -69,5 +69,5 @@ declare module "@package/net/minecraft/world/level/dimension/end" {
     /**
      * Values that may be interpreted as {@link $EndDragonFight$Data}.
      */
-    export type $EndDragonFight$Data_ = { previouslyKilled?: boolean, isRespawning?: boolean, needsStateScanning?: boolean, dragonKilled?: boolean, dragonUUID?: ($UUID_) | undefined, gateways?: ($List_<number>) | undefined, exitPortalLocation?: ($BlockPos_) | undefined,  } | [previouslyKilled?: boolean, isRespawning?: boolean, needsStateScanning?: boolean, dragonKilled?: boolean, dragonUUID?: ($UUID_) | undefined, gateways?: ($List_<number>) | undefined, exitPortalLocation?: ($BlockPos_) | undefined, ];
+    export type $EndDragonFight$Data_ = { gateways?: ($List_<number>) | undefined, dragonUUID?: ($UUID_) | undefined, dragonKilled?: boolean, needsStateScanning?: boolean, isRespawning?: boolean, previouslyKilled?: boolean, exitPortalLocation?: ($BlockPos_) | undefined,  } | [gateways?: ($List_<number>) | undefined, dragonUUID?: ($UUID_) | undefined, dragonKilled?: boolean, needsStateScanning?: boolean, isRespawning?: boolean, previouslyKilled?: boolean, exitPortalLocation?: ($BlockPos_) | undefined, ];
 }

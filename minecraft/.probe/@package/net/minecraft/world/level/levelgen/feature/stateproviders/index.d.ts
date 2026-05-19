@@ -52,8 +52,8 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/stateprovide
     }
     export class $NoiseProvider extends $NoiseBasedStateProvider implements $NoiseProviderAccessor {
         static noiseProviderCodec<P extends $NoiseProvider>(arg0: $RecordCodecBuilder$Instance<P>): $Products$P4<$RecordCodecBuilder$Mu<P>, number, $NormalNoise$NoiseParameters, number, $List<$BlockState>>;
-        getRandomState(arg0: $List_<$BlockState_>, arg1: number): $BlockState;
         getRandomState(arg0: $List_<$BlockState_>, arg1: $BlockPos_, arg2: number): $BlockState;
+        getRandomState(arg0: $List_<$BlockState_>, arg1: number): $BlockState;
         getStates(): $List<$BlockState>;
         static CODEC: $MapCodec<$NoiseProvider>;
         seed: number;
@@ -101,9 +101,9 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/stateprovide
         constructor(arg0: $Block_);
     }
     export class $RuleBasedBlockStateProvider extends $Record {
+        rules(): $List<$RuleBasedBlockStateProvider$Rule>;
         getState(arg0: $WorldGenLevel, arg1: $RandomSource, arg2: $BlockPos_): $BlockState;
         fallback(): $BlockStateProvider;
-        rules(): $List<$RuleBasedBlockStateProvider$Rule>;
         static simple(arg0: $Block_): $RuleBasedBlockStateProvider;
         static simple(arg0: $BlockStateProvider): $RuleBasedBlockStateProvider;
         static CODEC: $Codec<$RuleBasedBlockStateProvider>;
@@ -112,7 +112,7 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/stateprovide
     /**
      * Values that may be interpreted as {@link $RuleBasedBlockStateProvider}.
      */
-    export type $RuleBasedBlockStateProvider_ = { fallback?: $BlockStateProvider, rules?: $List_<$RuleBasedBlockStateProvider$Rule_>,  } | [fallback?: $BlockStateProvider, rules?: $List_<$RuleBasedBlockStateProvider$Rule_>, ];
+    export type $RuleBasedBlockStateProvider_ = { rules?: $List_<$RuleBasedBlockStateProvider$Rule_>, fallback?: $BlockStateProvider,  } | [rules?: $List_<$RuleBasedBlockStateProvider$Rule_>, fallback?: $BlockStateProvider, ];
     export class $NoiseThresholdProvider extends $NoiseBasedStateProvider {
         static CODEC: $MapCodec<$NoiseThresholdProvider>;
         seed: number;

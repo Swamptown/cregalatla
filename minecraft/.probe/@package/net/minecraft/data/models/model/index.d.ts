@@ -9,23 +9,23 @@ import { $TextureSlotAccessor } from "@package/com/blackgear/vanillabackport/cor
 
 declare module "@package/net/minecraft/data/models/model" {
     export class $ModelLocationUtils {
-        static getModelLocation(arg0: $Block_): $ResourceLocation;
         static getModelLocation(arg0: $Item_): $ResourceLocation;
+        static getModelLocation(arg0: $Block_): $ResourceLocation;
         static getModelLocation(arg0: $Item_, arg1: string): $ResourceLocation;
         static getModelLocation(arg0: $Block_, arg1: string): $ResourceLocation;
-        static decorateItemModelLocation(arg0: string): $ResourceLocation;
         /**
          * @deprecated
          */
         static decorateBlockModelLocation(arg0: string): $ResourceLocation;
+        static decorateItemModelLocation(arg0: string): $ResourceLocation;
         constructor();
     }
     export class $TextureSlot implements $TextureSlotAccessor {
+        static create$vanillabackport_$md$4ca6b6$0(arg0: string): $TextureSlot;
         getParent(): $TextureSlot;
         getId(): string;
-        static create(arg0: string): $TextureSlot;
         static create(arg0: string, arg1: $TextureSlot): $TextureSlot;
-        static create$vanillabackport_$md$d858b6$0(arg0: string): $TextureSlot;
+        static create(arg0: string): $TextureSlot;
         static CANDLE: $TextureSlot;
         static ALL: $TextureSlot;
         static PLANT: $TextureSlot;
@@ -81,6 +81,10 @@ declare module "@package/net/minecraft/data/models/model" {
      */
     export type $ModelTemplate$JsonFactory_ = ((arg0: $ResourceLocation, arg1: $Map<$TextureSlot, $ResourceLocation>) => $JsonObject_);
     export class $ModelTemplates {
+        static createItem(arg0: string, ...arg1: $TextureSlot[]): $ModelTemplate;
+        static create(arg0: string, arg1: string, ...arg2: $TextureSlot[]): $ModelTemplate;
+        static create(...arg0: $TextureSlot[]): $ModelTemplate;
+        static create(arg0: string, ...arg1: $TextureSlot[]): $ModelTemplate;
         static CANDLE: $ModelTemplate;
         static STAINED_GLASS_PANE_POST: $ModelTemplate;
         static LEAVES: $ModelTemplate;
@@ -229,27 +233,38 @@ declare module "@package/net/minecraft/data/models/model" {
         constructor();
     }
     export class $TextureMapping {
-        get(arg0: $TextureSlot): $ResourceLocation;
-        put(arg0: $TextureSlot, arg1: $ResourceLocation_): $TextureMapping;
-        static pattern(arg0: $Block_): $TextureMapping;
-        static fence(arg0: $Block_): $TextureMapping;
-        static top(arg0: $Block_): $TextureMapping;
-        static fan(arg0: $Block_): $TextureMapping;
-        static getItemTexture(arg0: $Item_): $ResourceLocation;
+        static defaultTexture(arg0: $Block_): $TextureMapping;
+        static defaultTexture(arg0: $ResourceLocation_): $TextureMapping;
+        static logColumn(arg0: $Block_): $TextureMapping;
+        static particleFromItem(arg0: $Item_): $TextureMapping;
+        copyForced(arg0: $TextureSlot, arg1: $TextureSlot): $TextureMapping;
+        copyAndUpdate(arg0: $TextureSlot, arg1: $ResourceLocation_): $TextureMapping;
+        static pottedAzalea(arg0: $Block_): $TextureMapping;
+        static fire0(arg0: $Block_): $TextureMapping;
+        static fire1(arg0: $Block_): $TextureMapping;
+        static sculkShrieker(arg0: boolean): $TextureMapping;
+        static craftingTable(arg0: $Block_, arg1: $Block_): $TextureMapping;
+        static fletchingTable(arg0: $Block_, arg1: $Block_): $TextureMapping;
+        static orientableCube(arg0: $Block_): $TextureMapping;
+        static orientableCubeSameEnds(arg0: $Block_): $TextureMapping;
+        static candleCake(arg0: $Block_, arg1: boolean): $TextureMapping;
+        static snifferEgg(arg0: string): $TextureMapping;
+        static customParticle(arg0: $Block_): $TextureMapping;
+        getForced(): $Stream<$TextureSlot>;
+        putForced(arg0: $TextureSlot, arg1: $ResourceLocation_): $TextureMapping;
+        copySlot(arg0: $TextureSlot, arg1: $TextureSlot): $TextureMapping;
+        static singleSlot(arg0: $TextureSlot, arg1: $ResourceLocation_): $TextureMapping;
+        static flowerbed(arg0: $Block_): $TextureMapping;
+        static cubeBottomTopWithWall(arg0: $Block_): $TextureMapping;
+        static columnWithWall(arg0: $Block_): $TextureMapping;
+        static orientableCubeOnlyTop(arg0: $Block_): $TextureMapping;
+        static getBlockTexture(arg0: $Block_, arg1: string): $ResourceLocation;
+        static getBlockTexture(arg0: $Block_): $ResourceLocation;
         static getItemTexture(arg0: $Item_, arg1: string): $ResourceLocation;
-        static attachedStem(arg0: $Block_, arg1: $Block_): $TextureMapping;
-        static layer0(arg0: $ResourceLocation_): $TextureMapping;
-        static layer0(arg0: $Item_): $TextureMapping;
-        static layer0(arg0: $Block_): $TextureMapping;
-        static wool(arg0: $Block_): $TextureMapping;
-        static wool(arg0: $ResourceLocation_): $TextureMapping;
-        static cubeTop(arg0: $Block_): $TextureMapping;
-        static cubeBottomTop(arg0: $Block_): $TextureMapping;
-        static pane(arg0: $Block_, arg1: $Block_): $TextureMapping;
-        static cube(arg0: $Block_): $TextureMapping;
+        static getItemTexture(arg0: $Item_): $ResourceLocation;
+        static fan(arg0: $Block_): $TextureMapping;
         static cube(arg0: $ResourceLocation_): $TextureMapping;
-        static trialSpawner(arg0: $Block_, arg1: string, arg2: string): $TextureMapping;
-        static commandBlock(arg0: $Block_): $TextureMapping;
+        static cube(arg0: $Block_): $TextureMapping;
         static campfire(arg0: $Block_): $TextureMapping;
         static cauldron(arg0: $ResourceLocation_): $TextureMapping;
         static crop(arg0: $ResourceLocation_): $TextureMapping;
@@ -259,46 +274,35 @@ declare module "@package/net/minecraft/data/models/model" {
         static rail(arg0: $ResourceLocation_): $TextureMapping;
         static rail(arg0: $Block_): $TextureMapping;
         static stem(arg0: $Block_): $TextureMapping;
-        static torch(arg0: $Block_): $TextureMapping;
         static torch(arg0: $ResourceLocation_): $TextureMapping;
+        static torch(arg0: $Block_): $TextureMapping;
         static vault(arg0: $Block_, arg1: string, arg2: string, arg3: string, arg4: string): $TextureMapping;
-        static defaultTexture(arg0: $Block_): $TextureMapping;
-        static defaultTexture(arg0: $ResourceLocation_): $TextureMapping;
-        static logColumn(arg0: $Block_): $TextureMapping;
-        static orientableCubeOnlyTop(arg0: $Block_): $TextureMapping;
-        static customParticle(arg0: $Block_): $TextureMapping;
-        static fire0(arg0: $Block_): $TextureMapping;
-        static fire1(arg0: $Block_): $TextureMapping;
-        static snifferEgg(arg0: string): $TextureMapping;
-        static craftingTable(arg0: $Block_, arg1: $Block_): $TextureMapping;
-        static fletchingTable(arg0: $Block_, arg1: $Block_): $TextureMapping;
-        static orientableCube(arg0: $Block_): $TextureMapping;
-        static orientableCubeSameEnds(arg0: $Block_): $TextureMapping;
-        static candleCake(arg0: $Block_, arg1: boolean): $TextureMapping;
-        getForced(): $Stream<$TextureSlot>;
-        static pottedAzalea(arg0: $Block_): $TextureMapping;
-        static sculkShrieker(arg0: boolean): $TextureMapping;
-        static particleFromItem(arg0: $Item_): $TextureMapping;
-        putForced(arg0: $TextureSlot, arg1: $ResourceLocation_): $TextureMapping;
-        copySlot(arg0: $TextureSlot, arg1: $TextureSlot): $TextureMapping;
-        static singleSlot(arg0: $TextureSlot, arg1: $ResourceLocation_): $TextureMapping;
-        static flowerbed(arg0: $Block_): $TextureMapping;
-        static cubeBottomTopWithWall(arg0: $Block_): $TextureMapping;
-        static columnWithWall(arg0: $Block_): $TextureMapping;
-        copyForced(arg0: $TextureSlot, arg1: $TextureSlot): $TextureMapping;
-        copyAndUpdate(arg0: $TextureSlot, arg1: $ResourceLocation_): $TextureMapping;
+        static layer0(arg0: $Item_): $TextureMapping;
+        static layer0(arg0: $Block_): $TextureMapping;
+        static layer0(arg0: $ResourceLocation_): $TextureMapping;
+        static wool(arg0: $ResourceLocation_): $TextureMapping;
+        static wool(arg0: $Block_): $TextureMapping;
+        static cubeTop(arg0: $Block_): $TextureMapping;
+        static cubeBottomTop(arg0: $Block_): $TextureMapping;
+        static pane(arg0: $Block_, arg1: $Block_): $TextureMapping;
+        static commandBlock(arg0: $Block_): $TextureMapping;
+        static trialSpawner(arg0: $Block_, arg1: string, arg2: string): $TextureMapping;
+        static attachedStem(arg0: $Block_, arg1: $Block_): $TextureMapping;
+        get(arg0: $TextureSlot): $ResourceLocation;
+        put(arg0: $TextureSlot, arg1: $ResourceLocation_): $TextureMapping;
+        static pattern(arg0: $Block_): $TextureMapping;
+        static fence(arg0: $Block_): $TextureMapping;
+        static top(arg0: $Block_): $TextureMapping;
         static column(arg0: $Block_): $TextureMapping;
         static column(arg0: $ResourceLocation_, arg1: $ResourceLocation_): $TextureMapping;
-        static cross(arg0: $Block_): $TextureMapping;
-        static cross(arg0: $ResourceLocation_): $TextureMapping;
-        static layered(arg0: $ResourceLocation_, arg1: $ResourceLocation_): $TextureMapping;
         static layered(arg0: $ResourceLocation_, arg1: $ResourceLocation_, arg2: $ResourceLocation_): $TextureMapping;
-        static particle(arg0: $ResourceLocation_): $TextureMapping;
+        static layered(arg0: $ResourceLocation_, arg1: $ResourceLocation_): $TextureMapping;
         static particle(arg0: $Block_): $TextureMapping;
-        static plant(arg0: $Block_): $TextureMapping;
+        static particle(arg0: $ResourceLocation_): $TextureMapping;
+        static cross(arg0: $ResourceLocation_): $TextureMapping;
+        static cross(arg0: $Block_): $TextureMapping;
         static plant(arg0: $ResourceLocation_): $TextureMapping;
-        static getBlockTexture(arg0: $Block_, arg1: string): $ResourceLocation;
-        static getBlockTexture(arg0: $Block_): $ResourceLocation;
+        static plant(arg0: $Block_): $TextureMapping;
         constructor();
         get forced(): $Stream<$TextureSlot>;
     }
@@ -309,9 +313,9 @@ declare module "@package/net/minecraft/data/models/model" {
     export class $TexturedModel$Provider {
     }
     export interface $TexturedModel$Provider {
+        createWithSuffix(arg0: $Block_, arg1: string, arg2: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
         get(arg0: $Block_): $TexturedModel;
         create(arg0: $Block_, arg1: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
-        createWithSuffix(arg0: $Block_, arg1: string, arg2: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
         updateTexture(arg0: $Consumer_<$TextureMapping>): $TexturedModel$Provider;
     }
     /**
@@ -319,11 +323,11 @@ declare module "@package/net/minecraft/data/models/model" {
      */
     export type $TexturedModel$Provider_ = ((arg0: $Block) => $TexturedModel);
     export class $TexturedModel {
-        create(arg0: $Block_, arg1: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
-        getMapping(): $TextureMapping;
+        createWithSuffix(arg0: $Block_, arg1: string, arg2: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
         static createAllSame(arg0: $ResourceLocation_): $TexturedModel;
         updateTextures(arg0: $Consumer_<$TextureMapping>): $TexturedModel;
-        createWithSuffix(arg0: $Block_, arg1: string, arg2: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
+        getMapping(): $TextureMapping;
+        create(arg0: $Block_, arg1: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
         getTemplate(): $ModelTemplate;
         static createDefault(arg0: $Function_<$Block, $TextureMapping>, arg1: $ModelTemplate): $TexturedModel$Provider;
         static CUBE_TOP_BOTTOM: $TexturedModel$Provider;
@@ -356,13 +360,13 @@ declare module "@package/net/minecraft/data/models/model" {
         get template(): $ModelTemplate;
     }
     export class $ModelTemplate {
-        create(arg0: $ResourceLocation_, arg1: $TextureMapping, arg2: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>, arg3: $ModelTemplate$JsonFactory_): $ResourceLocation;
-        create(arg0: $ResourceLocation_, arg1: $TextureMapping, arg2: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
-        create(arg0: $Block_, arg1: $TextureMapping, arg2: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
-        createBaseTemplate(arg0: $ResourceLocation_, arg1: $Map_<$TextureSlot, $ResourceLocation_>): $JsonObject;
+        createWithSuffix(arg0: $Block_, arg1: string, arg2: $TextureMapping, arg3: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
         getDefaultModelLocation(arg0: $Block_): $ResourceLocation;
         createWithOverride(arg0: $Block_, arg1: string, arg2: $TextureMapping, arg3: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
-        createWithSuffix(arg0: $Block_, arg1: string, arg2: $TextureMapping, arg3: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
+        createBaseTemplate(arg0: $ResourceLocation_, arg1: $Map_<$TextureSlot, $ResourceLocation_>): $JsonObject;
+        create(arg0: $Block_, arg1: $TextureMapping, arg2: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
+        create(arg0: $ResourceLocation_, arg1: $TextureMapping, arg2: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>): $ResourceLocation;
+        create(arg0: $ResourceLocation_, arg1: $TextureMapping, arg2: $BiConsumer_<$ResourceLocation, $Supplier<$JsonElement>>, arg3: $ModelTemplate$JsonFactory_): $ResourceLocation;
         constructor(arg0: ($ResourceLocation_) | undefined, arg1: (string) | undefined, ...arg2: $TextureSlot[]);
     }
 }

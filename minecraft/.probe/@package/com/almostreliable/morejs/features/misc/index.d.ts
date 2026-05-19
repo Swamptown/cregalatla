@@ -9,41 +9,17 @@ import { $KubePlayerEvent } from "@package/dev/latvian/mods/kubejs/player";
 
 declare module "@package/com/almostreliable/morejs/features/misc" {
     export class $PiglinPlayerBehaviorEventJS implements $KubePlayerEvent {
-        getBehavior(): $PiglinPlayerBehaviorEventJS$PiglinBehavior;
-        isIgnoreHoldingCheck(): boolean;
-        ignoreHoldingCheck(): void;
         getPiglin(): $Piglin;
         isAggressiveAlready(): boolean;
         getPreviousTargetPlayer(): $Player;
         setBehavior(arg0: $PiglinPlayerBehaviorEventJS$PiglinBehavior_): void;
+        ignoreHoldingCheck(): void;
+        getBehavior(): $PiglinPlayerBehaviorEventJS$PiglinBehavior;
+        isIgnoreHoldingCheck(): boolean;
         getPlayer(): $Player;
         getLevel(): $Level;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -56,6 +32,30 @@ declare module "@package/com/almostreliable/morejs/features/misc" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         getEntity(): $LivingEntity;
         constructor(arg0: $Piglin, arg1: $Player, arg2: ($Player) | undefined);
         get piglin(): $Piglin;
@@ -68,12 +68,12 @@ declare module "@package/com/almostreliable/morejs/features/misc" {
         get entity(): $LivingEntity;
     }
     export class $ExperiencePlayerEventJS implements $KubePlayerEvent {
-        setAmount(arg0: number): void;
         setExperienceProgress(arg0: number): void;
         setExperienceLevel(arg0: number): void;
         setTotalExperience(arg0: number): void;
         getRemainingExperience(): number;
         willLevelUp(): boolean;
+        setAmount(arg0: number): void;
         getAmount(): number;
         getXpNeededForNextLevel(): number;
         getExperienceProgress(): number;
@@ -83,30 +83,6 @@ declare module "@package/com/almostreliable/morejs/features/misc" {
         getLevel(): $Level;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -119,6 +95,30 @@ declare module "@package/com/almostreliable/morejs/features/misc" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         getEntity(): $LivingEntity;
         constructor(arg0: $Player, arg1: number);
         get remainingExperience(): number;

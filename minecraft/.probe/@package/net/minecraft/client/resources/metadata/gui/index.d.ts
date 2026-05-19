@@ -14,7 +14,7 @@ declare module "@package/net/minecraft/client/resources/metadata/gui" {
     /**
      * Values that may be interpreted as {@link $GuiSpriteScaling$Tile}.
      */
-    export type $GuiSpriteScaling$Tile_ = { width?: number, height?: number,  } | [width?: number, height?: number, ];
+    export type $GuiSpriteScaling$Tile_ = { height?: number, width?: number,  } | [height?: number, width?: number, ];
     export class $GuiMetadataSection extends $Record {
         scaling(): $GuiSpriteScaling;
         static CODEC: $Codec<$GuiMetadataSection>;
@@ -27,9 +27,9 @@ declare module "@package/net/minecraft/client/resources/metadata/gui" {
      */
     export type $GuiMetadataSection_ = { scaling?: $GuiSpriteScaling_,  } | [scaling?: $GuiSpriteScaling_, ];
     export class $GuiSpriteScaling$NineSlice extends $Record implements $GuiSpriteScaling {
+        border(): $GuiSpriteScaling$NineSlice$Border;
         type(): $GuiSpriteScaling$Type;
         width(): number;
-        border(): $GuiSpriteScaling$NineSlice$Border;
         height(): number;
         static CODEC: $MapCodec<$GuiSpriteScaling$NineSlice>;
         constructor(arg0: number, arg1: number, arg2: $GuiSpriteScaling$NineSlice$Border_);
@@ -37,7 +37,7 @@ declare module "@package/net/minecraft/client/resources/metadata/gui" {
     /**
      * Values that may be interpreted as {@link $GuiSpriteScaling$NineSlice}.
      */
-    export type $GuiSpriteScaling$NineSlice_ = { border?: $GuiSpriteScaling$NineSlice$Border_, width?: number, height?: number,  } | [border?: $GuiSpriteScaling$NineSlice$Border_, width?: number, height?: number, ];
+    export type $GuiSpriteScaling$NineSlice_ = { height?: number, width?: number, border?: $GuiSpriteScaling$NineSlice$Border_,  } | [height?: number, width?: number, border?: $GuiSpriteScaling$NineSlice$Border_, ];
     export class $GuiSpriteScaling$NineSlice$Border extends $Record {
         bottom(): number;
         top(): number;
@@ -49,7 +49,7 @@ declare module "@package/net/minecraft/client/resources/metadata/gui" {
     /**
      * Values that may be interpreted as {@link $GuiSpriteScaling$NineSlice$Border}.
      */
-    export type $GuiSpriteScaling$NineSlice$Border_ = { bottom?: number, right?: number, top?: number, left?: number,  } | [bottom?: number, right?: number, top?: number, left?: number, ];
+    export type $GuiSpriteScaling$NineSlice$Border_ = { left?: number, top?: number, right?: number, bottom?: number,  } | [left?: number, top?: number, right?: number, bottom?: number, ];
     export class $GuiSpriteScaling$Type extends $Enum<$GuiSpriteScaling$Type> implements $StringRepresentable {
         static values(): $GuiSpriteScaling$Type[];
         static valueOf(arg0: string): $GuiSpriteScaling$Type;

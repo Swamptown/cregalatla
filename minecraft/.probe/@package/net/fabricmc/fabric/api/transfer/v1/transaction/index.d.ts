@@ -2,22 +2,22 @@ import { $Enum, $AutoCloseable } from "@package/java/lang";
 
 declare module "@package/net/fabricmc/fabric/api/transfer/v1/transaction" {
     export class $Transaction {
-        static isOpen(): boolean;
+        static getLifecycle(): $Transaction$Lifecycle;
         /**
          * @deprecated
          */
         static getCurrentUnsafe(): $TransactionContext;
-        static openNested(arg0: $TransactionContext): $Transaction;
         static openOuter(): $Transaction;
-        static getLifecycle(): $Transaction$Lifecycle;
-        static get open(): boolean;
-        static get currentUnsafe(): $TransactionContext;
+        static openNested(arg0: $TransactionContext): $Transaction;
+        static isOpen(): boolean;
         static get lifecycle(): $Transaction$Lifecycle;
+        static get currentUnsafe(): $TransactionContext;
+        static get open(): boolean;
     }
     export interface $Transaction extends $AutoCloseable, $TransactionContext {
+        abort(): void;
         commit(): void;
         close(): void;
-        abort(): void;
     }
     export class $TransactionContext$OuterCloseCallback {
     }
@@ -31,11 +31,11 @@ declare module "@package/net/fabricmc/fabric/api/transfer/v1/transaction" {
     export class $TransactionContext {
     }
     export interface $TransactionContext {
-        openNested(): $Transaction;
         nestingDepth(): number;
         getOpenTransaction(arg0: number): $Transaction;
         addOuterCloseCallback(arg0: $TransactionContext$OuterCloseCallback_): void;
         addCloseCallback(arg0: $TransactionContext$CloseCallback_): void;
+        openNested(): $Transaction;
     }
     export class $Transaction$Lifecycle extends $Enum<$Transaction$Lifecycle> {
         static values(): $Transaction$Lifecycle[];
@@ -50,10 +50,10 @@ declare module "@package/net/fabricmc/fabric/api/transfer/v1/transaction" {
      */
     export type $Transaction$Lifecycle_ = "none" | "open" | "closing" | "outer_closing";
     export class $TransactionContext$Result extends $Enum<$TransactionContext$Result> {
+        wasAborted(): boolean;
+        wasCommitted(): boolean;
         static values(): $TransactionContext$Result[];
         static valueOf(arg0: string): $TransactionContext$Result;
-        wasCommitted(): boolean;
-        wasAborted(): boolean;
         static ABORTED: $TransactionContext$Result;
         static COMMITTED: $TransactionContext$Result;
     }

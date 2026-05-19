@@ -13,32 +13,32 @@ declare module "@package/net/minecraft/client/gui/spectator/categories" {
         get selectedSlot(): number;
     }
     export class $TeleportToPlayerMenuCategory implements $SpectatorMenuCategory, $SpectatorMenuItem {
-        getName(): $Component;
-        isEnabled(): boolean;
+        selectItem(arg0: $SpectatorMenu): void;
         renderIcon(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         getItems(): $List<$SpectatorMenuItem>;
-        selectItem(arg0: $SpectatorMenu): void;
+        getName(): $Component;
+        isEnabled(): boolean;
         getPrompt(): $Component;
         constructor();
         constructor(arg0: $Collection_<$PlayerInfo>);
+        get items(): $List<$SpectatorMenuItem>;
         get name(): $Component;
         get enabled(): boolean;
-        get items(): $List<$SpectatorMenuItem>;
         get prompt(): $Component;
     }
     export class $TeleportToTeamMenuCategory$TeamSelectionItem implements $SpectatorMenuItem {
     }
     export class $TeleportToTeamMenuCategory implements $SpectatorMenuCategory, $SpectatorMenuItem {
-        getName(): $Component;
-        isEnabled(): boolean;
+        selectItem(arg0: $SpectatorMenu): void;
         renderIcon(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         getItems(): $List<$SpectatorMenuItem>;
-        selectItem(arg0: $SpectatorMenu): void;
+        getName(): $Component;
+        isEnabled(): boolean;
         getPrompt(): $Component;
         constructor();
+        get items(): $List<$SpectatorMenuItem>;
         get name(): $Component;
         get enabled(): boolean;
-        get items(): $List<$SpectatorMenuItem>;
         get prompt(): $Component;
     }
 }

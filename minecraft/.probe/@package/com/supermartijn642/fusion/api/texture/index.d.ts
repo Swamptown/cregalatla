@@ -8,44 +8,44 @@ declare module "@package/com/supermartijn642/fusion/api/texture" {
     export class $SpritePreparationContext {
     }
     export interface $SpritePreparationContext {
-        getOriginalFrameSize(): $Pair<number, number>;
         getTextureWidth(): number;
         getOriginalFrameWith(): number;
         getTextureHeight(): number;
         getOriginalFrameHeight(): number;
+        getOriginalFrameSize(): $Pair<number, number>;
         getAnimationMetadata(): $AnimationMetadataSection;
         getIdentifier(): $ResourceLocation;
-        get originalFrameSize(): $Pair<number, number>;
         get textureWidth(): number;
         get originalFrameWith(): number;
         get textureHeight(): number;
         get originalFrameHeight(): number;
+        get originalFrameSize(): $Pair<number, number>;
         get animationMetadata(): $AnimationMetadataSection;
         get identifier(): $ResourceLocation;
     }
     export class $SpriteCreationContext {
     }
     export interface $SpriteCreationContext {
+        getTextureIdentifier(): $ResourceLocation;
+        getTextureWidth(): number;
+        getTextureHeight(): number;
+        createOriginalSprite(): $TextureAtlasSprite;
         getAtlasWidth(): number;
         getAtlasHeight(): number;
         getSpritePositionX(): number;
         getSpritePositionY(): number;
-        getTextureWidth(): number;
-        getTextureHeight(): number;
-        createOriginalSprite(): $TextureAtlasSprite;
-        getTextureIdentifier(): $ResourceLocation;
         getTextureBuffers(): $NativeImage[];
         getSpriteWidth(): number;
         getSpriteHeight(): number;
         getMipmapLevels(): number;
         getAtlas(): $TextureAtlas;
+        get textureIdentifier(): $ResourceLocation;
+        get textureWidth(): number;
+        get textureHeight(): number;
         get atlasWidth(): number;
         get atlasHeight(): number;
         get spritePositionX(): number;
         get spritePositionY(): number;
-        get textureWidth(): number;
-        get textureHeight(): number;
-        get textureIdentifier(): $ResourceLocation;
         get textureBuffers(): $NativeImage[];
         get spriteWidth(): number;
         get spriteHeight(): number;
@@ -55,7 +55,7 @@ declare module "@package/com/supermartijn642/fusion/api/texture" {
     export class $TextureType<T> {
     }
     export interface $TextureType<T> extends $Serializer<T> {
-        getFrameSize(context: $SpritePreparationContext, data: T): $Pair<number, number>;
         createSprite(context: $SpriteCreationContext, data: T): $TextureAtlasSprite;
+        getFrameSize(context: $SpritePreparationContext, data: T): $Pair<number, number>;
     }
 }

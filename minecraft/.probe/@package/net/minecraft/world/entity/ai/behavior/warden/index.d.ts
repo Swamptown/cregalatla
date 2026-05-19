@@ -12,29 +12,29 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/warden" {
         constructor();
     }
     export class $Emerging<E extends $Warden> extends $Behavior<E> {
+        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         start(arg0: $ServerLevel, arg1: E, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: E, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor(arg0: number);
     }
     export class $Roar extends $Behavior<$Warden> {
+        canStillUse(arg0: $ServerLevel, arg1: $Warden, arg2: number): boolean;
+        tick(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
-        tick(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: $Warden, arg2: number): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();
     }
     export class $SonicBoom extends $Behavior<$Warden> {
+        canStillUse(arg0: $ServerLevel, arg1: $Warden, arg2: number): boolean;
+        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Warden): boolean;
+        static setCooldown(arg0: $LivingEntity, arg1: number): void;
+        tick(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
-        tick(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
-        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Warden): boolean;
-        canStillUse(arg0: $ServerLevel, arg1: $Warden, arg2: number): boolean;
-        static setCooldown(arg0: $LivingEntity, arg1: number): void;
         static COOLDOWN: number;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
@@ -50,18 +50,18 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/warden" {
         constructor();
     }
     export class $Sniffing<E extends $Warden> extends $Behavior<E> {
+        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         start(arg0: $ServerLevel, arg1: E, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: E, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor(arg0: number);
     }
     export class $Digging<E extends $Warden> extends $Behavior<E> {
+        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
+        checkExtraStartConditions(arg0: $ServerLevel, arg1: E): boolean;
         start(arg0: $ServerLevel, arg1: E, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: E, arg2: number): void;
-        checkExtraStartConditions(arg0: $ServerLevel, arg1: E): boolean;
-        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor(arg0: number);

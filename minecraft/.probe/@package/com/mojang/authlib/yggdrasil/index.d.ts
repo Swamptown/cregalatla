@@ -34,14 +34,14 @@ declare module "@package/com/mojang/authlib/yggdrasil" {
     export class $ServicesKeyInfo {
     }
     export interface $ServicesKeyInfo {
-        signature(): $Signature;
         validateProperty(arg0: $Property_): boolean;
+        signature(): $Signature;
         keyBitCount(): number;
         signatureBitCount(): number;
     }
     export class $ProfileResult extends $Record {
-        profile(): $GameProfile;
         actions(): $Set<$ProfileActionType>;
+        profile(): $GameProfile;
         constructor(arg0: $GameProfile);
         constructor(profile: $GameProfile, actions: $Set_<$ProfileActionType_>);
     }

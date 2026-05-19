@@ -18,19 +18,19 @@ declare module "@package/net/minecraft/client/renderer/debug" {
     export class $LightSectionDebugRenderer$SectionData {
     }
     export class $DebugRenderer {
-        clear(): void;
-        handler$gjl000$moonlight$supp$renderVanillaDebug(arg0: $PoseStack, arg1: $MultiBufferSource$BufferSource, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        handler$gki000$moonlight$supp$renderVanillaDebug(arg0: $PoseStack, arg1: $MultiBufferSource$BufferSource, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         static getTargetedEntity(arg0: $Entity, arg1: number): ($Entity) | undefined;
         static renderFilledUnitCube(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: $BlockPos_, arg3: number, arg4: number, arg5: number, arg6: number): void;
         static renderFilledBox(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: $BlockPos_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        static renderFilledBox(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number): void;
         static renderFilledBox(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: $AABB_, arg3: number, arg4: number, arg5: number, arg6: number): void;
         static renderFilledBox(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: number, arg5: number, arg6: number, arg7: number): void;
-        static renderFilledBox(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number): void;
+        clear(): void;
         render(arg0: $PoseStack, arg1: $MultiBufferSource$BufferSource, arg2: number, arg3: number, arg4: number): void;
         static renderFloatingText(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: string, arg3: number, arg4: number, arg5: number, arg6: number): void;
         static renderFloatingText(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: string, arg3: number, arg4: number, arg5: number, arg6: number): void;
-        static renderFloatingText(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: string, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         static renderFloatingText(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: string, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean, arg9: number, arg10: boolean): void;
+        static renderFloatingText(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: string, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         switchRenderChunkborder(): boolean;
         waterDebugRenderer: $DebugRenderer$SimpleDebugRenderer;
         neighborsUpdateRenderer: $DebugRenderer$SimpleDebugRenderer;
@@ -126,7 +126,7 @@ declare module "@package/net/minecraft/client/renderer/debug" {
     /**
      * Values that may be interpreted as {@link $GameEventListenerRenderer$TrackedGameEvent}.
      */
-    export type $GameEventListenerRenderer$TrackedGameEvent_ = { timeStamp?: number, position?: $Vec3_, gameEvent?: $ResourceKey_<$GameEvent>,  } | [timeStamp?: number, position?: $Vec3_, gameEvent?: $ResourceKey_<$GameEvent>, ];
+    export type $GameEventListenerRenderer$TrackedGameEvent_ = { gameEvent?: $ResourceKey_<$GameEvent>, position?: $Vec3_, timeStamp?: number,  } | [gameEvent?: $ResourceKey_<$GameEvent>, position?: $Vec3_, timeStamp?: number, ];
     export class $ChunkBorderRenderer implements $DebugRenderer$SimpleDebugRenderer {
         render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: number, arg4: number): void;
         clear(): void;

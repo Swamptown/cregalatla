@@ -11,10 +11,10 @@ import { $Structure_, $Structure } from "@package/net/minecraft/world/level/leve
 
 declare module "@package/net/mehvahdjukaar/moonlight/api/worldgen" {
     export class $SpawnBoxSettings extends $Record {
-        get(arg0: string, arg1: $MobCategory_): $WeightedRandomList<$MobSpawnSettings$SpawnerData>;
-        isEmpty(): boolean;
         spawnOverrides(): $Map<$MobCategory, $Map<string, $WeightedRandomList<$MobSpawnSettings$SpawnerData>>>;
         hasCategory(arg0: $MobCategory_): boolean;
+        get(arg0: string, arg1: $MobCategory_): $WeightedRandomList<$MobSpawnSettings$SpawnerData>;
+        isEmpty(): boolean;
         static CODEC: $Codec<$SpawnBoxSettings>;
         static EMPTY: $SpawnBoxSettings;
         constructor(spawnOverrides: $Map_<$MobCategory_, $Map_<string, $WeightedRandomList<$MobSpawnSettings$SpawnerData>>>);

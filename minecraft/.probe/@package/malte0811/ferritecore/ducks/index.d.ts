@@ -1,5 +1,5 @@
-import { $Reference2ObjectMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $Property } from "@package/net/minecraft/world/level/block/state/properties";
+import { $Reference2ObjectMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $Table } from "@package/com/google/common/collect";
 import { $VoxelShape } from "@package/net/minecraft/world/phys/shapes";
 import { $Comparable, $Comparable_ } from "@package/java/lang";

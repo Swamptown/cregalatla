@@ -43,21 +43,21 @@ export * as flag from "@package/net/minecraft/world/flag";
 
 declare module "@package/net/minecraft/world" {
     export class $RandomSequences extends $SavedData {
+        forAllSequences(arg0: $BiConsumer_<$ResourceLocation, $RandomSequence>): void;
+        setSeedDefaults(arg0: number, arg1: boolean, arg2: boolean): void;
         reset(arg0: $ResourceLocation_, arg1: number, arg2: boolean, arg3: boolean): void;
         reset(arg0: $ResourceLocation_): void;
         get(arg0: $ResourceLocation_): $RandomSource;
         static load(arg0: number, arg1: $CompoundTag_): $RandomSequences;
         clear(): number;
         static factory(arg0: number): $SavedData$Factory<$RandomSequences>;
-        setSeedDefaults(arg0: number, arg1: boolean, arg2: boolean): void;
-        forAllSequences(arg0: $BiConsumer_<$ResourceLocation, $RandomSequence>): void;
         constructor(arg0: number);
     }
     export class $BossEvent$BossBarColor extends $Enum<$BossEvent$BossBarColor> {
+        getFormatting(): $ChatFormatting;
         getName(): string;
         static values(): $BossEvent$BossBarColor[];
         static valueOf(arg0: string): $BossEvent$BossBarColor;
-        getFormatting(): $ChatFormatting;
         static byName(arg0: string): $BossEvent$BossBarColor;
         static RED: $BossEvent$BossBarColor;
         static WHITE: $BossEvent$BossBarColor;
@@ -100,12 +100,12 @@ declare module "@package/net/minecraft/world" {
      */
     export type $BossEvent$BossBarOverlay_ = "progress" | "notched_6" | "notched_10" | "notched_12" | "notched_20";
     export class $InteractionResultHolder<T> {
-        static fail<T>(arg0: T): $InteractionResultHolder<T>;
+        static success<T>(arg0: T): $InteractionResultHolder<T>;
+        static consume<T>(arg0: T): $InteractionResultHolder<T>;
         getResult(): $InteractionResult;
         static pass<T>(arg0: T): $InteractionResultHolder<T>;
+        static fail<T>(arg0: T): $InteractionResultHolder<T>;
         getObject(): T;
-        static consume<T>(arg0: T): $InteractionResultHolder<T>;
-        static success<T>(arg0: T): $InteractionResultHolder<T>;
         static sidedSuccess<T>(arg0: T, arg1: boolean): $InteractionResultHolder<T>;
         constructor(arg0: $InteractionResult_, arg1: T);
         get result(): $InteractionResult;
@@ -114,12 +114,12 @@ declare module "@package/net/minecraft/world" {
     export class $Nameable {
     }
     export interface $Nameable {
-        getName(): $Component;
         getDisplayName(): $Component;
+        getName(): $Component;
         hasCustomName(): boolean;
         getCustomName(): $Component;
-        get name(): $Component;
         get displayName(): $Component;
+        get name(): $Component;
         get customName(): $Component;
     }
     /**
@@ -127,20 +127,20 @@ declare module "@package/net/minecraft/world" {
      */
     export type $Nameable_ = (() => $Component_);
     export class $CompoundContainer implements $Container, $CompoundContainerAccessor, $DoubleInventoryAccessor {
-        isEmpty(): boolean;
-        contains(arg0: $Container): boolean;
         setItem(arg0: number, arg1: $ItemStack_): void;
-        clearContent(): void;
         startOpen(arg0: $Player): void;
         stopOpen(arg0: $Player): void;
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
+        clearContent(): void;
         removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
+        isEmpty(): boolean;
+        contains(arg0: $Container): boolean;
         getMaxStackSize(): number;
-        setChanged(): void;
-        stillValid(arg0: $Player): boolean;
         getContainerSize(): number;
         removeItemNoUpdate(arg0: number): $ItemStack;
+        stillValid(arg0: $Player): boolean;
+        setChanged(): void;
         countItem(arg0: $Item_): number;
         hasAnyOf(arg0: $Set_<$Item_>): boolean;
         hasAnyMatching(arg0: $Predicate_<$ItemStack>): boolean;
@@ -174,10 +174,10 @@ declare module "@package/net/minecraft/world" {
         countNonEmpty(match: $ItemPredicate_): number;
         countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
-        getFirst(): $Container;
-        getSecond(): $Container;
-        fabric_getSecond(): $Container;
         fabric_getFirst(): $Container;
+        fabric_getSecond(): $Container;
+        getSecond(): $Container;
+        getFirst(): $Container;
         constructor(arg0: $Container, arg1: $Container);
         get containerSize(): number;
         set transferCooldown(value: number);
@@ -186,19 +186,19 @@ declare module "@package/net/minecraft/world" {
         get width(): number;
         get height(): number;
         get allItems(): $List<$ItemStack>;
-        get first(): $Container;
         get second(): $Container;
+        get first(): $Container;
     }
     export class $RandomSequences$DirtyMarkingRandomSource implements $RandomSource {
         nextInt(arg0: number, arg1: number): number;
-        consumeCount(arg0: number): void;
         triangle(arg0: number, arg1: number): number;
         nextIntBetweenInclusive(arg0: number, arg1: number): number;
+        consumeCount(arg0: number): void;
     }
     export class $LockCode extends $Record {
-        key(): string;
-        addToTag(arg0: $CompoundTag_): void;
         unlocksWith(arg0: $ItemStack_): boolean;
+        addToTag(arg0: $CompoundTag_): void;
+        key(): string;
         static fromTag(arg0: $CompoundTag_): $LockCode;
         static CODEC: $Codec<$LockCode>;
         static NO_LOCK: $LockCode;
@@ -210,28 +210,28 @@ declare module "@package/net/minecraft/world" {
      */
     export type $LockCode_ = { key?: string,  } | [key?: string, ];
     export class $SimpleContainer implements $Container, $StackedContentsCompatible, $SpecialLogicInventory {
-        isEmpty(): boolean;
+        createTag(arg0: $HolderLookup$Provider): $ListTag;
         addItem(arg0: $ItemStack_): $ItemStack;
-        fabric_setSuppress(arg0: boolean): void;
-        fabric_onFinalCommit(arg0: number, arg1: $ItemStack_, arg2: $ItemStack_): void;
         setItem(arg0: number, arg1: $ItemStack_): void;
         getItems(): $NonNullList<$ItemStack>;
-        clearContent(): void;
+        fabric_setSuppress(arg0: boolean): void;
+        fabric_onFinalCommit(arg0: number, arg1: $ItemStack_, arg2: $ItemStack_): void;
         fillStackedContents(arg0: $StackedContents): void;
-        redirect$eli000$fabric_transfer_api_v1$fabric_redirectMarkDirty(arg0: $SimpleContainer): void;
         removeItemType(arg0: $Item_, arg1: number): $ItemStack;
         canAddItem(arg0: $ItemStack_): boolean;
+        redirect$emf000$fabric_transfer_api_v1$fabric_redirectMarkDirty(arg0: $SimpleContainer): void;
+        clearContent(): void;
         removeAllItems(): $List<$ItemStack>;
         removeItem(arg0: number, arg1: number): $ItemStack;
-        createTag(arg0: $HolderLookup$Provider): $ListTag;
         getItem(arg0: number): $ItemStack;
+        isEmpty(): boolean;
         removeListener(arg0: $ContainerListener_): void;
         addListener(arg0: $ContainerListener_): void;
-        setChanged(): void;
-        stillValid(arg0: $Player): boolean;
         getContainerSize(): number;
         removeItemNoUpdate(arg0: number): $ItemStack;
         fromTag(arg0: $ListTag_, arg1: $HolderLookup$Provider): void;
+        stillValid(arg0: $Player): boolean;
+        setChanged(): void;
         startOpen(arg0: $Player): void;
         stopOpen(arg0: $Player): void;
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
@@ -270,10 +270,11 @@ declare module "@package/net/minecraft/world" {
         countNonEmpty(match: $ItemPredicate_): number;
         countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
+        size: number;
         listeners: $List<$ContainerListener>;
         items: $NonNullList<$ItemStack>;
-        constructor(arg0: number);
         constructor(...arg0: $ItemStack_[]);
+        constructor(arg0: number);
         get containerSize(): number;
         set transferCooldown(value: number);
         get mutable(): boolean;
@@ -293,18 +294,18 @@ declare module "@package/net/minecraft/world" {
      */
     export type $Clearable_ = (() => void);
     export class $TickRateManager {
-        isFrozen(): boolean;
-        tick(): void;
         frozenTicksToRun(): number;
-        nanosecondsPerTick(): number;
         isSteppingForward(): boolean;
+        nanosecondsPerTick(): number;
         isEntityFrozen(arg0: $Entity): boolean;
+        tick(): void;
+        isFrozen(): boolean;
         runsNormally(): boolean;
         millisecondsPerTick(): number;
-        tickrate(): number;
         setTickRate(arg0: number): void;
         setFrozen(arg0: boolean): void;
         setFrozenTicksToRun(arg0: number): void;
+        tickrate(): number;
         static MIN_TICKRATE: number;
         runGameElements: boolean;
         constructor();
@@ -312,12 +313,12 @@ declare module "@package/net/minecraft/world" {
         set tickRate(value: number);
     }
     export class $ContainerHelper {
-        static takeItem(arg0: $List_<$ItemStack_>, arg1: number): $ItemStack;
-        static clearOrCountMatchingItems(arg0: $Container, arg1: $Predicate_<$ItemStack>, arg2: number, arg3: boolean): number;
         static clearOrCountMatchingItems(arg0: $ItemStack_, arg1: $Predicate_<$ItemStack>, arg2: number, arg3: boolean): number;
+        static clearOrCountMatchingItems(arg0: $Container, arg1: $Predicate_<$ItemStack>, arg2: number, arg3: boolean): number;
         static loadAllItems(arg0: $CompoundTag_, arg1: $NonNullList<$ItemStack_>, arg2: $HolderLookup$Provider): void;
         static saveAllItems(arg0: $CompoundTag_, arg1: $NonNullList<$ItemStack_>, arg2: boolean, arg3: $HolderLookup$Provider): $CompoundTag;
         static saveAllItems(arg0: $CompoundTag_, arg1: $NonNullList<$ItemStack_>, arg2: $HolderLookup$Provider): $CompoundTag;
+        static takeItem(arg0: $List_<$ItemStack_>, arg1: number): $ItemStack;
         static removeItem(arg0: $List_<$ItemStack_>, arg1: number, arg2: number): $ItemStack;
         static TAG_ITEMS: string;
         constructor();
@@ -328,7 +329,6 @@ declare module "@package/net/minecraft/world" {
         static DEFAULT_DISTANCE_BUFFER: number;
     }
     export interface $Container extends $Clearable, $LithiumCooldownReceivingInventory, $ContainerMixin, $LithiumTransferConditionInventory, $ContainerKJS {
-        isEmpty(): boolean;
         setItem(arg0: number, arg1: $ItemStack_): void;
         startOpen(arg0: $Player): void;
         stopOpen(arg0: $Player): void;
@@ -338,36 +338,37 @@ declare module "@package/net/minecraft/world" {
         hasAnyMatching(arg0: $Predicate_<$ItemStack>): boolean;
         removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
+        isEmpty(): boolean;
         getMaxStackSize(arg0: $ItemStack_): number;
         getMaxStackSize(): number;
-        canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
-        setChanged(): void;
-        stillValid(arg0: $Player): boolean;
         getContainerSize(): number;
         removeItemNoUpdate(arg0: number): $ItemStack;
+        canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
+        stillValid(arg0: $Player): boolean;
+        setChanged(): void;
         get empty(): boolean;
         get containerSize(): number;
     }
     export class $MenuProvider {
     }
     export interface $MenuProvider extends $MenuConstructor, $IMenuProviderExtension, $FabricScreenHandlerFactory {
-        getDisplayName(): $Component;
         shouldTriggerClientSideContainerClosingOnOpen(): boolean;
+        getDisplayName(): $Component;
         get displayName(): $Component;
     }
     export class $BossEvent {
+        setDarkenScreen(arg0: boolean): $BossEvent;
+        setProgress(arg0: number): void;
+        getProgress(): number;
+        setColor(arg0: $BossEvent$BossBarColor_): void;
         getName(): $Component;
         setName(arg0: $Component_): void;
         getId(): $UUID;
-        setColor(arg0: $BossEvent$BossBarColor_): void;
-        getProgress(): number;
-        setDarkenScreen(arg0: boolean): $BossEvent;
-        setProgress(arg0: number): void;
+        shouldDarkenScreen(): boolean;
         getColor(): $BossEvent$BossBarColor;
+        shouldCreateWorldFog(): boolean;
         setOverlay(arg0: $BossEvent$BossBarOverlay_): void;
         getOverlay(): $BossEvent$BossBarOverlay;
-        shouldDarkenScreen(): boolean;
-        shouldCreateWorldFog(): boolean;
         shouldPlayBossMusic(): boolean;
         setPlayBossMusic(arg0: boolean): $BossEvent;
         setCreateWorldFog(arg0: boolean): $BossEvent;
@@ -398,9 +399,9 @@ declare module "@package/net/minecraft/world" {
      */
     export type $ContainerListener_ = ((arg0: $Container) => void);
     export class $InteractionResult extends $Enum<$InteractionResult> {
+        indicateItemUse(): boolean;
         static values(): $InteractionResult[];
         static valueOf(arg0: string): $InteractionResult;
-        indicateItemUse(): boolean;
         consumesAction(): boolean;
         shouldSwing(): boolean;
         static sidedSuccess(arg0: boolean): $InteractionResult;
@@ -416,12 +417,12 @@ declare module "@package/net/minecraft/world" {
      */
     export type $InteractionResult_ = "success" | "success_no_item_used" | "consume" | "consume_partial" | "pass" | "fail";
     export class $RandomSequence {
-        random(): $RandomSource;
         static seedForKey(arg0: $ResourceLocation_): $RandomSupport$Seed128bit;
+        random(): $RandomSource;
         static CODEC: $Codec<$RandomSequence>;
-        constructor(arg0: number, arg1: ($ResourceLocation_) | undefined);
-        constructor(arg0: number, arg1: $ResourceLocation_);
         constructor(arg0: $XoroshiroRandomSource);
+        constructor(arg0: number, arg1: $ResourceLocation_);
+        constructor(arg0: number, arg1: ($ResourceLocation_) | undefined);
     }
     export class $WorldlyContainerHolder {
     }
@@ -446,8 +447,8 @@ declare module "@package/net/minecraft/world" {
         static dropContentsOnDestroy(arg0: $BlockState_, arg1: $BlockState_, arg2: $Level_, arg3: $BlockPos_): void;
         static dropItemStack(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_): void;
         static dropContents(arg0: $Level_, arg1: $BlockPos_, arg2: $NonNullList<$ItemStack_>): void;
-        static dropContents(arg0: $Level_, arg1: $Entity, arg2: $Container): void;
         static dropContents(arg0: $Level_, arg1: $BlockPos_, arg2: $Container): void;
+        static dropContents(arg0: $Level_, arg1: $Entity, arg2: $Container): void;
         constructor();
     }
     export class $RandomizableContainer {
@@ -456,13 +457,13 @@ declare module "@package/net/minecraft/world" {
         static LOOT_TABLE_TAG: string;
     }
     export interface $RandomizableContainer extends $Container {
-        getLevel(): $Level;
-        setLootTableSeed(arg0: number): void;
-        unpackLootTable(arg0: $Player): void;
         tryLoadLootTable(arg0: $CompoundTag_): boolean;
         trySaveLootTable(arg0: $CompoundTag_): boolean;
-        setLootTable(arg0: $ResourceKey_<$LootTable>): void;
         setLootTable(arg0: $ResourceKey_<$LootTable>, arg1: number): void;
+        setLootTable(arg0: $ResourceKey_<$LootTable>): void;
+        setLootTableSeed(arg0: number): void;
+        unpackLootTable(arg0: $Player): void;
+        getLevel(): $Level;
         getBlockPos(): $BlockPos;
         getLootTable(): $ResourceKey<$LootTable>;
         getLootTableSeed(): number;
@@ -470,8 +471,8 @@ declare module "@package/net/minecraft/world" {
         get blockPos(): $BlockPos;
     }
     export class $SimpleMenuProvider implements $MenuProvider {
-        getDisplayName(): $Component;
         createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
+        getDisplayName(): $Component;
         shouldTriggerClientSideContainerClosingOnOpen(): boolean;
         writeClientSideData(arg0: $AbstractContainerMenu, arg1: $RegistryFriendlyByteBuf): void;
         shouldCloseCurrentScreen(): boolean;
@@ -497,26 +498,26 @@ declare module "@package/net/minecraft/world" {
      */
     export type $ItemInteractionResult_ = "success" | "consume" | "consume_partial" | "pass_to_default_block_interaction" | "skip_default_block_interaction" | "fail";
     export class $Difficulty extends $Enum<$Difficulty> implements $StringRepresentable {
+        getInfo(): $Component;
+        getDisplayName(): $Component;
         static values(): $Difficulty[];
         static valueOf(arg0: string): $Difficulty;
         getKey(): string;
         getId(): number;
-        getDisplayName(): $Component;
         static byName(arg0: string): $Difficulty;
         getSerializedName(): string;
         static byId(arg0: number): $Difficulty;
-        getInfo(): $Component;
         getRemappedEnumConstantName(): string;
         static EASY: $Difficulty;
         static CODEC: $StringRepresentable$EnumCodec<$Difficulty>;
         static PEACEFUL: $Difficulty;
         static HARD: $Difficulty;
         static NORMAL: $Difficulty;
+        get info(): $Component;
+        get displayName(): $Component;
         get key(): string;
         get id(): number;
-        get displayName(): $Component;
         get serializedName(): string;
-        get info(): $Component;
         get remappedEnumConstantName(): string;
     }
     /**

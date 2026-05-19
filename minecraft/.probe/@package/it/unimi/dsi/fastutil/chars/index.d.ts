@@ -1,7 +1,7 @@
 import { $Int2ByteFunction_, $Int2CharFunction_, $Int2FloatFunction_, $Int2LongFunction, $Int2IntFunction, $Int2ShortFunction, $Int2ObjectFunction_, $Int2CharFunction, $Int2DoubleFunction, $Int2DoubleFunction_, $Int2FloatFunction, $Int2ByteFunction, $Int2ObjectFunction, $Int2ReferenceFunction, $Int2BooleanFunction, $Int2ReferenceFunction_, $Int2IntFunction_, $Int2LongFunction_, $Int2ShortFunction_ } from "@package/it/unimi/dsi/fastutil/ints";
 import { $Float2LongFunction_, $Float2FloatFunction_, $Float2ShortFunction, $Float2BooleanFunction, $Float2FloatFunction, $Float2ObjectFunction_, $Float2IntFunction_, $Float2IntFunction, $Float2ObjectFunction, $Float2ReferenceFunction, $Float2ShortFunction_, $Float2CharFunction, $Float2CharFunction_, $Float2ByteFunction_, $Float2DoubleFunction, $Float2LongFunction, $Float2DoubleFunction_, $Float2ReferenceFunction_, $Float2ByteFunction } from "@package/it/unimi/dsi/fastutil/floats";
 import { $IntPredicate, $IntFunction, $IntToDoubleFunction, $Function as $Function$1, $Function_, $IntToLongFunction, $IntUnaryOperator } from "@package/java/util/function";
-import { $Object2LongFunction_, $Reference2DoubleFunction_, $Reference2ShortFunction, $Reference2FloatFunction_, $Object2DoubleFunction, $Reference2IntFunction, $Object2IntFunction, $Object2ShortFunction, $Object2ObjectFunction_, $Reference2IntFunction_, $Object2ShortFunction_, $Object2IntFunction_, $Reference2CharFunction_, $Reference2BooleanFunction, $Object2ByteFunction_, $Object2DoubleFunction_, $Reference2ByteFunction_, $Object2ReferenceFunction, $Reference2DoubleFunction, $Object2BooleanFunction, $Object2LongFunction, $Object2ReferenceFunction_, $Reference2ReferenceFunction, $Reference2LongFunction, $Reference2ShortFunction_, $Reference2ObjectFunction_, $Reference2ObjectFunction, $Object2CharFunction_, $Object2FloatFunction_, $Object2ByteFunction, $Object2FloatFunction, $Reference2ByteFunction, $Reference2ReferenceFunction_, $Reference2LongFunction_, $Reference2CharFunction, $Reference2FloatFunction, $Object2ObjectFunction, $Object2CharFunction } from "@package/it/unimi/dsi/fastutil/objects";
+import { $Object2LongFunction_, $Reference2DoubleFunction_, $Reference2ShortFunction, $Reference2FloatFunction_, $Object2DoubleFunction, $Reference2IntFunction, $Object2IntFunction, $Object2ShortFunction, $Object2ObjectFunction_, $Reference2IntFunction_, $Object2ShortFunction_, $Object2IntFunction_, $Reference2CharFunction_, $Reference2BooleanFunction, $Object2ByteFunction_, $Object2DoubleFunction_, $Object2ReferenceFunction, $Reference2ByteFunction_, $Reference2DoubleFunction, $Object2BooleanFunction, $Object2LongFunction, $Object2ReferenceFunction_, $Reference2ReferenceFunction, $Reference2LongFunction, $Reference2ObjectFunction_, $Reference2ShortFunction_, $Reference2ObjectFunction, $Object2CharFunction_, $Object2FloatFunction_, $Object2ByteFunction, $Object2FloatFunction, $Reference2ByteFunction, $Reference2ReferenceFunction_, $Reference2LongFunction_, $Reference2CharFunction, $Reference2FloatFunction, $Object2ObjectFunction, $Object2CharFunction } from "@package/it/unimi/dsi/fastutil/objects";
 import { $Long2ReferenceFunction_, $Long2CharFunction, $Long2LongFunction, $Long2ObjectFunction_, $Long2ShortFunction_, $Long2IntFunction, $Long2FloatFunction, $Long2LongFunction_, $Long2ByteFunction, $Long2ShortFunction, $Long2BooleanFunction, $Long2IntFunction_, $Long2ObjectFunction, $Long2CharFunction_, $Long2DoubleFunction, $Long2ReferenceFunction, $Long2DoubleFunction_, $Long2FloatFunction_, $Long2ByteFunction_ } from "@package/it/unimi/dsi/fastutil/longs";
 import { $Byte2IntFunction_, $Byte2ReferenceFunction, $Byte2ObjectFunction_, $Byte2FloatFunction, $Byte2LongFunction_, $Byte2DoubleFunction_, $Byte2CharFunction, $Byte2DoubleFunction, $Byte2ObjectFunction, $Byte2ShortFunction, $Byte2ByteFunction_, $Byte2CharFunction_, $Byte2LongFunction, $Byte2ShortFunction_, $Byte2BooleanFunction, $Byte2ReferenceFunction_, $Byte2IntFunction, $Byte2FloatFunction_, $Byte2ByteFunction } from "@package/it/unimi/dsi/fastutil/bytes";
 import { $Double2FloatFunction, $Double2IntFunction, $Double2IntFunction_, $Double2LongFunction, $Double2DoubleFunction, $Double2ObjectFunction, $Double2ByteFunction_, $Double2ByteFunction, $Double2ReferenceFunction, $Double2BooleanFunction, $Double2CharFunction_, $Double2ObjectFunction_, $Double2CharFunction, $Double2ReferenceFunction_, $Double2ShortFunction, $Double2FloatFunction_, $Double2LongFunction_, $Double2ShortFunction_, $Double2DoubleFunction_ } from "@package/it/unimi/dsi/fastutil/doubles";
@@ -18,10 +18,6 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: string): number;
         put(arg0: string, arg1: number): number;
@@ -29,16 +25,16 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         put(arg0: string, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: string): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: string, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */
@@ -85,22 +81,26 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         remove(arg0: $Object): string;
-        get(arg0: string): string;
-        put(arg0: string, arg1: string): string;
         /**
          * @deprecated
          */
+        get(arg0: $Object): string;
+        get(arg0: string): string;
+        /**
+         * @deprecated
+         */
+        put(arg0: string, arg1: string): string;
         put(arg0: string, arg1: string): string;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
         containsKey(arg0: string): boolean;
+        getOrDefault(arg0: string, arg1: string): string;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: string): string;
-        getOrDefault(arg0: string, arg1: string): string;
         /**
          * @deprecated
          */
@@ -113,8 +113,8 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<string, T>): $Function$1<string, T>;
-        defaultReturnValue(): string;
         defaultReturnValue(arg0: string): void;
+        defaultReturnValue(): string;
         andThenByte(arg0: $Char2ByteFunction_): $Char2ByteFunction;
         composeByte(arg0: $Byte2CharFunction_): $Byte2CharFunction;
         andThenShort(arg0: $Char2ShortFunction_): $Char2ShortFunction;
@@ -174,8 +174,8 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, string>): $Function$1<T, V>;
-        defaultReturnValue(arg0: V): void;
         defaultReturnValue(): V;
+        defaultReturnValue(arg0: V): void;
         andThenByte(arg0: $Object2ByteFunction_<V>): $Char2ByteFunction;
         composeByte(arg0: $Byte2CharFunction_): $Byte2ObjectFunction<V>;
         andThenShort(arg0: $Object2ShortFunction_<V>): $Char2ShortFunction;
@@ -202,11 +202,11 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
     export class $Char2BooleanFunction {
     }
     export interface $Char2BooleanFunction extends $Function<string, boolean>, $IntPredicate {
-        remove(arg0: string): boolean;
         /**
          * @deprecated
          */
         remove(arg0: $Object): boolean;
+        remove(arg0: string): boolean;
         /**
          * @deprecated
          */
@@ -239,8 +239,8 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<boolean, T>): $Function$1<string, T>;
-        defaultReturnValue(arg0: boolean): void;
         defaultReturnValue(): boolean;
+        defaultReturnValue(arg0: boolean): void;
         andThenByte(arg0: $Boolean2ByteFunction_): $Char2ByteFunction;
         composeByte(arg0: $Byte2CharFunction_): $Byte2BooleanFunction;
         andThenShort(arg0: $Boolean2ShortFunction_): $Char2ShortFunction;
@@ -271,10 +271,6 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: string): number;
         put(arg0: string, arg1: number): number;
@@ -282,16 +278,16 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         put(arg0: string, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: string): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: string, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */
@@ -336,10 +332,6 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: string): number;
         put(arg0: string, arg1: number): number;
@@ -347,16 +339,16 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         put(arg0: string, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: string): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: string, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */
@@ -430,8 +422,8 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, string>): $Function$1<T, V>;
-        defaultReturnValue(arg0: V): void;
         defaultReturnValue(): V;
+        defaultReturnValue(arg0: V): void;
         andThenByte(arg0: $Reference2ByteFunction_<V>): $Char2ByteFunction;
         composeByte(arg0: $Byte2CharFunction_): $Byte2ReferenceFunction<V>;
         andThenShort(arg0: $Reference2ShortFunction_<V>): $Char2ShortFunction;
@@ -462,10 +454,6 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: string): number;
         put(arg0: string, arg1: number): number;
@@ -473,16 +461,16 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         put(arg0: string, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: string): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: string, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */
@@ -527,10 +515,6 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: string): number;
         put(arg0: string, arg1: number): number;
@@ -538,16 +522,16 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         put(arg0: string, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: string): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: string, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */
@@ -592,10 +576,6 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: string): number;
         put(arg0: string, arg1: number): number;
@@ -603,16 +583,16 @@ declare module "@package/it/unimi/dsi/fastutil/chars" {
          * @deprecated
          */
         put(arg0: string, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: string): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: string, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         /**
          * @deprecated
          */

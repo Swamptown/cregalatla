@@ -17,11 +17,11 @@ import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 
 declare module "@package/net/minecraft/server/commands/data" {
     export class $BlockDataAccessor implements $DataAccessor {
-        getData(): $CompoundTag;
         getModifiedSuccess(): $Component;
-        getPrintSuccess(arg0: $Tag_): $Component;
         getPrintSuccess(arg0: $NbtPathArgument$NbtPath, arg1: number, arg2: number): $Component;
+        getPrintSuccess(arg0: $Tag_): $Component;
         setData(arg0: $CompoundTag_): void;
+        getData(): $CompoundTag;
         static PROVIDER: $Function<string, $DataCommands$DataProvider>;
         static ERROR_NOT_A_BLOCK_ENTITY: $SimpleCommandExceptionType;
         constructor(arg0: $BlockEntity, arg1: $BlockPos_);
@@ -30,11 +30,11 @@ declare module "@package/net/minecraft/server/commands/data" {
     export class $DataAccessor {
     }
     export interface $DataAccessor {
-        getData(): $CompoundTag;
         getModifiedSuccess(): $Component;
         getPrintSuccess(arg0: $Tag_): $Component;
         getPrintSuccess(arg0: $NbtPathArgument$NbtPath, arg1: number, arg2: number): $Component;
         setData(arg0: $CompoundTag_): void;
+        getData(): $CompoundTag;
         get modifiedSuccess(): $Component;
     }
     export class $DataCommands$DataProvider {
@@ -44,18 +44,18 @@ declare module "@package/net/minecraft/server/commands/data" {
         access(arg0: $CommandContext<$CommandSourceStack>): $DataAccessor;
     }
     export class $EntityDataAccessor implements $DataAccessor {
-        getData(): $CompoundTag;
         getModifiedSuccess(): $Component;
         getPrintSuccess(arg0: $Tag_): $Component;
         getPrintSuccess(arg0: $NbtPathArgument$NbtPath, arg1: number, arg2: number): $Component;
         setData(arg0: $CompoundTag_): void;
+        getData(): $CompoundTag;
         static PROVIDER: $Function<string, $DataCommands$DataProvider>;
         constructor(arg0: $Entity);
         get modifiedSuccess(): $Component;
     }
     export class $DataCommands {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static getSingleTag(arg0: $NbtPathArgument$NbtPath, arg1: $DataAccessor): $Tag;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static TARGET_PROVIDERS: $List<$DataCommands$DataProvider>;
         static ALL_PROVIDERS: $List<$Function<string, $DataCommands$DataProvider>>;
         static SOURCE_PROVIDERS: $List<$DataCommands$DataProvider>;
@@ -70,12 +70,12 @@ declare module "@package/net/minecraft/server/commands/data" {
      */
     export type $DataCommands$DataManipulator_ = (() => void);
     export class $StorageDataAccessor implements $DataAccessor {
-        getData(): $CompoundTag;
         static getGlobalTags(arg0: $CommandContext<$CommandSourceStack>): $CommandStorage;
         getModifiedSuccess(): $Component;
-        getPrintSuccess(arg0: $Tag_): $Component;
         getPrintSuccess(arg0: $NbtPathArgument$NbtPath, arg1: number, arg2: number): $Component;
+        getPrintSuccess(arg0: $Tag_): $Component;
         setData(arg0: $CompoundTag_): void;
+        getData(): $CompoundTag;
         static SUGGEST_STORAGE: $SuggestionProvider<$CommandSourceStack>;
         static PROVIDER: $Function<string, $DataCommands$DataProvider>;
         constructor(arg0: $CommandStorage, arg1: $ResourceLocation_);

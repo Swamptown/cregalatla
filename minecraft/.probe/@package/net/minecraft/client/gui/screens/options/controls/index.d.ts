@@ -15,6 +15,8 @@ import { $AccessKeyBindsScreen, $AccessKeyBindsScreenNeoForge } from "@package/c
 
 declare module "@package/net/minecraft/client/gui/screens/options/controls" {
     export class $KeyBindsList extends $ContainerObjectSelectionList<$KeyBindsList$Entry> {
+        refreshEntries(): void;
+        resetMappingAndUpdateButtons(): void;
         static access$000(arg0: $KeyBindsList): $Minecraft;
         static access$100(arg0: $KeyBindsList): $Minecraft;
         static access$200(arg0: $KeyBindsList): number;
@@ -22,8 +24,6 @@ declare module "@package/net/minecraft/client/gui/screens/options/controls" {
         static access$400(arg0: $KeyBindsList): $Minecraft;
         static access$500(arg0: $KeyBindsList): $Minecraft;
         static access$600(arg0: $KeyBindsList): $Minecraft;
-        resetMappingAndUpdateButtons(): void;
-        refreshEntries(): void;
         minecraft: $Minecraft;
         static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;

@@ -6,6 +6,7 @@
 			enderPearlsVanishOnDeath = true
 			playersNetherPortalCreativeDelay = 1
 			playersNetherPortalDefaultDelay = 80
+			dashCoolDown = 20
 
 		[gamerules.modded.misc]
 			maxCommandForkCount = 65536

@@ -16,11 +16,11 @@ declare module "@package/xaero/common/minimap/radar/tracker/system" {
         /**
          * @deprecated
          */
-        register(arg0: string, arg1: $IPlayerTrackerSystem<never>): void;
+        getSystems(): $Iterable<$IPlayerTrackerSystem<never>>;
         /**
          * @deprecated
          */
-        getSystems(): $Iterable<$IPlayerTrackerSystem<never>>;
+        register(arg0: string, arg1: $IPlayerTrackerSystem<never>): void;
         constructor();
         get systems(): $Iterable<$IPlayerTrackerSystem<never>>;
     }

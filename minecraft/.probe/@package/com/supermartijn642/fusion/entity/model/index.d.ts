@@ -14,9 +14,9 @@ export * as predicates from "@package/com/supermartijn642/fusion/entity/model/pr
 
 declare module "@package/com/supermartijn642/fusion/entity/model" {
     export class $EntityLayerProperties$ModelOption {
-        model(): $ModelPart;
         isVanillaModel(): boolean;
         textures(): $List<$ResourceLocation>;
+        model(): $ModelPart;
         weight(): number;
         scaling(): number;
         constructor(model: $ModelPart, isVanillaModel: boolean, textures: $List_<$ResourceLocation_>, weight: number, scaling: number);
@@ -24,9 +24,9 @@ declare module "@package/com/supermartijn642/fusion/entity/model" {
     }
     export class $EntityLayerProperties {
         gatherModels(output: $Consumer_<$ModelPart>): void;
+        identifier(): $ModelLayerLocation;
         transformed(properties: $VanillaModelLayerProperties): $EntityLayerProperties;
         chooseModel(entity: $Entity): $Triple<$ModelPart, $ResourceLocation, number>;
-        identifier(): $ModelLayerLocation;
         static RANDOM: $RandomSource;
         constructor(identifier: $ModelLayerLocation, defaultModel: $List_<$EntityLayerProperties$ModelOption>, conditionals: $List_<$Pair<$EntityModelPredicate, $List_<$EntityLayerProperties$ModelOption>>>);
     }

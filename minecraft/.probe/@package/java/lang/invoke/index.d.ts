@@ -1,24 +1,12 @@
 import { $Serializable } from "@package/java/io";
 import { $DynamicConstantDesc, $MethodHandleDesc, $ClassDesc, $MethodTypeDesc, $Constable } from "@package/java/lang/constant";
 import { $Method, $Member, $Constructor, $Field } from "@package/java/lang/reflect";
-import { $List, $List_ } from "@package/java/util";
 import { $ClassLoader, $Enum, $Object, $Class } from "@package/java/lang";
+import { $List, $List_ } from "@package/java/util";
 
 declare module "@package/java/lang/invoke" {
     export class $MethodHandles$Lookup {
-        findClass(arg0: string): $Class<never>;
-        defineClass(arg0: number[]): $Class<never>;
-        in(arg0: $Class<never>): $MethodHandles$Lookup;
-        ensureInitialized<T>(arg0: $Class<T>): $Class<T>;
-        revealDirect(arg0: $MethodHandle): $MethodHandleInfo;
-        lookupClass(): $Class<never>;
-        previousLookupClass(): $Class<never>;
-        findVirtual(arg0: $Class<never>, arg1: string, arg2: $MethodType): $MethodHandle;
-        findStatic(arg0: $Class<never>, arg1: string, arg2: $MethodType): $MethodHandle;
-        unreflect(arg0: $Method): $MethodHandle;
-        unreflectConstructor(arg0: $Constructor<never>): $MethodHandle;
         lookupModes(): number;
-        hasFullPrivilegeAccess(): boolean;
         accessClass<T>(arg0: $Class<T>): $Class<T>;
         dropLookupMode(arg0: number): $MethodHandles$Lookup;
         defineHiddenClass(arg0: number[], arg1: boolean, ...arg2: $MethodHandles$Lookup$ClassOption_[]): $MethodHandles$Lookup;
@@ -33,6 +21,7 @@ declare module "@package/java/lang/invoke" {
         findStaticVarHandle(arg0: $Class<never>, arg1: string, arg2: $Class<never>): $VarHandle;
         bind(arg0: $Object, arg1: string, arg2: $MethodType): $MethodHandle;
         unreflectSpecial(arg0: $Method, arg1: $Class<never>): $MethodHandle;
+        unreflectConstructor(arg0: $Constructor<never>): $MethodHandle;
         unreflectGetter(arg0: $Field): $MethodHandle;
         unreflectSetter(arg0: $Field): $MethodHandle;
         unreflectVarHandle(arg0: $Field): $VarHandle;
@@ -40,6 +29,17 @@ declare module "@package/java/lang/invoke" {
          * @deprecated
          */
         hasPrivateAccess(): boolean;
+        findClass(arg0: string): $Class<never>;
+        defineClass(arg0: number[]): $Class<never>;
+        in(arg0: $Class<never>): $MethodHandles$Lookup;
+        ensureInitialized<T>(arg0: $Class<T>): $Class<T>;
+        revealDirect(arg0: $MethodHandle): $MethodHandleInfo;
+        lookupClass(): $Class<never>;
+        previousLookupClass(): $Class<never>;
+        findVirtual(arg0: $Class<never>, arg1: string, arg2: $MethodType): $MethodHandle;
+        findStatic(arg0: $Class<never>, arg1: string, arg2: $MethodType): $MethodHandle;
+        unreflect(arg0: $Method): $MethodHandle;
+        hasFullPrivilegeAccess(): boolean;
         static MODULE: number;
         static PACKAGE: number;
         static PUBLIC: number;
@@ -53,33 +53,33 @@ declare module "@package/java/lang/invoke" {
         wrap(): $MethodType;
         describeConstable(): ($MethodTypeDesc) | undefined;
         descriptorString(): string;
-        parameterType(arg0: number): $Class<never>;
-        insertParameterTypes(arg0: number, ...arg1: $Class<never>[]): $MethodType;
         insertParameterTypes(arg0: number, arg1: $List_<$Class<never>>): $MethodType;
+        insertParameterTypes(arg0: number, ...arg1: $Class<never>[]): $MethodType;
         changeReturnType(arg0: $Class<never>): $MethodType;
-        static methodType(arg0: $Class<never>, arg1: $List_<$Class<never>>): $MethodType;
+        static methodType(arg0: $Class<never>, arg1: $Class<never>): $MethodType;
         static methodType(arg0: $Class<never>): $MethodType;
         static methodType(arg0: $Class<never>, arg1: $Class<never>, ...arg2: $Class<never>[]): $MethodType;
-        static methodType(arg0: $Class<never>, arg1: $Class<never>[]): $MethodType;
-        static methodType(arg0: $Class<never>, arg1: $Class<never>): $MethodType;
+        static methodType(arg0: $Class<never>, arg1: $List_<$Class<never>>): $MethodType;
         static methodType(arg0: $Class<never>, arg1: $MethodType): $MethodType;
-        appendParameterTypes(...arg0: $Class<never>[]): $MethodType;
+        static methodType(arg0: $Class<never>, arg1: $Class<never>[]): $MethodType;
         appendParameterTypes(arg0: $List_<$Class<never>>): $MethodType;
+        appendParameterTypes(...arg0: $Class<never>[]): $MethodType;
         parameterCount(): number;
         static genericMethodType(arg0: number, arg1: boolean): $MethodType;
         static genericMethodType(arg0: number): $MethodType;
         lastParameterType(): $Class<never>;
+        hasPrimitives(): boolean;
+        unwrap(): $MethodType;
+        parameterArray(): $Class<never>[];
+        changeParameterType(arg0: number, arg1: $Class<never>): $MethodType;
         parameterList(): $List<$Class<never>>;
         erase(): $MethodType;
         toMethodDescriptorString(): string;
-        changeParameterType(arg0: number, arg1: $Class<never>): $MethodType;
-        hasPrimitives(): boolean;
-        unwrap(): $MethodType;
         hasWrappers(): boolean;
         generic(): $MethodType;
         static fromMethodDescriptorString(arg0: string, arg1: $ClassLoader): $MethodType;
+        parameterType(arg0: number): $Class<never>;
         dropParameterTypes(arg0: number, arg1: number): $MethodType;
-        parameterArray(): $Class<never>[];
     }
     export class $MethodHandles$Lookup$ClassOption extends $Enum<$MethodHandles$Lookup$ClassOption> {
         static values(): $MethodHandles$Lookup$ClassOption[];
@@ -94,18 +94,19 @@ declare module "@package/java/lang/invoke" {
     export class $TypeDescriptor$OfField<F extends $TypeDescriptor$OfField<F>> {
     }
     export interface $TypeDescriptor$OfField<F extends $TypeDescriptor$OfField<F>> extends $TypeDescriptor {
-        componentType(): F;
-        isPrimitive(): boolean;
         isArray(): boolean;
+        isPrimitive(): boolean;
+        componentType(): F;
         arrayType(): F;
-        get primitive(): boolean;
         get array(): boolean;
+        get primitive(): boolean;
     }
     export class $VarHandle$VarHandleDesc extends $DynamicConstantDesc<$VarHandle> {
-        static ofField(arg0: $ClassDesc, arg1: string, arg2: $ClassDesc): $VarHandle$VarHandleDesc;
-        varType(): $ClassDesc;
         static ofStaticField(arg0: $ClassDesc, arg1: string, arg2: $ClassDesc): $VarHandle$VarHandleDesc;
         static ofArray(arg0: $ClassDesc): $VarHandle$VarHandleDesc;
+        resolveConstantDesc(arg0: $MethodHandles$Lookup): $VarHandle;
+        static ofField(arg0: $ClassDesc, arg1: string, arg2: $ClassDesc): $VarHandle$VarHandleDesc;
+        varType(): $ClassDesc;
     }
     export class $VarHandle$AccessMode extends $Enum<$VarHandle$AccessMode> {
         static values(): $VarHandle$AccessMode[];
@@ -162,13 +163,13 @@ declare module "@package/java/lang/invoke" {
         static REF_invokeInterface: number;
     }
     export interface $MethodHandleInfo {
+        reflectAs<T extends $Member>(arg0: $Class<T>, arg1: $MethodHandles$Lookup): T;
         getName(): string;
         getModifiers(): number;
         getDeclaringClass(): $Class<never>;
         isVarArgs(): boolean;
         getReferenceKind(): number;
         getMethodType(): $MethodType;
-        reflectAs<T extends $Member>(arg0: $Class<T>, arg1: $MethodHandles$Lookup): T;
         get name(): string;
         get modifiers(): number;
         get declaringClass(): $Class<never>;
@@ -233,9 +234,9 @@ declare module "@package/java/lang/invoke" {
         changeReturnType(arg0: F): M;
         dropParameterTypes(arg0: number, arg1: number): M;
         parameterCount(): number;
-        parameterList(): $List<F>;
-        changeParameterType(arg0: number, arg1: F): M;
         parameterArray(): F[];
+        changeParameterType(arg0: number, arg1: F): M;
+        parameterList(): $List<F>;
     }
     export class $TypeDescriptor {
     }

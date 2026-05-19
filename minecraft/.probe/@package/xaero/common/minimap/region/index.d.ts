@@ -5,9 +5,8 @@ import { $IntBuffer } from "@package/java/nio";
 
 declare module "@package/xaero/common/minimap/region" {
     export class $MinimapChunk {
-        reset(arg0: number, arg1: number): void;
-        cleanup(arg0: $MinimapInterface): void;
-        getBuffer(arg0: number): $IntBuffer;
+        getLevelToRefresh(arg0: number): number;
+        isBlockTextureUpload(): boolean;
         putColour(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[], arg6: number): void;
         isHasSomething(): boolean;
         isChanged(): boolean;
@@ -23,13 +22,14 @@ declare module "@package/xaero/common/minimap/region" {
         setRefreshRequired(arg0: number, arg1: boolean): void;
         setTile(arg0: number, arg1: number, arg2: $MinimapTile): void;
         setHasSomething(arg0: boolean): void;
-        getLevelToRefresh(arg0: number): number;
-        isBlockTextureUpload(): boolean;
+        getBuffer(arg0: number): $IntBuffer;
+        getTile(arg0: number, arg1: number): $MinimapTile;
+        reset(arg0: number, arg1: number): void;
+        cleanup(arg0: $MinimapInterface): void;
+        bindTexture(arg0: number): number;
         getX(): number;
         getZ(): number;
-        bindTexture(arg0: number): number;
         setChanged(arg0: boolean): void;
-        getTile(arg0: number, arg1: number): $MinimapTile;
         static LIGHT_LEVELS: number;
         static INT_BUFFER_SIZE: number;
         static SIZE_TILES: number;
@@ -38,8 +38,9 @@ declare module "@package/xaero/common/minimap/region" {
         get z(): number;
     }
     export class $MinimapTile {
-        isSlimeChunk(): boolean;
+        isWasTransfered(): boolean;
         static isSlimeChunk(arg0: $ModSettings, arg1: number, arg2: number, arg3: number): boolean;
+        isSlimeChunk(): boolean;
         isChunkGrid(): boolean;
         recycle(): void;
         isHasSomething(): boolean;
@@ -52,19 +53,18 @@ declare module "@package/xaero/common/minimap/region" {
         setHighlightVersion(arg0: number): void;
         hasTerrain(): boolean;
         pixelChanged(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): boolean;
+        setSuccess(arg0: boolean): void;
         getRed(arg0: number, arg1: number, arg2: number): number;
         getGreen(arg0: number, arg1: number, arg2: number): number;
         getBlue(arg0: number, arg1: number, arg2: number): number;
-        setSuccess(arg0: boolean): void;
-        isWasTransfered(): boolean;
-        getX(): number;
-        getZ(): number;
+        setRGB(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
+        getHeight(arg0: number, arg1: number): number;
         isSuccess(): boolean;
         setCode(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
+        getX(): number;
+        getZ(): number;
         setHeight(arg0: number, arg1: number, arg2: number): void;
         getHighlights(): number[];
-        getHeight(arg0: number, arg1: number): number;
-        setRGB(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         static recycled: $List<$MinimapTile>;
         caveLevel: number;
         constructor(arg0: $ModSettings, arg1: number, arg2: number, arg3: number);

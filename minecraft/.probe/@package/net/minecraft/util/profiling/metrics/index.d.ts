@@ -8,14 +8,14 @@ export * as storage from "@package/net/minecraft/util/profiling/metrics/storage"
 
 declare module "@package/net/minecraft/util/profiling/metrics" {
     export class $MetricSampler$MetricSamplerBuilder<T> {
-        build(): $MetricSampler;
-        withThresholdAlert(arg0: $MetricSampler$ThresholdTest_): $MetricSampler$MetricSamplerBuilder<T>;
         withBeforeTick(arg0: $Consumer_<T>): $MetricSampler$MetricSamplerBuilder<T>;
+        withThresholdAlert(arg0: $MetricSampler$ThresholdTest_): $MetricSampler$MetricSamplerBuilder<T>;
+        build(): $MetricSampler;
         constructor(arg0: string, arg1: $MetricCategory_, arg2: $ToDoubleFunction_<T>, arg3: T);
     }
     export class $MetricSampler$SamplerResult {
-        getLastTick(): number;
         valueAtTick(arg0: number): number;
+        getLastTick(): number;
         getFirstTick(): number;
         constructor(arg0: number, arg1: number, arg2: $Int2DoubleMap);
         get lastTick(): number;
@@ -38,10 +38,10 @@ declare module "@package/net/minecraft/util/profiling/metrics" {
         static create(arg0: string, arg1: $MetricCategory_, arg2: $DoubleSupplier_): $MetricSampler;
         getCategory(): $MetricCategory;
         onStartTick(): void;
-        onEndTick(arg0: number): void;
-        onFinished(): void;
         getSampler(): $DoubleSupplier;
         triggersThreshold(): boolean;
+        onEndTick(arg0: number): void;
+        onFinished(): void;
         thresholdTest: $MetricSampler$ThresholdTest;
         constructor(arg0: string, arg1: $MetricCategory_, arg2: $DoubleSupplier_, arg3: $Runnable_, arg4: $MetricSampler$ThresholdTest_);
         get name(): string;
@@ -76,9 +76,9 @@ declare module "@package/net/minecraft/util/profiling/metrics" {
         thresholdTest: $MetricSampler$ThresholdTest;
     }
     export class $MetricCategory extends $Enum<$MetricCategory> {
+        getDescription(): string;
         static values(): $MetricCategory[];
         static valueOf(arg0: string): $MetricCategory;
-        getDescription(): string;
         static JVM: $MetricCategory;
         static PATH_FINDING: $MetricCategory;
         static EVENT_LOOPS: $MetricCategory;

@@ -7,6 +7,7 @@ import { $Entity } from "@package/net/minecraft/world/entity";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $MultiTextureRenderTypeRendererProvider } from "@package/xaero/common/graphics/renderer/multitexture";
 import { $Font, $GuiGraphics } from "@package/net/minecraft/client/gui";
+export * as over from "@package/xaero/common/minimap/element/render/over";
 
 declare module "@package/xaero/common/minimap/element/render" {
     /**
@@ -16,7 +17,7 @@ declare module "@package/xaero/common/minimap/element/render" {
         /**
          * @deprecated
          */
-        postRender(arg0: number, arg1: $Entity, arg2: $Player, arg3: number, arg4: number, arg5: number, arg6: $IXaeroMinimap, arg7: $MultiBufferSource$BufferSource, arg8: $MultiTextureRenderTypeRendererProvider): void;
+        getElementReader(): $MinimapElementReader<E, RC>;
         /**
          * @deprecated
          */
@@ -28,11 +29,16 @@ declare module "@package/xaero/common/minimap/element/render" {
         /**
          * @deprecated
          */
+        postRender(arg0: number, arg1: $Entity, arg2: $Player, arg3: number, arg4: number, arg5: number, arg6: $IXaeroMinimap, arg7: $MultiBufferSource$BufferSource, arg8: $MultiTextureRenderTypeRendererProvider): void;
+        /**
+         * @deprecated
+         */
         shouldRender(arg0: number): boolean;
         /**
          * @deprecated
          */
         constructor(arg0: $MinimapElementReader<E, RC>, arg1: $MinimapElementRenderProvider<E, RC>, arg2: RC);
+        get elementReader(): $MinimapElementReader<E, RC>;
     }
     /**
      * @deprecated

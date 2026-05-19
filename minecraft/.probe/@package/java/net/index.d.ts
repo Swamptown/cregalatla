@@ -8,22 +8,22 @@ export * as http from "@package/java/net/http";
 
 declare module "@package/java/net" {
     export class $ServerSocket implements $Closeable {
-        accept(): $Socket;
-        close(): void;
-        getChannel(): $ServerSocketChannel;
-        bind(arg0: $SocketAddress): void;
-        bind(arg0: $SocketAddress, arg1: number): void;
-        setOption<T>(arg0: $SocketOption<T>, arg1: T): $ServerSocket;
-        getOption<T>(arg0: $SocketOption<T>): T;
-        supportedOptions(): $Set<$SocketOption<never>>;
         getInetAddress(): $InetAddress;
-        getLocalSocketAddress(): $SocketAddress;
-        getLocalPort(): number;
-        getReuseAddress(): boolean;
         /**
          * @deprecated
          */
         static setSocketFactory(arg0: $SocketImplFactory_): void;
+        supportedOptions(): $Set<$SocketOption<never>>;
+        setOption<T>(arg0: $SocketOption<T>, arg1: T): $ServerSocket;
+        getOption<T>(arg0: $SocketOption<T>): T;
+        getLocalSocketAddress(): $SocketAddress;
+        getLocalPort(): number;
+        getReuseAddress(): boolean;
+        bind(arg0: $SocketAddress): void;
+        bind(arg0: $SocketAddress, arg1: number): void;
+        accept(): $Socket;
+        close(): void;
+        getChannel(): $ServerSocketChannel;
         isClosed(): boolean;
         setReuseAddress(arg0: boolean): void;
         setReceiveBufferSize(arg0: number): void;
@@ -32,51 +32,51 @@ declare module "@package/java/net" {
         getSoTimeout(): number;
         setPerformancePreferences(arg0: number, arg1: number, arg2: number): void;
         isBound(): boolean;
-        constructor(arg0: number, arg1: number, arg2: $InetAddress);
-        constructor(arg0: number, arg1: number);
         constructor(arg0: number);
         constructor();
-        get channel(): $ServerSocketChannel;
+        constructor(arg0: number, arg1: number, arg2: $InetAddress);
+        constructor(arg0: number, arg1: number);
         get inetAddress(): $InetAddress;
+        static set socketFactory(value: $SocketImplFactory_);
         get localSocketAddress(): $SocketAddress;
         get localPort(): number;
-        static set socketFactory(value: $SocketImplFactory_);
+        get channel(): $ServerSocketChannel;
         get closed(): boolean;
         get bound(): boolean;
     }
     export class $NetworkInterface {
-        getName(): string;
-        getParent(): $NetworkInterface;
-        isVirtual(): boolean;
-        static getByName(arg0: string): $NetworkInterface;
-        getIndex(): number;
-        static networkInterfaces(): $Stream<$NetworkInterface>;
-        inetAddresses(): $Stream<$InetAddress>;
-        getInetAddresses(): $Enumeration<$InetAddress>;
-        static getNetworkInterfaces(): $Enumeration<$NetworkInterface>;
         getInterfaceAddresses(): $List<$InterfaceAddress>;
         getSubInterfaces(): $Enumeration<$NetworkInterface>;
         subInterfaces(): $Stream<$NetworkInterface>;
-        getDisplayName(): string;
-        static getByIndex(arg0: number): $NetworkInterface;
-        static getByInetAddress(arg0: $InetAddress): $NetworkInterface;
-        isUp(): boolean;
-        isLoopback(): boolean;
         isPointToPoint(): boolean;
         supportsMulticast(): boolean;
-        getHardwareAddress(): number[];
         getMTU(): number;
-        get name(): string;
-        get parent(): $NetworkInterface;
-        get virtual(): boolean;
-        get index(): number;
+        getDisplayName(): string;
+        static networkInterfaces(): $Stream<$NetworkInterface>;
+        inetAddresses(): $Stream<$InetAddress>;
+        getName(): string;
+        isVirtual(): boolean;
+        getParent(): $NetworkInterface;
+        static getByName(arg0: string): $NetworkInterface;
+        getIndex(): number;
+        static getNetworkInterfaces(): $Enumeration<$NetworkInterface>;
+        isLoopback(): boolean;
+        getInetAddresses(): $Enumeration<$InetAddress>;
+        static getByInetAddress(arg0: $InetAddress): $NetworkInterface;
+        getHardwareAddress(): number[];
+        isUp(): boolean;
+        static getByIndex(arg0: number): $NetworkInterface;
         get interfaceAddresses(): $List<$InterfaceAddress>;
-        get displayName(): string;
-        get up(): boolean;
-        get loopback(): boolean;
         get pointToPoint(): boolean;
-        get hardwareAddress(): number[];
         get MTU(): number;
+        get displayName(): string;
+        get name(): string;
+        get virtual(): boolean;
+        get parent(): $NetworkInterface;
+        get index(): number;
+        get loopback(): boolean;
+        get hardwareAddress(): number[];
+        get up(): boolean;
     }
     export class $URLStreamHandlerFactory {
     }
@@ -88,12 +88,12 @@ declare module "@package/java/net" {
      */
     export type $URLStreamHandlerFactory_ = ((arg0: string) => $URLStreamHandler);
     export class $InterfaceAddress {
-        getAddress(): $InetAddress;
-        getBroadcast(): $InetAddress;
         getNetworkPrefixLength(): number;
-        get address(): $InetAddress;
-        get broadcast(): $InetAddress;
+        getBroadcast(): $InetAddress;
+        getAddress(): $InetAddress;
         get networkPrefixLength(): number;
+        get broadcast(): $InetAddress;
+        get address(): $InetAddress;
     }
     export class $SocketImplFactory {
     }
@@ -105,11 +105,18 @@ declare module "@package/java/net" {
      */
     export type $SocketImplFactory_ = (() => $SocketImpl);
     export class $URI implements $Comparable<$URI>, $Serializable {
+        normalize(): $URI;
+        relativize(arg0: $URI): $URI;
         compareTo(arg0: $URI): number;
         isAbsolute(): boolean;
         resolve(arg0: string): $URI;
         resolve(arg0: $URI): $URI;
         static create(arg0: string): $URI;
+        getAuthority(): string;
+        getQuery(): string;
+        getPath(): string;
+        getUserInfo(): string;
+        toURL(): $URL;
         getScheme(): string;
         isOpaque(): boolean;
         getRawAuthority(): string;
@@ -118,25 +125,22 @@ declare module "@package/java/net" {
         getRawPath(): string;
         getHost(): string;
         getPort(): number;
-        getAuthority(): string;
-        getQuery(): string;
-        getPath(): string;
-        getUserInfo(): string;
-        toURL(): $URL;
-        normalize(): $URI;
-        relativize(arg0: $URI): $URI;
         getRawSchemeSpecificPart(): string;
         parseServerAuthority(): $URI;
         getSchemeSpecificPart(): string;
         getRawUserInfo(): string;
         getFragment(): string;
         toASCIIString(): string;
+        constructor(arg0: string);
+        constructor(arg0: string, arg1: string, arg2: string, arg3: number, arg4: string, arg5: string, arg6: string);
         constructor(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string);
         constructor(arg0: string, arg1: string, arg2: string, arg3: string);
         constructor(arg0: string, arg1: string, arg2: string);
-        constructor(arg0: string);
-        constructor(arg0: string, arg1: string, arg2: string, arg3: number, arg4: string, arg5: string, arg6: string);
         get absolute(): boolean;
+        get authority(): string;
+        get query(): string;
+        get path(): string;
+        get userInfo(): string;
         get scheme(): string;
         get opaque(): boolean;
         get rawAuthority(): string;
@@ -145,10 +149,6 @@ declare module "@package/java/net" {
         get rawPath(): string;
         get host(): string;
         get port(): number;
-        get authority(): string;
-        get query(): string;
-        get path(): string;
-        get userInfo(): string;
         get rawSchemeSpecificPart(): string;
         get schemeSpecificPart(): string;
         get rawUserInfo(): string;
@@ -157,13 +157,6 @@ declare module "@package/java/net" {
     export class $URL implements $Serializable {
         static of(arg0: $URI, arg1: $URLStreamHandler): $URL;
         openStream(): $InputStream;
-        getHost(): string;
-        getPort(): number;
-        getDefaultPort(): number;
-        sameFile(arg0: $URL): boolean;
-        toExternalForm(): string;
-        openConnection(arg0: $Proxy): $URLConnection;
-        openConnection(): $URLConnection;
         getContent(arg0: $Class<never>[]): $Object;
         getContent(): $Object;
         getProtocol(): string;
@@ -175,6 +168,13 @@ declare module "@package/java/net" {
         getUserInfo(): string;
         toURI(): $URI;
         static setURLStreamHandlerFactory(arg0: $URLStreamHandlerFactory_): void;
+        getHost(): string;
+        getPort(): number;
+        getDefaultPort(): number;
+        sameFile(arg0: $URL): boolean;
+        toExternalForm(): string;
+        openConnection(): $URLConnection;
+        openConnection(arg0: $Proxy): $URLConnection;
         /**
          * @deprecated
          */
@@ -199,9 +199,6 @@ declare module "@package/java/net" {
          * @deprecated
          */
         constructor(arg0: string, arg1: string, arg2: number, arg3: string, arg4: $URLStreamHandler);
-        get host(): string;
-        get port(): number;
-        get defaultPort(): number;
         get protocol(): string;
         get authority(): string;
         get file(): string;
@@ -210,6 +207,9 @@ declare module "@package/java/net" {
         get path(): string;
         get userInfo(): string;
         static set URLStreamHandlerFactory(value: $URLStreamHandlerFactory_);
+        get host(): string;
+        get port(): number;
+        get defaultPort(): number;
     }
     export class $SocketImpl implements $SocketOptions {
         constructor();
@@ -242,31 +242,31 @@ declare module "@package/java/net" {
         getOption(arg0: number): $Object;
     }
     export class $DatagramSocket implements $Closeable {
-        close(): void;
-        getPort(): number;
-        getChannel(): $DatagramChannel;
-        bind(arg0: $SocketAddress): void;
-        getBroadcast(): boolean;
-        getLocalAddress(): $InetAddress;
-        setOption<T>(arg0: $SocketOption<T>, arg1: T): $DatagramSocket;
-        getOption<T>(arg0: $SocketOption<T>): T;
-        supportedOptions(): $Set<$SocketOption<never>>;
-        connect(arg0: $InetAddress, arg1: number): void;
-        connect(arg0: $SocketAddress): void;
-        isConnected(): boolean;
-        joinGroup(arg0: $SocketAddress, arg1: $NetworkInterface): void;
-        leaveGroup(arg0: $SocketAddress, arg1: $NetworkInterface): void;
-        receive(arg0: $DatagramPacket): void;
-        getInetAddress(): $InetAddress;
-        getRemoteSocketAddress(): $SocketAddress;
-        getLocalSocketAddress(): $SocketAddress;
-        getLocalPort(): number;
-        getReuseAddress(): boolean;
         setBroadcast(arg0: boolean): void;
+        getBroadcast(): boolean;
         /**
          * @deprecated
          */
         static setDatagramSocketImplFactory(arg0: $DatagramSocketImplFactory_): void;
+        joinGroup(arg0: $SocketAddress, arg1: $NetworkInterface): void;
+        leaveGroup(arg0: $SocketAddress, arg1: $NetworkInterface): void;
+        getInetAddress(): $InetAddress;
+        supportedOptions(): $Set<$SocketOption<never>>;
+        isConnected(): boolean;
+        setOption<T>(arg0: $SocketOption<T>, arg1: T): $DatagramSocket;
+        getLocalAddress(): $InetAddress;
+        getOption<T>(arg0: $SocketOption<T>): T;
+        getRemoteSocketAddress(): $SocketAddress;
+        getLocalSocketAddress(): $SocketAddress;
+        getLocalPort(): number;
+        getReuseAddress(): boolean;
+        receive(arg0: $DatagramPacket): void;
+        bind(arg0: $SocketAddress): void;
+        connect(arg0: $SocketAddress): void;
+        connect(arg0: $InetAddress, arg1: number): void;
+        close(): void;
+        getPort(): number;
+        getChannel(): $DatagramChannel;
         disconnect(): void;
         isClosed(): boolean;
         send(arg0: $DatagramPacket): void;
@@ -280,29 +280,28 @@ declare module "@package/java/net" {
         getTrafficClass(): number;
         setSendBufferSize(arg0: number): void;
         isBound(): boolean;
-        constructor(arg0: number);
         constructor(arg0: $SocketAddress);
-        constructor(arg0: number, arg1: $InetAddress);
         constructor();
-        get port(): number;
-        get channel(): $DatagramChannel;
-        get localAddress(): $InetAddress;
-        get connected(): boolean;
+        constructor(arg0: number, arg1: $InetAddress);
+        constructor(arg0: number);
+        static set datagramSocketImplFactory(value: $DatagramSocketImplFactory_);
         get inetAddress(): $InetAddress;
+        get connected(): boolean;
+        get localAddress(): $InetAddress;
         get remoteSocketAddress(): $SocketAddress;
         get localSocketAddress(): $SocketAddress;
         get localPort(): number;
-        static set datagramSocketImplFactory(value: $DatagramSocketImplFactory_);
+        get port(): number;
+        get channel(): $DatagramChannel;
         get closed(): boolean;
         get bound(): boolean;
     }
     export class $InetAddress implements $Serializable {
-        getAddress(): number[];
-        static getByName(arg0: string): $InetAddress;
-        getHostAddress(): string;
-        isLinkLocalAddress(): boolean;
-        getHostName(): string;
-        static ofLiteral(arg0: string): $InetAddress;
+        isReachable(arg0: $NetworkInterface, arg1: number, arg2: number): boolean;
+        isReachable(arg0: number): boolean;
+        static getAllByName(arg0: string): $InetAddress[];
+        static getByAddress(arg0: string, arg1: number[]): $InetAddress;
+        static getByAddress(arg0: number[]): $InetAddress;
         isMulticastAddress(): boolean;
         isAnyLocalAddress(): boolean;
         isLoopbackAddress(): boolean;
@@ -312,18 +311,14 @@ declare module "@package/java/net" {
         isMCLinkLocal(): boolean;
         isMCSiteLocal(): boolean;
         isMCOrgLocal(): boolean;
-        isReachable(arg0: number): boolean;
-        isReachable(arg0: $NetworkInterface, arg1: number, arg2: number): boolean;
-        static getAllByName(arg0: string): $InetAddress[];
-        static getByAddress(arg0: number[]): $InetAddress;
-        static getByAddress(arg0: string, arg1: number[]): $InetAddress;
         getCanonicalHostName(): string;
         static getLoopbackAddress(): $InetAddress;
         static getLocalHost(): $InetAddress;
-        get address(): number[];
-        get hostAddress(): string;
-        get linkLocalAddress(): boolean;
-        get hostName(): string;
+        isLinkLocalAddress(): boolean;
+        getHostAddress(): string;
+        getAddress(): number[];
+        getHostName(): string;
+        static getByName(arg0: string): $InetAddress;
         get multicastAddress(): boolean;
         get anyLocalAddress(): boolean;
         get siteLocalAddress(): boolean;
@@ -334,6 +329,10 @@ declare module "@package/java/net" {
         get MCOrgLocal(): boolean;
         get canonicalHostName(): string;
         static get localHost(): $InetAddress;
+        get linkLocalAddress(): boolean;
+        get hostAddress(): string;
+        get address(): number[];
+        get hostName(): string;
     }
     export class $FileNameMap {
     }
@@ -354,20 +353,6 @@ declare module "@package/java/net" {
      */
     export type $ContentHandlerFactory_ = ((arg0: string) => $ContentHandler);
     export class $URLConnection {
-        getInputStream(): $InputStream;
-        getContent(arg0: $Class<never>[]): $Object;
-        getContent(): $Object;
-        connect(): void;
-        getDate(): number;
-        setUseCaches(arg0: boolean): void;
-        getLastModified(): number;
-        getContentLength(): number;
-        getURL(): $URL;
-        setRequestProperty(arg0: string, arg1: string): void;
-        /**
-         * @deprecated
-         */
-        getPermission(): $Permission;
         getUseCaches(): boolean;
         getContentLengthLong(): number;
         static guessContentTypeFromStream(arg0: $InputStream): string;
@@ -395,6 +380,8 @@ declare module "@package/java/net" {
         getReadTimeout(): number;
         getContentEncoding(): string;
         getExpiration(): number;
+        getDate(): number;
+        getLastModified(): number;
         getHeaderFields(): $Map<string, $List<string>>;
         getHeaderFieldInt(arg0: string, arg1: number): number;
         getHeaderFieldKey(arg0: number): string;
@@ -415,20 +402,29 @@ declare module "@package/java/net" {
          */
         static getDefaultRequestProperty(arg0: string): string;
         static setContentHandlerFactory(arg0: $ContentHandlerFactory_): void;
-        get inputStream(): $InputStream;
-        get date(): number;
-        get lastModified(): number;
-        get contentLength(): number;
-        get URL(): $URL;
-        get permission(): $Permission;
+        getContentLength(): number;
+        connect(): void;
+        getInputStream(): $InputStream;
+        getContent(): $Object;
+        getContent(arg0: $Class<never>[]): $Object;
+        getPermission(): $Permission;
+        setRequestProperty(arg0: string, arg1: string): void;
+        getURL(): $URL;
+        setUseCaches(arg0: boolean): void;
         get contentLengthLong(): number;
         get requestProperties(): $Map<string, $List<string>>;
         get contentType(): string;
         get contentEncoding(): string;
         get expiration(): number;
+        get date(): number;
+        get lastModified(): number;
         get headerFields(): $Map<string, $List<string>>;
         get outputStream(): $OutputStream;
         static set contentHandlerFactory(value: $ContentHandlerFactory_);
+        get contentLength(): number;
+        get inputStream(): $InputStream;
+        get permission(): $Permission;
+        get URL(): $URL;
     }
     export class $ProtocolFamily {
     }
@@ -440,30 +436,30 @@ declare module "@package/java/net" {
      */
     export type $ProtocolFamily_ = (() => string);
     export class $Authenticator {
-        static getDefault(): $Authenticator;
-        static setDefault(arg0: $Authenticator): void;
-        requestPasswordAuthenticationInstance(arg0: string, arg1: $InetAddress, arg2: number, arg3: string, arg4: string, arg5: string, arg6: $URL, arg7: $Authenticator$RequestorType_): $PasswordAuthentication;
         static requestPasswordAuthentication(arg0: string, arg1: $InetAddress, arg2: number, arg3: string, arg4: string, arg5: string): $PasswordAuthentication;
+        static requestPasswordAuthentication(arg0: $InetAddress, arg1: number, arg2: string, arg3: string, arg4: string): $PasswordAuthentication;
         static requestPasswordAuthentication(arg0: $Authenticator, arg1: string, arg2: $InetAddress, arg3: number, arg4: string, arg5: string, arg6: string, arg7: $URL, arg8: $Authenticator$RequestorType_): $PasswordAuthentication;
         static requestPasswordAuthentication(arg0: string, arg1: $InetAddress, arg2: number, arg3: string, arg4: string, arg5: string, arg6: $URL, arg7: $Authenticator$RequestorType_): $PasswordAuthentication;
-        static requestPasswordAuthentication(arg0: $InetAddress, arg1: number, arg2: string, arg3: string, arg4: string): $PasswordAuthentication;
+        requestPasswordAuthenticationInstance(arg0: string, arg1: $InetAddress, arg2: number, arg3: string, arg4: string, arg5: string, arg6: $URL, arg7: $Authenticator$RequestorType_): $PasswordAuthentication;
+        static setDefault(arg0: $Authenticator): void;
+        static getDefault(): $Authenticator;
         constructor();
     }
     export class $InetSocketAddress extends $SocketAddress {
-        getAddress(): $InetAddress;
-        getPort(): number;
-        getHostName(): string;
         getHostString(): string;
-        isUnresolved(): boolean;
         static createUnresolved(arg0: string, arg1: number): $InetSocketAddress;
-        constructor(arg0: string, arg1: number);
+        getAddress(): $InetAddress;
+        isUnresolved(): boolean;
+        getHostName(): string;
+        getPort(): number;
         constructor(arg0: number);
         constructor(arg0: $InetAddress, arg1: number);
-        get address(): $InetAddress;
-        get port(): number;
-        get hostName(): string;
+        constructor(arg0: string, arg1: number);
         get hostString(): string;
+        get address(): $InetAddress;
         get unresolved(): boolean;
+        get hostName(): string;
+        get port(): number;
     }
     export class $PasswordAuthentication {
         getPassword(): string[];
@@ -473,27 +469,17 @@ declare module "@package/java/net" {
         get userName(): string;
     }
     export class $Socket implements $Closeable {
-        close(): void;
-        getPort(): number;
-        getInputStream(): $InputStream;
-        getChannel(): $SocketChannel;
-        bind(arg0: $SocketAddress): void;
-        getLocalAddress(): $InetAddress;
-        setOption<T>(arg0: $SocketOption<T>, arg1: T): $Socket;
-        getOption<T>(arg0: $SocketOption<T>): T;
-        supportedOptions(): $Set<$SocketOption<never>>;
-        connect(arg0: $SocketAddress): void;
-        connect(arg0: $SocketAddress, arg1: number): void;
-        isConnected(): boolean;
-        shutdownInput(): void;
-        shutdownOutput(): void;
-        /**
-         * @deprecated
-         */
-        static setSocketImplFactory(arg0: $SocketImplFactory_): void;
         isOutputShutdown(): boolean;
         isInputShutdown(): boolean;
         getInetAddress(): $InetAddress;
+        supportedOptions(): $Set<$SocketOption<never>>;
+        isConnected(): boolean;
+        setOption<T>(arg0: $SocketOption<T>, arg1: T): $Socket;
+        getLocalAddress(): $InetAddress;
+        getOption<T>(arg0: $SocketOption<T>): T;
+        shutdownInput(): void;
+        shutdownOutput(): void;
+        getOutputStream(): $OutputStream;
         getRemoteSocketAddress(): $SocketAddress;
         getLocalSocketAddress(): $SocketAddress;
         getLocalPort(): number;
@@ -502,6 +488,17 @@ declare module "@package/java/net" {
         getReuseAddress(): boolean;
         sendUrgentData(arg0: number): void;
         getOOBInline(): boolean;
+        /**
+         * @deprecated
+         */
+        static setSocketImplFactory(arg0: $SocketImplFactory_): void;
+        bind(arg0: $SocketAddress): void;
+        connect(arg0: $SocketAddress, arg1: number): void;
+        connect(arg0: $SocketAddress): void;
+        close(): void;
+        getInputStream(): $InputStream;
+        getPort(): number;
+        getChannel(): $SocketChannel;
         isClosed(): boolean;
         setKeepAlive(arg0: boolean): void;
         setOOBInline(arg0: boolean): void;
@@ -519,41 +516,37 @@ declare module "@package/java/net" {
         setPerformancePreferences(arg0: number, arg1: number, arg2: number): void;
         setSendBufferSize(arg0: number): void;
         isBound(): boolean;
-        getOutputStream(): $OutputStream;
-        constructor(arg0: string, arg1: number, arg2: $InetAddress, arg3: number);
-        constructor();
-        constructor(arg0: $Proxy);
-        constructor(arg0: $InetAddress, arg1: number);
         constructor(arg0: string, arg1: number);
         /**
          * @deprecated
          */
         constructor(arg0: $InetAddress, arg1: number, arg2: boolean);
+        constructor(arg0: $InetAddress, arg1: number);
+        constructor(arg0: string, arg1: number, arg2: $InetAddress, arg3: number);
         /**
          * @deprecated
          */
         constructor(arg0: string, arg1: number, arg2: boolean);
         constructor(arg0: $InetAddress, arg1: number, arg2: $InetAddress, arg3: number);
-        get port(): number;
-        get inputStream(): $InputStream;
-        get channel(): $SocketChannel;
-        get localAddress(): $InetAddress;
-        get connected(): boolean;
-        static set socketImplFactory(value: $SocketImplFactory_);
+        constructor();
+        constructor(arg0: $Proxy);
         get outputShutdown(): boolean;
         get inputShutdown(): boolean;
         get inetAddress(): $InetAddress;
+        get connected(): boolean;
+        get localAddress(): $InetAddress;
+        get outputStream(): $OutputStream;
         get remoteSocketAddress(): $SocketAddress;
         get localSocketAddress(): $SocketAddress;
         get localPort(): number;
+        static set socketImplFactory(value: $SocketImplFactory_);
+        get inputStream(): $InputStream;
+        get port(): number;
+        get channel(): $SocketChannel;
         get closed(): boolean;
         get bound(): boolean;
-        get outputStream(): $OutputStream;
     }
     export class $HttpURLConnection extends $URLConnection {
-        getErrorStream(): $InputStream;
-        setRequestMethod(arg0: string): void;
-        getResponseCode(): number;
         setAuthenticator(arg0: $Authenticator): void;
         setFixedLengthStreamingMode(arg0: number): void;
         setFixedLengthStreamingMode(arg0: number): void;
@@ -564,8 +557,11 @@ declare module "@package/java/net" {
         getRequestMethod(): string;
         getResponseMessage(): string;
         usingProxy(): boolean;
-        setInstanceFollowRedirects(arg0: boolean): void;
+        setRequestMethod(arg0: string): void;
+        getResponseCode(): number;
+        getErrorStream(): $InputStream;
         disconnect(): void;
+        setInstanceFollowRedirects(arg0: boolean): void;
         static HTTP_SEE_OTHER: number;
         static HTTP_CLIENT_TIMEOUT: number;
         static HTTP_BAD_REQUEST: number;
@@ -605,11 +601,11 @@ declare module "@package/java/net" {
         static HTTP_UNSUPPORTED_TYPE: number;
         static HTTP_PARTIAL: number;
         static HTTP_NOT_FOUND: number;
-        get errorStream(): $InputStream;
-        get responseCode(): number;
         set authenticator(value: $Authenticator);
         set chunkedStreamingMode(value: number);
         get responseMessage(): string;
+        get responseCode(): number;
+        get errorStream(): $InputStream;
     }
     export class $SocketAddress implements $Serializable {
         constructor();
@@ -618,24 +614,24 @@ declare module "@package/java/net" {
         constructor();
     }
     export class $DatagramPacket {
+        setSocketAddress(arg0: $SocketAddress): void;
+        setAddress(arg0: $InetAddress): void;
+        setData(arg0: number[]): void;
+        setData(arg0: number[], arg1: number, arg2: number): void;
         getLength(): number;
         setLength(arg0: number): void;
         getAddress(): $InetAddress;
         getPort(): number;
         getOffset(): number;
         getData(): number[];
-        setAddress(arg0: $InetAddress): void;
-        setSocketAddress(arg0: $SocketAddress): void;
-        getSocketAddress(): $SocketAddress;
         setPort(arg0: number): void;
-        setData(arg0: number[]): void;
-        setData(arg0: number[], arg1: number, arg2: number): void;
+        getSocketAddress(): $SocketAddress;
         constructor(arg0: number[], arg1: number, arg2: $SocketAddress);
-        constructor(arg0: number[], arg1: number, arg2: $InetAddress, arg3: number);
-        constructor(arg0: number[], arg1: number, arg2: number, arg3: $SocketAddress);
         constructor(arg0: number[], arg1: number, arg2: number);
         constructor(arg0: number[], arg1: number);
         constructor(arg0: number[], arg1: number, arg2: number, arg3: $InetAddress, arg4: number);
+        constructor(arg0: number[], arg1: number, arg2: number, arg3: $SocketAddress);
+        constructor(arg0: number[], arg1: number, arg2: $InetAddress, arg3: number);
         get offset(): number;
     }
     export class $ContentHandler {

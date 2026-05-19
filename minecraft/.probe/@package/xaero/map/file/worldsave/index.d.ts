@@ -20,8 +20,8 @@ declare module "@package/xaero/map/file/worldsave" {
         prepareSingleplayer(arg0: $Level_, arg1: $MapProcessor): void;
         getWorldServer(): $ServerLevel;
         getWorldDataReader(): $WorldDataReader;
-        static onServerWorldUnload(arg0: $ServerLevel): void;
         handleRenderExecutor(): void;
+        static onServerWorldUnload(arg0: $ServerLevel): void;
         getWorldDir(): $Path;
         constructor(arg0: $WorldDataReader, arg1: $Executor);
         get worldServer(): $ServerLevel;

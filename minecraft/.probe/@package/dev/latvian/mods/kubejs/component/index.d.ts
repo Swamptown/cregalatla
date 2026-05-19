@@ -27,17 +27,16 @@ import { $ResourceLocation_, $ResourceKey_ } from "@package/net/minecraft/resour
 
 declare module "@package/dev/latvian/mods/kubejs/component" {
     export class $DataComponentWrapper {
-        static filter(from: $Object, target: $TypeInfo_): boolean;
-        static readPatch(registryOps: $DynamicOps<$Tag_>, reader: $StringReader): $DataComponentPatch;
+        static getTypeInfo(type: $DataComponentType_<never>): $TypeInfo;
+        static tryWrapComponent<T>(type: $DataComponentType_<T>, value: $Object): $DataResult<(T) | undefined>;
+        static patchToString(builder: $StringBuilder, ops: $DynamicOps<$Tag_>, patch: $DataComponentPatch_): $StringBuilder;
+        static visualPatch(patch: $DataComponentPatch_): $DataComponentPatch;
         static wrapType(object: $Object): $DataComponentType<never>;
         static patchOf(from: $Object): $DataComponentPatch;
         /**
          * @deprecated
          */
         static patchOf(ops: $DynamicOps<$Tag_>, o: $Object): $DataComponentPatch;
-        static readComponentType(stringReader: $StringReader): $DataComponentType<never>;
-        static tryMapOf(o: $Object): $DataResult<$DataComponentMap>;
-        static tryPatchOf(o: $Object): $DataResult<$DataComponentPatch>;
         static readPredicate(registryOps: $DynamicOps<$Tag_>, reader: $StringReader): $DataComponentPredicate;
         /**
          * @deprecated
@@ -50,16 +49,17 @@ declare module "@package/dev/latvian/mods/kubejs/component" {
         static patchOrEmptyOf(ops: $DynamicOps<$Tag_>, o: $Object): $DataComponentPatch;
         static patchOrEmptyOf(from: $Object): $DataComponentPatch;
         static mapToString(builder: $StringBuilder, ops: $DynamicOps<$Tag_>, map: $DataComponentMap_): $StringBuilder;
-        static getTypeInfo(type: $DataComponentType_<never>): $TypeInfo;
-        static visualPatch(patch: $DataComponentPatch_): $DataComponentPatch;
-        static tryWrapComponent<T>(type: $DataComponentType_<T>, value: $Object): $DataResult<(T) | undefined>;
-        static patchToString(builder: $StringBuilder, ops: $DynamicOps<$Tag_>, patch: $DataComponentPatch_): $StringBuilder;
+        static readComponentType(stringReader: $StringReader): $DataComponentType<never>;
+        static tryMapOf(o: $Object): $DataResult<$DataComponentMap>;
+        static tryPatchOf(o: $Object): $DataResult<$DataComponentPatch>;
+        static readPatch(registryOps: $DynamicOps<$Tag_>, reader: $StringReader): $DataComponentPatch;
+        static filter(from: $Object, target: $TypeInfo_): boolean;
         static readMap(registryOps: $DynamicOps<$Tag_>, reader: $StringReader): $DataComponentMap;
-        static mapOf(from: $Object): $DataComponentMap;
         /**
          * @deprecated
          */
         static mapOf(ops: $DynamicOps<$Tag_>, o: $Object): $DataComponentMap;
+        static mapOf(from: $Object): $DataComponentMap;
         static VISUAL_DIFFERENCE: $Lazy<$Set<$DataComponentType<never>>>;
         static ERROR_UNKNOWN_COMPONENT: $DynamicCommandExceptionType;
         static ERROR_MALFORMED_COMPONENT: $Dynamic2CommandExceptionType;
@@ -78,6 +78,7 @@ declare module "@package/dev/latvian/mods/kubejs/component" {
     export interface $ComponentFunctions {
         remove(type: $DataComponentType_<never>): this;
         getComponentMap(): $DataComponentMap;
+        setAdditionalTooltipHidden(): void;
         setUnit(component: $DataComponentType_<$Unit_>): this;
         patch(components: $DataComponentPatch_): this;
         resetComponents(): this;
@@ -87,10 +88,9 @@ declare module "@package/dev/latvian/mods/kubejs/component" {
         setRarity(rarity: $Rarity_): void;
         setCustomName(name: $Component_): void;
         getCustomName(): $Component;
-        setLore(lines: $List_<$Component_>): void;
         setLore(lines: $List_<$Component_>, styledLines: $List_<$Component_>): void;
+        setLore(lines: $List_<$Component_>): void;
         setCustomModelData(data: number): void;
-        setAdditionalTooltipHidden(): void;
         setTooltipHidden(): void;
         setGlintOverride(override: boolean): void;
         setDyedColor(color: $KubeColor_): void;
@@ -135,6 +135,8 @@ declare module "@package/dev/latvian/mods/kubejs/component" {
         set<T extends keyof DataComponentTypes.InputMap>(type: T, data: DataComponentTypes.InputMap[T]): this;
     }
     export interface $ItemComponentFunctions extends $ComponentFunctions, $AttributeModifierFunctions {
+        setFood(nutrition: number, saturation: number): void;
+        setFood(foodProperties: $FoodProperties_): void;
         modifyFood(foodBuilder: $Consumer_<$FoodBuilder>): void;
         setMaxStackSize(size: number): void;
         setMaxDamage(maxDamage: number): void;
@@ -155,8 +157,6 @@ declare module "@package/dev/latvian/mods/kubejs/component" {
         setFireworks(fireworks: $Fireworks_): void;
         setNoteBlockSound(id: $ResourceLocation_): void;
         getAttributeModifiers(): $ItemAttributeModifiers;
-        setFood(foodProperties: $FoodProperties_): void;
-        setFood(nutrition: number, saturation: number): void;
         get<T extends keyof DataComponentTypes.OutputMap>(type: T): DataComponentTypes.OutputMap[T] | null;
         getOrDefault<T extends keyof DataComponentTypes.OutputMap>(type: T, _default: DataComponentTypes.OutputMap[T]): DataComponentTypes.OutputMap[T];
         set(components: $DataComponentMap_): this;
@@ -198,15 +198,15 @@ declare module "@package/dev/latvian/mods/kubejs/component" {
         set<T extends keyof DataComponentTypes.InputMap>(type: T, data: DataComponentTypes.InputMap[T]): this;
     }
     export interface $MutableDataComponentHolderFunctions extends $ComponentFunctions {
-        getComponentHolder(): $MutableDataComponentHolder;
         getComponentMap(): $DataComponentMap;
-        patch(components: $DataComponentPatch_): this;
+        patch(components: $DataComponentPatch_): $ComponentFunctions;
+        getComponentHolder(): $MutableDataComponentHolder;
         get<T extends keyof DataComponentTypes.OutputMap>(type: T): DataComponentTypes.OutputMap[T] | null;
         getOrDefault<T extends keyof DataComponentTypes.OutputMap>(type: T, _default: DataComponentTypes.OutputMap[T]): DataComponentTypes.OutputMap[T];
         set(components: $DataComponentMap_): this;
         set<T extends keyof DataComponentTypes.InputMap>(type: T, data: DataComponentTypes.InputMap[T]): this;
-        get componentHolder(): $MutableDataComponentHolder;
         get componentMap(): $DataComponentMap;
+        get componentHolder(): $MutableDataComponentHolder;
     }
     export class $DataComponentWrapper$PatchBuilder {
     }
@@ -220,11 +220,14 @@ declare module "@package/dev/latvian/mods/kubejs/component" {
     export class $AttributeModifierFunctions {
     }
     export interface $AttributeModifierFunctions {
+        getAttributeModifiers(): $ItemAttributeModifiers;
+        setAttributeModifiers(modifiers: $List_<$ItemAttributeModifiers$Entry_>): void;
         getBaseAttackDamage(): number;
         getBaseAttackSpeed(): number;
         addAttributeModifier(attribute: $Holder_<$Attribute>, mod: $AttributeModifier_, slot: $EquipmentSlotGroup_): void;
         hasAttributeModifier(attribute: $Holder_<$Attribute>, id: $ResourceLocation_): boolean;
         getAttributeModifier(attribute: $Holder_<$Attribute>, id: $ResourceLocation_): $AttributeModifier;
+        setAttributeModifiersWithTooltip(modifiers: $List_<$ItemAttributeModifiers$Entry_>): void;
         /**
          * Sets the attack speed of this item to the given value, **removing** all other modifiers to attack speed.
          * Note that players have a default attack speed of 4.0, so this modifier is added on top of that.
@@ -249,9 +252,6 @@ declare module "@package/dev/latvian/mods/kubejs/component" {
          * Note that since players have a default attack damage of 1.0, total damage will be (dmg + 1.0) before other modifiers.
          */
         setBaseAttackDamage(dmg: number): void;
-        getAttributeModifiers(): $ItemAttributeModifiers;
-        setAttributeModifiers(modifiers: $List_<$ItemAttributeModifiers$Entry_>): void;
-        setAttributeModifiersWithTooltip(modifiers: $List_<$ItemAttributeModifiers$Entry_>): void;
         set attributeModifiersWithTooltip(value: $List_<$ItemAttributeModifiers$Entry_>);
     }
 }

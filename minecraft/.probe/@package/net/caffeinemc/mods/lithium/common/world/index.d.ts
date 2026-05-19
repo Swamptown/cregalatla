@@ -20,19 +20,19 @@ export * as listeners from "@package/net/caffeinemc/mods/lithium/common/world/li
 
 declare module "@package/net/caffeinemc/mods/lithium/common/world" {
     export class $LithiumData$Data extends $Record {
+        chunkSectionChangeCallbacks(): $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>;
         blockChangeTrackers(): $LithiumInterner<$SectionedBlockChangeTracker>;
         entityMovementTrackers(): $LithiumInterner<$SectionedEntityMovementTracker<never, never>>;
-        chunkSectionChangeCallbacks(): $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>;
+        gameEventDispatchers(): $GameEventDispatcherStorage;
         activeNavigations(): $ReferenceOpenHashSet<$PathNavigation>;
         ominousBanner(): $ItemStack;
-        gameEventDispatchers(): $GameEventDispatcherStorage;
-        constructor(arg0: $HolderLookup$Provider);
         constructor(gameEventDispatchers: $GameEventDispatcherStorage_, ominousBanner: $ItemStack_, activeNavigations: $ReferenceOpenHashSet<$PathNavigation>, blockChangeTrackers: $LithiumInterner<$SectionedBlockChangeTracker>, entityMovementTrackers: $LithiumInterner<$SectionedEntityMovementTracker<never, never>>, chunkSectionChangeCallbacks: $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>);
+        constructor(arg0: $HolderLookup$Provider);
     }
     /**
      * Values that may be interpreted as {@link $LithiumData$Data}.
      */
-    export type $LithiumData$Data_ = { ominousBanner?: $ItemStack_, blockChangeTrackers?: $LithiumInterner<$SectionedBlockChangeTracker>, gameEventDispatchers?: $GameEventDispatcherStorage_, activeNavigations?: $ReferenceOpenHashSet<$PathNavigation>, entityMovementTrackers?: $LithiumInterner<$SectionedEntityMovementTracker<never, never>>, chunkSectionChangeCallbacks?: $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>,  } | [ominousBanner?: $ItemStack_, blockChangeTrackers?: $LithiumInterner<$SectionedBlockChangeTracker>, gameEventDispatchers?: $GameEventDispatcherStorage_, activeNavigations?: $ReferenceOpenHashSet<$PathNavigation>, entityMovementTrackers?: $LithiumInterner<$SectionedEntityMovementTracker<never, never>>, chunkSectionChangeCallbacks?: $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>, ];
+    export type $LithiumData$Data_ = { chunkSectionChangeCallbacks?: $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>, entityMovementTrackers?: $LithiumInterner<$SectionedEntityMovementTracker<never, never>>, activeNavigations?: $ReferenceOpenHashSet<$PathNavigation>, gameEventDispatchers?: $GameEventDispatcherStorage_, blockChangeTrackers?: $LithiumInterner<$SectionedBlockChangeTracker>, ominousBanner?: $ItemStack_,  } | [chunkSectionChangeCallbacks?: $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>, entityMovementTrackers?: $LithiumInterner<$SectionedEntityMovementTracker<never, never>>, activeNavigations?: $ReferenceOpenHashSet<$PathNavigation>, gameEventDispatchers?: $GameEventDispatcherStorage_, blockChangeTrackers?: $LithiumInterner<$SectionedBlockChangeTracker>, ominousBanner?: $ItemStack_, ];
     export class $ChunkAwareEntityIterable<T extends $EntityAccess> {
     }
     export interface $ChunkAwareEntityIterable<T extends $EntityAccess> {
@@ -76,10 +76,10 @@ declare module "@package/net/caffeinemc/mods/lithium/common/world" {
      */
     export type $ChunkRandomSource_ = ((arg0: number, arg1: number, arg2: number, arg3: number, arg4: $BlockPos$MutableBlockPos) => void);
     export class $GameEventDispatcherStorage extends $Record {
+        removeChunk(arg0: number): void;
+        addChunk(arg0: number, arg1: $Int2ObjectMap<$GameEventListenerRegistry>): void;
         get(arg0: number): $Int2ObjectMap<$GameEventListenerRegistry>;
         replace(arg0: number, arg1: $Int2ObjectMap<$GameEventListenerRegistry>): void;
-        addChunk(arg0: number, arg1: $Int2ObjectMap<$GameEventListenerRegistry>): void;
-        removeChunk(arg0: number): void;
         storage(): $Long2ReferenceOpenHashMap<$Int2ObjectMap<$GameEventListenerRegistry>>;
         loadedChunks(): $LongOpenHashSet;
         constructor();
@@ -88,5 +88,5 @@ declare module "@package/net/caffeinemc/mods/lithium/common/world" {
     /**
      * Values that may be interpreted as {@link $GameEventDispatcherStorage}.
      */
-    export type $GameEventDispatcherStorage_ = { storage?: $Long2ReferenceOpenHashMap<$Int2ObjectMap<$GameEventListenerRegistry>>, loadedChunks?: $LongOpenHashSet,  } | [storage?: $Long2ReferenceOpenHashMap<$Int2ObjectMap<$GameEventListenerRegistry>>, loadedChunks?: $LongOpenHashSet, ];
+    export type $GameEventDispatcherStorage_ = { loadedChunks?: $LongOpenHashSet, storage?: $Long2ReferenceOpenHashMap<$Int2ObjectMap<$GameEventListenerRegistry>>,  } | [loadedChunks?: $LongOpenHashSet, storage?: $Long2ReferenceOpenHashMap<$Int2ObjectMap<$GameEventListenerRegistry>>, ];
 }

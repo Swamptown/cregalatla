@@ -48,35 +48,35 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/event" {
     export interface $UIEvents {
     }
     export class $HoverTooltips extends $Record {
+        tooltipTexts(): $List<$Component>;
+        tooltipFont(): $Font;
         stack(arg0: $ItemStack_): $HoverTooltips;
         append(...arg0: $Component_[]): $HoverTooltips;
         static empty(): $HoverTooltips;
-        tooltipTexts(): $List<$Component>;
-        tooltipFont(): $Font;
+        font(arg0: $Font): $HoverTooltips;
         tooltipStack(): $ItemStack;
         tooltipComponent(arg0: $TooltipComponent): $HoverTooltips;
         tooltipComponent(): $TooltipComponent;
-        font(arg0: $Font): $HoverTooltips;
         constructor(tooltipTexts: $List_<$Component_>, tooltipComponent: $TooltipComponent, tooltipFont: $Font, tooltipStack: $ItemStack_);
     }
     /**
      * Values that may be interpreted as {@link $HoverTooltips}.
      */
-    export type $HoverTooltips_ = { tooltipTexts?: $List_<$Component_>, tooltipFont?: $Font, tooltipStack?: $ItemStack_, tooltipComponent?: $TooltipComponent,  } | [tooltipTexts?: $List_<$Component_>, tooltipFont?: $Font, tooltipStack?: $ItemStack_, tooltipComponent?: $TooltipComponent, ];
+    export type $HoverTooltips_ = { tooltipStack?: $ItemStack_, tooltipFont?: $Font, tooltipTexts?: $List_<$Component_>, tooltipComponent?: $TooltipComponent,  } | [tooltipStack?: $ItemStack_, tooltipFont?: $Font, tooltipTexts?: $List_<$Component_>, tooltipComponent?: $TooltipComponent, ];
     export class $DragHandler {
-        stopDrag(arg0: $UIElement): void;
-        stopDrag(): void;
-        setStartX(arg0: number): void;
-        setStartY(arg0: number): void;
-        startDrag(): void;
-        startDrag(arg0: $Object): void;
-        startDrag(arg0: $Object, arg1: $IGuiTexture_): void;
-        startDrag(arg0: $Object, arg1: $IGuiTexture_, arg2: $UIElement, arg3: $UIElement): void;
         startDrag(arg0: $Object, arg1: $IGuiTexture_, arg2: $UIElement): void;
+        startDrag(arg0: $Object, arg1: $IGuiTexture_): void;
+        startDrag(arg0: $Object): void;
+        startDrag(arg0: $Object, arg1: $IGuiTexture_, arg2: $UIElement, arg3: $UIElement): void;
+        startDrag(): void;
         getDraggingObject<T>(): T;
         setDragTexture(arg0: number, arg1: number, arg2: number, arg3: number): void;
         setOffsetX(arg0: number): void;
         setOffsetY(arg0: number): void;
+        stopDrag(): void;
+        stopDrag(arg0: $UIElement): void;
+        setStartX(arg0: number): void;
+        setStartY(arg0: number): void;
         setWidth(arg0: number): void;
         setHeight(arg0: number): void;
         isDragging(): boolean;
@@ -105,35 +105,35 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/event" {
      */
     export type $UIEvent$EventPhase_ = "capture" | "at_target" | "bubble";
     export class $UIEventDispatcher {
-        static dispatchDirectEvent(arg0: $UIEvent, arg1: boolean): void;
-        static dispatchDirectEvent(arg0: $UIEvent): void;
-        static dispatchAllChildren(arg0: $UIEvent, arg1: boolean, arg2: boolean): boolean;
-        static dispatchAllChildren(arg0: $UIEvent): boolean;
         static dispatchEvent(arg0: $UIEvent): void;
         static dispatchEvent(arg0: $UIEvent, arg1: boolean, arg2: boolean, arg3: boolean): void;
+        static dispatchDirectEvent(arg0: $UIEvent): void;
+        static dispatchDirectEvent(arg0: $UIEvent, arg1: boolean): void;
+        static dispatchAllChildren(arg0: $UIEvent): boolean;
+        static dispatchAllChildren(arg0: $UIEvent, arg1: boolean, arg2: boolean): boolean;
     }
     export class $UIEventListener {
     }
     export interface $UIEventListener extends $Consumer<$UIEvent> {
+        handleEvent(arg0: $UIEvent): void;
         /**
          * @deprecated
          */
         accept(arg0: $UIEvent): void;
         create(arg0: $UIEventListener_): $UIEventListener;
-        handleEvent(arg0: $UIEvent): void;
     }
     /**
      * Values that may be interpreted as {@link $UIEventListener}.
      */
     export type $UIEventListener_ = ((arg0: $UIEvent) => void);
     export class $UIEvent {
-        static create(arg0: string): $UIEvent;
         isShiftDown(): boolean;
         isCtrlDown(): boolean;
         isAltDown(): boolean;
         stopImmediatePropagation(): void;
         stopLaterPropagation(): void;
         stopPropagation(): void;
+        static create(arg0: string): $UIEvent;
         isKeyDown(arg0: number): boolean;
         currentListener: $UIEventListener;
         deltaX: number;

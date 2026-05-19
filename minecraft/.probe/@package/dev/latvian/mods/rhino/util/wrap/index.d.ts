@@ -4,10 +4,10 @@ import { $Map } from "@package/java/util";
 
 declare module "@package/dev/latvian/mods/rhino/util/wrap" {
     export class $TypeWrappers {
+        registerDirect<T>(arg0: $Class<T>, arg1: $TypeWrapperValidator_, arg2: $DirectTypeWrapperFactory_<T>): void;
+        registerDirect<T>(arg0: $Class<T>, arg1: $DirectTypeWrapperFactory_<T>): void;
         register<T>(arg0: $Class<T>, arg1: $TypeWrapperFactory_<T>): void;
         register<T>(arg0: $Class<T>, arg1: $TypeWrapperValidator_, arg2: $TypeWrapperFactory_<T>): void;
-        registerDirect<T>(arg0: $Class<T>, arg1: $DirectTypeWrapperFactory_<T>): void;
-        registerDirect<T>(arg0: $Class<T>, arg1: $TypeWrapperValidator_, arg2: $DirectTypeWrapperFactory_<T>): void;
         hasWrapper(arg0: $Object, arg1: $TypeInfo_): boolean;
         getWrapperFactory(arg0: $Object, arg1: $TypeInfo_): $TypeWrapperFactory<never>;
         wrappers: $Map<$Class<never>, $TypeWrapper<never>>;
@@ -42,7 +42,7 @@ declare module "@package/dev/latvian/mods/rhino/util/wrap" {
     /**
      * Values that may be interpreted as {@link $TypeWrapper}.
      */
-    export type $TypeWrapper_<T> = { validator?: $TypeWrapperValidator_, factory?: $TypeWrapperFactory_<any>, target?: $Class<any>,  } | [validator?: $TypeWrapperValidator_, factory?: $TypeWrapperFactory_<any>, target?: $Class<any>, ];
+    export type $TypeWrapper_<T> = { target?: $Class<any>, factory?: $TypeWrapperFactory_<any>, validator?: $TypeWrapperValidator_,  } | [target?: $Class<any>, factory?: $TypeWrapperFactory_<any>, validator?: $TypeWrapperValidator_, ];
     export class $TypeWrapperFactory<T> {
     }
     export interface $TypeWrapperFactory<T> {

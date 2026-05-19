@@ -16,9 +16,9 @@ declare module "@package/net/minecraft/commands/arguments/selector/options" {
      */
     export type $EntitySelectorOptions$Modifier_ = ((arg0: $EntitySelectorParser) => void);
     export class $EntitySelectorOptions {
+        static suggestNames(arg0: $EntitySelectorParser, arg1: $SuggestionsBuilder): void;
         static get(arg0: $EntitySelectorParser, arg1: string, arg2: number): $EntitySelectorOptions$Modifier;
         static register(arg0: string, arg1: $EntitySelectorOptions$Modifier_, arg2: $Predicate_<$EntitySelectorParser>, arg3: $Component_): void;
-        static suggestNames(arg0: $EntitySelectorParser, arg1: $SuggestionsBuilder): void;
         static bootStrap(): void;
         static ERROR_LEVEL_NEGATIVE: $SimpleCommandExceptionType;
         static ERROR_LIMIT_TOO_SMALL: $SimpleCommandExceptionType;
@@ -35,5 +35,5 @@ declare module "@package/net/minecraft/commands/arguments/selector/options" {
     /**
      * Values that may be interpreted as {@link $EntitySelectorOptions$Option}.
      */
-    export type $EntitySelectorOptions$Option_ = { canUse?: $Predicate_<$EntitySelectorParser>, modifier?: $EntitySelectorOptions$Modifier_, description?: $Component_,  } | [canUse?: $Predicate_<$EntitySelectorParser>, modifier?: $EntitySelectorOptions$Modifier_, description?: $Component_, ];
+    export type $EntitySelectorOptions$Option_ = { description?: $Component_, modifier?: $EntitySelectorOptions$Modifier_, canUse?: $Predicate_<$EntitySelectorParser>,  } | [description?: $Component_, modifier?: $EntitySelectorOptions$Modifier_, canUse?: $Predicate_<$EntitySelectorParser>, ];
 }

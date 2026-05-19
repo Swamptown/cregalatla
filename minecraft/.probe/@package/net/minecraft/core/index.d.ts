@@ -45,15 +45,6 @@ export * as registries from "@package/net/minecraft/core/registries";
 
 declare module "@package/net/minecraft/core" {
     export class $Holder$Reference<T> implements $Holder<T>, $CoreLibHolderReference {
-        value(): T;
-        getKey(): $ResourceKey<T>;
-        kind(): $Holder$Kind;
-        is(arg0: $ResourceLocation_): boolean;
-        is(arg0: $Predicate_<$ResourceKey<T>>): boolean;
-        key(): $ResourceKey<T>;
-        unwrap(): $Either<$ResourceKey<T>, T>;
-        tags(): $Stream<$TagKey<T>>;
-        getData<A>(arg0: $DataMapType<T, A>): A;
         bindKey(arg0: $ResourceKey_<T>): void;
         bindValue(arg0: T): void;
         canSerializeIn(arg0: $HolderOwner<T>): boolean;
@@ -65,6 +56,15 @@ declare module "@package/net/minecraft/core" {
         supermartijn642corelibOverride(key: $ResourceKey_<any>, value: $Object): void;
         bindTags(arg0: $Collection_<$TagKey_<T>>): void;
         unwrapLookup(): $HolderLookup$RegistryLookup<T>;
+        tags(): $Stream<$TagKey<T>>;
+        value(): T;
+        getKey(): $ResourceKey<T>;
+        kind(): $Holder$Kind;
+        key(): $ResourceKey<T>;
+        unwrap(): $Either<$ResourceKey<T>, T>;
+        is(arg0: $Predicate_<$ResourceKey<T>>): boolean;
+        is(arg0: $ResourceLocation_): boolean;
+        getData<A>(arg0: $DataMapType<T, A>): A;
         isBound(): boolean;
         unwrapKey(): ($ResourceKey<T>) | undefined;
         /**
@@ -100,9 +100,9 @@ declare module "@package/net/minecraft/core" {
     export class $WritableRegistry<T> {
     }
     export interface $WritableRegistry<T> extends $Registry<T> {
+        createRegistrationLookup(): $HolderGetter<T>;
         isEmpty(): boolean;
         register(arg0: $ResourceKey_<T>, arg1: T, arg2: $RegistrationInfo_): $Holder$Reference<T>;
-        createRegistrationLookup(): $HolderGetter<T>;
         get empty(): boolean;
     }
     export class $RegistrySetBuilder$RegisteredValue<T> extends $Record {
@@ -126,13 +126,13 @@ declare module "@package/net/minecraft/core" {
         asGetterLookup(): $HolderGetter$Provider;
     }
     export class $RegistrySetBuilder {
-        add<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $RegistrySetBuilder$RegistryBootstrap_<T>): $RegistrySetBuilder;
-        add<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Lifecycle, arg2: $RegistrySetBuilder$RegistryBootstrap_<T>): $RegistrySetBuilder;
-        build(arg0: $RegistryAccess): $HolderLookup$Provider;
+        static wrapContextLookup<T>(arg0: $HolderLookup$RegistryLookup<T>): $HolderGetter<T>;
         static lookupFromMap<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Lifecycle, arg2: $HolderOwner<T>, arg3: $Map_<$ResourceKey_<T>, $Holder$Reference<T>>): $HolderLookup$RegistryLookup<T>;
         getEntryKeys(): $List<$ResourceKey<$Registry<never>>>;
-        static wrapContextLookup<T>(arg0: $HolderLookup$RegistryLookup<T>): $HolderGetter<T>;
         buildPatch(arg0: $RegistryAccess, arg1: $HolderLookup$Provider, arg2: $Cloner$Factory): $RegistrySetBuilder$PatchedRegistries;
+        add<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Lifecycle, arg2: $RegistrySetBuilder$RegistryBootstrap_<T>): $RegistrySetBuilder;
+        add<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $RegistrySetBuilder$RegistryBootstrap_<T>): $RegistrySetBuilder;
+        build(arg0: $RegistryAccess): $HolderLookup$Provider;
         entries: $List<$RegistrySetBuilder$RegistryStub<never>>;
         constructor();
         get entryKeys(): $List<$ResourceKey<$Registry<never>>>;
@@ -144,12 +144,12 @@ declare module "@package/net/minecraft/core" {
      */
     export type $Holder$Reference$Type_ = "stand_alone" | "intrusive";
     export class $UUIDUtil {
+        static createOfflinePlayerUUID(arg0: string): $UUID;
         static uuidFromIntArray(arg0: number[]): $UUID;
         static uuidToIntArray(arg0: $UUID_): number[];
         static uuidToByteArray(arg0: $UUID_): number[];
         static readUUID(arg0: $Dynamic<never>): $UUID;
         static createOfflineProfile(arg0: string): $GameProfile;
-        static createOfflinePlayerUUID(arg0: string): $UUID;
         static CODEC_SET: $Codec<$Set<$UUID>>;
         static AUTHLIB_CODEC: $Codec<$UUID>;
         static CODEC: $Codec<$UUID>;
@@ -160,11 +160,11 @@ declare module "@package/net/minecraft/core" {
         static LENIENT_CODEC: $Codec<$UUID>;
     }
     export class $FrontAndTop extends $Enum<$FrontAndTop> implements $StringRepresentable {
+        static fromFrontAndTop(arg0: $Direction_, arg1: $Direction_): $FrontAndTop;
+        front(): $Direction;
         static values(): $FrontAndTop[];
         static valueOf(arg0: string): $FrontAndTop;
         top(): $Direction;
-        front(): $Direction;
-        static fromFrontAndTop(arg0: $Direction_, arg1: $Direction_): $FrontAndTop;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static UP_SOUTH: $FrontAndTop;
@@ -215,49 +215,47 @@ declare module "@package/net/minecraft/core" {
         static EMPTY: $RegistryAccess$Frozen;
     }
     export interface $RegistryAccess extends $HolderLookup$Provider {
+        allRegistriesLifecycle(): $Lifecycle;
         lookup<T>(arg0: $ResourceKey_<$Registry<T>>): ($HolderLookup$RegistryLookup<T>) | undefined;
         freeze(): $RegistryAccess$Frozen;
-        allRegistriesLifecycle(): $Lifecycle;
         registry<E>(arg0: $ResourceKey_<$Registry<E>>): ($Registry<E>) | undefined;
         registries(): $Stream<$RegistryAccess$RegistryEntry<never>>;
         listRegistries(): $Stream<$ResourceKey<$Registry<never>>>;
         registryOrThrow<E>(arg0: $ResourceKey_<$Registry<E>>): $Registry<E>;
     }
     export class $BlockPos extends $Vec3i {
+        static getY(arg0: number): number;
+        relative(arg0: $Direction$Axis_, arg1: number): $BlockPos;
+        subtract(arg0: $Vec3i): $BlockPos;
         static min(arg0: $BlockPos_, arg1: $BlockPos_): $BlockPos;
         static max(arg0: $BlockPos_, arg1: $BlockPos_): $BlockPos;
         static of(arg0: number): $BlockPos;
-        offset(arg0: $Vec3i): $BlockPos;
-        offset(arg0: number, arg1: number, arg2: number): $BlockPos;
         static offset(arg0: number, arg1: number, arg2: number, arg3: number): number;
         static offset(arg0: number, arg1: $Direction_): number;
         multiply(arg0: number): $BlockPos;
         rotate(arg0: $Rotation_): $BlockPos;
-        subtract(arg0: $Vec3i): $BlockPos;
-        relative(arg0: $Direction$Axis_, arg1: number): $BlockPos;
-        static getY(arg0: number): number;
-        static getX(arg0: number): number;
-        static getZ(arg0: number): number;
         immutable(): $BlockPos;
-        mutable(): $BlockPos$MutableBlockPos;
         static asLong(arg0: number, arg1: number, arg2: number): number;
         asLong(): number;
         above(): $BlockPos;
         above(arg0: number): $BlockPos;
         below(arg0: number): $BlockPos;
+        below(): $BlockPos;
+        mutable(): $BlockPos$MutableBlockPos;
+        static getX(arg0: number): number;
+        static getZ(arg0: number): number;
         east(arg0: number): $BlockPos;
-        north(): $BlockPos;
-        north(arg0: number): $BlockPos;
-        south(arg0: number): $BlockPos;
-        atY(arg0: number): $BlockPos;
+        east(): $BlockPos;
+        south(): $BlockPos;
         static containing(arg0: number, arg1: number, arg2: number): $BlockPos;
         static containing(arg0: $Position): $BlockPos;
+        atY(arg0: number): $BlockPos;
         getCenter(): $Vec3;
         getBottomCenter(): $Vec3;
-        static betweenClosedStream(arg0: $AABB_): $Stream<$BlockPos>;
-        static betweenClosedStream(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): $Stream<$BlockPos>;
         static betweenClosedStream(arg0: $BoundingBox): $Stream<$BlockPos>;
         static betweenClosedStream(arg0: $BlockPos_, arg1: $BlockPos_): $Stream<$BlockPos>;
+        static betweenClosedStream(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): $Stream<$BlockPos>;
+        static betweenClosedStream(arg0: $AABB_): $Stream<$BlockPos>;
         static getFlatIndex(arg0: number): number;
         clampLocationWithin(arg0: $Vec3_): $Vec3;
         static randomInCube(arg0: $RandomSource, arg1: number, arg2: $BlockPos_, arg3: number): $Iterable<$BlockPos>;
@@ -269,16 +267,16 @@ declare module "@package/net/minecraft/core" {
         static withinManhattan(arg0: $BlockPos_, arg1: number, arg2: number, arg3: number): $Iterable<$BlockPos>;
         static findClosestMatch(arg0: $BlockPos_, arg1: number, arg2: number, arg3: $Predicate_<$BlockPos>): ($BlockPos) | undefined;
         static withinManhattanStream(arg0: $BlockPos_, arg1: number, arg2: number, arg3: number): $Stream<$BlockPos>;
-        static betweenClosed(arg0: $BlockPos_, arg1: $BlockPos_): $Iterable<$BlockPos>;
         static betweenClosed(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): $Iterable<$BlockPos>;
+        static betweenClosed(arg0: $BlockPos_, arg1: $BlockPos_): $Iterable<$BlockPos>;
         static spiralAround(arg0: $BlockPos_, arg1: number, arg2: $Direction_, arg3: $Direction_): $Iterable<$BlockPos$MutableBlockPos>;
         static breadthFirstTraversal(arg0: $BlockPos_, arg1: number, arg2: number, arg3: $BiConsumer_<$BlockPos, $Consumer<$BlockPos>>, arg4: $Predicate_<$BlockPos>): number;
         static ZERO: $BlockPos;
         static CODEC: $Codec<$BlockPos>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $BlockPos>;
         static PACKED_Y_LENGTH: number;
-        constructor(arg0: number, arg1: number, arg2: number);
         constructor(arg0: $Vec3i);
+        constructor(arg0: number, arg1: number, arg2: number);
         get center(): $Vec3;
         get bottomCenter(): $Vec3;
     }
@@ -287,8 +285,8 @@ declare module "@package/net/minecraft/core" {
      */
     export type $BlockPos_ = [x: number, y: number, z: number, ];
     export class $HolderSet$Named<T> extends $HolderSet$ListBacked<T> {
-        key(): $TagKey<T>;
         bind(arg0: $List_<$Holder_<T>>): void;
+        key(): $TagKey<T>;
         constructor(arg0: $HolderOwner<T>, arg1: $TagKey_<T>);
     }
     export class $RegistrySetBuilder$RegistryBootstrap<T> {
@@ -301,22 +299,22 @@ declare module "@package/net/minecraft/core" {
      */
     export type $RegistrySetBuilder$RegistryBootstrap_<T> = ((arg0: $BootstrapContext<T>) => void);
     export class $Direction$Axis extends $Enum<$Direction$Axis> implements $StringRepresentable, $Predicate<$Direction> {
+        isHorizontal(): boolean;
+        isVertical(): boolean;
+        getPlane(): $Direction$Plane;
         getName(): string;
         static values(): $Direction$Axis[];
         test(arg0: $Direction_): boolean;
         static valueOf(arg0: string): $Direction$Axis;
-        isHorizontal(): boolean;
-        isVertical(): boolean;
-        getPlane(): $Direction$Plane;
         static byName(arg0: string): $Direction$Axis;
         getSerializedName(): string;
         static getRandom(arg0: $RandomSource): $Direction$Axis;
         choose(arg0: number, arg1: number, arg2: number): number;
         choose(arg0: number, arg1: number, arg2: number): number;
         getRemappedEnumConstantName(): string;
-        or(arg0: $Predicate_<$Direction>): $Predicate<$Direction>;
         negate(): $Predicate<$Direction>;
         and(arg0: $Predicate_<$Direction>): $Predicate<$Direction>;
+        or(arg0: $Predicate_<$Direction>): $Predicate<$Direction>;
         static CODEC: $StringRepresentable$EnumCodec<$Direction$Axis>;
         static X: $Direction$Axis;
         static Y: $Direction$Axis;
@@ -337,7 +335,7 @@ declare module "@package/net/minecraft/core" {
     /**
      * Values that may be interpreted as {@link $RegistrySetBuilder$BuildState}.
      */
-    export type $RegistrySetBuilder$BuildState_ = { owner?: $RegistrySetBuilder$UniversalOwner, lookup?: $RegistrySetBuilder$UniversalLookup, registries?: $Map_<$ResourceLocation_, $HolderGetter<never>>, registeredValues?: $Map_<$ResourceKey_<never>, $RegistrySetBuilder$RegisteredValue_<never>>, errors?: $List_<$RuntimeException>,  } | [owner?: $RegistrySetBuilder$UniversalOwner, lookup?: $RegistrySetBuilder$UniversalLookup, registries?: $Map_<$ResourceLocation_, $HolderGetter<never>>, registeredValues?: $Map_<$ResourceKey_<never>, $RegistrySetBuilder$RegisteredValue_<never>>, errors?: $List_<$RuntimeException>, ];
+    export type $RegistrySetBuilder$BuildState_ = { registeredValues?: $Map_<$ResourceKey_<never>, $RegistrySetBuilder$RegisteredValue_<never>>, registries?: $Map_<$ResourceLocation_, $HolderGetter<never>>, lookup?: $RegistrySetBuilder$UniversalLookup, owner?: $RegistrySetBuilder$UniversalOwner, errors?: $List_<$RuntimeException>,  } | [registeredValues?: $Map_<$ResourceKey_<never>, $RegistrySetBuilder$RegisteredValue_<never>>, registries?: $Map_<$ResourceLocation_, $HolderGetter<never>>, lookup?: $RegistrySetBuilder$UniversalLookup, owner?: $RegistrySetBuilder$UniversalOwner, errors?: $List_<$RuntimeException>, ];
     export class $DefaultedMappedRegistry<T> extends $MappedRegistry<T> implements $DefaultedRegistry<T> {
         getDefaultKey(): $ResourceLocation;
         registrationInfos: $Map<$ResourceKey<T>, $RegistrationInfo>;
@@ -364,31 +362,31 @@ declare module "@package/net/minecraft/core" {
     /**
      * Values that may be interpreted as {@link $RegistrySynchronization$PackedRegistryEntry}.
      */
-    export type $RegistrySynchronization$PackedRegistryEntry_ = { data?: ($Tag_) | undefined, id?: $ResourceLocation_,  } | [data?: ($Tag_) | undefined, id?: $ResourceLocation_, ];
+    export type $RegistrySynchronization$PackedRegistryEntry_ = { id?: $ResourceLocation_, data?: ($Tag_) | undefined,  } | [id?: $ResourceLocation_, data?: ($Tag_) | undefined, ];
     export class $Holder<T> {
         static direct<T>(arg0: T): $Holder<T>;
     }
     export interface $Holder<T> extends $IHolderExtension<T> {
-        value(): T;
-        kind(): $Holder$Kind;
-        /**
-         * Tests the resource key held by the holder using a predicate.
-         */
-        test(arg0: $Predicate_<$ResourceKey<T>>): boolean;
-        /**
-         * Test if the holder holds an object registered with given resource location.
-         */
-        is(arg0: $ResourceLocation_): boolean;
-        unwrap(): $Either<$ResourceKey<T>, T>;
-        tags(): $Stream<$TagKey<T>>;
         canSerializeIn(arg0: $HolderOwner<T>): boolean;
         /**
          * Test if a tag matches the object this holder holds.
          */
         isTag(tagKey: $ResourceLocation_): boolean;
+        tags(): $Stream<$TagKey<T>>;
+        value(): T;
+        kind(): $Holder$Kind;
+        unwrap(): $Either<$ResourceKey<T>, T>;
+        /**
+         * Test if the holder holds an object registered with given resource location.
+         */
+        is(arg0: $ResourceLocation_): boolean;
+        /**
+         * Tests the resource key held by the holder using a predicate.
+         */
+        test(arg0: $Predicate_<$ResourceKey<T>>): boolean;
         isBound(): boolean;
-        unwrapKey(): ($ResourceKey<T>) | undefined;
         getRegisteredName(): string;
+        unwrapKey(): ($ResourceKey<T>) | undefined;
         get bound(): boolean;
         get registeredName(): string;
     }
@@ -397,11 +395,11 @@ declare module "@package/net/minecraft/core" {
      */
     export type $Holder_<T> = RegistryTypes.ResolveObject<T>;
     export class $Rotations {
-        save(): $ListTag;
         getWrappedX(): number;
         getWrappedY(): number;
         getWrappedZ(): number;
         getY(): number;
+        save(): $ListTag;
         getX(): number;
         getZ(): number;
         x: number;
@@ -445,9 +443,9 @@ declare module "@package/net/minecraft/core" {
         canSerializeIn(arg0: $HolderOwner<$Object>): boolean;
     }
     export class $GlobalPos extends $Record {
+        dimension(): $ResourceKey<$Level>;
         static of(arg0: $ResourceKey_<$Level>, arg1: $BlockPos_): $GlobalPos;
         pos(): $BlockPos;
-        dimension(): $ResourceKey<$Level>;
         static CODEC: $Codec<$GlobalPos>;
         static MAP_CODEC: $MapCodec<$GlobalPos>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $GlobalPos>;
@@ -456,18 +454,18 @@ declare module "@package/net/minecraft/core" {
     /**
      * Values that may be interpreted as {@link $GlobalPos}.
      */
-    export type $GlobalPos_ = { dimension?: $ResourceKey_<$Level>, pos?: $BlockPos_,  } | [dimension?: $ResourceKey_<$Level>, pos?: $BlockPos_, ];
+    export type $GlobalPos_ = { pos?: $BlockPos_, dimension?: $ResourceKey_<$Level>,  } | [pos?: $BlockPos_, dimension?: $ResourceKey_<$Level>, ];
     export class $RegistryAccess$1FrozenAccess extends $RegistryAccess$ImmutableRegistryAccess implements $RegistryAccess$Frozen {
     }
     export class $HolderSet$ListBacked<T> implements $HolderSet<T> {
+        canSerializeIn(arg0: $HolderOwner<T>): boolean;
+        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
+        contents(): $List<$Holder<T>>;
         size(): number;
         get(arg0: number): $Holder<T>;
         iterator(): $Iterator<$Holder<T>>;
         stream(): $Stream<$Holder<T>>;
         spliterator(): $Spliterator<$Holder<T>>;
-        contents(): $List<$Holder<T>>;
-        canSerializeIn(arg0: $HolderOwner<T>): boolean;
-        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
         forEach(arg0: $Consumer_<T>): void;
         addInvalidationListener(arg0: $Runnable_): void;
         serializationType(): $IHolderSetExtension$SerializationType;
@@ -483,10 +481,10 @@ declare module "@package/net/minecraft/core" {
     /**
      * Values that may be interpreted as {@link $RegistrationInfo}.
      */
-    export type $RegistrationInfo_ = { lifecycle?: $Lifecycle, knownPackInfo?: ($KnownPack_) | undefined,  } | [lifecycle?: $Lifecycle, knownPackInfo?: ($KnownPack_) | undefined, ];
+    export type $RegistrationInfo_ = { knownPackInfo?: ($KnownPack_) | undefined, lifecycle?: $Lifecycle,  } | [knownPackInfo?: ($KnownPack_) | undefined, lifecycle?: $Lifecycle, ];
     export class $Cloner$Factory {
-        cloner<T>(arg0: $ResourceKey_<$Registry<T>>): $Cloner<T>;
         addCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<T>): $Cloner$Factory;
+        cloner<T>(arg0: $ResourceKey_<$Registry<T>>): $Cloner<T>;
         constructor();
     }
     export class $IdMapper<T> implements $IdMap<T> {
@@ -509,16 +507,16 @@ declare module "@package/net/minecraft/core" {
         [Symbol.iterator](): Iterator<T>
     }
     export class $BlockPos$MutableBlockPos extends $BlockPos {
-        clamp(arg0: $Direction$Axis_, arg1: number, arg2: number): $BlockPos$MutableBlockPos;
-        set(arg0: $Vec3i): $BlockPos$MutableBlockPos;
-        set(arg0: number): $BlockPos$MutableBlockPos;
-        set(arg0: $AxisCycle_, arg1: number, arg2: number, arg3: number): $BlockPos$MutableBlockPos;
-        set(arg0: number, arg1: number, arg2: number): $BlockPos$MutableBlockPos;
-        set(arg0: number, arg1: number, arg2: number): $BlockPos$MutableBlockPos;
+        move(arg0: $Direction_): $BlockPos$MutableBlockPos;
+        move(arg0: $Direction_, arg1: number): $BlockPos$MutableBlockPos;
         move(arg0: number, arg1: number, arg2: number): $BlockPos$MutableBlockPos;
         move(arg0: $Vec3i): $BlockPos$MutableBlockPos;
-        move(arg0: $Direction_, arg1: number): $BlockPos$MutableBlockPos;
-        move(arg0: $Direction_): $BlockPos$MutableBlockPos;
+        clamp(arg0: $Direction$Axis_, arg1: number, arg2: number): $BlockPos$MutableBlockPos;
+        set(arg0: $AxisCycle_, arg1: number, arg2: number, arg3: number): $BlockPos$MutableBlockPos;
+        set(arg0: $Vec3i): $BlockPos$MutableBlockPos;
+        set(arg0: number, arg1: number, arg2: number): $BlockPos$MutableBlockPos;
+        set(arg0: number, arg1: number, arg2: number): $BlockPos$MutableBlockPos;
+        set(arg0: number): $BlockPos$MutableBlockPos;
         setWithOffset(arg0: $Vec3i, arg1: $Vec3i): $BlockPos$MutableBlockPos;
         setWithOffset(arg0: $Vec3i, arg1: number, arg2: number, arg3: number): $BlockPos$MutableBlockPos;
         setWithOffset(arg0: $Vec3i, arg1: $Direction_): $BlockPos$MutableBlockPos;
@@ -526,9 +524,9 @@ declare module "@package/net/minecraft/core" {
         static CODEC: $Codec<$BlockPos>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $BlockPos>;
         static PACKED_Y_LENGTH: number;
-        constructor(arg0: number, arg1: number, arg2: number);
-        constructor(arg0: number, arg1: number, arg2: number);
         constructor();
+        constructor(arg0: number, arg1: number, arg2: number);
+        constructor(arg0: number, arg1: number, arg2: number);
     }
     export class $RegistryAccess$Frozen {
     }
@@ -537,39 +535,27 @@ declare module "@package/net/minecraft/core" {
     export class $HolderLookup$RegistryLookup$Delegate<T> {
     }
     export interface $HolderLookup$RegistryLookup$Delegate<T> extends $HolderLookup$RegistryLookup<T> {
+        registryLifecycle(): $Lifecycle;
+        listElements(): $Stream<$Holder$Reference<T>>;
+        listTags(): $Stream<$HolderSet$Named<T>>;
         parent(): $HolderLookup$RegistryLookup<T>;
         get(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
         get(arg0: $TagKey_<T>): ($HolderSet$Named<T>) | undefined;
         key(): $ResourceKey<$Registry<T>>;
         getData<A>(arg0: $DataMapType<T, A>, arg1: $ResourceKey_<T>): A;
-        registryLifecycle(): $Lifecycle;
-        listElements(): $Stream<$Holder$Reference<T>>;
-        listTags(): $Stream<$HolderSet$Named<T>>;
     }
     /**
      * Values that may be interpreted as {@link $HolderLookup$RegistryLookup$Delegate}.
      */
     export type $HolderLookup$RegistryLookup$Delegate_<T> = (() => $HolderLookup$RegistryLookup<T>);
     export class $Registry<T> {
-        static register<V, T extends V>(arg0: $Registry<V>, arg1: $ResourceLocation_, arg2: T): T;
-        static register<V, T extends V>(arg0: $Registry<V>, arg1: $ResourceKey_<V>, arg2: T): T;
-        static register<T>(arg0: $Registry<T>, arg1: string, arg2: T): T;
-        static registerForHolder<T>(arg0: $Registry<T>, arg1: $ResourceLocation_, arg2: T): $Holder$Reference<T>;
         static registerForHolder<T>(arg0: $Registry<T>, arg1: $ResourceKey_<T>, arg2: T): $Holder$Reference<T>;
+        static registerForHolder<T>(arg0: $Registry<T>, arg1: $ResourceLocation_, arg2: T): $Holder$Reference<T>;
+        static register<T>(arg0: $Registry<T>, arg1: string, arg2: T): T;
+        static register<V, T extends V>(arg0: $Registry<V>, arg1: $ResourceKey_<V>, arg2: T): T;
+        static register<V, T extends V>(arg0: $Registry<V>, arg1: $ResourceLocation_, arg2: T): T;
     }
     export interface $Registry<T> extends $Keyable, $IdMap<T>, $IRegistryExtension<T> {
-        get(arg0: $ResourceLocation_): T;
-        get(arg0: $ResourceKey_<T>): T;
-        stream(): $Stream<T>;
-        entrySet(): $Set<$Map$Entry<$ResourceKey<T>, T>>;
-        getKey(arg0: T): $ResourceLocation;
-        key(): $ResourceKey<$Registry<T>>;
-        getId(arg0: T): number;
-        keys<U>(arg0: $DynamicOps<U>): $Stream<U>;
-        keySet(): $Set<$ResourceLocation>;
-        containsKey(arg0: $ResourceLocation_): boolean;
-        containsKey(arg0: $ResourceKey_<T>): boolean;
-        freeze(): $Registry<T>;
         holderByNameCodec(): $Codec<$Holder<T>>;
         registrationInfo(arg0: $ResourceKey_<T>): ($RegistrationInfo) | undefined;
         registryLifecycle(): $Lifecycle;
@@ -585,38 +571,50 @@ declare module "@package/net/minecraft/core" {
         holderOwner(): $HolderOwner<T>;
         asTagAddingLookup(): $HolderLookup$RegistryLookup<T>;
         getTag(arg0: $TagKey_<T>): ($HolderSet$Named<T>) | undefined;
-        getOptional(arg0: $ResourceKey_<T>): (T) | undefined;
+        get(arg0: $ResourceKey_<T>): T;
+        get(arg0: $ResourceLocation_): T;
+        stream(): $Stream<T>;
+        entrySet(): $Set<$Map$Entry<$ResourceKey<T>, T>>;
+        getKey(arg0: T): $ResourceLocation;
+        key(): $ResourceKey<$Registry<T>>;
+        containsKey(arg0: $ResourceKey_<T>): boolean;
+        containsKey(arg0: $ResourceLocation_): boolean;
+        getId(arg0: T): number;
+        keys<U>(arg0: $DynamicOps<U>): $Stream<U>;
+        keySet(): $Set<$ResourceLocation>;
+        freeze(): $Registry<T>;
         getOptional(arg0: $ResourceLocation_): (T) | undefined;
+        getOptional(arg0: $ResourceKey_<T>): (T) | undefined;
         getAny(): ($Holder$Reference<T>) | undefined;
         getOrThrow(arg0: $ResourceKey_<T>): T;
         asHolderIdMap(): $IdMap<$Holder<T>>;
-        getHolder(arg0: $ResourceLocation_): ($Holder$Reference<T>) | undefined;
         getHolder(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
         getHolder(arg0: number): ($Holder$Reference<T>) | undefined;
+        getHolder(arg0: $ResourceLocation_): ($Holder$Reference<T>) | undefined;
         getRandom(arg0: $RandomSource): ($Holder$Reference<T>) | undefined;
         getTags(): $Stream<$Pair<$TagKey<T>, $HolderSet$Named<T>>>;
         byNameCodec(): $Codec<T>;
-        getHolderOrThrow(arg0: $ResourceKey_<T>): $Holder$Reference<T>;
         wrapAsHolder(arg0: T): $Holder<T>;
         getResourceKey(arg0: T): ($ResourceKey<T>) | undefined;
+        getHolderOrThrow(arg0: $ResourceKey_<T>): $Holder$Reference<T>;
         asLookup(): $HolderLookup$RegistryLookup<T>;
         get tagNames(): $Stream<$TagKey<T>>;
         get any(): ($Holder$Reference<T>) | undefined;
         get tags(): $Stream<$Pair<$TagKey<T>, $HolderSet$Named<T>>>;
     }
     export class $RegistryCodecs {
-        static homogeneousList<E>(arg0: $ResourceKey_<$Registry<E>>, arg1: boolean): $Codec<$HolderSet<E>>;
         static homogeneousList<E>(arg0: $ResourceKey_<$Registry<E>>): $Codec<$HolderSet<E>>;
-        static homogeneousList<E>(arg0: $ResourceKey_<$Registry<E>>, arg1: $Codec<E>, arg2: boolean): $Codec<$HolderSet<E>>;
+        static homogeneousList<E>(arg0: $ResourceKey_<$Registry<E>>, arg1: boolean): $Codec<$HolderSet<E>>;
         static homogeneousList<E>(arg0: $ResourceKey_<$Registry<E>>, arg1: $Codec<E>): $Codec<$HolderSet<E>>;
+        static homogeneousList<E>(arg0: $ResourceKey_<$Registry<E>>, arg1: $Codec<E>, arg2: boolean): $Codec<$HolderSet<E>>;
         constructor();
     }
     export class $NonNullList<E> extends $AbstractList<E> implements $NonNullListAccessor<any> {
+        static createWithCapacity<E>(arg0: number): $NonNullList<E>;
+        static codecOf<E>(arg0: $Codec<E>): $Codec<$NonNullList<E>>;
         static copyOf<E>(arg0: $Collection_<E>): $NonNullList<E>;
         static of<E>(arg0: E, ...arg1: E[]): $NonNullList<E>;
         static create<E>(): $NonNullList<E>;
-        static codecOf<E>(arg0: $Codec<E>): $Codec<$NonNullList<E>>;
-        static createWithCapacity<E>(arg0: number): $NonNullList<E>;
         static withSize<E>(arg0: number, arg1: E): $NonNullList<E>;
         getDelegate(): $List<$Object>;
         reversed(): $SequencedCollection<E>;
@@ -624,31 +622,31 @@ declare module "@package/net/minecraft/core" {
         get delegate(): $List<$Object>;
     }
     export class $RegistrySetBuilder$EmptyTagRegistryLookup<T> extends $RegistrySetBuilder$EmptyTagLookup<T> implements $HolderLookup$RegistryLookup<T> {
-        getData<A>(arg0: $DataMapType<T, A>, arg1: $ResourceKey_<T>): A;
         filterElements(arg0: $Predicate_<T>): $HolderLookup$RegistryLookup<T>;
+        getData<A>(arg0: $DataMapType<T, A>, arg1: $ResourceKey_<T>): A;
         filterFeatures(arg0: $FeatureFlagSet): $HolderLookup$RegistryLookup<T>;
         listElementIds(): $Stream<$ResourceKey<T>>;
         listTagIds(): $Stream<$TagKey<T>>;
         canSerializeIn(arg0: $HolderOwner<T>): boolean;
     }
     export class $Vec3i implements $Comparable<$Vec3i> {
+        getY(): number;
+        relative(arg0: $Direction$Axis_, arg1: number): $Vec3i;
+        relative(arg0: $Direction_, arg1: number): $Vec3i;
+        relative(arg0: $Direction_): $Vec3i;
+        subtract(arg0: $Vec3i): $Vec3i;
         get(arg0: $Direction$Axis_): number;
         compareTo(arg0: $Vec3i): number;
-        offset(arg0: number, arg1: number, arg2: number): $Vec3i;
         offset(arg0: $Vec3i): $Vec3i;
+        offset(arg0: number, arg1: number, arg2: number): $Vec3i;
         toShortString(): string;
         multiply(arg0: number): $Vec3i;
-        subtract(arg0: $Vec3i): $Vec3i;
-        relative(arg0: $Direction$Axis_, arg1: number): $Vec3i;
-        relative(arg0: $Direction_): $Vec3i;
-        relative(arg0: $Direction_, arg1: number): $Vec3i;
-        getY(): number;
+        above(): $Vec3i;
+        above(arg0: number): $Vec3i;
+        below(): $Vec3i;
+        below(arg0: number): $Vec3i;
         getX(): number;
         getZ(): number;
-        above(arg0: number): $Vec3i;
-        above(): $Vec3i;
-        below(arg0: number): $Vec3i;
-        below(): $Vec3i;
         cross(arg0: $Vec3i): $Vec3i;
         east(arg0: number): $Vec3i;
         east(): $Vec3i;
@@ -674,18 +672,18 @@ declare module "@package/net/minecraft/core" {
         constructor(arg0: number, arg1: number, arg2: number);
     }
     export class $LayeredRegistryAccess<T> {
-        getLayer(arg0: T): $RegistryAccess$Frozen;
         getAccessForLoading(arg0: T): $RegistryAccess$Frozen;
         getAccessFrom(arg0: T): $RegistryAccess$Frozen;
-        compositeAccess(): $RegistryAccess$Frozen;
-        replaceFrom(arg0: T, arg1: $List_<$RegistryAccess$Frozen>): $LayeredRegistryAccess<T>;
+        getLayer(arg0: T): $RegistryAccess$Frozen;
         replaceFrom(arg0: T, ...arg1: $RegistryAccess$Frozen[]): $LayeredRegistryAccess<T>;
+        replaceFrom(arg0: T, arg1: $List_<$RegistryAccess$Frozen>): $LayeredRegistryAccess<T>;
+        compositeAccess(): $RegistryAccess$Frozen;
         constructor(arg0: $List_<T>);
     }
     export class $Direction8 extends $Enum<$Direction8> {
+        getDirections(): $Set<$Direction>;
         static values(): $Direction8[];
         static valueOf(arg0: string): $Direction8;
-        getDirections(): $Set<$Direction>;
         getStepX(): number;
         getStepZ(): number;
         static NORTH_WEST: $Direction8;
@@ -705,13 +703,13 @@ declare module "@package/net/minecraft/core" {
      */
     export type $Direction8_ = "north" | "north_east" | "east" | "south_east" | "south" | "south_west" | "west" | "north_west";
     export class $Holder$Direct<T> extends $Record implements $Holder<T> {
+        canSerializeIn(arg0: $HolderOwner<T>): boolean;
+        tags(): $Stream<$TagKey<T>>;
         value(): T;
         kind(): $Holder$Kind;
+        unwrap(): $Either<$ResourceKey<T>, T>;
         is(arg0: $ResourceLocation_): boolean;
         is(arg0: $Predicate_<$ResourceKey<T>>): boolean;
-        unwrap(): $Either<$ResourceKey<T>, T>;
-        tags(): $Stream<$TagKey<T>>;
-        canSerializeIn(arg0: $HolderOwner<T>): boolean;
         isBound(): boolean;
         unwrapKey(): ($ResourceKey<T>) | undefined;
         /**
@@ -719,8 +717,8 @@ declare module "@package/net/minecraft/core" {
          */
         isTag(tagKey: $ResourceLocation_): boolean;
         getRegisteredName(): string;
-        getKey(): $ResourceKey<T>;
         unwrapLookup(): $HolderLookup$RegistryLookup<T>;
+        getKey(): $ResourceKey<T>;
         getDelegate(): $Holder<T>;
         getData<T>(arg0: $DataMapType<T, T>): T;
         constructor(value: T);
@@ -738,7 +736,7 @@ declare module "@package/net/minecraft/core" {
     /**
      * Values that may be interpreted as {@link $RegistrySetBuilder$RegistryContents}.
      */
-    export type $RegistrySetBuilder$RegistryContents_<T> = { lifecycle?: $Lifecycle, values?: $Map_<$ResourceKey_<any>, $RegistrySetBuilder$ValueAndHolder_<any>>, key?: $ResourceKey_<$Registry<any>>,  } | [lifecycle?: $Lifecycle, values?: $Map_<$ResourceKey_<any>, $RegistrySetBuilder$ValueAndHolder_<any>>, key?: $ResourceKey_<$Registry<any>>, ];
+    export type $RegistrySetBuilder$RegistryContents_<T> = { key?: $ResourceKey_<$Registry<any>>, values?: $Map_<$ResourceKey_<any>, $RegistrySetBuilder$ValueAndHolder_<any>>, lifecycle?: $Lifecycle,  } | [key?: $ResourceKey_<$Registry<any>>, values?: $Map_<$ResourceKey_<any>, $RegistrySetBuilder$ValueAndHolder_<any>>, lifecycle?: $Lifecycle, ];
     export class $HolderGetter$Provider {
     }
     export interface $HolderGetter$Provider {
@@ -761,26 +759,23 @@ declare module "@package/net/minecraft/core" {
         getIdOrThrow(arg0: T): number;
     }
     export class $RegistrySetBuilder$RegistryStub<T> extends $Record {
+        collectRegisteredValues(arg0: $RegistrySetBuilder$BuildState_): $RegistrySetBuilder$RegistryContents<T>;
         apply(arg0: $RegistrySetBuilder$BuildState_): void;
         key(): $ResourceKey<$Registry<T>>;
         bootstrap(): $RegistrySetBuilder$RegistryBootstrap<T>;
-        collectRegisteredValues(arg0: $RegistrySetBuilder$BuildState_): $RegistrySetBuilder$RegistryContents<T>;
         lifecycle(): $Lifecycle;
         constructor(key: $ResourceKey_<$Registry<T>>, lifecycle: $Lifecycle, bootstrap: $RegistrySetBuilder$RegistryBootstrap_<T>);
     }
     /**
      * Values that may be interpreted as {@link $RegistrySetBuilder$RegistryStub}.
      */
-    export type $RegistrySetBuilder$RegistryStub_<T> = { lifecycle?: $Lifecycle, key?: $ResourceKey_<$Registry<any>>, bootstrap?: $RegistrySetBuilder$RegistryBootstrap_<any>,  } | [lifecycle?: $Lifecycle, key?: $ResourceKey_<$Registry<any>>, bootstrap?: $RegistrySetBuilder$RegistryBootstrap_<any>, ];
+    export type $RegistrySetBuilder$RegistryStub_<T> = { bootstrap?: $RegistrySetBuilder$RegistryBootstrap_<any>, key?: $ResourceKey_<$Registry<any>>, lifecycle?: $Lifecycle,  } | [bootstrap?: $RegistrySetBuilder$RegistryBootstrap_<any>, key?: $ResourceKey_<$Registry<any>>, lifecycle?: $Lifecycle, ];
     export class $HolderSet$Direct<T> extends $HolderSet$ListBacked<T> {
         static EMPTY: $HolderSet$Direct<never>;
         constructor(arg0: $List_<$Holder_<T>>);
     }
     export class $MappedRegistry<T> extends $BaseMappedRegistry<T> implements $WritableRegistry<T>, $MappedRegistryAccessor$3<any>, $CoreLibMappedRegistry, $MappedRegistryAccessor$1, $MappedRegistryAccessor, $MappedRegistryAccessor$2<any> {
-        clear(arg0: boolean): void;
-        isEmpty(): boolean;
-        register(arg0: $ResourceKey_<T>, arg1: T, arg2: $RegistrationInfo_): $Holder$Reference<T>;
-        register(arg0: number, arg1: $ResourceKey_<T>, arg2: T, arg3: $RegistrationInfo_): $Holder$Reference<T>;
+        createRegistrationLookup(): $HolderGetter<T>;
         getOrCreateHolderOrThrow(arg0: $ResourceKey_<T>): $Holder$Reference<T>;
         /**
          * @deprecated
@@ -788,15 +783,18 @@ declare module "@package/net/minecraft/core" {
         unfreeze(): void;
         registerIdMapping(arg0: $ResourceKey_<T>, arg1: number): void;
         supermartijn642corelibSetRegisterOverrides(flag: boolean): void;
-        createRegistrationLookup(): $HolderGetter<T>;
+        clear(arg0: boolean): void;
+        isEmpty(): boolean;
+        register(arg0: number, arg1: $ResourceKey_<T>, arg2: T, arg3: $RegistrationInfo_): $Holder$Reference<T>;
+        register(arg0: $ResourceKey_<T>, arg1: T, arg2: $RegistrationInfo_): $Holder$Reference<T>;
         neoforge$getRegistrationInfos(): $Map<$ResourceKey<T>, $RegistrationInfo>;
         getFrozen(): boolean;
         getToId(): $Reference2IntMap<T>;
         getByValue(): $Map<T, $Holder$Reference<T>>;
         registrationInfos: $Map<$ResourceKey<T>, $RegistrationInfo>;
         frozen: boolean;
-        constructor(arg0: $ResourceKey_<$Registry<T>>, arg1: $Lifecycle);
         constructor(arg0: $ResourceKey_<$Registry<T>>, arg1: $Lifecycle, arg2: boolean);
+        constructor(arg0: $ResourceKey_<$Registry<T>>, arg1: $Lifecycle);
         get empty(): boolean;
         get toId(): $Reference2IntMap<T>;
         get byValue(): $Map<T, $Holder$Reference<T>>;
@@ -804,9 +802,9 @@ declare module "@package/net/minecraft/core" {
     export class $RegistryAccess$ImmutableRegistryAccess implements $RegistryAccess {
         registry<E>(arg0: $ResourceKey_<$Registry<E>>): ($Registry<E>) | undefined;
         registries(): $Stream<$RegistryAccess$RegistryEntry<never>>;
+        allRegistriesLifecycle(): $Lifecycle;
         lookup<T>(arg0: $ResourceKey_<$Registry<T>>): ($HolderLookup$RegistryLookup<T>) | undefined;
         freeze(): $RegistryAccess$Frozen;
-        allRegistriesLifecycle(): $Lifecycle;
         listRegistries(): $Stream<$ResourceKey<$Registry<never>>>;
         registryOrThrow<E>(arg0: $ResourceKey_<$Registry<E>>): $Registry<E>;
         createSerializationContext<V>(arg0: $DynamicOps<V>): $RegistryOps<V>;
@@ -814,13 +812,13 @@ declare module "@package/net/minecraft/core" {
         asGetterLookup(): $HolderGetter$Provider;
         holder<T>(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
         holderOrThrow<T>(arg0: $ResourceKey_<T>): $Holder<T>;
+        constructor(arg0: $List_<$Registry<never>>);
         constructor(arg0: $Stream<$RegistryAccess$RegistryEntry_<never>>);
         constructor(arg0: $Map_<$ResourceKey_<$Registry<never>>, $Registry<never>>);
-        constructor(arg0: $List_<$Registry<never>>);
     }
     export class $Cursor3D {
-        advance(): boolean;
         getNextType(): number;
+        advance(): boolean;
         nextX(): number;
         nextY(): number;
         nextZ(): number;
@@ -832,20 +830,20 @@ declare module "@package/net/minecraft/core" {
         get nextType(): number;
     }
     export class $Direction$Plane extends $Enum<$Direction$Plane> implements $Iterable<$Direction>, $Predicate<$Direction> {
+        getRandomAxis(arg0: $RandomSource): $Direction$Axis;
+        getRandomDirection(arg0: $RandomSource): $Direction;
         length(): number;
         static values(): $Direction$Plane[];
         test(arg0: $Direction_): boolean;
         static valueOf(arg0: string): $Direction$Plane;
         iterator(): $Iterator<$Direction>;
         stream(): $Stream<$Direction>;
-        getRandomDirection(arg0: $RandomSource): $Direction;
-        getRandomAxis(arg0: $RandomSource): $Direction$Axis;
         shuffledCopy(arg0: $RandomSource): $List<$Direction>;
         spliterator(): $Spliterator<$Direction>;
         forEach(arg0: $Consumer_<$Direction>): void;
-        or(arg0: $Predicate_<$Direction>): $Predicate<$Direction>;
         negate(): $Predicate<$Direction>;
         and(arg0: $Predicate_<$Direction>): $Predicate<$Direction>;
+        or(arg0: $Predicate_<$Direction>): $Predicate<$Direction>;
         static VERTICAL: $Direction$Plane;
         static HORIZONTAL: $Direction$Plane;
         [Symbol.iterator](): Iterator<$Direction>
@@ -855,19 +853,19 @@ declare module "@package/net/minecraft/core" {
      */
     export type $Direction$Plane_ = "horizontal" | "vertical";
     export class $BlockBox extends $Record implements $Iterable<$BlockPos> {
-        min(): $BlockPos;
-        max(): $BlockPos;
-        static of(arg0: $BlockPos_, arg1: $BlockPos_): $BlockBox;
-        static of(arg0: $BlockPos_): $BlockBox;
-        iterator(): $Iterator<$BlockPos>;
-        offset(arg0: $Vec3i): $BlockBox;
-        contains(arg0: $BlockPos_): boolean;
-        move(arg0: $Direction_, arg1: number): $BlockBox;
-        include(arg0: $BlockPos_): $BlockBox;
+        isBlock(): boolean;
         sizeX(): number;
         sizeY(): number;
         sizeZ(): number;
-        isBlock(): boolean;
+        include(arg0: $BlockPos_): $BlockBox;
+        move(arg0: $Direction_, arg1: number): $BlockBox;
+        min(): $BlockPos;
+        max(): $BlockPos;
+        iterator(): $Iterator<$BlockPos>;
+        static of(arg0: $BlockPos_): $BlockBox;
+        static of(arg0: $BlockPos_, arg1: $BlockPos_): $BlockBox;
+        offset(arg0: $Vec3i): $BlockBox;
+        contains(arg0: $BlockPos_): boolean;
         extend(arg0: $Direction_, arg1: number): $BlockBox;
         aabb(): $AABB;
         spliterator(): $Spliterator<$BlockPos>;
@@ -880,40 +878,26 @@ declare module "@package/net/minecraft/core" {
     /**
      * Values that may be interpreted as {@link $BlockBox}.
      */
-    export type $BlockBox_ = { min?: $BlockPos_, max?: $BlockPos_,  } | [min?: $BlockPos_, max?: $BlockPos_, ];
+    export type $BlockBox_ = { max?: $BlockPos_, min?: $BlockPos_,  } | [max?: $BlockPos_, min?: $BlockPos_, ];
     export class $HolderLookup$RegistryLookup<T> {
     }
     export interface $HolderLookup$RegistryLookup<T> extends $HolderLookup<T>, $HolderOwner<T> {
-        key(): $ResourceKey<$Registry<T>>;
-        getData<A>(arg0: $DataMapType<T, A>, arg1: $ResourceKey_<T>): A;
         registryLifecycle(): $Lifecycle;
         filterElements(arg0: $Predicate_<T>): $HolderLookup$RegistryLookup<T>;
+        key(): $ResourceKey<$Registry<T>>;
+        getData<A>(arg0: $DataMapType<T, A>, arg1: $ResourceKey_<T>): A;
         filterFeatures(arg0: $FeatureFlagSet): $HolderLookup$RegistryLookup<T>;
     }
     export class $RegistrySynchronization {
+        static packRegistries(arg0: $DynamicOps<$Tag_>, arg1: $RegistryAccess, arg2: $Set_<$KnownPack_>, arg3: $BiConsumer_<$ResourceKey<$Registry<never>>, $List<$RegistrySynchronization$PackedRegistryEntry>>): void;
         static networkedRegistries(arg0: $LayeredRegistryAccess<$RegistryLayer_>): $Stream<$RegistryAccess$RegistryEntry<never>>;
         static networkSafeRegistries(arg0: $LayeredRegistryAccess<$RegistryLayer_>): $Stream<$RegistryAccess$RegistryEntry<never>>;
-        static packRegistries(arg0: $DynamicOps<$Tag_>, arg1: $RegistryAccess, arg2: $Set_<$KnownPack_>, arg3: $BiConsumer_<$ResourceKey<$Registry<never>>, $List<$RegistrySynchronization$PackedRegistryEntry>>): void;
         static NETWORKABLE_REGISTRIES: $Set<$ResourceKey<$Registry<never>>>;
         constructor();
     }
     export class $SectionPos extends $Vec3i {
-        static of(arg0: $EntityAccess): $SectionPos;
-        static of(arg0: $Position): $SectionPos;
-        static of(arg0: number): $SectionPos;
-        static of(arg0: number, arg1: number, arg2: number): $SectionPos;
-        static of(arg0: $BlockPos_): $SectionPos;
-        static of(arg0: $ChunkPos, arg1: number): $SectionPos;
-        static offset(arg0: number, arg1: number, arg2: number, arg3: number): number;
-        static offset(arg0: number, arg1: $Direction_): number;
-        static x(arg0: number): number;
-        x(): number;
-        static z(arg0: number): number;
-        z(): number;
-        static y(arg0: number): number;
-        y(): number;
-        origin(): $BlockPos;
         static sectionRelative(arg0: number): number;
+        static cube(arg0: $SectionPos, arg1: number): $Stream<$SectionPos>;
         static bottomOf(arg0: $ChunkAccess): $SectionPos;
         static posToSectionCoord(arg0: number): number;
         static sectionRelativePos(arg0: $BlockPos_): number;
@@ -931,24 +915,39 @@ declare module "@package/net/minecraft/core" {
         maxBlockY(): number;
         maxBlockZ(): number;
         static blockToSection(arg0: number): number;
-        static getZeroNode(arg0: number): number;
         static getZeroNode(arg0: number, arg1: number): number;
+        static getZeroNode(arg0: number): number;
         blocksInside(): $Stream<$BlockPos>;
         static aroundChunk(arg0: $ChunkPos, arg1: number, arg2: number, arg3: number): $Stream<$SectionPos>;
-        static aroundAndAtBlockPos(arg0: $BlockPos_, arg1: $LongConsumer_): void;
         static aroundAndAtBlockPos(arg0: number, arg1: number, arg2: number, arg3: $LongConsumer_): void;
         static aroundAndAtBlockPos(arg0: number, arg1: $LongConsumer_): void;
-        static cube(arg0: $SectionPos, arg1: number): $Stream<$SectionPos>;
+        static aroundAndAtBlockPos(arg0: $BlockPos_, arg1: $LongConsumer_): void;
+        origin(): $BlockPos;
+        chunk(): $ChunkPos;
+        static of(arg0: number, arg1: number, arg2: number): $SectionPos;
+        static of(arg0: $BlockPos_): $SectionPos;
+        static of(arg0: number): $SectionPos;
+        static of(arg0: $ChunkPos, arg1: number): $SectionPos;
+        static of(arg0: $Position): $SectionPos;
+        static of(arg0: $EntityAccess): $SectionPos;
+        offset(arg0: number, arg1: number, arg2: number): $SectionPos;
+        static offset(arg0: number, arg1: number, arg2: number, arg3: number): number;
+        static offset(arg0: number, arg1: $Direction_): number;
+        x(): number;
+        static x(arg0: number): number;
+        static z(arg0: number): number;
+        z(): number;
+        y(): number;
+        static y(arg0: number): number;
         center(): $BlockPos;
-        static asLong(arg0: $BlockPos_): number;
-        asLong(): number;
         static asLong(arg0: number, arg1: number, arg2: number): number;
+        asLong(): number;
+        static asLong(arg0: $BlockPos_): number;
         static blockToSectionCoord(arg0: number): number;
         static blockToSectionCoord(arg0: number): number;
         static betweenClosedStream(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): $Stream<$SectionPos>;
-        static sectionToBlockCoord(arg0: number, arg1: number): number;
         static sectionToBlockCoord(arg0: number): number;
-        chunk(): $ChunkPos;
+        static sectionToBlockCoord(arg0: number, arg1: number): number;
         static ZERO: $Vec3i;
         static SECTION_MASK: number;
         static CODEC: $Codec<$Vec3i>;
@@ -963,8 +962,8 @@ declare module "@package/net/minecraft/core" {
     export class $HolderGetter<T> {
     }
     export interface $HolderGetter<T> {
-        get(arg0: $TagKey_<T>): ($HolderSet$Named<T>) | undefined;
         get(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
+        get(arg0: $TagKey_<T>): ($HolderSet$Named<T>) | undefined;
         getOrThrow(arg0: $ResourceKey_<T>): $Holder$Reference<T>;
         getOrThrow(arg0: $TagKey_<T>): $HolderSet$Named<T>;
     }
@@ -976,10 +975,10 @@ declare module "@package/net/minecraft/core" {
         y(): number;
     }
     export class $Direction$AxisDirection extends $Enum<$Direction$AxisDirection> {
+        getStep(): number;
         getName(): string;
         static values(): $Direction$AxisDirection[];
         static valueOf(arg0: string): $Direction$AxisDirection;
-        getStep(): number;
         opposite(): $Direction$AxisDirection;
         static POSITIVE: $Direction$AxisDirection;
         static NEGATIVE: $Direction$AxisDirection;
@@ -990,28 +989,20 @@ declare module "@package/net/minecraft/core" {
      */
     export type $Direction$AxisDirection_ = "positive" | "negative";
     export class $RegistrySetBuilder$PatchedRegistries extends $Record {
-        full(): $HolderLookup$Provider;
         patches(): $HolderLookup$Provider;
+        full(): $HolderLookup$Provider;
         constructor(full: $HolderLookup$Provider, patches: $HolderLookup$Provider);
     }
     /**
      * Values that may be interpreted as {@link $RegistrySetBuilder$PatchedRegistries}.
      */
-    export type $RegistrySetBuilder$PatchedRegistries_ = { patches?: $HolderLookup$Provider, full?: $HolderLookup$Provider,  } | [patches?: $HolderLookup$Provider, full?: $HolderLookup$Provider, ];
+    export type $RegistrySetBuilder$PatchedRegistries_ = { full?: $HolderLookup$Provider, patches?: $HolderLookup$Provider,  } | [full?: $HolderLookup$Provider, patches?: $HolderLookup$Provider, ];
     export class $Direction extends $Enum<$Direction> implements $StringRepresentable {
-        getName(): string;
-        static get(arg0: $Direction$AxisDirection_, arg1: $Direction$Axis_): $Direction;
-        static values(): $Direction[];
-        static valueOf(arg0: string): $Direction;
-        static stream(): $Stream<$Direction>;
-        step(): $Vector3f;
-        static rotate(arg0: $Matrix4f, arg1: $Direction_): $Direction;
-        getClockWise(): $Direction;
-        getClockWise(arg0: $Direction$Axis_): $Direction;
         getYaw(): number;
+        getClockWise(arg0: $Direction$Axis_): $Direction;
+        getClockWise(): $Direction;
         getCounterClockWise(arg0: $Direction$Axis_): $Direction;
         getCounterClockWise(): $Direction;
-        static orderedByNearest(arg0: $Entity): $Direction[];
         static allShuffled(arg0: $RandomSource): $Collection<$Direction>;
         getIndex(): number;
         getHorizontalIndex(): number;
@@ -1022,13 +1013,21 @@ declare module "@package/net/minecraft/core" {
         static fromDelta(arg0: number, arg1: number, arg2: number): $Direction;
         static fromAxisAndDirection(arg0: $Direction$Axis_, arg1: $Direction$AxisDirection_): $Direction;
         getPitch(): number;
-        getNormal(): $Vec3i;
+        static orderedByNearest(arg0: $Entity): $Direction[];
+        getName(): string;
+        static get(arg0: $Direction$AxisDirection_, arg1: $Direction$Axis_): $Direction;
+        static values(): $Direction[];
+        static valueOf(arg0: string): $Direction;
+        static stream(): $Stream<$Direction>;
+        step(): $Vector3f;
+        static rotate(arg0: $Matrix4f, arg1: $Direction_): $Direction;
         static byName(arg0: string): $Direction;
+        getNormal(): $Vec3i;
         getSerializedName(): string;
         getRotation(): $Quaternionf;
         static getRandom(arg0: $RandomSource): $Direction;
-        static getNearest(arg0: $Vec3_): $Direction;
         static getNearest(arg0: number, arg1: number, arg2: number): $Direction;
+        static getNearest(arg0: $Vec3_): $Direction;
         static getNearest(arg0: number, arg1: number, arg2: number): $Direction;
         getOpposite(): $Direction;
         getAxis(): $Direction$Axis;
@@ -1074,9 +1073,9 @@ declare module "@package/net/minecraft/core" {
     export class $DefaultedRegistry<T> {
     }
     export interface $DefaultedRegistry<T> extends $Registry<T> {
+        getDefaultKey(): $ResourceLocation;
         get(arg0: $ResourceLocation_): T;
         getKey(arg0: T): $ResourceLocation;
-        getDefaultKey(): $ResourceLocation;
         byId(arg0: number): T;
         get defaultKey(): $ResourceLocation;
     }
@@ -1084,24 +1083,24 @@ declare module "@package/net/minecraft/core" {
         owner: $HolderOwner<T>;
     }
     export class $HolderSet<T> {
-        static empty<T>(): $HolderSet<T>;
-        static direct<E, T>(arg0: $Function_<E, $Holder<T>>, ...arg1: E[]): $HolderSet$Direct<T>;
-        static direct<T>(...arg0: $Holder_<T>[]): $HolderSet$Direct<T>;
-        static direct<T>(arg0: $List_<$Holder_<T>>): $HolderSet$Direct<T>;
-        static direct<E, T>(arg0: $Function_<E, $Holder<T>>, arg1: $Collection_<E>): $HolderSet$Direct<T>;
         /**
          * @deprecated
          */
         static emptyNamed<T>(arg0: $HolderOwner<T>, arg1: $TagKey_<T>): $HolderSet$Named<T>;
+        static empty<T>(): $HolderSet<T>;
+        static direct<E, T>(arg0: $Function_<E, $Holder<T>>, ...arg1: E[]): $HolderSet$Direct<T>;
+        static direct<T>(arg0: $List_<$Holder_<T>>): $HolderSet$Direct<T>;
+        static direct<T>(...arg0: $Holder_<T>[]): $HolderSet$Direct<T>;
+        static direct<E, T>(arg0: $Function_<E, $Holder<T>>, arg1: $Collection_<E>): $HolderSet$Direct<T>;
     }
     export interface $HolderSet<T> extends $Iterable<$Holder<T>>, $IHolderSetExtension<T> {
+        canSerializeIn(arg0: $HolderOwner<$Holder_<T>>): boolean;
+        getRandomElement(arg0: $RandomSource): ($Holder<$Holder<T>>) | undefined;
         size(): number;
         get(arg0: number): $Holder<$Holder<T>>;
         stream(): $Stream<$Holder<$Holder<T>>>;
         contains(arg0: $Holder_<$Holder<T>>): boolean;
         unwrap(): $Either<$TagKey<$Holder<T>>, $List<$Holder<$Holder<T>>>>;
-        canSerializeIn(arg0: $HolderOwner<$Holder_<T>>): boolean;
-        getRandomElement(arg0: $RandomSource): ($Holder<$Holder<T>>) | undefined;
         unwrapKey(): ($TagKey<$Holder<T>>) | undefined;
     }
     /**
@@ -1113,5 +1112,5 @@ declare module "@package/net/minecraft/core" {
     /**
      * Values that may be interpreted as {@link $RegistrySetBuilder$1Entry}.
      */
-    export type $RegistrySetBuilder$1Entry_<T> = { lookup?: $HolderLookup$RegistryLookup<any>, opsInfo?: $RegistryOps$RegistryInfo_<any>,  } | [lookup?: $HolderLookup$RegistryLookup<any>, opsInfo?: $RegistryOps$RegistryInfo_<any>, ];
+    export type $RegistrySetBuilder$1Entry_<T> = { opsInfo?: $RegistryOps$RegistryInfo_<any>, lookup?: $HolderLookup$RegistryLookup<any>,  } | [opsInfo?: $RegistryOps$RegistryInfo_<any>, lookup?: $HolderLookup$RegistryLookup<any>, ];
 }

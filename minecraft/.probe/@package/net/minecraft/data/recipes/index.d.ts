@@ -22,9 +22,9 @@ export * as packs from "@package/net/minecraft/data/recipes/packs";
 
 declare module "@package/net/minecraft/data/recipes" {
     export class $SmithingTrimRecipeBuilder {
-        save(arg0: $RecipeOutput, arg1: $ResourceLocation_): void;
         unlocks(arg0: string, arg1: $Criterion_<never>): $SmithingTrimRecipeBuilder;
         static smithingTrim(arg0: $Ingredient_, arg1: $Ingredient_, arg2: $Ingredient_, arg3: $RecipeCategory_): $SmithingTrimRecipeBuilder;
+        save(arg0: $RecipeOutput, arg1: $ResourceLocation_): void;
         constructor(arg0: $RecipeCategory_, arg1: $Ingredient_, arg2: $Ingredient_, arg3: $Ingredient_);
     }
     export class $SpecialRecipeBuilder {
@@ -34,30 +34,14 @@ declare module "@package/net/minecraft/data/recipes" {
         constructor(arg0: $Function_<$CraftingBookCategory, $Recipe<never>>);
     }
     export class $RecipeProvider implements $DataProvider {
-        getName(): string;
-        run(arg0: $CachedOutput_): $CompletableFuture<never>;
-        run(arg0: $CachedOutput_, arg1: $HolderLookup$Provider): $CompletableFuture<never>;
-        static has(arg0: $ItemLike_): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
-        static has(arg0: $TagKey_<$Item>): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
-        static has(arg0: $MinMaxBounds$Ints_, arg1: $ItemLike_): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
-        static wall(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $ItemLike_): void;
         static grate(arg0: $RecipeOutput, arg1: $Block_, arg2: $Block_): void;
-        handler$gha001$tfmg$getName(arg0: $CallbackInfoReturnable<any>): void;
-        static oneToOneConversionRecipe(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_, arg3: string, arg4: number): void;
-        static oneToOneConversionRecipe(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_, arg3: string): void;
-        static oreSmelting(arg0: $RecipeOutput, arg1: $List_<$ItemLike_>, arg2: $RecipeCategory_, arg3: $ItemLike_, arg4: number, arg5: number, arg6: string): void;
-        static oreCooking<T extends $AbstractCookingRecipe>(arg0: $RecipeOutput, arg1: $RecipeSerializer_<T>, arg2: $AbstractCookingRecipe$Factory_<T>, arg3: $List_<$ItemLike_>, arg4: $RecipeCategory_, arg5: $ItemLike_, arg6: number, arg7: number, arg8: string, arg9: string): void;
-        static oreBlasting(arg0: $RecipeOutput, arg1: $List_<$ItemLike_>, arg2: $RecipeCategory_, arg3: $ItemLike_, arg4: number, arg5: number, arg6: string): void;
-        static nineBlockStorageRecipes(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $RecipeCategory_, arg4: $ItemLike_, arg5: string, arg6: string, arg7: string, arg8: string): void;
-        static nineBlockStorageRecipes(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $RecipeCategory_, arg4: $ItemLike_): void;
-        static nineBlockStorageRecipesWithCustomPacking(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $RecipeCategory_, arg4: $ItemLike_, arg5: string, arg6: string): void;
-        static nineBlockStorageRecipesRecipesWithCustomUnpacking(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $RecipeCategory_, arg4: $ItemLike_, arg5: string, arg6: string): void;
-        static cookRecipes<T extends $AbstractCookingRecipe>(arg0: $RecipeOutput, arg1: string, arg2: $RecipeSerializer_<T>, arg3: $AbstractCookingRecipe$Factory_<T>, arg4: number): void;
-        static simpleCookingRecipe<T extends $AbstractCookingRecipe>(arg0: $RecipeOutput, arg1: string, arg2: $RecipeSerializer_<T>, arg3: $AbstractCookingRecipe$Factory_<T>, arg4: number, arg5: $ItemLike_, arg6: $ItemLike_, arg7: number): void;
         static banner(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_): void;
-        buildAdvancement(arg0: $CachedOutput_, arg1: $HolderLookup$Provider, arg2: $AdvancementHolder_): $CompletableFuture<never>;
-        buildAdvancement(arg0: $CachedOutput_, arg1: $HolderLookup$Provider, arg2: $AdvancementHolder_, ...arg3: $ICondition[]): $CompletableFuture<never>;
+        static candle(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_): void;
+        static carpet(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_): void;
+        static slab(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $ItemLike_): void;
         generateForEnabledBlockFamilies(arg0: $RecipeOutput, arg1: $FeatureFlagSet): void;
+        buildAdvancement(arg0: $CachedOutput_, arg1: $HolderLookup$Provider, arg2: $AdvancementHolder_, ...arg3: $ICondition[]): $CompletableFuture<never>;
+        buildAdvancement(arg0: $CachedOutput_, arg1: $HolderLookup$Provider, arg2: $AdvancementHolder_): $CompletableFuture<never>;
         static netheriteSmithing(arg0: $RecipeOutput, arg1: $Item_, arg2: $RecipeCategory_, arg3: $Item_): void;
         static trimSmithing(arg0: $RecipeOutput, arg1: $Item_, arg2: $ResourceLocation_): void;
         static twoByTwoPacker(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $ItemLike_): void;
@@ -94,12 +78,12 @@ declare module "@package/net/minecraft/data/recipes" {
         static chiseled(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $ItemLike_): void;
         static mosaicBuilder(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $ItemLike_): void;
         static chiseledBuilder(arg0: $RecipeCategory_, arg1: $ItemLike_, arg2: $Ingredient_): $ShapedRecipeBuilder;
-        static stonecutterResultFromBase(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $ItemLike_, arg4: number): void;
         static stonecutterResultFromBase(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $ItemLike_): void;
+        static stonecutterResultFromBase(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $ItemLike_, arg4: number): void;
         static smeltingResultFromBase(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_): void;
         static copySmithingTemplate(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_): void;
-        static copySmithingTemplate(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $Ingredient_): void;
         static copySmithingTemplate(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $TagKey_<$Item>): void;
+        static copySmithingTemplate(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $Ingredient_): void;
         static waxRecipes(arg0: $RecipeOutput, arg1: $FeatureFlagSet): void;
         static copperBulb(arg0: $RecipeOutput, arg1: $Block_, arg2: $Block_): void;
         static generateRecipes(arg0: $RecipeOutput, arg1: $BlockFamily, arg2: $FeatureFlagSet): void;
@@ -115,55 +99,71 @@ declare module "@package/net/minecraft/data/recipes" {
         static getBlastingRecipeName(arg0: $ItemLike_): string;
         buildRecipes(arg0: $RecipeOutput, arg1: $HolderLookup$Provider): void;
         buildRecipes(arg0: $RecipeOutput): void;
-        static candle(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_): void;
-        static carpet(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_): void;
-        static slab(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $ItemLike_): void;
+        handler$ghn001$tfmg$getName(arg0: $CallbackInfoReturnable<any>): void;
+        static nineBlockStorageRecipes(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $RecipeCategory_, arg4: $ItemLike_, arg5: string, arg6: string, arg7: string, arg8: string): void;
+        static nineBlockStorageRecipes(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $RecipeCategory_, arg4: $ItemLike_): void;
+        static nineBlockStorageRecipesWithCustomPacking(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $RecipeCategory_, arg4: $ItemLike_, arg5: string, arg6: string): void;
+        static nineBlockStorageRecipesRecipesWithCustomUnpacking(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $RecipeCategory_, arg4: $ItemLike_, arg5: string, arg6: string): void;
+        static cookRecipes<T extends $AbstractCookingRecipe>(arg0: $RecipeOutput, arg1: string, arg2: $RecipeSerializer_<T>, arg3: $AbstractCookingRecipe$Factory_<T>, arg4: number): void;
+        static simpleCookingRecipe<T extends $AbstractCookingRecipe>(arg0: $RecipeOutput, arg1: string, arg2: $RecipeSerializer_<T>, arg3: $AbstractCookingRecipe$Factory_<T>, arg4: number, arg5: $ItemLike_, arg6: $ItemLike_, arg7: number): void;
+        static oneToOneConversionRecipe(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_, arg3: string): void;
+        static oneToOneConversionRecipe(arg0: $RecipeOutput, arg1: $ItemLike_, arg2: $ItemLike_, arg3: string, arg4: number): void;
+        static oreSmelting(arg0: $RecipeOutput, arg1: $List_<$ItemLike_>, arg2: $RecipeCategory_, arg3: $ItemLike_, arg4: number, arg5: number, arg6: string): void;
+        static oreCooking<T extends $AbstractCookingRecipe>(arg0: $RecipeOutput, arg1: $RecipeSerializer_<T>, arg2: $AbstractCookingRecipe$Factory_<T>, arg3: $List_<$ItemLike_>, arg4: $RecipeCategory_, arg5: $ItemLike_, arg6: number, arg7: number, arg8: string, arg9: string): void;
+        static oreBlasting(arg0: $RecipeOutput, arg1: $List_<$ItemLike_>, arg2: $RecipeCategory_, arg3: $ItemLike_, arg4: number, arg5: number, arg6: string): void;
+        static has(arg0: $MinMaxBounds$Ints_, arg1: $ItemLike_): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
+        static has(arg0: $TagKey_<$Item>): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
+        static has(arg0: $ItemLike_): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
+        static wall(arg0: $RecipeOutput, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: $ItemLike_): void;
+        getName(): string;
+        run(arg0: $CachedOutput_): $CompletableFuture<never>;
+        run(arg0: $CachedOutput_, arg1: $HolderLookup$Provider): $CompletableFuture<never>;
         advancementPathProvider: $PackOutput$PathProvider;
         recipePathProvider: $PackOutput$PathProvider;
         constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>);
         get name(): string;
     }
     export class $SmithingTransformRecipeBuilder {
-        save(arg0: $RecipeOutput, arg1: $ResourceLocation_): void;
-        save(arg0: $RecipeOutput, arg1: string): void;
         static smithing(arg0: $Ingredient_, arg1: $Ingredient_, arg2: $Ingredient_, arg3: $RecipeCategory_, arg4: $Item_): $SmithingTransformRecipeBuilder;
         unlocks(arg0: string, arg1: $Criterion_<never>): $SmithingTransformRecipeBuilder;
+        save(arg0: $RecipeOutput, arg1: $ResourceLocation_): void;
+        save(arg0: $RecipeOutput, arg1: string): void;
         constructor(arg0: $Ingredient_, arg1: $Ingredient_, arg2: $Ingredient_, arg3: $RecipeCategory_, arg4: $Item_);
     }
     export class $ShapelessRecipeBuilder implements $RecipeBuilder {
-        group(arg0: string): $ShapelessRecipeBuilder;
-        save(arg0: $RecipeOutput, arg1: $ResourceLocation_): void;
-        requires(arg0: $Ingredient_): $ShapelessRecipeBuilder;
-        requires(arg0: $ItemLike_, arg1: number): $ShapelessRecipeBuilder;
+        unlockedBy(arg0: string, arg1: $Criterion_<never>): $ShapelessRecipeBuilder;
+        static shapeless(arg0: $RecipeCategory_, arg1: $ItemStack_): $ShapelessRecipeBuilder;
+        static shapeless(arg0: $RecipeCategory_, arg1: $ItemLike_, arg2: number): $ShapelessRecipeBuilder;
+        static shapeless(arg0: $RecipeCategory_, arg1: $ItemLike_): $ShapelessRecipeBuilder;
+        getResult(): $Item;
         requires(arg0: $Ingredient_, arg1: number): $ShapelessRecipeBuilder;
         requires(arg0: $ItemLike_): $ShapelessRecipeBuilder;
         requires(arg0: $TagKey_<$Item>): $ShapelessRecipeBuilder;
-        getResult(): $Item;
-        static shapeless(arg0: $RecipeCategory_, arg1: $ItemLike_, arg2: number): $ShapelessRecipeBuilder;
-        static shapeless(arg0: $RecipeCategory_, arg1: $ItemLike_): $ShapelessRecipeBuilder;
-        static shapeless(arg0: $RecipeCategory_, arg1: $ItemStack_): $ShapelessRecipeBuilder;
+        requires(arg0: $ItemLike_, arg1: number): $ShapelessRecipeBuilder;
+        requires(arg0: $Ingredient_): $ShapelessRecipeBuilder;
+        group(arg0: string): $ShapelessRecipeBuilder;
+        save(arg0: $RecipeOutput, arg1: $ResourceLocation_): void;
         save(arg0: $RecipeOutput): void;
         save(arg0: $RecipeOutput, arg1: string): void;
-        unlockedBy(arg0: string, arg1: $Criterion_<never>): $RecipeBuilder;
-        constructor(arg0: $RecipeCategory_, arg1: $ItemLike_, arg2: number);
         constructor(arg0: $RecipeCategory_, arg1: $ItemStack_);
+        constructor(arg0: $RecipeCategory_, arg1: $ItemLike_, arg2: number);
         get result(): $Item;
     }
     export class $ShapedRecipeBuilder implements $RecipeBuilder {
-        group(arg0: string): $ShapedRecipeBuilder;
+        showNotification(arg0: boolean): $ShapedRecipeBuilder;
+        getResult(): $Item;
         pattern(arg0: string): $ShapedRecipeBuilder;
         save(arg0: $RecipeOutput, arg1: $ResourceLocation_): void;
-        getResult(): $Item;
-        unlockedBy(arg0: string, arg1: $Criterion_<never>): $ShapedRecipeBuilder;
-        showNotification(arg0: boolean): $ShapedRecipeBuilder;
-        define(arg0: string, arg1: $Ingredient_): $ShapedRecipeBuilder;
-        define(arg0: string, arg1: $TagKey_<$Item>): $ShapedRecipeBuilder;
         define(arg0: string, arg1: $ItemLike_): $ShapedRecipeBuilder;
+        define(arg0: string, arg1: $TagKey_<$Item>): $ShapedRecipeBuilder;
+        define(arg0: string, arg1: $Ingredient_): $ShapedRecipeBuilder;
+        static shaped(arg0: $RecipeCategory_, arg1: $ItemLike_, arg2: number): $ShapedRecipeBuilder;
         static shaped(arg0: $RecipeCategory_, arg1: $ItemStack_): $ShapedRecipeBuilder;
         static shaped(arg0: $RecipeCategory_, arg1: $ItemLike_): $ShapedRecipeBuilder;
-        static shaped(arg0: $RecipeCategory_, arg1: $ItemLike_, arg2: number): $ShapedRecipeBuilder;
         save(arg0: $RecipeOutput): void;
         save(arg0: $RecipeOutput, arg1: string): void;
+        unlockedBy(arg0: string, arg1: $Criterion_<never>): $RecipeBuilder;
+        group(arg0: string): $RecipeBuilder;
         constructor(arg0: $RecipeCategory_, arg1: $ItemLike_, arg2: number);
         constructor(arg0: $RecipeCategory_, arg1: $ItemStack_);
         get result(): $Item;
@@ -174,18 +174,18 @@ declare module "@package/net/minecraft/data/recipes" {
         static ROOT_RECIPE_ADVANCEMENT: $ResourceLocation;
     }
     export interface $RecipeBuilder {
+        unlockedBy(arg0: string, arg1: $Criterion_<never>): $RecipeBuilder;
+        getResult(): $Item;
         group(arg0: string): $RecipeBuilder;
         save(arg0: $RecipeOutput): void;
         save(arg0: $RecipeOutput, arg1: string): void;
         save(arg0: $RecipeOutput, arg1: $ResourceLocation_): void;
-        getResult(): $Item;
-        unlockedBy(arg0: string, arg1: $Criterion_<never>): $RecipeBuilder;
         get result(): $Item;
     }
     export class $RecipeCategory extends $Enum<$RecipeCategory> {
+        getFolderName(): string;
         static values(): $RecipeCategory[];
         static valueOf(arg0: string): $RecipeCategory;
-        getFolderName(): string;
         static BUILDING_BLOCKS: $RecipeCategory;
         static REDSTONE: $RecipeCategory;
         static TRANSPORTATION: $RecipeCategory;
@@ -204,15 +204,15 @@ declare module "@package/net/minecraft/data/recipes" {
     export class $RecipeOutput {
     }
     export interface $RecipeOutput extends $IRecipeOutputExtension, $RecipeOutputMixin, $FabricRecipeExporter {
-        accept(arg0: $ResourceLocation_, arg1: $Recipe<never>, arg2: $AdvancementHolder_): void;
         advancement(): $Advancement$Builder;
+        accept(arg0: $ResourceLocation_, arg1: $Recipe<never>, arg2: $AdvancementHolder_): void;
     }
     export class $SingleItemRecipeBuilder implements $RecipeBuilder {
+        static stonecutting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number): $SingleItemRecipeBuilder;
+        static stonecutting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_): $SingleItemRecipeBuilder;
+        getResult(): $Item;
         group(arg0: string): $SingleItemRecipeBuilder;
         save(arg0: $RecipeOutput, arg1: $ResourceLocation_): void;
-        getResult(): $Item;
-        static stonecutting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_): $SingleItemRecipeBuilder;
-        static stonecutting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number): $SingleItemRecipeBuilder;
         save(arg0: $RecipeOutput): void;
         save(arg0: $RecipeOutput, arg1: string): void;
         unlockedBy(arg0: string, arg1: $Criterion_<never>): $RecipeBuilder;
@@ -220,22 +220,22 @@ declare module "@package/net/minecraft/data/recipes" {
         get result(): $Item;
     }
     export class $SimpleCookingRecipeBuilder implements $RecipeBuilder {
+        static campfireCooking(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
+        static campfireCooking(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemStack_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
+        static smelting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemStack_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
+        static smelting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
+        static blasting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
+        static blasting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemStack_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
+        static smoking(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
+        static smoking(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemStack_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
+        getResult(): $Item;
         save(arg0: $RecipeOutput, arg1: $ResourceLocation_): void;
         static generic<T extends $AbstractCookingRecipe>(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemStack_, arg3: number, arg4: number, arg5: $RecipeSerializer_<T>, arg6: $AbstractCookingRecipe$Factory_<T>): $SimpleCookingRecipeBuilder;
         static generic<T extends $AbstractCookingRecipe>(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number, arg4: number, arg5: $RecipeSerializer_<T>, arg6: $AbstractCookingRecipe$Factory_<T>): $SimpleCookingRecipeBuilder;
-        getResult(): $Item;
-        static campfireCooking(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemStack_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
-        static campfireCooking(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
-        static smelting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
-        static smelting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemStack_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
-        static blasting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
-        static blasting(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemStack_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
-        static smoking(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemStack_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
-        static smoking(arg0: $Ingredient_, arg1: $RecipeCategory_, arg2: $ItemLike_, arg3: number, arg4: number): $SimpleCookingRecipeBuilder;
         save(arg0: $RecipeOutput): void;
         save(arg0: $RecipeOutput, arg1: string): void;
-        group(arg0: string): $RecipeBuilder;
         unlockedBy(arg0: string, arg1: $Criterion_<never>): $RecipeBuilder;
+        group(arg0: string): $RecipeBuilder;
         get result(): $Item;
     }
 }

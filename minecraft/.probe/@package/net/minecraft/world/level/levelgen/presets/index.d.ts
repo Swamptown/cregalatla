@@ -9,10 +9,10 @@ import { $WorldDimensions, $WorldDimensions_ } from "@package/net/minecraft/worl
 
 declare module "@package/net/minecraft/world/level/levelgen/presets" {
     export class $WorldPresets {
-        static bootstrap(arg0: $BootstrapContext<$WorldPreset_>): void;
-        static createNormalWorldDimensions(arg0: $RegistryAccess): $WorldDimensions;
         static fromSettings(arg0: $WorldDimensions_): ($ResourceKey<$WorldPreset>) | undefined;
         static getNormalOverworld(arg0: $RegistryAccess): $LevelStem;
+        static bootstrap(arg0: $BootstrapContext<$WorldPreset_>): void;
+        static createNormalWorldDimensions(arg0: $RegistryAccess): $WorldDimensions;
         static AMPLIFIED: $ResourceKey<$WorldPreset>;
         static FLAT: $ResourceKey<$WorldPreset>;
         static SINGLE_BIOME_SURFACE: $ResourceKey<$WorldPreset>;

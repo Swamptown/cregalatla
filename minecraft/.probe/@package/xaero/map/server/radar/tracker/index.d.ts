@@ -10,19 +10,19 @@ import { $Iterable } from "@package/java/lang";
 
 declare module "@package/xaero/map/server/radar/tracker" {
     export class $SyncedTrackedPlayer {
-        update(arg0: $Player): void;
-        getId(): $UUID;
-        copyFrom(arg0: $SyncedTrackedPlayer): void;
         setDimension(arg0: $ResourceKey_<$Level>): $SyncedTrackedPlayer;
         matchesEnough(arg0: $Player, arg1: number): boolean;
         getY(): number;
         getDimension(): $ResourceKey<$Level>;
+        update(arg0: $Player): void;
+        getId(): $UUID;
+        copyFrom(arg0: $SyncedTrackedPlayer): void;
         getX(): number;
         getZ(): number;
         setPos(arg0: number, arg1: number, arg2: number): $SyncedTrackedPlayer;
         constructor(arg0: $UUID_, arg1: number, arg2: number, arg3: number, arg4: $ResourceKey_<$Level>);
-        get id(): $UUID;
         get y(): number;
+        get id(): $UUID;
         get x(): number;
         get z(): number;
     }
@@ -38,8 +38,8 @@ declare module "@package/xaero/map/server/radar/tracker" {
         get partySystem(): boolean;
     }
     export class $SyncedPlayerTrackerSystemManager {
-        register(arg0: string, arg1: $ISyncedPlayerTrackerSystem): void;
         getSystems(): $Iterable<$ISyncedPlayerTrackerSystem>;
+        register(arg0: string, arg1: $ISyncedPlayerTrackerSystem): void;
         constructor();
         get systems(): $Iterable<$ISyncedPlayerTrackerSystem>;
     }

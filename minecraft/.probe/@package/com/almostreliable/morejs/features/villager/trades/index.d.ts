@@ -17,21 +17,21 @@ import { $BlockPosFinder_ } from "@package/com/almostreliable/morejs/util";
 declare module "@package/com/almostreliable/morejs/features/villager/trades" {
     export class $EnchantedItemTrade extends $TransformableTrade<$EnchantedItemTrade> {
         levels(arg0: $IntProvider_): $EnchantedItemTrade;
-        constructor(arg0: $TradeItem[], arg1: $ItemStack_, arg2: $TagKey_<$Enchantment>);
         constructor(arg0: $TradeItem[], arg1: $ItemStack_, arg2: $HolderSet_<$Enchantment>);
+        constructor(arg0: $TradeItem[], arg1: $ItemStack_, arg2: $TagKey_<$Enchantment>);
     }
     export class $TreasureMapTrade extends $TransformableTrade<$TreasureMapTrade> {
+        noPreview(): $TreasureMapTrade;
         scale(arg0: number): $TreasureMapTrade;
         displayName(arg0: $Component_): $TreasureMapTrade;
-        noPreview(): $TreasureMapTrade;
         marker(arg0: $Holder_<$MapDecorationType>): $TreasureMapTrade;
         constructor(arg0: $TradeItem[], arg1: $BlockPosFinder_);
     }
     export class $PotionTrade extends $TransformableTrade<$PotionTrade> {
-        item(arg0: $Item_): $PotionTrade;
+        potions(...arg0: $Potion_[]): $PotionTrade;
         onlyBrewablePotion(): $PotionTrade;
         noBrewablePotion(): $PotionTrade;
-        potions(...arg0: $Potion_[]): $PotionTrade;
+        item(arg0: $Item_): $PotionTrade;
         constructor(arg0: $TradeItem[]);
     }
     export class $TransformableTrade$Transformer {
@@ -53,13 +53,13 @@ declare module "@package/com/almostreliable/morejs/features/villager/trades" {
         get output(): $TradeItem;
     }
     export class $TransformableTrade<T extends $VillagerTrades$ItemListing> implements $VillagerTrades$ItemListing {
-        transform(arg0: $TransformableTrade$Transformer_): T;
         maxUses(arg0: number): T;
         priceMultiplier(arg0: number): T;
         villagerExperience(arg0: number): T;
+        getOffer(arg0: $Entity, arg1: $RandomSource): $MerchantOffer;
         getFirstInput(): $TradeItem;
         getSecondInput(): $TradeItem;
-        getOffer(arg0: $Entity, arg1: $RandomSource): $MerchantOffer;
+        transform(arg0: $TransformableTrade$Transformer_): T;
         constructor(arg0: $TradeItem[]);
         get firstInput(): $TradeItem;
         get secondInput(): $TradeItem;

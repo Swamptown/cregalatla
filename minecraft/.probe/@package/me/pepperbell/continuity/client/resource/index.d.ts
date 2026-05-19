@@ -9,9 +9,9 @@ declare module "@package/me/pepperbell/continuity/client/resource" {
         static create(wrapCtm: boolean, wrapEmissive: boolean): $ModelWrappingHandler;
     }
     export class $ResourceRedirectHandler {
+        redirect(id: $ResourceLocation_): $ResourceLocation;
         static get(resourceManager: $ResourceManager): $ResourceRedirectHandler;
         static parseHex(string: string, startIndex: number): number;
-        redirect(id: $ResourceLocation_): $ResourceLocation;
         getSourceSpritePath(absolutePath: string): string;
         static toHex(i: number): string;
         static PATH_START: string;

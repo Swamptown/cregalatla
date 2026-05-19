@@ -19,12 +19,12 @@ declare module "@package/net/minecraft/util/thread" {
         get empty(): boolean;
     }
     export class $ProcessorMailbox<T> implements $ProfilerMeasured, $ProcessorHandle<T>, $AutoCloseable, $Runnable {
+        runAll(): void;
         name(): string;
         run(): void;
         size(): number;
         close(): void;
         static create(arg0: $Executor_, arg1: string): $ProcessorMailbox<$Runnable>;
-        runAll(): void;
         tell(arg0: T): void;
         profiledMetrics(): $List<$MetricSampler>;
         hasWork(): boolean;
@@ -55,39 +55,39 @@ declare module "@package/net/minecraft/util/thread" {
     export interface $ProcessorHandle<Msg> extends $AutoCloseable {
         name(): string;
         close(): void;
-        tell(arg0: Msg): void;
         ask<Source>(arg0: $Function_<$ProcessorHandle<Source>, Msg>): $CompletableFuture<Source>;
         askEither<Source>(arg0: $Function_<$ProcessorHandle<$Either<Source, $Exception>>, Msg>): $CompletableFuture<Source>;
+        tell(arg0: Msg): void;
     }
     export class $BlockableEventLoop<R extends $Runnable> implements $ProfilerMeasured, $ProcessorHandle<R>, $Executor {
-        name(): string;
-        execute(arg0: $Runnable_): void;
+        pollTask(): boolean;
         submit<V>(arg0: $Supplier_<V>): $CompletableFuture<V>;
         submit(arg0: $Runnable_): $CompletableFuture<void>;
-        pollTask(): boolean;
+        name(): string;
+        execute(arg0: $Runnable_): void;
         managedBlock(arg0: $BooleanSupplier_): void;
-        scheduleExecutables(): boolean;
-        doRunTask(arg0: R): void;
-        isSameThread(): boolean;
-        getPendingTasksCount(): number;
-        submitAsync(arg0: $Runnable_): $CompletableFuture<void>;
-        executeBlocking(arg0: $Runnable_): void;
-        tell(arg0: R): void;
-        executeIfPossible(arg0: $Runnable_): void;
-        waitForTasks(): void;
-        profiledMetrics(): $List<$MetricSampler>;
         runAllTasks(): void;
         dropAllTasks(): void;
         getRunningThread(): $Thread;
         wrapRunnable(arg0: $Runnable_): R;
         shouldRun(arg0: R): boolean;
+        doRunTask(arg0: R): void;
+        executeBlocking(arg0: $Runnable_): void;
+        tell(arg0: R): void;
+        executeIfPossible(arg0: $Runnable_): void;
+        waitForTasks(): void;
+        profiledMetrics(): $List<$MetricSampler>;
+        isSameThread(): boolean;
+        getPendingTasksCount(): number;
+        submitAsync(arg0: $Runnable_): $CompletableFuture<void>;
+        scheduleExecutables(): boolean;
         close(): void;
         ask<Source>(arg0: $Function_<$ProcessorHandle<Source>, R>): $CompletableFuture<Source>;
         askEither<Source>(arg0: $Function_<$ProcessorHandle<$Either<Source, $Exception>>, R>): $CompletableFuture<Source>;
         constructor(arg0: string);
+        get runningThread(): $Thread;
         get sameThread(): boolean;
         get pendingTasksCount(): number;
-        get runningThread(): $Thread;
     }
     export class $StrictQueue$IntRunnable implements $Runnable {
         run(): void;

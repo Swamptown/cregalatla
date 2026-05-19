@@ -30,8 +30,8 @@ declare module "@package/io/github/ocelot/glslprocessor/api/visitor" {
         visitVariable(arg0: $GlslVariableNode): void;
         visitOperation(arg0: $GlslOperationNode): void;
         visitConstant(arg0: $GlslConstantNode): void;
-        constructor();
         constructor(arg0: $GlslNodeVisitor);
+        constructor();
     }
     export class $GlslSwitchVisitor {
         visitSwitchEnd(arg0: $GlslSwitchNode): void;
@@ -42,21 +42,21 @@ declare module "@package/io/github/ocelot/glslprocessor/api/visitor" {
     export class $GlslBitwiseVisitor {
         visitNode(arg0: number): $GlslNodeVisitor;
         visitBitwiseExpressionEnd(arg0: $GlslBitwiseNode): void;
-        constructor();
         constructor(arg0: $GlslBitwiseVisitor);
+        constructor();
     }
     export class $GlslInvokeVisitor {
         visitHeader(): void;
         visitInvokeEnd(arg0: $GlslInvokeFunctionNode): void;
         visitParameter(arg0: number): $GlslNodeVisitor;
-        constructor();
         constructor(arg0: $GlslInvokeVisitor);
+        constructor();
     }
     export class $GlslIfVisitor {
         visitIf(): $GlslNodeVisitor;
         visitElse(): $GlslNodeVisitor;
         visitIfEnd(arg0: $GlslIfNode): void;
-        constructor();
         constructor(arg0: $GlslIfVisitor);
+        constructor();
     }
 }

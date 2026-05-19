@@ -29,9 +29,10 @@ declare module "@package/net/neoforged/neoforge/common/damagesource" {
     export type $IScalingFunction_ = ((arg0: $DamageSource, arg1: $Player, arg2: number, arg3: $Difficulty) => number);
     export class $DamageContainer {
         addModifier(arg0: $DamageContainer$Reduction_, arg1: $IReductionFunction_): void;
+        setPostAttackInvulnerabilityTicks(arg0: number): void;
         getOriginalDamage(): number;
         getShieldDamage(): number;
-        setPostAttackInvulnerabilityTicks(arg0: number): void;
+        getSource(): $DamageSource;
         getNewDamage(): number;
         setBlockedDamage(arg0: $LivingShieldBlockEvent): void;
         getBlockedDamage(): number;
@@ -39,7 +40,6 @@ declare module "@package/net/neoforged/neoforge/common/damagesource" {
         setReduction(arg0: $DamageContainer$Reduction_, arg1: number): void;
         getPostAttackInvulnerabilityTicks(): number;
         getReduction(arg0: $DamageContainer$Reduction_): number;
-        getSource(): $DamageSource;
         constructor(arg0: $DamageSource_, arg1: number);
         get originalDamage(): number;
         get shieldDamage(): number;

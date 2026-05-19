@@ -6,16 +6,16 @@ import { $FluidStack_, $FluidStack } from "@package/net/neoforged/neoforge/fluid
 
 declare module "@package/com/simibubi/create/content/logistics/filter" {
     export class $FilterItemStack {
-        test(arg0: $Level_, arg1: $ItemStack_): boolean;
+        isFilterItem(): boolean;
+        item(): $ItemStack;
         test(arg0: $Level_, arg1: $FluidStack_): boolean;
+        test(arg0: $Level_, arg1: $ItemStack_): boolean;
         test(arg0: $Level_, arg1: $ItemStack_, arg2: boolean): boolean;
         test(arg0: $Level_, arg1: $FluidStack_, arg2: boolean): boolean;
+        isEmpty(): boolean;
         static of(arg0: $ItemStack_): $FilterItemStack;
         static of(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $FilterItemStack;
-        isEmpty(): boolean;
         static empty(): $FilterItemStack;
-        item(): $ItemStack;
-        isFilterItem(): boolean;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         fluid(arg0: $Level_): $FluidStack;
         get filterItem(): boolean;

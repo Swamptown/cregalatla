@@ -1,5 +1,5 @@
 import { $Executor_, $CompletableFuture } from "@package/java/util/concurrent";
-import { $ResourceManager, $SimplePreparableReloadListener, $PreparableReloadListener$PreparationBarrier_, $PreparableReloadListener } from "@package/net/minecraft/server/packs/resources";
+import { $ResourceManager, $SimplePreparableReloadListener, $PreparableReloadListener, $PreparableReloadListener$PreparationBarrier_ } from "@package/net/minecraft/server/packs/resources";
 import { $User } from "@package/net/minecraft/client";
 import { $PaintingVariant_ } from "@package/net/minecraft/world/entity/decoration";
 import { $List, $UUID_, $Set_, $List_ } from "@package/java/util";
@@ -45,6 +45,7 @@ declare module "@package/net/minecraft/client/resources" {
     export type $PlayerSkin$Model_ = "slim" | "wide";
     export class $SplashManager extends $SimplePreparableReloadListener<$List<string>> {
         apply(arg0: $List_<string>, arg1: $ResourceManager, arg2: $ProfilerFiller): void;
+        prepare(arg0: $ResourceManager, arg1: $ProfilerFiller): $List<string>;
         getSplash(): $SplashRenderer;
         static SPLASHES_LOCATION: $ResourceLocation;
         constructor(arg0: $User);
@@ -56,10 +57,10 @@ declare module "@package/net/minecraft/client/resources" {
         constructor();
     }
     export class $TextureAtlasHolder implements $PreparableReloadListener, $AutoCloseable, $TextureAtlasExtension, $TextureAtlasHolderInvoker {
-        close(): void;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
-        getSprite(arg0: $ResourceLocation_): $TextureAtlasSprite;
+        close(): void;
         veil$hasTexture(arg0: $ResourceLocation_): boolean;
+        getSprite(arg0: $ResourceLocation_): $TextureAtlasSprite;
         getName(): string;
         emiffect$invokeGetSprite(arg0: $ResourceLocation_): $TextureAtlasSprite;
         textureAtlas: $TextureAtlas;
@@ -80,8 +81,8 @@ declare module "@package/net/minecraft/client/resources" {
         constructor(arg0: $TextureManager);
     }
     export class $PaintingTextureManager extends $TextureAtlasHolder {
-        get(arg0: $PaintingVariant_): $TextureAtlasSprite;
         getBackSprite(): $TextureAtlasSprite;
+        get(arg0: $PaintingVariant_): $TextureAtlasSprite;
         textureAtlas: $TextureAtlas;
         constructor(arg0: $TextureManager);
         get backSprite(): $TextureAtlasSprite;
@@ -117,18 +118,18 @@ declare module "@package/net/minecraft/client/resources" {
         static get defaultTexture(): $ResourceLocation;
     }
     export class $PlayerSkin extends $Record {
-        model(): $PlayerSkin$Model;
+        capeTexture(): $ResourceLocation;
         texture(): $ResourceLocation;
-        secure(): boolean;
+        model(): $PlayerSkin$Model;
         textureUrl(): string;
         elytraTexture(): $ResourceLocation;
-        capeTexture(): $ResourceLocation;
+        secure(): boolean;
         constructor(arg0: $ResourceLocation_, arg1: string, arg2: $ResourceLocation_, arg3: $ResourceLocation_, arg4: $PlayerSkin$Model_, arg5: boolean);
     }
     /**
      * Values that may be interpreted as {@link $PlayerSkin}.
      */
-    export type $PlayerSkin_ = { capeTexture?: $ResourceLocation_, texture?: $ResourceLocation_, textureUrl?: string, secure?: boolean, model?: $PlayerSkin$Model_, elytraTexture?: $ResourceLocation_,  } | [capeTexture?: $ResourceLocation_, texture?: $ResourceLocation_, textureUrl?: string, secure?: boolean, model?: $PlayerSkin$Model_, elytraTexture?: $ResourceLocation_, ];
+    export type $PlayerSkin_ = { elytraTexture?: $ResourceLocation_, model?: $PlayerSkin$Model_, secure?: boolean, textureUrl?: string, texture?: $ResourceLocation_, capeTexture?: $ResourceLocation_,  } | [elytraTexture?: $ResourceLocation_, model?: $PlayerSkin$Model_, secure?: boolean, textureUrl?: string, texture?: $ResourceLocation_, capeTexture?: $ResourceLocation_, ];
     export class $SkinManager {
         lookupInsecure(arg0: $GameProfile): $Supplier<$PlayerSkin>;
         getInsecureSkin(arg0: $GameProfile): $PlayerSkin;

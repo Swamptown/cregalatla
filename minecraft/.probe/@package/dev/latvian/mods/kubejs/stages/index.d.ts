@@ -8,35 +8,35 @@ declare module "@package/dev/latvian/mods/kubejs/stages" {
     export class $Stages {
     }
     export interface $Stages {
+        addNoUpdate(stage: string): boolean;
+        removeNoUpdate(stage: string): boolean;
+        getPlayer(): $Player;
+        toggle(stage: string): boolean;
+        getAll(): $Collection<string>;
+        has(stage: string): boolean;
         remove(stage: string): boolean;
         clear(): boolean;
         replace(stages: $Collection_<string>): void;
         add(stage: string): boolean;
         set(stage: string, enabled: boolean): boolean;
         sync(): void;
-        has(stage: string): boolean;
-        getAll(): $Collection<string>;
-        addNoUpdate(stage: string): boolean;
-        removeNoUpdate(stage: string): boolean;
-        getPlayer(): $Player;
-        toggle(stage: string): boolean;
-        get all(): $Collection<string>;
         get player(): $Player;
+        get all(): $Collection<string>;
     }
     export class $TagWrapperStages extends $Record implements $Stages {
-        clear(): boolean;
-        replace(stages: $Collection_<string>): void;
-        getAll(): $Collection<string>;
         addNoUpdate(stage: string): boolean;
         removeNoUpdate(stage: string): boolean;
         getPlayer(): $Player;
+        getAll(): $Collection<string>;
+        clear(): boolean;
+        replace(stages: $Collection_<string>): void;
         player(): $Player;
+        toggle(stage: string): boolean;
+        has(stage: string): boolean;
         remove(stage: string): boolean;
         add(stage: string): boolean;
         set(stage: string, enabled: boolean): boolean;
         sync(): void;
-        has(stage: string): boolean;
-        toggle(stage: string): boolean;
         constructor(player: $Player);
         get all(): $Collection<string>;
     }
@@ -57,19 +57,19 @@ declare module "@package/dev/latvian/mods/kubejs/stages" {
     export interface $StageEvents {
     }
     export class $NoStages extends $Record implements $Stages {
-        clear(): boolean;
-        replace(stages: $Collection_<string>): void;
-        sync(): void;
-        has(stage: string): boolean;
-        getAll(): $Collection<string>;
         addNoUpdate(stage: string): boolean;
         removeNoUpdate(stage: string): boolean;
         getPlayer(): $Player;
+        getAll(): $Collection<string>;
+        has(stage: string): boolean;
+        clear(): boolean;
+        replace(stages: $Collection_<string>): void;
+        sync(): void;
         player(): $Player;
+        toggle(stage: string): boolean;
         remove(stage: string): boolean;
         add(stage: string): boolean;
         set(stage: string, enabled: boolean): boolean;
-        toggle(stage: string): boolean;
         static NULL_INSTANCE: $NoStages;
         constructor(player: $Player);
         get all(): $Collection<string>;

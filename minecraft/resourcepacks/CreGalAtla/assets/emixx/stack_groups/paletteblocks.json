@@ -1,0 +1,8 @@
+{
+  "id": "cregalatla:palette_blocks",
+  "type": "emixx:group",
+  "contents": [
+    "#dndesires:palette_blocks",
+    "#dndecor:palette_blocks"
+  ]
+}

@@ -16,13 +16,13 @@ declare module "@package/net/minecraft/world/level/timers" {
         constructor(arg0: number, arg1: $UnsignedLong, arg2: string, arg3: $TimerCallback_<T>);
     }
     export class $TimerCallback$Serializer<T, C extends $TimerCallback<T>> {
-        getId(): $ResourceLocation;
         getCls(): $Class<never>;
+        getId(): $ResourceLocation;
         deserialize(arg0: $CompoundTag_): C;
         serialize(arg0: $CompoundTag_, arg1: C): void;
         constructor(arg0: $ResourceLocation_, arg1: $Class<never>);
-        get id(): $ResourceLocation;
         get cls(): $Class<never>;
+        get id(): $ResourceLocation;
     }
     export class $FunctionCallback implements $TimerCallback<$MinecraftServer> {
         handle(arg0: $MinecraftServer, arg1: $TimerQueue<$MinecraftServer>, arg2: number): void;
@@ -34,13 +34,13 @@ declare module "@package/net/minecraft/world/level/timers" {
         constructor();
     }
     export class $TimerQueue<T> {
+        getEventsIds(): $Set<string>;
+        tick(arg0: T, arg1: number): void;
         remove(arg0: string): number;
         store(): $ListTag;
         schedule(arg0: string, arg1: number, arg2: $TimerCallback_<T>): void;
-        tick(arg0: T, arg1: number): void;
-        getEventsIds(): $Set<string>;
-        constructor(arg0: $TimerCallbacks<T>);
         constructor(arg0: $TimerCallbacks<T>, arg1: $Stream<$Dynamic<never>>);
+        constructor(arg0: $TimerCallbacks<T>);
         get eventsIds(): $Set<string>;
     }
     export class $TimerCallbacks<C> {

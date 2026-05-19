@@ -35,11 +35,11 @@ declare module "@package/com/mojang/brigadier" {
     export class $ImmutableStringReader {
     }
     export interface $ImmutableStringReader {
-        canRead(): boolean;
-        canRead(arg0: number): boolean;
-        peek(arg0: number): string;
-        peek(): string;
         getString(): string;
+        canRead(arg0: number): boolean;
+        canRead(): boolean;
+        peek(): string;
+        peek(arg0: number): string;
         getRemaining(): string;
         getCursor(): number;
         getRemainingLength(): number;
@@ -90,20 +90,20 @@ declare module "@package/com/mojang/brigadier" {
      */
     export type $RedirectModifier_<S> = ((arg0: $CommandContext<S>) => $Collection_<S>);
     export class $CommandDispatcher<S> {
+        getAllUsage(arg0: $CommandNode<S>, arg1: S, arg2: boolean): string[];
+        getSmartUsage(arg0: $CommandNode<S>, arg1: S): $Map<$CommandNode<S>, string>;
+        getCompletionSuggestions(arg0: $ParseResults<S>, arg1: number): $CompletableFuture<$Suggestions>;
+        getCompletionSuggestions(arg0: $ParseResults<S>): $CompletableFuture<$Suggestions>;
+        findAmbiguities(arg0: $AmbiguityConsumer_<S>): void;
+        findNode(arg0: $Collection_<string>): $CommandNode<S>;
         register(arg0: $LiteralArgumentBuilder<S>): $LiteralCommandNode<S>;
         execute(arg0: $ParseResults<S>): number;
         execute(arg0: $StringReader, arg1: S): number;
         execute(arg0: string, arg1: S): number;
-        parse(arg0: $StringReader, arg1: S): $ParseResults<S>;
         parse(arg0: string, arg1: S): $ParseResults<S>;
+        parse(arg0: $StringReader, arg1: S): $ParseResults<S>;
         getRoot(): $RootCommandNode<S>;
         getPath(arg0: $CommandNode<S>): $Collection<string>;
-        findNode(arg0: $Collection_<string>): $CommandNode<S>;
-        getCompletionSuggestions(arg0: $ParseResults<S>): $CompletableFuture<$Suggestions>;
-        getCompletionSuggestions(arg0: $ParseResults<S>, arg1: number): $CompletableFuture<$Suggestions>;
-        findAmbiguities(arg0: $AmbiguityConsumer_<S>): void;
-        getAllUsage(arg0: $CommandNode<S>, arg1: S, arg2: boolean): string[];
-        getSmartUsage(arg0: $CommandNode<S>, arg1: S): $Map<$CommandNode<S>, string>;
         setConsumer(arg0: $ResultConsumer_<S>): void;
         static ARGUMENT_SEPARATOR: string;
         static ARGUMENT_SEPARATOR_CHAR: string;
@@ -113,22 +113,22 @@ declare module "@package/com/mojang/brigadier" {
         set consumer(value: $ResultConsumer_<S>);
     }
     export class $StringReader implements $ImmutableStringReader {
+        skipWhitespace(): void;
+        getString(): string;
+        readFloat(): number;
+        readString(): string;
+        readBoolean(): boolean;
+        readLong(): number;
+        readDouble(): number;
+        read(): string;
         readInt(): number;
         canRead(): boolean;
         canRead(arg0: number): boolean;
-        read(): string;
-        skip(): void;
-        peek(): string;
         peek(arg0: number): string;
-        readLong(): number;
-        readFloat(): number;
-        readDouble(): number;
-        readBoolean(): boolean;
-        readString(): string;
-        getString(): string;
+        peek(): string;
+        skip(): void;
         expect(arg0: string): void;
         getRemaining(): string;
-        skipWhitespace(): void;
         getCursor(): number;
         setCursor(arg0: number): void;
         getRemainingLength(): number;

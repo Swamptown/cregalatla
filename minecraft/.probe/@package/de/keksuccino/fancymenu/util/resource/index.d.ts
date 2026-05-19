@@ -8,8 +8,8 @@ declare module "@package/de/keksuccino/fancymenu/util/resource" {
     }
     export interface $PlayableResource extends $Resource {
         stop(): void;
-        isPlaying(): boolean;
         play(): void;
+        isPlaying(): boolean;
         pause(): void;
         isPaused(): boolean;
         get playing(): boolean;
@@ -18,10 +18,10 @@ declare module "@package/de/keksuccino/fancymenu/util/resource" {
     export class $Resource {
     }
     export interface $Resource extends $Closeable {
-        open(): $InputStream;
         isLoadingCompleted(): boolean;
         isLoadingFailed(): boolean;
         waitForLoadingCompletedOrFailed(arg0: number): void;
+        open(): $InputStream;
         isClosed(): boolean;
         waitForReady(arg0: number): void;
         isReady(): boolean;
@@ -35,14 +35,14 @@ declare module "@package/de/keksuccino/fancymenu/util/resource" {
         static FULLY_TRANSPARENT_TEXTURE: $ResourceLocation;
     }
     export interface $RenderableResource extends $Resource {
+        getWidth(): number;
+        getHeight(): number;
         reset(): void;
         getAspectRatio(): $AspectRatio;
         getResourceLocation(): $ResourceLocation;
-        getWidth(): number;
-        getHeight(): number;
-        get aspectRatio(): $AspectRatio;
-        get resourceLocation(): $ResourceLocation;
         get width(): number;
         get height(): number;
+        get aspectRatio(): $AspectRatio;
+        get resourceLocation(): $ResourceLocation;
     }
 }

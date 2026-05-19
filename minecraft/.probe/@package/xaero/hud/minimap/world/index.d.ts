@@ -27,42 +27,39 @@ declare module "@package/xaero/hud/minimap/world" {
         constructor();
     }
     export class $MinimapWorldManager {
-        addRootWorldContainer(arg0: $MinimapWorldRootContainer): void;
-        getRootContainers(): $Iterable<$MinimapWorldRootContainer>;
-        getCurrentRootContainer(): $MinimapWorldRootContainer;
-        hasCustomWaypoints(): boolean;
-        getWorldContainer(arg0: $XaeroPath): $MinimapWorldContainer;
-        getCustomWaypoints(): $Iterable<$Waypoint>;
-        getCustomWaypoints(arg0: $ResourceLocation_): $Int2ObjectMap<$Waypoint>;
-        addWorld(arg0: $XaeroPath): $MinimapWorld;
-        addWorldContainer(arg0: $XaeroPath): $MinimapWorldContainer;
-        getWorldContainerNullable(arg0: $XaeroPath): $MinimapWorldContainer;
-        containerExists(arg0: $XaeroPath): boolean;
+        getAutoRootContainer(): $MinimapWorldRootContainer;
         /**
          * @deprecated
          */
         getRootContainersDirect(): $HashMap<string, $MinimapWorldRootContainer>;
-        getAutoRootContainer(): $MinimapWorldRootContainer;
-        getAutoWorld(): $MinimapWorld;
-        removeContainer(arg0: $XaeroPath): boolean;
-        getWorld(arg0: $XaeroPath): $MinimapWorld;
+        getWorldContainer(arg0: $XaeroPath): $MinimapWorldContainer;
+        getCustomWaypoints(arg0: $ResourceLocation_): $Int2ObjectMap<$Waypoint>;
+        getCustomWaypoints(): $Iterable<$Waypoint>;
+        addWorld(arg0: $XaeroPath): $MinimapWorld;
+        addWorldContainer(arg0: $XaeroPath): $MinimapWorldContainer;
+        getWorldContainerNullable(arg0: $XaeroPath): $MinimapWorldContainer;
+        containerExists(arg0: $XaeroPath): boolean;
+        getCurrentWorld(arg0: $XaeroPath): $MinimapWorld;
+        getCurrentWorld(): $MinimapWorld;
         getRootWorldContainer(arg0: string): $MinimapWorldRootContainer;
         getRootWorldContainer(arg0: $XaeroPath): $MinimapWorldRootContainer;
-        getCurrentWorld(): $MinimapWorld;
-        getCurrentWorld(arg0: $XaeroPath): $MinimapWorld;
+        addRootWorldContainer(arg0: $MinimapWorldRootContainer): void;
+        getRootContainers(): $Iterable<$MinimapWorldRootContainer>;
+        getCurrentRootContainer(): $MinimapWorldRootContainer;
+        hasCustomWaypoints(): boolean;
+        getAutoWorld(): $MinimapWorld;
+        getWorld(arg0: $XaeroPath): $MinimapWorld;
+        removeContainer(arg0: $XaeroPath): boolean;
         constructor(arg0: $HudMod, arg1: $MinimapSession);
+        get autoRootContainer(): $MinimapWorldRootContainer;
+        get rootContainersDirect(): $HashMap<string, $MinimapWorldRootContainer>;
         get rootContainers(): $Iterable<$MinimapWorldRootContainer>;
         get currentRootContainer(): $MinimapWorldRootContainer;
-        get rootContainersDirect(): $HashMap<string, $MinimapWorldRootContainer>;
-        get autoRootContainer(): $MinimapWorldRootContainer;
         get autoWorld(): $MinimapWorld;
     }
     export class $MinimapWorld {
-        getNode(): string;
-        setNode(arg0: string): void;
-        getDimId(): $ResourceKey<$Level>;
-        addWaypointSet(arg0: string): void;
         addWaypointSet(arg0: $WaypointSet): $WaypointSet;
+        addWaypointSet(arg0: string): void;
         cleanupOnSave(arg0: $Path_): void;
         getLocalWorldKey(): $XaeroPath;
         removeWaypointSet(arg0: string): $WaypointSet;
@@ -70,22 +67,25 @@ declare module "@package/xaero/hud/minimap/world" {
         hasSomethingToRemoveOnSave(): boolean;
         setDimId(arg0: $ResourceKey_<$Level>): void;
         getSetCount(): number;
-        setContainer(arg0: $MinimapWorldContainer): void;
-        getContainer(): $MinimapWorldContainer;
-        getFullPath(): $XaeroPath;
-        getIterableWaypointSets(): $Iterable<$WaypointSet>;
+        getDimId(): $ResourceKey<$Level>;
         getCurrentWaypointSetId(): string;
         setCurrentWaypointSetId(arg0: string): void;
+        getIterableWaypointSets(): $Iterable<$WaypointSet>;
         getCurrentWaypointSet(): $WaypointSet;
         getRootConfig(): $RootConfig;
         getSlimeChunkSeed(): number;
         setSlimeChunkSeed(arg0: number): void;
         getWaypointSet(arg0: string): $WaypointSet;
+        setContainer(arg0: $MinimapWorldContainer): void;
+        getContainer(): $MinimapWorldContainer;
+        setNode(arg0: string): void;
+        getNode(): string;
+        getFullPath(): $XaeroPath;
         get localWorldKey(): $XaeroPath;
         get setCount(): number;
-        get fullPath(): $XaeroPath;
         get iterableWaypointSets(): $Iterable<$WaypointSet>;
         get currentWaypointSet(): $WaypointSet;
         get rootConfig(): $RootConfig;
+        get fullPath(): $XaeroPath;
     }
 }

@@ -1,6 +1,8 @@
 
 declare module "@package/xaero/map/palette" {
     export class $FastPalette<T> {
+        getNonNullCount(): number;
+        addNull(): void;
         remove(arg0: number): void;
         get(arg0: number): T;
         append(arg0: T, arg1: number): number;
@@ -12,9 +14,7 @@ declare module "@package/xaero/map/palette" {
         getCount(arg0: number): number;
         getSize(): number;
         getIndex(arg0: T): number;
-        getNonNullCount(): number;
-        addNull(): void;
-        get size(): number;
         get nonNullCount(): number;
+        get size(): number;
     }
 }

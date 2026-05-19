@@ -1,4 +1,4 @@
-import { $MapCodec_, $Decoder$Simple, $DataResult, $MapEncoder, $DynamicOps, $Codec, $Dynamic, $MapCodec, $Decoder, $Codec$ResultFunction, $Decoder$Boxed, $Lifecycle, $Encoder, $Decoder$Terminal, $Decoder_ } from "@package/com/mojang/serialization";
+import { $MapCodec_, $Decoder$Simple, $DataResult, $DynamicOps, $Codec, $Dynamic, $MapCodec, $Decoder, $Codec$ResultFunction, $Decoder$Boxed, $Lifecycle, $Encoder, $Decoder$Terminal, $Decoder_ } from "@package/com/mojang/serialization";
 import { $TickTask, $MinecraftServer } from "@package/net/minecraft/server";
 import { $Tag_, $Tag, $CompoundTag } from "@package/net/minecraft/nbt";
 import { $Either, $Pair } from "@package/com/mojang/datafixers/util";
@@ -39,7 +39,7 @@ import { $NioEventLoopGroup } from "@package/io/netty/channel/nio";
 import { $SavedData } from "@package/net/minecraft/world/level/saveddata";
 import { $AttributeModifier, $AttributeModifier_, $Attribute } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $ConnectionType } from "@package/net/neoforged/neoforge/network/connection";
-import { $Comparator, $Stack, $Map, $Map$Entry, $Set, $ListIterator, $Spliterator, $Iterator, $Properties, $UUID, $List, $SequencedCollection, $Collection_, $List_, $SequencedSet } from "@package/java/util";
+import { $Comparator, $Stack, $Map, $Map$Entry, $Set, $ListIterator, $Spliterator, $Iterator, $Properties, $UUID, $List, $SequencedCollection, $Collection_, $List_ } from "@package/java/util";
 import { $IntFunction_, $Supplier_, $Consumer_, $Predicate_, $Consumer, $ToDoubleFunction_, $Function_, $UnaryOperator_, $BiPredicate_, $Supplier, $ToLongFunction_, $ToIntFunction_ } from "@package/java/util/function";
 import { $BlockPos, $BlockPos_, $RegistryAccess, $HolderLookup$Provider, $Holder_, $Holder } from "@package/net/minecraft/core";
 import { $ServerPlayerGameMode, $ServerLevel, $ServerPlayer } from "@package/net/minecraft/server/level";
@@ -72,25 +72,25 @@ declare module "@package/net/neoforged/neoforge/common/util" {
      */
     export type $AttributeUtil$BaseModifier_ = { children?: $List_<$AttributeModifier_>, base?: $AttributeModifier_,  } | [children?: $List_<$AttributeModifier_>, base?: $AttributeModifier_, ];
     export class $BlockSnapshot {
-        getState(): $BlockState;
-        static create(arg0: $ResourceKey_<$Level>, arg1: $LevelAccessor, arg2: $BlockPos_): $BlockSnapshot;
-        static create(arg0: $ResourceKey_<$Level>, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: number): $BlockSnapshot;
-        getLevel(): $LevelAccessor;
-        getFlags(): number;
-        restoreBlockEntity(arg0: $LevelAccessor, arg1: $BlockPos_): boolean;
-        restore(): boolean;
-        restore(arg0: number): boolean;
         restoreToLocation(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: number): boolean;
         recreateBlockEntity(arg0: $HolderLookup$Provider): $BlockEntity;
-        getTag(): $CompoundTag;
+        restoreBlockEntity(arg0: $LevelAccessor, arg1: $BlockPos_): boolean;
+        restore(arg0: number): boolean;
+        restore(): boolean;
+        getLevel(): $LevelAccessor;
+        getFlags(): number;
         getDimension(): $ResourceKey<$Level>;
+        getTag(): $CompoundTag;
+        getState(): $BlockState;
+        static create(arg0: $ResourceKey_<$Level>, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: number): $BlockSnapshot;
+        static create(arg0: $ResourceKey_<$Level>, arg1: $LevelAccessor, arg2: $BlockPos_): $BlockSnapshot;
         getCurrentState(): $BlockState;
         getPos(): $BlockPos;
-        get state(): $BlockState;
         get level(): $LevelAccessor;
         get flags(): number;
-        get tag(): $CompoundTag;
         get dimension(): $ResourceKey<$Level>;
+        get tag(): $CompoundTag;
+        get state(): $BlockState;
         get currentState(): $BlockState;
         get pos(): $BlockPos;
     }
@@ -99,22 +99,22 @@ declare module "@package/net/neoforged/neoforge/common/util" {
     export class $MutableHashedLinkedMap$Entry implements $Map$Entry<K, V> {
     }
     export class $MutableHashedLinkedMap<K, V> implements $Iterable<$Map$Entry<K, V>> {
+        putBefore(arg0: K, arg1: K, arg2: V): V;
+        putAfter(arg0: K, arg1: K, arg2: V): V;
+        putFirst(arg0: K, arg1: V): V;
         remove(arg0: K): V;
         get(arg0: K): V;
         put(arg0: K, arg1: V): V;
         isEmpty(): boolean;
         iterator(): $Iterator<$Map$Entry<K, V>>;
         contains(arg0: K): boolean;
-        putFirst(arg0: K, arg1: V): V;
-        putBefore(arg0: K, arg1: K, arg2: V): V;
-        putAfter(arg0: K, arg1: K, arg2: V): V;
         spliterator(): $Spliterator<$Map$Entry<K, V>>;
         forEach(arg0: $Consumer_<$Map$Entry<K, V>>): void;
-        constructor(arg0: $Hash$Strategy<K>, arg1: $MutableHashedLinkedMap$MergeFunction_<K, V>, arg2: $BiPredicate_<K, V>);
-        constructor(arg0: $Hash$Strategy<K>, arg1: $BiPredicate_<K, V>);
-        constructor(arg0: $Hash$Strategy<K>, arg1: $MutableHashedLinkedMap$MergeFunction_<K, V>);
-        constructor(arg0: $Hash$Strategy<K>);
         constructor();
+        constructor(arg0: $Hash$Strategy<K>, arg1: $MutableHashedLinkedMap$MergeFunction_<K, V>, arg2: $BiPredicate_<K, V>);
+        constructor(arg0: $Hash$Strategy<K>);
+        constructor(arg0: $Hash$Strategy<K>, arg1: $MutableHashedLinkedMap$MergeFunction_<K, V>);
+        constructor(arg0: $Hash$Strategy<K>, arg1: $BiPredicate_<K, V>);
         [Symbol.iterator](): Iterator<$Map$Entry<K, V>>
         get empty(): boolean;
     }
@@ -345,16 +345,16 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         static DUMMY: $DummySavedData;
     }
     export class $TriState extends $Enum<$TriState> {
+        isFalse(): boolean;
         static values(): $TriState[];
         static valueOf(arg0: string): $TriState;
         isDefault(): boolean;
-        isFalse(): boolean;
         isTrue(): boolean;
         static TRUE: $TriState;
         static FALSE: $TriState;
         static DEFAULT: $TriState;
-        get default(): boolean;
         get false(): boolean;
+        get default(): boolean;
         get true(): boolean;
     }
     /**
@@ -364,25 +364,24 @@ declare module "@package/net/neoforged/neoforge/common/util" {
     export class $InsertableLinkedOpenCustomHashSet<T> extends $ObjectLinkedOpenCustomHashSet<T> {
         addAfter(arg0: T, arg1: T): boolean;
         addBefore(arg0: T, arg1: T): boolean;
-        reversed(): $SequencedSet<T>;
         constructor();
         constructor(arg0: $Hash$Strategy<T>);
     }
     export class $AttributeUtil$MergedModifierData {
     }
     export class $LogMessageAdapter extends $Record implements $Message, $StringBuilderFormattable {
+        getFormat(): string;
+        formatTo(arg0: $StringBuilder): void;
         builder(): $Consumer<$StringBuilder>;
         static adapt(arg0: $Consumer_<$StringBuilder>): $Message;
         getParameters(): $Object[];
-        formatTo(arg0: $StringBuilder): void;
-        getFormat(): string;
-        getThrowable(): $Throwable;
         getFormattedMessage(): string;
+        getThrowable(): $Throwable;
         constructor(builder: $Consumer_<$StringBuilder>);
-        get parameters(): $Object[];
         get format(): string;
-        get throwable(): $Throwable;
+        get parameters(): $Object[];
         get formattedMessage(): string;
+        get throwable(): $Throwable;
     }
     /**
      * Values that may be interpreted as {@link $LogMessageAdapter}.
@@ -420,10 +419,10 @@ declare module "@package/net/neoforged/neoforge/common/util" {
     export class $TriPredicate<T, U, V> {
     }
     export interface $TriPredicate<T, U, V> {
-        test(arg0: T, arg1: U, arg2: V): boolean;
-        or(arg0: $TriPredicate_<T, U, V>): $TriPredicate<T, U, V>;
         negate(): $TriPredicate<T, U, V>;
         and(arg0: $TriPredicate_<T, U, V>): $TriPredicate<T, U, V>;
+        test(arg0: T, arg1: U, arg2: V): boolean;
+        or(arg0: $TriPredicate_<T, U, V>): $TriPredicate<T, U, V>;
     }
     /**
      * Values that may be interpreted as {@link $TriPredicate}.
@@ -438,24 +437,24 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         static initCommon(): void;
     }
     export class $DataComponentUtil {
+        static logDataComponentSaveError(arg0: $DataComponentHolder_, arg1: $Exception, arg2: $Tag_): void;
         static wrapEncodingExceptions<T extends $DataComponentHolder>(arg0: T, arg1: $Codec<T>, arg2: $HolderLookup$Provider): $Tag;
         static wrapEncodingExceptions<T extends $DataComponentHolder>(arg0: T, arg1: $Codec<T>, arg2: $HolderLookup$Provider, arg3: $Tag_): $Tag;
-        static logDataComponentSaveError(arg0: $DataComponentHolder_, arg1: $Exception, arg2: $Tag_): void;
         constructor();
     }
     export class $NeoForgeExtraCodecs {
-        static xor<F, S>(arg0: $MapCodec_<F>, arg1: $MapCodec_<S>): $MapCodec<$Either<F, S>>;
+        static dispatchMapOrElse<A, E, B>(arg0: $Codec<A>, arg1: $Function_<E, A>, arg2: $Function_<A, $MapCodec<E>>, arg3: $MapCodec_<B>): $MapCodec<$Either<E, B>>;
         static mapWithAlternative<T>(arg0: $MapCodec_<T>, arg1: $MapCodec_<T>): $MapCodec<T>;
         static singularOrPluralCodec<T>(arg0: $Codec<T>, arg1: string): $MapCodec<$Set<T>>;
         static singularOrPluralCodec<T>(arg0: $Codec<T>, arg1: string, arg2: string): $MapCodec<$Set<T>>;
-        static singularOrPluralCodecNotEmpty<T>(arg0: $Codec<T>, arg1: string, arg2: string): $MapCodec<$Set<T>>;
-        static singularOrPluralCodecNotEmpty<T>(arg0: $Codec<T>, arg1: string): $MapCodec<$Set<T>>;
         static listWithoutEmpty<A>(arg0: $Codec<$List_<(A) | undefined>>): $Codec<$List<A>>;
         static aliasedFieldOf<T>(arg0: $Codec<T>, ...arg1: string[]): $MapCodec<T>;
         static optionalFieldAlwaysWrite<T>(arg0: $Codec<T>, arg1: string, arg2: T): $MapCodec<T>;
         static decodeOnly<A>(arg0: $Decoder_<A>): $Codec<A>;
         static listWithOptionalElements<A>(arg0: $Codec<(A) | undefined>): $Codec<$List<A>>;
-        static dispatchMapOrElse<A, E, B>(arg0: $Codec<A>, arg1: $Function_<E, A>, arg2: $Function_<A, $MapCodec<E>>, arg3: $MapCodec_<B>): $MapCodec<$Either<E, B>>;
+        static singularOrPluralCodecNotEmpty<T>(arg0: $Codec<T>, arg1: string): $MapCodec<$Set<T>>;
+        static singularOrPluralCodecNotEmpty<T>(arg0: $Codec<T>, arg1: string, arg2: string): $MapCodec<$Set<T>>;
+        static xor<F, S>(arg0: $MapCodec_<F>, arg1: $MapCodec_<S>): $MapCodec<$Either<F, S>>;
         static setOf<T>(arg0: $Codec<T>): $Codec<$Set<T>>;
         static withAlternative<T>(arg0: $MapCodec_<T>, arg1: $MapCodec_<T>): $MapCodec<T>;
         static withAlternative<T>(arg0: $Codec<T>, arg1: $Codec<T>): $Codec<T>;
@@ -472,14 +471,14 @@ declare module "@package/net/neoforged/neoforge/common/util" {
     /**
      * Values that may be interpreted as {@link $FakePlayerFactory$FakePlayerKey}.
      */
-    export type $FakePlayerFactory$FakePlayerKey_ = { username?: $GameProfile, level?: $ServerLevel,  } | [username?: $GameProfile, level?: $ServerLevel, ];
+    export type $FakePlayerFactory$FakePlayerKey_ = { level?: $ServerLevel, username?: $GameProfile,  } | [level?: $ServerLevel, username?: $GameProfile, ];
     export class $HexDumper$Instance {
     }
     export class $InsertingContents extends $Record implements $ComponentContents {
         index(): number;
         type(): $ComponentContents$Type<never>;
-        visit<T>(arg0: $FormattedText$ContentConsumer_<T>): (T) | undefined;
         visit<T>(arg0: $FormattedText$StyledContentConsumer_<T>, arg1: $Style): (T) | undefined;
+        visit<T>(arg0: $FormattedText$ContentConsumer_<T>): (T) | undefined;
         static pushTranslation(arg0: $TranslatableContents): boolean;
         static popTranslation(): void;
         resolve(arg0: $CommandSourceStack, arg1: $Entity, arg2: number): $MutableComponent;
@@ -513,8 +512,8 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         static applyTextFor(arg0: $ItemStack_, arg1: $Consumer_<$Component>, arg2: $Multimap<$Holder_<$Attribute>, $AttributeModifier_>, arg3: $AttributeTooltipContext): void;
         static applyModifierTooltips(arg0: $ItemStack_, arg1: $Consumer_<$Component>, arg2: $AttributeTooltipContext): void;
         static sortedMap(): $Multimap<$Holder<$Attribute>, $AttributeModifier>;
-        static addPotionTooltip(arg0: $List_<$Pair<$Holder_<$Attribute>, $AttributeModifier_>>, arg1: $Consumer_<$Component>): void;
         static addAttributeTooltips(arg0: $ItemStack_, arg1: $Consumer_<$Component>, arg2: $AttributeTooltipContext): void;
+        static addPotionTooltip(arg0: $List_<$Pair<$Holder_<$Attribute>, $AttributeModifier_>>, arg1: $Consumer_<$Component>): void;
         static getSortedModifiers(arg0: $ItemStack_, arg1: $EquipmentSlotGroup_): $Multimap<$Holder<$Attribute>, $AttributeModifier>;
         static FAKE_MERGED_ID: $ResourceLocation;
         static BASE_ATTACK_DAMAGE_ID: $ResourceLocation;
@@ -529,39 +528,42 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         constructor();
     }
     export class $Lazy<T> implements $Supplier<T> {
+        invalidate(): void;
         get(): T;
         static of<T>(arg0: $Supplier_<T>): $Lazy<T>;
-        invalidate(): void;
     }
     export class $NeoForgeExtraCodecs$AlternativeCodec<T> extends $Record implements $Codec<T> {
         dispatch<E>(arg0: $Function_<E, T>, arg1: $Function_<T, $MapCodec<E>>): $Codec<E>;
         dispatch<E>(arg0: string, arg1: $Function_<E, T>, arg2: $Function_<T, $MapCodec<E>>): $Codec<E>;
         validate(arg0: $Function_<T, $DataResult<T>>): $Codec<T>;
+        orElse(arg0: T): $Codec<T>;
         orElse(arg0: $Consumer_<string>, arg1: T): $Codec<T>;
         orElse(arg0: $UnaryOperator_<string>, arg1: T): $Codec<T>;
-        orElse(arg0: T): $Codec<T>;
         orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<T>): $Codec<T>;
         orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<T>): $Codec<T>;
         orElseGet(arg0: $Supplier_<T>): $Codec<T>;
-        deprecated(arg0: number): $Codec<T>;
         comapFlatMap<S>(arg0: $Function_<T, $DataResult<S>>, arg1: $Function_<S, T>): $Codec<S>;
+        optionalFieldOf(arg0: string, arg1: T, arg2: $Lifecycle): $MapCodec<T>;
         optionalFieldOf(arg0: string): $MapCodec<(T) | undefined>;
         optionalFieldOf(arg0: string, arg1: T): $MapCodec<T>;
         optionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: T, arg3: $Lifecycle): $MapCodec<T>;
-        optionalFieldOf(arg0: string, arg1: T, arg2: $Lifecycle): $MapCodec<T>;
-        listOf(): $Codec<$List<T>>;
         listOf(arg0: number, arg1: number): $Codec<$List<T>>;
+        listOf(): $Codec<$List<T>>;
         xmap<S>(arg0: $Function_<T, S>, arg1: $Function_<S, T>): $Codec<S>;
         stable(): $Codec<T>;
+        withLifecycle(arg0: $Lifecycle): $Codec<T>;
+        deprecated(arg0: number): $Codec<T>;
         flatXmap<S>(arg0: $Function_<T, $DataResult<S>>, arg1: $Function_<S, $DataResult<T>>): $Codec<S>;
-        lenientOptionalFieldOf(arg0: string, arg1: T): $MapCodec<T>;
+        fieldOf(arg0: string): $MapCodec<T>;
         lenientOptionalFieldOf(arg0: string, arg1: T, arg2: $Lifecycle): $MapCodec<T>;
-        lenientOptionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: T, arg3: $Lifecycle): $MapCodec<T>;
         lenientOptionalFieldOf(arg0: string): $MapCodec<(T) | undefined>;
+        lenientOptionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: T, arg3: $Lifecycle): $MapCodec<T>;
+        lenientOptionalFieldOf(arg0: string, arg1: T): $MapCodec<T>;
         mapResult(arg0: $Codec$ResultFunction<T>): $Codec<T>;
+        promotePartial(arg0: $Consumer_<string>): $Codec<T>;
         partialDispatch<E>(arg0: string, arg1: $Function_<E, $DataResult<T>>, arg2: $Function_<T, $DataResult<$MapCodec<E>>>): $Codec<E>;
-        dispatchMap<E>(arg0: $Function_<E, T>, arg1: $Function_<T, $MapCodec<E>>): $MapCodec<E>;
         dispatchMap<E>(arg0: string, arg1: $Function_<E, T>, arg2: $Function_<T, $MapCodec<E>>): $MapCodec<E>;
+        dispatchMap<E>(arg0: $Function_<E, T>, arg1: $Function_<T, $MapCodec<E>>): $MapCodec<E>;
         sizeLimitedListOf(arg0: number): $Codec<$List<T>>;
         flatComapMap<S>(arg0: $Function_<T, S>, arg1: $Function_<S, $DataResult<T>>): $Codec<S>;
         dispatchStable<E>(arg0: $Function_<E, T>, arg1: $Function_<T, $MapCodec<E>>): $Codec<E>;
@@ -570,15 +572,12 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         flatComap<B>(arg0: $Function_<B, $DataResult<T>>): $Encoder<B>;
         decode<T>(arg0: $Dynamic<T>): $DataResult<$Pair<T, T>>;
         map<B>(arg0: $Function_<T, B>): $Decoder<B>;
+        flatMap<B>(arg0: $Function_<T, $DataResult<B>>): $Decoder<B>;
         parse<T>(arg0: $Dynamic<T>): $DataResult<T>;
         parse<T>(arg0: $DynamicOps<T>, arg1: T): $DataResult<T>;
-        flatMap<B>(arg0: $Function_<T, $DataResult<B>>): $Decoder<B>;
         boxed(): $Decoder$Boxed<T>;
         terminal(): $Decoder$Terminal<T>;
         simple(): $Decoder$Simple<T>;
-        withLifecycle(arg0: $Lifecycle): $Encoder<T>;
-        fieldOf(arg0: string): $MapEncoder<T>;
-        promotePartial(arg0: $Consumer_<string>): $Decoder<T>;
     }
     /**
      * Values that may be interpreted as {@link $NeoForgeExtraCodecs$AlternativeCodec}.
@@ -596,9 +595,9 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         constructor();
     }
     export class $TransformationHelper$TransformOrigin extends $Enum<$TransformationHelper$TransformOrigin> implements $StringRepresentable {
+        getVector(): $Vector3f;
         static values(): $TransformationHelper$TransformOrigin[];
         static valueOf(arg0: string): $TransformationHelper$TransformOrigin;
-        getVector(): $Vector3f;
         static fromString(arg0: string): $TransformationHelper$TransformOrigin;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
@@ -738,20 +737,20 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         clear(): void;
         add(...arg0: $Object[]): void;
         build(arg0: string): string;
-        static column(arg0: string): $TextTable$Column;
         static column(arg0: string, arg1: $TextTable$Alignment_): $TextTable$Column;
+        static column(arg0: string): $TextTable$Column;
         getColumns(): $List<$TextTable$Column>;
         constructor(arg0: $List_<$TextTable$Column>);
         get columns(): $List<$TextTable$Column>;
     }
     export class $LogicalSidedProvider<T> {
         get(arg0: $LogicalSide_): T;
-        static setServer(arg0: $Supplier_<$MinecraftServer>): void;
         static setClient(arg0: $Supplier_<$Minecraft>): void;
+        static setServer(arg0: $Supplier_<$MinecraftServer>): void;
         static WORKQUEUE: $LogicalSidedProvider<$BlockableEventLoop<$TickTask>>;
         static CLIENTWORLD: $LogicalSidedProvider<($Level) | undefined>;
-        static set server(value: $Supplier_<$MinecraftServer>);
         static set client(value: $Supplier_<$Minecraft>);
+        static set server(value: $Supplier_<$MinecraftServer>);
     }
     export class $FakePlayerFactory {
         static get(arg0: $ServerLevel, arg1: $GameProfile): $FakePlayer;
@@ -760,34 +759,34 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         constructor();
     }
     export class $ConcatenatedListView<T> implements $List<T> {
-        remove(arg0: number): T;
         remove(arg0: $Object): boolean;
+        remove(arg0: number): T;
         size(): number;
         get(arg0: number): T;
         indexOf(arg0: $Object): number;
         clear(): void;
-        static of<T>(...arg0: $List_<T>[]): $ConcatenatedListView<T>;
-        static of<T>(arg0: $List_<$List_<T>>): $List<T>;
         lastIndexOf(arg0: $Object): number;
         isEmpty(): boolean;
-        add(arg0: T): boolean;
         add(arg0: number, arg1: T): void;
+        add(arg0: T): boolean;
         subList(arg0: number, arg1: number): $List<T>;
         toArray<T1>(arg0: T1[]): T1[];
         toArray(): $Object[];
         iterator(): $Iterator<T>;
+        static of<T>(arg0: $List_<$List_<T>>): $List<T>;
+        static of<T>(...arg0: $List_<T>[]): $ConcatenatedListView<T>;
         contains(arg0: $Object): boolean;
         spliterator(): $Spliterator<T>;
-        addAll(arg0: $Collection_<T>): boolean;
         addAll(arg0: number, arg1: $Collection_<T>): boolean;
+        addAll(arg0: $Collection_<T>): boolean;
         set(arg0: number, arg1: T): T;
         removeAll(arg0: $Collection_<never>): boolean;
         retainAll(arg0: $Collection_<never>): boolean;
         listIterator(arg0: number): $ListIterator<T>;
         listIterator(): $ListIterator<T>;
         containsAll(arg0: $Collection_<never>): boolean;
-        sort(arg0: $Comparator<T>): void;
         replaceAll(arg0: $UnaryOperator_<T>): void;
+        sort(arg0: $Comparator<T>): void;
         getFirst(): T;
         getLast(): T;
         addFirst(arg0: T): void;
@@ -796,8 +795,8 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         removeLast(): T;
         toArray<T>(arg0: $IntFunction_<T[]>): T[];
         stream(): $Stream<T>;
-        removeIf(arg0: $Predicate_<T>): boolean;
         parallelStream(): $Stream<T>;
+        removeIf(arg0: $Predicate_<T>): boolean;
         forEach(arg0: $Consumer_<T>): void;
         reversed(): $SequencedCollection<T>;
         [Symbol.iterator](): Iterator<T>
@@ -831,24 +830,24 @@ declare module "@package/net/neoforged/neoforge/common/util" {
         constructor();
     }
     export class $TablePrinter<T> {
-        add(arg0: T, ...arg1: T[]): $TablePrinter<T>;
-        add(arg0: T): $TablePrinter<T>;
-        add(arg0: $Collection_<T>): $TablePrinter<T>;
-        build(arg0: $StringBuilder): void;
-        header(arg0: string, arg1: $Function_<T, string>): $TablePrinter<T>;
-        header(arg0: string, arg1: $Function_<T, string>, arg2: boolean): $TablePrinter<T>;
         clearRows(): void;
+        add(arg0: T, ...arg1: T[]): $TablePrinter<T>;
+        add(arg0: $Collection_<T>): $TablePrinter<T>;
+        add(arg0: T): $TablePrinter<T>;
+        build(arg0: $StringBuilder): void;
+        header(arg0: string, arg1: $Function_<T, string>, arg2: boolean): $TablePrinter<T>;
+        header(arg0: string, arg1: $Function_<T, string>): $TablePrinter<T>;
         constructor();
     }
     export class $TablePrinter$Header<T> {
     }
     export class $TextTable$Column {
-        format(arg0: string, arg1: string): string;
-        getSeparator(arg0: string): string;
         formatHeader(arg0: string): string;
         resetWidth(): void;
-        fit(arg0: string): void;
+        getSeparator(arg0: string): string;
         getWidth(): number;
+        format(arg0: string, arg1: string): string;
+        fit(arg0: string): void;
         constructor(arg0: string);
         constructor(arg0: string, arg1: $TextTable$Alignment_);
         get width(): number;
@@ -874,9 +873,9 @@ declare module "@package/net/neoforged/neoforge/common/util" {
      */
     export type $MutableHashedLinkedMap$MergeFunction_<Key, Value> = ((arg0: Key, arg1: Value, arg2: Value) => Value);
     export class $HexDumper {
+        static dump(arg0: $ByteBuf): string;
         static dump(arg0: number[], arg1: number): string;
         static dump(arg0: number[]): string;
-        static dump(arg0: $ByteBuf): string;
         constructor();
     }
     export class $NeoForgeExtraCodecs$AlternativeMapCodec<T> extends $MapCodec<T> {

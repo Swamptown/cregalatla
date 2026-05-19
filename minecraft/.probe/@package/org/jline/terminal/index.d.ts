@@ -146,21 +146,21 @@ declare module "@package/org/jline/terminal" {
      */
     export type $Terminal$MouseTracking_ = "off" | "normal" | "button" | "any";
     export class $Attributes {
-        copy(arg0: $Attributes): void;
-        getLocalFlags(): $EnumSet<$Attributes$LocalFlag>;
         getInputFlags(): $EnumSet<$Attributes$InputFlag>;
-        setInputFlags(arg0: $EnumSet<$Attributes$InputFlag_>): void;
         setInputFlags(arg0: $EnumSet<$Attributes$InputFlag_>, arg1: boolean): void;
+        setInputFlags(arg0: $EnumSet<$Attributes$InputFlag_>): void;
         getOutputFlags(): $EnumSet<$Attributes$OutputFlag>;
         setOutputFlags(arg0: $EnumSet<$Attributes$OutputFlag_>): void;
         setOutputFlags(arg0: $EnumSet<$Attributes$OutputFlag_>, arg1: boolean): void;
         getControlFlags(): $EnumSet<$Attributes$ControlFlag>;
         setControlFlags(arg0: $EnumSet<$Attributes$ControlFlag_>): void;
         setControlFlags(arg0: $EnumSet<$Attributes$ControlFlag_>, arg1: boolean): void;
+        getLocalFlags(): $EnumSet<$Attributes$LocalFlag>;
         setLocalFlags(arg0: $EnumSet<$Attributes$LocalFlag_>): void;
         setLocalFlags(arg0: $EnumSet<$Attributes$LocalFlag_>, arg1: boolean): void;
         getControlChars(): $EnumMap<$Attributes$ControlChar, number>;
         setControlChars(arg0: $EnumMap<$Attributes$ControlChar_, number>): void;
+        copy(arg0: $Attributes): void;
         getInputFlag(arg0: $Attributes$InputFlag_): boolean;
         getOutputFlag(arg0: $Attributes$OutputFlag_): boolean;
         getControlFlag(arg0: $Attributes$ControlFlag_): boolean;
@@ -200,15 +200,15 @@ declare module "@package/org/jline/terminal" {
      */
     export type $MouseEvent$Modifier_ = "shift" | "alt" | "control";
     export class $MouseEvent {
+        getY(): number;
         getModifiers(): $EnumSet<$MouseEvent$Modifier>;
         getType(): $MouseEvent$Type;
-        getY(): number;
         getX(): number;
         getButton(): $MouseEvent$Button;
         constructor(arg0: $MouseEvent$Type_, arg1: $MouseEvent$Button_, arg2: $EnumSet<$MouseEvent$Modifier_>, arg3: number, arg4: number);
+        get y(): number;
         get modifiers(): $EnumSet<$MouseEvent$Modifier>;
         get type(): $MouseEvent$Type;
-        get y(): number;
         get x(): number;
         get button(): $MouseEvent$Button;
     }
@@ -251,10 +251,10 @@ declare module "@package/org/jline/terminal" {
      */
     export type $MouseEvent$Type_ = "released" | "pressed" | "wheel" | "moved" | "dragged";
     export class $Size {
-        copy(arg0: $Size): void;
         setRows(arg0: number): void;
         cursorPos(arg0: number, arg1: number): number;
         setColumns(arg0: number): void;
+        copy(arg0: $Size): void;
         getColumns(): number;
         getRows(): number;
         constructor();
@@ -265,22 +265,26 @@ declare module "@package/org/jline/terminal" {
         static TYPE_DUMB: string;
     }
     export interface $Terminal extends $Closeable, $Flushable {
+        setAttributes(arg0: $Attributes): void;
+        getWidth(): number;
+        getHeight(): number;
         getName(): string;
         flush(): void;
+        resume(): void;
         reader(): $NonBlockingReader;
         writer(): $PrintWriter;
         encoding(): $Charset;
         getType(): string;
         getSize(): $Size;
-        input(): $InputStream;
         handle(arg0: $Terminal$Signal_, arg1: $Terminal$SignalHandler_): $Terminal$SignalHandler;
+        input(): $InputStream;
         getAttributes(): $Attributes;
         raise(arg0: $Terminal$Signal_): void;
-        output(): $OutputStream;
         setSize(arg0: $Size): void;
+        output(): $OutputStream;
         getBufferSize(): $Size;
-        echo(): boolean;
         echo(arg0: boolean): boolean;
+        echo(): boolean;
         pause(arg0: boolean): void;
         pause(): void;
         canPauseResume(): boolean;
@@ -298,15 +302,11 @@ declare module "@package/org/jline/terminal" {
         hasFocusSupport(): boolean;
         trackFocus(arg0: boolean): boolean;
         getPalette(): $ColorPalette;
-        resume(): void;
-        getWidth(): number;
-        getHeight(): number;
-        setAttributes(arg0: $Attributes): void;
+        get width(): number;
+        get height(): number;
         get name(): string;
         get type(): string;
         get bufferSize(): $Size;
         get palette(): $ColorPalette;
-        get width(): number;
-        get height(): number;
     }
 }

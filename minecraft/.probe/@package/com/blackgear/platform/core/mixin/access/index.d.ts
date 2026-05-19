@@ -1,5 +1,5 @@
 import { $BlockGetter } from "@package/net/minecraft/world/level";
-import { $Sensor, $SensorType } from "@package/net/minecraft/world/entity/ai/sensing";
+import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $NarratableEntry } from "@package/net/minecraft/client/gui/narration";
 import { $SpawnPlacements$Data, $EntityType } from "@package/net/minecraft/world/entity";
 import { $Renderable } from "@package/net/minecraft/client/gui/components";
@@ -56,8 +56,8 @@ declare module "@package/com/blackgear/platform/core/mixin/access" {
     export class $PackRepositoryAccessor {
     }
     export interface $PackRepositoryAccessor {
-        setSources(arg0: $Set_<$RepositorySource_>): void;
         getSources(): $Set<$RepositorySource>;
+        setSources(arg0: $Set_<$RepositorySource_>): void;
     }
     export class $SensorTypeAccessor {
         static createSensorType<T extends $Sensor<never>>(supplier: $Supplier_<T>): $SensorType<T>;

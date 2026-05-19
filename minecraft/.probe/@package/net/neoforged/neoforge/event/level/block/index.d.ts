@@ -20,9 +20,9 @@ declare module "@package/net/neoforged/neoforge/event/level/block" {
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_);
     }
     export class $CreateFluidSourceEvent extends $BlockEvent {
-        canConvert(): boolean;
         getVanillaResult(): boolean;
         setCanConvert(arg0: boolean): void;
+        canConvert(): boolean;
         getFluidState(): $FluidState;
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_);
         get vanillaResult(): boolean;

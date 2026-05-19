@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:packages",
+  "type": "emixx:group",
+  "contents": [
+    "#create:packages"
+  ]
+}

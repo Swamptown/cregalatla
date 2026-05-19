@@ -8,8 +8,8 @@ declare module "@package/xaero/lib/client/level" {
         xaerolib_setData(arg0: $ClientLevelData): void;
     }
     export class $ClientLevelData {
-        static get(arg0: $ClientLevel): $ClientLevelData;
         setServerHasMod(): void;
+        static get(arg0: $ClientLevel): $ClientLevelData;
         serverHasMod(): boolean;
         constructor();
     }

@@ -16,28 +16,6 @@ export * as options from "@package/net/minecraft/commands/arguments/selector/opt
 
 declare module "@package/net/minecraft/commands/arguments/selector" {
     export class $EntitySelectorParser implements $FabricEntitySelectorReader {
-        parse(): $EntitySelector;
-        setLevel(arg0: $MinMaxBounds$Ints_): void;
-        getLevel(): $MinMaxBounds$Ints;
-        setLimited(arg0: boolean): void;
-        getRotY(): $WrappedMinMaxBounds;
-        setRotY(arg0: $WrappedMinMaxBounds_): void;
-        getRotX(): $WrappedMinMaxBounds;
-        setRotX(arg0: $WrappedMinMaxBounds_): void;
-        getDeltaZ(): number;
-        setWorldLimited(): void;
-        setDeltaZ(arg0: number): void;
-        getDeltaY(): number;
-        setDeltaY(arg0: number): void;
-        getDeltaX(): number;
-        setDeltaX(arg0: number): void;
-        hasNameEquals(): boolean;
-        hasNameNotEquals(): boolean;
-        setHasNameNotEquals(arg0: boolean): void;
-        setHasNameEquals(arg0: boolean): void;
-        fillSuggestions(arg0: $SuggestionsBuilder, arg1: $Consumer_<$SuggestionsBuilder>): $CompletableFuture<$Suggestions>;
-        setCustomFlag(arg0: $ResourceLocation_, arg1: boolean): void;
-        getCustomFlag(arg0: $ResourceLocation_): boolean;
         hasTeamNotEquals(): boolean;
         shouldInvertValue(): boolean;
         addPredicate(arg0: $Predicate_<$Entity>): void;
@@ -61,20 +39,42 @@ declare module "@package/net/minecraft/commands/arguments/selector" {
         isCurrentEntity(): boolean;
         setSorted(arg0: boolean): void;
         setMaxResults(arg0: number): void;
+        setLimited(arg0: boolean): void;
+        getRotY(): $WrappedMinMaxBounds;
+        setRotY(arg0: $WrappedMinMaxBounds_): void;
+        getRotX(): $WrappedMinMaxBounds;
+        setRotX(arg0: $WrappedMinMaxBounds_): void;
+        getDeltaZ(): number;
+        setWorldLimited(): void;
+        setDeltaZ(arg0: number): void;
+        getDeltaY(): number;
+        setDeltaY(arg0: number): void;
+        getDeltaX(): number;
+        setDeltaX(arg0: number): void;
+        hasNameEquals(): boolean;
+        hasNameNotEquals(): boolean;
+        setHasNameNotEquals(arg0: boolean): void;
+        setHasNameEquals(arg0: boolean): void;
         isTag(): boolean;
+        fillSuggestions(arg0: $SuggestionsBuilder, arg1: $Consumer_<$SuggestionsBuilder>): $CompletableFuture<$Suggestions>;
+        setCustomFlag(arg0: $ResourceLocation_, arg1: boolean): void;
+        getCustomFlag(arg0: $ResourceLocation_): boolean;
         finalizePredicates(): void;
         parseOptions(): void;
         parseNameOrUUID(): void;
         static allowSelectors<S>(arg0: S): boolean;
+        getLevel(): $MinMaxBounds$Ints;
+        setLevel(arg0: $MinMaxBounds$Ints_): void;
         getY(): number;
         getOrder(): $BiConsumer<$Vec3, $List<$Entity>>;
-        getX(): number;
-        getZ(): number;
+        isLimited(): boolean;
+        parse(): $EntitySelector;
         getSelector(): $EntitySelector;
         getReader(): $StringReader;
         setOrder(arg0: $BiConsumer_<$Vec3, $List<$Entity>>): void;
-        isLimited(): boolean;
         parseSelector(): void;
+        getX(): number;
+        getZ(): number;
         getDistance(): $MinMaxBounds$Doubles;
         setDistance(arg0: $MinMaxBounds$Doubles_): void;
         isSorted(): boolean;
@@ -106,22 +106,22 @@ declare module "@package/net/minecraft/commands/arguments/selector" {
         get reader(): $StringReader;
     }
     export class $EntitySelector {
-        static joinNames(arg0: $List_<$Entity>): $Component;
-        usesSelector(): boolean;
-        isWorldLimited(): boolean;
         includesEntities(): boolean;
+        findSingleEntity(arg0: $CommandSourceStack): $Entity;
         findEntities(arg0: $CommandSourceStack): $List<$Entity>;
         findPlayers(arg0: $CommandSourceStack): $List<$ServerPlayer>;
         findSinglePlayer(arg0: $CommandSourceStack): $ServerPlayer;
         getMaxResults(): number;
         isSelfSelector(): boolean;
-        findSingleEntity(arg0: $CommandSourceStack): $Entity;
+        usesSelector(): boolean;
+        isWorldLimited(): boolean;
+        static joinNames(arg0: $List_<$Entity>): $Component;
         static ORDER_ARBITRARY: $BiConsumer<$Vec3, $List<$Entity>>;
         contextFreePredicates: $List<$Predicate<$Entity>>;
         static INFINITE: number;
         constructor(arg0: number, arg1: boolean, arg2: boolean, arg3: $List_<$Predicate_<$Entity>>, arg4: $MinMaxBounds$Doubles_, arg5: $Function_<$Vec3, $Vec3>, arg6: $AABB_, arg7: $BiConsumer_<$Vec3, $List<$Entity>>, arg8: boolean, arg9: string, arg10: $UUID_, arg11: $EntityType_<never>, arg12: boolean);
-        get worldLimited(): boolean;
         get maxResults(): number;
         get selfSelector(): boolean;
+        get worldLimited(): boolean;
     }
 }

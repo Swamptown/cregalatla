@@ -20,26 +20,26 @@ import { $BlockEvent } from "@package/net/neoforged/neoforge/event/level";
 
 declare module "@package/net/mehvahdjukaar/moonlight/api/events/platform" {
     export class $DropItemOnDeathEvent extends $Event implements $IDropItemOnDeathEvent, $ICancellableEvent {
-        static create(arg0: $ItemStack_, arg1: $Player, arg2: boolean): $IDropItemOnDeathEvent;
-        getPlayer(): $Player;
-        getReturnItemStack(): $ItemStack;
         isBeforeDrop(): boolean;
         setReturnItemStack(arg0: $ItemStack_): void;
-        getItemStack(): $ItemStack;
+        getPlayer(): $Player;
+        getReturnItemStack(): $ItemStack;
+        static create(arg0: $ItemStack_, arg1: $Player, arg2: boolean): $IDropItemOnDeathEvent;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
+        getItemStack(): $ItemStack;
         constructor(arg0: $ItemStack_, arg1: $Player, arg2: boolean);
-        get player(): $Player;
         get beforeDrop(): boolean;
+        get player(): $Player;
         get itemStack(): $ItemStack;
     }
     export class $VillagerBrainEvent extends $Event implements $IVillagerBrainEvent {
-        scheduleActivity(arg0: $Activity_, arg1: number, arg2: number): void;
-        addTaskToActivity<P extends $Pair<number, $Behavior<$Villager>>>(arg0: $Activity_, arg1: P): boolean;
         addSensor(arg0: $SensorType_<$Sensor<$Villager>>): void;
         getVillager(): $Villager;
         getMemories(): $Map<$MemoryModuleType<never>, ($ExpirableValue<never>) | undefined>;
         addOrReplaceActivity(arg0: $Activity_, arg1: $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>): void;
+        scheduleActivity(arg0: $Activity_, arg1: number, arg2: number): void;
+        addTaskToActivity<P extends $Pair<number, $Behavior<$Villager>>>(arg0: $Activity_, arg1: P): boolean;
         getInternal(): $VillagerBrainEventInternal;
         constructor(arg0: $Brain<$Villager>, arg1: $Villager);
         get villager(): $Villager;
@@ -52,15 +52,15 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/events/platform" {
         get entity(): $LightningBolt;
     }
     export class $FireConsumeBlockEvent extends $BlockEvent implements $IFireConsumeBlockEvent {
-        getFinalState(): $BlockState;
-        getFace(): $Direction;
-        getChance(): number;
-        setFinalState(arg0: $BlockState_): void;
         wasReplacedByFire(): boolean;
+        getChance(): number;
+        getFace(): $Direction;
+        setFinalState(arg0: $BlockState_): void;
+        getFinalState(): $BlockState;
         getAge(): number;
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: number, arg4: number, arg5: $Direction_, arg6: boolean);
-        get face(): $Direction;
         get chance(): number;
+        get face(): $Direction;
         get age(): number;
     }
 }

@@ -34,12 +34,12 @@ declare module "@package/dev/latvian/mods/kubejs/web" {
      */
     export type $LocalWebServerAPIRegistry_ = ((id: $ResourceLocation, version: number) => void);
     export class $JsonContent extends $Record implements $ResponseContent {
+        static any(json: $Supplier_<$JsonElement>): $JsonContent;
+        static object(json: $Consumer_<$JsonObject>): $JsonContent;
         type(): string;
         length(): number;
         static array(json: $Consumer_<$JsonArray>): $JsonContent;
         write(out: $OutputStream): void;
-        static object(json: $Consumer_<$JsonObject>): $JsonContent;
-        static any(json: $Supplier_<$JsonElement>): $JsonContent;
         json(): $Lazy<number[]>;
         toBytes(): number[];
         transferTo(connection: $HTTPConnection<never>): void;
@@ -70,32 +70,32 @@ declare module "@package/dev/latvian/mods/kubejs/web" {
     export class $LocalWebServerRegistry implements $ServerRegistry<$KJSHTTPRequest> {
         ws<WSS extends $WSSession<$KJSHTTPRequest>>(path: string, factory: $WSSessionFactory_<$KJSHTTPRequest, WSS>): $WSHandler<$KJSHTTPRequest, WSS>;
         http(method: $HTTPMethod_, path: string, handler: $HTTPHandler_<$KJSHTTPRequest>): void;
+        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
+        dynamicFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
+        staticFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
+        acceptPostString(path: string, handler: $Consumer_<string>): void;
+        acceptPostTask(path: string, task: $Runnable_): void;
+        redirect(path: string, redirect: string): void;
+        post(path: string, handler: $HTTPHandler_<$KJSHTTPRequest>): void;
         get(path: string, handler: $HTTPHandler_<$KJSHTTPRequest>): void;
         put(path: string, handler: $HTTPHandler_<$KJSHTTPRequest>): void;
         delete(path: string, handler: $HTTPHandler_<$KJSHTTPRequest>): void;
-        ws<WSS extends $WSSession<REQ>>(path: string): $WSHandler<$KJSHTTPRequest, WSS>;
         patch(path: string, handler: $HTTPHandler_<$KJSHTTPRequest>): void;
-        post(path: string, handler: $HTTPHandler_<$KJSHTTPRequest>): void;
-        redirect(path: string, redirect: string): void;
-        acceptPostString(path: string, handler: $Consumer_<string>): void;
-        acceptPostTask(path: string, task: $Runnable_): void;
-        dynamicFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
-        staticFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
-        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
+        ws<WSS extends $WSSession<REQ>>(path: string): $WSHandler<$KJSHTTPRequest, WSS>;
     }
     export class $KJSHTTPRequest extends $HTTPRequest {
+        runInMainThread(task: $Runnable_): void;
+        supplyInMainThread<T>(task: $Supplier_<T>): T;
         id(): $ResourceLocation;
         id(ns: string, path: string): $ResourceLocation;
-        supplyInMainThread<T>(task: $Supplier_<T>): T;
-        runInMainThread(task: $Runnable_): void;
         components(ops: $DynamicOps<$Tag_>): $DataComponentPatch;
         registries(): $RegistryAccessContainer;
         eventLoop: $BlockableEventLoop<never>;
         constructor(eventLoop: $BlockableEventLoop<never>);
     }
     export class $WebServerProperties extends $BaseProperties {
-        static get(): $WebServerProperties;
         static reload(): void;
+        static get(): $WebServerProperties;
         port: number;
         auth: string;
         publicAddress: string;
@@ -111,21 +111,21 @@ declare module "@package/dev/latvian/mods/kubejs/web" {
     /**
      * Values that may be interpreted as {@link $LocalWebServer$Endpoint}.
      */
-    export type $LocalWebServer$Endpoint_ = { auth?: boolean, path?: string, method?: string,  } | [auth?: boolean, path?: string, method?: string, ];
+    export type $LocalWebServer$Endpoint_ = { method?: string, path?: string, auth?: boolean,  } | [method?: string, path?: string, auth?: boolean, ];
     export class $RelativeURL extends $Record {
+        fullString(): string;
         query(): $Map<string, string>;
         path(): string;
-        fullString(): string;
-        constructor(path: string);
         constructor(path: string, query: $Map_<string, string>);
+        constructor(path: string);
     }
     /**
      * Values that may be interpreted as {@link $RelativeURL}.
      */
     export type $RelativeURL_ = { query?: $Map_<string, string>, path?: string,  } | [query?: $Map_<string, string>, path?: string, ];
     export class $LocalWebServer extends $Record {
-        url(): string;
         explorerCode(): string;
+        url(): string;
         server(): $KJSHTTPServer;
         endpoints(): $List<$LocalWebServer$Endpoint>;
         constructor(server: $KJSHTTPServer, url: string, endpoints: $List_<$LocalWebServer$Endpoint_>, explorerCode: string);
@@ -133,10 +133,10 @@ declare module "@package/dev/latvian/mods/kubejs/web" {
     /**
      * Values that may be interpreted as {@link $LocalWebServer}.
      */
-    export type $LocalWebServer_ = { server?: $KJSHTTPServer, explorerCode?: string, endpoints?: $List_<$LocalWebServer$Endpoint_>, url?: string,  } | [server?: $KJSHTTPServer, explorerCode?: string, endpoints?: $List_<$LocalWebServer$Endpoint_>, url?: string, ];
+    export type $LocalWebServer_ = { url?: string, endpoints?: $List_<$LocalWebServer$Endpoint_>, explorerCode?: string, server?: $KJSHTTPServer,  } | [url?: string, endpoints?: $List_<$LocalWebServer$Endpoint_>, explorerCode?: string, server?: $KJSHTTPServer, ];
     export class $SessionInfo extends $Record {
-        source(): string;
         tags(): $Set<string>;
+        source(): string;
         static fromJson(info: $SessionInfo_, json: $JsonObject_): $SessionInfo;
         static NONE: $SessionInfo;
         constructor(source: string, tags: $Set_<string>);

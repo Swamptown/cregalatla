@@ -16,24 +16,24 @@ import { $Editor, $View } from "@package/com/lowdragmc/lowdraglib2/editor/ui";
 
 declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/view" {
     export class $ResourceView extends $View {
-        clear(): void;
-        getResources(): $Map<$Resource<never>, $ResourceInstance<never>>;
-        loadResources(arg0: $Resources): void;
         getResourceInstance<T>(arg0: $Resource<never>): $ResourceInstance<T>;
         removeResource(arg0: $Resource<never>): void;
-        addResourceInstance(arg0: $ResourceInstance<never>): void;
         addResourceInstances(...arg0: $ResourceInstance<never>[]): void;
         selectResourceInstance(arg0: $Resource<never>): void;
         getResourceTabs(): $BiMap<$Resource<never>, $Tab>;
+        addResourceInstance(arg0: $ResourceInstance<never>): void;
         getSelectedResourceInstance(): $ResourceInstance<never>;
+        loadResources(arg0: $Resources): void;
+        clear(): void;
+        getResources(): $Map<$Resource<never>, $ResourceInstance<never>>;
         editor: $Editor;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
         tabView: $TabView;
         constructor(arg0: $Editor);
-        get resources(): $Map<$Resource<never>, $ResourceInstance<never>>;
         get resourceTabs(): $BiMap<$Resource<never>, $Tab>;
         get selectedResourceInstance(): $ResourceInstance<never>;
+        get resources(): $Map<$Resource<never>, $ResourceInstance<never>>;
     }
     export class $InspectorView extends $View {
         clear(): void;
@@ -48,16 +48,16 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/view" {
         constructor(arg0: $Editor);
     }
     export class $HistoryView extends $View implements $IHistoryStack {
-        jumpToHistory(arg0: $IHistoryStack$HistoryItem_): void;
-        pushHistory(arg0: $Component_, arg1: $EditAction, arg2: $Object, arg3: boolean): void;
-        pushHistory(arg0: $Component_, arg1: $EditAction, arg2: boolean): void;
-        pushHistory(arg0: $Component_, arg1: $EditAction): void;
-        clearHistory(): void;
         getMaxHistoryCount(): number;
         setMaxHistoryCount(arg0: number): void;
         getUndoStack(): $Stack<$IHistoryStack$HistoryItem>;
         getRedoStack(): $Stack<$IHistoryStack$HistoryItem>;
         getCurrentHistory(): $IHistoryStack$HistoryItem;
+        pushHistory(arg0: $Component_, arg1: $EditAction, arg2: boolean): void;
+        pushHistory(arg0: $Component_, arg1: $EditAction): void;
+        pushHistory(arg0: $Component_, arg1: $EditAction, arg2: $Object, arg3: boolean): void;
+        clearHistory(): void;
+        jumpToHistory(arg0: $IHistoryStack$HistoryItem_): void;
         undo(): void;
         redo(): void;
         recordSerializableObject<T extends $INBTSerializable<never>>(arg0: $Component_, arg1: T): $SerializableRecordAction<T>;

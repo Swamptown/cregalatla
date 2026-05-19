@@ -1,5 +1,5 @@
 import { $InputStream } from "@package/java/io";
-import { $Ingredient, $Ingredient_ } from "@package/net/minecraft/world/item/crafting";
+import { $Ingredient_, $Ingredient } from "@package/net/minecraft/world/item/crafting";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $MutableComponent, $Style } from "@package/net/minecraft/network/chat";
@@ -23,8 +23,8 @@ export * as data from "@package/com/lowdragmc/lowdraglib2/utils/data";
 
 declare module "@package/com/lowdragmc/lowdraglib2/utils" {
     export class $XmlUtils$SizedIngredient extends $Record {
-        count(): number;
         ingredient(): $Ingredient;
+        count(): number;
         constructor(ingredient: $Ingredient_, count: number);
     }
     /**
@@ -32,49 +32,49 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils" {
      */
     export type $XmlUtils$SizedIngredient_ = { count?: number, ingredient?: $Ingredient_,  } | [count?: number, ingredient?: $Ingredient_, ];
     export class $XmlUtils {
-        static getContent(arg0: $Element, arg1: boolean): string;
-        static getAsInt(arg0: $Element, arg1: string, arg2: number): number;
-        static getAsLong(arg0: $Element, arg1: string, arg2: number): number;
-        static getAsBoolean(arg0: $Element, arg1: string, arg2: boolean): boolean;
-        static getIngredient(arg0: $Element): $XmlUtils$SizedIngredient;
-        static getAsColor(arg0: $Element, arg1: string, arg2: number): number;
-        static getAsBlockPos(arg0: $Element, arg1: string, arg2: $BlockPos_): $BlockPos;
-        static getAsVector3f(arg0: $Element, arg1: string, arg2: $Vector3f): $Vector3f;
-        static getAsVec2(arg0: $Element, arg1: string, arg2: $Vec2): $Vec2;
-        static getEntityInfo(arg0: $Element): $EntityInfo;
-        static getBlockInfo(arg0: $Element): $BlockInfo;
         static loadXml(arg0: $InputStream): $Document;
         static loadXml(arg0: string): $Document;
         static loadXml(arg0: $ResourceLocation_): $Document;
         static getAsEnum<T extends $Enum<T>>(arg0: $Element, arg1: string, arg2: $Class<T>, arg3: T): T;
         static getFluidStack(arg0: $Element): $FluidStack;
         static getCompoundTag(arg0: $Element): $CompoundTag;
+        static getAsColor(arg0: $Element, arg1: string, arg2: number): number;
+        static getAsBlockPos(arg0: $Element, arg1: string, arg2: $BlockPos_): $BlockPos;
+        static getAsVector3f(arg0: $Element, arg1: string, arg2: $Vector3f): $Vector3f;
+        static getAsVec2(arg0: $Element, arg1: string, arg2: $Vec2): $Vec2;
+        static getEntityInfo(arg0: $Element): $EntityInfo;
+        static getBlockInfo(arg0: $Element): $BlockInfo;
+        static getIngredient(arg0: $Element): $XmlUtils$SizedIngredient;
+        static getContent(arg0: $Element, arg1: boolean): string;
+        static getAsInt(arg0: $Element, arg1: string, arg2: number): number;
         static getAsString(arg0: $Element, arg1: string, arg2: string): string;
-        static getItemStack(arg0: $Element): $ItemStack;
+        static getAsBoolean(arg0: $Element, arg1: string, arg2: boolean): boolean;
+        static getAsLong(arg0: $Element, arg1: string, arg2: number): number;
         static getAsFloat(arg0: $Element, arg1: string, arg2: number): number;
-        static getComponents(arg0: $Element, arg1: $Style): $List<$MutableComponent>;
         static getComponents(arg0: $Element): $DataComponentMap;
+        static getComponents(arg0: $Element, arg1: $Style): $List<$MutableComponent>;
+        static getItemStack(arg0: $Element): $ItemStack;
         static setBlockState(arg0: $BlockState_, arg1: $Element): $BlockState;
         static documentBuilderFactory: $DocumentBuilderFactory;
     }
     export class $HistoryStack<T> {
-        clear(): void;
-        record(arg0: T): void;
         canUndo(): boolean;
         replaceCurrent(arg0: T): void;
+        setMaxSize(arg0: number): void;
+        getMaxSize(): number;
         canRedo(): boolean;
         trackedSize(): number;
         undoSize(): number;
         redoSize(): number;
         setDedupeConsecutive(arg0: boolean): void;
         isDedupeConsecutive(): boolean;
-        setMaxSize(arg0: number): void;
-        getMaxSize(): number;
+        clear(): void;
+        record(arg0: T): void;
         undo(): boolean;
         redo(): boolean;
         getCurrent(): T;
-        constructor(arg0: number);
         constructor(arg0: number, arg1: boolean);
+        constructor(arg0: number);
         get current(): T;
     }
 }

@@ -42,15 +42,15 @@ declare module "@package/com/mojang/blaze3d/font" {
         get boldOffset(): number;
     }
     export class $TrueTypeGlyphProvider implements $GlyphProvider {
-        close(): void;
         getSupportedGlyphs(): $IntSet;
         getGlyph(arg0: number): $GlyphInfo;
+        close(): void;
         constructor(arg0: $ByteBuffer, arg1: $FT_Face, arg2: number, arg3: number, arg4: number, arg5: number, arg6: string);
         get supportedGlyphs(): $IntSet;
     }
     export class $SpaceProvider$Definition extends $Record implements $GlyphProviderDefinition {
-        type(): $GlyphProviderType;
         advances(): $Map<number, number>;
+        type(): $GlyphProviderType;
         unpack(): $Either<$GlyphProviderDefinition$Loader, $GlyphProviderDefinition$Reference>;
         static CODEC: $MapCodec<$SpaceProvider$Definition>;
         constructor(arg0: $Map_<number, number>);
@@ -77,9 +77,9 @@ declare module "@package/com/mojang/blaze3d/font" {
     }
     export interface $SheetGlyphInfo {
         getTop(): number;
-        upload(arg0: number, arg1: number): void;
         getLeft(): number;
         getRight(): number;
+        upload(arg0: number, arg1: number): void;
         isColored(): boolean;
         getBottom(): number;
         getPixelWidth(): number;
@@ -102,9 +102,9 @@ declare module "@package/com/mojang/blaze3d/font" {
         static BASELINE: number;
     }
     export interface $GlyphProvider extends $AutoCloseable {
-        close(): void;
         getSupportedGlyphs(): $IntSet;
         getGlyph(arg0: number): $GlyphInfo;
+        close(): void;
         get supportedGlyphs(): $IntSet;
     }
     /**

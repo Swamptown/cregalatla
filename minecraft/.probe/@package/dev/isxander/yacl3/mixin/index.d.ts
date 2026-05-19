@@ -1,5 +1,5 @@
 import { $LinearLayout } from "@package/net/minecraft/client/gui/layouts";
-import { $TabManager, $Tab } from "@package/net/minecraft/client/gui/components/tabs";
+import { $Tab, $TabManager } from "@package/net/minecraft/client/gui/components/tabs";
 import { $TabButton } from "@package/net/minecraft/client/gui/components";
 import { $ImmutableList } from "@package/com/google/common/collect";
 

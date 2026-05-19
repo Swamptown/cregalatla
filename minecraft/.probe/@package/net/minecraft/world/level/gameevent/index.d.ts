@@ -1,5 +1,5 @@
 import { $Level_ } from "@package/net/minecraft/world/level";
-import { $BlockPos_, $Holder_, $Holder$Reference, $Registry, $Holder } from "@package/net/minecraft/core";
+import { $BlockPos_, $Holder_, $Registry, $Holder$Reference, $Holder } from "@package/net/minecraft/core";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $MapCodec, $Codec } from "@package/com/mojang/serialization";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
@@ -14,24 +14,24 @@ export * as vibrations from "@package/net/minecraft/world/level/gameevent/vibrat
 
 declare module "@package/net/minecraft/world/level/gameevent" {
     export class $DynamicGameEventListener<T extends $GameEventListener> {
+        getListener(): T;
+        move(arg0: $ServerLevel): void;
         remove(arg0: $ServerLevel): void;
         add(arg0: $ServerLevel): void;
-        move(arg0: $ServerLevel): void;
-        getListener(): T;
         constructor(arg0: T);
         get listener(): T;
     }
     export class $EuclideanGameEventListenerRegistry implements $GameEventListenerRegistry {
+        visitInRangeListeners(arg0: $Holder_<$GameEvent>, arg1: $Vec3_, arg2: $GameEvent$Context_, arg3: $GameEventListenerRegistry$ListenerVisitor_): boolean;
+        unregister(arg0: $GameEventListener): void;
         isEmpty(): boolean;
         register(arg0: $GameEventListener): void;
-        unregister(arg0: $GameEventListener): void;
-        visitInRangeListeners(arg0: $Holder_<$GameEvent>, arg1: $Vec3_, arg2: $GameEvent$Context_, arg3: $GameEventListenerRegistry$ListenerVisitor_): boolean;
         constructor(arg0: $ServerLevel, arg1: number, arg2: $EuclideanGameEventListenerRegistry$OnEmptyAction_);
         get empty(): boolean;
     }
     export class $EntityPositionSource implements $PositionSource {
-        getType(): $PositionSourceType<$EntityPositionSource>;
         getPosition(arg0: $Level_): ($Vec3) | undefined;
+        getType(): $PositionSourceType<$EntityPositionSource>;
         static CODEC: $MapCodec<$EntityPositionSource>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $EntityPositionSource>;
         constructor(arg0: $Entity, arg1: number);
@@ -78,8 +78,8 @@ declare module "@package/net/minecraft/world/level/gameevent" {
      */
     export type $GameEventListenerRegistry$ListenerVisitor_ = ((arg0: $GameEventListener, arg1: $Vec3) => void);
     export class $BlockPositionSource implements $PositionSource {
-        getType(): $PositionSourceType<$BlockPositionSource>;
         getPosition(arg0: $Level_): ($Vec3) | undefined;
+        getType(): $PositionSourceType<$BlockPositionSource>;
         static CODEC: $MapCodec<$BlockPositionSource>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $BlockPositionSource>;
         constructor(arg0: $BlockPos_);
@@ -89,10 +89,10 @@ declare module "@package/net/minecraft/world/level/gameevent" {
         static NOOP: $GameEventListenerRegistry;
     }
     export interface $GameEventListenerRegistry {
+        visitInRangeListeners(arg0: $Holder_<$GameEvent>, arg1: $Vec3_, arg2: $GameEvent$Context_, arg3: $GameEventListenerRegistry$ListenerVisitor_): boolean;
+        unregister(arg0: $GameEventListener): void;
         isEmpty(): boolean;
         register(arg0: $GameEventListener): void;
-        unregister(arg0: $GameEventListener): void;
-        visitInRangeListeners(arg0: $Holder_<$GameEvent>, arg1: $Vec3_, arg2: $GameEvent$Context_, arg3: $GameEventListenerRegistry$ListenerVisitor_): boolean;
         get empty(): boolean;
     }
     export class $GameEventListener$DeliveryMode extends $Enum<$GameEventListener$DeliveryMode> {
@@ -106,11 +106,11 @@ declare module "@package/net/minecraft/world/level/gameevent" {
      */
     export type $GameEventListener$DeliveryMode_ = "unspecified" | "by_distance";
     export class $GameEvent$Context extends $Record {
-        static of(arg0: $Entity): $GameEvent$Context;
-        static of(arg0: $BlockState_): $GameEvent$Context;
-        static of(arg0: $Entity, arg1: $BlockState_): $GameEvent$Context;
         sourceEntity(): $Entity;
         affectedState(): $BlockState;
+        static of(arg0: $Entity, arg1: $BlockState_): $GameEvent$Context;
+        static of(arg0: $Entity): $GameEvent$Context;
+        static of(arg0: $BlockState_): $GameEvent$Context;
         constructor(arg0: $Entity, arg1: $BlockState_);
     }
     /**
@@ -142,10 +142,10 @@ declare module "@package/net/minecraft/world/level/gameevent" {
      */
     export type $PositionSourceType_<T> = RegistryTypes.PositionSourceType;
     export class $GameEvent$ListenerInfo implements $Comparable<$GameEvent$ListenerInfo> {
+        recipient(): $GameEventListener;
+        context(): $GameEvent$Context;
         compareTo(arg0: $GameEvent$ListenerInfo): number;
         source(): $Vec3;
-        context(): $GameEvent$Context;
-        recipient(): $GameEventListener;
         gameEvent(): $Holder<$GameEvent>;
         constructor(arg0: $Holder_<$GameEvent>, arg1: $Vec3_, arg2: $GameEvent$Context_, arg3: $GameEventListener, arg4: $Vec3_);
     }
@@ -154,13 +154,13 @@ declare module "@package/net/minecraft/world/level/gameevent" {
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $PositionSource>;
     }
     export interface $PositionSource {
-        getType(): $PositionSourceType<$PositionSource>;
         getPosition(arg0: $Level_): ($Vec3) | undefined;
+        getType(): $PositionSourceType<$PositionSource>;
         get type(): $PositionSourceType<$PositionSource>;
     }
     export class $GameEvent extends $Record {
-        static bootstrap(arg0: $Registry<$GameEvent_>): $Holder<$GameEvent>;
         notificationRadius(): number;
+        static bootstrap(arg0: $Registry<$GameEvent_>): $Holder<$GameEvent>;
         static EXPLODE: $Holder$Reference<$GameEvent>;
         static BLOCK_DESTROY: $Holder$Reference<$GameEvent>;
         static BLOCK_OPEN: $Holder$Reference<$GameEvent>;

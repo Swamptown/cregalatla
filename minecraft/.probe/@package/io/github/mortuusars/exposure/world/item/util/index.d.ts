@@ -3,12 +3,12 @@ import { $Item, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/ite
 
 declare module "@package/io/github/mortuusars/exposure/world/item/util" {
     export class $ItemAndStack<T extends $Item> {
+        getItem(): T;
         apply(_function: $BiConsumer_<T, $ItemStack>): $ItemAndStack<T>;
         map<R>(mappingFunction: $BiFunction_<T, $ItemStack, R>): R;
         getItemStack(): $ItemStack;
-        getItem(): T;
         constructor(stack: $ItemStack_);
-        get itemStack(): $ItemStack;
         get item(): T;
+        get itemStack(): $ItemStack;
     }
 }

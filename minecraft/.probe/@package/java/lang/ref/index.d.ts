@@ -4,13 +4,13 @@ declare module "@package/java/lang/ref" {
     export class $Reference<T> {
         get(): T;
         clear(): void;
+        static reachabilityFence(arg0: $Object): void;
         enqueue(): boolean;
         refersTo(arg0: T): boolean;
         /**
          * @deprecated
          */
         isEnqueued(): boolean;
-        static reachabilityFence(arg0: $Object): void;
         get enqueued(): boolean;
     }
     export class $WeakReference<T> extends $Reference<T> {

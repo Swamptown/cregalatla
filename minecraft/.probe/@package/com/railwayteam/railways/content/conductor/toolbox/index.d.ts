@@ -11,13 +11,13 @@ import { $List } from "@package/java/util";
 
 declare module "@package/com/railwayteam/railways/content/conductor/toolbox" {
     export class $MountedToolbox extends $ToolboxBlockEntity {
+        readFromItem(arg0: $ItemStack_): void;
+        getDisplayStack(): $ItemStack;
+        getConnectedPlayers(): $List<$Player>;
         getParent(): $ConductorEntity;
         write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
-        static read(arg0: $ConductorEntity, arg1: $CompoundTag_): $MountedToolbox;
         read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
-        getDisplayStack(): $ItemStack;
-        readFromItem(arg0: $ItemStack_): void;
-        getConnectedPlayers(): $List<$Player>;
+        static read(arg0: $ConductorEntity, arg1: $CompoundTag_): $MountedToolbox;
         getCloneItemStack(): $ItemStack;
         static openMenu(arg0: $ServerPlayer, arg1: $MountedToolbox): void;
         worldPosition: $BlockPos;
@@ -27,9 +27,9 @@ declare module "@package/com/railwayteam/railways/content/conductor/toolbox" {
         static ATTACHMENTS_NBT_KEY: string;
         hasComparators: number;
         constructor(arg0: $ConductorEntity, arg1: $DyeColor_);
-        get parent(): $ConductorEntity;
         get displayStack(): $ItemStack;
         get connectedPlayers(): $List<$Player>;
+        get parent(): $ConductorEntity;
         get cloneItemStack(): $ItemStack;
     }
 }

@@ -21,32 +21,59 @@ import { $Pair, $Couple } from "@package/net/createmod/catnip/data";
 
 declare module "@package/com/simibubi/create/content/trains/graph" {
     export class $TrackEdge {
-        getLength(): number;
-        write(arg0: $DimensionPalette): $CompoundTag;
-        static read(arg0: $TrackNode, arg1: $TrackNode, arg2: $CompoundTag_, arg3: $TrackGraph, arg4: $DimensionPalette): $TrackEdge;
-        getPosition(arg0: $TrackGraph, arg1: number): $Vec3;
-        getDirectionAt(arg0: number): $Vec3;
+        getPositionSmoothed(arg0: $TrackGraph, arg1: number): $Vec3;
+        getNormalSmoothed(arg0: $TrackGraph, arg1: number): $Vec3;
         isTurn(): boolean;
+        isInterDimensional(): boolean;
         incrementT(arg0: number, arg1: number): number;
         canTravelTo(arg0: $TrackEdge): boolean;
         getEdgeData(): $EdgeData;
-        isInterDimensional(): boolean;
+        getDirectionAt(arg0: number): $Vec3;
         getTrackMaterial(): $TrackMaterial;
         getTurn(): $BezierConnection;
-        getPositionSmoothed(arg0: $TrackGraph, arg1: number): $Vec3;
-        getNormalSmoothed(arg0: $TrackGraph, arg1: number): $Vec3;
+        getPosition(arg0: $TrackGraph, arg1: number): $Vec3;
         getIntersection(arg0: $TrackNode, arg1: $TrackNode, arg2: $TrackEdge, arg3: $TrackNode, arg4: $TrackNode): $Collection<number[]>;
+        getLength(): number;
+        write(arg0: $DimensionPalette): $CompoundTag;
+        static read(arg0: $TrackNode, arg1: $TrackNode, arg2: $CompoundTag_, arg3: $TrackGraph, arg4: $DimensionPalette): $TrackEdge;
         getDirection(arg0: boolean): $Vec3;
         getNormal(arg0: $TrackGraph, arg1: number): $Vec3;
         node2: $TrackNode;
         node1: $TrackNode;
         constructor(arg0: $TrackNode, arg1: $TrackNode, arg2: $BezierConnection, arg3: $TrackMaterial);
-        get length(): number;
-        get edgeData(): $EdgeData;
         get interDimensional(): boolean;
+        get edgeData(): $EdgeData;
         get trackMaterial(): $TrackMaterial;
+        get length(): number;
     }
     export class $TrackGraph {
+        transferAll(arg0: $TrackGraph): void;
+        createNodeIfAbsent(arg0: $TrackNodeLocation$DiscoveredLocation): boolean;
+        connectNodes(arg0: $LevelAccessor, arg1: $TrackNodeLocation$DiscoveredLocation, arg2: $TrackNodeLocation$DiscoveredLocation, arg3: $BezierConnection): void;
+        static nextGraphId(): number;
+        static nextNodeId(): number;
+        addNodeIfAbsent(arg0: $TrackNode): boolean;
+        invalidateBounds(): void;
+        disconnectNodes(arg0: $TrackNode, arg1: $TrackNode): void;
+        deferIntersectionUpdate(arg0: $TrackEdge): void;
+        getNodes(): $Set<$TrackNodeLocation>;
+        getConnectionsFrom(arg0: $TrackNode): $Map<$TrackNode, $TrackEdge>;
+        removePoint<T extends $TrackEdgePoint>(arg0: $EdgePointType<T>, arg1: $UUID_): T;
+        loadNode(arg0: $TrackNodeLocation, arg1: number, arg2: $Vec3_): void;
+        distanceToLocationSqr(arg0: $Level_, arg1: $Vec3_): number;
+        addPoint<T extends $TrackEdgePoint>(arg0: $EdgePointType<T>, arg1: T): void;
+        getPoint<T extends $TrackEdgePoint>(arg0: $EdgePointType<T>, arg1: $UUID_): T;
+        putConnection(arg0: $TrackNode, arg1: $TrackNode, arg2: $TrackEdge): boolean;
+        getChecksum(): number;
+        markDirty(): void;
+        findDisconnectedGraphs(arg0: $LevelAccessor, arg1: $Map_<number, $Pair<number, $UUID_>>): $Set<$TrackGraph>;
+        locateNode(arg0: $Level_, arg1: $Vec3_): $TrackNode;
+        locateNode(arg0: $TrackNodeLocation): $TrackNode;
+        tickPoints(arg0: boolean): void;
+        resolveIntersectingEdgeGroups(arg0: $Level_): void;
+        setNetId(arg0: number): void;
+        getPoints<T extends $TrackEdgePoint>(arg0: $EdgePointType<T>): $Collection<T>;
+        getConnection(arg0: $Couple<$TrackNode>): $TrackEdge;
         isEmpty(): boolean;
         getBounds(arg0: $Level_): $TrackGraphBounds;
         write(arg0: $HolderLookup$Provider, arg1: $DimensionPalette): $CompoundTag;
@@ -54,51 +81,24 @@ declare module "@package/com/simibubi/create/content/trains/graph" {
         transfer(arg0: $LevelAccessor, arg1: $TrackNode, arg2: $TrackGraph): void;
         getNode(arg0: number): $TrackNode;
         removeNode(arg0: $LevelAccessor, arg1: $TrackNodeLocation): boolean;
-        addPoint<T extends $TrackEdgePoint>(arg0: $EdgePointType<T>, arg1: T): void;
-        getNodes(): $Set<$TrackNodeLocation>;
-        loadNode(arg0: $TrackNodeLocation, arg1: number, arg2: $Vec3_): void;
-        distanceToLocationSqr(arg0: $Level_, arg1: $Vec3_): number;
-        getConnectionsFrom(arg0: $TrackNode): $Map<$TrackNode, $TrackEdge>;
-        removePoint<T extends $TrackEdgePoint>(arg0: $EdgePointType<T>, arg1: $UUID_): T;
-        putConnection(arg0: $TrackNode, arg1: $TrackNode, arg2: $TrackEdge): boolean;
-        findDisconnectedGraphs(arg0: $LevelAccessor, arg1: $Map_<number, $Pair<number, $UUID_>>): $Set<$TrackGraph>;
-        locateNode(arg0: $Level_, arg1: $Vec3_): $TrackNode;
-        locateNode(arg0: $TrackNodeLocation): $TrackNode;
-        tickPoints(arg0: boolean): void;
-        resolveIntersectingEdgeGroups(arg0: $Level_): void;
-        markDirty(): void;
-        setNetId(arg0: number): void;
-        getPoints<T extends $TrackEdgePoint>(arg0: $EdgePointType<T>): $Collection<T>;
-        getChecksum(): number;
-        getPoint<T extends $TrackEdgePoint>(arg0: $EdgePointType<T>, arg1: $UUID_): T;
-        transferAll(arg0: $TrackGraph): void;
-        createNodeIfAbsent(arg0: $TrackNodeLocation$DiscoveredLocation): boolean;
-        connectNodes(arg0: $LevelAccessor, arg1: $TrackNodeLocation$DiscoveredLocation, arg2: $TrackNodeLocation$DiscoveredLocation, arg3: $BezierConnection): void;
-        static nextNodeId(): number;
-        addNodeIfAbsent(arg0: $TrackNode): boolean;
-        invalidateBounds(): void;
-        static nextGraphId(): number;
-        disconnectNodes(arg0: $TrackNode, arg1: $TrackNode): void;
-        deferIntersectionUpdate(arg0: $TrackEdge): void;
         setId(arg0: $UUID_): void;
         addNode(arg0: $TrackNode): void;
-        getConnection(arg0: $Couple<$TrackNode>): $TrackEdge;
         static graphNetIdGenerator: $AtomicInteger;
         static nodeNetIdGenerator: $AtomicInteger;
         color: $Color;
         id: $UUID;
         constructor();
         constructor(arg0: $UUID_);
-        get empty(): boolean;
         get nodes(): $Set<$TrackNodeLocation>;
-        set netId(value: number);
         get checksum(): number;
+        set netId(value: number);
+        get empty(): boolean;
     }
     export class $TrackEdgeIntersection {
-        write(arg0: $DimensionPalette): $CompoundTag;
-        targets(arg0: $TrackNodeLocation, arg1: $TrackNodeLocation): boolean;
-        static read(arg0: $CompoundTag_, arg1: $DimensionPalette): $TrackEdgeIntersection;
         isNear(arg0: number): boolean;
+        write(arg0: $DimensionPalette): $CompoundTag;
+        static read(arg0: $CompoundTag_, arg1: $DimensionPalette): $TrackEdgeIntersection;
+        targets(arg0: $TrackNodeLocation, arg1: $TrackNodeLocation): boolean;
         groupId: $UUID;
         location: number;
         id: $UUID;
@@ -108,9 +108,9 @@ declare module "@package/com/simibubi/create/content/trains/graph" {
     }
     export class $EdgePointType<T extends $TrackEdgePoint> {
         static register<T extends $TrackEdgePoint>(arg0: $ResourceLocation_, arg1: $Supplier_<T>): $EdgePointType<T>;
+        static read(arg0: $FriendlyByteBuf, arg1: $DimensionPalette): $TrackEdgePoint;
         getId(): $ResourceLocation;
         create(): T;
-        static read(arg0: $FriendlyByteBuf, arg1: $DimensionPalette): $TrackEdgePoint;
         static TYPES: $Map<$ResourceLocation, $EdgePointType<never>>;
         static SIGNAL: $EdgePointType<$SignalBoundary>;
         static STATION: $EdgePointType<$GlobalStation>;
@@ -131,23 +131,23 @@ declare module "@package/com/simibubi/create/content/trains/graph" {
         constructor(arg0: $TrackGraph, arg1: $ResourceKey_<$Level>);
     }
     export class $DimensionPalette {
+        static receive(arg0: $FriendlyByteBuf): $DimensionPalette;
         decode(arg0: number): $ResourceKey<$Level>;
         encode(arg0: $ResourceKey_<$Level>): number;
         write(arg0: $CompoundTag_): void;
         static read(arg0: $CompoundTag_): $DimensionPalette;
-        static receive(arg0: $FriendlyByteBuf): $DimensionPalette;
         send(arg0: $FriendlyByteBuf): void;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $DimensionPalette>;
-        constructor();
         constructor(arg0: $List_<$ResourceKey_<$Level>>);
+        constructor();
     }
     export class $TrackNode {
-        getLocation(): $TrackNodeLocation;
         getNetId(): number;
+        getLocation(): $TrackNodeLocation;
         getNormal(): $Vec3;
         constructor(arg0: $TrackNodeLocation, arg1: number, arg2: $Vec3_);
-        get location(): $TrackNodeLocation;
         get netId(): number;
+        get location(): $TrackNodeLocation;
         get normal(): $Vec3;
     }
     export class $TrackGraphLocation {
@@ -157,51 +157,51 @@ declare module "@package/com/simibubi/create/content/trains/graph" {
         constructor();
     }
     export class $EdgeData implements $ISwitchDisabledEdge {
+        setAutomaticallySelected(): void;
+        getIntersections(): $List<$TrackEdgeIntersection>;
+        hasIntersections(): boolean;
+        removeIntersection(arg0: $TrackGraph, arg1: $UUID_): void;
+        addIntersection(arg0: $TrackGraph, arg1: $UUID_, arg2: number, arg3: $TrackNode, arg4: $TrackNode, arg5: number): void;
+        getGroupAtPosition(arg0: $TrackGraph, arg1: number): $UUID;
+        refreshIntersectingSignalGroups(arg0: $TrackGraph): void;
+        removePoint(arg0: $TrackGraph, arg1: $TrackEdgePoint): void;
+        setSingleSignalGroup(arg0: $TrackGraph, arg1: $UUID_): void;
+        hasSignalBoundaries(): boolean;
+        getSingleSignalGroup(): $UUID;
+        getEffectiveEdgeGroupId(arg0: $TrackGraph): $UUID;
+        addPoint<T extends $TrackEdgePoint>(arg0: $TrackGraph, arg1: $TrackEdgePoint): void;
+        getAutomaticallySelectedPriority(): number;
+        isAutomaticallySelected(): boolean;
+        ackAutomaticSelection(): void;
+        hasPoints(): boolean;
+        getPoints(): $List<$TrackEdgePoint>;
+        setAutomatic(arg0: boolean): void;
         get<T extends $TrackEdgePoint>(arg0: $EdgePointType<T>, arg1: number): T;
         next(arg0: number): $TrackEdgePoint;
         next<T extends $TrackEdgePoint>(arg0: $EdgePointType<T>, arg1: number): T;
         isEnabled(): boolean;
         write(arg0: $DimensionPalette): $CompoundTag;
-        isAutomatic(): boolean;
         static read(arg0: $CompoundTag_, arg1: $TrackEdge, arg2: $TrackGraph, arg3: $DimensionPalette): $EdgeData;
-        addPoint<T extends $TrackEdgePoint>(arg0: $TrackGraph, arg1: $TrackEdgePoint): void;
-        isAutomaticallySelected(): boolean;
-        getAutomaticallySelectedPriority(): number;
-        ackAutomaticSelection(): void;
-        hasPoints(): boolean;
-        setSingleSignalGroup(arg0: $TrackGraph, arg1: $UUID_): void;
-        hasSignalBoundaries(): boolean;
-        getSingleSignalGroup(): $UUID;
-        getEffectiveEdgeGroupId(arg0: $TrackGraph): $UUID;
-        removePoint(arg0: $TrackGraph, arg1: $TrackEdgePoint): void;
-        getPoints(): $List<$TrackEdgePoint>;
-        setAutomatic(arg0: boolean): void;
-        setAutomaticallySelected(): void;
-        getIntersections(): $List<$TrackEdgeIntersection>;
-        removeIntersection(arg0: $TrackGraph, arg1: $UUID_): void;
-        refreshIntersectingSignalGroups(arg0: $TrackGraph): void;
-        hasIntersections(): boolean;
-        addIntersection(arg0: $TrackGraph, arg1: $UUID_, arg2: number, arg3: $TrackNode, arg4: $TrackNode, arg5: number): void;
-        getGroupAtPosition(arg0: $TrackGraph, arg1: number): $UUID;
+        isAutomatic(): boolean;
         setEnabled(arg0: boolean): void;
         static passiveGroup: $UUID;
         constructor(arg0: $TrackEdge);
+        get intersections(): $List<$TrackEdgeIntersection>;
         get automaticallySelectedPriority(): number;
         get points(): $List<$TrackEdgePoint>;
-        get intersections(): $List<$TrackEdgeIntersection>;
     }
     export class $TrackNodeLocation$DiscoveredLocation extends $TrackNodeLocation {
+        materials(arg0: $TrackMaterial, arg1: $TrackMaterial): $TrackNodeLocation$DiscoveredLocation;
+        connectedViaTurn(): boolean;
+        shouldForceNode(): boolean;
+        differentMaterials(): boolean;
+        notInLineWith(arg0: $Vec3_): boolean;
         viaTurn(arg0: $BezierConnection): $TrackNodeLocation$DiscoveredLocation;
         materialA(arg0: $TrackMaterial): $TrackNodeLocation$DiscoveredLocation;
         materialB(arg0: $TrackMaterial): $TrackNodeLocation$DiscoveredLocation;
         withNormal(arg0: $Vec3_): $TrackNodeLocation$DiscoveredLocation;
         withYOffset(arg0: number): $TrackNodeLocation$DiscoveredLocation;
         forceNode(): $TrackNodeLocation$DiscoveredLocation;
-        connectedViaTurn(): boolean;
-        shouldForceNode(): boolean;
-        differentMaterials(): boolean;
-        notInLineWith(arg0: $Vec3_): boolean;
-        materials(arg0: $TrackMaterial, arg1: $TrackMaterial): $TrackNodeLocation$DiscoveredLocation;
         getTurn(): $BezierConnection;
         getDirection(): $Vec3;
         withDirection(arg0: $Vec3_): $TrackNodeLocation$DiscoveredLocation;
@@ -210,28 +210,28 @@ declare module "@package/com/simibubi/create/content/trains/graph" {
         yOffsetPixels: number;
         dimension: $ResourceKey<$Level>;
         constructor(arg0: $Level_, arg1: $Vec3_);
-        constructor(arg0: $ResourceKey_<$Level>, arg1: $Vec3_);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number);
+        constructor(arg0: $ResourceKey_<$Level>, arg1: $Vec3_);
         get turn(): $BezierConnection;
         get direction(): $Vec3;
     }
     export class $TrackNodeLocation extends $Vec3i {
-        getLocation(): $Vec3;
-        in(arg0: $ResourceKey_<$Level>): $TrackNodeLocation;
-        in(arg0: $Level_): $TrackNodeLocation;
-        write(arg0: $DimensionPalette): $CompoundTag;
-        static read(arg0: $CompoundTag_, arg1: $DimensionPalette): $TrackNodeLocation;
         allAdjacent(): $Collection<$BlockPos>;
         equalsIgnoreDim(arg0: $Object): boolean;
-        static receive(arg0: $FriendlyByteBuf, arg1: $DimensionPalette): $TrackNodeLocation;
         getDimension(): $ResourceKey<$Level>;
+        static receive(arg0: $FriendlyByteBuf, arg1: $DimensionPalette): $TrackNodeLocation;
+        getLocation(): $Vec3;
+        write(arg0: $DimensionPalette): $CompoundTag;
+        in(arg0: $ResourceKey_<$Level>): $TrackNodeLocation;
+        in(arg0: $Level_): $TrackNodeLocation;
+        static read(arg0: $CompoundTag_, arg1: $DimensionPalette): $TrackNodeLocation;
         send(arg0: $FriendlyByteBuf, arg1: $DimensionPalette): void;
         static ZERO: $Vec3i;
         static CODEC: $Codec<$Vec3i>;
         yOffsetPixels: number;
         dimension: $ResourceKey<$Level>;
-        constructor(arg0: number, arg1: number, arg2: number);
         constructor(arg0: $Vec3_);
+        constructor(arg0: number, arg1: number, arg2: number);
         get location(): $Vec3;
     }
 }

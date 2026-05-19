@@ -25,16 +25,16 @@ declare module "@package/net/minecraft/util/worldupdate" {
     export class $WorldUpgrader$PoiUpgrader extends $WorldUpgrader$SimpleRegionStorageUpgrader {
     }
     export class $WorldUpgrader {
-        cancel(): void;
-        levels(): $Set<$ResourceKey<$Level>>;
-        isFinished(): boolean;
-        getProgress(): number;
         static resolveRecreateDirectory(arg0: $Path_): $Path;
-        getStatus(): $Component;
         getTotalChunks(): number;
         getConverted(): number;
         getSkipped(): number;
         dimensionProgress(arg0: $ResourceKey_<$Level>): number;
+        isFinished(): boolean;
+        getProgress(): number;
+        levels(): $Set<$ResourceKey<$Level>>;
+        cancel(): void;
+        getStatus(): $Component;
         static STATUS_UPGRADING_ENTITIES: $MutableComponent;
         recreateRegionFiles: boolean;
         static REGEX: $Pattern;
@@ -65,11 +65,11 @@ declare module "@package/net/minecraft/util/worldupdate" {
     /**
      * Values that may be interpreted as {@link $WorldUpgrader$FileToUpgrade}.
      */
-    export type $WorldUpgrader$FileToUpgrade_ = { chunksToUpgrade?: $List_<$ChunkPos>, file?: $RegionFile,  } | [chunksToUpgrade?: $List_<$ChunkPos>, file?: $RegionFile, ];
+    export type $WorldUpgrader$FileToUpgrade_ = { file?: $RegionFile, chunksToUpgrade?: $List_<$ChunkPos>,  } | [file?: $RegionFile, chunksToUpgrade?: $List_<$ChunkPos>, ];
     export class $WorldUpgrader$DimensionToUpgrade<T> extends $Record {
     }
     /**
      * Values that may be interpreted as {@link $WorldUpgrader$DimensionToUpgrade}.
      */
-    export type $WorldUpgrader$DimensionToUpgrade_<T> = { files?: $ListIterator<$WorldUpgrader$FileToUpgrade_>, storage?: any, dimensionKey?: $ResourceKey_<$Level>,  } | [files?: $ListIterator<$WorldUpgrader$FileToUpgrade_>, storage?: any, dimensionKey?: $ResourceKey_<$Level>, ];
+    export type $WorldUpgrader$DimensionToUpgrade_<T> = { dimensionKey?: $ResourceKey_<$Level>, storage?: any, files?: $ListIterator<$WorldUpgrader$FileToUpgrade_>,  } | [dimensionKey?: $ResourceKey_<$Level>, storage?: any, files?: $ListIterator<$WorldUpgrader$FileToUpgrade_>, ];
 }

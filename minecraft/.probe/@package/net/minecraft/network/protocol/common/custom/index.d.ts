@@ -15,20 +15,20 @@ import { $StreamMemberEncoder_, $StreamCodec, $StreamDecoder_ } from "@package/n
 
 declare module "@package/net/minecraft/network/protocol/common/custom" {
     export class $BrainDebugPayload$BrainDump extends $Record {
+        hasPoi(arg0: $BlockPos_): boolean;
+        gossips(): $List<string>;
         name(): string;
         id(): number;
         write(arg0: $FriendlyByteBuf): void;
         pos(): $Vec3;
         path(): $Path;
         xp(): number;
-        hasPoi(arg0: $BlockPos_): boolean;
-        gossips(): $List<string>;
         uuid(): $UUID;
-        inventory(): string;
         activities(): $List<string>;
+        inventory(): string;
+        memories(): $List<string>;
         health(): number;
         profession(): string;
-        memories(): $List<string>;
         pois(): $Set<$BlockPos>;
         maxHealth(): number;
         behaviors(): $List<string>;
@@ -42,7 +42,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $BrainDebugPayload$BrainDump}.
      */
-    export type $BrainDebugPayload$BrainDump_ = { potentialPois?: $Set_<$BlockPos_>, xp?: number, health?: number, behaviors?: $List_<string>, angerLevel?: number, pos?: $Vec3_, gossips?: $List_<string>, pois?: $Set_<$BlockPos_>, profession?: string, wantsGolem?: boolean, activities?: $List_<string>, name?: string, maxHealth?: number, uuid?: $UUID_, inventory?: string, path?: $Path, memories?: $List_<string>, id?: number,  } | [potentialPois?: $Set_<$BlockPos_>, xp?: number, health?: number, behaviors?: $List_<string>, angerLevel?: number, pos?: $Vec3_, gossips?: $List_<string>, pois?: $Set_<$BlockPos_>, profession?: string, wantsGolem?: boolean, activities?: $List_<string>, name?: string, maxHealth?: number, uuid?: $UUID_, inventory?: string, path?: $Path, memories?: $List_<string>, id?: number, ];
+    export type $BrainDebugPayload$BrainDump_ = { id?: number, memories?: $List_<string>, path?: $Path, inventory?: string, uuid?: $UUID_, maxHealth?: number, name?: string, activities?: $List_<string>, wantsGolem?: boolean, profession?: string, pois?: $Set_<$BlockPos_>, gossips?: $List_<string>, pos?: $Vec3_, angerLevel?: number, behaviors?: $List_<string>, health?: number, xp?: number, potentialPois?: $Set_<$BlockPos_>,  } | [id?: number, memories?: $List_<string>, path?: $Path, inventory?: string, uuid?: $UUID_, maxHealth?: number, name?: string, activities?: $List_<string>, wantsGolem?: boolean, profession?: string, pois?: $Set_<$BlockPos_>, gossips?: $List_<string>, pos?: $Vec3_, angerLevel?: number, behaviors?: $List_<string>, health?: number, xp?: number, potentialPois?: $Set_<$BlockPos_>, ];
     export class $BrainDebugPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$BrainDebugPayload>;
         brainDump(): $BrainDebugPayload$BrainDump;
@@ -70,12 +70,12 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
      */
     export type $RaidsDebugPayload_ = { raidCenters?: $List_<$BlockPos_>,  } | [raidCenters?: $List_<$BlockPos_>, ];
     export class $BeeDebugPayload$BeeInfo extends $Record {
+        hasHive(arg0: $BlockPos_): boolean;
+        hivePos(): $BlockPos;
         id(): number;
         write(arg0: $FriendlyByteBuf): void;
         pos(): $Vec3;
         path(): $Path;
-        hivePos(): $BlockPos;
-        hasHive(arg0: $BlockPos_): boolean;
         uuid(): $UUID;
         goals(): $Set<string>;
         flowerPos(): $BlockPos;
@@ -88,7 +88,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $BeeDebugPayload$BeeInfo}.
      */
-    export type $BeeDebugPayload$BeeInfo_ = { blacklistedHives?: $List_<$BlockPos_>, id?: number, path?: $Path, uuid?: $UUID_, goals?: $Set_<string>, travelTicks?: number, flowerPos?: $BlockPos_, pos?: $Vec3_, hivePos?: $BlockPos_,  } | [blacklistedHives?: $List_<$BlockPos_>, id?: number, path?: $Path, uuid?: $UUID_, goals?: $Set_<string>, travelTicks?: number, flowerPos?: $BlockPos_, pos?: $Vec3_, hivePos?: $BlockPos_, ];
+    export type $BeeDebugPayload$BeeInfo_ = { hivePos?: $BlockPos_, pos?: $Vec3_, flowerPos?: $BlockPos_, travelTicks?: number, goals?: $Set_<string>, uuid?: $UUID_, path?: $Path, id?: number, blacklistedHives?: $List_<$BlockPos_>,  } | [hivePos?: $BlockPos_, pos?: $Vec3_, flowerPos?: $BlockPos_, travelTicks?: number, goals?: $Set_<string>, uuid?: $UUID_, path?: $Path, id?: number, blacklistedHives?: $List_<$BlockPos_>, ];
     export class $PathfindingDebugPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$PathfindingDebugPayload>;
         path(): $Path;
@@ -103,7 +103,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $PathfindingDebugPayload}.
      */
-    export type $PathfindingDebugPayload_ = { path?: $Path, maxNodeDistance?: number, entityId?: number,  } | [path?: $Path, maxNodeDistance?: number, entityId?: number, ];
+    export type $PathfindingDebugPayload_ = { entityId?: number, maxNodeDistance?: number, path?: $Path,  } | [entityId?: number, maxNodeDistance?: number, path?: $Path, ];
     export class $WorldGenAttemptDebugPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$WorldGenAttemptDebugPayload>;
         scale(): number;
@@ -121,7 +121,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $WorldGenAttemptDebugPayload}.
      */
-    export type $WorldGenAttemptDebugPayload_ = { green?: number, pos?: $BlockPos_, red?: number, blue?: number, scale?: number, alpha?: number,  } | [green?: number, pos?: $BlockPos_, red?: number, blue?: number, scale?: number, alpha?: number, ];
+    export type $WorldGenAttemptDebugPayload_ = { alpha?: number, scale?: number, blue?: number, red?: number, pos?: $BlockPos_, green?: number,  } | [alpha?: number, scale?: number, blue?: number, red?: number, pos?: $BlockPos_, green?: number, ];
     export class $HiveDebugPayload$HiveInfo extends $Record {
         write(arg0: $FriendlyByteBuf): void;
         pos(): $BlockPos;
@@ -135,7 +135,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $HiveDebugPayload$HiveInfo}.
      */
-    export type $HiveDebugPayload$HiveInfo_ = { sedated?: boolean, pos?: $BlockPos_, occupantCount?: number, hiveType?: string, honeyLevel?: number,  } | [sedated?: boolean, pos?: $BlockPos_, occupantCount?: number, hiveType?: string, honeyLevel?: number, ];
+    export type $HiveDebugPayload$HiveInfo_ = { hiveType?: string, occupantCount?: number, pos?: $BlockPos_, sedated?: boolean, honeyLevel?: number,  } | [hiveType?: string, occupantCount?: number, pos?: $BlockPos_, sedated?: boolean, honeyLevel?: number, ];
     export class $BreezeDebugPayload$BreezeInfo extends $Record {
         id(): number;
         write(arg0: $FriendlyByteBuf): void;
@@ -149,7 +149,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $BreezeDebugPayload$BreezeInfo}.
      */
-    export type $BreezeDebugPayload$BreezeInfo_ = { id?: number, uuid?: $UUID_, jumpTarget?: $BlockPos_, attackTarget?: number,  } | [id?: number, uuid?: $UUID_, jumpTarget?: $BlockPos_, attackTarget?: number, ];
+    export type $BreezeDebugPayload$BreezeInfo_ = { attackTarget?: number, jumpTarget?: $BlockPos_, uuid?: $UUID_, id?: number,  } | [attackTarget?: number, jumpTarget?: $BlockPos_, uuid?: $UUID_, id?: number, ];
     export class $GameTestClearMarkersDebugPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$GameTestClearMarkersDebugPayload>;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
@@ -175,7 +175,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $VillageSectionsDebugPayload}.
      */
-    export type $VillageSectionsDebugPayload_ = { villageChunks?: $Set_<$SectionPos>, notVillageChunks?: $Set_<$SectionPos>,  } | [villageChunks?: $Set_<$SectionPos>, notVillageChunks?: $Set_<$SectionPos>, ];
+    export type $VillageSectionsDebugPayload_ = { notVillageChunks?: $Set_<$SectionPos>, villageChunks?: $Set_<$SectionPos>,  } | [notVillageChunks?: $Set_<$SectionPos>, villageChunks?: $Set_<$SectionPos>, ];
     export class $BeeDebugPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$BeeDebugPayload>;
         beeInfo(): $BeeDebugPayload$BeeInfo;
@@ -190,9 +190,9 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
      */
     export type $BeeDebugPayload_ = { beeInfo?: $BeeDebugPayload$BeeInfo_,  } | [beeInfo?: $BeeDebugPayload$BeeInfo_, ];
     export class $StructuresDebugPayload$PieceInfo extends $Record {
-        write(arg0: $FriendlyByteBuf): void;
         isStart(): boolean;
         boundingBox(): $BoundingBox;
+        write(arg0: $FriendlyByteBuf): void;
         constructor(arg0: $FriendlyByteBuf);
         constructor(arg0: $BoundingBox, arg1: boolean);
         get start(): boolean;
@@ -200,12 +200,12 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $StructuresDebugPayload$PieceInfo}.
      */
-    export type $StructuresDebugPayload$PieceInfo_ = { boundingBox?: $BoundingBox, isStart?: boolean,  } | [boundingBox?: $BoundingBox, isStart?: boolean, ];
+    export type $StructuresDebugPayload$PieceInfo_ = { isStart?: boolean, boundingBox?: $BoundingBox,  } | [isStart?: boolean, boundingBox?: $BoundingBox, ];
     export class $GameTestAddMarkerDebugPayload extends $Record implements $CustomPacketPayload {
-        type(): $CustomPacketPayload$Type<$GameTestAddMarkerDebugPayload>;
-        pos(): $BlockPos;
-        color(): number;
         text(): string;
+        type(): $CustomPacketPayload$Type<$GameTestAddMarkerDebugPayload>;
+        color(): number;
+        pos(): $BlockPos;
         durationMs(): number;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
@@ -216,7 +216,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $GameTestAddMarkerDebugPayload}.
      */
-    export type $GameTestAddMarkerDebugPayload_ = { color?: number, pos?: $BlockPos_, text?: string, durationMs?: number,  } | [color?: number, pos?: $BlockPos_, text?: string, durationMs?: number, ];
+    export type $GameTestAddMarkerDebugPayload_ = { text?: string, pos?: $BlockPos_, color?: number, durationMs?: number,  } | [text?: string, pos?: $BlockPos_, color?: number, durationMs?: number, ];
     export class $CustomPacketPayload$TypeAndCodec<B extends $FriendlyByteBuf, T extends $CustomPacketPayload> extends $Record {
         type(): $CustomPacketPayload$Type<T>;
         codec(): $StreamCodec<B, T>;
@@ -225,7 +225,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $CustomPacketPayload$TypeAndCodec}.
      */
-    export type $CustomPacketPayload$TypeAndCodec_<B, T> = { codec?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>, type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>,  } | [codec?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>, type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, ];
+    export type $CustomPacketPayload$TypeAndCodec_<B, T> = { type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, codec?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>,  } | [type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, codec?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>, ];
     export class $NeighborUpdatesDebugPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$NeighborUpdatesDebugPayload>;
         time(): number;
@@ -241,10 +241,10 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
      */
     export type $NeighborUpdatesDebugPayload_ = { pos?: $BlockPos_, time?: number,  } | [pos?: $BlockPos_, time?: number, ];
     export class $StructuresDebugPayload extends $Record implements $CustomPacketPayload {
-        type(): $CustomPacketPayload$Type<$StructuresDebugPayload>;
         static writeBoundingBox(arg0: $FriendlyByteBuf, arg1: $BoundingBox): void;
         static readBoundingBox(arg0: $FriendlyByteBuf): $BoundingBox;
         dimension(): $ResourceKey<$Level>;
+        type(): $CustomPacketPayload$Type<$StructuresDebugPayload>;
         pieces(): $List<$StructuresDebugPayload$PieceInfo>;
         mainBB(): $BoundingBox;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
@@ -256,7 +256,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $StructuresDebugPayload}.
      */
-    export type $StructuresDebugPayload_ = { dimension?: $ResourceKey_<$Level>, mainBB?: $BoundingBox, pieces?: $List_<$StructuresDebugPayload$PieceInfo_>,  } | [dimension?: $ResourceKey_<$Level>, mainBB?: $BoundingBox, pieces?: $List_<$StructuresDebugPayload$PieceInfo_>, ];
+    export type $StructuresDebugPayload_ = { pieces?: $List_<$StructuresDebugPayload$PieceInfo_>, mainBB?: $BoundingBox, dimension?: $ResourceKey_<$Level>,  } | [pieces?: $List_<$StructuresDebugPayload$PieceInfo_>, mainBB?: $BoundingBox, dimension?: $ResourceKey_<$Level>, ];
     export class $PoiAddedDebugPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$PoiAddedDebugPayload>;
         pos(): $BlockPos;
@@ -271,7 +271,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $PoiAddedDebugPayload}.
      */
-    export type $PoiAddedDebugPayload_ = { pos?: $BlockPos_, poiType?: string, freeTicketCount?: number,  } | [pos?: $BlockPos_, poiType?: string, freeTicketCount?: number, ];
+    export type $PoiAddedDebugPayload_ = { freeTicketCount?: number, poiType?: string, pos?: $BlockPos_,  } | [freeTicketCount?: number, poiType?: string, pos?: $BlockPos_, ];
     export class $PoiTicketCountDebugPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$PoiTicketCountDebugPayload>;
         pos(): $BlockPos;
@@ -285,7 +285,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $PoiTicketCountDebugPayload}.
      */
-    export type $PoiTicketCountDebugPayload_ = { freeTicketCount?: number, pos?: $BlockPos_,  } | [freeTicketCount?: number, pos?: $BlockPos_, ];
+    export type $PoiTicketCountDebugPayload_ = { pos?: $BlockPos_, freeTicketCount?: number,  } | [pos?: $BlockPos_, freeTicketCount?: number, ];
     export class $CustomPacketPayload$Type<T extends $CustomPacketPayload> extends $Record {
         id(): $ResourceLocation;
         constructor(id: $ResourceLocation_);
@@ -346,7 +346,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $GoalDebugPayload}.
      */
-    export type $GoalDebugPayload_ = { pos?: $BlockPos_, entityId?: number, goals?: $List_<$GoalDebugPayload$DebugGoal_>,  } | [pos?: $BlockPos_, entityId?: number, goals?: $List_<$GoalDebugPayload$DebugGoal_>, ];
+    export type $GoalDebugPayload_ = { goals?: $List_<$GoalDebugPayload$DebugGoal_>, entityId?: number, pos?: $BlockPos_,  } | [goals?: $List_<$GoalDebugPayload$DebugGoal_>, entityId?: number, pos?: $BlockPos_, ];
     export class $GameEventDebugPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$GameEventDebugPayload>;
         pos(): $Vec3;
@@ -360,7 +360,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $GameEventDebugPayload}.
      */
-    export type $GameEventDebugPayload_ = { gameEventType?: $ResourceKey_<$GameEvent>, pos?: $Vec3_,  } | [gameEventType?: $ResourceKey_<$GameEvent>, pos?: $Vec3_, ];
+    export type $GameEventDebugPayload_ = { pos?: $Vec3_, gameEventType?: $ResourceKey_<$GameEvent>,  } | [pos?: $Vec3_, gameEventType?: $ResourceKey_<$GameEvent>, ];
     export class $BrandPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$BrandPayload>;
         brand(): string;
@@ -386,7 +386,7 @@ declare module "@package/net/minecraft/network/protocol/common/custom" {
     /**
      * Values that may be interpreted as {@link $GoalDebugPayload$DebugGoal}.
      */
-    export type $GoalDebugPayload$DebugGoal_ = { name?: string, priority?: number, isRunning?: boolean,  } | [name?: string, priority?: number, isRunning?: boolean, ];
+    export type $GoalDebugPayload$DebugGoal_ = { isRunning?: boolean, priority?: number, name?: string,  } | [isRunning?: boolean, priority?: number, name?: string, ];
     export class $GameEventListenerDebugPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$GameEventListenerDebugPayload>;
         listenerPos(): $PositionSource;

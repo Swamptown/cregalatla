@@ -12,9 +12,9 @@ import { $UIElementProvider_ } from "@package/com/lowdragmc/lowdraglib2/gui/ui/u
 
 declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/resource" {
     export class $ResourceContainer<T> extends $UIElement {
-        setOnResourceSelect(arg0: $Consumer_<$CompoundTag>): void;
         getSelectedProvider(): $IResourceProvider<$CompoundTag>;
         selectProvider(arg0: $IResourceProvider<$CompoundTag_>): void;
+        setOnResourceSelect(arg0: $Consumer_<$CompoundTag>): void;
         loadResource(): void;
         editor: $Editor;
         static CODEC: $Codec<$UIElement>;
@@ -24,10 +24,22 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/resource" {
         providerContainer: $UIElement;
         providerList: $ScrollerView;
         constructor(arg0: $ResourceInstance<$CompoundTag_>, arg1: $Editor);
-        set onResourceSelect(value: $Consumer_<$CompoundTag>);
         get selectedProvider(): $IResourceProvider<$CompoundTag>;
+        set onResourceSelect(value: $Consumer_<$CompoundTag>);
     }
     export class $ResourceProviderContainer<T> extends $UIElement {
+        setAddDefault(arg0: $Supplier_<$CompoundTag>): $ResourceProviderContainer<$CompoundTag>;
+        setCanRemove(arg0: $Predicate_<$IResourcePath>): $ResourceProviderContainer<$CompoundTag>;
+        removeResource(arg0: $IResourcePath, arg1: boolean): void;
+        selectResource(arg0: $IResourcePath): void;
+        setUiWidth(arg0: number): void;
+        reloadResourceContainer(): void;
+        reloadSpecificResource(arg0: $IResourcePath): void;
+        setDisplayMode(arg0: $Resource$DisplayMode_): void;
+        addNewResource(arg0: $CompoundTag_): void;
+        appendResourceUI(arg0: $IResourcePath): void;
+        renameResource(arg0: $IResourcePath): void;
+        editResource(arg0: $IResourcePath): void;
         markResourceDirty(arg0: $IResourcePath): void;
         setUiSupplier(arg0: $UIElementProvider_<$IResourcePath>): $ResourceProviderContainer<$CompoundTag>;
         setCanRename(arg0: $Predicate_<$IResourcePath>): $ResourceProviderContainer<$CompoundTag>;
@@ -41,18 +53,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/resource" {
         getDirtyResources(): $HashSet<$IResourcePath>;
         getEditor(): $Editor;
         setEditor(arg0: $Editor): $ResourceProviderContainer<$CompoundTag>;
-        selectResource(arg0: $IResourcePath): void;
-        setUiWidth(arg0: number): void;
-        reloadResourceContainer(): void;
-        reloadSpecificResource(arg0: $IResourcePath): void;
-        setDisplayMode(arg0: $Resource$DisplayMode_): void;
-        addNewResource(arg0: $CompoundTag_): void;
-        appendResourceUI(arg0: $IResourcePath): void;
-        renameResource(arg0: $IResourcePath): void;
-        editResource(arg0: $IResourcePath): void;
-        setAddDefault(arg0: $Supplier_<$CompoundTag>): $ResourceProviderContainer<$CompoundTag>;
-        setCanRemove(arg0: $Predicate_<$IResourcePath>): $ResourceProviderContainer<$CompoundTag>;
-        removeResource(arg0: $IResourcePath, arg1: boolean): void;
         getSelected(): $IResourcePath;
         copyResource(arg0: $IResourcePath): void;
         static CODEC: $Codec<$UIElement>;
@@ -60,6 +60,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/resource" {
         scrollerView: $ScrollerView;
         resourceProvider: $IResourceProvider<$CompoundTag>;
         constructor(arg0: $IResourceProvider<$CompoundTag_>);
+        set addDefault(value: $Supplier_<$CompoundTag>);
+        set canRemove(value: $Predicate_<$IResourcePath>);
+        set uiWidth(value: number);
+        set displayMode(value: $Resource$DisplayMode_);
         set uiSupplier(value: $UIElementProvider_<$IResourcePath>);
         set canRename(value: $Predicate_<$IResourcePath>);
         set canEdit(value: $Predicate_<$IResourcePath>);
@@ -70,10 +74,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/resource" {
         set onMenu(value: $BiConsumer_<$ResourceProviderContainer<$CompoundTag>, $TreeBuilder$Menu>);
         set onResourceSelect(value: $Consumer_<$CompoundTag>);
         get dirtyResources(): $HashSet<$IResourcePath>;
-        set uiWidth(value: number);
-        set displayMode(value: $Resource$DisplayMode_);
-        set addDefault(value: $Supplier_<$CompoundTag>);
-        set canRemove(value: $Predicate_<$IResourcePath>);
         get selected(): $IResourcePath;
     }
 }

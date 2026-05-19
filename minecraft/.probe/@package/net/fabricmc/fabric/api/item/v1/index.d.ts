@@ -51,9 +51,9 @@ declare module "@package/net/fabricmc/fabric/api/item/v1" {
     export class $FabricComponentMapBuilder {
     }
     export interface $FabricComponentMapBuilder {
-        getOrDefault<T>(arg0: $DataComponentType_<T>, arg1: T): T;
         getOrEmpty<T>(arg0: $DataComponentType_<$List_<T>>): $List<T>;
         getOrCreate<T>(arg0: $DataComponentType_<T>, arg1: $Supplier_<T>): T;
+        getOrDefault<T>(arg0: $DataComponentType_<T>, arg1: T): T;
     }
     export class $FabricItemStack {
     }

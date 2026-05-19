@@ -7,20 +7,20 @@ declare module "@package/net/minecraft/client/multiplayer/resolver" {
         static from(arg0: $InetSocketAddress): $ResolvedServerAddress;
     }
     export interface $ResolvedServerAddress {
-        getPort(): number;
-        getHostName(): string;
-        asInetSocketAddress(): $InetSocketAddress;
         getHostIp(): string;
-        get port(): number;
-        get hostName(): string;
+        asInetSocketAddress(): $InetSocketAddress;
+        getHostName(): string;
+        getPort(): number;
         get hostIp(): string;
+        get hostName(): string;
+        get port(): number;
     }
     export class $AddressCheck {
         static createFromService(): $AddressCheck;
     }
     export interface $AddressCheck {
-        isAllowed(arg0: $ResolvedServerAddress): boolean;
         isAllowed(arg0: $ServerAddress): boolean;
+        isAllowed(arg0: $ResolvedServerAddress): boolean;
     }
     export class $ServerNameResolver {
         resolveAddress(arg0: $ServerAddress): ($ResolvedServerAddress) | undefined;
@@ -51,13 +51,13 @@ declare module "@package/net/minecraft/client/multiplayer/resolver" {
      */
     export type $ServerAddressResolver_ = ((arg0: $ServerAddress) => ($ResolvedServerAddress) | undefined);
     export class $ServerAddress implements $TicketSmuggler {
-        getHost(): string;
-        getPort(): number;
         static isValidAddress(arg0: string): boolean;
-        static parsePort(arg0: string): number;
         e4mc$setSmuggledTicket(ticket: string): void;
         e4mc$getSmuggledTicket(): string;
+        static parsePort(arg0: string): number;
         static parseString(arg0: string): $ServerAddress;
+        getHost(): string;
+        getPort(): number;
         constructor(arg0: string, arg1: number);
         get host(): string;
         get port(): number;

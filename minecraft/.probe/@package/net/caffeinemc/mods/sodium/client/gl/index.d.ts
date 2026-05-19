@@ -9,7 +9,7 @@ export * as sync from "@package/net/caffeinemc/mods/sodium/client/gl/sync";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/gl" {
     export class $GlObject {
-        handle(): number;
         invalidateHandle(): void;
+        handle(): number;
     }
 }

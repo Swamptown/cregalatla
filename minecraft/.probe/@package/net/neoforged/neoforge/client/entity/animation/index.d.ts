@@ -5,9 +5,9 @@ export * as json from "@package/net/neoforged/neoforge/client/entity/animation/j
 
 declare module "@package/net/neoforged/neoforge/client/entity/animation" {
     export class $AnimationTarget extends $Record {
-        channelTarget(): $AnimationChannel$Target;
         keyframeTarget(): $AnimationKeyframeTarget;
         inverseKeyframeTarget(): $AnimationKeyframeTarget;
+        channelTarget(): $AnimationChannel$Target;
         static ROTATION: $AnimationTarget;
         static POSITION: $AnimationTarget;
         static SCALE: $AnimationTarget;
@@ -16,7 +16,7 @@ declare module "@package/net/neoforged/neoforge/client/entity/animation" {
     /**
      * Values that may be interpreted as {@link $AnimationTarget}.
      */
-    export type $AnimationTarget_ = { channelTarget?: $AnimationChannel$Target_, keyframeTarget?: $AnimationKeyframeTarget_, inverseKeyframeTarget?: $AnimationKeyframeTarget_,  } | [channelTarget?: $AnimationChannel$Target_, keyframeTarget?: $AnimationKeyframeTarget_, inverseKeyframeTarget?: $AnimationKeyframeTarget_, ];
+    export type $AnimationTarget_ = { inverseKeyframeTarget?: $AnimationKeyframeTarget_, keyframeTarget?: $AnimationKeyframeTarget_, channelTarget?: $AnimationChannel$Target_,  } | [inverseKeyframeTarget?: $AnimationKeyframeTarget_, keyframeTarget?: $AnimationKeyframeTarget_, channelTarget?: $AnimationChannel$Target_, ];
     export class $AnimationKeyframeTarget {
     }
     export interface $AnimationKeyframeTarget {

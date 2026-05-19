@@ -15,20 +15,20 @@ import { $ItemAbility_, $ItemAbility } from "@package/net/neoforged/neoforge/com
 
 declare module "@package/net/neoforged/neoforge/common/loot" {
     export class $CanItemPerformAbility implements $LootItemCondition, $CanItemPerformAbilityAccess {
+        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         test(arg0: $LootContext): boolean;
         getType(): $LootItemConditionType;
-        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         static canItemPerformAbility(arg0: $ItemAbility_): $LootItemCondition$Builder;
         validate(arg0: $ValidationContext): void;
-        or(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
         negate(): $Predicate<$LootContext>;
         and(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
+        or(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
         getAbility(): $ItemAbility;
         static CODEC: $MapCodec<$CanItemPerformAbility>;
         static LOOT_CONDITION_TYPE: $LootItemConditionType;
         constructor(arg0: $ItemAbility_);
-        get type(): $LootItemConditionType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
+        get type(): $LootItemConditionType;
         get ability(): $ItemAbility;
     }
     export class $LootModifier implements $IGlobalLootModifier {
@@ -47,11 +47,11 @@ declare module "@package/net/neoforged/neoforge/common/loot" {
         test(arg0: $LootContext): boolean;
         static builder(arg0: $ResourceLocation_): $LootTableIdCondition$Builder;
         getType(): $LootItemConditionType;
-        validate(arg0: $ValidationContext): void;
         getReferencedContextParams(): $Set<$LootContextParam<never>>;
-        or(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
+        validate(arg0: $ValidationContext): void;
         negate(): $Predicate<$LootContext>;
         and(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
+        or(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
         static UNKNOWN_LOOT_TABLE: $ResourceLocation;
         static CODEC: $MapCodec<$LootTableIdCondition>;
         static LOOT_TABLE_ID: $LootItemConditionType;
@@ -65,8 +65,8 @@ declare module "@package/net/neoforged/neoforge/common/loot" {
     }
     export class $LootTableIdCondition$Builder implements $LootItemCondition$Builder {
         build(): $LootItemCondition;
-        or(arg0: $LootItemCondition$Builder_): $AnyOfCondition$Builder;
         and(arg0: $LootItemCondition$Builder_): $AllOfCondition$Builder;
+        or(arg0: $LootItemCondition$Builder_): $AnyOfCondition$Builder;
         invert(): $LootItemCondition$Builder;
         constructor(arg0: $ResourceLocation_);
     }

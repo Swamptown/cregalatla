@@ -3,16 +3,16 @@ import { $Vec3, $Vec3_ } from "@package/net/minecraft/world/phys";
 
 declare module "@package/com/simibubi/create/foundation/collision" {
     export class $Matrix3d implements $Matrix3dAccessor {
+        asIdentity(): $Matrix3d;
+        asXRotation(arg0: number): $Matrix3d;
+        asZRotation(arg0: number): $Matrix3d;
+        transformTransposed(arg0: number, arg1: number, arg2: number): $Vec3;
+        transformTransposed(arg0: $Vec3_): $Vec3;
+        asYRotation(arg0: number): $Matrix3d;
         scale(arg0: number): $Matrix3d;
         transform(arg0: number, arg1: number, arg2: number): $Vec3;
         transform(arg0: $Vec3_): $Vec3;
         multiply(arg0: $Matrix3d): $Matrix3d;
-        asIdentity(): $Matrix3d;
-        asXRotation(arg0: number): $Matrix3d;
-        asZRotation(arg0: number): $Matrix3d;
-        transformTransposed(arg0: $Vec3_): $Vec3;
-        transformTransposed(arg0: number, arg1: number, arg2: number): $Vec3;
-        asYRotation(arg0: number): $Matrix3d;
         getM00(): number;
         setM00(arg0: number): void;
         getM01(): number;

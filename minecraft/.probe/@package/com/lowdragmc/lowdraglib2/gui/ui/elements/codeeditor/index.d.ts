@@ -11,13 +11,12 @@ export * as language from "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/co
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor" {
     export class $CodeEditor extends $TextArea {
-        setValue(arg0: string[], arg1: boolean): $CodeEditor;
-        getLanguage(): $ILanguageDefinition;
-        setLanguage(arg0: $ILanguageDefinition): $CodeEditor;
         getStyledLines(): $List<$StyledLine>;
         getSyntaxParser(): $SyntaxParser;
         getStyleManager(): $StyleManager;
         setStyleManager(arg0: $StyleManager): $CodeEditor;
+        setLanguage(arg0: $ILanguageDefinition): $CodeEditor;
+        getLanguage(): $ILanguageDefinition;
         contentView: $UIElement;
         verticalScroller: $Scroller;
         static CODEC: $Codec<$UIElement>;
@@ -28,9 +27,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor" {
         get syntaxParser(): $SyntaxParser;
     }
     export class $StyledLine extends $Record {
-        line(): number;
-        text(): $List<$StyledText>;
         getWidth(arg0: $Font, arg1: $Style): number;
+        text(): $List<$StyledText>;
+        line(): number;
         constructor(line: number, text: $List_<$StyledText_>);
     }
     /**

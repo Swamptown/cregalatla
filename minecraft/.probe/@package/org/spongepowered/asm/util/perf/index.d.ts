@@ -25,35 +25,35 @@ declare module "@package/org/spongepowered/asm/util/perf" {
         get sections(): $Collection<$Profiler$Section>;
     }
     export class $Profiler$Section {
-        getName(): string;
-        next(arg0: string): $Profiler$Section;
-        end(): $Profiler$Section;
-        getCount(): number;
-        getTime(): number;
-        getSeconds(): number;
+        getInfo(): string;
         getTotalSeconds(): number;
         isRoot(): boolean;
+        getSeconds(): number;
+        getName(): string;
+        end(): $Profiler$Section;
+        next(arg0: string): $Profiler$Section;
+        getCount(): number;
+        getTime(): number;
+        getAverageTime(): number;
+        setInfo(arg0: string): void;
         getBaseName(): string;
         getTimes(): number[];
         getTotalAverageTime(): number;
         getTotalCount(): number;
         getTotalTime(): number;
         isFine(): boolean;
-        getAverageTime(): number;
-        setInfo(arg0: string): void;
-        getInfo(): string;
+        get totalSeconds(): number;
+        get root(): boolean;
+        get seconds(): number;
         get name(): string;
         get count(): number;
         get time(): number;
-        get seconds(): number;
-        get totalSeconds(): number;
-        get root(): boolean;
+        get averageTime(): number;
         get baseName(): string;
         get times(): number[];
         get totalAverageTime(): number;
         get totalCount(): number;
         get totalTime(): number;
         get fine(): boolean;
-        get averageTime(): number;
     }
 }

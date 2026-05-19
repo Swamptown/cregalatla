@@ -11,14 +11,14 @@ export * as factory from "@package/com/lowdragmc/lowdraglib2/gui/factory";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui" {
     export class $ColorPattern extends $Enum<$ColorPattern> {
-        static values(): $ColorPattern[];
-        static valueOf(arg0: string): $ColorPattern;
         rectTexture(): $ColorRectTexture;
-        static generateRainbowColor(arg0: number): number;
         static generateRainbowColor(): number;
+        static generateRainbowColor(arg0: number): number;
         borderTexture(arg0: number): $ColorBorderTexture;
         static rainbowRectTexture(arg0: number): $ColorBorderTexture;
         static rainbowRectTexture(): $ColorRectTexture;
+        static values(): $ColorPattern[];
+        static valueOf(arg0: string): $ColorPattern;
         colorName: string;
         static GRAY: $ColorPattern;
         color: number;

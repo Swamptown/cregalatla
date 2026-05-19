@@ -57,29 +57,29 @@ declare module "@package/net/minecraft/client/sounds" {
      */
     export type $LoopingAudioStream$AudioStreamProvider_ = ((arg0: $InputStream) => $AudioStream);
     export class $SoundManager extends $SimplePreparableReloadListener<$SoundManager$Preparations> implements $SoundManagerAccessor, $IMixinSoundManager, $IdentifiableResourceReloadListener {
-        apply(arg0: $SoundManager$Preparations, arg1: $ResourceManager, arg2: $ProfilerFiller): void;
-        stop(arg0: $SoundInstance): void;
-        stop(): void;
-        stop(arg0: $ResourceLocation_, arg1: $SoundSource_): void;
-        destroy(): void;
-        isActive(arg0: $SoundInstance): boolean;
-        tick(arg0: boolean): void;
-        reload(): void;
-        getListenerTransform(): $ListenerTransform;
-        static validateSoundResource(arg0: $Sound, arg1: $ResourceLocation_, arg2: $ResourceProvider_): boolean;
         getDebugString(): string;
         getAvailableSounds(): $Collection<$ResourceLocation>;
         getSoundEvent(arg0: $ResourceLocation_): $WeighedSoundEvents;
+        getListenerTransform(): $ListenerTransform;
+        static validateSoundResource(arg0: $Sound, arg1: $ResourceLocation_, arg2: $ResourceProvider_): boolean;
+        reload(): void;
+        tick(arg0: boolean): void;
+        apply(arg0: $SoundManager$Preparations, arg1: $ResourceManager, arg2: $ProfilerFiller): void;
+        stop(arg0: $ResourceLocation_, arg1: $SoundSource_): void;
+        stop(arg0: $SoundInstance): void;
+        stop(): void;
+        resume(): void;
+        destroy(): void;
+        isActive(arg0: $SoundInstance): boolean;
         playDelayed(arg0: $SoundInstance, arg1: number): void;
         removeListener(arg0: $SoundEventListener_): void;
         addListener(arg0: $SoundEventListener_): void;
+        getFabricId(): $ResourceLocation;
+        getFabricDependencies(): $Collection<any>;
         play(arg0: $SoundInstance): void;
         pause(): void;
         emergencyShutdown(): void;
-        resume(): void;
         updateSource(arg0: $Camera): void;
-        getFabricId(): $ResourceLocation;
-        getFabricDependencies(): $Collection<any>;
         queueTickingSound(arg0: $TickableSoundInstance): void;
         updateSourceVolume(arg0: $SoundSource_, arg1: number): void;
         getAvailableSoundDevices(): $List<string>;
@@ -93,18 +93,18 @@ declare module "@package/net/minecraft/client/sounds" {
         static INTENTIONALLY_EMPTY_SOUND_LOCATION: $ResourceLocation;
         static INTENTIONALLY_EMPTY_SOUND: $Sound;
         constructor(arg0: $Options);
-        get listenerTransform(): $ListenerTransform;
         get debugString(): string;
         get availableSounds(): $Collection<$ResourceLocation>;
+        get listenerTransform(): $ListenerTransform;
         get fabricId(): $ResourceLocation;
         get fabricDependencies(): $Collection<any>;
         get availableSoundDevices(): $List<string>;
         get soundEngineMelody(): $SoundEngine;
     }
     export class $LoopingAudioStream implements $AudioStream {
-        close(): void;
-        read(arg0: number): $ByteBuffer;
         getFormat(): $AudioFormat;
+        read(arg0: number): $ByteBuffer;
+        close(): void;
         constructor(arg0: $LoopingAudioStream$AudioStreamProvider_, arg1: $InputStream);
         get format(): $AudioFormat;
     }
@@ -120,29 +120,29 @@ declare module "@package/net/minecraft/client/sounds" {
     export class $AudioStream {
     }
     export interface $AudioStream extends $Closeable {
-        read(arg0: number): $ByteBuffer;
         getFormat(): $AudioFormat;
+        read(arg0: number): $ByteBuffer;
         get format(): $AudioFormat;
     }
     export class $SoundEngine implements $SoundEngineAccessor, $DuckSoundEngine, $IMixinSoundEngine {
-        stop(arg0: $ResourceLocation_, arg1: $SoundSource_): void;
-        stop(arg0: $SoundInstance): void;
-        destroy(): void;
-        isActive(arg0: $SoundInstance): boolean;
-        tick(arg0: boolean): void;
-        reload(): void;
+        getDebugString(): string;
         dynamic_fps$updateVolume(source: $SoundSource_): void;
+        addEventListener(arg0: $SoundEventListener_): void;
+        removeEventListener(arg0: $SoundEventListener_): void;
+        stopAll(): void;
         getListenerTransform(): $ListenerTransform;
         updateCategoryVolume(arg0: $SoundSource_, arg1: number): void;
-        getDebugString(): string;
-        removeEventListener(arg0: $SoundEventListener_): void;
-        addEventListener(arg0: $SoundEventListener_): void;
-        stopAll(): void;
+        reload(): void;
+        tick(arg0: boolean): void;
+        stop(arg0: $SoundInstance): void;
+        stop(arg0: $ResourceLocation_, arg1: $SoundSource_): void;
+        resume(): void;
+        destroy(): void;
+        isActive(arg0: $SoundInstance): boolean;
         playDelayed(arg0: $SoundInstance, arg1: number): void;
         play(arg0: $SoundInstance): void;
         pause(): void;
         emergencyShutdown(): void;
-        resume(): void;
         updateSource(arg0: $Camera): void;
         queueTickingSound(arg0: $TickableSoundInstance): void;
         getAvailableSoundDevices(): $List<string>;
@@ -156,16 +156,16 @@ declare module "@package/net/minecraft/client/sounds" {
         static OPEN_AL_SOFT_PREFIX: string;
         static OPEN_AL_SOFT_PREFIX_LENGTH: number;
         constructor(arg0: $SoundManager, arg1: $Options, arg2: $ResourceProvider_);
-        get listenerTransform(): $ListenerTransform;
         get debugString(): string;
+        get listenerTransform(): $ListenerTransform;
         get availableSoundDevices(): $List<string>;
         get loaded(): boolean;
         get instanceToChannel(): $Map<$SoundInstance, $ChannelAccess$ChannelHandle>;
         get loadedMelody(): boolean;
     }
     export class $SoundBufferLibrary {
-        clear(): void;
         getStream(arg0: $ResourceLocation_, arg1: boolean): $CompletableFuture<$AudioStream>;
+        clear(): void;
         preload(arg0: $Collection_<$Sound>): $CompletableFuture<never>;
         getCompleteBuffer(arg0: $ResourceLocation_): $CompletableFuture<$SoundBuffer>;
         constructor(arg0: $ResourceProvider_);
@@ -198,22 +198,22 @@ declare module "@package/net/minecraft/client/sounds" {
         get weight(): number;
     }
     export class $JOrbisAudioStream implements $FloatSampleSource {
-        close(): void;
-        getFormat(): $AudioFormat;
         readChunk(arg0: $FloatConsumer_): boolean;
-        read(arg0: number): $ByteBuffer;
+        getFormat(): $AudioFormat;
+        close(): void;
         readAll(): $ByteBuffer;
+        read(arg0: number): $ByteBuffer;
         constructor(arg0: $InputStream);
         get format(): $AudioFormat;
     }
     export class $SoundManager$Preparations {
     }
     export class $MusicManager implements $MusicManagerAccessor, $IMixinMusicManager {
-        tick(): void;
         startPlaying(arg0: $Music): void;
+        tick(): void;
         isPlayingMusic(arg0: $Music): boolean;
-        stopPlaying(arg0: $Music): void;
         stopPlaying(): void;
+        stopPlaying(arg0: $Music): void;
         getNextSongDelay(): number;
         setNextSongDelay(arg0: number): void;
         getCurrentMusic(): $SoundInstance;
@@ -231,13 +231,13 @@ declare module "@package/net/minecraft/client/sounds" {
         static EXPECTED_MAX_FRAME_SIZE: number;
     }
     export interface $FloatSampleSource extends $FiniteAudioStream {
-        read(arg0: number): $ByteBuffer;
         readChunk(arg0: $FloatConsumer_): boolean;
         readAll(): $ByteBuffer;
+        read(arg0: number): $ByteBuffer;
     }
     export class $ChannelAccess {
-        clear(): void;
         createHandle(arg0: $Library$Pool_): $CompletableFuture<$ChannelAccess$ChannelHandle>;
+        clear(): void;
         scheduleTick(): void;
         executeOnChannels(arg0: $Consumer_<$Stream<$Channel>>): void;
         library: $Library;

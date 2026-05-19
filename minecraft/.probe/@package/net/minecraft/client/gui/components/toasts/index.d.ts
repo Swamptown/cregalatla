@@ -11,13 +11,14 @@ import { $GuiGraphics } from "@package/net/minecraft/client/gui";
 
 declare module "@package/net/minecraft/client/gui/components/toasts" {
     export class $ToastComponent {
-        clear(): void;
         addToast(arg0: $Toast_): void;
+        clear(): void;
         getMinecraft(): $Minecraft;
         render(arg0: $GuiGraphics): void;
+        freeSlots(): number;
+        getToast<T extends $Toast>(arg0: $Class<T>, arg1: $Object): T;
         handler$zch000$sodium_extra$goodByeToasts(arg0: $Toast_, arg1: $CallbackInfo): void;
         getNotificationDisplayTimeMultiplier(): number;
-        getToast<T extends $Toast>(arg0: $Class<T>, arg1: $Object): T;
         minecraft: $Minecraft;
         visible: $List<$ToastComponent$ToastInstance<never>>;
         constructor(arg0: $Minecraft);
@@ -26,9 +27,9 @@ declare module "@package/net/minecraft/client/gui/components/toasts" {
     export class $RecipeToast implements $Toast {
         render(arg0: $GuiGraphics, arg1: $ToastComponent, arg2: number): $Toast$Visibility;
         static addOrUpdate(arg0: $ToastComponent, arg1: $RecipeHolder_<never>): void;
+        getToken(): $Object;
         slotCount(): number;
         width(): number;
-        getToken(): $Object;
         height(): number;
         constructor(arg0: $RecipeHolder_<never>);
         get token(): $Object;
@@ -51,9 +52,9 @@ declare module "@package/net/minecraft/client/gui/components/toasts" {
     }
     export class $AdvancementToast implements $Toast {
         render(arg0: $GuiGraphics, arg1: $ToastComponent, arg2: number): $Toast$Visibility;
+        getToken(): $Object;
         slotCount(): number;
         width(): number;
-        getToken(): $Object;
         height(): number;
         static DISPLAY_TIME: number;
         constructor(arg0: $AdvancementHolder_);
@@ -75,9 +76,9 @@ declare module "@package/net/minecraft/client/gui/components/toasts" {
         static SLOT_HEIGHT: number;
     }
     export interface $Toast {
+        getToken(): $Object;
         slotCount(): number;
         width(): number;
-        getToken(): $Object;
         height(): number;
         render(arg0: $GuiGraphics, arg1: $ToastComponent, arg2: number): $Toast$Visibility;
         get token(): $Object;
@@ -111,22 +112,22 @@ declare module "@package/net/minecraft/client/gui/components/toasts" {
         get toast(): T;
     }
     export class $SystemToast implements $Toast {
-        reset(arg0: $Component_, arg1: $Component_): void;
-        static add(arg0: $ToastComponent, arg1: $SystemToast$SystemToastId, arg2: $Component_, arg3: $Component_): void;
-        width(): number;
-        static multiline(arg0: $Minecraft, arg1: $SystemToast$SystemToastId, arg2: $Component_, arg3: $Component_): $SystemToast;
+        static forceHide(arg0: $ToastComponent, arg1: $SystemToast$SystemToastId): void;
+        forceHide(): void;
+        static onPackCopyFailure(arg0: $Minecraft, arg1: string): void;
         static onChunkSaveFailure(arg0: $Minecraft, arg1: $ChunkPos): void;
         static onChunkLoadFailure(arg0: $Minecraft, arg1: $ChunkPos): void;
         static onLowDiskSpace(arg0: $Minecraft): void;
-        static forceHide(arg0: $ToastComponent, arg1: $SystemToast$SystemToastId): void;
-        forceHide(): void;
+        static multiline(arg0: $Minecraft, arg1: $SystemToast$SystemToastId, arg2: $Component_, arg3: $Component_): $SystemToast;
+        reset(arg0: $Component_, arg1: $Component_): void;
+        static add(arg0: $ToastComponent, arg1: $SystemToast$SystemToastId, arg2: $Component_, arg3: $Component_): void;
+        width(): number;
         height(): number;
         render(arg0: $GuiGraphics, arg1: $ToastComponent, arg2: number): $Toast$Visibility;
         static addOrUpdate(arg0: $ToastComponent, arg1: $SystemToast$SystemToastId, arg2: $Component_, arg3: $Component_): void;
         static onWorldAccessFailure(arg0: $Minecraft, arg1: string): void;
         static onWorldDeleteFailure(arg0: $Minecraft, arg1: string): void;
         static onFileDropFailure(arg0: $Minecraft, arg1: number): void;
-        static onPackCopyFailure(arg0: $Minecraft, arg1: string): void;
         slotCount(): number;
         getToken(): $Object;
         constructor(arg0: $SystemToast$SystemToastId, arg1: $Component_, arg2: $Component_);
@@ -136,9 +137,9 @@ declare module "@package/net/minecraft/client/gui/components/toasts" {
         hide(): void;
         render(arg0: $GuiGraphics, arg1: $ToastComponent, arg2: number): $Toast$Visibility;
         updateProgress(arg0: number): void;
+        getToken(): $Object;
         slotCount(): number;
         width(): number;
-        getToken(): $Object;
         height(): number;
         static PROGRESS_BAR_HEIGHT: number;
         static PROGRESS_BAR_X: number;

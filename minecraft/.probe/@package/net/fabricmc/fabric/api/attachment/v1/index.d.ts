@@ -22,12 +22,12 @@ declare module "@package/net/fabricmc/fabric/api/attachment/v1" {
     export class $AttachmentType<A> {
     }
     export interface $AttachmentType<A> {
-        persistenceCodec(): $Codec<A>;
         isSynced(): boolean;
+        persistenceCodec(): $Codec<A>;
+        identifier(): $ResourceLocation;
         initializer(): $Supplier<A>;
         isPersistent(): boolean;
         copyOnDeath(): boolean;
-        identifier(): $ResourceLocation;
         get synced(): boolean;
         get persistent(): boolean;
     }

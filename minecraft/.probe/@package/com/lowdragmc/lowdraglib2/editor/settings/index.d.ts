@@ -12,18 +12,18 @@ import { $IConfigurable } from "@package/com/lowdragmc/lowdraglib2/configurator"
 
 declare module "@package/com/lowdragmc/lowdraglib2/editor/settings" {
     export class $EditorSettings implements $IPersistedSerializable {
-        isDirty(): boolean;
+        unregisterSettings(arg0: $ResourceLocation_): void;
+        setSettingsFile(arg0: $File_): $EditorSettings;
+        getSettingsFile(): $File;
         loadAllSettingsFromFile(): void;
         applyCurrentSettings(): void;
         registerSettings<T extends $Settings>(arg0: T, arg1: $Codec<T>): void;
         createSettingsPanel(): $UIElement;
         saveAllSettingsToFile(): void;
         restoreSettings(): void;
-        markDirty(): void;
-        unregisterSettings(arg0: $ResourceLocation_): void;
-        setSettingsFile(arg0: $File_): $EditorSettings;
         getSettings(arg0: $ResourceLocation_): ($Settings) | undefined;
-        getSettingsFile(): $File;
+        markDirty(): void;
+        isDirty(): boolean;
         beforeSerialize(): void;
         writeToBuff(arg0: $ByteBuf): void;
         serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
@@ -41,12 +41,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/settings" {
     export class $Settings {
     }
     export interface $Settings extends $IConfigurable {
+        getDisplayName(): $Component;
         getId(): $ResourceLocation;
         getPath(): string;
-        getDisplayName(): $Component;
         onApply(arg0: $Editor): void;
+        get displayName(): $Component;
         get id(): $ResourceLocation;
         get path(): string;
-        get displayName(): $Component;
     }
 }

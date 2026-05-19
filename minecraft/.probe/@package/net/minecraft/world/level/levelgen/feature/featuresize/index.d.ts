@@ -15,10 +15,10 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/featuresize"
      */
     export type $FeatureSizeType_<P> = RegistryTypes.WorldgenFeatureSizeType;
     export class $FeatureSize {
-        type(): $FeatureSizeType<never>;
         minClippedHeight(): $OptionalInt;
         static minClippedHeightCodec<S extends $FeatureSize>(): $RecordCodecBuilder<S, $OptionalInt>;
         getSizeAtHeight(arg0: number, arg1: number): number;
+        type(): $FeatureSizeType<never>;
         static CODEC: $Codec<$FeatureSize>;
         static MAX_WIDTH: number;
         constructor(arg0: $OptionalInt);

@@ -33,9 +33,9 @@ import { $Vec3, $Vec3_, $BlockHitResult } from "@package/net/minecraft/world/phy
 
 declare module "@package/net/neoforged/neoforge/event/entity/player" {
     export class $PlayerHeartTypeEvent extends $PlayerEvent {
-        getType(): $Gui$HeartType;
         getOriginalType(): $Gui$HeartType;
         setType(arg0: $Gui$HeartType_): void;
+        getType(): $Gui$HeartType;
         constructor(arg0: $Player, arg1: $Gui$HeartType_);
         get originalType(): $Gui$HeartType;
     }
@@ -45,29 +45,29 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         get container(): $AbstractContainerMenu;
     }
     export class $ItemTooltipEvent extends $PlayerEvent {
-        getContext(): $Item$TooltipContext;
-        getFlags(): $TooltipFlag;
         getToolTip(): $List<$Component>;
+        getFlags(): $TooltipFlag;
+        getContext(): $Item$TooltipContext;
         getItemStack(): $ItemStack;
         constructor(arg0: $ItemStack_, arg1: $Player, arg2: $List_<$Component_>, arg3: $TooltipFlag, arg4: $Item$TooltipContext);
-        get context(): $Item$TooltipContext;
-        get flags(): $TooltipFlag;
         get toolTip(): $List<$Component>;
+        get flags(): $TooltipFlag;
+        get context(): $Item$TooltipContext;
         get itemStack(): $ItemStack;
     }
     export class $PlayerEvent extends $LivingEvent {
         constructor(arg0: $Player);
     }
     export class $SweepAttackEvent extends $PlayerEvent implements $ICancellableEvent {
-        getTarget(): $Entity;
         setSweeping(arg0: boolean): void;
         isVanillaSweep(): boolean;
+        getTarget(): $Entity;
         setCanceled(arg0: boolean): void;
         isSweeping(): boolean;
         isCanceled(): boolean;
         constructor(arg0: $Player, arg1: $Entity, arg2: boolean);
-        get target(): $Entity;
         get vanillaSweep(): boolean;
+        get target(): $Entity;
     }
     export class $AdvancementEvent$AdvancementEarnEvent extends $AdvancementEvent {
         constructor(arg0: $Player, arg1: $AdvancementHolder_);
@@ -80,15 +80,15 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         get inventory(): $Container;
     }
     export class $ItemFishedEvent extends $PlayerEvent implements $ICancellableEvent {
-        getRodDamage(): number;
         damageRodBy(arg0: number): void;
         getHookEntity(): $FishingHook;
+        getRodDamage(): number;
         getDrops(): $NonNullList<$ItemStack>;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $List_<$ItemStack_>, arg1: number, arg2: $FishingHook);
-        get rodDamage(): number;
         get hookEntity(): $FishingHook;
+        get rodDamage(): number;
         get drops(): $NonNullList<$ItemStack>;
     }
     export class $AttackEntityEvent extends $PlayerEvent implements $ICancellableEvent {
@@ -111,18 +111,18 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         constructor(arg0: $Player, arg1: boolean, arg2: boolean);
     }
     export class $ArrowNockEvent extends $PlayerEvent implements $ICancellableEvent {
-        getLevel(): $Level;
-        getBow(): $ItemStack;
         setAction(arg0: $InteractionResultHolder<$ItemStack_>): void;
+        getBow(): $ItemStack;
         hasAmmo(): boolean;
         getHand(): $InteractionHand;
+        getLevel(): $Level;
         getAction(): $InteractionResultHolder<$ItemStack>;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Player, arg1: $ItemStack_, arg2: $InteractionHand_, arg3: $Level_, arg4: boolean);
-        get level(): $Level;
         get bow(): $ItemStack;
         get hand(): $InteractionHand;
+        get level(): $Level;
     }
     export class $PlayerInteractEvent$RightClickItem extends $PlayerInteractEvent implements $ICancellableEvent {
         setCancellationResult(arg0: $InteractionResult_): void;
@@ -132,19 +132,19 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         constructor(arg0: $Player, arg1: $InteractionHand_);
     }
     export class $CriticalHitEvent extends $PlayerEvent {
-        getTarget(): $Entity;
         setDamageMultiplier(arg0: number): void;
         isVanillaCritical(): boolean;
         setCriticalHit(arg0: boolean): void;
         getVanillaMultiplier(): number;
         setDisableSweep(arg0: boolean): void;
+        getTarget(): $Entity;
         isCriticalHit(): boolean;
         getDamageMultiplier(): number;
         disableSweep(): boolean;
         constructor(arg0: $Player, arg1: $Entity, arg2: number, arg3: boolean);
-        get target(): $Entity;
         get vanillaCritical(): boolean;
         get vanillaMultiplier(): number;
+        get target(): $Entity;
     }
     export class $PlayerInteractEvent$LeftClickBlock$Action extends $Enum<$PlayerInteractEvent$LeftClickBlock$Action> {
         static values(): $PlayerInteractEvent$LeftClickBlock$Action[];
@@ -167,15 +167,14 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         get orb(): $ExperienceOrb;
     }
     export class $PlayerSpawnPhantomsEvent extends $PlayerEvent {
-        getResult(): $PlayerSpawnPhantomsEvent$Result;
-        setResult(arg0: $PlayerSpawnPhantomsEvent$Result_): void;
         getPhantomsToSpawn(): number;
         setPhantomsToSpawn(arg0: number): void;
         shouldSpawnPhantoms(arg0: $ServerLevel, arg1: $BlockPos_): boolean;
+        getResult(): $PlayerSpawnPhantomsEvent$Result;
+        setResult(arg0: $PlayerSpawnPhantomsEvent$Result_): void;
         constructor(arg0: $Player, arg1: number);
     }
     export class $UseItemOnBlockEvent extends $Event implements $ICancellableEvent {
-        getLevel(): $Level;
         getPlayer(): $Player;
         getHand(): $InteractionHand;
         setCancellationResult(arg0: $ItemInteractionResult_): void;
@@ -183,21 +182,22 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         getUseOnContext(): $UseOnContext;
         getUsePhase(): $UseItemOnBlockEvent$UsePhase;
         cancelWithResult(arg0: $ItemInteractionResult_): void;
-        getItemStack(): $ItemStack;
+        getLevel(): $Level;
         getSide(): $LogicalSide;
+        getItemStack(): $ItemStack;
         getPos(): $BlockPos;
         getCancellationResult(): $ItemInteractionResult;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $UseOnContext, arg1: $UseItemOnBlockEvent$UsePhase_);
-        get level(): $Level;
         get player(): $Player;
         get hand(): $InteractionHand;
         get face(): $Direction;
         get useOnContext(): $UseOnContext;
         get usePhase(): $UseItemOnBlockEvent$UsePhase;
-        get itemStack(): $ItemStack;
+        get level(): $Level;
         get side(): $LogicalSide;
+        get itemStack(): $ItemStack;
         get pos(): $BlockPos;
     }
     export class $TradeWithVillagerEvent extends $PlayerEvent {
@@ -228,15 +228,15 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         constructor(arg0: $Player, arg1: $ItemEntity);
     }
     export class $PlayerSetSpawnEvent extends $PlayerEvent implements $ICancellableEvent {
-        getNewSpawn(): $BlockPos;
         isForced(): boolean;
         getSpawnLevel(): $ResourceKey<$Level>;
+        getNewSpawn(): $BlockPos;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Player, arg1: $ResourceKey_<$Level>, arg2: $BlockPos_, arg3: boolean);
-        get newSpawn(): $BlockPos;
         get forced(): boolean;
         get spawnLevel(): $ResourceKey<$Level>;
+        get newSpawn(): $BlockPos;
     }
     export class $PlayerEvent$SaveToFile extends $PlayerEvent {
         getPlayerDirectory(): $File;
@@ -247,17 +247,17 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         get playerUUID(): string;
     }
     export class $PlayerEvent$BreakSpeed extends $PlayerEvent implements $ICancellableEvent {
-        getState(): $BlockState;
-        getPosition(): ($BlockPos) | undefined;
+        getOriginalSpeed(): number;
         getNewSpeed(): number;
         setNewSpeed(arg0: number): void;
-        getOriginalSpeed(): number;
+        getPosition(): ($BlockPos) | undefined;
+        getState(): $BlockState;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Player, arg1: $BlockState_, arg2: number, arg3: $BlockPos_);
-        get state(): $BlockState;
-        get position(): ($BlockPos) | undefined;
         get originalSpeed(): number;
+        get position(): ($BlockPos) | undefined;
+        get state(): $BlockState;
     }
     export class $PlayerRespawnPositionEvent extends $PlayerEvent {
         copyOriginalSpawnPosition(): boolean;
@@ -283,20 +283,20 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         get original(): $ItemStack;
     }
     export class $ArrowLooseEvent extends $PlayerEvent implements $ICancellableEvent {
-        getLevel(): $Level;
-        getBow(): $ItemStack;
         setCharge(arg0: number): void;
+        getBow(): $ItemStack;
         hasAmmo(): boolean;
         getCharge(): number;
+        getLevel(): $Level;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: number, arg4: boolean);
-        get level(): $Level;
         get bow(): $ItemStack;
+        get level(): $Level;
     }
     export class $PlayerEvent$TabListNameFormat extends $PlayerEvent {
-        getDisplayName(): $Component;
         setDisplayName(arg0: $Component_): void;
+        getDisplayName(): $Component;
         constructor(arg0: $Player);
     }
     export class $PlayerEvent$PlayerLoggedOutEvent extends $PlayerEvent {
@@ -310,11 +310,11 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         get wasDeath(): boolean;
     }
     export class $PlayerInteractEvent$LeftClickBlock extends $PlayerInteractEvent implements $ICancellableEvent {
-        setUseItem(arg0: $TriState_): void;
         getUseBlock(): $TriState;
         setUseBlock(arg0: $TriState_): void;
-        setCanceled(arg0: boolean): void;
+        setUseItem(arg0: $TriState_): void;
         getAction(): $PlayerInteractEvent$LeftClickBlock$Action;
+        setCanceled(arg0: boolean): void;
         getUseItem(): $TriState;
         isCanceled(): boolean;
         constructor(arg0: $Player, arg1: $BlockPos_, arg2: $Direction_, arg3: $PlayerInteractEvent$LeftClickBlock$Action_);
@@ -337,8 +337,8 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         get smelting(): $ItemStack;
     }
     export class $PlayerInteractEvent$EntityInteract extends $PlayerInteractEvent implements $ICancellableEvent {
-        getTarget(): $Entity;
         setCancellationResult(arg0: $InteractionResult_): void;
+        getTarget(): $Entity;
         getCancellationResult(): $InteractionResult;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
@@ -346,11 +346,11 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         get target(): $Entity;
     }
     export class $PlayerInteractEvent$RightClickBlock extends $PlayerInteractEvent implements $ICancellableEvent {
-        getHitVec(): $BlockHitResult;
-        setUseItem(arg0: $TriState_): void;
+        setCancellationResult(arg0: $InteractionResult_): void;
         getUseBlock(): $TriState;
         setUseBlock(arg0: $TriState_): void;
-        setCancellationResult(arg0: $InteractionResult_): void;
+        setUseItem(arg0: $TriState_): void;
+        getHitVec(): $BlockHitResult;
         setCanceled(arg0: boolean): void;
         getUseItem(): $TriState;
         getCancellationResult(): $InteractionResult;
@@ -359,8 +359,8 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         get hitVec(): $BlockHitResult;
     }
     export class $CanContinueSleepingEvent extends $LivingEvent {
-        setContinueSleeping(arg0: boolean): void;
         mayContinueSleeping(): boolean;
+        setContinueSleeping(arg0: boolean): void;
         getProblem(): $Player$BedSleepingProblem;
         constructor(arg0: $LivingEntity, arg1: $Player$BedSleepingProblem_);
         set continueSleeping(value: boolean);
@@ -382,8 +382,8 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         constructor(arg0: $Player);
     }
     export class $AnvilRepairEvent extends $PlayerEvent {
-        getBreakChance(): number;
         setBreakChance(arg0: number): void;
+        getBreakChance(): number;
         getOutput(): $ItemStack;
         getLeft(): $ItemStack;
         getRight(): $ItemStack;
@@ -437,51 +437,51 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         get player(): $Player;
     }
     export class $PlayerNegotiationEvent extends $Event {
+        getConnection(): $Connection;
         getProfile(): $GameProfile;
         enqueueWork(arg0: $Runnable_): void;
         enqueueWork(arg0: $Future<void>): void;
-        getConnection(): $Connection;
         constructor(arg0: $Connection, arg1: $GameProfile, arg2: $List_<$Future<void>>);
-        get profile(): $GameProfile;
         get connection(): $Connection;
+        get profile(): $GameProfile;
     }
     export class $CanPlayerSleepEvent extends $PlayerEvent {
-        getState(): $BlockState;
-        getLevel(): $Level;
-        setProblem(arg0: $Player$BedSleepingProblem_): void;
         getVanillaProblem(): $Player$BedSleepingProblem;
+        setProblem(arg0: $Player$BedSleepingProblem_): void;
         getProblem(): $Player$BedSleepingProblem;
+        getLevel(): $Level;
+        getState(): $BlockState;
         getPos(): $BlockPos;
         constructor(arg0: $ServerPlayer, arg1: $BlockPos_, arg2: $Player$BedSleepingProblem_);
-        get state(): $BlockState;
-        get level(): $Level;
         get vanillaProblem(): $Player$BedSleepingProblem;
+        get level(): $Level;
+        get state(): $BlockState;
         get pos(): $BlockPos;
     }
     export class $PlayerInteractEvent extends $PlayerEvent {
-        getLevel(): $Level;
         getHand(): $InteractionHand;
         getFace(): $Direction;
-        getItemStack(): $ItemStack;
+        getLevel(): $Level;
         getSide(): $LogicalSide;
+        getItemStack(): $ItemStack;
         getPos(): $BlockPos;
-        get level(): $Level;
         get hand(): $InteractionHand;
         get face(): $Direction;
-        get itemStack(): $ItemStack;
+        get level(): $Level;
         get side(): $LogicalSide;
+        get itemStack(): $ItemStack;
         get pos(): $BlockPos;
     }
     export class $PlayerInteractEvent$EntityInteractSpecific extends $PlayerInteractEvent implements $ICancellableEvent {
-        getTarget(): $Entity;
-        getLocalPos(): $Vec3;
         setCancellationResult(arg0: $InteractionResult_): void;
+        getLocalPos(): $Vec3;
+        getTarget(): $Entity;
         getCancellationResult(): $InteractionResult;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Player, arg1: $InteractionHand_, arg2: $Entity, arg3: $Vec3_);
-        get target(): $Entity;
         get localPos(): $Vec3;
+        get target(): $Entity;
     }
     export class $PlayerEvent$StartTracking extends $PlayerEvent {
         getTarget(): $Entity;
@@ -506,22 +506,22 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
      */
     export type $AdvancementEvent$AdvancementProgressEvent$ProgressType_ = "grant" | "revoke";
     export class $BonemealEvent extends $Event implements $ICancellableEvent {
-        getState(): $BlockState;
-        getStack(): $ItemStack;
-        getLevel(): $Level;
         setSuccessful(arg0: boolean): void;
         getPlayer(): $Player;
         isSuccessful(): boolean;
         isValidBonemealTarget(): boolean;
+        getLevel(): $Level;
+        getState(): $BlockState;
+        getStack(): $ItemStack;
         setCanceled(arg0: boolean): void;
         getPos(): $BlockPos;
         isCanceled(): boolean;
         constructor(arg0: $Player, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_, arg4: $ItemStack_);
-        get state(): $BlockState;
-        get stack(): $ItemStack;
-        get level(): $Level;
         get player(): $Player;
         get validBonemealTarget(): boolean;
+        get level(): $Level;
+        get state(): $BlockState;
+        get stack(): $ItemStack;
         get pos(): $BlockPos;
     }
     export class $PlayerFlyableFallEvent extends $PlayerEvent {
@@ -532,14 +532,14 @@ declare module "@package/net/neoforged/neoforge/event/entity/player" {
         constructor(arg0: $Player, arg1: number, arg2: number);
     }
     export class $PlayerEvent$HarvestCheck extends $PlayerEvent {
-        getLevel(): $BlockGetter;
         getTargetBlock(): $BlockState;
         setCanHarvest(arg0: boolean): void;
         canHarvest(): boolean;
+        getLevel(): $BlockGetter;
         getPos(): $BlockPos;
         constructor(arg0: $Player, arg1: $BlockState_, arg2: $BlockGetter, arg3: $BlockPos_, arg4: boolean);
-        get level(): $BlockGetter;
         get targetBlock(): $BlockState;
+        get level(): $BlockGetter;
         get pos(): $BlockPos;
     }
     export class $ClientInformationUpdatedEvent extends $PlayerEvent {

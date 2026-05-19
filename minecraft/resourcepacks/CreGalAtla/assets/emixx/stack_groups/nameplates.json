@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:nameplates",
+  "type": "emixx:group",
+  "contents": [
+    "#simulated:nameplate_items"
+  ]
+}

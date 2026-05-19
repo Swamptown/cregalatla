@@ -17,18 +17,15 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
     export class $DoubleStack {
     }
     export interface $DoubleStack extends $Stack<number> {
-        /**
-         * @deprecated
-         */
-        peek(arg0: number): number;
-        push(arg0: number): void;
-        /**
-         * @deprecated
-         */
-        push(arg0: number): void;
         topDouble(): number;
         peekDouble(arg0: number): number;
+        /**
+         * @deprecated
+         */
+        push(arg0: number): void;
+        push(arg0: number): void;
         popDouble(): number;
+        peek(arg0: number): number;
         top(): number;
         pop(): number;
     }
@@ -50,18 +47,12 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         stream(): $Stream<number>;
-        contains(arg0: number): boolean;
         /**
          * @deprecated
          */
         contains(arg0: $Object): boolean;
+        contains(arg0: number): boolean;
         addAll(arg0: $DoubleCollection): boolean;
-        removeIf(arg0: $DoublePredicate_$1): boolean;
-        /**
-         * @deprecated
-         */
-        removeIf(arg0: $Predicate_<number>): boolean;
-        removeIf(arg0: $DoublePredicate_): boolean;
         removeAll(arg0: $DoubleCollection): boolean;
         retainAll(arg0: $DoubleCollection): boolean;
         containsAll(arg0: $DoubleCollection): boolean;
@@ -70,6 +61,12 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          */
         parallelStream(): $Stream<number>;
         rem(arg0: number): boolean;
+        removeIf(arg0: $DoublePredicate_): boolean;
+        removeIf(arg0: $DoublePredicate_$1): boolean;
+        /**
+         * @deprecated
+         */
+        removeIf(arg0: $Predicate_<number>): boolean;
         doubleStream(): $DoubleStream;
         toDoubleArray(): number[];
         /**
@@ -88,10 +85,6 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -99,16 +92,16 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsInt(arg0: number): number;
         /**
          * @deprecated
@@ -166,6 +159,10 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         static of(arg0: number, arg1: number): $DoubleDoubleImmutablePair;
         leftDouble(): number;
         rightDouble(): number;
+        firstDouble(): number;
+        keyDouble(): number;
+        secondDouble(): number;
+        valueDouble(): number;
         /**
          * @deprecated
          */
@@ -174,25 +171,21 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        first(arg0: number): $DoubleDoublePair;
+        first(): number;
         first(arg0: number): $DoubleDoublePair;
         /**
          * @deprecated
          */
-        second(): number;
+        first(arg0: number): $DoubleDoublePair;
         second(arg0: number): $DoubleDoublePair;
         /**
          * @deprecated
          */
         second(arg0: number): $DoubleDoublePair;
-        /**
-         * @deprecated
-         */
-        key(): number;
-        /**
-         * @deprecated
-         */
         key(arg0: number): $DoubleDoublePair;
+        /**
+         * @deprecated
+         */
         key(arg0: number): $DoubleDoublePair;
         /**
          * @deprecated
@@ -203,34 +196,28 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         left(arg0: number): $DoubleDoublePair;
-        /**
-         * @deprecated
-         */
-        right(): number;
         right(arg0: number): $DoubleDoublePair;
         /**
          * @deprecated
          */
         right(arg0: number): $DoubleDoublePair;
-        firstDouble(): number;
-        keyDouble(): number;
-        secondDouble(): number;
-        valueDouble(): number;
         value(): number;
-        first(): number;
+        second(): number;
+        key(): number;
+        right(): number;
         constructor(arg0: number, arg1: number);
     }
     export class $DoubleComparator {
     }
     export interface $DoubleComparator extends $Comparator<number> {
+        compare(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         compare(arg0: number, arg1: number): number;
-        compare(arg0: number, arg1: number): number;
-        reversed(): $DoubleComparator;
         thenComparing(arg0: $Comparator<number>): $Comparator<number>;
         thenComparing(arg0: $DoubleComparator): $DoubleComparator;
+        reversed(): $Comparator<number>;
     }
     export class $DoubleSpliterator {
     }
@@ -238,14 +225,14 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        forEachRemaining(arg0: $Consumer_<number>): void;
-        forEachRemaining(arg0: $DoubleConsumer_): void;
-        skip(arg0: number): number;
+        tryAdvance(arg0: $Consumer_<number>): boolean;
+        tryAdvance(arg0: $DoubleConsumer_): boolean;
         /**
          * @deprecated
          */
-        tryAdvance(arg0: $Consumer_<number>): boolean;
-        tryAdvance(arg0: $DoubleConsumer_): boolean;
+        forEachRemaining(arg0: $Consumer_<number>): void;
+        forEachRemaining(arg0: $DoubleConsumer_): void;
+        skip(arg0: number): number;
         trySplit(): $Spliterator<number>;
         getComparator(): $Comparator<number>;
         get comparator(): $Comparator<number>;
@@ -283,8 +270,8 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(arg0: V): void;
         defaultReturnValue(): V;
+        defaultReturnValue(arg0: V): void;
         andThenByte(arg0: $Reference2ByteFunction_<V>): $Double2ByteFunction;
         composeByte(arg0: $Byte2DoubleFunction_): $Byte2ReferenceFunction<V>;
         andThenShort(arg0: $Reference2ShortFunction_<V>): $Double2ShortFunction;
@@ -317,22 +304,26 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         remove(arg0: $Object): number;
-        get(arg0: number): number;
-        put(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
+        get(arg0: $Object): number;
+        get(arg0: number): number;
+        /**
+         * @deprecated
+         */
+        put(arg0: number, arg1: number): number;
         put(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
+        getOrDefault(arg0: number, arg1: number): number;
         /**
          * @deprecated
          */
         getOrDefault(arg0: $Object, arg1: number): number;
-        getOrDefault(arg0: number, arg1: number): number;
         applyAsDouble(arg0: number): number;
         /**
          * @deprecated
@@ -342,8 +333,8 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<number, T>): $Function$1<number, T>;
-        defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         andThenByte(arg0: $Double2ByteFunction_): $Double2ByteFunction;
         composeByte(arg0: $Byte2DoubleFunction_): $Byte2DoubleFunction;
         andThenShort(arg0: $Double2ShortFunction_): $Double2ShortFunction;
@@ -368,37 +359,27 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
      */
     export type $Double2DoubleFunction_ = ((arg0: number) => number);
     export class $AbstractDoubleList extends $AbstractDoubleCollection implements $DoubleList, $DoubleStack {
+        getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
+        removeDouble(arg0: number): number;
+        topDouble(): number;
+        peekDouble(arg0: number): number;
         size(arg0: number): void;
         compareTo(arg0: $List_<number>): number;
         indexOf(arg0: number): number;
         lastIndexOf(arg0: number): number;
         replaceAll(arg0: $DoubleUnaryOperator_): void;
         add(arg0: number, arg1: number): void;
-        subList(arg0: number, arg1: number): $DoubleList;
-        addAll(arg0: number, arg1: $Collection_<number>): boolean;
         addAll(arg0: number, arg1: $DoubleCollection): boolean;
+        addAll(arg0: number, arg1: $Collection_<number>): boolean;
         set(arg0: number, arg1: number): number;
         listIterator(): $DoubleListIterator;
         listIterator(arg0: number): $DoubleListIterator;
         push(arg0: number): void;
-        topDouble(): number;
-        peekDouble(arg0: number): number;
-        removeDouble(arg0: number): number;
-        getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         popDouble(): number;
         setElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         removeElements(arg0: number, arg1: number): void;
-        addElements(arg0: number, arg1: number[]): void;
         addElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
-        /**
-         * @deprecated
-         */
-        get(arg0: number): number;
-        sort(arg0: $DoubleComparator): void;
-        /**
-         * @deprecated
-         */
-        sort(arg0: $Comparator<number>): void;
+        addElements(arg0: number, arg1: number[]): void;
         /**
          * @deprecated
          */
@@ -407,11 +388,11 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         lastIndexOf(arg0: $Object): number;
+        replaceAll(arg0: $DoubleUnaryOperator_$1): void;
         /**
          * @deprecated
          */
         replaceAll(arg0: $UnaryOperator_<number>): void;
-        replaceAll(arg0: $DoubleUnaryOperator_$1): void;
         /**
          * @deprecated
          */
@@ -422,17 +403,18 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         set(arg0: number, arg1: number): number;
-        unstableSort(arg0: $DoubleComparator): void;
+        sort(arg0: $DoubleComparator): void;
+        /**
+         * @deprecated
+         */
+        sort(arg0: $Comparator<number>): void;
         /**
          * @deprecated
          */
         unstableSort(arg0: $Comparator<number>): void;
+        unstableSort(arg0: $DoubleComparator): void;
         setElements(arg0: number, arg1: number[]): void;
         setElements(arg0: number[]): void;
-        /**
-         * @deprecated
-         */
-        peek(arg0: number): number;
         /**
          * @deprecated
          */
@@ -443,10 +425,13 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         addLast(arg0: number): void;
         removeFirst(): number;
         removeLast(): number;
+        subList(arg0: number, arg1: number): $List<number>;
         /**
          * @deprecated
          */
         remove(arg0: $Object): boolean;
+        get(arg0: number): number;
+        peek(arg0: number): number;
         top(): number;
         pop(): number;
         reversed(): $SequencedCollection<number>;
@@ -456,11 +441,11 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
     export class $Double2BooleanFunction {
     }
     export interface $Double2BooleanFunction extends $Function<number, boolean>, $DoublePredicate$1 {
-        remove(arg0: number): boolean;
         /**
          * @deprecated
          */
         remove(arg0: $Object): boolean;
+        remove(arg0: number): boolean;
         /**
          * @deprecated
          */
@@ -490,8 +475,8 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         andThen<T>(arg0: $Function_<boolean, T>): $Function$1<number, T>;
-        defaultReturnValue(arg0: boolean): void;
         defaultReturnValue(): boolean;
+        defaultReturnValue(arg0: boolean): void;
         andThenByte(arg0: $Boolean2ByteFunction_): $Double2ByteFunction;
         composeByte(arg0: $Byte2DoubleFunction_): $Byte2BooleanFunction;
         andThenShort(arg0: $Boolean2ShortFunction_): $Double2ShortFunction;
@@ -565,8 +550,8 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(arg0: V): void;
         defaultReturnValue(): V;
+        defaultReturnValue(arg0: V): void;
         andThenByte(arg0: $Object2ByteFunction_<V>): $Double2ByteFunction;
         composeByte(arg0: $Byte2DoubleFunction_): $Byte2ObjectFunction<V>;
         andThenShort(arg0: $Object2ShortFunction_<V>): $Double2ShortFunction;
@@ -605,6 +590,11 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
     export class $DoublePredicate {
     }
     export interface $DoublePredicate extends $Predicate<number>, $DoublePredicate$1 {
+        and(arg0: $DoublePredicate_): $DoublePredicate;
+        /**
+         * @deprecated
+         */
+        and(arg0: $Predicate_<number>): $Predicate<number>;
         /**
          * @deprecated
          */
@@ -615,11 +605,6 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         or(arg0: $Predicate_<number>): $Predicate<number>;
         or(arg0: $DoublePredicate_$1): $DoublePredicate;
         or(arg0: $DoublePredicate_): $DoublePredicate;
-        and(arg0: $DoublePredicate_): $DoublePredicate;
-        /**
-         * @deprecated
-         */
-        and(arg0: $Predicate_<number>): $Predicate<number>;
         negate(): $Predicate<number>;
     }
     /**
@@ -636,16 +621,16 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         contains(arg0: number): boolean;
         addAll(arg0: $DoubleCollection): boolean;
         forEach(arg0: $DoubleConsumer_): void;
-        removeIf(arg0: $DoublePredicate_): boolean;
         removeAll(arg0: $DoubleCollection): boolean;
         retainAll(arg0: $DoubleCollection): boolean;
         containsAll(arg0: $DoubleCollection): boolean;
         rem(arg0: number): boolean;
+        removeIf(arg0: $DoublePredicate_): boolean;
+        toDoubleArray(): number[];
         /**
          * @deprecated
          */
         toDoubleArray(arg0: number[]): number[];
-        toDoubleArray(): number[];
         removeIf(arg0: $DoublePredicate_$1): boolean;
         doubleStream(): $DoubleStream;
         doubleIterator(): $DoubleIterator;
@@ -660,10 +645,6 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -671,16 +652,16 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsDouble(arg0: number): number;
         /**
          * @deprecated
@@ -720,6 +701,10 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         static lexComparator(): $Comparator<$DoubleDoublePair>;
     }
     export interface $DoubleDoublePair extends $Pair<number, number> {
+        firstDouble(): number;
+        keyDouble(): number;
+        secondDouble(): number;
+        valueDouble(): number;
         /**
          * @deprecated
          */
@@ -728,25 +713,21 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        first(arg0: number): $DoubleDoublePair;
+        first(): number;
         first(arg0: number): $DoubleDoublePair;
         /**
          * @deprecated
          */
-        second(): number;
+        first(arg0: number): $DoubleDoublePair;
         second(arg0: number): $DoubleDoublePair;
         /**
          * @deprecated
          */
         second(arg0: number): $DoubleDoublePair;
-        /**
-         * @deprecated
-         */
-        key(): number;
-        /**
-         * @deprecated
-         */
         key(arg0: number): $DoubleDoublePair;
+        /**
+         * @deprecated
+         */
         key(arg0: number): $DoubleDoublePair;
         /**
          * @deprecated
@@ -757,23 +738,17 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         left(arg0: number): $DoubleDoublePair;
-        /**
-         * @deprecated
-         */
-        right(): number;
         right(arg0: number): $DoubleDoublePair;
         /**
          * @deprecated
          */
         right(arg0: number): $DoubleDoublePair;
-        firstDouble(): number;
-        keyDouble(): number;
-        secondDouble(): number;
-        valueDouble(): number;
         leftDouble(): number;
         rightDouble(): number;
         value(): number;
-        first(): number;
+        second(): number;
+        key(): number;
+        right(): number;
     }
     export class $DoubleListIterator {
     }
@@ -802,10 +777,6 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -813,16 +784,16 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsInt(arg0: number): number;
         /**
          * @deprecated
@@ -881,10 +852,6 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -892,16 +859,16 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsInt(arg0: number): number;
         /**
          * @deprecated
@@ -938,13 +905,15 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
     export type $Double2ByteFunction_ = ((arg0: number) => number);
     export class $DoubleList {
         static of(...arg0: number[]): $DoubleList;
-        static of(arg0: number, arg1: number): $DoubleList;
         static of(): $DoubleList;
+        static of(arg0: number, arg1: number): $DoubleList;
         static of(arg0: number): $DoubleList;
         static of(arg0: number, arg1: number, arg2: number): $DoubleList;
         [Symbol.iterator](): Iterator<number>
     }
     export interface $DoubleList extends $List<number>, $Comparable<$List<number>>, $DoubleCollection {
+        getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
+        removeDouble(arg0: number): number;
         /**
          * @deprecated
          */
@@ -953,7 +922,42 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        get(arg0: number): number;
+        indexOf(arg0: $Object): number;
+        indexOf(arg0: number): number;
+        getDouble(arg0: number): number;
+        /**
+         * @deprecated
+         */
+        lastIndexOf(arg0: $Object): number;
+        lastIndexOf(arg0: number): number;
+        replaceAll(arg0: $DoubleUnaryOperator_): void;
+        replaceAll(arg0: $DoubleUnaryOperator_$1): void;
+        /**
+         * @deprecated
+         */
+        replaceAll(arg0: $UnaryOperator_<number>): void;
+        add(arg0: number): boolean;
+        add(arg0: number, arg1: number): void;
+        /**
+         * @deprecated
+         */
+        add(arg0: number, arg1: number): void;
+        /**
+         * @deprecated
+         */
+        add(arg0: number): boolean;
+        /**
+         * @deprecated
+         */
+        contains(arg0: $Object): boolean;
+        addAll(arg0: number, arg1: $DoubleCollection): boolean;
+        addAll(arg0: number, arg1: $DoubleList): boolean;
+        addAll(arg0: $DoubleList): boolean;
+        set(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        set(arg0: number, arg1: number): number;
         sort(arg0: $DoubleComparator): void;
         /**
          * @deprecated
@@ -962,59 +966,19 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        indexOf(arg0: $Object): number;
-        indexOf(arg0: number): number;
-        getDouble(arg0: number): number;
-        lastIndexOf(arg0: number): number;
-        /**
-         * @deprecated
-         */
-        lastIndexOf(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
-        replaceAll(arg0: $UnaryOperator_<number>): void;
-        replaceAll(arg0: $DoubleUnaryOperator_): void;
-        replaceAll(arg0: $DoubleUnaryOperator_$1): void;
-        /**
-         * @deprecated
-         */
-        add(arg0: number): boolean;
-        /**
-         * @deprecated
-         */
-        add(arg0: number, arg1: number): void;
-        add(arg0: number, arg1: number): void;
-        add(arg0: number): boolean;
-        subList(arg0: number, arg1: number): $DoubleList;
-        /**
-         * @deprecated
-         */
-        contains(arg0: $Object): boolean;
-        addAll(arg0: number, arg1: $DoubleCollection): boolean;
-        addAll(arg0: number, arg1: $DoubleList): boolean;
-        addAll(arg0: $DoubleList): boolean;
-        /**
-         * @deprecated
-         */
-        set(arg0: number, arg1: number): number;
-        set(arg0: number, arg1: number): number;
-        listIterator(): $DoubleListIterator;
-        removeDouble(arg0: number): number;
-        getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
-        unstableSort(arg0: $DoubleComparator): void;
-        /**
-         * @deprecated
-         */
         unstableSort(arg0: $Comparator<number>): void;
+        unstableSort(arg0: $DoubleComparator): void;
         setElements(arg0: number, arg1: number[]): void;
         setElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         setElements(arg0: number[]): void;
         removeElements(arg0: number, arg1: number): void;
         addElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         addElements(arg0: number, arg1: number[]): void;
+        get(arg0: number): number;
+        subList(arg0: number, arg1: number): $List<number>;
         iterator(): $Iterator<number>;
         spliterator(): $Spliterator<number>;
+        listIterator(): $ListIterator<number>;
         listIterator(arg0: number): $ListIterator<number>;
         [Symbol.iterator](): Iterator<number>
     }
@@ -1045,10 +1009,6 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): string;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): string;
         get(arg0: number): string;
         put(arg0: number, arg1: string): string;
@@ -1056,16 +1016,16 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         put(arg0: number, arg1: string): string;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: string): string;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: string): string;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: string): string;
         applyAsInt(arg0: number): number;
         /**
          * @deprecated
@@ -1107,10 +1067,6 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         /**
          * @deprecated
          */
-        remove(arg0: $Object): number;
-        /**
-         * @deprecated
-         */
         get(arg0: $Object): number;
         get(arg0: number): number;
         put(arg0: number, arg1: number): number;
@@ -1118,16 +1074,16 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         put(arg0: number, arg1: number): number;
-        /**
-         * @deprecated
-         */
-        containsKey(arg0: $Object): boolean;
         containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
-        getOrDefault(arg0: $Object, arg1: number): number;
+        containsKey(arg0: $Object): boolean;
         getOrDefault(arg0: number, arg1: number): number;
+        /**
+         * @deprecated
+         */
+        getOrDefault(arg0: $Object, arg1: number): number;
         applyAsLong(arg0: number): number;
         /**
          * @deprecated
@@ -1165,12 +1121,12 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
     export class $DoubleBidirectionalIterator {
     }
     export interface $DoubleBidirectionalIterator extends $DoubleIterator, $ObjectBidirectionalIterator<number> {
+        previousDouble(): number;
+        back(arg0: number): number;
         skip(arg0: number): number;
         /**
          * @deprecated
          */
         previous(): number;
-        back(arg0: number): number;
-        previousDouble(): number;
     }
 }

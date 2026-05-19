@@ -1,6 +1,6 @@
 import { $ShufflingList } from "@package/net/minecraft/world/entity/ai/behavior";
-import { $Iterator } from "@package/java/util";
 import { $Iterable } from "@package/java/lang";
+import { $Iterator } from "@package/java/util";
 export * as non_poi_block_search from "@package/net/caffeinemc/mods/lithium/common/ai/non_poi_block_search";
 
 declare module "@package/net/caffeinemc/mods/lithium/common/ai" {

@@ -28,25 +28,25 @@ declare module "@package/com/google/common/hash" {
         hashBytes(input: number[]): $HashCode;
         hashBytes(input: number[], off: number, len: number): $HashCode;
         hashBytes(input: $ByteBuffer): $HashCode;
-        hashString(input: $CharSequence, charset: $Charset): $HashCode;
-        newHasher(): $Hasher;
         newHasher(expectedInputSize: number): $Hasher;
+        newHasher(): $Hasher;
         hashInt(input: number): $HashCode;
         hashLong(input: number): $HashCode;
         hashUnencodedChars(input: $CharSequence): $HashCode;
+        hashString(input: $CharSequence, charset: $Charset): $HashCode;
         hashObject<T>(instance: T, funnel: $Funnel_<T>): $HashCode;
     }
     export class $HashCode {
-        bits(): number;
         asBytes(): number[];
-        static fromString(string: string): $HashCode;
-        padToLong(): number;
-        static fromLong(hash: number): $HashCode;
-        writeBytesTo(dest: number[], offset: number, maxLength: number): number;
-        static fromBytes(bytes: number[]): $HashCode;
-        static fromInt(hash: number): $HashCode;
-        asLong(): number;
         asInt(): number;
+        bits(): number;
+        static fromString(string: string): $HashCode;
+        asLong(): number;
+        writeBytesTo(dest: number[], offset: number, maxLength: number): number;
+        static fromInt(hash: number): $HashCode;
+        static fromLong(hash: number): $HashCode;
+        static fromBytes(bytes: number[]): $HashCode;
+        padToLong(): number;
     }
     export class $Funnel<T> {
     }
@@ -67,17 +67,17 @@ declare module "@package/com/google/common/hash" {
         putBoolean(b: boolean): $Hasher;
         putChar(c: string): $Hasher;
         hash(): $HashCode;
-        putUnencodedChars(charSequence: $CharSequence): $Hasher;
-        putString(charSequence: $CharSequence, charset: $Charset): $Hasher;
         putObject<T>(instance: T, funnel: $Funnel_<T>): $Hasher;
+        putUnencodedChars(charSequence: $CharSequence): $Hasher;
+        putBytes(bytes: number[], off: number, len: number): $Hasher;
         putByte(b: number): $PrimitiveSink;
         putShort(s: number): $PrimitiveSink;
         putInt(i: number): $PrimitiveSink;
         putLong(l: number): $PrimitiveSink;
         putFloat(f: number): $PrimitiveSink;
         putDouble(d: number): $PrimitiveSink;
+        putString(charSequence: $CharSequence, charset: $Charset): $PrimitiveSink;
         putBytes(bytes: $ByteBuffer): $PrimitiveSink;
-        putBytes(bytes: number[], off: number, len: number): $PrimitiveSink;
         putBytes(bytes: $ByteBuffer): $PrimitiveSink;
     }
 }

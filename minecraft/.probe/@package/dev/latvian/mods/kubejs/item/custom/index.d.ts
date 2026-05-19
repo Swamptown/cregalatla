@@ -12,37 +12,13 @@ import { $SourceLine } from "@package/dev/latvian/mods/kubejs/script";
 
 declare module "@package/dev/latvian/mods/kubejs/item/custom" {
     export class $ItemToolTierRegistryKubeEvent extends $Record implements $KubeStartupEvent {
-        /**
-         * Adds a new tool tier.
-         */
-        add(id: string, tier: $Consumer_<$MutableToolTier>): void;
         tiers(): $Map<string, $Tier>;
         addBasedOnExisting(id: string, existing: string, tier: $Consumer_<$MutableToolTier>): void;
         addExisting(id: string, tier: $Tier_): void;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
+         * Adds a new tool tier.
          */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
+        add(id: string, tier: $Consumer_<$MutableToolTier>): void;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -55,6 +31,30 @@ declare module "@package/dev/latvian/mods/kubejs/item/custom" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         constructor(tiers: $Map_<string, $Tier_>);
     }
     /**

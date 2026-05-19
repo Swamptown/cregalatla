@@ -10,21 +10,21 @@ declare module "@package/dev/engine_room/flywheel/api/visualization" {
     export class $VisualizationContext {
     }
     export interface $VisualizationContext {
-        createEmbedding(arg0: $Vec3i): $VisualEmbedding;
-        renderOrigin(): $Vec3i;
         instancerProvider(): $InstancerProvider;
+        renderOrigin(): $Vec3i;
+        createEmbedding(arg0: $Vec3i): $VisualEmbedding;
     }
     export class $EntityVisualizer<T extends $Entity> {
     }
     export interface $EntityVisualizer<T extends $Entity> {
-        skipVanillaRender(arg0: T): boolean;
         createVisual(arg0: $VisualizationContext, arg1: T, arg2: number): $EntityVisual<T>;
+        skipVanillaRender(arg0: T): boolean;
     }
     export class $VisualEmbedding {
     }
     export interface $VisualEmbedding extends $VisualizationContext {
-        delete(): void;
         transforms(arg0: $Matrix4fc, arg1: $Matrix3fc): void;
+        delete(): void;
     }
     export class $VisualizationLevel {
     }
@@ -34,7 +34,7 @@ declare module "@package/dev/engine_room/flywheel/api/visualization" {
     export class $BlockEntityVisualizer<T extends $BlockEntity> {
     }
     export interface $BlockEntityVisualizer<T extends $BlockEntity> {
-        skipVanillaRender(arg0: T): boolean;
         createVisual(arg0: $VisualizationContext, arg1: T, arg2: number): $BlockEntityVisual<T>;
+        skipVanillaRender(arg0: T): boolean;
     }
 }

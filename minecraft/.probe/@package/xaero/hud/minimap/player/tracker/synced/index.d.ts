@@ -6,10 +6,10 @@ import { $SyncedTrackedPlayer } from "@package/xaero/common/server/radar/tracker
 
 declare module "@package/xaero/hud/minimap/player/tracker/synced" {
     export class $ClientSyncedTrackedPlayerManager {
+        getPlayers(): $Iterable<$SyncedTrackedPlayer>;
         remove(arg0: $UUID_): void;
         reset(): void;
         update(arg0: $UUID_, arg1: number, arg2: number, arg3: number, arg4: $ResourceKey_<$Level>): void;
-        getPlayers(): $Iterable<$SyncedTrackedPlayer>;
         get players(): $Iterable<$SyncedTrackedPlayer>;
     }
 }

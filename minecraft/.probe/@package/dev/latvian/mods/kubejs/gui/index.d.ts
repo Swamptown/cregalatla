@@ -103,8 +103,8 @@ declare module "@package/dev/latvian/mods/kubejs/gui" {
         constructor(menu: $KubeJSMenu, inventory: $Inventory, component: $Component_);
     }
     export class $KubeJSGUI {
-        write(buf: $FriendlyByteBuf): void;
         setInventory(inv: $InventoryKJS): void;
+        write(buf: $FriendlyByteBuf): void;
         playerSlotsY: number;
         playerSlotsX: number;
         inventoryHeight: number;
@@ -116,8 +116,8 @@ declare module "@package/dev/latvian/mods/kubejs/gui" {
         inventory: $InventoryKJS;
         static EMPTY_CONTAINER: $SimpleContainer;
         height: number;
-        constructor();
         constructor(buf: $FriendlyByteBuf);
+        constructor();
     }
     export class $KubeJSMenus {
         static MENU: $Supplier<$MenuType<$KubeJSMenu>>;

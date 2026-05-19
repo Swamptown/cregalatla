@@ -9,8 +9,8 @@ declare module "@package/net/minecraft/world/level/validation" {
         constructor(arg0: $Path_, arg1: $List_<$ForbiddenSymlinkInfo_>);
     }
     export class $ForbiddenSymlinkInfo extends $Record {
-        target(): $Path;
         link(): $Path;
+        target(): $Path;
         constructor(arg0: $Path_, arg1: $Path_);
     }
     /**
@@ -36,23 +36,23 @@ declare module "@package/net/minecraft/world/level/validation" {
         constructor(arg0: $PathMatcher_);
     }
     export class $PathAllowList implements $PathMatcher {
-        matches(arg0: $Path_): boolean;
         getForFileSystem(arg0: $FileSystem): $PathMatcher;
+        matches(arg0: $Path_): boolean;
         static readPlain(arg0: $BufferedReader): $PathAllowList;
         constructor(arg0: $List_<$PathAllowList$ConfigEntry_>);
     }
     export class $PathAllowList$ConfigEntry extends $Record {
+        static glob(arg0: string): $PathAllowList$ConfigEntry;
         type(): $PathAllowList$EntryType;
         compile(arg0: $FileSystem): $PathMatcher;
         static prefix(arg0: string): $PathAllowList$ConfigEntry;
         static regex(arg0: string): $PathAllowList$ConfigEntry;
         pattern(): string;
         static parse(arg0: string): ($PathAllowList$ConfigEntry) | undefined;
-        static glob(arg0: string): $PathAllowList$ConfigEntry;
         constructor(arg0: $PathAllowList$EntryType_, arg1: string);
     }
     /**
      * Values that may be interpreted as {@link $PathAllowList$ConfigEntry}.
      */
-    export type $PathAllowList$ConfigEntry_ = { type?: $PathAllowList$EntryType_, pattern?: string,  } | [type?: $PathAllowList$EntryType_, pattern?: string, ];
+    export type $PathAllowList$ConfigEntry_ = { pattern?: string, type?: $PathAllowList$EntryType_,  } | [pattern?: string, type?: $PathAllowList$EntryType_, ];
 }

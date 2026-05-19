@@ -4,15 +4,15 @@ export * as task from "@package/net/caffeinemc/mods/sodium/client/util/task";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/util" {
     export class $NativeBuffer {
-        getLength(): number;
-        static copy(arg0: $ByteBuffer): $NativeBuffer;
-        free(): void;
         getDirectBuffer(): $ByteBuffer;
         static reclaim(arg0: boolean): void;
         static getTotalAllocated(): number;
+        getLength(): number;
+        static copy(arg0: $ByteBuffer): $NativeBuffer;
+        free(): void;
         constructor(arg0: number);
-        get length(): number;
         get directBuffer(): $ByteBuffer;
         static get totalAllocated(): number;
+        get length(): number;
     }
 }

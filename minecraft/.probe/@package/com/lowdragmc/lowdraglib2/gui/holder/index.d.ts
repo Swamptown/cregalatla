@@ -59,10 +59,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/holder" {
     export class $IItemSlotHolderMenu {
     }
     export interface $IItemSlotHolderMenu {
-        self(): $AbstractContainerMenu;
         addSlot(arg0: $ItemSlot): void;
         getItemSlot(arg0: $Slot): $ItemSlot;
         isItemSlot(arg0: $Slot): boolean;
+        self(): $AbstractContainerMenu;
     }
     /**
      * Values that may be interpreted as {@link $IItemSlotHolderMenu}.

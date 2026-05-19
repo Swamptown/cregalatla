@@ -9,11 +9,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/syncdata/ref" {
     export class $IRef<TYPE> {
     }
     export interface $IRef<TYPE> {
-        update(): void;
-        getKey(): $ManagedKey;
-        getAccessor(): $IAccessor<TYPE>;
-        readSyncToStream(arg0: $RegistryFriendlyByteBuf): void;
-        writeSyncFromStream(arg0: $RegistryFriendlyByteBuf): void;
         writeRaw(arg0: TYPE): void;
         getPersistedPrefixName(): string;
         readRaw(): TYPE;
@@ -31,13 +26,18 @@ declare module "@package/com/lowdragmc/lowdraglib2/syncdata/ref" {
         writePersisted<T>(arg0: $DynamicOps<T>, arg1: T): void;
         readInitialSync<T>(arg0: $DynamicOps<T>): T;
         writeInitialSync<T>(arg0: $DynamicOps<T>, arg1: T): void;
-        get key(): $ManagedKey;
-        get accessor(): $IAccessor<TYPE>;
+        readSyncToStream(arg0: $RegistryFriendlyByteBuf): void;
+        writeSyncFromStream(arg0: $RegistryFriendlyByteBuf): void;
+        update(): void;
+        getKey(): $ManagedKey;
+        getAccessor(): $IAccessor<TYPE>;
         get syncDirty(): boolean;
         get persistedDirty(): boolean;
         set onSyncListener(value: $BooleanConsumer_);
         set onPersistedListener(value: $BooleanConsumer_);
         set conditionalSynced(value: $Predicate_<TYPE>);
         get persistedKey(): string;
+        get key(): $ManagedKey;
+        get accessor(): $IAccessor<TYPE>;
     }
 }

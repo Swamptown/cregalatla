@@ -1,6 +1,6 @@
 import { $CommandResultCallback_, $ExecutionCommandSource } from "@package/net/minecraft/commands";
 import { $Consumer_ } from "@package/java/util/function";
-import { $UnboundEntryAction, $CommandQueueEntry, $CommandQueueEntry_, $ChainModifiers_, $Frame_, $ExecutionContext, $EntryAction, $Frame, $ExecutionControl } from "@package/net/minecraft/commands/execution";
+import { $UnboundEntryAction, $CommandQueueEntry, $CommandQueueEntry_, $Frame_, $ChainModifiers_, $EntryAction, $ExecutionContext, $Frame, $ExecutionControl } from "@package/net/minecraft/commands/execution";
 import { $DynamicCommandExceptionType } from "@package/com/mojang/brigadier/exceptions";
 import { $ContextChain, $CommandContext } from "@package/com/mojang/brigadier/context";
 import { $InstantiatedFunction } from "@package/net/minecraft/commands/functions";
@@ -18,8 +18,8 @@ declare module "@package/net/minecraft/commands/execution/tasks" {
         constructor(arg0: $InstantiatedFunction<T>, arg1: $CommandResultCallback_, arg2: boolean);
     }
     export class $BuildContexts<T extends $ExecutionCommandSource<T>> {
-        execute(arg0: T, arg1: $List_<T>, arg2: $ExecutionContext<T>, arg3: $Frame_, arg4: $ChainModifiers_): void;
         traceCommandStart(arg0: $ExecutionContext<T>, arg1: $Frame_): void;
+        execute(arg0: T, arg1: $List_<T>, arg2: $ExecutionContext<T>, arg3: $Frame_, arg4: $ChainModifiers_): void;
         static ERROR_FORK_LIMIT_REACHED: $DynamicCommandExceptionType;
         constructor(arg0: string, arg1: $ContextChain<T>);
     }

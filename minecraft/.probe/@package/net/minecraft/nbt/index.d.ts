@@ -25,9 +25,9 @@ export * as visitors from "@package/net/minecraft/nbt/visitors";
 
 declare module "@package/net/minecraft/nbt" {
     export class $LongArrayTag extends $CollectionTag<$LongTag> {
-        get(arg0: number): $LongTag;
         add(arg0: number, arg1: $LongTag): void;
         set(arg0: number, arg1: $LongTag): $LongTag;
+        copy(): $LongArrayTag;
         getAsLongArray(): number[];
         reversed(): $SequencedCollection<$LongTag>;
         static TYPE: $TagType<$LongArrayTag>;
@@ -39,8 +39,9 @@ declare module "@package/net/minecraft/nbt" {
     export class $NbtOps$NbtRecordBuilder extends $RecordBuilder$AbstractStringBuilder<$Tag, $CompoundTag> {
     }
     export class $TextComponentTagVisitor implements $TagVisitor {
-        visit(arg0: $Tag_): $Component;
         static handleEscapePretty(arg0: string): $Component;
+        visit(arg0: $Tag_): $Component;
+        visitEnd(arg0: $EndTag): void;
         visitString(arg0: $StringTag): void;
         visitByte(arg0: $ByteTag): void;
         visitShort(arg0: $ShortTag): void;
@@ -48,17 +49,15 @@ declare module "@package/net/minecraft/nbt" {
         visitFloat(arg0: $FloatTag): void;
         visitLong(arg0: $LongTag): void;
         visitDouble(arg0: $DoubleTag): void;
-        visitEnd(arg0: $EndTag): void;
         visitCompound(arg0: $CompoundTag_): void;
         visitList(arg0: $ListTag_): void;
         visitByteArray(arg0: $ByteArrayTag): void;
-        visitLongArray(arg0: $LongArrayTag): void;
         visitIntArray(arg0: $IntArrayTag): void;
+        visitLongArray(arg0: $LongArrayTag): void;
         constructor(arg0: string);
     }
     export class $LongTag extends $NumericTag {
         static valueOf(arg0: number): $LongTag;
-        copy(): $LongTag;
         static TYPE: $TagType<$LongTag>;
         constructor(arg0: number);
     }
@@ -86,6 +85,7 @@ declare module "@package/net/minecraft/nbt" {
     export class $TagVisitor {
     }
     export interface $TagVisitor {
+        visitEnd(arg0: $EndTag): void;
         visitString(arg0: $StringTag): void;
         visitByte(arg0: $ByteTag): void;
         visitShort(arg0: $ShortTag): void;
@@ -93,29 +93,28 @@ declare module "@package/net/minecraft/nbt" {
         visitFloat(arg0: $FloatTag): void;
         visitLong(arg0: $LongTag): void;
         visitDouble(arg0: $DoubleTag): void;
-        visitEnd(arg0: $EndTag): void;
         visitCompound(arg0: $CompoundTag_): void;
         visitList(arg0: $ListTag_): void;
         visitByteArray(arg0: $ByteArrayTag): void;
-        visitLongArray(arg0: $LongArrayTag): void;
         visitIntArray(arg0: $IntArrayTag): void;
+        visitLongArray(arg0: $LongArrayTag): void;
     }
     export class $NbtIo {
-        static write(arg0: $CompoundTag_, arg1: $Path_): void;
-        static write(arg0: $CompoundTag_, arg1: $DataOutput): void;
-        static parse(arg0: $DataInput, arg1: $StreamTagVisitor, arg2: $NbtAccounter): void;
-        static read(arg0: $Path_): $CompoundTag;
-        static read(arg0: $DataInput): $CompoundTag;
-        static read(arg0: $DataInput, arg1: $NbtAccounter): $CompoundTag;
-        static writeAnyTag(arg0: $Tag_, arg1: $DataOutput): void;
-        static readAnyTag(arg0: $DataInput, arg1: $NbtAccounter): $Tag;
-        static readCompressed(arg0: $Path_, arg1: $NbtAccounter): $CompoundTag;
+        static writeUnnamedTagWithFallback(arg0: $Tag_, arg1: $DataOutput): void;
         static readCompressed(arg0: $InputStream, arg1: $NbtAccounter): $CompoundTag;
+        static readCompressed(arg0: $Path_, arg1: $NbtAccounter): $CompoundTag;
         static writeCompressed(arg0: $CompoundTag_, arg1: $Path_): void;
         static writeCompressed(arg0: $CompoundTag_, arg1: $OutputStream): void;
+        static writeAnyTag(arg0: $Tag_, arg1: $DataOutput): void;
+        static readAnyTag(arg0: $DataInput, arg1: $NbtAccounter): $Tag;
+        static write(arg0: $CompoundTag_, arg1: $DataOutput): void;
+        static write(arg0: $CompoundTag_, arg1: $Path_): void;
+        static read(arg0: $DataInput): $CompoundTag;
+        static read(arg0: $DataInput, arg1: $NbtAccounter): $CompoundTag;
+        static read(arg0: $Path_): $CompoundTag;
+        static parse(arg0: $DataInput, arg1: $StreamTagVisitor, arg2: $NbtAccounter): void;
         static parseCompressed(arg0: $Path_, arg1: $StreamTagVisitor, arg2: $NbtAccounter): void;
         static parseCompressed(arg0: $InputStream, arg1: $StreamTagVisitor, arg2: $NbtAccounter): void;
-        static writeUnnamedTagWithFallback(arg0: $Tag_, arg1: $DataOutput): void;
         static writeUnnamedTag(arg0: $Tag_, arg1: $DataOutput): void;
         constructor();
     }
@@ -137,8 +136,8 @@ declare module "@package/net/minecraft/nbt" {
         visitEntry(arg0: $TagType<never>): $StreamTagVisitor$EntryResult;
         visitRootEntry(arg0: $TagType<never>): $StreamTagVisitor$ValueResult;
         visitContainerEnd(): $StreamTagVisitor$ValueResult;
-        visitList(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$ValueResult;
         visitElement(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$EntryResult;
+        visitList(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$ValueResult;
     }
     export class $NbtOps$HomogenousListCollector implements $NbtOps$ListCollector {
     }
@@ -167,12 +166,12 @@ declare module "@package/net/minecraft/nbt" {
     }
     export interface $Tag {
         toString(): string;
-        copy(): $Tag;
-        getId(): number;
-        accept(arg0: $StreamTagVisitor): $StreamTagVisitor$ValueResult;
-        accept(arg0: $TagVisitor): void;
         write(arg0: $DataOutput): void;
+        accept(arg0: $TagVisitor): void;
+        accept(arg0: $StreamTagVisitor): $StreamTagVisitor$ValueResult;
+        getId(): number;
         getType(): $TagType<never>;
+        copy(): $Tag;
         getAsString(): string;
         sizeInBytes(): number;
         acceptAsRoot(arg0: $StreamTagVisitor): void;
@@ -202,24 +201,24 @@ declare module "@package/net/minecraft/nbt" {
     export class $NbtOps$LongListCollector implements $NbtOps$ListCollector {
     }
     export class $NumericTag implements $Tag, $SpecialEquality {
-        getAsDouble(): number;
         getAsInt(): number;
+        getAsDouble(): number;
         getAsLong(): number;
         getAsNumber(): $Number;
+        getAsFloat(): number;
         getAsByte(): number;
         getAsShort(): number;
-        getAsFloat(): number;
         specialEquals(o: $Object, shallow: boolean): boolean;
         getAsString(): string;
         acceptAsRoot(arg0: $StreamTagVisitor): void;
         constructor();
-        get asDouble(): number;
         get asInt(): number;
+        get asDouble(): number;
         get asLong(): number;
         get asNumber(): $Number;
+        get asFloat(): number;
         get asByte(): number;
         get asShort(): number;
-        get asFloat(): number;
         get asString(): string;
     }
     export class $NbtAccounterException extends $NbtException {
@@ -231,7 +230,9 @@ declare module "@package/net/minecraft/nbt" {
         skip(arg0: $DataInput, arg1: number, arg2: $NbtAccounter): void;
     }
     export class $StringTagVisitor implements $TagVisitor {
+        static handleEscape(arg0: string): string;
         visit(arg0: $Tag_): string;
+        visitEnd(arg0: $EndTag): void;
         visitString(arg0: $StringTag): void;
         visitByte(arg0: $ByteTag): void;
         visitShort(arg0: $ShortTag): void;
@@ -239,25 +240,23 @@ declare module "@package/net/minecraft/nbt" {
         visitFloat(arg0: $FloatTag): void;
         visitLong(arg0: $LongTag): void;
         visitDouble(arg0: $DoubleTag): void;
-        visitEnd(arg0: $EndTag): void;
         visitCompound(arg0: $CompoundTag_): void;
         visitList(arg0: $ListTag_): void;
         visitByteArray(arg0: $ByteArrayTag): void;
-        visitLongArray(arg0: $LongArrayTag): void;
         visitIntArray(arg0: $IntArrayTag): void;
-        static handleEscape(arg0: string): string;
+        visitLongArray(arg0: $LongArrayTag): void;
         constructor();
     }
     export class $NbtAccounter implements $NbtAccounterAccessor {
+        getUsage(): number;
         static create(arg0: number): $NbtAccounter;
         readUTF(arg0: string): string;
-        getUsage(): number;
         getDepth(): number;
         accountBytes(arg0: number): void;
         accountBytes(arg0: number, arg1: number): void;
+        static unlimitedHeap(): $NbtAccounter;
         pushDepth(): void;
         popDepth(): void;
-        static unlimitedHeap(): $NbtAccounter;
         create$getUsage(): number;
         constructor(arg0: number, arg1: number);
         get usage(): number;
@@ -265,11 +264,11 @@ declare module "@package/net/minecraft/nbt" {
     }
     export class $IntTag extends $NumericTag {
         static valueOf(arg0: number): $IntTag;
-        copy(): $IntTag;
         static TYPE: $TagType<$IntTag>;
         constructor(arg0: number);
     }
     export class $CompoundTag implements $Tag, $CustomJavaToJsWrapper {
+        getString(arg0: string): string;
         remove(arg0: string): void;
         size(): number;
         get(arg0: string): $Tag;
@@ -293,17 +292,18 @@ declare module "@package/net/minecraft/nbt" {
         contains(arg0: string): boolean;
         merge(arg0: $CompoundTag_): $CompoundTag;
         entrySet(): $Set<$Map$Entry<string, $Tag>>;
-        getId(): number;
+        write(arg0: $DataOutput): void;
         accept(arg0: $StreamTagVisitor): $StreamTagVisitor$ValueResult;
         accept(arg0: $TagVisitor): void;
-        write(arg0: $DataOutput): void;
+        getId(): number;
         getType(): $TagType<$CompoundTag>;
-        getString(arg0: string): string;
-        getList(arg0: string, arg1: number): $ListTag;
+        copy(): $CompoundTag;
         putByteArray(arg0: string, arg1: number[]): void;
+        getList(arg0: string, arg1: number): $ListTag;
         putString(arg0: string, arg1: string): void;
         getAllKeys(): $Set<string>;
         getUUID(arg0: string): $UUID;
+        sizeInBytes(): number;
         putUUID(arg0: string, arg1: $UUID_): void;
         hasUUID(arg0: string): boolean;
         putIntArray(arg0: string, arg1: number[]): void;
@@ -313,19 +313,17 @@ declare module "@package/net/minecraft/nbt" {
         getIntArray(arg0: string): number[];
         getLongArray(arg0: string): number[];
         getCompound(arg0: string): $CompoundTag;
-        sizeInBytes(): number;
         shallowCopy(): $CompoundTag;
         static readNamedTagData(arg0: $TagType<never>, arg1: string, arg2: $DataInput, arg3: $NbtAccounter): $Tag;
         convertJavaToJs(scope: $Scriptable, target: $TypeInfo_): $Scriptable;
         getAsString(): string;
         acceptAsRoot(arg0: $StreamTagVisitor): void;
-        copy(): $Tag;
         static CODEC: $Codec<$CompoundTag>;
         static TYPE: $TagType<$CompoundTag>;
         tags: $Map<string, $Tag>;
+        constructor(arg0: $Map_<string, $Tag_>);
         constructor(arg0: number);
         constructor();
-        constructor(arg0: $Map_<string, $Tag_>);
         get empty(): boolean;
         get id(): number;
         get type(): $TagType<$CompoundTag>;
@@ -348,38 +346,38 @@ declare module "@package/net/minecraft/nbt" {
      */
     export type $StreamTagVisitor$ValueResult_ = "continue" | "break" | "halt";
     export class $NbtOps implements $DynamicOps<$Tag> {
-        remove(arg0: $Tag_, arg1: string): $Tag;
-        getByteBuffer(arg0: $Tag_): $DataResult<$ByteBuffer>;
-        getMap(arg0: $Tag_): $DataResult<$MapLike<$Tag>>;
-        createLong(arg0: number): $Tag;
         getStringValue(arg0: $Tag_): $DataResult<string>;
         getStream(arg0: $Tag_): $DataResult<$Stream<$Tag>>;
+        createMap(arg0: $Stream<$Pair<$Tag_, $Tag_>>): $Tag;
+        remove(arg0: $Tag_, arg1: string): $Tag;
+        empty(): $Tag;
+        getByteBuffer(arg0: $Tag_): $DataResult<$ByteBuffer>;
+        getMap(arg0: $Tag_): $DataResult<$MapLike<$Tag>>;
+        createString(arg0: string): $Tag;
         getList(arg0: $Tag_): $DataResult<$Consumer<$Consumer<$Tag>>>;
-        createList(arg0: $Stream<$Tag_>): $Tag;
-        createFloat(arg0: number): $Tag;
         createDouble(arg0: number): $Tag;
         getNumberValue(arg0: $Tag_): $DataResult<$Number>;
         createNumeric(arg0: $Number): $Tag;
-        createByte(arg0: number): $Tag;
+        mergeToMap(arg0: $Tag_, arg1: $Map_<$Tag_, $Tag_>): $DataResult<$Tag>;
         mergeToMap(arg0: $Tag_, arg1: $MapLike<$Tag_>): $DataResult<$Tag>;
         mergeToMap(arg0: $Tag_, arg1: $Tag_, arg2: $Tag_): $DataResult<$Tag>;
-        mergeToMap(arg0: $Tag_, arg1: $Map_<$Tag_, $Tag_>): $DataResult<$Tag>;
         getMapValues(arg0: $Tag_): $DataResult<$Stream<$Pair<$Tag, $Tag>>>;
         convertTo<U>(arg0: $DynamicOps<U>, arg1: $Tag_): U;
         mergeToList(arg0: $Tag_, arg1: $Tag_): $DataResult<$Tag>;
         mergeToList(arg0: $Tag_, arg1: $List_<$Tag_>): $DataResult<$Tag>;
+        createShort(arg0: number): $Tag;
         createInt(arg0: number): $Tag;
+        createBoolean(arg0: boolean): $Tag;
         getMapEntries(arg0: $Tag_): $DataResult<$Consumer<$BiConsumer<$Tag, $Tag>>>;
-        createByteList(arg0: $ByteBuffer): $Tag;
         getIntStream(arg0: $Tag_): $DataResult<$IntStream>;
         getLongStream(arg0: $Tag_): $DataResult<$LongStream>;
         mapBuilder(): $RecordBuilder<$Tag>;
+        createMap(arg0: $Map_<$Tag_, $Tag_>): $Tag;
         get(arg0: $Tag_, arg1: string): $DataResult<$Tag>;
         update(arg0: $Tag_, arg1: string, arg2: $Function_<$Tag, $Tag>): $Tag;
         set(arg0: $Tag_, arg1: string, arg2: $Tag_): $Tag;
         emptyList(): $Tag;
         emptyMap(): $Tag;
-        createMap(arg0: $Map_<$Tag_, $Tag_>): $Tag;
         getBooleanValue(arg0: $Tag_): $DataResult<boolean>;
         getNumberValue(arg0: $Tag_, arg1: $Number): $Number;
         getGeneric(arg0: $Tag_, arg1: $Tag_): $DataResult<$Tag>;
@@ -392,63 +390,65 @@ declare module "@package/net/minecraft/nbt" {
         withParser<E>(arg0: $Decoder_<E>): $Function<$Tag, $DataResult<E>>;
         convertList<U>(arg0: $DynamicOps<U>, arg1: $Tag_): U;
         convertMap<U>(arg0: $DynamicOps<U>, arg1: $Tag_): U;
-        empty(): $Tag;
-        createString(arg0: string): $Tag;
-        createShort(arg0: number): $Tag;
-        createBoolean(arg0: boolean): $Tag;
+        createLong(arg0: number): $Tag;
+        createList(arg0: $Stream<$Tag_>): $Tag;
+        createFloat(arg0: number): $Tag;
+        createByte(arg0: number): $Tag;
+        createByteList(arg0: $ByteBuffer): $Tag;
         createIntList(arg0: $IntStream): $Tag;
         createLongList(arg0: $LongStream): $Tag;
         static INSTANCE: $NbtOps;
         constructor();
     }
     export class $ByteTag extends $NumericTag {
-        static valueOf(arg0: number): $ByteTag;
         static valueOf(arg0: boolean): $ByteTag;
-        copy(): $ByteTag;
+        static valueOf(arg0: number): $ByteTag;
         static ZERO: $ByteTag;
         static ONE: $ByteTag;
         static TYPE: $TagType<$ByteTag>;
         constructor(arg0: number);
     }
     export class $NbtUtils {
-        static readBlockPos(arg0: $CompoundTag_, arg1: string): ($BlockPos) | undefined;
-        static compareNbt(arg0: $Tag_, arg1: $Tag_, arg2: boolean): boolean;
-        static writeBlockState(arg0: $BlockState_): $CompoundTag;
-        static readBlockState(arg0: $HolderGetter<$Block_>, arg1: $CompoundTag_): $BlockState;
-        static snbtToStructure(arg0: string): $CompoundTag;
-        static createUUID(arg0: $UUID_): $IntArrayTag;
-        static loadUUID(arg0: $Tag_): $UUID;
-        static getDataVersion(arg0: $CompoundTag_, arg1: number): number;
-        static writeBlockPos(arg0: $BlockPos_): $Tag;
-        static addCurrentDataVersion(arg0: $CompoundTag_): $CompoundTag;
-        static toPrettyComponent(arg0: $Tag_): $Component;
-        static addDataVersion(arg0: $CompoundTag_, arg1: number): $CompoundTag;
         static writeFluidState(arg0: $FluidState): $CompoundTag;
-        static prettyPrint(arg0: $Tag_): string;
         static prettyPrint(arg0: $Tag_, arg1: boolean): string;
+        static prettyPrint(arg0: $Tag_): string;
         static prettyPrint(arg0: $StringBuilder, arg1: $Tag_, arg2: number, arg3: boolean): $StringBuilder;
         static structureToSnbt(arg0: $CompoundTag_): string;
         static packStructureTemplate(arg0: $CompoundTag_): $CompoundTag;
         static unpackStructureTemplate(arg0: $CompoundTag_): $CompoundTag;
         static packBlockState(arg0: $CompoundTag_): string;
         static unpackBlockState(arg0: string): $CompoundTag;
+        static addDataVersion(arg0: $CompoundTag_, arg1: number): $CompoundTag;
+        static snbtToStructure(arg0: string): $CompoundTag;
+        static writeBlockState(arg0: $BlockState_): $CompoundTag;
+        static readBlockState(arg0: $HolderGetter<$Block_>, arg1: $CompoundTag_): $BlockState;
+        static compareNbt(arg0: $Tag_, arg1: $Tag_, arg2: boolean): boolean;
+        static readBlockPos(arg0: $CompoundTag_, arg1: string): ($BlockPos) | undefined;
+        static createUUID(arg0: $UUID_): $IntArrayTag;
+        static loadUUID(arg0: $Tag_): $UUID;
+        static getDataVersion(arg0: $CompoundTag_, arg1: number): number;
+        static addCurrentDataVersion(arg0: $CompoundTag_): $CompoundTag;
+        static writeBlockPos(arg0: $BlockPos_): $Tag;
+        static toPrettyComponent(arg0: $Tag_): $Component;
         static SNBT_DATA_TAG: string;
     }
     export class $ListTag extends $CollectionTag<$Tag> {
+        getString(arg0: number): string;
+        get(arg0: number): $Tag;
         getShort(arg0: number): number;
         getInt(arg0: number): number;
         getFloat(arg0: number): number;
         getDouble(arg0: number): number;
-        getString(arg0: number): string;
+        copy(): $ListTag;
         getList(arg0: number): $ListTag;
         getIntArray(arg0: number): number[];
         getLongArray(arg0: number): number[];
         getCompound(arg0: number): $CompoundTag;
         reversed(): $SequencedCollection<$Tag>;
         static TYPE: $TagType<$ListTag>;
+        constructor(arg0: $List_<$Tag_>, arg1: number);
         constructor(arg0: number);
         constructor();
-        constructor(arg0: $List_<$Tag_>, arg1: number);
     }
     /**
      * Values that may be interpreted as {@link $ListTag}.
@@ -460,12 +460,10 @@ declare module "@package/net/minecraft/nbt" {
     }
     export class $DoubleTag extends $NumericTag {
         static valueOf(arg0: number): $DoubleTag;
-        copy(): $DoubleTag;
         static ZERO: $DoubleTag;
         static TYPE: $TagType<$DoubleTag>;
     }
     export class $ByteArrayTag extends $CollectionTag<$ByteTag> {
-        get(arg0: number): $ByteTag;
         add(arg0: number, arg1: $ByteTag): void;
         set(arg0: number, arg1: $ByteTag): $ByteTag;
         getAsByteArray(): number[];
@@ -500,15 +498,14 @@ declare module "@package/net/minecraft/nbt" {
     }
     export class $FloatTag extends $NumericTag {
         static valueOf(arg0: number): $FloatTag;
-        copy(): $FloatTag;
         static ZERO: $FloatTag;
         static TYPE: $TagType<$FloatTag>;
     }
     export class $EndTag implements $Tag {
-        getId(): number;
-        accept(arg0: $TagVisitor): void;
-        accept(arg0: $StreamTagVisitor): $StreamTagVisitor$ValueResult;
         write(arg0: $DataOutput): void;
+        accept(arg0: $StreamTagVisitor): $StreamTagVisitor$ValueResult;
+        accept(arg0: $TagVisitor): void;
+        getId(): number;
         getType(): $TagType<$EndTag>;
         sizeInBytes(): number;
         getAsString(): string;
@@ -522,15 +519,15 @@ declare module "@package/net/minecraft/nbt" {
     }
     export class $ShortTag extends $NumericTag {
         static valueOf(arg0: number): $ShortTag;
-        copy(): $ShortTag;
         static TYPE: $TagType<$ShortTag>;
         constructor(arg0: number);
     }
     export class $SnbtPrinterTagVisitor implements $TagVisitor {
-        visit(arg0: $Tag_): string;
-        getKeys(arg0: $CompoundTag_): $List<string>;
-        pathString(): string;
         static handleEscapePretty(arg0: string): string;
+        pathString(): string;
+        getKeys(arg0: $CompoundTag_): $List<string>;
+        visit(arg0: $Tag_): string;
+        visitEnd(arg0: $EndTag): void;
         visitString(arg0: $StringTag): void;
         visitByte(arg0: $ByteTag): void;
         visitShort(arg0: $ShortTag): void;
@@ -538,12 +535,11 @@ declare module "@package/net/minecraft/nbt" {
         visitFloat(arg0: $FloatTag): void;
         visitLong(arg0: $LongTag): void;
         visitDouble(arg0: $DoubleTag): void;
-        visitEnd(arg0: $EndTag): void;
         visitCompound(arg0: $CompoundTag_): void;
         visitList(arg0: $ListTag_): void;
         visitByteArray(arg0: $ByteArrayTag): void;
-        visitLongArray(arg0: $LongArrayTag): void;
         visitIntArray(arg0: $IntArrayTag): void;
+        visitLongArray(arg0: $LongArrayTag): void;
         constructor();
         constructor(arg0: string, arg1: number, arg2: $List_<string>);
     }
@@ -557,16 +553,16 @@ declare module "@package/net/minecraft/nbt" {
         static createInvalid(arg0: number): $TagType<$EndTag>;
     }
     export interface $TagType<T extends $Tag> {
+        isValue(): boolean;
         getName(): string;
         load(arg0: $DataInput, arg1: $NbtAccounter): T;
         parse(arg0: $DataInput, arg1: $StreamTagVisitor, arg2: $NbtAccounter): $StreamTagVisitor$ValueResult;
         skip(arg0: $DataInput, arg1: $NbtAccounter): void;
         skip(arg0: $DataInput, arg1: number, arg2: $NbtAccounter): void;
-        isValue(): boolean;
         getPrettyName(): string;
         parseRoot(arg0: $DataInput, arg1: $StreamTagVisitor, arg2: $NbtAccounter): void;
-        get name(): string;
         get value(): boolean;
+        get name(): string;
         get prettyName(): string;
     }
     export class $NbtOps$ListCollector {
@@ -576,10 +572,10 @@ declare module "@package/net/minecraft/nbt" {
     export class $CollectionTag<T extends $Tag> extends $AbstractList<T> implements $Tag, $CustomJavaToJsWrapper {
         add(arg0: number, arg1: T): void;
         set(arg0: number, arg1: T): T;
+        getElementType(): number;
         setTag(arg0: number, arg1: $Tag_): boolean;
         convertJavaToJs(scope: $Scriptable, target: $TypeInfo_): $Scriptable;
         addTag(arg0: number, arg1: $Tag_): boolean;
-        getElementType(): number;
         getAsString(): string;
         acceptAsRoot(arg0: $StreamTagVisitor): void;
         reversed(): $SequencedCollection<T>;
@@ -592,19 +588,19 @@ declare module "@package/net/minecraft/nbt" {
      */
     export type $CollectionTag_<T> = any[];
     export class $StringTag implements $Tag, $SpecialEquality {
-        static valueOf(arg0: string): $StringTag;
-        copy(): $StringTag;
-        getId(): number;
-        accept(arg0: $StreamTagVisitor): $StreamTagVisitor$ValueResult;
-        accept(arg0: $TagVisitor): void;
-        write(arg0: $DataOutput): void;
-        getType(): $TagType<$StringTag>;
         static skipString(arg0: $DataInput): void;
+        static valueOf(arg0: string): $StringTag;
+        write(arg0: $DataOutput): void;
+        accept(arg0: $TagVisitor): void;
+        accept(arg0: $StreamTagVisitor): $StreamTagVisitor$ValueResult;
+        getId(): number;
+        getType(): $TagType<$StringTag>;
         getAsString(): string;
         sizeInBytes(): number;
         specialEquals(o: $Object, shallow: boolean): boolean;
         static quoteAndEscape(arg0: string): string;
         acceptAsRoot(arg0: $StreamTagVisitor): void;
+        copy(): $Tag;
         static TYPE: $TagType<$StringTag>;
         get id(): number;
         get type(): $TagType<$StringTag>;
@@ -614,6 +610,7 @@ declare module "@package/net/minecraft/nbt" {
         get(arg0: number): $IntTag;
         add(arg0: number, arg1: $IntTag): void;
         set(arg0: number, arg1: $IntTag): $IntTag;
+        copy(): $IntArrayTag;
         getAsIntArray(): number[];
         reversed(): $SequencedCollection<$IntTag>;
         static TYPE: $TagType<$IntArrayTag>;

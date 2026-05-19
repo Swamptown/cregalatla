@@ -11,7 +11,11 @@ declare module "@package/xaero/hud/minimap/waypoint/render/world" {
         /**
          * @deprecated
          */
-        hasNext(arg0: number, arg1: $WaypointWorldRenderContext): boolean;
+        setupContextAndGetNext(arg0: number, arg1: $WaypointWorldRenderContext): $Waypoint;
+        /**
+         * @deprecated
+         */
+        getNext(arg0: number, arg1: $WaypointWorldRenderContext): $Waypoint;
         /**
          * @deprecated
          */
@@ -23,11 +27,7 @@ declare module "@package/xaero/hud/minimap/waypoint/render/world" {
         /**
          * @deprecated
          */
-        setupContextAndGetNext(arg0: number, arg1: $WaypointWorldRenderContext): $Waypoint;
-        /**
-         * @deprecated
-         */
-        getNext(arg0: number, arg1: $WaypointWorldRenderContext): $Waypoint;
+        hasNext(arg0: number, arg1: $WaypointWorldRenderContext): boolean;
         filter: $Predicate<$Waypoint>;
         constructor();
     }

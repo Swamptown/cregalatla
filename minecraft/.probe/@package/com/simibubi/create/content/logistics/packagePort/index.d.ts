@@ -19,13 +19,13 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/com/simibubi/create/content/logistics/packagePort" {
     export class $PackagePortTarget {
-        register(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
-        setup(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
-        be(arg0: $LevelAccessor, arg1: $BlockPos_): $BlockEntity;
-        export(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $ItemStack_, arg3: boolean): boolean;
         deregister(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
         getExactTargetLocation(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): $Vec3;
         depositImmediately(): boolean;
+        export(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $ItemStack_, arg3: boolean): boolean;
+        register(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
+        setup(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
+        be(arg0: $LevelAccessor, arg1: $BlockPos_): $BlockEntity;
         getIcon(): $ItemStack;
         canSupport(arg0: $BlockEntity): boolean;
         static CODEC: $Codec<$PackagePortTarget>;
@@ -46,15 +46,15 @@ declare module "@package/com/simibubi/create/content/logistics/packagePort" {
      */
     export type $PackagePortTargetType_ = RegistryTypes.CreatePackagePortTargetType;
     export class $PackagePortBlockEntity extends $SmartBlockEntity implements $MenuProvider, $Clearable, $PackagePortBlockEntityAccessor {
-        use(arg0: $Player): $ItemInteractionResult;
-        getDisplayName(): $Component;
-        isBackedUp(): boolean;
         filterChanged(): void;
         getFilterString(): string;
+        isBackedUp(): boolean;
         createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
         clearContent(): void;
         getComparatorOutput(): number;
         drop(arg0: $ItemStack_): void;
+        getDisplayName(): $Component;
+        use(arg0: $Player): $ItemInteractionResult;
         shouldTriggerClientSideContainerClosingOnOpen(): boolean;
         writeClientSideData(arg0: $AbstractContainerMenu, arg1: $RegistryFriendlyByteBuf): void;
         shouldCloseCurrentScreen(): boolean;
@@ -68,9 +68,9 @@ declare module "@package/com/simibubi/create/content/logistics/packagePort" {
         inventory: $SmartInventory;
         target: $PackagePortTarget;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
-        get displayName(): $Component;
-        get backedUp(): boolean;
         get filterString(): string;
+        get backedUp(): boolean;
         get comparatorOutput(): number;
+        get displayName(): $Component;
     }
 }

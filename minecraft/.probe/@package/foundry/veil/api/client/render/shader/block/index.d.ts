@@ -3,9 +3,9 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/foundry/veil/api/client/render/shader/block" {
     export class $ShaderBlock$MemoryLayout extends $Enum<$ShaderBlock$MemoryLayout> {
+        getLayoutId(): $GlslTypeQualifier$LayoutId;
         static values(): $ShaderBlock$MemoryLayout[];
         static valueOf(arg0: string): $ShaderBlock$MemoryLayout;
-        getLayoutId(): $GlslTypeQualifier$LayoutId;
         static SHARED: $ShaderBlock$MemoryLayout;
         static STD140: $ShaderBlock$MemoryLayout;
         static PACKED: $ShaderBlock$MemoryLayout;
@@ -17,9 +17,9 @@ declare module "@package/foundry/veil/api/client/render/shader/block" {
      */
     export type $ShaderBlock$MemoryLayout_ = "packed" | "shared" | "std140" | "std430";
     export class $ShaderBlock$BufferBinding extends $Enum<$ShaderBlock$BufferBinding> {
+        getGlType(): number;
         static values(): $ShaderBlock$BufferBinding[];
         static valueOf(arg0: string): $ShaderBlock$BufferBinding;
-        getGlType(): number;
         static UNIFORM: $ShaderBlock$BufferBinding;
         static SHADER_STORAGE: $ShaderBlock$BufferBinding;
         get glType(): number;

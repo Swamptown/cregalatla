@@ -11,31 +11,31 @@ export * as scrollValue from "@package/com/simibubi/create/foundation/blockEntit
 
 declare module "@package/com/simibubi/create/foundation/blockEntity/behaviour" {
     export class $BlockEntityBehaviour {
-        static get<T extends $BlockEntityBehaviour>(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BehaviourType<T>): T;
-        static get<T extends $BlockEntityBehaviour>(arg0: $BlockEntity, arg1: $BehaviourType<T>): T;
-        initialize(): void;
-        destroy(): void;
-        write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
-        getType(): $BehaviourType<never>;
-        read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
-        unload(): void;
-        tick(): void;
+        onNeighborChanged(arg0: $BlockPos_): void;
         onBlockChanged(arg0: $BlockState_): void;
         getRequiredItems(): $ItemRequirement;
-        onNeighborChanged(arg0: $BlockPos_): void;
+        getWorld(): $Level;
         setLazyTickRate(arg0: number): void;
         lazyTick(): void;
         writeSafe(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         isSafeNBT(): boolean;
-        getWorld(): $Level;
+        tick(): void;
+        static get<T extends $BlockEntityBehaviour>(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BehaviourType<T>): T;
+        static get<T extends $BlockEntityBehaviour>(arg0: $BlockEntity, arg1: $BehaviourType<T>): T;
+        initialize(): void;
+        write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
+        read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
+        destroy(): void;
+        getType(): $BehaviourType<never>;
+        unload(): void;
         getPos(): $BlockPos;
         blockEntity: $SmartBlockEntity;
         constructor(arg0: $SmartBlockEntity);
-        get type(): $BehaviourType<never>;
         get requiredItems(): $ItemRequirement;
+        get world(): $Level;
         set lazyTickRate(value: number);
         get safeNBT(): boolean;
-        get world(): $Level;
+        get type(): $BehaviourType<never>;
         get pos(): $BlockPos;
     }
     export class $BehaviourType<T extends $BlockEntityBehaviour> {

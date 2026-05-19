@@ -11,7 +11,6 @@ import { $RenderRegionExtension } from "@package/foundry/veil/forge/ext";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/region" {
     export class $RenderRegion$DeviceResources {
-        delete(arg0: $CommandList): void;
         deleteTessellation(arg0: $CommandList): void;
         getTessellation(): $GlTessellation;
         updateTessellation(arg0: $CommandList, arg1: $GlTessellation): void;
@@ -21,6 +20,7 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/region" 
         getIndexArena(): $GlBufferArena;
         deleteIndexedTessellation(arg0: $CommandList): void;
         shouldDelete(): boolean;
+        delete(arg0: $CommandList): void;
         getIndexBuffer(): $GlBuffer;
         getGeometryArena(): $GlBufferArena;
         constructor(arg0: $CommandList, arg1: $StagingBuffer);
@@ -32,30 +32,30 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/region" 
         get geometryArena(): $GlBufferArena;
     }
     export class $RenderRegion implements $RenderRegionExtension {
+        getOriginX(): number;
+        getOriginY(): number;
+        getRenderList(): $ChunkRenderList;
+        veil$getPerspectiveRenderList(): $ChunkRenderList;
+        getOriginZ(): number;
+        createResources(arg0: $CommandList): $RenderRegion$DeviceResources;
+        refreshTesselation(arg0: $CommandList): void;
+        refreshIndexedTesselation(arg0: $CommandList): void;
+        createStorage(arg0: $TerrainRenderPass): $SectionRenderDataStorage;
+        getStorage(arg0: $TerrainRenderPass): $SectionRenderDataStorage;
+        getSection(arg0: number): $RenderSection;
+        getY(): number;
+        addSection(arg0: $RenderSection): void;
         update(arg0: $CommandList): void;
         isEmpty(): boolean;
         getResources(): $RenderRegion$DeviceResources;
         static key(arg0: number, arg1: number, arg2: number): number;
         delete(arg0: $CommandList): void;
-        getOriginZ(): number;
-        refreshTesselation(arg0: $CommandList): void;
-        refreshIndexedTesselation(arg0: $CommandList): void;
-        createResources(arg0: $CommandList): $RenderRegion$DeviceResources;
-        veil$getPerspectiveRenderList(): $ChunkRenderList;
-        getRenderList(): $ChunkRenderList;
-        createStorage(arg0: $TerrainRenderPass): $SectionRenderDataStorage;
-        getStorage(arg0: $TerrainRenderPass): $SectionRenderDataStorage;
-        getSection(arg0: number): $RenderSection;
-        getY(): number;
         getX(): number;
         getZ(): number;
         removeSection(arg0: $RenderSection): void;
         getChunkX(): number;
         getChunkY(): number;
         getChunkZ(): number;
-        getOriginX(): number;
-        getOriginY(): number;
-        addSection(arg0: $RenderSection): void;
         static REGION_LENGTH: number;
         static REGION_WIDTH: number;
         static REGION_LENGTH_SH: number;
@@ -67,17 +67,17 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/region" 
         static REGION_SIZE: number;
         static REGION_HEIGHT: number;
         constructor(arg0: number, arg1: number, arg2: number, arg3: $StagingBuffer);
+        get originX(): number;
+        get originY(): number;
+        get renderList(): $ChunkRenderList;
+        get originZ(): number;
+        get y(): number;
         get empty(): boolean;
         get resources(): $RenderRegion$DeviceResources;
-        get originZ(): number;
-        get renderList(): $ChunkRenderList;
-        get y(): number;
         get x(): number;
         get z(): number;
         get chunkX(): number;
         get chunkY(): number;
         get chunkZ(): number;
-        get originX(): number;
-        get originY(): number;
     }
 }

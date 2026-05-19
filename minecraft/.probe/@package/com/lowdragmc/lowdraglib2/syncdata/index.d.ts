@@ -25,9 +25,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/syncdata" {
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
     }
     export class $SyncValueHolder<T> {
+        static getValueField(): $Field;
         getValue(): T;
         setValue(arg0: T): void;
-        static getValueField(): $Field;
         managedKey: $ManagedKey;
         ref: $IRef<never>;
         type: $Type;

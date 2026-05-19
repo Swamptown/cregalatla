@@ -32,9 +32,9 @@ declare module "@package/com/simibubi/create/api/contraption/storage/item" {
     }
     export interface $MountedItemStorageType<T> extends RegistryMarked<RegistryTypes.CreateMountedItemStorageTypeTag, RegistryTypes.CreateMountedItemStorageType> {}
     export class $MountedItemStorage implements $IItemHandlerModifiable {
-        unmount(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockEntity): void;
-        wrapMethod$cjd000$offroad$wrapHandler(arg0: $StructureTemplate$StructureBlockInfo_, arg1: $Contraption, arg2: $Operation_<any>): $IItemHandlerModifiable;
+        wrapMethod$cjk000$offroad$wrapHandler(arg0: $StructureTemplate$StructureBlockInfo_, arg1: $Contraption, arg2: $Operation_<any>): $IItemHandlerModifiable;
         handleInteraction(arg0: $ServerPlayer, arg1: $Contraption, arg2: $StructureTemplate$StructureBlockInfo_): boolean;
+        unmount(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockEntity): void;
         kjs$self(): $IItemHandler;
         kjs$getBlock(level: $Level_): $LevelBlock;
         kjs$isMutable(): boolean;
@@ -70,9 +70,9 @@ declare module "@package/com/simibubi/create/api/contraption/storage/item" {
         get slots(): number;
     }
     export class $MountedItemStorageType<T extends $MountedItemStorage> {
-        is(arg0: $TagKey_<$MountedItemStorageType<never>>): boolean;
-        mount(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockEntity): T;
         static mountedItemStorage<B extends $Block, P>(arg0: $RegistryEntry<$MountedItemStorageType_<never>, $MountedItemStorageType_<never>>): $NonNullUnaryOperator<$BlockBuilder<B, P>>;
+        mount(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockEntity): T;
+        is(arg0: $TagKey_<$MountedItemStorageType<never>>): boolean;
         codec: $MapCodec<T>;
         static CODEC: $Codec<$MountedItemStorageType<never>>;
         holder: $Holder$Reference<$MountedItemStorageType<never>>;

@@ -12,7 +12,7 @@ import { $SoundEvent_ } from "@package/net/minecraft/sounds";
 import { $Holder_, $HolderSet_, $Registry } from "@package/net/minecraft/core";
 import { $TickDuration_, $RegistryAccessContainer } from "@package/dev/latvian/mods/kubejs/util";
 import { $Path_ } from "@package/java/nio/file";
-import { $PackResources, $PackType_, $PackLocationInfo, $PackType, $AbstractPackResources, $PackResources$ResourceOutput_ } from "@package/net/minecraft/server/packs";
+import { $PackResources, $PackType_, $PackLocationInfo, $AbstractPackResources, $PackType, $PackResources$ResourceOutput_ } from "@package/net/minecraft/server/packs";
 import { $Enum, $Record, $Object } from "@package/java/lang";
 import { $LootTable } from "@package/net/minecraft/world/level/storage/loot";
 import { $ScriptType_, $ScriptType } from "@package/dev/latvian/mods/kubejs/script";
@@ -31,10 +31,10 @@ import { $Block_ } from "@package/net/minecraft/world/level/block";
 
 declare module "@package/dev/latvian/mods/kubejs/script/data" {
     export class $GeneratedData extends $Record implements $IoSupplier<$InputStream> {
+        get(): $InputStream;
         data(): $Supplier<number[]>;
         id(): $ResourceLocation;
         static json(id: $ResourceLocation_, json: $Supplier_<$JsonElement>): $GeneratedData;
-        get(): $InputStream;
         static PACK_META: $GeneratedData;
         static INTERNAL_RELOAD: $GeneratedData;
         static PACK_ICON: $GeneratedData;
@@ -43,7 +43,7 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
     /**
      * Values that may be interpreted as {@link $GeneratedData}.
      */
-    export type $GeneratedData_ = { data?: $Supplier_<number[]>, id?: $ResourceLocation_,  } | [data?: $Supplier_<number[]>, id?: $ResourceLocation_, ];
+    export type $GeneratedData_ = { id?: $ResourceLocation_, data?: $Supplier_<number[]>,  } | [id?: $ResourceLocation_, data?: $Supplier_<number[]>, ];
     export class $GeneratedDataStage extends $Enum<$GeneratedDataStage> implements $StringRepresentable {
         static values(): $GeneratedDataStage[];
         static valueOf(name: string): $GeneratedDataStage;
@@ -72,39 +72,15 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
         exportPath(): string;
     }
     export class $VirtualResourcePack extends $AbstractPackResources implements $KubeResourceGenerator, $ExportablePackResources {
+        export(root: $Path_): void;
         reset(): void;
         add(data: $GeneratedData_): void;
-        export(root: $Path_): void;
         getRegistries(): $RegistryAccessContainer;
         exportPath(): string;
         getGenerated(id: $ResourceLocation_): $GeneratedData;
-        flush(): void;
         text(id: $ResourceLocation_, content: string): void;
+        flush(): void;
         json(id: $ResourceLocation_, json: $JsonElement_): void;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -117,6 +93,30 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         component: $Component;
         stage: $GeneratedDataStage;
         scriptType: $ScriptType;
@@ -129,9 +129,9 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
         texture(target: $ResourceLocation_, texture: $LoadedTexture): void;
         sounds(namespace: string, consumer: $Consumer_<$SoundsGenerator>): void;
         loadTexture(id: $ResourceLocation_): $LoadedTexture;
-        mask(target: $ResourceLocation_, mask: $ResourceLocation_, input: $ResourceLocation_): boolean;
         blockModel(id: $ResourceLocation_, consumer: $Consumer_<$ModelGenerator>): void;
         itemModel(id: $ResourceLocation_, consumer: $Consumer_<$ModelGenerator>): void;
+        mask(target: $ResourceLocation_, mask: $ResourceLocation_, input: $ResourceLocation_): boolean;
         particle(id: $ResourceLocation_, consumer: $Consumer_<$ParticleGenerator>): void;
         blockState(id: $ResourceLocation_, consumer: $Consumer_<$VariantBlockStateGenerator>): void;
         multipartState(id: $ResourceLocation_, consumer: $Consumer_<$MultipartBlockStateGenerator>): void;
@@ -147,17 +147,17 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
         constructor(stage: $GeneratedDataStage_, registries: $Supplier_<$RegistryAccessContainer>);
     }
     export class $VirtualDataMapFile<RT, DT> implements $BiConsumer<$ResourceLocation, DT> {
-        remove(holders: $HolderSet_<RT>): void;
-        remove(holder: $Holder_<RT>): void;
         remove(holder: RT): void;
+        remove(holder: $Holder_<RT>): void;
+        remove(holders: $HolderSet_<RT>): void;
         clear(): void;
         replaceAll(): void;
         add(holders: $HolderSet_<RT>, value: DT, replace: boolean): void;
-        add(holder: RT, value: DT, replace: boolean): void;
-        add(holder: RT, value: DT): void;
+        add(holders: $HolderSet_<RT>, value: DT): void;
         add(holder: $Holder_<RT>, value: DT): void;
         add(holder: $Holder_<RT>, value: DT, replace: boolean): void;
-        add(holders: $HolderSet_<RT>, value: DT): void;
+        add(holder: RT, value: DT, replace: boolean): void;
+        add(holder: RT, value: DT): void;
         removeTag(tag: $TagKey_<RT>): void;
         addTag(tag: $TagKey_<RT>, value: DT): void;
         addTag(tag: $TagKey_<RT>, value: DT, replace: boolean): void;
@@ -168,19 +168,19 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
         constructor(type: $DataMapType<RT, DT>, pack: $VirtualDataPack);
     }
     export class $KubeFileResourcePack implements $PackResources {
+        static scanForInvalidFiles(pathName: string, path: $Path_): void;
         getResource(type: $PackType_, location: $ResourceLocation_): $IoSupplier<$InputStream>;
         location(): $PackLocationInfo;
         close(): void;
         generate(map: $Map_<$ResourceLocation_, $GeneratedData_>): void;
-        static scanForInvalidFiles(pathName: string, path: $Path_): void;
-        getMetadataSection<T>(serializer: $MetadataSectionSerializer<T>): T;
+        packId(): string;
         listResources(type: $PackType_, namespace: string, path: string, visitor: $PackResources$ResourceOutput_): void;
         getNamespaces(type: $PackType_): $Set<string>;
-        packId(): string;
         getGenerated(): $Map<$ResourceLocation, $GeneratedData>;
         static findBeforeModsIndex(packs: $List_<$PackResources>): number;
         static findAfterModsIndex(packs: $List_<$PackResources>): number;
         static scanAndLoad(path: $Path_, packs: $List_<$PackResources>): void;
+        getMetadataSection<T>(serializer: $MetadataSectionSerializer<T>): T;
         knownPackInfo(): ($KnownPack) | undefined;
         isHidden(): boolean;
         getRootResource(...arg0: string[]): $IoSupplier<$InputStream>;
@@ -191,9 +191,6 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
     }
     export class $VirtualDataPack extends $VirtualResourcePack implements $KubeDataGenerator {
         dataMap<R, T>(type: $DataMapType<R, T>, consumer: $Consumer_<$VirtualDataMapFile<R, T>>): void;
-        setMonsterRoomMobs(entityType: $EntityType_<never>, weight: number): void;
-        setOxidizable(from: $Block_, to: $Block_): void;
-        setParrotImitation(type: $EntityType_<never>, sound: $SoundEvent_): void;
         setRaidHeroGifts(profession: $VillagerProfession_, lootTable: $ResourceKey_<$LootTable>): void;
         setVibrationFrequency(gameEvent: $GameEvent_, frequency: number): void;
         setVillagerType(biome: $ResourceKey_<$Biome>, villagerType: $VillagerType_): void;
@@ -202,6 +199,9 @@ declare module "@package/dev/latvian/mods/kubejs/script/data" {
         removeCompostable(items: $ItemPredicate_): void;
         setFurnaceFuel(items: $ItemPredicate_, ticks: $TickDuration_): void;
         removeFurnaceFuel(items: $ItemPredicate_): void;
+        setMonsterRoomMobs(entityType: $EntityType_<never>, weight: number): void;
+        setOxidizable(from: $Block_, to: $Block_): void;
+        setParrotImitation(type: $EntityType_<never>, sound: $SoundEvent_): void;
         component: $Component;
         stage: $GeneratedDataStage;
         scriptType: $ScriptType;

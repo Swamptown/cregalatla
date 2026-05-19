@@ -37,15 +37,17 @@ declare module "@package/dev/lambdaurora/lambdynlights/shadow/nightconfig/core/i
     export class $ConfigParser<C extends $Config> {
     }
     export interface $ConfigParser<C extends $Config> {
-        parse(file: $Path_, notFoundAction: $FileNotFoundAction_): C;
+        getFormat(): $ConfigFormat<C>;
         parse(file: $File_, destination: $Config, parsingMode: $ParsingMode_, notFoundAction: $FileNotFoundAction_, charset: $Charset): void;
+        parse(file: $Path_, notFoundAction: $FileNotFoundAction_): C;
+        parse(file: $Path_, notFoundAction: $FileNotFoundAction_, charset: $Charset): C;
         parse(file: $File_, destination: $Config, parsingMode: $ParsingMode_, notFoundAction: $FileNotFoundAction_): void;
         parse(file: $File_, notFoundAction: $FileNotFoundAction_, charset: $Charset): C;
         parse(url: $URL, destination: $Config, parsingMode: $ParsingMode_): void;
         parse(url: $URL): C;
         parse(file: $Path_, destination: $Config, parsingMode: $ParsingMode_, notFoundAction: $FileNotFoundAction_, charset: $Charset): void;
         parse(file: $Path_, destination: $Config, parsingMode: $ParsingMode_, notFoundAction: $FileNotFoundAction_): void;
-        parse(file: $Path_, notFoundAction: $FileNotFoundAction_, charset: $Charset): C;
+        parse(input: $InputStream): C;
         parse(input: string, destination: $Config, parsingMode: $ParsingMode_): void;
         parse(input: string): C;
         parse(arg0: $Reader, arg1: $Config, arg2: $ParsingMode_): void;
@@ -54,14 +56,12 @@ declare module "@package/dev/lambdaurora/lambdynlights/shadow/nightconfig/core/i
         parse(input: $InputStream, destination: $Config, parsingMode: $ParsingMode_, charset: $Charset): void;
         parse(input: $InputStream, destination: $Config, parsingMode: $ParsingMode_): void;
         parse(input: $InputStream, charset: $Charset): C;
-        parse(input: $InputStream): C;
-        getFormat(): $ConfigFormat<C>;
         get format(): $ConfigFormat<C>;
     }
     export class $ConfigWriter {
     }
     export interface $ConfigWriter {
-        write(config: $UnmodifiableConfig, file: $Path_, writingMode: $WritingMode_, charset: $Charset): void;
+        writeToString(config: $UnmodifiableConfig): string;
         write(config: $UnmodifiableConfig, file: $File_, writingMode: $WritingMode_): void;
         write(config: $UnmodifiableConfig, file: $File_, writingMode: $WritingMode_, charset: $Charset): void;
         write(config: $UnmodifiableConfig, url: $URL): void;
@@ -69,7 +69,7 @@ declare module "@package/dev/lambdaurora/lambdynlights/shadow/nightconfig/core/i
         write(config: $UnmodifiableConfig, output: $OutputStream, charset: $Charset): void;
         write(config: $UnmodifiableConfig, output: $OutputStream): void;
         write(config: $UnmodifiableConfig, file: $Path_, writingMode: $WritingMode_): void;
-        writeToString(config: $UnmodifiableConfig): string;
+        write(config: $UnmodifiableConfig, file: $Path_, writingMode: $WritingMode_, charset: $Charset): void;
     }
     /**
      * Values that may be interpreted as {@link $ConfigWriter}.

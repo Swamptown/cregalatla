@@ -43,19 +43,19 @@ import { $RegisterCapabilitiesEvent } from "@package/net/neoforged/neoforge/capa
 
 declare module "@package/com/simibubi/create/content/kinetics/deployer" {
     export class $DeployerBlockEntity extends $KineticBlockEntity implements $Clearable {
-        write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
+        changeMode(): void;
+        discardPlayer(): void;
+        redstoneUpdate(): void;
+        getHandPose(): $PartialModel;
         startFistBump(arg0: $Direction_): boolean;
         triggerFistBump(): void;
         getHandOffset(arg0: number): number;
         setAnimatedOffset(arg0: number): void;
-        getHandPose(): $PartialModel;
-        changeMode(): void;
-        discardPlayer(): void;
-        redstoneUpdate(): void;
-        getRecipe(arg0: $ItemStack_): $RecipeHolder<$Recipe<$RecipeInput>>;
         getPlayer(): $DeployerFakePlayer;
+        getRecipe(arg0: $ItemStack_): $RecipeHolder<$Recipe<$RecipeInput>>;
         clearContent(): void;
         static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
+        write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
         sequenceContext: $SequencedGearshiftBlockEntity$SequenceContext;
         networkDirty: boolean;
         worldPosition: $BlockPos;
@@ -68,13 +68,13 @@ declare module "@package/com/simibubi/create/content/kinetics/deployer" {
         preventSpeedUpdate: number;
         network: number;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
-        set animatedOffset(value: number);
         get handPose(): $PartialModel;
+        set animatedOffset(value: number);
         get player(): $DeployerFakePlayer;
     }
     export class $DeployerRecipeSearchEvent extends $Event implements $ICancellableEvent {
-        addRecipe(arg0: $Supplier_<($RecipeHolder<$Recipe<$RecipeInput>>) | undefined>, arg1: number): void;
         shouldAddRecipeWithPriority(arg0: number): boolean;
+        addRecipe(arg0: $Supplier_<($RecipeHolder<$Recipe<$RecipeInput>>) | undefined>, arg1: number): void;
         getRecipe(): $RecipeHolder<$Recipe<$RecipeInput>>;
         getInventory(): $RecipeWrapper;
         getBlockEntity(): $DeployerBlockEntity;

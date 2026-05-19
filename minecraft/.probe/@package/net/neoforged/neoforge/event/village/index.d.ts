@@ -23,29 +23,29 @@ declare module "@package/net/neoforged/neoforge/event/village" {
         get registryAccess(): $RegistryAccess;
     }
     export class $VillagerTradesEvent extends $Event {
-        getType(): $VillagerProfession;
         getTrades(): $Int2ObjectMap<$List<$VillagerTrades$ItemListing>>;
+        getType(): $VillagerProfession;
         getRegistryAccess(): $RegistryAccess;
         /**
          * @deprecated
          */
         constructor(arg0: $Int2ObjectMap<$List_<$VillagerTrades$ItemListing_>>, arg1: $VillagerProfession_);
         constructor(arg0: $Int2ObjectMap<$List_<$VillagerTrades$ItemListing_>>, arg1: $VillagerProfession_, arg2: $RegistryAccess);
-        get type(): $VillagerProfession;
         get trades(): $Int2ObjectMap<$List<$VillagerTrades$ItemListing>>;
+        get type(): $VillagerProfession;
         get registryAccess(): $RegistryAccess;
     }
     export class $VillageSiegeEvent extends $Event implements $ICancellableEvent {
-        getLevel(): $Level;
         getSiege(): $VillageSiege;
         getAttemptedSpawnPos(): $Vec3;
         getPlayer(): $Player;
+        getLevel(): $Level;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $VillageSiege, arg1: $Level_, arg2: $Player, arg3: $Vec3_);
-        get level(): $Level;
         get siege(): $VillageSiege;
         get attemptedSpawnPos(): $Vec3;
         get player(): $Player;
+        get level(): $Level;
     }
 }

@@ -4,12 +4,12 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/com/simibubi/create/content/processing/burner" {
     export class $BlazeBurnerBlock$HeatLevel extends $Enum<$BlazeBurnerBlock$HeatLevel> implements $StringRepresentable {
+        nextActiveLevel(): $BlazeBurnerBlock$HeatLevel;
         static values(): $BlazeBurnerBlock$HeatLevel[];
         static valueOf(arg0: string): $BlazeBurnerBlock$HeatLevel;
-        nextActiveLevel(): $BlazeBurnerBlock$HeatLevel;
+        static byIndex(arg0: number): $BlazeBurnerBlock$HeatLevel;
         isAtLeast(arg0: $BlazeBurnerBlock$HeatLevel_): boolean;
         getSerializedName(): string;
-        static byIndex(arg0: number): $BlazeBurnerBlock$HeatLevel;
         getRemappedEnumConstantName(): string;
         static CODEC: $Codec<$BlazeBurnerBlock$HeatLevel>;
         static SEETHING: $BlazeBurnerBlock$HeatLevel;

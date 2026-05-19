@@ -39,19 +39,19 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
     /**
      * Values that may be interpreted as {@link $FluidIngredientType}.
      */
-    export type $FluidIngredientType_<T> = RegistryTypes.NeoforgeFluidIngredientType | { codec?: $MapCodec_<$FluidIngredient_>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>,  } | [codec?: $MapCodec_<$FluidIngredient_>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>, ];
+    export type $FluidIngredientType_<T> = RegistryTypes.NeoforgeFluidIngredientType | { streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>, codec?: $MapCodec_<$FluidIngredient_>,  } | [streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>, codec?: $MapCodec_<$FluidIngredient_>, ];
     export class $DataComponentFluidIngredient extends $FluidIngredient {
+        generateStacks(): $Stream<$FluidStack>;
+        isStrict(): boolean;
         static of(arg0: boolean, arg1: $DataComponentMap_, ...arg2: $Holder_<$Fluid>[]): $FluidIngredient;
-        static of(arg0: boolean, arg1: $DataComponentPredicate, ...arg2: $Holder_<$Fluid>[]): $FluidIngredient;
-        static of<T>(arg0: boolean, arg1: $Supplier_<$DataComponentType<T>>, arg2: T, ...arg3: $Fluid_[]): $FluidIngredient;
         static of(arg0: boolean, arg1: $DataComponentMap_, arg2: $HolderSet_<$Fluid>): $FluidIngredient;
-        static of(arg0: boolean, arg1: $DataComponentPredicate, arg2: $HolderSet_<$Fluid>): $FluidIngredient;
+        static of(arg0: boolean, arg1: $DataComponentPredicate, ...arg2: $Holder_<$Fluid>[]): $FluidIngredient;
         static of(arg0: boolean, arg1: $DataComponentPredicate, ...arg2: $Fluid_[]): $FluidIngredient;
-        static of(arg0: boolean, arg1: $DataComponentMap_, ...arg2: $Fluid_[]): $FluidIngredient;
+        static of(arg0: boolean, arg1: $DataComponentPredicate, arg2: $HolderSet_<$Fluid>): $FluidIngredient;
+        static of<T>(arg0: boolean, arg1: $Supplier_<$DataComponentType<T>>, arg2: T, ...arg3: $Fluid_[]): $FluidIngredient;
         static of(arg0: boolean, arg1: $FluidStack_): $FluidIngredient;
         static of<T>(arg0: boolean, arg1: $DataComponentType_<T>, arg2: T, ...arg3: $Fluid_[]): $FluidIngredient;
-        isStrict(): boolean;
-        generateStacks(): $Stream<$FluidStack>;
+        static of(arg0: boolean, arg1: $DataComponentMap_, ...arg2: $Fluid_[]): $FluidIngredient;
         components(): $DataComponentPredicate;
         fluids(): $HolderSet<$Fluid>;
         static CODEC_NON_EMPTY: $Codec<$FluidIngredient>;
@@ -73,17 +73,17 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
         static LIST_CODEC_NON_EMPTY: $Codec<$List<$FluidIngredient>>;
     }
     export class $SizedFluidIngredient implements $SizedFluidIngredientKJS {
+        getFluids(): $FluidStack[];
+        ingredient(): $FluidIngredient;
+        amount(): number;
         test(arg0: $FluidStack_): boolean;
         static of(arg0: $Fluid_, arg1: number): $SizedFluidIngredient;
-        static of(arg0: $TagKey_<$Fluid>, arg1: number): $SizedFluidIngredient;
         static of(arg0: $FluidStack_): $SizedFluidIngredient;
-        amount(): number;
-        ingredient(): $FluidIngredient;
-        getFluids(): $FluidStack[];
-        matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
+        static of(arg0: $TagKey_<$Fluid>, arg1: number): $SizedFluidIngredient;
         toFlatJson(): $JsonElement;
         toNestedJson(): $JsonElement;
+        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
         self(): $SizedFluidIngredient;
         replaceThisWith(cx: $RecipeScriptContext, _with: $Object): $Object;
         static NESTED_CODEC: $Codec<$SizedFluidIngredient>;
@@ -93,27 +93,27 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
         get fluids(): $FluidStack[];
     }
     export class $FluidIngredient implements $Predicate<$FluidStack>, $FluidIngredientKJS, $FluidIngredientStacksInvoker {
+        hasNoFluids(): boolean;
+        static tag(arg0: $TagKey_<$Fluid>): $FluidIngredient;
+        getStacks(): $FluidStack[];
         test(arg0: $FluidStack_): boolean;
-        static of(...arg0: $Fluid_[]): $FluidIngredient;
-        static of(): $FluidIngredient;
-        static of(...arg0: $FluidStack_[]): $FluidIngredient;
         isEmpty(): boolean;
+        static of(...arg0: $Fluid_[]): $FluidIngredient;
+        static of(...arg0: $FluidStack_[]): $FluidIngredient;
+        static of(): $FluidIngredient;
         static single(arg0: $FluidStack_): $FluidIngredient;
         static single(arg0: $Fluid_): $FluidIngredient;
         static single(arg0: $Holder_<$Fluid>): $FluidIngredient;
         static empty(): $FluidIngredient;
         getType(): $FluidIngredientType<never>;
-        static tag(arg0: $TagKey_<$Fluid>): $FluidIngredient;
-        hasNoFluids(): boolean;
         isSimple(): boolean;
         self(): $FluidIngredient;
-        getStacks(): $FluidStack[];
-        or(arg0: $Predicate_<$FluidStack>): $Predicate<$FluidStack>;
         negate(): $Predicate<$FluidStack>;
         and(arg0: $Predicate_<$FluidStack>): $Predicate<$FluidStack>;
-        matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
+        or(arg0: $Predicate_<$FluidStack>): $Predicate<$FluidStack>;
         withAmount(amount: number): $SizedFluidIngredient;
+        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
         getCodec(): $Codec<never>;
         toJson(): $JsonElement;
         toNBT(): $Tag;
@@ -125,9 +125,9 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
         static MAP_CODEC_NONEMPTY: $MapCodec<$FluidIngredient>;
         static LIST_CODEC_NON_EMPTY: $Codec<$List<$FluidIngredient>>;
         constructor();
+        get stacks(): $FluidStack[];
         get type(): $FluidIngredientType<never>;
         get simple(): boolean;
-        get stacks(): $FluidStack[];
         get codec(): $Codec<never>;
     }
     /**
@@ -135,9 +135,9 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
      */
     export type $FluidIngredient_ = $Fluid_ | RegExp | `#${RegistryTypes.FluidTag}` | `@${SpecialTypes.ModId}`;
     export class $IntersectionFluidIngredient extends $FluidIngredient {
-        static of(...arg0: $FluidIngredient_[]): $FluidIngredient;
-        children(): $List<$FluidIngredient>;
         generateStacks(): $Stream<$FluidStack>;
+        children(): $List<$FluidIngredient>;
+        static of(...arg0: $FluidIngredient_[]): $FluidIngredient;
         static CODEC_NON_EMPTY: $Codec<$FluidIngredient>;
         static CODEC: $MapCodec<$IntersectionFluidIngredient>;
         static LIST_CODEC: $Codec<$List<$FluidIngredient>>;
@@ -157,11 +157,11 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
         constructor(arg0: $Holder_<$Fluid>);
     }
     export class $CompoundFluidIngredient extends $FluidIngredient {
+        generateStacks(): $Stream<$FluidStack>;
+        children(): $List<$FluidIngredient>;
+        static of(...arg0: $FluidIngredient_[]): $FluidIngredient;
         static of(arg0: $List_<$FluidIngredient_>): $FluidIngredient;
         static of(arg0: $Stream<$FluidIngredient_>): $FluidIngredient;
-        static of(...arg0: $FluidIngredient_[]): $FluidIngredient;
-        children(): $List<$FluidIngredient>;
-        generateStacks(): $Stream<$FluidStack>;
         static CODEC_NON_EMPTY: $Codec<$FluidIngredient>;
         static CODEC: $MapCodec<$CompoundFluidIngredient>;
         static LIST_CODEC: $Codec<$List<$FluidIngredient>>;
@@ -171,10 +171,10 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
         constructor(arg0: $List_<$FluidIngredient_>);
     }
     export class $DifferenceFluidIngredient extends $FluidIngredient {
+        subtracted(): $FluidIngredient;
+        generateStacks(): $Stream<$FluidStack>;
         base(): $FluidIngredient;
         static of(arg0: $FluidIngredient_, arg1: $FluidIngredient_): $FluidIngredient;
-        generateStacks(): $Stream<$FluidStack>;
-        subtracted(): $FluidIngredient;
         static CODEC_NON_EMPTY: $Codec<$FluidIngredient>;
         static CODEC: $MapCodec<$DifferenceFluidIngredient>;
         static LIST_CODEC: $Codec<$List<$FluidIngredient>>;

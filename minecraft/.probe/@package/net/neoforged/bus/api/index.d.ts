@@ -24,19 +24,19 @@ declare module "@package/net/neoforged/bus/api" {
     export class $IEventBus {
     }
     export interface $IEventBus {
-        register(arg0: $Object): void;
-        start(): void;
-        unregister(arg0: $Object): void;
         post<T extends $Event>(arg0: T): T;
         post<T extends $Event>(arg0: $EventPriority_, arg1: T): T;
+        unregister(arg0: $Object): void;
+        register(arg0: $Object): void;
+        start(): void;
+        addListener<T extends $Event>(arg0: $EventPriority_, arg1: $Consumer_<T>): void;
+        addListener<T extends $Event>(arg0: $Class<T>, arg1: $Consumer_<T>): void;
+        addListener<T extends $Event>(arg0: $Consumer_<T>): void;
+        addListener<T extends $Event>(arg0: $EventPriority_, arg1: boolean, arg2: $Class<T>, arg3: $Consumer_<T>): void;
+        addListener<T extends $Event>(arg0: $EventPriority_, arg1: boolean, arg2: $Consumer_<T>): void;
+        addListener<T extends $Event>(arg0: $EventPriority_, arg1: $Class<T>, arg2: $Consumer_<T>): void;
         addListener<T extends $Event>(arg0: boolean, arg1: $Consumer_<T>): void;
         addListener<T extends $Event>(arg0: boolean, arg1: $Class<T>, arg2: $Consumer_<T>): void;
-        addListener<T extends $Event>(arg0: $EventPriority_, arg1: boolean, arg2: $Class<T>, arg3: $Consumer_<T>): void;
-        addListener<T extends $Event>(arg0: $Class<T>, arg1: $Consumer_<T>): void;
-        addListener<T extends $Event>(arg0: $EventPriority_, arg1: $Consumer_<T>): void;
-        addListener<T extends $Event>(arg0: $EventPriority_, arg1: $Class<T>, arg2: $Consumer_<T>): void;
-        addListener<T extends $Event>(arg0: $EventPriority_, arg1: boolean, arg2: $Consumer_<T>): void;
-        addListener<T extends $Event>(arg0: $Consumer_<T>): void;
     }
     export class $Event {
     }

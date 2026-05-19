@@ -1,4 +1,4 @@
-import { $ObjectCategoryListRuleType, $ObjectCategoryRule, $ObjectCategoryIncludeList, $ObjectCategoryExcludeList, $ExcludeListMode } from "@package/xaero/hud/category/rule";
+import { $ObjectCategoryRule, $ObjectCategoryListRuleType, $ObjectCategoryIncludeList, $ObjectCategoryExcludeList, $ExcludeListMode } from "@package/xaero/hud/category/rule";
 import { $List } from "@package/java/util";
 import { $FilterObjectCategoryData } from "@package/xaero/hud/category/serialization/data";
 export * as serialization from "@package/xaero/hud/category/serialization";

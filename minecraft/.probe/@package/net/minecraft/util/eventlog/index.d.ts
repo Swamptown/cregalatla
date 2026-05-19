@@ -20,11 +20,11 @@ declare module "@package/net/minecraft/util/eventlog" {
         constructor(arg0: $Codec<T>, arg1: $FileChannel);
     }
     export class $EventLogDirectory$RawFile extends $Record implements $EventLogDirectory$File {
+        openChannel(): $FileChannel;
         compress(): $EventLogDirectory$CompressedFile;
         id(): $EventLogDirectory$FileId;
         path(): $Path;
         openReader(): $Reader;
-        openChannel(): $FileChannel;
         constructor(arg0: $Path_, arg1: $EventLogDirectory$FileId_);
     }
     /**
@@ -32,23 +32,23 @@ declare module "@package/net/minecraft/util/eventlog" {
      */
     export type $EventLogDirectory$RawFile_ = { id?: $EventLogDirectory$FileId_, path?: $Path_,  } | [id?: $EventLogDirectory$FileId_, path?: $Path_, ];
     export class $EventLogDirectory {
+        static tryCompress(arg0: $Path_, arg1: $Path_): void;
+        listFiles(): $EventLogDirectory$FileList;
         static open(arg0: $Path_, arg1: string): $EventLogDirectory;
         createNewFile(arg0: $LocalDate): $EventLogDirectory$RawFile;
-        listFiles(): $EventLogDirectory$FileList;
-        static tryCompress(arg0: $Path_, arg1: $Path_): void;
         static LOGGER: $Logger;
     }
     export class $EventLogDirectory$FileId extends $Record {
-        index(): number;
-        date(): $LocalDate;
-        static parse(arg0: string): $EventLogDirectory$FileId;
         toFileName(arg0: string): string;
+        date(): $LocalDate;
+        index(): number;
+        static parse(arg0: string): $EventLogDirectory$FileId;
         constructor(arg0: $LocalDate, arg1: number);
     }
     /**
      * Values that may be interpreted as {@link $EventLogDirectory$FileId}.
      */
-    export type $EventLogDirectory$FileId_ = { date?: $LocalDate, index?: number,  } | [date?: $LocalDate, index?: number, ];
+    export type $EventLogDirectory$FileId_ = { index?: number, date?: $LocalDate,  } | [index?: number, date?: $LocalDate, ];
     export class $JsonEventLogReader<T> {
         static create<T>(arg0: $Codec<T>, arg1: $Reader): $JsonEventLogReader<T>;
     }
@@ -56,10 +56,10 @@ declare module "@package/net/minecraft/util/eventlog" {
         next(): T;
     }
     export class $EventLogDirectory$FileList implements $Iterable<$EventLogDirectory$File> {
+        compressAll(): $EventLogDirectory$FileList;
+        ids(): $Set<$EventLogDirectory$FileId>;
         iterator(): $Iterator<$EventLogDirectory$File>;
         stream(): $Stream<$EventLogDirectory$File>;
-        ids(): $Set<$EventLogDirectory$FileId>;
-        compressAll(): $EventLogDirectory$FileList;
         prune(arg0: $LocalDate, arg1: number): $EventLogDirectory$FileList;
         spliterator(): $Spliterator<$EventLogDirectory$File>;
         forEach(arg0: $Consumer_<$EventLogDirectory$File>): void;

@@ -11,27 +11,27 @@ import { $Iterable } from "@package/java/lang";
 
 declare module "@package/xaero/common/server/radar/tracker" {
     export class $SyncedTrackedPlayer {
-        update(arg0: $Player): void;
-        getId(): $UUID;
-        copyFrom(arg0: $SyncedTrackedPlayer): void;
         setDimension(arg0: $ResourceKey_<$Level>): $SyncedTrackedPlayer;
         matchesEnough(arg0: $Player, arg1: number): boolean;
         getY(): number;
+        update(arg0: $Player): void;
+        getId(): $UUID;
+        copyFrom(arg0: $SyncedTrackedPlayer): void;
         getX(): number;
         getZ(): number;
         setPos(arg0: number, arg1: number, arg2: number): $SyncedTrackedPlayer;
         getDimensionKey(): $ResourceKey<$Level>;
         constructor(arg0: $UUID_, arg1: number, arg2: number, arg3: number, arg4: $ResourceKey_<$Level>);
-        get id(): $UUID;
         set dimension(value: $ResourceKey_<$Level>);
         get y(): number;
+        get id(): $UUID;
         get x(): number;
         get z(): number;
         get dimensionKey(): $ResourceKey<$Level>;
     }
     export class $SyncedPlayerTrackerSystemManager {
-        register(arg0: string, arg1: $ISyncedPlayerTrackerSystem): void;
         getSystems(): $Iterable<$ISyncedPlayerTrackerSystem>;
+        register(arg0: string, arg1: $ISyncedPlayerTrackerSystem): void;
         constructor();
         get systems(): $Iterable<$ISyncedPlayerTrackerSystem>;
     }

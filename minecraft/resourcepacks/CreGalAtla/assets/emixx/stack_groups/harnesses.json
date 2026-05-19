@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:harnesses",
+  "type": "emixx:group",
+  "contents": [
+    "#minecraft:harnesses"
+  ]
+}

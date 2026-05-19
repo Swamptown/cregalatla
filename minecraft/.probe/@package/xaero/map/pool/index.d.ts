@@ -30,8 +30,8 @@ declare module "@package/xaero/map/pool" {
         constructor(arg0: number);
     }
     export class $MapPool<T extends $PoolUnit> {
-        size(): number;
         addToPool(arg0: T): boolean;
+        size(): number;
         constructor(arg0: number);
     }
     export class $TextureUploadPool$BranchUpdate extends $TextureUploadPool<$TextureUpload$BranchUpdate> {

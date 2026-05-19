@@ -1,5 +1,5 @@
 import { $Container } from "@package/net/minecraft/world";
-import { $LithiumTransferConditionInventory, $LithiumCooldownReceivingInventory } from "@package/net/caffeinemc/mods/lithium/api/inventory";
+import { $LithiumCooldownReceivingInventory, $LithiumTransferConditionInventory } from "@package/net/caffeinemc/mods/lithium/api/inventory";
 import { $List_, $List } from "@package/java/util";
 import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entity";
 import { $ClassInstanceMultiMap } from "@package/net/minecraft/util";
@@ -8,10 +8,10 @@ declare module "@package/net/caffeinemc/mods/lithium/mixin/block/hopper" {
     export class $CompoundContainerAccessor {
     }
     export interface $CompoundContainerAccessor {
-        getFirst(): $Container;
         getSecond(): $Container;
-        get first(): $Container;
+        getFirst(): $Container;
         get second(): $Container;
+        get first(): $Container;
     }
     export class $EntityAccessor {
     }

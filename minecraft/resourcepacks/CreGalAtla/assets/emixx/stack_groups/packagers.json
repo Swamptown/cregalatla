@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:packagers",
+  "type": "emixx:group",
+  "contents": [
+    "#create_vibrant_vaults:packagers"
+  ]
+}

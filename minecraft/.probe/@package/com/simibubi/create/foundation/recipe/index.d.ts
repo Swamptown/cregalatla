@@ -1,15 +1,15 @@
-import { $RecipeInput, $RecipeSerializer, $RecipeType, $Recipe } from "@package/net/minecraft/world/item/crafting";
+import { $RecipeType, $RecipeInput, $RecipeSerializer, $Recipe } from "@package/net/minecraft/world/item/crafting";
 import { $ResourceLocation } from "@package/net/minecraft/resources";
 
 declare module "@package/com/simibubi/create/foundation/recipe" {
     export class $IRecipeTypeInfo {
     }
     export interface $IRecipeTypeInfo {
+        getSerializer<T extends $RecipeSerializer<never>>(): T;
         getId(): $ResourceLocation;
         getType<I extends $RecipeInput, R extends $Recipe<I>>(): $RecipeType<R>;
-        getSerializer<T extends $RecipeSerializer<never>>(): T;
+        get serializer(): T;
         get id(): $ResourceLocation;
         get type(): $RecipeType<R>;
-        get serializer(): T;
     }
 }

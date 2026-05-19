@@ -72,10 +72,10 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
         get value(): number;
     }
     export class $BlockModel$GuiLight extends $Enum<$BlockModel$GuiLight> {
+        lightLikeBlock(): boolean;
         static values(): $BlockModel$GuiLight[];
         static valueOf(arg0: string): $BlockModel$GuiLight;
         static getByName(arg0: string): $BlockModel$GuiLight;
-        lightLikeBlock(): boolean;
         getSerializedName(): string;
         static SIDE: $BlockModel$GuiLight;
         static FRONT: $BlockModel$GuiLight;
@@ -86,7 +86,6 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
      */
     export type $BlockModel$GuiLight_ = "front" | "side";
     export class $BakedQuad implements $BakedQuadView, $BakedQuadAccess {
-        getFlags(): number;
         getNormalFace(): $ModelQuadFacing;
         hasAO(): boolean;
         isShade(): boolean;
@@ -94,37 +93,38 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
         hasShade(): boolean;
         getLight(arg0: number): number;
         getY(arg0: number): number;
-        getVertices(): number[];
-        getDirection(): $Direction;
-        getX(arg0: number): number;
-        getZ(arg0: number): number;
-        getSprite(): $TextureAtlasSprite;
+        getFlags(): number;
         getColor(arg0: number): number;
+        getColorIndex(): number;
         getVertexNormal(arg0: number): number;
         getFaceNormal(): number;
         getTexU(arg0: number): number;
         getTexV(arg0: number): number;
         getLightFace(): $Direction;
+        getVertices(): number[];
+        getDirection(): $Direction;
+        getX(arg0: number): number;
+        getZ(arg0: number): number;
+        getSprite(): $TextureAtlasSprite;
         isTinted(): boolean;
         getTintIndex(): number;
-        getColorIndex(): number;
         hasColor(): boolean;
-        calculateNormal(): number;
         getAccurateNormal(arg0: number): number;
+        calculateNormal(): number;
         setVertices(arg0: number[]): void;
         tintIndex: number;
         vertices: number[];
         sprite: $TextureAtlasSprite;
         direction: $Direction;
-        constructor(arg0: number[], arg1: number, arg2: $Direction_, arg3: $TextureAtlasSprite, arg4: boolean);
         constructor(arg0: number[], arg1: number, arg2: $Direction_, arg3: $TextureAtlasSprite, arg4: boolean, arg5: boolean);
-        get flags(): number;
+        constructor(arg0: number[], arg1: number, arg2: $Direction_, arg3: $TextureAtlasSprite, arg4: boolean);
         get normalFace(): $ModelQuadFacing;
         get shade(): boolean;
+        get flags(): number;
+        get colorIndex(): number;
         get faceNormal(): number;
         get lightFace(): $Direction;
         get tinted(): boolean;
-        get colorIndex(): number;
     }
     export class $ItemOverride$Deserializer implements $JsonDeserializer<$ItemOverride> {
         deserialize(arg0: $JsonElement_, arg1: $Type, arg2: $JsonDeserializationContext_): $ItemOverride;
@@ -145,11 +145,11 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
         ground: $ItemTransform;
         fixed: $ItemTransform;
         constructor(arg0: $ItemTransform, arg1: $ItemTransform, arg2: $ItemTransform, arg3: $ItemTransform, arg4: $ItemTransform, arg5: $ItemTransform, arg6: $ItemTransform, arg7: $ItemTransform, arg8: $ImmutableMap<$ItemDisplayContext_, $ItemTransform>);
+        constructor(arg0: $ItemTransforms);
         /**
          * @deprecated
          */
         constructor(arg0: $ItemTransform, arg1: $ItemTransform, arg2: $ItemTransform, arg3: $ItemTransform, arg4: $ItemTransform, arg5: $ItemTransform, arg6: $ItemTransform, arg7: $ItemTransform);
-        constructor(arg0: $ItemTransforms);
     }
     export class $BlockModel$LoopException extends $RuntimeException {
         constructor(arg0: string);
@@ -169,16 +169,16 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
         constructor();
     }
     export class $BlockModel implements $UnbakedModel, $BlockModelExtension {
-        isResolved(): boolean;
-        static fromStream(arg0: $Reader): $BlockModel;
-        hasAmbientOcclusion(): boolean;
         resolveParents(arg0: $Function_<$ResourceLocation, $UnbakedModel>): void;
-        getMaterial(arg0: string): $Material;
-        getTransforms(): $ItemTransforms;
+        hasAmbientOcclusion(): boolean;
         /**
          * @deprecated
          */
         getElements(): $List<$BlockElement>;
+        getTransforms(): $ItemTransforms;
+        getMaterial(arg0: string): $Material;
+        static fromStream(arg0: $Reader): $BlockModel;
+        isResolved(): boolean;
         static fromString(arg0: string): $BlockModel;
         getOverrides(): $List<$ItemOverride>;
         getOverrides(arg0: $ModelBaker, arg1: $BlockModel, arg2: $Function_<$Material, $TextureAtlasSprite>): $ItemOverrides;
@@ -229,16 +229,16 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
         constructor(arg0: $Vector3f, arg1: $Vector3f, arg2: $Vector3f, arg3: $Vector3f);
     }
     export class $BlockModelDefinition {
-        getVariant(arg0: string): $MultiVariant;
-        static fromStream(arg0: $BlockModelDefinition$Context, arg1: $Reader): $BlockModelDefinition;
+        static fromJsonElement(arg0: $BlockModelDefinition$Context, arg1: $JsonElement_): $BlockModelDefinition;
         isMultiPart(): boolean;
         getMultiPart(): $MultiPart;
-        static fromJsonElement(arg0: $BlockModelDefinition$Context, arg1: $JsonElement_): $BlockModelDefinition;
         getMultiVariants(): $Set<$MultiVariant>;
         hasVariant(arg0: string): boolean;
+        static fromStream(arg0: $BlockModelDefinition$Context, arg1: $Reader): $BlockModelDefinition;
+        getVariant(arg0: string): $MultiVariant;
         getVariants(): $Map<string, $MultiVariant>;
-        constructor(arg0: $List_<$BlockModelDefinition>);
         constructor(arg0: $Map_<string, $MultiVariant>, arg1: $MultiPart);
+        constructor(arg0: $List_<$BlockModelDefinition>);
         get multiVariants(): $Set<$MultiVariant>;
         get variants(): $Map<string, $MultiVariant>;
     }
@@ -258,20 +258,20 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
         constructor();
     }
     export class $BlockElementFace extends $Record {
-        parent(): $MutableObject<$BlockElement>;
         texture(): string;
         uv(): $BlockFaceUV;
         cullForDirection(): $Direction;
         tintIndex(): number;
         faceData(): $ExtraFaceData;
+        parent(): $MutableObject<$BlockElement>;
         static NO_TINT: number;
-        constructor(arg0: $Direction_, arg1: number, arg2: string, arg3: $BlockFaceUV);
         constructor(cullForDirection: $Direction_, tintIndex: number, texture: string, uv: $BlockFaceUV, faceData: $ExtraFaceData_, parent: $MutableObject<$BlockElement>);
+        constructor(arg0: $Direction_, arg1: number, arg2: string, arg3: $BlockFaceUV);
     }
     /**
      * Values that may be interpreted as {@link $BlockElementFace}.
      */
-    export type $BlockElementFace_ = { faceData?: $ExtraFaceData_, cullForDirection?: $Direction_, texture?: string, parent?: $MutableObject<$BlockElement>, tintIndex?: number, uv?: $BlockFaceUV,  } | [faceData?: $ExtraFaceData_, cullForDirection?: $Direction_, texture?: string, parent?: $MutableObject<$BlockElement>, tintIndex?: number, uv?: $BlockFaceUV, ];
+    export type $BlockElementFace_ = { uv?: $BlockFaceUV, tintIndex?: number, parent?: $MutableObject<$BlockElement>, texture?: string, cullForDirection?: $Direction_, faceData?: $ExtraFaceData_,  } | [uv?: $BlockFaceUV, tintIndex?: number, parent?: $MutableObject<$BlockElement>, texture?: string, cullForDirection?: $Direction_, faceData?: $ExtraFaceData_, ];
     export class $ItemModelGenerator$Span {
     }
     export class $MultiVariant implements $UnbakedModel {
@@ -301,12 +301,12 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
         getOverrides(): $ImmutableList<$ItemOverrides$BakedOverride>;
         static NO_OVERRIDE: number;
         static EMPTY: $ItemOverrides;
-        constructor(arg0: $ModelBaker, arg1: $UnbakedModel, arg2: $List_<$ItemOverride>, arg3: $Function_<$Material, $TextureAtlasSprite>);
+        constructor();
         /**
          * @deprecated
          */
         constructor(arg0: $ModelBaker, arg1: $BlockModel, arg2: $List_<$ItemOverride>);
-        constructor();
+        constructor(arg0: $ModelBaker, arg1: $UnbakedModel, arg2: $List_<$ItemOverride>, arg3: $Function_<$Material, $TextureAtlasSprite>);
         get overrides(): $ImmutableList<$ItemOverrides$BakedOverride>;
     }
     export class $BlockModelDefinition$MissingVariantException extends $RuntimeException {
@@ -323,8 +323,8 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
         constructor();
     }
     export class $BlockElementRotation extends $Record {
-        origin(): $Vector3f;
         rescale(): boolean;
+        origin(): $Vector3f;
         angle(): number;
         axis(): $Direction$Axis;
         constructor(arg0: $Vector3f, arg1: $Direction$Axis_, arg2: number, arg3: boolean);
@@ -332,7 +332,7 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
     /**
      * Values that may be interpreted as {@link $BlockElementRotation}.
      */
-    export type $BlockElementRotation_ = { angle?: number, origin?: $Vector3f, rescale?: boolean, axis?: $Direction$Axis_,  } | [angle?: number, origin?: $Vector3f, rescale?: boolean, axis?: $Direction$Axis_, ];
+    export type $BlockElementRotation_ = { axis?: $Direction$Axis_, rescale?: boolean, origin?: $Vector3f, angle?: number,  } | [axis?: $Direction$Axis_, rescale?: boolean, origin?: $Vector3f, angle?: number, ];
     export class $BlockFaceUV$Deserializer implements $JsonDeserializer<$BlockFaceUV> {
         getRotation(arg0: $JsonObject_): number;
         deserialize(arg0: $JsonElement_, arg1: $Type, arg2: $JsonDeserializationContext_): $BlockFaceUV;
@@ -348,20 +348,20 @@ declare module "@package/net/minecraft/client/renderer/block/model" {
         constructor();
     }
     export class $BlockModelDefinition$Context {
-        getDefinition(): $StateDefinition<$Block, $BlockState>;
         setDefinition(arg0: $StateDefinition<$Block_, $BlockState_>): void;
+        getDefinition(): $StateDefinition<$Block, $BlockState>;
         gson: $Gson;
         constructor();
     }
     export class $Variant implements $ModelState {
-        getModelLocation(): $ResourceLocation;
         isUvLocked(): boolean;
+        getModelLocation(): $ResourceLocation;
         getWeight(): number;
         getRotation(): $Transformation;
         mayApplyArbitraryRotation(): boolean;
         constructor(arg0: $ResourceLocation_, arg1: $Transformation, arg2: boolean, arg3: number);
-        get modelLocation(): $ResourceLocation;
         get uvLocked(): boolean;
+        get modelLocation(): $ResourceLocation;
         get weight(): number;
         get rotation(): $Transformation;
     }

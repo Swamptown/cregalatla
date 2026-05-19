@@ -4,19 +4,19 @@ import { $Iterable } from "@package/java/lang";
 
 declare module "@package/xaero/hud/minimap/waypoint/server" {
     export class $ServerWaypointManager {
+        getWaypoints(): $Iterable<$Waypoint>;
+        getBySlot(arg0: number): $Waypoint;
+        addDisabled(arg0: number): void;
+        getById(arg0: number): $Waypoint;
         remove(arg0: number): void;
         size(): number;
         clear(): void;
         isEmpty(): boolean;
         add(arg0: number, arg1: $Waypoint): void;
-        addDisabled(arg0: number): void;
-        getBySlot(arg0: number): $Waypoint;
-        getById(arg0: number): $Waypoint;
         getIds(): $IntIterable;
-        getWaypoints(): $Iterable<$Waypoint>;
         constructor();
+        get waypoints(): $Iterable<$Waypoint>;
         get empty(): boolean;
         get ids(): $IntIterable;
-        get waypoints(): $Iterable<$Waypoint>;
     }
 }

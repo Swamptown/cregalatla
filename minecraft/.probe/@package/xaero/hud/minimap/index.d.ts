@@ -20,6 +20,7 @@ export * as common from "@package/xaero/hud/minimap/common";
 
 declare module "@package/xaero/hud/minimap" {
     export class $Minimap {
+        usingFBO(): boolean;
         getWaypointWorldRenderer(): $WaypointWorldRenderer;
         getMinimapFBORenderer(): $MinimapFBORenderer;
         getCrashedWith(): $Throwable;
@@ -38,7 +39,6 @@ declare module "@package/xaero/hud/minimap" {
          */
         getWaypointsIngameRenderer(): $WaypointsIngameRenderer;
         getMinimapSafeModeRenderer(): $MinimapSafeModeRenderer;
-        usingFBO(): boolean;
         getCompassRenderer(): $CompassRenderer;
         getModMain(): $HudMod;
         getInfoDisplays(): $InfoDisplays;

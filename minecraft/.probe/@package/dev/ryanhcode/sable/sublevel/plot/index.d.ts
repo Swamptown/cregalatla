@@ -12,7 +12,7 @@ import { $RandomSource } from "@package/net/minecraft/util";
 import { $WorldBorder } from "@package/net/minecraft/world/level/border";
 import { $Supplier_, $Predicate_ } from "@package/java/util/function";
 import { $DifficultyInstance, $Difficulty } from "@package/net/minecraft/world";
-import { $BlockPos, $BlockPos_, $RegistryAccess, $Registry, $Holder$Reference, $Holder_, $Holder, $Direction_, $HolderLookup } from "@package/net/minecraft/core";
+import { $BlockPos, $BlockPos_, $RegistryAccess, $Holder$Reference, $Registry, $Holder_, $Holder, $Direction_, $HolderLookup } from "@package/net/minecraft/core";
 import { $SoundEvent_, $SoundSource_ } from "@package/net/minecraft/sounds";
 import { $ChunkHolder, $ChunkResult, $ChunkHolder$PlayerProvider_, $ChunkHolder$LevelChangeListener_, $ServerLevel } from "@package/net/minecraft/server/level";
 import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
@@ -29,7 +29,7 @@ import { $FluidState, $Fluid_, $Fluid } from "@package/net/minecraft/world/level
 import { $Biome, $BiomeManager } from "@package/net/minecraft/world/level/biome";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $LevelChunk, $ChunkSource, $ChunkAccess } from "@package/net/minecraft/world/level/chunk";
-import { $SubLevel, $ClientSubLevel } from "@package/dev/ryanhcode/sable/sublevel";
+import { $SubLevel } from "@package/dev/ryanhcode/sable/sublevel";
 import { $LevelData } from "@package/net/minecraft/world/level/storage";
 import { $ModelData } from "@package/net/neoforged/neoforge/client/model/data";
 import { $Stream } from "@package/java/util/stream";
@@ -45,58 +45,54 @@ import { $SubLevelContainer } from "@package/dev/ryanhcode/sable/api/sublevel";
 export * as heat from "@package/dev/ryanhcode/sable/sublevel/plot/heat";
 
 declare module "@package/dev/ryanhcode/sable/sublevel/plot" {
-    export class $ClientLevelPlot extends $LevelPlot {
-        plotPos: $ChunkPos;
-        constructor(arg0: $SubLevelContainer, arg1: number, arg2: number, arg3: number, arg4: $ClientSubLevel);
-    }
     export class $LevelPlot {
-        contains(arg0: number, arg1: number): boolean;
-        contains(arg0: $Vec3_): boolean;
-        contains(arg0: $ChunkPos): boolean;
-        contains(arg0: $Vector3dc): boolean;
-        tick(): void;
-        getCenterChunk(): $ChunkPos;
-        newEmptyChunk(arg0: $ChunkPos): void;
-        getEmbeddedLevelAccessor(): $EmbeddedPlotLevelAccessor;
-        getCenterBlock(): $BlockPos;
+        getBlockEntityActors(): $Iterable<$BlockEntitySubLevelActor>;
+        getLoadedChunks(): $Collection<$PlotChunkHolder>;
         toGlobal(arg0: $ChunkPos): $ChunkPos;
         expandIfNecessary(arg0: $BlockPos_): void;
         getBlockEntityReactionWheels(): $Collection<$BlockEntitySubLevelReactionWheel>;
         getBlockEntityReactionWheelMap(): $Set<$Map$Entry<$BlockPos, $BlockEntitySubLevelReactionWheel>>;
-        getBlockEntityActors(): $Iterable<$BlockEntitySubLevelActor>;
-        getLoadedChunks(): $Collection<$PlotChunkHolder>;
+        getCenterChunk(): $ChunkPos;
+        newEmptyChunk(arg0: $ChunkPos): void;
+        getEmbeddedLevelAccessor(): $EmbeddedPlotLevelAccessor;
+        getCenterBlock(): $BlockPos;
         getChunkMin(): $ChunkPos;
         getChunkMax(): $ChunkPos;
-        getChunkHolder(arg0: $ChunkPos): $PlotChunkHolder;
         onBlockChange(arg0: $BlockPos_, arg1: $BlockState_): void;
+        getChunkHolder(arg0: $ChunkPos): $PlotChunkHolder;
+        tick(): void;
+        contains(arg0: $ChunkPos): boolean;
+        contains(arg0: $Vector3dc): boolean;
+        contains(arg0: $Vec3_): boolean;
+        contains(arg0: number, arg1: number): boolean;
         toLocal(arg0: $ChunkPos): $ChunkPos;
         addChunkHolder(arg0: $ChunkPos, arg1: $PlotChunkHolder, arg2: boolean): void;
-        onRemove(): void;
         updateBoundingBox(): void;
+        onRemove(): void;
         getBoundingBox(): $BoundingBox3ic;
-        setBoundingBox(arg0: $BoundingBox3ic): void;
         getSubLevel(): $SubLevel;
+        setBoundingBox(arg0: $BoundingBox3ic): void;
         getChunk(arg0: $ChunkPos): $LevelChunk;
         getLightEngine(): $LevelLightEngine;
         plotPos: $ChunkPos;
         constructor(arg0: $SubLevelContainer, arg1: number, arg2: number, arg3: number, arg4: $SubLevel);
+        get blockEntityActors(): $Iterable<$BlockEntitySubLevelActor>;
+        get loadedChunks(): $Collection<$PlotChunkHolder>;
+        get blockEntityReactionWheels(): $Collection<$BlockEntitySubLevelReactionWheel>;
+        get blockEntityReactionWheelMap(): $Set<$Map$Entry<$BlockPos, $BlockEntitySubLevelReactionWheel>>;
         get centerChunk(): $ChunkPos;
         get embeddedLevelAccessor(): $EmbeddedPlotLevelAccessor;
         get centerBlock(): $BlockPos;
-        get blockEntityReactionWheels(): $Collection<$BlockEntitySubLevelReactionWheel>;
-        get blockEntityReactionWheelMap(): $Set<$Map$Entry<$BlockPos, $BlockEntitySubLevelReactionWheel>>;
-        get blockEntityActors(): $Iterable<$BlockEntitySubLevelActor>;
-        get loadedChunks(): $Collection<$PlotChunkHolder>;
         get chunkMin(): $ChunkPos;
         get chunkMax(): $ChunkPos;
         get subLevel(): $SubLevel;
         get lightEngine(): $LevelLightEngine;
     }
     export class $PlotChunkHolder extends $ChunkHolder {
-        static create(arg0: $Level_, arg1: $ChunkPos, arg2: $LevelLightEngine, arg3: $LevelChunk): $PlotChunkHolder;
         getHeatSection(arg0: number): $HeatDataChunkSection;
         setHeatSection(arg0: number, arg1: $HeatDataChunkSection): void;
         handleBlockChange(arg0: number, arg1: number, arg2: number, arg3: $BlockState_, arg4: $BlockState_): void;
+        static create(arg0: $Level_, arg1: $ChunkPos, arg2: $LevelLightEngine, arg3: $LevelChunk): $PlotChunkHolder;
         getBoundingBox(): $BoundingBox3ic;
         getChunk(): $LevelChunk;
         currentlyLoading: $LevelChunk;
@@ -121,10 +117,12 @@ declare module "@package/dev/ryanhcode/sable/sublevel/plot" {
         constructor();
     }
     export class $EmbeddedPlotLevelAccessor implements $CommonLevelAccessor, $ServerLevelAccessor {
-        getLevel(): $ServerLevel;
         getEntities(arg0: $Entity, arg1: $AABB_, arg2: $Predicate_<$Entity>): $List<$Entity>;
         getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $AABB_, arg2: $Predicate_<T>): $List<T>;
+        getLevel(): $ServerLevel;
+        getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
         setBlock(arg0: $BlockPos_, arg1: $BlockState_, arg2: number, arg3: number): boolean;
+        getFluidState(arg0: $BlockPos_): $FluidState;
         getLevelData(): $LevelData;
         getBlockState(arg0: $BlockPos_): $BlockState;
         enabledFeatures(): $FeatureFlagSet;
@@ -132,17 +130,14 @@ declare module "@package/dev/ryanhcode/sable/sublevel/plot" {
         getBlockEntity(arg0: $BlockPos_): $BlockEntity;
         registryAccess(): $RegistryAccess;
         getChunkSource(): $ChunkSource;
-        getFluidState(arg0: $BlockPos_): $FluidState;
-        levelEvent(arg0: $Player, arg1: number, arg2: $BlockPos_, arg3: number): void;
         isClientSide(): boolean;
         gameEvent(arg0: $Holder_<$GameEvent>, arg1: $Vec3_, arg2: $GameEvent$Context_): void;
         getRandom(): $RandomSource;
         addParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
         playSound(arg0: $Player, arg1: $BlockPos_, arg2: $SoundEvent_, arg3: $SoundSource_, arg4: number, arg5: number): void;
         getServer(): $MinecraftServer;
+        levelEvent(arg0: $Player, arg1: number, arg2: $BlockPos_, arg3: number): void;
         getChunk(arg0: number, arg1: number, arg2: $ChunkStatus_, arg3: boolean): $ChunkAccess;
-        removeBlock(arg0: $BlockPos_, arg1: boolean): boolean;
-        destroyBlock(arg0: $BlockPos_, arg1: boolean, arg2: $Entity, arg3: number): boolean;
         hasChunk(arg0: number, arg1: number): boolean;
         /**
          * @deprecated
@@ -154,13 +149,14 @@ declare module "@package/dev/ryanhcode/sable/sublevel/plot" {
         getSkyDarken(): number;
         isStateAtPosition(arg0: $BlockPos_, arg1: $Predicate_<$BlockState>): boolean;
         isFluidAtPosition(arg0: $BlockPos_, arg1: $Predicate_<$FluidState>): boolean;
+        removeBlock(arg0: $BlockPos_, arg1: boolean): boolean;
+        destroyBlock(arg0: $BlockPos_, arg1: boolean, arg2: $Entity, arg3: number): boolean;
         getBiomeManager(): $BiomeManager;
         nextSubTickCount(): number;
         getBlockTicks(): $LevelTickAccess<$Block>;
         getFluidTicks(): $LevelTickAccess<$Fluid>;
         getShade(arg0: $Direction_, arg1: boolean): number;
         getUncachedNoiseBiome(arg0: number, arg1: number, arg2: number): $Holder<$Biome>;
-        getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
         getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $BlockEntityType_<T>): (T) | undefined;
         getHeightmapPos(arg0: $Heightmap$Types_, arg1: $BlockPos_): $BlockPos;
         getEntityCollisions(arg0: $Entity, arg1: $AABB_): $List<$VoxelShape>;
@@ -181,18 +177,23 @@ declare module "@package/dev/ryanhcode/sable/sublevel/plot" {
         getNearbyPlayers(arg0: $TargetingConditions, arg1: $LivingEntity, arg2: $AABB_): $List<$Player>;
         getNearbyEntities<T extends $LivingEntity>(arg0: $Class<T>, arg1: $TargetingConditions, arg2: $LivingEntity, arg3: $AABB_): $List<T>;
         getPlayerByUUID(arg0: $UUID_): $Player;
+        getHeight(): number;
         getBiome(arg0: $BlockPos_): $Holder<$Biome>;
-        getBlockStatesIfLoaded(arg0: $AABB_): $Stream<$BlockState>;
-        /**
-         * @deprecated
-         */
-        hasChunkAt(arg0: number, arg1: number): boolean;
         /**
          * @deprecated
          */
         hasChunkAt(arg0: $BlockPos_): boolean;
+        /**
+         * @deprecated
+         */
+        hasChunkAt(arg0: number, arg1: number): boolean;
         getMinBuildHeight(): number;
         containsAnyLiquid(arg0: $AABB_): boolean;
+        getBlockStatesIfLoaded(arg0: $AABB_): $Stream<$BlockState>;
+        /**
+         * @deprecated
+         */
+        hasChunksAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
         /**
          * @deprecated
          */
@@ -204,42 +205,37 @@ declare module "@package/dev/ryanhcode/sable/sublevel/plot" {
         /**
          * @deprecated
          */
-        hasChunksAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
-        /**
-         * @deprecated
-         */
         getLightLevelDependentMagicValue(arg0: $BlockPos_): number;
         getChunk(arg0: $BlockPos_): $ChunkAccess;
         getChunk(arg0: number, arg1: number): $ChunkAccess;
         getChunk(arg0: number, arg1: number, arg2: $ChunkStatus_): $ChunkAccess;
         getChunkForCollisions(arg0: number, arg1: number): $BlockGetter;
-        getBlockTint(arg0: $BlockPos_, arg1: $ColorResolver_): number;
-        getNoiseBiome(arg0: number, arg1: number, arg2: number): $Holder<$Biome>;
-        isEmptyBlock(arg0: $BlockPos_): boolean;
-        canSeeSkyFromBelowWater(arg0: $BlockPos_): boolean;
-        getPathfindingCostFromLightLevels(arg0: $BlockPos_): number;
-        getMaxLocalRawBrightness(arg0: $BlockPos_, arg1: number): number;
-        getMaxLocalRawBrightness(arg0: $BlockPos_): number;
-        isWaterAt(arg0: $BlockPos_): boolean;
         holderLookup<T>(arg0: $ResourceKey_<$Registry<T>>): $HolderLookup<T>;
         hasBiomes(): boolean;
         getBiomeFabric(arg0: $BlockPos_): $Holder<any>;
         lithium$getLoadedChunk(arg0: number, arg1: number): $ChunkAccess;
-        getHeight(): number;
-        levelEvent(arg0: number, arg1: $BlockPos_, arg2: number): void;
-        gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $Vec3_): void;
+        getBlockTint(arg0: $BlockPos_, arg1: $ColorResolver_): number;
+        getNoiseBiome(arg0: number, arg1: number, arg2: number): $Holder<$Biome>;
+        isEmptyBlock(arg0: $BlockPos_): boolean;
+        canSeeSkyFromBelowWater(arg0: $BlockPos_): boolean;
+        getMaxLocalRawBrightness(arg0: $BlockPos_, arg1: number): number;
+        getMaxLocalRawBrightness(arg0: $BlockPos_): number;
+        isWaterAt(arg0: $BlockPos_): boolean;
+        getPathfindingCostFromLightLevels(arg0: $BlockPos_): number;
         gameEvent(arg0: $ResourceKey_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
-        gameEvent(arg0: $Holder_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
         gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $BlockPos_): void;
+        gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $Vec3_): void;
+        gameEvent(arg0: $Holder_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
         getDifficulty(): $Difficulty;
         playSound(arg0: $Player, arg1: $BlockPos_, arg2: $SoundEvent_, arg3: $SoundSource_): void;
+        levelEvent(arg0: number, arg1: $BlockPos_, arg2: number): void;
+        neighborShapeChanged(arg0: $Direction_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: number, arg5: number): void;
         blockUpdated(arg0: $BlockPos_, arg1: $Block_): void;
         dayTime(): number;
-        scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number, arg3: $TickPriority_): void;
-        scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number): void;
         scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number): void;
         scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number, arg3: $TickPriority_): void;
-        neighborShapeChanged(arg0: $Direction_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: number, arg5: number): void;
+        scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number, arg3: $TickPriority_): void;
+        scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number): void;
         self(): $EntityGetter;
         getMcEntities(): $Iterable<$Entity>;
         getMcPlayers(): $List<$Player>;
@@ -248,24 +244,24 @@ declare module "@package/dev/ryanhcode/sable/sublevel/plot" {
         canSeeSky(arg0: $BlockPos_): boolean;
         getBrightness(arg0: $LightLayer_, arg1: $BlockPos_): number;
         getRawBrightness(arg0: $BlockPos_, arg1: number): number;
-        findSupportingBlock(arg0: $Entity, arg1: $AABB_): ($BlockPos) | undefined;
-        noCollision(arg0: $Entity, arg1: $AABB_): boolean;
         noCollision(arg0: $AABB_): boolean;
+        noCollision(arg0: $Entity, arg1: $AABB_): boolean;
         noCollision(arg0: $Entity): boolean;
         noBlockCollision(arg0: $Entity, arg1: $AABB_): boolean;
+        findSupportingBlock(arg0: $Entity, arg1: $AABB_): ($BlockPos) | undefined;
         getBlockCollisions(arg0: $Entity, arg1: $AABB_): $Iterable<$VoxelShape>;
         findFreePosition(arg0: $Entity, arg1: $VoxelShape, arg2: $Vec3_, arg3: number, arg4: number, arg5: number): ($Vec3) | undefined;
+        isUnobstructed(arg0: $Entity): boolean;
+        isUnobstructed(arg0: $BlockState_, arg1: $BlockPos_, arg2: $CollisionContext): boolean;
         getCollisions(arg0: $Entity, arg1: $AABB_): $Iterable<$VoxelShape>;
         collidesWithSuffocatingBlock(arg0: $Entity, arg1: $AABB_): boolean;
-        isUnobstructed(arg0: $BlockState_, arg1: $BlockPos_, arg2: $CollisionContext): boolean;
-        isUnobstructed(arg0: $Entity): boolean;
         getSignal(arg0: $BlockPos_, arg1: $Direction_): number;
         getDirectSignal(arg0: $BlockPos_, arg1: $Direction_): number;
-        getDirectSignalTo(arg0: $BlockPos_): number;
-        getControlInputSignal(arg0: $BlockPos_, arg1: $Direction_, arg2: boolean): number;
         hasSignal(arg0: $BlockPos_, arg1: $Direction_): boolean;
         hasNeighborSignal(arg0: $BlockPos_): boolean;
         getBestNeighborSignal(arg0: $BlockPos_): number;
+        getDirectSignalTo(arg0: $BlockPos_): number;
+        getControlInputSignal(arg0: $BlockPos_, arg1: $Direction_, arg2: boolean): number;
         holder<T>(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
         holderOrThrow<T>(arg0: $ResourceKey_<T>): $Holder<T>;
         isAreaLoaded(arg0: $BlockPos_, arg1: number): boolean;
@@ -284,11 +280,11 @@ declare module "@package/dev/ryanhcode/sable/sublevel/plot" {
         getEntityByNetworkID(id: number): $Entity;
         getEntities(): $EntityArrayList;
         clip(arg0: $ClipContext): $BlockHitResult;
+        clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
         getLightEmission(arg0: $BlockPos_): number;
         isBlockInLine(arg0: $ClipBlockStateContext): $BlockHitResult;
-        clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
-        getBlockFloorHeight(arg0: $BlockPos_): number;
         getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
+        getBlockFloorHeight(arg0: $BlockPos_): number;
         getMaxLightLevel(): number;
         getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
         getShade(arg0: number, arg1: number, arg2: number, arg3: boolean): number;
@@ -296,14 +292,14 @@ declare module "@package/dev/ryanhcode/sable/sublevel/plot" {
         getSectionsCount(): number;
         getMaxSection(): number;
         getMinSection(): number;
-        isOutsideBuildHeight(arg0: number): boolean;
         isOutsideBuildHeight(arg0: $BlockPos_): boolean;
+        isOutsideBuildHeight(arg0: number): boolean;
         getSectionIndex(arg0: number): number;
         getSectionIndexFromSectionY(arg0: number): number;
         getSectionYFromSectionIndex(arg0: number): number;
-        getModelData(arg0: $BlockPos_): $ModelData;
-        getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
         getAuxLightManager(arg0: $BlockPos_): $AuxiliaryLightManager;
+        getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
+        getModelData(arg0: $BlockPos_): $ModelData;
         getBlockEntityRenderData(arg0: $BlockPos_): $Object;
         constructor(arg0: $LevelPlot);
         get level(): $ServerLevel;

@@ -24,12 +24,12 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/dev/latvian/mods/kubejs/misc" {
     export class $PotionBuilder extends $BuilderBase<$Potion> {
+        effect(effect: $Holder_<$MobEffect>, duration: number, amplifier: number, ambient: boolean, visible: boolean): this;
+        effect(effect: $Holder_<$MobEffect>, duration: number, amplifier: number, ambient: boolean, visible: boolean, showIcon: boolean): this;
         effect(effect: $Holder_<$MobEffect>, duration: number, amplifier: number, ambient: boolean, visible: boolean, showIcon: boolean, hiddenEffect: $MobEffectInstance): this;
         effect(effect: $Holder_<$MobEffect>, duration: number, amplifier: number): this;
-        effect(effect: $Holder_<$MobEffect>, duration: number, amplifier: number, ambient: boolean, visible: boolean, showIcon: boolean): this;
-        effect(effect: $Holder_<$MobEffect>, duration: number, amplifier: number, ambient: boolean, visible: boolean): this;
-        effect(effect: $Holder_<$MobEffect>): this;
         effect(effect: $Holder_<$MobEffect>, duration: number): this;
+        effect(effect: $Holder_<$MobEffect>): this;
         addEffect(effect: $MobEffectInstance): this;
         registryKey: $ResourceKey<$Registry<$Potion>>;
         sourceLine: $SourceLine;
@@ -77,18 +77,18 @@ declare module "@package/dev/latvian/mods/kubejs/misc" {
         constructor(i: $ResourceLocation_);
     }
     export class $PoiTypeBuilder extends $BuilderBase<$PoiType> {
-        block(r: $Block_): this;
-        validRange(i: number): this;
-        blocks(r: $BlockState_[]): this;
         maxTickets(i: number): this;
+        validRange(i: number): this;
+        block(r: $Block_): this;
+        blocks(r: $BlockState_[]): this;
         registryKey: $ResourceKey<$Registry<$PoiType>>;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         constructor(i: $ResourceLocation_);
     }
     export class $PaintingVariantBuilder extends $BuilderBase<$PaintingVariant> {
-        size(width: number, height: number): this;
         assetId(assetId: $ResourceLocation_): this;
+        size(width: number, height: number): this;
         registryKey: $ResourceKey<$Registry<$PaintingVariant>>;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
@@ -106,14 +106,14 @@ declare module "@package/dev/latvian/mods/kubejs/misc" {
         constructor(i: $ResourceLocation_);
     }
     export class $MobEffectBuilder extends $BuilderBase<$MobEffect> {
-        color(col: $KubeColor_): this;
-        instant(): this;
-        instant(instant: boolean): this;
-        category(c: $MobEffectCategory_): this;
         harmful(): this;
         beneficial(): this;
         effectTick(effectTick: $MobEffectBuilder$EffectEntityCallback_): this;
         modifyAttribute(attribute: $ResourceLocation_, id: $ResourceLocation_, amount: number, operation: $AttributeModifier$Operation_): this;
+        instant(instant: boolean): this;
+        instant(): this;
+        category(c: $MobEffectCategory_): this;
+        color(col: $KubeColor_): this;
         registryKey: $ResourceKey<$Registry<$MobEffect>>;
         sourceLine: $SourceLine;
         id: $ResourceLocation;

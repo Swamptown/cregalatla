@@ -14,11 +14,11 @@ declare module "@package/net/neoforged/neoforge/common/world/chunk" {
     export class $ForcedChunkManager$TicketOwner<T extends $Comparable<T>> implements $Comparable<$ForcedChunkManager$TicketOwner<T>> {
     }
     export class $TicketController extends $Record {
-        id(): $ResourceLocation;
-        callback(): $LoadingValidationCallback;
+        forceChunk(arg0: $ServerLevel, arg1: $Entity, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
         forceChunk(arg0: $ServerLevel, arg1: $UUID_, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
         forceChunk(arg0: $ServerLevel, arg1: $BlockPos_, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
-        forceChunk(arg0: $ServerLevel, arg1: $Entity, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
+        callback(): $LoadingValidationCallback;
+        id(): $ResourceLocation;
         constructor(id: $ResourceLocation_, callback: $LoadingValidationCallback_);
         constructor(arg0: $ResourceLocation_);
     }
@@ -39,8 +39,8 @@ declare module "@package/net/neoforged/neoforge/common/world/chunk" {
         register(arg0: $TicketController_): void;
     }
     export class $TicketSet extends $Record {
-        ticking(): $LongSet;
         nonTicking(): $LongSet;
+        ticking(): $LongSet;
         constructor(nonTicking: $LongSet, ticking: $LongSet);
     }
     /**
@@ -48,32 +48,32 @@ declare module "@package/net/neoforged/neoforge/common/world/chunk" {
      */
     export type $TicketSet_ = { nonTicking?: $LongSet, ticking?: $LongSet,  } | [nonTicking?: $LongSet, ticking?: $LongSet, ];
     export class $TicketHelper {
-        removeTicket(arg0: $BlockPos_, arg1: number, arg2: boolean): void;
-        removeTicket(arg0: $UUID_, arg1: number, arg2: boolean): void;
-        removeAllTickets(arg0: $UUID_): void;
         removeAllTickets(arg0: $BlockPos_): void;
+        removeAllTickets(arg0: $UUID_): void;
         getBlockTickets(): $Map<$BlockPos, $TicketSet>;
         getEntityTickets(): $Map<$UUID, $TicketSet>;
+        removeTicket(arg0: $BlockPos_, arg1: number, arg2: boolean): void;
+        removeTicket(arg0: $UUID_, arg1: number, arg2: boolean): void;
         get blockTickets(): $Map<$BlockPos, $TicketSet>;
         get entityTickets(): $Map<$UUID, $TicketSet>;
     }
     export class $ForcedChunkManager$TicketTracker<T extends $Comparable<T>> {
-        remove(arg0: $ForcedChunkManager$TicketOwner<T>, arg1: number, arg2: boolean): boolean;
-        isEmpty(): boolean;
         getTickingChunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
         getChunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
+        remove(arg0: $ForcedChunkManager$TicketOwner<T>, arg1: number, arg2: boolean): boolean;
+        isEmpty(): boolean;
         constructor();
-        get empty(): boolean;
         get tickingChunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
         get chunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
+        get empty(): boolean;
     }
     export class $ForcedChunkManager {
-        static init(): void;
-        static reinstatePersistentChunks(arg0: $ServerLevel, arg1: $ForcedChunksSavedData): void;
-        static hasForcedChunks(arg0: $ServerLevel): boolean;
-        static writeBlockPos(arg0: $BlockPos_): $CompoundTag;
         static writeModForcedChunks(arg0: $CompoundTag_, arg1: $ForcedChunkManager$TicketTracker<$BlockPos_>, arg2: $ForcedChunkManager$TicketTracker<$UUID_>): void;
         static readModForcedChunks(arg0: $CompoundTag_, arg1: $ForcedChunkManager$TicketTracker<$BlockPos_>, arg2: $ForcedChunkManager$TicketTracker<$UUID_>): void;
+        static reinstatePersistentChunks(arg0: $ServerLevel, arg1: $ForcedChunksSavedData): void;
+        static hasForcedChunks(arg0: $ServerLevel): boolean;
+        static init(): void;
+        static writeBlockPos(arg0: $BlockPos_): $CompoundTag;
         constructor();
     }
 }

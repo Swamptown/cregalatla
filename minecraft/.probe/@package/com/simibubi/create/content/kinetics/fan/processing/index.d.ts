@@ -15,13 +15,13 @@ declare module "@package/com/simibubi/create/content/kinetics/fan/processing" {
         static getAt(arg0: $Level_, arg1: $BlockPos_): $FanProcessingType;
     }
     export interface $FanProcessingType {
-        getPriority(): number;
-        process(arg0: $ItemStack_, arg1: $Level_): $List<$ItemStack>;
         isValidAt(arg0: $Level_, arg1: $BlockPos_): boolean;
+        spawnProcessingParticles(arg0: $Level_, arg1: $Vec3_): void;
+        canProcess(arg0: $ItemStack_, arg1: $Level_): boolean;
         morphAirFlow(arg0: $FanProcessingType$AirFlowParticleAccess, arg1: $RandomSource): void;
         affectEntity(arg0: $Entity, arg1: $Level_): void;
-        canProcess(arg0: $ItemStack_, arg1: $Level_): boolean;
-        spawnProcessingParticles(arg0: $Level_, arg1: $Vec3_): void;
+        getPriority(): number;
+        process(arg0: $ItemStack_, arg1: $Level_): $List<$ItemStack>;
         get priority(): number;
     }
     /**
@@ -31,8 +31,8 @@ declare module "@package/com/simibubi/create/content/kinetics/fan/processing" {
     export class $FanProcessingType$AirFlowParticleAccess {
     }
     export interface $FanProcessingType$AirFlowParticleAccess {
-        setColor(arg0: number): void;
         spawnExtraParticle(arg0: $ParticleOptions_, arg1: number): void;
+        setColor(arg0: number): void;
         setAlpha(arg0: number): void;
         set color(value: number);
         set alpha(value: number);

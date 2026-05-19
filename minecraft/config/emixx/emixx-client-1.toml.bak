@@ -1,0 +1,7 @@
+[creativeModeTabs]
+	enableCreativeModeTabs = true
+	syncSelectedCreativeModeTab = true
+
+[stackGroups]
+	enableStackGroups = true
+	disabledStackGroups = ["minecraft:flowers", "minecraft:beds", "c:buckets"]

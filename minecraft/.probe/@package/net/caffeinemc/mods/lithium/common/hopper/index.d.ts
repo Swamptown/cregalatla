@@ -15,22 +15,23 @@ declare module "@package/net/caffeinemc/mods/lithium/common/hopper" {
         lithium$invalidateCacheOnNeighborUpdate(arg0: $Direction_): void;
     }
     export class $LithiumStackList extends $NonNullList<$ItemStack> implements $LithiumDefaultedList, $ChangeSubscriber$CountChangeSubscriber<$ItemStack> {
-        add(arg0: number, arg1: $ItemStack_): void;
-        set(arg0: number, arg1: $ItemStack_): $ItemStack;
-        changed(): void;
-        removeInventoryModificationCallback(arg0: $InventoryChangeTracker): void;
-        setNextInventoryModificationCallback(arg0: $InventoryChangeTracker): void;
-        getSignalStrength(arg0: $Container): number;
-        runComparatorUpdatePatternOnFailedExtract(arg0: $LithiumStackList, arg1: $Container): void;
-        maybeSendsComparatorUpdatesOnFailedExtract(): boolean;
-        getModCount(): number;
-        getOccupiedSlots(): number;
-        getFullSlots(): number;
         changedALot(): void;
         hasSignalStrengthOverride(): boolean;
         setReducedSignalStrengthOverride(): void;
         clearSignalStrengthOverride(): void;
         changedInteractionConditions(): void;
+        removeInventoryModificationCallback(arg0: $InventoryChangeTracker): void;
+        setNextInventoryModificationCallback(arg0: $InventoryChangeTracker): void;
+        getModCount(): number;
+        getOccupiedSlots(): number;
+        getFullSlots(): number;
+        runComparatorUpdatePatternOnFailedExtract(arg0: $LithiumStackList, arg1: $Container): void;
+        maybeSendsComparatorUpdatesOnFailedExtract(): boolean;
+        getSignalStrength(arg0: $Container): number;
+        changed(): void;
+        remove(arg0: number): $ItemStack;
+        add(arg0: number, arg1: $ItemStack_): void;
+        set(arg0: number, arg1: $ItemStack_): $ItemStack;
         lithium$notify(arg0: $ItemStack_, arg1: number): void;
         lithium$notifyCount(arg0: $ItemStack_, arg1: number, arg2: number): void;
         lithium$forceUnsubscribe(arg0: $ItemStack_, arg1: number): void;

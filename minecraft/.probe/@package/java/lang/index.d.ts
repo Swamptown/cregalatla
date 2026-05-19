@@ -27,60 +27,60 @@ declare module "@package/java/lang" {
         length(): number;
         getChars(arg0: number, arg1: number, arg2: string[], arg3: number): void;
         compareTo(arg0: string): number;
-        indexOf(arg0: string, arg1: number): number;
         indexOf(arg0: string, arg1: number, arg2: number): number;
+        indexOf(arg0: string, arg1: number): number;
         indexOf(arg0: number): number;
         indexOf(arg0: number, arg1: number): number;
         indexOf(arg0: number, arg1: number, arg2: number): number;
         indexOf(arg0: string): number;
+        static valueOf(arg0: number): string;
+        static valueOf(arg0: string[]): string;
         static valueOf(arg0: $Object): string;
+        static valueOf(arg0: string[], arg1: number, arg2: number): string;
         static valueOf(arg0: number): string;
         static valueOf(arg0: number): string;
         static valueOf(arg0: string): string;
-        static valueOf(arg0: string[], arg1: number, arg2: number): string;
         static valueOf(arg0: boolean): string;
-        static valueOf(arg0: number): string;
-        static valueOf(arg0: string[]): string;
         static valueOf(arg0: number): string;
         charAt(arg0: number): string;
         codePointAt(arg0: number): number;
         codePointBefore(arg0: number): number;
         codePointCount(arg0: number, arg1: number): number;
         offsetByCodePoints(arg0: number, arg1: number): number;
-        getBytes(arg0: string): number[];
+        getBytes(): number[];
         /**
          * @deprecated
          */
         getBytes(arg0: number, arg1: number, arg2: number[], arg3: number): void;
-        getBytes(): number[];
+        getBytes(arg0: string): number[];
         getBytes(arg0: $Charset): number[];
-        contentEquals(arg0: $StringBuffer): boolean;
         contentEquals(arg0: $CharSequence): boolean;
+        contentEquals(arg0: $StringBuffer): boolean;
         regionMatches(arg0: number, arg1: string, arg2: number, arg3: number): boolean;
         regionMatches(arg0: boolean, arg1: number, arg2: string, arg3: number, arg4: number): boolean;
         startsWith(arg0: string): boolean;
         startsWith(arg0: string, arg1: number): boolean;
         lastIndexOf(arg0: number): number;
         lastIndexOf(arg0: string): number;
-        lastIndexOf(arg0: string, arg1: number): number;
         lastIndexOf(arg0: number, arg1: number): number;
+        lastIndexOf(arg0: string, arg1: number): number;
         substring(arg0: number, arg1: number): string;
         substring(arg0: number): string;
         isEmpty(): boolean;
-        replace(arg0: $CharSequence, arg1: $CharSequence): string;
         replace(arg0: string, arg1: string): string;
+        replace(arg0: $CharSequence, arg1: $CharSequence): string;
         matches(arg0: string): boolean;
         replaceFirst(arg0: string, arg1: string): string;
         replaceAll(arg0: string, arg1: string): string;
         split(arg0: string): string[];
         split(arg0: string, arg1: number): string[];
         splitWithDelimiters(arg0: string, arg1: number): string[];
-        static join(arg0: $CharSequence, ...arg1: $CharSequence[]): string;
         static join(arg0: $CharSequence, arg1: $Iterable_<$CharSequence>): string;
+        static join(arg0: $CharSequence, ...arg1: $CharSequence[]): string;
         toLowerCase(): string;
         toLowerCase(arg0: $Locale): string;
-        toUpperCase(arg0: $Locale): string;
         toUpperCase(): string;
+        toUpperCase(arg0: $Locale): string;
         trim(): string;
         strip(): string;
         stripLeading(): string;
@@ -91,7 +91,6 @@ declare module "@package/java/lang" {
         toCharArray(): string[];
         static format(arg0: $Locale, arg1: string, ...arg2: $Object[]): string;
         static format(arg0: string, ...arg1: $Object[]): string;
-        resolveConstantDesc(arg0: $MethodHandles$Lookup): string;
         codePoints(): $IntStream;
         equalsIgnoreCase(arg0: string): boolean;
         compareToIgnoreCase(arg0: string): number;
@@ -109,6 +108,7 @@ declare module "@package/java/lang" {
         static copyValueOf(arg0: string[]): string;
         intern(): string;
         describeConstable(): (string) | undefined;
+        resolveConstantDesc(arg0: $MethodHandles$Lookup): $Object;
         static CASE_INSENSITIVE_ORDER: $Comparator<string>;
         constructor(arg0: $StringBuilder);
         constructor(arg0: number[], arg1: number, arg2: number, arg3: $Charset);
@@ -142,19 +142,19 @@ declare module "@package/java/lang" {
         enableNativeAccess(arg0: $Module): $ModuleLayer$Controller;
     }
     export class $ModuleLayer {
+        static defineModulesWithOneLoader(arg0: $Configuration, arg1: $List_<$ModuleLayer>, arg2: $ClassLoader): $ModuleLayer$Controller;
+        defineModulesWithOneLoader(arg0: $Configuration, arg1: $ClassLoader): $ModuleLayer;
+        static defineModulesWithManyLoaders(arg0: $Configuration, arg1: $List_<$ModuleLayer>, arg2: $ClassLoader): $ModuleLayer$Controller;
+        defineModulesWithManyLoaders(arg0: $Configuration, arg1: $ClassLoader): $ModuleLayer;
+        findLoader(arg0: string): $ClassLoader;
         static empty(): $ModuleLayer;
         static boot(): $ModuleLayer;
         modules(): $Set<$Module>;
         configuration(): $Configuration;
         parents(): $List<$ModuleLayer>;
         findModule(arg0: string): ($Module) | undefined;
-        static defineModules(arg0: $Configuration, arg1: $List_<$ModuleLayer>, arg2: $Function_<string, $ClassLoader>): $ModuleLayer$Controller;
         defineModules(arg0: $Configuration, arg1: $Function_<string, $ClassLoader>): $ModuleLayer;
-        static defineModulesWithOneLoader(arg0: $Configuration, arg1: $List_<$ModuleLayer>, arg2: $ClassLoader): $ModuleLayer$Controller;
-        defineModulesWithOneLoader(arg0: $Configuration, arg1: $ClassLoader): $ModuleLayer;
-        defineModulesWithManyLoaders(arg0: $Configuration, arg1: $ClassLoader): $ModuleLayer;
-        static defineModulesWithManyLoaders(arg0: $Configuration, arg1: $List_<$ModuleLayer>, arg2: $ClassLoader): $ModuleLayer$Controller;
-        findLoader(arg0: string): $ClassLoader;
+        static defineModules(arg0: $Configuration, arg1: $List_<$ModuleLayer>, arg2: $Function_<string, $ClassLoader>): $ModuleLayer$Controller;
     }
     export class $Number implements $Serializable {
         byteValue(): number;
@@ -401,7 +401,7 @@ declare module "@package/java/lang" {
         compareTo(arg0: $StringBuffer): number;
         insert(arg0: number, arg1: $Object): $StringBuffer;
         replace(arg0: number, arg1: number, arg2: string): $StringBuffer;
-        delete(arg0: number, arg1: number): $StringBuffer;
+        appendCodePoint(arg0: number): $StringBuffer;
         deleteCharAt(arg0: number): $StringBuffer;
         constructor(arg0: $CharSequence);
         constructor(arg0: string);
@@ -422,8 +422,8 @@ declare module "@package/java/lang" {
         insert(arg0: number, arg1: boolean): $StringBuilder;
         insert(arg0: number, arg1: $CharSequence, arg2: number, arg3: number): $StringBuilder;
         replace(arg0: number, arg1: number, arg2: string): $StringBuilder;
-        repeat(arg0: number, arg1: number): $StringBuilder;
-        appendCodePoint(arg0: number): $StringBuilder;
+        repeat(arg0: $CharSequence, arg1: number): $StringBuilder;
+        delete(arg0: number, arg1: number): $StringBuilder;
         deleteCharAt(arg0: number): $StringBuilder;
         append(arg0: $CharSequence): $Appendable;
         constructor(arg0: $CharSequence);
@@ -432,10 +432,10 @@ declare module "@package/java/lang" {
         constructor();
     }
     export class $ThreadLocal<T> {
+        static withInitial<S>(arg0: $Supplier_<S>): $ThreadLocal<S>;
         remove(): void;
         get(): T;
         set(arg0: T): void;
-        static withInitial<S>(arg0: $Supplier_<S>): $ThreadLocal<S>;
         constructor();
     }
     export class $Record {
@@ -443,13 +443,13 @@ declare module "@package/java/lang" {
     export class $Thread$Builder {
     }
     export interface $Thread$Builder {
+        unstarted(arg0: $Runnable_): $Thread;
         name(arg0: string): $Thread$Builder;
         name(arg0: string, arg1: number): $Thread$Builder;
         factory(): $ThreadFactory;
         start(arg0: $Runnable_): $Thread;
         uncaughtExceptionHandler(arg0: $Thread$UncaughtExceptionHandler_): $Thread$Builder;
         inheritInheritableThreadLocals(arg0: boolean): $Thread$Builder;
-        unstarted(arg0: $Runnable_): $Thread;
     }
     export class $IllegalArgumentException extends $RuntimeException {
         constructor(arg0: $Throwable);
@@ -471,6 +471,10 @@ declare module "@package/java/lang" {
         /**
          * @deprecated
          */
+        checkAccess(): void;
+        /**
+         * @deprecated
+         */
         setDaemon(arg0: boolean): void;
         getMaxPriority(): number;
         /**
@@ -478,15 +482,23 @@ declare module "@package/java/lang" {
          */
         isDaemon(): boolean;
         activeCount(): number;
-        enumerate(arg0: $ThreadGroup[], arg1: boolean): number;
         enumerate(arg0: $ThreadGroup[]): number;
-        enumerate(arg0: $Thread[], arg1: boolean): number;
+        enumerate(arg0: $ThreadGroup[], arg1: boolean): number;
         enumerate(arg0: $Thread[]): number;
+        enumerate(arg0: $Thread[], arg1: boolean): number;
         uncaughtException(arg0: $Thread, arg1: $Throwable): void;
         /**
          * @deprecated
          */
-        checkAccess(): void;
+        stop(): void;
+        /**
+         * @deprecated
+         */
+        suspend(): void;
+        /**
+         * @deprecated
+         */
+        resume(): void;
         parentOf(arg0: $ThreadGroup): boolean;
         activeGroupCount(): number;
         setMaxPriority(arg0: number): void;
@@ -498,8 +510,8 @@ declare module "@package/java/lang" {
          * @deprecated
          */
         destroy(): void;
-        constructor(arg0: $ThreadGroup, arg1: string);
         constructor(arg0: string);
+        constructor(arg0: $ThreadGroup, arg1: string);
         get name(): string;
         get parent(): $ThreadGroup;
         get destroyed(): boolean;
@@ -508,7 +520,16 @@ declare module "@package/java/lang" {
         version(): $List<number>;
         compareTo(arg0: $Runtime$Version): number;
         update(): number;
+        feature(): number;
+        /**
+         * @deprecated
+         */
+        security(): number;
         static parse(arg0: string): $Runtime$Version;
+        interim(): number;
+        equalsIgnoreOptional(arg0: $Object): boolean;
+        patch(): number;
+        compareToIgnoreOptional(arg0: $Runtime$Version): number;
         /**
          * @deprecated
          */
@@ -520,15 +541,6 @@ declare module "@package/java/lang" {
         pre(): (string) | undefined;
         build(): (number) | undefined;
         optional(): (string) | undefined;
-        feature(): number;
-        interim(): number;
-        equalsIgnoreOptional(arg0: $Object): boolean;
-        patch(): number;
-        /**
-         * @deprecated
-         */
-        security(): number;
-        compareToIgnoreOptional(arg0: $Runtime$Version): number;
     }
     export class $NamedPackage {
     }
@@ -538,7 +550,6 @@ declare module "@package/java/lang" {
     export interface $CharSequence {
         length(): number;
         toString(): string;
-        getChars(arg0: number, arg1: number, arg2: string[], arg3: number): void;
         charAt(arg0: number): string;
         isEmpty(): boolean;
         codePoints(): $IntStream;
@@ -603,8 +614,6 @@ declare module "@package/java/lang" {
         static rint(arg0: number): number;
         static round(arg0: number): number;
         static round(arg0: number): number;
-        static tanh(arg0: number): number;
-        static cbrt(arg0: number): number;
         static addExact(arg0: number, arg1: number): number;
         static addExact(arg0: number, arg1: number): number;
         static decrementExact(arg0: number): number;
@@ -630,16 +639,17 @@ declare module "@package/java/lang" {
         static clamp(arg0: number, arg1: number, arg2: number): number;
         static clamp(arg0: number, arg1: number, arg2: number): number;
         static clamp(arg0: number, arg1: number, arg2: number): number;
+        static floorMod(arg0: number, arg1: number): number;
+        static floorMod(arg0: number, arg1: number): number;
+        static floorMod(arg0: number, arg1: number): number;
         static scalb(arg0: number, arg1: number): number;
         static scalb(arg0: number, arg1: number): number;
         static getExponent(arg0: number): number;
         static getExponent(arg0: number): number;
-        static floorMod(arg0: number, arg1: number): number;
-        static floorMod(arg0: number, arg1: number): number;
-        static floorMod(arg0: number, arg1: number): number;
         static asin(arg0: number): number;
         static acos(arg0: number): number;
         static atan(arg0: number): number;
+        static cbrt(arg0: number): number;
         static IEEEremainder(arg0: number, arg1: number): number;
         static floorDiv(arg0: number, arg1: number): number;
         static floorDiv(arg0: number, arg1: number): number;
@@ -652,12 +662,10 @@ declare module "@package/java/lang" {
         static ceilMod(arg0: number, arg1: number): number;
         static sinh(arg0: number): number;
         static cosh(arg0: number): number;
+        static tanh(arg0: number): number;
         static hypot(arg0: number, arg1: number): number;
         static expm1(arg0: number): number;
         static log1p(arg0: number): number;
-        static unsignedMultiplyExact(arg0: number, arg1: number): number;
-        static unsignedMultiplyExact(arg0: number, arg1: number): number;
-        static unsignedMultiplyExact(arg0: number, arg1: number): number;
         static toRadians(arg0: number): number;
         static toDegrees(arg0: number): number;
         static random(): number;
@@ -679,10 +687,6 @@ declare module "@package/java/lang" {
         static nextUp(arg0: number): number;
         static nextDown(arg0: number): number;
         static nextDown(arg0: number): number;
-        static powExact(arg0: number, arg1: number): number;
-        static powExact(arg0: number, arg1: number): number;
-        static unsignedPowExact(arg0: number, arg1: number): number;
-        static unsignedPowExact(arg0: number, arg1: number): number;
         static E: number;
         static PI: number;
         static TAU: number;
@@ -721,42 +725,40 @@ declare module "@package/java/lang" {
     }
     export class $Class<T> implements $Serializable, $GenericDeclaration, $Type, $AnnotatedElement, $TypeDescriptor$OfField<$Class<never>>, $Constable {
         getName(): string;
+        static forName(arg0: string, arg1: boolean, arg2: $ClassLoader): $Class<never>;
         static forName(arg0: $Module, arg1: string): $Class<never>;
         static forName(arg0: string): $Class<never>;
-        static forName(arg0: string, arg1: boolean, arg2: $ClassLoader): $Class<never>;
         getModule(): $Module;
         getProtectionDomain(): $ProtectionDomain;
         isAssignableFrom(arg0: $Class<never>): boolean;
         isInstance(arg0: $Object): boolean;
+        getModifiers(): number;
+        isInterface(): boolean;
+        isArray(): boolean;
+        isPrimitive(): boolean;
         isHidden(): boolean;
         getSuperclass(): $Class<T>;
         cast(arg0: $Object): T;
-        componentType(): $Class<never>;
         describeConstable(): ($ClassDesc) | undefined;
-        isInterface(): boolean;
-        isPrimitive(): boolean;
-        isArray(): boolean;
         getComponentType(): $Class<never>;
-        getModifiers(): number;
         isAnnotation(): boolean;
         isEnum(): boolean;
         isRecord(): boolean;
         getTypeParameters(): $TypeVariable<$Class<T>>[];
-        isSealed(): boolean;
-        getInterfaces(): $Class<never>[];
         getClassLoader(): $ClassLoader;
         /**
          * @deprecated
          */
         newInstance(): T;
+        getInterfaces(): $Class<never>[];
         isMemberClass(): boolean;
         isLocalClass(): boolean;
         isAnonymousClass(): boolean;
         getEnclosingClass(): $Class<never>;
-        arrayType(): $Class<never>;
+        isUnnamedClass(): boolean;
         getSimpleName(): string;
         getCanonicalName(): string;
-        getDeclaredClasses(): $Class<never>[];
+        isSynthetic(): boolean;
         getResourceAsStream(arg0: string): $InputStream;
         getResource(arg0: string): $URL;
         getPackageName(): string;
@@ -766,9 +768,8 @@ declare module "@package/java/lang" {
         getNestHost(): $Class<never>;
         descriptorString(): string;
         getPermittedSubclasses(): $Class<never>[];
+        arrayType(): $Class<never>;
         toGenericString(): string;
-        static forPrimitiveName(arg0: string): $Class<never>;
-        isSynthetic(): boolean;
         getGenericSuperclass(): $Type;
         getPackage(): $Package;
         getGenericInterfaces(): $Type[];
@@ -784,6 +785,7 @@ declare module "@package/java/lang" {
         getConstructors(): $Constructor<never>[];
         getField(arg0: string): $Field;
         getConstructor(...arg0: $Class<never>[]): $Constructor<T>;
+        getDeclaredClasses(): $Class<never>[];
         getDeclaredFields(): $Field[];
         getRecordComponents(): $RecordComponent[];
         getDeclaredMethods(): $Method[];
@@ -803,32 +805,33 @@ declare module "@package/java/lang" {
         getAnnotatedInterfaces(): $AnnotatedType[];
         isNestmateOf(arg0: $Class<never>): boolean;
         getNestMembers(): $Class<never>[];
+        isSealed(): boolean;
+        componentType(): $Class<never>;
         get name(): string;
         get module(): $Module;
         get protectionDomain(): $ProtectionDomain;
+        get modifiers(): number;
+        get interface(): boolean;
+        get array(): boolean;
+        get primitive(): boolean;
         get hidden(): boolean;
         get superclass(): $Class<T>;
-        get interface(): boolean;
-        get primitive(): boolean;
-        get array(): boolean;
-        get modifiers(): number;
         get enum(): boolean;
         get record(): boolean;
         get typeParameters(): $TypeVariable<$Class<T>>[];
-        get sealed(): boolean;
-        get interfaces(): $Class<never>[];
         get classLoader(): $ClassLoader;
+        get interfaces(): $Class<never>[];
         get memberClass(): boolean;
         get localClass(): boolean;
         get anonymousClass(): boolean;
         get enclosingClass(): $Class<never>;
+        get unnamedClass(): boolean;
         get simpleName(): string;
         get canonicalName(): string;
-        get declaredClasses(): $Class<never>[];
+        get synthetic(): boolean;
         get packageName(): string;
         get nestHost(): $Class<never>;
         get permittedSubclasses(): $Class<never>[];
-        get synthetic(): boolean;
         get genericSuperclass(): $Type;
         get package(): $Package;
         get genericInterfaces(): $Type[];
@@ -841,6 +844,7 @@ declare module "@package/java/lang" {
         get fields(): $Field[];
         get methods(): $Method[];
         get constructors(): $Constructor<never>[];
+        get declaredClasses(): $Class<never>[];
         get declaredFields(): $Field[];
         get recordComponents(): $RecordComponent[];
         get declaredMethods(): $Method[];
@@ -851,11 +855,17 @@ declare module "@package/java/lang" {
         get annotatedSuperclass(): $AnnotatedType;
         get annotatedInterfaces(): $AnnotatedType[];
         get nestMembers(): $Class<never>[];
+        get sealed(): boolean;
     }
     export class $Package extends $NamedPackage implements $AnnotatedElement {
+        getSpecificationTitle(): string;
+        getSpecificationVersion(): string;
+        getSpecificationVendor(): string;
+        getImplementationTitle(): string;
+        getImplementationVersion(): string;
+        getImplementationVendor(): string;
+        isCompatibleWith(arg0: string): boolean;
         getName(): string;
-        isSealed(arg0: $URL): boolean;
-        isSealed(): boolean;
         isAnnotationPresent(arg0: $Class<$Annotation>): boolean;
         /**
          * @deprecated
@@ -867,24 +877,19 @@ declare module "@package/java/lang" {
         getDeclaredAnnotation<A extends $Annotation>(arg0: $Class<A>): A;
         getDeclaredAnnotationsByType<A extends $Annotation>(arg0: $Class<A>): A[];
         getDeclaredAnnotations(): $Annotation[];
+        isSealed(): boolean;
+        isSealed(arg0: $URL): boolean;
         static getPackages(): $Package[];
-        getSpecificationTitle(): string;
-        getSpecificationVersion(): string;
-        getSpecificationVendor(): string;
-        getImplementationTitle(): string;
-        getImplementationVersion(): string;
-        getImplementationVendor(): string;
-        isCompatibleWith(arg0: string): boolean;
-        get name(): string;
-        get annotations(): $Annotation[];
-        get declaredAnnotations(): $Annotation[];
-        static get packages(): $Package[];
         get specificationTitle(): string;
         get specificationVersion(): string;
         get specificationVendor(): string;
         get implementationTitle(): string;
         get implementationVersion(): string;
         get implementationVendor(): string;
+        get name(): string;
+        get annotations(): $Annotation[];
+        get declaredAnnotations(): $Annotation[];
+        static get packages(): $Package[];
     }
     export class $Module implements $AnnotatedElement {
         getName(): string;
@@ -896,8 +901,8 @@ declare module "@package/java/lang" {
         getDescriptor(): $ModuleDescriptor;
         isNamed(): boolean;
         getResourceAsStream(arg0: string): $InputStream;
-        isOpen(arg0: string, arg1: $Module): boolean;
         isOpen(arg0: string): boolean;
+        isOpen(arg0: string, arg1: $Module): boolean;
         getAnnotation<T extends $Annotation>(arg0: $Class<T>): T;
         getAnnotations(): $Annotation[];
         getDeclaredAnnotations(): $Annotation[];
@@ -970,8 +975,8 @@ declare module "@package/java/lang" {
         describeConstable(): (number) | undefined;
         static isNaN(arg0: number): boolean;
         isNaN(): boolean;
-        static sum(arg0: number, arg1: number): number;
         static parseFloat(arg0: string): number;
+        static sum(arg0: number, arg1: number): number;
         static POSITIVE_INFINITY: number;
         static BYTES: number;
         static MAX_EXPONENT: number;
@@ -1004,30 +1009,35 @@ declare module "@package/java/lang" {
         interrupt(): void;
         static currentThread(): $Thread;
         static onSpinWait(): void;
-        join(arg0: $Duration_): boolean;
+        isVirtual(): boolean;
+        join(arg0: number): void;
         join(arg0: number, arg1: number): void;
         join(): void;
-        join(arg0: number): void;
+        join(arg0: $Duration_): boolean;
         setContextClassLoader(arg0: $ClassLoader): void;
-        static holdsLock(arg0: $Object): boolean;
+        getThreadGroup(): $ThreadGroup;
+        /**
+         * @deprecated
+         */
+        checkAccess(): void;
+        static dumpStack(): void;
         setPriority(arg0: number): void;
         setDaemon(arg0: boolean): void;
         start(): void;
-        getThreadGroup(): $ThreadGroup;
+        getContextClassLoader(): $ClassLoader;
         getPriority(): number;
         isDaemon(): boolean;
-        getContextClassLoader(): $ClassLoader;
         static interrupted(): boolean;
-        isVirtual(): boolean;
         static activeCount(): number;
         static enumerate(arg0: $Thread[]): number;
         isAlive(): boolean;
         threadId(): number;
+        static setDefaultUncaughtExceptionHandler(arg0: $Thread$UncaughtExceptionHandler_): void;
         getUncaughtExceptionHandler(): $Thread$UncaughtExceptionHandler;
         static yield(): void;
-        static sleep(arg0: number): void;
         static sleep(arg0: number, arg1: number): void;
         static sleep(arg0: $Duration_): void;
+        static sleep(arg0: number): void;
         static ofPlatform(): $Thread$Builder$OfPlatform;
         static ofVirtual(): $Thread$Builder$OfVirtual;
         static startVirtualThread(arg0: $Runnable_): $Thread;
@@ -1036,36 +1046,43 @@ declare module "@package/java/lang" {
          */
         stop(): void;
         isInterrupted(): boolean;
-        setName(arg0: string): void;
-        static dumpStack(): void;
         /**
          * @deprecated
          */
-        checkAccess(): void;
+        suspend(): void;
+        /**
+         * @deprecated
+         */
+        resume(): void;
+        setName(arg0: string): void;
+        /**
+         * @deprecated
+         */
+        countStackFrames(): number;
+        static holdsLock(arg0: $Object): boolean;
         static getAllStackTraces(): $Map<$Thread, $StackTraceElement[]>;
         /**
          * @deprecated
          */
         getId(): number;
         getState(): $Thread$State;
-        static setDefaultUncaughtExceptionHandler(arg0: $Thread$UncaughtExceptionHandler_): void;
         static getDefaultUncaughtExceptionHandler(): $Thread$UncaughtExceptionHandler;
         setUncaughtExceptionHandler(arg0: $Thread$UncaughtExceptionHandler_): void;
         static MIN_PRIORITY: number;
         static MAX_PRIORITY: number;
         static NORM_PRIORITY: number;
-        constructor(arg0: $ThreadGroup, arg1: string);
-        constructor(arg0: string);
-        constructor(arg0: $Runnable_, arg1: string);
-        constructor(arg0: $ThreadGroup, arg1: $Runnable_, arg2: string);
         constructor();
         constructor(arg0: $Runnable_);
-        constructor(arg0: $ThreadGroup, arg1: $Runnable_);
         constructor(arg0: $ThreadGroup, arg1: $Runnable_, arg2: string, arg3: number, arg4: boolean);
         constructor(arg0: $ThreadGroup, arg1: $Runnable_, arg2: string, arg3: number);
+        constructor(arg0: $ThreadGroup, arg1: $Runnable_, arg2: string);
+        constructor(arg0: $Runnable_, arg1: string);
+        constructor(arg0: $ThreadGroup, arg1: $Runnable_);
+        constructor(arg0: string);
+        constructor(arg0: $ThreadGroup, arg1: string);
         get stackTrace(): $StackTraceElement[];
-        get threadGroup(): $ThreadGroup;
         get virtual(): boolean;
+        get threadGroup(): $ThreadGroup;
         get alive(): boolean;
         static get allStackTraces(): $Map<$Thread, $StackTraceElement[]>;
         get id(): number;
@@ -1101,9 +1118,8 @@ declare module "@package/java/lang" {
         static parseInt(arg0: string): number;
         static parseInt(arg0: string, arg1: number): number;
         static toUnsignedLong(arg0: number): number;
-        static sum(arg0: number, arg1: number): number;
-        static toUnsignedString(arg0: number): string;
         static toUnsignedString(arg0: number, arg1: number): string;
+        static toUnsignedString(arg0: number): string;
         static parseUnsignedInt(arg0: string, arg1: number): number;
         static parseUnsignedInt(arg0: string): number;
         static parseUnsignedInt(arg0: $CharSequence, arg1: number, arg2: number, arg3: number): number;
@@ -1116,6 +1132,7 @@ declare module "@package/java/lang" {
         static lowestOneBit(arg0: number): number;
         static rotateLeft(arg0: number, arg1: number): number;
         static rotateRight(arg0: number, arg1: number): number;
+        static sum(arg0: number, arg1: number): number;
         static BYTES: number;
         static SIZE: number;
         static MAX_VALUE: number;
@@ -1124,11 +1141,11 @@ declare module "@package/java/lang" {
         /**
          * @deprecated
          */
-        constructor(arg0: number);
+        constructor(arg0: string);
         /**
          * @deprecated
          */
-        constructor(arg0: string);
+        constructor(arg0: number);
     }
     export class $Runnable {
     }
@@ -1186,8 +1203,8 @@ declare module "@package/java/lang" {
         static of<E extends $Enum<E>>(arg0: $ClassDesc, arg1: string): $Enum$EnumDesc<E>;
     }
     export class $Throwable implements $Serializable {
-        printStackTrace(): void;
         printStackTrace(arg0: $PrintWriter): void;
+        printStackTrace(): void;
         printStackTrace(arg0: $PrintStream): void;
         getStackTrace(): $StackTraceElement[];
         fillInStackTrace(): $Throwable;
@@ -1265,7 +1282,6 @@ declare module "@package/java/lang" {
         uncaughtExceptionHandler(arg0: $Thread$UncaughtExceptionHandler_): $Thread$Builder;
     }
     export class $AbstractStringBuilder implements $Appendable, $CharSequence {
-        getChars(arg0: number, arg1: number, arg2: string[], arg3: number): void;
         isEmpty(): boolean;
         codePoints(): $IntStream;
         chars(): $IntStream;
@@ -1303,26 +1319,26 @@ declare module "@package/java/lang" {
         static getLong(arg0: string, arg1: number): number;
         static compare(arg0: number, arg1: number): number;
         static valueOf(arg0: string, arg1: number): number;
-        static valueOf(arg0: number): number;
         static valueOf(arg0: string): number;
+        static valueOf(arg0: number): number;
         static toHexString(arg0: number): string;
         static decode(arg0: string): number;
         describeConstable(): (number) | undefined;
+        static toUnsignedString(arg0: number, arg1: number): string;
+        static toUnsignedString(arg0: number): string;
+        static parseLong(arg0: string): number;
         static parseLong(arg0: string, arg1: number): number;
         static parseLong(arg0: $CharSequence, arg1: number, arg2: number, arg3: number): number;
-        static parseLong(arg0: string): number;
-        static sum(arg0: number, arg1: number): number;
-        static toUnsignedString(arg0: number): string;
-        static toUnsignedString(arg0: number, arg1: number): string;
         static toOctalString(arg0: number): string;
         static toBinaryString(arg0: number): string;
         static highestOneBit(arg0: number): number;
         static lowestOneBit(arg0: number): number;
         static rotateLeft(arg0: number, arg1: number): number;
         static rotateRight(arg0: number, arg1: number): number;
-        static parseUnsignedLong(arg0: string, arg1: number): number;
         static parseUnsignedLong(arg0: string): number;
         static parseUnsignedLong(arg0: $CharSequence, arg1: number, arg2: number, arg3: number): number;
+        static parseUnsignedLong(arg0: string, arg1: number): number;
+        static sum(arg0: number, arg1: number): number;
         resolveConstantDesc(arg0: $MethodHandles$Lookup): $Object;
         static BYTES: number;
         static SIZE: number;
@@ -1357,8 +1373,8 @@ declare module "@package/java/lang" {
         describeConstable(): (number) | undefined;
         isNaN(): boolean;
         static isNaN(arg0: number): boolean;
-        static sum(arg0: number, arg1: number): number;
         static parseDouble(arg0: string): number;
+        static sum(arg0: number, arg1: number): number;
         resolveConstantDesc(arg0: $MethodHandles$Lookup): $Object;
         static POSITIVE_INFINITY: number;
         static BYTES: number;

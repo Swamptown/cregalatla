@@ -4,9 +4,9 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/net/neoforged/fml/config" {
     export class $ModConfig$Type extends $Enum<$ModConfig$Type> {
+        extension(): string;
         static values(): $ModConfig$Type[];
         static valueOf(arg0: string): $ModConfig$Type;
-        extension(): string;
         static SERVER: $ModConfig$Type;
         static COMMON: $ModConfig$Type;
         static STARTUP: $ModConfig$Type;
@@ -17,15 +17,15 @@ declare module "@package/net/neoforged/fml/config" {
      */
     export type $ModConfig$Type_ = "common" | "client" | "server" | "startup";
     export class $ModConfig {
+        getLoadedConfig(): $IConfigSpec$ILoadedConfig;
         getType(): $ModConfig$Type;
         getFileName(): string;
-        getLoadedConfig(): $IConfigSpec$ILoadedConfig;
         getSpec(): $IConfigSpec;
         getModId(): string;
         getFullPath(): $Path;
+        get loadedConfig(): $IConfigSpec$ILoadedConfig;
         get type(): $ModConfig$Type;
         get fileName(): string;
-        get loadedConfig(): $IConfigSpec$ILoadedConfig;
         get spec(): $IConfigSpec;
         get modId(): string;
         get fullPath(): $Path;
@@ -39,9 +39,9 @@ declare module "@package/net/neoforged/fml/config" {
     export class $IConfigSpec {
     }
     export interface $IConfigSpec {
-        isEmpty(): boolean;
         validateSpec(arg0: $ModConfig): void;
         acceptConfig(arg0: $IConfigSpec$ILoadedConfig): void;
+        isEmpty(): boolean;
         isCorrect(arg0: $UnmodifiableCommentedConfig): boolean;
         correct(arg0: $CommentedConfig): void;
         get empty(): boolean;

@@ -54,25 +54,25 @@ declare module "@package/com/mojang/blaze3d/vertex" {
         setColor(arg0: number): $VertexConsumer;
         setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setUv1(arg0: number, arg1: number): $VertexConsumer;
-        setUv2(arg0: number, arg1: number): $VertexConsumer;
-        setNormal(arg0: number, arg1: number, arg2: number): $VertexConsumer;
-        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setWhiteAlpha(arg0: number): $VertexConsumer;
-        setLight(arg0: number): $VertexConsumer;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
+        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
         addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
-        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        addVertex(arg0: number, arg1: number, arg2: number): $VertexConsumer;
         addVertex(arg0: $Vector3f): $VertexConsumer;
-        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
+        addVertex(arg0: number, arg1: number, arg2: number): $VertexConsumer;
+        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         setUv(arg0: number, arg1: number): $VertexConsumer;
         setOverlay(arg0: number): $VertexConsumer;
-        set whiteAlpha(value: number);
-        set light(value: number);
+        setUv1(arg0: number, arg1: number): $VertexConsumer;
+        setUv2(arg0: number, arg1: number): $VertexConsumer;
+        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        setNormal(arg0: number, arg1: number, arg2: number): $VertexConsumer;
+        setLight(arg0: number): $VertexConsumer;
+        setWhiteAlpha(arg0: number): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
         set overlay(value: number);
+        set light(value: number);
+        set whiteAlpha(value: number);
     }
     export class $VertexFormat$Mode extends $Enum<$VertexFormat$Mode> {
         static values(): $VertexFormat$Mode[];
@@ -113,7 +113,7 @@ declare module "@package/com/mojang/blaze3d/vertex" {
     /**
      * Values that may be interpreted as {@link $MeshData$SortState}.
      */
-    export type $MeshData$SortState_ = { centroids?: $Vector3f[], indexType?: $VertexFormat$IndexType_,  } | [centroids?: $Vector3f[], indexType?: $VertexFormat$IndexType_, ];
+    export type $MeshData$SortState_ = { indexType?: $VertexFormat$IndexType_, centroids?: $Vector3f[],  } | [indexType?: $VertexFormat$IndexType_, centroids?: $Vector3f[], ];
     export class $VertexMultiConsumer {
         static create(...arg0: $VertexConsumer[]): $VertexConsumer;
         static create(arg0: $VertexConsumer, arg1: $VertexConsumer): $VertexConsumer;
@@ -124,71 +124,71 @@ declare module "@package/com/mojang/blaze3d/vertex" {
     export class $VertexMultiConsumer$Multiple extends $Record implements $VertexConsumer, $VertexBufferWriter {
         setColor(arg0: number): $VertexConsumer;
         setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setWhiteAlpha(arg0: number): $VertexConsumer;
-        setLight(arg0: number): $VertexConsumer;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
+        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
         addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
-        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $Vector3f): $VertexConsumer;
-        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
+        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         setOverlay(arg0: number): $VertexConsumer;
+        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        setLight(arg0: number): $VertexConsumer;
+        setWhiteAlpha(arg0: number): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
         canUseIntrinsics(): boolean;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
         misc(arg0: $VertexFormatElement_, ...arg1: number[]): $VertexConsumer;
-        set whiteAlpha(value: number);
-        set light(value: number);
         set overlay(value: number);
+        set light(value: number);
+        set whiteAlpha(value: number);
     }
     /**
      * Values that may be interpreted as {@link $VertexMultiConsumer$Multiple}.
      */
     export type $VertexMultiConsumer$Multiple_ = { delegates?: $VertexConsumer[],  } | [delegates?: $VertexConsumer[], ];
     export class $BufferBuilder implements $VertexConsumer, $BufferBuilderAccessor, $BufferBuilderExtension, $VertexBufferWriter, $BufferBuilderAccessor$1 {
+        setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        setColor(arg0: number): $VertexConsumer;
         build(): $MeshData;
         push(arg0: $MemoryStack, arg1: number, arg2: number, arg3: $VertexFormat): void;
-        setColor(arg0: number): $VertexConsumer;
-        setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setUv1(arg0: number, arg1: number): $VertexConsumer;
-        setUv2(arg0: number, arg1: number): $VertexConsumer;
-        setNormal(arg0: number, arg1: number, arg2: number): $VertexConsumer;
-        setLight(arg0: number): $VertexConsumer;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        sodium$duplicateVertex(): void;
         buildOrThrow(): $MeshData;
         addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
         addVertex(arg0: number, arg1: number, arg2: number): $VertexConsumer;
         setUv(arg0: number, arg1: number): $VertexConsumer;
         setOverlay(arg0: number): $VertexConsumer;
-        sodium$duplicateVertex(): void;
+        setUv1(arg0: number, arg1: number): $VertexConsumer;
+        setUv2(arg0: number, arg1: number): $VertexConsumer;
+        setNormal(arg0: number, arg1: number, arg2: number): $VertexConsumer;
+        setLight(arg0: number): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
         setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setWhiteAlpha(arg0: number): $VertexConsumer;
         addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
-        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $Vector3f): $VertexConsumer;
+        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        setWhiteAlpha(arg0: number): $VertexConsumer;
         canUseIntrinsics(): boolean;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
         misc(arg0: $VertexFormatElement_, ...arg1: number[]): $VertexConsumer;
-        catnip$getVertices(): number;
         invokeBeginElement(arg0: $VertexFormatElement_): number;
+        catnip$getVertices(): number;
         building: boolean;
         constructor(arg0: $ByteBufferBuilder, arg1: $VertexFormat$Mode_, arg2: $VertexFormat);
-        set light(value: number);
         set overlay(value: number);
+        set light(value: number);
         set whiteAlpha(value: number);
     }
     export class $VertexSorting {
         static byDistance(arg0: number, arg1: number, arg2: number): $VertexSorting;
-        static byDistance(arg0: $Vector3f): $VertexSorting;
         static byDistance(arg0: $VertexSorting$DistanceFunction_): $VertexSorting;
+        static byDistance(arg0: $Vector3f): $VertexSorting;
         static ORTHOGRAPHIC_Z: $VertexSorting;
         static DISTANCE_TO_ORIGIN: $VertexSorting;
     }
@@ -200,10 +200,10 @@ declare module "@package/com/mojang/blaze3d/vertex" {
      */
     export type $VertexSorting_ = ((arg0: $Vector3f[]) => number[]);
     export class $VertexFormatElement$Type extends $Enum<$VertexFormatElement$Type> {
+        glType(): number;
         size(): number;
         static values(): $VertexFormatElement$Type[];
         static valueOf(arg0: string): $VertexFormatElement$Type;
-        glType(): number;
         static UBYTE: $VertexFormatElement$Type;
         static FLOAT: $VertexFormatElement$Type;
         static BYTE: $VertexFormatElement$Type;
@@ -226,42 +226,42 @@ declare module "@package/com/mojang/blaze3d/vertex" {
      */
     export type $VertexFormatElement$Usage$SetupState_ = ((arg0: number, arg1: number, arg2: number, arg3: number, arg4: number) => void);
     export class $VertexFormat implements $VertexFormatExtensions {
+        getElements(): $List<$VertexFormatElement>;
         static builder(): $VertexFormat$Builder;
         contains(arg0: $VertexFormatElement_): boolean;
         getOffset(arg0: $VertexFormatElement_): number;
-        getElements(): $List<$VertexFormatElement>;
-        getVertexSize(): number;
         getOffsetsByElement(): number[];
         getElementsMask(): number;
         setupBufferState(): void;
         clearBufferState(): void;
         getImmediateDrawVertexBuffer(): $VertexBuffer;
-        handler$zjc000$veil$nameImmediateDrawVertexBuffer(arg0: $CallbackInfoReturnable<any>): void;
+        handler$zjd000$veil$nameImmediateDrawVertexBuffer(arg0: $CallbackInfoReturnable<any>): void;
         getElementMapping(): $ImmutableMap<string, $VertexFormatElement>;
         hasPosition(): boolean;
         hasNormal(): boolean;
         hasColor(): boolean;
         hasUV(arg0: number): boolean;
         sodium$getGlobalId(): number;
-        getElementName(arg0: $VertexFormatElement_): string;
         getElementAttributeNames(): $List<string>;
+        getElementName(arg0: $VertexFormatElement_): string;
+        getVertexSize(): number;
         static UNKNOWN_ELEMENT: number;
         get elements(): $List<$VertexFormatElement>;
-        get vertexSize(): number;
         get offsetsByElement(): number[];
         get elementsMask(): number;
         get immediateDrawVertexBuffer(): $VertexBuffer;
         get elementMapping(): $ImmutableMap<string, $VertexFormatElement>;
         get elementAttributeNames(): $List<string>;
+        get vertexSize(): number;
     }
     export class $ByteBufferBuilder$Result implements $AutoCloseable {
-        close(): void;
         byteBuffer(): $ByteBuffer;
+        close(): void;
     }
     export class $MeshData implements $AutoCloseable, $MeshDataAccessor {
-        close(): void;
-        vertexBuffer(): $ByteBuffer;
         sortQuads(arg0: $ByteBufferBuilder, arg1: $VertexSorting_): $MeshData$SortState;
+        vertexBuffer(): $ByteBuffer;
+        close(): void;
         drawState(): $MeshData$DrawState;
         indexBuffer(): $ByteBuffer;
         getIndexBuffer(): $ByteBufferBuilder$Result;
@@ -293,9 +293,9 @@ declare module "@package/com/mojang/blaze3d/vertex" {
         static get instance(): $Tesselator;
     }
     export class $MeshData$DrawState extends $Record {
+        vertexCount(): number;
         mode(): $VertexFormat$Mode;
         format(): $VertexFormat;
-        vertexCount(): number;
         indexCount(): number;
         indexType(): $VertexFormat$IndexType;
         constructor(arg0: $VertexFormat, arg1: number, arg2: number, arg3: $VertexFormat$Mode_, arg4: $VertexFormat$IndexType_);
@@ -303,37 +303,37 @@ declare module "@package/com/mojang/blaze3d/vertex" {
     /**
      * Values that may be interpreted as {@link $MeshData$DrawState}.
      */
-    export type $MeshData$DrawState_ = { format?: $VertexFormat, vertexCount?: number, mode?: $VertexFormat$Mode_, indexType?: $VertexFormat$IndexType_, indexCount?: number,  } | [format?: $VertexFormat, vertexCount?: number, mode?: $VertexFormat$Mode_, indexType?: $VertexFormat$IndexType_, indexCount?: number, ];
+    export type $MeshData$DrawState_ = { indexType?: $VertexFormat$IndexType_, mode?: $VertexFormat$Mode_, vertexCount?: number, format?: $VertexFormat, indexCount?: number,  } | [indexType?: $VertexFormat$IndexType_, mode?: $VertexFormat$Mode_, vertexCount?: number, format?: $VertexFormat, indexCount?: number, ];
     export class $BufferUploader {
-        static reset(): void;
         static invalidate(): void;
+        static reset(): void;
         static draw(arg0: $MeshData): void;
         static drawWithShader(arg0: $MeshData): void;
         static lastImmediateBuffer: $VertexBuffer;
         constructor();
     }
     export class $VertexMultiConsumer$Double implements $VertexConsumer, $VertexBufferWriter {
-        push(arg0: $MemoryStack, arg1: number, arg2: number, arg3: $VertexFormat): void;
-        setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         canUseIntrinsics(): boolean;
-        setUv1(arg0: number, arg1: number): $VertexConsumer;
-        setUv2(arg0: number, arg1: number): $VertexConsumer;
-        setNormal(arg0: number, arg1: number, arg2: number): $VertexConsumer;
+        setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        push(arg0: $MemoryStack, arg1: number, arg2: number, arg3: $VertexFormat): void;
         addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
         addVertex(arg0: number, arg1: number, arg2: number): $VertexConsumer;
         setUv(arg0: number, arg1: number): $VertexConsumer;
+        setUv1(arg0: number, arg1: number): $VertexConsumer;
+        setUv2(arg0: number, arg1: number): $VertexConsumer;
+        setNormal(arg0: number, arg1: number, arg2: number): $VertexConsumer;
         setColor(arg0: number): $VertexConsumer;
         setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setWhiteAlpha(arg0: number): $VertexConsumer;
-        setLight(arg0: number): $VertexConsumer;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
         addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
-        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $Vector3f): $VertexConsumer;
+        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         setOverlay(arg0: number): $VertexConsumer;
+        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        setLight(arg0: number): $VertexConsumer;
+        setWhiteAlpha(arg0: number): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
@@ -341,60 +341,60 @@ declare module "@package/com/mojang/blaze3d/vertex" {
         first: $VertexConsumer;
         second: $VertexConsumer;
         constructor(arg0: $VertexConsumer, arg1: $VertexConsumer);
-        set whiteAlpha(value: number);
-        set light(value: number);
         set overlay(value: number);
+        set light(value: number);
+        set whiteAlpha(value: number);
     }
     export class $SheetedDecalTextureGenerator implements $VertexConsumer, $VertexBufferWriter {
-        push(arg0: $MemoryStack, arg1: number, arg2: number, arg3: $VertexFormat): void;
-        setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         canUseIntrinsics(): boolean;
+        setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        push(arg0: $MemoryStack, arg1: number, arg2: number, arg3: $VertexFormat): void;
+        addVertex(arg0: number, arg1: number, arg2: number): $VertexConsumer;
+        setUv(arg0: number, arg1: number): $VertexConsumer;
         setUv1(arg0: number, arg1: number): $VertexConsumer;
         setUv2(arg0: number, arg1: number): $VertexConsumer;
         setNormal(arg0: number, arg1: number, arg2: number): $VertexConsumer;
-        addVertex(arg0: number, arg1: number, arg2: number): $VertexConsumer;
-        setUv(arg0: number, arg1: number): $VertexConsumer;
         setColor(arg0: number): $VertexConsumer;
         setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        setWhiteAlpha(arg0: number): $VertexConsumer;
-        setLight(arg0: number): $VertexConsumer;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
+        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
         addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
-        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $Vector3f): $VertexConsumer;
-        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
+        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         setOverlay(arg0: number): $VertexConsumer;
+        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        setLight(arg0: number): $VertexConsumer;
+        setWhiteAlpha(arg0: number): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
         misc(arg0: $VertexFormatElement_, ...arg1: number[]): $VertexConsumer;
         constructor(arg0: $VertexConsumer, arg1: $PoseStack$Pose, arg2: number);
-        set whiteAlpha(value: number);
-        set light(value: number);
         set overlay(value: number);
+        set light(value: number);
+        set whiteAlpha(value: number);
     }
     export class $VertexBuffer implements $AutoCloseable, $DebugVertexBufferExt, $VertexBufferExtension {
+        static unbind(): void;
+        getFormat(): $VertexFormat;
+        bind(): void;
         close(): void;
         isInvalid(): boolean;
-        bind(): void;
-        getFormat(): $VertexFormat;
         veil$setName(arg0: string): void;
         draw(): void;
-        upload(arg0: $MeshData): void;
         drawWithShader(arg0: $Matrix4f, arg1: $Matrix4f, arg2: $ShaderInstance): void;
+        upload(arg0: $MeshData): void;
         veil$drawInstanced(arg0: number): void;
         veil$drawIndirect(arg0: number, arg1: number, arg2: number): void;
         veil$getIndexCount(): number;
+        handler$zkk000$veil$drawPatches(arg0: $CallbackInfo): void;
         uploadIndexBuffer(arg0: $ByteBufferBuilder$Result): void;
-        handler$zkj000$veil$drawPatches(arg0: $CallbackInfo): void;
-        modify$zkj000$veil$modifyDrawMode(arg0: number): number;
-        static unbind(): void;
+        modify$zkk000$veil$modifyDrawMode(arg0: number): number;
         constructor(arg0: $VertexBuffer$Usage_);
-        get invalid(): boolean;
         get format(): $VertexFormat;
+        get invalid(): boolean;
     }
     export class $VertexBuffer$Usage extends $Enum<$VertexBuffer$Usage> {
         static values(): $VertexBuffer$Usage[];
@@ -409,25 +409,25 @@ declare module "@package/com/mojang/blaze3d/vertex" {
     export class $PoseStack$Pose {
         copy(): $PoseStack$Pose;
         normal(): $Matrix3f;
+        pose(): $Matrix4f;
         transformNormal(arg0: number, arg1: number, arg2: number, arg3: $Vector3f): $Vector3f;
         transformNormal(arg0: $Vector3f, arg1: $Vector3f): $Vector3f;
-        pose(): $Matrix4f;
         trustedNormals: boolean;
         constructor(arg0: $Matrix4f, arg1: $Matrix3f);
     }
     export class $VertexFormatElement extends $Record {
+        byteSize(): number;
+        usage(): $VertexFormatElement$Usage;
         index(): number;
         type(): $VertexFormatElement$Type;
         count(): number;
         static register(arg0: number, arg1: number, arg2: $VertexFormatElement$Type_, arg3: $VertexFormatElement$Usage_, arg4: number): $VertexFormatElement;
         id(): number;
         mask(): number;
-        usage(): $VertexFormatElement$Usage;
+        setupBufferState(arg0: number, arg1: number, arg2: number): void;
         static elementsFromMask(arg0: number): $Stream<$VertexFormatElement>;
         static findNextId(): number;
-        setupBufferState(arg0: number, arg1: number, arg2: number): void;
         static byId(arg0: number): $VertexFormatElement;
-        byteSize(): number;
         static UV2: $VertexFormatElement;
         static POSITION: $VertexFormatElement;
         static UV: $VertexFormatElement;
@@ -442,48 +442,48 @@ declare module "@package/com/mojang/blaze3d/vertex" {
     /**
      * Values that may be interpreted as {@link $VertexFormatElement}.
      */
-    export type $VertexFormatElement_ = { count?: number, id?: number, index?: number, type?: $VertexFormatElement$Type_, usage?: $VertexFormatElement$Usage_,  } | [count?: number, id?: number, index?: number, type?: $VertexFormatElement$Type_, usage?: $VertexFormatElement$Usage_, ];
+    export type $VertexFormatElement_ = { type?: $VertexFormatElement$Type_, index?: number, id?: number, count?: number, usage?: $VertexFormatElement$Usage_,  } | [type?: $VertexFormatElement$Type_, index?: number, id?: number, count?: number, usage?: $VertexFormatElement$Usage_, ];
     export class $PoseStack implements $IPoseStackExtension, $PoseStackAccessor, $MatrixStack, $PoseStackAccessor$1, $PoseStackExtension {
-        clear(): boolean;
+        clear(): void;
         scale(arg0: number, arg1: number, arg2: number): void;
         isEmpty(): boolean;
         last(): $PoseStack$Pose;
         isIdentity(): boolean;
+        rotate(arg0: number, arg1: number, arg2: number, arg3: number): void;
         rotate(arg0: $Quaternionfc): void;
         rotate(arg0: $Quaterniondc): void;
-        rotate(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        matrixPush(): void;
+        matrixPop(): void;
         setIdentity(): void;
         applyScale(arg0: number, arg1: number, arg2: number): void;
         toPoseStack(): $PoseStack;
         flywheel$transformStack(): $PoseTransformStack;
-        translate(arg0: number, arg1: number, arg2: number): void;
-        translate(arg0: number, arg1: number, arg2: number): void;
-        popPose(): void;
-        pose(): $PoseStack$Pose;
-        pushPose(): void;
-        rotateXYZ(arg0: number, arg1: number, arg2: number): void;
-        rotateZYX(arg0: number, arg1: number, arg2: number): void;
-        matrixPush(): void;
-        matrixPop(): void;
-        rotateAround(arg0: $Quaternionfc, arg1: number, arg2: number, arg3: number): void;
-        rotateAround(arg0: $Quaternionf, arg1: number, arg2: number, arg3: number): void;
-        rotateAround(arg0: $Quaterniondc, arg1: number, arg2: number, arg3: number): void;
         mulPose(arg0: $Matrix4f): void;
         mulPose(arg0: $Quaternionf): void;
+        translate(arg0: number, arg1: number, arg2: number): void;
+        translate(arg0: number, arg1: number, arg2: number): void;
+        pose(): $PoseStack$Pose;
+        pushPose(): void;
+        popPose(): void;
+        rotateXYZ(arg0: number, arg1: number, arg2: number): void;
+        rotateZYX(arg0: number, arg1: number, arg2: number): void;
+        rotateAround(arg0: $Quaternionf, arg1: number, arg2: number, arg3: number): void;
+        rotateAround(arg0: $Quaternionfc, arg1: number, arg2: number, arg3: number): void;
+        rotateAround(arg0: $Quaterniondc, arg1: number, arg2: number, arg3: number): void;
         pushTransformation(arg0: $Transformation): void;
         position(): $Matrix4f;
-        copy(arg0: $PoseStack$Pose): void;
-        copy(arg0: $MatrixStack): void;
         copy(arg0: $PoseStack): void;
+        copy(arg0: $MatrixStack): void;
+        copy(arg0: $PoseStack$Pose): void;
         rotate(arg0: number, arg1: number, arg2: number, arg3: number): void;
         normal(): $Matrix3f;
-        applyScale(arg0: number): void;
-        applyScale(arg0: number): void;
         applyScale(arg0: number, arg1: number, arg2: number): void;
-        applyScale(arg0: $Vector3fc): void;
+        applyScale(arg0: number): void;
         applyScale(arg0: $Vector3dc): void;
-        translate(arg0: $Vector3dc): void;
+        applyScale(arg0: $Vector3fc): void;
+        applyScale(arg0: number): void;
         translate(arg0: $Vector3fc): void;
+        translate(arg0: $Vector3dc): void;
         rotateXYZ(arg0: number, arg1: number, arg2: number): void;
         rotateZYX(arg0: number, arg1: number, arg2: number): void;
         getPoseStack(): $Deque<$PoseStack$Pose>;
@@ -493,14 +493,14 @@ declare module "@package/com/mojang/blaze3d/vertex" {
         get poseStack(): $Deque<$PoseStack$Pose>;
     }
     export class $VertexFormat$Builder {
+        padding(arg0: number): $VertexFormat$Builder;
         add(arg0: string, arg1: $VertexFormatElement_): $VertexFormat$Builder;
         build(): $VertexFormat;
-        padding(arg0: number): $VertexFormat$Builder;
     }
     export class $VertexFormat$IndexType extends $Enum<$VertexFormat$IndexType> {
+        static least(arg0: number): $VertexFormat$IndexType;
         static values(): $VertexFormat$IndexType[];
         static valueOf(arg0: string): $VertexFormat$IndexType;
-        static least(arg0: number): $VertexFormat$IndexType;
         bytes: number;
         asGLType: number;
         static INT: $VertexFormat$IndexType;

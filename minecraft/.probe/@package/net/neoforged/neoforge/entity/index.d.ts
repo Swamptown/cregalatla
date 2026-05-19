@@ -91,10 +91,10 @@ declare module "@package/net/neoforged/neoforge/entity" {
         get parent(): $CompoundTag;
     }
     export class $XpOrbTargetingEvent extends $Event {
+        getFollowingPlayer(): $Player;
         setFollowingPlayer(arg0: $Player): void;
         getXpOrb(): $ExperienceOrb;
         getScanDistance(): number;
-        getFollowingPlayer(): $Player;
         constructor(arg0: $ExperienceOrb, arg1: number);
         get xpOrb(): $ExperienceOrb;
         get scanDistance(): number;

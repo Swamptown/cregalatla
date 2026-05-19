@@ -9,8 +9,8 @@ import { $IModBusEvent } from "@package/net/neoforged/fml/event";
 declare module "@package/net/neoforged/fml/event/lifecycle" {
     export class $ModLifecycleEvent extends $Event implements $IModBusEvent {
         description(): string;
-        getIMCStream(arg0: $Predicate_<string>): $Stream<$InterModComms$IMCMessage>;
         getIMCStream(): $Stream<$InterModComms$IMCMessage>;
+        getIMCStream(arg0: $Predicate_<string>): $Stream<$InterModComms$IMCMessage>;
         constructor(arg0: $ModContainer);
     }
     export class $FMLClientSetupEvent extends $ParallelDispatchEvent {

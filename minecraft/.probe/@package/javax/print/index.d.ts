@@ -22,10 +22,6 @@ declare module "@package/javax/print" {
     export class $PrintService {
     }
     export interface $PrintService {
-        getName(): string;
-        equals(arg0: $Object): boolean;
-        hashCode(): number;
-        getAttributes(): $PrintServiceAttributeSet;
         getAttribute<T extends $PrintServiceAttribute>(arg0: $Class<T>): T;
         createPrintJob(): $DocPrintJob;
         addPrintServiceAttributeListener(arg0: $PrintServiceAttributeListener_): void;
@@ -39,42 +35,46 @@ declare module "@package/javax/print" {
         isAttributeValueSupported(arg0: $Attribute, arg1: $DocFlavor, arg2: $AttributeSet): boolean;
         getUnsupportedAttributes(arg0: $DocFlavor, arg1: $AttributeSet): $AttributeSet;
         getServiceUIFactory(): $ServiceUIFactory;
-        get name(): string;
-        get attributes(): $PrintServiceAttributeSet;
+        getName(): string;
+        equals(arg0: $Object): boolean;
+        hashCode(): number;
+        getAttributes(): $PrintServiceAttributeSet;
         get supportedDocFlavors(): $DocFlavor[];
         get supportedAttributeCategories(): $Class<never>[];
         get serviceUIFactory(): $ServiceUIFactory;
+        get name(): string;
+        get attributes(): $PrintServiceAttributeSet;
     }
     export class $DocPrintJob {
     }
     export interface $DocPrintJob {
-        print(arg0: $Doc, arg1: $PrintRequestAttributeSet): void;
-        getAttributes(): $PrintJobAttributeSet;
         getPrintService(): $PrintService;
         addPrintJobListener(arg0: $PrintJobListener): void;
         removePrintJobListener(arg0: $PrintJobListener): void;
         addPrintJobAttributeListener(arg0: $PrintJobAttributeListener_, arg1: $PrintJobAttributeSet): void;
         removePrintJobAttributeListener(arg0: $PrintJobAttributeListener_): void;
-        get attributes(): $PrintJobAttributeSet;
+        print(arg0: $Doc, arg1: $PrintRequestAttributeSet): void;
+        getAttributes(): $PrintJobAttributeSet;
         get printService(): $PrintService;
+        get attributes(): $PrintJobAttributeSet;
     }
     export class $Doc {
     }
     export interface $Doc {
-        getAttributes(): $DocAttributeSet;
         getDocFlavor(): $DocFlavor;
         getPrintData(): $Object;
         getStreamForBytes(): $InputStream;
         getReaderForText(): $Reader;
-        get attributes(): $DocAttributeSet;
+        getAttributes(): $DocAttributeSet;
         get docFlavor(): $DocFlavor;
         get printData(): $Object;
         get streamForBytes(): $InputStream;
         get readerForText(): $Reader;
+        get attributes(): $DocAttributeSet;
     }
     export class $ServiceUIFactory {
-        getUIClassNamesForRole(arg0: number): string[];
         getUI(arg0: number, arg1: string): $Object;
+        getUIClassNamesForRole(arg0: number): string[];
         static ABOUT_UIROLE: number;
         static PANEL_UI: string;
         static RESERVED_UIROLE: number;

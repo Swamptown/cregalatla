@@ -7,8 +7,8 @@ declare module "@package/org/spongepowered/asm/mixin/extensibility" {
         static DEFAULT_PRIORITY: number;
     }
     export interface $IEnvironmentTokenProvider {
-        getPriority(): number;
         getToken(arg0: string, arg1: $MixinEnvironment): number;
+        getPriority(): number;
         get priority(): number;
     }
     export class $IMixinConfigPlugin {
@@ -50,8 +50,8 @@ declare module "@package/org/spongepowered/asm/mixin/extensibility" {
     export class $IRemapper {
     }
     export interface $IRemapper {
-        map(arg0: string): string;
         unmap(arg0: string): string;
+        map(arg0: string): string;
         mapDesc(arg0: string): string;
         mapFieldName(arg0: string, arg1: string, arg2: string): string;
         mapMethodName(arg0: string, arg1: string, arg2: string): string;
@@ -60,35 +60,35 @@ declare module "@package/org/spongepowered/asm/mixin/extensibility" {
     export class $IMixinConfigSource {
     }
     export interface $IMixinConfigSource {
-        getId(): string;
         getDescription(): string;
-        get id(): string;
+        getId(): string;
         get description(): string;
+        get id(): string;
     }
     export class $IMixinConfig {
         static DEFAULT_PRIORITY: number;
     }
     export interface $IMixinConfig {
+        getEnvironment(): $MixinEnvironment;
+        getSource(): $IMixinConfigSource;
         getName(): string;
         getPriority(): number;
-        getTargets(): $Set<string>;
         isRequired(): boolean;
+        getTargets(): $Set<string>;
         decorate<V>(arg0: string, arg1: V): void;
         getCleanSourceId(): string;
         getDecoration<V>(arg0: string): V;
         getMixinPackage(): string;
         getPlugin(): $IMixinConfigPlugin;
         hasDecoration(arg0: string): boolean;
-        getSource(): $IMixinConfigSource;
-        getEnvironment(): $MixinEnvironment;
+        get environment(): $MixinEnvironment;
+        get source(): $IMixinConfigSource;
         get name(): string;
         get priority(): number;
-        get targets(): $Set<string>;
         get required(): boolean;
+        get targets(): $Set<string>;
         get cleanSourceId(): string;
         get mixinPackage(): string;
         get plugin(): $IMixinConfigPlugin;
-        get source(): $IMixinConfigSource;
-        get environment(): $MixinEnvironment;
     }
 }

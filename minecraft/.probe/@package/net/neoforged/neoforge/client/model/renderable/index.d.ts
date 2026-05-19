@@ -19,16 +19,16 @@ declare module "@package/net/neoforged/neoforge/client/model/renderable" {
         withContext(arg0: $CompositeRenderable$Transforms): $IRenderable<$Unit>;
     }
     export class $CompositeRenderable$PartBuilder<T> {
+        addMesh(arg0: $ResourceLocation_, arg1: $List_<$BakedQuad>): $CompositeRenderable$PartBuilder<T>;
         end(): T;
         child(arg0: string): $CompositeRenderable$PartBuilder<$CompositeRenderable$PartBuilder<T>>;
-        addMesh(arg0: $ResourceLocation_, arg1: $List_<$BakedQuad>): $CompositeRenderable$PartBuilder<T>;
     }
     export class $BakedModelRenderable$Context extends $Record {
+        tint(): $Vector4f;
+        faces(): $Direction[];
         data(): $ModelData;
         state(): $BlockState;
         seed(): number;
-        tint(): $Vector4f;
-        faces(): $Direction[];
         randomSource(): $RandomSource;
         constructor(arg0: $ModelData);
         constructor(state: $BlockState_, faces: $Direction_[], randomSource: $RandomSource, seed: number, data: $ModelData, tint: $Vector4f);
@@ -36,7 +36,7 @@ declare module "@package/net/neoforged/neoforge/client/model/renderable" {
     /**
      * Values that may be interpreted as {@link $BakedModelRenderable$Context}.
      */
-    export type $BakedModelRenderable$Context_ = { state?: $BlockState_, seed?: number, randomSource?: $RandomSource, faces?: $Direction_[], data?: $ModelData, tint?: $Vector4f,  } | [state?: $BlockState_, seed?: number, randomSource?: $RandomSource, faces?: $Direction_[], data?: $ModelData, tint?: $Vector4f, ];
+    export type $BakedModelRenderable$Context_ = { tint?: $Vector4f, data?: $ModelData, faces?: $Direction_[], randomSource?: $RandomSource, seed?: number, state?: $BlockState_,  } | [tint?: $Vector4f, data?: $ModelData, faces?: $Direction_[], randomSource?: $RandomSource, seed?: number, state?: $BlockState_, ];
     export class $CompositeRenderable$Mesh {
     }
     export class $IRenderable<T> {
@@ -54,14 +54,14 @@ declare module "@package/net/neoforged/neoforge/client/model/renderable" {
         child(arg0: string): $CompositeRenderable$PartBuilder<$CompositeRenderable$Builder>;
     }
     export class $CompositeRenderable$Transforms {
-        static of(arg0: $ImmutableMap<string, $Matrix4f>): $CompositeRenderable$Transforms;
         getTransform(arg0: string): $Matrix4f;
+        static of(arg0: $ImmutableMap<string, $Matrix4f>): $CompositeRenderable$Transforms;
         static EMPTY: $CompositeRenderable$Transforms;
     }
     export class $BakedModelRenderable implements $IRenderable<$BakedModelRenderable$Context> {
+        withModelDataContext(): $IRenderable<$ModelData>;
         static of(arg0: $ModelResourceLocation_): $BakedModelRenderable;
         static of(arg0: $BakedModel): $BakedModelRenderable;
-        withModelDataContext(): $IRenderable<$ModelData>;
         render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: $ITextureRenderTypeLookup_, arg3: number, arg4: number, arg5: number, arg6: $BakedModelRenderable$Context_): void;
         withContext(arg0: $ModelData): $IRenderable<$Unit>;
         withContext(arg0: $BakedModelRenderable$Context_): $IRenderable<$Unit>;

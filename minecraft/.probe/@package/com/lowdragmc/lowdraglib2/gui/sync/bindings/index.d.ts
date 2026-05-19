@@ -18,13 +18,13 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings" {
     export class $IBindable<T> {
     }
     export interface $IBindable<T> extends $IDataSource<T> {
-        bind(arg0: $IBinding<T>): $UIElement;
         unbind(arg0: $IBinding<T>): $UIElement;
+        bind(arg0: $IBinding<T>): $UIElement;
     }
     export class $SyncStrategy extends $Enum<$SyncStrategy> {
+        doSync(): boolean;
         static values(): $SyncStrategy[];
         static valueOf(arg0: string): $SyncStrategy;
-        doSync(): boolean;
         static CHANGED_PERIODIC: $SyncStrategy;
         static NONE: $SyncStrategy;
         static ALWAYS: $SyncStrategy;

@@ -57,8 +57,8 @@ declare module "@package/net/minecraft/world/entity/animal/sniffer" {
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
     }
     export class $SnifferAi {
-        static getTemptations(): $Predicate<$ItemStack>;
         static resetSniffing(arg0: $Sniffer): $Sniffer;
+        static getTemptations(): $Predicate<$ItemStack>;
         static updateActivity(arg0: $Sniffer): void;
         static makeBrain(arg0: $Brain<$Sniffer>): $Brain<never>;
         static MEMORY_TYPES: $List<$MemoryModuleType<never>>;

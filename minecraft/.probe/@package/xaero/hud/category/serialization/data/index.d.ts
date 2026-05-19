@@ -13,38 +13,38 @@ declare module "@package/xaero/hud/category/serialization/data" {
         deserialize(arg0: $CompoundTag_): D;
     }
     export class $FilterObjectCategoryData<D extends $FilterObjectCategoryData<D>> extends $ObjectCategoryData<D> {
-        getHardInclude(): string;
         getIncludeListInSuperCategory(): boolean;
+        getHardInclude(): string;
         getExcludeMode(): $ExcludeListMode;
         getIncludeListIterator(): $Iterator<string>;
         getExcludeListIterator(): $Iterator<string>;
-        get hardInclude(): string;
         get includeListInSuperCategory(): boolean;
+        get hardInclude(): string;
         get excludeMode(): $ExcludeListMode;
         get includeListIterator(): $Iterator<string>;
         get excludeListIterator(): $Iterator<string>;
     }
     export class $FilterObjectCategoryData$Builder<D extends $FilterObjectCategoryData<D>, B extends $FilterObjectCategoryData$Builder<D, B>> extends $ObjectCategoryData$Builder<D, B> {
-        build(): D;
         setHardInclude(arg0: string): void;
-        setIncludeListInSuperCategory(arg0: boolean): B;
         setExcludeMode(arg0: $ExcludeListMode): void;
         addToIncludeList(arg0: string): B;
         addToExcludeList(arg0: string): B;
+        setIncludeListInSuperCategory(arg0: boolean): B;
+        build(): D;
         constructor(arg0: $ListFactory, arg1: $MapFactory);
         set hardInclude(value: string);
-        set includeListInSuperCategory(value: boolean);
         set excludeMode(value: $ExcludeListMode);
+        set includeListInSuperCategory(value: boolean);
     }
     export class $ObjectCategoryData<D extends $ObjectCategoryData<D>> {
-        getName(): string;
         getProtection(): boolean;
         getSettingOverrideIterator(): $Iterator<$Map$Entry<string, $Object>>;
         getSubCategoryIterator(): $Iterator<D>;
-        get name(): string;
+        getName(): string;
         get protection(): boolean;
         get settingOverrideIterator(): $Iterator<$Map$Entry<string, $Object>>;
         get subCategoryIterator(): $Iterator<D>;
+        get name(): string;
     }
     export class $ObjectCategoryDataGsonSerializer<D extends $ObjectCategoryData<D>> extends $ObjectCategoryDataSerializer<D, string> {
         deserialize(arg0: string): D;

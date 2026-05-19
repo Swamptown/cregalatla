@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:redstone_requesters",
+  "type": "emixx:group",
+  "contents": [
+    "#create_vibrant_vaults:redstone_requesters"
+  ]
+}

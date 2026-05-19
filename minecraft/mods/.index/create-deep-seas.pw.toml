@@ -1,0 +1,18 @@
+filename = 'create_submarine-1.21.1  1.1.4v.jar'
+name = 'Create  Deep Seas'
+side = 'server'
+x-prismlauncher-dependencies = []
+x-prismlauncher-loaders = [ 'neoforge' ]
+x-prismlauncher-mc-versions = [ '1.21.1' ]
+x-prismlauncher-release-type = 'beta'
+x-prismlauncher-version-number = 'create_submarine-1.21.1  1.1.4v.jar'
+
+[download]
+hash = 'cb6b8e945315376ca056561a7408f5d5c8048cd2'
+hash-format = 'sha1'
+mode = 'metadata:curseforge'
+url = ''
+
+[update.curseforge]
+file-id = 8075038
+project-id = 1533137

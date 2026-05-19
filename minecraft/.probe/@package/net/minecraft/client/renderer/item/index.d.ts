@@ -31,26 +31,26 @@ declare module "@package/net/minecraft/client/renderer/item" {
     export class $ClampedItemPropertyFunction {
     }
     export interface $ClampedItemPropertyFunction extends $ItemPropertyFunction {
+        unclampedCall(arg0: $ItemStack_, arg1: $ClientLevel, arg2: $LivingEntity, arg3: number): number;
         /**
          * @deprecated
          */
         call(arg0: $ItemStack_, arg1: $ClientLevel, arg2: $LivingEntity, arg3: number): number;
-        unclampedCall(arg0: $ItemStack_, arg1: $ClientLevel, arg2: $LivingEntity, arg3: number): number;
     }
     /**
      * Values that may be interpreted as {@link $ClampedItemPropertyFunction}.
      */
     export type $ClampedItemPropertyFunction_ = ((arg0: $ItemStack, arg1: $ClientLevel, arg2: $LivingEntity, arg3: number) => number);
     export class $ItemProperties implements $ItemPropertiesAccessor {
-        static getProperty(arg0: $ItemStack_, arg1: $ResourceLocation_): $ItemPropertyFunction;
-        static register(arg0: $Item_, arg1: $ResourceLocation_, arg2: $ItemPropertyFunction_): void;
-        static register(arg0: $Item_, arg1: $ResourceLocation_, arg2: $ClampedItemPropertyFunction_): void;
-        static registerGeneric(arg0: $ResourceLocation_, arg1: $ClampedItemPropertyFunction_): $ClampedItemPropertyFunction;
         static registerGeneric(arg0: $ResourceLocation_, arg1: $ItemPropertyFunction_): $ItemPropertyFunction;
+        static registerGeneric(arg0: $ResourceLocation_, arg1: $ClampedItemPropertyFunction_): $ClampedItemPropertyFunction;
         static registerCustomModelData(arg0: $ItemPropertyFunction_): void;
-        static getGENERIC_PROPERTIES$platform_$md$d858b6$0(): $Map<any, any>;
+        static getGENERIC_PROPERTIES$platform_$md$4ca6b6$0(): $Map<any, any>;
+        static getProperty(arg0: $ItemStack_, arg1: $ResourceLocation_): $ItemPropertyFunction;
+        static register(arg0: $Item_, arg1: $ResourceLocation_, arg2: $ClampedItemPropertyFunction_): void;
+        static register(arg0: $Item_, arg1: $ResourceLocation_, arg2: $ItemPropertyFunction_): void;
         constructor();
-        static get GENERIC_PROPERTIES$platform_$md$d858b6$0(): $Map<any, any>;
+        static get GENERIC_PROPERTIES$platform_$md$4ca6b6$0(): $Map<any, any>;
     }
     /**
      * @deprecated

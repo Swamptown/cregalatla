@@ -29,10 +29,10 @@ export * as behaviour from "@package/com/simibubi/create/foundation/blockEntity/
 declare module "@package/com/simibubi/create/foundation/blockEntity" {
     export class $SyncedBlockEntity extends $BlockEntity {
         notifyUpdate(): void;
-        sendData(): void;
-        blockHolderGetter(): $HolderGetter<$Block>;
         readClient(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         writeClient(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $CompoundTag;
+        sendData(): void;
+        blockHolderGetter(): $HolderGetter<$Block>;
         getUpdatePacket(): $ClientboundBlockEntityDataPacket;
         worldPosition: $BlockPos;
         level: $Level;
@@ -43,19 +43,19 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
         get updatePacket(): $ClientboundBlockEntityDataPacket;
     }
     export class $ItemHandlerContainer implements $Container {
-        isEmpty(): boolean;
         setItem(arg0: number, arg1: $ItemStack_): void;
-        clearContent(): void;
         startOpen(arg0: $Player): void;
         stopOpen(arg0: $Player): void;
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
+        clearContent(): void;
         removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
+        isEmpty(): boolean;
         getMaxStackSize(): number;
-        setChanged(): void;
-        stillValid(arg0: $Player): boolean;
         getContainerSize(): number;
         removeItemNoUpdate(arg0: number): $ItemStack;
+        stillValid(arg0: $Player): boolean;
+        setChanged(): void;
         countItem(arg0: $Item_): number;
         hasAnyOf(arg0: $Set_<$Item_>): boolean;
         hasAnyMatching(arg0: $Predicate_<$ItemStack>): boolean;
@@ -118,14 +118,8 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
         getFluid(arg0: number): $FluidStack;
     }
     export class $SmartBlockEntity extends $CachedRenderBBBlockEntity implements $PartialSafeNBT, $IInteractionChecker, $SpecialBlockEntityItemRequirement, $VirtualBlockEntity {
-        remove(): void;
-        initialize(): void;
-        isVirtual(): boolean;
-        destroy(): void;
-        invalidate(): void;
-        tick(): void;
-        getBehaviour<T extends $BlockEntityBehaviour>(arg0: $BehaviourType<T>): T;
         getRequiredItems(arg0: $BlockState_): $ItemRequirement;
+        getBehaviour<T extends $BlockEntityBehaviour>(arg0: $BehaviourType<T>): T;
         setLazyTickRate(arg0: number): void;
         lazyTick(): void;
         addBehaviours(arg0: $List_<$BlockEntityBehaviour>): void;
@@ -142,20 +136,30 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
         refreshBlockState(): void;
         registerAwardables(arg0: $List_<$BlockEntityBehaviour>, ...arg1: $CreateAdvancement[]): void;
         awardIfNear(arg0: $CreateAdvancement, arg1: number): void;
+        invalidate(): void;
+        tick(): void;
+        remove(): void;
+        isVirtual(): boolean;
+        initialize(): void;
+        destroy(): void;
         award(arg0: $CreateAdvancement): void;
         worldPosition: $BlockPos;
         level: $Level;
         static ATTACHMENTS_NBT_KEY: string;
         hasComparators: number;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
-        get virtual(): boolean;
         set lazyTickRate(value: number);
         get allBehaviours(): $Collection<$BlockEntityBehaviour>;
         get chunkUnloaded(): boolean;
+        get virtual(): boolean;
     }
     export class $IMultiBlockEntityContainer {
     }
     export interface $IMultiBlockEntityContainer {
+        isController(): boolean;
+        getController(): $BlockPos;
+        setController(arg0: $BlockPos_): void;
+        removeController(arg0: boolean): void;
         getMainAxisOf(arg0: $BlockEntity): $Direction$Axis;
         getLastKnownPos(): $BlockPos;
         preventConnectivityUpdate(): void;
@@ -163,18 +167,14 @@ declare module "@package/com/simibubi/create/foundation/blockEntity" {
         getMainConnectionAxis(): $Direction$Axis;
         setExtraData(arg0: $Object): void;
         modifyExtraData(arg0: $Object): $Object;
-        removeController(arg0: boolean): void;
         getControllerBE<T extends $BlockEntity>(): T;
-        getController(): $BlockPos;
-        isController(): boolean;
-        setController(arg0: $BlockPos_): void;
         getMaxWidth(): number;
+        getWidth(): number;
+        getHeight(): number;
         getMaxLength(arg0: $Direction$Axis_, arg1: number): number;
         setWidth(arg0: number): void;
         setHeight(arg0: number): void;
         getExtraData(): $Object;
-        getWidth(): number;
-        getHeight(): number;
         get lastKnownPos(): $BlockPos;
         get mainConnectionAxis(): $Direction$Axis;
         get controllerBE(): T;

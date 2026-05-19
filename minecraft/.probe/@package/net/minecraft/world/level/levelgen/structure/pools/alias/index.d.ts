@@ -16,13 +16,13 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pools/alia
     /**
      * Values that may be interpreted as {@link $Random}.
      */
-    export type $Random_ = { targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, alias?: $ResourceKey_<$StructureTemplatePool>,  } | [targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, alias?: $ResourceKey_<$StructureTemplatePool>, ];
+    export type $Random_ = { alias?: $ResourceKey_<$StructureTemplatePool>, targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>,  } | [alias?: $ResourceKey_<$StructureTemplatePool>, targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, ];
     export class $PoolAliasBinding {
+        static randomGroup(arg0: $SimpleWeightedRandomList<$List_<$PoolAliasBinding>>): $RandomGroup;
         static random(arg0: $ResourceKey_<$StructureTemplatePool>, arg1: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>): $Random;
         static random(arg0: string, arg1: $SimpleWeightedRandomList<string>): $Random;
         static direct(arg0: $ResourceKey_<$StructureTemplatePool>, arg1: $ResourceKey_<$StructureTemplatePool>): $Direct;
         static direct(arg0: string, arg1: string): $Direct;
-        static randomGroup(arg0: $SimpleWeightedRandomList<$List_<$PoolAliasBinding>>): $RandomGroup;
         static CODEC: $Codec<$PoolAliasBinding>;
     }
     export interface $PoolAliasBinding {
@@ -37,8 +37,8 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pools/alia
      */
     export type $RandomGroup_ = { groups?: $SimpleWeightedRandomList<$List_<$PoolAliasBinding>>,  } | [groups?: $SimpleWeightedRandomList<$List_<$PoolAliasBinding>>, ];
     export class $PoolAliasBindings {
-        static bootstrap(arg0: $Registry<$MapCodec_<$PoolAliasBinding>>): $MapCodec<$PoolAliasBinding>;
         static registerTargetsAsPools(arg0: $BootstrapContext<$StructureTemplatePool_>, arg1: $Holder_<$StructureTemplatePool>, arg2: $List_<$PoolAliasBinding>): void;
+        static bootstrap(arg0: $Registry<$MapCodec_<$PoolAliasBinding>>): $MapCodec<$PoolAliasBinding>;
         constructor();
     }
     export class $Direct extends $Record implements $PoolAliasBinding {

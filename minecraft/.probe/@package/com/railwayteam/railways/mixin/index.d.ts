@@ -52,7 +52,8 @@ declare module "@package/com/railwayteam/railways/mixin" {
     export class $AccessorTrackTargetingBehavior {
     }
     export interface $AccessorTrackTargetingBehavior {
-        getId(): $UUID;
+        isOrthogonal(): boolean;
+        getTargetDirection(): $Direction$AxisDirection;
         setTargetTrack(arg0: $BlockPos_): void;
         setTargetDirection(arg0: $Direction$AxisDirection_): void;
         getTargetTrack(): $BlockPos;
@@ -66,8 +67,7 @@ declare module "@package/com/railwayteam/railways/mixin" {
         setMigrationData(arg0: $CompoundTag_): void;
         getTargetBezier(): $BezierTrackPointLocation;
         setTargetBezier(arg0: $BezierTrackPointLocation_): void;
-        getTargetDirection(): $Direction$AxisDirection;
-        isOrthogonal(): boolean;
+        getId(): $UUID;
         setId(arg0: $UUID_): void;
         set edgePoint(value: $TrackEdgePoint);
     }
@@ -131,8 +131,8 @@ declare module "@package/com/railwayteam/railways/mixin" {
     export class $AccessorBlockEntityType {
     }
     export interface $AccessorBlockEntityType {
-        getValidBlocks(): $Set<$Block>;
         setValidBlocks(arg0: $Set_<$Block_>): void;
+        getValidBlocks(): $Set<$Block>;
     }
     export class $AccessorTrain {
     }

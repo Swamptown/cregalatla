@@ -15,6 +15,7 @@ declare module "@package/net/fabricmc/loader/api" {
     export class $ModContainer {
     }
     export interface $ModContainer {
+        getOrigin(): $ModOrigin;
         /**
          * @deprecated
          */
@@ -23,7 +24,6 @@ declare module "@package/net/fabricmc/loader/api" {
          * @deprecated
          */
         getPath(arg0: string): $Path;
-        getOrigin(): $ModOrigin;
         /**
          * @deprecated
          */
@@ -33,8 +33,8 @@ declare module "@package/net/fabricmc/loader/api" {
         getContainingMod(): ($ModContainer) | undefined;
         getContainedMods(): $Collection<$ModContainer>;
         findPath(file: string): ($Path) | undefined;
-        get root(): $Path;
         get origin(): $ModOrigin;
+        get root(): $Path;
         get rootPath(): $Path;
         get metadata(): $ModMetadata;
         get rootPaths(): $List<$Path>;

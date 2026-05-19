@@ -15,14 +15,14 @@ import { $NeighborUpdater } from "@package/net/minecraft/world/level/redstone";
 
 declare module "@package/com/simibubi/create/foundation/virtualWorld" {
     export class $VirtualRenderWorld extends $Level implements $VisualizationLevel {
-        clear(): void;
-        setBlockEntities(arg0: $Collection_<$BlockEntity>): void;
-        runLightEngine(): void;
-        static nextMultipleOf16(arg0: number): number;
         setExternalLight(arg0: number): void;
         resetExternalLight(): void;
         getChunkAtImmediately(arg0: number, arg1: number): $LevelChunk;
         getAnyChunkImmediately(arg0: number, arg1: number): $ChunkAccess;
+        setBlockEntities(arg0: $Collection_<$BlockEntity>): void;
+        runLightEngine(): void;
+        static nextMultipleOf16(arg0: number): number;
+        clear(): void;
         getBlockState(arg0: number, arg1: number, arg2: number): $BlockState;
         supportsVisualization(): boolean;
         self(): $EntityGetter;
@@ -52,7 +52,7 @@ declare module "@package/com/simibubi/create/foundation/virtualWorld" {
         blockEntityTickers: $List<$TickingBlockEntity>;
         captureBlockSnapshots: boolean;
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: $Vec3i, arg4: $Runnable_);
-        set blockEntities(value: $Collection_<$BlockEntity>);
         set externalLight(value: number);
+        set blockEntities(value: $Collection_<$BlockEntity>);
     }
 }

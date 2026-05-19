@@ -5,10 +5,10 @@ import { $ByteBuffer } from "@package/java/nio";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/gl/buffer" {
     export class $GlBufferTarget extends $Enum<$GlBufferTarget> {
-        static values(): $GlBufferTarget[];
-        static valueOf(arg0: string): $GlBufferTarget;
         getTargetParameter(): number;
         getBindingParameter(): number;
+        static values(): $GlBufferTarget[];
+        static valueOf(arg0: string): $GlBufferTarget;
         static COPY_WRITE_BUFFER: $GlBufferTarget;
         static COPY_READ_BUFFER: $GlBufferTarget;
         static VALUES: $GlBufferTarget[];
@@ -56,9 +56,9 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/buffer" {
      */
     export type $GlBufferUsage_ = "stream_draw" | "stream_read" | "stream_copy" | "static_draw" | "static_read" | "static_copy" | "dynamic_draw" | "dynamic_read" | "dynamic_copy";
     export class $GlBufferStorageFlags extends $Enum<$GlBufferStorageFlags> implements $EnumBit {
+        getBits(): number;
         static values(): $GlBufferStorageFlags[];
         static valueOf(arg0: string): $GlBufferStorageFlags;
-        getBits(): number;
         static PERSISTENT: $GlBufferStorageFlags;
         static COHERENT: $GlBufferStorageFlags;
         static CLIENT_STORAGE: $GlBufferStorageFlags;
@@ -71,9 +71,9 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/buffer" {
      */
     export type $GlBufferStorageFlags_ = "persistent" | "map_read" | "map_write" | "client_storage" | "coherent";
     export class $GlBufferMapFlags extends $Enum<$GlBufferMapFlags> implements $EnumBit {
+        getBits(): number;
         static values(): $GlBufferMapFlags[];
         static valueOf(arg0: string): $GlBufferMapFlags;
-        getBits(): number;
         static READ: $GlBufferMapFlags;
         static PERSISTENT: $GlBufferMapFlags;
         static INVALIDATE_RANGE: $GlBufferMapFlags;
@@ -89,10 +89,10 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/buffer" {
      */
     export type $GlBufferMapFlags_ = "read" | "write" | "persistent" | "invalidate_buffer" | "invalidate_range" | "explicit_flush" | "coherent" | "unsynchronized";
     export class $GlBufferMapping {
-        write(arg0: $ByteBuffer, arg1: number): void;
-        dispose(): void;
         getBufferObject(): $GlBuffer;
         getMemoryBuffer(): $ByteBuffer;
+        dispose(): void;
+        write(arg0: $ByteBuffer, arg1: number): void;
         isDisposed(): boolean;
         constructor(arg0: $GlBuffer, arg1: $ByteBuffer);
         get bufferObject(): $GlBuffer;

@@ -144,38 +144,38 @@ declare module "@package/net/minecraft/world/entity/ai/memory" {
      */
     export type $MemoryStatus_ = "value_present" | "value_absent" | "registered";
     export class $WalkTarget {
-        getTarget(): $PositionTracker;
         getCloseEnoughDist(): number;
         getSpeedModifier(): number;
+        getTarget(): $PositionTracker;
+        constructor(arg0: $BlockPos_, arg1: number, arg2: number);
         constructor(arg0: $PositionTracker, arg1: number, arg2: number);
         constructor(arg0: $Entity, arg1: number, arg2: number);
         constructor(arg0: $Vec3_, arg1: number, arg2: number);
-        constructor(arg0: $BlockPos_, arg1: number, arg2: number);
-        get target(): $PositionTracker;
         get closeEnoughDist(): number;
         get speedModifier(): number;
+        get target(): $PositionTracker;
     }
     export interface $MemoryModuleType<U> extends RegistryMarked<RegistryTypes.MemoryModuleTypeTag, RegistryTypes.MemoryModuleType> {}
     export class $ExpirableValue<T> {
-        static of<T>(arg0: T): $ExpirableValue<T>;
-        static of<T>(arg0: T, arg1: number): $ExpirableValue<T>;
-        getValue(): T;
-        tick(): void;
-        getTimeToLive(): number;
         canExpire(): boolean;
+        getTimeToLive(): number;
+        tick(): void;
+        getValue(): T;
+        static of<T>(arg0: T, arg1: number): $ExpirableValue<T>;
+        static of<T>(arg0: T): $ExpirableValue<T>;
         static codec<T>(arg0: $Codec<T>): $Codec<$ExpirableValue<T>>;
         hasExpired(): boolean;
         constructor(arg0: T, arg1: number);
-        get value(): T;
         get timeToLive(): number;
+        get value(): T;
     }
     export class $NearestVisibleLivingEntities {
-        contains(arg0: $LivingEntity): boolean;
+        findClosest(arg0: $Predicate_<$LivingEntity>): ($LivingEntity) | undefined;
         contains(arg0: $Predicate_<$LivingEntity>): boolean;
+        contains(arg0: $LivingEntity): boolean;
         static empty(): $NearestVisibleLivingEntities;
         find(arg0: $Predicate_<$LivingEntity>): $Stream<$LivingEntity>;
         findAll(arg0: $Predicate_<$LivingEntity>): $Iterable<$LivingEntity>;
-        findClosest(arg0: $Predicate_<$LivingEntity>): ($LivingEntity) | undefined;
         constructor(arg0: $LivingEntity, arg1: $List_<$LivingEntity>);
     }
 }

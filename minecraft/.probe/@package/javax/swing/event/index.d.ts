@@ -33,8 +33,8 @@ declare module "@package/javax/swing/event" {
         get edit(): $UndoableEdit;
     }
     export class $MenuKeyEvent extends $KeyEvent {
-        getPath(): $MenuElement[];
         getMenuSelectionManager(): $MenuSelectionManager;
+        getPath(): $MenuElement[];
         static VK_UNDEFINED: number;
         static VK_QUOTEDBL: number;
         /**
@@ -302,12 +302,12 @@ declare module "@package/javax/swing/event" {
         static VK_META: number;
         static VK_BRACELEFT: number;
         constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number, arg5: string, arg6: $MenuElement[], arg7: $MenuSelectionManager);
-        get path(): $MenuElement[];
         get menuSelectionManager(): $MenuSelectionManager;
+        get path(): $MenuElement[];
     }
     export class $MenuDragMouseEvent extends $MouseEvent {
-        getPath(): $MenuElement[];
         getMenuSelectionManager(): $MenuSelectionManager;
+        getPath(): $MenuElement[];
         static ADJUSTMENT_EVENT_MASK: number;
         static MOUSE_FIRST: number;
         /**
@@ -390,42 +390,42 @@ declare module "@package/javax/swing/event" {
         static MOUSE_DRAGGED: number;
         constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: $MenuElement[], arg9: $MenuSelectionManager);
         constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: boolean, arg10: $MenuElement[], arg11: $MenuSelectionManager);
-        get path(): $MenuElement[];
         get menuSelectionManager(): $MenuSelectionManager;
+        get path(): $MenuElement[];
     }
     export class $ListSelectionEvent extends $EventObject {
-        getValueIsAdjusting(): boolean;
         getFirstIndex(): number;
+        getValueIsAdjusting(): boolean;
         getLastIndex(): number;
         constructor(arg0: $Object, arg1: number, arg2: number, arg3: boolean);
-        get valueIsAdjusting(): boolean;
         get firstIndex(): number;
+        get valueIsAdjusting(): boolean;
         get lastIndex(): number;
     }
     export class $DocumentEvent$ElementChange {
     }
     export interface $DocumentEvent$ElementChange {
-        getIndex(): number;
         getElement(): $Element;
         getChildrenRemoved(): $Element[];
         getChildrenAdded(): $Element[];
-        get index(): number;
+        getIndex(): number;
         get element(): $Element;
         get childrenRemoved(): $Element[];
         get childrenAdded(): $Element[];
+        get index(): number;
     }
     export class $DocumentEvent {
     }
     export interface $DocumentEvent {
+        getChange(arg0: $Element): $DocumentEvent$ElementChange;
+        getDocument(): $Document;
         getLength(): number;
         getType(): $DocumentEvent$EventType;
         getOffset(): number;
-        getChange(arg0: $Element): $DocumentEvent$ElementChange;
-        getDocument(): $Document;
+        get document(): $Document;
         get length(): number;
         get type(): $DocumentEvent$EventType;
         get offset(): number;
-        get document(): $Document;
     }
     export class $UndoableEditListener {
     }
@@ -469,8 +469,8 @@ declare module "@package/javax/swing/event" {
         ancestorMoved(arg0: $AncestorEvent): void;
     }
     export class $AncestorEvent extends $AWTEvent {
-        getComponent(): $JComponent;
         getAncestorParent(): $Container;
+        getComponent(): $JComponent;
         getAncestor(): $Container;
         static ADJUSTMENT_EVENT_MASK: number;
         static MOUSE_EVENT_MASK: number;
@@ -496,24 +496,24 @@ declare module "@package/javax/swing/event" {
         static MOUSE_MOTION_EVENT_MASK: number;
         static WINDOW_FOCUS_EVENT_MASK: number;
         constructor(arg0: $JComponent, arg1: number, arg2: $Container, arg3: $Container);
-        get component(): $JComponent;
         get ancestorParent(): $Container;
+        get component(): $JComponent;
         get ancestor(): $Container;
     }
     export class $PopupMenuEvent extends $EventObject {
         constructor(arg0: $Object);
     }
     export class $ListDataEvent extends $EventObject {
-        getType(): number;
         getIndex0(): number;
         getIndex1(): number;
+        getType(): number;
         static INTERVAL_ADDED: number;
         static CONTENTS_CHANGED: number;
         static INTERVAL_REMOVED: number;
         constructor(arg0: $Object, arg1: number, arg2: number, arg3: number);
-        get type(): number;
         get index0(): number;
         get index1(): number;
+        get type(): number;
     }
     export class $CaretEvent extends $EventObject {
         getMark(): number;

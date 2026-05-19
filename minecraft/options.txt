@@ -48,7 +48,7 @@ mouseSensitivity:0.5
 damageTiltStrength:1.0
 highContrast:false
 narratorHotkey:true
-resourcePacks:["vanilla","fabric","mod_resources","moonlight:merged_pack"]
+resourcePacks:["vanilla","fabric","mod_resources","moonlight:merged_pack","file/CreGalAtla"]
 incompatibleResourcePacks:[]
 lastServer:slighted-mardi.na.e4mc.link
 lang:en_us
@@ -192,6 +192,7 @@ key_gui.xaero_alternative_list_players:key.keyboard.unknown
 key_gui.xaero_toggle_tracked_players_on_map:key.keyboard.unknown
 key_gui.xaero_toggle_tracked_players_in_world:key.keyboard.unknown
 key_gui.xaero_toggle_pac_chunk_claims:key.keyboard.unknown
+key_key.cregalatla.air_dash:key.mouse.4
 key_key.craftingtweaks.rotate:key.keyboard.unknown
 key_key.craftingtweaks.rotate_counter_clockwise:key.keyboard.unknown
 key_key.craftingtweaks.balance:key.keyboard.unknown
@@ -233,7 +234,6 @@ key_create.keyinfo.ctrl_modifier:key.keyboard.left.control
 key_create.keyinfo.alt_modifier:key.keyboard.left.alt
 key_dndesires.keyinfo.saw_active:key.keyboard.left.alt
 key_dndesires.keyinfo.drill_active:key.keyboard.left.alt
-key_key.fridgedash.dash:key.mouse.4
 key_tfmg.keyinfo.transmission_shift_up:key.keyboard.v
 key_tfmg.keyinfo.transmission_shift_down:key.keyboard.unknown
 key_tfmg.keyinfo.custom_button:key.keyboard.b

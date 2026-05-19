@@ -23,11 +23,11 @@ declare module "@package/mezz/jei/api/gui/drawable" {
     export class $IDrawableBuilder {
     }
     export interface $IDrawableBuilder {
-        trim(arg0: number, arg1: number, arg2: number, arg3: number): $IDrawableBuilder;
-        build(): $IDrawableStatic;
         setTextureSize(arg0: number, arg1: number): $IDrawableBuilder;
         buildAnimated(arg0: number, arg1: $IDrawableAnimated$StartDirection_, arg2: boolean): $IDrawableAnimated;
         buildAnimated(arg0: $ITickTimer, arg1: $IDrawableAnimated$StartDirection_): $IDrawableAnimated;
+        trim(arg0: number, arg1: number, arg2: number, arg3: number): $IDrawableBuilder;
+        build(): $IDrawableStatic;
         addPadding(arg0: number, arg1: number, arg2: number, arg3: number): $IDrawableBuilder;
     }
     export class $IScalableDrawable {
@@ -43,10 +43,10 @@ declare module "@package/mezz/jei/api/gui/drawable" {
     export class $IDrawable {
     }
     export interface $IDrawable {
-        draw(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        draw(arg0: $GuiGraphics): void;
         getWidth(): number;
         getHeight(): number;
+        draw(arg0: $GuiGraphics, arg1: number, arg2: number): void;
+        draw(arg0: $GuiGraphics): void;
         get width(): number;
         get height(): number;
     }

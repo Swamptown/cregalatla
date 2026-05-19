@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:postboxes",
+  "type": "emixx:group",
+  "contents": [
+    "#create:postboxes"
+  ]
+}

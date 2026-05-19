@@ -13,24 +13,24 @@ import { $Transformation } from "@package/com/mojang/math";
 
 declare module "@package/net/neoforged/neoforge/client/model/geometry" {
     export class $BlockGeometryBakingContext implements $IGeometryBakingContext {
-        copyFrom(arg0: $BlockGeometryBakingContext): void;
         getRenderTypeHint(): $ResourceLocation;
-        getMaterial(arg0: string): $Material;
         getTransforms(): $ItemTransforms;
+        getMaterial(arg0: string): $Material;
+        copyFrom(arg0: $BlockGeometryBakingContext): void;
         isGui3d(): boolean;
         useAmbientOcclusion(): boolean;
         useBlockLight(): boolean;
         bake(arg0: $ModelBaker, arg1: $Function_<$Material, $TextureAtlasSprite>, arg2: $ModelState, arg3: $ItemOverrides): $BakedModel;
-        hasCustomGeometry(): boolean;
-        getCustomGeometry(): $IUnbakedGeometry<never>;
         getModelName(): string;
         hasMaterial(arg0: string): boolean;
         getRootTransform(): $Transformation;
         isComponentVisible(arg0: string, arg1: boolean): boolean;
+        hasCustomGeometry(): boolean;
+        getCustomGeometry(): $IUnbakedGeometry<never>;
         setCustomGeometry(arg0: $IUnbakedGeometry_<never>): void;
+        setGui3d(arg0: boolean): void;
         setRootTransform(arg0: $Transformation): void;
         setRenderTypeHint(arg0: $ResourceLocation_): void;
-        setGui3d(arg0: boolean): void;
         getRenderType(arg0: $ResourceLocation_): $RenderTypeGroup;
         owner: $BlockModel;
         visibilityData: $BlockGeometryBakingContext$VisibilityData;
@@ -39,16 +39,16 @@ declare module "@package/net/neoforged/neoforge/client/model/geometry" {
         get modelName(): string;
     }
     export class $UnbakedGeometryHelper {
-        static composeRootTransformIntoModelState(arg0: $ModelState, arg1: $Transformation): $ModelState;
-        static resolveDirtyMaterial(arg0: string, arg1: $IGeometryBakingContext): $Material;
-        static createUnbakedItemElements(arg0: number, arg1: $TextureAtlasSprite): $List<$BlockElement>;
         static createUnbakedItemElements(arg0: number, arg1: $TextureAtlasSprite, arg2: $ExtraFaceData_): $List<$BlockElement>;
+        static createUnbakedItemElements(arg0: number, arg1: $TextureAtlasSprite): $List<$BlockElement>;
         static bakeElements(arg0: $IModelBuilder<never>, arg1: $List_<$BlockElement>, arg2: $Function_<$Material, $TextureAtlasSprite>, arg3: $ModelState): void;
         static bakeElements(arg0: $List_<$BlockElement>, arg1: $Function_<$Material, $TextureAtlasSprite>, arg2: $ModelState): $List<$BakedQuad>;
-        static applyRootTransform(arg0: $ModelState, arg1: $Transformation): $IQuadTransformer;
-        static createUnbakedItemMaskElements(arg0: number, arg1: $TextureAtlasSprite): $List<$BlockElement>;
-        static createUnbakedItemMaskElements(arg0: number, arg1: $TextureAtlasSprite, arg2: $ExtraFaceData_): $List<$BlockElement>;
+        static composeRootTransformIntoModelState(arg0: $ModelState, arg1: $Transformation): $ModelState;
         static bakeElementFace(arg0: $BlockElement, arg1: $BlockElementFace_, arg2: $TextureAtlasSprite, arg3: $Direction_, arg4: $ModelState): $BakedQuad;
+        static createUnbakedItemMaskElements(arg0: number, arg1: $TextureAtlasSprite, arg2: $ExtraFaceData_): $List<$BlockElement>;
+        static createUnbakedItemMaskElements(arg0: number, arg1: $TextureAtlasSprite): $List<$BlockElement>;
+        static applyRootTransform(arg0: $ModelState, arg1: $Transformation): $IQuadTransformer;
+        static resolveDirtyMaterial(arg0: string, arg1: $IGeometryBakingContext): $Material;
         static bake(arg0: $BlockModel, arg1: $ModelBaker, arg2: $BlockModel, arg3: $Function_<$Material, $TextureAtlasSprite>, arg4: $ModelState, arg5: boolean): $BakedModel;
         constructor();
     }
@@ -63,12 +63,12 @@ declare module "@package/net/neoforged/neoforge/client/model/geometry" {
     }
     export interface $IGeometryBakingContext {
         getRenderTypeHint(): $ResourceLocation;
-        getMaterial(arg0: string): $Material;
         getTransforms(): $ItemTransforms;
+        getMaterial(arg0: string): $Material;
         isGui3d(): boolean;
         useAmbientOcclusion(): boolean;
-        useBlockLight(): boolean;
         getRenderType(arg0: $ResourceLocation_): $RenderTypeGroup;
+        useBlockLight(): boolean;
         getModelName(): string;
         hasMaterial(arg0: string): boolean;
         getRootTransform(): $Transformation;
@@ -80,14 +80,14 @@ declare module "@package/net/neoforged/neoforge/client/model/geometry" {
         get rootTransform(): $Transformation;
     }
     export class $StandaloneGeometryBakingContext implements $IGeometryBakingContext {
+        getRenderTypeHint(): $ResourceLocation;
+        getTransforms(): $ItemTransforms;
+        getMaterial(arg0: string): $Material;
         static builder(): $StandaloneGeometryBakingContext$Builder;
         static builder(arg0: $IGeometryBakingContext): $StandaloneGeometryBakingContext$Builder;
         static create(arg0: $ResourceLocation_): $StandaloneGeometryBakingContext;
-        static create(arg0: $ResourceLocation_, arg1: $Map_<string, $ResourceLocation_>): $StandaloneGeometryBakingContext;
         static create(arg0: $Map_<string, $ResourceLocation_>): $StandaloneGeometryBakingContext;
-        getRenderTypeHint(): $ResourceLocation;
-        getMaterial(arg0: string): $Material;
-        getTransforms(): $ItemTransforms;
+        static create(arg0: $ResourceLocation_, arg1: $Map_<string, $ResourceLocation_>): $StandaloneGeometryBakingContext;
         isGui3d(): boolean;
         useAmbientOcclusion(): boolean;
         useBlockLight(): boolean;
@@ -107,8 +107,8 @@ declare module "@package/net/neoforged/neoforge/client/model/geometry" {
     export class $BlockGeometryBakingContext$VisibilityData {
         copyFrom(arg0: $BlockGeometryBakingContext$VisibilityData): void;
         isVisible(arg0: string, arg1: boolean): boolean;
-        setVisibilityState(arg0: string, arg1: boolean): void;
         hasCustomVisibility(arg0: string): boolean;
+        setVisibilityState(arg0: string, arg1: boolean): void;
         constructor();
     }
     export class $GeometryLoaderManager {
@@ -139,16 +139,16 @@ declare module "@package/net/neoforged/neoforge/client/model/geometry" {
      */
     export type $IGeometryLoader_<T> = ((arg0: $JsonObject, arg1: $JsonDeserializationContext) => T);
     export class $StandaloneGeometryBakingContext$Builder {
-        build(arg0: $ResourceLocation_): $StandaloneGeometryBakingContext;
         withGui3d(arg0: boolean): $StandaloneGeometryBakingContext$Builder;
         withUseBlockLight(arg0: boolean): $StandaloneGeometryBakingContext$Builder;
-        withTextures(arg0: $Map_<string, $ResourceLocation_>, arg1: $ResourceLocation_): $StandaloneGeometryBakingContext$Builder;
         withTextures(arg0: $ResourceLocation_, arg1: $Map_<string, $ResourceLocation_>, arg2: $ResourceLocation_): $StandaloneGeometryBakingContext$Builder;
+        withTextures(arg0: $Map_<string, $ResourceLocation_>, arg1: $ResourceLocation_): $StandaloneGeometryBakingContext$Builder;
         withMaterials(arg0: $Map_<string, $Material>, arg1: $Material): $StandaloneGeometryBakingContext$Builder;
         withUseAmbientOcclusion(arg0: boolean): $StandaloneGeometryBakingContext$Builder;
         withTransforms(arg0: $ItemTransforms): $StandaloneGeometryBakingContext$Builder;
         withRootTransform(arg0: $Transformation): $StandaloneGeometryBakingContext$Builder;
         withRenderTypeHint(arg0: $ResourceLocation_): $StandaloneGeometryBakingContext$Builder;
         withVisibleComponents(arg0: $Object2BooleanMap<string>): $StandaloneGeometryBakingContext$Builder;
+        build(arg0: $ResourceLocation_): $StandaloneGeometryBakingContext;
     }
 }

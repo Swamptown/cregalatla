@@ -25,11 +25,11 @@ declare module "@package/xaero/common/settings" {
         /**
          * @deprecated
          */
-        saveWaypoints(arg0: $WaypointWorld, arg1: boolean): void;
+        saveWaypoints(arg0: $WaypointWorld): void;
         /**
          * @deprecated
          */
-        saveWaypoints(arg0: $WaypointWorld): void;
+        saveWaypoints(arg0: $WaypointWorld, arg1: boolean): void;
         readSetting(arg0: string[]): void;
         foundOldRadarSettings(): boolean;
         loadDefaultSettings(arg0: boolean): void;
@@ -54,28 +54,28 @@ declare module "@package/xaero/common/settings" {
         getEntityRadarBackwardsCompatibilityConfig(): $EntityRadarBackwardsCompatibilityConfig;
         getLoadedWaypointLines(): string;
         removeLoadedWaypointLines(): void;
-        static canEditIngameSettings(): boolean;
-        isIgnoreHeightmaps(): boolean;
+        /**
+         * @deprecated
+         */
+        waypointsGUI(arg0: $WaypointsManager): boolean;
+        waypointsGUI(arg0: $MinimapSession): boolean;
+        saveSettings(): void;
+        writeSettings(arg0: $PrintWriter): void;
         getUIScale(arg0: number, arg1: number, arg2: number): number;
+        static canEditIngameSettings(): boolean;
         resetServerSettings(): void;
+        isIgnoreHeightmaps(): boolean;
         resetEntityRadarBackwardsCompatibilityConfig(): void;
         caveMapsDisabled(): boolean;
         deathpointsDisabled(): boolean;
         showWaypointsDisabled(): boolean;
         minimapDisabled(): boolean;
-        static getTranslation(arg0: boolean): string;
-        loadSettings(arg0: boolean): void;
         /**
          * @deprecated
          */
         getMinimap(): boolean;
-        waypointsGUI(arg0: $MinimapSession): boolean;
-        /**
-         * @deprecated
-         */
-        waypointsGUI(arg0: $WaypointsManager): boolean;
-        saveSettings(): void;
-        writeSettings(arg0: $PrintWriter): void;
+        static getTranslation(arg0: boolean): string;
+        loadSettings(arg0: boolean): void;
         /**
          * @deprecated
          */

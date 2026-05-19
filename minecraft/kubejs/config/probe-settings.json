@@ -4,6 +4,8 @@
         "minecraft",
         "kubejs",
         "neoforge",
-        "morejs"
-    ]
+        "morejs",
+        "emixx"
+    ],
+    "probejs.hintsForLLM": false
 }

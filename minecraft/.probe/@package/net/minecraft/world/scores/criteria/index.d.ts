@@ -4,12 +4,12 @@ import { $StringRepresentable$EnumCodec, $StringRepresentable } from "@package/n
 
 declare module "@package/net/minecraft/world/scores/criteria" {
     export class $ObjectiveCriteria {
-        getName(): string;
-        isReadOnly(): boolean;
-        getDefaultRenderType(): $ObjectiveCriteria$RenderType;
         static registerCustom(arg0: string, arg1: boolean, arg2: $ObjectiveCriteria$RenderType_): $ObjectiveCriteria;
         static registerCustom(arg0: string): $ObjectiveCriteria;
         static getCustomCriteriaNames(): $Set<string>;
+        getDefaultRenderType(): $ObjectiveCriteria$RenderType;
+        getName(): string;
+        isReadOnly(): boolean;
         static byName(arg0: string): ($ObjectiveCriteria) | undefined;
         static DEATH_COUNT: $ObjectiveCriteria;
         static ARMOR: $ObjectiveCriteria;
@@ -26,10 +26,10 @@ declare module "@package/net/minecraft/world/scores/criteria" {
         static FOOD: $ObjectiveCriteria;
         constructor(arg0: string);
         constructor(arg0: string, arg1: boolean, arg2: $ObjectiveCriteria$RenderType_);
+        static get customCriteriaNames(): $Set<string>;
+        get defaultRenderType(): $ObjectiveCriteria$RenderType;
         get name(): string;
         get readOnly(): boolean;
-        get defaultRenderType(): $ObjectiveCriteria$RenderType;
-        static get customCriteriaNames(): $Set<string>;
     }
     export class $ObjectiveCriteria$RenderType extends $Enum<$ObjectiveCriteria$RenderType> implements $StringRepresentable {
         static values(): $ObjectiveCriteria$RenderType[];

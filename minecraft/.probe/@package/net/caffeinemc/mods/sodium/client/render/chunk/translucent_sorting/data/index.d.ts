@@ -7,13 +7,13 @@ import { $Vector3dc, $Vector3fc } from "@package/org/joml";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/translucent_sorting/data" {
     export class $TranslucentData {
+        getSortType(): $SortType;
         static writeQuadVertexIndexes(arg0: $IntBuffer, arg1: number): void;
         static writeQuadVertexIndexes(arg0: $IntBuffer, arg1: number[]): void;
         static vertexCountToQuadCount(arg0: number): number;
         static quadCountToIndexBytes(arg0: number): number;
         static indexBytesToQuadCount(arg0: number): number;
         prepareTrigger(arg0: boolean): void;
-        getSortType(): $SortType;
         static VERTICES_PER_QUAD: number;
         static BYTES_PER_QUAD: number;
         static BYTES_PER_INDEX: number;

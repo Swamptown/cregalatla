@@ -12,8 +12,8 @@ declare module "@package/de/keksuccino/fancymenu/util/rendering/ui/widget" {
     export class $UniqueLabeledSwitchCycleButton {
     }
     export interface $UniqueLabeledSwitchCycleButton {
-        setLabeledSwitchComponentLabel_FancyMenu(arg0: $Component_): void;
         getLabeledSwitchComponentLabel_FancyMenu(): $Component;
+        setLabeledSwitchComponentLabel_FancyMenu(arg0: $Component_): void;
     }
     export class $CustomizableSlider {
     }
@@ -67,20 +67,18 @@ declare module "@package/de/keksuccino/fancymenu/util/rendering/ui/widget" {
     export class $UniqueWidget {
     }
     export interface $UniqueWidget {
-        setWidgetIdentifierFancyMenu(arg0: string): $AbstractWidget;
         getWidgetIdentifierFancyMenu(): string;
+        setWidgetIdentifierFancyMenu(arg0: string): $AbstractWidget;
     }
     export class $CustomizableWidget {
     }
     export interface $CustomizableWidget {
-        getHitboxRotationDegreesFancyMenu(): number;
+        resolveLabelScaleFancyMenu(): number;
         resetWidgetSizeAndPositionFancyMenu(): void;
         tickFocusStateListenersFancyMenu(arg0: boolean): void;
-        isHiddenFancyMenu(): boolean;
-        resetWidgetCustomizationsFancyMenu(): void;
+        isNineSliceCustomBackgroundTexture_FancyMenu(): boolean;
         tickHoverStateListenersFancyMenu(arg0: boolean): void;
         tickHoverOrFocusStateListenersFancyMenu(arg0: boolean): void;
-        resolveLabelScaleFancyMenu(): number;
         addHoverOrFocusStateListenerFancyMenu(arg0: $Consumer_<boolean>): void;
         addResetCustomizationsListenerFancyMenu(arg0: $Runnable_): void;
         getResetCustomizationsListenersFancyMenu(): $List<$Runnable>;
@@ -129,7 +127,6 @@ declare module "@package/de/keksuccino/fancymenu/util/rendering/ui/widget" {
         getHoverSoundFancyMenu(): $IAudio;
         getUnhoverSoundFancyMenu(): $IAudio;
         setNineSliceCustomBackground_FancyMenu(arg0: boolean): void;
-        isNineSliceCustomBackgroundTexture_FancyMenu(): boolean;
         setNineSliceBorderX_FancyMenu(arg0: number): void;
         getNineSliceCustomBackgroundBorderX_FancyMenu(): number;
         setNineSliceBorderY_FancyMenu(arg0: number): void;
@@ -147,6 +144,7 @@ declare module "@package/de/keksuccino/fancymenu/util/rendering/ui/widget" {
         getCustomHeightFancyMenu(): number;
         getCustomXFancyMenu(): number;
         getCustomYFancyMenu(): number;
+        getHitboxRotationDegreesFancyMenu(): number;
         getHitboxVerticalTiltDegreesFancyMenu(): number;
         getHitboxHorizontalTiltDegreesFancyMenu(): number;
         getOriginalMessageFancyMenu(): $Component;
@@ -154,13 +152,14 @@ declare module "@package/de/keksuccino/fancymenu/util/rendering/ui/widget" {
         stopCustomClickSoundFancyMenu(): void;
         stopHoverSoundFancyMenu(): void;
         stopUnhoverSoundFancyMenu(): void;
-        get hitboxRotationDegreesFancyMenu(): number;
+        isHiddenFancyMenu(): boolean;
+        resetWidgetCustomizationsFancyMenu(): void;
+        get nineSliceCustomBackgroundTexture_FancyMenu(): boolean;
         get resetCustomizationsListenersFancyMenu(): $List<$Runnable>;
         get hoverStateListenersFancyMenu(): $List<$Consumer<boolean>>;
         get focusStateListenersFancyMenu(): $List<$Consumer<boolean>>;
         get hoverOrFocusStateListenersFancyMenu(): $List<$Consumer<boolean>>;
         set nineSliceCustomBackground_FancyMenu(value: boolean);
-        get nineSliceCustomBackgroundTexture_FancyMenu(): boolean;
         set nineSliceBorderX_FancyMenu(value: number);
         get nineSliceCustomBackgroundBorderX_FancyMenu(): number;
         set nineSliceBorderY_FancyMenu(value: number);
@@ -173,6 +172,7 @@ declare module "@package/de/keksuccino/fancymenu/util/rendering/ui/widget" {
         get nineSliceCustomBackgroundBorderBottom_FancyMenu(): number;
         set nineSliceBorderLeft_FancyMenu(value: number);
         get nineSliceCustomBackgroundBorderLeft_FancyMenu(): number;
+        get hitboxRotationDegreesFancyMenu(): number;
         get hitboxVerticalTiltDegreesFancyMenu(): number;
         get hitboxHorizontalTiltDegreesFancyMenu(): number;
         get originalMessageFancyMenu(): $Component;

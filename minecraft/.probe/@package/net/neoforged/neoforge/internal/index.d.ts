@@ -6,8 +6,8 @@ export * as versions from "@package/net/neoforged/neoforge/internal/versions";
 
 declare module "@package/net/neoforged/neoforge/internal" {
     export class $RegistrationEvents {
-        static canModifyComponents(): boolean;
         static modifyComponents(): void;
+        static canModifyComponents(): boolean;
         constructor();
     }
     export class $BrandingControl {

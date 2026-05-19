@@ -13,14 +13,14 @@ declare module "@package/net/caffeinemc/mods/lithium/common/block" {
     export class $BlockListeningSection {
     }
     export interface $BlockListeningSection {
-        lithium$removeFromCallback(arg0: $ListeningBlockStatePredicate, arg1: $SectionedBlockChangeTracker): void;
         lithium$addToCallback(arg0: $ListeningBlockStatePredicate, arg1: $SectionedBlockChangeTracker, arg2: number, arg3: $Level_): void;
+        lithium$removeFromCallback(arg0: $ListeningBlockStatePredicate, arg1: $SectionedBlockChangeTracker): void;
     }
     export class $TrackedBlockStatePredicate implements $Predicate<$BlockState> {
         getIndex(): number;
-        or(arg0: $Predicate_<$BlockState>): $Predicate<$BlockState>;
         negate(): $Predicate<$BlockState>;
         and(arg0: $Predicate_<$BlockState>): $Predicate<$BlockState>;
+        or(arg0: $Predicate_<$BlockState>): $Predicate<$BlockState>;
         static FULLY_INITIALIZED: $AtomicBoolean;
         constructor(arg0: number);
         get index(): number;

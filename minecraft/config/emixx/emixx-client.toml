@@ -1,7 +1,12 @@
 [creativeModeTabs]
 	enableCreativeModeTabs = true
 	syncSelectedCreativeModeTab = true
+	showCreativeTabNameInSearchbar = true
+	disabledCreativeModeTabs = ["minecraft:op_blocks"]
 
 [stackGroups]
 	enableStackGroups = true
-	disabledStackGroups = ["minecraft:flowers", "minecraft:beds", "c:buckets"]
+	enableCreateStackGroupButton = true
+
+[miscellaneous]
+	emiOnlyInRecipeBook = false

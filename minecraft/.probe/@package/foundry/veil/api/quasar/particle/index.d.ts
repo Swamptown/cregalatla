@@ -39,32 +39,32 @@ declare module "@package/foundry/veil/api/quasar/particle" {
      */
     export type $RenderStyle_ = RegistryTypes.VeilQuasarRenderStyle | ((arg0: $MatrixStack, arg1: $QuasarParticle, arg2: $RenderData, arg3: $Vector3fc, arg4: $VertexConsumer, arg5: number, arg6: number) => void);
     export class $RenderData {
-        tick(arg0: $QuasarParticle, arg1: number): void;
-        setColor(arg0: $Colorc): void;
-        setColor(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        setColor(arg0: $Vector4fc): void;
-        getPackedLight(): number;
-        renderTrails(arg0: $MatrixStack, arg1: $MultiBufferSource_, arg2: $Vec3_, arg3: number): void;
-        setFixedPackedLight(arg0: number): void;
+        getFixedPackedLight(): number;
+        getTrails(): $List<$Trail>;
+        setSpriteData(arg0: $SpriteData_): void;
         setAtlasSprite(arg0: $TextureAtlasSprite): void;
+        setFixedPackedLight(arg0: number): void;
+        getAtlasSprite(): $TextureAtlasSprite;
+        getSpriteData(): $SpriteData;
         getRenderRotation(): $Vector3fc;
         getRenderRadius(): number;
         getRenderAge(): number;
         getAgePercent(): number;
-        getAtlasSprite(): $TextureAtlasSprite;
-        getSpriteData(): $SpriteData;
+        renderTrails(arg0: $MatrixStack, arg1: $MultiBufferSource_, arg2: $Vec3_, arg3: number): void;
         setRed(arg0: number): void;
         setGreen(arg0: number): void;
         setBlue(arg0: number): void;
+        getPackedLight(): number;
         getRed(): number;
         getGreen(): number;
         getBlue(): number;
         getAlpha(): number;
         markDirty(): void;
         getRenderPosition(): $Vector3dc;
-        getTrails(): $List<$Trail>;
-        setSpriteData(arg0: $SpriteData_): void;
-        getFixedPackedLight(): number;
+        setColor(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        setColor(arg0: $Vector4fc): void;
+        setColor(arg0: $Colorc): void;
+        tick(arg0: $QuasarParticle, arg1: number): void;
         isAdditive(): boolean;
         setAdditive(arg0: boolean): void;
         render(arg0: $QuasarParticle, arg1: number): void;
@@ -77,58 +77,60 @@ declare module "@package/foundry/veil/api/quasar/particle" {
         agePercent: number;
         renderAge: number;
         constructor(arg0: $QuasarParticle, arg1: $QuasarParticleData_);
-        get packedLight(): number;
+        get trails(): $List<$Trail>;
         get renderRotation(): $Vector3fc;
         get renderRadius(): number;
+        get packedLight(): number;
         get renderPosition(): $Vector3dc;
-        get trails(): $List<$Trail>;
         get renderType(): $RenderType;
     }
     export interface $RenderStyle extends RegistryMarked<RegistryTypes.VeilQuasarRenderStyleTag, RegistryTypes.VeilQuasarRenderStyle> {}
     export class $ParticleModuleSet {
-        copy(): $ParticleModuleSet;
-        static builder(): $ParticleModuleSet$Builder;
-        getRenderModules(): $RenderParticleModule[];
-        getEnabledRenderModules(): $Iterator<$RenderParticleModule>;
-        getAllModules(): $ParticleModule[];
+        getEnabledRenderModuleCount(): number;
         getCollisionModules(): $CollisionParticleModule[];
         getInitModules(): $InitParticleModule[];
         updateEnabled(): void;
         getUpdateModules(): $UpdateParticleModule[];
         getForceModules(): $ForceParticleModule[];
-        getEnabledRenderModuleCount(): number;
         getEnabledRenderModulesArray(): $RenderParticleModule[];
-        get renderModules(): $RenderParticleModule[];
-        get enabledRenderModules(): $Iterator<$RenderParticleModule>;
-        get allModules(): $ParticleModule[];
+        getRenderModules(): $RenderParticleModule[];
+        getEnabledRenderModules(): $Iterator<$RenderParticleModule>;
+        getAllModules(): $ParticleModule[];
+        static builder(): $ParticleModuleSet$Builder;
+        copy(): $ParticleModuleSet;
+        get enabledRenderModuleCount(): number;
         get collisionModules(): $CollisionParticleModule[];
         get initModules(): $InitParticleModule[];
         get updateModules(): $UpdateParticleModule[];
         get forceModules(): $ForceParticleModule[];
-        get enabledRenderModuleCount(): number;
         get enabledRenderModulesArray(): $RenderParticleModule[];
+        get renderModules(): $RenderParticleModule[];
+        get enabledRenderModules(): $Iterator<$RenderParticleModule>;
+        get allModules(): $ParticleModule[];
     }
     export class $ParticleModuleSet$Builder {
-        build(): $ParticleModuleSet;
         addModule(arg0: $ParticleModule): void;
+        build(): $ParticleModuleSet;
         constructor();
     }
     export class $QuasarParticle {
-        remove(): void;
-        init(): void;
-        tick(): void;
-        getLevel(): $ClientLevel;
-        getPosition(): $Vector3d;
-        getData(): $QuasarParticleData;
-        getModules(): $ParticleModuleSet;
+        vectorToRotation(arg0: number, arg1: number, arg2: number): void;
         getBlockStateInOrUnder(): $BlockState;
-        setAge(arg0: number): void;
+        getEmitter(): $ParticleEmitter;
+        getModules(): $ParticleModuleSet;
+        getSettings(): $ParticleSettings;
+        getEnvironment(): $MolangEnvironment;
         getRadius(): number;
         setRadius(arg0: number): void;
+        setAge(arg0: number): void;
         getRandomSource(): $RandomSource;
-        vectorToRotation(arg0: number, arg1: number, arg2: number): void;
-        getEmitter(): $ParticleEmitter;
-        getSettings(): $ParticleSettings;
+        getLevel(): $ClientLevel;
+        getPosition(): $Vector3d;
+        tick(): void;
+        remove(): void;
+        init(): void;
+        getData(): $QuasarParticleData;
+        getBlockPosition(): $BlockPos;
         getScheduler(): $TickTaskScheduler;
         getAge(): number;
         render(arg0: number): void;
@@ -138,37 +140,30 @@ declare module "@package/foundry/veil/api/quasar/particle" {
         getBoundingBox(): $AABB;
         getVelocity(): $Vector3d;
         getRenderData(): $RenderData;
-        getBlockPosition(): $BlockPos;
         getLifetime(): number;
-        getEnvironment(): $MolangEnvironment;
         constructor(arg0: $ClientLevel, arg1: $RandomSource, arg2: $TickTaskScheduler, arg3: $QuasarParticleData_, arg4: $ParticleModuleSet, arg5: $ParticleSettings_, arg6: $ParticleEmitter);
+        get blockStateInOrUnder(): $BlockState;
+        get emitter(): $ParticleEmitter;
+        get modules(): $ParticleModuleSet;
+        get settings(): $ParticleSettings;
+        get environment(): $MolangEnvironment;
+        get randomSource(): $RandomSource;
         get level(): $ClientLevel;
         get position(): $Vector3d;
         get data(): $QuasarParticleData;
-        get modules(): $ParticleModuleSet;
-        get blockStateInOrUnder(): $BlockState;
-        get randomSource(): $RandomSource;
-        get emitter(): $ParticleEmitter;
-        get settings(): $ParticleSettings;
+        get blockPosition(): $BlockPos;
         get scheduler(): $TickTaskScheduler;
         get removed(): boolean;
         get rotation(): $Vector3f;
         get boundingBox(): $AABB;
         get velocity(): $Vector3d;
         get renderData(): $RenderData;
-        get blockPosition(): $BlockPos;
         get lifetime(): number;
-        get environment(): $MolangEnvironment;
     }
     export class $ParticleEmitter {
-        remove(): void;
-        reset(): void;
-        trim(arg0: number): number;
-        getCount(): number;
-        isLoop(): boolean;
-        getPosition(): $Vector3d;
-        getData(): $ParticleEmitterData;
-        static clearErrors(): void;
+        setMaxParticles(arg0: number): void;
+        getMaxParticles(): number;
+        getParticleCount(): number;
         addCodeModule(arg0: $CodeModule_): void;
         getMaxLifetime(): number;
         getRate(): number;
@@ -184,29 +179,34 @@ declare module "@package/foundry/veil/api/quasar/particle" {
         setForceSpawn(arg0: boolean): void;
         setParticleData(arg0: $QuasarParticleData_): void;
         setAttachedEntity(arg0: $Entity): void;
-        getParticleCount(): number;
-        setLoop(arg0: boolean): void;
-        setMaxParticles(arg0: number): void;
-        getMaxParticles(): number;
+        static clearErrors(): void;
         getRegistryName(): $ResourceLocation;
+        getPosition(): $Vector3d;
+        setLoop(arg0: boolean): void;
+        remove(): void;
+        reset(): void;
+        trim(arg0: number): number;
+        getCount(): number;
+        isLoop(): boolean;
+        getData(): $ParticleEmitterData;
         render(arg0: $MatrixStack, arg1: $MultiBufferSource_, arg2: $Camera, arg3: number): void;
         setCount(arg0: number): void;
         isRemoved(): boolean;
         setPosition(arg0: $Vec3_): void;
-        setPosition(arg0: number, arg1: number, arg2: number): void;
         setPosition(arg0: $Vector3dc): void;
-        get data(): $ParticleEmitterData;
+        setPosition(arg0: number, arg1: number, arg2: number): void;
         get particleCount(): number;
         get registryName(): $ResourceLocation;
+        get data(): $ParticleEmitterData;
         get removed(): boolean;
     }
     export class $SpriteData extends $Record {
-        v(arg0: number, arg1: number, arg2: number): number;
-        u(arg0: number, arg1: number, arg2: number): number;
-        frameTime(): number;
         frameCount(): number;
+        frameTime(): number;
         stretchToLifetime(): boolean;
         uv(arg0: number, arg1: number, arg2: $Vector4f): $Vector4f;
+        v(arg0: number, arg1: number, arg2: number): number;
+        u(arg0: number, arg1: number, arg2: number): number;
         sprite(): $ResourceLocation;
         frameWidth(): number;
         frameHeight(): number;
@@ -216,5 +216,5 @@ declare module "@package/foundry/veil/api/quasar/particle" {
     /**
      * Values that may be interpreted as {@link $SpriteData}.
      */
-    export type $SpriteData_ = { stretchToLifetime?: boolean, frameWidth?: number, sprite?: $ResourceLocation_, frameTime?: number, frameHeight?: number, frameCount?: number,  } | [stretchToLifetime?: boolean, frameWidth?: number, sprite?: $ResourceLocation_, frameTime?: number, frameHeight?: number, frameCount?: number, ];
+    export type $SpriteData_ = { frameCount?: number, frameHeight?: number, frameTime?: number, sprite?: $ResourceLocation_, frameWidth?: number, stretchToLifetime?: boolean,  } | [frameCount?: number, frameHeight?: number, frameTime?: number, sprite?: $ResourceLocation_, frameWidth?: number, stretchToLifetime?: boolean, ];
 }

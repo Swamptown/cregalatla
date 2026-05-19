@@ -4,18 +4,18 @@ export * as render from "@package/xaero/map/gui/message/render";
 
 declare module "@package/xaero/map/gui/message" {
     export class $Message {
-        getText(): $Component;
         getAdditionTime(): number;
+        getText(): $Component;
         constructor(arg0: $Component_, arg1: number);
-        get text(): $Component;
         get additionTime(): number;
+        get text(): $Component;
     }
     export class $MessageBox {
-        getIterator(): $Iterator<$Message>;
         addMessageWithSource(arg0: $Component_, arg1: $Component_): void;
-        addMessage(arg0: $Component_): void;
         getCapacity(): number;
-        get iterator(): $Iterator<$Message>;
+        getIterator(): $Iterator<$Message>;
+        addMessage(arg0: $Component_): void;
         get capacity(): number;
+        get iterator(): $Iterator<$Message>;
     }
 }

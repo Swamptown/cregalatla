@@ -27,8 +27,8 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
      */
     export type $GlyphProviderDefinition$Reference_ = { id?: $ResourceLocation_,  } | [id?: $ResourceLocation_, ];
     export class $UnihexProvider$IntContents extends $Record implements $UnihexProvider$LineData {
-        mask(): number;
         calculateWidth(): number;
+        mask(): number;
     }
     /**
      * Values that may be interpreted as {@link $UnihexProvider$IntContents}.
@@ -44,7 +44,7 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
     /**
      * Values that may be interpreted as {@link $UnihexProvider$Glyph}.
      */
-    export type $UnihexProvider$Glyph_ = { right?: number, contents?: $UnihexProvider$LineData, left?: number,  } | [right?: number, contents?: $UnihexProvider$LineData, left?: number, ];
+    export type $UnihexProvider$Glyph_ = { left?: number, contents?: $UnihexProvider$LineData, right?: number,  } | [left?: number, contents?: $UnihexProvider$LineData, right?: number, ];
     export class $GlyphProviderDefinition$Conditional extends $Record {
         filter(): $FontOption$Filter;
         definition(): $GlyphProviderDefinition;
@@ -54,14 +54,14 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
     /**
      * Values that may be interpreted as {@link $GlyphProviderDefinition$Conditional}.
      */
-    export type $GlyphProviderDefinition$Conditional_ = { definition?: $GlyphProviderDefinition, filter?: $FontOption$Filter,  } | [definition?: $GlyphProviderDefinition, filter?: $FontOption$Filter, ];
+    export type $GlyphProviderDefinition$Conditional_ = { filter?: $FontOption$Filter, definition?: $GlyphProviderDefinition,  } | [filter?: $FontOption$Filter, definition?: $GlyphProviderDefinition, ];
     export class $UnihexProvider$Dimensions extends $Record {
-        static left(arg0: number): number;
+        static pack(arg0: number, arg1: number): number;
+        pack(): number;
         left(): number;
+        static left(arg0: number): number;
         right(): number;
         static right(arg0: number): number;
-        pack(): number;
-        static pack(arg0: number, arg1: number): number;
         static CODEC: $Codec<$UnihexProvider$Dimensions>;
         static MAP_CODEC: $MapCodec<$UnihexProvider$Dimensions>;
         constructor(arg0: number, arg1: number);
@@ -69,18 +69,18 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
     /**
      * Values that may be interpreted as {@link $UnihexProvider$Dimensions}.
      */
-    export type $UnihexProvider$Dimensions_ = { left?: number, right?: number,  } | [left?: number, right?: number, ];
+    export type $UnihexProvider$Dimensions_ = { right?: number, left?: number,  } | [right?: number, left?: number, ];
     export class $UnihexProvider$OverrideRange extends $Record {
     }
     /**
      * Values that may be interpreted as {@link $UnihexProvider$OverrideRange}.
      */
-    export type $UnihexProvider$OverrideRange_ = { from?: number, to?: number, dimensions?: $UnihexProvider$Dimensions_,  } | [from?: number, to?: number, dimensions?: $UnihexProvider$Dimensions_, ];
+    export type $UnihexProvider$OverrideRange_ = { dimensions?: $UnihexProvider$Dimensions_, to?: number, from?: number,  } | [dimensions?: $UnihexProvider$Dimensions_, to?: number, from?: number, ];
     export class $BitmapProvider$Definition extends $Record implements $GlyphProviderDefinition {
-        type(): $GlyphProviderType;
-        file(): $ResourceLocation;
         codepointGrid(): number[][];
         ascent(): number;
+        type(): $GlyphProviderType;
+        file(): $ResourceLocation;
         height(): number;
         unpack(): $Either<$GlyphProviderDefinition$Loader, $GlyphProviderDefinition$Reference>;
         static CODEC: $MapCodec<$BitmapProvider$Definition>;
@@ -89,7 +89,7 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
     /**
      * Values that may be interpreted as {@link $BitmapProvider$Definition}.
      */
-    export type $BitmapProvider$Definition_ = { file?: $ResourceLocation_, height?: number, codepointGrid?: number[][], ascent?: number,  } | [file?: $ResourceLocation_, height?: number, codepointGrid?: number[][], ascent?: number, ];
+    export type $BitmapProvider$Definition_ = { codepointGrid?: number[][], height?: number, file?: $ResourceLocation_, ascent?: number,  } | [codepointGrid?: number[][], height?: number, file?: $ResourceLocation_, ascent?: number, ];
     export class $ProviderReferenceDefinition extends $Record implements $GlyphProviderDefinition {
         type(): $GlyphProviderType;
         id(): $ResourceLocation;
@@ -102,16 +102,16 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
      */
     export type $ProviderReferenceDefinition_ = { id?: $ResourceLocation_,  } | [id?: $ResourceLocation_, ];
     export class $UnihexProvider$ByteContents extends $Record implements $UnihexProvider$LineData {
-        mask(): number;
         calculateWidth(): number;
+        mask(): number;
     }
     /**
      * Values that may be interpreted as {@link $UnihexProvider$ByteContents}.
      */
     export type $UnihexProvider$ByteContents_ = { contents?: number[],  } | [contents?: number[], ];
     export class $UnihexProvider implements $GlyphProvider {
-        static unpackBitsToBytes(arg0: $IntBuffer, arg1: $UnihexProvider$LineData, arg2: number, arg3: number): void;
         static unpackBitsToBytes(arg0: $IntBuffer, arg1: number, arg2: number, arg3: number): void;
+        static unpackBitsToBytes(arg0: $IntBuffer, arg1: $UnihexProvider$LineData, arg2: number, arg3: number): void;
         static readFromStream(arg0: $InputStream, arg1: $UnihexProvider$ReaderOutput_): void;
         getSupportedGlyphs(): $IntSet;
         getGlyph(arg0: number): $GlyphInfo;
@@ -131,16 +131,16 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
      */
     export type $GlyphProviderDefinition$Loader_ = ((arg0: $ResourceManager) => $GlyphProvider);
     export class $BitmapProvider implements $GlyphProvider {
-        close(): void;
         getSupportedGlyphs(): $IntSet;
         getGlyph(arg0: number): $GlyphInfo;
+        close(): void;
         static LOGGER: $Logger;
         constructor(arg0: $NativeImage, arg1: $CodepointMap<$BitmapProvider$Glyph_>);
         get supportedGlyphs(): $IntSet;
     }
     export class $UnihexProvider$ShortContents extends $Record implements $UnihexProvider$LineData {
-        mask(): number;
         calculateWidth(): number;
+        mask(): number;
     }
     /**
      * Values that may be interpreted as {@link $UnihexProvider$ShortContents}.
@@ -179,20 +179,20 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
      */
     export type $TrueTypeGlyphProviderDefinition$Shift_ = { x?: number, y?: number,  } | [x?: number, y?: number, ];
     export class $TrueTypeGlyphProviderDefinition extends $Record implements $GlyphProviderDefinition {
+        oversample(): number;
         size(): number;
         type(): $GlyphProviderType;
         location(): $ResourceLocation;
         shift(): $TrueTypeGlyphProviderDefinition$Shift;
         skip(): string;
         unpack(): $Either<$GlyphProviderDefinition$Loader, $GlyphProviderDefinition$Reference>;
-        oversample(): number;
         static CODEC: $MapCodec<$TrueTypeGlyphProviderDefinition>;
         constructor(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: $TrueTypeGlyphProviderDefinition$Shift_, arg4: string);
     }
     /**
      * Values that may be interpreted as {@link $TrueTypeGlyphProviderDefinition}.
      */
-    export type $TrueTypeGlyphProviderDefinition_ = { oversample?: number, location?: $ResourceLocation_, skip?: string, shift?: $TrueTypeGlyphProviderDefinition$Shift_, size?: number,  } | [oversample?: number, location?: $ResourceLocation_, skip?: string, shift?: $TrueTypeGlyphProviderDefinition$Shift_, size?: number, ];
+    export type $TrueTypeGlyphProviderDefinition_ = { shift?: $TrueTypeGlyphProviderDefinition$Shift_, skip?: string, location?: $ResourceLocation_, oversample?: number, size?: number,  } | [shift?: $TrueTypeGlyphProviderDefinition$Shift_, skip?: string, location?: $ResourceLocation_, oversample?: number, size?: number, ];
     export class $GlyphProviderDefinition {
         static MAP_CODEC: $MapCodec<$GlyphProviderDefinition>;
     }
@@ -201,11 +201,11 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
         unpack(): $Either<$GlyphProviderDefinition$Loader, $GlyphProviderDefinition$Reference>;
     }
     export class $FreeTypeUtil {
+        static assertError(arg0: number, arg1: string): void;
+        static setVector(arg0: $FT_Vector, arg1: number, arg2: number): $FT_Vector;
         static x(arg0: $FT_Vector): number;
         static destroy(): void;
         static checkError(arg0: number, arg1: string): boolean;
-        static assertError(arg0: number, arg1: string): void;
-        static setVector(arg0: $FT_Vector, arg1: number, arg2: number): $FT_Vector;
         static getLibrary(): number;
         static LIBRARY_LOCK: $Object;
         constructor();
@@ -214,10 +214,10 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
     export class $UnihexProvider$LineData {
     }
     export interface $UnihexProvider$LineData {
+        calculateWidth(): number;
+        bitWidth(): number;
         line(arg0: number): number;
         mask(): number;
-        bitWidth(): number;
-        calculateWidth(): number;
     }
     export class $UnihexProvider$ReaderOutput {
     }
@@ -234,12 +234,12 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
         static CODEC: $MapCodec<$UnihexProvider$Definition>;
     }
     export class $BitmapProvider$Glyph extends $Record implements $GlyphInfo {
+        ascent(): number;
+        getAdvance(): number;
+        image(): $NativeImage;
         scale(): number;
         advance(): number;
         width(): number;
-        image(): $NativeImage;
-        getAdvance(): number;
-        ascent(): number;
         height(): number;
         offsetX(): number;
         offsetY(): number;
@@ -254,5 +254,5 @@ declare module "@package/net/minecraft/client/gui/font/providers" {
     /**
      * Values that may be interpreted as {@link $BitmapProvider$Glyph}.
      */
-    export type $BitmapProvider$Glyph_ = { offsetY?: number, width?: number, height?: number, ascent?: number, image?: $NativeImage, scale?: number, advance?: number, offsetX?: number,  } | [offsetY?: number, width?: number, height?: number, ascent?: number, image?: $NativeImage, scale?: number, advance?: number, offsetX?: number, ];
+    export type $BitmapProvider$Glyph_ = { advance?: number, scale?: number, image?: $NativeImage, ascent?: number, height?: number, width?: number, offsetY?: number, offsetX?: number,  } | [advance?: number, scale?: number, image?: $NativeImage, ascent?: number, height?: number, width?: number, offsetY?: number, offsetX?: number, ];
 }

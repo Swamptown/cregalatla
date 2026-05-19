@@ -5,8 +5,8 @@ declare module "@package/com/supermartijn642/fusion/entity/model/predicates" {
     export class $EntityModelPredicate {
     }
     export interface $EntityModelPredicate {
-        test(entity: $Entity): boolean;
         getSerializer(): $Serializer<$EntityModelPredicate>;
+        test(entity: $Entity): boolean;
         get serializer(): $Serializer<$EntityModelPredicate>;
     }
 }

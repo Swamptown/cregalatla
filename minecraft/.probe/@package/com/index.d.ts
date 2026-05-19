@@ -18,6 +18,7 @@ export * as aizistral from "@package/com/aizistral";
 export * as llamalad7 from "@package/com/llamalad7";
 export * as kipti from "@package/com/kipti";
 export * as misterpemodder from "@package/com/misterpemodder";
+export * as mrh0 from "@package/com/mrh0";
 export * as copycatsplus from "@package/com/copycatsplus";
 export * as hlysine from "@package/com/hlysine";
 export * as tom from "@package/com/tom";

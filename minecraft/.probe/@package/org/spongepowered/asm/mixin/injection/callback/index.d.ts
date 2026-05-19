@@ -32,21 +32,21 @@ declare module "@package/org/spongepowered/asm/mixin/injection/callback" {
         get returnValueZ(): boolean;
     }
     export class $CallbackInfo implements $Cancellable {
+        isCancelled(): boolean;
         getId(): string;
         cancel(): void;
-        isCancelled(): boolean;
         static getCallInfoClassName(arg0: $Type): string;
         isCancellable(): boolean;
         constructor(arg0: string, arg1: boolean);
-        get id(): string;
         get cancelled(): boolean;
+        get id(): string;
         get cancellable(): boolean;
     }
     export class $Cancellable {
     }
     export interface $Cancellable {
-        cancel(): void;
         isCancelled(): boolean;
+        cancel(): void;
         isCancellable(): boolean;
         get cancelled(): boolean;
         get cancellable(): boolean;

@@ -2,9 +2,6 @@ export * as legacy from "@package/org/apache/maven/repository/legacy";
 
 declare module "@package/org/apache/maven/repository" {
     export class $Proxy {
-        getHost(): string;
-        getPort(): number;
-        getProtocol(): string;
         setUserName(arg0: string): void;
         getNonProxyHosts(): string;
         setNonProxyHosts(arg0: string): void;
@@ -12,6 +9,9 @@ declare module "@package/org/apache/maven/repository" {
         setNtlmHost(arg0: string): void;
         setNtlmDomain(arg0: string): void;
         getNtlmDomain(): string;
+        getProtocol(): string;
+        getHost(): string;
+        getPort(): number;
         getPassword(): string;
         getUserName(): string;
         setPassword(arg0: string): void;

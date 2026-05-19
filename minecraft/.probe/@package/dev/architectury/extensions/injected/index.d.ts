@@ -40,8 +40,8 @@ declare module "@package/dev/architectury/extensions/injected" {
     export class $InjectedRegistryEntryExtension<T> {
     }
     export interface $InjectedRegistryEntryExtension<T> {
-        arch$registryName(): $ResourceLocation;
         arch$holder(): $Holder<T>;
+        arch$registryName(): $ResourceLocation;
     }
     /**
      * Values that may be interpreted as {@link $InjectedRegistryEntryExtension}.

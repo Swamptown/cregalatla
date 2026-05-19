@@ -15,10 +15,10 @@ export * as custom from "@package/net/minecraft/network/protocol/login/custom";
 
 declare module "@package/net/minecraft/network/protocol/login" {
     export class $ServerboundCustomQueryAnswerPacket extends $Record implements $Packet<$ServerLoginPacketListener> {
+        transactionId(): number;
         payload(): $CustomQueryAnswerPayload;
         type(): $PacketType<$ServerboundCustomQueryAnswerPacket>;
         handle(arg0: $ServerLoginPacketListener): void;
-        transactionId(): number;
         isTerminal(): boolean;
         isSkippable(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundCustomQueryAnswerPacket>;
@@ -38,9 +38,9 @@ declare module "@package/net/minecraft/network/protocol/login" {
         constructor();
     }
     export class $ClientboundGameProfilePacket extends $Record implements $Packet<$ClientLoginPacketListener> {
+        isTerminal(): boolean;
         type(): $PacketType<$ClientboundGameProfilePacket>;
         handle(arg0: $ClientLoginPacketListener): void;
-        isTerminal(): boolean;
         gameProfile(): $GameProfile;
         /**
          * @deprecated
@@ -55,12 +55,12 @@ declare module "@package/net/minecraft/network/protocol/login" {
     /**
      * Values that may be interpreted as {@link $ClientboundGameProfilePacket}.
      */
-    export type $ClientboundGameProfilePacket_ = { gameProfile?: $GameProfile, strictErrorHandling?: boolean,  } | [gameProfile?: $GameProfile, strictErrorHandling?: boolean, ];
+    export type $ClientboundGameProfilePacket_ = { strictErrorHandling?: boolean, gameProfile?: $GameProfile,  } | [strictErrorHandling?: boolean, gameProfile?: $GameProfile, ];
     export class $ClientboundCustomQueryPacket extends $Record implements $Packet<$ClientLoginPacketListener> {
+        transactionId(): number;
         payload(): $CustomQueryPayload;
         type(): $PacketType<$ClientboundCustomQueryPacket>;
         handle(arg0: $ClientLoginPacketListener): void;
-        transactionId(): number;
         isTerminal(): boolean;
         isSkippable(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundCustomQueryPacket>;
@@ -73,9 +73,9 @@ declare module "@package/net/minecraft/network/protocol/login" {
      */
     export type $ClientboundCustomQueryPacket_ = { payload?: $CustomQueryPayload, transactionId?: number,  } | [payload?: $CustomQueryPayload, transactionId?: number, ];
     export class $ServerboundLoginAcknowledgedPacket implements $Packet<$ServerLoginPacketListener> {
+        isTerminal(): boolean;
         type(): $PacketType<$ServerboundLoginAcknowledgedPacket>;
         handle(arg0: $ServerLoginPacketListener): void;
-        isTerminal(): boolean;
         isSkippable(): boolean;
         static INSTANCE: $ServerboundLoginAcknowledgedPacket;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ServerboundLoginAcknowledgedPacket>;
@@ -97,7 +97,7 @@ declare module "@package/net/minecraft/network/protocol/login" {
     /**
      * Values that may be interpreted as {@link $ServerboundHelloPacket}.
      */
-    export type $ServerboundHelloPacket_ = { name?: string, profileId?: $UUID_,  } | [name?: string, profileId?: $UUID_, ];
+    export type $ServerboundHelloPacket_ = { profileId?: $UUID_, name?: string,  } | [profileId?: $UUID_, name?: string, ];
     export class $LoginPacketTypes {
         static CLIENTBOUND_GAME_PROFILE: $PacketType<$ClientboundGameProfilePacket>;
         static CLIENTBOUND_CUSTOM_QUERY: $PacketType<$ClientboundCustomQueryPacket>;
@@ -111,36 +111,36 @@ declare module "@package/net/minecraft/network/protocol/login" {
         constructor();
     }
     export class $ClientboundHelloPacket implements $Packet<$ClientLoginPacketListener> {
-        type(): $PacketType<$ClientboundHelloPacket>;
-        handle(arg0: $ClientLoginPacketListener): void;
-        getPublicKey(): $PublicKey;
         getServerId(): string;
         getChallenge(): number[];
         shouldAuthenticate(): boolean;
+        getPublicKey(): $PublicKey;
+        type(): $PacketType<$ClientboundHelloPacket>;
+        handle(arg0: $ClientLoginPacketListener): void;
         isTerminal(): boolean;
         isSkippable(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundHelloPacket>;
         constructor(arg0: string, arg1: number[], arg2: number[], arg3: boolean);
-        get publicKey(): $PublicKey;
         get serverId(): string;
         get challenge(): number[];
+        get publicKey(): $PublicKey;
         get terminal(): boolean;
         get skippable(): boolean;
     }
     export class $ServerLoginPacketListener {
     }
     export interface $ServerLoginPacketListener extends $ServerCookiePacketListener, $ServerPacketListener {
-        protocol(): $ConnectionProtocol;
-        handleKey(arg0: $ServerboundKeyPacket): void;
         handleCustomQueryPacket(arg0: $ServerboundCustomQueryAnswerPacket_): void;
+        handleKey(arg0: $ServerboundKeyPacket): void;
         handleLoginAcknowledgement(arg0: $ServerboundLoginAcknowledgedPacket): void;
+        protocol(): $ConnectionProtocol;
         handleHello(arg0: $ServerboundHelloPacket_): void;
     }
     export class $ServerboundKeyPacket implements $Packet<$ServerLoginPacketListener> {
-        type(): $PacketType<$ServerboundKeyPacket>;
-        handle(arg0: $ServerLoginPacketListener): void;
         isChallengeValid(arg0: number[], arg1: $PrivateKey): boolean;
         getSecretKey(arg0: $PrivateKey): $SecretKey;
+        type(): $PacketType<$ServerboundKeyPacket>;
+        handle(arg0: $ServerLoginPacketListener): void;
         isTerminal(): boolean;
         isSkippable(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundKeyPacket>;
@@ -149,9 +149,9 @@ declare module "@package/net/minecraft/network/protocol/login" {
         get skippable(): boolean;
     }
     export class $ClientboundLoginCompressionPacket implements $Packet<$ClientLoginPacketListener> {
+        getCompressionThreshold(): number;
         type(): $PacketType<$ClientboundLoginCompressionPacket>;
         handle(arg0: $ClientLoginPacketListener): void;
-        getCompressionThreshold(): number;
         isTerminal(): boolean;
         isSkippable(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundLoginCompressionPacket>;
@@ -161,9 +161,9 @@ declare module "@package/net/minecraft/network/protocol/login" {
         get skippable(): boolean;
     }
     export class $ClientboundLoginDisconnectPacket implements $Packet<$ClientLoginPacketListener> {
+        getReason(): $Component;
         type(): $PacketType<$ClientboundLoginDisconnectPacket>;
         handle(arg0: $ClientLoginPacketListener): void;
-        getReason(): $Component;
         isTerminal(): boolean;
         isSkippable(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundLoginDisconnectPacket>;

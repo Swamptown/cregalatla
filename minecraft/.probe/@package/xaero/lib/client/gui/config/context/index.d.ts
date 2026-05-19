@@ -8,14 +8,13 @@ declare module "@package/xaero/lib/client/gui/config/context" {
     export class $IEditConfigScreenContext {
     }
     export interface $IEditConfigScreenContext {
-        reset(arg0: $ConfigChannel): void;
-        deleteProfile(arg0: $ConfigProfile, arg1: $ConfigChannel): void;
+        profileExists(arg0: string, arg1: $ConfigChannel): boolean;
+        getScreenTitleFormat(): string;
+        isAutoConfirm(): boolean;
         getSyncStatus(arg0: $ConfigChannel): boolean;
         getDefaultProfileId(arg0: $ConfigChannel): string;
         setCurrentProfile(arg0: string, arg1: $ConfigChannel): void;
         getSelectedProfileId(arg0: $ConfigChannel): string;
-        getScreenTitleFormat(): string;
-        isAutoConfirm(): boolean;
         getDropdownNarration(): $Component;
         isAutoDefaultProfile(): boolean;
         getProfiles(arg0: $ConfigChannel): $Iterable<$IConfigProfileInfo>;
@@ -23,11 +22,12 @@ declare module "@package/xaero/lib/client/gui/config/context" {
         confirmProfile(arg0: $ConfigProfile, arg1: $ConfigChannel): void;
         getSyncMessage(): $Component;
         getEnforcedConfig(arg0: $ConfigChannel): $Config;
+        deleteProfile(arg0: $ConfigProfile, arg1: $ConfigChannel): void;
         hasPermission(arg0: $ConfigChannel): boolean;
         createProfile(arg0: string, arg1: string, arg2: $ConfigChannel, arg3: string): void;
+        reset(arg0: $ConfigChannel): void;
         isClientSide(): boolean;
         getCurrentProfile(arg0: $ConfigChannel): $ConfigProfile;
-        profileExists(arg0: string, arg1: $ConfigChannel): boolean;
         get screenTitleFormat(): string;
         get autoConfirm(): boolean;
         get dropdownNarration(): $Component;

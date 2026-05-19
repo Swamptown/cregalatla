@@ -3,27 +3,27 @@ import { $RegistrationEnvironment } from "@package/com/lowdragmc/lowdraglib2/reg
 
 declare module "@package/com/lowdragmc/lowdraglib2/registry/annotation" {
     export class $LDLRegister implements $Annotation {
-        name(): string;
-        priority(): number;
-        group(): string;
-        environment(): $RegistrationEnvironment;
         /**
          * @deprecated
          */
         manual(): boolean;
         modID(): string;
+        name(): string;
+        priority(): number;
+        group(): string;
+        environment(): $RegistrationEnvironment;
         registry(): string;
     }
     export class $LDLRegisterClient implements $Annotation {
-        name(): string;
-        priority(): number;
-        group(): string;
-        environment(): $RegistrationEnvironment;
         /**
          * @deprecated
          */
         manual(): boolean;
         modID(): string;
+        name(): string;
+        priority(): number;
+        group(): string;
+        environment(): $RegistrationEnvironment;
         registry(): string;
     }
 }

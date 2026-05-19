@@ -11,8 +11,8 @@ declare module "@package/javax/xml/transform" {
     export class $Source {
     }
     export interface $Source {
-        isEmpty(): boolean;
         getSystemId(): string;
+        isEmpty(): boolean;
         setSystemId(arg0: string): void;
         get empty(): boolean;
     }

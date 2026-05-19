@@ -20,8 +20,8 @@ declare module "@package/net/neoforged/neoforge/server" {
         static handleServerStopped(arg0: $MinecraftServer): void;
         static handleServerAboutToStart(arg0: $MinecraftServer): void;
         static handleServerStarting(arg0: $MinecraftServer): void;
-        static handleExit(arg0: number): void;
         static getCurrentServer(): $MinecraftServer;
+        static handleExit(arg0: number): void;
         constructor();
         static get currentServer(): $MinecraftServer;
     }

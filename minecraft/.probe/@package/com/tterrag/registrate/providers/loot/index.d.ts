@@ -1,6 +1,7 @@
 import { $AbstractRegistrate } from "@package/com/tterrag/registrate";
 import { $Item } from "@package/net/minecraft/world/item";
 import { $CompletableFuture } from "@package/java/util/concurrent";
+import { $EntityType } from "@package/net/minecraft/world/entity";
 import { $FeatureFlagSet } from "@package/net/minecraft/world/flag";
 import { $Map, $Set } from "@package/java/util";
 import { $NonNullConsumer_ } from "@package/com/tterrag/registrate/util/nullness";
@@ -22,6 +23,7 @@ declare module "@package/com/tterrag/registrate/providers/loot" {
         getRegistries(): $HolderLookup$Provider;
         validate(arg0: $WritableRegistry<$LootTable>, arg1: $ValidationContext): void;
         registries: $HolderLookup$Provider;
+        map: $Map<$EntityType<never>, $Map<$ResourceKey<$LootTable>, $LootTable$Builder>>;
         constructor(arg0: $HolderLookup$Provider, arg1: $AbstractRegistrate<never>, arg2: $Consumer_<$RegistrateEntityLootTables>);
     }
     export class $RegistrateBlockLootTables extends $VanillaBlockLoot implements $RegistrateLootTables {
@@ -29,6 +31,7 @@ declare module "@package/com/tterrag/registrate/providers/loot" {
         enabledFeatures: $FeatureFlagSet;
         static HAS_SHEARS: $LootItemCondition$Builder;
         explosionResistant: $Set<$Item>;
+        static NORMAL_LEAVES_STICK_CHANCES: number[];
         registries: $HolderLookup$Provider;
         map: $Map<$ResourceKey<$LootTable>, $LootTable$Builder>;
         static NORMAL_LEAVES_SAPLING_CHANCES: number[];
@@ -40,8 +43,8 @@ declare module "@package/com/tterrag/registrate/providers/loot" {
         static BLOCK: $RegistrateLootTableProvider$LootType<$RegistrateBlockLootTables>;
     }
     export interface $RegistrateLootTableProvider$LootType<T extends $RegistrateLootTables> {
-        getLootCreator(arg0: $HolderLookup$Provider, arg1: $AbstractRegistrate<never>, arg2: $Consumer_<T>): T;
         getLootSet(): $LootContextParamSet;
+        getLootCreator(arg0: $HolderLookup$Provider, arg1: $AbstractRegistrate<never>, arg2: $Consumer_<T>): T;
         get lootSet(): $LootContextParamSet;
     }
     export class $RegistrateLootTables {
@@ -54,10 +57,10 @@ declare module "@package/com/tterrag/registrate/providers/loot" {
      */
     export type $RegistrateLootTables_ = (() => void);
     export class $RegistrateLootTableProvider extends $LootTableProvider implements $RegistrateProvider {
-        resolve<T>(arg0: $ResourceKey_<T>): $Holder<T>;
-        getProvider(): $HolderLookup$Provider;
         addLootAction(arg0: $LootContextParamSet, arg1: $Consumer_<$BiConsumer<$ResourceKey<$LootTable>, $LootTable$Builder>>): void;
         addLootAction<T extends $RegistrateLootTables>(arg0: $RegistrateLootTableProvider$LootType<T>, arg1: $NonNullConsumer_<T>): void;
+        getProvider(): $HolderLookup$Provider;
+        resolve<T>(arg0: $ResourceKey_<T>): $Holder<T>;
         getSide(): $LogicalSide;
         constructor(arg0: $AbstractRegistrate<never>, arg1: $PackOutput, arg2: $CompletableFuture<$HolderLookup$Provider>);
         get provider(): $HolderLookup$Provider;

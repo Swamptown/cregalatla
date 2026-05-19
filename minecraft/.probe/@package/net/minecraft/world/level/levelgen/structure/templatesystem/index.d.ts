@@ -35,12 +35,13 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/templatesy
         forEach(arg0: $Consumer_<$BlockState>): void;
     }
     export class $StructurePlaceSettings {
-        copy(): $StructurePlaceSettings;
+        getKnownShape(): boolean;
+        shouldApplyWaterlogging(): boolean;
+        getRandomPalette(arg0: $List_<$StructureTemplate$Palette>, arg1: $BlockPos_): $StructureTemplate$Palette;
+        shouldFinalizeEntities(): boolean;
+        getRotationPivot(): $BlockPos;
         setRotationPivot(arg0: $BlockPos_): $StructurePlaceSettings;
         setLiquidSettings(arg0: $LiquidSettings_): $StructurePlaceSettings;
-        popProcessor(arg0: $StructureProcessor): $StructurePlaceSettings;
-        setKnownShape(arg0: boolean): $StructurePlaceSettings;
-        setFinalizeEntities(arg0: boolean): $StructurePlaceSettings;
         setMirror(arg0: $Mirror_): $StructurePlaceSettings;
         setRotation(arg0: $Rotation_): $StructurePlaceSettings;
         isIgnoreEntities(): boolean;
@@ -48,11 +49,10 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/templatesy
         clearProcessors(): $StructurePlaceSettings;
         addProcessor(arg0: $StructureProcessor): $StructurePlaceSettings;
         setRandom(arg0: $RandomSource): $StructurePlaceSettings;
-        getKnownShape(): boolean;
-        shouldApplyWaterlogging(): boolean;
-        getRandomPalette(arg0: $List_<$StructureTemplate$Palette>, arg1: $BlockPos_): $StructureTemplate$Palette;
-        shouldFinalizeEntities(): boolean;
-        getRotationPivot(): $BlockPos;
+        setKnownShape(arg0: boolean): $StructurePlaceSettings;
+        setFinalizeEntities(arg0: boolean): $StructurePlaceSettings;
+        popProcessor(arg0: $StructureProcessor): $StructurePlaceSettings;
+        copy(): $StructurePlaceSettings;
         getMirror(): $Mirror;
         getProcessors(): $List<$StructureProcessor>;
         getRotation(): $Rotation;
@@ -94,32 +94,32 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/templatesy
      */
     export type $StructureProcessorType_<P> = RegistryTypes.WorldgenStructureProcessor | (() => $MapCodec_<P>);
     export class $StructureTemplate implements $StructureTemplateAccess, $StructureTemplateExtension {
-        load(arg0: $HolderGetter<$Block_>, arg1: $CompoundTag_): void;
-        static transform(arg0: $BlockPos_, arg1: $Mirror_, arg2: $Rotation_, arg3: $BlockPos_): $BlockPos;
-        static transform(arg0: $Vec3_, arg1: $Mirror_, arg2: $Rotation_, arg3: $BlockPos_): $Vec3;
-        save(arg0: $CompoundTag_): $CompoundTag;
-        getSize(arg0: $Rotation_): $Vec3i;
-        getSize(): $Vec3i;
-        sable$getSubLevels(): $List<any>;
-        getBorderSize(): $Vec3i;
-        static getZeroPositionWithTransform(arg0: $BlockPos_, arg1: $Mirror_, arg2: $Rotation_, arg3: number, arg4: number): $BlockPos;
-        getZeroPositionWithTransform(arg0: $BlockPos_, arg1: $Mirror_, arg2: $Rotation_): $BlockPos;
-        static updateShapeAtEdge(arg0: $LevelAccessor, arg1: number, arg2: $DiscreteVoxelShape, arg3: number, arg4: number, arg5: number): void;
-        static updateShapeAtEdge(arg0: $LevelAccessor, arg1: number, arg2: $DiscreteVoxelShape, arg3: $BlockPos_): void;
-        filterBlocks(arg0: $BlockPos_, arg1: $StructurePlaceSettings, arg2: $Block_): $List<$StructureTemplate$StructureBlockInfo>;
-        filterBlocks(arg0: $BlockPos_, arg1: $StructurePlaceSettings, arg2: $Block_, arg3: boolean): $ObjectArrayList<$StructureTemplate$StructureBlockInfo>;
-        static calculateRelativePosition(arg0: $StructurePlaceSettings, arg1: $BlockPos_): $BlockPos;
-        static processBlockInfos(arg0: $ServerLevelAccessor, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $StructurePlaceSettings, arg4: $List_<$StructureTemplate$StructureBlockInfo_>, arg5: $StructureTemplate): $List<$StructureTemplate$StructureBlockInfo>;
-        static processBlockInfos(arg0: $ServerLevelAccessor, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $StructurePlaceSettings, arg4: $List_<$StructureTemplate$StructureBlockInfo_>): $List<$StructureTemplate$StructureBlockInfo>;
-        fillFromWorld(arg0: $Level_, arg1: $BlockPos_, arg2: $Vec3i, arg3: boolean, arg4: $Block_): void;
-        setAuthor(arg0: string): void;
-        getAuthor(): string;
-        placeInWorld(arg0: $ServerLevelAccessor, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $StructurePlaceSettings, arg4: $RandomSource, arg5: number): boolean;
         calculateConnectedPosition(arg0: $StructurePlaceSettings, arg1: $BlockPos_, arg2: $StructurePlaceSettings, arg3: $BlockPos_): $BlockPos;
         static transformedVec3d(arg0: $StructurePlaceSettings, arg1: $Vec3_): $Vec3;
         static processEntityInfos(arg0: $StructureTemplate, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: $StructurePlaceSettings, arg4: $List_<$StructureTemplate$StructureEntityInfo>): $List<$StructureTemplate$StructureEntityInfo>;
         getPalettes(): $List<any>;
+        getBorderSize(): $Vec3i;
+        sable$getSubLevels(): $List<any>;
         getEntities(): $List<any>;
+        getZeroPositionWithTransform(arg0: $BlockPos_, arg1: $Mirror_, arg2: $Rotation_): $BlockPos;
+        static getZeroPositionWithTransform(arg0: $BlockPos_, arg1: $Mirror_, arg2: $Rotation_, arg3: number, arg4: number): $BlockPos;
+        filterBlocks(arg0: $BlockPos_, arg1: $StructurePlaceSettings, arg2: $Block_, arg3: boolean): $ObjectArrayList<$StructureTemplate$StructureBlockInfo>;
+        filterBlocks(arg0: $BlockPos_, arg1: $StructurePlaceSettings, arg2: $Block_): $List<$StructureTemplate$StructureBlockInfo>;
+        static calculateRelativePosition(arg0: $StructurePlaceSettings, arg1: $BlockPos_): $BlockPos;
+        static updateShapeAtEdge(arg0: $LevelAccessor, arg1: number, arg2: $DiscreteVoxelShape, arg3: $BlockPos_): void;
+        static updateShapeAtEdge(arg0: $LevelAccessor, arg1: number, arg2: $DiscreteVoxelShape, arg3: number, arg4: number, arg5: number): void;
+        fillFromWorld(arg0: $Level_, arg1: $BlockPos_, arg2: $Vec3i, arg3: boolean, arg4: $Block_): void;
+        setAuthor(arg0: string): void;
+        getAuthor(): string;
+        placeInWorld(arg0: $ServerLevelAccessor, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $StructurePlaceSettings, arg4: $RandomSource, arg5: number): boolean;
+        static processBlockInfos(arg0: $ServerLevelAccessor, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $StructurePlaceSettings, arg4: $List_<$StructureTemplate$StructureBlockInfo_>): $List<$StructureTemplate$StructureBlockInfo>;
+        static processBlockInfos(arg0: $ServerLevelAccessor, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $StructurePlaceSettings, arg4: $List_<$StructureTemplate$StructureBlockInfo_>, arg5: $StructureTemplate): $List<$StructureTemplate$StructureBlockInfo>;
+        load(arg0: $HolderGetter<$Block_>, arg1: $CompoundTag_): void;
+        static transform(arg0: $BlockPos_, arg1: $Mirror_, arg2: $Rotation_, arg3: $BlockPos_): $BlockPos;
+        static transform(arg0: $Vec3_, arg1: $Mirror_, arg2: $Rotation_, arg3: $BlockPos_): $Vec3;
+        save(arg0: $CompoundTag_): $CompoundTag;
+        getSize(): $Vec3i;
+        getSize(arg0: $Rotation_): $Vec3i;
         getBoundingBox(arg0: $StructurePlaceSettings, arg1: $BlockPos_): $BoundingBox;
         getBoundingBox(arg0: $BlockPos_, arg1: $Rotation_, arg2: $BlockPos_, arg3: $Mirror_): $BoundingBox;
         static getBoundingBox(arg0: $BlockPos_, arg1: $Rotation_, arg2: $BlockPos_, arg3: $Mirror_, arg4: $Vec3i): $BoundingBox;
@@ -135,8 +135,8 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/templatesy
         static ENTITIES_TAG: string;
         static ENTITY_TAG_BLOCKPOS: string;
         constructor();
-        get borderSize(): $Vec3i;
         get palettes(): $List<any>;
+        get borderSize(): $Vec3i;
         get entities(): $List<any>;
     }
     export interface $PosRuleTestType<P> extends RegistryMarked<RegistryTypes.PosRuleTestTag, RegistryTypes.PosRuleTest> {}
@@ -185,14 +185,14 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/templatesy
         static INSTANCE: $PosAlwaysTrueTest;
     }
     export class $ProcessorRule {
-        test(arg0: $BlockState_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: $BlockPos_, arg5: $RandomSource): boolean;
         getOutputState(): $BlockState;
         getOutputTag(arg0: $RandomSource, arg1: $CompoundTag_): $CompoundTag;
+        test(arg0: $BlockState_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: $BlockPos_, arg5: $RandomSource): boolean;
         static CODEC: $Codec<$ProcessorRule>;
         static DEFAULT_BLOCK_ENTITY_MODIFIER: $Passthrough;
+        constructor(arg0: $RuleTest_, arg1: $RuleTest_, arg2: $BlockState_);
         constructor(arg0: $RuleTest_, arg1: $RuleTest_, arg2: $PosRuleTest, arg3: $BlockState_, arg4: $RuleBlockEntityModifier);
         constructor(arg0: $RuleTest_, arg1: $RuleTest_, arg2: $PosRuleTest, arg3: $BlockState_);
-        constructor(arg0: $RuleTest_, arg1: $RuleTest_, arg2: $BlockState_);
         get outputState(): $BlockState;
     }
     export class $CappedProcessor extends $StructureProcessor {
@@ -207,26 +207,26 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/templatesy
     }
     export interface $StructureProcessorList extends RegistryMarked<RegistryTypes.WorldgenProcessorListTag, RegistryTypes.WorldgenProcessorList> {}
     export class $StructureProcessor {
-        getType(): $StructureProcessorType<never>;
         /**
          * @deprecated
          */
         processBlock(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $StructureTemplate$StructureBlockInfo_, arg4: $StructureTemplate$StructureBlockInfo_, arg5: $StructurePlaceSettings): $StructureTemplate$StructureBlockInfo;
-        process(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $StructureTemplate$StructureBlockInfo_, arg4: $StructureTemplate$StructureBlockInfo_, arg5: $StructurePlaceSettings, arg6: $StructureTemplate): $StructureTemplate$StructureBlockInfo;
         finalizeProcessing(arg0: $ServerLevelAccessor, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $List_<$StructureTemplate$StructureBlockInfo_>, arg4: $List_<$StructureTemplate$StructureBlockInfo_>, arg5: $StructurePlaceSettings): $List<$StructureTemplate$StructureBlockInfo>;
         processEntity(arg0: $LevelReader, arg1: $BlockPos_, arg2: $StructureTemplate$StructureEntityInfo, arg3: $StructureTemplate$StructureEntityInfo, arg4: $StructurePlaceSettings, arg5: $StructureTemplate): $StructureTemplate$StructureEntityInfo;
+        getType(): $StructureProcessorType<never>;
+        process(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $StructureTemplate$StructureBlockInfo_, arg4: $StructureTemplate$StructureBlockInfo_, arg5: $StructurePlaceSettings, arg6: $StructureTemplate): $StructureTemplate$StructureBlockInfo;
         constructor();
         get type(): $StructureProcessorType<never>;
     }
     export class $StructureTemplateManager$Source extends $Record {
-        loader(): $Function<$ResourceLocation, ($StructureTemplate) | undefined>;
         lister(): $Supplier<$Stream<$ResourceLocation>>;
+        loader(): $Function<$ResourceLocation, ($StructureTemplate) | undefined>;
         constructor(arg0: $Function_<$ResourceLocation, ($StructureTemplate) | undefined>, arg1: $Supplier_<$Stream<$ResourceLocation>>);
     }
     /**
      * Values that may be interpreted as {@link $StructureTemplateManager$Source}.
      */
-    export type $StructureTemplateManager$Source_ = { lister?: $Supplier_<$Stream<$ResourceLocation>>, loader?: $Function_<$ResourceLocation, ($StructureTemplate) | undefined>,  } | [lister?: $Supplier_<$Stream<$ResourceLocation>>, loader?: $Function_<$ResourceLocation, ($StructureTemplate) | undefined>, ];
+    export type $StructureTemplateManager$Source_ = { loader?: $Function_<$ResourceLocation, ($StructureTemplate) | undefined>, lister?: $Supplier_<$Stream<$ResourceLocation>>,  } | [loader?: $Function_<$ResourceLocation, ($StructureTemplate) | undefined>, lister?: $Supplier_<$Stream<$ResourceLocation>>, ];
     export class $PosRuleTest {
         test(arg0: $BlockPos_, arg1: $BlockPos_, arg2: $BlockPos_, arg3: $RandomSource): boolean;
         getType(): $PosRuleTestType<never>;
@@ -293,22 +293,22 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/templatesy
     export type $RuleTest_ = $BlockStatePredicate_ | $CompoundTag_;
     export class $BlockRotProcessor extends $StructureProcessor {
         static CODEC: $MapCodec<$BlockRotProcessor>;
-        constructor(arg0: number);
         constructor(arg0: $HolderSet_<$Block>, arg1: number);
+        constructor(arg0: number);
     }
     export class $RuleProcessor extends $StructureProcessor {
         static CODEC: $MapCodec<$RuleProcessor>;
         constructor(arg0: $List_<$ProcessorRule>);
     }
     export class $StructureTemplateManager {
-        remove(arg0: $ResourceLocation_): void;
-        get(arg0: $ResourceLocation_): ($StructureTemplate) | undefined;
-        save(arg0: $ResourceLocation_): boolean;
         listTemplates(): $Stream<$ResourceLocation>;
         onResourceManagerReload(arg0: $ResourceManager): void;
         createAndValidatePathToGeneratedStructure(arg0: $ResourceLocation_, arg1: string): $Path;
         readStructure(arg0: $CompoundTag_): $StructureTemplate;
         getOrCreate(arg0: $ResourceLocation_): $StructureTemplate;
+        remove(arg0: $ResourceLocation_): void;
+        get(arg0: $ResourceLocation_): ($StructureTemplate) | undefined;
+        save(arg0: $ResourceLocation_): boolean;
         static STRUCTURE_RESOURCE_DIRECTORY_NAME: string;
         constructor(arg0: $ResourceManager, arg1: $LevelStorageSource$LevelStorageAccess, arg2: $DataFixer, arg3: $HolderGetter<$Block_>);
     }
@@ -337,27 +337,27 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/templatesy
      */
     export type $LiquidSettings_ = "ignore_waterlogging" | "apply_waterlogging";
     export class $StructureTemplate$StructureBlockInfo extends $Record implements $StructureBlockInfoModification {
+        hasNbt(): boolean;
+        setNbt(arg0: $CompoundTag_): void;
+        getNbt(): $CompoundTag;
+        getPosition(): $BlockPos;
+        getBlock(): $Block;
         getProperties(): $Map<any, any>;
         state(): $BlockState;
         getId(): string;
         pos(): $BlockPos;
-        getPosition(): $BlockPos;
-        getNbt(): $CompoundTag;
-        hasNbt(): boolean;
-        setNbt(arg0: $CompoundTag_): void;
         setBlock(arg0: $ResourceLocation_): void;
         setBlock(arg0: $ResourceLocation_, arg1: $Map_<any, any>): void;
         nbt(): $CompoundTag;
-        getBlock(): $Block;
         constructor(pos: $BlockPos_, state: $BlockState_, nbt: $CompoundTag_);
+        get position(): $BlockPos;
         get properties(): $Map<any, any>;
         get id(): string;
-        get position(): $BlockPos;
     }
     /**
      * Values that may be interpreted as {@link $StructureTemplate$StructureBlockInfo}.
      */
-    export type $StructureTemplate$StructureBlockInfo_ = { pos?: $BlockPos_, state?: $BlockState_, nbt?: $CompoundTag_,  } | [pos?: $BlockPos_, state?: $BlockState_, nbt?: $CompoundTag_, ];
+    export type $StructureTemplate$StructureBlockInfo_ = { nbt?: $CompoundTag_, state?: $BlockState_, pos?: $BlockPos_,  } | [nbt?: $CompoundTag_, state?: $BlockState_, pos?: $BlockPos_, ];
     export class $StructureTemplateManager$InputStreamOpener {
     }
     export interface $StructureTemplateManager$InputStreamOpener {

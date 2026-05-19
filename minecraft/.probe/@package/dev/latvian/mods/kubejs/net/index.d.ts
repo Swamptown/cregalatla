@@ -4,6 +4,7 @@ import { $ItemTooltipData, $ItemTooltipData_ } from "@package/dev/latvian/mods/k
 import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $MinecraftServer } from "@package/net/minecraft/server";
 import { $Tag_, $Tag, $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $LivingEntity } from "@package/net/minecraft/world/entity";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $CustomPacketPayload_, $CustomPacketPayload$Type, $CustomPacketPayload } from "@package/net/minecraft/network/protocol/common/custom";
 import { $UUID, $List, $UUID_, $Collection_, $List_, $Collection } from "@package/java/util";
@@ -62,7 +63,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $RequestEntityKubedexPayload}.
      */
-    export type $RequestEntityKubedexPayload_ = { entityId?: number, flags?: number,  } | [entityId?: number, flags?: number, ];
+    export type $RequestEntityKubedexPayload_ = { flags?: number, entityId?: number,  } | [flags?: number, entityId?: number, ];
     export class $SyncStagesPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<never>;
         handle(ctx: $IPayloadContext): void;
@@ -103,7 +104,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $RequestInventoryKubedexPayload}.
      */
-    export type $RequestInventoryKubedexPayload_ = { stacks?: $List_<$ItemStack_>, flags?: number, slots?: $List_<number>,  } | [stacks?: $List_<$ItemStack_>, flags?: number, slots?: $List_<number>, ];
+    export type $RequestInventoryKubedexPayload_ = { slots?: $List_<number>, flags?: number, stacks?: $List_<$ItemStack_>,  } | [slots?: $List_<number>, flags?: number, stacks?: $List_<$ItemStack_>, ];
     export class $NetworkKubeEvent implements $KubePlayerEvent {
         /**
          * The channel of the packet.
@@ -113,38 +114,10 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
          * The data of the packet.
          */
         getData(): $CompoundTag;
-        /**
-         * The player that sent the packet. Always `Minecraft.player` in `client_scripts`.
-         */
-        getEntity(): $Player;
         getPlayer(): $Player;
         getLevel(): $Level;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -157,19 +130,44 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
+        getEntity(): $LivingEntity;
         constructor(p: $Player, c: string, d: $CompoundTag_);
         get channel(): string;
         get data(): $CompoundTag;
-        get entity(): $Player;
         get player(): $Player;
         get level(): $Level;
         get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get entity(): $LivingEntity;
     }
     export class $RemoveStagePayload extends $Record implements $CustomPacketPayload {
+        stage(): string;
         type(): $CustomPacketPayload$Type<never>;
         handle(ctx: $IPayloadContext): void;
-        stage(): string;
         player(): $UUID;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
@@ -181,9 +179,9 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
      */
     export type $RemoveStagePayload_ = { stage?: string, player?: $UUID_,  } | [stage?: string, player?: $UUID_, ];
     export class $FirstClickPayload extends $Record implements $CustomPacketPayload {
+        clickType(): number;
         type(): $CustomPacketPayload$Type<never>;
         handle(ctx: $IPayloadContext): void;
-        clickType(): number;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $FirstClickPayload>;
@@ -194,9 +192,9 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
      */
     export type $FirstClickPayload_ = { clickType?: number,  } | [clickType?: number, ];
     export class $ReloadStartupScriptsPayload extends $Record implements $CustomPacketPayload {
+        dedicated(): boolean;
         type(): $CustomPacketPayload$Type<never>;
         handle(ctx: $IPayloadContext): void;
-        dedicated(): boolean;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ReloadStartupScriptsPayload>;
@@ -219,13 +217,13 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $RequestBlockKubedexPayload}.
      */
-    export type $RequestBlockKubedexPayload_ = { flags?: number, pos?: $BlockPos_,  } | [flags?: number, pos?: $BlockPos_, ];
+    export type $RequestBlockKubedexPayload_ = { pos?: $BlockPos_, flags?: number,  } | [pos?: $BlockPos_, flags?: number, ];
     export class $WebServerUpdateJSONPayload extends $Record implements $CustomPacketPayload {
+        requiredTag(): string;
         payload(): $JsonElement;
         type(): $CustomPacketPayload$Type<never>;
         event(): string;
         handle(ctx: $IPayloadContext): void;
-        requiredTag(): string;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $WebServerUpdateJSONPayload>;
@@ -234,24 +232,24 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $WebServerUpdateJSONPayload}.
      */
-    export type $WebServerUpdateJSONPayload_ = { payload?: $JsonElement_, event?: string, requiredTag?: string,  } | [payload?: $JsonElement_, event?: string, requiredTag?: string, ];
+    export type $WebServerUpdateJSONPayload_ = { requiredTag?: string, event?: string, payload?: $JsonElement_,  } | [requiredTag?: string, event?: string, payload?: $JsonElement_, ];
     export class $KubeServerData extends $Record {
-        static collect(): $KubeServerData;
         recipeViewerData(): ($RecipeViewerData) | undefined;
         itemTooltipData(): $List<$ItemTooltipData>;
+        static collect(): $KubeServerData;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $KubeServerData>;
         constructor(recipeViewerData: ($RecipeViewerData_) | undefined, itemTooltipData: $List_<$ItemTooltipData_>);
     }
     /**
      * Values that may be interpreted as {@link $KubeServerData}.
      */
-    export type $KubeServerData_ = { itemTooltipData?: $List_<$ItemTooltipData_>, recipeViewerData?: ($RecipeViewerData_) | undefined,  } | [itemTooltipData?: $List_<$ItemTooltipData_>, recipeViewerData?: ($RecipeViewerData_) | undefined, ];
+    export type $KubeServerData_ = { recipeViewerData?: ($RecipeViewerData_) | undefined, itemTooltipData?: $List_<$ItemTooltipData_>,  } | [recipeViewerData?: ($RecipeViewerData_) | undefined, itemTooltipData?: $List_<$ItemTooltipData_>, ];
     export class $WebServerUpdateNBTPayload extends $Record implements $CustomPacketPayload {
+        requiredTag(): string;
         payload(): ($Tag) | undefined;
         type(): $CustomPacketPayload$Type<never>;
         event(): string;
         handle(ctx: $IPayloadContext): void;
-        requiredTag(): string;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $WebServerUpdateNBTPayload>;
@@ -260,7 +258,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $WebServerUpdateNBTPayload}.
      */
-    export type $WebServerUpdateNBTPayload_ = { payload?: ($Tag_) | undefined, event?: string, requiredTag?: string,  } | [payload?: ($Tag_) | undefined, event?: string, requiredTag?: string, ];
+    export type $WebServerUpdateNBTPayload_ = { requiredTag?: string, event?: string, payload?: ($Tag_) | undefined,  } | [requiredTag?: string, event?: string, payload?: ($Tag_) | undefined, ];
     export class $KubeJSNet$Kubedex {
         static REQUEST_BLOCK: $CustomPacketPayload$Type<$RequestBlockKubedexPayload>;
         static REQUEST_INVENTORY: $CustomPacketPayload$Type<$RequestInventoryKubedexPayload>;
@@ -269,9 +267,9 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     export interface $KubeJSNet$Kubedex {
     }
     export class $KubeJSNet {
-        static register(event: $RegisterPayloadHandlersEvent): void;
         static sendToAllPlayers(payload: $CustomPacketPayload_, ...payloads: $CustomPacketPayload_[]): void;
         static safeSendToPlayer(player: $ServerPlayer, payload: $CustomPacketPayload_, ...payloads: $CustomPacketPayload_[]): void;
+        static register(event: $RegisterPayloadHandlersEvent): void;
         static WEB_SERVER_NBT_UPDATE: $CustomPacketPayload$Type<$WebServerUpdateNBTPayload>;
         static DISPLAY_CLIENT_ERRORS: $CustomPacketPayload$Type<$DisplayClientErrorsPayload>;
         static REMOVE_STAGE: $CustomPacketPayload$Type<$RemoveStagePayload>;
@@ -302,11 +300,11 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $SendDataFromClientPayload}.
      */
-    export type $SendDataFromClientPayload_ = { data?: $CompoundTag_, channel?: string,  } | [data?: $CompoundTag_, channel?: string, ];
+    export type $SendDataFromClientPayload_ = { channel?: string, data?: $CompoundTag_,  } | [channel?: string, data?: $CompoundTag_, ];
     export class $AddStagePayload extends $Record implements $CustomPacketPayload {
+        stage(): string;
         type(): $CustomPacketPayload$Type<never>;
         handle(ctx: $IPayloadContext): void;
-        stage(): string;
         player(): $UUID;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
@@ -318,10 +316,10 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
      */
     export type $AddStagePayload_ = { stage?: string, player?: $UUID_,  } | [stage?: string, player?: $UUID_, ];
     export class $DisplayServerErrorsPayload extends $Record implements $CustomPacketPayload {
+        scriptType(): number;
         type(): $CustomPacketPayload$Type<never>;
         handle(ctx: $IPayloadContext): void;
         errors(): $List<$ConsoleLine>;
-        scriptType(): number;
         warnings(): $List<$ConsoleLine>;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
@@ -331,7 +329,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $DisplayServerErrorsPayload}.
      */
-    export type $DisplayServerErrorsPayload_ = { warnings?: $List_<$ConsoleLine>, errors?: $List_<$ConsoleLine>, scriptType?: number,  } | [warnings?: $List_<$ConsoleLine>, errors?: $List_<$ConsoleLine>, scriptType?: number, ];
+    export type $DisplayServerErrorsPayload_ = { scriptType?: number, errors?: $List_<$ConsoleLine>, warnings?: $List_<$ConsoleLine>,  } | [scriptType?: number, errors?: $List_<$ConsoleLine>, warnings?: $List_<$ConsoleLine>, ];
     export class $SendDataFromServerPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<never>;
         data(): $CompoundTag;
@@ -345,7 +343,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $SendDataFromServerPayload}.
      */
-    export type $SendDataFromServerPayload_ = { data?: $CompoundTag_, channel?: string,  } | [data?: $CompoundTag_, channel?: string, ];
+    export type $SendDataFromServerPayload_ = { channel?: string, data?: $CompoundTag_,  } | [channel?: string, data?: $CompoundTag_, ];
     export class $DisplayClientErrorsPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<never>;
         handle(ctx: $IPayloadContext): void;

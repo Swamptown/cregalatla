@@ -12,42 +12,42 @@ import { $Matrix4f, $Quaternionf } from "@package/org/joml";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/rendering" {
     export class $EnhancedPoseStack {
+        setOnTransform(arg0: $Runnable_): $EnhancedPoseStack;
         clear(): boolean;
         scale(arg0: number, arg1: number, arg2: number): void;
         last(): $PoseStack$Pose;
-        setOnTransform(arg0: $Runnable_): $EnhancedPoseStack;
         setIdentity(): void;
         pushTransformation(arg0: $Transformation): void;
-        translate(arg0: number, arg1: number, arg2: number): void;
-        translate(arg0: number, arg1: number, arg2: number): void;
-        popPose(): void;
-        pushPose(): void;
-        rotateAround(arg0: $Quaternionf, arg1: number, arg2: number, arg3: number): void;
         mulPose(arg0: $Matrix4f): void;
         mulPose(arg0: $Quaternionf): void;
+        translate(arg0: number, arg1: number, arg2: number): void;
+        translate(arg0: number, arg1: number, arg2: number): void;
+        pushPose(): void;
+        popPose(): void;
+        rotateAround(arg0: $Quaternionf, arg1: number, arg2: number, arg3: number): void;
         pose: $PoseStack;
         constructor(arg0: $PoseStack);
         set onTransform(value: $Runnable_);
     }
     export class $UIVisualLayer {
+        unbind(): void;
+        bind(arg0: $GUIContext): void;
         clear(): void;
         release(): void;
-        bind(arg0: $GUIContext): void;
         draw(arg0: $GUIContext): void;
         textureId(): number;
-        unbind(): void;
         constructor(arg0: $UIElement);
     }
     export class $GUIContext {
-        static of(arg0: $ModularUI, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number): $GUIContext;
-        refreshLocalMouse(): void;
-        callPostRendering(): void;
         pushVisualLayer(arg0: $UIVisualLayer): void;
         popVisualLayer(): void;
         setElementColor(arg0: number): void;
         resetElementColor(): void;
         drawTexture(arg0: $IGuiTexture_, arg1: number, arg2: number, arg3: number, arg4: number): void;
         postRendering(arg0: $Consumer_<$GUIContext>): void;
+        refreshLocalMouse(): void;
+        callPostRendering(): void;
+        static of(arg0: $ModularUI, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number): $GUIContext;
         enableScissor(arg0: number, arg1: number, arg2: number, arg3: number): void;
         enableScissor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Matrix4f): void;
         disableScissor(): void;

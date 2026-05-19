@@ -19,10 +19,10 @@ declare module "@package/net/minecraft/world/level/gameevent/vibrations" {
         getPositionSource(): $PositionSource;
         getListenableEvents(): $TagKey<$GameEvent>;
         canTriggerAvoidVibration(): boolean;
-        requiresAdjacentChunksToBeTicking(): boolean;
         calculateTravelTimeInTicks(arg0: number): number;
         isValidVibration(arg0: $Holder_<$GameEvent>, arg1: $GameEvent$Context_): boolean;
         onDataChanged(): void;
+        requiresAdjacentChunksToBeTicking(): boolean;
         getListenerRadius(): number;
         onReceiveVibration(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $Holder_<$GameEvent>, arg3: $Entity, arg4: $Entity, arg5: number): void;
         get positionSource(): $PositionSource;
@@ -30,13 +30,13 @@ declare module "@package/net/minecraft/world/level/gameevent/vibrations" {
         get listenerRadius(): number;
     }
     export class $VibrationSystem$Data {
+        shouldReloadVibrationParticle(): boolean;
         getSelectionStrategy(): $VibrationSelector;
         getCurrentVibration(): $VibrationInfo;
         setCurrentVibration(arg0: $VibrationInfo_): void;
         getTravelTimeInTicks(): number;
         setTravelTimeInTicks(arg0: number): void;
         decrementTravelTime(): void;
-        shouldReloadVibrationParticle(): boolean;
         setReloadVibrationParticle(arg0: boolean): void;
         selectionStrategy: $VibrationSelector;
         static CODEC: $Codec<$VibrationSystem$Data>;
@@ -54,23 +54,23 @@ declare module "@package/net/minecraft/world/level/gameevent/vibrations" {
         constructor();
     }
     export class $VibrationInfo extends $Record {
-        pos(): $Vec3;
-        distance(): number;
         projectileOwnerUuid(): $UUID;
         getProjectileOwner(arg0: $ServerLevel): ($Entity) | undefined;
-        getEntity(arg0: $ServerLevel): ($Entity) | undefined;
         entity(): $Entity;
+        getEntity(arg0: $ServerLevel): ($Entity) | undefined;
+        pos(): $Vec3;
+        distance(): number;
         uuid(): $UUID;
         gameEvent(): $Holder<$GameEvent>;
         static CODEC: $Codec<$VibrationInfo>;
-        constructor(arg0: $Holder_<$GameEvent>, arg1: number, arg2: $Vec3_, arg3: $UUID_, arg4: $UUID_, arg5: $Entity);
-        constructor(arg0: $Holder_<$GameEvent>, arg1: number, arg2: $Vec3_, arg3: $Entity);
         constructor(arg0: $Holder_<$GameEvent>, arg1: number, arg2: $Vec3_, arg3: $UUID_, arg4: $UUID_);
+        constructor(arg0: $Holder_<$GameEvent>, arg1: number, arg2: $Vec3_, arg3: $Entity);
+        constructor(arg0: $Holder_<$GameEvent>, arg1: number, arg2: $Vec3_, arg3: $UUID_, arg4: $UUID_, arg5: $Entity);
     }
     /**
      * Values that may be interpreted as {@link $VibrationInfo}.
      */
-    export type $VibrationInfo_ = { gameEvent?: $Holder_<$GameEvent>, uuid?: $UUID_, pos?: $Vec3_, distance?: number, entity?: $Entity, projectileOwnerUuid?: $UUID_,  } | [gameEvent?: $Holder_<$GameEvent>, uuid?: $UUID_, pos?: $Vec3_, distance?: number, entity?: $Entity, projectileOwnerUuid?: $UUID_, ];
+    export type $VibrationInfo_ = { projectileOwnerUuid?: $UUID_, entity?: $Entity, distance?: number, pos?: $Vec3_, uuid?: $UUID_, gameEvent?: $Holder_<$GameEvent>,  } | [projectileOwnerUuid?: $UUID_, entity?: $Entity, distance?: number, pos?: $Vec3_, uuid?: $UUID_, gameEvent?: $Holder_<$GameEvent>, ];
     export class $VibrationSystem$Ticker {
         static tick(arg0: $Level_, arg1: $VibrationSystem$Data, arg2: $VibrationSystem$User): void;
     }

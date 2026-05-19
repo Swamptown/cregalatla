@@ -7,15 +7,15 @@ declare module "@package/dev/lambdaurora/spruceui/option" {
     export class $SpruceOption implements $Nameable {
         getName(): string;
         getPrefix(): $Component;
-        setTooltip(tooltip: $Component_): void;
         getDisplayText(value: $Component_): $Component;
         getOptionTooltip(): ($Component) | undefined;
         createWidget(arg0: $Position, arg1: number): $SpruceWidget;
+        setTooltip(tooltip: $Component_): void;
         key: string;
         constructor(key: string);
         get name(): string;
         get prefix(): $Component;
-        set tooltip(value: $Component_);
         get optionTooltip(): ($Component) | undefined;
+        set tooltip(value: $Component_);
     }
 }

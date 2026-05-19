@@ -11,61 +11,61 @@ import { $RandomSource, $KeyDispatchDataCodec } from "@package/net/minecraft/uti
 
 declare module "@package/net/minecraft/world/level/levelgen/synth" {
     export class $NormalNoise {
-        getValue(arg0: number, arg1: number, arg2: number): number;
-        parameters(): $NormalNoise$NoiseParameters;
-        static create(arg0: $RandomSource, arg1: $NormalNoise$NoiseParameters_): $NormalNoise;
-        static create(arg0: $RandomSource, arg1: number, ...arg2: number[]): $NormalNoise;
-        maxValue(): number;
         /**
          * @deprecated
          */
         static createLegacyNetherBiome(arg0: $RandomSource, arg1: $NormalNoise$NoiseParameters_): $NormalNoise;
+        maxValue(): number;
+        getValue(arg0: number, arg1: number, arg2: number): number;
+        parameters(): $NormalNoise$NoiseParameters;
+        static create(arg0: $RandomSource, arg1: number, ...arg2: number[]): $NormalNoise;
+        static create(arg0: $RandomSource, arg1: $NormalNoise$NoiseParameters_): $NormalNoise;
         parityConfigString(arg0: $StringBuilder): void;
     }
     export class $BlendedNoise implements $DensityFunction$SimpleFunction {
-        compute(arg0: $DensityFunction$FunctionContext): number;
-        maxValue(): number;
         static createUnseeded(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): $BlendedNoise;
         withNewRandom(arg0: $RandomSource): $BlendedNoise;
+        maxValue(): number;
+        compute(arg0: $DensityFunction$FunctionContext): number;
         minValue(): number;
         codec(): $KeyDispatchDataCodec<$DensityFunction>;
         parityConfigString(arg0: $StringBuilder): void;
         mapAll(arg0: $DensityFunction$Visitor_): $DensityFunction;
         fillArray(arg0: number[], arg1: $DensityFunction$ContextProvider): void;
-        abs(): $DensityFunction;
-        clamp(arg0: number, arg1: number): $DensityFunction;
-        square(): $DensityFunction;
         cube(): $DensityFunction;
         halfNegative(): $DensityFunction;
         quarterNegative(): $DensityFunction;
         squeeze(): $DensityFunction;
+        square(): $DensityFunction;
+        abs(): $DensityFunction;
+        clamp(arg0: number, arg1: number): $DensityFunction;
         static CODEC: $KeyDispatchDataCodec<$BlendedNoise>;
         constructor(arg0: $RandomSource, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number);
     }
     export class $PerlinNoise {
-        static wrap(arg0: number): number;
-        /**
-         * @deprecated
-         */
-        getValue(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: boolean): number;
-        getValue(arg0: number, arg1: number, arg2: number): number;
-        static create(arg0: $RandomSource, arg1: number, arg2: $DoubleList): $PerlinNoise;
-        static create(arg0: $RandomSource, arg1: $IntStream): $PerlinNoise;
-        static create(arg0: $RandomSource, arg1: $List_<number>): $PerlinNoise;
-        static create(arg0: $RandomSource, arg1: number, arg2: number, ...arg3: number[]): $PerlinNoise;
-        maxValue(): number;
+        firstOctave(): number;
+        amplitudes(): $DoubleList;
         /**
          * @deprecated
          */
         static createLegacyForLegacyNetherBiome(arg0: $RandomSource, arg1: number, arg2: $DoubleList): $PerlinNoise;
-        firstOctave(): number;
-        amplitudes(): $DoubleList;
         maxBrokenValue(arg0: number): number;
         /**
          * @deprecated
          */
         static createLegacyForBlendedNoise(arg0: $RandomSource, arg1: $IntStream): $PerlinNoise;
         getOctaveNoise(arg0: number): $ImprovedNoise;
+        maxValue(): number;
+        static wrap(arg0: number): number;
+        /**
+         * @deprecated
+         */
+        getValue(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: boolean): number;
+        getValue(arg0: number, arg1: number, arg2: number): number;
+        static create(arg0: $RandomSource, arg1: $IntStream): $PerlinNoise;
+        static create(arg0: $RandomSource, arg1: $List_<number>): $PerlinNoise;
+        static create(arg0: $RandomSource, arg1: number, arg2: $DoubleList): $PerlinNoise;
+        static create(arg0: $RandomSource, arg1: number, arg2: number, ...arg3: number[]): $PerlinNoise;
         parityConfigString(arg0: $StringBuilder): void;
         constructor(arg0: $RandomSource, arg1: $Pair<number, $DoubleList>, arg2: boolean);
     }
@@ -101,14 +101,14 @@ declare module "@package/net/minecraft/world/level/levelgen/synth" {
      */
     export type $NormalNoise$NoiseParameters_ = RegistryTypes.WorldgenNoise | { amplitudes?: $DoubleList, firstOctave?: number,  } | [amplitudes?: $DoubleList, firstOctave?: number, ];
     export class $NoiseUtils {
-        static parityNoiseOctaveConfigString(arg0: $StringBuilder, arg1: number, arg2: number, arg3: number, arg4: number[]): void;
-        static parityNoiseOctaveConfigString(arg0: $StringBuilder, arg1: number, arg2: number, arg3: number, arg4: number[]): void;
         static biasTowardsExtreme(arg0: number, arg1: number): number;
+        static parityNoiseOctaveConfigString(arg0: $StringBuilder, arg1: number, arg2: number, arg3: number, arg4: number[]): void;
+        static parityNoiseOctaveConfigString(arg0: $StringBuilder, arg1: number, arg2: number, arg3: number, arg4: number[]): void;
         constructor();
     }
     export class $SimplexNoise {
-        getValue(arg0: number, arg1: number): number;
         getValue(arg0: number, arg1: number, arg2: number): number;
+        getValue(arg0: number, arg1: number): number;
         static dot(arg0: number[], arg1: number, arg2: number, arg3: number): number;
         zo: number;
         yo: number;

@@ -11,8 +11,8 @@ declare module "@package/dev/latvian/mods/kubejs/typings" {
         value(): string;
     }
     export class $ThisIs implements $Annotation {
+        classNames(): string[];
         value(): $Class<never>[];
         classes(): $Class<never>[];
-        classNames(): string[];
     }
 }

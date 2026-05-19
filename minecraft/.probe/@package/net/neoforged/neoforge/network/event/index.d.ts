@@ -7,9 +7,9 @@ import { $ServerConfigurationPacketListener } from "@package/net/minecraft/netwo
 
 declare module "@package/net/neoforged/neoforge/network/event" {
     export class $RegisterConfigurationTasksEvent extends $Event implements $IModBusEvent {
-        register(arg0: $ConfigurationTask): void;
         getConfigurationTasks(): $Queue<$ConfigurationTask>;
         getListener(): $ServerConfigurationPacketListener;
+        register(arg0: $ConfigurationTask): void;
         constructor(arg0: $ServerConfigurationPacketListener);
         get configurationTasks(): $Queue<$ConfigurationTask>;
         get listener(): $ServerConfigurationPacketListener;

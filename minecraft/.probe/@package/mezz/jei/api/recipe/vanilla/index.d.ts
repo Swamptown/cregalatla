@@ -61,13 +61,13 @@ declare module "@package/mezz/jei/api/recipe/vanilla" {
     export interface $IJeiBrewingRecipe {
         getPotionInputs(): $List<$ItemStack>;
         getPotionOutput(): $ItemStack;
-        getBrewingSteps(): number;
         getIngredients(): $List<$ItemStack>;
+        getBrewingSteps(): number;
         getUid(): $ResourceLocation;
         get potionInputs(): $List<$ItemStack>;
         get potionOutput(): $ItemStack;
-        get brewingSteps(): number;
         get ingredients(): $List<$ItemStack>;
+        get brewingSteps(): number;
         get uid(): $ResourceLocation;
     }
     export class $IJeiAnvilRecipe {

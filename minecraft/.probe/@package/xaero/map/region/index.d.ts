@@ -23,24 +23,25 @@ export * as texture from "@package/xaero/map/region/texture";
 
 declare module "@package/xaero/map/region" {
     export class $Overlay extends $MapPixel {
-        equals(arg0: $Overlay): boolean;
-        write(arg0: $BlockState_, arg1: number, arg2: boolean): void;
+        toRenderString(): string;
         getParametres(): number;
         getPixelColour(arg0: $MapBlock, arg1: number[], arg2: $MapWriter, arg3: $Level_, arg4: $MapDimension, arg5: $Registry<$Block_>, arg6: $MapTileChunk, arg7: $MapTileChunk, arg8: $MapTileChunk, arg9: $MapTileChunk, arg10: $MapTile, arg11: number, arg12: number, arg13: number, arg14: number, arg15: $BlockPos$MutableBlockPos, arg16: $Registry<$Biome_>, arg17: $Registry<$DimensionType_>, arg18: number, arg19: number, arg20: number, arg21: $BlockTintProvider, arg22: $MapProcessor, arg23: $OverlayManager, arg24: $MapUpdateFastConfig): void;
-        toRenderString(): string;
-        getOpacity(): number;
         increaseOpacity(arg0: number): void;
+        getOpacity(): number;
         isWater(): boolean;
+        equals(arg0: $Overlay): boolean;
+        write(arg0: $BlockState_, arg1: number, arg2: boolean): void;
         constructor(arg0: $BlockState_, arg1: number, arg2: boolean);
         get parametres(): number;
         get opacity(): number;
         get water(): boolean;
     }
     export class $LeveledRegion<T extends $RegionTexture<T>> implements $Comparable<$LeveledRegion<T>> {
-        compareTo(arg0: $LeveledRegion<$LeveledRegion<T>>): number;
-        getParent(): $BranchLeveledRegion;
-        isLoaded(): boolean;
-        getLevel(): number;
+        getCacheFile(): $File;
+        setShouldCache(arg0: boolean, arg1: string): void;
+        setCacheFile(arg0: $File_): void;
+        loadCacheTextures(arg0: $MapProcessor, arg1: $Registry<$Biome_>, arg2: boolean, arg3: boolean[][], arg4: number, arg5: boolean[], arg6: boolean[], arg7: number, arg8: $OldFormatSupport): boolean;
+        createTexture(arg0: number, arg1: number): $LeveledRegion<T>;
         hasTextures(): boolean;
         addDebugLines(arg0: $List_<string>, arg1: $MapProcessor, arg2: number, arg3: number): void;
         shouldCache(): boolean;
@@ -50,12 +51,6 @@ declare module "@package/xaero/map/region" {
         recacheHasBeenRequested(): boolean;
         reloadHasBeenRequested(): boolean;
         loadingAnimation(): boolean;
-        setReloadHasBeenRequested(arg0: boolean, arg1: string): void;
-        getCacheFile(): $File;
-        setShouldCache(arg0: boolean, arg1: string): void;
-        setCacheFile(arg0: $File_): void;
-        loadCacheTextures(arg0: $MapProcessor, arg1: $Registry<$Biome_>, arg2: boolean, arg3: boolean[][], arg4: number, arg5: boolean[], arg6: boolean[], arg7: number, arg8: $OldFormatSupport): boolean;
-        createTexture(arg0: number, arg1: number): $LeveledRegion<T>;
         isRefreshing(): boolean;
         resetBiomePalette(): void;
         setRecacheHasBeenRequested(arg0: boolean, arg1: string): void;
@@ -87,29 +82,31 @@ declare module "@package/xaero/map/region" {
         ensureBiomePalette(): void;
         onBiomeRemovedFromTexture(arg0: number): void;
         isAllCachePrepared(): boolean;
+        setReloadHasBeenRequested(arg0: boolean, arg1: string): void;
         getAndResetCachedTextureVersion(arg0: number, arg1: number): number;
         confirmMetaLoaded(): void;
         getBiomePaletteIndex(arg0: $ResourceKey_<$Biome>): number;
         onBiomeAddedToTexture(arg0: $ResourceKey_<$Biome>): number;
         uncountTextureBiomes(arg0: $RegionTexture<never>): void;
         getBiomePalette(): $FastPalette<$ResourceKey<$Biome>>;
+        shouldAllowAnotherRegionToLoad(): boolean;
+        static setComparison(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
         calculateSortingChunkDistance(): void;
         setAllCachePrepared(arg0: boolean): void;
         getDim(): $MapDimension;
         getCaveLayer(): number;
-        shouldAllowAnotherRegionToLoad(): boolean;
-        static setComparison(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
         getRegionX(): number;
         getRegionZ(): number;
+        getLevel(): number;
+        compareTo(arg0: $LeveledRegion<$LeveledRegion<T>>): number;
+        getParent(): $BranchLeveledRegion;
+        isLoaded(): boolean;
         getTexture(arg0: number, arg1: number): $LeveledRegion<T>;
         checkForUpdates(arg0: $MapProcessor, arg1: boolean, arg2: boolean[], arg3: $ArrayList<$BranchLeveledRegion>, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): void;
         activeBranchUpdateReferences: number;
         leafTextureVersionSum: number[][];
         static SIDE_LENGTH: number;
         constructor(arg0: string, arg1: string, arg2: string, arg3: $MapDimension, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $BranchLeveledRegion);
-        get parent(): $BranchLeveledRegion;
-        get loaded(): boolean;
-        get level(): number;
         get metaLoaded(): boolean;
         get rootRegion(): $LeveledRegion<never>;
         get refreshing(): boolean;
@@ -120,12 +117,13 @@ declare module "@package/xaero/map/region" {
         get caveLayer(): number;
         get regionX(): number;
         get regionZ(): number;
+        get level(): number;
+        get parent(): $BranchLeveledRegion;
+        get loaded(): boolean;
     }
     export class $MapRegion extends $LeveledRegion<$LeafRegionTexture> implements $MapRegionInfo {
-        clean(arg0: $MapProcessor): void;
-        setVersion(arg0: number): void;
-        setParent(arg0: $BranchLeveledRegion): void;
-        getVersion(): number;
+        isBeingWritten(): boolean;
+        hasLookedForCache(): boolean;
         getDimId(): string;
         getBiomeRegistry(): $Registry<$Biome>;
         getReloadVersion(): number;
@@ -133,8 +131,6 @@ declare module "@package/xaero/map/region" {
         caveStartOutdated(arg0: number, arg1: number): boolean;
         hasHadTerrain(): boolean;
         getHighlightsHash(): number;
-        isBeingWritten(): boolean;
-        hasLookedForCache(): boolean;
         getRegionFile(): $File;
         getWorldId(): string;
         getMwId(): string;
@@ -175,7 +171,6 @@ declare module "@package/xaero/map/region" {
         getCaveDepth(): number;
         isResaving(): boolean;
         setResaving(arg0: boolean): void;
-        hasVersion(): boolean;
         getLoadState(): number;
         registerVisit(): void;
         canRequestReload_unsynced(): boolean;
@@ -187,10 +182,15 @@ declare module "@package/xaero/map/region" {
         setHasHadTerrain(): void;
         setOutdatedWithOtherLayers(arg0: boolean): void;
         isWritingPaused(): boolean;
+        hasVersion(): boolean;
         isResting(): boolean;
+        setVersion(arg0: number): void;
+        setParent(arg0: $BranchLeveledRegion): void;
+        getVersion(): number;
+        clean(arg0: $MapProcessor): void;
         getChunk(arg0: number, arg1: number): $MapTileChunk;
-        requestRefresh(arg0: $MapProcessor): void;
         requestRefresh(arg0: $MapProcessor, arg1: boolean): void;
+        requestRefresh(arg0: $MapProcessor): void;
         activeBranchUpdateReferences: number;
         leafTextureVersionSum: number[][];
         loadingNeededForBranchLevel: number;
@@ -198,7 +198,6 @@ declare module "@package/xaero/map/region" {
         static SIDE_LENGTH: number;
         loadingPrioritized: boolean;
         constructor(arg0: string, arg1: string, arg2: string, arg3: $MapDimension, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean, arg9: $Registry<$Biome_>);
-        set parent(value: $BranchLeveledRegion);
         get dimId(): string;
         get biomeRegistry(): $Registry<$Biome>;
         get worldId(): string;
@@ -215,48 +214,49 @@ declare module "@package/xaero/map/region" {
         get normalMapData(): boolean;
         get writingPaused(): boolean;
         get resting(): boolean;
+        set parent(value: $BranchLeveledRegion);
     }
     export class $LayeredRegionManager {
+        getUnsyncedSet(): $Set<$LeveledRegion<never>>;
+        loadedCount(): number;
+        bumpLoadedRegion(arg0: $LeveledRegion<never>): void;
+        bumpLoadedRegion(arg0: $MapRegion): void;
+        getLoadedRegion(arg0: number): $LeveledRegion<never>;
+        putLeaf(arg0: number, arg1: number, arg2: $MapRegion): void;
+        preDetection(): void;
+        addLoadedRegion(arg0: $LeveledRegion<never>): void;
+        addListRegion(arg0: $LeveledRegion<never>): void;
+        removeListRegion(arg0: $LeveledRegion<never>): void;
+        removeLoadedRegion(arg0: $LeveledRegion<never>): void;
+        onClearCachedHighlightHash(arg0: number, arg1: number): void;
+        onClearCachedHighlightHashes(): void;
+        getLoadedListUnsynced(): $List<$LeveledRegion<never>>;
+        applyToEachLoadedLayer(arg0: $BiConsumer_<number, $MapLayer>): void;
         remove(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         size(): number;
         get(arg0: number, arg1: number, arg2: number, arg3: number): $LeveledRegion<never>;
         clear(): void;
         getLayer(arg0: number): $MapLayer;
-        preDetection(): void;
-        addLoadedRegion(arg0: $LeveledRegion<never>): void;
-        addListRegion(arg0: $LeveledRegion<never>): void;
-        onClearCachedHighlightHash(arg0: number, arg1: number): void;
-        onClearCachedHighlightHashes(): void;
-        getLoadedListUnsynced(): $List<$LeveledRegion<never>>;
-        removeListRegion(arg0: $LeveledRegion<never>): void;
-        removeLoadedRegion(arg0: $LeveledRegion<never>): void;
-        loadedCount(): number;
-        bumpLoadedRegion(arg0: $LeveledRegion<never>): void;
-        bumpLoadedRegion(arg0: $MapRegion): void;
-        getUnsyncedSet(): $Set<$LeveledRegion<never>>;
-        putLeaf(arg0: number, arg1: number, arg2: $MapRegion): void;
-        getLoadedRegion(arg0: number): $LeveledRegion<never>;
-        applyToEachLoadedLayer(arg0: $BiConsumer_<number, $MapLayer>): void;
         getLeaf(arg0: number, arg1: number, arg2: number): $MapRegion;
         constructor(arg0: $MapDimension);
-        get loadedListUnsynced(): $List<$LeveledRegion<never>>;
         get unsyncedSet(): $Set<$LeveledRegion<never>>;
+        get loadedListUnsynced(): $List<$LeveledRegion<never>>;
     }
     export class $MapTileChunk {
-        clean(arg0: $MapProcessor): void;
+        hasHadTerrain(): boolean;
+        unsetHasHadTerrain(): void;
+        readCacheData(arg0: number, arg1: number, arg2: $DataInputStream, arg3: number[], arg4: number[], arg5: $MapProcessor, arg6: number, arg7: number): void;
+        getTileGridsCache(): number[][];
         putColour(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $ByteBuffer, arg7: number): void;
         resetHeights(): void;
+        decTimer(): void;
         getInRegion(): $MapRegion;
         getToUpdateBuffers(): boolean;
         hasHighlights(): boolean;
         writeCacheData(arg0: $DataOutputStream, arg1: number[], arg2: number[], arg3: $LeveledRegion<$LeafRegionTexture>): void;
         unincludeInSave(): void;
-        decTimer(): void;
         setHasHighlightsIfUndiscovered(arg0: boolean): void;
         setHasHighlights(arg0: boolean): void;
-        hasHadTerrain(): boolean;
-        unsetHasHadTerrain(): void;
-        readCacheData(arg0: number, arg1: number, arg2: $DataInputStream, arg3: number[], arg4: number[], arg5: $MapProcessor, arg6: number, arg7: number): void;
         getLoadState(): number;
         setLoadState(arg0: number): void;
         getLeafTexture(): $LeafRegionTexture;
@@ -268,33 +268,33 @@ declare module "@package/xaero/map/region" {
         setToUpdateBuffers(arg0: boolean): void;
         updateBuffers(arg0: $MapProcessor, arg1: $BlockTintProvider, arg2: $OverlayManager, arg3: boolean, arg4: $BlockStateShortShapeCache, arg5: $MapUpdateFastConfig): void;
         setTile(arg0: number, arg1: number, arg2: $MapTile, arg3: $BlockStateShortShapeCache): void;
+        getTile(arg0: number, arg1: number): $MapTile;
+        clean(arg0: $MapProcessor): void;
+        getTimer(): number;
         getX(): number;
         getZ(): number;
-        getTimer(): number;
         setChanged(arg0: boolean): void;
-        getTileGridsCache(): number[][];
-        getTile(arg0: number, arg1: number): $MapTile;
         static SIDE_LENGTH: number;
         constructor(arg0: $MapRegion, arg1: number, arg2: number);
+        get tileGridsCache(): number[][];
         get inRegion(): $MapRegion;
         get leafTexture(): $LeafRegionTexture;
+        get timer(): number;
         get x(): number;
         get z(): number;
-        get timer(): number;
         set changed(value: boolean);
-        get tileGridsCache(): number[][];
     }
     export class $BranchLeveledRegion extends $LeveledRegion<$BranchRegionTexture> {
-        isEmpty(): boolean;
+        createTexture(arg0: number, arg1: number): $BranchRegionTexture;
+        setShouldCheckForUpdatesRecursive(arg0: boolean): void;
+        putTexture(arg0: number, arg1: number, arg2: $BranchRegionTexture): void;
+        preCacheLoad(): void;
         eligibleForSaving(arg0: number): boolean;
         startDownloadingTexturesForCache(arg0: $MapProcessor): void;
         setShouldCheckForUpdatesSingle(arg0: boolean): void;
         postTextureUpdate(): void;
-        setShouldCheckForUpdatesRecursive(arg0: boolean): void;
-        createTexture(arg0: number, arg1: number): $BranchRegionTexture;
-        putTexture(arg0: number, arg1: number, arg2: $BranchRegionTexture): void;
-        preCacheLoad(): void;
         setLoaded(arg0: boolean): void;
+        isEmpty(): boolean;
         getTexture(arg0: number, arg1: number): $BranchRegionTexture;
         activeBranchUpdateReferences: number;
         static CHILD_LENGTH_IN_TEXTURES: number;
@@ -302,10 +302,10 @@ declare module "@package/xaero/map/region" {
         static SIDE_LENGTH: number;
         static MAX_COORD_WITHIN_CHILD: number;
         constructor(arg0: string, arg1: string, arg2: string, arg3: $MapDimension, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $BranchLeveledRegion);
-        get empty(): boolean;
-        set shouldCheckForUpdatesSingle(value: boolean);
         set shouldCheckForUpdatesRecursive(value: boolean);
+        set shouldCheckForUpdatesSingle(value: boolean);
         set loaded(value: boolean);
+        get empty(): boolean;
     }
     export class $OverlayManager {
         getNumberOfUniqueOverlays(): number;
@@ -314,30 +314,30 @@ declare module "@package/xaero/map/region" {
         get numberOfUniqueOverlays(): number;
     }
     export class $MapLayer {
-        preDetection(): void;
-        getRegionHighlightExistenceTracker(): $RegionHighlightExistenceTracker;
-        getLinkedCompleteWorldSaveDetectedRegions(): $Iterable<$RegionDetection>;
-        getMapRegions(): $LeveledRegionManager;
-        removeRegionDetection(arg0: number, arg1: number): void;
-        getCompleteRegionDetection(arg0: number, arg1: number): $RegionDetection;
-        tryAddingToCompleteRegionDetection(arg0: $RegionDetection): void;
         getDetectedRegions(): $Hashtable<number, $Hashtable<number, $RegionDetection>>;
         regionDetectionExists(arg0: number, arg1: number): boolean;
         getRegionDetection(arg0: number, arg1: number): $RegionDetection;
         setCaveStart(arg0: number): void;
         addRegionDetection(arg0: $RegionDetection): void;
+        preDetection(): void;
+        getRegionHighlightExistenceTracker(): $RegionHighlightExistenceTracker;
+        removeRegionDetection(arg0: number, arg1: number): void;
+        getCompleteRegionDetection(arg0: number, arg1: number): $RegionDetection;
+        tryAddingToCompleteRegionDetection(arg0: $RegionDetection): void;
+        getLinkedCompleteWorldSaveDetectedRegions(): $Iterable<$RegionDetection>;
+        getMapRegions(): $LeveledRegionManager;
         getCaveStart(): number;
         constructor(arg0: $MapDimension, arg1: $RegionHighlightExistenceTracker);
+        get detectedRegions(): $Hashtable<number, $Hashtable<number, $RegionDetection>>;
         get regionHighlightExistenceTracker(): $RegionHighlightExistenceTracker;
         get linkedCompleteWorldSaveDetectedRegions(): $Iterable<$RegionDetection>;
         get mapRegions(): $LeveledRegionManager;
-        get detectedRegions(): $Hashtable<number, $Hashtable<number, $RegionDetection>>;
     }
     export class $MapPixel {
-        getState(): $BlockState;
-        setState(arg0: $BlockState_): void;
         getPixelColours(arg0: number[], arg1: $MapWriter, arg2: $Level_, arg3: $MapDimension, arg4: $Registry<$Block_>, arg5: $MapTileChunk, arg6: $MapTileChunk, arg7: $MapTileChunk, arg8: $MapTileChunk, arg9: $MapTile, arg10: number, arg11: number, arg12: $MapBlock, arg13: number, arg14: number, arg15: number, arg16: number, arg17: $ArrayList<$Overlay>, arg18: $BlockPos$MutableBlockPos, arg19: $Registry<$Biome_>, arg20: $Registry<$DimensionType_>, arg21: number, arg22: number, arg23: number, arg24: $BlockTintProvider, arg25: $MapProcessor, arg26: $OverlayManager, arg27: $BlockStateShortShapeCache, arg28: $MapUpdateFastConfig): void;
         getBlockBrightness(arg0: number, arg1: number, arg2: number): number;
+        getState(): $BlockState;
+        setState(arg0: $BlockState_): void;
         setLight(arg0: number): void;
         setGlowing(arg0: boolean): void;
         constructor();
@@ -356,8 +356,6 @@ declare module "@package/xaero/map/region" {
         constructor();
     }
     export class $MapTile implements $PoolUnit {
-        create(...arg0: $Object[]): void;
-        isLoaded(): boolean;
         getBlockColumn(arg0: number): $MapBlock[];
         getWorldInterpretationVersion(): number;
         getWrittenCaveStart(): number;
@@ -367,10 +365,12 @@ declare module "@package/xaero/map/region" {
         setWrittenCave(arg0: number, arg1: number): void;
         setWrittenOnce(arg0: boolean): void;
         setLoaded(arg0: boolean): void;
+        getBlock(arg0: number, arg1: number): $MapBlock;
+        create(...arg0: $Object[]): void;
+        isLoaded(): boolean;
         setBlock(arg0: number, arg1: number, arg2: $MapBlock): void;
         getChunkX(): number;
         getChunkZ(): number;
-        getBlock(arg0: number, arg1: number): $MapBlock;
         static CURRENT_WORLD_INTERPRETATION_VERSION: number;
         constructor(...arg0: $Object[]);
         get writtenCaveStart(): number;
@@ -380,8 +380,7 @@ declare module "@package/xaero/map/region" {
         get chunkZ(): number;
     }
     export class $MapBlock extends $MapPixel {
-        equals(arg0: $MapBlock, arg1: boolean): boolean;
-        write(arg0: $BlockState_, arg1: number, arg2: number, arg3: $ResourceKey_<$Biome>, arg4: number, arg5: boolean, arg6: boolean): void;
+        toRenderString(arg0: $Registry<$Biome_>): string;
         isGrass(): boolean;
         getParametres(): number;
         setTopHeight(arg0: number): void;
@@ -391,10 +390,8 @@ declare module "@package/xaero/map/region" {
         getVerticalSlope(): number;
         getDiagonalSlope(): number;
         getEffectiveTopHeight(arg0: boolean): number;
-        toRenderString(arg0: $Registry<$Biome_>): string;
-        setBiome(arg0: $ResourceKey_<$Biome>): void;
-        getEffectiveHeight(arg0: boolean): number;
         getEffectiveHeight(arg0: $BlockStateShortShapeCache, arg1: $MapUpdateFastConfig): number;
+        getEffectiveHeight(arg0: boolean): number;
         fixHeightType(arg0: number, arg1: number, arg2: $MapTile, arg3: $MapTileChunk, arg4: $MapTileChunk, arg5: $MapTileChunk, arg6: $MapTileChunk, arg7: number, arg8: boolean, arg9: $BlockStateShortShapeCache, arg10: $MapUpdateFastConfig): void;
         equalsSlopesExcluded(arg0: $MapBlock): boolean;
         setSlopeUnknown(arg0: boolean): void;
@@ -402,10 +399,13 @@ declare module "@package/xaero/map/region" {
         getNumberOfOverlays(): number;
         getTopHeight(): number;
         getOverlays(): $ArrayList<$Overlay>;
+        setBiome(arg0: $ResourceKey_<$Biome>): void;
+        getHeight(): number;
+        addOverlay(arg0: $Overlay): void;
+        equals(arg0: $MapBlock, arg1: boolean): boolean;
+        write(arg0: $BlockState_, arg1: number, arg2: number, arg3: $ResourceKey_<$Biome>, arg4: number, arg5: boolean, arg6: boolean): void;
         getBiome(): $ResourceKey<$Biome>;
         setHeight(arg0: number): void;
-        addOverlay(arg0: $Overlay): void;
-        getHeight(): number;
         constructor();
         get grass(): boolean;
         get parametres(): number;

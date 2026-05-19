@@ -15,18 +15,17 @@ export * as component from "@package/io/github/mortuusars/exposure/world/item/co
 
 declare module "@package/io/github/mortuusars/exposure/world/item" {
     export class $FilmRollItem extends $Item implements $SensitiveFilmItem {
-        getType(): $ExposureType;
-        addFrame(stack: $ItemStack_, frame: $Frame_): void;
         canAddFrame(stack: $ItemStack_): boolean;
+        addFrame(stack: $ItemStack_, frame: $Frame_): void;
+        getType(): $ExposureType;
+        getFilmProperties(stack: $ItemStack_): $FilmProperties;
         addFrameSizeToTooltip(stack: $ItemStack_, list: $List_<$Component_>): void;
         addPaletteToTooltip(stack: $ItemStack_, list: $List_<$Component_>): void;
         addStyleToTooltip(stack: $ItemStack_, list: $List_<$Component_>): void;
         getColorPalette(stack: $ItemStack_): $ResourceKey<$ColorPalette>;
         getDitherMode(stack: $ItemStack_): $DitherMode;
         getFilmStyle(stack: $ItemStack_): $FilmStyle;
-        getFilmProperties(stack: $ItemStack_): $FilmProperties;
         getFrameSize(stack: $ItemStack_): number;
-        hasFrames(stack: $ItemStack_): boolean;
         getDefaultFrameSize(stack: $ItemStack_): number;
         getDefaultMaxFrameCount(stack: $ItemStack_): number;
         getStoredFrames(stack: $ItemStack_): $List<$Frame>;
@@ -35,6 +34,7 @@ declare module "@package/io/github/mortuusars/exposure/world/item" {
         getStoredFramesCount(stack: $ItemStack_): number;
         getMaxFrameCount(stack: $ItemStack_): number;
         isFull(stack: $ItemStack_): boolean;
+        hasFrames(stack: $ItemStack_): boolean;
         static BASE_ATTACK_DAMAGE_ID: $ResourceLocation;
         static DEFAULT_MAX_STACK_SIZE: number;
         static MAX_BAR_WIDTH: number;
@@ -51,9 +51,7 @@ declare module "@package/io/github/mortuusars/exposure/world/item" {
     export class $FilmItem {
     }
     export interface $FilmItem {
-        getType(): $ExposureType;
         getFrameSize(stack: $ItemStack_): number;
-        hasFrames(stack: $ItemStack_): boolean;
         getDefaultFrameSize(stack: $ItemStack_): number;
         getDefaultMaxFrameCount(stack: $ItemStack_): number;
         getStoredFrames(stack: $ItemStack_): $List<$Frame>;
@@ -62,6 +60,8 @@ declare module "@package/io/github/mortuusars/exposure/world/item" {
         getStoredFramesCount(stack: $ItemStack_): number;
         getMaxFrameCount(stack: $ItemStack_): number;
         isFull(stack: $ItemStack_): boolean;
+        getType(): $ExposureType;
+        hasFrames(stack: $ItemStack_): boolean;
         get type(): $ExposureType;
     }
     /**
@@ -71,13 +71,13 @@ declare module "@package/io/github/mortuusars/exposure/world/item" {
     export class $SensitiveFilmItem {
     }
     export interface $SensitiveFilmItem extends $FilmItem {
+        getFilmProperties(stack: $ItemStack_): $FilmProperties;
         addFrameSizeToTooltip(stack: $ItemStack_, list: $List_<$Component_>): void;
         addPaletteToTooltip(stack: $ItemStack_, list: $List_<$Component_>): void;
         addStyleToTooltip(stack: $ItemStack_, list: $List_<$Component_>): void;
         getColorPalette(stack: $ItemStack_): $ResourceKey<$ColorPalette>;
         getDitherMode(stack: $ItemStack_): $DitherMode;
         getFilmStyle(stack: $ItemStack_): $FilmStyle;
-        getFilmProperties(stack: $ItemStack_): $FilmProperties;
     }
     /**
      * Values that may be interpreted as {@link $SensitiveFilmItem}.

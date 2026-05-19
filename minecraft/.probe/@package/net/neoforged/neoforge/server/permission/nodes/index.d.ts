@@ -16,23 +16,23 @@ declare module "@package/net/neoforged/neoforge/server/permission/nodes" {
     /**
      * Values that may be interpreted as {@link $PermissionDynamicContextKey}.
      */
-    export type $PermissionDynamicContextKey_<T> = { name?: string, serializer?: $Function_<any, string>, typeToken?: $Class<any>,  } | [name?: string, serializer?: $Function_<any, string>, typeToken?: $Class<any>, ];
+    export type $PermissionDynamicContextKey_<T> = { typeToken?: $Class<any>, serializer?: $Function_<any, string>, name?: string,  } | [typeToken?: $Class<any>, serializer?: $Function_<any, string>, name?: string, ];
     export class $PermissionNode<T> {
-        getType(): $PermissionType<T>;
+        getNodeName(): string;
         setInformation(arg0: $Component_, arg1: $Component_): $PermissionNode<any>;
         getDynamics(): $PermissionDynamicContextKey<never>[];
         getDefaultResolver(): $PermissionNode$PermissionResolver<T>;
         getReadableName(): $Component;
-        getNodeName(): string;
         getDescription(): $Component;
-        constructor(arg0: string, arg1: string, arg2: $PermissionType<T>, arg3: $PermissionNode$PermissionResolver_<T>, ...arg4: $PermissionDynamicContextKey_<any>[]);
+        getType(): $PermissionType<T>;
         constructor(arg0: $ResourceLocation_, arg1: $PermissionType<T>, arg2: $PermissionNode$PermissionResolver_<T>, ...arg3: $PermissionDynamicContextKey_<any>[]);
-        get type(): $PermissionType<T>;
+        constructor(arg0: string, arg1: string, arg2: $PermissionType<T>, arg3: $PermissionNode$PermissionResolver_<T>, ...arg4: $PermissionDynamicContextKey_<any>[]);
+        get nodeName(): string;
         get dynamics(): $PermissionDynamicContextKey<never>[];
         get defaultResolver(): $PermissionNode$PermissionResolver<T>;
         get readableName(): $Component;
-        get nodeName(): string;
         get description(): $Component;
+        get type(): $PermissionType<T>;
     }
     export class $PermissionTypes {
         static getTypeByName(arg0: string): $PermissionType<never>;
@@ -55,11 +55,11 @@ declare module "@package/net/neoforged/neoforge/server/permission/nodes" {
      */
     export type $PermissionNode$PermissionResolver_<T> = ((arg0: $ServerPlayer, arg1: $UUID, arg2: $PermissionDynamicContext<never>[]) => T);
     export class $PermissionDynamicContext<T> {
-        getValue(): T;
         getDynamic(): $PermissionDynamicContextKey<T>;
         getSerializedValue(): string;
-        get value(): T;
+        getValue(): T;
         get dynamic(): $PermissionDynamicContextKey<T>;
         get serializedValue(): string;
+        get value(): T;
     }
 }

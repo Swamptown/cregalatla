@@ -11,10 +11,10 @@ declare module "@package/de/keksuccino/fancymenu/util/resource/resources/audio" 
     export class $IAudio {
     }
     export interface $IAudio extends $PlayableResourceWithAudio {
-        getDuration(): number;
         setSoundChannel(arg0: $SoundSource_): void;
         getSoundChannel(): $SoundSource;
         getPlayTime(): number;
+        getDuration(): number;
         setPlayTime(arg0: number): void;
         play(): void;
         get duration(): number;

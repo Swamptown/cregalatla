@@ -11,20 +11,20 @@ export * as file from "@package/com/electronwill/nightconfig/core/file";
 
 declare module "@package/com/electronwill/nightconfig/core" {
     export class $UnmodifiableCommentedConfig$CommentNode {
-        getComment(): string;
         getChildren(): $Map<string, $UnmodifiableCommentedConfig$CommentNode>;
+        getComment(): string;
         constructor(arg0: string, arg1: $Map_<string, $UnmodifiableCommentedConfig$CommentNode>);
-        get comment(): string;
         get children(): $Map<string, $UnmodifiableCommentedConfig$CommentNode>;
+        get comment(): string;
     }
     export class $Config {
-        static of(arg0: $Supplier_<$Map<string, $Object>>, arg1: $ConfigFormat<never>): $Config;
-        static of(arg0: $ConfigFormat<$Config>): $Config;
         static wrap(arg0: $Map_<string, $Object>, arg1: $ConfigFormat<never>): $Config;
-        static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>): $Config;
+        static of(arg0: $ConfigFormat<$Config>): $Config;
+        static of(arg0: $Supplier_<$Map<string, $Object>>, arg1: $ConfigFormat<never>): $Config;
         static copy(arg0: $UnmodifiableConfig): $Config;
-        static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>, arg2: $ConfigFormat<never>): $Config;
         static copy(arg0: $UnmodifiableConfig, arg1: $ConfigFormat<never>): $Config;
+        static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>): $Config;
+        static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>, arg2: $ConfigFormat<never>): $Config;
         static inMemory(): $Config;
         /**
          * @deprecated
@@ -35,6 +35,14 @@ declare module "@package/com/electronwill/nightconfig/core" {
          * @deprecated
          */
         static inMemoryConcurrent(): $Config;
+        /**
+         * @deprecated
+         */
+        static getDefaultMapCreator<T>(arg0: boolean): $Supplier<$Map<string, T>>;
+        /**
+         * @deprecated
+         */
+        static getDefaultMapCreator<T>(arg0: boolean, arg1: boolean): $Supplier<$Map<string, T>>;
         /**
          * @deprecated
          */
@@ -49,30 +57,22 @@ declare module "@package/com/electronwill/nightconfig/core" {
         static concurrentCopy(arg0: $UnmodifiableConfig): $Config;
         static isInsertionOrderPreserved(): boolean;
         static setInsertionOrderPreserved(arg0: boolean): void;
-        /**
-         * @deprecated
-         */
-        static getDefaultMapCreator<T>(arg0: boolean): $Supplier<$Map<string, T>>;
-        /**
-         * @deprecated
-         */
-        static getDefaultMapCreator<T>(arg0: boolean, arg1: boolean): $Supplier<$Map<string, T>>;
     }
     export interface $Config extends $UnmodifiableConfig {
-        remove<T>(arg0: string): T;
         remove<T>(arg0: $List_<string>): T;
+        remove<T>(arg0: string): T;
         update(arg0: string, arg1: $Object): void;
         update(arg0: $List_<string>, arg1: $Object): void;
         clear(): void;
-        add(arg0: string, arg1: $Object): boolean;
         add(arg0: $List_<string>, arg1: $Object): boolean;
+        add(arg0: string, arg1: $Object): boolean;
         addAll(arg0: $UnmodifiableConfig): void;
         entrySet(): $Set<$Config$Entry>;
         putAll(arg0: $UnmodifiableConfig): void;
         set<T>(arg0: string, arg1: $Object): T;
         set<T>(arg0: $List_<string>, arg1: $Object): T;
-        removeAll(arg0: $UnmodifiableConfig): void;
         checked(): $Config;
+        removeAll(arg0: $UnmodifiableConfig): void;
         /**
          * @deprecated
          */
@@ -81,18 +81,18 @@ declare module "@package/com/electronwill/nightconfig/core" {
         unmodifiable(): $UnmodifiableConfig;
     }
     export class $CommentedConfig {
-        static of(arg0: $ConfigFormat<$CommentedConfig>): $CommentedConfig;
-        static of(arg0: $Supplier_<$Map<string, $Object>>, arg1: $ConfigFormat<$CommentedConfig>): $CommentedConfig;
+        static fake(arg0: $Config): $CommentedConfig;
         static wrap(arg0: $Map_<string, $Object>, arg1: $ConfigFormat<never>): $CommentedConfig;
-        static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>, arg2: $ConfigFormat<never>): $CommentedConfig;
-        static copy(arg0: $UnmodifiableConfig, arg1: $ConfigFormat<never>): $CommentedConfig;
-        static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>): $CommentedConfig;
+        static of(arg0: $Supplier_<$Map<string, $Object>>, arg1: $ConfigFormat<$CommentedConfig>): $CommentedConfig;
+        static of(arg0: $ConfigFormat<$CommentedConfig>): $CommentedConfig;
         static copy(arg0: $UnmodifiableConfig): $CommentedConfig;
-        static copy(arg0: $UnmodifiableCommentedConfig, arg1: $Supplier_<$Map<string, $Object>>, arg2: $ConfigFormat<$CommentedConfig>): $CommentedConfig;
+        static copy(arg0: $UnmodifiableConfig, arg1: $ConfigFormat<never>): $CommentedConfig;
+        static copy(arg0: $UnmodifiableCommentedConfig): $CommentedConfig;
+        static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>): $CommentedConfig;
         static copy(arg0: $UnmodifiableCommentedConfig, arg1: $ConfigFormat<never>): $CommentedConfig;
         static copy(arg0: $UnmodifiableCommentedConfig, arg1: $Supplier_<$Map<string, $Object>>): $CommentedConfig;
-        static copy(arg0: $UnmodifiableCommentedConfig): $CommentedConfig;
-        static fake(arg0: $Config): $CommentedConfig;
+        static copy(arg0: $UnmodifiableCommentedConfig, arg1: $Supplier_<$Map<string, $Object>>, arg2: $ConfigFormat<$CommentedConfig>): $CommentedConfig;
+        static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>, arg2: $ConfigFormat<never>): $CommentedConfig;
         static inMemory(): $CommentedConfig;
         /**
          * @deprecated
@@ -105,19 +105,19 @@ declare module "@package/com/electronwill/nightconfig/core" {
         /**
          * @deprecated
          */
-        static concurrentCopy(arg0: $UnmodifiableConfig, arg1: $ConfigFormat<never>): $CommentedConfig;
-        /**
-         * @deprecated
-         */
         static concurrentCopy(arg0: $UnmodifiableCommentedConfig, arg1: $ConfigFormat<never>): $CommentedConfig;
         /**
          * @deprecated
          */
-        static concurrentCopy(arg0: $UnmodifiableConfig): $CommentedConfig;
+        static concurrentCopy(arg0: $UnmodifiableCommentedConfig): $CommentedConfig;
         /**
          * @deprecated
          */
-        static concurrentCopy(arg0: $UnmodifiableCommentedConfig): $CommentedConfig;
+        static concurrentCopy(arg0: $UnmodifiableConfig, arg1: $ConfigFormat<never>): $CommentedConfig;
+        /**
+         * @deprecated
+         */
+        static concurrentCopy(arg0: $UnmodifiableConfig): $CommentedConfig;
     }
     export interface $CommentedConfig extends $UnmodifiableCommentedConfig, $Config {
         entrySet(): $Set<$CommentedConfig$Entry>;
@@ -300,14 +300,14 @@ declare module "@package/com/electronwill/nightconfig/core" {
         entrySet(): $Set<$UnmodifiableCommentedConfig$Entry>;
         getComment(arg0: string): string;
         getComment(arg0: $List_<string>): string;
-        getOptionalComment(arg0: string): (string) | undefined;
-        getOptionalComment(arg0: $List_<string>): (string) | undefined;
-        containsComment(arg0: $List_<string>): boolean;
-        containsComment(arg0: string): boolean;
         /**
          * @deprecated
          */
         commentMap(): $Map<string, string>;
+        getOptionalComment(arg0: string): (string) | undefined;
+        getOptionalComment(arg0: $List_<string>): (string) | undefined;
+        containsComment(arg0: $List_<string>): boolean;
+        containsComment(arg0: string): boolean;
         getComments(arg0: $Map_<string, $UnmodifiableCommentedConfig$CommentNode>): void;
         getComments(): $Map<string, $UnmodifiableCommentedConfig$CommentNode>;
     }
@@ -318,18 +318,18 @@ declare module "@package/com/electronwill/nightconfig/core" {
         set value(value: $Object);
     }
     export class $EnumGetMethod extends $Enum<$EnumGetMethod> {
+        isOrdinalOk(): boolean;
+        isCaseSensitive(): boolean;
         get<T extends $Enum<T>>(arg0: $Object, arg1: $Class<T>): T;
         static values(): $EnumGetMethod[];
         static valueOf(arg0: string): $EnumGetMethod;
         validate<T extends $Enum<T>>(arg0: $Object, arg1: $Class<T>): boolean;
-        isCaseSensitive(): boolean;
-        isOrdinalOk(): boolean;
         static NAME_IGNORECASE: $EnumGetMethod;
         static ORDINAL_OR_NAME: $EnumGetMethod;
         static ORDINAL_OR_NAME_IGNORECASE: $EnumGetMethod;
         static NAME: $EnumGetMethod;
-        get caseSensitive(): boolean;
         get ordinalOk(): boolean;
+        get caseSensitive(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $EnumGetMethod}.

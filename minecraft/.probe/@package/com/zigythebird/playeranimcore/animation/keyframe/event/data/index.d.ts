@@ -16,8 +16,8 @@ declare module "@package/com/zigythebird/playeranimcore/animation/keyframe/event
         get instructions(): string;
     }
     export class $ParticleKeyframeData extends $KeyFrameData {
-        script(): string;
         getLocator(): string;
+        script(): string;
         getEffect(): string;
         constructor(startTick: number, effect: string, locator: string, script: string);
         get locator(): string;

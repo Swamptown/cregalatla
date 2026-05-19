@@ -4,9 +4,9 @@ declare module "@package/net/fabricmc/fabric/api/tag" {
     export class $FabricTagKey {
     }
     export interface $FabricTagKey {
-        getName(): $Component;
         getTranslationKey(): string;
-        get name(): $Component;
+        getName(): $Component;
         get translationKey(): string;
+        get name(): $Component;
     }
 }

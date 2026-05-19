@@ -11,18 +11,18 @@ export * as file from "@package/dev/lambdaurora/lambdynlights/shadow/nightconfig
 
 declare module "@package/dev/lambdaurora/lambdynlights/shadow/nightconfig/core" {
     export class $EnumGetMethod extends $Enum<$EnumGetMethod> {
+        isOrdinalOk(): boolean;
+        isCaseSensitive(): boolean;
         get<T extends $Enum<T>>(value: $Object, enumType: $Class<T>): T;
         static values(): $EnumGetMethod[];
         static valueOf(name: string): $EnumGetMethod;
         validate<T extends $Enum<T>>(value: $Object, enumType: $Class<T>): boolean;
-        isCaseSensitive(): boolean;
-        isOrdinalOk(): boolean;
         static NAME_IGNORECASE: $EnumGetMethod;
         static ORDINAL_OR_NAME: $EnumGetMethod;
         static ORDINAL_OR_NAME_IGNORECASE: $EnumGetMethod;
         static NAME: $EnumGetMethod;
-        get caseSensitive(): boolean;
         get ordinalOk(): boolean;
+        get caseSensitive(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $EnumGetMethod}.
@@ -52,13 +52,13 @@ declare module "@package/dev/lambdaurora/lambdynlights/shadow/nightconfig/core" 
         get inMemory(): boolean;
     }
     export class $Config {
-        static of(mapCreator: $Supplier_<$Map<string, $Object>>, format: $ConfigFormat<never>): $Config;
-        static of(format: $ConfigFormat<$Config>): $Config;
         static wrap(map: $Map_<string, $Object>, format: $ConfigFormat<never>): $Config;
-        static copy(config: $UnmodifiableConfig, mapCreator: $Supplier_<$Map<string, $Object>>): $Config;
+        static of(format: $ConfigFormat<$Config>): $Config;
+        static of(mapCreator: $Supplier_<$Map<string, $Object>>, format: $ConfigFormat<never>): $Config;
         static copy(config: $UnmodifiableConfig): $Config;
-        static copy(config: $UnmodifiableConfig, mapCreator: $Supplier_<$Map<string, $Object>>, format: $ConfigFormat<never>): $Config;
         static copy(config: $UnmodifiableConfig, format: $ConfigFormat<never>): $Config;
+        static copy(config: $UnmodifiableConfig, mapCreator: $Supplier_<$Map<string, $Object>>): $Config;
+        static copy(config: $UnmodifiableConfig, mapCreator: $Supplier_<$Map<string, $Object>>, format: $ConfigFormat<never>): $Config;
         static inMemory(): $Config;
         /**
          * @deprecated
@@ -69,6 +69,14 @@ declare module "@package/dev/lambdaurora/lambdynlights/shadow/nightconfig/core" 
          * @deprecated
          */
         static inMemoryConcurrent(): $Config;
+        /**
+         * @deprecated
+         */
+        static getDefaultMapCreator<T>(concurrent: boolean): $Supplier<$Map<string, T>>;
+        /**
+         * @deprecated
+         */
+        static getDefaultMapCreator<T>(concurrent: boolean, insertionOrderPreserved: boolean): $Supplier<$Map<string, T>>;
         /**
          * @deprecated
          */
@@ -83,30 +91,22 @@ declare module "@package/dev/lambdaurora/lambdynlights/shadow/nightconfig/core" 
         static concurrentCopy(config: $UnmodifiableConfig): $Config;
         static isInsertionOrderPreserved(): boolean;
         static setInsertionOrderPreserved(orderPreserved: boolean): void;
-        /**
-         * @deprecated
-         */
-        static getDefaultMapCreator<T>(concurrent: boolean): $Supplier<$Map<string, T>>;
-        /**
-         * @deprecated
-         */
-        static getDefaultMapCreator<T>(concurrent: boolean, insertionOrderPreserved: boolean): $Supplier<$Map<string, T>>;
     }
     export interface $Config extends $UnmodifiableConfig {
-        remove<T>(path: string): T;
         remove<T>(arg0: $List_<string>): T;
+        remove<T>(path: string): T;
         update(path: string, value: $Object): void;
         update(path: $List_<string>, value: $Object): void;
         clear(): void;
-        add(path: string, value: $Object): boolean;
         add(arg0: $List_<string>, arg1: $Object): boolean;
+        add(path: string, value: $Object): boolean;
         addAll(config: $UnmodifiableConfig): void;
         entrySet(): $Set<$Config$Entry>;
         putAll(config: $UnmodifiableConfig): void;
         set<T>(path: string, value: $Object): T;
         set<T>(arg0: $List_<string>, arg1: $Object): T;
-        removeAll(config: $UnmodifiableConfig): void;
         checked(): $Config;
+        removeAll(config: $UnmodifiableConfig): void;
         /**
          * @deprecated
          */

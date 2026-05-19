@@ -18,15 +18,15 @@ import { $BlockEntityType, $BlockEntity } from "@package/net/minecraft/world/lev
 
 declare module "@package/com/simibubi/create/api/behaviour/display" {
     export class $DisplayTarget {
-        static get(arg0: $ResourceLocation_): $DisplayTarget;
-        static get(arg0: $LevelAccessor, arg1: $BlockPos_): $DisplayTarget;
-        static displayTarget<B extends $Block, P>(arg0: $RegistryEntry<$DisplayTarget_, $DisplayTarget_>): $NonNullUnaryOperator<$BlockBuilder<B, P>>;
-        getLineOptionText(arg0: number): $Component;
-        isReserved(arg0: number, arg1: $BlockEntity, arg2: $DisplayLinkContext): boolean;
-        requiresComponentSanitization(): boolean;
         getMultiblockBounds(arg0: $LevelAccessor, arg1: $BlockPos_): $AABB;
         acceptText(arg0: number, arg1: $List_<$MutableComponent_>, arg2: $DisplayLinkContext): void;
         provideStats(arg0: $DisplayLinkContext): $DisplayTargetStats;
+        getLineOptionText(arg0: number): $Component;
+        isReserved(arg0: number, arg1: $BlockEntity, arg2: $DisplayLinkContext): boolean;
+        requiresComponentSanitization(): boolean;
+        static displayTarget<B extends $Block, P>(arg0: $RegistryEntry<$DisplayTarget_, $DisplayTarget_>): $NonNullUnaryOperator<$BlockBuilder<B, P>>;
+        static get(arg0: $LevelAccessor, arg1: $BlockPos_): $DisplayTarget;
+        static get(arg0: $ResourceLocation_): $DisplayTarget;
         static reserve(arg0: number, arg1: $BlockEntity, arg2: $DisplayLinkContext): void;
         static BY_BLOCK_ENTITY: $SimpleRegistry<$BlockEntityType<never>, $DisplayTarget>;
         static BY_BLOCK: $SimpleRegistry<$Block, $DisplayTarget>;
@@ -37,9 +37,6 @@ declare module "@package/com/simibubi/create/api/behaviour/display" {
      */
     export type $DisplayTarget_ = RegistryTypes.CreateDisplayTarget;
     export class $DisplaySource {
-        getName(): $Component;
-        static get(arg0: $ResourceLocation_): $DisplaySource;
-        static getAll(arg0: $LevelAccessor, arg1: $BlockPos_): $List<$DisplaySource>;
         initConfigurationWidgets(arg0: $DisplayLinkContext, arg1: $ModularGuiLineBuilder, arg2: boolean): void;
         provideText(arg0: $DisplayLinkContext, arg1: $DisplayTargetStats_): $List<$MutableComponent>;
         provideFlapDisplayText(arg0: $DisplayLinkContext, arg1: $DisplayTargetStats_): $List<$List<$MutableComponent>>;
@@ -51,14 +48,17 @@ declare module "@package/com/simibubi/create/api/behaviour/display" {
         getPassiveRefreshTicks(): number;
         shouldPassiveReset(): boolean;
         static displaySource<B extends $Block, P>(arg0: $RegistryEntry<$DisplaySource_, $DisplaySource_>): $NonNullUnaryOperator<$BlockBuilder<B, P>>;
+        static getAll(arg0: $LevelAccessor, arg1: $BlockPos_): $List<$DisplaySource>;
+        getName(): $Component;
+        static get(arg0: $ResourceLocation_): $DisplaySource;
         static BY_BLOCK_ENTITY: $SimpleRegistry$Multi<$BlockEntityType<never>, $DisplaySource>;
         static WHITESPACE: $MutableComponent;
         static EMPTY: $List<$MutableComponent>;
         static EMPTY_LINE: $MutableComponent;
         static BY_BLOCK: $SimpleRegistry$Multi<$Block, $DisplaySource>;
         constructor();
-        get name(): $Component;
         get passiveRefreshTicks(): number;
+        get name(): $Component;
     }
     /**
      * Values that may be interpreted as {@link $DisplaySource}.

@@ -25,13 +25,13 @@ declare module "@package/gg/moonflower/molangcompiler/api/bridge" {
     export class $MolangVariableProvider$Context {
     }
     export interface $MolangVariableProvider$Context {
-        addVariable(arg0: string, arg1: $MolangVariable): void;
         addQuery(arg0: string, arg1: number, arg2: $MolangJavaFunction_): void;
-        addQuery(arg0: string, arg1: $Supplier_<number>): void;
         addQuery(arg0: string, arg1: number): void;
         addQuery(arg0: string, arg1: $MolangExpression_): void;
+        addQuery(arg0: string, arg1: $Supplier_<number>): void;
         removeQuery(arg0: string): void;
         removeVariable(arg0: string): void;
+        addVariable(arg0: string, arg1: $MolangVariable): void;
     }
     export class $MolangVariableProvider {
     }
@@ -48,9 +48,9 @@ declare module "@package/gg/moonflower/molangcompiler/api/bridge" {
         static create(arg0: number): $MolangVariable;
     }
     export interface $MolangVariable {
-        copy(): $MolangVariable;
         getValue(): number;
         setValue(arg0: number): void;
+        copy(): $MolangVariable;
         immutable(): $MolangVariable;
     }
 }

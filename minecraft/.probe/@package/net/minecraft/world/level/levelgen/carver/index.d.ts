@@ -20,14 +20,14 @@ import { $Aquifer, $RandomState, $VerticalAnchor, $SurfaceRules$RuleSource, $Wor
 declare module "@package/net/minecraft/world/level/levelgen/carver" {
     export interface $WorldCarver<C> extends RegistryMarked<RegistryTypes.WorldgenCarverTag, RegistryTypes.WorldgenCarver> {}
     export class $CarverDebugSettings {
-        static of(arg0: boolean, arg1: $BlockState_, arg2: $BlockState_, arg3: $BlockState_, arg4: $BlockState_): $CarverDebugSettings;
-        static of(arg0: $BlockState_, arg1: $BlockState_, arg2: $BlockState_, arg3: $BlockState_): $CarverDebugSettings;
-        static of(arg0: boolean, arg1: $BlockState_): $CarverDebugSettings;
         getBarrierState(): $BlockState;
         getAirState(): $BlockState;
         getWaterState(): $BlockState;
         getLavaState(): $BlockState;
         isDebugMode(): boolean;
+        static of(arg0: boolean, arg1: $BlockState_, arg2: $BlockState_, arg3: $BlockState_, arg4: $BlockState_): $CarverDebugSettings;
+        static of(arg0: $BlockState_, arg1: $BlockState_, arg2: $BlockState_, arg3: $BlockState_): $CarverDebugSettings;
+        static of(arg0: boolean, arg1: $BlockState_): $CarverDebugSettings;
         static CODEC: $Codec<$CarverDebugSettings>;
         static DEFAULT: $CarverDebugSettings;
         get barrierState(): $BlockState;
@@ -142,6 +142,7 @@ declare module "@package/net/minecraft/world/level/levelgen/carver" {
         constructor(arg0: number, arg1: $HeightProvider, arg2: $FloatProvider, arg3: $VerticalAnchor_, arg4: $CarverDebugSettings, arg5: $HolderSet_<$Block>, arg6: $FloatProvider, arg7: $FloatProvider, arg8: $FloatProvider);
     }
     export class $WorldCarver<C extends $CarverConfiguration> {
+        getRange(): number;
         configuredCodec(): $MapCodec<$ConfiguredWorldCarver<C>>;
         carveEllipsoid(arg0: $CarvingContext, arg1: C, arg2: $ChunkAccess, arg3: $Function_<$BlockPos, $Holder<$Biome>>, arg4: $Aquifer, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CarvingMask, arg11: $WorldCarver$CarveSkipChecker_): boolean;
         carveBlock(arg0: $CarvingContext, arg1: C, arg2: $ChunkAccess, arg3: $Function_<$BlockPos, $Holder<$Biome>>, arg4: $CarvingMask, arg5: $BlockPos$MutableBlockPos, arg6: $BlockPos$MutableBlockPos, arg7: $Aquifer, arg8: $MutableBoolean): boolean;
@@ -149,7 +150,6 @@ declare module "@package/net/minecraft/world/level/levelgen/carver" {
         carve(arg0: $CarvingContext, arg1: C, arg2: $ChunkAccess, arg3: $Function_<$BlockPos, $Holder<$Biome>>, arg4: $RandomSource, arg5: $Aquifer, arg6: $ChunkPos, arg7: $CarvingMask): boolean;
         isStartChunk(arg0: C, arg1: $RandomSource): boolean;
         static canReach(arg0: $ChunkPos, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
-        getRange(): number;
         configured(arg0: C): $ConfiguredWorldCarver<C>;
         static CAVE: $WorldCarver<$CaveCarverConfiguration>;
         static LAVA: $FluidState;
@@ -177,10 +177,10 @@ declare module "@package/net/minecraft/world/level/levelgen/carver" {
         constructor(arg0: $FloatProvider, arg1: $FloatProvider, arg2: number, arg3: $FloatProvider, arg4: number, arg5: number);
     }
     export class $ConfiguredWorldCarver<WC extends $CarverConfiguration> extends $Record {
-        config(): WC;
+        worldCarver(): $WorldCarver<WC>;
         carve(arg0: $CarvingContext, arg1: $ChunkAccess, arg2: $Function_<$BlockPos, $Holder<$Biome>>, arg3: $RandomSource, arg4: $Aquifer, arg5: $ChunkPos, arg6: $CarvingMask): boolean;
         isStartChunk(arg0: $RandomSource): boolean;
-        worldCarver(): $WorldCarver<WC>;
+        config(): WC;
         static CODEC: $Codec<$Holder<$ConfiguredWorldCarver<never>>>;
         static DIRECT_CODEC: $Codec<$ConfiguredWorldCarver<never>>;
         static LIST_CODEC: $Codec<$HolderSet<$ConfiguredWorldCarver<never>>>;

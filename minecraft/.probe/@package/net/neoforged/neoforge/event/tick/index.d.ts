@@ -28,8 +28,8 @@ declare module "@package/net/neoforged/neoforge/event/tick" {
         get server(): $MinecraftServer;
     }
     export class $LevelTickEvent extends $Event {
-        getLevel(): $Level;
         hasTime(): boolean;
+        getLevel(): $Level;
         get level(): $Level;
     }
     export class $LevelTickEvent$Pre extends $LevelTickEvent {

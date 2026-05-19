@@ -25,9 +25,9 @@ import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entit
 
 declare module "@package/net/minecraft/world/entity/ambient" {
     export class $Bat extends $AmbientCreature {
+        static checkBatSpawnRules(arg0: $EntityType_<$Bat>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         setResting(arg0: boolean): void;
         isResting(): boolean;
-        static checkBatSpawnRules(arg0: $EntityType_<$Bat>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;

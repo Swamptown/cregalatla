@@ -55,11 +55,11 @@ declare module "@package/com/google/common/base" {
         apply(input: F): F;
     }
     export class $Stopwatch {
+        elapsed(): $Duration;
+        elapsed(desiredUnit: $TimeUnit_): number;
         reset(): $Stopwatch;
         start(): $Stopwatch;
         stop(): $Stopwatch;
-        elapsed(): $Duration;
-        elapsed(desiredUnit: $TimeUnit_): number;
         isRunning(): boolean;
         static createStarted(): $Stopwatch;
         static createStarted(ticker: $Ticker): $Stopwatch;
@@ -68,22 +68,10 @@ declare module "@package/com/google/common/base" {
         get running(): boolean;
     }
     export class $CharMatcher implements $Predicate<string> {
-        matches(c: string): boolean;
-        /**
-         * @deprecated
-         */
-        apply(character: string): boolean;
-        static ascii(): $CharMatcher;
-        static is(match: string): $CharMatcher;
-        static noneOf(sequence: $CharSequence): $CharMatcher;
-        /**
-         * @deprecated
-         */
-        static digit(): $CharMatcher;
-        static inRange(startInclusive: string, endInclusive: string): $CharMatcher;
-        or(other: $CharMatcher): $CharMatcher;
-        negate(): $CharMatcher;
+        static anyOf(sequence: $CharSequence): $CharMatcher;
+        static whitespace(): $CharMatcher;
         and(other: $CharMatcher): $CharMatcher;
+        static inRange(startInclusive: string, endInclusive: string): $CharMatcher;
         /**
          * @deprecated
          */
@@ -105,8 +93,19 @@ declare module "@package/com/google/common/base" {
          */
         static javaLetterOrDigit(): $CharMatcher;
         static any(): $CharMatcher;
-        static whitespace(): $CharMatcher;
-        static anyOf(sequence: $CharSequence): $CharMatcher;
+        matches(c: string): boolean;
+        /**
+         * @deprecated
+         */
+        apply(character: string): boolean;
+        static ascii(): $CharMatcher;
+        static noneOf(sequence: $CharSequence): $CharMatcher;
+        static is(match: string): $CharMatcher;
+        /**
+         * @deprecated
+         */
+        static digit(): $CharMatcher;
+        or(other: $CharMatcher): $CharMatcher;
         static none(): $CharMatcher;
         retainFrom(sequence: $CharSequence): string;
         removeFrom(sequence: $CharSequence): string;
@@ -138,7 +137,8 @@ declare module "@package/com/google/common/base" {
         collapseFrom(sequence: $CharSequence, replacement: string): string;
         trimAndCollapseFrom(sequence: $CharSequence, replacement: string): string;
         test(input: string): boolean;
-        or(arg0: $Predicate_<string>): $Predicate$1<string>;
         and(arg0: $Predicate_<string>): $Predicate$1<string>;
+        or(arg0: $Predicate_<string>): $Predicate$1<string>;
+        negate(): $Predicate$1<string>;
     }
 }

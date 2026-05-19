@@ -52,7 +52,6 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
         get entityLiving(): $LivingEntity;
     }
     export class $EntityTeleportEvent extends $EntityEvent implements $ICancellableEvent {
-        getTarget(): $Vec3;
         setTargetX(arg0: number): void;
         setTargetY(arg0: number): void;
         setTargetZ(arg0: number): void;
@@ -63,20 +62,21 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
         getTargetX(): number;
         getTargetY(): number;
         getTargetZ(): number;
+        getTarget(): $Vec3;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Entity, arg1: number, arg2: number, arg3: number);
-        get target(): $Vec3;
         get prevX(): number;
         get prevY(): number;
         get prevZ(): number;
         get prev(): $Vec3;
+        get target(): $Vec3;
     }
     export class $EntityTeleportEvent$EnderPearl extends $EntityTeleportEvent implements $ICancellableEvent {
         getPearlEntity(): $ThrownEnderpearl;
         setAttackDamage(arg0: number): void;
-        getAttackDamage(): number;
         getPlayer(): $ServerPlayer;
+        getAttackDamage(): number;
         getHitResult(): $HitResult;
         constructor(arg0: $ServerPlayer, arg1: number, arg2: number, arg3: number, arg4: $ThrownEnderpearl, arg5: number, arg6: $HitResult);
         get pearlEntity(): $ThrownEnderpearl;
@@ -84,20 +84,20 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
         get hitResult(): $HitResult;
     }
     export class $RegisterSpawnPlacementsEvent$MergedSpawnPredicate<T extends $Entity> {
-        build(): $SpawnPlacements$SpawnPredicate<T>;
         getHeightmapType(): $Heightmap$Types;
         getSpawnType(): $SpawnPlacementType;
+        build(): $SpawnPlacements$SpawnPredicate<T>;
         constructor(arg0: $SpawnPlacements$SpawnPredicate_<T>, arg1: $SpawnPlacementType_, arg2: $Heightmap$Types_);
         get heightmapType(): $Heightmap$Types;
         get spawnType(): $SpawnPlacementType;
     }
     export class $EntityJoinLevelEvent extends $EntityEvent implements $ICancellableEvent {
-        getLevel(): $Level;
         loadedFromDisk(): boolean;
+        getLevel(): $Level;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
-        constructor(arg0: $Entity, arg1: $Level_);
         constructor(arg0: $Entity, arg1: $Level_, arg2: boolean);
+        constructor(arg0: $Entity, arg1: $Level_);
         get level(): $Level;
     }
     export class $EntityTravelToDimensionEvent extends $EntityEvent implements $ICancellableEvent {
@@ -109,9 +109,9 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
     }
     export class $EntityInvulnerabilityCheckEvent extends $EntityEvent {
         getOriginalInvulnerability(): boolean;
+        getSource(): $DamageSource;
         isInvulnerable(): boolean;
         setInvulnerable(arg0: boolean): void;
-        getSource(): $DamageSource;
         constructor(arg0: $Entity, arg1: $DamageSource_, arg2: boolean);
         get originalInvulnerability(): boolean;
         get source(): $DamageSource;
@@ -126,39 +126,39 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
         get projectile(): $Projectile;
     }
     export class $EntityAttributeModificationEvent extends $Event implements $IModBusEvent {
+        has(arg0: $EntityType_<$LivingEntity>, arg1: $Holder_<$Attribute>): boolean;
         add(arg0: $EntityType_<$LivingEntity>, arg1: $Holder_<$Attribute>): void;
         add(arg0: $EntityType_<$LivingEntity>, arg1: $Holder_<$Attribute>, arg2: number): void;
-        has(arg0: $EntityType_<$LivingEntity>, arg1: $Holder_<$Attribute>): boolean;
         getTypes(): $List<$EntityType<$LivingEntity>>;
         constructor(arg0: $Map_<$EntityType_<$LivingEntity>, $AttributeSupplier$Builder>);
         get types(): $List<$EntityType<$LivingEntity>>;
     }
     export class $EntityEvent$EnteringSection extends $EntityEvent {
-        getOldPos(): $SectionPos;
         getPackedOldPos(): number;
         getPackedNewPos(): number;
-        didChunkChange(): boolean;
+        getOldPos(): $SectionPos;
         getNewPos(): $SectionPos;
+        didChunkChange(): boolean;
         constructor(arg0: $Entity, arg1: number, arg2: number);
-        get oldPos(): $SectionPos;
         get packedOldPos(): number;
         get packedNewPos(): number;
+        get oldPos(): $SectionPos;
         get newPos(): $SectionPos;
     }
     export class $EntityMountEvent extends $EntityEvent implements $ICancellableEvent {
-        getLevel(): $Level;
-        getEntityMounting(): $Entity;
-        isDismounting(): boolean;
         isMounting(): boolean;
         getEntityBeingMounted(): $Entity;
+        isDismounting(): boolean;
+        getEntityMounting(): $Entity;
+        getLevel(): $Level;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Entity, arg1: $Entity, arg2: $Level_, arg3: boolean);
-        get level(): $Level;
-        get entityMounting(): $Entity;
-        get dismounting(): boolean;
         get mounting(): boolean;
         get entityBeingMounted(): $Entity;
+        get dismounting(): boolean;
+        get entityMounting(): $Entity;
+        get level(): $Level;
     }
     export class $EntityLeaveLevelEvent extends $EntityEvent {
         getLevel(): $Level;

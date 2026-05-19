@@ -23,9 +23,9 @@ declare module "@package/net/minecraft/world/item/enchantment/providers" {
      */
     export type $EnchantmentProvider_ = RegistryTypes.EnchantmentProvider;
     export class $SingleEnchantment extends $Record implements $EnchantmentProvider {
-        level(): $IntProvider;
-        enchantment(): $Holder<$Enchantment>;
         enchant(arg0: $ItemStack_, arg1: $ItemEnchantments$Mutable, arg2: $RandomSource, arg3: $DifficultyInstance): void;
+        enchantment(): $Holder<$Enchantment>;
+        level(): $IntProvider;
         codec(): $MapCodec<$SingleEnchantment>;
         static CODEC: $MapCodec<$SingleEnchantment>;
         constructor(arg0: $Holder_<$Enchantment>, arg1: $IntProvider_);
@@ -33,7 +33,7 @@ declare module "@package/net/minecraft/world/item/enchantment/providers" {
     /**
      * Values that may be interpreted as {@link $SingleEnchantment}.
      */
-    export type $SingleEnchantment_ = { enchantment?: $Holder_<$Enchantment>, level?: $IntProvider_,  } | [enchantment?: $Holder_<$Enchantment>, level?: $IntProvider_, ];
+    export type $SingleEnchantment_ = { level?: $IntProvider_, enchantment?: $Holder_<$Enchantment>,  } | [level?: $IntProvider_, enchantment?: $Holder_<$Enchantment>, ];
     export class $EnchantmentProviderTypes {
         static bootstrap(arg0: $Registry<$MapCodec_<$EnchantmentProvider_>>): $MapCodec<$EnchantmentProvider>;
     }
@@ -105,7 +105,7 @@ declare module "@package/net/minecraft/world/item/enchantment/providers" {
     /**
      * Values that may be interpreted as {@link $EnchantmentsByCostWithDifficulty}.
      */
-    export type $EnchantmentsByCostWithDifficulty_ = { maxCostSpan?: number, minCost?: number, enchantments?: $HolderSet_<$Enchantment>,  } | [maxCostSpan?: number, minCost?: number, enchantments?: $HolderSet_<$Enchantment>, ];
+    export type $EnchantmentsByCostWithDifficulty_ = { enchantments?: $HolderSet_<$Enchantment>, minCost?: number, maxCostSpan?: number,  } | [enchantments?: $HolderSet_<$Enchantment>, minCost?: number, maxCostSpan?: number, ];
     export interface $EnchantmentProvider extends RegistryMarked<RegistryTypes.EnchantmentProviderTag, RegistryTypes.EnchantmentProvider> {}
     export class $VanillaEnchantmentProviders {
         static create(arg0: string): $ResourceKey<$EnchantmentProvider>;

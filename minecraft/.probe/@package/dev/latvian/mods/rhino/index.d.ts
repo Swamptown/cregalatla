@@ -33,9 +33,9 @@ declare module "@package/dev/latvian/mods/rhino" {
      */
     export type $Script_ = ((arg1: $Scriptable) => $Object);
     export class $CachedClassStorage {
-        get(arg0: $Class<never>): $CachedClassInfo;
-        include(arg0: $Class<never>, arg1: $Member): boolean;
         getDebugClassName(arg0: $Class<never>): string;
+        include(arg0: $Class<never>, arg1: $Member): boolean;
+        get(arg0: $Class<never>): $CachedClassInfo;
         isVisible(arg0: number): boolean;
         static GLOBAL_PUBLIC: $CachedClassStorage;
         includeProtected: boolean;
@@ -44,13 +44,13 @@ declare module "@package/dev/latvian/mods/rhino" {
         constructor(arg0: boolean);
     }
     export class $CachedMethodInfo$Accessible {
+        getInfo(): $CachedMethodInfo;
         getName(): string;
         getSignature(): $MethodSignature;
-        getInfo(): $CachedMethodInfo;
         constructor();
+        get info(): $CachedMethodInfo;
         get name(): string;
         get signature(): $MethodSignature;
-        get info(): $CachedMethodInfo;
     }
     export class $EvaluatorException extends $RhinoException {
         constructor(arg1: string);
@@ -74,12 +74,12 @@ declare module "@package/dev/latvian/mods/rhino" {
      */
     export type $MemberType_ = "undefined" | "object" | "function" | "symbol" | "string" | "number" | "boolean";
     export class $CachedParameters extends $Record {
-        count(): number;
-        types(): $List<$Class<never>>;
-        typesMatch(arg0: $Class<never>[]): boolean;
-        firstArgContext(): boolean;
         varArgType(): $TypeInfo;
         typeInfos(): $List<$TypeInfo>;
+        firstArgContext(): boolean;
+        typesMatch(arg0: $Class<never>[]): boolean;
+        count(): number;
+        types(): $List<$Class<never>>;
         isVarArg(): boolean;
         static EMPTY: $CachedParameters;
         static EMPTY_FIRST_CX: $CachedParameters;
@@ -89,12 +89,12 @@ declare module "@package/dev/latvian/mods/rhino" {
     /**
      * Values that may be interpreted as {@link $CachedParameters}.
      */
-    export type $CachedParameters_ = { types?: $List_<$Class<never>>, varArgType?: $TypeInfo_, typeInfos?: $List_<$TypeInfo_>, firstArgContext?: boolean, count?: number,  } | [types?: $List_<$Class<never>>, varArgType?: $TypeInfo_, typeInfos?: $List_<$TypeInfo_>, firstArgContext?: boolean, count?: number, ];
+    export type $CachedParameters_ = { firstArgContext?: boolean, typeInfos?: $List_<$TypeInfo_>, varArgType?: $TypeInfo_, types?: $List_<$Class<never>>, count?: number,  } | [firstArgContext?: boolean, typeInfos?: $List_<$TypeInfo_>, varArgType?: $TypeInfo_, types?: $List_<$Class<never>>, count?: number, ];
     export class $ErrorReporter {
     }
     export interface $ErrorReporter {
-        error(arg1: string, arg2: string, arg3: number, arg4: string, arg5: number): void;
         warning(arg0: string, arg1: string, arg2: number, arg3: string, arg4: number): void;
+        error(arg1: string, arg2: string, arg3: number, arg4: string, arg5: number): void;
         runtimeError(arg1: string, arg2: string, arg3: number, arg4: string, arg5: number): $EvaluatorException;
     }
     export class $Wrapper {
@@ -115,15 +115,15 @@ declare module "@package/dev/latvian/mods/rhino" {
         isConst(arg0: string): boolean;
     }
     export class $RhinoException extends $RuntimeException {
-        lineNumber(): number;
         initSourceName(arg0: string): void;
         initLineNumber(arg0: number): void;
         initLineSource(arg0: string): void;
         initColumnNumber(arg0: number): void;
         getScriptStackTrace(): string;
         getScriptStackTrace(arg0: number, arg1: string): string;
-        details(): string;
         columnNumber(): number;
+        details(): string;
+        lineNumber(): number;
         sourceName(): string;
         lineSource(): string;
         getScriptStack(arg0: number, arg1: string): $ScriptStackElement[];
@@ -138,7 +138,7 @@ declare module "@package/dev/latvian/mods/rhino" {
     /**
      * Values that may be interpreted as {@link $CustomMember}.
      */
-    export type $CustomMember_ = { name?: string, type?: $TypeInfo_, value?: $Object,  } | [name?: string, type?: $TypeInfo_, value?: $Object, ];
+    export type $CustomMember_ = { value?: $Object, type?: $TypeInfo_, name?: string,  } | [value?: $Object, type?: $TypeInfo_, name?: string, ];
     export class $MethodSignature extends $Record {
         name(): string;
         args(): $Class<never>[];
@@ -152,10 +152,10 @@ declare module "@package/dev/latvian/mods/rhino" {
     export class $SymbolScriptable {
     }
     export interface $SymbolScriptable {
+        has(arg1: $Symbol, arg2: $Scriptable): boolean;
         get(arg1: $Symbol, arg2: $Scriptable): $Object;
         put(arg1: $Symbol, arg2: $Scriptable, arg3: $Object): void;
         delete(arg1: $Symbol): void;
-        has(arg1: $Symbol, arg2: $Scriptable): boolean;
     }
     export class $CachedConstructorInfo extends $CachedExecutableInfo {
         getCached(): $Constructor<never>;
@@ -175,17 +175,17 @@ declare module "@package/dev/latvian/mods/rhino" {
         enumerationIteratorNext(arg1: $Consumer_<$Object>): boolean;
     }
     export class $CachedFieldInfo$Accessible {
-        getName(): string;
         getInfo(): $CachedFieldInfo;
+        getName(): string;
         constructor();
-        get name(): string;
         get info(): $CachedFieldInfo;
+        get name(): string;
     }
     export class $IdScriptableObject extends $ScriptableObject implements $IdFunctionCall {
         exportAsJSClass(arg0: number, arg1: $Scriptable, arg2: boolean, arg3: $Context): $IdFunctionObject;
         initPrototypeMethod(arg0: $Object, arg1: number, arg2: string, arg3: string, arg4: number, arg5: $Context): $IdFunctionObject;
-        initPrototypeMethod(arg0: $Object, arg1: number, arg2: string, arg3: number, arg4: $Context): $IdFunctionObject;
         initPrototypeMethod(arg0: $Object, arg1: number, arg2: $Symbol, arg3: string, arg4: number, arg5: $Context): $IdFunctionObject;
+        initPrototypeMethod(arg0: $Object, arg1: number, arg2: string, arg3: number, arg4: $Context): $IdFunctionObject;
         execIdCall(arg0: $IdFunctionObject, arg1: $Context, arg2: $Scriptable, arg3: $Scriptable, arg4: $Object[]): $Object;
         activatePrototypeMap(arg0: number): void;
         hasPrototypeMap(): boolean;
@@ -202,38 +202,38 @@ declare module "@package/dev/latvian/mods/rhino" {
         constructor(arg0: $Scriptable, arg1: $Scriptable);
     }
     export class $NativeJavaObject implements $Scriptable, $SymbolScriptable, $Wrapper {
-        get(arg1: number, arg2: $Scriptable): $Object;
-        get(arg1: string, arg2: $Scriptable): $Object;
-        get(arg1: $Symbol, arg2: $Scriptable): $Object;
-        put(arg1: $Symbol, arg2: $Scriptable, arg3: $Object): void;
-        put(arg1: number, arg2: $Scriptable, arg3: $Object): void;
-        put(arg1: string, arg2: $Scriptable, arg3: $Object): void;
-        getDefaultValue(arg1: $DefaultValueTypeHint_): $Object;
-        getClassName(): string;
-        unwrap(): $Object;
-        delete(arg1: string): void;
-        delete(arg1: $Symbol): void;
-        delete(arg1: number): void;
-        has(arg1: $Symbol, arg2: $Scriptable): boolean;
-        has(arg1: number, arg2: $Scriptable): boolean;
-        has(arg1: string, arg2: $Scriptable): boolean;
         addCustomMember(arg0: $CustomMember_): void;
         getTypeMapping(): $Map<$VariableTypeInfo, $TypeInfo>;
         addCustomProperty(arg0: string, arg1: $TypeInfo_, arg2: $CustomProperty_): void;
+        has(arg1: number, arg2: $Scriptable): boolean;
+        has(arg1: string, arg2: $Scriptable): boolean;
+        has(arg1: $Symbol, arg2: $Scriptable): boolean;
+        get(arg1: $Symbol, arg2: $Scriptable): $Object;
+        get(arg1: number, arg2: $Scriptable): $Object;
+        get(arg1: string, arg2: $Scriptable): $Object;
+        put(arg1: number, arg2: $Scriptable, arg3: $Object): void;
+        put(arg1: $Symbol, arg2: $Scriptable, arg3: $Object): void;
+        put(arg1: string, arg2: $Scriptable, arg3: $Object): void;
+        delete(arg1: number): void;
+        delete(arg1: $Symbol): void;
+        delete(arg1: string): void;
+        getDefaultValue(arg1: $DefaultValueTypeHint_): $Object;
+        unwrap(): $Object;
+        getClassName(): string;
         hasInstance(arg1: $Scriptable): boolean;
         getPrototype(): $Scriptable;
         setPrototype(arg0: $Scriptable): void;
+        getIds(): $Object[];
         setParentScope(arg0: $Scriptable): void;
         getParentScope(): $Scriptable;
-        getIds(): $Object[];
         getAllIds(): $Object[];
         enumerationIteratorHasNext(arg1: $Consumer_<$Object>): boolean;
         enumerationIteratorNext(arg1: $Consumer_<$Object>): boolean;
         getTypeOf(): $MemberType;
         constructor(arg0: $Scriptable, arg1: $Object, arg2: $TypeInfo_, arg3: $Context);
         constructor(arg0: $Scriptable, arg1: $Object, arg2: $TypeInfo_, arg3: boolean, arg4: $Context);
-        get className(): string;
         get typeMapping(): $Map<$VariableTypeInfo, $TypeInfo>;
+        get className(): string;
         get ids(): $Object[];
         get allIds(): $Object[];
         get typeOf(): $MemberType;
@@ -268,8 +268,8 @@ declare module "@package/dev/latvian/mods/rhino" {
         construct(arg1: $Scriptable, arg2: $Object[]): $Scriptable;
     }
     export class $ScriptStackElement {
-        renderJavaStyle(arg0: $StringBuilder): void;
         renderMozillaStyle(arg0: $StringBuilder): void;
+        renderJavaStyle(arg0: $StringBuilder): void;
         fileName: string;
         functionName: string;
         lineNumber: number;
@@ -297,31 +297,9 @@ declare module "@package/dev/latvian/mods/rhino" {
         get cached(): $Field;
     }
     export class $ScriptableObject implements $Scriptable, $SymbolScriptable, $ConstProperties {
-        size(): number;
-        get(arg1: string, arg2: $Scriptable): $Object;
-        get(arg1: number, arg2: $Scriptable): $Object;
-        get(arg1: $Object): $Object;
-        get(arg1: $Symbol, arg2: $Scriptable): $Object;
-        put(arg1: number, arg2: $Scriptable, arg3: $Object): void;
-        put(arg1: string, arg2: $Scriptable, arg3: $Object): void;
-        put(arg1: $Symbol, arg2: $Scriptable, arg3: $Object): void;
-        static getProperty(arg0: $Scriptable, arg1: number, arg2: $Context): $Object;
-        static getProperty(arg0: $Scriptable, arg1: $Symbol, arg2: $Context): $Object;
-        static getProperty(arg0: $Scriptable, arg1: string, arg2: $Context): $Object;
-        isEmpty(): boolean;
-        isSealed(): boolean;
-        static getDefaultValue(arg0: $Scriptable, arg1: $DefaultValueTypeHint_, arg2: $Context): $Object;
-        getDefaultValue(arg1: $DefaultValueTypeHint_): $Object;
-        getClassName(): string;
-        delete(arg1: string): void;
-        delete(arg1: $Symbol): void;
-        delete(arg1: number): void;
-        getAttributes(arg1: $Symbol): number;
-        getAttributes(arg1: number): number;
-        getAttributes(arg1: string): number;
-        has(arg1: $Symbol, arg2: $Scriptable): boolean;
-        has(arg1: number, arg2: $Scriptable): boolean;
-        has(arg1: string, arg2: $Scriptable): boolean;
+        setAttributes(arg1: number, arg2: number): void;
+        setAttributes(arg1: $Symbol, arg2: number): void;
+        setAttributes(arg1: string, arg2: number): void;
         defineConst(arg1: string, arg2: $Scriptable): void;
         putConst(arg1: string, arg2: $Scriptable, arg3: $Object): void;
         avoidObjectDetection(): boolean;
@@ -340,40 +318,62 @@ declare module "@package/dev/latvian/mods/rhino" {
         defineOwnProperties(arg1: $ScriptableObject): void;
         defineFunctionProperties(arg1: string[], arg2: $Class<never>, arg3: number): void;
         sealObject(): void;
+        has(arg1: $Symbol, arg2: $Scriptable): boolean;
+        has(arg1: number, arg2: $Scriptable): boolean;
+        has(arg1: string, arg2: $Scriptable): boolean;
+        size(): number;
+        get(arg1: $Object): $Object;
+        get(arg1: number, arg2: $Scriptable): $Object;
+        get(arg1: $Symbol, arg2: $Scriptable): $Object;
+        get(arg1: string, arg2: $Scriptable): $Object;
+        put(arg1: string, arg2: $Scriptable, arg3: $Object): void;
+        put(arg1: number, arg2: $Scriptable, arg3: $Object): void;
+        put(arg1: $Symbol, arg2: $Scriptable, arg3: $Object): void;
+        static getProperty(arg0: $Scriptable, arg1: number, arg2: $Context): $Object;
+        static getProperty(arg0: $Scriptable, arg1: $Symbol, arg2: $Context): $Object;
+        static getProperty(arg0: $Scriptable, arg1: string, arg2: $Context): $Object;
+        isEmpty(): boolean;
+        isSealed(): boolean;
+        delete(arg1: $Symbol): void;
+        delete(arg1: number): void;
+        delete(arg1: string): void;
+        getDefaultValue(arg1: $DefaultValueTypeHint_): $Object;
+        static getDefaultValue(arg0: $Scriptable, arg1: $DefaultValueTypeHint_, arg2: $Context): $Object;
+        getClassName(): string;
+        getAttributes(arg1: number): number;
+        getAttributes(arg1: $Symbol): number;
+        getAttributes(arg1: string): number;
         static hasProperty(arg0: $Scriptable, arg1: string, arg2: $Context): boolean;
-        static hasProperty(arg0: $Scriptable, arg1: number, arg2: $Context): boolean;
         static hasProperty(arg0: $Scriptable, arg1: $Symbol, arg2: $Context): boolean;
+        static hasProperty(arg0: $Scriptable, arg1: number, arg2: $Context): boolean;
         defineOwnProperty(arg1: $Object, arg2: $ScriptableObject): void;
         preventExtensions(): void;
         isExtensible(): boolean;
-        static deleteProperty(arg0: $Scriptable, arg1: number, arg2: $Context): boolean;
         static deleteProperty(arg0: $Scriptable, arg1: string, arg2: $Context): boolean;
+        static deleteProperty(arg0: $Scriptable, arg1: number, arg2: $Context): boolean;
         hasInstance(arg1: $Scriptable): boolean;
         static getObjectPrototype(arg0: $Scriptable, arg1: $Context): $Scriptable;
         getPrototype(): $Scriptable;
         static getFunctionPrototype(arg0: $Scriptable, arg1: $Context): $Scriptable;
         static getArrayPrototype(arg0: $Scriptable, arg1: $Context): $Scriptable;
         setPrototype(arg0: $Scriptable): void;
+        defineProperty(arg1: $Symbol, arg2: $Object, arg3: number): void;
         defineProperty(arg1: string, arg2: $Object, arg3: number): void;
         defineProperty(arg1: string, arg2: $Object, arg3: $WrappedExecutable_, arg4: $WrappedExecutable_, arg5: number): void;
         static defineProperty(arg0: $Scriptable, arg1: string, arg2: $Object, arg3: number, arg4: $Context): void;
         defineProperty(arg1: string, arg2: $Class<never>, arg3: number): void;
-        defineProperty(arg1: $Symbol, arg2: $Object, arg3: number): void;
         isConst(arg0: string): boolean;
+        getIds(): $Object[];
         setParentScope(arg0: $Scriptable): void;
         getAllIds(): $Object[];
         getTypeOf(): $MemberType;
         getParentScope(): $Scriptable;
-        getIds(): $Object[];
+        static putProperty(arg0: $Scriptable, arg1: $Symbol, arg2: $Object, arg3: $Context): void;
         static putProperty(arg0: $Scriptable, arg1: number, arg2: $Object, arg3: $Context): void;
         static putProperty(arg0: $Scriptable, arg1: string, arg2: $Object, arg3: $Context): void;
-        static putProperty(arg0: $Scriptable, arg1: $Symbol, arg2: $Object, arg3: $Context): void;
         static getTopLevelScope(arg0: $Scriptable): $Scriptable;
         getAssociatedValue(arg0: $Object): $Object;
         associateValue(arg0: $Object, arg1: $Object): $Object;
-        setAttributes(arg1: $Symbol, arg2: number): void;
-        setAttributes(arg1: string, arg2: number): void;
-        setAttributes(arg1: number, arg2: number): void;
         enumerationIteratorHasNext(arg1: $Consumer_<$Object>): boolean;
         enumerationIteratorNext(arg1: $Consumer_<$Object>): boolean;
         static DONTENUM: number;
@@ -384,14 +384,14 @@ declare module "@package/dev/latvian/mods/rhino" {
         static PERMANENT: number;
         constructor();
         constructor(arg0: $Scriptable, arg1: $Scriptable);
+        get externalArrayLength(): $Object;
         get empty(): boolean;
         get sealed(): boolean;
         get className(): string;
-        get externalArrayLength(): $Object;
         get extensible(): boolean;
+        get ids(): $Object[];
         get allIds(): $Object[];
         get typeOf(): $MemberType;
-        get ids(): $Object[];
     }
     export class $ExternalArrayData {
     }
@@ -414,30 +414,30 @@ declare module "@package/dev/latvian/mods/rhino" {
         static NOT_FOUND: $Object;
     }
     export interface $Scriptable extends $IdEnumerationIterator {
+        has(arg1: string, arg2: $Scriptable): boolean;
+        has(arg1: number, arg2: $Scriptable): boolean;
         get(arg1: number, arg2: $Scriptable): $Object;
         get(arg1: string, arg2: $Scriptable): $Object;
-        put(arg1: string, arg2: $Scriptable, arg3: $Object): void;
         put(arg1: number, arg2: $Scriptable, arg3: $Object): void;
+        put(arg1: string, arg2: $Scriptable, arg3: $Object): void;
+        delete(arg1: number): void;
+        delete(arg1: string): void;
         getDefaultValue(arg1: $DefaultValueTypeHint_): $Object;
         getClassName(): string;
-        delete(arg1: string): void;
-        delete(arg1: number): void;
-        has(arg1: number, arg2: $Scriptable): boolean;
-        has(arg1: string, arg2: $Scriptable): boolean;
         hasInstance(arg1: $Scriptable): boolean;
         getPrototype(): $Scriptable;
         setPrototype(arg0: $Scriptable): void;
+        getIds(): $Object[];
         setParentScope(arg0: $Scriptable): void;
         getAllIds(): $Object[];
         enumerationIteratorHasNext(arg1: $Consumer_<$Object>): boolean;
         enumerationIteratorNext(arg1: $Consumer_<$Object>): boolean;
         getTypeOf(): $MemberType;
         getParentScope(): $Scriptable;
-        getIds(): $Object[];
         get className(): string;
+        get ids(): $Object[];
         get allIds(): $Object[];
         get typeOf(): $MemberType;
-        get ids(): $Object[];
     }
     export class $Symbol {
     }
@@ -468,13 +468,13 @@ declare module "@package/dev/latvian/mods/rhino" {
      */
     export type $WrappedExecutable_ = ((arg1: $Scriptable, arg2: $Object, arg3: $Object[]) => $Object);
     export class $BaseFunction extends $IdScriptableObject implements $Function {
+        setImmunePrototypeProperty(arg0: $Object): void;
+        createObject(arg1: $Scriptable): $Scriptable;
         getLength(): number;
         call(arg1: $Scriptable, arg2: $Scriptable, arg3: $Object[]): $Object;
-        setImmunePrototypeProperty(arg0: $Object): void;
         construct(arg1: $Scriptable, arg2: $Object[]): $Scriptable;
         getArity(): number;
         getFunctionName(): string;
-        createObject(arg1: $Scriptable): $Scriptable;
         static DONTENUM: number;
         static CONST: number;
         static UNINITIALIZED_CONST: number;
@@ -482,19 +482,19 @@ declare module "@package/dev/latvian/mods/rhino" {
         static READONLY: number;
         static PERMANENT: number;
         constructor();
-        constructor(arg0: boolean);
         constructor(arg0: $Scriptable, arg1: $Scriptable);
-        get length(): number;
+        constructor(arg0: boolean);
         set immunePrototypeProperty(value: $Object);
+        get length(): number;
         get arity(): number;
         get functionName(): string;
     }
     export class $IdFunctionObject extends $BaseFunction {
-        initFunction(arg0: string, arg1: $Scriptable): void;
-        markAsConstructor(arg0: $Scriptable): void;
         exportAsScopeProperty(): void;
         addAsProperty(arg0: $Scriptable, arg1: $Context): void;
         hasTag(arg0: $Object): boolean;
+        initFunction(arg0: string, arg1: $Scriptable): void;
+        markAsConstructor(arg0: $Scriptable): void;
         getTag(): $Object;
         unknown(): $RuntimeException;
         methodId(): number;
@@ -504,36 +504,36 @@ declare module "@package/dev/latvian/mods/rhino" {
         static EMPTY: number;
         static READONLY: number;
         static PERMANENT: number;
-        constructor(arg0: $IdFunctionCall_, arg1: $Object, arg2: number, arg3: string, arg4: number, arg5: $Scriptable);
         constructor(arg0: $IdFunctionCall_, arg1: $Object, arg2: number, arg3: number);
+        constructor(arg0: $IdFunctionCall_, arg1: $Object, arg2: number, arg3: string, arg4: number, arg5: $Scriptable);
         get tag(): $Object;
     }
     export class $CachedClassInfo {
+        getTypeInfo(): $TypeInfo;
+        getDebugInfo(): $List<string>;
+        getAccessibleFields(arg0: boolean): $List<$CachedFieldInfo$Accessible>;
+        getAccessibleMethods(arg0: boolean): $List<$CachedMethodInfo$Accessible>;
+        appendDebugType(arg0: $StringBuilder): void;
+        getRemapPrefixes(): $Set<string>;
         getSuperclass(): $CachedClassInfo;
         getInterfaces(): $List<$CachedClassInfo>;
         getMethod(arg0: string, arg1: $Class<never>[]): $CachedMethodInfo;
         getConstructors(): $List<$CachedConstructorInfo>;
         getDeclaredFields(): $List<$CachedFieldInfo>;
         getDeclaredMethods(): $List<$CachedMethodInfo>;
-        appendDebugType(arg0: $StringBuilder): void;
-        getRemapPrefixes(): $Set<string>;
-        getAccessibleMethods(arg0: boolean): $List<$CachedMethodInfo$Accessible>;
-        getAccessibleFields(arg0: boolean): $List<$CachedFieldInfo$Accessible>;
-        getTypeInfo(): $TypeInfo;
-        getDebugInfo(): $List<string>;
         storage: $CachedClassStorage;
         type: $Class<never>;
         modifiers: number;
         isInterface: boolean;
         constructor(arg0: $CachedClassStorage, arg1: $Class<never>);
+        get typeInfo(): $TypeInfo;
+        get debugInfo(): $List<string>;
+        get remapPrefixes(): $Set<string>;
         get superclass(): $CachedClassInfo;
         get interfaces(): $List<$CachedClassInfo>;
         get constructors(): $List<$CachedConstructorInfo>;
         get declaredFields(): $List<$CachedFieldInfo>;
         get declaredMethods(): $List<$CachedMethodInfo>;
-        get remapPrefixes(): $Set<string>;
-        get typeInfo(): $TypeInfo;
-        get debugInfo(): $List<string>;
     }
     export class $Callable {
     }
@@ -545,12 +545,12 @@ declare module "@package/dev/latvian/mods/rhino" {
      */
     export type $Callable_ = ((arg1: $Scriptable, arg2: $Scriptable, arg3: $Object[]) => $Object);
     export class $CachedExecutableInfo extends $CachedMemberInfo {
+        transformArgs(arg1: $Object, arg2: $CachedParameters_, arg3: $Object[]): $Object[];
+        appendDebugParams(arg0: $StringBuilder): void;
         invoke(arg1: $Scriptable, arg2: $Object, arg3: $Object[]): $Object;
         getReturnType(): $TypeInfo;
         getParameters(): $CachedParameters;
         getSignature(): $MethodSignature;
-        transformArgs(arg1: $Object, arg2: $CachedParameters_, arg3: $Object[]): $Object[];
-        appendDebugParams(arg0: $StringBuilder): void;
         getCached(): $Executable;
         originalName: string;
         parent: $CachedClassInfo;
@@ -565,44 +565,44 @@ declare module "@package/dev/latvian/mods/rhino" {
         get cached(): $Executable;
     }
     export class $Context {
-        toString(arg0: $Object): string;
-        newArray(arg0: $Scriptable, arg1: number): $Scriptable;
-        newArray(arg0: $Scriptable, arg1: $Object[]): $Scriptable;
-        wrap(arg0: $Scriptable, arg1: $Object): $Object;
-        wrap(arg0: $Scriptable, arg1: $Object, arg2: $TypeInfo_): $Object;
-        canConvert(arg0: $Object, arg1: $TypeInfo_): boolean;
+        static reportError(arg1: string, arg2: number, arg3: string, arg4: number, arg5: string): void;
+        static reportError(arg1: string): void;
+        createClassLoader(arg0: $ClassLoader): $GeneratedClassLoader;
         toBoolean(arg0: $Object): boolean;
         getImplementationVersion(): string;
-        static reportError(arg1: string): void;
-        static reportError(arg1: string, arg2: number, arg3: string, arg4: number, arg5: string): void;
-        toObject(arg0: $Object, arg1: $Scriptable): $Scriptable;
-        setOf(arg0: $Object, arg1: $TypeInfo_): $Object;
+        toString(arg0: $Object): string;
+        newArray(arg0: $Scriptable, arg1: $Object[]): $Scriptable;
+        newArray(arg0: $Scriptable, arg1: number): $Scriptable;
+        wrap(arg0: $Scriptable, arg1: $Object, arg2: $TypeInfo_): $Object;
+        wrap(arg0: $Scriptable, arg1: $Object): $Object;
+        canConvert(arg0: $Object, arg1: $TypeInfo_): boolean;
         arrayOf(arg0: $Object, arg1: $TypeInfo_): $Object;
+        setOf(arg0: $Object, arg1: $TypeInfo_): $Object;
         listOf(arg0: $Object, arg1: $TypeInfo_): $Object;
-        createClassLoader(arg0: $ClassLoader): $GeneratedClassLoader;
         getRegExp(): $RegExp;
         toNumber(arg0: $Object): number;
+        toObject(arg0: $Object, arg1: $Scriptable): $Scriptable;
         newObject(arg0: $Scriptable, arg1: string): $Scriptable;
-        newObject(arg0: $Scriptable, arg1: string, arg2: $Object[]): $Scriptable;
         newObject(arg0: $Scriptable): $Scriptable;
+        newObject(arg0: $Scriptable, arg1: string, arg2: $Object[]): $Scriptable;
         isStrictMode(): boolean;
-        getErrorReporter(): $ErrorReporter;
         static getSourcePositionFromStack(arg1: number[]): string;
-        static reportWarning(arg1: string, arg2: string, arg3: number, arg4: string, arg5: number): void;
-        static reportWarning(arg0: string, arg1: $Context): void;
         static reportRuntimeError(arg1: string, arg2: string, arg3: number, arg4: string, arg5: number): $EvaluatorException;
         static reportRuntimeError(arg0: string, arg1: $Context): $EvaluatorException;
-        initStandardObjects(arg0: $ScriptableObject): $Scriptable;
-        initStandardObjects(arg0: $ScriptableObject, arg1: boolean): $ScriptableObject;
+        compileString(arg0: string, arg1: string, arg2: number, arg3: $Object): $Script;
+        getErrorReporter(): $ErrorReporter;
         initStandardObjects(): $ScriptableObject;
+        initStandardObjects(arg0: $ScriptableObject, arg1: boolean): $ScriptableObject;
+        initStandardObjects(arg0: $ScriptableObject): $Scriptable;
         initSafeStandardObjects(): $ScriptableObject;
         initSafeStandardObjects(arg0: $ScriptableObject): $Scriptable;
         initSafeStandardObjects(arg0: $ScriptableObject, arg1: boolean): $ScriptableObject;
-        compileString(arg0: string, arg1: string, arg2: number, arg3: $Object): $Script;
         compileReader(arg0: $Reader, arg1: string, arg2: number, arg3: $Object): $Script;
         setGenerateObserverCount(arg0: boolean): void;
-        javaToJS(arg0: $Object, arg1: $Scriptable): $Object;
+        static reportWarning(arg0: string, arg1: $Context): void;
+        static reportWarning(arg1: string, arg2: string, arg3: number, arg4: string, arg5: number): void;
         javaToJS(arg0: $Object, arg1: $Scriptable, arg2: $TypeInfo_): $Object;
+        javaToJS(arg0: $Object, arg1: $Scriptable): $Object;
         wrapAsJavaObject(arg0: $Scriptable, arg1: $Object, arg2: $TypeInfo_): $Scriptable;
         hasTopCallScope(): boolean;
         setTopCall(arg0: $Scriptable): void;
@@ -610,8 +610,8 @@ declare module "@package/dev/latvian/mods/rhino" {
         arrayValueProviderOf(arg0: $Object): $ArrayValueProvider;
         jsToJava(arg0: $Object, arg1: $TypeInfo_): $Object;
         isListLike(arg0: $Object): boolean;
-        optionalListOf(arg0: $Object): $List<$Object>;
         optionalListOf<K>(arg0: $Object, arg1: $TypeInfo_): $List<K>;
+        optionalListOf(arg0: $Object): $List<$Object>;
         reportConversionError(arg0: $Object, arg1: $TypeInfo_): $Object;
         isMapLike(arg0: $Object): boolean;
         mapOf(arg0: $Object, arg1: $TypeInfo_, arg2: $TypeInfo_): $Object;
@@ -681,10 +681,14 @@ declare module "@package/dev/latvian/mods/rhino" {
         get maximumInterpreterStackDepth(): number;
     }
     export class $NativeArray extends $IdScriptableObject implements $List<any>, $DataObject {
-        remove(arg0: $Object): boolean;
+        getIndexIds(): $List<number>;
+        createDataObject<T>(arg0: $Supplier_<T>, arg1: $Context): T;
+        createDataObjectList<T>(arg0: $Supplier_<T>, arg1: $Context): $List<T>;
+        isDataObjectList(): boolean;
         remove(arg0: number): $Object;
-        get(arg0: number): $Object;
+        remove(arg0: $Object): boolean;
         get(arg0: number, arg1: $Context): $Object;
+        get(arg0: number): $Object;
         getLength(): number;
         indexOf(arg0: $Object): number;
         clear(): void;
@@ -692,26 +696,22 @@ declare module "@package/dev/latvian/mods/rhino" {
         add(arg0: $Object): boolean;
         add(arg0: number, arg1: $Object): void;
         subList(arg0: number, arg1: number): $List<any>;
-        toArray(): $Object[];
         toArray(arg0: $Object[]): $Object[];
+        toArray(): $Object[];
         iterator(): $Iterator<any>;
         contains(arg0: $Object): boolean;
-        addAll(arg0: $Collection_<any>): boolean;
         addAll(arg0: number, arg1: $Collection_<any>): boolean;
+        addAll(arg0: $Collection_<any>): boolean;
         set(arg0: number, arg1: $Object): $Object;
         removeAll(arg0: $Collection_<any>): boolean;
         retainAll(arg0: $Collection_<any>): boolean;
         listIterator(arg0: number): $ListIterator<any>;
         listIterator(): $ListIterator<any>;
         containsAll(arg0: $Collection_<any>): boolean;
-        getIndexIds(): $List<number>;
-        createDataObject<T>(arg0: $Supplier_<T>, arg1: $Context): T;
-        createDataObjectList<T>(arg0: $Supplier_<T>, arg1: $Context): $List<T>;
-        isDataObjectList(): boolean;
         getIds(arg1: boolean, arg2: boolean): $Object[];
-        sort(arg0: $Comparator<$Object>): void;
         replaceAll(arg0: $UnaryOperator_<$Object>): void;
         spliterator(): $Spliterator<$Object>;
+        sort(arg0: $Comparator<$Object>): void;
         getFirst(): $Object;
         getLast(): $Object;
         addFirst(arg0: $Object): void;
@@ -720,8 +720,8 @@ declare module "@package/dev/latvian/mods/rhino" {
         removeLast(): $Object;
         toArray<T>(arg0: $IntFunction_<T[]>): T[];
         stream(): $Stream<$Object>;
-        removeIf(arg0: $Predicate_<$Object>): boolean;
         parallelStream(): $Stream<$Object>;
+        removeIf(arg0: $Predicate_<$Object>): boolean;
         forEach(arg0: $Consumer_<$Object>): void;
         reversed(): $SequencedCollection<$Object>;
         static DONTENUM: number;
@@ -730,23 +730,23 @@ declare module "@package/dev/latvian/mods/rhino" {
         static EMPTY: number;
         static READONLY: number;
         static PERMANENT: number;
-        constructor(arg1: $Object[]);
         constructor(arg1: number);
+        constructor(arg1: $Object[]);
         [Symbol.iterator](): Iterator<any>
-        get length(): number;
         get indexIds(): $List<number>;
         get dataObjectList(): boolean;
+        get length(): number;
         get first(): $Object;
         get last(): $Object;
     }
     export class $ContextFactory {
-        enter(): $Context;
+        registerDefaultRecordProperties(arg0: $Record): void;
         getRecordConstructor(arg0: $Class<never>): $MethodHandle;
         getDefaultRecordProperties(arg0: $Class<never>): $Object[];
-        getMethodHandlesLookup(): $MethodHandles$Lookup;
         setInstanceStaticFallback(arg0: boolean): void;
         getInstanceStaticFallback(): boolean;
-        registerDefaultRecordProperties(arg0: $Record): void;
+        getMethodHandlesLookup(): $MethodHandles$Lookup;
+        enter(): $Context;
         getTypeWrappers(): $TypeWrappers;
         getCachedClassStorage(): $CachedClassStorage;
         constructor();
@@ -757,7 +757,7 @@ declare module "@package/dev/latvian/mods/rhino" {
     export class $GeneratedClassLoader {
     }
     export interface $GeneratedClassLoader {
-        defineClass(arg0: string, arg1: number[]): $Class<never>;
         linkClass(arg0: $Class<never>): void;
+        defineClass(arg0: string, arg1: number[]): $Class<never>;
     }
 }

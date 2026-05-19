@@ -2,7 +2,7 @@ import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $JumpControl, $MoveControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $CompoundTag } from "@package/net/minecraft/nbt";
-import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $Pose, $PortalProcessor, $WalkAnimationState, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
+import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $Pose, $PortalProcessor, $AgeableMob, $WalkAnimationState, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $Stack } from "@package/java/util";
@@ -12,6 +12,7 @@ import { $Predicate } from "@package/java/util/function";
 import { $InteractionHand } from "@package/net/minecraft/world";
 import { $HolderLookup$Provider, $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
+import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $SoundEvent } from "@package/net/minecraft/sounds";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
 import { $PathNavigation } from "@package/net/minecraft/world/entity/ai/navigation";
@@ -47,6 +48,7 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
         static get temptations(): $Predicate<$ItemStack>;
     }
     export class $Goat extends $Animal {
+        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Goat;
         createHorn(): $ItemStack;
         isScreamingGoat(): boolean;
         removeHorns(): void;

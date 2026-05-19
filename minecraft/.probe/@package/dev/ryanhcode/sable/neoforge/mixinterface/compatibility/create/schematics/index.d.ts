@@ -15,13 +15,13 @@ declare module "@package/dev/ryanhcode/sable/neoforge/mixinterface/compatibility
     export type $StructureTemplateExtension_ = (() => $List_<$StructureTemplateExtension$SubLevelTemplate_>);
     export class $StructureTemplateExtension$SubLevelTemplate extends $Record {
         position(): $Vector3d;
-        template(): $StructureTemplate;
         uuid(): $UUID;
+        template(): $StructureTemplate;
         orientation(): $Quaterniond;
         constructor(uuid: $UUID_, position: $Vector3d, orientation: $Quaterniond, template: $StructureTemplate);
     }
     /**
      * Values that may be interpreted as {@link $StructureTemplateExtension$SubLevelTemplate}.
      */
-    export type $StructureTemplateExtension$SubLevelTemplate_ = { uuid?: $UUID_, orientation?: $Quaterniond, position?: $Vector3d, template?: $StructureTemplate,  } | [uuid?: $UUID_, orientation?: $Quaterniond, position?: $Vector3d, template?: $StructureTemplate, ];
+    export type $StructureTemplateExtension$SubLevelTemplate_ = { position?: $Vector3d, orientation?: $Quaterniond, uuid?: $UUID_, template?: $StructureTemplate,  } | [position?: $Vector3d, orientation?: $Quaterniond, uuid?: $UUID_, template?: $StructureTemplate, ];
 }

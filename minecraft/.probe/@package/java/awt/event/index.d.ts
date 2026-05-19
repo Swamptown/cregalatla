@@ -12,21 +12,21 @@ declare module "@package/java/awt/event" {
         caretPositionChanged(arg0: $InputMethodEvent): void;
     }
     export class $InputEvent extends $ComponentEvent {
+        getModifiersEx(): number;
+        static getMaskForButton(arg0: number): number;
+        isConsumed(): boolean;
+        isShiftDown(): boolean;
+        isAltDown(): boolean;
+        isControlDown(): boolean;
+        static getModifiersExText(arg0: number): string;
+        isMetaDown(): boolean;
+        isAltGraphDown(): boolean;
+        consume(): void;
+        getWhen(): number;
         /**
          * @deprecated
          */
         getModifiers(): number;
-        consume(): void;
-        getWhen(): number;
-        isControlDown(): boolean;
-        isShiftDown(): boolean;
-        isAltDown(): boolean;
-        getModifiersEx(): number;
-        static getMaskForButton(arg0: number): number;
-        isConsumed(): boolean;
-        static getModifiersExText(arg0: number): string;
-        isMetaDown(): boolean;
-        isAltGraphDown(): boolean;
         static ADJUSTMENT_EVENT_MASK: number;
         static MOUSE_EVENT_MASK: number;
         /**
@@ -93,24 +93,24 @@ declare module "@package/java/awt/event" {
          */
         static META_MASK: number;
         static COMPONENT_RESIZED: number;
-        get modifiers(): number;
-        get when(): number;
-        get controlDown(): boolean;
-        get shiftDown(): boolean;
-        get altDown(): boolean;
         get modifiersEx(): number;
         get consumed(): boolean;
+        get shiftDown(): boolean;
+        get altDown(): boolean;
+        get controlDown(): boolean;
         get metaDown(): boolean;
         get altGraphDown(): boolean;
+        get when(): number;
+        get modifiers(): number;
     }
     export class $InputMethodEvent extends $AWTEvent {
-        getText(): $AttributedCharacterIterator;
+        getCaret(): $TextHitInfo;
+        isConsumed(): boolean;
+        getCommittedCharacterCount(): number;
+        getVisiblePosition(): $TextHitInfo;
         consume(): void;
         getWhen(): number;
-        getCommittedCharacterCount(): number;
-        getCaret(): $TextHitInfo;
-        getVisiblePosition(): $TextHitInfo;
-        isConsumed(): boolean;
+        getText(): $AttributedCharacterIterator;
         static ADJUSTMENT_EVENT_MASK: number;
         static MOUSE_EVENT_MASK: number;
         static CARET_POSITION_CHANGED: number;
@@ -135,15 +135,15 @@ declare module "@package/java/awt/event" {
         static MOUSE_MOTION_EVENT_MASK: number;
         static INPUT_METHOD_FIRST: number;
         static WINDOW_FOCUS_EVENT_MASK: number;
-        constructor(arg0: $Component, arg1: number, arg2: $TextHitInfo, arg3: $TextHitInfo);
-        constructor(arg0: $Component, arg1: number, arg2: $AttributedCharacterIterator, arg3: number, arg4: $TextHitInfo, arg5: $TextHitInfo);
         constructor(arg0: $Component, arg1: number, arg2: number, arg3: $AttributedCharacterIterator, arg4: number, arg5: $TextHitInfo, arg6: $TextHitInfo);
-        get text(): $AttributedCharacterIterator;
-        get when(): number;
-        get committedCharacterCount(): number;
+        constructor(arg0: $Component, arg1: number, arg2: $AttributedCharacterIterator, arg3: number, arg4: $TextHitInfo, arg5: $TextHitInfo);
+        constructor(arg0: $Component, arg1: number, arg2: $TextHitInfo, arg3: $TextHitInfo);
         get caret(): $TextHitInfo;
-        get visiblePosition(): $TextHitInfo;
         get consumed(): boolean;
+        get committedCharacterCount(): number;
+        get visiblePosition(): $TextHitInfo;
+        get when(): number;
+        get text(): $AttributedCharacterIterator;
     }
     export class $WindowFocusListener {
     }
@@ -152,10 +152,10 @@ declare module "@package/java/awt/event" {
         windowLostFocus(arg0: $WindowEvent): void;
     }
     export class $MouseEvent extends $InputEvent {
-        getY(): number;
-        getPoint(): $Point;
         translatePoint(arg0: number, arg1: number): void;
+        getPoint(): $Point;
         static getMouseModifiersText(arg0: number): string;
+        getY(): number;
         getLocationOnScreen(): $Point;
         getXOnScreen(): number;
         getYOnScreen(): number;
@@ -243,11 +243,11 @@ declare module "@package/java/awt/event" {
         static META_MASK: number;
         static MOUSE_ENTERED: number;
         static MOUSE_DRAGGED: number;
+        constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: boolean, arg10: number);
         constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: number);
         constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean);
-        constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: boolean, arg10: number);
-        get y(): number;
         get point(): $Point;
+        get y(): number;
         get locationOnScreen(): $Point;
         get XOnScreen(): number;
         get YOnScreen(): number;
@@ -330,8 +330,8 @@ declare module "@package/java/awt/event" {
         get component(): $Component;
     }
     export class $ContainerEvent extends $ComponentEvent {
-        getChild(): $Component;
         getContainer(): $Container;
+        getChild(): $Component;
         static ADJUSTMENT_EVENT_MASK: number;
         static MOUSE_EVENT_MASK: number;
         static COMPONENT_EVENT_MASK: number;
@@ -363,8 +363,8 @@ declare module "@package/java/awt/event" {
         static WINDOW_STATE_EVENT_MASK: number;
         static COMPONENT_RESIZED: number;
         constructor(arg0: $Component, arg1: number, arg2: $Component);
-        get child(): $Component;
         get container(): $Container;
+        get child(): $Component;
     }
     export class $ComponentListener {
     }
@@ -400,17 +400,17 @@ declare module "@package/java/awt/event" {
      */
     export type $FocusEvent$Cause_ = "unknown" | "mouse_event" | "traversal" | "traversal_up" | "traversal_down" | "traversal_forward" | "traversal_backward" | "rollback" | "unexpected" | "activation" | "clear_global_focus_owner";
     export class $KeyEvent extends $InputEvent {
-        setKeyCode(arg0: number): void;
+        getKeyChar(): string;
+        getExtendedKeyCode(): number;
         static getKeyText(arg0: number): string;
+        setKeyCode(arg0: number): void;
         /**
          * @deprecated
          */
         static getKeyModifiersText(arg0: number): string;
+        isActionKey(): boolean;
         static getExtendedKeyCodeForChar(arg0: number): number;
         getKeyLocation(): number;
-        getKeyChar(): string;
-        getExtendedKeyCode(): number;
-        isActionKey(): boolean;
         setKeyChar(arg0: string): void;
         /**
          * @deprecated
@@ -683,15 +683,15 @@ declare module "@package/java/awt/event" {
         static HIERARCHY_EVENT_MASK: number;
         static VK_META: number;
         static VK_BRACELEFT: number;
-        constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number, arg5: string);
         constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number, arg5: string, arg6: number);
+        constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number, arg5: string);
         /**
          * @deprecated
          */
         constructor(arg0: $Component, arg1: number, arg2: number, arg3: number, arg4: number);
-        get keyLocation(): number;
         get extendedKeyCode(): number;
         get actionKey(): boolean;
+        get keyLocation(): number;
         set modifiers(value: number);
     }
     export class $WindowStateListener {
@@ -722,10 +722,10 @@ declare module "@package/java/awt/event" {
      */
     export type $ActionListener_ = ((arg0: $ActionEvent) => void);
     export class $AdjustmentEvent extends $AWTEvent {
-        getValue(): number;
         getAdjustable(): $Adjustable;
-        getValueIsAdjusting(): boolean;
         getAdjustmentType(): number;
+        getValueIsAdjusting(): boolean;
+        getValue(): number;
         static ADJUSTMENT_EVENT_MASK: number;
         static MOUSE_EVENT_MASK: number;
         static COMPONENT_EVENT_MASK: number;
@@ -754,12 +754,12 @@ declare module "@package/java/awt/event" {
         static UNIT_DECREMENT: number;
         static HIERARCHY_EVENT_MASK: number;
         static WINDOW_STATE_EVENT_MASK: number;
-        constructor(arg0: $Adjustable, arg1: number, arg2: number, arg3: number);
         constructor(arg0: $Adjustable, arg1: number, arg2: number, arg3: number, arg4: boolean);
-        get value(): number;
+        constructor(arg0: $Adjustable, arg1: number, arg2: number, arg3: number);
         get adjustable(): $Adjustable;
-        get valueIsAdjusting(): boolean;
         get adjustmentType(): number;
+        get valueIsAdjusting(): boolean;
+        get value(): number;
     }
     export class $HierarchyListener {
     }
@@ -771,10 +771,10 @@ declare module "@package/java/awt/event" {
      */
     export type $HierarchyListener_ = ((arg0: $HierarchyEvent) => void);
     export class $HierarchyEvent extends $AWTEvent {
-        getComponent(): $Component;
         getChanged(): $Component;
         getChangedParent(): $Container;
         getChangeFlags(): number;
+        getComponent(): $Component;
         static ADJUSTMENT_EVENT_MASK: number;
         static MOUSE_EVENT_MASK: number;
         static HIERARCHY_FIRST: number;
@@ -805,10 +805,10 @@ declare module "@package/java/awt/event" {
         static DISPLAYABILITY_CHANGED: number;
         constructor(arg0: $Component, arg1: number, arg2: $Component, arg3: $Container);
         constructor(arg0: $Component, arg1: number, arg2: $Component, arg3: $Container, arg4: number);
-        get component(): $Component;
         get changed(): $Component;
         get changedParent(): $Container;
         get changeFlags(): number;
+        get component(): $Component;
     }
     export class $AWTEventListener {
     }
@@ -820,9 +820,9 @@ declare module "@package/java/awt/event" {
      */
     export type $AWTEventListener_ = ((arg0: $AWTEvent) => void);
     export class $ActionEvent extends $AWTEvent {
-        getModifiers(): number;
-        getWhen(): number;
         getActionCommand(): string;
+        getWhen(): number;
+        getModifiers(): number;
         static ADJUSTMENT_EVENT_MASK: number;
         static MOUSE_EVENT_MASK: number;
         static COMPONENT_EVENT_MASK: number;
@@ -850,17 +850,17 @@ declare module "@package/java/awt/event" {
         static HIERARCHY_EVENT_MASK: number;
         static WINDOW_STATE_EVENT_MASK: number;
         static META_MASK: number;
+        constructor(arg0: $Object, arg1: number, arg2: string);
         constructor(arg0: $Object, arg1: number, arg2: string, arg3: number, arg4: number);
         constructor(arg0: $Object, arg1: number, arg2: string, arg3: number);
-        constructor(arg0: $Object, arg1: number, arg2: string);
-        get modifiers(): number;
-        get when(): number;
         get actionCommand(): string;
+        get when(): number;
+        get modifiers(): number;
     }
     export class $FocusEvent extends $ComponentEvent {
-        getCause(): $FocusEvent$Cause;
-        getOppositeComponent(): $Component;
         isTemporary(): boolean;
+        getOppositeComponent(): $Component;
+        getCause(): $FocusEvent$Cause;
         static ADJUSTMENT_EVENT_MASK: number;
         static MOUSE_EVENT_MASK: number;
         static COMPONENT_EVENT_MASK: number;
@@ -892,12 +892,12 @@ declare module "@package/java/awt/event" {
         static WINDOW_STATE_EVENT_MASK: number;
         static COMPONENT_RESIZED: number;
         constructor(arg0: $Component, arg1: number);
+        constructor(arg0: $Component, arg1: number, arg2: boolean, arg3: $Component);
         constructor(arg0: $Component, arg1: number, arg2: boolean);
         constructor(arg0: $Component, arg1: number, arg2: boolean, arg3: $Component, arg4: $FocusEvent$Cause_);
-        constructor(arg0: $Component, arg1: number, arg2: boolean, arg3: $Component);
-        get cause(): $FocusEvent$Cause;
-        get oppositeComponent(): $Component;
         get temporary(): boolean;
+        get oppositeComponent(): $Component;
+        get cause(): $FocusEvent$Cause;
     }
     export class $ContainerListener {
     }

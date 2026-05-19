@@ -11,11 +11,11 @@ declare module "@package/com/yungnickyoung/minecraft/yungsapi/world/structure/te
         constructor(arg0: $BlockState_);
     }
     export class $AquiferOverrideMask {
-        get(arg0: number, arg1: number, arg2: number): boolean;
-        set(arg0: number, arg1: number, arg2: number): void;
         getAquiferOverride(): $AquiferOverride;
         getBlockStateForPos(arg0: number, arg1: number, arg2: number, arg3: $BlockState_): $BlockState;
         setAquiferOverride(arg0: $AquiferOverride): void;
+        get(arg0: number, arg1: number, arg2: number): boolean;
+        set(arg0: number, arg1: number, arg2: number): void;
         constructor(arg0: number, arg1: number);
     }
     export class $AquiferOverrideType<C extends $AquiferOverride> {

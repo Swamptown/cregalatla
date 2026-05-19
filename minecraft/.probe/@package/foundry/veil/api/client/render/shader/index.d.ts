@@ -12,23 +12,23 @@ export * as uniform from "@package/foundry/veil/api/client/render/shader/uniform
 declare module "@package/foundry/veil/api/client/render/shader" {
     export class $ShaderPreDefinitions {
         remove(arg0: string): void;
-        set(arg0: string): void;
         set(arg0: string, arg1: string): void;
+        set(arg0: string): void;
         getDefinition(arg0: string): string;
-        getDefinitions(): $Map<string, string>;
         addListener(arg0: $Consumer_<string>): void;
-        getStaticDefinitions(): $Map<string, string>;
+        getDefinitions(): $Map<string, string>;
         setStatic(arg0: string, arg1: string): void;
         setStatic(arg0: string): void;
+        getStaticDefinitions(): $Map<string, string>;
         constructor();
         get definitions(): $Map<string, string>;
         get staticDefinitions(): $Map<string, string>;
     }
     export class $ShaderFeature extends $Enum<$ShaderFeature> {
+        getDefinitionName(): string;
         static values(): $ShaderFeature[];
         static valueOf(arg0: string): $ShaderFeature;
         isSupported(): boolean;
-        getDefinitionName(): string;
         modifyShader(arg0: number, arg1: $GlslTree): void;
         static CODEC: $Codec<$ShaderFeature>;
         static COMPUTE: $ShaderFeature;
@@ -41,8 +41,8 @@ declare module "@package/foundry/veil/api/client/render/shader" {
         static SHADER_STORAGE: $ShaderFeature;
         static ATOMIC_COUNTER: $ShaderFeature;
         static FEATURES: $ShaderFeature[];
-        get supported(): boolean;
         get definitionName(): string;
+        get supported(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ShaderFeature}.

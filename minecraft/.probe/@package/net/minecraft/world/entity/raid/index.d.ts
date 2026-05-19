@@ -40,26 +40,20 @@ declare module "@package/net/minecraft/world/entity/raid" {
     export class $Raider$ObtainRaidLeaderBannerGoal<T extends $Raider> extends $Goal {
     }
     export class $Raid {
-        stop(): void;
-        getId(): number;
-        save(arg0: $CompoundTag_): $CompoundTag;
-        isStarted(): boolean;
-        isActive(): boolean;
-        tick(): void;
-        getLevel(): $Level;
         isVictory(): boolean;
         isBetweenWaves(): boolean;
-        hasFirstWaveSpawned(): boolean;
         getTotalRaidersAlive(): number;
         getTotalHealth(): number;
         getAllRaiders(): $Set<$Raider>;
         setRaidOmenLevel(arg0: number): void;
         absorbRaidOmen(arg0: $ServerPlayer): boolean;
         getHealthOfLivingRaiders(): number;
+        hasFirstWaveSpawned(): boolean;
+        static getLeaderBannerInstance(arg0: $HolderGetter<$BannerPattern_>): $ItemStack;
         getRaidOmenLevel(): number;
         getMaxRaidOmenLevel(): number;
-        static getLeaderBannerInstance(arg0: $HolderGetter<$BannerPattern_>): $ItemStack;
         isLoss(): boolean;
+        isOver(): boolean;
         getGroupsSpawned(): number;
         joinRaid(arg0: number, arg1: $Raider, arg2: $BlockPos_, arg3: boolean): void;
         removeLeader(arg0: number): void;
@@ -69,9 +63,15 @@ declare module "@package/net/minecraft/world/entity/raid" {
         setLeader(arg0: number, arg1: $Raider): void;
         getLeader(arg0: number): $Raider;
         updateBossbar(): void;
-        isOver(): boolean;
-        getEnchantOdds(): number;
         getNumGroups(arg0: $Difficulty_): number;
+        getEnchantOdds(): number;
+        getLevel(): $Level;
+        tick(): void;
+        stop(): void;
+        getId(): number;
+        save(arg0: $CompoundTag_): $CompoundTag;
+        isStarted(): boolean;
+        isActive(): boolean;
         isStopped(): boolean;
         getCenter(): $BlockPos;
         static RAID_REMOVAL_THRESHOLD_SQR: number;
@@ -81,12 +81,8 @@ declare module "@package/net/minecraft/world/entity/raid" {
         static VALID_RAID_RADIUS_SQR: number;
         static MAX_NO_ACTION_TIME: number;
         static DEFAULT_MAX_RAID_OMEN_LEVEL: number;
-        constructor(arg0: number, arg1: $ServerLevel, arg2: $BlockPos_);
         constructor(arg0: $ServerLevel, arg1: $CompoundTag_);
-        get id(): number;
-        get started(): boolean;
-        get active(): boolean;
-        get level(): $Level;
+        constructor(arg0: number, arg1: $ServerLevel, arg2: $BlockPos_);
         get victory(): boolean;
         get betweenWaves(): boolean;
         get totalRaidersAlive(): number;
@@ -95,9 +91,13 @@ declare module "@package/net/minecraft/world/entity/raid" {
         get healthOfLivingRaiders(): number;
         get maxRaidOmenLevel(): number;
         get loss(): boolean;
-        get groupsSpawned(): number;
         get over(): boolean;
+        get groupsSpawned(): number;
         get enchantOdds(): number;
+        get level(): $Level;
+        get id(): number;
+        get started(): boolean;
+        get active(): boolean;
         get stopped(): boolean;
         get center(): $BlockPos;
     }
@@ -134,14 +134,14 @@ declare module "@package/net/minecraft/world/entity/raid" {
     export class $Raider$HoldGroundAttackGoal extends $Goal {
     }
     export class $Raids extends $SavedData {
+        createOrExtendRaid(arg0: $ServerPlayer, arg1: $BlockPos_): $Raid;
+        static getFileId(arg0: $Holder_<$DimensionType>): string;
+        getNearbyRaid(arg0: $BlockPos_, arg1: number): $Raid;
+        static canJoinRaid(arg0: $Raider, arg1: $Raid): boolean;
+        tick(): void;
         get(arg0: number): $Raid;
         static load(arg0: $ServerLevel, arg1: $CompoundTag_): $Raids;
         static factory(arg0: $ServerLevel): $SavedData$Factory<$Raids>;
-        tick(): void;
-        createOrExtendRaid(arg0: $ServerPlayer, arg1: $BlockPos_): $Raid;
-        getNearbyRaid(arg0: $BlockPos_, arg1: number): $Raid;
-        static getFileId(arg0: $Holder_<$DimensionType>): string;
-        static canJoinRaid(arg0: $Raider, arg1: $Raid): boolean;
         constructor(arg0: $ServerLevel);
     }
     export class $Raider extends $PatrollingMonster {

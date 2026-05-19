@@ -11,53 +11,53 @@ declare module "@package/net/minecraft/world/level/block/state/pattern" {
     export class $BlockPattern$BlockCacheLoader extends $CacheLoader<$BlockPos, $BlockInWorld> {
     }
     export class $BlockPatternBuilder {
+        where(arg0: string, arg1: $Predicate_<$BlockInWorld>): $BlockPatternBuilder;
+        aisle(...arg0: string[]): $BlockPatternBuilder;
         static start(): $BlockPatternBuilder;
         build(): $BlockPattern;
-        aisle(...arg0: string[]): $BlockPatternBuilder;
-        where(arg0: string, arg1: $Predicate_<$BlockInWorld>): $BlockPatternBuilder;
     }
     export class $BlockInWorld {
-        getState(): $BlockState;
-        getLevel(): $LevelReader;
         static hasState(arg0: $Predicate_<$BlockState>): $Predicate<$BlockInWorld>;
+        getLevel(): $LevelReader;
         getEntity(): $BlockEntity;
+        getState(): $BlockState;
         getPos(): $BlockPos;
         constructor(arg0: $LevelReader, arg1: $BlockPos_, arg2: boolean);
-        get state(): $BlockState;
         get level(): $LevelReader;
         get entity(): $BlockEntity;
+        get state(): $BlockState;
         get pos(): $BlockPos;
     }
     export class $BlockPattern implements $BlockPatternExtended {
-        matches(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Direction_, arg3: $Direction_): $BlockPattern$BlockPatternMatch;
-        find(arg0: $LevelReader, arg1: $BlockPos_): $BlockPattern$BlockPatternMatch;
-        lithium$setRequiredBlock(arg0: $Block_, arg1: number): void;
         static createLevelCache(arg0: $LevelReader, arg1: boolean): $LoadingCache<$BlockPos, $BlockInWorld>;
+        lithium$setRequiredBlock(arg0: $Block_, arg1: number): void;
         static translateAndRotate(arg0: $BlockPos_, arg1: $Direction_, arg2: $Direction_, arg3: number, arg4: number, arg5: number): $BlockPos;
-        getDepth(): number;
+        getPattern(): $Predicate<$BlockInWorld>[][][];
         getWidth(): number;
         getHeight(): number;
-        getPattern(): $Predicate<$BlockInWorld>[][][];
+        matches(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Direction_, arg3: $Direction_): $BlockPattern$BlockPatternMatch;
+        find(arg0: $LevelReader, arg1: $BlockPos_): $BlockPattern$BlockPatternMatch;
+        getDepth(): number;
         constructor(arg0: $Predicate_<$BlockInWorld>[][][]);
-        get depth(): number;
+        get pattern(): $Predicate<$BlockInWorld>[][][];
         get width(): number;
         get height(): number;
-        get pattern(): $Predicate<$BlockInWorld>[][][];
+        get depth(): number;
     }
     export class $BlockPattern$BlockPatternMatch {
         getFrontTopLeft(): $BlockPos;
         getUp(): $Direction;
         getForwards(): $Direction;
-        getDepth(): number;
+        getBlock(arg0: number, arg1: number, arg2: number): $BlockInWorld;
         getWidth(): number;
         getHeight(): number;
-        getBlock(arg0: number, arg1: number, arg2: number): $BlockInWorld;
+        getDepth(): number;
         constructor(arg0: $BlockPos_, arg1: $Direction_, arg2: $Direction_, arg3: $LoadingCache<$BlockPos_, $BlockInWorld>, arg4: number, arg5: number, arg6: number);
         get frontTopLeft(): $BlockPos;
         get up(): $Direction;
         get forwards(): $Direction;
-        get depth(): number;
         get width(): number;
         get height(): number;
+        get depth(): number;
     }
 }

@@ -7,11 +7,11 @@ export * as function from "@package/xaero/hud/controls/key/function";
 
 declare module "@package/xaero/hud/controls/key" {
     export class $KeyMappingControllerManager implements $Iterable<$KeyMappingController> {
-        iterator(): $Iterator<$KeyMappingController>;
-        getController(arg0: $KeyMapping): $KeyMappingController;
         registerFunction(arg0: $KeyMapping, arg1: $KeyMappingFunction): void;
         registerController(arg0: $KeyMapping, arg1: boolean, arg2: $Consumer_<$KeyMapping>): void;
         registerController(arg0: $KeyMapping, arg1: boolean): void;
+        getController(arg0: $KeyMapping): $KeyMappingController;
+        iterator(): $Iterator<$KeyMappingController>;
         spliterator(): $Spliterator<$KeyMappingController>;
         forEach(arg0: $Consumer_<$KeyMappingController>): void;
         constructor();
@@ -23,19 +23,19 @@ declare module "@package/xaero/hud/controls/key" {
         constructor(arg0: $KeyMappingControllerManager);
     }
     export class $KeyMappingController implements $Iterable<$KeyMappingFunction> {
-        add(arg0: $KeyMappingFunction): void;
-        iterator(): $Iterator<$KeyMappingFunction>;
-        getKeyMapping(): $KeyMapping;
-        isPressed(): boolean;
-        getFunctions(): $Iterable<$KeyMappingFunction>;
         isXaeroKey(): boolean;
         setPressed(arg0: boolean): void;
+        isPressed(): boolean;
+        getKeyMapping(): $KeyMapping;
+        add(arg0: $KeyMappingFunction): void;
+        iterator(): $Iterator<$KeyMappingFunction>;
+        getFunctions(): $Iterable<$KeyMappingFunction>;
         spliterator(): $Spliterator<$KeyMappingFunction>;
         forEach(arg0: $Consumer_<$KeyMappingFunction>): void;
         constructor(arg0: $KeyMapping, arg1: boolean);
         [Symbol.iterator](): Iterator<$KeyMappingFunction>
+        get xaeroKey(): boolean;
         get keyMapping(): $KeyMapping;
         get functions(): $Iterable<$KeyMappingFunction>;
-        get xaeroKey(): boolean;
     }
 }

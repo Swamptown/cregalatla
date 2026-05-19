@@ -63,17 +63,17 @@ declare module "@package/net/minecraft/util/datafix" {
     }
     export class $ExtraDataFixUtils {
         static cast<T, R>(arg0: $Type<R>, arg1: $Typed<T>): $Typed<R>;
-        static chainAllFilters<T>(...arg0: $Function_<$Typed<never>, $Typed<never>>[]): $Function<$Typed<never>, $Typed<never>>;
         static fixBlockPos(arg0: $Dynamic<never>): $Dynamic<never>;
+        static chainAllFilters<T>(...arg0: $Function_<$Typed<never>, $Typed<never>>[]): $Function<$Typed<never>, $Typed<never>>;
         constructor();
     }
     export class $FixWolfHealth extends $NamedEntityFix {
         constructor(arg0: $Schema);
     }
     export class $PackedBitStorage {
+        getBits(): number;
         get(arg0: number): number;
         set(arg0: number, arg1: number): void;
-        getBits(): number;
         getRaw(): number[];
         constructor(arg0: number, arg1: number);
         constructor(arg0: number, arg1: number, arg2: number[]);

@@ -78,15 +78,15 @@ declare module "@package/cpw/mods/jarhandling" {
         get metaInfServices(): $List<$SecureJar$Provider>;
     }
     export class $SecureJar$Provider extends $Record {
-        providers(): $List<string>;
         serviceName(): string;
+        providers(): $List<string>;
         static fromPath(arg0: $Path_, arg1: $UnionPathFilter_): $SecureJar$Provider;
         constructor(serviceName: string, providers: $List_<string>);
     }
     /**
      * Values that may be interpreted as {@link $SecureJar$Provider}.
      */
-    export type $SecureJar$Provider_ = { providers?: $List_<string>, serviceName?: string,  } | [providers?: $List_<string>, serviceName?: string, ];
+    export type $SecureJar$Provider_ = { serviceName?: string, providers?: $List_<string>,  } | [serviceName?: string, providers?: $List_<string>, ];
     export class $SecureJar$Status extends $Enum<$SecureJar$Status> {
         static values(): $SecureJar$Status[];
         static valueOf(arg0: string): $SecureJar$Status;

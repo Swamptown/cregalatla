@@ -11,13 +11,13 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/com/mojang/math" {
     export class $OctahedralGroup extends $Enum<$OctahedralGroup> implements $StringRepresentable {
+        inverts(arg0: $Direction$Axis_): boolean;
+        transformation(): $Matrix3f;
         static values(): $OctahedralGroup[];
         static valueOf(arg0: string): $OctahedralGroup;
         compose(arg0: $OctahedralGroup_): $OctahedralGroup;
-        rotate(arg0: $Direction_): $Direction;
         rotate(arg0: $FrontAndTop_): $FrontAndTop;
-        inverts(arg0: $Direction$Axis_): boolean;
-        transformation(): $Matrix3f;
+        rotate(arg0: $Direction_): $Direction;
         inverse(): $OctahedralGroup;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
@@ -92,10 +92,10 @@ declare module "@package/com/mojang/math" {
         constructor(arg0: number, arg1: number);
     }
     export class $Transformation implements $ITransformationExtension {
-        static identity(): $Transformation;
-        compose(arg0: $Transformation): $Transformation;
         getLeftRotation(): $Quaternionf;
         getRightRotation(): $Quaternionf;
+        static identity(): $Transformation;
+        compose(arg0: $Transformation): $Transformation;
         inverse(): $Transformation;
         slerp(arg0: $Transformation, arg1: number): $Transformation;
         getTranslation(): $Vector3f;
@@ -128,11 +128,11 @@ declare module "@package/com/mojang/math" {
         constructor();
     }
     export class $SymmetricGroup3 extends $Enum<$SymmetricGroup3> {
+        permutation(arg0: number): number;
+        transformation(): $Matrix3f;
         static values(): $SymmetricGroup3[];
         static valueOf(arg0: string): $SymmetricGroup3;
         compose(arg0: $SymmetricGroup3_): $SymmetricGroup3;
-        permutation(arg0: number): number;
-        transformation(): $Matrix3f;
         static P213: $SymmetricGroup3;
         static P312: $SymmetricGroup3;
         static P132: $SymmetricGroup3;
@@ -149,25 +149,25 @@ declare module "@package/com/mojang/math" {
     export class $FieldsAreNonnullByDefault implements $Annotation {
     }
     export class $GivensParameters extends $Record {
-        sin(): number;
-        cos(): number;
         static fromUnnormalized(arg0: number, arg1: number): $GivensParameters;
-        aroundZ(arg0: $Matrix3f): $Matrix3f;
         aroundZ(arg0: $Quaternionf): $Quaternionf;
+        aroundZ(arg0: $Matrix3f): $Matrix3f;
         aroundY(arg0: $Quaternionf): $Quaternionf;
         aroundY(arg0: $Matrix3f): $Matrix3f;
-        aroundX(arg0: $Quaternionf): $Quaternionf;
         aroundX(arg0: $Matrix3f): $Matrix3f;
+        aroundX(arg0: $Quaternionf): $Quaternionf;
         static fromPositiveAngle(arg0: number): $GivensParameters;
         sinHalf(): number;
         cosHalf(): number;
+        sin(): number;
+        cos(): number;
         inverse(): $GivensParameters;
         constructor(arg0: number, arg1: number);
     }
     /**
      * Values that may be interpreted as {@link $GivensParameters}.
      */
-    export type $GivensParameters_ = { cosHalf?: number, sinHalf?: number,  } | [cosHalf?: number, sinHalf?: number, ];
+    export type $GivensParameters_ = { sinHalf?: number, cosHalf?: number,  } | [sinHalf?: number, cosHalf?: number, ];
     export class $MatrixUtil {
         static eigenvalueJacobi(arg0: $Matrix3f, arg1: number): $Quaternionf;
         static isPureTranslation(arg0: $Matrix4f): boolean;
@@ -185,8 +185,8 @@ declare module "@package/com/mojang/math" {
         static XP: $Axis;
     }
     export interface $Axis {
-        rotation(arg0: number): $Quaternionf;
         rotationDegrees(arg0: number): $Quaternionf;
+        rotation(arg0: number): $Quaternionf;
     }
     /**
      * Values that may be interpreted as {@link $Axis}.

@@ -55,7 +55,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
     /**
      * Values that may be interpreted as {@link $CachedTagLookup$Entry}.
      */
-    export type $CachedTagLookup$Entry_<T> = { lookup?: $CachedTagLookup<any>, registry?: $Registry<any>, key?: $ResourceKey_<any>,  } | [lookup?: $CachedTagLookup<any>, registry?: $Registry<any>, key?: $ResourceKey_<any>, ];
+    export type $CachedTagLookup$Entry_<T> = { key?: $ResourceKey_<any>, registry?: $Registry<any>, lookup?: $CachedTagLookup<any>,  } | [key?: $ResourceKey_<any>, registry?: $Registry<any>, lookup?: $CachedTagLookup<any>, ];
     export class $KubeJSRecipeSerializers {
         static SHAPED: $Supplier<$RecipeSerializer<never>>;
         static SHAPELESS: $Supplier<$RecipeSerializer<never>>;
@@ -64,25 +64,25 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
     export interface $KubeJSRecipeSerializers {
     }
     export class $RecipeSchemaProvider$SchemaDataBuilder {
+        keysForUniqueId(keys: $List_<string>): $RecipeSchemaProvider$SchemaDataBuilder;
+        keysForUniqueId(...keys: string[]): $RecipeSchemaProvider$SchemaDataBuilder;
+        keyDatas(...keys: $RecipeSchemaData$RecipeKeyData_[]): $RecipeSchemaProvider$SchemaDataBuilder;
+        keyDatas(keys: $List_<$RecipeSchemaData$RecipeKeyData_>): $RecipeSchemaProvider$SchemaDataBuilder;
+        overrideKey<T>(key: $RecipeKey<T>, optionalValue: T): $RecipeSchemaProvider$SchemaDataBuilder;
+        recipeFactory(factory: $ResourceLocation_): $RecipeSchemaProvider$SchemaDataBuilder;
+        mergeData(keys: boolean, constructors: boolean, unique: boolean, postProcessors: boolean): $RecipeSchemaProvider$SchemaDataBuilder;
+        postProcessors(processors: $List_<$RecipePostProcessor>): $RecipeSchemaProvider$SchemaDataBuilder;
+        postProcessors(...processors: $RecipePostProcessor[]): $RecipeSchemaProvider$SchemaDataBuilder;
+        overrideType(type: $ResourceLocation_): $RecipeSchemaProvider$SchemaDataBuilder;
         parent(parent: $ResourceLocation_): $RecipeSchemaProvider$SchemaDataBuilder;
-        constructors(constructors: $List_<$RecipeSchemaData$ConstructorData_>): $RecipeSchemaProvider$SchemaDataBuilder;
         constructors(...constructors: $RecipeSchemaData$ConstructorData_[]): $RecipeSchemaProvider$SchemaDataBuilder;
-        keys(keys: $List_<$RecipeKey<never>>): $RecipeSchemaProvider$SchemaDataBuilder;
+        constructors(constructors: $List_<$RecipeSchemaData$ConstructorData_>): $RecipeSchemaProvider$SchemaDataBuilder;
         keys(...keys: $RecipeKey<never>[]): $RecipeSchemaProvider$SchemaDataBuilder;
+        keys(keys: $List_<$RecipeKey<never>>): $RecipeSchemaProvider$SchemaDataBuilder;
         function(name: string, _function: $RecipeSchemaFunction): $RecipeSchemaProvider$SchemaDataBuilder;
         mappings(mappings: $List_<string>): $RecipeSchemaProvider$SchemaDataBuilder;
         mappings(...mappings: string[]): $RecipeSchemaProvider$SchemaDataBuilder;
         functions(functions: $Map_<string, $RecipeSchemaFunction>): $RecipeSchemaProvider$SchemaDataBuilder;
-        recipeFactory(factory: $ResourceLocation_): $RecipeSchemaProvider$SchemaDataBuilder;
-        postProcessors(processors: $List_<$RecipePostProcessor>): $RecipeSchemaProvider$SchemaDataBuilder;
-        postProcessors(...processors: $RecipePostProcessor[]): $RecipeSchemaProvider$SchemaDataBuilder;
-        overrideType(type: $ResourceLocation_): $RecipeSchemaProvider$SchemaDataBuilder;
-        mergeData(keys: boolean, constructors: boolean, unique: boolean, postProcessors: boolean): $RecipeSchemaProvider$SchemaDataBuilder;
-        keyDatas(...keys: $RecipeSchemaData$RecipeKeyData_[]): $RecipeSchemaProvider$SchemaDataBuilder;
-        keyDatas(keys: $List_<$RecipeSchemaData$RecipeKeyData_>): $RecipeSchemaProvider$SchemaDataBuilder;
-        keysForUniqueId(keys: $List_<string>): $RecipeSchemaProvider$SchemaDataBuilder;
-        keysForUniqueId(...keys: string[]): $RecipeSchemaProvider$SchemaDataBuilder;
-        overrideKey<T>(key: $RecipeKey<T>, optionalValue: T): $RecipeSchemaProvider$SchemaDataBuilder;
         hidden(): $RecipeSchemaProvider$SchemaDataBuilder;
         hidden(hidden: boolean): $RecipeSchemaProvider$SchemaDataBuilder;
         constructor(this$0: $RecipeSchemaProvider);
@@ -95,30 +95,6 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
     }
     export class $ModifyCraftingItemKubeEvent implements $KubeEvent {
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `success` denotes a `true` outcome.
@@ -130,42 +106,42 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         item: $ItemStack;
         grid: $RecipeInput;
         width: number;
         index: number;
         height: number;
-        constructor(grid: $RecipeInput, width: number, height: number, item: $ItemStack_, index: number);
         constructor(grid: $CraftingInput, item: $ItemStack_, index: number);
+        constructor(grid: $RecipeInput, width: number, height: number, item: $ItemStack_, index: number);
     }
     export class $AfterRecipesLoadedKubeEvent implements $KubeEvent {
-        remove(filter: $RecipeFilter_): number;
         forEachRecipe(filter: $RecipeFilter_, consumer: $Consumer_<$RecipeLikeKJS>): void;
         countRecipes(filter: $RecipeFilter_): number;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
+        remove(filter: $RecipeFilter_): number;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -178,32 +154,56 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         constructor(resources: $ReloadableServerResources);
     }
     export class $CachedTagLookup<T> {
+        bindingMap(): $Map<$TagKey<T>, $List<$Holder<T>>>;
+        keyToValue(): $Map<$TagKey<T>, $Set<T>>;
         values(key: $TagKey_<T>): $Set<T>;
         isEmpty(key: $TagKey_<T>): boolean;
         keys(value: T): $Set<$TagKey<T>>;
         build(builders: $Map_<$ResourceLocation_, $List_<$TagLoader$EntryWithSource_>>): $Map<$ResourceLocation, $Collection<T>>;
         tagMap(): $Map<$ResourceLocation, $Collection<$Holder<T>>>;
-        keyToValue(): $Map<$TagKey<T>, $Set<T>>;
-        bindingMap(): $Map<$TagKey<T>, $List<$Holder<T>>>;
         registry: $Registry<T>;
         originalMap: $Map<$ResourceLocation, $List<$TagLoader$EntryWithSource>>;
         constructor(registry: $Registry<T>, originalMap: $Map_<$ResourceLocation_, $List_<$TagLoader$EntryWithSource_>>);
     }
     export class $RecipeKey<T> {
+        alwaysWrite(): $RecipeKey<T>;
+        getValidFunctionNames(): $List<string>;
+        defaultOptional(): $RecipeKey<T>;
+        noFunctions(): $RecipeKey<T>;
+        getPrimaryFunctionName(): string;
+        functionNames(names: $List_<string>): $RecipeKey<T>;
+        functionNames(...names: string[]): $RecipeKey<T>;
+        exclude(): $RecipeKey<T>;
         optional(): boolean;
         optional(value: $RecipeOptional_<T>): $RecipeKey<T>;
         optional(value: T): $RecipeKey<T>;
-        noFunctions(): $RecipeKey<T>;
-        getPrimaryFunctionName(): string;
-        getValidFunctionNames(): $List<string>;
-        defaultOptional(): $RecipeKey<T>;
-        alwaysWrite(): $RecipeKey<T>;
-        functionNames(...names: string[]): $RecipeKey<T>;
-        functionNames(names: $List_<string>): $RecipeKey<T>;
-        exclude(): $RecipeKey<T>;
         toJson(storage: $RecipeSchemaStorage, type: $RecipeSchemaType, ops: $DynamicOps<$JsonElement_>): $JsonObject;
         alt(name: string): $RecipeKey<T>;
         alt(...names: string[]): $RecipeKey<T>;
@@ -215,42 +215,18 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
         names: $SequencedSet<string>;
         name: string;
         constructor(component: $RecipeComponent<T>, name: string, role: $ComponentRole_);
-        get primaryFunctionName(): string;
         get validFunctionNames(): $List<string>;
+        get primaryFunctionName(): string;
     }
     export class $CompostableRecipesKubeEvent extends $Record implements $KubeEvent {
+        addReplace(match: $ItemPredicate_, f: number, villager: boolean): void;
+        addReplace(match: $ItemPredicate_, f: number): void;
+        compostables(): $VirtualDataMapFile<$Item, $Compostable>;
         remove(match: $ItemPredicate_): void;
         replaceAll(): void;
         add(match: $ItemPredicate_, f: number): void;
         add(match: $ItemPredicate_, f: number, villager: boolean): void;
         removeAll(): void;
-        compostables(): $VirtualDataMapFile<$Item, $Compostable>;
-        addReplace(match: $ItemPredicate_, f: number): void;
-        addReplace(match: $ItemPredicate_, f: number, villager: boolean): void;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -263,6 +239,30 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         constructor(compostables: $VirtualDataMapFile<$Item_, $Compostable_>);
     }
     /**
@@ -276,8 +276,8 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
      */
     export type $CachedTagLookup$SortingEntry_ = { entries?: $List_<$TagLoader$EntryWithSource_>,  } | [entries?: $List_<$TagLoader$EntryWithSource_>, ];
     export class $RecipeTypeRegistryContext extends $Record {
-        recipePostProcessorCodec(): $Codec<$RecipePostProcessor>;
         recipeComponentCodec(): $Codec<$RecipeComponent<never>>;
+        recipePostProcessorCodec(): $Codec<$RecipePostProcessor>;
         storage(): $RecipeSchemaStorage;
         registries(): $RegistryAccessContainer;
         constructor(registries: $RegistryAccessContainer, storage: $RecipeSchemaStorage);
@@ -285,8 +285,50 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
     /**
      * Values that may be interpreted as {@link $RecipeTypeRegistryContext}.
      */
-    export type $RecipeTypeRegistryContext_ = { registries?: $RegistryAccessContainer, storage?: $RecipeSchemaStorage,  } | [registries?: $RegistryAccessContainer, storage?: $RecipeSchemaStorage, ];
+    export type $RecipeTypeRegistryContext_ = { storage?: $RecipeSchemaStorage, registries?: $RegistryAccessContainer,  } | [storage?: $RecipeSchemaStorage, registries?: $RegistryAccessContainer, ];
     export class $KubeRecipe implements $RecipeLikeKJS, $CustomJavaToJsWrapper {
+        getOriginalRecipe(): $Recipe<never>;
+        afterLoaded(cx: $RecipeValidationContext): void;
+        afterLoaded(stack: $ErrorStack): void;
+        inputValues(): $RecipeComponentValue<never>[];
+        outputValues(): $RecipeComponentValue<never>[];
+        getFromToString(): string;
+        ingredientAction(filter: $SlotFilter_, action: $IngredientAction): $KubeRecipe;
+        damageIngredient(filter: $SlotFilter_): $KubeRecipe;
+        damageIngredient(filter: $SlotFilter_, damage: number): $KubeRecipe;
+        initValues(save: boolean): void;
+        serializeChanges(): $KubeRecipe;
+        getOriginalRecipeResult(): $ItemStack;
+        getOriginalRecipeIngredients(): $List<$Ingredient>;
+        replaceIngredient(filter: $SlotFilter_, item: $ItemStack_): $KubeRecipe;
+        customIngredientAction(filter: $SlotFilter_, id: string): $KubeRecipe;
+        keepIngredient(filter: $SlotFilter_): $KubeRecipe;
+        consumeIngredient(filter: $SlotFilter_): $KubeRecipe;
+        getSerializationTypeFunction(): $RecipeTypeFunction;
+        /**
+         * @deprecated
+         */
+        kjs$getGroup(): string;
+        /**
+         * @deprecated
+         */
+        kjs$getOrCreateId(): $ResourceLocation;
+        /**
+         * @deprecated
+         */
+        kjs$getSchema(): $RecipeSchema;
+        replaceInput(cx: $RecipeScriptContext, match: $ReplacementMatchInfo_, _with: $Object): boolean;
+        replaceOutput(cx: $RecipeScriptContext, match: $ReplacementMatchInfo_, _with: $Object): boolean;
+        hasInput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
+        kjs$getTypeKey(): $ResourceKey<$RecipeSerializer<never>>;
+        kjs$getSerializer(): $RecipeSerializer<never>;
+        hasOutput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
+        hasChanged(): boolean;
+        modifyResult(id: string): $KubeRecipe;
+        /**
+         * @deprecated
+         */
+        stage(s: string): $KubeRecipe;
         group(g: string): $KubeRecipe;
         remove(): void;
         get(key: string): $Object;
@@ -299,48 +341,6 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
         save(): void;
         setValue<T>(key: $RecipeKey<T>, value: T): $KubeRecipe;
         getPath(): string;
-        /**
-         * @deprecated
-         */
-        stage(s: string): $KubeRecipe;
-        serializeChanges(): $KubeRecipe;
-        getOriginalRecipeResult(): $ItemStack;
-        getOriginalRecipeIngredients(): $List<$Ingredient>;
-        replaceIngredient(filter: $SlotFilter_, item: $ItemStack_): $KubeRecipe;
-        customIngredientAction(filter: $SlotFilter_, id: string): $KubeRecipe;
-        keepIngredient(filter: $SlotFilter_): $KubeRecipe;
-        consumeIngredient(filter: $SlotFilter_): $KubeRecipe;
-        afterLoaded(stack: $ErrorStack): void;
-        afterLoaded(cx: $RecipeValidationContext): void;
-        inputValues(): $RecipeComponentValue<never>[];
-        outputValues(): $RecipeComponentValue<never>[];
-        getSerializationTypeFunction(): $RecipeTypeFunction;
-        getFromToString(): string;
-        ingredientAction(filter: $SlotFilter_, action: $IngredientAction): $KubeRecipe;
-        damageIngredient(filter: $SlotFilter_): $KubeRecipe;
-        damageIngredient(filter: $SlotFilter_, damage: number): $KubeRecipe;
-        initValues(save: boolean): void;
-        getOriginalRecipe(): $Recipe<never>;
-        modifyResult(id: string): $KubeRecipe;
-        /**
-         * @deprecated
-         */
-        kjs$getSchema(): $RecipeSchema;
-        replaceInput(cx: $RecipeScriptContext, match: $ReplacementMatchInfo_, _with: $Object): boolean;
-        hasOutput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
-        replaceOutput(cx: $RecipeScriptContext, match: $ReplacementMatchInfo_, _with: $Object): boolean;
-        kjs$getTypeKey(): $ResourceKey<$RecipeSerializer<never>>;
-        kjs$getSerializer(): $RecipeSerializer<never>;
-        /**
-         * @deprecated
-         */
-        kjs$getGroup(): string;
-        /**
-         * @deprecated
-         */
-        kjs$getOrCreateId(): $ResourceLocation;
-        hasInput(cx: $RecipeMatchContext, match: $ReplacementMatchInfo_): boolean;
-        hasChanged(): boolean;
         deserialize(merge: boolean): void;
         serialize(): void;
         convertJavaToJs(scope: $Scriptable, staticType: $TypeInfo_): $Scriptable;
@@ -357,12 +357,12 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
         type: $RecipeTypeFunction;
         changed: boolean;
         constructor();
-        get path(): string;
+        get originalRecipe(): $Recipe<never>;
+        get fromToString(): string;
         get originalRecipeResult(): $ItemStack;
         get originalRecipeIngredients(): $List<$Ingredient>;
         get serializationTypeFunction(): $RecipeTypeFunction;
-        get fromToString(): string;
-        get originalRecipe(): $Recipe<never>;
+        get path(): string;
         get mod(): string;
     }
     export class $RecipeScriptContext {
@@ -381,8 +381,8 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
      */
     export type $KubeRecipeContext_ = (() => $RecipeLikeKJS);
     export class $RecipeScriptContext$Impl extends $Record implements $RecipeScriptContext {
-        errors(): $ErrorStack;
         cx(): $Context;
+        errors(): $ErrorStack;
         ops(): $RegistryOpsContainer;
         registries(): $RegistryAccessContainer;
         recipe(): $RecipeLikeKJS;
@@ -392,10 +392,9 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
     /**
      * Values that may be interpreted as {@link $RecipeScriptContext$Impl}.
      */
-    export type $RecipeScriptContext$Impl_ = { cx?: $Context, recipe?: $KubeRecipe, errors?: $ErrorStack,  } | [cx?: $Context, recipe?: $KubeRecipe, errors?: $ErrorStack, ];
+    export type $RecipeScriptContext$Impl_ = { errors?: $ErrorStack, recipe?: $KubeRecipe, cx?: $Context,  } | [errors?: $ErrorStack, recipe?: $KubeRecipe, cx?: $Context, ];
     export class $RecipesKubeEvent implements $KubeEvent {
-        remove(filter: $RecipeFilter_): void;
-        stage(filter: $RecipeFilter_, stage: string): void;
+        takeId(recipe: $KubeRecipe, prefix: string, ids: string): $ResourceLocation;
         getRecipeFunction(id: string): $RecipeTypeFunction;
         recipeStream(filter: $RecipeFilter_): $Stream<$KubeRecipe>;
         forEachRecipe(filter: $RecipeFilter_, consumer: $Consumer_<$KubeRecipe>): void;
@@ -405,37 +404,14 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
         findRecipeIds(filter: $RecipeFilter_): $Collection<$ResourceLocation>;
         printAllTypes(): void;
         printExamples(type: string): void;
-        takeId(recipe: $KubeRecipe, prefix: string, ids: string): $ResourceLocation;
-        addRecipe(r: $KubeRecipe, json: boolean): $KubeRecipe;
         replaceInput(filter: $RecipeFilter_, match: $ReplacementMatchInfo_, _with: $Object): void;
         replaceOutput(filter: $RecipeFilter_, match: $ReplacementMatchInfo_, _with: $Object): void;
+        addRecipe(r: $KubeRecipe, json: boolean): $KubeRecipe;
         getRecipes(): DocumentedRecipes;
+        stage(filter: $RecipeFilter_, stage: string): void;
+        remove(filter: $RecipeFilter_): void;
         custom(json: $JsonObject_): $KubeRecipe;
         printTypes(): void;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
-         * Stops the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(value: $Object): $Object;
-        /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(): $Object;
-        /**
-         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
-         * 
-         * `cancel` denotes a `false` outcome.
-         */
-        cancel(value: $Object): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -448,6 +424,30 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
          * `success` denotes a `true` outcome.
          */
         success(): $Object;
+        /**
+         * Stops the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(value: $Object): $Object;
+        /**
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `exit` denotes a `default` outcome.
+         */
+        exit(): $Object;
+        /**
+         * Cancels the event with the given exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         addedRecipes: $Collection<$KubeRecipe>;
         registries: $RegistryAccessContainer;
         removedRecipes: $Collection<$KubeRecipe>;
@@ -470,18 +470,18 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
         get recipes(): DocumentedRecipes;
     }
     export class $RecipeSchemaProvider implements $DataProvider {
-        getName(): string;
-        run(output: $CachedOutput_): $CompletableFuture<never>;
-        add(lookup: $HolderLookup$Provider): void;
-        add(id: $ResourceLocation_, schema: $RecipeSchemaData_): void;
-        add(id: $ResourceLocation_, builder: $Consumer_<$RecipeSchemaProvider$SchemaDataBuilder>): void;
-        keyData(key: $RecipeKey<never>): $RecipeSchemaData$RecipeKeyData;
         registryAccessContainer(): $RegistryAccessContainer;
         serverScriptManager(): $ServerScriptManager;
         recipeTypeRegistryContext(): $RecipeTypeRegistryContext;
         onlyKeys(id: $ResourceLocation_, ...keys: $RecipeKey<never>[]): void;
-        constructor(name: string, event: $GatherDataEvent);
+        keyData(key: $RecipeKey<never>): $RecipeSchemaData$RecipeKeyData;
+        getName(): string;
+        run(output: $CachedOutput_): $CompletableFuture<never>;
+        add(id: $ResourceLocation_, builder: $Consumer_<$RecipeSchemaProvider$SchemaDataBuilder>): void;
+        add(id: $ResourceLocation_, schema: $RecipeSchemaData_): void;
+        add(lookup: $HolderLookup$Provider): void;
         constructor(name: string, event: $GatherDataEvent, registryAccessContainer: $RegistryAccessContainer);
+        constructor(name: string, event: $GatherDataEvent);
         get name(): string;
     }
     export class $CachedItemTagLookup extends $CachedTagLookup<$Item> {
@@ -490,8 +490,8 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
         constructor(registry: $Registry<$Item_>, originalMap: $Map_<$ResourceLocation_, $List_<$TagLoader$EntryWithSource_>>);
     }
     export class $RecipeTypeFunction extends $BaseFunction implements $WrappedJS {
-        call(scope: $Scriptable, thisObj: $Scriptable, args0: $Object[]): $KubeRecipe;
         createRecipe(sourceLine: $SourceLine_, stack: $ErrorStack, args: $Object[]): $KubeRecipe;
+        call(scope: $Scriptable, thisObj: $Scriptable, args0: $Object[]): $KubeRecipe;
         static DONTENUM: number;
         static CONST: number;
         idString: string;
@@ -509,14 +509,14 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
     export class $RecipeLikeContext {
     }
     export interface $RecipeLikeContext {
-        recipe(): $RecipeLikeKJS;
         ops(): $RegistryOpsContainer;
+        recipe(): $RecipeLikeKJS;
         registries(): $RegistryAccessContainer;
     }
     export class $RecipesKubeEvent$RecipeStreamFilter extends $Record implements $Predicate<$KubeRecipe> {
-        or(arg0: $Predicate_<$KubeRecipe>): $Predicate<$KubeRecipe>;
         negate(): $Predicate<$KubeRecipe>;
         and(arg0: $Predicate_<$KubeRecipe>): $Predicate<$KubeRecipe>;
+        or(arg0: $Predicate_<$KubeRecipe>): $Predicate<$KubeRecipe>;
     }
     /**
      * Values that may be interpreted as {@link $RecipesKubeEvent$RecipeStreamFilter}.
@@ -533,8 +533,8 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
         constructor(event: $RecipesKubeEvent, ops: $RegistryOps<T>);
     }
     export class $AfterRecipesLoadedKubeEvent$MatchCx extends $Record implements $RecipeMatchContext {
-        recipe(): $RecipeLikeKJS;
         ops(): $RegistryOpsContainer;
+        recipe(): $RecipeLikeKJS;
         cx(): $Context;
         registries(): $RegistryAccessContainer;
         constructor(event: $AfterRecipesLoadedKubeEvent, recipe: $RecipeLikeKJS);
@@ -543,7 +543,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe" {
     /**
      * Values that may be interpreted as {@link $AfterRecipesLoadedKubeEvent$MatchCx}.
      */
-    export type $AfterRecipesLoadedKubeEvent$MatchCx_ = { registries?: $RegistryAccessContainer, cx?: $Context, recipe?: $RecipeLikeKJS, ops?: $RegistryOpsContainer,  } | [registries?: $RegistryAccessContainer, cx?: $Context, recipe?: $RecipeLikeKJS, ops?: $RegistryOpsContainer, ];
+    export type $AfterRecipesLoadedKubeEvent$MatchCx_ = { recipe?: $RecipeLikeKJS, cx?: $Context, registries?: $RegistryAccessContainer, ops?: $RegistryOpsContainer,  } | [recipe?: $RecipeLikeKJS, cx?: $Context, registries?: $RegistryAccessContainer, ops?: $RegistryOpsContainer, ];
     export class $NamespaceFunction extends $BaseFunction implements $WrappedJS {
         getMod(): string;
         static DONTENUM: number;

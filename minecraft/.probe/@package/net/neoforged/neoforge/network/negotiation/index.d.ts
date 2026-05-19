@@ -15,7 +15,7 @@ declare module "@package/net/neoforged/neoforge/network/negotiation" {
     /**
      * Values that may be interpreted as {@link $NetworkComponentNegotiator$ComponentNegotiationResult}.
      */
-    export type $NetworkComponentNegotiator$ComponentNegotiationResult_ = { failureReason?: $Component_, success?: boolean,  } | [failureReason?: $Component_, success?: boolean, ];
+    export type $NetworkComponentNegotiator$ComponentNegotiationResult_ = { success?: boolean, failureReason?: $Component_,  } | [success?: boolean, failureReason?: $Component_, ];
     export class $NegotiableNetworkComponent extends $Record {
         version(): string;
         id(): $ResourceLocation;
@@ -28,17 +28,17 @@ declare module "@package/net/neoforged/neoforge/network/negotiation" {
     /**
      * Values that may be interpreted as {@link $NegotiableNetworkComponent}.
      */
-    export type $NegotiableNetworkComponent_ = { id?: $ResourceLocation_, flow?: ($PacketFlow_) | undefined, optional?: boolean, version?: string,  } | [id?: $ResourceLocation_, flow?: ($PacketFlow_) | undefined, optional?: boolean, version?: string, ];
+    export type $NegotiableNetworkComponent_ = { version?: string, optional?: boolean, flow?: ($PacketFlow_) | undefined, id?: $ResourceLocation_,  } | [version?: string, optional?: boolean, flow?: ($PacketFlow_) | undefined, id?: $ResourceLocation_, ];
     export class $NegotiationResult extends $Record {
         failureReasons(): $Map<$ResourceLocation, $Component>;
-        components(): $List<$NegotiatedNetworkComponent>;
         success(): boolean;
+        components(): $List<$NegotiatedNetworkComponent>;
         constructor(components: $List_<$NegotiatedNetworkComponent_>, success: boolean, failureReasons: $Map_<$ResourceLocation_, $Component_>);
     }
     /**
      * Values that may be interpreted as {@link $NegotiationResult}.
      */
-    export type $NegotiationResult_ = { failureReasons?: $Map_<$ResourceLocation_, $Component_>, components?: $List_<$NegotiatedNetworkComponent_>, success?: boolean,  } | [failureReasons?: $Map_<$ResourceLocation_, $Component_>, components?: $List_<$NegotiatedNetworkComponent_>, success?: boolean, ];
+    export type $NegotiationResult_ = { success?: boolean, components?: $List_<$NegotiatedNetworkComponent_>, failureReasons?: $Map_<$ResourceLocation_, $Component_>,  } | [success?: boolean, components?: $List_<$NegotiatedNetworkComponent_>, failureReasons?: $Map_<$ResourceLocation_, $Component_>, ];
     export class $NetworkComponentNegotiator {
         static negotiate(arg0: $List_<$NegotiableNetworkComponent_>, arg1: $List_<$NegotiableNetworkComponent_>): $NegotiationResult;
         static validateComponent(arg0: $NegotiableNetworkComponent_, arg1: $NegotiableNetworkComponent_, arg2: string): ($NetworkComponentNegotiator$ComponentNegotiationResult) | undefined;
@@ -52,5 +52,5 @@ declare module "@package/net/neoforged/neoforge/network/negotiation" {
     /**
      * Values that may be interpreted as {@link $NegotiatedNetworkComponent}.
      */
-    export type $NegotiatedNetworkComponent_ = { id?: $ResourceLocation_, version?: string,  } | [id?: $ResourceLocation_, version?: string, ];
+    export type $NegotiatedNetworkComponent_ = { version?: string, id?: $ResourceLocation_,  } | [version?: string, id?: $ResourceLocation_, ];
 }

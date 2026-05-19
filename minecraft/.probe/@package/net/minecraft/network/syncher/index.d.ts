@@ -30,8 +30,8 @@ declare module "@package/net/minecraft/network/syncher" {
         static forValueType<T>(arg0: $StreamCodec<$RegistryFriendlyByteBuf, T>): $EntityDataSerializer<T>;
     }
     export interface $EntityDataSerializer<T> {
-        copy(arg0: T): T;
         createAccessor(arg0: number): $EntityDataAccessor<T>;
+        copy(arg0: T): T;
         codec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
     }
     /**
@@ -39,24 +39,24 @@ declare module "@package/net/minecraft/network/syncher" {
      */
     export type $EntityDataSerializer_<T> = RegistryTypes.NeoforgeEntityDataSerializers;
     export class $SynchedEntityData$DataItem<T> {
+        setDirty(arg0: boolean): void;
+        isSetToDefault(): boolean;
+        isDirty(): boolean;
         value(): $SynchedEntityData$DataValue<T>;
         getValue(): T;
         setValue(arg0: T): void;
         getAccessor(): $EntityDataAccessor<T>;
-        isDirty(): boolean;
-        isSetToDefault(): boolean;
-        setDirty(arg0: boolean): void;
         accessor: $EntityDataAccessor<T>;
         constructor(arg0: $EntityDataAccessor_<T>, arg1: T);
         get setToDefault(): boolean;
     }
     export class $EntityDataSerializers {
+        static getSerializer(arg0: number): $EntityDataSerializer<never>;
         /**
          * @deprecated
          */
         static registerSerializer(arg0: $EntityDataSerializer_<never>): void;
         static getSerializedId(arg0: $EntityDataSerializer_<never>): number;
-        static getSerializer(arg0: number): $EntityDataSerializer<never>;
         static FLOAT: $EntityDataSerializer<number>;
         static PARTICLE: $EntityDataSerializer<$ParticleOptions>;
         static PARTICLES: $EntityDataSerializer<$List<$ParticleOptions>>;
@@ -107,15 +107,15 @@ declare module "@package/net/minecraft/network/syncher" {
         value(): T;
         id(): number;
         write(arg0: $RegistryFriendlyByteBuf): void;
-        static create<T>(arg0: $EntityDataAccessor_<T>, arg1: T): $SynchedEntityData$DataValue<T>;
         static read(arg0: $RegistryFriendlyByteBuf, arg1: number): $SynchedEntityData$DataValue<never>;
+        static create<T>(arg0: $EntityDataAccessor_<T>, arg1: T): $SynchedEntityData$DataValue<T>;
         serializer(): $EntityDataSerializer<T>;
         constructor(id: number, serializer: $EntityDataSerializer_<T>, value: T);
     }
     /**
      * Values that may be interpreted as {@link $SynchedEntityData$DataValue}.
      */
-    export type $SynchedEntityData$DataValue_<T> = { value?: any, serializer?: $EntityDataSerializer_<any>, id?: number,  } | [value?: any, serializer?: $EntityDataSerializer_<any>, id?: number, ];
+    export type $SynchedEntityData$DataValue_<T> = { id?: number, serializer?: $EntityDataSerializer_<any>, value?: any,  } | [id?: number, serializer?: $EntityDataSerializer_<any>, value?: any, ];
     export class $EntityDataAccessor<T> extends $Record {
         id(): number;
         serializer(): $EntityDataSerializer<T>;
@@ -124,19 +124,19 @@ declare module "@package/net/minecraft/network/syncher" {
     /**
      * Values that may be interpreted as {@link $EntityDataAccessor}.
      */
-    export type $EntityDataAccessor_<T> = { serializer?: $EntityDataSerializer_<any>, id?: number,  } | [serializer?: $EntityDataSerializer_<any>, id?: number, ];
+    export type $EntityDataAccessor_<T> = { id?: number, serializer?: $EntityDataSerializer_<any>,  } | [id?: number, serializer?: $EntityDataSerializer_<any>, ];
     export class $SynchedEntityData {
-        get<T>(arg0: $EntityDataAccessor_<T>): T;
-        set<T>(arg0: $EntityDataAccessor_<T>, arg1: T): void;
-        set<T>(arg0: $EntityDataAccessor_<T>, arg1: T, arg2: boolean): void;
-        isDirty(): boolean;
         packDirty(): $List<$SynchedEntityData$DataValue<never>>;
         getNonDefaultValues(): $List<$SynchedEntityData$DataValue<never>>;
         assignValues(arg0: $List_<$SynchedEntityData$DataValue_<never>>): void;
+        isDirty(): boolean;
+        get<T>(arg0: $EntityDataAccessor_<T>): T;
+        set<T>(arg0: $EntityDataAccessor_<T>, arg1: T): void;
+        set<T>(arg0: $EntityDataAccessor_<T>, arg1: T, arg2: boolean): void;
         static defineId<T>(arg0: $Class<$SyncedDataHolder>, arg1: $EntityDataSerializer_<T>): $EntityDataAccessor<T>;
         static ID_REGISTRY: $ClassTreeIdRegistry;
         constructor(arg0: $SyncedDataHolder, arg1: $SynchedEntityData$DataItem<never>[]);
-        get dirty(): boolean;
         get nonDefaultValues(): $List<$SynchedEntityData$DataValue<never>>;
+        get dirty(): boolean;
     }
 }

@@ -21,9 +21,9 @@ declare module "@package/team/unnamed/mocha/runtime" {
         static create(): $Scope;
     }
     export interface $Scope extends $ObjectValue {
-        copy(): $Scope;
-        readOnly(arg0: boolean): void;
         readOnly(): boolean;
+        readOnly(arg0: boolean): void;
+        copy(): $Scope;
     }
     export class $Scope$Builder {
     }
@@ -34,9 +34,9 @@ declare module "@package/team/unnamed/mocha/runtime" {
     export class $ExecutionContext<T> {
     }
     export interface $ExecutionContext<T> {
+        entity(): T;
         flag(arg0: $Object): void;
         flag(): $Object;
-        entity(): T;
         eval(arg0: $Expression): $Value;
     }
 }

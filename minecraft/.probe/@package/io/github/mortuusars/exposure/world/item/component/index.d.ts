@@ -8,20 +8,20 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/io/github/mortuusars/exposure/world/item/component" {
     export class $StoredItemStack {
-        isEmpty(): boolean;
         getForReading(): $ItemStack;
         getItemAndStackCopy<T extends $Item>(): $ItemAndStack<T>;
         mapIf<T, R>(clazz: $Class<T>, func: $BiFunction_<T, $ItemStack, R>): (R) | undefined;
         getItem(): $Item;
+        isEmpty(): boolean;
         getCopy(): $ItemStack;
         static CODEC: $Codec<$StoredItemStack>;
         static EMPTY: $StoredItemStack;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $StoredItemStack>;
         constructor(stack: $ItemStack_);
-        get empty(): boolean;
         get forReading(): $ItemStack;
         get itemAndStackCopy(): $ItemAndStack<T>;
         get item(): $Item;
+        get empty(): boolean;
         get copy(): $ItemStack;
     }
 }

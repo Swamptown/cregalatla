@@ -1,4 +1,3 @@
-import { $LeashExtension } from "@package/com/blackgear/vanillabackport/common/api/leash";
 import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $EntityType_, $VariantHolder, $Pose_, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $HasCustomInventoryScreen, $Leashable, $Pose, $PortalProcessor, $SlotAccess, $Entity, $Leashable$LeashData } from "@package/net/minecraft/world/entity";
 import { $FluidType_, $FluidType } from "@package/net/neoforged/neoforge/fluids";
@@ -39,16 +38,11 @@ import { $Hopper } from "@package/net/minecraft/world/level/block/entity";
 import { $DamageSource_ } from "@package/net/minecraft/world/damagesource";
 
 declare module "@package/net/minecraft/world/entity/vehicle" {
-    export class $Boat extends $VehicleEntity implements $Leashable, $VariantHolder<$Boat$Type>, $IBoatExtension, $LeashExtension {
-        setVariant(arg0: $Boat$Type_): void;
-        setInput(arg0: boolean, arg1: boolean, arg2: boolean, arg3: boolean): void;
-        elasticRangeLeashBehaviour(arg0: $Entity, arg1: number): void;
+    export class $Boat extends $VehicleEntity implements $Leashable, $VariantHolder<$Boat$Type>, $IBoatExtension {
         getLeashData(): $Leashable$LeashData;
         setLeashData(arg0: $Leashable$LeashData): void;
-        getGroundFriction(): number;
-        getWaterLevelAbove(): number;
-        clampRotation(arg0: $Entity): void;
-        getBubbleAngle(arg0: number): number;
+        elasticRangeLeashBehaviour(arg0: $Entity, arg1: number): void;
+        hasEnoughSpaceFor(arg0: $Entity): boolean;
         static canVehicleCollide(arg0: $Entity, arg1: $Entity): boolean;
         getSinglePassengerXOffset(): number;
         setPaddleState(arg0: boolean, arg1: boolean): void;
@@ -56,36 +50,28 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         getPaddleSound(): $SoundEvent;
         getMaxPassengers(): number;
         getRowingTime(arg0: number, arg1: number): number;
-        hasEnoughSpaceFor(arg0: $Entity): boolean;
+        getGroundFriction(): number;
+        getWaterLevelAbove(): number;
+        clampRotation(arg0: $Entity): void;
+        getBubbleAngle(arg0: number): number;
+        setVariant(arg0: $Boat$Type_): void;
+        getVariant(): $Boat$Type;
+        setInput(arg0: boolean, arg1: boolean, arg2: boolean, arg3: boolean): void;
+        leashTooFarBehaviour(): void;
+        canBeLeashed(): boolean;
+        isLeashed(): boolean;
         mayBeLeashed(): boolean;
         setDelayedLeashHolderId(arg0: number): void;
         handleLeashAtDistance(arg0: $Entity, arg1: number): boolean;
         closeRangeLeashBehaviour(arg0: $Entity): void;
         writeLeashData(arg0: $CompoundTag_, arg1: $Leashable$LeashData): void;
         readLeashData(arg0: $CompoundTag_): $Leashable$LeashData;
-        leashTooFarBehaviour(): void;
-        canBeLeashed(): boolean;
-        isLeashed(): boolean;
         getLeashHolder(): $Entity;
         dropLeash(arg0: boolean, arg1: boolean): void;
         canHaveALeashAttachedToIt(): boolean;
         setLeashedTo(arg0: $Entity, arg1: boolean): void;
         canBoatInFluid(arg0: $FluidState): boolean;
         canBoatInFluid(arg0: $FluidType_): boolean;
-        vb$leashDistanceTo(entity: $Entity): number;
-        vb$whenLeashedTo(entity: $Entity): void;
-        vb$leashSnapDistance(): number;
-        vb$leashElasticDistance(): number;
-        vb$checkElasticInteractions(entity: $Entity, data: $Leashable$LeashData): boolean;
-        vb$onElasticLeashPull(): void;
-        vb$canHaveALeashAttachedTo(target: $Entity): boolean;
-        vb$notifyLeashHolder(leashable: $Leashable): void;
-        vb$resetAngularMomentum(): void;
-        vb$supportQuadLeashAsHolder(): boolean;
-        vb$supportQuadLeash(): boolean;
-        vb$getQuadLeashOffsets(): $Vec3[];
-        vb$getQuadLeashHolderOffsets(): $Vec3[];
-        getVariant(): $Boat$Type;
         serializeNBT(arg0: $HolderLookup$Provider): $Boat$Type;
         firstTick: boolean;
         wasEyeInWater: boolean;
@@ -166,22 +152,22 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         dimensions: $EntityDimensions;
         constructor(arg0: $EntityType_<$Boat>, arg1: $Level_);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number);
-        get groundFriction(): number;
-        get waterLevelAbove(): number;
         get singlePassengerXOffset(): number;
         get paddleSound(): $SoundEvent;
         get maxPassengers(): number;
-        set delayedLeashHolderId(value: number);
+        get groundFriction(): number;
+        get waterLevelAbove(): number;
         get leashed(): boolean;
+        set delayedLeashHolderId(value: number);
         get leashHolder(): $Entity;
     }
     export class $Boat$Type extends $Enum<$Boat$Type> implements $StringRepresentable, $IExtensibleEnum {
+        isRaft(): boolean;
+        getPlanks(): $Block;
+        getSticks(): $Item;
         getName(): string;
         static values(): $Boat$Type[];
         static valueOf(arg0: string): $Boat$Type;
-        getPlanks(): $Block;
-        getSticks(): $Item;
-        isRaft(): boolean;
         static byName(arg0: string): $Boat$Type;
         static getExtensionInfo(): $ExtensionInfo;
         getSerializedName(): string;
@@ -199,9 +185,9 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         static OAK: $Boat$Type;
         chestBoatItem: $Supplier<$Item>;
         static DARK_OAK: $Boat$Type;
+        get raft(): boolean;
         get planks(): $Block;
         get sticks(): $Item;
-        get raft(): boolean;
         static get extensionInfo(): $ExtensionInfo;
         get serializedName(): string;
         get remappedEnumConstantName(): string;
@@ -213,14 +199,12 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
     export class $ContainerEntity {
     }
     export interface $ContainerEntity extends $Container, $MenuProvider {
-        position(): $Vec3;
-        isEmpty(): boolean;
-        level(): $Level;
+        setLootTable(arg0: $ResourceKey_<$LootTable>): void;
+        unpackChestVehicleLootTable(arg0: $Player): void;
         setLootTableSeed(arg0: number): void;
         addChestVehicleSaveData(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         readChestVehicleSaveData(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         chestVehicleDestroyed(arg0: $DamageSource_, arg1: $Level_, arg2: $Entity): void;
-        interactWithContainerVehicle(arg0: $Player): $InteractionResult;
         clearChestVehicleContent(): void;
         getChestVehicleItem(arg0: number): $ItemStack;
         removeChestVehicleItem(arg0: number, arg1: number): $ItemStack;
@@ -231,25 +215,27 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         getItemStacks(): $NonNullList<$ItemStack>;
         clearItemStacks(): void;
         isChestVehicleEmpty(): boolean;
-        setLootTable(arg0: $ResourceKey_<$LootTable>): void;
-        unpackChestVehicleLootTable(arg0: $Player): void;
+        interactWithContainerVehicle(arg0: $Player): $InteractionResult;
+        level(): $Level;
+        position(): $Vec3;
+        isEmpty(): boolean;
         isRemoved(): boolean;
         getBoundingBox(): $AABB;
         getLootTable(): $ResourceKey<$LootTable>;
         getLootTableSeed(): number;
-        get empty(): boolean;
         get itemStacks(): $NonNullList<$ItemStack>;
         get chestVehicleEmpty(): boolean;
+        get empty(): boolean;
         get removed(): boolean;
         get boundingBox(): $AABB;
     }
     export class $MinecartHopper extends $AbstractMinecartContainer implements $Hopper {
-        isEnabled(): boolean;
         suckInItems(): boolean;
         getLevelX(): number;
         getLevelY(): number;
         getLevelZ(): number;
         isGridAligned(): boolean;
+        isEnabled(): boolean;
         setEnabled(arg0: boolean): void;
         getSuckAabb(): $AABB;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
@@ -407,8 +393,8 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
-        constructor(arg0: $EntityType_<$MinecartChest>, arg1: $Level_);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number);
+        constructor(arg0: $EntityType_<$MinecartChest>, arg1: $Level_);
     }
     export class $AbstractMinecart extends $VehicleEntity implements $IAbstractMinecartExtension {
         static createMinecart(arg0: $ServerLevel, arg1: number, arg2: number, arg3: number, arg4: $AbstractMinecart$Type_, arg5: $ItemStack_, arg6: $Player): $AbstractMinecart;
@@ -442,13 +428,13 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         setMaxSpeedAirVertical(arg0: number): void;
         setDragAir(arg0: number): void;
         getPos(arg0: number, arg1: number, arg2: number): $Vec3;
-        getComparatorLevel(): number;
         getMaxCartSpeedOnRail(): number;
         canBeRidden(): boolean;
         getSlopeAdjustment(): number;
         shouldDoRailFunctions(): boolean;
         isPoweredCart(): boolean;
         getCurrentRailPosition(): $BlockPos;
+        getComparatorLevel(): number;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
@@ -522,8 +508,8 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
-        constructor(arg0: $EntityType_<never>, arg1: $Level_);
         constructor(arg0: $EntityType_<never>, arg1: $Level_, arg2: number, arg3: number, arg4: number);
+        constructor(arg0: $EntityType_<never>, arg1: $Level_);
         get collisionHandler(): $IMinecartCollisionHandler;
         get maxSpeed(): number;
         get minecartType(): $AbstractMinecart$Type;
@@ -531,20 +517,20 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         get defaultDisplayOffset(): number;
         set customDisplay(value: boolean);
         get maxSpeedWithRail(): number;
-        get comparatorLevel(): number;
         get maxCartSpeedOnRail(): number;
         get slopeAdjustment(): number;
         get poweredCart(): boolean;
         get currentRailPosition(): $BlockPos;
+        get comparatorLevel(): number;
     }
     export class $DismountHelper {
-        static findSafeDismountLocation(arg0: $EntityType_<never>, arg1: $CollisionGetter, arg2: $BlockPos_, arg3: boolean): $Vec3;
-        static isBlockFloorValid(arg0: number): boolean;
-        static canDismountTo(arg0: $CollisionGetter, arg1: $Vec3_, arg2: $LivingEntity, arg3: $Pose_): boolean;
-        static canDismountTo(arg0: $CollisionGetter, arg1: $LivingEntity, arg2: $AABB_): boolean;
         static offsetsForDirection(arg0: $Direction_): number[][];
         static nonClimbableShape(arg0: $BlockGetter, arg1: $BlockPos_): $VoxelShape;
         static findCeilingFrom(arg0: $BlockPos_, arg1: number, arg2: $Function_<$BlockPos, $VoxelShape>): number;
+        static isBlockFloorValid(arg0: number): boolean;
+        static canDismountTo(arg0: $CollisionGetter, arg1: $Vec3_, arg2: $LivingEntity, arg3: $Pose_): boolean;
+        static canDismountTo(arg0: $CollisionGetter, arg1: $LivingEntity, arg2: $AABB_): boolean;
+        static findSafeDismountLocation(arg0: $EntityType_<never>, arg1: $CollisionGetter, arg2: $BlockPos_, arg3: boolean): $Vec3;
         constructor();
     }
     export class $AbstractMinecart$Type extends $Enum<$AbstractMinecart$Type> {
@@ -576,29 +562,28 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
      */
     export type $Boat$Status_ = "in_water" | "under_water" | "under_flowing_water" | "on_land" | "in_air";
     export class $ChestBoat extends $Boat implements $HasCustomInventoryScreen, $ContainerEntity {
-        setLootTableSeed(arg0: number): void;
         createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
         setItem(arg0: number, arg1: $ItemStack_): void;
+        setLootTable(arg0: $ResourceKey_<$LootTable>): void;
+        setLootTableSeed(arg0: number): void;
+        stopOpen(arg0: $Player): void;
         unpackLootTable(arg0: $Player): void;
+        clearContent(): void;
         openCustomInventoryScreen(arg0: $Player): void;
         getItemStacks(): $NonNullList<$ItemStack>;
         clearItemStacks(): void;
-        clearContent(): void;
-        setLootTable(arg0: $ResourceKey_<$LootTable>): void;
-        stopOpen(arg0: $Player): void;
         removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
         getLootTable(): $ResourceKey<$LootTable>;
         getLootTableSeed(): number;
-        setChanged(): void;
-        stillValid(arg0: $Player): boolean;
         getContainerSize(): number;
         removeItemNoUpdate(arg0: number): $ItemStack;
-        isEmpty(): boolean;
+        stillValid(arg0: $Player): boolean;
+        setChanged(): void;
+        unpackChestVehicleLootTable(arg0: $Player): void;
         addChestVehicleSaveData(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         readChestVehicleSaveData(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         chestVehicleDestroyed(arg0: $DamageSource_, arg1: $Level_, arg2: $Entity): void;
-        interactWithContainerVehicle(arg0: $Player): $InteractionResult;
         clearChestVehicleContent(): void;
         getChestVehicleItem(arg0: number): $ItemStack;
         removeChestVehicleItem(arg0: number, arg1: number): $ItemStack;
@@ -607,7 +592,8 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         getChestVehicleSlot(arg0: number): $SlotAccess;
         isChestVehicleStillValid(arg0: $Player): boolean;
         isChestVehicleEmpty(): boolean;
-        unpackChestVehicleLootTable(arg0: $Player): void;
+        interactWithContainerVehicle(arg0: $Player): $InteractionResult;
+        isEmpty(): boolean;
         startOpen(arg0: $Player): void;
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
         countItem(arg0: $Item_): number;
@@ -810,18 +796,18 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
-        constructor(arg0: $EntityType_<never>, arg1: $Level_);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number);
+        constructor(arg0: $EntityType_<never>, arg1: $Level_);
     }
     export class $VehicleEntity extends $Entity {
-        destroy(arg0: $Item_): void;
-        destroy(arg0: $DamageSource_): void;
         setDamage(arg0: number): void;
         getDropItem(): $Item;
         setHurtDir(arg0: number): void;
         setHurtTime(arg0: number): void;
         getHurtTime(): number;
         shouldSourceDestroy(arg0: $DamageSource_): boolean;
+        destroy(arg0: $DamageSource_): void;
+        destroy(arg0: $Item_): void;
         getHurtDir(): number;
         getDamage(): number;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
@@ -974,8 +960,8 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
-        constructor(arg0: $EntityType_<$MinecartSpawner>, arg1: $Level_);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number);
+        constructor(arg0: $EntityType_<$MinecartSpawner>, arg1: $Level_);
         get spawner(): $BaseSpawner;
     }
     export class $MinecartCommandBlock extends $AbstractMinecart {
@@ -1149,9 +1135,9 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number);
     }
     export class $MinecartTNT extends $AbstractMinecart {
+        getFuse(): number;
         primeFuse(): void;
         isPrimed(): boolean;
-        getFuse(): number;
         explode(arg0: $DamageSource_, arg1: number): void;
         explode(arg0: number): void;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
@@ -1229,31 +1215,30 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         dimensions: $EntityDimensions;
         constructor(arg0: $EntityType_<$MinecartTNT>, arg1: $Level_);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number);
-        get primed(): boolean;
         get fuse(): number;
+        get primed(): boolean;
     }
     export class $AbstractMinecartContainer extends $AbstractMinecart implements $ContainerEntity, $LithiumInventory {
-        setLootTableSeed(arg0: number): void;
         createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
         createMenu(arg0: number, arg1: $Inventory): $AbstractContainerMenu;
         setItem(arg0: number, arg1: $ItemStack_): void;
+        setLootTable(arg0: $ResourceKey_<$LootTable>): void;
+        setLootTable(arg0: $ResourceKey_<$LootTable>, arg1: number): void;
+        setLootTableSeed(arg0: number): void;
+        clearContent(): void;
         getItemStacks(): $NonNullList<$ItemStack>;
         clearItemStacks(): void;
-        clearContent(): void;
-        setLootTable(arg0: $ResourceKey_<$LootTable>, arg1: number): void;
-        setLootTable(arg0: $ResourceKey_<$LootTable>): void;
         removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
         getLootTable(): $ResourceKey<$LootTable>;
         getLootTableSeed(): number;
-        setChanged(): void;
-        stillValid(arg0: $Player): boolean;
         removeItemNoUpdate(arg0: number): $ItemStack;
-        isEmpty(): boolean;
+        stillValid(arg0: $Player): boolean;
+        setChanged(): void;
+        unpackChestVehicleLootTable(arg0: $Player): void;
         addChestVehicleSaveData(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         readChestVehicleSaveData(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         chestVehicleDestroyed(arg0: $DamageSource_, arg1: $Level_, arg2: $Entity): void;
-        interactWithContainerVehicle(arg0: $Player): $InteractionResult;
         clearChestVehicleContent(): void;
         getChestVehicleItem(arg0: number): $ItemStack;
         removeChestVehicleItem(arg0: number, arg1: number): $ItemStack;
@@ -1262,7 +1247,8 @@ declare module "@package/net/minecraft/world/entity/vehicle" {
         getChestVehicleSlot(arg0: number): $SlotAccess;
         isChestVehicleStillValid(arg0: $Player): boolean;
         isChestVehicleEmpty(): boolean;
-        unpackChestVehicleLootTable(arg0: $Player): void;
+        interactWithContainerVehicle(arg0: $Player): $InteractionResult;
+        isEmpty(): boolean;
         generateLootLithium(): void;
         startOpen(arg0: $Player): void;
         stopOpen(arg0: $Player): void;

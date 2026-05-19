@@ -70,15 +70,15 @@ declare module "@package/net/blay09/mods/balm/api/config/schema" {
     export class $ConfiguredProperty<T> {
     }
     export interface $ConfiguredProperty<T> {
+        synced(): boolean;
+        setRaw(arg0: $MutableLoadedConfig, arg1: T): void;
+        parentSchema(): $BalmConfigSchema;
+        streamCodec(): $StreamCodec<$ByteBuf, T>;
+        category(): string;
         name(): string;
         type(): $Class<never>;
         comment(): string;
         defaultValue(): T;
-        category(): string;
-        parentSchema(): $BalmConfigSchema;
-        synced(): boolean;
-        setRaw(arg0: $MutableLoadedConfig, arg1: T): void;
-        streamCodec(): $StreamCodec<$ByteBuf, T>;
         getRaw(arg0: $LoadedConfig): T;
         codec(): $Codec<T>;
     }
@@ -107,12 +107,12 @@ declare module "@package/net/blay09/mods/balm/api/config/schema" {
         static create(arg0: $ResourceLocation_): $ConfigSchemaImpl;
     }
     export interface $BalmConfigSchema {
-        defaults(): $LoadedConfig;
         rootProperties(): $Collection<$ConfiguredProperty<never>>;
         findRootProperty(arg0: string): $ConfiguredProperty<never>;
+        identifier(): $ResourceLocation;
+        defaults(): $LoadedConfig;
         categories(): $Collection<$ConfigCategory>;
         findProperty(arg0: string, arg1: string): $ConfiguredProperty<never>;
-        identifier(): $ResourceLocation;
     }
     export class $ConfiguredList<T> {
     }

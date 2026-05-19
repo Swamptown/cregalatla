@@ -12,7 +12,6 @@ import { $InteractionResult, $ContainerListener, $InteractionHand, $SimpleContai
 import { $IntUnaryOperator_, $DoubleSupplier_ } from "@package/java/util/function";
 import { $HolderLookup$Provider, $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
-import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $SoundEvent, $SoundSource_ } from "@package/net/minecraft/sounds";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
 import { $PathNavigation } from "@package/net/minecraft/world/entity/ai/navigation";
@@ -79,8 +78,8 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
     export type $Llama$Variant_ = "creamy" | "white" | "brown" | "gray";
     export class $AbstractChestedHorse extends $AbstractHorse {
         hasChest(): boolean;
-        static createBaseChestedHorseAttributes(): $AttributeSupplier$Builder;
         setChest(arg0: boolean): void;
+        static createBaseChestedHorseAttributes(): $AttributeSupplier$Builder;
         playChestEquipsSound(): void;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
@@ -270,8 +269,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
     export class $Llama$LlamaGroupData extends $AgeableMob$AgeableMobGroupData {
     }
     export class $Llama extends $AbstractChestedHorse implements $VariantHolder<$Llama$Variant>, $RangedAttackMob {
-        getVariant(): $Llama$Variant;
-        setVariant(arg0: $Llama$Variant_): void;
+        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
         isTraderLlama(): boolean;
         getSwag(): $DyeColor;
         makeNewLlama(): $Llama;
@@ -281,8 +279,8 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         hasCaravanTail(): boolean;
         inCaravan(): boolean;
         getCaravanHead(): $Llama;
-        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
-        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Llama;
+        setVariant(arg0: $Llama$Variant_): void;
+        getVariant(): $Llama$Variant;
         getStrength(): number;
         static createAttributes(): $AttributeSupplier$Builder;
         serializeNBT(arg0: $HolderLookup$Provider): $Llama$Variant;
@@ -673,12 +671,14 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
     }
     export class $AbstractHorse extends $Animal implements $ContainerListener, $HasCustomInventoryScreen, $OwnableEntity, $PlayerRideableJumping, $Saddleable {
         getInventoryColumns(): number;
-        getOwnerUUID(): $UUID;
+        isTamed(): boolean;
+        containerChanged(arg0: $Container): void;
         canJump(): boolean;
         onPlayerJump(arg0: number): void;
-        equipSaddle(arg0: $ItemStack_, arg1: $SoundSource_): void;
         isSaddled(): boolean;
         isSaddleable(): boolean;
+        equipSaddle(arg0: $ItemStack_, arg1: $SoundSource_): void;
+        getOwnerUUID(): $UUID;
         static createBaseHorseAttributes(): $AttributeSupplier$Builder;
         getRiddenRotation(arg0: $LivingEntity): $Vec2;
         executeRidersJump(arg0: number, arg1: $Vec3_): void;
@@ -704,8 +704,8 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         setTemper(arg0: number): void;
         modifyTemper(arg0: number): number;
         getMaxTemper(): number;
-        static getInventorySize(arg0: number): number;
         getInventorySize(): number;
+        static getInventorySize(arg0: number): number;
         syncSaddleToClients(): void;
         standIfPossible(): void;
         getAngrySound(): $SoundEvent;
@@ -730,8 +730,6 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         hasInventoryChanged(arg0: $Container): boolean;
         getAmbientStandInterval(): number;
         getBodyArmorAccess(): $Container;
-        isTamed(): boolean;
-        containerChanged(arg0: $Container): void;
         getFlag(arg0: number): boolean;
         setFlag(arg0: number, arg1: boolean): void;
         getInventory(): $Container;
@@ -950,8 +948,8 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
     }
     export class $SkeletonHorse extends $AbstractHorse {
         setTrap(arg0: boolean): void;
-        static checkSkeletonHorseSpawnRules(arg0: $EntityType_<$Animal>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         isTrap(): boolean;
+        static checkSkeletonHorseSpawnRules(arg0: $EntityType_<$Animal>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
@@ -1530,9 +1528,9 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         constructor(arg0: $SkeletonHorse);
     }
     export class $Horse extends $AbstractHorse implements $VariantHolder<$Variant> {
-        getVariant(): $Variant;
-        setVariant(arg0: $Variant_): void;
         getMarkings(): $Markings;
+        setVariant(arg0: $Variant_): void;
+        getVariant(): $Variant;
         serializeNBT(arg0: $HolderLookup$Provider): $Variant;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;

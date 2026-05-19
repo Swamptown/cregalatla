@@ -127,26 +127,26 @@ declare module "@package/net/minecraft/client/model/geom" {
         constructor(arg0: $Vector3f, arg1: number, arg2: number);
     }
     export class $ModelPart implements $ModelPartInjector, $ModelPartAccessor {
-        isEmpty(): boolean;
-        copyFrom(arg0: $ModelPart): void;
-        visit(arg0: $PoseStack, arg1: $ModelPart$Visitor_): void;
-        getChild(arg0: string): $ModelPart;
-        offsetScale(arg0: $Vector3f): void;
+        hasChild(arg0: string): boolean;
         loadPose(arg0: $PartPose): void;
         translateAndRotate(arg0: $PoseStack): void;
-        hasChild(arg0: string): boolean;
+        offsetScale(arg0: $Vector3f): void;
         offsetPos(arg0: $Vector3f): void;
         setRotation(arg0: number, arg1: number, arg2: number): void;
+        getChild(arg0: string): $ModelPart;
+        isEmpty(): boolean;
+        visit(arg0: $PoseStack, arg1: $ModelPart$Visitor_): void;
+        copyFrom(arg0: $ModelPart): void;
         render(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number): void;
         render(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number): void;
         setPos(arg0: number, arg1: number, arg2: number): void;
         isVisible(): boolean;
+        handler$ghj000$skinlayers3d$render(poseStack: $PoseStack, vertexConsumer: $VertexConsumer, light: number, overlay: number, color: number, ci: $CallbackInfo): void;
         storePose(): $PartPose;
         getInitialPose(): $PartPose;
         setInitialPose(arg0: $PartPose): void;
         resetPose(): void;
-        handler$ggm000$skinlayers3d$render(poseStack: $PoseStack, vertexConsumer: $VertexConsumer, light: number, overlay: number, color: number, ci: $CallbackInfo): void;
-        handler$cop000$xaerominimap$onRender(arg0: $PoseStack$Pose, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        handler$cpg000$xaerominimap$onRender(arg0: $PoseStack$Pose, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         getRandomCube(arg0: $RandomSource): $ModelPart$Cube;
         offsetRotation(arg0: $Vector3f): void;
         getAllParts(): $Stream<$ModelPart>;
@@ -177,8 +177,8 @@ declare module "@package/net/minecraft/client/model/geom" {
         get offsetProvider(): $OffsetProvider;
     }
     export class $PartPose {
-        static offset(arg0: number, arg1: number, arg2: number): $PartPose;
         static offsetAndRotation(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): $PartPose;
+        static offset(arg0: number, arg1: number, arg2: number): $PartPose;
         static rotation(arg0: number, arg1: number, arg2: number): $PartPose;
         static ZERO: $PartPose;
         zRot: number;
@@ -189,14 +189,14 @@ declare module "@package/net/minecraft/client/model/geom" {
         z: number;
     }
     export class $ModelLayers implements $EntityModelLayersAccessor {
+        static createHangingSignModelName(arg0: $WoodType_): $ModelLayerLocation;
+        static createSignModelName(arg0: $WoodType_): $ModelLayerLocation;
+        static getLayers$fabric_rendering_v1_$md$4ca6b6$0(): $Set<any>;
         static createRaftModelName(arg0: $Boat$Type_): $ModelLayerLocation;
         static createChestRaftModelName(arg0: $Boat$Type_): $ModelLayerLocation;
-        static getLayers$fabric_rendering_v1_$md$d858b6$0(): $Set<any>;
         static getKnownLocations(): $Stream<$ModelLayerLocation>;
-        static createChestBoatModelName(arg0: $Boat$Type_): $ModelLayerLocation;
         static createBoatModelName(arg0: $Boat$Type_): $ModelLayerLocation;
-        static createSignModelName(arg0: $WoodType_): $ModelLayerLocation;
-        static createHangingSignModelName(arg0: $WoodType_): $ModelLayerLocation;
+        static createChestBoatModelName(arg0: $Boat$Type_): $ModelLayerLocation;
         static MOOSHROOM: $ModelLayerLocation;
         static MAGMA_CUBE: $ModelLayerLocation;
         static SILVERFISH: $ModelLayerLocation;
@@ -372,7 +372,7 @@ declare module "@package/net/minecraft/client/model/geom" {
         static BOOK: $ModelLayerLocation;
         static CONDUIT_SHELL: $ModelLayerLocation;
         constructor();
-        static get layers$fabric_rendering_v1_$md$d858b6$0(): $Set<any>;
+        static get layers$fabric_rendering_v1_$md$4ca6b6$0(): $Set<any>;
         static get knownLocations(): $Stream<$ModelLayerLocation>;
     }
     export class $EntityModelSet implements $ResourceManagerReloadListener {

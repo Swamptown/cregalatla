@@ -6,12 +6,12 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/io/github/mortuusars/exposure/world/camera/component" {
     export class $ShutterSpeed implements $StringRepresentable {
-        getNotation(): string;
         getDurationMilliseconds(): number;
-        getStopsDifference(relative: $ShutterSpeed): number;
-        getStops(): number;
         shouldCauseTickingSound(): boolean;
         getDurationTicks(): number;
+        getNotation(): string;
+        getStopsDifference(relative: $ShutterSpeed): number;
+        getStops(): number;
         getSerializedName(): string;
         getBrightness(): number;
         getRemappedEnumConstantName(): string;
@@ -19,24 +19,24 @@ declare module "@package/io/github/mortuusars/exposure/world/camera/component" {
         static DEFAULT: $ShutterSpeed;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ShutterSpeed>;
         constructor(notation: string);
-        get notation(): string;
         get durationMilliseconds(): number;
-        get stops(): number;
         get durationTicks(): number;
+        get notation(): string;
+        get stops(): number;
         get serializedName(): string;
         get brightness(): number;
         get remappedEnumConstantName(): string;
     }
     export class $FocalRange implements $StringRepresentable {
-        min(): number;
-        max(): number;
-        static getDefault(): $FocalRange;
-        static parse(value: string): $FocalRange;
         zoomFromFov(fov: number): number;
         clampFocalLength(focalLength: number): number;
         clampFov(fov: number): number;
         fovFromZoom(zoom: number): number;
         focalLengthFromZoom(zoom: number): number;
+        min(): number;
+        max(): number;
+        static getDefault(): $FocalRange;
+        static parse(value: string): $FocalRange;
         static fromJson(json: $JsonElement_): $FocalRange;
         isPrime(): boolean;
         getSerializedName(): string;

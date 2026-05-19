@@ -6,10 +6,10 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/de/maxhenkel/voicechat/config" {
     export class $ServerConfig$Codec extends $Enum<$ServerConfig$Codec> {
-        static values(): $ServerConfig$Codec[];
-        static valueOf(arg0: string): $ServerConfig$Codec;
         getApplication(): $OpusEncoder$Application;
         getMode(): $OpusEncoderMode;
+        static values(): $ServerConfig$Codec[];
+        static valueOf(arg0: string): $ServerConfig$Codec;
         static RESTRICTED_LOWDELAY: $ServerConfig$Codec;
         static VOIP: $ServerConfig$Codec;
         static AUDIO: $ServerConfig$Codec;

@@ -27,31 +27,31 @@ declare module "@package/software/bernie/geckolib/event" {
         get renderer(): $GeoRenderer<never>;
     }
     export class $GeoRenderEvent$Armor$Post extends $GeoRenderEvent$Armor {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         getRenderer(): $GeoRenderer<never>;
         constructor(arg0: $GeoArmorRenderer<never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoRenderer<never>;
     }
     export class $GeoRenderEvent$Block$Post extends $GeoRenderEvent$Block {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         getRenderer(): $GeoRenderer<never>;
         constructor(arg0: $GeoBlockRenderer<never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoRenderer<never>;
@@ -68,18 +68,18 @@ declare module "@package/software/bernie/geckolib/event" {
         get renderer(): $GeoObjectRenderer<never>;
     }
     export class $GeoRenderEvent$Entity$Pre extends $GeoRenderEvent$Entity implements $ICancellableEvent {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         getRenderer(): $GeoEntityRenderer<never>;
         constructor(arg0: $GeoEntityRenderer<never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoEntityRenderer<never>;
@@ -105,35 +105,35 @@ declare module "@package/software/bernie/geckolib/event" {
         get renderer(): $GeoRenderer<never>;
     }
     export class $GeoRenderEvent$Object$Pre extends $GeoRenderEvent$Object implements $ICancellableEvent {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         getRenderer(): $GeoObjectRenderer<never>;
         constructor(arg0: $GeoObjectRenderer<never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoObjectRenderer<never>;
     }
     export class $GeoRenderEvent$Armor$Pre extends $GeoRenderEvent$Armor implements $ICancellableEvent {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         getRenderer(): $GeoRenderer<never>;
         constructor(arg0: $GeoArmorRenderer<never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoRenderer<never>;
@@ -145,18 +145,18 @@ declare module "@package/software/bernie/geckolib/event" {
         get renderer(): $GeoReplacedEntityRenderer<never, never>;
     }
     export class $GeoRenderEvent$Item$Pre extends $GeoRenderEvent$Item implements $ICancellableEvent {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         getRenderer(): $GeoRenderer<never>;
         constructor(arg0: $GeoItemRenderer<never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoRenderer<never>;
@@ -175,18 +175,18 @@ declare module "@package/software/bernie/geckolib/event" {
         get renderer(): $GeoReplacedEntityRenderer<never, never>;
     }
     export class $GeoRenderEvent$ReplacedEntity$Pre extends $GeoRenderEvent$ReplacedEntity implements $ICancellableEvent {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         getRenderer(): $GeoReplacedEntityRenderer<never, never>;
         constructor(arg0: $GeoReplacedEntityRenderer<never, never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoReplacedEntityRenderer<never, never>;
@@ -199,48 +199,48 @@ declare module "@package/software/bernie/geckolib/event" {
         get renderer(): $GeoEntityRenderer<never>;
     }
     export class $GeoRenderEvent$ReplacedEntity$Post extends $GeoRenderEvent$ReplacedEntity {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         getRenderer(): $GeoReplacedEntityRenderer<never, never>;
         constructor(arg0: $GeoReplacedEntityRenderer<never, never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoReplacedEntityRenderer<never, never>;
     }
     export class $GeoRenderEvent$Block$Pre extends $GeoRenderEvent$Block implements $ICancellableEvent {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         getRenderer(): $GeoRenderer<never>;
         constructor(arg0: $GeoBlockRenderer<never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoRenderer<never>;
     }
     export class $GeoRenderEvent$Object$Post extends $GeoRenderEvent$Object {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         getRenderer(): $GeoObjectRenderer<never>;
         constructor(arg0: $GeoObjectRenderer<never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoObjectRenderer<never>;
@@ -252,16 +252,16 @@ declare module "@package/software/bernie/geckolib/event" {
         get renderer(): $GeoEntityRenderer<never>;
     }
     export class $GeoRenderEvent$Item$Post extends $GeoRenderEvent$Item {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         getRenderer(): $GeoRenderer<never>;
         constructor(arg0: $GeoItemRenderer<never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoRenderer<never>;
@@ -277,16 +277,16 @@ declare module "@package/software/bernie/geckolib/event" {
      */
     export type $GeoRenderEvent_ = (() => $GeoRenderer<never>);
     export class $GeoRenderEvent$Entity$Post extends $GeoRenderEvent$Entity {
-        getPackedLight(): number;
-        getPartialTick(): number;
         getBufferSource(): $MultiBufferSource;
+        getPartialTick(): number;
+        getPackedLight(): number;
         getPoseStack(): $PoseStack;
         getModel(): $BakedGeoModel;
         getRenderer(): $GeoEntityRenderer<never>;
         constructor(arg0: $GeoEntityRenderer<never>, arg1: $PoseStack, arg2: $BakedGeoModel_, arg3: $MultiBufferSource_, arg4: number, arg5: number);
-        get packedLight(): number;
-        get partialTick(): number;
         get bufferSource(): $MultiBufferSource;
+        get partialTick(): number;
+        get packedLight(): number;
         get poseStack(): $PoseStack;
         get model(): $BakedGeoModel;
         get renderer(): $GeoEntityRenderer<never>;

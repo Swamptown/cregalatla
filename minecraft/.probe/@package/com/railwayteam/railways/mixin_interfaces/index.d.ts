@@ -63,15 +63,15 @@ declare module "@package/com/railwayteam/railways/mixin_interfaces" {
         railways$isVisible(): boolean;
     }
     export class $IHasTrackCasing {
-        static isAlternate(arg0: $Level_, arg1: $BlockPos_): boolean;
         static setTrackCasing(arg0: $Level_, arg1: $BlockPos_, arg2: $SlabBlock): void;
         static setAlternateModel(arg0: $Level_, arg1: $BlockPos_, arg2: boolean): boolean;
+        static isAlternate(arg0: $Level_, arg1: $BlockPos_): boolean;
         static getTrackCasing(arg0: $Level_, arg1: $BlockPos_): $SlabBlock;
     }
     export interface $IHasTrackCasing {
-        isAlternate(): boolean;
         setTrackCasing(arg0: $SlabBlock): void;
         setAlternate(arg0: boolean): void;
+        isAlternate(): boolean;
         getTrackCasing(): $SlabBlock;
     }
     export class $IPreAssembleCallback {
@@ -84,19 +84,19 @@ declare module "@package/com/railwayteam/railways/mixin_interfaces" {
      */
     export type $IPreAssembleCallback_ = (() => void);
     export class $ISwitchDisabledEdge {
-        static isEnabled(arg0: $TrackEdge): boolean;
-        static isAutomatic(arg0: $TrackEdge): boolean;
         static automaticallySelect(arg0: $TrackEdge): void;
         static isDisabled(arg0: $TrackEdge): boolean;
+        static isEnabled(arg0: $TrackEdge): boolean;
+        static isAutomatic(arg0: $TrackEdge): boolean;
     }
     export interface $ISwitchDisabledEdge {
-        isEnabled(): boolean;
-        isAutomatic(): boolean;
-        isAutomaticallySelected(): boolean;
+        setAutomaticallySelected(): void;
         getAutomaticallySelectedPriority(): number;
+        isAutomaticallySelected(): boolean;
         ackAutomaticSelection(): void;
         setAutomatic(arg0: boolean): void;
-        setAutomaticallySelected(): void;
+        isEnabled(): boolean;
+        isAutomatic(): boolean;
         setEnabled(arg0: boolean): void;
         get automaticallySelectedPriority(): number;
     }
@@ -109,14 +109,14 @@ declare module "@package/com/railwayteam/railways/mixin_interfaces" {
     export class $IHandcarTrain {
     }
     export interface $IHandcarTrain {
-        railways$setHandcar(arg0: boolean): void;
         railways$isHandcar(): boolean;
+        railways$setHandcar(arg0: boolean): void;
     }
     export class $IIndexedSchedule {
     }
     export interface $IIndexedSchedule {
-        railways$getIndex(): number;
         railways$setIndex(arg0: number): void;
+        railways$getIndex(): number;
     }
     export class $IMonorailBezier {
     }
@@ -139,16 +139,16 @@ declare module "@package/com/railwayteam/railways/mixin_interfaces" {
     export class $IBufferBlockedTrain {
     }
     export interface $IBufferBlockedTrain {
-        railways$setControlBlocked(arg0: boolean, arg1: boolean): void;
         railways$isControlBlocked(): boolean;
         railways$getBlockedSign(): number;
+        railways$setControlBlocked(arg0: boolean, arg1: boolean): void;
     }
     export class $IGenerallySearchableNavigation {
     }
     export interface $IGenerallySearchableNavigation {
-        railways$findNearestApproachableSwitch(arg0: boolean): $Pair<$TrackSwitch, $Pair<boolean, ($TrackSwitchBlock$SwitchState) | undefined>>;
-        railways$searchGeneral(arg0: number, arg1: number, arg2: boolean, arg3: $IGenerallySearchableNavigation$PointTest_): void;
         railways$searchGeneral(arg0: number, arg1: boolean, arg2: $IGenerallySearchableNavigation$PointTest_): void;
+        railways$searchGeneral(arg0: number, arg1: number, arg2: boolean, arg3: $IGenerallySearchableNavigation$PointTest_): void;
+        railways$findNearestApproachableSwitch(arg0: boolean): $Pair<$TrackSwitch, $Pair<boolean, ($TrackSwitchBlock$SwitchState) | undefined>>;
     }
     export class $IContraptionFuel {
     }
@@ -198,8 +198,8 @@ declare module "@package/com/railwayteam/railways/mixin_interfaces" {
     export class $ILimited {
     }
     export interface $ILimited {
-        setLimitEnabled(arg0: boolean): void;
         isLimitEnabled(): boolean;
+        setLimitEnabled(arg0: boolean): void;
     }
     export class $AnimatedTextureDuck {
     }

@@ -52,9 +52,9 @@ declare module "@package/net/minecraft/client/gui/screens/inventory/tooltip" {
     }
     export interface $ClientTooltipComponent {
         renderText(arg0: $Font, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $MultiBufferSource$BufferSource): void;
-        renderImage(arg0: $Font, arg1: number, arg2: number, arg3: $GuiGraphics): void;
         getWidth(arg0: $Font): number;
         getHeight(): number;
+        renderImage(arg0: $Font, arg1: number, arg2: number, arg3: $GuiGraphics): void;
         get height(): number;
     }
     export class $BelowOrAboveWidgetTooltipPositioner implements $ClientTooltipPositioner {
@@ -62,24 +62,24 @@ declare module "@package/net/minecraft/client/gui/screens/inventory/tooltip" {
         constructor(arg0: $ScreenRectangle_);
     }
     export class $ClientBundleTooltip implements $ClientTooltipComponent {
-        renderImage(arg0: $Font, arg1: number, arg2: number, arg3: $GuiGraphics): void;
         getWidth(font: $Font): number;
         getHeight(): number;
+        renderImage(arg0: $Font, arg1: number, arg2: number, arg3: $GuiGraphics): void;
         renderText(arg0: $Font, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $MultiBufferSource$BufferSource): void;
         constructor(arg0: $BundleContents);
         get height(): number;
     }
     export class $ClientActivePlayersTooltip implements $ClientTooltipComponent {
-        renderImage(arg0: $Font, arg1: number, arg2: number, arg3: $GuiGraphics): void;
         getWidth(arg0: $Font): number;
         getHeight(): number;
+        renderImage(arg0: $Font, arg1: number, arg2: number, arg3: $GuiGraphics): void;
         renderText(arg0: $Font, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $MultiBufferSource$BufferSource): void;
         constructor(arg0: $ClientActivePlayersTooltip$ActivePlayersTooltip_);
         get height(): number;
     }
     export class $TooltipRenderUtil {
-        static renderTooltipBackground(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         static renderTooltipBackground(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
+        static renderTooltipBackground(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         static MOUSE_OFFSET: number;
         static PADDING_LEFT: number;
         static PADDING_RIGHT: number;

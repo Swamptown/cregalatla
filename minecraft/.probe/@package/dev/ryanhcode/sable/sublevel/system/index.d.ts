@@ -19,10 +19,6 @@ export * as ticket from "@package/dev/ryanhcode/sable/sublevel/system/ticket";
 
 declare module "@package/dev/ryanhcode/sable/sublevel/system" {
     export class $SubLevelPhysicsSystem implements $SubLevelObserver {
-        static get(arg0: $Level_): $SubLevelPhysicsSystem;
-        initialize(): void;
-        tick(arg0: $SubLevelContainer): void;
-        getLevel(): $ServerLevel;
         getPartialPhysicsTick(): number;
         updatePose(arg0: $ServerSubLevel): void;
         recoverSubLevel(arg0: $ServerSubLevel): boolean;
@@ -39,6 +35,10 @@ declare module "@package/dev/ryanhcode/sable/sublevel/system" {
         wakeUpObjectsAt(arg0: number, arg1: number, arg2: number): void;
         handleBlockChange(arg0: $SectionPos, arg1: $LevelChunkSection, arg2: number, arg3: number, arg4: number, arg5: $BlockState_, arg6: $BlockState_): void;
         getPhysicsHandle(arg0: $ServerSubLevel): $RigidBodyHandle;
+        getLevel(): $ServerLevel;
+        tick(arg0: $SubLevelContainer): void;
+        static get(arg0: $Level_): $SubLevelPhysicsSystem;
+        initialize(): void;
         onSubLevelRemoved(arg0: $SubLevel, arg1: $SubLevelRemovalReason_): void;
         onSubLevelAdded(arg0: $SubLevel): void;
         queryIntersecting(arg0: $BoundingBox3dc): $Iterable<$SubLevel>;
@@ -50,19 +50,19 @@ declare module "@package/dev/ryanhcode/sable/sublevel/system" {
         static DEFAULT_RESIDENT_CAPACITY: number;
         static currentlySteppingSystem: $SubLevelPhysicsSystem;
         constructor(arg0: $ServerLevel);
-        get level(): $ServerLevel;
         get partialPhysicsTick(): number;
         get nextRuntimeID(): number;
         get arbitraryObjects(): $Iterable<$ArbitraryPhysicsObject>;
         get ticketManager(): $PhysicsChunkTicketManager;
+        get level(): $ServerLevel;
         get config(): $PhysicsConfigData;
         get pipeline(): $PhysicsPipeline;
     }
     export class $SubLevelTrackingSystem implements $SubLevelObserver {
-        tick(arg0: $SubLevelContainer): void;
         serverWidePlayerSink(arg0: $ServerSubLevel): $VeilPacketManager$PacketSink;
         getInterpolationTick(): number;
         addTrackingPlugin(arg0: $SubLevelTrackingPlugin): void;
+        tick(arg0: $SubLevelContainer): void;
         onSubLevelRemoved(arg0: $SubLevel, arg1: $SubLevelRemovalReason_): void;
         onSubLevelAdded(arg0: $SubLevel): void;
         constructor(arg0: $ServerLevel);

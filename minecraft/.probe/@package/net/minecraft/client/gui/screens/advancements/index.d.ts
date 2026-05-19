@@ -15,13 +15,13 @@ import { $Enum, $Record } from "@package/java/lang";
 
 declare module "@package/net/minecraft/client/gui/screens/advancements" {
     export class $AdvancementTabType extends $Enum<$AdvancementTabType> {
+        getY(arg0: number): number;
         static values(): $AdvancementTabType[];
         static valueOf(arg0: string): $AdvancementTabType;
         getMax(): number;
-        getY(arg0: number): number;
+        draw(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: boolean, arg4: number): void;
         isMouseOver(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
         getX(arg0: number): number;
-        draw(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: boolean, arg4: number): void;
         drawIcon(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_): void;
         static MAX_TABS: number;
         static BELOW: $AdvancementTabType;
@@ -39,14 +39,14 @@ declare module "@package/net/minecraft/client/gui/screens/advancements" {
     /**
      * Values that may be interpreted as {@link $AdvancementTabType$Sprites}.
      */
-    export type $AdvancementTabType$Sprites_ = { last?: $ResourceLocation_, first?: $ResourceLocation_, middle?: $ResourceLocation_,  } | [last?: $ResourceLocation_, first?: $ResourceLocation_, middle?: $ResourceLocation_, ];
+    export type $AdvancementTabType$Sprites_ = { middle?: $ResourceLocation_, first?: $ResourceLocation_, last?: $ResourceLocation_,  } | [middle?: $ResourceLocation_, first?: $ResourceLocation_, last?: $ResourceLocation_, ];
     export class $AdvancementsScreen extends $Screen implements $ClientAdvancements$Listener {
+        onUpdateAdvancementProgress(arg0: $AdvancementNode, arg1: $AdvancementProgress): void;
         renderWindow(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         onAddAdvancementRoot(arg0: $AdvancementNode): void;
         onRemoveAdvancementRoot(arg0: $AdvancementNode): void;
         onAddAdvancementTask(arg0: $AdvancementNode): void;
         onRemoveAdvancementTask(arg0: $AdvancementNode): void;
-        onUpdateAdvancementProgress(arg0: $AdvancementNode, arg1: $AdvancementProgress): void;
         getAdvancementWidget(arg0: $AdvancementNode): $AdvancementWidget;
         onSelectedTabChanged(arg0: $AdvancementHolder_): void;
         onAdvancementsCleared(): void;
@@ -79,10 +79,10 @@ declare module "@package/net/minecraft/client/gui/screens/advancements" {
         constructor(arg0: $ClientAdvancements, arg1: $Screen);
     }
     export class $AdvancementWidgetType extends $Enum<$AdvancementWidgetType> {
-        static values(): $AdvancementWidgetType[];
-        static valueOf(arg0: string): $AdvancementWidgetType;
         frameSprite(arg0: $AdvancementType_): $ResourceLocation;
         boxSprite(): $ResourceLocation;
+        static values(): $AdvancementWidgetType[];
+        static valueOf(arg0: string): $AdvancementWidgetType;
         static OBTAINED: $AdvancementWidgetType;
         static UNOBTAINED: $AdvancementWidgetType;
     }
@@ -91,14 +91,14 @@ declare module "@package/net/minecraft/client/gui/screens/advancements" {
      */
     export type $AdvancementWidgetType_ = "obtained" | "unobtained";
     export class $AdvancementTab {
+        getPage(): number;
+        getDisplay(): $DisplayInfo;
         getType(): $AdvancementTabType;
         static create(arg0: $Minecraft, arg1: $AdvancementsScreen, arg2: number, arg3: $AdvancementNode): $AdvancementTab;
         getIndex(): number;
-        getDisplay(): $DisplayInfo;
-        getPage(): number;
-        isMouseOver(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         getRootNode(): $AdvancementNode;
         getTitle(): $Component;
+        isMouseOver(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         getScreen(): $AdvancementsScreen;
         getWidget(arg0: $AdvancementHolder_): $AdvancementWidget;
         scroll(arg0: number, arg1: number): void;
@@ -109,10 +109,10 @@ declare module "@package/net/minecraft/client/gui/screens/advancements" {
         addAdvancement(arg0: $AdvancementNode): void;
         constructor(arg0: $Minecraft, arg1: $AdvancementsScreen, arg2: $AdvancementTabType_, arg3: number, arg4: $AdvancementNode, arg5: $DisplayInfo);
         constructor(arg0: $Minecraft, arg1: $AdvancementsScreen, arg2: $AdvancementTabType_, arg3: number, arg4: number, arg5: $AdvancementNode, arg6: $DisplayInfo);
+        get page(): number;
+        get display(): $DisplayInfo;
         get type(): $AdvancementTabType;
         get index(): number;
-        get display(): $DisplayInfo;
-        get page(): number;
         get rootNode(): $AdvancementNode;
         get title(): $Component;
         get screen(): $AdvancementsScreen;
@@ -121,17 +121,17 @@ declare module "@package/net/minecraft/client/gui/screens/advancements" {
         drawConnectivity(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: boolean): void;
         attachToParent(): void;
         drawHover(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
-        addChild(arg0: $AdvancementWidget): void;
         setProgress(arg0: $AdvancementProgress): void;
         getY(): number;
+        addChild(arg0: $AdvancementWidget): void;
+        getWidth(): number;
+        draw(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         isMouseOver(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         getX(): number;
-        draw(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        getWidth(): number;
         constructor(arg0: $AdvancementTab, arg1: $Minecraft, arg2: $AdvancementNode, arg3: $DisplayInfo);
         set progress(value: $AdvancementProgress);
         get y(): number;
-        get x(): number;
         get width(): number;
+        get x(): number;
     }
 }

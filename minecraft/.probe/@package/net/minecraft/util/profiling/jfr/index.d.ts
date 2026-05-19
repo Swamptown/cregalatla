@@ -19,10 +19,10 @@ export * as callback from "@package/net/minecraft/util/profiling/jfr/callback";
 
 declare module "@package/net/minecraft/util/profiling/jfr" {
     export class $Environment extends $Enum<$Environment> {
+        getDescription(): string;
         static values(): $Environment[];
         static valueOf(arg0: string): $Environment;
         static from(arg0: $MinecraftServer): $Environment;
-        getDescription(): string;
         static SERVER: $Environment;
         static CLIENT: $Environment;
         get description(): string;
@@ -36,45 +36,45 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         constructor(arg0: $Runnable_);
     }
     export class $JfrProfiler implements $JvmProfiler {
-        static getInstance(): $JfrProfiler;
-        start(arg0: $Environment_): boolean;
-        stop(): $Path;
         onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
         onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        onWorldLoadedStarted(): $ProfiledDuration;
         onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
+        onWorldLoadedStarted(): $ProfiledDuration;
+        isAvailable(): boolean;
+        static getInstance(): $JfrProfiler;
+        start(arg0: $Environment_): boolean;
+        stop(): $Path;
         isRunning(): boolean;
         onServerTick(arg0: number): void;
-        isAvailable(): boolean;
         static TICK_CATEGORY: string;
         static WORLD_GEN_CATEGORY: string;
         static STORAGE_CATEGORY: string;
         static NETWORK_CATEGORY: string;
         recording: $Recording;
         static ROOT_CATEGORY: string;
+        get available(): boolean;
         static get instance(): $JfrProfiler;
         get running(): boolean;
-        get available(): boolean;
     }
     export class $JvmProfiler {
         static INSTANCE: $JvmProfiler;
     }
     export interface $JvmProfiler {
-        start(arg0: $Environment_): boolean;
-        stop(): $Path;
         onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
         onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        onWorldLoadedStarted(): $ProfiledDuration;
         onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
+        onWorldLoadedStarted(): $ProfiledDuration;
+        isAvailable(): boolean;
+        start(arg0: $Environment_): boolean;
+        stop(): $Path;
         isRunning(): boolean;
         onServerTick(arg0: number): void;
-        isAvailable(): boolean;
-        get running(): boolean;
         get available(): boolean;
+        get running(): boolean;
     }
     export class $Percentiles {
         static evaluate(arg0: number[]): $Map<number, number>;
@@ -82,20 +82,20 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         static DEFAULT_INDEXES: $Quantiles$ScaleAndIndexes;
     }
     export class $JvmProfiler$NoOpProfiler implements $JvmProfiler {
-        start(arg0: $Environment_): boolean;
-        stop(): $Path;
         onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
         onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        onWorldLoadedStarted(): $ProfiledDuration;
         onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
+        onWorldLoadedStarted(): $ProfiledDuration;
+        isAvailable(): boolean;
+        start(arg0: $Environment_): boolean;
+        stop(): $Path;
         isRunning(): boolean;
         onServerTick(arg0: number): void;
-        isAvailable(): boolean;
         static noOpCommit: $ProfiledDuration;
         constructor();
-        get running(): boolean;
         get available(): boolean;
+        get running(): boolean;
     }
 }

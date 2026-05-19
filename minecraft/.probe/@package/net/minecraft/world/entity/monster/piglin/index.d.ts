@@ -260,13 +260,13 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         static getVisibleAdultPiglins(arg0: $Piglin): $List<$AbstractPiglin>;
         static dontKillAnyMoreHoglinsForAWhile(arg0: $AbstractPiglin): void;
         static getNearestVisibleTargetablePlayer(arg0: $AbstractPiglin): ($Player) | undefined;
-        static pickUpItem(arg0: $Piglin, arg1: $ItemEntity): void;
-        static mobInteract(arg0: $Piglin, arg1: $Player, arg2: $InteractionHand_): $InteractionResult;
         static isWearingGold(arg0: $LivingEntity): boolean;
         static isPlayerHoldingLovedItem(arg0: $LivingEntity): boolean;
         static isZombified(arg0: $EntityType_<never>): boolean;
-        static isBarterCurrency(arg0: $ItemStack_): boolean;
         static angerNearbyPiglins(arg0: $Player, arg1: boolean): void;
+        static isBarterCurrency(arg0: $ItemStack_): boolean;
+        static pickUpItem(arg0: $Piglin, arg1: $ItemEntity): void;
+        static mobInteract(arg0: $Piglin, arg1: $Player, arg2: $InteractionHand_): $InteractionResult;
         static initMemories(arg0: $Piglin, arg1: $RandomSource): void;
         static wasHurtBy(arg0: $Piglin, arg1: $LivingEntity): void;
         static getSoundForCurrentActivity(arg0: $Piglin): ($SoundEvent) | undefined;
@@ -469,7 +469,10 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         get holdingMeleeWeapon(): boolean;
     }
     export class $Piglin extends $AbstractPiglin implements $CrossbowAttackMob, $InventoryCarrier {
+        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
         canReplaceCurrentItem(arg0: $ItemStack_): boolean;
+        isDancing(): boolean;
+        setDancing(arg0: boolean): void;
         addToInventory(arg0: $ItemStack_): $ItemStack;
         canAddToInventory(arg0: $ItemStack_): boolean;
         static checkPiglinSpawnRules(arg0: $EntityType_<$Piglin>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
@@ -477,9 +480,6 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         onCrossbowAttackPerformed(): void;
         holdInMainHand(arg0: $ItemStack_): void;
         holdInOffHand(arg0: $ItemStack_): void;
-        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
-        isDancing(): boolean;
-        setDancing(arg0: boolean): void;
         getInventory(): $SimpleContainer;
         static createAttributes(): $AttributeSupplier$Builder;
         performCrossbowAttack(arg0: $LivingEntity, arg1: number): void;

@@ -10,9 +10,6 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
     export class $DragonPhaseInstance {
     }
     export interface $DragonPhaseInstance {
-        begin(): void;
-        end(): void;
-        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_, arg3: $Player): void;
         isSitting(): boolean;
         doClientTick(): void;
         doServerTick(): void;
@@ -20,6 +17,9 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
         getFlySpeed(): number;
         getTurnSpeed(): number;
         onHurt(arg0: $DamageSource_, arg1: number): number;
+        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_, arg3: $Player): void;
+        begin(): void;
+        end(): void;
         getPhase(): $EnderDragonPhase<$DragonPhaseInstance>;
         get sitting(): boolean;
         get flyTargetLocation(): $Vec3;
@@ -58,11 +58,11 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
         get currentPhase(): $DragonPhaseInstance;
     }
     export class $EnderDragonPhase<T extends $DragonPhaseInstance> {
+        static getById(arg0: number): $EnderDragonPhase<never>;
+        createInstance(arg0: $EnderDragon): $DragonPhaseInstance;
         getConstructor(): $Constructor<$DragonPhaseInstance>;
         getId(): number;
         static getCount(): number;
-        createInstance(arg0: $EnderDragon): $DragonPhaseInstance;
-        static getById(arg0: number): $EnderDragonPhase<never>;
         static HOVERING: $EnderDragonPhase<$DragonHoverPhase>;
         static STRAFE_PLAYER: $EnderDragonPhase<$DragonStrafePlayerPhase>;
         static SITTING_FLAMING: $EnderDragonPhase<$DragonSittingFlamingPhase>;
@@ -109,9 +109,6 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
         constructor(arg0: $EnderDragon);
     }
     export class $AbstractDragonPhaseInstance implements $DragonPhaseInstance {
-        begin(): void;
-        end(): void;
-        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_, arg3: $Player): void;
         isSitting(): boolean;
         doClientTick(): void;
         doServerTick(): void;
@@ -119,6 +116,9 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
         getFlySpeed(): number;
         getTurnSpeed(): number;
         onHurt(arg0: $DamageSource_, arg1: number): number;
+        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_, arg3: $Player): void;
+        begin(): void;
+        end(): void;
         dragon: $EnderDragon;
         constructor(arg0: $EnderDragon);
         get sitting(): boolean;

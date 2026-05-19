@@ -16,10 +16,10 @@ import { $Font, $GuiGraphics } from "@package/net/minecraft/client/gui";
 
 declare module "@package/net/minecraft/realms" {
     export class $RealmsObjectSelectionList<E extends $ObjectSelectionList$Entry<E>> extends $ObjectSelectionList<E> {
+        selectItem(arg0: number): void;
+        setSelectedItem(arg0: number): void;
         clear(): void;
         addEntry(arg0: E): number;
-        setSelectedItem(arg0: number): void;
-        selectItem(arg0: number): void;
         minecraft: $Minecraft;
         static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
@@ -115,9 +115,9 @@ declare module "@package/net/minecraft/realms" {
         get text(): $Component;
     }
     export class $RealmsConnect {
-        connect(arg0: $RealmsServer, arg1: $ServerAddress): void;
-        tick(): void;
         abort(): void;
+        tick(): void;
+        connect(arg0: $RealmsServer, arg1: $ServerAddress): void;
         onlineScreen: $Screen;
         aborted: boolean;
         static LOGGER: $Logger;

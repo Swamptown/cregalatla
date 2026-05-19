@@ -17,17 +17,8 @@ export * as config from "@package/xaero/hud/minimap/world/container/config";
 
 declare module "@package/xaero/hud/minimap/world/container" {
     export class $MinimapWorldContainer {
-        getName(arg0: string): string;
-        isEmpty(): boolean;
-        setName(arg0: string, arg1: string): void;
-        getRoot(): $MinimapWorldRootContainer;
-        getPath(): $XaeroPath;
-        addWorld(arg0: string): $MinimapWorld;
         addWorld(arg0: $MinimapWorld): void;
-        getLastNode(): string;
-        getSession(): $MinimapSession;
-        setPath(arg0: $XaeroPath): void;
-        getSubName(): string;
+        addWorld(arg0: string): $MinimapWorld;
         getRootConfig(): $RootConfig;
         getFirstWorld(): $MinimapWorld;
         getDirectoryPath(): $Path;
@@ -44,11 +35,15 @@ declare module "@package/xaero/hud/minimap/world/container" {
         getWorlds(): $Iterable<$MinimapWorld>;
         getSubContainers(): $Iterable<$MinimapWorldContainer>;
         getServerWaypointManager(): $ServerWaypointManager;
-        get empty(): boolean;
-        get root(): $MinimapWorldRootContainer;
-        get lastNode(): string;
-        get session(): $MinimapSession;
-        get subName(): string;
+        getLastNode(): string;
+        getSession(): $MinimapSession;
+        getName(arg0: string): string;
+        isEmpty(): boolean;
+        setName(arg0: string, arg1: string): void;
+        getRoot(): $MinimapWorldRootContainer;
+        getPath(): $XaeroPath;
+        setPath(arg0: $XaeroPath): void;
+        getSubName(): string;
         get rootConfig(): $RootConfig;
         get firstWorld(): $MinimapWorld;
         get directoryPath(): $Path;
@@ -57,6 +52,11 @@ declare module "@package/xaero/hud/minimap/world/container" {
         get worlds(): $Iterable<$MinimapWorld>;
         get subContainers(): $Iterable<$MinimapWorldContainer>;
         get serverWaypointManager(): $ServerWaypointManager;
+        get lastNode(): string;
+        get session(): $MinimapSession;
+        get empty(): boolean;
+        get root(): $MinimapWorldRootContainer;
+        get subName(): string;
     }
     export class $MinimapWorldRootContainer extends $WaypointWorldContainer {
         getDimensionType(arg0: $ResourceKey_<$Level>): $DimensionType;
@@ -64,12 +64,6 @@ declare module "@package/xaero/hud/minimap/world/container" {
          * @deprecated
          */
         setIgnoreHeightmaps(arg0: boolean): void;
-        isConfigLoaded(): boolean;
-        /**
-         * @deprecated
-         */
-        isIgnoreHeightmaps(): boolean;
-        getConfig(): $RootConfig;
         /**
          * @deprecated
          */
@@ -106,21 +100,14 @@ declare module "@package/xaero/hud/minimap/world/container" {
          * @deprecated
          */
         setServerTeleportCommandRotationFormat(arg0: string): void;
-        updateConnectionsField(arg0: $WaypointSession): void;
-        getDimensionScale(arg0: $ResourceKey_<$Level>): number;
-        updateDimensionType(arg0: $ClientLevel): void;
-        renameOldContainer(arg0: $XaeroPath): void;
-        getDimensionTypeIds(): $Iterable<$Map$Entry<$ResourceKey<$Level>, $ResourceLocation>>;
-        setDimensionTypeId(arg0: $ResourceKey_<$Level>, arg1: $ResourceLocation_): void;
-        getSubWorldConnections(): $MinimapWorldConnectionManager;
-        /**
-         * @deprecated
-         */
-        isUsingMultiworldDetection(): boolean;
         /**
          * @deprecated
          */
         setUsingMultiworldDetection(arg0: boolean): void;
+        /**
+         * @deprecated
+         */
+        isUsingMultiworldDetection(): boolean;
         /**
          * @deprecated
          */
@@ -157,9 +144,22 @@ declare module "@package/xaero/hud/minimap/world/container" {
          * @deprecated
          */
         setIgnoreServerLevelId(arg0: boolean): void;
-        get configLoaded(): boolean;
-        get config(): $RootConfig;
+        updateConnectionsField(arg0: $WaypointSession): void;
+        getDimensionScale(arg0: $ResourceKey_<$Level>): number;
+        updateDimensionType(arg0: $ClientLevel): void;
+        renameOldContainer(arg0: $XaeroPath): void;
+        getDimensionTypeIds(): $Iterable<$Map$Entry<$ResourceKey<$Level>, $ResourceLocation>>;
+        setDimensionTypeId(arg0: $ResourceKey_<$Level>, arg1: $ResourceLocation_): void;
+        getSubWorldConnections(): $MinimapWorldConnectionManager;
+        isConfigLoaded(): boolean;
+        /**
+         * @deprecated
+         */
+        isIgnoreHeightmaps(): boolean;
+        getConfig(): $RootConfig;
         get dimensionTypeIds(): $Iterable<$Map$Entry<$ResourceKey<$Level>, $ResourceLocation>>;
         get subWorldConnections(): $MinimapWorldConnectionManager;
+        get configLoaded(): boolean;
+        get config(): $RootConfig;
     }
 }

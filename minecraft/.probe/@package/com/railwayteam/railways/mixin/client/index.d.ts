@@ -38,9 +38,9 @@ declare module "@package/com/railwayteam/railways/mixin/client" {
     export class $AccessorWalkAnimationState {
     }
     export interface $AccessorWalkAnimationState {
-        setPosition(arg0: number): void;
         getSpeedOld(): number;
         setSpeedOld(arg0: number): void;
+        setPosition(arg0: number): void;
         set position(value: number);
     }
     export class $AccessorLivingEntityRenderer<T extends $LivingEntity> {

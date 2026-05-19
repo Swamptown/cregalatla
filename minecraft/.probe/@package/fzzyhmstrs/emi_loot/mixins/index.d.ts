@@ -57,10 +57,10 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $SetDamageLootFunctionAccessor {
     }
     export interface $SetDamageLootFunctionAccessor {
-        getAdd(): boolean;
         getDurabilityRange(): $NumberProvider;
-        get add(): boolean;
+        getAdd(): boolean;
         get durabilityRange(): $NumberProvider;
+        get add(): boolean;
     }
     export class $AlternativeLootConditionAccessor {
     }
@@ -75,10 +75,10 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $ExplorationMapLootFunctionAccessor {
     }
     export interface $ExplorationMapLootFunctionAccessor {
-        getDecoration(): $Holder<$MapDecorationType>;
         getDestination(): $TagKey<$Structure>;
-        get decoration(): $Holder<$MapDecorationType>;
+        getDecoration(): $Holder<$MapDecorationType>;
         get destination(): $TagKey<$Structure>;
+        get decoration(): $Holder<$MapDecorationType>;
     }
     export class $SetEnchantmentsLootFunctionAccessor {
     }
@@ -110,17 +110,17 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $SetFireworkExplosionLootFunctionAccessor {
     }
     export interface $SetFireworkExplosionLootFunctionAccessor {
-        getShape(): ($FireworkExplosion$Shape) | undefined;
+        callApply(arg0: $FireworkExplosion_): $FireworkExplosion;
         getColors(): ($IntList) | undefined;
         getFadeColors(): ($IntList) | undefined;
         getTrail(): (boolean) | undefined;
         getTwinkle(): (boolean) | undefined;
-        callApply(arg0: $FireworkExplosion_): $FireworkExplosion;
-        get shape(): ($FireworkExplosion$Shape) | undefined;
+        getShape(): ($FireworkExplosion$Shape) | undefined;
         get colors(): ($IntList) | undefined;
         get fadeColors(): ($IntList) | undefined;
         get trail(): (boolean) | undefined;
         get twinkle(): (boolean) | undefined;
+        get shape(): ($FireworkExplosion$Shape) | undefined;
     }
     export class $ConditionalLootFunctionAccessor {
     }
@@ -161,13 +161,13 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $LootPoolAccessor {
     }
     export interface $LootPoolAccessor {
-        getEntries(): $List<$LootPoolEntryContainer>;
-        getConditions(): $List<$LootItemCondition>;
         getRolls(): $NumberProvider;
+        getConditions(): $List<$LootItemCondition>;
+        getEntries(): $List<$LootPoolEntryContainer>;
         getFunctions(): $List<$LootItemFunction>;
-        get entries(): $List<$LootPoolEntryContainer>;
-        get conditions(): $List<$LootItemCondition>;
         get rolls(): $NumberProvider;
+        get conditions(): $List<$LootItemCondition>;
+        get entries(): $List<$LootPoolEntryContainer>;
         get functions(): $List<$LootItemFunction>;
     }
     export class $SetLootTableLootFunctionAccessor {
@@ -358,10 +358,10 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $BoundedIntUnaryOperatorAccessor {
     }
     export interface $BoundedIntUnaryOperatorAccessor {
-        getMin(): $NumberProvider;
         getMax(): $NumberProvider;
-        get min(): $NumberProvider;
+        getMin(): $NumberProvider;
         get max(): $NumberProvider;
+        get min(): $NumberProvider;
     }
     export class $VariantPredicateAccessor<V> {
     }

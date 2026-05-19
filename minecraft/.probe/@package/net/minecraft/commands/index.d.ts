@@ -21,7 +21,7 @@ import { $Iterable_, $Enum, $Record, $Exception } from "@package/java/lang";
 import { $CommandContext } from "@package/com/mojang/brigadier/context";
 import { $Level } from "@package/net/minecraft/world/level";
 import { $ExecutionContext, $TraceCallbacks } from "@package/net/minecraft/commands/execution";
-import { $Component_, $PlayerChatMessage, $ChatType$Bound_, $Component, $OutgoingChatMessage, $PlayerChatMessage_ } from "@package/net/minecraft/network/chat";
+import { $Component_, $PlayerChatMessage, $ChatType$Bound_, $OutgoingChatMessage, $Component, $PlayerChatMessage_ } from "@package/net/minecraft/network/chat";
 import { $LocalPlayer } from "@package/net/minecraft/client/player";
 import { $ClientCommandRegistrationEvent$ClientCommandSourceStack } from "@package/dev/architectury/event/events/client";
 import { $EntityAnchorArgument$Anchor_, $EntityAnchorArgument$Anchor } from "@package/net/minecraft/commands/arguments";
@@ -51,46 +51,46 @@ declare module "@package/net/minecraft/commands" {
     export interface $CommandBuildContext extends $HolderLookup$Provider {
     }
     export class $SharedSuggestionProvider {
+        static matchesSubStr(arg0: string, arg1: string): boolean;
         static filterResources<T>(arg0: $Iterable_<T>, arg1: string, arg2: string, arg3: $Function_<T, $ResourceLocation>, arg4: $Consumer_<T>): void;
         static filterResources<T>(arg0: $Iterable_<T>, arg1: string, arg2: $Function_<T, $ResourceLocation>, arg3: $Consumer_<T>): void;
-        static matchesSubStr(arg0: string, arg1: string): boolean;
         static suggest(arg0: $Iterable_<string>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
-        static suggest(arg0: $Stream<string>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
-        static suggest(arg0: string[], arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static suggest<T>(arg0: $Iterable_<T>, arg1: $SuggestionsBuilder, arg2: $Function_<T, string>, arg3: $Function_<T, $Message>): $CompletableFuture<$Suggestions>;
-        static suggestResource<T>(arg0: $Stream<T>, arg1: $SuggestionsBuilder, arg2: $Function_<T, $ResourceLocation>, arg3: $Function_<T, $Message>): $CompletableFuture<$Suggestions>;
-        static suggestResource<T>(arg0: $Iterable_<T>, arg1: $SuggestionsBuilder, arg2: $Function_<T, $ResourceLocation>, arg3: $Function_<T, $Message>): $CompletableFuture<$Suggestions>;
+        static suggest(arg0: string[], arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static suggest(arg0: $Stream<string>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static suggestResource(arg0: $Iterable_<$ResourceLocation>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static suggestResource<T>(arg0: $Iterable_<T>, arg1: $SuggestionsBuilder, arg2: $Function_<T, $ResourceLocation>, arg3: $Function_<T, $Message>): $CompletableFuture<$Suggestions>;
+        static suggestResource(arg0: $Stream<$ResourceLocation_>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static suggestResource<T>(arg0: $Stream<T>, arg1: $SuggestionsBuilder, arg2: $Function_<T, $ResourceLocation>, arg3: $Function_<T, $Message>): $CompletableFuture<$Suggestions>;
         static suggestResource(arg0: $Stream<$ResourceLocation_>, arg1: $SuggestionsBuilder, arg2: string): $CompletableFuture<$Suggestions>;
         static suggestResource(arg0: $Iterable_<$ResourceLocation>, arg1: $SuggestionsBuilder, arg2: string): $CompletableFuture<$Suggestions>;
-        static suggestResource(arg0: $Stream<$ResourceLocation_>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
-        static suggestCoordinates(arg0: string, arg1: $Collection_<$SharedSuggestionProvider$TextCoordinates>, arg2: $SuggestionsBuilder, arg3: $Predicate_<string>): $CompletableFuture<$Suggestions>;
         static suggest2DCoordinates(arg0: string, arg1: $Collection_<$SharedSuggestionProvider$TextCoordinates>, arg2: $SuggestionsBuilder, arg3: $Predicate_<string>): $CompletableFuture<$Suggestions>;
+        static suggestCoordinates(arg0: string, arg1: $Collection_<$SharedSuggestionProvider$TextCoordinates>, arg2: $SuggestionsBuilder, arg3: $Predicate_<string>): $CompletableFuture<$Suggestions>;
     }
     export interface $SharedSuggestionProvider {
-        levels(): $Set<$ResourceKey<$Level>>;
         getAvailableSounds(): $Stream<$ResourceLocation>;
         getRecipeNames(): $Stream<$ResourceLocation>;
         getCustomTabSugggestions(): $Collection<string>;
-        suggestRegistryElements(arg0: $ResourceKey_<$Registry<never>>, arg1: $SharedSuggestionProvider$ElementSuggestionType_, arg2: $SuggestionsBuilder, arg3: $CommandContext<never>): $CompletableFuture<$Suggestions>;
         suggestRegistryElements(arg0: $Registry<never>, arg1: $SharedSuggestionProvider$ElementSuggestionType_, arg2: $SuggestionsBuilder): void;
-        getAllTeams(): $Collection<string>;
+        suggestRegistryElements(arg0: $ResourceKey_<$Registry<never>>, arg1: $SharedSuggestionProvider$ElementSuggestionType_, arg2: $SuggestionsBuilder, arg3: $CommandContext<never>): $CompletableFuture<$Suggestions>;
         hasPermission(arg0: number): boolean;
-        getRelevantCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
-        getAbsoluteCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
+        customSuggestion(arg0: $CommandContext<never>): $CompletableFuture<$Suggestions>;
+        getAllTeams(): $Collection<string>;
         getOnlinePlayerNames(): $Collection<string>;
         getSelectedEntities(): $Collection<string>;
-        customSuggestion(arg0: $CommandContext<never>): $CompletableFuture<$Suggestions>;
+        getAbsoluteCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
+        getRelevantCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
+        levels(): $Set<$ResourceKey<$Level>>;
         enabledFeatures(): $FeatureFlagSet;
         registryAccess(): $RegistryAccess;
         get availableSounds(): $Stream<$ResourceLocation>;
         get recipeNames(): $Stream<$ResourceLocation>;
         get customTabSugggestions(): $Collection<string>;
         get allTeams(): $Collection<string>;
-        get relevantCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
-        get absoluteCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
         get onlinePlayerNames(): $Collection<string>;
         get selectedEntities(): $Collection<string>;
+        get absoluteCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
+        get relevantCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
     }
     export class $CommandSource {
         static NULL: $CommandSource;
@@ -139,12 +139,10 @@ declare module "@package/net/minecraft/commands" {
      */
     export type $CommandResultCallback_ = ((arg0: boolean, arg1: number) => void);
     export class $CommandSourceStack implements $ExecutionCommandSource<$CommandSourceStack>, $SharedSuggestionProvider, $ICommandSourceStackExtension, $ClientCommandRegistrationEvent$ClientCommandSourceStack {
-        getDisplayName(): $Component;
-        levels(): $Set<$ResourceKey<$Level>>;
-        getLevel(): $ServerLevel;
-        getPosition(): $Vec3;
-        getPlayerOrException(): $ServerPlayer;
         sendFailure(arg0: $Component_): void;
+        getPlayerOrException(): $ServerPlayer;
+        isPlayer(): boolean;
+        withSource(arg0: $CommandSource): $CommandSourceStack;
         withMaximumPermission(arg0: number): $CommandSourceStack;
         withAnchor(arg0: $EntityAnchorArgument$Anchor_): $CommandSourceStack;
         withSigningContext(arg0: $CommandSigningContext_, arg1: $TaskChainer_): $CommandSourceStack;
@@ -160,35 +158,37 @@ declare module "@package/net/minecraft/commands" {
         arch$getLevel(): $ClientLevel;
         sendSuccess(component: $Component_, broadcastToAdmins: boolean): void;
         sendSuccessLazy(component: $LazyComponentKJS_, broadcastToAdmins: boolean): void;
-        withSource(arg0: $CommandSource): $CommandSourceStack;
+        getPlayer(): $ServerPlayer;
         getAnchor(): $EntityAnchorArgument$Anchor;
         suggestRegistryElements(arg0: $ResourceKey_<$Registry<never>>, arg1: $SharedSuggestionProvider$ElementSuggestionType_, arg2: $SuggestionsBuilder, arg3: $CommandContext<never>): $CompletableFuture<$Suggestions>;
-        getAllTeams(): $Collection<string>;
         sendChatMessage(arg0: $OutgoingChatMessage, arg1: boolean, arg2: $ChatType$Bound_): void;
         shouldFilterMessageTo(arg0: $ServerPlayer): boolean;
         hasPermission(arg0: number): boolean;
-        getPlayer(): $ServerPlayer;
-        getOnlinePlayerNames(): $Collection<string>;
-        customSuggestion(arg0: $CommandContext<never>): $CompletableFuture<$Suggestions>;
         getSigningContext(): $CommandSigningContext;
         getChatMessageChainer(): $TaskChainer;
+        customSuggestion(arg0: $CommandContext<never>): $CompletableFuture<$Suggestions>;
+        getAllTeams(): $Collection<string>;
+        getOnlinePlayerNames(): $Collection<string>;
         withPosition(arg0: $Vec3_): $CommandSourceStack;
-        isPlayer(): boolean;
         withCallback(arg0: $CommandResultCallback_): $CommandSourceStack;
         withCallback(arg0: $CommandResultCallback_, arg1: $BinaryOperator_<$CommandResultCallback>): $CommandSourceStack;
         withPermission(arg0: number): $CommandSourceStack;
         withEntity(arg0: $Entity): $CommandSourceStack;
         withRotation(arg0: $Vec2): $CommandSourceStack;
+        getLevel(): $ServerLevel;
+        getPosition(): $Vec3;
         getEntity(): $Entity;
         callback(): $CommandResultCallback;
+        getDisplayName(): $Component;
+        levels(): $Set<$ResourceKey<$Level>>;
         handleError(arg0: $CommandExceptionType, arg1: $Message_, arg2: boolean, arg3: $TraceCallbacks): void;
         dispatcher(): $CommandDispatcher<$CommandSourceStack>;
         withLevel(arg0: $ServerLevel): $CommandSourceStack;
         enabledFeatures(): $FeatureFlagSet;
         registryAccess(): $RegistryAccess;
         getRotation(): $Vec2;
-        facing(arg0: $Vec3_): $CommandSourceStack;
         facing(arg0: $Entity, arg1: $EntityAnchorArgument$Anchor_): $CommandSourceStack;
+        facing(arg0: $Vec3_): $CommandSourceStack;
         isSilent(): boolean;
         getServer(): $MinecraftServer;
         sendSystemMessage(arg0: $Component_): void;
@@ -197,9 +197,9 @@ declare module "@package/net/minecraft/commands" {
         handleError(arg0: $CommandSyntaxException, arg1: boolean, arg2: $TraceCallbacks): void;
         getCustomTabSugggestions(): $Collection<string>;
         suggestRegistryElements(arg0: $Registry<never>, arg1: $SharedSuggestionProvider$ElementSuggestionType_, arg2: $SuggestionsBuilder): void;
-        getRelevantCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
-        getAbsoluteCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
         getSelectedEntities(): $Collection<string>;
+        getAbsoluteCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
+        getRelevantCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
         getAdvancement(arg0: $ResourceLocation_): $AdvancementHolder;
         getUnsidedLevel(): $Level;
         getRecipeManager(): $RecipeManager;
@@ -207,38 +207,38 @@ declare module "@package/net/minecraft/commands" {
         source: $CommandSource;
         static ERROR_NOT_ENTITY: $SimpleCommandExceptionType;
         static ERROR_NOT_PLAYER: $SimpleCommandExceptionType;
-        constructor(arg0: $CommandSource, arg1: $Vec3_, arg2: $Vec2, arg3: $ServerLevel, arg4: number, arg5: string, arg6: $Component_, arg7: $MinecraftServer, arg8: $Entity);
         constructor(arg0: $CommandSource, arg1: $Vec3_, arg2: $Vec2, arg3: $ServerLevel, arg4: number, arg5: string, arg6: $Component_, arg7: $MinecraftServer, arg8: $Entity, arg9: boolean, arg10: $CommandResultCallback_, arg11: $EntityAnchorArgument$Anchor_, arg12: $CommandSigningContext_, arg13: $TaskChainer_);
-        get displayName(): $Component;
-        get level(): $ServerLevel;
-        get position(): $Vec3;
+        constructor(arg0: $CommandSource, arg1: $Vec3_, arg2: $Vec2, arg3: $ServerLevel, arg4: number, arg5: string, arg6: $Component_, arg7: $MinecraftServer, arg8: $Entity);
         get playerOrException(): $ServerPlayer;
         get textName(): string;
         get entityOrException(): $Entity;
         get availableSounds(): $Stream<$ResourceLocation>;
         get recipeNames(): $Stream<$ResourceLocation>;
         get anchor(): $EntityAnchorArgument$Anchor;
-        get allTeams(): $Collection<string>;
-        get onlinePlayerNames(): $Collection<string>;
         get signingContext(): $CommandSigningContext;
         get chatMessageChainer(): $TaskChainer;
+        get allTeams(): $Collection<string>;
+        get onlinePlayerNames(): $Collection<string>;
+        get level(): $ServerLevel;
+        get position(): $Vec3;
         get entity(): $Entity;
+        get displayName(): $Component;
         get rotation(): $Vec2;
         get silent(): boolean;
         get server(): $MinecraftServer;
         get customTabSugggestions(): $Collection<string>;
-        get relevantCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
-        get absoluteCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
         get selectedEntities(): $Collection<string>;
+        get absoluteCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
+        get relevantCoordinates(): $Collection<$SharedSuggestionProvider$TextCoordinates>;
         get unsidedLevel(): $Level;
         get recipeManager(): $RecipeManager;
         get scoreboard(): $Scoreboard;
     }
     export class $SharedSuggestionProvider$ElementSuggestionType extends $Enum<$SharedSuggestionProvider$ElementSuggestionType> {
-        static values(): $SharedSuggestionProvider$ElementSuggestionType[];
-        static valueOf(arg0: string): $SharedSuggestionProvider$ElementSuggestionType;
         shouldSuggestTags(): boolean;
         shouldSuggestElements(): boolean;
+        static values(): $SharedSuggestionProvider$ElementSuggestionType[];
+        static valueOf(arg0: string): $SharedSuggestionProvider$ElementSuggestionType;
         static ELEMENTS: $SharedSuggestionProvider$ElementSuggestionType;
         static ALL: $SharedSuggestionProvider$ElementSuggestionType;
         static TAGS: $SharedSuggestionProvider$ElementSuggestionType;
@@ -257,17 +257,17 @@ declare module "@package/net/minecraft/commands" {
      */
     export type $Commands$ParseFunction_ = ((arg0: $StringReader) => void);
     export class $Commands {
-        static validate(): void;
-        static argument<T>(arg0: string, arg1: $ArgumentType_<T>): $RequiredArgumentBuilder<$CommandSourceStack, T>;
-        static literal(arg0: string): $LiteralArgumentBuilder<$CommandSourceStack>;
         static executeCommandInContext(arg0: $CommandSourceStack, arg1: $Consumer_<$ExecutionContext<$CommandSourceStack>>): void;
         static validateParseResults<S>(arg0: $ParseResults<S>): void;
         static getParseException<S>(arg0: $ParseResults<S>): $CommandSyntaxException;
         static createValidationContext(arg0: $HolderLookup$Provider): $CommandBuildContext;
         static mapSource<S>(arg0: $ParseResults<S>, arg1: $UnaryOperator_<S>): $ParseResults<S>;
-        sendCommands(arg0: $ServerPlayer): void;
         static createValidator(arg0: $Commands$ParseFunction_): $Predicate<string>;
         performCommand(arg0: $ParseResults<$CommandSourceStack>, arg1: string): void;
+        sendCommands(arg0: $ServerPlayer): void;
+        static validate(): void;
+        static argument<T>(arg0: string, arg1: $ArgumentType_<T>): $RequiredArgumentBuilder<$CommandSourceStack, T>;
+        static literal(arg0: string): $LiteralArgumentBuilder<$CommandSourceStack>;
         getDispatcher(): $CommandDispatcher<$CommandSourceStack>;
         performPrefixedCommand(arg0: $CommandSourceStack, arg1: string): void;
         static LEVEL_MODERATORS: number;
@@ -314,15 +314,6 @@ declare module "@package/net/minecraft/commands" {
      */
     export type $CommandSigningContext_ = ((arg0: string) => $PlayerChatMessage_);
     export class $BrigadierExceptions implements $BuiltInExceptionProvider {
-        readerExpectedStartOfQuote(): $SimpleCommandExceptionType;
-        readerExpectedEndOfQuote(): $SimpleCommandExceptionType;
-        readerInvalidEscape(): $DynamicCommandExceptionType;
-        readerInvalidBool(): $DynamicCommandExceptionType;
-        readerInvalidInt(): $DynamicCommandExceptionType;
-        readerExpectedInt(): $SimpleCommandExceptionType;
-        readerInvalidLong(): $DynamicCommandExceptionType;
-        readerExpectedLong(): $SimpleCommandExceptionType;
-        readerInvalidDouble(): $DynamicCommandExceptionType;
         readerExpectedDouble(): $SimpleCommandExceptionType;
         readerInvalidFloat(): $DynamicCommandExceptionType;
         readerExpectedFloat(): $SimpleCommandExceptionType;
@@ -341,11 +332,20 @@ declare module "@package/net/minecraft/commands" {
         longTooLow(): $Dynamic2CommandExceptionType;
         longTooHigh(): $Dynamic2CommandExceptionType;
         literalIncorrect(): $DynamicCommandExceptionType;
+        readerExpectedStartOfQuote(): $SimpleCommandExceptionType;
+        readerExpectedEndOfQuote(): $SimpleCommandExceptionType;
+        readerInvalidEscape(): $DynamicCommandExceptionType;
+        readerInvalidBool(): $DynamicCommandExceptionType;
+        readerInvalidInt(): $DynamicCommandExceptionType;
+        readerExpectedInt(): $SimpleCommandExceptionType;
+        readerInvalidLong(): $DynamicCommandExceptionType;
+        readerExpectedLong(): $SimpleCommandExceptionType;
+        readerInvalidDouble(): $DynamicCommandExceptionType;
         constructor();
     }
     export class $ParserUtils {
-        static readWhile(arg0: $StringReader, arg1: $CharPredicate_): string;
         static parseJson<T>(arg0: $HolderLookup$Provider, arg1: $StringReader, arg2: $Codec<T>): T;
+        static readWhile(arg0: $StringReader, arg1: $CharPredicate_): string;
         constructor();
     }
 }

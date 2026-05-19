@@ -17,8 +17,8 @@ declare module "@package/dev/ryanhcode/sable/sublevel/water_occlusion" {
         get regions(): $Set<T>;
     }
     export class $WaterOcclusionRegion {
-        isDirty(): boolean;
         markDirty(): void;
+        isDirty(): boolean;
         getVolume(): $BoundedBitVolume3i;
         constructor(arg0: $BoundedBitVolume3i);
         get dirty(): boolean;

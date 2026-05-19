@@ -62,14 +62,14 @@ declare module "@package/dev/latvian/mods/rhino/util" {
         static EMPTY: $ArrayValueProvider;
     }
     export interface $ArrayValueProvider {
-        getLength(): number;
-        getArrayValue(arg1: number): $Object;
         getErrorSource(): $Object;
+        getArrayValue(arg1: number): $Object;
+        getLength(): number;
         createList(arg1: $TypeInfo_): $Object;
         createArray(arg1: $TypeInfo_): $Object;
         createSet(arg1: $TypeInfo_): $Object;
-        get length(): number;
         get errorSource(): $Object;
+        get length(): number;
     }
     export class $ToStringJS {
         static toStringJS(arg1: $Object): string;

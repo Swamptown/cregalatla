@@ -25,11 +25,11 @@ declare module "@package/com/simibubi/create/foundation/item" {
         isItemValid(arg0: number, arg1: $ItemStack_): boolean;
         setStackInSlot(arg0: number, arg1: $ItemStack_): void;
         kjs$self(): $IItemHandler;
-        constructor(arg0: $IItemHandlerModifiable, arg1: number, arg2: boolean);
+        constructor(arg0: number, arg1: $SyncedBlockEntity);
         constructor(arg0: number, arg1: $SyncedBlockEntity, arg2: number, arg3: boolean, arg4: $BiPredicate_<number, $ItemStack>);
+        constructor(arg0: $IItemHandlerModifiable, arg1: number, arg2: boolean);
         constructor(arg0: number, arg1: $SyncedBlockEntity, arg2: number, arg3: boolean);
         constructor(arg0: number, arg1: $SyncedBlockEntity, arg2: $BiPredicate_<number, $ItemStack>);
-        constructor(arg0: number, arg1: $SyncedBlockEntity);
         get slots(): number;
     }
 }

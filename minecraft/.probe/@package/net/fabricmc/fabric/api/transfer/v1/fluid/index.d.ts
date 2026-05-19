@@ -8,17 +8,17 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/fabricmc/fabric/api/transfer/v1/fluid" {
     export class $FluidVariant {
-        static of(arg0: $Fluid_, arg1: $DataComponentPatch_): $FluidVariant;
-        static of(arg0: $Fluid_): $FluidVariant;
         static blank(): $FluidVariant;
+        static of(arg0: $Fluid_): $FluidVariant;
+        static of(arg0: $Fluid_, arg1: $DataComponentPatch_): $FluidVariant;
         static CODEC: $Codec<$FluidVariant>;
         static PACKET_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $FluidVariant>;
     }
     export interface $FluidVariant extends $TransferVariant<$Fluid> {
-        getRegistryEntry(): $Holder<$Fluid>;
         getFluid(): $Fluid;
-        withComponentChanges(arg0: $DataComponentPatch_): $TransferVariant<$Fluid>;
-        get registryEntry(): $Holder<$Fluid>;
+        withComponentChanges(arg0: $DataComponentPatch_): $FluidVariant;
+        getRegistryEntry(): $Holder<$Fluid>;
         get fluid(): $Fluid;
+        get registryEntry(): $Holder<$Fluid>;
     }
 }

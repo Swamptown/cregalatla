@@ -45,8 +45,8 @@ declare module "@package/net/neoforged/neoforge/server/command" {
     export class $CommandUtils {
         static suggestRegistries(arg0: $CommandContext<$CommandSourceStack>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static suggestFromRegistry<T extends $Registry<never>>(arg0: $Function_<$Registry<never>, $Iterable<$ResourceLocation>>, arg1: string, arg2: $ResourceKey_<$Registry<T>>): $SuggestionProvider<$CommandSourceStack>;
-        static makeTranslatableWithFallback(arg0: string, ...arg1: $Object[]): $MutableComponent;
         static makeTranslatableWithFallback(arg0: string): $MutableComponent;
+        static makeTranslatableWithFallback(arg0: string, ...arg1: $Object[]): $MutableComponent;
         static getResourceKey<T>(arg0: $CommandContext<$CommandSourceStack>, arg1: string, arg2: $ResourceKey_<$Registry<T>>): ($ResourceKey<T>) | undefined;
     }
     export class $CommandHelper {
@@ -69,11 +69,11 @@ declare module "@package/net/neoforged/neoforge/server/command" {
     export class $TagsCommand {
     }
     export class $ModIdArgument implements $ArgumentType<string> {
-        parse(arg0: $StringReader): string;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static modIdArgument(): $ModIdArgument;
         getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): string;
+        parse(arg0: $StringReader): string;
         constructor();
         get examples(): $Collection<string>;
     }
@@ -82,8 +82,8 @@ declare module "@package/net/neoforged/neoforge/server/command" {
     export class $DataComponentCommand {
     }
     export class $ConfigCommand {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static onClientCommandsRegister(arg0: $RegisterClientCommandsEvent): void;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
     }
     export class $TrackCommand$StartTrackingCommand {
@@ -101,9 +101,9 @@ declare module "@package/net/neoforged/neoforge/server/command" {
     export class $TrackCommand {
     }
     export class $ConfigCommand$ServerModConfigType extends $Enum<$ConfigCommand$ServerModConfigType> {
+        extension(): string;
         static values(): $ConfigCommand$ServerModConfigType[];
         static valueOf(arg0: string): $ConfigCommand$ServerModConfigType;
-        extension(): string;
         static SERVER: $ConfigCommand$ServerModConfigType;
         static COMMON: $ConfigCommand$ServerModConfigType;
     }

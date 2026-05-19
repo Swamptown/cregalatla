@@ -22,21 +22,21 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
      */
     export type $OrCondition_ = { values?: $List_<$ICondition>,  } | [values?: $List_<$ICondition>, ];
     export class $WithConditions$Builder<T> {
-        build(): $WithConditions<T>;
         withCarrier(arg0: T): $WithConditions$Builder<T>;
         addCondition(...arg0: $ICondition[]): $WithConditions$Builder<T>;
         addCondition(arg0: $Collection_<$ICondition>): $WithConditions$Builder<T>;
+        build(): $WithConditions<T>;
         constructor();
     }
     export class $TagEmptyCondition extends $Record implements $ICondition {
-        test(arg0: $ICondition$IContext_): boolean;
         tag(): $TagKey<$Item>;
+        test(arg0: $ICondition$IContext_): boolean;
         codec(): $MapCodec<$ICondition>;
         static CODEC: $MapCodec<$TagEmptyCondition>;
+        constructor(arg0: string);
+        constructor(arg0: string, arg1: string);
         constructor(tag: $TagKey_<$Item>);
         constructor(arg0: $ResourceLocation_);
-        constructor(arg0: string, arg1: string);
-        constructor(arg0: string);
     }
     /**
      * Values that may be interpreted as {@link $TagEmptyCondition}.
@@ -56,9 +56,9 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
         static INSTANCE: $FalseCondition;
     }
     export class $ConditionalOps<T> extends $RegistryOps<T> {
-        static decodeListWithElementConditions<T>(arg0: $Codec<T>): $Codec<$List<T>>;
-        static createConditionalCodecWithConditions<T>(arg0: $Codec<T>): $Codec<($WithConditions<T>) | undefined>;
         static createConditionalCodecWithConditions<T>(arg0: $Codec<T>, arg1: string): $Codec<($WithConditions<T>) | undefined>;
+        static createConditionalCodecWithConditions<T>(arg0: $Codec<T>): $Codec<($WithConditions<T>) | undefined>;
+        static decodeListWithElementConditions<T>(arg0: $Codec<T>): $Codec<$List<T>>;
         static createConditionalCodec<T>(arg0: $Codec<T>): $Codec<(T) | undefined>;
         static createConditionalCodec<T>(arg0: $Codec<T>, arg1: string): $Codec<(T) | undefined>;
         static retrieveContext(): $MapCodec<$ICondition$IContext>;
@@ -83,9 +83,9 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
     export class $ConditionalOps$ConditionalDecoder<A> implements $Decoder<($WithConditions<A>) | undefined> {
         decode<T>(arg0: $Dynamic<T>): $DataResult<$Pair<($WithConditions<A>) | undefined, T>>;
         map<B>(arg0: $Function_<($WithConditions<A>) | undefined, B>): $Decoder<B>;
+        flatMap<B>(arg0: $Function_<($WithConditions<A>) | undefined, $DataResult<B>>): $Decoder<B>;
         parse<T>(arg0: $Dynamic<T>): $DataResult<($WithConditions<A>) | undefined>;
         parse<T>(arg0: $DynamicOps<T>, arg1: T): $DataResult<($WithConditions<A>) | undefined>;
-        flatMap<B>(arg0: $Function_<($WithConditions<A>) | undefined, $DataResult<B>>): $Decoder<B>;
         boxed(): $Decoder$Boxed<($WithConditions<A>) | undefined>;
         terminal(): $Decoder$Terminal<($WithConditions<A>) | undefined>;
         withLifecycle(arg0: $Lifecycle): $Decoder<($WithConditions<A>) | undefined>;
@@ -105,13 +105,13 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
      */
     export type $NotCondition_ = { value?: $ICondition,  } | [value?: $ICondition, ];
     export class $ICondition {
-        static getWithWithConditionsCodec<V, T>(arg0: $Codec<($WithConditions_<T>) | undefined>, arg1: $DynamicOps<V>, arg2: V): (T) | undefined;
-        static conditionsMatched<V>(arg0: $DynamicOps<V>, arg1: V): boolean;
         static getWithConditionalCodec<V, T>(arg0: $Codec<(T) | undefined>, arg1: $DynamicOps<V>, arg2: V): (T) | undefined;
         static getConditionally<V, T>(arg0: $Codec<T>, arg1: $DynamicOps<V>, arg2: V): (T) | undefined;
         static writeConditions(arg0: $DynamicOps<$JsonElement_>, arg1: $JsonObject_, arg2: $List_<$ICondition>): void;
-        static writeConditions(arg0: $HolderLookup$Provider, arg1: $JsonObject_, ...arg2: $ICondition[]): void;
         static writeConditions(arg0: $HolderLookup$Provider, arg1: $JsonObject_, arg2: $List_<$ICondition>): void;
+        static writeConditions(arg0: $HolderLookup$Provider, arg1: $JsonObject_, ...arg2: $ICondition[]): void;
+        static getWithWithConditionsCodec<V, T>(arg0: $Codec<($WithConditions_<T>) | undefined>, arg1: $DynamicOps<V>, arg2: V): (T) | undefined;
+        static conditionsMatched<V>(arg0: $DynamicOps<V>, arg1: V): boolean;
         static CODEC: $Codec<$ICondition>;
         static LIST_CODEC: $Codec<$List<$ICondition>>;
     }
@@ -125,13 +125,13 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
         constructor(arg0: $TagManager);
     }
     export class $ItemExistsCondition implements $ICondition {
-        test(arg0: $ICondition$IContext_): boolean;
         getItem(): $ResourceLocation;
+        test(arg0: $ICondition$IContext_): boolean;
         codec(): $MapCodec<$ICondition>;
         static CODEC: $MapCodec<$ItemExistsCondition>;
+        constructor(arg0: string);
         constructor(arg0: $ResourceLocation_);
         constructor(arg0: string, arg1: string);
-        constructor(arg0: string);
         get item(): $ResourceLocation;
     }
     export class $ICondition$IContext {
@@ -164,8 +164,8 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
         static INSTANCE: $TrueCondition;
     }
     export class $AndCondition extends $Record implements $ICondition {
-        test(arg0: $ICondition$IContext_): boolean;
         children(): $List<$ICondition>;
+        test(arg0: $ICondition$IContext_): boolean;
         codec(): $MapCodec<$ICondition>;
         static CODEC: $MapCodec<$AndCondition>;
         constructor(children: $List_<$ICondition>);
@@ -177,13 +177,13 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
     export class $IConditionBuilder {
     }
     export interface $IConditionBuilder {
+        itemExists(arg0: string, arg1: string): $ICondition;
+        tagEmpty(arg0: $TagKey_<$Item>): $ICondition;
+        modLoaded(arg0: string): $ICondition;
+        and(...arg0: $ICondition[]): $ICondition;
+        not(arg0: $ICondition): $ICondition;
         TRUE(): $ICondition;
         FALSE(): $ICondition;
         or(...arg0: $ICondition[]): $ICondition;
-        and(...arg0: $ICondition[]): $ICondition;
-        not(arg0: $ICondition): $ICondition;
-        modLoaded(arg0: string): $ICondition;
-        itemExists(arg0: string, arg1: string): $ICondition;
-        tagEmpty(arg0: $TagKey_<$Item>): $ICondition;
     }
 }

@@ -3,8 +3,8 @@ import { $ProcessingOutput } from "@package/com/simibubi/create/content/processi
 
 declare module "@package/dev/latvian/mods/kubejs/create/wrapper" {
     export class $KubeCreateOutput {
-        static of(stack: $ItemStack_): $ProcessingOutput;
         static of(stack: $ItemStack_, c: number): $ProcessingOutput;
+        static of(stack: $ItemStack_): $ProcessingOutput;
     }
     export interface $KubeCreateOutput {
     }

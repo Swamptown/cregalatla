@@ -27,6 +27,7 @@ declare module "@package/java/lang/reflect" {
     export class $Field extends $AccessibleObject implements $Member {
         getName(): string;
         get(arg0: $Object): $Object;
+        getModifiers(): number;
         getBoolean(arg0: $Object): boolean;
         getByte(arg0: $Object): number;
         getShort(arg0: $Object): number;
@@ -35,9 +36,8 @@ declare module "@package/java/lang/reflect" {
         getLong(arg0: $Object): number;
         getFloat(arg0: $Object): number;
         getDouble(arg0: $Object): number;
-        getModifiers(): number;
-        toGenericString(): string;
         isSynthetic(): boolean;
+        toGenericString(): string;
         accessFlags(): $Set<$AccessFlag>;
         getDeclaringClass(): $Class<never>;
         set(arg0: $Object, arg1: $Object): void;
@@ -63,8 +63,6 @@ declare module "@package/java/lang/reflect" {
         get annotatedType(): $AnnotatedType;
     }
     export class $AccessibleObject implements $AnnotatedElement {
-        static setAccessible(arg0: $AccessibleObject[], arg1: boolean): void;
-        setAccessible(arg0: boolean): void;
         isAnnotationPresent(arg0: $Class<$Annotation>): boolean;
         getAnnotation<T extends $Annotation>(arg0: $Class<T>): T;
         getAnnotationsByType<T extends $Annotation>(arg0: $Class<T>): T[];
@@ -72,6 +70,8 @@ declare module "@package/java/lang/reflect" {
         getDeclaredAnnotation<T extends $Annotation>(arg0: $Class<T>): T;
         getDeclaredAnnotationsByType<T extends $Annotation>(arg0: $Class<T>): T[];
         getDeclaredAnnotations(): $Annotation[];
+        static setAccessible(arg0: $AccessibleObject[], arg1: boolean): void;
+        setAccessible(arg0: boolean): void;
         trySetAccessible(): boolean;
         canAccess(arg0: $Object): boolean;
         /**
@@ -86,11 +86,7 @@ declare module "@package/java/lang/reflect" {
     }
     export class $AccessFlag$Location extends $Enum<$AccessFlag$Location> {
         static values(): $AccessFlag$Location[];
-        flags(): $Set<$AccessFlag>;
-        flags(arg0: $ClassFileFormatVersion_): $Set<$AccessFlag>;
         static valueOf(arg0: string): $AccessFlag$Location;
-        flagsMask(): number;
-        flagsMask(arg0: $ClassFileFormatVersion_): number;
         static MODULE: $AccessFlag$Location;
         static MODULE_EXPORTS: $AccessFlag$Location;
         static FIELD: $AccessFlag$Location;
@@ -129,9 +125,9 @@ declare module "@package/java/lang/reflect" {
         static valueOf(arg0: string): $ClassFileFormatVersion;
         static valueOf(arg0: $Runtime$Version): $ClassFileFormatVersion;
         major(): number;
-        static fromMajor(arg0: number): $ClassFileFormatVersion;
         static latest(): $ClassFileFormatVersion;
         runtimeVersion(): $Runtime$Version;
+        static fromMajor(arg0: number): $ClassFileFormatVersion;
         static RELEASE_15: $ClassFileFormatVersion;
         static RELEASE_16: $ClassFileFormatVersion;
         static RELEASE_17: $ClassFileFormatVersion;
@@ -140,15 +136,11 @@ declare module "@package/java/lang/reflect" {
         static RELEASE_12: $ClassFileFormatVersion;
         static RELEASE_13: $ClassFileFormatVersion;
         static RELEASE_14: $ClassFileFormatVersion;
+        static RELEASE_20: $ClassFileFormatVersion;
         static RELEASE_10: $ClassFileFormatVersion;
+        static RELEASE_21: $ClassFileFormatVersion;
         static RELEASE_9: $ClassFileFormatVersion;
         static RELEASE_8: $ClassFileFormatVersion;
-        static RELEASE_22: $ClassFileFormatVersion;
-        static RELEASE_23: $ClassFileFormatVersion;
-        static RELEASE_24: $ClassFileFormatVersion;
-        static RELEASE_25: $ClassFileFormatVersion;
-        static RELEASE_20: $ClassFileFormatVersion;
-        static RELEASE_21: $ClassFileFormatVersion;
         static RELEASE_7: $ClassFileFormatVersion;
         static RELEASE_6: $ClassFileFormatVersion;
         static RELEASE_5: $ClassFileFormatVersion;
@@ -162,18 +154,18 @@ declare module "@package/java/lang/reflect" {
     /**
      * Values that may be interpreted as {@link $ClassFileFormatVersion}.
      */
-    export type $ClassFileFormatVersion_ = "release_0" | "release_1" | "release_2" | "release_3" | "release_4" | "release_5" | "release_6" | "release_7" | "release_8" | "release_9" | "release_10" | "release_11" | "release_12" | "release_13" | "release_14" | "release_15" | "release_16" | "release_17" | "release_18" | "release_19" | "release_20" | "release_21" | "release_22" | "release_23" | "release_24" | "release_25";
+    export type $ClassFileFormatVersion_ = "release_0" | "release_1" | "release_2" | "release_3" | "release_4" | "release_5" | "release_6" | "release_7" | "release_8" | "release_9" | "release_10" | "release_11" | "release_12" | "release_13" | "release_14" | "release_15" | "release_16" | "release_17" | "release_18" | "release_19" | "release_20" | "release_21";
     export class $TypeVariable<D extends $GenericDeclaration> {
     }
     export interface $TypeVariable<D extends $GenericDeclaration> extends $Type, $AnnotatedElement {
+        getAnnotatedBounds(): $AnnotatedType[];
         getName(): string;
         getBounds(): $Type[];
         getGenericDeclaration(): D;
-        getAnnotatedBounds(): $AnnotatedType[];
+        get annotatedBounds(): $AnnotatedType[];
         get name(): string;
         get bounds(): $Type[];
         get genericDeclaration(): D;
-        get annotatedBounds(): $AnnotatedType[];
     }
     export class $RecordComponent implements $AnnotatedElement {
         getName(): string;
@@ -184,8 +176,8 @@ declare module "@package/java/lang/reflect" {
         getGenericType(): $Type;
         getType(): $Class<never>;
         getAnnotatedType(): $AnnotatedType;
-        getAccessor(): $Method;
         getDeclaringRecord(): $Class<never>;
+        getAccessor(): $Method;
         isAnnotationPresent(arg0: $Class<$Annotation>): boolean;
         getAnnotationsByType<T extends $Annotation>(arg0: $Class<T>): T[];
         getDeclaredAnnotation<T extends $Annotation>(arg0: $Class<T>): T;
@@ -197,29 +189,29 @@ declare module "@package/java/lang/reflect" {
         get genericType(): $Type;
         get type(): $Class<never>;
         get annotatedType(): $AnnotatedType;
-        get accessor(): $Method;
         get declaringRecord(): $Class<never>;
+        get accessor(): $Method;
     }
     export class $AnnotatedType {
     }
     export interface $AnnotatedType extends $AnnotatedElement {
+        getAnnotatedOwnerType(): $AnnotatedType;
         getAnnotation<T extends $Annotation>(arg0: $Class<T>): T;
         getAnnotations(): $Annotation[];
         getDeclaredAnnotations(): $Annotation[];
         getType(): $Type;
-        getAnnotatedOwnerType(): $AnnotatedType;
+        get annotatedOwnerType(): $AnnotatedType;
         get annotations(): $Annotation[];
         get declaredAnnotations(): $Annotation[];
         get type(): $Type;
-        get annotatedOwnerType(): $AnnotatedType;
     }
     export class $Executable extends $AccessibleObject implements $Member, $GenericDeclaration {
         getName(): string;
         getModifiers(): number;
         getTypeParameters(): $TypeVariable<never>[];
         getParameterTypes(): $Class<never>[];
-        toGenericString(): string;
         isSynthetic(): boolean;
+        toGenericString(): string;
         accessFlags(): $Set<$AccessFlag>;
         getDeclaringClass(): $Class<never>;
         isVarArgs(): boolean;
@@ -254,12 +246,11 @@ declare module "@package/java/lang/reflect" {
     export class $AccessFlag extends $Enum<$AccessFlag> {
         static values(): $AccessFlag[];
         static valueOf(arg0: string): $AccessFlag;
-        mask(): number;
         static maskToAccessFlags(arg0: number, arg1: $AccessFlag$Location_): $Set<$AccessFlag>;
-        static maskToAccessFlags(arg0: number, arg1: $AccessFlag$Location_, arg2: $ClassFileFormatVersion_): $Set<$AccessFlag>;
+        mask(): number;
         sourceModifier(): boolean;
-        locations(arg0: $ClassFileFormatVersion_): $Set<$AccessFlag$Location>;
         locations(): $Set<$AccessFlag$Location>;
+        locations(arg0: $ClassFileFormatVersion_): $Set<$AccessFlag$Location>;
         static TRANSITIVE: $AccessFlag;
         static SYNCHRONIZED: $AccessFlag;
         static VOLATILE: $AccessFlag;
@@ -316,8 +307,8 @@ declare module "@package/java/lang/reflect" {
         getAnnotatedType(): $AnnotatedType;
         getParameterizedType(): $Type;
         isVarArgs(): boolean;
-        getDeclaringExecutable(): $Executable;
         isNamePresent(): boolean;
+        getDeclaringExecutable(): $Executable;
         isImplicit(): boolean;
         isAnnotationPresent(arg0: $Class<$Annotation>): boolean;
         get name(): string;
@@ -329,8 +320,8 @@ declare module "@package/java/lang/reflect" {
         get annotatedType(): $AnnotatedType;
         get parameterizedType(): $Type;
         get varArgs(): boolean;
-        get declaringExecutable(): $Executable;
         get namePresent(): boolean;
+        get declaringExecutable(): $Executable;
         get implicit(): boolean;
     }
 }

@@ -5,14 +5,14 @@ import { $FluidTank } from "@package/net/neoforged/neoforge/fluids/capability/te
 
 declare module "@package/com/simibubi/create/foundation/fluid" {
     export class $CombinedTankWrapper implements $IFluidHandler {
-        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
-        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         enforceVariety(): $CombinedTankWrapper;
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         getTanks(): number;
         getFluidInTank(arg0: number): $FluidStack;
         getTankCapacity(arg0: number): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
+        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
         constructor(...arg0: $IFluidHandler[]);
         get tanks(): number;
     }

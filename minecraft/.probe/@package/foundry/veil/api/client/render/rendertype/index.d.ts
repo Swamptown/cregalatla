@@ -7,9 +7,12 @@ declare module "@package/foundry/veil/api/client/render/rendertype" {
     export class $VeilRenderTypeBuilder {
     }
     export interface $VeilRenderTypeBuilder {
-        create(arg0: $RenderType$OutlineProperty_): $RenderType$CompositeState;
-        create(arg0: boolean): $RenderType$CompositeState;
         outputState(arg0: $RenderStateShard$OutputStateShard): $VeilRenderTypeBuilder;
+        create(arg0: boolean): $RenderType$CompositeState;
+        create(arg0: $RenderType$OutlineProperty_): $RenderType$CompositeState;
+        textureState(arg0: $RenderStateShard$EmptyTextureStateShard): $VeilRenderTypeBuilder;
+        cullState(arg0: $RenderStateShard$CullStateShard): $VeilRenderTypeBuilder;
+        addLayer(arg0: $RenderStateShard): $VeilRenderTypeBuilder;
         shaderState(arg0: $RenderStateShard$ShaderStateShard): $VeilRenderTypeBuilder;
         transparencyState(arg0: $RenderStateShard$TransparencyStateShard): $VeilRenderTypeBuilder;
         depthTestState(arg0: $RenderStateShard$DepthTestStateShard): $VeilRenderTypeBuilder;
@@ -20,15 +23,16 @@ declare module "@package/foundry/veil/api/client/render/rendertype" {
         writeMaskState(arg0: $RenderStateShard$WriteMaskStateShard): $VeilRenderTypeBuilder;
         lineState(arg0: $RenderStateShard$LineStateShard): $VeilRenderTypeBuilder;
         colorLogicState(arg0: $RenderStateShard$ColorLogicStateShard): $VeilRenderTypeBuilder;
-        addLayer(arg0: $RenderStateShard): $VeilRenderTypeBuilder;
-        cullState(arg0: $RenderStateShard$CullStateShard): $VeilRenderTypeBuilder;
-        textureState(arg0: $RenderStateShard$EmptyTextureStateShard): $VeilRenderTypeBuilder;
     }
     export class $VeilRenderTypeAccessor {
     }
     export interface $VeilRenderTypeAccessor {
-        states(): $List<$RenderStateShard>;
         outputState(): $RenderStateShard$OutputStateShard;
+        states(): $List<$RenderStateShard>;
+        veilShaderId(): $ResourceLocation;
+        outlineProperty(): $RenderType$OutlineProperty;
+        textureState(): $RenderStateShard$EmptyTextureStateShard;
+        cullState(): $RenderStateShard$CullStateShard;
         shaderState(): $RenderStateShard$ShaderStateShard;
         transparencyState(): $RenderStateShard$TransparencyStateShard;
         depthTestState(): $RenderStateShard$DepthTestStateShard;
@@ -39,9 +43,5 @@ declare module "@package/foundry/veil/api/client/render/rendertype" {
         writeMaskState(): $RenderStateShard$WriteMaskStateShard;
         lineState(): $RenderStateShard$LineStateShard;
         colorLogicState(): $RenderStateShard$ColorLogicStateShard;
-        veilShaderId(): $ResourceLocation;
-        cullState(): $RenderStateShard$CullStateShard;
-        outlineProperty(): $RenderType$OutlineProperty;
-        textureState(): $RenderStateShard$EmptyTextureStateShard;
     }
 }

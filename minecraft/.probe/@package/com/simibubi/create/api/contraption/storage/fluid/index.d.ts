@@ -18,8 +18,8 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 declare module "@package/com/simibubi/create/api/contraption/storage/fluid" {
     export interface $MountedFluidStorageType<T> extends RegistryMarked<RegistryTypes.CreateMountedFluidStorageTypeTag, RegistryTypes.CreateMountedFluidStorageType> {}
     export class $MountedFluidStorageType<T extends $MountedFluidStorage> {
-        mount(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockEntity): T;
         static mountedFluidStorage<B extends $Block, P>(arg0: $RegistryEntry<$MountedFluidStorageType_<never>, $MountedFluidStorageType_<never>>): $NonNullUnaryOperator<$BlockBuilder<B, P>>;
+        mount(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockEntity): T;
         codec: $MapCodec<T>;
         static CODEC: $Codec<$MountedFluidStorageType<never>>;
         static REGISTRY: $SimpleRegistry<$Block, $MountedFluidStorageType<never>>;

@@ -37,60 +37,60 @@ declare module "@package/dev/latvian/apps/tinyserver/http" {
     /**
      * Values that may be interpreted as {@link $HTTPPathHandler}.
      */
-    export type $HTTPPathHandler_<REQ> = { path?: $CompiledPath_, handler?: $HTTPHandler_<$HTTPRequest>, method?: $HTTPMethod_,  } | [path?: $CompiledPath_, handler?: $HTTPHandler_<$HTTPRequest>, method?: $HTTPMethod_, ];
+    export type $HTTPPathHandler_<REQ> = { method?: $HTTPMethod_, handler?: $HTTPHandler_<$HTTPRequest>, path?: $CompiledPath_,  } | [method?: $HTTPMethod_, handler?: $HTTPHandler_<$HTTPRequest>, path?: $CompiledPath_, ];
     export class $Body {
+        getPostData(): $Map<string, $OptionalString>;
+        contentType(): string;
+        text(): string;
+        byteBuffer(): $ByteBuffer;
         name(): string;
         fileName(): string;
         bytes(): number[];
         property(key: string): $OptionalString;
-        text(): string;
-        byteBuffer(): $ByteBuffer;
-        getPostData(): $Map<string, $OptionalString>;
-        contentType(): string;
         constructor();
         get postData(): $Map<string, $OptionalString>;
     }
     export class $HTTPRequest {
+        fullPath(): string;
+        variables(): $Map<string, $OptionalString>;
+        cookie(key: string): $OptionalString;
+        cookies(): $Map<string, $OptionalString>;
+        preInit(session: $HTTPConnection<never>, startTime: $Instant, method: $HTTPMethod_): void;
+        ip(): string;
+        formData(key: string): $OptionalString;
+        formData(): $Map<string, $OptionalString>;
+        acceptedEncodings(): $Set<string>;
+        bodyBuffer(): $ByteBuffer;
+        bodyList(): $List<$Body>;
+        gitHubSignature(): string;
+        gitHubEvent(): string;
+        mainBody(): $Body;
+        createPreResponse(handler: $HTTPHandler_<never>): $HTTPResponse;
+        afterResponse(payload: $HTTPPayload, response: $HTTPResponse, handler: $HTTPHandler_<never>, error: $Throwable): void;
+        queryString(): string;
+        variable(name: string): $OptionalString;
+        country(): string;
         method(): $HTTPMethod;
         init(path: string, pathParts: string[], compiledPath: $CompiledPath_, headers: $List_<$Header_>, queryString: string, query: $Map_<string, $OptionalString_>): void;
         startTime(): $Instant;
         query(): $Map<string, $OptionalString>;
         query(key: string): $OptionalString;
         path(): string;
-        country(): string;
-        connection(): $HTTPConnection<never>;
         header(name: string): $OptionalString;
-        ip(): string;
-        mainBody(): $Body;
-        createPreResponse(handler: $HTTPHandler_<never>): $HTTPResponse;
-        afterResponse(payload: $HTTPPayload, response: $HTTPResponse, handler: $HTTPHandler_<never>, error: $Throwable): void;
-        queryString(): string;
-        formData(): $Map<string, $OptionalString>;
-        formData(key: string): $OptionalString;
-        acceptedEncodings(): $Set<string>;
-        bodyBuffer(): $ByteBuffer;
-        bodyList(): $List<$Body>;
-        gitHubSignature(): string;
-        gitHubEvent(): string;
-        variables(): $Map<string, $OptionalString>;
-        fullPath(): string;
-        cookie(key: string): $OptionalString;
-        preInit(session: $HTTPConnection<never>, startTime: $Instant, method: $HTTPMethod_): void;
-        cookies(): $Map<string, $OptionalString>;
         server(): $HTTPServer<never>;
+        connection(): $HTTPConnection<never>;
         userAgent(): string;
         pathParts(): string[];
         headers(): $List<$Header>;
         ipv6(): string;
         afterInit(): void;
         handleResponse(payload: $HTTPPayload, response: $HTTPResponse, error: $Throwable): $HTTPResponse;
-        variable(name: string): $OptionalString;
         constructor();
     }
     export class $Header extends $Record {
         value(): $OptionalString;
-        is(name: string): boolean;
         key(): string;
+        is(name: string): boolean;
         constructor(key: string, value: string);
         constructor(key: string, value: $OptionalString_);
     }
@@ -101,8 +101,8 @@ declare module "@package/dev/latvian/apps/tinyserver/http" {
     export class $HTTPHandler<REQ extends $HTTPRequest> {
     }
     export interface $HTTPHandler<REQ extends $HTTPRequest> {
-        handle(req: REQ): $HTTPResponse;
         isFileHandler(): boolean;
+        handle(req: REQ): $HTTPResponse;
         get fileHandler(): boolean;
     }
     /**

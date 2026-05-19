@@ -10,10 +10,10 @@ import { $ItemPredicate_, $ItemPredicate } from "@package/net/minecraft/advancem
 
 declare module "@package/io/github/mortuusars/exposure/data" {
     export class $Filter extends $Record {
-        predicate(): $ItemPredicate;
         attachmentTexture(): $ResourceLocation;
         attachmentTintColor(): $Color;
         shader(): $ResourceLocation;
+        predicate(): $ItemPredicate;
         static CODEC: $Codec<$Filter>;
         static HOLDER_CODEC: $Codec<$Holder<$Filter>>;
         static DEFAULT_GLASS_TEXTURE: $ResourceLocation;
@@ -22,19 +22,19 @@ declare module "@package/io/github/mortuusars/exposure/data" {
     /**
      * Values that may be interpreted as {@link $Filter}.
      */
-    export type $Filter_ = RegistryTypes.ExposureFilter | { shader?: $ResourceLocation_, attachmentTintColor?: $Color_, predicate?: $ItemPredicate_, attachmentTexture?: $ResourceLocation_,  } | [shader?: $ResourceLocation_, attachmentTintColor?: $Color_, predicate?: $ItemPredicate_, attachmentTexture?: $ResourceLocation_, ];
+    export type $Filter_ = RegistryTypes.ExposureFilter | { attachmentTexture?: $ResourceLocation_, predicate?: $ItemPredicate_, attachmentTintColor?: $Color_, shader?: $ResourceLocation_,  } | [attachmentTexture?: $ResourceLocation_, predicate?: $ItemPredicate_, attachmentTintColor?: $Color_, shader?: $ResourceLocation_, ];
     export interface $ColorPalette extends RegistryMarked<RegistryTypes.ExposureColorPaletteTag, RegistryTypes.ExposureColorPalette> {}
     export interface $Lens extends RegistryMarked<RegistryTypes.ExposureLensTag, RegistryTypes.ExposureLens> {}
     export class $Lens extends $Record {
-        predicate(): $ItemPredicate;
         focalRange(): $FocalRange;
+        predicate(): $ItemPredicate;
         static CODEC: $Codec<$Lens>;
         constructor(predicate: $ItemPredicate_, focalRange: $FocalRange);
     }
     /**
      * Values that may be interpreted as {@link $Lens}.
      */
-    export type $Lens_ = RegistryTypes.ExposureLens | { predicate?: $ItemPredicate_, focalRange?: $FocalRange,  } | [predicate?: $ItemPredicate_, focalRange?: $FocalRange, ];
+    export type $Lens_ = RegistryTypes.ExposureLens | { focalRange?: $FocalRange, predicate?: $ItemPredicate_,  } | [focalRange?: $FocalRange, predicate?: $ItemPredicate_, ];
     export interface $Filter extends RegistryMarked<RegistryTypes.ExposureFilterTag, RegistryTypes.ExposureFilter> {}
     export class $ColorPalette extends $Record {
         toColorList(): $List<$Color>;

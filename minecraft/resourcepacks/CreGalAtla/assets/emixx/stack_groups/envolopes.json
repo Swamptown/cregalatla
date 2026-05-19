@@ -1,0 +1,7 @@
+{
+  "id": "cregalatla:envelopes",
+  "type": "emixx:group",
+  "contents": [
+    "#aeronautics:envelope"
+  ]
+}

@@ -7,7 +7,6 @@ import { $CharSequence, $Iterable_, $Enum } from "@package/java/lang";
 
 declare module "@package/org/jline/utils" {
     export class $AttributedStyle {
-        getMask(): number;
         toAnsi(): string;
         boldOff(): $AttributedStyle;
         boldDefault(): $AttributedStyle;
@@ -38,15 +37,16 @@ declare module "@package/org/jline/utils" {
         hiddenOff(): $AttributedStyle;
         hiddenDefault(): $AttributedStyle;
         blink(): $AttributedStyle;
-        background(arg0: number): $AttributedStyle;
+        getMask(): number;
         background(arg0: number, arg1: number, arg2: number): $AttributedStyle;
+        background(arg0: number): $AttributedStyle;
         foreground(arg0: number, arg1: number, arg2: number): $AttributedStyle;
         foreground(arg0: number): $AttributedStyle;
         inverse(): $AttributedStyle;
         hidden(): $AttributedStyle;
         getStyle(): number;
-        italic(): $AttributedStyle;
         bold(): $AttributedStyle;
+        italic(): $AttributedStyle;
         underline(): $AttributedStyle;
         static BOLD_OFF: $AttributedStyle;
         static WHITE: number;
@@ -64,16 +64,16 @@ declare module "@package/org/jline/utils" {
         static DEFAULT: $AttributedStyle;
         static BRIGHT: number;
         static INVERSE_OFF: $AttributedStyle;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $AttributedStyle);
+        constructor(arg0: number, arg1: number);
         constructor();
         get mask(): number;
         get style(): number;
     }
     export class $InfoCmp$Capability extends $Enum<$InfoCmp$Capability> {
+        getNames(): string[];
         static values(): $InfoCmp$Capability[];
         static valueOf(arg0: string): $InfoCmp$Capability;
-        getNames(): string[];
         static byName(arg0: string): $InfoCmp$Capability;
         static key_f37: $InfoCmp$Capability;
         static key_f38: $InfoCmp$Capability;
@@ -548,49 +548,49 @@ declare module "@package/org/jline/utils" {
     export class $NonBlockingReader extends $Reader {
         shutdown(): void;
         read(arg0: number): number;
-        available(): number;
         peek(arg0: number): number;
+        available(): number;
         readBuffered(arg0: string[]): number;
         static READ_EXPIRED: number;
         static EOF: number;
         constructor();
     }
     export class $ColorPalette {
-        round(arg0: number, arg1: number, arg2: number): number;
-        round(arg0: number): number;
-        getLength(): number;
-        isReal(): boolean;
-        setColor(arg0: number, arg1: number): void;
+        loadPalette(): boolean;
         getDistanceName(): string;
         canChange(): boolean;
-        loadPalette(): boolean;
+        setColor(arg0: number, arg1: number): void;
+        round(arg0: number): number;
+        round(arg0: number, arg1: number, arg2: number): number;
+        getLength(): number;
+        isReal(): boolean;
         getColor(arg0: number): number;
         setDistance(arg0: string): void;
         static XTERM_INITC: string;
         static DEFAULT: $ColorPalette;
-        constructor(arg0: $Terminal, arg1: string);
         constructor(arg0: $Terminal);
+        constructor(arg0: $Terminal, arg1: string);
         constructor();
+        get distanceName(): string;
         get length(): number;
         get real(): boolean;
-        get distanceName(): string;
         set distance(value: string);
     }
     export class $AttributedString extends $AttributedCharSequence {
-        static join(arg0: $AttributedString, ...arg1: $AttributedString[]): $AttributedString;
-        static join(arg0: $AttributedString, arg1: $Iterable_<$AttributedString>): $AttributedString;
         static fromAnsi(arg0: string, arg1: number): $AttributedString;
-        static fromAnsi(arg0: string): $AttributedString;
         static fromAnsi(arg0: string, arg1: $List_<number>): $AttributedString;
+        static fromAnsi(arg0: string): $AttributedString;
         static stripAnsi(arg0: string): string;
         styleMatches(arg0: $Pattern, arg1: $AttributedStyle): $AttributedString;
+        static join(arg0: $AttributedString, ...arg1: $AttributedString[]): $AttributedString;
+        static join(arg0: $AttributedString, arg1: $Iterable_<$AttributedString>): $AttributedString;
         static NEWLINE: $AttributedString;
         static EMPTY: $AttributedString;
         static TRUE_COLORS: number;
-        constructor(arg0: $CharSequence, arg1: number, arg2: number, arg3: $AttributedStyle);
-        constructor(arg0: $CharSequence, arg1: $AttributedStyle);
-        constructor(arg0: $CharSequence, arg1: number, arg2: number);
         constructor(arg0: $CharSequence);
+        constructor(arg0: $CharSequence, arg1: number, arg2: number, arg3: $AttributedStyle);
+        constructor(arg0: $CharSequence, arg1: number, arg2: number);
+        constructor(arg0: $CharSequence, arg1: $AttributedStyle);
     }
     export class $AttributedCharSequence$ForceMode extends $Enum<$AttributedCharSequence$ForceMode> {
         static values(): $AttributedCharSequence$ForceMode[];
@@ -604,32 +604,21 @@ declare module "@package/org/jline/utils" {
      */
     export type $AttributedCharSequence$ForceMode_ = "none" | "force256colors" | "forcetruecolors";
     export class $AttributedCharSequence implements $CharSequence {
-        println(arg0: $Terminal): void;
-        isHidden(arg0: number): boolean;
-        charAt(arg0: number): string;
-        codePointAt(arg0: number): number;
-        codePointBefore(arg0: number): number;
-        codePointCount(arg0: number, arg1: number): number;
-        substring(arg0: number, arg1: number): $AttributedString;
-        subSequence(arg0: number, arg1: number): $AttributedString;
-        contains(arg0: string): boolean;
-        print(arg0: $Terminal): void;
-        runStart(arg0: number): number;
         styleAt(arg0: number): $AttributedStyle;
         toAttributedString(): $AttributedString;
-        toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_): string;
         /**
          * @deprecated
          */
         toAnsi(arg0: number, arg1: boolean, arg2: string, arg3: string): string;
+        toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_): string;
+        toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_, arg2: $ColorPalette): string;
+        toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_, arg2: $ColorPalette, arg3: string, arg4: string): string;
+        toAnsi(): string;
+        toAnsi(arg0: $Terminal): string;
         /**
          * @deprecated
          */
         toAnsi(arg0: number, arg1: boolean): string;
-        toAnsi(): string;
-        toAnsi(arg0: $Terminal): string;
-        toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_, arg2: $ColorPalette, arg3: string, arg4: string): string;
-        toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_, arg2: $ColorPalette): string;
         /**
          * @deprecated
          */
@@ -645,9 +634,19 @@ declare module "@package/org/jline/utils" {
         runLimit(arg0: number): number;
         columnLength(): number;
         columnSubSequence(arg0: number, arg1: number): $AttributedString;
-        columnSplitLength(arg0: number): $List<$AttributedString>;
         columnSplitLength(arg0: number, arg1: boolean, arg2: boolean): $List<$AttributedString>;
-        getChars(arg0: number, arg1: number, arg2: string[], arg3: number): void;
+        columnSplitLength(arg0: number): $List<$AttributedString>;
+        runStart(arg0: number): number;
+        println(arg0: $Terminal): void;
+        isHidden(arg0: number): boolean;
+        charAt(arg0: number): string;
+        codePointAt(arg0: number): number;
+        codePointBefore(arg0: number): number;
+        codePointCount(arg0: number, arg1: number): number;
+        substring(arg0: number, arg1: number): $AttributedString;
+        subSequence(arg0: number, arg1: number): $AttributedString;
+        contains(arg0: string): boolean;
+        print(arg0: $Terminal): void;
         isEmpty(): boolean;
         codePoints(): $IntStream;
         chars(): $IntStream;

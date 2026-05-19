@@ -1,5 +1,6 @@
 import { $Item_, $Item } from "@package/net/minecraft/world/item";
 import { $CompletableFuture } from "@package/java/util/concurrent";
+import { $EntityType } from "@package/net/minecraft/world/entity";
 import { $FeatureFlagSet } from "@package/net/minecraft/world/flag";
 import { $Map, $Set } from "@package/java/util";
 import { $PackOutput } from "@package/net/minecraft/data";
@@ -17,6 +18,7 @@ declare module "@package/net/minecraft/data/loot/packs" {
     export class $VanillaEntityLoot extends $EntityLootSubProvider {
         elderGuardianLootTable(): $LootTable$Builder;
         registries: $HolderLookup$Provider;
+        map: $Map<$EntityType<never>, $Map<$ResourceKey<$LootTable>, $LootTable$Builder>>;
         constructor(arg0: $HolderLookup$Provider);
     }
     export class $VanillaLootTableProvider {
@@ -33,8 +35,8 @@ declare module "@package/net/minecraft/data/loot/packs" {
      */
     export type $VanillaPiglinBarterLoot_ = { registries?: $HolderLookup$Provider,  } | [registries?: $HolderLookup$Provider, ];
     export class $VanillaEquipmentLoot extends $Record implements $LootTableSubProvider {
-        generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         static trialChamberEquipment(arg0: $Item_, arg1: $Item_, arg2: $ArmorTrim, arg3: $HolderLookup$RegistryLookup<$Enchantment_>): $LootTable$Builder;
+        generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         registries(): $HolderLookup$Provider;
         constructor(arg0: $HolderLookup$Provider);
     }
@@ -59,6 +61,7 @@ declare module "@package/net/minecraft/data/loot/packs" {
         enabledFeatures: $FeatureFlagSet;
         static HAS_SHEARS: $LootItemCondition$Builder;
         explosionResistant: $Set<$Item>;
+        static NORMAL_LEAVES_STICK_CHANCES: number[];
         registries: $HolderLookup$Provider;
         map: $Map<$ResourceKey<$LootTable>, $LootTable$Builder>;
         static NORMAL_LEAVES_SAPLING_CHANCES: number[];
@@ -74,8 +77,8 @@ declare module "@package/net/minecraft/data/loot/packs" {
      */
     export type $VanillaShearingLoot_ = { registries?: $HolderLookup$Provider,  } | [registries?: $HolderLookup$Provider, ];
     export class $VanillaFishingLoot extends $Record implements $LootTableSubProvider {
-        generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         static fishingFishLootTable(): $LootTable$Builder;
+        generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         registries(): $HolderLookup$Provider;
         constructor(arg0: $HolderLookup$Provider);
     }
@@ -84,15 +87,12 @@ declare module "@package/net/minecraft/data/loot/packs" {
      */
     export type $VanillaFishingLoot_ = { registries?: $HolderLookup$Provider,  } | [registries?: $HolderLookup$Provider, ];
     export class $VanillaChestLoot extends $Record implements $LootTableSubProvider {
-        generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
+        bastionHoglinStableLootTable(): $LootTable$Builder;
         ancientCityLootTable(): $LootTable$Builder;
         desertPyramidLootTable(): $LootTable$Builder;
         jungleTempleLootTable(): $LootTable$Builder;
         pillagerOutpostLootTable(): $LootTable$Builder;
-        woodlandMansionLootTable(): $LootTable$Builder;
-        spawnerLootTables(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         bastionBridgeLootTable(): $LootTable$Builder;
-        bastionHoglinStableLootTable(): $LootTable$Builder;
         bastionOtherLootTable(): $LootTable$Builder;
         bastionTreasureLootTable(): $LootTable$Builder;
         endCityTreasureLootTable(): $LootTable$Builder;
@@ -102,6 +102,9 @@ declare module "@package/net/minecraft/data/loot/packs" {
         shipwreckTreasureLootTable(): $LootTable$Builder;
         strongholdCorridorLootTable(): $LootTable$Builder;
         strongholdLibraryLootTable(): $LootTable$Builder;
+        woodlandMansionLootTable(): $LootTable$Builder;
+        spawnerLootTables(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
+        generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         registries(): $HolderLookup$Provider;
         constructor(arg0: $HolderLookup$Provider);
     }
@@ -110,11 +113,11 @@ declare module "@package/net/minecraft/data/loot/packs" {
      */
     export type $VanillaChestLoot_ = { registries?: $HolderLookup$Provider,  } | [registries?: $HolderLookup$Provider, ];
     export class $TradeRebalanceChestLoot extends $Record implements $LootTableSubProvider {
-        generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         ancientCityLootTable(): $LootTable$Builder;
         desertPyramidLootTable(): $LootTable$Builder;
         jungleTempleLootTable(): $LootTable$Builder;
         pillagerOutpostLootTable(): $LootTable$Builder;
+        generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         registries(): $HolderLookup$Provider;
         constructor(arg0: $HolderLookup$Provider);
     }

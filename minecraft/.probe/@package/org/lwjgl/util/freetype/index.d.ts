@@ -6,38 +6,38 @@ import { $ByteBuffer, $ShortBuffer } from "@package/java/nio";
 
 declare module "@package/org/lwjgl/util/freetype" {
     export class $FT_BBox extends $Struct<$FT_BBox> implements $NativeResource {
+        static nxMin(arg0: number): number;
+        static nxMin(arg0: number, arg1: number): void;
+        static nyMin(arg0: number, arg1: number): void;
+        static nyMin(arg0: number): number;
+        static nxMax(arg0: number): number;
+        static nxMax(arg0: number, arg1: number): void;
+        static nyMax(arg0: number): number;
+        static nyMax(arg0: number, arg1: number): void;
+        xMin(arg0: number): $FT_BBox;
+        xMin(): number;
+        yMin(): number;
+        yMin(arg0: number): $FT_BBox;
+        xMax(): number;
+        xMax(arg0: number): $FT_BBox;
+        yMax(arg0: number): $FT_BBox;
+        yMax(): number;
         set(arg0: number, arg1: number, arg2: number, arg3: number): $FT_BBox;
         set(arg0: $FT_BBox): $FT_BBox;
         static create(): $FT_BBox;
         static create(arg0: number): $FT_BBox;
-        static create(arg0: number, arg1: number): $FT_BBox$Buffer;
         static create(arg0: number): $FT_BBox$Buffer;
-        static nxMax(arg0: number, arg1: number): void;
-        static nxMax(arg0: number): number;
-        static nyMax(arg0: number): number;
-        static nyMax(arg0: number, arg1: number): void;
-        static nxMin(arg0: number, arg1: number): void;
-        static nxMin(arg0: number): number;
-        static nyMin(arg0: number, arg1: number): void;
-        static nyMin(arg0: number): number;
-        xMin(): number;
-        xMin(arg0: number): $FT_BBox;
-        yMin(): number;
-        yMin(arg0: number): $FT_BBox;
-        xMax(arg0: number): $FT_BBox;
-        xMax(): number;
-        yMax(arg0: number): $FT_BBox;
-        yMax(): number;
-        static malloc(arg0: number): $FT_BBox$Buffer;
-        static malloc(): $FT_BBox;
-        static malloc(arg0: $MemoryStack): $FT_BBox;
-        static malloc(arg0: number, arg1: $MemoryStack): $FT_BBox$Buffer;
+        static create(arg0: number, arg1: number): $FT_BBox$Buffer;
         static calloc(): $FT_BBox;
-        static calloc(arg0: number): $FT_BBox$Buffer;
         static calloc(arg0: number, arg1: $MemoryStack): $FT_BBox$Buffer;
         static calloc(arg0: $MemoryStack): $FT_BBox;
-        static createSafe(arg0: number): $FT_BBox;
+        static calloc(arg0: number): $FT_BBox$Buffer;
         static createSafe(arg0: number, arg1: number): $FT_BBox$Buffer;
+        static createSafe(arg0: number): $FT_BBox;
+        static malloc(arg0: $MemoryStack): $FT_BBox;
+        static malloc(arg0: number): $FT_BBox$Buffer;
+        static malloc(): $FT_BBox;
+        static malloc(arg0: number, arg1: $MemoryStack): $FT_BBox$Buffer;
         close(): void;
         static YMIN: number;
         static YMAX: number;
@@ -48,12 +48,6 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_Outline extends $Struct<$FT_Outline> implements $NativeResource {
-        flags(): number;
-        static create(arg0: number, arg1: number): $FT_Outline$Buffer;
-        static create(): $FT_Outline;
-        static create(arg0: number): $FT_Outline;
-        static create(arg0: number): $FT_Outline$Buffer;
-        tags(): $ByteBuffer;
         n_contours(): number;
         n_points(): number;
         contours(): $ShortBuffer;
@@ -62,16 +56,22 @@ declare module "@package/org/lwjgl/util/freetype" {
         static npoints(arg0: number): $FT_Vector$Buffer;
         static ntags(arg0: number): $ByteBuffer;
         static ncontours(arg0: number): $ShortBuffer;
-        static malloc(arg0: number, arg1: $MemoryStack): $FT_Outline$Buffer;
-        static malloc(arg0: number): $FT_Outline$Buffer;
-        static malloc(arg0: $MemoryStack): $FT_Outline;
-        static malloc(): $FT_Outline;
+        tags(): $ByteBuffer;
+        flags(): number;
+        static create(arg0: number, arg1: number): $FT_Outline$Buffer;
+        static create(arg0: number): $FT_Outline$Buffer;
+        static create(): $FT_Outline;
+        static create(arg0: number): $FT_Outline;
+        static calloc(arg0: $MemoryStack): $FT_Outline;
+        static calloc(arg0: number): $FT_Outline$Buffer;
         static calloc(arg0: number, arg1: $MemoryStack): $FT_Outline$Buffer;
         static calloc(): $FT_Outline;
-        static calloc(arg0: number): $FT_Outline$Buffer;
-        static calloc(arg0: $MemoryStack): $FT_Outline;
-        static createSafe(arg0: number, arg1: number): $FT_Outline$Buffer;
         static createSafe(arg0: number): $FT_Outline;
+        static createSafe(arg0: number, arg1: number): $FT_Outline$Buffer;
+        static malloc(arg0: number, arg1: $MemoryStack): $FT_Outline$Buffer;
+        static malloc(arg0: number): $FT_Outline$Buffer;
+        static malloc(): $FT_Outline;
+        static malloc(arg0: $MemoryStack): $FT_Outline;
         static nflags(arg0: number): number;
         points(): $FT_Vector$Buffer;
         close(): void;
@@ -94,30 +94,30 @@ declare module "@package/org/lwjgl/util/freetype" {
         get callInterface(): $FFICIF;
     }
     export class $FT_CharMap$Buffer extends $StructBuffer<$FT_CharMap, $FT_CharMap$Buffer> {
-        encoding(): number;
         platform_id(): number;
         encoding_id(): number;
+        encoding(): number;
         face(): $FT_Face;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Stream$Buffer extends $StructBuffer<$FT_Stream, $FT_Stream$Buffer> implements $NativeResource {
-        base(arg0: $ByteBuffer): $FT_Stream$Buffer;
-        base(): $ByteBuffer;
-        size(arg0: number): $FT_Stream$Buffer;
-        size(): number;
-        descriptor(arg0: $FT_StreamDesc): $FT_Stream$Buffer;
-        descriptor(arg0: $Consumer_<$FT_StreamDesc>): $FT_Stream$Buffer;
-        descriptor(): $FT_StreamDesc;
-        pos(arg0: number): $FT_Stream$Buffer;
-        pos(): number;
-        read(): $FT_Stream_IoFunc;
-        read(arg0: $FT_Stream_IoFuncI_): $FT_Stream$Buffer;
-        pathname(arg0: $Consumer_<$FT_StreamDesc>): $FT_Stream$Buffer;
-        pathname(arg0: $FT_StreamDesc): $FT_Stream$Buffer;
-        pathname(): $FT_StreamDesc;
         close$(): $FT_Stream_CloseFunc;
         close$(arg0: $FT_Stream_CloseFuncI_): $FT_Stream$Buffer;
+        base(): $ByteBuffer;
+        base(arg0: $ByteBuffer): $FT_Stream$Buffer;
+        size(arg0: number): $FT_Stream$Buffer;
+        size(): number;
+        read(): $FT_Stream_IoFunc;
+        read(arg0: $FT_Stream_IoFuncI_): $FT_Stream$Buffer;
+        descriptor(arg0: $FT_StreamDesc): $FT_Stream$Buffer;
+        descriptor(): $FT_StreamDesc;
+        descriptor(arg0: $Consumer_<$FT_StreamDesc>): $FT_Stream$Buffer;
+        pos(arg0: number): $FT_Stream$Buffer;
+        pos(): number;
+        pathname(): $FT_StreamDesc;
+        pathname(arg0: $FT_StreamDesc): $FT_Stream$Buffer;
+        pathname(arg0: $Consumer_<$FT_StreamDesc>): $FT_Stream$Buffer;
         close(): void;
         constructor(arg0: $ByteBuffer);
         constructor(arg0: number, arg1: number);
@@ -126,8 +126,8 @@ declare module "@package/org/lwjgl/util/freetype" {
         static CIF: $FFICIF;
     }
     export interface $FT_Free_FuncI extends $CallbackI {
-        invoke(arg0: number, arg1: number): void;
         callback(arg0: number, arg1: number): void;
+        invoke(arg0: number, arg1: number): void;
         getCallInterface(): $FFICIF;
         get callInterface(): $FFICIF;
     }
@@ -139,15 +139,15 @@ declare module "@package/org/lwjgl/util/freetype" {
         module_data(): number;
         autohint_mode(): number;
         autohint_metrics(): $FT_Size_Metrics;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Realloc_FuncI {
         static CIF: $FFICIF;
     }
     export interface $FT_Realloc_FuncI extends $CallbackI {
-        invoke(arg0: number, arg1: number, arg2: number, arg3: number): number;
         callback(arg0: number, arg1: number): void;
+        invoke(arg0: number, arg1: number, arg2: number, arg3: number): number;
         getCallInterface(): $FFICIF;
         get callInterface(): $FFICIF;
     }
@@ -156,32 +156,26 @@ declare module "@package/org/lwjgl/util/freetype" {
      */
     export type $FT_Realloc_FuncI_ = ((arg0: number, arg1: number, arg2: number, arg3: number) => number);
     export class $FT_GlyphSlot$Buffer extends $StructBuffer<$FT_GlyphSlot, $FT_GlyphSlot$Buffer> {
-        next(): $FT_GlyphSlot;
-        format(): number;
-        generic(): $FT_Generic;
-        advance(): $FT_Vector;
-        metrics(): $FT_Glyph_Metrics;
         bitmap_left(): number;
         bitmap_top(): number;
         linearHoriAdvance(): number;
         linearVertAdvance(): number;
         lsb_delta(): number;
         rsb_delta(): number;
-        bitmap(): $FT_Bitmap;
         glyph_index(): number;
+        bitmap(): $FT_Bitmap;
+        metrics(): $FT_Glyph_Metrics;
+        next(): $FT_GlyphSlot;
+        format(): number;
+        generic(): $FT_Generic;
+        advance(): $FT_Vector;
         library(): number;
         outline(): $FT_Outline;
         face(): $FT_Face;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Bitmap extends $Struct<$FT_Bitmap> implements $NativeResource {
-        buffer(arg0: number): $ByteBuffer;
-        static create(arg0: number, arg1: number): $FT_Bitmap$Buffer;
-        static create(): $FT_Bitmap;
-        static create(arg0: number): $FT_Bitmap;
-        static create(arg0: number): $FT_Bitmap$Buffer;
-        width(): number;
         num_grays(): number;
         palette_mode(): number;
         static nrows(arg0: number): number;
@@ -192,17 +186,23 @@ declare module "@package/org/lwjgl/util/freetype" {
         static npalette_mode(arg0: number): number;
         static npalette(arg0: number): number;
         rows(): number;
-        static malloc(arg0: $MemoryStack): $FT_Bitmap;
-        static malloc(arg0: number, arg1: $MemoryStack): $FT_Bitmap$Buffer;
-        static malloc(arg0: number): $FT_Bitmap$Buffer;
-        static malloc(): $FT_Bitmap;
+        buffer(arg0: number): $ByteBuffer;
+        static create(arg0: number): $FT_Bitmap$Buffer;
+        static create(arg0: number, arg1: number): $FT_Bitmap$Buffer;
+        static create(arg0: number): $FT_Bitmap;
+        static create(): $FT_Bitmap;
+        width(): number;
         static calloc(arg0: number, arg1: $MemoryStack): $FT_Bitmap$Buffer;
-        static calloc(): $FT_Bitmap;
         static calloc(arg0: number): $FT_Bitmap$Buffer;
         static calloc(arg0: $MemoryStack): $FT_Bitmap;
+        static calloc(): $FT_Bitmap;
         static createSafe(arg0: number): $FT_Bitmap;
         static createSafe(arg0: number, arg1: number): $FT_Bitmap$Buffer;
         static nwidth(arg0: number): number;
+        static malloc(arg0: number): $FT_Bitmap$Buffer;
+        static malloc(arg0: number, arg1: $MemoryStack): $FT_Bitmap$Buffer;
+        static malloc(): $FT_Bitmap;
+        static malloc(arg0: $MemoryStack): $FT_Bitmap;
         palette(): number;
         pitch(): number;
         pixel_mode(): number;
@@ -231,8 +231,8 @@ declare module "@package/org/lwjgl/util/freetype" {
         static CIF: $FFICIF;
     }
     export interface $FT_Stream_CloseFuncI extends $CallbackI {
-        invoke(arg0: number): void;
         callback(arg0: number, arg1: number): void;
+        invoke(arg0: number): void;
         getCallInterface(): $FFICIF;
         get callInterface(): $FFICIF;
     }
@@ -249,95 +249,95 @@ declare module "@package/org/lwjgl/util/freetype" {
         get callInterface(): $FFICIF;
     }
     export class $FT_Outline$Buffer extends $StructBuffer<$FT_Outline, $FT_Outline$Buffer> implements $NativeResource {
-        flags(): number;
-        tags(): $ByteBuffer;
         n_contours(): number;
         n_points(): number;
         contours(): $ShortBuffer;
+        tags(): $ByteBuffer;
+        flags(): number;
         points(): $FT_Vector$Buffer;
         close(): void;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Bitmap$Buffer extends $StructBuffer<$FT_Bitmap, $FT_Bitmap$Buffer> implements $NativeResource {
-        buffer(arg0: number): $ByteBuffer;
-        width(): number;
         num_grays(): number;
         palette_mode(): number;
         rows(): number;
+        buffer(arg0: number): $ByteBuffer;
+        width(): number;
         palette(): number;
         pitch(): number;
         pixel_mode(): number;
         close(): void;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Bitmap_Size$Buffer extends $StructBuffer<$FT_Bitmap_Size, $FT_Bitmap_Size$Buffer> {
-        size(): number;
-        width(): number;
         x_ppem(): number;
         y_ppem(): number;
+        size(): number;
+        width(): number;
         height(): number;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Glyph_Metrics$Buffer extends $StructBuffer<$FT_Glyph_Metrics, $FT_Glyph_Metrics$Buffer> {
-        width(): number;
         horiBearingX(): number;
         horiBearingY(): number;
         horiAdvance(): number;
         vertBearingX(): number;
         vertBearingY(): number;
         vertAdvance(): number;
+        width(): number;
         height(): number;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Size_Metrics$Buffer extends $StructBuffer<$FT_Size_Metrics, $FT_Size_Metrics$Buffer> {
-        x_ppem(): number;
-        y_ppem(): number;
-        x_scale(): number;
-        max_advance(): number;
         ascender(): number;
         descender(): number;
+        x_scale(): number;
+        max_advance(): number;
+        x_ppem(): number;
+        y_ppem(): number;
         y_scale(): number;
         height(): number;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Memory extends $Struct<$FT_Memory> implements $NativeResource {
-        set(arg0: $FT_Memory): $FT_Memory;
+        free$(): $FT_Free_Func;
+        free$(arg0: $FT_Free_FuncI_): $FT_Memory;
+        static nuser(arg0: number, arg1: number): void;
+        static nuser(arg0: number): number;
+        static nalloc(arg0: number): $FT_Alloc_Func;
+        static nalloc(arg0: number, arg1: $FT_Alloc_FuncI_): void;
+        static nfree$(arg0: number, arg1: $FT_Free_FuncI_): void;
+        static nfree$(arg0: number): $FT_Free_Func;
+        static nrealloc(arg0: number, arg1: $FT_Realloc_FuncI_): void;
+        static nrealloc(arg0: number): $FT_Realloc_Func;
+        alloc(arg0: $FT_Alloc_FuncI_): $FT_Memory;
+        alloc(): $FT_Alloc_Func;
         set(arg0: number, arg1: $FT_Alloc_FuncI_, arg2: $FT_Free_FuncI_, arg3: $FT_Realloc_FuncI_): $FT_Memory;
+        set(arg0: $FT_Memory): $FT_Memory;
+        static create(arg0: number): $FT_Memory$Buffer;
         static create(arg0: number, arg1: number): $FT_Memory$Buffer;
         static create(): $FT_Memory;
-        static create(arg0: number): $FT_Memory$Buffer;
         static create(arg0: number): $FT_Memory;
         user(): number;
         user(arg0: number): $FT_Memory;
-        free$(arg0: $FT_Free_FuncI_): $FT_Memory;
-        free$(): $FT_Free_Func;
-        static nuser(arg0: number): number;
-        static nuser(arg0: number, arg1: number): void;
-        static nalloc(arg0: number, arg1: $FT_Alloc_FuncI_): void;
-        static nalloc(arg0: number): $FT_Alloc_Func;
-        static nfree$(arg0: number, arg1: $FT_Free_FuncI_): void;
-        static nfree$(arg0: number): $FT_Free_Func;
-        static nrealloc(arg0: number): $FT_Realloc_Func;
-        static nrealloc(arg0: number, arg1: $FT_Realloc_FuncI_): void;
-        alloc(arg0: $FT_Alloc_FuncI_): $FT_Memory;
-        alloc(): $FT_Alloc_Func;
-        realloc(arg0: $FT_Realloc_FuncI_): $FT_Memory;
-        realloc(): $FT_Realloc_Func;
-        static malloc(arg0: number): $FT_Memory$Buffer;
-        static malloc(): $FT_Memory;
-        static malloc(arg0: $MemoryStack): $FT_Memory;
-        static malloc(arg0: number, arg1: $MemoryStack): $FT_Memory$Buffer;
         static calloc(): $FT_Memory;
         static calloc(arg0: number): $FT_Memory$Buffer;
         static calloc(arg0: number, arg1: $MemoryStack): $FT_Memory$Buffer;
         static calloc(arg0: $MemoryStack): $FT_Memory;
-        static createSafe(arg0: number): $FT_Memory;
         static createSafe(arg0: number, arg1: number): $FT_Memory$Buffer;
+        static createSafe(arg0: number): $FT_Memory;
+        static malloc(arg0: number): $FT_Memory$Buffer;
+        static malloc(arg0: $MemoryStack): $FT_Memory;
+        static malloc(): $FT_Memory;
+        static malloc(arg0: number, arg1: $MemoryStack): $FT_Memory$Buffer;
+        realloc(arg0: $FT_Realloc_FuncI_): $FT_Memory;
+        realloc(): $FT_Realloc_Func;
         close(): void;
         static ALLOC: number;
         static ALIGNOF: number;
@@ -356,13 +356,13 @@ declare module "@package/org/lwjgl/util/freetype" {
         get callInterface(): $FFICIF;
     }
     export class $FT_StreamDesc$Buffer extends $StructBuffer<$FT_StreamDesc, $FT_StreamDesc$Buffer> implements $NativeResource {
-        value(arg0: number): $FT_StreamDesc$Buffer;
-        value(): number;
         pointer(): number;
         pointer(arg0: number): $FT_StreamDesc$Buffer;
+        value(arg0: number): $FT_StreamDesc$Buffer;
+        value(): number;
         close(): void;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Generic_Finalizer extends $Callback implements $FT_Generic_FinalizerI {
         static create(arg0: number): $FT_Generic_Finalizer;
@@ -373,36 +373,36 @@ declare module "@package/org/lwjgl/util/freetype" {
         get callInterface(): $FFICIF;
     }
     export class $FT_Size extends $Struct<$FT_Size> implements $NativeResource {
+        static ngeneric(arg0: number, arg1: $FT_Generic): void;
+        static ngeneric(arg0: number): $FT_Generic;
+        static ninternal(arg0: number): $FT_Size_Internal;
+        static ninternal(arg0: number, arg1: $FT_Size_Internal): void;
+        static nface(arg0: number, arg1: $FT_Face): void;
+        static nface(arg0: number): $FT_Face;
+        static nmetrics(arg0: number): $FT_Size_Metrics;
+        static nmetrics(arg0: number, arg1: $FT_Size_Metrics): void;
+        metrics(arg0: $FT_Size_Metrics): $FT_Size;
+        metrics(): $FT_Size_Metrics;
         static validate(arg0: number): void;
         set(arg0: $FT_Face, arg1: $FT_Generic, arg2: $FT_Size_Metrics): $FT_Size;
         set(arg0: $FT_Size): $FT_Size;
-        static create(arg0: number, arg1: number): $FT_Size$Buffer;
         static create(): $FT_Size;
-        static create(arg0: number): $FT_Size;
         static create(arg0: number): $FT_Size$Buffer;
+        static create(arg0: number, arg1: number): $FT_Size$Buffer;
+        static create(arg0: number): $FT_Size;
         generic(): $FT_Generic;
-        generic(arg0: $Consumer_<$FT_Generic>): $FT_Size;
         generic(arg0: $FT_Generic): $FT_Size;
-        metrics(arg0: $FT_Size_Metrics): $FT_Size;
-        metrics(): $FT_Size_Metrics;
-        static ngeneric(arg0: number): $FT_Generic;
-        static ngeneric(arg0: number, arg1: $FT_Generic): void;
-        static ninternal(arg0: number): $FT_Size_Internal;
-        static ninternal(arg0: number, arg1: $FT_Size_Internal): void;
-        static nface(arg0: number): $FT_Face;
-        static nface(arg0: number, arg1: $FT_Face): void;
-        static nmetrics(arg0: number): $FT_Size_Metrics;
-        static nmetrics(arg0: number, arg1: $FT_Size_Metrics): void;
-        static malloc(): $FT_Size;
-        static malloc(arg0: number): $FT_Size$Buffer;
-        static malloc(arg0: $MemoryStack): $FT_Size;
-        static malloc(arg0: number, arg1: $MemoryStack): $FT_Size$Buffer;
-        static calloc(arg0: number): $FT_Size$Buffer;
-        static calloc(): $FT_Size;
-        static calloc(arg0: $MemoryStack): $FT_Size;
+        generic(arg0: $Consumer_<$FT_Generic>): $FT_Size;
         static calloc(arg0: number, arg1: $MemoryStack): $FT_Size$Buffer;
+        static calloc(): $FT_Size;
+        static calloc(arg0: number): $FT_Size$Buffer;
+        static calloc(arg0: $MemoryStack): $FT_Size;
         static createSafe(arg0: number): $FT_Size;
         static createSafe(arg0: number, arg1: number): $FT_Size$Buffer;
+        static malloc(): $FT_Size;
+        static malloc(arg0: $MemoryStack): $FT_Size;
+        static malloc(arg0: number): $FT_Size$Buffer;
+        static malloc(arg0: number, arg1: $MemoryStack): $FT_Size$Buffer;
         face(arg0: $FT_Face): $FT_Size;
         face(): $FT_Face;
         close(): void;
@@ -415,9 +415,6 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_Face$Buffer extends $StructBuffer<$FT_Face, $FT_Face$Buffer> {
-        size(): $FT_Size;
-        generic(): $FT_Generic;
-        face_flags(): number;
         num_faces(): number;
         style_flags(): number;
         num_glyphs(): number;
@@ -439,17 +436,15 @@ declare module "@package/org/lwjgl/util/freetype" {
         underline_thickness(): number;
         face_index(): number;
         charmap(): $FT_CharMap;
+        face_flags(): number;
         glyph(): $FT_GlyphSlot;
+        size(): $FT_Size;
+        generic(): $FT_Generic;
         height(): number;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Face extends $Struct<$FT_Face> {
-        size(): $FT_Size;
-        static create(arg0: number): $FT_Face;
-        static create(arg0: number, arg1: number): $FT_Face$Buffer;
-        generic(): $FT_Generic;
-        face_flags(): number;
         num_faces(): number;
         style_flags(): number;
         num_glyphs(): number;
@@ -502,11 +497,16 @@ declare module "@package/org/lwjgl/util/freetype" {
         static ninternal(arg0: number): number;
         face_index(): number;
         charmap(): $FT_CharMap;
+        face_flags(): number;
         glyph(): $FT_GlyphSlot;
         static nsize(arg0: number): $FT_Size;
+        size(): $FT_Size;
+        static create(arg0: number): $FT_Face;
+        static create(arg0: number, arg1: number): $FT_Face$Buffer;
+        generic(): $FT_Generic;
         height(): number;
-        static createSafe(arg0: number, arg1: number): $FT_Face$Buffer;
         static createSafe(arg0: number): $FT_Face;
+        static createSafe(arg0: number, arg1: number): $FT_Face$Buffer;
         static nheight(arg0: number): number;
         static UNDERLINE_THICKNESS: number;
         static GLYPH: number;
@@ -544,25 +544,25 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_Size_Metrics extends $Struct<$FT_Size_Metrics> {
-        static create(arg0: number): $FT_Size_Metrics;
-        static create(arg0: number, arg1: number): $FT_Size_Metrics$Buffer;
-        x_ppem(): number;
-        y_ppem(): number;
-        static nx_ppem(arg0: number): number;
-        static ny_ppem(arg0: number): number;
+        ascender(): number;
+        descender(): number;
+        static nascender(arg0: number): number;
+        static ndescender(arg0: number): number;
         x_scale(): number;
         max_advance(): number;
         static nx_scale(arg0: number): number;
         static ny_scale(arg0: number): number;
         static nmax_advance(arg0: number): number;
-        ascender(): number;
-        descender(): number;
-        static nascender(arg0: number): number;
-        static ndescender(arg0: number): number;
+        x_ppem(): number;
+        y_ppem(): number;
+        static nx_ppem(arg0: number): number;
+        static ny_ppem(arg0: number): number;
         y_scale(): number;
+        static create(arg0: number): $FT_Size_Metrics;
+        static create(arg0: number, arg1: number): $FT_Size_Metrics$Buffer;
         height(): number;
-        static createSafe(arg0: number): $FT_Size_Metrics;
         static createSafe(arg0: number, arg1: number): $FT_Size_Metrics$Buffer;
+        static createSafe(arg0: number): $FT_Size_Metrics;
         static nheight(arg0: number): number;
         static ASCENDER: number;
         static Y_PPEM: number;
@@ -580,8 +580,8 @@ declare module "@package/org/lwjgl/util/freetype" {
         static CIF: $FFICIF;
     }
     export interface $FT_Generic_FinalizerI extends $CallbackI {
-        invoke(arg0: number): void;
         callback(arg0: number, arg1: number): void;
+        invoke(arg0: number): void;
         getCallInterface(): $FFICIF;
         get callInterface(): $FFICIF;
     }
@@ -593,8 +593,8 @@ declare module "@package/org/lwjgl/util/freetype" {
         static CIF: $FFICIF;
     }
     export interface $FT_Alloc_FuncI extends $CallbackI {
-        invoke(arg0: number, arg1: number): number;
         callback(arg0: number, arg1: number): void;
+        invoke(arg0: number, arg1: number): number;
         getCallInterface(): $FFICIF;
         get callInterface(): $FFICIF;
     }
@@ -603,26 +603,26 @@ declare module "@package/org/lwjgl/util/freetype" {
      */
     export type $FT_Alloc_FuncI_ = ((arg0: number, arg1: number) => number);
     export class $FT_Memory$Buffer extends $StructBuffer<$FT_Memory, $FT_Memory$Buffer> implements $NativeResource {
-        user(arg0: number): $FT_Memory$Buffer;
-        user(): number;
         free$(arg0: $FT_Free_FuncI_): $FT_Memory$Buffer;
         free$(): $FT_Free_Func;
-        alloc(arg0: $FT_Alloc_FuncI_): $FT_Memory$Buffer;
         alloc(): $FT_Alloc_Func;
-        realloc(arg0: $FT_Realloc_FuncI_): $FT_Memory$Buffer;
+        alloc(arg0: $FT_Alloc_FuncI_): $FT_Memory$Buffer;
+        user(): number;
+        user(arg0: number): $FT_Memory$Buffer;
         realloc(): $FT_Realloc_Func;
+        realloc(arg0: $FT_Realloc_FuncI_): $FT_Memory$Buffer;
         close(): void;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_ListNode extends $Struct<$FT_ListNode> {
+        static nnext(arg0: number): $FT_ListNode;
+        static nprev(arg0: number): $FT_ListNode;
         next(): $FT_ListNode;
         data(arg0: number): $ByteBuffer;
         prev(): $FT_ListNode;
-        static create(arg0: number): $FT_ListNode;
         static create(arg0: number, arg1: number): $FT_ListNode$Buffer;
-        static nprev(arg0: number): $FT_ListNode;
-        static nnext(arg0: number): $FT_ListNode;
+        static create(arg0: number): $FT_ListNode;
         static createSafe(arg0: number): $FT_ListNode;
         static createSafe(arg0: number, arg1: number): $FT_ListNode$Buffer;
         static ndata(arg0: number, arg1: number): $ByteBuffer;
@@ -641,58 +641,58 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_Stream extends $Struct<$FT_Stream> implements $NativeResource {
-        base(): $ByteBuffer;
-        base(arg0: $ByteBuffer): $FT_Stream;
-        size(arg0: number): $FT_Stream;
-        size(): number;
-        set(arg0: $FT_Stream): $FT_Stream;
-        set(arg0: $ByteBuffer, arg1: number, arg2: number, arg3: $FT_StreamDesc, arg4: $FT_StreamDesc, arg5: $FT_Stream_IoFuncI_, arg6: $FT_Stream_CloseFuncI_): $FT_Stream;
-        descriptor(): $FT_StreamDesc;
-        descriptor(arg0: $FT_StreamDesc): $FT_Stream;
-        descriptor(arg0: $Consumer_<$FT_StreamDesc>): $FT_Stream;
-        static create(arg0: number): $FT_Stream;
-        static create(arg0: number, arg1: number): $FT_Stream$Buffer;
-        static create(arg0: number): $FT_Stream$Buffer;
-        static create(): $FT_Stream;
-        pos(arg0: number): $FT_Stream;
-        pos(): number;
-        read(): $FT_Stream_IoFunc;
-        read(arg0: $FT_Stream_IoFuncI_): $FT_Stream;
-        static nread(arg0: number): $FT_Stream_IoFunc;
-        static nread(arg0: number, arg1: $FT_Stream_IoFuncI_): void;
-        pathname(arg0: $FT_StreamDesc): $FT_Stream;
-        pathname(): $FT_StreamDesc;
-        pathname(arg0: $Consumer_<$FT_StreamDesc>): $FT_Stream;
-        static npos(arg0: number): number;
-        static npos(arg0: number, arg1: number): void;
-        static ndescriptor(arg0: number): $FT_StreamDesc;
-        static ndescriptor(arg0: number, arg1: $FT_StreamDesc): void;
-        static npathname(arg0: number, arg1: $FT_StreamDesc): void;
-        static npathname(arg0: number): $FT_StreamDesc;
-        static nclose$(arg0: number, arg1: $FT_Stream_CloseFuncI_): void;
-        static nclose$(arg0: number): $FT_Stream_CloseFunc;
-        static ncursor(arg0: number, arg1: number): $ByteBuffer;
-        static ncursor(arg0: number, arg1: $ByteBuffer): void;
-        static nlimit$(arg0: number, arg1: number): $ByteBuffer;
-        static nlimit$(arg0: number, arg1: $ByteBuffer): void;
+        static nmemory(arg0: number): $FT_Memory;
+        static nmemory(arg0: number, arg1: $FT_Memory): void;
         close$(arg0: $FT_Stream_CloseFuncI_): $FT_Stream;
         close$(): $FT_Stream_CloseFunc;
         static nbase(arg0: number): $ByteBuffer;
         static nbase(arg0: number, arg1: $ByteBuffer): void;
-        static nmemory(arg0: number, arg1: $FT_Memory): void;
-        static nmemory(arg0: number): $FT_Memory;
+        static npos(arg0: number, arg1: number): void;
+        static npos(arg0: number): number;
+        static ndescriptor(arg0: number): $FT_StreamDesc;
+        static ndescriptor(arg0: number, arg1: $FT_StreamDesc): void;
+        static npathname(arg0: number): $FT_StreamDesc;
+        static npathname(arg0: number, arg1: $FT_StreamDesc): void;
+        static nclose$(arg0: number): $FT_Stream_CloseFunc;
+        static nclose$(arg0: number, arg1: $FT_Stream_CloseFuncI_): void;
+        static ncursor(arg0: number, arg1: number): $ByteBuffer;
+        static ncursor(arg0: number, arg1: $ByteBuffer): void;
+        static nlimit$(arg0: number, arg1: $ByteBuffer): void;
+        static nlimit$(arg0: number, arg1: number): $ByteBuffer;
         static nsize(arg0: number): number;
         static nsize(arg0: number, arg1: number): void;
+        base(arg0: $ByteBuffer): $FT_Stream;
+        base(): $ByteBuffer;
+        size(): number;
+        size(arg0: number): $FT_Stream;
+        set(arg0: $FT_Stream): $FT_Stream;
+        set(arg0: $ByteBuffer, arg1: number, arg2: number, arg3: $FT_StreamDesc, arg4: $FT_StreamDesc, arg5: $FT_Stream_IoFuncI_, arg6: $FT_Stream_CloseFuncI_): $FT_Stream;
+        read(): $FT_Stream_IoFunc;
+        read(arg0: $FT_Stream_IoFuncI_): $FT_Stream;
+        descriptor(arg0: $Consumer_<$FT_StreamDesc>): $FT_Stream;
+        descriptor(): $FT_StreamDesc;
+        descriptor(arg0: $FT_StreamDesc): $FT_Stream;
+        static create(arg0: number): $FT_Stream$Buffer;
+        static create(): $FT_Stream;
+        static create(arg0: number): $FT_Stream;
+        static create(arg0: number, arg1: number): $FT_Stream$Buffer;
+        pos(arg0: number): $FT_Stream;
+        pos(): number;
+        static nread(arg0: number): $FT_Stream_IoFunc;
+        static nread(arg0: number, arg1: $FT_Stream_IoFuncI_): void;
+        pathname(arg0: $Consumer_<$FT_StreamDesc>): $FT_Stream;
+        pathname(arg0: $FT_StreamDesc): $FT_Stream;
+        pathname(): $FT_StreamDesc;
+        static calloc(arg0: number): $FT_Stream$Buffer;
+        static calloc(): $FT_Stream;
+        static calloc(arg0: number, arg1: $MemoryStack): $FT_Stream$Buffer;
+        static calloc(arg0: $MemoryStack): $FT_Stream;
+        static createSafe(arg0: number): $FT_Stream;
+        static createSafe(arg0: number, arg1: number): $FT_Stream$Buffer;
         static malloc(): $FT_Stream;
         static malloc(arg0: number): $FT_Stream$Buffer;
         static malloc(arg0: number, arg1: $MemoryStack): $FT_Stream$Buffer;
         static malloc(arg0: $MemoryStack): $FT_Stream;
-        static calloc(arg0: number): $FT_Stream$Buffer;
-        static calloc(arg0: $MemoryStack): $FT_Stream;
-        static calloc(): $FT_Stream;
-        static calloc(arg0: number, arg1: $MemoryStack): $FT_Stream$Buffer;
-        static createSafe(arg0: number, arg1: number): $FT_Stream$Buffer;
-        static createSafe(arg0: number): $FT_Stream;
         close(): void;
         static READ: number;
         static DESCRIPTOR: number;
@@ -712,8 +712,8 @@ declare module "@package/org/lwjgl/util/freetype" {
         static CIF: $FFICIF;
     }
     export interface $FT_Stream_IoFuncI extends $CallbackI {
-        invoke(arg0: number, arg1: number, arg2: number, arg3: number): number;
         callback(arg0: number, arg1: number): void;
+        invoke(arg0: number, arg1: number, arg2: number, arg3: number): number;
         getCallInterface(): $FFICIF;
         get callInterface(): $FFICIF;
     }
@@ -722,16 +722,16 @@ declare module "@package/org/lwjgl/util/freetype" {
      */
     export type $FT_Stream_IoFuncI_ = ((arg0: number, arg1: number, arg2: number, arg3: number) => number);
     export class $FT_Size$Buffer extends $StructBuffer<$FT_Size, $FT_Size$Buffer> implements $NativeResource {
+        metrics(): $FT_Size_Metrics;
+        metrics(arg0: $FT_Size_Metrics): $FT_Size$Buffer;
+        generic(arg0: $FT_Generic): $FT_Size$Buffer;
         generic(arg0: $Consumer_<$FT_Generic>): $FT_Size$Buffer;
         generic(): $FT_Generic;
-        generic(arg0: $FT_Generic): $FT_Size$Buffer;
-        metrics(arg0: $FT_Size_Metrics): $FT_Size$Buffer;
-        metrics(): $FT_Size_Metrics;
         face(): $FT_Face;
         face(arg0: $FT_Face): $FT_Size$Buffer;
         close(): void;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_Generic$Buffer extends $StructBuffer<$FT_Generic, $FT_Generic$Buffer> implements $NativeResource {
         data(): number;
@@ -743,15 +743,15 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_CharMap extends $Struct<$FT_CharMap> {
-        encoding(): number;
-        static create(arg0: number): $FT_CharMap;
-        static create(arg0: number, arg1: number): $FT_CharMap$Buffer;
+        static nface(arg0: number): $FT_Face;
         platform_id(): number;
         encoding_id(): number;
         static nencoding(arg0: number): number;
         static nplatform_id(arg0: number): number;
         static nencoding_id(arg0: number): number;
-        static nface(arg0: number): $FT_Face;
+        encoding(): number;
+        static create(arg0: number, arg1: number): $FT_CharMap$Buffer;
+        static create(arg0: number): $FT_CharMap;
         static createSafe(arg0: number, arg1: number): $FT_CharMap$Buffer;
         static createSafe(arg0: number): $FT_CharMap;
         face(): $FT_Face;
@@ -764,27 +764,27 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_BBox$Buffer extends $StructBuffer<$FT_BBox, $FT_BBox$Buffer> implements $NativeResource {
-        xMin(arg0: number): $FT_BBox$Buffer;
         xMin(): number;
-        yMin(arg0: number): $FT_BBox$Buffer;
+        xMin(arg0: number): $FT_BBox$Buffer;
         yMin(): number;
+        yMin(arg0: number): $FT_BBox$Buffer;
         xMax(arg0: number): $FT_BBox$Buffer;
         xMax(): number;
-        yMax(arg0: number): $FT_BBox$Buffer;
         yMax(): number;
+        yMax(arg0: number): $FT_BBox$Buffer;
         close(): void;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $ByteBuffer);
+        constructor(arg0: number, arg1: number);
     }
     export class $FT_List extends $Struct<$FT_List> {
-        tail(): $FT_ListNode;
-        static create(arg0: number): $FT_List;
-        static create(arg0: number, arg1: number): $FT_List$Buffer;
-        head(): $FT_ListNode;
         static nhead(arg0: number): $FT_ListNode;
         static ntail(arg0: number): $FT_ListNode;
-        static createSafe(arg0: number, arg1: number): $FT_List$Buffer;
+        tail(): $FT_ListNode;
+        static create(arg0: number, arg1: number): $FT_List$Buffer;
+        static create(arg0: number): $FT_List;
+        head(): $FT_ListNode;
         static createSafe(arg0: number): $FT_List;
+        static createSafe(arg0: number, arg1: number): $FT_List$Buffer;
         static HEAD: number;
         static ALIGNOF: number;
         static TAIL: number;
@@ -792,30 +792,30 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_Vector extends $Struct<$FT_Vector> implements $NativeResource {
-        x(arg0: number): $FT_Vector;
-        x(): number;
-        set(arg0: number, arg1: number): $FT_Vector;
-        set(arg0: $FT_Vector): $FT_Vector;
-        static create(): $FT_Vector;
-        static create(arg0: number): $FT_Vector$Buffer;
-        static create(arg0: number, arg1: number): $FT_Vector$Buffer;
-        static create(arg0: number): $FT_Vector;
-        y(arg0: number): $FT_Vector;
-        y(): number;
         static nx(arg0: number): number;
         static nx(arg0: number, arg1: number): void;
-        static ny(arg0: number): number;
         static ny(arg0: number, arg1: number): void;
-        static malloc(arg0: $MemoryStack): $FT_Vector;
-        static malloc(arg0: number, arg1: $MemoryStack): $FT_Vector$Buffer;
+        static ny(arg0: number): number;
+        x(): number;
+        x(arg0: number): $FT_Vector;
+        set(arg0: $FT_Vector): $FT_Vector;
+        set(arg0: number, arg1: number): $FT_Vector;
+        static create(arg0: number): $FT_Vector;
+        static create(arg0: number): $FT_Vector$Buffer;
+        static create(arg0: number, arg1: number): $FT_Vector$Buffer;
+        static create(): $FT_Vector;
+        y(arg0: number): $FT_Vector;
+        y(): number;
+        static calloc(arg0: number, arg1: $MemoryStack): $FT_Vector$Buffer;
+        static calloc(arg0: $MemoryStack): $FT_Vector;
+        static calloc(): $FT_Vector;
+        static calloc(arg0: number): $FT_Vector$Buffer;
+        static createSafe(arg0: number, arg1: number): $FT_Vector$Buffer;
+        static createSafe(arg0: number): $FT_Vector;
         static malloc(arg0: number): $FT_Vector$Buffer;
         static malloc(): $FT_Vector;
-        static calloc(arg0: number, arg1: $MemoryStack): $FT_Vector$Buffer;
-        static calloc(arg0: number): $FT_Vector$Buffer;
-        static calloc(): $FT_Vector;
-        static calloc(arg0: $MemoryStack): $FT_Vector;
-        static createSafe(arg0: number): $FT_Vector;
-        static createSafe(arg0: number, arg1: number): $FT_Vector$Buffer;
+        static malloc(arg0: $MemoryStack): $FT_Vector;
+        static malloc(arg0: number, arg1: $MemoryStack): $FT_Vector$Buffer;
         close(): void;
         static ALIGNOF: number;
         static SIZEOF: number;
@@ -833,16 +833,16 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_Size_Internal extends $Struct<$FT_Size_Internal> {
-        static create(arg0: number): $FT_Size_Internal;
-        static create(arg0: number, arg1: number): $FT_Size_Internal$Buffer;
         module_data(): number;
         autohint_mode(): number;
         autohint_metrics(): $FT_Size_Metrics;
         static nmodule_data(arg0: number): number;
         static nautohint_mode(arg0: number): number;
         static nautohint_metrics(arg0: number): $FT_Size_Metrics;
-        static createSafe(arg0: number, arg1: number): $FT_Size_Internal$Buffer;
+        static create(arg0: number): $FT_Size_Internal;
+        static create(arg0: number, arg1: number): $FT_Size_Internal$Buffer;
         static createSafe(arg0: number): $FT_Size_Internal;
+        static createSafe(arg0: number, arg1: number): $FT_Size_Internal$Buffer;
         static AUTOHINT_METRICS: number;
         static ALIGNOF: number;
         static SIZEOF: number;
@@ -851,9 +851,6 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_Glyph_Metrics extends $Struct<$FT_Glyph_Metrics> {
-        static create(arg0: number): $FT_Glyph_Metrics;
-        static create(arg0: number, arg1: number): $FT_Glyph_Metrics$Buffer;
-        width(): number;
         horiBearingX(): number;
         horiBearingY(): number;
         horiAdvance(): number;
@@ -866,9 +863,12 @@ declare module "@package/org/lwjgl/util/freetype" {
         static nvertBearingX(arg0: number): number;
         static nvertBearingY(arg0: number): number;
         static nvertAdvance(arg0: number): number;
+        static create(arg0: number, arg1: number): $FT_Glyph_Metrics$Buffer;
+        static create(arg0: number): $FT_Glyph_Metrics;
+        width(): number;
         height(): number;
-        static createSafe(arg0: number, arg1: number): $FT_Glyph_Metrics$Buffer;
         static createSafe(arg0: number): $FT_Glyph_Metrics;
+        static createSafe(arg0: number, arg1: number): $FT_Glyph_Metrics$Buffer;
         static nwidth(arg0: number): number;
         static nheight(arg0: number): number;
         static HORIADVANCE: number;
@@ -884,29 +884,29 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_Generic extends $Struct<$FT_Generic> implements $NativeResource {
-        data(arg0: number): $FT_Generic;
-        data(): number;
-        static validate(arg0: number): void;
-        set(arg0: number, arg1: $FT_Generic_FinalizerI_): $FT_Generic;
-        set(arg0: $FT_Generic): $FT_Generic;
-        finalizer(arg0: $FT_Generic_FinalizerI_): $FT_Generic;
-        finalizer(): $FT_Generic_Finalizer;
-        static create(arg0: number): $FT_Generic;
-        static create(arg0: number, arg1: number): $FT_Generic$Buffer;
-        static create(arg0: number): $FT_Generic$Buffer;
-        static create(): $FT_Generic;
         static nfinalizer(arg0: number): $FT_Generic_Finalizer;
         static nfinalizer(arg0: number, arg1: $FT_Generic_FinalizerI_): void;
-        static malloc(arg0: number, arg1: $MemoryStack): $FT_Generic$Buffer;
-        static malloc(arg0: $MemoryStack): $FT_Generic;
+        data(): number;
+        data(arg0: number): $FT_Generic;
+        static validate(arg0: number): void;
+        set(arg0: $FT_Generic): $FT_Generic;
+        set(arg0: number, arg1: $FT_Generic_FinalizerI_): $FT_Generic;
+        finalizer(): $FT_Generic_Finalizer;
+        finalizer(arg0: $FT_Generic_FinalizerI_): $FT_Generic;
+        static create(arg0: number): $FT_Generic$Buffer;
+        static create(arg0: number, arg1: number): $FT_Generic$Buffer;
+        static create(arg0: number): $FT_Generic;
+        static create(): $FT_Generic;
+        static calloc(arg0: number, arg1: $MemoryStack): $FT_Generic$Buffer;
+        static calloc(arg0: $MemoryStack): $FT_Generic;
+        static calloc(): $FT_Generic;
+        static calloc(arg0: number): $FT_Generic$Buffer;
+        static createSafe(arg0: number, arg1: number): $FT_Generic$Buffer;
+        static createSafe(arg0: number): $FT_Generic;
         static malloc(arg0: number): $FT_Generic$Buffer;
         static malloc(): $FT_Generic;
-        static calloc(arg0: number, arg1: $MemoryStack): $FT_Generic$Buffer;
-        static calloc(): $FT_Generic;
-        static calloc(arg0: $MemoryStack): $FT_Generic;
-        static calloc(arg0: number): $FT_Generic$Buffer;
-        static createSafe(arg0: number): $FT_Generic;
-        static createSafe(arg0: number, arg1: number): $FT_Generic$Buffer;
+        static malloc(arg0: $MemoryStack): $FT_Generic;
+        static malloc(arg0: number, arg1: $MemoryStack): $FT_Generic$Buffer;
         static ndata(arg0: number, arg1: number): void;
         static ndata(arg0: number): number;
         close(): void;
@@ -925,29 +925,29 @@ declare module "@package/org/lwjgl/util/freetype" {
         get callInterface(): $FFICIF;
     }
     export class $FT_StreamDesc extends $Struct<$FT_StreamDesc> implements $NativeResource {
-        value(arg0: number): $FT_StreamDesc;
-        value(): number;
-        set(arg0: $FT_StreamDesc): $FT_StreamDesc;
-        static create(): $FT_StreamDesc;
-        static create(arg0: number, arg1: number): $FT_StreamDesc$Buffer;
-        static create(arg0: number): $FT_StreamDesc;
-        static create(arg0: number): $FT_StreamDesc$Buffer;
-        static nvalue(arg0: number, arg1: number): void;
         static nvalue(arg0: number): number;
+        static nvalue(arg0: number, arg1: number): void;
         pointer(arg0: number): $FT_StreamDesc;
         pointer(): number;
-        static malloc(arg0: number, arg1: $MemoryStack): $FT_StreamDesc$Buffer;
-        static malloc(arg0: $MemoryStack): $FT_StreamDesc;
-        static malloc(): $FT_StreamDesc;
-        static malloc(arg0: number): $FT_StreamDesc$Buffer;
+        value(): number;
+        value(arg0: number): $FT_StreamDesc;
+        set(arg0: $FT_StreamDesc): $FT_StreamDesc;
+        static create(arg0: number): $FT_StreamDesc$Buffer;
+        static create(arg0: number, arg1: number): $FT_StreamDesc$Buffer;
+        static create(): $FT_StreamDesc;
+        static create(arg0: number): $FT_StreamDesc;
         static calloc(arg0: number, arg1: $MemoryStack): $FT_StreamDesc$Buffer;
+        static calloc(arg0: $MemoryStack): $FT_StreamDesc;
         static calloc(): $FT_StreamDesc;
         static calloc(arg0: number): $FT_StreamDesc$Buffer;
-        static calloc(arg0: $MemoryStack): $FT_StreamDesc;
         static createSafe(arg0: number, arg1: number): $FT_StreamDesc$Buffer;
         static createSafe(arg0: number): $FT_StreamDesc;
-        static npointer(arg0: number): number;
+        static malloc(arg0: number): $FT_StreamDesc$Buffer;
+        static malloc(): $FT_StreamDesc;
+        static malloc(arg0: $MemoryStack): $FT_StreamDesc;
+        static malloc(arg0: number, arg1: $MemoryStack): $FT_StreamDesc$Buffer;
         static npointer(arg0: number, arg1: number): void;
+        static npointer(arg0: number): number;
         close(): void;
         static ALIGNOF: number;
         static POINTER: number;
@@ -956,18 +956,18 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_Bitmap_Size extends $Struct<$FT_Bitmap_Size> {
-        size(): number;
-        static create(arg0: number): $FT_Bitmap_Size;
-        static create(arg0: number, arg1: number): $FT_Bitmap_Size$Buffer;
-        width(): number;
         x_ppem(): number;
         y_ppem(): number;
         static nx_ppem(arg0: number): number;
         static ny_ppem(arg0: number): number;
         static nsize(arg0: number): number;
+        size(): number;
+        static create(arg0: number, arg1: number): $FT_Bitmap_Size$Buffer;
+        static create(arg0: number): $FT_Bitmap_Size;
+        width(): number;
         height(): number;
-        static createSafe(arg0: number, arg1: number): $FT_Bitmap_Size$Buffer;
         static createSafe(arg0: number): $FT_Bitmap_Size;
+        static createSafe(arg0: number, arg1: number): $FT_Bitmap_Size$Buffer;
         static nwidth(arg0: number): number;
         static nheight(arg0: number): number;
         static Y_PPEM: number;
@@ -986,14 +986,6 @@ declare module "@package/org/lwjgl/util/freetype" {
         constructor(arg0: $ByteBuffer);
     }
     export class $FT_GlyphSlot extends $Struct<$FT_GlyphSlot> {
-        next(): $FT_GlyphSlot;
-        format(): number;
-        static create(arg0: number): $FT_GlyphSlot;
-        static create(arg0: number, arg1: number): $FT_GlyphSlot$Buffer;
-        generic(): $FT_Generic;
-        advance(): $FT_Vector;
-        metrics(): $FT_Glyph_Metrics;
-        static nnext(arg0: number): $FT_GlyphSlot;
         bitmap_left(): number;
         bitmap_top(): number;
         static ngeneric(arg0: number): $FT_Generic;
@@ -1002,16 +994,10 @@ declare module "@package/org/lwjgl/util/freetype" {
         linearVertAdvance(): number;
         lsb_delta(): number;
         rsb_delta(): number;
-        static nglyph_index(arg0: number): number;
-        static nnum_subglyphs(arg0: number): number;
-        static nsubglyphs(arg0: number): number;
-        static ncontrol_data(arg0: number): $ByteBuffer;
-        static ncontrol_len(arg0: number): number;
-        static nlsb_delta(arg0: number): number;
-        static nrsb_delta(arg0: number): number;
-        static nother(arg0: number): number;
         static nlibrary(arg0: number): number;
         static nface(arg0: number): $FT_Face;
+        static nnext(arg0: number): $FT_GlyphSlot;
+        static nglyph_index(arg0: number): number;
         static nmetrics(arg0: number): $FT_Glyph_Metrics;
         static nlinearHoriAdvance(arg0: number): number;
         static nlinearVertAdvance(arg0: number): number;
@@ -1021,11 +1007,25 @@ declare module "@package/org/lwjgl/util/freetype" {
         static nbitmap_left(arg0: number): number;
         static nbitmap_top(arg0: number): number;
         static noutline(arg0: number): $FT_Outline;
-        bitmap(): $FT_Bitmap;
+        static nnum_subglyphs(arg0: number): number;
+        static nsubglyphs(arg0: number): number;
+        static ncontrol_data(arg0: number): $ByteBuffer;
+        static ncontrol_len(arg0: number): number;
+        static nlsb_delta(arg0: number): number;
+        static nrsb_delta(arg0: number): number;
+        static nother(arg0: number): number;
         glyph_index(): number;
+        bitmap(): $FT_Bitmap;
+        metrics(): $FT_Glyph_Metrics;
+        next(): $FT_GlyphSlot;
+        format(): number;
+        static create(arg0: number, arg1: number): $FT_GlyphSlot$Buffer;
+        static create(arg0: number): $FT_GlyphSlot;
+        generic(): $FT_Generic;
+        advance(): $FT_Vector;
         library(): number;
-        static createSafe(arg0: number): $FT_GlyphSlot;
         static createSafe(arg0: number, arg1: number): $FT_GlyphSlot$Buffer;
+        static createSafe(arg0: number): $FT_GlyphSlot;
         outline(): $FT_Outline;
         face(): $FT_Face;
         static BITMAP: number;

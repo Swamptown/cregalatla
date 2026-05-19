@@ -39,8 +39,8 @@ declare module "@package/com/mojang/realmsclient/gui" {
         get tasks(): $List<$DataFetcher$Task<never>>;
     }
     export class $RealmsWorldSlotButton extends $Button {
-        getState(): $RealmsWorldSlotButton$State;
         setServerData(arg0: $RealmsServer): void;
+        getState(): $RealmsWorldSlotButton$State;
         createNarration: $Button$CreateNarration;
         tooltip: $WidgetTooltipHolder;
         static DEFAULT_WIDTH: number;
@@ -65,13 +65,13 @@ declare module "@package/com/mojang/realmsclient/gui" {
         y: number;
         static BIG_WIDTH: number;
         constructor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $Button$OnPress_);
-        get state(): $RealmsWorldSlotButton$State;
         set serverData(value: $RealmsServer);
+        get state(): $RealmsWorldSlotButton$State;
     }
     export class $RowButton {
-        static rowButtonMouseClicked(arg0: $RealmsObjectSelectionList<never>, arg1: $ObjectSelectionList$Entry<never>, arg2: $List_<$RowButton>, arg3: number, arg4: number, arg5: number): void;
         drawForRowAt(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
         static drawButtonsInRow(arg0: $GuiGraphics, arg1: $List_<$RowButton>, arg2: $RealmsObjectSelectionList<never>, arg3: number, arg4: number, arg5: number, arg6: number): void;
+        static rowButtonMouseClicked(arg0: $RealmsObjectSelectionList<never>, arg1: $ObjectSelectionList$Entry<never>, arg2: $List_<$RowButton>, arg3: number, arg4: number, arg5: number): void;
         getRight(): number;
         onClick(arg0: number): void;
         getBottom(): number;
@@ -96,10 +96,10 @@ declare module "@package/com/mojang/realmsclient/gui" {
         constructor(arg0: $RealmsPersistence);
     }
     export class $RealmsServerList implements $Iterable<$RealmsServer> {
-        isEmpty(): boolean;
-        iterator(): $Iterator<$RealmsServer>;
         updateServersList(arg0: $List_<$RealmsServer>): void;
         removeItem(arg0: $RealmsServer): void;
+        isEmpty(): boolean;
+        iterator(): $Iterator<$RealmsServer>;
         spliterator(): $Spliterator<$RealmsServer>;
         forEach(arg0: $Consumer_<$RealmsServer>): void;
         constructor(arg0: $Minecraft);

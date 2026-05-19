@@ -59,19 +59,19 @@ declare module "@package/net/minecraft/util/valueproviders" {
         constructor(arg0: $IntProvider_, arg1: number, arg2: number);
     }
     export class $IntProvider {
-        getType(): $IntProviderType<never>;
         static validateCodec<T extends $IntProvider>(arg0: number, arg1: number, arg2: $Codec<T>): $Codec<T>;
         getMinValue(): number;
         getMaxValue(): number;
+        getType(): $IntProviderType<never>;
         static codec(arg0: number, arg1: number): $Codec<$IntProvider>;
         sample(arg0: $RandomSource): number;
         static CODEC: $Codec<$IntProvider>;
         static NON_NEGATIVE_CODEC: $Codec<$IntProvider>;
         static POSITIVE_CODEC: $Codec<$IntProvider>;
         constructor();
-        get type(): $IntProviderType<never>;
         get minValue(): number;
         get maxValue(): number;
+        get type(): $IntProviderType<never>;
     }
     /**
      * Values that may be interpreted as {@link $IntProvider}.
@@ -114,15 +114,15 @@ declare module "@package/net/minecraft/util/valueproviders" {
         static CODEC: $MapCodec<$UniformFloat>;
     }
     export class $ConstantFloat extends $FloatProvider {
-        static of(arg0: number): $ConstantFloat;
         getValue(): number;
+        static of(arg0: number): $ConstantFloat;
         static ZERO: $ConstantFloat;
         static CODEC: $MapCodec<$ConstantFloat>;
         get value(): number;
     }
     export class $ConstantInt extends $IntProvider {
-        static of(arg0: number): $ConstantInt;
         getValue(): number;
+        static of(arg0: number): $ConstantInt;
         static ZERO: $ConstantInt;
         static CODEC: $MapCodec<$ConstantInt>;
         static NON_NEGATIVE_CODEC: $Codec<$IntProvider>;
@@ -130,14 +130,14 @@ declare module "@package/net/minecraft/util/valueproviders" {
         get value(): number;
     }
     export class $FloatProvider implements $SampledFloat {
-        getType(): $FloatProviderType<never>;
         getMinValue(): number;
         getMaxValue(): number;
+        getType(): $FloatProviderType<never>;
         static codec(arg0: number, arg1: number): $Codec<$FloatProvider>;
         static CODEC: $Codec<$FloatProvider>;
         constructor();
-        get type(): $FloatProviderType<never>;
         get minValue(): number;
         get maxValue(): number;
+        get type(): $FloatProviderType<never>;
     }
 }

@@ -16,17 +16,17 @@ export * as brigadier from "@package/net/minecraft/commands/synchronization/brig
 declare module "@package/net/minecraft/commands/synchronization" {
     export class $SingletonArgumentInfo<A extends $ArgumentType<never>> implements $ArgumentTypeInfo<A, $SingletonArgumentInfo$Template> {
         serializeToNetwork(arg0: $SingletonArgumentInfo$Template, arg1: $FriendlyByteBuf): void;
+        deserializeFromNetwork(arg0: $FriendlyByteBuf): $SingletonArgumentInfo$Template;
         serializeToJson(arg0: $SingletonArgumentInfo$Template, arg1: $JsonObject_): void;
         static contextFree<T extends $ArgumentType<never>>(arg0: $Supplier_<T>): $SingletonArgumentInfo<T>;
         static contextAware<T extends $ArgumentType<never>>(arg0: $Function_<$CommandBuildContext, T>): $SingletonArgumentInfo<T>;
-        deserializeFromNetwork(arg0: $FriendlyByteBuf): $SingletonArgumentInfo$Template;
         unpack(arg0: A): $SingletonArgumentInfo$Template;
     }
     export class $ArgumentTypeInfos {
-        static bootstrap(arg0: $Registry<$ArgumentTypeInfo_<never, never>>): $ArgumentTypeInfo<never, never>;
+        static registerByClass<A extends $ArgumentType<never>, T extends $ArgumentTypeInfo$Template<A>, I extends $ArgumentTypeInfo<A, T>>(arg0: $Class<A>, arg1: I): I;
         static isClassRecognized(arg0: $Class<never>): boolean;
         static byClass<A extends $ArgumentType<never>>(arg0: A): $ArgumentTypeInfo<A, never>;
-        static registerByClass<A extends $ArgumentType<never>, T extends $ArgumentTypeInfo$Template<A>, I extends $ArgumentTypeInfo<A, T>>(arg0: $Class<A>, arg1: I): I;
+        static bootstrap(arg0: $Registry<$ArgumentTypeInfo_<never, never>>): $ArgumentTypeInfo<never, never>;
         static unpack<A extends $ArgumentType<never>>(arg0: A): $ArgumentTypeInfo$Template<A>;
         static BY_CLASS: $Map<$Class<never>, $ArgumentTypeInfo<never, never>>;
         constructor();
@@ -35,8 +35,8 @@ declare module "@package/net/minecraft/commands/synchronization" {
     }
     export interface $ArgumentTypeInfo<A, T> extends RegistryMarked<RegistryTypes.CommandArgumentTypeTag, RegistryTypes.CommandArgumentType> {}
     export class $ArgumentUtils {
-        static serializeNodeToJson<S>(arg0: $CommandDispatcher<S>, arg1: $CommandNode<S>): $JsonObject;
         static findUsedArgumentTypes<T>(arg0: $CommandNode<T>): $Set<$ArgumentType<never>>;
+        static serializeNodeToJson<S>(arg0: $CommandDispatcher<S>, arg1: $CommandNode<S>): $JsonObject;
         static createNumberFlags(arg0: boolean, arg1: boolean): number;
         static numberHasMin(arg0: number): boolean;
         static numberHasMax(arg0: number): boolean;
@@ -66,10 +66,10 @@ declare module "@package/net/minecraft/commands/synchronization" {
         this$0: $SingletonArgumentInfo<any>;
     }
     export class $SuggestionProviders {
+        static safelySwap(arg0: $SuggestionProvider_<$SharedSuggestionProvider>): $SuggestionProvider<$SharedSuggestionProvider>;
+        static getProvider(arg0: $ResourceLocation_): $SuggestionProvider<$SharedSuggestionProvider>;
         static getName(arg0: $SuggestionProvider_<$SharedSuggestionProvider>): $ResourceLocation;
         static register<S extends $SharedSuggestionProvider>(arg0: $ResourceLocation_, arg1: $SuggestionProvider_<$SharedSuggestionProvider>): $SuggestionProvider<S>;
-        static getProvider(arg0: $ResourceLocation_): $SuggestionProvider<$SharedSuggestionProvider>;
-        static safelySwap(arg0: $SuggestionProvider_<$SharedSuggestionProvider>): $SuggestionProvider<$SharedSuggestionProvider>;
         static AVAILABLE_SOUNDS: $SuggestionProvider<$CommandSourceStack>;
         static ALL_RECIPES: $SuggestionProvider<$CommandSourceStack>;
         static SUMMONABLE_ENTITIES: $SuggestionProvider<$CommandSourceStack>;

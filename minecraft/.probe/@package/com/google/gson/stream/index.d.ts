@@ -21,19 +21,19 @@ declare module "@package/com/google/gson/stream" {
      */
     export type $JsonToken_ = "begin_array" | "end_array" | "begin_object" | "end_object" | "name" | "string" | "number" | "boolean" | "null" | "end_document";
     export class $JsonWriter implements $Closeable, $Flushable {
+        setLenient(arg0: boolean): void;
         name(arg0: string): $JsonWriter;
+        value(arg0: number): $JsonWriter;
+        value(arg0: number): $JsonWriter;
+        value(arg0: number): $JsonWriter;
         value(arg0: boolean): $JsonWriter;
-        value(arg0: number): $JsonWriter;
-        value(arg0: number): $JsonWriter;
         value(arg0: boolean): $JsonWriter;
         value(arg0: string): $JsonWriter;
-        value(arg0: number): $JsonWriter;
         value(arg0: $Number): $JsonWriter;
         flush(): void;
         close(): void;
-        setLenient(arg0: boolean): void;
-        isLenient(): boolean;
         nullValue(): $JsonWriter;
+        isLenient(): boolean;
         getSerializeNulls(): boolean;
         isHtmlSafe(): boolean;
         setHtmlSafe(arg0: boolean): void;
@@ -48,24 +48,24 @@ declare module "@package/com/google/gson/stream" {
         set indent(value: string);
     }
     export class $JsonReader implements $Closeable {
+        setLenient(arg0: boolean): void;
         hasNext(): boolean;
         close(): void;
         getPath(): string;
         peek(): $JsonToken;
         nextDouble(): number;
         nextInt(): number;
-        setLenient(arg0: boolean): void;
-        isLenient(): boolean;
-        nextLong(): number;
-        nextBoolean(): boolean;
         skipValue(): void;
+        nextLong(): number;
         nextNull(): void;
         nextString(): string;
         getPreviousPath(): string;
+        isLenient(): boolean;
         beginArray(): void;
         beginObject(): void;
         endArray(): void;
         endObject(): void;
+        nextBoolean(): boolean;
         nextName(): string;
         constructor(arg0: $Reader);
         get path(): string;

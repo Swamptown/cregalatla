@@ -8,11 +8,11 @@ export * as maps from "@package/net/minecraft/world/level/saveddata/maps";
 
 declare module "@package/net/minecraft/world/level/saveddata" {
     export class $SavedData {
-        save(arg0: $File_, arg1: $HolderLookup$Provider): void;
-        save(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $CompoundTag;
-        isDirty(): boolean;
         setDirty(arg0: boolean): void;
         setDirty(): void;
+        isDirty(): boolean;
+        save(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $CompoundTag;
+        save(arg0: $File_, arg1: $HolderLookup$Provider): void;
         constructor();
     }
     export class $SavedData$Factory<T extends $SavedData> extends $Record {
@@ -25,5 +25,5 @@ declare module "@package/net/minecraft/world/level/saveddata" {
     /**
      * Values that may be interpreted as {@link $SavedData$Factory}.
      */
-    export type $SavedData$Factory_<T> = { constructor?: $Supplier_<$SavedData>, type?: $DataFixTypes_, deserializer?: $BiFunction_<$CompoundTag, $HolderLookup$Provider, $SavedData>,  } | [constructor?: $Supplier_<$SavedData>, type?: $DataFixTypes_, deserializer?: $BiFunction_<$CompoundTag, $HolderLookup$Provider, $SavedData>, ];
+    export type $SavedData$Factory_<T> = { deserializer?: $BiFunction_<$CompoundTag, $HolderLookup$Provider, $SavedData>, type?: $DataFixTypes_, constructor?: $Supplier_<$SavedData>,  } | [deserializer?: $BiFunction_<$CompoundTag, $HolderLookup$Provider, $SavedData>, type?: $DataFixTypes_, constructor?: $Supplier_<$SavedData>, ];
 }

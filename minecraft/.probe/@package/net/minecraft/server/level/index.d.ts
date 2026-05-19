@@ -1,6 +1,6 @@
 import { $ServerChunkCacheAccessor as $ServerChunkCacheAccessor$1 } from "@package/org/embeddedt/modernfix/common/mixin/bugfix/chunk_deadlock";
 import { $Long2ObjectLinkedOpenHashMap, $Long2ObjectOpenHashMap, $LongSet, $Long2ByteMap, $Long2ObjectMap, $Long2LongMap } from "@package/it/unimi/dsi/fastutil/longs";
-import { $PlayerAdvancements, $MinecraftServer } from "@package/net/minecraft/server";
+import { $ServerScoreboard, $PlayerAdvancements, $MinecraftServer } from "@package/net/minecraft/server";
 import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $VeilPacketManager$PacketSink } from "@package/foundry/veil/api/network";
 import { $EntityDimensions, $WalkAnimationState, $HumanoidArm_, $PortalProcessor, $Entity, $Entity$RemovalReason_, $HumanoidArm, $Entity$RemovalReason, $LivingEntity, $Mob, $Pose, $ReputationEventHandler_ } from "@package/net/minecraft/world/entity";
@@ -20,6 +20,7 @@ import { $Brain } from "@package/net/minecraft/world/entity/ai";
 import { $FriendlyByteBuf } from "@package/net/minecraft/network";
 import { $ServerLevelSceneExtension } from "@package/dev/ryanhcode/sable/mixinterface/physics";
 import { $GameProfile } from "@package/com/mojang/authlib";
+import { $MotionAwareEntity } from "@package/com/blackgear/vanillabackport/common/api/extensions";
 import { $BoundingBox, $Structure } from "@package/net/minecraft/world/level/levelgen/structure";
 import { $ServerPlayerAccessor } from "@package/com/railwayteam/railways/mixin/conductor_possession";
 import { $PartEntity } from "@package/net/neoforged/neoforge/entity";
@@ -129,18 +130,18 @@ export * as progress from "@package/net/minecraft/server/level/progress";
 
 declare module "@package/net/minecraft/server/level" {
     export class $ChunkTrackingView$Positioned extends $Record implements $ChunkTrackingView {
-        contains(arg0: number, arg1: number, arg2: boolean): boolean;
-        forEach(arg0: $Consumer_<$ChunkPos>): void;
         squareIntersects(arg0: $ChunkTrackingView$Positioned_): boolean;
         viewDistance(): number;
+        minX(): number;
+        contains(arg0: number, arg1: number, arg2: boolean): boolean;
+        forEach(arg0: $Consumer_<$ChunkPos>): void;
         center(): $ChunkPos;
         maxX(): number;
         minZ(): number;
         maxZ(): number;
-        minX(): number;
-        contains(arg0: number, arg1: number): boolean;
-        contains(arg0: $ChunkPos): boolean;
         isInViewDistance(arg0: number, arg1: number): boolean;
+        contains(arg0: $ChunkPos): boolean;
+        contains(arg0: number, arg1: number): boolean;
         constructor(arg0: $ChunkPos, arg1: number);
     }
     /**
@@ -153,24 +154,24 @@ declare module "@package/net/minecraft/server/level" {
         constructor();
     }
     export class $Ticket<T> implements $Comparable<$Ticket<never>> {
-        compareTo(arg0: $Ticket<never>): number;
-        getType(): $TicketType<$Ticket<never>>;
-        timedOut(arg0: number): boolean;
+        getTicketLevel(): number;
         setCreatedTick(arg0: number): void;
         isForceTicks(): boolean;
-        getTicketLevel(): number;
+        timedOut(arg0: number): boolean;
+        compareTo(arg0: $Ticket<never>): number;
+        getType(): $TicketType<$Ticket<never>>;
         createdTick: number;
         constructor(arg0: $TicketType<$Ticket<never>>, arg1: number, arg2: $Ticket<never>);
         constructor(arg0: $TicketType<$Ticket<never>>, arg1: number, arg2: $Ticket<never>, arg3: boolean);
-        get type(): $TicketType<$Ticket<never>>;
-        get forceTicks(): boolean;
         get ticketLevel(): number;
+        get forceTicks(): boolean;
+        get type(): $TicketType<$Ticket<never>>;
     }
     export class $TicketType<T> {
-        timeout(): number;
-        static create<T>(arg0: string, arg1: $Comparator<T>): $TicketType<T>;
-        static create<T>(arg0: string, arg1: $Comparator<T>, arg2: number): $TicketType<T>;
         getComparator(): $Comparator<T>;
+        static create<T>(arg0: string, arg1: $Comparator<T>, arg2: number): $TicketType<T>;
+        static create<T>(arg0: string, arg1: $Comparator<T>): $TicketType<T>;
+        timeout(): number;
         static PLAYER: $TicketType<$ChunkPos>;
         static POST_TELEPORT: $TicketType<number>;
         static DRAGON: $TicketType<$Unit>;
@@ -192,9 +193,9 @@ declare module "@package/net/minecraft/server/level" {
     export type $ChunkHolder$PlayerProvider_ = ((arg0: $ChunkPos, arg1: boolean) => $List_<$ServerPlayer>);
     export class $ServerBossEvent extends $BossEvent {
         removeAllPlayers(): void;
-        addPlayer(arg0: $ServerPlayer): void;
-        getPlayers(): $Collection<$ServerPlayer>;
         removePlayer(arg0: $ServerPlayer): void;
+        getPlayers(): $Collection<$ServerPlayer>;
+        addPlayer(arg0: $ServerPlayer): void;
         setVisible(arg0: boolean): void;
         isVisible(): boolean;
         darkenScreen: boolean;
@@ -217,17 +218,17 @@ declare module "@package/net/minecraft/server/level" {
      */
     export type $ChunkHolder$LevelChangeListener_ = ((arg0: $ChunkPos, arg1: $IntSupplier, arg2: number, arg3: $IntConsumer) => void);
     export class $ChunkHolder extends $GenerationChunkHolder implements $IClearableChunkHolder, $ChunkLevelTypeEventTracker {
-        setTicketLevel(arg0: number): void;
-        wasAccessibleSinceLastSave(): boolean;
-        refreshAccessibility(): void;
-        getSaveSyncFuture(): $CompletableFuture<never>;
-        updateFutures(arg0: $ChunkMap, arg1: $Executor_): void;
         fabric_getCurrentEventLevelType(): $FullChunkStatus;
         fabric_setCurrentEventLevelType(arg0: $FullChunkStatus_): void;
         getTickingChunkFuture(): $CompletableFuture<$ChunkResult<$LevelChunk>>;
         getTickingChunk(): $LevelChunk;
         getFullChunkFuture(): $CompletableFuture<$ChunkResult<$LevelChunk>>;
         sectionLightChanged(arg0: $LightLayer_, arg1: number): void;
+        updateFutures(arg0: $ChunkMap, arg1: $Executor_): void;
+        setTicketLevel(arg0: number): void;
+        wasAccessibleSinceLastSave(): boolean;
+        refreshAccessibility(): void;
+        getSaveSyncFuture(): $CompletableFuture<never>;
         isReadyForSaving(): boolean;
         getChunkToSend(): $LevelChunk;
         getEntityTickingChunkFuture(): $CompletableFuture<$ChunkResult<$LevelChunk>>;
@@ -247,25 +248,28 @@ declare module "@package/net/minecraft/server/level" {
         futures: $AtomicReferenceArray<$CompletableFuture<$ChunkResult<$ChunkAccess>>>;
         fullChunkFuture: $CompletableFuture<$ChunkResult<$LevelChunk>>;
         constructor(arg0: $ChunkPos, arg1: number, arg2: $LevelHeightAccessor, arg3: $LevelLightEngine, arg4: $ChunkHolder$LevelChangeListener_, arg5: $ChunkHolder$PlayerProvider_);
+        get tickingChunk(): $LevelChunk;
         set ticketLevel(value: number);
         get saveSyncFuture(): $CompletableFuture<never>;
-        get tickingChunk(): $LevelChunk;
         get readyForSaving(): boolean;
         get chunkToSend(): $LevelChunk;
         get sendSyncFuture(): $CompletableFuture<never>;
     }
     export class $WorldGenRegion implements $WorldGenLevel {
-        getSeed(): number;
+        isOldChunkAround(arg0: $ChunkPos, arg1: number): boolean;
+        getEntities(arg0: $Entity, arg1: $AABB_, arg2: $Predicate_<$Entity>): $List<$Entity>;
+        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $AABB_, arg2: $Predicate_<T>): $List<T>;
+        ensureCanWrite(arg0: $BlockPos_): boolean;
+        setCurrentlyGenerating(arg0: $Supplier_<string>): void;
         /**
          * @deprecated
          */
         getLevel(): $ServerLevel;
-        isOldChunkAround(arg0: $ChunkPos, arg1: number): boolean;
-        ensureCanWrite(arg0: $BlockPos_): boolean;
-        setCurrentlyGenerating(arg0: $Supplier_<string>): void;
-        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $AABB_, arg2: $Predicate_<T>): $List<T>;
-        getEntities(arg0: $Entity, arg1: $AABB_, arg2: $Predicate_<$Entity>): $List<$Entity>;
+        getSeed(): number;
+        getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
+        getHeight(): number;
         setBlock(arg0: $BlockPos_, arg1: $BlockState_, arg2: number, arg3: number): boolean;
+        getFluidState(arg0: $BlockPos_): $FluidState;
         getLevelData(): $LevelData;
         getBlockState(arg0: $BlockPos_): $BlockState;
         enabledFeatures(): $FeatureFlagSet;
@@ -273,8 +277,6 @@ declare module "@package/net/minecraft/server/level" {
         getBlockEntity(arg0: $BlockPos_): $BlockEntity;
         registryAccess(): $RegistryAccess;
         getChunkSource(): $ChunkSource;
-        getFluidState(arg0: $BlockPos_): $FluidState;
-        levelEvent(arg0: $Player, arg1: number, arg2: $BlockPos_, arg3: number): void;
         isClientSide(): boolean;
         gameEvent(arg0: $Holder_<$GameEvent>, arg1: $Vec3_, arg2: $GameEvent$Context_): void;
         getRandom(): $RandomSource;
@@ -283,11 +285,10 @@ declare module "@package/net/minecraft/server/level" {
         addFreshEntity(arg0: $Entity): boolean;
         getServer(): $MinecraftServer;
         getMinBuildHeight(): number;
+        levelEvent(arg0: $Player, arg1: number, arg2: $BlockPos_, arg3: number): void;
         getCenter(): $ChunkPos;
         getChunk(arg0: number, arg1: number, arg2: $ChunkStatus_, arg3: boolean): $ChunkAccess;
         getChunk(arg0: number, arg1: number): $ChunkAccess;
-        removeBlock(arg0: $BlockPos_, arg1: boolean): boolean;
-        destroyBlock(arg0: $BlockPos_, arg1: boolean, arg2: $Entity, arg3: number): boolean;
         hasChunk(arg0: number, arg1: number): boolean;
         getSeaLevel(): number;
         getLightEngine(): $LevelLightEngine;
@@ -296,6 +297,8 @@ declare module "@package/net/minecraft/server/level" {
         getSkyDarken(): number;
         isStateAtPosition(arg0: $BlockPos_, arg1: $Predicate_<$BlockState>): boolean;
         isFluidAtPosition(arg0: $BlockPos_, arg1: $Predicate_<$FluidState>): boolean;
+        removeBlock(arg0: $BlockPos_, arg1: boolean): boolean;
+        destroyBlock(arg0: $BlockPos_, arg1: boolean, arg2: $Entity, arg3: number): boolean;
         getBiomeManager(): $BiomeManager;
         nextSubTickCount(): number;
         getBlockTicks(): $LevelTickAccess<$Block>;
@@ -303,23 +306,21 @@ declare module "@package/net/minecraft/server/level" {
         getShade(arg0: $Direction_, arg1: boolean): number;
         getNearestPlayer(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $Predicate_<$Entity>): $Player;
         getUncachedNoiseBiome(arg0: number, arg1: number, arg2: number): $Holder<$Biome>;
-        getHeight(): number;
-        getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
         addFreshEntityWithPassengers(arg0: $Entity): void;
-        levelEvent(arg0: number, arg1: $BlockPos_, arg2: number): void;
-        gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $Vec3_): void;
         gameEvent(arg0: $ResourceKey_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
-        gameEvent(arg0: $Holder_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
         gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $BlockPos_): void;
+        gameEvent(arg0: $Entity, arg1: $Holder_<$GameEvent>, arg2: $Vec3_): void;
+        gameEvent(arg0: $Holder_<$GameEvent>, arg1: $BlockPos_, arg2: $GameEvent$Context_): void;
         getDifficulty(): $Difficulty;
         playSound(arg0: $Player, arg1: $BlockPos_, arg2: $SoundEvent_, arg3: $SoundSource_): void;
+        levelEvent(arg0: number, arg1: $BlockPos_, arg2: number): void;
+        neighborShapeChanged(arg0: $Direction_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: number, arg5: number): void;
         blockUpdated(arg0: $BlockPos_, arg1: $Block_): void;
         dayTime(): number;
-        scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number, arg3: $TickPriority_): void;
-        scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number): void;
         scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number): void;
         scheduleTick(arg0: $BlockPos_, arg1: $Fluid_, arg2: number, arg3: $TickPriority_): void;
-        neighborShapeChanged(arg0: $Direction_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: number, arg5: number): void;
+        scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number, arg3: $TickPriority_): void;
+        scheduleTick(arg0: $BlockPos_, arg1: $Block_, arg2: number): void;
         getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $BlockEntityType_<T>): (T) | undefined;
         getHeightmapPos(arg0: $Heightmap$Types_, arg1: $BlockPos_): $BlockPos;
         getEntityCollisions(arg0: $Entity, arg1: $AABB_): $List<$VoxelShape>;
@@ -342,16 +343,20 @@ declare module "@package/net/minecraft/server/level" {
         getNearbyEntities<T extends $LivingEntity>(arg0: $Class<T>, arg1: $TargetingConditions, arg2: $LivingEntity, arg3: $AABB_): $List<T>;
         getPlayerByUUID(arg0: $UUID_): $Player;
         getBiome(arg0: $BlockPos_): $Holder<$Biome>;
-        getBlockStatesIfLoaded(arg0: $AABB_): $Stream<$BlockState>;
-        /**
-         * @deprecated
-         */
-        hasChunkAt(arg0: number, arg1: number): boolean;
         /**
          * @deprecated
          */
         hasChunkAt(arg0: $BlockPos_): boolean;
+        /**
+         * @deprecated
+         */
+        hasChunkAt(arg0: number, arg1: number): boolean;
         containsAnyLiquid(arg0: $AABB_): boolean;
+        getBlockStatesIfLoaded(arg0: $AABB_): $Stream<$BlockState>;
+        /**
+         * @deprecated
+         */
+        hasChunksAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
         /**
          * @deprecated
          */
@@ -363,26 +368,22 @@ declare module "@package/net/minecraft/server/level" {
         /**
          * @deprecated
          */
-        hasChunksAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
-        /**
-         * @deprecated
-         */
         getLightLevelDependentMagicValue(arg0: $BlockPos_): number;
         getChunk(arg0: $BlockPos_): $ChunkAccess;
         getChunk(arg0: number, arg1: number, arg2: $ChunkStatus_): $ChunkAccess;
         getChunkForCollisions(arg0: number, arg1: number): $BlockGetter;
-        getBlockTint(arg0: $BlockPos_, arg1: $ColorResolver_): number;
-        getNoiseBiome(arg0: number, arg1: number, arg2: number): $Holder<$Biome>;
-        isEmptyBlock(arg0: $BlockPos_): boolean;
-        canSeeSkyFromBelowWater(arg0: $BlockPos_): boolean;
-        getPathfindingCostFromLightLevels(arg0: $BlockPos_): number;
-        getMaxLocalRawBrightness(arg0: $BlockPos_, arg1: number): number;
-        getMaxLocalRawBrightness(arg0: $BlockPos_): number;
-        isWaterAt(arg0: $BlockPos_): boolean;
         holderLookup<T>(arg0: $ResourceKey_<$Registry<T>>): $HolderLookup<T>;
         hasBiomes(): boolean;
         getBiomeFabric(arg0: $BlockPos_): $Holder<any>;
         lithium$getLoadedChunk(arg0: number, arg1: number): $ChunkAccess;
+        getBlockTint(arg0: $BlockPos_, arg1: $ColorResolver_): number;
+        getNoiseBiome(arg0: number, arg1: number, arg2: number): $Holder<$Biome>;
+        isEmptyBlock(arg0: $BlockPos_): boolean;
+        canSeeSkyFromBelowWater(arg0: $BlockPos_): boolean;
+        getMaxLocalRawBrightness(arg0: $BlockPos_, arg1: number): number;
+        getMaxLocalRawBrightness(arg0: $BlockPos_): number;
+        isWaterAt(arg0: $BlockPos_): boolean;
+        getPathfindingCostFromLightLevels(arg0: $BlockPos_): number;
         self(): $EntityGetter;
         getMcEntities(): $Iterable<$Entity>;
         getMcPlayers(): $List<$Player>;
@@ -391,24 +392,24 @@ declare module "@package/net/minecraft/server/level" {
         canSeeSky(arg0: $BlockPos_): boolean;
         getBrightness(arg0: $LightLayer_, arg1: $BlockPos_): number;
         getRawBrightness(arg0: $BlockPos_, arg1: number): number;
-        findSupportingBlock(arg0: $Entity, arg1: $AABB_): ($BlockPos) | undefined;
-        noCollision(arg0: $Entity, arg1: $AABB_): boolean;
         noCollision(arg0: $AABB_): boolean;
+        noCollision(arg0: $Entity, arg1: $AABB_): boolean;
         noCollision(arg0: $Entity): boolean;
         noBlockCollision(arg0: $Entity, arg1: $AABB_): boolean;
+        findSupportingBlock(arg0: $Entity, arg1: $AABB_): ($BlockPos) | undefined;
         getBlockCollisions(arg0: $Entity, arg1: $AABB_): $Iterable<$VoxelShape>;
         findFreePosition(arg0: $Entity, arg1: $VoxelShape, arg2: $Vec3_, arg3: number, arg4: number, arg5: number): ($Vec3) | undefined;
+        isUnobstructed(arg0: $Entity): boolean;
+        isUnobstructed(arg0: $BlockState_, arg1: $BlockPos_, arg2: $CollisionContext): boolean;
         getCollisions(arg0: $Entity, arg1: $AABB_): $Iterable<$VoxelShape>;
         collidesWithSuffocatingBlock(arg0: $Entity, arg1: $AABB_): boolean;
-        isUnobstructed(arg0: $BlockState_, arg1: $BlockPos_, arg2: $CollisionContext): boolean;
-        isUnobstructed(arg0: $Entity): boolean;
         getSignal(arg0: $BlockPos_, arg1: $Direction_): number;
         getDirectSignal(arg0: $BlockPos_, arg1: $Direction_): number;
-        getDirectSignalTo(arg0: $BlockPos_): number;
-        getControlInputSignal(arg0: $BlockPos_, arg1: $Direction_, arg2: boolean): number;
         hasSignal(arg0: $BlockPos_, arg1: $Direction_): boolean;
         hasNeighborSignal(arg0: $BlockPos_): boolean;
         getBestNeighborSignal(arg0: $BlockPos_): number;
+        getDirectSignalTo(arg0: $BlockPos_): number;
+        getControlInputSignal(arg0: $BlockPos_, arg1: $Direction_, arg2: boolean): number;
         holder<T>(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
         holderOrThrow<T>(arg0: $ResourceKey_<T>): $Holder<T>;
         isAreaLoaded(arg0: $BlockPos_, arg1: number): boolean;
@@ -423,11 +424,11 @@ declare module "@package/net/minecraft/server/level" {
         getEntityByNetworkID(id: number): $Entity;
         getEntities(): $EntityArrayList;
         clip(arg0: $ClipContext): $BlockHitResult;
+        clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
         getLightEmission(arg0: $BlockPos_): number;
         isBlockInLine(arg0: $ClipBlockStateContext): $BlockHitResult;
-        clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
-        getBlockFloorHeight(arg0: $BlockPos_): number;
         getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
+        getBlockFloorHeight(arg0: $BlockPos_): number;
         getMaxLightLevel(): number;
         getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
         getShade(arg0: number, arg1: number, arg2: number, arg3: boolean): number;
@@ -435,19 +436,19 @@ declare module "@package/net/minecraft/server/level" {
         getSectionsCount(): number;
         getMaxSection(): number;
         getMinSection(): number;
-        isOutsideBuildHeight(arg0: number): boolean;
         isOutsideBuildHeight(arg0: $BlockPos_): boolean;
+        isOutsideBuildHeight(arg0: number): boolean;
         getSectionIndex(arg0: number): number;
         getSectionIndexFromSectionY(arg0: number): number;
         getSectionYFromSectionIndex(arg0: number): number;
-        getModelData(arg0: $BlockPos_): $ModelData;
-        getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
         getAuxLightManager(arg0: $BlockPos_): $AuxiliaryLightManager;
+        getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
+        getModelData(arg0: $BlockPos_): $ModelData;
         getBlockEntityRenderData(arg0: $BlockPos_): $Object;
         constructor(arg0: $ServerLevel, arg1: $StaticCache2D<$GenerationChunkHolder>, arg2: $ChunkStep_, arg3: $ChunkAccess);
-        get seed(): number;
-        get level(): $ServerLevel;
         set currentlyGenerating(value: $Supplier_<string>);
+        get level(): $ServerLevel;
+        get seed(): number;
         get levelData(): $LevelData;
         get worldBorder(): $WorldBorder;
         get chunkSource(): $ChunkSource;
@@ -475,39 +476,39 @@ declare module "@package/net/minecraft/server/level" {
         get minSection(): number;
     }
     export class $ChunkTrackingView {
-        static of(arg0: $ChunkPos, arg1: number): $ChunkTrackingView;
-        static difference(arg0: $ChunkTrackingView, arg1: $ChunkTrackingView, arg2: $Consumer_<$ChunkPos>, arg3: $Consumer_<$ChunkPos>): void;
         static isInViewDistance(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
         static isWithinDistance(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: boolean): boolean;
+        static difference(arg0: $ChunkTrackingView, arg1: $ChunkTrackingView, arg2: $Consumer_<$ChunkPos>, arg3: $Consumer_<$ChunkPos>): void;
+        static of(arg0: $ChunkPos, arg1: number): $ChunkTrackingView;
         static EMPTY: $ChunkTrackingView;
     }
     export interface $ChunkTrackingView {
-        contains(arg0: number, arg1: number, arg2: boolean): boolean;
-        contains(arg0: number, arg1: number): boolean;
-        contains(arg0: $ChunkPos): boolean;
-        forEach(arg0: $Consumer_<$ChunkPos>): void;
         isInViewDistance(arg0: number, arg1: number): boolean;
+        contains(arg0: $ChunkPos): boolean;
+        contains(arg0: number, arg1: number): boolean;
+        contains(arg0: number, arg1: number, arg2: boolean): boolean;
+        forEach(arg0: $Consumer_<$ChunkPos>): void;
     }
     export class $GenerationChunkHolder {
+        getChunkIfPresent(arg0: $ChunkStatus_): $ChunkAccess;
+        scheduleChunkGenerationTask(arg0: $ChunkStatus_, arg1: $ChunkMap): $CompletableFuture<$ChunkResult<$ChunkAccess>>;
+        getChunkIfPresentUnchecked(arg0: $ChunkStatus_): $ChunkAccess;
+        getTicketLevel(): number;
+        replaceProtoChunk(arg0: $ImposterProtoChunk): void;
+        updateHighestAllowedStatus(arg0: $ChunkMap): void;
+        getLatestStatus(): $ChunkStatus;
+        getLatestChunk(): $ChunkAccess;
         getGenerationRefCount(): number;
         increaseGenerationRefCount(): void;
         decreaseGenerationRefCount(): void;
         applyStep(arg0: $ChunkStep_, arg1: $GeneratingChunkMap, arg2: $StaticCache2D<$GenerationChunkHolder>): $CompletableFuture<$ChunkResult<$ChunkAccess>>;
-        rescheduleChunkTask(arg0: $ChunkMap, arg1: $ChunkStatus_): void;
-        updateHighestAllowedStatus(arg0: $ChunkMap): void;
-        getLatestStatus(): $ChunkStatus;
-        getLatestChunk(): $ChunkAccess;
-        getTicketLevel(): number;
-        replaceProtoChunk(arg0: $ImposterProtoChunk): void;
-        getChunkIfPresent(arg0: $ChunkStatus_): $ChunkAccess;
-        scheduleChunkGenerationTask(arg0: $ChunkStatus_, arg1: $ChunkMap): $CompletableFuture<$ChunkResult<$ChunkAccess>>;
-        getChunkIfPresentUnchecked(arg0: $ChunkStatus_): $ChunkAccess;
         getAllFutures(): $List<$Pair$1<$ChunkStatus, $CompletableFuture<$ChunkResult<$ChunkAccess>>>>;
         getQueueLevel(): number;
+        rescheduleChunkTask(arg0: $ChunkMap, arg1: $ChunkStatus_): void;
         removeTask(arg0: $ChunkGenerationTask): void;
         getPersistedStatus(): $ChunkStatus;
-        getFullStatus(): $FullChunkStatus;
         getPos(): $ChunkPos;
+        getFullStatus(): $FullChunkStatus;
         currentlyLoading: $LevelChunk;
         pos: $ChunkPos;
         static UNLOADED_CHUNK: $ChunkResult<$ChunkAccess>;
@@ -515,10 +516,10 @@ declare module "@package/net/minecraft/server/level" {
         startedWork: $AtomicReference<$ChunkStatus>;
         futures: $AtomicReferenceArray<$CompletableFuture<$ChunkResult<$ChunkAccess>>>;
         constructor(arg0: $ChunkPos);
-        get generationRefCount(): number;
+        get ticketLevel(): number;
         get latestStatus(): $ChunkStatus;
         get latestChunk(): $ChunkAccess;
-        get ticketLevel(): number;
+        get generationRefCount(): number;
         get allFutures(): $List<$Pair$1<$ChunkStatus, $CompletableFuture<$ChunkResult<$ChunkAccess>>>>;
         get queueLevel(): number;
         get persistedStatus(): $ChunkStatus;
@@ -540,8 +541,8 @@ declare module "@package/net/minecraft/server/level" {
         get success(): boolean;
     }
     export class $ServerChunkCache$ChunkAndHolder extends $Record {
-        holder(): $ChunkHolder;
         chunk(): $LevelChunk;
+        holder(): $ChunkHolder;
         constructor(chunk: $LevelChunk, holder: $ChunkHolder);
     }
     /**
@@ -549,40 +550,40 @@ declare module "@package/net/minecraft/server/level" {
      */
     export type $ServerChunkCache$ChunkAndHolder_ = { holder?: $ChunkHolder, chunk?: $LevelChunk,  } | [holder?: $ChunkHolder, chunk?: $LevelChunk, ];
     export class $ServerChunkCache extends $ChunkSource implements $IServerChunkCacheExtension, $ServerChunkCacheAccessor$1, $ServerChunkCacheAccessor {
-        save(arg0: boolean): void;
-        broadcast(arg0: $Entity, arg1: $Packet<never>): void;
-        move(arg0: $ServerPlayer): void;
-        pollTask(): boolean;
-        getLevel(): $Level;
-        handler$fif000$sable$init(arg0: $ServerLevel, arg1: $LevelStorageSource$LevelStorageAccess, arg2: $DataFixer, arg3: $StructureTemplateManager, arg4: $Executor_, arg5: $ChunkGenerator, arg6: number, arg7: number, arg8: boolean, arg9: $ChunkProgressListener, arg10: $ChunkStatusUpdateListener_, arg11: $Supplier_<any>, arg12: $CallbackInfo): void;
+        handler$fjc000$sable$init(arg0: $ServerLevel, arg1: $LevelStorageSource$LevelStorageAccess, arg2: $DataFixer, arg3: $StructureTemplateManager, arg4: $Executor_, arg5: $ChunkGenerator, arg6: number, arg7: number, arg8: boolean, arg9: $ChunkProgressListener, arg10: $ChunkStatusUpdateListener_, arg11: $Supplier_<any>, arg12: $CallbackInfo): void;
         runDistanceManagerUpdates(): boolean;
         getChunkDebugData(arg0: $ChunkPos): string;
+        getChunkFuture(arg0: number, arg1: number, arg2: $ChunkStatus_, arg3: boolean): $CompletableFuture<$ChunkResult<$ChunkAccess>>;
         getTickingGenerated(): number;
         removeTicketsOnClosing(): void;
-        setViewDistance(arg0: number): void;
-        setSimulationDistance(arg0: number): void;
-        getChunkFuture(arg0: number, arg1: number, arg2: $ChunkStatus_, arg3: boolean): $CompletableFuture<$ChunkResult<$ChunkAccess>>;
-        addEntity(arg0: $Entity): void;
-        blockChanged(arg0: $BlockPos_): void;
-        removeRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
-        removeRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T, arg4: boolean): void;
-        getLastSpawnState(): $NaturalSpawner$SpawnState;
-        isPositionTicking(arg0: number): boolean;
         getGeneratorState(): $ChunkGeneratorStructureState;
         getDataStorage(): $DimensionDataStorage;
         chunkScanner(): $ChunkScanAccess;
         randomState(): $RandomState;
         getPoiManager(): $PoiManager;
+        addEntity(arg0: $Entity): void;
+        blockChanged(arg0: $BlockPos_): void;
+        removeRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T, arg4: boolean): void;
+        removeRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
+        getLastSpawnState(): $NaturalSpawner$SpawnState;
+        isPositionTicking(arg0: number): boolean;
+        getLevel(): $Level;
+        setViewDistance(arg0: number): void;
+        setSimulationDistance(arg0: number): void;
         getGenerator(): $ChunkGenerator;
+        pollTask(): boolean;
+        move(arg0: $ServerPlayer): void;
+        save(arg0: boolean): void;
         removeEntity(arg0: $Entity): void;
         getPendingTasksCount(): number;
         broadcastAndSend(arg0: $Entity, arg1: $Packet<never>): void;
+        broadcast(arg0: $Entity, arg1: $Packet<never>): void;
         addRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T, arg4: boolean): void;
         addRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
         getLightEngine(): $ThreadedLevelLightEngine;
         self(): $ServerChunkCache;
-        broadcast(arg0: $Entity, arg1: $CustomPacketPayload_): void;
         broadcastAndSend(arg0: $Entity, arg1: $CustomPacketPayload_): void;
+        broadcast(arg0: $Entity, arg1: $CustomPacketPayload_): void;
         mfix$getMainThreadProcessor(): $ServerChunkCache$MainThreadExecutor;
         invokeGetVisibleChunkIfPresent(arg0: number): $ChunkHolder;
         mainThread: $Thread;
@@ -591,12 +592,12 @@ declare module "@package/net/minecraft/server/level" {
         chunkMap: $ChunkMap;
         constructor(arg0: $ServerLevel, arg1: $LevelStorageSource$LevelStorageAccess, arg2: $DataFixer, arg3: $StructureTemplateManager, arg4: $Executor_, arg5: $ChunkGenerator, arg6: number, arg7: number, arg8: boolean, arg9: $ChunkProgressListener, arg10: $ChunkStatusUpdateListener_, arg11: $Supplier_<$DimensionDataStorage>);
         get tickingGenerated(): number;
-        set viewDistance(value: number);
-        set simulationDistance(value: number);
-        get lastSpawnState(): $NaturalSpawner$SpawnState;
         get generatorState(): $ChunkGeneratorStructureState;
         get dataStorage(): $DimensionDataStorage;
         get poiManager(): $PoiManager;
+        get lastSpawnState(): $NaturalSpawner$SpawnState;
+        set viewDistance(value: number);
+        set simulationDistance(value: number);
         get generator(): $ChunkGenerator;
         get pendingTasksCount(): number;
     }
@@ -616,26 +617,26 @@ declare module "@package/net/minecraft/server/level" {
      */
     export type $ChunkResult$Success_<T> = { value?: any,  } | [value?: any, ];
     export class $PlayerMap {
-        ignored(arg0: $ServerPlayer): boolean;
         getAllPlayers(): $Set<$ServerPlayer>;
         ignoredOrUnknown(arg0: $ServerPlayer): boolean;
         ignorePlayer(arg0: $ServerPlayer): void;
         unIgnorePlayer(arg0: $ServerPlayer): void;
-        addPlayer(arg0: $ServerPlayer, arg1: boolean): void;
         removePlayer(arg0: $ServerPlayer): void;
+        addPlayer(arg0: $ServerPlayer, arg1: boolean): void;
+        ignored(arg0: $ServerPlayer): boolean;
         constructor();
         get allPlayers(): $Set<$ServerPlayer>;
     }
     export class $ChunkLevel {
-        static isLoaded(arg0: number): boolean;
+        static byStatus(arg0: $ChunkStatus_): number;
+        static byStatus(arg0: $FullChunkStatus_): number;
+        static isBlockTicking(arg0: number): boolean;
         static generationStatus(arg0: number): $ChunkStatus;
         static getStatusAroundFullChunk(arg0: number, arg1: $ChunkStatus_): $ChunkStatus;
         static getStatusAroundFullChunk(arg0: number): $ChunkStatus;
-        static byStatus(arg0: $FullChunkStatus_): number;
-        static byStatus(arg0: $ChunkStatus_): number;
         static isEntityTicking(arg0: number): boolean;
-        static isBlockTicking(arg0: number): boolean;
         static fullStatus(arg0: number): $FullChunkStatus;
+        static isLoaded(arg0: number): boolean;
         static RADIUS_AROUND_FULL_CHUNK: number;
         static ENTITY_TICKING_LEVEL: number;
         static MAX_LEVEL: number;
@@ -643,10 +644,10 @@ declare module "@package/net/minecraft/server/level" {
         constructor();
     }
     export class $ServerEntity {
+        getLastSentYHeadRot(): number;
         sendChanges(): void;
         removePairing(arg0: $ServerPlayer): void;
         addPairing(arg0: $ServerPlayer): void;
-        getLastSentYHeadRot(): number;
         getPositionBase(): $Vec3;
         getLastSentXRot(): number;
         getLastSentYRot(): number;
@@ -663,41 +664,41 @@ declare module "@package/net/minecraft/server/level" {
     export class $GeneratingChunkMap {
     }
     export interface $GeneratingChunkMap {
+        runGenerationTasks(): void;
         acquireGeneration(arg0: number): $GenerationChunkHolder;
         releaseGeneration(arg0: $GenerationChunkHolder): void;
         applyStep(arg0: $GenerationChunkHolder, arg1: $ChunkStep_, arg2: $StaticCache2D<$GenerationChunkHolder>): $CompletableFuture<$ChunkAccess>;
-        runGenerationTasks(): void;
         scheduleGenerationTask(arg0: $ChunkStatus_, arg1: $ChunkPos): $ChunkGenerationTask;
     }
     export class $ColumnPos extends $Record {
+        toChunkPos(): $ChunkPos;
+        toLong(): number;
         x(): number;
         z(): number;
-        toChunkPos(): $ChunkPos;
+        static asLong(arg0: number, arg1: number): number;
         static getX(arg0: number): number;
         static getZ(arg0: number): number;
-        static asLong(arg0: number, arg1: number): number;
-        toLong(): number;
         constructor(arg0: number, arg1: number);
     }
     /**
      * Values that may be interpreted as {@link $ColumnPos}.
      */
-    export type $ColumnPos_ = { z?: number, x?: number,  } | [z?: number, x?: number, ];
+    export type $ColumnPos_ = { x?: number, z?: number,  } | [x?: number, z?: number, ];
     export class $ChunkTaskPriorityQueue<T> {
-        release(arg0: number, arg1: boolean): void;
-        pop(): $Stream<$Either<T, $Runnable>>;
-        submit(arg0: (T) | undefined, arg1: number, arg2: number): void;
         getAcquired(): $LongSet;
         resortChunkTasks(arg0: number, arg1: $ChunkPos, arg2: number): void;
+        submit(arg0: (T) | undefined, arg1: number, arg2: number): void;
+        release(arg0: number, arg1: boolean): void;
+        pop(): $Stream<$Either<T, $Runnable>>;
         hasWork(): boolean;
         static PRIORITY_LEVEL_COUNT: number;
         constructor(arg0: string, arg1: number);
         get acquired(): $LongSet;
     }
     export class $ChunkGenerationTask {
-        static create(arg0: $GeneratingChunkMap, arg1: $ChunkStatus_, arg2: $ChunkPos): $ChunkGenerationTask;
         markForCancellation(): void;
         runUntilWait(): $CompletableFuture<never>;
+        static create(arg0: $GeneratingChunkMap, arg1: $ChunkStatus_, arg2: $ChunkPos): $ChunkGenerationTask;
         getCenter(): $GenerationChunkHolder;
         targetStatus: $ChunkStatus;
         get center(): $GenerationChunkHolder;
@@ -707,28 +708,28 @@ declare module "@package/net/minecraft/server/level" {
         constructor(arg0: $ServerChunkCache, arg1: $Level_);
     }
     export class $BlockDestructionProgress implements $Comparable<$BlockDestructionProgress>, $BlockDestructionProgressExtension {
-        compareTo(arg0: $BlockDestructionProgress): number;
-        getId(): number;
+        setProgress(arg0: number): void;
         updateTick(arg0: number): void;
         getProgress(): number;
-        setProgress(arg0: number): void;
+        compareTo(arg0: $BlockDestructionProgress): number;
+        getId(): number;
         create$setExtraPositions(arg0: $Set_<any>): void;
         create$getExtraPositions(): $Set<any>;
-        getPos(): $BlockPos;
         getUpdatedRenderTick(): number;
+        getPos(): $BlockPos;
         constructor(arg0: number, arg1: $BlockPos_);
         get id(): number;
-        get pos(): $BlockPos;
         get updatedRenderTick(): number;
+        get pos(): $BlockPos;
     }
     export class $TickingTracker extends $ChunkTracker {
-        getLevel(arg0: $ChunkPos): number;
-        removeTicket(arg0: number, arg1: $Ticket<never>): void;
-        removeTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
-        replacePlayerTicketsLevel(arg0: number): void;
-        addTicket(arg0: number, arg1: $Ticket<never>): void;
         addTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
+        addTicket(arg0: number, arg1: $Ticket<never>): void;
+        removeTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
+        removeTicket(arg0: number, arg1: $Ticket<never>): void;
+        replacePlayerTicketsLevel(arg0: number): void;
         getTicketDebugString(arg0: number): string;
+        getLevel(arg0: $ChunkPos): number;
         runAllUpdates(): void;
         levelCount: number;
         chunks: $Long2ByteMap;
@@ -737,13 +738,13 @@ declare module "@package/net/minecraft/server/level" {
         constructor();
     }
     export class $ThreadedLevelLightEngine extends $LevelLightEngine implements $AutoCloseable {
-        close(): void;
         tryScheduleUpdate(): void;
         runUpdate(): void;
         waitForPendingTasks(arg0: number, arg1: number): $CompletableFuture<never>;
         initializeLight(arg0: $ChunkAccess, arg1: boolean): $CompletableFuture<$ChunkAccess>;
         lightChunk(arg0: $ChunkAccess, arg1: boolean): $CompletableFuture<$ChunkAccess>;
         updateChunkStatus(arg0: $ChunkPos): void;
+        close(): void;
         static DEFAULT_BATCH_SIZE: number;
         static LIGHT_SECTION_PADDING: number;
         skyEngine: $LightEngine<never, never>;
@@ -780,8 +781,8 @@ declare module "@package/net/minecraft/server/level" {
         constructor(arg0: $ServerPlayer);
     }
     export class $ChunkTracker extends $DynamicGraphMinFixedPoint {
-        update(arg0: number, arg1: number, arg2: boolean): void;
         getLevelFromSource(arg0: number): number;
+        update(arg0: number, arg1: number, arg2: boolean): void;
         levelCount: number;
         static SOURCE: number;
         constructor(arg0: number, arg1: number, arg2: number);
@@ -832,14 +833,14 @@ declare module "@package/net/minecraft/server/level" {
         constructor(arg0: $ServerLevel);
     }
     export class $ClientInformation extends $Record {
-        write(arg0: $FriendlyByteBuf): void;
-        language(): string;
         textFilteringEnabled(): boolean;
         allowsListing(): boolean;
         viewDistance(): number;
         chatColors(): boolean;
         modelCustomisation(): number;
         mainHand(): $HumanoidArm;
+        language(): string;
+        write(arg0: $FriendlyByteBuf): void;
         static createDefault(): $ClientInformation;
         chatVisibility(): $ChatVisiblity;
         static MAX_LANGUAGE_LENGTH: number;
@@ -849,16 +850,18 @@ declare module "@package/net/minecraft/server/level" {
     /**
      * Values that may be interpreted as {@link $ClientInformation}.
      */
-    export type $ClientInformation_ = { mainHand?: $HumanoidArm_, chatColors?: boolean, chatVisibility?: $ChatVisiblity_, allowsListing?: boolean, language?: string, viewDistance?: number, modelCustomisation?: number, textFilteringEnabled?: boolean,  } | [mainHand?: $HumanoidArm_, chatColors?: boolean, chatVisibility?: $ChatVisiblity_, allowsListing?: boolean, language?: string, viewDistance?: number, modelCustomisation?: number, textFilteringEnabled?: boolean, ];
+    export type $ClientInformation_ = { textFilteringEnabled?: boolean, modelCustomisation?: number, viewDistance?: number, language?: string, allowsListing?: boolean, chatVisibility?: $ChatVisiblity_, chatColors?: boolean, mainHand?: $HumanoidArm_,  } | [textFilteringEnabled?: boolean, modelCustomisation?: number, viewDistance?: number, language?: string, allowsListing?: boolean, chatVisibility?: $ChatVisiblity_, chatColors?: boolean, mainHand?: $HumanoidArm_, ];
     export class $ChunkMap extends $ChunkStorage implements $ChunkHolder$PlayerProvider, $GeneratingChunkMap, $ISuspendedHolderTrackingChunkMap, $ChunkMapAccessor$1, $ChunkMapAccessor, $ServerChunkLoadingManagerAccessor {
-        size(): number;
-        generator(): $ChunkGenerator;
-        broadcast(arg0: $Entity, arg1: $Packet<never>): void;
-        move(arg0: $ServerPlayer): void;
-        tick(arg0: $BooleanSupplier_): void;
-        tick(): void;
-        waitForLightBeforeSending(arg0: $ChunkPos, arg1: number): void;
-        resendBiomesForChunks(arg0: $List_<$ChunkAccess>): void;
+        getVisibleChunkIfPresent(arg0: number): $ChunkHolder;
+        promoteChunkMap(): boolean;
+        runGenerationTasks(): void;
+        getChunkQueueLevel(arg0: number): $IntSupplier;
+        anyPlayerCloseEnoughForSpawning(arg0: $ChunkPos): boolean;
+        setServerViewDistance(arg0: number): void;
+        getChunkDebugData(arg0: $ChunkPos): string;
+        isChunkTracked(arg0: $ServerPlayer, arg1: number, arg2: number): boolean;
+        getUpdatingChunkIfPresent(arg0: number): $ChunkHolder;
+        debugFuturesAndCreateReportedException(arg0: $IllegalStateException, arg1: string): $ReportedException;
         prepareEntityTickingChunk(arg0: $ChunkHolder): $CompletableFuture<$ChunkResult<$LevelChunk>>;
         updateChunkScheduling(arg0: number, arg1: number, arg2: $ChunkHolder, arg3: number): $ChunkHolder;
         saveChunkIfNeeded(arg0: $ChunkHolder): boolean;
@@ -866,16 +869,6 @@ declare module "@package/net/minecraft/server/level" {
         acquireGeneration(arg0: number): $GenerationChunkHolder;
         releaseGeneration(arg0: $GenerationChunkHolder): void;
         applyStep(arg0: $GenerationChunkHolder, arg1: $ChunkStep_, arg2: $StaticCache2D<$GenerationChunkHolder>): $CompletableFuture<$ChunkAccess>;
-        isChunkTracked(arg0: $ServerPlayer, arg1: number, arg2: number): boolean;
-        getUpdatingChunkIfPresent(arg0: number): $ChunkHolder;
-        debugFuturesAndCreateReportedException(arg0: $IllegalStateException, arg1: string): $ReportedException;
-        getChunkQueueLevel(arg0: number): $IntSupplier;
-        getVisibleChunkIfPresent(arg0: number): $ChunkHolder;
-        promoteChunkMap(): boolean;
-        runGenerationTasks(): void;
-        anyPlayerCloseEnoughForSpawning(arg0: $ChunkPos): boolean;
-        setServerViewDistance(arg0: number): void;
-        getChunkDebugData(arg0: $ChunkPos): string;
         scheduleGenerationTask(arg0: $ChunkStatus_, arg1: $ChunkPos): $ChunkGenerationTask;
         prepareTickingChunk(arg0: $ChunkHolder): $CompletableFuture<$ChunkResult<$LevelChunk>>;
         prepareAccessibleChunk(arg0: $ChunkHolder): $CompletableFuture<$ChunkResult<$LevelChunk>>;
@@ -886,25 +879,34 @@ declare module "@package/net/minecraft/server/level" {
         scheduleOnMainThreadMailbox(arg0: $ChunkTaskPriorityQueueSorter$Message<$Runnable_>): void;
         mfix$markForSuspensionCheck(arg0: $ChunkPos): void;
         mfix$getMainThreadExecutor(): $Executor;
-        onFullChunkStatusChange(arg0: $ChunkPos, arg1: $FullChunkStatus_): void;
+        resendBiomesForChunks(arg0: $List_<$ChunkAccess>): void;
+        waitForLightBeforeSending(arg0: $ChunkPos, arg1: number): void;
         getTickingGenerated(): number;
         saveAllChunks(arg0: boolean): void;
         getStorageName(): string;
-        generatorState(): $ChunkGeneratorStructureState;
-        addEntity(arg0: $Entity): void;
-        dumpChunks(arg0: $Writer): void;
+        onFullChunkStatusChange(arg0: $ChunkPos, arg1: $FullChunkStatus_): void;
+        getChunks(): $Iterable<$ChunkHolder>;
         randomState(): $RandomState;
         getDistanceManager(): $DistanceManager;
         getPoiManager(): $PoiManager;
         getPlayers(arg0: $ChunkPos, arg1: boolean): $List<$ServerPlayer>;
-        getChunks(): $Iterable<$ChunkHolder>;
+        addEntity(arg0: $Entity): void;
+        dumpChunks(arg0: $Writer): void;
+        generatorState(): $ChunkGeneratorStructureState;
+        tick(): void;
+        tick(arg0: $BooleanSupplier_): void;
+        move(arg0: $ServerPlayer): void;
+        size(): number;
+        generator(): $ChunkGenerator;
         removeEntity(arg0: $Entity): void;
         broadcastAndSend(arg0: $Entity, arg1: $Packet<never>): void;
+        broadcast(arg0: $Entity, arg1: $Packet<never>): void;
         getLightEngine(): $ThreadedLevelLightEngine;
         hasWork(): boolean;
         getPlayersWatching(arg0: $Entity): $List<$ServerPlayer>;
         getEntityMap(): $Int2ObjectMap<$TrackedEntityAccessor>;
         fixerUpper: $DataFixer;
+        entityMap: $Int2ObjectMap<$ChunkMap$TrackedEntity>;
         toDrop: $LongSet;
         level: $ServerLevel;
         updatingChunkMap: $Long2ObjectLinkedOpenHashMap<$ChunkHolder>;
@@ -922,15 +924,12 @@ declare module "@package/net/minecraft/server/level" {
         set serverViewDistance(value: number);
         get tickingGenerated(): number;
         get storageName(): string;
+        get chunks(): $Iterable<$ChunkHolder>;
         get distanceManager(): $DistanceManager;
         get poiManager(): $PoiManager;
-        get chunks(): $Iterable<$ChunkHolder>;
         get lightEngine(): $ThreadedLevelLightEngine;
-        get entityMap(): $Int2ObjectMap<$TrackedEntityAccessor>;
     }
     export class $ServerPlayerGameMode {
-        tick(): void;
-        setLevel(arg0: $ServerLevel): void;
         destroyAndAck(arg0: $BlockPos_, arg1: number, arg2: string): void;
         handleBlockBreakAction(arg0: $BlockPos_, arg1: $ServerboundPlayerActionPacket$Action_, arg2: $Direction_, arg3: number, arg4: number): void;
         getGameModeForPlayer(): $GameType;
@@ -938,6 +937,8 @@ declare module "@package/net/minecraft/server/level" {
         setGameModeForPlayer(arg0: $GameType_, arg1: $GameType_): void;
         changeGameModeForPlayer(arg0: $GameType_): boolean;
         isSurvival(): boolean;
+        setLevel(arg0: $ServerLevel): void;
+        tick(): void;
         useItemOn(arg0: $ServerPlayer, arg1: $Level_, arg2: $ItemStack_, arg3: $InteractionHand_, arg4: $BlockHitResult): $InteractionResult;
         useItem(arg0: $ServerPlayer, arg1: $Level_, arg2: $ItemStack_, arg3: $InteractionHand_): $InteractionResult;
         isCreative(): boolean;
@@ -965,8 +966,8 @@ declare module "@package/net/minecraft/server/level" {
         constructor(arg0: $ChunkMap, arg1: $Executor_, arg2: $Executor_);
     }
     export class $ServerPlayer$RespawnPosAngle extends $Record {
-        static of(arg0: $Vec3_, arg1: $BlockPos_): $ServerPlayer$RespawnPosAngle;
         position(): $Vec3;
+        static of(arg0: $Vec3_, arg1: $BlockPos_): $ServerPlayer$RespawnPosAngle;
         yaw(): number;
         constructor(position: $Vec3_, yaw: number);
     }
@@ -975,30 +976,30 @@ declare module "@package/net/minecraft/server/level" {
      */
     export type $ServerPlayer$RespawnPosAngle_ = { yaw?: number, position?: $Vec3_,  } | [yaw?: number, position?: $Vec3_, ];
     export class $DistanceManager {
-        updateChunkScheduling(arg0: number, arg1: number, arg2: $ChunkHolder, arg3: number): $ChunkHolder;
-        hasTickets(): boolean;
-        removeTicket(arg0: number, arg1: $Ticket<never>): void;
-        removeTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
-        isChunkToRemove(arg0: number): boolean;
-        updateSimulationDistance(arg0: number): void;
-        addTicket(arg0: number, arg1: $Ticket<never>): void;
         addTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
+        addTicket(arg0: number, arg1: $Ticket<never>): void;
+        updateSimulationDistance(arg0: number): void;
         purgeStaleTickets(): void;
         shouldForceTicks(arg0: number): boolean;
+        removeTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
+        removeTicket(arg0: number, arg1: $Ticket<never>): void;
+        isChunkToRemove(arg0: number): boolean;
+        updateChunkScheduling(arg0: number, arg1: number, arg2: $ChunkHolder, arg3: number): $ChunkHolder;
+        hasTickets(): boolean;
         updatePlayerTickets(arg0: number): void;
         tickingTracker(): $TickingTracker;
         getTicketDebugString(arg0: number): string;
         hasPlayersNearby(arg0: number): boolean;
         removeTicketsOnClosing(): void;
+        removePlayer(arg0: $SectionPos, arg1: $ServerPlayer): void;
+        inBlockTickingRange(arg0: number): boolean;
         addPlayer(arg0: $SectionPos, arg1: $ServerPlayer): void;
-        removeRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T, arg4: boolean): void;
         removeRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
+        removeRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T, arg4: boolean): void;
         updateChunkForced(arg0: $ChunkPos, arg1: boolean): void;
         getNaturalSpawnChunkCount(): number;
         getDebugStatus(): string;
-        inBlockTickingRange(arg0: number): boolean;
         inEntityTickingRange(arg0: number): boolean;
-        removePlayer(arg0: $SectionPos, arg1: $ServerPlayer): void;
         addRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T): void;
         addRegionTicket<T>(arg0: $TicketType<T>, arg1: $ChunkPos, arg2: number, arg3: T, arg4: boolean): void;
         getChunk(arg0: number): $ChunkHolder;
@@ -1017,19 +1018,15 @@ declare module "@package/net/minecraft/server/level" {
         get naturalSpawnChunkCount(): number;
         get debugStatus(): string;
     }
-    export class $ServerPlayer extends $Player implements $VeilPacketManager$PacketSink, $IServerPlayer$2, $IServerPlayer$1, $ServerPlayerAccessor, $ServerPlayerKJS, $IServerPlayer, $PlayerFreezeExtension, $ServerPlayerRespawnExtension, $ServerPlayerPossessionAccess {
-        getLanguage(): string;
-        isChangingDimension(): boolean;
-        requestedViewDistance(): number;
-        allowsListing(): boolean;
+    export class $ServerPlayer extends $Player implements $VeilPacketManager$PacketSink, $MotionAwareEntity, $IServerPlayer$2, $IServerPlayer$1, $ServerPlayerAccessor, $ServerPlayerKJS, $IServerPlayer, $PlayerFreezeExtension, $ServerPlayerRespawnExtension, $ServerPlayerPossessionAccess {
         setExperiencePoints(arg0: number): void;
         setExperienceLevels(arg0: number): void;
         initInventoryMenu(): void;
-        handler$fff005$sable$tick(arg0: $CallbackInfo): void;
+        handler$fgc005$sable$tick(arg0: $CallbackInfo): void;
         trackStartFallingPosition(): void;
         trackEnteredOrExitedLavaOnVehicle(): void;
         doTick(): void;
-        handler$dff000$item_obliterator$playerTick(arg0: $CallbackInfo, arg1: number): void;
+        handler$dgb000$item_obliterator$playerTick(arg0: $CallbackInfo, arg1: number): void;
         findRespawnPositionAndUseSpawnBlock(arg0: boolean, arg1: $DimensionTransition$PostDimensionTransition_): $DimensionTransition;
         getRespawnAngle(): number;
         isRespawnForced(): boolean;
@@ -1039,12 +1036,15 @@ declare module "@package/net/minecraft/server/level" {
         createCommonSpawnInfo(arg0: $ServerLevel): $CommonPlayerSpawnInfo;
         setServerLevel(arg0: $ServerLevel): void;
         doCheckFallDamage(arg0: number, arg1: number, arg2: number, arg3: boolean): void;
+        isChangingDimension(): boolean;
+        requestedViewDistance(): number;
+        allowsListing(): boolean;
         setPlayerInput(arg0: number, arg1: number, arg2: boolean, arg3: boolean): void;
         checkMovementStatistics(arg0: number, arg1: number, arg2: number): void;
         checkRidingStatistics(arg0: number, arg1: number, arg2: number): void;
         hasDisconnected(): boolean;
         resetSentInfo(): void;
-        wrapMethod$fhg000$sable$teleportTo(arg0: $ServerLevel, arg1: number, arg2: number, arg3: number, arg4: $Set_<any>, arg5: number, arg6: number, arg7: $Operation_<any>): boolean;
+        wrapMethod$fid000$sable$teleportTo(arg0: $ServerLevel, arg1: number, arg2: number, arg3: number, arg4: $Set_<any>, arg5: number, arg6: number, arg7: $Operation_<any>): boolean;
         /**
          * Changes the player's gamemode.
          * 
@@ -1075,7 +1075,7 @@ declare module "@package/net/minecraft/server/level" {
         getTextFilter(): $TextFilter;
         loadGameTypes(arg0: $CompoundTag_): void;
         shouldFilterMessageTo(arg0: $ServerPlayer): boolean;
-        handler$znl000$exposure$onDrop(dropStack: boolean, cir: $CallbackInfoReturnable<any>): void;
+        handler$znm000$exposure$onDrop(dropStack: boolean, cir: $CallbackInfoReturnable<any>): void;
         setSpawnExtraParticlesOnFall(arg0: boolean): void;
         setChatSession(arg0: $RemoteChatSession_): void;
         getChatSession(): $RemoteChatSession;
@@ -1095,19 +1095,20 @@ declare module "@package/net/minecraft/server/level" {
         sable$getQueuedFreeze(): $Pair<any, any>;
         railways$getPossessedConductor(): $ConductorEntity;
         railways$setPossessedConductor(arg0: $ConductorEntity): void;
+        drop(arg0: boolean): boolean;
+        getLanguage(): string;
         disconnect(): void;
         getStatsCounter(): $ServerStatsCounter;
+        sendPacket(arg0: $Packet<any>): void;
         updateOptions(arg0: $ClientInformation_): void;
         getAdvancements(): $PlayerAdvancements;
         lookAt(arg0: $EntityAnchorArgument$Anchor_, arg1: $Entity, arg2: $EntityAnchorArgument$Anchor_): void;
-        sendPacket(arg0: $Packet<any>): void;
+        getLastActionTime(): number;
         teleportTo(arg0: $ServerLevel, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         serverLevel(): $ServerLevel;
         sendSystemMessage(arg0: $Component_, arg1: boolean): void;
-        getLastActionTime(): number;
         restoreFrom(arg0: $ServerPlayer, arg1: boolean): void;
         getRespawnPosition(): $BlockPos;
-        drop(arg0: boolean): boolean;
         sendPacket(...arg0: $CustomPacketPayload_[]): void;
         /**
          * Kicks the player from the server with the provided reason.
@@ -1122,8 +1123,8 @@ declare module "@package/net/minecraft/server/level" {
         openInventoryGUI(inventory: $InventoryKJS, title: $Component_, columns: number, rows: number): void;
         openInventoryGUI(inventory: $InventoryKJS, title: $Component_, columns: number): void;
         openInventoryGUI(inventory: $InventoryKJS, title: $Component_): void;
-        openChestGUI(gui: $Consumer_<$KubeJSGUI>): void;
         openChestGUI(title: $Component_, rows: number, gui: $Consumer_<$ChestMenuData>): void;
+        openChestGUI(gui: $Consumer_<$KubeJSGUI>): void;
         captureInventory(autoRestore: boolean): $Container;
         /**
          * Switches the player's gamemode between Creative and Survival.
@@ -1356,13 +1357,12 @@ declare module "@package/net/minecraft/server/level" {
         static DATA_SHOULDER_RIGHT: $EntityDataAccessor<$CompoundTag>;
         currentExplosionCause: $Entity;
         constructor(arg0: $MinecraftServer, arg1: $ServerLevel, arg2: $GameProfile, arg3: $ClientInformation_);
-        get language(): string;
-        get changingDimension(): boolean;
         set experiencePoints(value: number);
         set experienceLevels(value: number);
         get respawnAngle(): number;
         get respawnForced(): boolean;
         get respawnDimension(): $ResourceKey<$Level>;
+        get changingDimension(): boolean;
         get ipAddress(): string;
         get chatVisibility(): $ChatVisiblity;
         get recipeBook(): $ServerRecipeBook;
@@ -1370,6 +1370,7 @@ declare module "@package/net/minecraft/server/level" {
         get textFilter(): $TextFilter;
         set spawnExtraParticlesOnFall(value: boolean);
         set knownMovement(value: $Vec3_);
+        get language(): string;
         get statsCounter(): $ServerStatsCounter;
         get advancements(): $PlayerAdvancements;
         get lastActionTime(): number;
@@ -1377,38 +1378,56 @@ declare module "@package/net/minecraft/server/level" {
         get op(): boolean;
     }
     export class $ChunkTaskPriorityQueueSorter implements $ChunkHolder$LevelChangeListener, $AutoCloseable {
+        getReleaseProcessor(arg0: $ProcessorHandle<$Runnable_>): $ProcessorHandle<$ChunkTaskPriorityQueueSorter$Release>;
+        onLevelChange(arg0: $ChunkPos, arg1: $IntSupplier_, arg2: number, arg3: $IntConsumer_): void;
+        getDebugStatus(): string;
+        static message<T>(arg0: $Function_<$ProcessorHandle<$Unit>, T>, arg1: number, arg2: $IntSupplier_): $ChunkTaskPriorityQueueSorter$Message<T>;
+        static message(arg0: $Runnable_, arg1: number, arg2: $IntSupplier_): $ChunkTaskPriorityQueueSorter$Message<$Runnable>;
         static message<T>(arg0: $GenerationChunkHolder, arg1: $Function_<$ProcessorHandle<$Unit>, T>): $ChunkTaskPriorityQueueSorter$Message<T>;
         static message(arg0: $GenerationChunkHolder, arg1: $Runnable_): $ChunkTaskPriorityQueueSorter$Message<$Runnable>;
-        static message(arg0: $Runnable_, arg1: number, arg2: $IntSupplier_): $ChunkTaskPriorityQueueSorter$Message<$Runnable>;
-        static message<T>(arg0: $Function_<$ProcessorHandle<$Unit>, T>, arg1: number, arg2: $IntSupplier_): $ChunkTaskPriorityQueueSorter$Message<T>;
         close(): void;
         static release(arg0: $Runnable_, arg1: number, arg2: boolean): $ChunkTaskPriorityQueueSorter$Release;
-        onLevelChange(arg0: $ChunkPos, arg1: $IntSupplier_, arg2: number, arg3: $IntConsumer_): void;
-        getReleaseProcessor(arg0: $ProcessorHandle<$Runnable_>): $ProcessorHandle<$ChunkTaskPriorityQueueSorter$Release>;
-        getDebugStatus(): string;
         getProcessor<T>(arg0: $ProcessorHandle<T>, arg1: boolean): $ProcessorHandle<$ChunkTaskPriorityQueueSorter$Message<T>>;
         hasWork(): boolean;
         constructor(arg0: $List_<$ProcessorHandle<never>>, arg1: $Executor_, arg2: number);
         get debugStatus(): string;
     }
     export class $ServerLevel extends $Level implements $WorldGenLevel, $VeilPacketManager$PacketSink, $ServerWorldExtended, $ServerLevelAccessor, $ServerLevelAccessor$1, $ServerLevelAccessor$2, $IWorldMapServerLevel, $ServerWorldCache, $ServerLevelKJS, $ServerLevelAccessor$3, $ServerLevelSceneExtension, $SubLevelContainerHolder, $WaterOcclusionContainerHolder {
-        save(arg0: $ProgressListener, arg1: boolean, arg2: boolean): void;
-        unload(arg0: $LevelChunk): void;
-        tick(arg0: $BooleanSupplier_): void;
-        getSeed(): number;
-        getLevel(): $ServerLevel;
+        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $Predicate_<T>, arg2: $List_<T>, arg3: number): void;
+        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $Predicate_<T>, arg2: $List_<T>): void;
+        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $Predicate_<T>): $List<T>;
+        isFlat(): boolean;
         removePlayerImmediately(arg0: $ServerPlayer, arg1: $Entity$RemovalReason_): void;
         canSleepThroughNights(): boolean;
         structureManager(): $StructureManager;
-        isFlat(): boolean;
         tickTime(): void;
+        getStructureManager(): $StructureTemplateManager;
+        getDataStorage(): $DimensionDataStorage;
+        /**
+         * @deprecated
+         */
+        setDragonFight(arg0: $EndDragonFight): void;
+        setWeatherParameters(arg0: number, arg1: number, arg2: boolean, arg3: boolean): void;
+        setDayTime(arg0: number): void;
+        resetWeatherCycle(): void;
+        tickCustomSpawners(arg0: boolean, arg1: boolean): void;
+        tickChunk(arg0: $LevelChunk, arg1: number): void;
+        findLightningTargetAround(arg0: $BlockPos_): $BlockPos;
+        tickPrecipitation(arg0: $BlockPos_): void;
+        getPoiManager(): $PoiManager;
+        isHandlingTick(): boolean;
+        tickNonPassenger(arg0: $Entity): void;
+        handler$fjd000$sable$saveSubLevels(arg0: $ProgressListener, arg1: boolean, arg2: boolean, arg3: $CallbackInfo): void;
+        getDragons(): $List<$EnderDragon>;
+        getPlayers(arg0: $Predicate_<$ServerPlayer>): $List<$ServerPlayer>;
+        getPlayers(arg0: $Predicate_<$ServerPlayer>, arg1: number): $List<$ServerPlayer>;
         getRandomPlayer(): $ServerPlayer;
-        handler$ffk000$sable$kickEntity(arg0: $Entity, arg1: $CallbackInfoReturnable<any>): void;
+        handler$fgh000$sable$kickEntity(arg0: $Entity, arg1: $CallbackInfoReturnable<any>): void;
         addNewPlayer(arg0: $ServerPlayer): void;
         addRespawnedPlayer(arg0: $ServerPlayer): void;
         tryAddFreshEntityWithPassengers(arg0: $Entity): boolean;
         getLogicalHeight(): number;
-        wrapMethod$fhj000$sable$preExplode(arg0: $Entity, arg1: $DamageSource_, arg2: $ExplosionDamageCalculator, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: $Level$ExplosionInteraction_, arg9: $ParticleOptions_, arg10: $ParticleOptions_, arg11: $Holder_<any>, arg12: $Operation_<any>): $Explosion;
+        wrapMethod$fig000$sable$preExplode(arg0: $Entity, arg1: $DamageSource_, arg2: $ExplosionDamageCalculator, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: $Level$ExplosionInteraction_, arg9: $ParticleOptions_, arg10: $ParticleOptions_, arg11: $Holder_<any>, arg12: $Operation_<any>): $Explosion;
         getPortalForcer(): $PortalForcer;
         /**
          * @deprecated
@@ -1446,26 +1465,6 @@ declare module "@package/net/minecraft/server/level" {
         registerCapabilityListener(arg0: $BlockPos_, arg1: $ICapabilityInvalidationListener_): void;
         cleanCapabilityListenerReferences(): void;
         lithium$setNavigationActive(arg0: $Mob): void;
-        getStructureManager(): $StructureTemplateManager;
-        getDataStorage(): $DimensionDataStorage;
-        /**
-         * @deprecated
-         */
-        setDragonFight(arg0: $EndDragonFight): void;
-        setWeatherParameters(arg0: number, arg1: number, arg2: boolean, arg3: boolean): void;
-        setDayTime(arg0: number): void;
-        resetWeatherCycle(): void;
-        tickCustomSpawners(arg0: boolean, arg1: boolean): void;
-        tickChunk(arg0: $LevelChunk, arg1: number): void;
-        findLightningTargetAround(arg0: $BlockPos_): $BlockPos;
-        tickPrecipitation(arg0: $BlockPos_): void;
-        getPoiManager(): $PoiManager;
-        isHandlingTick(): boolean;
-        tickNonPassenger(arg0: $Entity): void;
-        handler$fig000$sable$saveSubLevels(arg0: $ProgressListener, arg1: boolean, arg2: boolean, arg3: $CallbackInfo): void;
-        getDragons(): $List<$EnderDragon>;
-        getPlayers(arg0: $Predicate_<$ServerPlayer>): $List<$ServerPlayer>;
-        getPlayers(arg0: $Predicate_<$ServerPlayer>, arg1: number): $List<$ServerPlayer>;
         lithium$setNavigationInactive(arg0: $Mob): void;
         areEntityNavigationsConsistent(): boolean;
         getXaero_wm_capabilities(): $ServerWorldCapabilities;
@@ -1475,17 +1474,20 @@ declare module "@package/net/minecraft/server/level" {
         sable$getSceneID(): number;
         sable$setSceneID(arg0: number): void;
         sable$getWaterOcclusionContainer(): $WaterOcclusionContainer<any>;
-        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $Predicate_<T>, arg2: $List_<T>): void;
-        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $Predicate_<T>, arg2: $List_<T>, arg3: number): void;
-        getEntities<T extends $Entity>(arg0: $EntityTypeTest<$Entity, T>, arg1: $Predicate_<T>): $List<T>;
-        sable$getPlotContainer(): $SubLevelContainer;
+        getLevel(): $ServerLevel;
+        getSeed(): number;
+        tick(arg0: $BooleanSupplier_): void;
+        save(arg0: $ProgressListener, arg1: boolean, arg2: boolean): void;
+        unload(arg0: $LevelChunk): void;
         sendPacket(arg0: $Packet<any>): void;
+        sable$getPlotContainer(): $SubLevelContainer;
         sendParticles<T extends $ParticleOptions>(arg0: T, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): number;
         sendParticles<T extends $ParticleOptions>(arg0: $ServerPlayer, arg1: T, arg2: boolean, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): boolean;
         sendParticles(arg0: $ServerPlayer, arg1: boolean, arg2: number, arg3: number, arg4: number, arg5: $Packet<never>): boolean;
-        getPersistentData(): $CompoundTag;
+        getScoreboard(): $ServerScoreboard;
         updateSleepingPlayerList(): void;
         addWithUUID(arg0: $Entity): boolean;
+        getPersistentData(): $CompoundTag;
         addDuringTeleport(arg0: $Entity): void;
         resetEmptyTime(): void;
         getBlockTicks(): $LevelTicks<$Block>;
@@ -1538,9 +1540,11 @@ declare module "@package/net/minecraft/server/level" {
         blockEntityTickers: $List<$TickingBlockEntity>;
         captureBlockSnapshots: boolean;
         constructor(arg0: $MinecraftServer, arg1: $Executor_, arg2: $LevelStorageSource$LevelStorageAccess, arg3: $ServerLevelData, arg4: $ResourceKey_<$Level>, arg5: $LevelStem_, arg6: $ChunkProgressListener, arg7: boolean, arg8: number, arg9: $List_<$CustomSpawner_>, arg10: boolean, arg11: $RandomSequences);
-        get seed(): number;
-        get level(): $ServerLevel;
         get flat(): boolean;
+        get dataStorage(): $DimensionDataStorage;
+        get poiManager(): $PoiManager;
+        get handlingTick(): boolean;
+        get dragons(): $List<$EnderDragon>;
         get randomPlayer(): $ServerPlayer;
         get logicalHeight(): number;
         get portalForcer(): $PortalForcer;
@@ -1549,38 +1553,37 @@ declare module "@package/net/minecraft/server/level" {
         get watchdogStats(): string;
         get pathTypeCache(): $PathTypeCache;
         get randomSequences(): $RandomSequences;
-        get dataStorage(): $DimensionDataStorage;
-        get poiManager(): $PoiManager;
-        get handlingTick(): boolean;
-        get dragons(): $List<$EnderDragon>;
+        get level(): $ServerLevel;
+        get seed(): number;
+        get scoreboard(): $ServerScoreboard;
         get persistentData(): $CompoundTag;
         get blockTicks(): $LevelTicks<$Block>;
         get fluidTicks(): $LevelTicks<$Fluid>;
         set currentlyGenerating(value: $Supplier_<string>);
     }
     export class $SectionTracker extends $DynamicGraphMinFixedPoint {
-        update(arg0: number, arg1: number, arg2: boolean): void;
         getLevelFromSource(arg0: number): number;
+        update(arg0: number, arg1: number, arg2: boolean): void;
         levelCount: number;
         static SOURCE: number;
         constructor(arg0: number, arg1: number, arg2: number);
     }
     export class $ChunkMap$TrackedEntity implements $TrackedEntityAccessor, $ChunkMapAccessor$TrackedEntityAccessor, $EntityTrackerAccessor {
-        broadcast(arg0: $Packet<never>): void;
-        updatePlayers(arg0: $List_<$ServerPlayer>): void;
         broadcastRemoved(): void;
-        localvar$doc000$railways$securitycraft$modifyFlag(arg0: boolean): boolean;
+        localvar$doo000$railways$securitycraft$modifyFlag(arg0: boolean): boolean;
+        updatePlayer(arg0: $ServerPlayer): void;
+        updatePlayers(arg0: $List_<$ServerPlayer>): void;
         removePlayer(arg0: $ServerPlayer): void;
         broadcastAndSend(arg0: $Packet<never>): void;
-        updatePlayer(arg0: $ServerPlayer): void;
+        broadcast(arg0: $Packet<never>): void;
         getSeenBy(): $Set<$ServerPlayerConnection>;
         getPlayersTracking(): $Set<$ServerPlayerConnection>;
         serverEntity: $ServerEntity;
         lastSectionPos: $SectionPos;
         this$0: $ChunkMap;
         entity: $Entity;
+        seenBy: $Set<$ServerPlayerConnection>;
         constructor(arg0: $ChunkMap, arg1: $Entity, arg2: number, arg3: number, arg4: boolean);
-        get seenBy(): $Set<$ServerPlayerConnection>;
         get playersTracking(): $Set<$ServerPlayerConnection>;
     }
     export class $DistanceManager$ChunkTicketTracker extends $ChunkTracker {

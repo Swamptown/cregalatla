@@ -16,15 +16,31 @@ export * as criteria from "@package/net/minecraft/world/scores/criteria";
 
 declare module "@package/net/minecraft/world/scores" {
     export class $Scoreboard {
+        getObjective(arg0: string): $Objective;
+        getPlayerScoreInfo(arg0: $ScoreHolder_, arg1: $Objective): $ReadOnlyScoreInfo;
+        setDisplayObjective(arg0: $DisplaySlot_, arg1: $Objective): void;
+        onObjectiveRemoved(arg0: $Objective): void;
+        addPlayerTeam(arg0: string): $PlayerTeam;
+        onTeamAdded(arg0: $PlayerTeam): void;
+        removePlayerTeam(arg0: $PlayerTeam): void;
+        onTeamRemoved(arg0: $PlayerTeam): void;
+        removePlayerFromTeam(arg0: string, arg1: $PlayerTeam): void;
+        removePlayerFromTeam(arg0: string): boolean;
+        getTeamNames(): $Collection<string>;
+        getPlayerTeams(): $Collection<$PlayerTeam>;
+        onObjectiveChanged(arg0: $Objective): void;
+        onScoreChanged(arg0: $ScoreHolder_, arg1: $Objective, arg2: $Score): void;
+        onScoreLockChanged(arg0: $ScoreHolder_, arg1: $Objective): void;
+        entityRemoved(arg0: $Entity): void;
+        savePlayerScores(arg0: $HolderLookup$Provider): $ListTag;
+        loadPlayerScores(arg0: $ListTag_, arg1: $HolderLookup$Provider): void;
         forAllObjectives(arg0: $ObjectiveCriteria, arg1: $ScoreHolder_, arg2: $Consumer_<$ScoreAccess>): void;
         addObjective(arg0: string, arg1: $ObjectiveCriteria, arg2: $Component_, arg3: $ObjectiveCriteria$RenderType_, arg4: boolean, arg5: $NumberFormat): $Objective;
         onObjectiveAdded(arg0: $Objective): void;
-        getObjective(arg0: string): $Objective;
-        getPlayerScoreInfo(arg0: $ScoreHolder_, arg1: $Objective): $ReadOnlyScoreInfo;
-        getOrCreatePlayerScore(arg0: $ScoreHolder_, arg1: $Objective): $ScoreAccess;
         getOrCreatePlayerScore(arg0: $ScoreHolder_, arg1: $Objective, arg2: boolean): $ScoreAccess;
-        listPlayerScores(arg0: $ScoreHolder_): $Object2IntMap<$Objective>;
+        getOrCreatePlayerScore(arg0: $ScoreHolder_, arg1: $Objective): $ScoreAccess;
         listPlayerScores(arg0: $Objective): $Collection<$PlayerScoreEntry>;
+        listPlayerScores(arg0: $ScoreHolder_): $Object2IntMap<$Objective>;
         getObjectives(): $Collection<$Objective>;
         getObjectiveNames(): $Collection<string>;
         getTrackedPlayers(): $Collection<$ScoreHolder>;
@@ -34,69 +50,53 @@ declare module "@package/net/minecraft/world/scores" {
         onPlayerScoreRemoved(arg0: $ScoreHolder_, arg1: $Objective): void;
         removeObjective(arg0: $Objective): void;
         getDisplayObjective(arg0: $DisplaySlot_): $Objective;
-        setDisplayObjective(arg0: $DisplaySlot_, arg1: $Objective): void;
-        onObjectiveRemoved(arg0: $Objective): void;
-        addPlayerTeam(arg0: string): $PlayerTeam;
-        onTeamAdded(arg0: $PlayerTeam): void;
-        removePlayerTeam(arg0: $PlayerTeam): void;
-        onTeamRemoved(arg0: $PlayerTeam): void;
-        removePlayerFromTeam(arg0: string): boolean;
-        removePlayerFromTeam(arg0: string, arg1: $PlayerTeam): void;
-        getTeamNames(): $Collection<string>;
-        getPlayerTeams(): $Collection<$PlayerTeam>;
-        onObjectiveChanged(arg0: $Objective): void;
-        onScoreChanged(arg0: $ScoreHolder_, arg1: $Objective, arg2: $Score): void;
-        onScoreLockChanged(arg0: $ScoreHolder_, arg1: $Objective): void;
-        entityRemoved(arg0: $Entity): void;
-        savePlayerScores(arg0: $HolderLookup$Provider): $ListTag;
-        loadPlayerScores(arg0: $ListTag_, arg1: $HolderLookup$Provider): void;
         onTeamChanged(arg0: $PlayerTeam): void;
         getPlayerTeam(arg0: string): $PlayerTeam;
         addPlayerToTeam(arg0: string, arg1: $PlayerTeam): boolean;
         getPlayersTeam(arg0: string): $PlayerTeam;
         static HIDDEN_SCORE_PREFIX: string;
         constructor();
+        get teamNames(): $Collection<string>;
+        get playerTeams(): $Collection<$PlayerTeam>;
         get objectives(): $Collection<$Objective>;
         get objectiveNames(): $Collection<string>;
         get trackedPlayers(): $Collection<$ScoreHolder>;
-        get teamNames(): $Collection<string>;
-        get playerTeams(): $Collection<$PlayerTeam>;
     }
     export class $ReadOnlyScoreInfo {
         static safeFormatValue(arg0: $ReadOnlyScoreInfo, arg1: $NumberFormat): $MutableComponent;
     }
     export interface $ReadOnlyScoreInfo {
+        formatValue(arg0: $NumberFormat): $MutableComponent;
+        numberFormat(): $NumberFormat;
         value(): number;
         isLocked(): boolean;
-        numberFormat(): $NumberFormat;
-        formatValue(arg0: $NumberFormat): $MutableComponent;
         get locked(): boolean;
     }
     export class $Objective {
-        getName(): string;
-        getDisplayName(): $Component;
-        numberFormat(): $NumberFormat;
-        setNumberFormat(arg0: $NumberFormat): void;
         setDisplayAutoUpdate(arg0: boolean): void;
         displayAutoUpdate(): boolean;
         getCriteria(): $ObjectiveCriteria;
         getFormattedDisplayName(): $Component;
         setDisplayName(arg0: $Component_): void;
+        getDisplayName(): $Component;
+        numberFormat(): $NumberFormat;
+        setNumberFormat(arg0: $NumberFormat): void;
+        getName(): string;
         getRenderType(): $ObjectiveCriteria$RenderType;
         getScoreboard(): $Scoreboard;
         setRenderType(arg0: $ObjectiveCriteria$RenderType_): void;
         numberFormatOrDefault(arg0: $NumberFormat): $NumberFormat;
         constructor(arg0: $Scoreboard, arg1: string, arg2: $ObjectiveCriteria, arg3: $Component_, arg4: $ObjectiveCriteria$RenderType_, arg5: boolean, arg6: $NumberFormat);
-        get name(): string;
         get criteria(): $ObjectiveCriteria;
         get formattedDisplayName(): $Component;
+        get name(): string;
         get scoreboard(): $Scoreboard;
     }
     export class $DisplaySlot extends $Enum<$DisplaySlot> implements $StringRepresentable {
+        static teamColorToSlot(arg0: $ChatFormatting_): $DisplaySlot;
         static values(): $DisplaySlot[];
         static valueOf(arg0: string): $DisplaySlot;
         id(): number;
-        static teamColorToSlot(arg0: $ChatFormatting_): $DisplaySlot;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static BELOW_NAME: $DisplaySlot;
@@ -128,6 +128,9 @@ declare module "@package/net/minecraft/world/scores" {
      */
     export type $DisplaySlot_ = "list" | "sidebar" | "below_name" | "sidebar.team.black" | "sidebar.team.dark_blue" | "sidebar.team.dark_green" | "sidebar.team.dark_aqua" | "sidebar.team.dark_red" | "sidebar.team.dark_purple" | "sidebar.team.gold" | "sidebar.team.gray" | "sidebar.team.dark_gray" | "sidebar.team.blue" | "sidebar.team.green" | "sidebar.team.aqua" | "sidebar.team.red" | "sidebar.team.light_purple" | "sidebar.team.yellow" | "sidebar.team.white";
     export class $Score implements $ReadOnlyScoreInfo {
+        setLocked(arg0: boolean): void;
+        numberFormat(arg0: $NumberFormat): void;
+        numberFormat(): $NumberFormat;
         value(arg0: number): void;
         value(): number;
         write(arg0: $HolderLookup$Provider): $CompoundTag;
@@ -135,36 +138,33 @@ declare module "@package/net/minecraft/world/scores" {
         display(arg0: $Component_): void;
         display(): $Component;
         isLocked(): boolean;
-        numberFormat(): $NumberFormat;
-        numberFormat(arg0: $NumberFormat): void;
-        setLocked(arg0: boolean): void;
         formatValue(arg0: $NumberFormat): $MutableComponent;
         constructor();
     }
     export class $Team {
-        getName(): string;
         getDeathMessageVisibility(): $Team$Visibility;
-        getPlayers(): $Collection<string>;
-        getFormattedName(arg0: $Component_): $MutableComponent;
         getNameTagVisibility(): $Team$Visibility;
         getCollisionRule(): $Team$CollisionRule;
+        getFormattedName(arg0: $Component_): $MutableComponent;
+        getPlayers(): $Collection<string>;
+        getName(): string;
         getColor(): $ChatFormatting;
-        isAlliedTo(arg0: $Team): boolean;
         isAllowFriendlyFire(): boolean;
+        isAlliedTo(arg0: $Team): boolean;
         canSeeFriendlyInvisibles(): boolean;
         constructor();
-        get name(): string;
         get deathMessageVisibility(): $Team$Visibility;
-        get players(): $Collection<string>;
         get nameTagVisibility(): $Team$Visibility;
         get collisionRule(): $Team$CollisionRule;
+        get players(): $Collection<string>;
+        get name(): string;
         get color(): $ChatFormatting;
         get allowFriendlyFire(): boolean;
     }
     export class $Team$CollisionRule extends $Enum<$Team$CollisionRule> {
+        getDisplayName(): $Component;
         static values(): $Team$CollisionRule[];
         static valueOf(arg0: string): $Team$CollisionRule;
-        getDisplayName(): $Component;
         static byName(arg0: string): $Team$CollisionRule;
         static PUSH_OTHER_TEAMS: $Team$CollisionRule;
         static NEVER: $Team$CollisionRule;
@@ -196,12 +196,12 @@ declare module "@package/net/minecraft/world/scores" {
      */
     export type $ScoreHolder_ = (() => string);
     export class $PlayerScoreEntry extends $Record {
+        numberFormatOverride(): $NumberFormat;
+        formatValue(arg0: $NumberFormat): $MutableComponent;
         value(): number;
         isHidden(): boolean;
         owner(): string;
         display(): $Component;
-        numberFormatOverride(): $NumberFormat;
-        formatValue(arg0: $NumberFormat): $MutableComponent;
         ownerName(): $Component;
         constructor(arg0: string, arg1: number, arg2: $Component_, arg3: $NumberFormat);
         get hidden(): boolean;
@@ -209,20 +209,20 @@ declare module "@package/net/minecraft/world/scores" {
     /**
      * Values that may be interpreted as {@link $PlayerScoreEntry}.
      */
-    export type $PlayerScoreEntry_ = { owner?: string, numberFormatOverride?: $NumberFormat, value?: number, display?: $Component_,  } | [owner?: string, numberFormatOverride?: $NumberFormat, value?: number, display?: $Component_, ];
+    export type $PlayerScoreEntry_ = { value?: number, numberFormatOverride?: $NumberFormat, owner?: string, display?: $Component_,  } | [value?: number, numberFormatOverride?: $NumberFormat, owner?: string, display?: $Component_, ];
     export class $Team$Visibility extends $Enum<$Team$Visibility> {
+        static getAllNames(): string[];
+        getDisplayName(): $Component;
         static values(): $Team$Visibility[];
         static valueOf(arg0: string): $Team$Visibility;
-        getDisplayName(): $Component;
-        static getAllNames(): string[];
         static byName(arg0: string): $Team$Visibility;
         static HIDE_FOR_OTHER_TEAMS: $Team$Visibility;
         static NEVER: $Team$Visibility;
         id: number;
         static ALWAYS: $Team$Visibility;
         static HIDE_FOR_OWN_TEAM: $Team$Visibility;
-        get displayName(): $Component;
         static get allNames(): string[];
+        get displayName(): $Component;
     }
     /**
      * Values that may be interpreted as {@link $Team$Visibility}.
@@ -231,8 +231,6 @@ declare module "@package/net/minecraft/world/scores" {
     export class $PlayerScores {
     }
     export class $PlayerTeam extends $Team {
-        getDisplayName(): $Component;
-        setColor(arg0: $ChatFormatting_): void;
         getFormattedDisplayName(): $MutableComponent;
         setDisplayName(arg0: $Component_): void;
         setPlayerPrefix(arg0: $Component_): void;
@@ -246,16 +244,18 @@ declare module "@package/net/minecraft/world/scores" {
         setCollisionRule(arg0: $Team$CollisionRule_): void;
         packOptions(): number;
         unpackOptions(arg0: number): void;
+        getDisplayName(): $Component;
+        setColor(arg0: $ChatFormatting_): void;
         getScoreboard(): $Scoreboard;
         static formatNameForTeam(arg0: $Team, arg1: $Component_): $MutableComponent;
         constructor(arg0: $Scoreboard, arg1: string);
-        set color(value: $ChatFormatting_);
         get formattedDisplayName(): $MutableComponent;
         set allowFriendlyFire(value: boolean);
         set seeFriendlyInvisibles(value: boolean);
         set nameTagVisibility(value: $Team$Visibility_);
         set deathMessageVisibility(value: $Team$Visibility_);
         set collisionRule(value: $Team$CollisionRule_);
+        set color(value: $ChatFormatting_);
         get scoreboard(): $Scoreboard;
     }
     export class $ScoreboardSaveData extends $SavedData {
@@ -266,16 +266,16 @@ declare module "@package/net/minecraft/world/scores" {
     export class $ScoreAccess {
     }
     export interface $ScoreAccess {
+        numberFormatOverride(arg0: $NumberFormat): void;
+        lock(): void;
         reset(): void;
         get(): number;
         add(arg0: number): number;
         increment(): number;
-        lock(): void;
         set(arg0: number): void;
-        display(): $Component;
-        display(arg0: $Component_): void;
         unlock(): void;
-        numberFormatOverride(arg0: $NumberFormat): void;
+        display(arg0: $Component_): void;
+        display(): $Component;
         locked(): boolean;
     }
 }

@@ -5,8 +5,8 @@ import { $Collection_, $List } from "@package/java/util";
 
 declare module "@package/net/minecraft/world/entity/schedule" {
     export class $Activity implements $ActivityAccessor {
+        static createActivity$platform_$md$4ca6b6$0(arg0: string): $Activity;
         getName(): string;
-        static createActivity$platform_$md$d858b6$0(arg0: string): $Activity;
         static CORE: $Activity;
         static ROAR: $Activity;
         static FIGHT: $Activity;
@@ -43,17 +43,17 @@ declare module "@package/net/minecraft/world/entity/schedule" {
     export class $ScheduleBuilder$ActivityTransition {
     }
     export class $ScheduleBuilder {
-        build(): $Schedule;
         changeActivityAt(arg0: number, arg1: $Activity_): $ScheduleBuilder;
+        build(): $Schedule;
         constructor(arg0: $Schedule_);
     }
     export interface $Activity extends RegistryMarked<RegistryTypes.ActivityTag, RegistryTypes.Activity> {}
     export class $Keyframe {
-        getValue(): number;
         getTimeStamp(): number;
+        getValue(): number;
         constructor(arg0: number, arg1: number);
-        get value(): number;
         get timeStamp(): number;
+        get value(): number;
     }
     export interface $Schedule extends RegistryMarked<RegistryTypes.ScheduleTag, RegistryTypes.Schedule> {}
     export class $Timeline {
@@ -65,11 +65,11 @@ declare module "@package/net/minecraft/world/entity/schedule" {
         get keyframes(): $ImmutableList<$Keyframe>;
     }
     export class $Schedule {
-        static register(arg0: string): $ScheduleBuilder;
         ensureTimelineExistsFor(arg0: $Activity_): void;
         getTimelineFor(arg0: $Activity_): $Timeline;
         getAllTimelinesExceptFor(arg0: $Activity_): $List<$Timeline>;
         getActivityAt(arg0: number): $Activity;
+        static register(arg0: string): $ScheduleBuilder;
         static WORK_START_TIME: number;
         static VILLAGER_DEFAULT: $Schedule;
         static VILLAGER_BABY: $Schedule;
