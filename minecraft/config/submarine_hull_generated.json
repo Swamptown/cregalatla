@@ -171,6 +171,10 @@
     "maxDepthY": 4,
     "implosionChance": 0.8
   },
+  "beansbackpacks:burlap_sack": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
   "bits_n_bobs:andesite_tile_slab": {
     "maxDepthY": -35,
     "implosionChance": 0.67
@@ -9049,6 +9053,14 @@
   },
   "exposure:lightroom": {
     "maxDepthY": 19,
+    "implosionChance": 0.85
+  },
+  "extra_gauges:display_collector": {
+    "maxDepthY": -36,
+    "implosionChance": 0.28
+  },
+  "extra_gauges:integer_selector": {
+    "maxDepthY": 26,
     "implosionChance": 0.85
   },
   "ldlib2:renderer_block": {

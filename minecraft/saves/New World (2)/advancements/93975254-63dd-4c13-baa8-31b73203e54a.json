@@ -1643,5 +1643,23 @@
     },
     "done": false
   },
+  "beansbackpacks:item/root": {
+    "criteria": {
+      "requirement": "2026-05-19 13:58:16 -0400"
+    },
+    "done": true
+  },
+  "beansbackpacks:beansbackpacks": {
+    "criteria": {
+      "requirement": "2026-05-19 13:58:16 -0400"
+    },
+    "done": true
+  },
+  "beansbackpacks:control/root": {
+    "criteria": {
+      "requirement": "2026-05-19 13:58:16 -0400"
+    },
+    "done": true
+  },
   "DataVersion": 3955
 }
