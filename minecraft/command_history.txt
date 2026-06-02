@@ -1,15 +1,3 @@
-/kill @e[type=minecraft:villager]
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:-1,rewardExp:0b,sell:{id:"mymod:closed_scroll",count:1}}]}}
-/kill @e[type=minecraft:villager]
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:-1,rewardExp:0b,sell:{id:acacia_boat,count:1}}]}}
-/kill @e[type=minecraft:villager]a
-/kill @e[type=minecraft:villager]
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:-1,rewardExp:0b,sell:{id:acacia_boat,count:1}}]}}
-/kill @e[type=minecraft:villager]
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:-1,rewardExp:0b,buy:{id:dirt,count:1},sell:{id:acacia_boat,count:1}}]}}
-/kill @e[type=minecraft:villager]
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:1,rewardExp:0b,buy:{id:dirt,count:1},sell:{id:"mymod:closed_fire_scroll",count:1}}]}}
-/tp Rasgajag mxwl
 /summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:1,rewardExp:0b,buy:{id:dirt,count:1},sell:{id:"mymod:closed_fire_scroll",count:1}}]}}
 /kill @e[type=minecraft:villager]
 /give Rasgajag minecraft:command_block
@@ -48,3 +36,15 @@
 /tag Rasgajag list
 /gamemode creative
 /gamemode survival
+/kill 68f89e63-9ebb-4e65-b61c-0cb1f999ea06
+/fill ~ ~ ~ ~ ~ ~ dirt
+/time set day
+/gamerule doDaylightCycle false
+/gamerule doMobSpawning false
+/kill @e[type=!minecraft:player]
+/gamerule doFireTick false
+/tick sprint 3d
+/kill a6a8393d-5586-4078-803c-4c6182011acc
+/gamerule doDaylightCycle false
+/gamerule doMobSpawning false
+/reload

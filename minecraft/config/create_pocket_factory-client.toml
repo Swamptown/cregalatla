@@ -1,0 +1,21 @@
+[rendering]
+	#Controls how the entrance and held bound entrance render the pocket factory preview.
+	#CORE_ONLY renders only the rotating core.
+	#MINIATURE renders the miniature preview on the entrance.
+	#LARGE_WITH_CORE keeps the entrance on the core and enables the held large projection.
+	#Allowed Values: CORE_ONLY, MINIATURE, LARGE_WITH_CORE
+	entranceProjectionMode = "MINIATURE"
+	#If true, the entrance display rotates.
+	#If false, both the miniature preview and the core fallback stay still.
+	rotateEntrancePreview = false
+	#If true, both the miniature and the large projection render Create block entity overlay parts.
+	#If false, both projection sizes skip the BER path entirely and only keep cached static block models.
+	renderProjectionBlockEntities = true
+	#If true, the large projection also renders Create block entity animation parts such as shafts, chain wheels, or steam engine linkages.
+	#If false, only the static block model is rendered for the projection.
+	renderDynamicProjectionParts = true
+
+[linkedBlockEffects]
+	#If true, nearby linked blocks occasionally emit a small upward particle as a visual marker.
+	#The effect is client-side only and only appears for nearby linked blocks in view.
+	showLinkedBlockParticles = true

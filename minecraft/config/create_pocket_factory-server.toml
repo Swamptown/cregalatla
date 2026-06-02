@@ -1,0 +1,4 @@
+[linking]
+	#If true, linked bindings require one endpoint inside a pocket factory and the other outside it.
+	#If false, same-side binding is allowed as long as at least one endpoint is inside a pocket factory.
+	requirePocketBoundaryForLinkedBindings = false

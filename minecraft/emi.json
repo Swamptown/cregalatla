@@ -1,6 +1,35 @@
 {
-  "favorites": [],
+  "favorites": [
+    {
+      "stack": {
+        "type": "fluid",
+        "id": "createaddition:bioethanol",
+        "amount": 125
+      },
+      "recipe": "jei:/createaddition/mixing/bioethanol"
+    },
+    {
+      "stack": "item:create:encased_chain_drive"
+    }
+  ],
   "lookup_history": [
+    "item:create_pocket_factory:pocket_factory_entrance",
+    "item:create_pocket_factory:pocket_factory_block_a",
+    "item:create_pocket_factory:pocket_factory_internal_eye",
+    "item:create_pocket_factory:pocket_factory_block_b",
+    "fluid:createaddition:bioethanol",
+    "fluid:createaddition:seed_oil",
+    "item:createaddition:biomass",
+    "item:minecraft:sugar",
+    "item:createaddition:bioethanol_bucket",
+    "item:create:cinder_flour",
+    {
+      "type": "fluid",
+      "id": "aeronautics:levitite_blend",
+      "amount": 1000
+    },
+    "item:aeronautics:levitite_blend_bucket",
+    "item:aeronautics:levitite",
     "item:create:small_asurine_bricks",
     "item:create:yellow_postbox",
     "item:create:orange_table_cloth",
@@ -192,7 +221,11 @@
   ],
   "craft_history": [],
   "recipe_defaults": {
-    "added": [],
+    "added": [
+      "jei:/createaddition/compacting/seed_oil",
+      "jei:/createaddition/mixing/bioethanol",
+      "jei:/createaddition/mixing/biomass_from_stricks"
+    ],
     "tags": {},
     "resolutions": {},
     "disabled": []
