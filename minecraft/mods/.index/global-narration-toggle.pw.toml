@@ -1,0 +1,21 @@
+filename = 'globalnarrationtoggle-1.21.1-1.4.jar'
+name = 'Global Narration Toggle'
+side = 'client'
+x-prismlauncher-loaders = [ 'neoforge', 'forge', 'quilt', 'fabric' ]
+x-prismlauncher-mc-versions = [ '1.21', '1.21.1' ]
+x-prismlauncher-release-type = 'release'
+x-prismlauncher-version-number = '1.21.1-1.4-fabric+forge+neo'
+
+[download]
+hash = 'a11e05bcdf54242aa39e801971e765e18dedd569676daf7a9018ec65b3c0c2bead1b3db0a5c6f6568e959b2ce91e43bbdc55e3edc94896eca6f49c9624cb4be5'
+hash-format = 'sha512'
+mode = 'url'
+url = 'https://cdn.modrinth.com/data/UxJVewrJ/versions/1kYuKyAt/globalnarrationtoggle-1.21.1-1.4.jar'
+
+[update.modrinth]
+mod-id = 'UxJVewrJ'
+version = '1kYuKyAt'
+
+[[x-prismlauncher-dependencies]]
+addonId = 'e0M1UDsY'
+type = 'REQUIRED'

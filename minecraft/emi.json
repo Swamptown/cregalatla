@@ -1,23 +1,19 @@
 {
-  "favorites": [
-    {
-      "stack": {
-        "type": "fluid",
-        "id": "createaddition:bioethanol",
-        "amount": 125
-      },
-      "recipe": "jei:/createaddition/mixing/bioethanol"
-    },
-    {
-      "stack": "item:create:encased_chain_drive"
-    }
-  ],
+  "favorites": [],
   "lookup_history": [
-    "item:create_pocket_factory:pocket_factory_entrance",
-    "item:create_pocket_factory:pocket_factory_block_a",
-    "item:create_pocket_factory:pocket_factory_internal_eye",
-    "item:create_pocket_factory:pocket_factory_block_b",
-    "fluid:createaddition:bioethanol",
+    "item:railways:track_bamboo",
+    {
+      "type": "item",
+      "id": "minecraft:iron_nugget",
+      "amount": 64
+    },
+    "item:create:precision_mechanism",
+    {
+      "type": "fluid",
+      "id": "createaddition:bioethanol",
+      "amount": 125
+    },
+    "item:create:encased_chain_drive",
     "fluid:createaddition:seed_oil",
     "item:createaddition:biomass",
     "item:minecraft:sugar",
@@ -222,8 +218,8 @@
   "craft_history": [],
   "recipe_defaults": {
     "added": [
-      "jei:/createaddition/compacting/seed_oil",
       "jei:/createaddition/mixing/bioethanol",
+      "jei:/createaddition/compacting/seed_oil",
       "jei:/createaddition/mixing/biomass_from_stricks"
     ],
     "tags": {},

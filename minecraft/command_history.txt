@@ -1,50 +1,50 @@
-/summon villager ~ ~ ~ {VillagerData:{type:plains,profession:cleric,level:99},Offers:{Recipes:[{maxUses:1,rewardExp:0b,buy:{id:dirt,count:1},sell:{id:"mymod:closed_fire_scroll",count:1}}]}}
-/kill @e[type=minecraft:villager]
-/give Rasgajag minecraft:command_block
-/probejs
-/kubejs reload server-scripts
-/kubejs dump events
-/kubejs errors server
-/kubejs reload
-/reload
-/kubejs reload server-scripts
-/reload
-/probejs
-/reload
-/kill @e[type=!minecraft:player]
-/gamemode survival
+/tp mxwl
+/gamerule dashCoolDown 60
+/tp mxwl
+/gamerule dashCoolDown 70
+/tp mxwl
+/gamerule dashCoolDown 100
+/tp mxwl
+/tp SirPotato42 Rasgajag
+/gamemode creative SirPotato42
+/tp mxwl
+/tp SirPotato42 Rasgajag
+/tp HeroBryan1 Rasgajag
+/tp SirPotato42 Rasgajag
+/kick SirPotato42
+/kill
+/tp SirPotato42 Rasgajag
+/give SirPotato42 mymod:closed_scroll
+/setavatar @a
+/setavatar mxwl
+/setavatar HeroBryan1
+/setavatar @r
+/give @a cregalatla:bending_coin 3
+/advancement revoke Rasgajag everything
+/clear @a
+/tp CherriRacc00n
 /gamemode creative
-/kubejs reload server-scripts
 /reload
-/kill @e
-/time set day
-/reload
-/give Rasgajag rocketnautics:jetpack
-/kubejs reload
-/kubejs reload startup-scripts
-/vre craftinggrid
-/vre maingui
-/reload
-/gamemode survival
-/gamemode creative
 /kubejs reload client-scripts
-/probejs
-/kubejs reload client-scripts
-/kubejs errors client
-/probejs
-/reload
-/tag Rasgajag list
-/gamemode creative
-/gamemode survival
-/kill 68f89e63-9ebb-4e65-b61c-0cb1f999ea06
-/fill ~ ~ ~ ~ ~ ~ dirt
-/time set day
-/gamerule doDaylightCycle false
-/gamerule doMobSpawning false
-/kill @e[type=!minecraft:player]
-/gamerule doFireTick false
-/tick sprint 3d
-/kill a6a8393d-5586-4078-803c-4c6182011acc
-/gamerule doDaylightCycle false
-/gamerule doMobSpawning false
-/reload
+/tp Rasgajag ~ ~1000 ~
+/tp Rasgajag ~ ~100 ~
+/tp Rasgajag ~ ~500 ~
+/tp Rasgajag ~ ~1000 ~
+/fill ~ ~ ~ ~ ~ ~ minecraft:diamond_block
+/tp ~ 10 ~
+/tp ~ 100 ~
+/fill ~ ~ ~ ~ ~ ~ minecraft:diamond_block
+/advancement grant Rasgajag only mymod:bend
+/tp ~ ~100 ~
+/tp ~ ~50000 ~
+/tp ~ ~300 ~
+/tp ~ 300 ~
+/tp @e[type=aeronautics:propeller_bearing_contraption]
+/tp @e[
+/tp @e[type=create:contraption]
+/tp @e[type=create:contraption] Rasgajag
+/tp @e Rasgajag
+/tp Rasgajag ~ ~100 ~
+/tp @e[type=create:contraption] Rasgajag
+/tp @e Rasgajag
+/fill ~ ~ ~ ~ ~ ~ minecraft:diamond_block
