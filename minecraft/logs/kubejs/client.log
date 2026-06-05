@@ -1,17 +1,17 @@
-[22:47:20] [INIT] KubeJS 2101.7.2-build.368; MC 2101 NeoForge
-[22:47:20] [INIT] Loaded plugins:
-[22:47:20] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSPlugin
-[22:47:20] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin
-[22:47:20] [INIT] - dev.latvian.mods.kubejs.integration.architectury.ArchitecturyIntegration
-[22:47:20] [INIT] - io.github.mortuusars.exposure.neoforge.integration.kubejs.ExposureKubeJSPlugin
-[22:47:20] [INIT] - com.lowdragmc.lowdraglib2.integration.kjs.LDLibKubeJSPlugin
-[22:47:20] [INIT] - com.tom.createores.kubejs.KubeJSExcavation
-[22:47:20] [INIT] - com.almostreliable.morejs.Plugin
-[22:47:20] [INIT] - moe.wolfgirl.probejs.plugin.ProbeJSKJSPlugin
-[22:47:20] [INIT] - dev.latvian.mods.kubejs.create.KubeJSCreatePlugin
-[22:47:20] [INIT] - fr.lucreeper74.createmetallurgy.compat.kubejs.CreateMetallurgyKJS
-[22:47:20] [INFO] client_scripts:main.js#2: Hello, World! (Loaded client example script)
-[22:47:20] [INFO] Loaded script client_scripts:main.js in 0.0 s
-[22:47:20] [INFO] Loaded script client_scripts:renamescrolls.js in 0.009 s
-[22:47:20] [INFO] Loaded 2/2 KubeJS client scripts in 0.052 s with 0 errors and 0 warnings
-[22:47:27] [INFO] Client resource reload complete!
+[23:04:19] [INIT] KubeJS 2101.7.2-build.368; MC 2101 NeoForge
+[23:04:19] [INIT] Loaded plugins:
+[23:04:19] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSPlugin
+[23:04:19] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin
+[23:04:19] [INIT] - dev.latvian.mods.kubejs.integration.architectury.ArchitecturyIntegration
+[23:04:19] [INIT] - io.github.mortuusars.exposure.neoforge.integration.kubejs.ExposureKubeJSPlugin
+[23:04:19] [INIT] - com.lowdragmc.lowdraglib2.integration.kjs.LDLibKubeJSPlugin
+[23:04:19] [INIT] - com.tom.createores.kubejs.KubeJSExcavation
+[23:04:19] [INIT] - com.almostreliable.morejs.Plugin
+[23:04:19] [INIT] - moe.wolfgirl.probejs.plugin.ProbeJSKJSPlugin
+[23:04:19] [INIT] - dev.latvian.mods.kubejs.create.KubeJSCreatePlugin
+[23:04:19] [INIT] - fr.lucreeper74.createmetallurgy.compat.kubejs.CreateMetallurgyKJS
+[23:04:19] [INFO] client_scripts:main.js#2: Hello, World! (Loaded client example script)
+[23:04:19] [INFO] Loaded script client_scripts:main.js in 0.001 s
+[23:04:19] [INFO] Loaded script client_scripts:renamescrolls.js in 0.001 s
+[23:04:19] [INFO] Loaded 2/2 KubeJS client scripts in 0.04 s with 0 errors and 0 warnings
+[23:04:26] [INFO] Client resource reload complete!

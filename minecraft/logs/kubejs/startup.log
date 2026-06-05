@@ -1,22 +1,22 @@
-[22:47:18] [INIT] KubeJS 2101.7.2-build.368; MC 2101 NeoForge
-[22:47:18] [INIT] Loaded plugins:
-[22:47:18] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSPlugin
-[22:47:18] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin
-[22:47:18] [INIT] - dev.latvian.mods.kubejs.integration.architectury.ArchitecturyIntegration
-[22:47:18] [INIT] - io.github.mortuusars.exposure.neoforge.integration.kubejs.ExposureKubeJSPlugin
-[22:47:18] [INIT] - com.lowdragmc.lowdraglib2.integration.kjs.LDLibKubeJSPlugin
-[22:47:18] [INIT] - com.tom.createores.kubejs.KubeJSExcavation
-[22:47:18] [INIT] - com.almostreliable.morejs.Plugin
-[22:47:18] [INIT] - moe.wolfgirl.probejs.plugin.ProbeJSKJSPlugin
-[22:47:18] [INIT] - dev.latvian.mods.kubejs.create.KubeJSCreatePlugin
-[22:47:18] [INIT] - fr.lucreeper74.createmetallurgy.compat.kubejs.CreateMetallurgyKJS
-[22:47:20] [INFO] Loaded script startup_scripts:armorchangecreate.js in 0.116 s
-[22:47:20] [INFO] Loaded script startup_scripts:armorchangediamond.js in 0.003 s
-[22:47:20] [INFO] Loaded script startup_scripts:armorchangeiron.js in 0.002 s
-[22:47:20] [INFO] Loaded script startup_scripts:armorchangenetherite.js in 0.002 s
-[22:47:20] [INFO] Loaded script startup_scripts:fixbendermodname.js in 0.003 s
-[22:47:20] [INFO] startup_scripts:main.js#2: Hello, World! (Loaded startup example script)
-[22:47:20] [INFO] Loaded script startup_scripts:main.js in 0.0 s
-[22:47:20] [INFO] Loaded 6/6 KubeJS startup scripts in 1.675 s with 0 errors and 0 warnings
-[22:47:20] [INFO] Validated 2 files in kubejs/assets/ in 1ms
-[22:47:20] [INFO] Validated 0 files in kubejs/data/ in 0ms
+[23:04:18] [INIT] KubeJS 2101.7.2-build.368; MC 2101 NeoForge
+[23:04:18] [INIT] Loaded plugins:
+[23:04:18] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSPlugin
+[23:04:18] [INIT] - dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin
+[23:04:18] [INIT] - dev.latvian.mods.kubejs.integration.architectury.ArchitecturyIntegration
+[23:04:18] [INIT] - io.github.mortuusars.exposure.neoforge.integration.kubejs.ExposureKubeJSPlugin
+[23:04:18] [INIT] - com.lowdragmc.lowdraglib2.integration.kjs.LDLibKubeJSPlugin
+[23:04:18] [INIT] - com.tom.createores.kubejs.KubeJSExcavation
+[23:04:18] [INIT] - com.almostreliable.morejs.Plugin
+[23:04:18] [INIT] - moe.wolfgirl.probejs.plugin.ProbeJSKJSPlugin
+[23:04:18] [INIT] - dev.latvian.mods.kubejs.create.KubeJSCreatePlugin
+[23:04:18] [INIT] - fr.lucreeper74.createmetallurgy.compat.kubejs.CreateMetallurgyKJS
+[23:04:19] [INFO] Loaded script startup_scripts:armorchangecreate.js in 0.094 s
+[23:04:19] [INFO] Loaded script startup_scripts:armorchangediamond.js in 0.002 s
+[23:04:19] [INFO] Loaded script startup_scripts:armorchangeiron.js in 0.001 s
+[23:04:19] [INFO] Loaded script startup_scripts:armorchangenetherite.js in 0.001 s
+[23:04:19] [INFO] Loaded script startup_scripts:fixbendermodname.js in 0.003 s
+[23:04:19] [INFO] startup_scripts:main.js#2: Hello, World! (Loaded startup example script)
+[23:04:19] [INFO] Loaded script startup_scripts:main.js in 0.001 s
+[23:04:19] [INFO] Loaded 6/6 KubeJS startup scripts in 1.578 s with 0 errors and 0 warnings
+[23:04:19] [INFO] Validated 2 files in kubejs/assets/ in 1ms
+[23:04:19] [INFO] Validated 0 files in kubejs/data/ in 0ms
