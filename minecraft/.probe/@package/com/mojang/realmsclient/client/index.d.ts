@@ -7,7 +7,7 @@ import { $Minecraft, $User } from "@package/net/minecraft/client";
 import { $LevelStorageSource } from "@package/net/minecraft/world/level/storage";
 import { $List, $UUID_, $List_ } from "@package/java/util";
 import { $RealmsHttpException } from "@package/com/mojang/realmsclient/exception";
-import { $UploadInfo, $RealmsServer, $RealmsServerPlayerLists, $PendingInvitesList, $Subscription, $RealmsWorldOptions, $RealmsNews, $ServerActivityList, $RealmsServerAddress, $Ops, $RealmsServerList, $BackupList, $WorldTemplatePaginatedList, $RegionPingResult, $PingResult, $WorldDownload, $RealmsServer$WorldType_, $RealmsNotification } from "@package/com/mojang/realmsclient/dto";
+import { $UploadInfo, $RealmsServer, $RealmsServerPlayerLists, $RealmsWorldOptions, $Subscription, $PendingInvitesList, $RealmsNews, $ServerActivityList, $RealmsServerAddress, $Ops, $RealmsServerList, $BackupList, $WorldTemplatePaginatedList, $RegionPingResult, $PingResult, $WorldDownload, $RealmsServer$WorldType_, $RealmsNotification } from "@package/com/mojang/realmsclient/dto";
 import { $InputStreamEntity } from "@package/org/apache/http/entity";
 import { $Consumer_ } from "@package/java/util/function";
 import { $CountingOutputStream } from "@package/org/apache/commons/io/output";
@@ -30,15 +30,15 @@ declare module "@package/com/mojang/realmsclient/client" {
     export type $RealmsError$AuthenticationError_ = { message?: string,  } | [message?: string, ];
     export class $FileDownload {
         static findAvailableFolderName(arg0: string): string;
-        isExtracting(): boolean;
         isFinished(): boolean;
+        isExtracting(): boolean;
         contentLength(arg0: string): number;
         cancel(): void;
         isError(): boolean;
         download(arg0: $WorldDownload, arg1: string, arg2: $RealmsDownloadLatestWorldScreen$DownloadStatus, arg3: $LevelStorageSource): void;
         constructor();
-        get extracting(): boolean;
         get finished(): boolean;
+        get extracting(): boolean;
         get error(): boolean;
     }
     export class $RealmsError$ErrorWithJsonPayload extends $Record implements $RealmsError {
@@ -54,26 +54,8 @@ declare module "@package/com/mojang/realmsclient/client" {
     /**
      * Values that may be interpreted as {@link $RealmsError$ErrorWithJsonPayload}.
      */
-    export type $RealmsError$ErrorWithJsonPayload_ = { message?: string, httpCode?: number, code?: number, reason?: string,  } | [message?: string, httpCode?: number, code?: number, reason?: string, ];
+    export type $RealmsError$ErrorWithJsonPayload_ = { reason?: string, code?: number, httpCode?: number, message?: string,  } | [reason?: string, code?: number, httpCode?: number, message?: string, ];
     export class $RealmsClient {
-        notificationsDismiss(arg0: $List_<$UUID_>): void;
-        sendPingResults(arg0: $PingResult): void;
-        notificationsSeen(arg0: $List_<$UUID_>): void;
-        getNotifications(): $List<$RealmsNotification>;
-        pendingInvitesCount(): number;
-        trialAvailable(): boolean;
-        getNews(): $RealmsNews;
-        getLiveStats(): $RealmsServerPlayerLists;
-        listRealms(): $RealmsServerList;
-        listSnapshotEligibleRealms(): $List<$RealmsServer>;
-        update(arg0: number, arg1: string, arg2: string): void;
-        join(arg0: number): $RealmsServerAddress;
-        op(arg0: number, arg1: $UUID_): $Ops;
-        close(arg0: number): boolean;
-        open(arg0: number): boolean;
-        static create(): $RealmsClient;
-        static create(arg0: $Minecraft): $RealmsClient;
-        getActivity(arg0: number): $ServerActivityList;
         createSnapshotRealm(arg0: number): $RealmsServer;
         getOwnRealm(arg0: number): $RealmsServer;
         initializeRealm(arg0: number, arg1: string, arg2: string): void;
@@ -99,22 +81,40 @@ declare module "@package/com/mojang/realmsclient/client" {
         rejectInvitation(arg0: string): void;
         agreeToTos(): void;
         deleteRealm(arg0: number): void;
+        pendingInvitesCount(): number;
+        trialAvailable(): boolean;
+        getNews(): $RealmsNews;
+        getLiveStats(): $RealmsServerPlayerLists;
+        listRealms(): $RealmsServerList;
+        listSnapshotEligibleRealms(): $List<$RealmsServer>;
+        notificationsDismiss(arg0: $List_<$UUID_>): void;
+        sendPingResults(arg0: $PingResult): void;
+        notificationsSeen(arg0: $List_<$UUID_>): void;
+        getNotifications(): $List<$RealmsNotification>;
+        update(arg0: number, arg1: string, arg2: string): void;
+        join(arg0: number): $RealmsServerAddress;
+        op(arg0: number, arg1: $UUID_): $Ops;
+        close(arg0: number): boolean;
+        open(arg0: number): boolean;
+        static create(arg0: $Minecraft): $RealmsClient;
+        static create(): $RealmsClient;
+        getActivity(arg0: number): $ServerActivityList;
         static ENVIRONMENT: $RealmsClient$Environment;
         constructor(arg0: string, arg1: string, arg2: $Minecraft);
-        get notifications(): $List<$RealmsNotification>;
         get news(): $RealmsNews;
         get liveStats(): $RealmsServerPlayerLists;
+        get notifications(): $List<$RealmsNotification>;
     }
     export class $RealmsError$CustomError extends $Record implements $RealmsError {
+        static noPayload(arg0: number): $RealmsError$CustomError;
+        static unknownCompatibilityResponse(arg0: string): $RealmsError$CustomError;
+        static connectivityError(arg0: $RealmsHttpException): $RealmsError$CustomError;
         httpCode(): number;
         errorCode(): number;
         static retry(arg0: number): $RealmsError$CustomError;
         payload(): $Component;
         logMessage(): string;
         errorMessage(): $Component;
-        static noPayload(arg0: number): $RealmsError$CustomError;
-        static unknownCompatibilityResponse(arg0: string): $RealmsError$CustomError;
-        static connectivityError(arg0: $RealmsHttpException): $RealmsError$CustomError;
         static SERVICE_BUSY: $RealmsError$CustomError;
         static RETRY_MESSAGE: $Component;
         constructor(arg0: number, arg1: $Component_);
@@ -214,22 +214,22 @@ declare module "@package/com/mojang/realmsclient/client" {
         constructor();
     }
     export class $Request<T extends $Request<T>> {
-        static cookie(arg0: $HttpURLConnection, arg1: string, arg2: string): void;
-        cookie(arg0: string, arg1: string): void;
-        responseCode(): number;
-        static getHeader(arg0: $HttpURLConnection, arg1: string): string;
-        getHeader(arg0: string): string;
-        static post(arg0: string, arg1: string, arg2: number, arg3: number): $Request<never>;
-        static post(arg0: string, arg1: string): $Request<never>;
-        text(): string;
-        static get(arg0: string, arg1: number, arg2: number): $Request<never>;
-        static get(arg0: string): $Request<never>;
-        static put(arg0: string, arg1: string): $Request<never>;
-        static put(arg0: string, arg1: string, arg2: number, arg3: number): $Request<never>;
-        static delete(arg0: string): $Request<never>;
         addSnapshotHeader(arg0: boolean): void;
         static getRetryAfterHeader(arg0: $HttpURLConnection): number;
         getRetryAfterHeader(): number;
+        static cookie(arg0: $HttpURLConnection, arg1: string, arg2: string): void;
+        cookie(arg0: string, arg1: string): void;
+        static post(arg0: string, arg1: string): $Request<never>;
+        static post(arg0: string, arg1: string, arg2: number, arg3: number): $Request<never>;
+        getHeader(arg0: string): string;
+        static getHeader(arg0: $HttpURLConnection, arg1: string): string;
+        responseCode(): number;
+        static get(arg0: string): $Request<never>;
+        static get(arg0: string, arg1: number, arg2: number): $Request<never>;
+        static put(arg0: string, arg1: string, arg2: number, arg3: number): $Request<never>;
+        static put(arg0: string, arg1: string): $Request<never>;
+        static delete(arg0: string): $Request<never>;
+        text(): string;
         constructor(arg0: string, arg1: number, arg2: number);
     }
     export class $FileUpload {

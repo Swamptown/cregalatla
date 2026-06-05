@@ -6,7 +6,6 @@ import { $List, $List_ } from "@package/java/util";
 
 declare module "@package/java/lang/invoke" {
     export class $MethodHandles$Lookup {
-        lookupModes(): number;
         accessClass<T>(arg0: $Class<T>): $Class<T>;
         dropLookupMode(arg0: number): $MethodHandles$Lookup;
         defineHiddenClass(arg0: number[], arg1: boolean, ...arg2: $MethodHandles$Lookup$ClassOption_[]): $MethodHandles$Lookup;
@@ -29,6 +28,7 @@ declare module "@package/java/lang/invoke" {
          * @deprecated
          */
         hasPrivateAccess(): boolean;
+        hasFullPrivilegeAccess(): boolean;
         findClass(arg0: string): $Class<never>;
         defineClass(arg0: number[]): $Class<never>;
         in(arg0: $Class<never>): $MethodHandles$Lookup;
@@ -39,7 +39,7 @@ declare module "@package/java/lang/invoke" {
         findVirtual(arg0: $Class<never>, arg1: string, arg2: $MethodType): $MethodHandle;
         findStatic(arg0: $Class<never>, arg1: string, arg2: $MethodType): $MethodHandle;
         unreflect(arg0: $Method): $MethodHandle;
-        hasFullPrivilegeAccess(): boolean;
+        lookupModes(): number;
         static MODULE: number;
         static PACKAGE: number;
         static PUBLIC: number;
@@ -103,10 +103,10 @@ declare module "@package/java/lang/invoke" {
     }
     export class $VarHandle$VarHandleDesc extends $DynamicConstantDesc<$VarHandle> {
         static ofStaticField(arg0: $ClassDesc, arg1: string, arg2: $ClassDesc): $VarHandle$VarHandleDesc;
-        static ofArray(arg0: $ClassDesc): $VarHandle$VarHandleDesc;
         resolveConstantDesc(arg0: $MethodHandles$Lookup): $VarHandle;
         static ofField(arg0: $ClassDesc, arg1: string, arg2: $ClassDesc): $VarHandle$VarHandleDesc;
         varType(): $ClassDesc;
+        static ofArray(arg0: $ClassDesc): $VarHandle$VarHandleDesc;
     }
     export class $VarHandle$AccessMode extends $Enum<$VarHandle$AccessMode> {
         static values(): $VarHandle$AccessMode[];
@@ -150,8 +150,8 @@ declare module "@package/java/lang/invoke" {
      */
     export type $VarHandle$AccessMode_ = "get" | "set" | "get_volatile" | "set_volatile" | "get_acquire" | "set_release" | "get_opaque" | "set_opaque" | "compare_and_set" | "compare_and_exchange" | "compare_and_exchange_acquire" | "compare_and_exchange_release" | "weak_compare_and_set_plain" | "weak_compare_and_set" | "weak_compare_and_set_acquire" | "weak_compare_and_set_release" | "get_and_set" | "get_and_set_acquire" | "get_and_set_release" | "get_and_add" | "get_and_add_acquire" | "get_and_add_release" | "get_and_bitwise_or" | "get_and_bitwise_or_release" | "get_and_bitwise_or_acquire" | "get_and_bitwise_and" | "get_and_bitwise_and_release" | "get_and_bitwise_and_acquire" | "get_and_bitwise_xor" | "get_and_bitwise_xor_release" | "get_and_bitwise_xor_acquire";
     export class $MethodHandleInfo {
-        static toString(arg0: number, arg1: $Class<never>, arg2: string, arg3: $MethodType): string;
         static referenceKindToString(arg0: number): string;
+        static toString(arg0: number, arg1: $Class<never>, arg2: string, arg3: $MethodType): string;
         static REF_getStatic: number;
         static REF_getField: number;
         static REF_putStatic: number;
@@ -163,13 +163,13 @@ declare module "@package/java/lang/invoke" {
         static REF_invokeInterface: number;
     }
     export interface $MethodHandleInfo {
-        reflectAs<T extends $Member>(arg0: $Class<T>, arg1: $MethodHandles$Lookup): T;
         getName(): string;
         getModifiers(): number;
         getDeclaringClass(): $Class<never>;
         isVarArgs(): boolean;
         getReferenceKind(): number;
         getMethodType(): $MethodType;
+        reflectAs<T extends $Member>(arg0: $Class<T>, arg1: $MethodHandles$Lookup): T;
         get name(): string;
         get modifiers(): number;
         get declaringClass(): $Class<never>;

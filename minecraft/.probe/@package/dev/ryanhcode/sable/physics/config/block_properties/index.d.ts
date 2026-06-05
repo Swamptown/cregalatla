@@ -40,7 +40,7 @@ declare module "@package/dev/ryanhcode/sable/physics/config/block_properties" {
     /**
      * Values that may be interpreted as {@link $PhysicsBlockPropertyTypes$PhysicsBlockPropertyType}.
      */
-    export type $PhysicsBlockPropertyTypes$PhysicsBlockPropertyType_<T> = RegistryTypes.SablePhysicsBlockProperties | { id?: number, codec?: $Codec<any>, defaultValue?: any,  } | [id?: number, codec?: $Codec<any>, defaultValue?: any, ];
+    export type $PhysicsBlockPropertyTypes$PhysicsBlockPropertyType_<T> = RegistryTypes.SablePhysicsBlockProperties | { defaultValue?: any, codec?: $Codec<any>, id?: number,  } | [defaultValue?: any, codec?: $Codec<any>, id?: number, ];
     export class $PhysicsBlockPropertiesDefinition extends $Record {
         selector(): $ExtraCodecs$TagOrElementLocation;
         overrides(): ($Map<$BlockStateConditionSet, $Map<$ResourceLocation, $Object>>) | undefined;
@@ -54,6 +54,6 @@ declare module "@package/dev/ryanhcode/sable/physics/config/block_properties" {
     /**
      * Values that may be interpreted as {@link $PhysicsBlockPropertiesDefinition}.
      */
-    export type $PhysicsBlockPropertiesDefinition_ = { overrides?: ($Map_<$BlockStateConditionSet_, $Map_<$ResourceLocation_, $Object>>) | undefined, selector?: $ExtraCodecs$TagOrElementLocation_, priority?: number, properties?: $Map_<$ResourceLocation_, $Object>,  } | [overrides?: ($Map_<$BlockStateConditionSet_, $Map_<$ResourceLocation_, $Object>>) | undefined, selector?: $ExtraCodecs$TagOrElementLocation_, priority?: number, properties?: $Map_<$ResourceLocation_, $Object>, ];
+    export type $PhysicsBlockPropertiesDefinition_ = { priority?: number, selector?: $ExtraCodecs$TagOrElementLocation_, overrides?: ($Map_<$BlockStateConditionSet_, $Map_<$ResourceLocation_, $Object>>) | undefined, properties?: $Map_<$ResourceLocation_, $Object>,  } | [priority?: number, selector?: $ExtraCodecs$TagOrElementLocation_, overrides?: ($Map_<$BlockStateConditionSet_, $Map_<$ResourceLocation_, $Object>>) | undefined, properties?: $Map_<$ResourceLocation_, $Object>, ];
     export interface $PhysicsBlockPropertyTypes$PhysicsBlockPropertyType<T> extends RegistryMarked<RegistryTypes.SablePhysicsBlockPropertiesTag, RegistryTypes.SablePhysicsBlockProperties> {}
 }

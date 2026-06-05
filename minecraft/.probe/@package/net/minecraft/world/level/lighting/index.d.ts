@@ -1,5 +1,6 @@
 import { $ChunkPos, $LevelHeightAccessor, $BlockGetter, $LightLayer_ } from "@package/net/minecraft/world/level";
 import { $LongPredicate_ } from "@package/java/util/function";
+import { $LightingProviderExt, $ChunkLightProviderExt } from "@package/de/johni0702/minecraft/bobby/ext";
 import { $BlockPos_, $Direction_, $SectionPos, $Direction } from "@package/net/minecraft/core";
 import { $Long2ObjectOpenHashMap, $LongLinkedOpenHashSet, $LongSet, $Long2ByteMap, $Long2ObjectMap, $Long2LongLinkedOpenHashMap } from "@package/it/unimi/dsi/fastutil/longs";
 import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
@@ -38,45 +39,47 @@ declare module "@package/net/minecraft/world/level/lighting" {
         get queueSize(): number;
     }
     export class $LightEngine$QueueEntry {
-        static increaseSkySourceInDirections(arg0: boolean, arg1: boolean, arg2: boolean, arg3: boolean, arg4: boolean): number;
+        static getFromLevel(arg0: number): number;
+        static isIncreaseFromEmission(arg0: number): boolean;
+        static decreaseAllDirections(arg0: number): number;
         static increaseLightFromEmission(arg0: number, arg1: boolean): number;
         static shouldPropagateInDirection(arg0: number, arg1: $Direction_): boolean;
         static isFromEmptyShape(arg0: number): boolean;
         static increaseSkipOneDirection(arg0: number, arg1: boolean, arg2: $Direction_): number;
         static decreaseSkipOneDirection(arg0: number, arg1: $Direction_): number;
         static increaseOnlyOneDirection(arg0: number, arg1: boolean, arg2: $Direction_): number;
-        static getFromLevel(arg0: number): number;
-        static isIncreaseFromEmission(arg0: number): boolean;
-        static decreaseAllDirections(arg0: number): number;
+        static increaseSkySourceInDirections(arg0: boolean, arg1: boolean, arg2: boolean, arg3: boolean, arg4: boolean): number;
         constructor();
     }
     export class $DataLayerStorageMap<M extends $DataLayerStorageMap<M>> {
+        removeLayer(arg0: number): $DataLayer;
+        disableCache(): void;
         setLayer(arg0: number, arg1: $DataLayer): void;
         copyDataLayer(arg0: number): $DataLayer;
         hasLayer(arg0: number): boolean;
-        removeLayer(arg0: number): $DataLayer;
-        disableCache(): void;
         clearCache(): void;
         getLayer(arg0: number): $DataLayer;
         copy(): M;
         map: $Long2ObjectOpenHashMap<$DataLayer>;
         constructor(arg0: $Long2ObjectOpenHashMap<$DataLayer>);
     }
-    export class $LevelLightEngine implements $LightEventListener {
-        handler$zzn000$sodium_extra$checkBlock(arg0: $BlockPos_, arg1: $CallbackInfo): void;
-        handler$zzn000$sodium_extra$doLightUpdates(arg0: $CallbackInfoReturnable<any>): void;
-        getDebugSectionType(arg0: $LightLayer_, arg1: $SectionPos): $LayerLightSectionStorage$SectionType;
+    export class $LevelLightEngine implements $LightEventListener, $LightingProviderExt {
+        hasLightWork(): boolean;
         propagateLightSources(arg0: $ChunkPos): void;
         retainData(arg0: $ChunkPos, arg1: boolean): void;
-        hasLightWork(): boolean;
+        handler$zcd000$sodium_extra$checkBlock(arg0: $BlockPos_, arg1: $CallbackInfo): void;
+        handler$zcd000$sodium_extra$doLightUpdates(arg0: $CallbackInfoReturnable<any>): void;
+        getDebugSectionType(arg0: $LightLayer_, arg1: $SectionPos): $LayerLightSectionStorage$SectionType;
+        bobby_enabledColumn(arg0: number): void;
+        bobby_disableColumn(arg0: number): void;
         updateSectionStatus(arg0: $SectionPos, arg1: boolean): void;
         checkBlock(arg0: $BlockPos_): void;
         getDebugData(arg0: $LightLayer_, arg1: $SectionPos): string;
-        setLightEnabled(arg0: $ChunkPos, arg1: boolean): void;
-        lightOnInSection(arg0: $SectionPos): boolean;
-        runLightUpdates(): number;
         getLayerListener(arg0: $LightLayer_): $LayerLightEventListener;
         getRawBrightness(arg0: $BlockPos_, arg1: number): number;
+        setLightEnabled(arg0: $ChunkPos, arg1: boolean): void;
+        runLightUpdates(): number;
+        lightOnInSection(arg0: $SectionPos): boolean;
         getLightSectionCount(): number;
         getMinLightSection(): number;
         queueSectionData(arg0: $LightLayer_, arg1: $SectionPos, arg2: $DataLayer): void;
@@ -92,7 +95,6 @@ declare module "@package/net/minecraft/world/level/lighting" {
         get maxLightSection(): number;
     }
     export class $SpatialLongSet$InternalMap extends $Long2LongLinkedOpenHashMap {
-        lastKey(): number;
         remove(arg0: number): number;
         get(arg0: number): number;
     }
@@ -125,7 +127,11 @@ declare module "@package/net/minecraft/world/level/lighting" {
     }
     export class $LayerLightSectionStorage$SectionState {
     }
-    export class $LightEngine<M extends $DataLayerStorageMap<M>, S extends $LayerLightSectionStorage<M>> implements $LayerLightEventListener, $LightEngineAccessor<any, any> {
+    export class $LightEngine<M extends $DataLayerStorageMap<M>, S extends $LayerLightSectionStorage<M>> implements $LayerLightEventListener, $LightEngineAccessor<any, any>, $ChunkLightProviderExt {
+        hasLightWork(): boolean;
+        getDataLayerData(arg0: $SectionPos): $DataLayer;
+        getOpacity(arg0: $BlockState_, arg1: $BlockPos_): number;
+        retainData(arg0: $ChunkPos, arg1: boolean): void;
         getDebugSectionType(arg0: number): $LayerLightSectionStorage$SectionType;
         static isEmptyShape(arg0: $BlockState_): boolean;
         shapeOccludes(arg0: number, arg1: $BlockState_, arg2: number, arg3: $BlockState_, arg4: $Direction_): boolean;
@@ -134,22 +140,21 @@ declare module "@package/net/minecraft/world/level/lighting" {
         propagateDecrease(arg0: number, arg1: number): void;
         enqueueDecrease(arg0: number, arg1: number): void;
         enqueueIncrease(arg0: number, arg1: number): void;
-        retainData(arg0: $ChunkPos, arg1: boolean): void;
-        getDataLayerData(arg0: $SectionPos): $DataLayer;
-        hasLightWork(): boolean;
-        getOpacity(arg0: $BlockState_, arg1: $BlockPos_): number;
+        bobby_addSectionData(arg0: number, arg1: $DataLayer): void;
+        bobby_removeSectionData(arg0: number): void;
+        bobby_setTainted(arg0: number, arg1: number): void;
         updateSectionStatus(arg0: $SectionPos, arg1: boolean): void;
         static hasDifferentLightProperties(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockState_): boolean;
         checkBlock(arg0: $BlockPos_): void;
         getDebugData(arg0: number): string;
         static getLightBlockInto(arg0: $BlockGetter, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BlockPos_, arg5: $Direction_, arg6: number): number;
         getState(arg0: $BlockPos_): $BlockState;
-        setLightEnabled(arg0: $ChunkPos, arg1: boolean): void;
-        runLightUpdates(): number;
-        getChunk(arg0: number, arg1: number): $LightChunk;
-        getOcclusionShape(arg0: $BlockState_, arg1: number, arg2: $Direction_): $VoxelShape;
-        static getOcclusionShape(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_): $VoxelShape;
         getLightValue(arg0: $BlockPos_): number;
+        static getOcclusionShape(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_): $VoxelShape;
+        getOcclusionShape(arg0: $BlockState_, arg1: number, arg2: $Direction_): $VoxelShape;
+        setLightEnabled(arg0: $ChunkPos, arg1: boolean): void;
+        getChunk(arg0: number, arg1: number): $LightChunk;
+        runLightUpdates(): number;
         queueSectionData(arg0: number, arg1: $DataLayer): void;
         updateSectionStatus(arg0: $BlockPos_, arg1: boolean): void;
         flywheel$storage(): $Object;
@@ -170,11 +175,11 @@ declare module "@package/net/minecraft/world/level/lighting" {
         get empty(): boolean;
     }
     export class $SkyLightSectionStorage extends $LayerLightSectionStorage<$SkyLightSectionStorage$SkyDataLayerStorageMap> implements $SkyLightSectionStorageExtension {
-        getTopSectionY(arg0: number): number;
+        flywheel$skyDataLayer(section: number): $DataLayer;
         getBottomSectionY(): number;
         hasLightDataAtOrBelow(arg0: number): boolean;
         isAboveData(arg0: number): boolean;
-        flywheel$skyDataLayer(section: number): $DataLayer;
+        getTopSectionY(arg0: number): number;
         getLightValue(arg0: number, arg1: boolean): number;
         changedSections: $LongSet;
         queuedSections: $Long2ObjectMap<$DataLayer>;
@@ -187,16 +192,16 @@ declare module "@package/net/minecraft/world/level/lighting" {
         get bottomSectionY(): number;
     }
     export class $LayerLightEventListener$DummyLightLayerEventListener extends $Enum<$LayerLightEventListener$DummyLightLayerEventListener> implements $LayerLightEventListener {
-        propagateLightSources(arg0: $ChunkPos): void;
-        getDataLayerData(arg0: $SectionPos): $DataLayer;
         hasLightWork(): boolean;
+        getDataLayerData(arg0: $SectionPos): $DataLayer;
+        propagateLightSources(arg0: $ChunkPos): void;
         updateSectionStatus(arg0: $SectionPos, arg1: boolean): void;
         checkBlock(arg0: $BlockPos_): void;
         static values(): $LayerLightEventListener$DummyLightLayerEventListener[];
         static valueOf(arg0: string): $LayerLightEventListener$DummyLightLayerEventListener;
+        getLightValue(arg0: $BlockPos_): number;
         setLightEnabled(arg0: $ChunkPos, arg1: boolean): void;
         runLightUpdates(): number;
-        getLightValue(arg0: $BlockPos_): number;
         updateSectionStatus(arg0: $BlockPos_, arg1: boolean): void;
         static INSTANCE: $LayerLightEventListener$DummyLightLayerEventListener;
     }
@@ -207,8 +212,8 @@ declare module "@package/net/minecraft/world/level/lighting" {
     export class $LightEventListener {
     }
     export interface $LightEventListener {
-        propagateLightSources(arg0: $ChunkPos): void;
         hasLightWork(): boolean;
+        propagateLightSources(arg0: $ChunkPos): void;
         updateSectionStatus(arg0: $BlockPos_, arg1: boolean): void;
         updateSectionStatus(arg0: $SectionPos, arg1: boolean): void;
         checkBlock(arg0: $BlockPos_): void;
@@ -216,27 +221,27 @@ declare module "@package/net/minecraft/world/level/lighting" {
         runLightUpdates(): number;
     }
     export class $LayerLightSectionStorage<M extends $DataLayerStorageMap<M>> implements $LayerLightSectionStorageAccessor {
+        getDataLayerData(arg0: number): $DataLayer;
+        retainData(arg0: number, arg1: boolean): void;
         getDebugSectionType(arg0: number): $LayerLightSectionStorage$SectionType;
-        getDataLayerToWrite(arg0: number): $DataLayer;
-        getDataLayer(arg0: M, arg1: number): $DataLayer;
-        getDataLayer(arg0: number, arg1: boolean): $DataLayer;
-        markSectionAndNeighborsAsAffected(arg0: number): void;
-        createDataLayer(arg0: number): $DataLayer;
-        onNodeRemoved(arg0: number): void;
-        onNodeAdded(arg0: number): void;
-        storingLightForSection(arg0: number): boolean;
         markNewInconsistencies(arg0: $LightEngine<M, never>): void;
         swapSectionMap(): void;
         getStoredLevel(arg0: number): number;
         setStoredLevel(arg0: number, arg1: number): void;
         hasInconsistencies(): boolean;
+        getDataLayer(arg0: number, arg1: boolean): $DataLayer;
+        getDataLayer(arg0: M, arg1: number): $DataLayer;
+        markSectionAndNeighborsAsAffected(arg0: number): void;
+        createDataLayer(arg0: number): $DataLayer;
+        onNodeRemoved(arg0: number): void;
+        onNodeAdded(arg0: number): void;
         putSectionState(arg0: number, arg1: number): void;
-        retainData(arg0: number, arg1: boolean): void;
-        getDataLayerData(arg0: number): $DataLayer;
+        storingLightForSection(arg0: number): boolean;
+        getDataLayerToWrite(arg0: number): $DataLayer;
         updateSectionStatus(arg0: number, arg1: boolean): void;
+        getLightValue(arg0: number): number;
         setLightEnabled(arg0: number, arg1: boolean): void;
         lightOnInSection(arg0: number): boolean;
-        getLightValue(arg0: number): number;
         queueSectionData(arg0: number, arg1: $DataLayer): void;
         flywheel$callGetDataLayer(arg0: number, arg1: boolean): $DataLayer;
         changedSections: $LongSet;
@@ -249,8 +254,8 @@ declare module "@package/net/minecraft/world/level/lighting" {
         constructor(arg0: $LightLayer_, arg1: $LightChunkGetter, arg2: M);
     }
     export class $ChunkSkyLightSources {
-        getHighestLowestSourceY(): number;
         getLowestSourceY(arg0: number, arg1: number): number;
+        getHighestLowestSourceY(): number;
         update(arg0: $BlockGetter, arg1: number, arg2: number, arg3: number): boolean;
         fillFrom(arg0: $ChunkAccess): void;
         static NEGATIVE_INFINITY: number;

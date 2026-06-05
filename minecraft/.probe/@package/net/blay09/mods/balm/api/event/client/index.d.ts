@@ -68,20 +68,20 @@ declare module "@package/net/blay09/mods/balm/api/event/client" {
         get hand(): $InteractionHand;
     }
     export class $FovUpdateEvent extends $BalmEvent {
-        setFov(arg0: number): void;
         getEntity(): $LivingEntity;
+        setFov(arg0: number): void;
         getFov(): number;
         constructor(arg0: $LivingEntity);
         get entity(): $LivingEntity;
     }
     export class $GuiDrawEvent extends $BalmEvent {
+        getGuiGraphics(): $GuiGraphics;
         getElement(): $GuiDrawEvent$Element;
         getWindow(): $Window;
-        getGuiGraphics(): $GuiGraphics;
         constructor(arg0: $Window, arg1: $GuiGraphics, arg2: $GuiDrawEvent$Element_);
+        get guiGraphics(): $GuiGraphics;
         get element(): $GuiDrawEvent$Element;
         get window(): $Window;
-        get guiGraphics(): $GuiGraphics;
     }
     export class $OpenScreenEvent extends $BalmEvent {
         getScreen(): $Screen;
@@ -92,13 +92,13 @@ declare module "@package/net/blay09/mods/balm/api/event/client" {
     }
     export class $BlockHighlightDrawEvent extends $BalmEvent {
         getMultiBufferSource(): $MultiBufferSource;
-        getCamera(): $Camera;
         getHitResult(): $BlockHitResult;
+        getCamera(): $Camera;
         getPoseStack(): $PoseStack;
         constructor(arg0: $BlockHitResult, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: $Camera);
         get multiBufferSource(): $MultiBufferSource;
-        get camera(): $Camera;
         get hitResult(): $BlockHitResult;
+        get camera(): $Camera;
         get poseStack(): $PoseStack;
     }
     export class $GuiDrawEvent$Post extends $GuiDrawEvent {

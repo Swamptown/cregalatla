@@ -56,7 +56,7 @@ declare module "@package/net/neoforged/neoforge/capabilities" {
     /**
      * Values that may be interpreted as {@link $CapabilityRegistry$StoredCap}.
      */
-    export type $CapabilityRegistry$StoredCap_<C> = { contextClass?: $Class<never>, typeClass?: $Class<never>, cap?: any,  } | [contextClass?: $Class<never>, typeClass?: $Class<never>, cap?: any, ];
+    export type $CapabilityRegistry$StoredCap_<C> = { typeClass?: $Class<never>, contextClass?: $Class<never>, cap?: any,  } | [typeClass?: $Class<never>, contextClass?: $Class<never>, cap?: any, ];
     export class $Capabilities {
     }
     export class $ICapabilityProvider<O, C, T> {
@@ -74,6 +74,8 @@ declare module "@package/net/neoforged/neoforge/capabilities" {
         static BLOCK: $BlockCapability<$IFluidHandler, $Direction>;
     }
     export class $RegisterCapabilitiesEvent extends $Event implements $IModBusEvent, $ITrackingCapEvent {
+        registerBlockEntity<T, C, BE extends $BlockEntity>(arg0: $BlockCapability<T, C>, arg1: $BlockEntityType_<BE>, arg2: $ICapabilityProvider_<BE, C, T>): void;
+        registerEntity<T, C, E extends $Entity>(arg0: $EntityCapability<T, C>, arg1: $EntityType_<E>, arg2: $ICapabilityProvider_<E, C, T>): void;
         setProxyable(arg0: $BlockCapability<never, never>): void;
         isBlockRegistered(arg0: $BlockCapability<never, never>, arg1: $Block_): boolean;
         setNonProxyable(arg0: $BlockCapability<never, never>): void;
@@ -82,8 +84,6 @@ declare module "@package/net/neoforged/neoforge/capabilities" {
         mfix$getTrackedCaps(): $Set<any>;
         registerBlock<T, C>(arg0: $BlockCapability<T, C>, arg1: $IBlockCapabilityProvider_<T, C>, ...arg2: $Block_[]): void;
         registerItem<T, C>(arg0: $ItemCapability<T, C>, arg1: $ICapabilityProvider_<$ItemStack, C, T>, ...arg2: $ItemLike_[]): void;
-        registerBlockEntity<T, C, BE extends $BlockEntity>(arg0: $BlockCapability<T, C>, arg1: $BlockEntityType_<BE>, arg2: $ICapabilityProvider_<BE, C, T>): void;
-        registerEntity<T, C, E extends $Entity>(arg0: $EntityCapability<T, C>, arg1: $EntityType_<E>, arg2: $ICapabilityProvider_<E, C, T>): void;
         set proxyable(value: $BlockCapability<never, never>);
         set nonProxyable(value: $BlockCapability<never, never>);
     }
@@ -142,22 +142,22 @@ declare module "@package/net/neoforged/neoforge/capabilities" {
      */
     export type $ICapabilityInvalidationListener_ = (() => boolean);
     export class $BlockCapability<T, C> extends $BaseCapability<T, C> {
+        static createSided<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $BlockCapability<T, $Direction>;
         static createVoid<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $BlockCapability<T, void>;
-        isProxyable(): boolean;
         static getAllProxyable(): $List<$BlockCapability<never, never>>;
+        isProxyable(): boolean;
         static getAll(): $List<$BlockCapability<never, never>>;
         static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $BlockCapability<T, C>;
-        static createSided<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $BlockCapability<T, $Direction>;
         getCapability(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): T;
-        get proxyable(): boolean;
         static get allProxyable(): $List<$BlockCapability<never, never>>;
+        get proxyable(): boolean;
         static get all(): $List<$BlockCapability<never, never>>;
     }
     export class $EntityCapability<T, C> extends $BaseCapability<T, C> {
+        static createSided<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $EntityCapability<T, $Direction>;
         static createVoid<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $EntityCapability<T, void>;
         static getAll(): $List<$EntityCapability<never, never>>;
         static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $EntityCapability<T, C>;
-        static createSided<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $EntityCapability<T, $Direction>;
         getCapability(arg0: $Entity, arg1: C): T;
         static get all(): $List<$EntityCapability<never, never>>;
     }

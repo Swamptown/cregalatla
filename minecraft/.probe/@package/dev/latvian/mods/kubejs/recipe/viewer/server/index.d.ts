@@ -62,7 +62,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer/server" {
     /**
      * Values that may be interpreted as {@link $FluidData$DataComponentSubtypes}.
      */
-    export type $FluidData$DataComponentSubtypes_ = { filter?: $FluidIngredient_, components?: $List_<$DataComponentType_<never>>,  } | [filter?: $FluidIngredient_, components?: $List_<$DataComponentType_<never>>, ];
+    export type $FluidData$DataComponentSubtypes_ = { components?: $List_<$DataComponentType_<never>>, filter?: $FluidIngredient_,  } | [components?: $List_<$DataComponentType_<never>>, filter?: $FluidIngredient_, ];
     export class $ServerGroupFluidEntriesKubeEvent implements $GroupEntriesKubeEvent {
         group(filter: $Object, groupId: $ResourceLocation_, description: $Component_): void;
         /**
@@ -119,7 +119,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer/server" {
     /**
      * Values that may be interpreted as {@link $ItemData}.
      */
-    export type $ItemData_ = { completelyRemovedEntries?: $List_<$Ingredient_>, groupedEntries?: $List_<$ItemData$Group_>, removedEntries?: $List_<$Ingredient_>, dataComponentSubtypes?: $List_<$ItemData$DataComponentSubtypes_>, addedEntries?: $List_<$ItemStack_>, info?: $List_<$ItemData$Info_>,  } | [completelyRemovedEntries?: $List_<$Ingredient_>, groupedEntries?: $List_<$ItemData$Group_>, removedEntries?: $List_<$Ingredient_>, dataComponentSubtypes?: $List_<$ItemData$DataComponentSubtypes_>, addedEntries?: $List_<$ItemStack_>, info?: $List_<$ItemData$Info_>, ];
+    export type $ItemData_ = { addedEntries?: $List_<$ItemStack_>, dataComponentSubtypes?: $List_<$ItemData$DataComponentSubtypes_>, removedEntries?: $List_<$Ingredient_>, groupedEntries?: $List_<$ItemData$Group_>, completelyRemovedEntries?: $List_<$Ingredient_>, info?: $List_<$ItemData$Info_>,  } | [addedEntries?: $List_<$ItemStack_>, dataComponentSubtypes?: $List_<$ItemData$DataComponentSubtypes_>, removedEntries?: $List_<$Ingredient_>, groupedEntries?: $List_<$ItemData$Group_>, completelyRemovedEntries?: $List_<$Ingredient_>, info?: $List_<$ItemData$Info_>, ];
     export class $ServerRemoveRecipesKubeEvent implements $RemoveRecipesKubeEvent {
         removeFromCategory(category: $ResourceLocation_, recipesToRemove: $ResourceLocation_[]): void;
         remove(recipesToRemove: $ResourceLocation_[]): void;
@@ -186,13 +186,13 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer/server" {
     /**
      * Values that may be interpreted as {@link $ItemData$Info}.
      */
-    export type $ItemData$Info_ = { filter?: $Ingredient_, info?: $List_<$Component_>,  } | [filter?: $Ingredient_, info?: $List_<$Component_>, ];
+    export type $ItemData$Info_ = { info?: $List_<$Component_>, filter?: $Ingredient_,  } | [info?: $List_<$Component_>, filter?: $Ingredient_, ];
     export class $RecipeViewerData extends $Record {
         removedGlobalRecipes(): $List<$ResourceLocation>;
         categoryData(): $List<$CategoryData>;
-        fluidData(): $FluidData;
         removedCategories(): $List<$ResourceLocation>;
         itemData(): $ItemData;
+        fluidData(): $FluidData;
         isEmpty(): boolean;
         static collect(): $RecipeViewerData;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $RecipeViewerData>;
@@ -202,7 +202,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer/server" {
     /**
      * Values that may be interpreted as {@link $RecipeViewerData}.
      */
-    export type $RecipeViewerData_ = { removedCategories?: $List_<$ResourceLocation_>, removedGlobalRecipes?: $List_<$ResourceLocation_>, fluidData?: $FluidData_, itemData?: $ItemData_, categoryData?: $List_<$CategoryData_>,  } | [removedCategories?: $List_<$ResourceLocation_>, removedGlobalRecipes?: $List_<$ResourceLocation_>, fluidData?: $FluidData_, itemData?: $ItemData_, categoryData?: $List_<$CategoryData_>, ];
+    export type $RecipeViewerData_ = { itemData?: $ItemData_, fluidData?: $FluidData_, removedGlobalRecipes?: $List_<$ResourceLocation_>, removedCategories?: $List_<$ResourceLocation_>, categoryData?: $List_<$CategoryData_>,  } | [itemData?: $ItemData_, fluidData?: $FluidData_, removedGlobalRecipes?: $List_<$ResourceLocation_>, removedCategories?: $List_<$ResourceLocation_>, categoryData?: $List_<$CategoryData_>, ];
     export class $FluidData$Info extends $Record {
         filter(): $FluidIngredient;
         info(): $List<$Component>;
@@ -212,7 +212,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer/server" {
     /**
      * Values that may be interpreted as {@link $FluidData$Info}.
      */
-    export type $FluidData$Info_ = { filter?: $FluidIngredient_, info?: $List_<$Component_>,  } | [filter?: $FluidIngredient_, info?: $List_<$Component_>, ];
+    export type $FluidData$Info_ = { info?: $List_<$Component_>, filter?: $FluidIngredient_,  } | [info?: $List_<$Component_>, filter?: $FluidIngredient_, ];
     export class $FluidData extends $Record {
         groupedEntries(): $List<$FluidData$Group>;
         removedEntries(): $List<$FluidIngredient>;
@@ -229,7 +229,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer/server" {
     /**
      * Values that may be interpreted as {@link $FluidData}.
      */
-    export type $FluidData_ = { completelyRemovedEntries?: $List_<$FluidIngredient_>, groupedEntries?: $List_<$FluidData$Group_>, removedEntries?: $List_<$FluidIngredient_>, dataComponentSubtypes?: $List_<$FluidData$DataComponentSubtypes_>, addedEntries?: $List_<$FluidStack_>, info?: $List_<$FluidData$Info_>,  } | [completelyRemovedEntries?: $List_<$FluidIngredient_>, groupedEntries?: $List_<$FluidData$Group_>, removedEntries?: $List_<$FluidIngredient_>, dataComponentSubtypes?: $List_<$FluidData$DataComponentSubtypes_>, addedEntries?: $List_<$FluidStack_>, info?: $List_<$FluidData$Info_>, ];
+    export type $FluidData_ = { addedEntries?: $List_<$FluidStack_>, dataComponentSubtypes?: $List_<$FluidData$DataComponentSubtypes_>, removedEntries?: $List_<$FluidIngredient_>, groupedEntries?: $List_<$FluidData$Group_>, completelyRemovedEntries?: $List_<$FluidIngredient_>, info?: $List_<$FluidData$Info_>,  } | [addedEntries?: $List_<$FluidStack_>, dataComponentSubtypes?: $List_<$FluidData$DataComponentSubtypes_>, removedEntries?: $List_<$FluidIngredient_>, groupedEntries?: $List_<$FluidData$Group_>, completelyRemovedEntries?: $List_<$FluidIngredient_>, info?: $List_<$FluidData$Info_>, ];
     export class $ItemData$DataComponentSubtypes extends $Record {
         filter(): $Ingredient;
         components(): $List<$DataComponentType<never>>;
@@ -239,7 +239,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer/server" {
     /**
      * Values that may be interpreted as {@link $ItemData$DataComponentSubtypes}.
      */
-    export type $ItemData$DataComponentSubtypes_ = { filter?: $Ingredient_, components?: $List_<$DataComponentType_<never>>,  } | [filter?: $Ingredient_, components?: $List_<$DataComponentType_<never>>, ];
+    export type $ItemData$DataComponentSubtypes_ = { components?: $List_<$DataComponentType_<never>>, filter?: $Ingredient_,  } | [components?: $List_<$DataComponentType_<never>>, filter?: $Ingredient_, ];
     export class $ServerRemoveFluidEntriesKubeEvent implements $RemoveEntriesKubeEvent {
         remove(filter: $Object): void;
         /**
@@ -572,7 +572,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer/server" {
     /**
      * Values that may be interpreted as {@link $FluidData$Group}.
      */
-    export type $FluidData$Group_ = { groupId?: $ResourceLocation_, filter?: $FluidIngredient_, description?: $Component_,  } | [groupId?: $ResourceLocation_, filter?: $FluidIngredient_, description?: $Component_, ];
+    export type $FluidData$Group_ = { filter?: $FluidIngredient_, groupId?: $ResourceLocation_, description?: $Component_,  } | [filter?: $FluidIngredient_, groupId?: $ResourceLocation_, description?: $Component_, ];
     export class $ServerRegisterItemSubtypesKubeEvent implements $RegisterSubtypesKubeEvent {
         useComponents(filter: $Object, components: $List_<$DataComponentType_<never>>): void;
         register(filter: $Object, interpreter: $SubtypeInterpreter_): void;
@@ -625,5 +625,5 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer/server" {
     /**
      * Values that may be interpreted as {@link $ItemData$Group}.
      */
-    export type $ItemData$Group_ = { groupId?: $ResourceLocation_, filter?: $Ingredient_, description?: $Component_,  } | [groupId?: $ResourceLocation_, filter?: $Ingredient_, description?: $Component_, ];
+    export type $ItemData$Group_ = { filter?: $Ingredient_, groupId?: $ResourceLocation_, description?: $Component_,  } | [filter?: $Ingredient_, groupId?: $ResourceLocation_, description?: $Component_, ];
 }

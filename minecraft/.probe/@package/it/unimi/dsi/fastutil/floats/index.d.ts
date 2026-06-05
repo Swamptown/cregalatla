@@ -16,27 +16,27 @@ declare module "@package/it/unimi/dsi/fastutil/floats" {
     export class $FloatPredicate {
     }
     export interface $FloatPredicate extends $Predicate<number>, $DoublePredicate {
-        negate(): $FloatPredicate;
-        /**
-         * @deprecated
-         */
-        and(arg0: $Predicate_<number>): $Predicate<number>;
-        and(arg0: $FloatPredicate_): $FloatPredicate;
-        /**
-         * @deprecated
-         */
-        test(arg0: number): boolean;
-        /**
-         * @deprecated
-         */
-        test(arg0: number): boolean;
-        test(arg0: number): boolean;
+        or(arg0: $FloatPredicate_): $FloatPredicate;
+        or(arg0: $DoublePredicate_): $FloatPredicate;
         /**
          * @deprecated
          */
         or(arg0: $Predicate_<number>): $Predicate<number>;
-        or(arg0: $FloatPredicate_): $FloatPredicate;
-        or(arg0: $DoublePredicate_): $FloatPredicate;
+        and(arg0: $FloatPredicate_): $FloatPredicate;
+        /**
+         * @deprecated
+         */
+        and(arg0: $Predicate_<number>): $Predicate<number>;
+        /**
+         * @deprecated
+         */
+        test(arg0: number): boolean;
+        test(arg0: number): boolean;
+        /**
+         * @deprecated
+         */
+        test(arg0: number): boolean;
+        negate(): $Predicate<number>;
     }
     /**
      * Values that may be interpreted as {@link $FloatPredicate}.
@@ -303,8 +303,8 @@ declare module "@package/it/unimi/dsi/fastutil/floats" {
         static lexComparator<V>(): $Comparator<$FloatObjectPair<V>>;
     }
     export interface $FloatObjectPair<V> extends $Pair<number, V> {
-        firstFloat(): number;
         keyFloat(): number;
+        firstFloat(): number;
         leftFloat(): number;
         first(arg0: number): $FloatObjectPair<V>;
         /**
@@ -616,11 +616,11 @@ declare module "@package/it/unimi/dsi/fastutil/floats" {
          * @deprecated
          */
         apply(arg0: number): V;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
@@ -630,8 +630,8 @@ declare module "@package/it/unimi/dsi/fastutil/floats" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Object2ByteFunction_<V>): $Float2ByteFunction;
         composeByte(arg0: $Byte2FloatFunction_): $Byte2ObjectFunction<V>;
         andThenShort(arg0: $Object2ShortFunction_<V>): $Float2ShortFunction;
@@ -792,11 +792,11 @@ declare module "@package/it/unimi/dsi/fastutil/floats" {
          * @deprecated
          */
         apply(arg0: number): V;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
@@ -806,8 +806,8 @@ declare module "@package/it/unimi/dsi/fastutil/floats" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Reference2ByteFunction_<V>): $Float2ByteFunction;
         composeByte(arg0: $Byte2FloatFunction_): $Byte2ReferenceFunction<V>;
         andThenShort(arg0: $Reference2ShortFunction_<V>): $Float2ShortFunction;

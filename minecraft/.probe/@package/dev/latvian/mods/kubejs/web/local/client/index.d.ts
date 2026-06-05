@@ -35,30 +35,30 @@ declare module "@package/dev/latvian/mods/kubejs/web/local/client" {
     /**
      * Values that may be interpreted as {@link $ImageGenerator$RenderImage}.
      */
-    export type $ImageGenerator$RenderImage_ = { size?: number, mc?: $Minecraft, graphics?: $GuiGraphics,  } | [size?: number, mc?: $Minecraft, graphics?: $GuiGraphics, ];
+    export type $ImageGenerator$RenderImage_ = { graphics?: $GuiGraphics, mc?: $Minecraft, size?: number,  } | [graphics?: $GuiGraphics, mc?: $Minecraft, size?: number, ];
     export class $FakeClientWorld implements $BlockAndTintGetter {
         getHeight(): number;
-        getFluidState(pos: $BlockPos_): $FluidState;
-        getBlockState(pos: $BlockPos_): $BlockState;
-        getBlockEntity(pos: $BlockPos_): $BlockEntity;
-        getMinBuildHeight(): number;
-        getLightEngine(): $LevelLightEngine;
         getShade(direction: $Direction_, shade: boolean): number;
         getBlockTint(pos: $BlockPos_, colorResolver: $ColorResolver_): number;
-        canSeeSky(arg0: $BlockPos_): boolean;
+        getMinBuildHeight(): number;
+        getFluidState(pos: $BlockPos_): $FluidState;
+        getLightEngine(): $LevelLightEngine;
+        getBlockState(pos: $BlockPos_): $BlockState;
+        getBlockEntity(pos: $BlockPos_): $BlockEntity;
         getBrightness(arg0: $LightLayer_, arg1: $BlockPos_): number;
         getRawBrightness(arg0: $BlockPos_, arg1: number): number;
-        getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $BlockEntityType_<T>): (T) | undefined;
-        clip(arg0: $ClipContext): $BlockHitResult;
-        clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
-        getLightEmission(arg0: $BlockPos_): number;
-        isBlockInLine(arg0: $ClipBlockStateContext): $BlockHitResult;
-        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
-        getBlockFloorHeight(arg0: $BlockPos_): number;
+        canSeeSky(arg0: $BlockPos_): boolean;
         getMaxLightLevel(): number;
         getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
+        getBlockFloorHeight(arg0: $BlockPos_): number;
+        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
+        clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
+        clip(arg0: $ClipContext): $BlockHitResult;
+        isBlockInLine(arg0: $ClipBlockStateContext): $BlockHitResult;
+        getLightEmission(arg0: $BlockPos_): number;
+        getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $BlockEntityType_<T>): (T) | undefined;
         getShade(arg0: number, arg1: number, arg2: number, arg3: boolean): number;
-        getMaxBuildHeight(): number;
+        getSectionYFromSectionIndex(arg0: number): number;
         getSectionsCount(): number;
         getMaxSection(): number;
         getMinSection(): number;
@@ -66,10 +66,10 @@ declare module "@package/dev/latvian/mods/kubejs/web/local/client" {
         isOutsideBuildHeight(arg0: number): boolean;
         getSectionIndex(arg0: number): number;
         getSectionIndexFromSectionY(arg0: number): number;
-        getSectionYFromSectionIndex(arg0: number): number;
-        getAuxLightManager(arg0: $BlockPos_): $AuxiliaryLightManager;
-        getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
+        getMaxBuildHeight(): number;
         getModelData(arg0: $BlockPos_): $ModelData;
+        getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
+        getAuxLightManager(arg0: $BlockPos_): $AuxiliaryLightManager;
         hasBiomes(): boolean;
         getBiomeFabric(arg0: $BlockPos_): $Holder<$Biome>;
         getBlockEntityRenderData(arg0: $BlockPos_): $Object;
@@ -81,16 +81,16 @@ declare module "@package/dev/latvian/mods/kubejs/web/local/client" {
         get minBuildHeight(): number;
         get lightEngine(): $LevelLightEngine;
         get maxLightLevel(): number;
-        get maxBuildHeight(): number;
         get sectionsCount(): number;
         get maxSection(): number;
         get minSection(): number;
+        get maxBuildHeight(): number;
     }
     export class $KubeJSClientWeb {
         static createItemSearch(useSearchTab: boolean): $Map<$UUID, $CachedComponentObject<$Item, $ItemStack>>;
         static createReverseItemSearch(original: $Map_<$UUID_, $CachedComponentObject_<$Item_, $ItemStack_>>): $Map<$CachedComponentObject<$Item, $ItemStack>, $UUID>;
-        static registerWithAuth(registry: $LocalWebServerRegistry): void;
         static registerAPIs(registry: $LocalWebServerAPIRegistry_): void;
+        static registerWithAuth(registry: $LocalWebServerRegistry): void;
         static register(registry: $LocalWebServerRegistry): void;
         constructor();
     }
@@ -105,17 +105,17 @@ declare module "@package/dev/latvian/mods/kubejs/web/local/client" {
         pose(): $PoseStack$Pose;
         setColor(arg0: number): $VertexConsumer;
         setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
-        addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
+        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
         addVertex(arg0: $Vector3f): $VertexConsumer;
         addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         setOverlay(arg0: number): $VertexConsumer;
-        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         setLight(arg0: number): $VertexConsumer;
         setWhiteAlpha(arg0: number): $VertexConsumer;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
+        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
@@ -136,8 +136,8 @@ declare module "@package/dev/latvian/mods/kubejs/web/local/client" {
      */
     export type $ImageGenerator$BodyKey_ = { bytes?: number[],  } | [bytes?: number[], ];
     export class $ImageGenerator$CachedImage extends $Record {
-        response(): $HTTPResponse;
         pathStr(): string;
+        response(): $HTTPResponse;
         constructor(response: $HTTPResponse, pathStr: string);
     }
     /**
@@ -148,17 +148,17 @@ declare module "@package/dev/latvian/mods/kubejs/web/local/client" {
         static DATE_TIME_FORMATTER: $DateTimeFormatter;
     }
     export class $ImageGenerator {
+        static renderFluid(req: $KJSHTTPRequest, stack: $FluidStack_, wildcard: boolean): $ImageGenerator$CachedImage;
         static getCanvas(size: number): $TextureTarget;
         static renderAllItems(req: $KJSHTTPRequest): $HTTPResponse;
-        static renderFluid(req: $KJSHTTPRequest, stack: $FluidStack_, wildcard: boolean): $ImageGenerator$CachedImage;
-        static renderBlock(req: $KJSHTTPRequest, state: $BlockState_, wildcard: boolean): $ImageGenerator$CachedImage;
         static fluidTag(req: $KJSHTTPRequest): $HTTPResponse;
+        static renderBlock(req: $KJSHTTPRequest, state: $BlockState_, wildcard: boolean): $ImageGenerator$CachedImage;
         static blockTag(req: $KJSHTTPRequest): $HTTPResponse;
-        static item(req: $KJSHTTPRequest): $HTTPResponse;
         static itemTag(req: $KJSHTTPRequest): $HTTPResponse;
+        static item(req: $KJSHTTPRequest): $HTTPResponse;
         static block(req: $KJSHTTPRequest): $HTTPResponse;
-        static renderItem(req: $KJSHTTPRequest, imageSize: number, stack: $ItemStack_, wildcard: boolean): $ImageGenerator$CachedImage;
         static fluid(req: $KJSHTTPRequest): $HTTPResponse;
+        static renderItem(req: $KJSHTTPRequest, imageSize: number, stack: $ItemStack_, wildcard: boolean): $ImageGenerator$CachedImage;
         static WILDCARD_TEXTURE: $ResourceLocation;
         static FB_CACHE: $Int2ObjectMap<$TextureTarget>;
         static ROTATED_BLOCK_TRANSFORM: $ItemTransform;

@@ -1,6 +1,6 @@
-import { $Decoder, $Decoder$Simple, $Codec$ResultFunction, $DataResult, $DynamicOps, $Codec, $Decoder$Boxed, $Lifecycle, $Dynamic, $MapCodec, $Encoder, $Decoder$Terminal } from "@package/com/mojang/serialization";
+import { $Decoder, $Decoder$Simple, $Codec$ResultFunction, $DataResult, $MapEncoder, $DynamicOps, $Codec, $Decoder$Boxed, $Lifecycle, $Dynamic, $MapCodec, $Encoder, $Decoder$Terminal } from "@package/com/mojang/serialization";
 import { $Item_, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
-import { $Ingredient_, $Ingredient } from "@package/net/minecraft/world/item/crafting";
+import { $Ingredient, $Ingredient_ } from "@package/net/minecraft/world/item/crafting";
 import { $Pair } from "@package/com/mojang/datafixers/util";
 import { $Biome } from "@package/net/minecraft/world/level/biome";
 import { $List, $Map_, $List_, $Collection, $Map, $Set } from "@package/java/util";
@@ -32,30 +32,28 @@ declare module "@package/com/almostreliable/morejs/features/villager" {
         decode<T>(arg0: $DynamicOps<T>, arg1: T): $DataResult<$Pair<$MerchantOffer, T>>;
         encode<T>(arg0: $MerchantOffer, arg1: $DynamicOps<T>, arg2: T): $DataResult<T>;
         static patch(): void;
+        orElseGet(arg0: $Supplier_<$MerchantOffer>): $Codec<$MerchantOffer>;
+        orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<$MerchantOffer>): $Codec<$MerchantOffer>;
+        orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<$MerchantOffer>): $Codec<$MerchantOffer>;
         dispatch<E>(arg0: $Function_<E, $MerchantOffer>, arg1: $Function_<$MerchantOffer, $MapCodec<E>>): $Codec<E>;
         dispatch<E>(arg0: string, arg1: $Function_<E, $MerchantOffer>, arg2: $Function_<$MerchantOffer, $MapCodec<E>>): $Codec<E>;
         validate(arg0: $Function_<$MerchantOffer, $DataResult<$MerchantOffer>>): $Codec<$MerchantOffer>;
-        orElse(arg0: $MerchantOffer): $Codec<$MerchantOffer>;
-        orElse(arg0: $Consumer_<string>, arg1: $MerchantOffer): $Codec<$MerchantOffer>;
         orElse(arg0: $UnaryOperator_<string>, arg1: $MerchantOffer): $Codec<$MerchantOffer>;
-        orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<$MerchantOffer>): $Codec<$MerchantOffer>;
-        orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<$MerchantOffer>): $Codec<$MerchantOffer>;
-        orElseGet(arg0: $Supplier_<$MerchantOffer>): $Codec<$MerchantOffer>;
+        orElse(arg0: $Consumer_<string>, arg1: $MerchantOffer): $Codec<$MerchantOffer>;
+        orElse(arg0: $MerchantOffer): $Codec<$MerchantOffer>;
         comapFlatMap<S>(arg0: $Function_<$MerchantOffer, $DataResult<S>>, arg1: $Function_<S, $MerchantOffer>): $Codec<S>;
-        optionalFieldOf(arg0: string, arg1: $MerchantOffer, arg2: $Lifecycle): $MapCodec<$MerchantOffer>;
         optionalFieldOf(arg0: string): $MapCodec<($MerchantOffer) | undefined>;
         optionalFieldOf(arg0: string, arg1: $MerchantOffer): $MapCodec<$MerchantOffer>;
+        optionalFieldOf(arg0: string, arg1: $MerchantOffer, arg2: $Lifecycle): $MapCodec<$MerchantOffer>;
         optionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: $MerchantOffer, arg3: $Lifecycle): $MapCodec<$MerchantOffer>;
         listOf(arg0: number, arg1: number): $Codec<$List<$MerchantOffer>>;
         listOf(): $Codec<$List<$MerchantOffer>>;
         xmap<S>(arg0: $Function_<$MerchantOffer, S>, arg1: $Function_<S, $MerchantOffer>): $Codec<S>;
         stable(): $Codec<$MerchantOffer>;
-        withLifecycle(arg0: $Lifecycle): $Codec<$MerchantOffer>;
         deprecated(arg0: number): $Codec<$MerchantOffer>;
         flatXmap<S>(arg0: $Function_<$MerchantOffer, $DataResult<S>>, arg1: $Function_<S, $DataResult<$MerchantOffer>>): $Codec<S>;
-        fieldOf(arg0: string): $MapCodec<$MerchantOffer>;
-        lenientOptionalFieldOf(arg0: string, arg1: $MerchantOffer, arg2: $Lifecycle): $MapCodec<$MerchantOffer>;
         lenientOptionalFieldOf(arg0: string): $MapCodec<($MerchantOffer) | undefined>;
+        lenientOptionalFieldOf(arg0: string, arg1: $MerchantOffer, arg2: $Lifecycle): $MapCodec<$MerchantOffer>;
         lenientOptionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: $MerchantOffer, arg3: $Lifecycle): $MapCodec<$MerchantOffer>;
         lenientOptionalFieldOf(arg0: string, arg1: $MerchantOffer): $MapCodec<$MerchantOffer>;
         mapResult(arg0: $Codec$ResultFunction<$MerchantOffer>): $Codec<$MerchantOffer>;
@@ -77,6 +75,8 @@ declare module "@package/com/almostreliable/morejs/features/villager" {
         boxed(): $Decoder$Boxed<$MerchantOffer>;
         terminal(): $Decoder$Terminal<$MerchantOffer>;
         simple(): $Decoder$Simple<$MerchantOffer>;
+        withLifecycle(arg0: $Lifecycle): $Encoder<$MerchantOffer>;
+        fieldOf(arg0: string): $MapEncoder<$MerchantOffer>;
         static KEY: string;
         constructor(arg0: $Codec<$MerchantOffer>);
     }
@@ -96,51 +96,46 @@ declare module "@package/com/almostreliable/morejs/features/villager" {
     /**
      * Values that may be interpreted as {@link $TradeMatcher}.
      */
-    export type $TradeMatcher_ = { filter?: $TradeFilter_, onMatch?: $TradeMatcher$OnMatch_,  } | [filter?: $TradeFilter_, onMatch?: $TradeMatcher$OnMatch_, ];
+    export type $TradeMatcher_ = { onMatch?: $TradeMatcher$OnMatch_, filter?: $TradeFilter_,  } | [onMatch?: $TradeMatcher$OnMatch_, filter?: $TradeFilter_, ];
     export class $TradeFilter extends $Record {
-        professions(): ($HolderSet<$VillagerProfession>) | undefined;
         firstCount(): ($IntRange) | undefined;
         secondCount(): ($IntRange) | undefined;
+        professions(): ($HolderSet<$VillagerProfession>) | undefined;
         outputCount(): ($IntRange) | undefined;
+        output(): ($Ingredient) | undefined;
         level(): ($IntRange) | undefined;
         first(): ($Ingredient) | undefined;
         second(): ($Ingredient) | undefined;
         types(): ($List<$TradeTypes>) | undefined;
-        output(): ($Ingredient) | undefined;
         constructor(first: ($Ingredient_) | undefined, second: ($Ingredient_) | undefined, output: ($Ingredient_) | undefined, firstCount: ($IntRange) | undefined, secondCount: ($IntRange) | undefined, outputCount: ($IntRange) | undefined, level: ($IntRange) | undefined, types: ($List_<$TradeTypes_>) | undefined, professions: ($HolderSet_<$VillagerProfession>) | undefined);
     }
     /**
      * Values that may be interpreted as {@link $TradeFilter}.
      */
-    export type $TradeFilter_ = { second?: ($Ingredient_) | undefined, firstCount?: ($IntRange) | undefined, secondCount?: ($IntRange) | undefined, professions?: ($HolderSet_<$VillagerProfession>) | undefined, level?: ($IntRange) | undefined, types?: ($List_<$TradeTypes_>) | undefined, outputCount?: ($IntRange) | undefined, output?: ($Ingredient_) | undefined, first?: ($Ingredient_) | undefined,  } | [second?: ($Ingredient_) | undefined, firstCount?: ($IntRange) | undefined, secondCount?: ($IntRange) | undefined, professions?: ($HolderSet_<$VillagerProfession>) | undefined, level?: ($IntRange) | undefined, types?: ($List_<$TradeTypes_>) | undefined, outputCount?: ($IntRange) | undefined, output?: ($Ingredient_) | undefined, first?: ($Ingredient_) | undefined, ];
+    export type $TradeFilter_ = { types?: ($List_<$TradeTypes_>) | undefined, level?: ($IntRange) | undefined, professions?: ($HolderSet_<$VillagerProfession>) | undefined, secondCount?: ($IntRange) | undefined, firstCount?: ($IntRange) | undefined, second?: ($Ingredient_) | undefined, first?: ($Ingredient_) | undefined, output?: ($Ingredient_) | undefined, outputCount?: ($IntRange) | undefined,  } | [types?: ($List_<$TradeTypes_>) | undefined, level?: ($IntRange) | undefined, professions?: ($HolderSet_<$VillagerProfession>) | undefined, secondCount?: ($IntRange) | undefined, firstCount?: ($IntRange) | undefined, second?: ($Ingredient_) | undefined, first?: ($Ingredient_) | undefined, output?: ($Ingredient_) | undefined, outputCount?: ($IntRange) | undefined, ];
     export class $IntRange implements $IntPredicate {
         test(arg0: number): boolean;
         static all(): $IntRange;
+        getRandom(arg0: $RandomSource): number;
         getMax(): number;
         getMin(): number;
-        getRandom(arg0: $RandomSource): number;
+        or(arg0: $IntPredicate_): $IntPredicate;
         negate(): $IntPredicate;
         and(arg0: $IntPredicate_): $IntPredicate;
-        or(arg0: $IntPredicate_): $IntPredicate;
         constructor(arg0: number, arg1: number);
         constructor(arg0: number);
         get max(): number;
         get min(): number;
     }
     export class $VillagerUtils {
-        static getProfession(arg0: $ResourceLocation_): $VillagerProfession;
-        static getVillagerTrades(arg0: $VillagerProfession_, arg1: number): $List<$VillagerTrades$ItemListing>;
-        static getVillagerTrades(arg0: $VillagerProfession_): $List<$VillagerTrades$ItemListing>;
-        static getWandererTrades(arg0: number): $List<$VillagerTrades$ItemListing>;
         static isModdedTypedTrade(arg0: $VillagerTrades$ItemListing_): boolean;
         static getProfessions(): $Collection<$VillagerProfession>;
         static createSimpleTrade(arg0: $TradeItem[], arg1: $TradeItem): $SimpleTrade;
         static createCustomTrade(arg0: $TransformableTrade$Transformer_): $CustomTrade;
-        static createStructureMapTrade(arg0: $TradeItem[], arg1: $HolderSet_<$Structure>): $TreasureMapTrade;
         static createBiomeMapTrade(arg0: $TradeItem[], arg1: $HolderSet_<$Biome>): $TreasureMapTrade;
         static createCustomMapTrade(arg0: $TradeItem[], arg1: $BlockPosFinder_): $TreasureMapTrade;
-        static createEnchantedItemTrade(arg0: $TradeItem[], arg1: $ItemStack_, arg2: $HolderSet_<$Enchantment>): $EnchantedItemTrade;
         static createEnchantedItemTrade(arg0: $TradeItem[], arg1: $ItemStack_): $EnchantedItemTrade;
+        static createEnchantedItemTrade(arg0: $TradeItem[], arg1: $ItemStack_, arg2: $HolderSet_<$Enchantment>): $EnchantedItemTrade;
         static createStewTrade(arg0: $TradeItem[]): $StewTrade;
         static createPotionTrade(arg0: $TradeItem[]): $PotionTrade;
         static setAbstractTrades(arg0: $Map_<number, $VillagerTrades$ItemListing_[]>, arg1: number, arg2: $List_<$VillagerTrades$ItemListing_>): void;
@@ -150,6 +145,11 @@ declare module "@package/com/almostreliable/morejs/features/villager" {
         static getRandomWandererTrade(arg0: number): $VillagerTrades$ItemListing;
         static isVanillaTypedTrade(arg0: $VillagerTrades$ItemListing_): boolean;
         static isCustomTypedTrade(arg0: $VillagerTrades$ItemListing_): boolean;
+        static getVillagerTrades(arg0: $VillagerProfession_): $List<$VillagerTrades$ItemListing>;
+        static getVillagerTrades(arg0: $VillagerProfession_, arg1: number): $List<$VillagerTrades$ItemListing>;
+        static getWandererTrades(arg0: number): $List<$VillagerTrades$ItemListing>;
+        static createStructureMapTrade(arg0: $TradeItem[], arg1: $HolderSet_<$Structure>): $TreasureMapTrade;
+        static getProfession(arg0: $ResourceLocation_): $VillagerProfession;
         static CACHED_PROFESSION_TRADES: $Map<$VillagerProfession, $List<$VillagerTrades$ItemListing>>;
         static VANILLA_TRADE_TYPES: $Set<$Class<$VillagerTrades$ItemListing>>;
         constructor();
@@ -166,8 +166,8 @@ declare module "@package/com/almostreliable/morejs/features/villager" {
         matchesTradeFilter(arg0: $TradeMatcher_): boolean;
     }
     export class $TradeItem {
-        getCountRange(): $IntRange;
         createItemCost(arg0: $RandomSource): $ItemCost;
+        getCountRange(): $IntRange;
         isEmpty(): boolean;
         static of(arg0: $ItemStack_, arg1: number): $TradeItem;
         static of(arg0: $ItemStack_): $TradeItem;

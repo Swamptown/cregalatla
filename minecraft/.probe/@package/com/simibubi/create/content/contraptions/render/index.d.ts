@@ -24,9 +24,9 @@ declare module "@package/com/simibubi/create/content/contraptions/render" {
         constructor(arg0: $VisualizationContext, arg1: $BlockAndTintGetter, arg2: $MovementContext);
     }
     export class $ContraptionMatrices {
-        static translateToEntity(arg0: $Matrix4f, arg1: $Entity, arg2: number): void;
         getModelViewProjection(): $PoseStack;
         getViewProjection(): $PoseStack;
+        static translateToEntity(arg0: $Matrix4f, arg1: $Entity, arg2: number): void;
         getWorld(): $Matrix4f;
         getLight(): $Matrix4f;
         static transform(arg0: $PoseStack, arg1: $PoseStack): void;
@@ -40,22 +40,22 @@ declare module "@package/com/simibubi/create/content/contraptions/render" {
         get model(): $PoseStack;
     }
     export class $ClientContraption$RenderedBlocks extends $Record {
-        lookup(): $Function<$BlockPos, $BlockState>;
         positions(): $Iterable<$BlockPos>;
+        lookup(): $Function<$BlockPos, $BlockState>;
         constructor(lookup: $Function_<$BlockPos, $BlockState>, positions: $Iterable_<$BlockPos>);
     }
     /**
      * Values that may be interpreted as {@link $ClientContraption$RenderedBlocks}.
      */
-    export type $ClientContraption$RenderedBlocks_ = { positions?: $Iterable_<$BlockPos>, lookup?: $Function_<$BlockPos, $BlockState>,  } | [positions?: $Iterable_<$BlockPos>, lookup?: $Function_<$BlockPos, $BlockState>, ];
+    export type $ClientContraption$RenderedBlocks_ = { lookup?: $Function_<$BlockPos, $BlockState>, positions?: $Iterable_<$BlockPos>,  } | [lookup?: $Function_<$BlockPos, $BlockState>, positions?: $Iterable_<$BlockPos>, ];
     export class $ClientContraption {
+        structureVersion(): number;
         childrenVersion(): number;
         readBlockEntity(arg0: $Level_, arg1: $StructureTemplate$StructureBlockInfo_, arg2: boolean): $BlockEntity;
         getRenderLevel(): $VirtualRenderWorld;
         getMatrices(): $ContraptionMatrices;
         getRenderedBlocks(): $ClientContraption$RenderedBlocks;
         getAndAdjustShouldRenderBlockEntities(): $BitSet;
-        structureVersion(): number;
         resetRenderLevel(): void;
         invalidateStructure(): void;
         invalidateChildren(): void;

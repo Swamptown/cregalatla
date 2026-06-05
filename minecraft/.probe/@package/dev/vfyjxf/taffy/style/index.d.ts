@@ -46,6 +46,8 @@ declare module "@package/dev/vfyjxf/taffy/style" {
      */
     export type $CalcExpression_ = ((arg0: number) => number);
     export class $TaffyDimension {
+        isMaxContent(): boolean;
+        isStretch(): boolean;
         static maxContent(): $TaffyDimension;
         static minContent(): $TaffyDimension;
         static fitContent(): $TaffyDimension;
@@ -53,8 +55,6 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         isAuto(): boolean;
         isPercent(): boolean;
         isFitContent(): boolean;
-        isMaxContent(): boolean;
-        isStretch(): boolean;
         isLength(): boolean;
         getCalcExpression(): $CalcExpression;
         maybeResolve(arg0: number): number;
@@ -63,14 +63,14 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         isIntrinsic(): boolean;
         intoOption(): number;
         resolveOrZero(arg0: number): number;
-        static percent(arg0: number): $TaffyDimension;
         isContent(): boolean;
+        static content(): $TaffyDimension;
+        static percent(arg0: number): $TaffyDimension;
         static length(arg0: number): $TaffyDimension;
         getValue(): number;
         static from(arg0: $LengthPercentageAuto): $TaffyDimension;
         static from(arg0: $LengthPercentage): $TaffyDimension;
         getType(): $TaffyDimension$Type;
-        static content(): $TaffyDimension;
         static auto(): $TaffyDimension;
         static calc(arg0: $CalcExpression_): $TaffyDimension;
         static ZERO: $TaffyDimension;
@@ -194,12 +194,12 @@ declare module "@package/dev/vfyjxf/taffy/style" {
     export type $FlexDirection_ = "row" | "column" | "row_reverse" | "column_reverse";
     export class $TrackSizingFunction {
         static flex(arg0: number): $TrackSizingFunction;
+        isMaxContent(): boolean;
         static maxContent(): $TrackSizingFunction;
         static minContent(): $TrackSizingFunction;
         static fitContent(arg0: $LengthPercentage): $TrackSizingFunction;
         isAuto(): boolean;
         isFitContent(): boolean;
-        isMaxContent(): boolean;
         isMinContent(): boolean;
         isIntrinsic(): boolean;
         getFixedValue(): $LengthPercentage;
@@ -216,14 +216,14 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         getFrValue(): number;
         isMinmax(): boolean;
         isFlexible(): boolean;
-        isFixed(): boolean;
         static percent(arg0: number): $TrackSizingFunction;
         static fr(arg0: number): $TrackSizingFunction;
+        isFixed(): boolean;
         getType(): $TrackSizingFunction$Type;
         static fixed(arg0: $LengthPercentage): $TrackSizingFunction;
         static fixed(arg0: number): $TrackSizingFunction;
-        static auto(): $TrackSizingFunction;
         static minmax(arg0: $TrackSizingFunction, arg1: $TrackSizingFunction): $TrackSizingFunction;
+        static auto(): $TrackSizingFunction;
         static AUTO: $TrackSizingFunction;
         static MAX_CONTENT: $TrackSizingFunction;
         static MIN_CONTENT: $TrackSizingFunction;
@@ -382,6 +382,8 @@ declare module "@package/dev/vfyjxf/taffy/style" {
      */
     export type $BoxGenerationMode_ = "normal" | "none";
     export class $LengthPercentageAuto {
+        isMaxContent(): boolean;
+        isStretch(): boolean;
         static maxContent(): $LengthPercentageAuto;
         static minContent(): $LengthPercentageAuto;
         static fitContent(): $LengthPercentageAuto;
@@ -389,8 +391,6 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         isAuto(): boolean;
         isPercent(): boolean;
         isFitContent(): boolean;
-        isMaxContent(): boolean;
-        isStretch(): boolean;
         isLength(): boolean;
         getCalcExpression(): $CalcExpression;
         maybeResolve(arg0: number): number;
@@ -510,9 +510,11 @@ declare module "@package/dev/vfyjxf/taffy/style" {
      */
     export type $JustifyContent_ = "flex_start" | "flex_end" | "center" | "space_between" | "space_around" | "space_evenly" | "start" | "end" | "stretch";
     export class $TaffyStyle {
-        getMargin(): $TaffyRect<$LengthPercentageAuto>;
-        isBlock(): boolean;
+        getEffectiveFlexGrow(): number;
+        getEffectiveFlexShrink(): number;
+        boxGenerationMode(): $BoxGenerationMode;
         flexNone(): $TaffyStyle;
+        flexInitial(): $TaffyStyle;
         clearFlex(): $TaffyStyle;
         getItemIsTable(): boolean;
         getItemIsReplaced(): boolean;
@@ -534,14 +536,13 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         getGridColumnStart(): $GridPlacement;
         getGridColumnEnd(): $GridPlacement;
         getBoxGenerationMode(): $BoxGenerationMode;
+        getMinSize(): $TaffySize<$TaffyDimension>;
+        isBlock(): boolean;
         getEffectiveFlexBasis(): $TaffyDimension;
-        getEffectiveFlexGrow(): number;
-        getEffectiveFlexShrink(): number;
-        boxGenerationMode(): $BoxGenerationMode;
-        flexInitial(): $TaffyStyle;
+        getPadding(): $TaffyRect<$LengthPercentage>;
+        flex(arg0: number, arg1: number, arg2: $TaffyDimension): $TaffyStyle;
         flex(arg0: number, arg1: number, arg2: number): $TaffyStyle;
         flex(arg0: number, arg1: number): $TaffyStyle;
-        flex(arg0: number, arg1: number, arg2: $TaffyDimension): $TaffyStyle;
         flex(arg0: number): $TaffyStyle;
         setFlex(arg0: number): $TaffyStyle;
         flexAuto(): $TaffyStyle;
@@ -554,16 +555,15 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         getFlexGrow(): number;
         getFlexShrink(): number;
         getOverflow(): $TaffyPoint<$Overflow>;
-        getPadding(): $TaffyRect<$LengthPercentage>;
-        getMinSize(): $TaffySize<$TaffyDimension>;
+        getMargin(): $TaffyRect<$LengthPercentageAuto>;
         getMaxSize(): $TaffySize<$TaffyDimension>;
-        getPosition(): $TaffyPosition;
         getDisplay(): $TaffyDisplay;
+        getPosition(): $TaffyPosition;
         copy(): $TaffyStyle;
         getSize(): $TaffySize<$TaffyDimension>;
-        getAspectRatio(): number;
-        getDirection(): $TaffyDirection;
         getBorder(): $TaffyRect<$LengthPercentage>;
+        getDirection(): $TaffyDirection;
+        getAspectRatio(): number;
         gridAutoColumns: $List<$TrackSizingFunction>;
         gridTemplateColumnNames: $List<$NamedGridLine>;
         flexGrow: number;
@@ -606,26 +606,26 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         gridTemplateColumns: $List<$TrackSizingFunction>;
         position: $TaffyPosition;
         constructor();
-        get block(): boolean;
+        get effectiveFlexGrow(): number;
+        get effectiveFlexShrink(): number;
         get gridRowStart(): $GridPlacement;
         get gridRowEnd(): $GridPlacement;
         get gridColumnStart(): $GridPlacement;
         get gridColumnEnd(): $GridPlacement;
+        get block(): boolean;
         get effectiveFlexBasis(): $TaffyDimension;
-        get effectiveFlexGrow(): number;
-        get effectiveFlexShrink(): number;
     }
     export class $AvailableSpace {
-        unwrapOr(arg0: number): number;
         mapDefiniteValue(arg0: $Function_<number, number>): $AvailableSpace;
         maybeSub(arg0: number): $AvailableSpace;
         maybeAdd(arg0: number): $AvailableSpace;
         maybeMax(arg0: number): $AvailableSpace;
         maybeMin(arg0: number): $AvailableSpace;
         isRoughlyEqual(arg0: $AvailableSpace): boolean;
+        unwrapOr(arg0: number): number;
+        isMaxContent(): boolean;
         static maxContent(): $AvailableSpace;
         static minContent(): $AvailableSpace;
-        isMaxContent(): boolean;
         static definite(arg0: number): $AvailableSpace;
         isMinContent(): boolean;
         intoOption(): number;
@@ -639,16 +639,16 @@ declare module "@package/dev/vfyjxf/taffy/style" {
         get type(): $AvailableSpace$Type;
     }
     export class $GridTemplateArea {
+        getRowStart(): number;
         getRowEnd(): number;
         getColumnStart(): number;
         getColumnEnd(): number;
-        getRowStart(): number;
         getName(): string;
         constructor(arg0: string, arg1: number, arg2: number, arg3: number, arg4: number);
+        get rowStart(): number;
         get rowEnd(): number;
         get columnStart(): number;
         get columnEnd(): number;
-        get rowStart(): number;
         get name(): string;
     }
     export class $LengthPercentageAuto$Type extends $Enum<$LengthPercentageAuto$Type> {

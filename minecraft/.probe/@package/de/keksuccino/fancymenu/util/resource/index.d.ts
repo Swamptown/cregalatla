@@ -38,11 +38,11 @@ declare module "@package/de/keksuccino/fancymenu/util/resource" {
         getWidth(): number;
         getHeight(): number;
         reset(): void;
-        getAspectRatio(): $AspectRatio;
         getResourceLocation(): $ResourceLocation;
+        getAspectRatio(): $AspectRatio;
         get width(): number;
         get height(): number;
-        get aspectRatio(): $AspectRatio;
         get resourceLocation(): $ResourceLocation;
+        get aspectRatio(): $AspectRatio;
     }
 }

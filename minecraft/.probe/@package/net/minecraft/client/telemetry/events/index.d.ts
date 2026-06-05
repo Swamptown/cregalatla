@@ -8,10 +8,10 @@ import { $Record } from "@package/java/lang";
 declare module "@package/net/minecraft/client/telemetry/events" {
     export class $GameLoadTimesEvent {
         send(arg0: $TelemetryEventSender_): void;
-        endStep(arg0: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>): void;
-        beginStep(arg0: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>): void;
-        beginStep(arg0: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>, arg1: $Stopwatch): void;
         setBootstrapTime(arg0: number): void;
+        endStep(arg0: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>): void;
+        beginStep(arg0: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>, arg1: $Stopwatch): void;
+        beginStep(arg0: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>): void;
         static INSTANCE: $GameLoadTimesEvent;
         constructor(arg0: $Ticker);
         set bootstrapTime(value: number);
@@ -29,9 +29,9 @@ declare module "@package/net/minecraft/client/telemetry/events" {
     }
     export class $AggregatedTelemetryEvent {
         getSampleCount(): number;
+        takeSample(): void;
         shouldTakeSample(): boolean;
         shouldSentEvent(): boolean;
-        takeSample(): void;
         sendEvent(arg0: $TelemetryEventSender_): void;
         tick(arg0: $TelemetryEventSender_): void;
         start(): void;

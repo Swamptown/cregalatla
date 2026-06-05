@@ -2,16 +2,15 @@ import { $ExplosionDamageCalculator, $Level_ } from "@package/net/minecraft/worl
 import { $TagKey } from "@package/net/minecraft/tags";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $Fluid } from "@package/net/minecraft/world/level/material";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $Breeze } from "@package/net/minecraft/world/entity/monster/breeze";
 import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $Pose, $PortalProcessor, $Entity } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $UUID } from "@package/java/util";
-import { $ItemSupplier, $AbstractHurtingProjectile } from "@package/net/minecraft/world/entity/projectile";
+import { $AbstractHurtingProjectile, $ItemSupplier } from "@package/net/minecraft/world/entity/projectile";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $SynchedEntityData, $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
-import { $HolderLookup$Provider, $BlockPos } from "@package/net/minecraft/core";
+import { $BlockPos } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $AtomicInteger } from "@package/java/util/concurrent/atomic";
 import { $Vec3_, $Vec3 } from "@package/net/minecraft/world/phys";
@@ -21,7 +20,6 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
     export class $AbstractWindCharge extends $AbstractHurtingProjectile implements $ItemSupplier {
         getItem(): $ItemStack;
         explode(arg0: $Vec3_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -74,6 +72,7 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;
@@ -98,13 +97,12 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
-        constructor(arg0: $EntityType_<$AbstractWindCharge>, arg1: number, arg2: number, arg3: number, arg4: $Vec3_, arg5: $Level_);
         constructor(arg0: $EntityType_<$AbstractWindCharge>, arg1: $Level_, arg2: $Entity, arg3: number, arg4: number, arg5: number);
+        constructor(arg0: $EntityType_<$AbstractWindCharge>, arg1: number, arg2: number, arg3: number, arg4: $Vec3_, arg5: $Level_);
         constructor(arg0: $EntityType_<$AbstractWindCharge>, arg1: $Level_);
         get item(): $ItemStack;
     }
     export class $WindCharge extends $AbstractWindCharge {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -157,6 +155,7 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;
@@ -186,7 +185,6 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
         constructor(arg0: $Player, arg1: $Level_, arg2: number, arg3: number, arg4: number);
     }
     export class $BreezeWindCharge extends $AbstractWindCharge {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -239,6 +237,7 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;

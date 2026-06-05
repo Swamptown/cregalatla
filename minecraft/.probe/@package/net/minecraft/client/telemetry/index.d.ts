@@ -52,9 +52,9 @@ declare module "@package/net/minecraft/client/telemetry" {
         onAdvancementDone(arg0: $Level_, arg1: $AdvancementHolder_): void;
         tick(): void;
         setTime(arg0: number): void;
+        onDisconnect(): void;
         onPlayerInfoReceived(arg0: $GameType_, arg1: boolean): void;
         onServerBrandReceived(arg0: string): void;
-        onDisconnect(): void;
         constructor(arg0: $TelemetryEventSender_, arg1: boolean, arg2: $Duration_, arg3: string);
         set time(value: number);
     }
@@ -68,7 +68,7 @@ declare module "@package/net/minecraft/client/telemetry" {
     /**
      * Values that may be interpreted as {@link $TelemetryEventInstance}.
      */
-    export type $TelemetryEventInstance_ = { properties?: $TelemetryPropertyMap, type?: $TelemetryEventType,  } | [properties?: $TelemetryPropertyMap, type?: $TelemetryEventType, ];
+    export type $TelemetryEventInstance_ = { type?: $TelemetryEventType, properties?: $TelemetryPropertyMap,  } | [type?: $TelemetryEventType, properties?: $TelemetryPropertyMap, ];
     export class $TelemetryEventLogger {
     }
     export interface $TelemetryEventLogger {
@@ -141,7 +141,7 @@ declare module "@package/net/minecraft/client/telemetry" {
     /**
      * Values that may be interpreted as {@link $TelemetryProperty}.
      */
-    export type $TelemetryProperty_<T> = { exporter?: $TelemetryProperty$Exporter_<any>, codec?: $Codec<any>, id?: string, exportKey?: string,  } | [exporter?: $TelemetryProperty$Exporter_<any>, codec?: $Codec<any>, id?: string, exportKey?: string, ];
+    export type $TelemetryProperty_<T> = { id?: string, codec?: $Codec<any>, exporter?: $TelemetryProperty$Exporter_<any>, exportKey?: string,  } | [id?: string, codec?: $Codec<any>, exporter?: $TelemetryProperty$Exporter_<any>, exportKey?: string, ];
     export class $TelemetryPropertyMap {
         propertySet(): $Set<$TelemetryProperty<never>>;
         get<T>(arg0: $TelemetryProperty_<T>): T;

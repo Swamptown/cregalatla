@@ -131,8 +131,8 @@ declare module "@package/com/railwayteam/railways/mixin" {
     export class $AccessorBlockEntityType {
     }
     export interface $AccessorBlockEntityType {
-        setValidBlocks(arg0: $Set_<$Block_>): void;
         getValidBlocks(): $Set<$Block>;
+        setValidBlocks(arg0: $Set_<$Block_>): void;
     }
     export class $AccessorTrain {
     }

@@ -19,29 +19,29 @@ declare module "@package/com/blamejared/controlling/api/events" {
         get mouseY(): number;
     }
     export class $KeyEntryRenderEvent extends $Event implements $IKeyEntryRenderEvent {
+        getGuiGraphics(): $GuiGraphics;
         getSlotIndex(): number;
         getY(): number;
         getEntry(): $IKeyEntry;
-        getPartialTicks(): number;
         getMouseX(): number;
         getMouseY(): number;
         getX(): number;
-        isHovered(): boolean;
         getRowWidth(): number;
         getRowLeft(): number;
-        getGuiGraphics(): $GuiGraphics;
+        getPartialTicks(): number;
+        isHovered(): boolean;
         constructor(arg0: $IKeyEntry, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: boolean, arg10: number);
+        get guiGraphics(): $GuiGraphics;
         get slotIndex(): number;
         get y(): number;
         get entry(): $IKeyEntry;
-        get partialTicks(): number;
         get mouseX(): number;
         get mouseY(): number;
         get x(): number;
-        get hovered(): boolean;
         get rowWidth(): number;
         get rowLeft(): number;
-        get guiGraphics(): $GuiGraphics;
+        get partialTicks(): number;
+        get hovered(): boolean;
     }
     export class $KeyEntryMouseClickedEvent extends $Event implements $IKeyEntryMouseClickedEvent {
         setHandled(arg0: boolean): void;
@@ -74,28 +74,28 @@ declare module "@package/com/blamejared/controlling/api/events" {
     export class $IKeyEntryRenderEvent {
     }
     export interface $IKeyEntryRenderEvent {
+        getGuiGraphics(): $GuiGraphics;
         getSlotIndex(): number;
         getY(): number;
         getEntry(): $IKeyEntry;
-        getPartialTicks(): number;
         getMouseX(): number;
         getMouseY(): number;
         getX(): number;
-        isHovered(): boolean;
         getRowWidth(): number;
         getRowLeft(): number;
-        getGuiGraphics(): $GuiGraphics;
+        getPartialTicks(): number;
+        isHovered(): boolean;
+        get guiGraphics(): $GuiGraphics;
         get slotIndex(): number;
         get y(): number;
         get entry(): $IKeyEntry;
-        get partialTicks(): number;
         get mouseX(): number;
         get mouseY(): number;
         get x(): number;
-        get hovered(): boolean;
         get rowWidth(): number;
         get rowLeft(): number;
-        get guiGraphics(): $GuiGraphics;
+        get partialTicks(): number;
+        get hovered(): boolean;
     }
     export class $IKeyEntryMouseReleasedEvent {
     }

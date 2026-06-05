@@ -4,8 +4,8 @@ declare module "@package/joptsimple" {
     export class $ValueConverter<V> {
     }
     export interface $ValueConverter<V> {
-        convert(arg0: string): V;
         valueType(): $Class<V>;
+        convert(arg0: string): V;
         valuePattern(): string;
     }
 }

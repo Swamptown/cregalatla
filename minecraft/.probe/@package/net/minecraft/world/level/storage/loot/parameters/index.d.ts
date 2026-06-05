@@ -51,7 +51,7 @@ declare module "@package/net/minecraft/world/level/storage/loot/parameters" {
         get required(): $Set<$LootContextParam<never>>;
     }
     export class $LootContextParamSets implements $LootContextTypesAccessor {
-        static getREGISTRY$emi_loot_$md$4ca6b6$0(): $BiMap<any, any>;
+        static getREGISTRY$emi_loot_$md$3b3139$0(): $BiMap<any, any>;
         static ENCHANTED_ITEM: $LootContextParamSet;
         static ENCHANTED_LOCATION: $LootContextParamSet;
         static HIT_BLOCK: $LootContextParamSet;
@@ -78,6 +78,6 @@ declare module "@package/net/minecraft/world/level/storage/loot/parameters" {
         static ENCHANTED_ENTITY: $LootContextParamSet;
         static REGISTRY: $BiMap<$ResourceLocation, $LootContextParamSet>;
         constructor();
-        static get REGISTRY$emi_loot_$md$4ca6b6$0(): $BiMap<any, any>;
+        static get REGISTRY$emi_loot_$md$3b3139$0(): $BiMap<any, any>;
     }
 }

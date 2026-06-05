@@ -14,41 +14,41 @@ declare module "@package/dev/ryanhcode/sable/sound" {
         getDelegate(): $MovingSoundInstanceDelegate;
     }
     export class $MovingSoundInstanceDelegate implements $SoundInstance, $TickableSoundInstance {
+        tickWithChannel(arg0: $Channel): void;
+        tick(): void;
+        getSource(): $SoundSource;
         getY(): number;
         getDelay(): number;
-        tick(): void;
         getStream(arg0: $SoundBufferLibrary, arg1: $Sound, arg2: boolean): $CompletableFuture<any>;
-        getSource(): $SoundSource;
         getLocation(): $ResourceLocation;
         resolve(arg0: $SoundManager): $WeighedSoundEvents;
         isRelative(): boolean;
         unload(arg0: $Channel): void;
+        isStopped(): boolean;
+        getVolume(): number;
+        getPitch(): number;
+        getSound(): $Sound;
+        getX(): number;
+        getZ(): number;
         isLooping(): boolean;
         getAttenuation(): $SoundInstance$Attenuation;
         canStartSilent(): boolean;
         canPlaySound(): boolean;
-        isStopped(): boolean;
-        getX(): number;
-        getZ(): number;
-        getVolume(): number;
-        getPitch(): number;
-        getSound(): $Sound;
-        tickWithChannel(arg0: $Channel): void;
         getAudioStream(arg0: $SoundBufferLibrary, arg1: $ResourceLocation_, arg2: boolean): $CompletableFuture<$AudioStream>;
         instance: $SoundInstance;
         constructor(arg0: $SoundInstance, arg1: $SubLevel);
+        get source(): $SoundSource;
         get y(): number;
         get delay(): number;
-        get source(): $SoundSource;
         get location(): $ResourceLocation;
         get relative(): boolean;
-        get looping(): boolean;
-        get attenuation(): $SoundInstance$Attenuation;
         get stopped(): boolean;
-        get x(): number;
-        get z(): number;
         get volume(): number;
         get pitch(): number;
         get sound(): $Sound;
+        get x(): number;
+        get z(): number;
+        get looping(): boolean;
+        get attenuation(): $SoundInstance$Attenuation;
     }
 }

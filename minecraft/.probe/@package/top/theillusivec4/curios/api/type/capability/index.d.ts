@@ -30,35 +30,18 @@ declare module "@package/top/theillusivec4/curios/api/type/capability" {
         static LOGGER: $Logger;
     }
     export interface $ICuriosItemHandler {
-        findCurios(arg0: boolean, ...arg1: string[]): $List<$SlotResult>;
         findCurios(arg0: $Item_): $List<$SlotResult>;
-        findCurios(arg0: $Predicate_<$ItemStack>): $List<$SlotResult>;
-        findCurios(arg0: $Predicate_<$ItemStack>, arg1: boolean, arg2: string): $List<$SlotResult>;
+        findCurios(arg0: boolean, ...arg1: string[]): $List<$SlotResult>;
         findCurios(...arg0: string[]): $List<$SlotResult>;
-        setEquippedCurio(arg0: string, arg1: number, arg2: $ItemStack_): void;
-        findCurio(arg0: string, arg1: number, arg2: boolean): ($SlotResult) | undefined;
+        findCurios(arg0: $Predicate_<$ItemStack>, arg1: boolean, arg2: string): $List<$SlotResult>;
+        findCurios(arg0: $Predicate_<$ItemStack>): $List<$SlotResult>;
         findCurio(arg0: string, arg1: number): ($SlotResult) | undefined;
-        /**
-         * @deprecated
-         */
-        growSlotType(arg0: string, arg1: number): void;
-        /**
-         * @deprecated
-         */
-        shrinkSlotType(arg0: string, arg1: number): void;
-        /**
-         * @deprecated
-         */
-        unlockSlotType(arg0: string, arg1: number, arg2: boolean, arg3: boolean): void;
-        /**
-         * @deprecated
-         */
-        lockSlotType(arg0: string): void;
-        getStacksHandler(arg0: string): ($ICurioStacksHandler) | undefined;
+        findCurio(arg0: string, arg1: number, arg2: boolean): ($SlotResult) | undefined;
         setCurios(arg0: $Map_<string, $ICurioStacksHandler>): void;
         getVisibleSlots(): number;
-        isEquipped(arg0: $Item_): boolean;
+        setEquippedCurio(arg0: string, arg1: number, arg2: $ItemStack_): void;
         isEquipped(arg0: $Predicate_<$ItemStack>): boolean;
+        isEquipped(arg0: $Item_): boolean;
         isSlotActive(arg0: string, arg1: number): boolean;
         setSlotActive(arg0: string, arg1: number, arg2: boolean): void;
         setSlotsActive(arg0: string, arg1: boolean): void;
@@ -90,13 +73,30 @@ declare module "@package/top/theillusivec4/curios/api/type/capability" {
          * @deprecated
          */
         getFortuneBonus(): number;
+        getStacksHandler(arg0: string): ($ICurioStacksHandler) | undefined;
+        /**
+         * @deprecated
+         */
+        growSlotType(arg0: string, arg1: number): void;
+        /**
+         * @deprecated
+         */
+        shrinkSlotType(arg0: string, arg1: number): void;
+        /**
+         * @deprecated
+         */
+        unlockSlotType(arg0: string, arg1: number, arg2: boolean, arg3: boolean): void;
+        /**
+         * @deprecated
+         */
+        lockSlotType(arg0: string): void;
         reset(): void;
         getModifiers(): $Multimap<string, $AttributeModifier>;
         getSlots(): number;
-        findFirstCurio(arg0: $Predicate_<$ItemStack>): ($SlotResult) | undefined;
-        findFirstCurio(arg0: $Item_): ($SlotResult) | undefined;
-        findFirstCurio(arg0: $Predicate_<$ItemStack>, arg1: string): ($SlotResult) | undefined;
         findFirstCurio(arg0: $Predicate_<$ItemStack>, arg1: boolean, arg2: string): ($SlotResult) | undefined;
+        findFirstCurio(arg0: $Item_): ($SlotResult) | undefined;
+        findFirstCurio(arg0: $Predicate_<$ItemStack>): ($SlotResult) | undefined;
+        findFirstCurio(arg0: $Predicate_<$ItemStack>, arg1: string): ($SlotResult) | undefined;
         getEquippedCurios(): $IItemHandlerModifiable;
         getLootingLevel(arg0: $LootContext): number;
         getFortuneLevel(arg0: $LootContext): number;

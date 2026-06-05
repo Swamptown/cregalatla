@@ -4,8 +4,8 @@ import { $Collection, $Set, $List } from "@package/java/util";
 
 declare module "@package/javax/management/openmbean" {
     export class $OpenType<T> implements $Serializable {
-        getDescription(): string;
         isValue(arg0: $Object): boolean;
+        getDescription(): string;
         isArray(): boolean;
         getTypeName(): string;
         getClassName(): string;
@@ -34,8 +34,8 @@ declare module "@package/javax/management/openmbean" {
     export class $CompositeData {
     }
     export interface $CompositeData {
-        getAll(arg0: string[]): $Object[];
         getCompositeType(): $CompositeType;
+        getAll(arg0: string[]): $Object[];
         get(arg0: string): $Object;
         equals(arg0: $Object): boolean;
         toString(): string;

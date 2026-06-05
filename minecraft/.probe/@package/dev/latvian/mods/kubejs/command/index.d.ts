@@ -109,8 +109,8 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
         getBuiltinSuggestions(): typeof $SharedSuggestionProvider;
         register(command: $LiteralArgumentBuilder<$CommandSourceStack>): $LiteralCommandNode<$CommandSourceStack>;
         getArguments(): typeof $ArgumentTypeWrappers;
-        getRegistry(): $CommandBuildContext;
         getCommands(): typeof $Commands;
+        getRegistry(): $CommandBuildContext;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -155,8 +155,8 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
         get forMultiPlayer(): boolean;
         get builtinSuggestions(): typeof $SharedSuggestionProvider;
         get arguments(): typeof $ArgumentTypeWrappers;
-        get registry(): $CommandBuildContext;
         get commands(): typeof $Commands;
+        get registry(): $CommandBuildContext;
     }
     export class $InformationCommands {
         static dump(stacks: $List_<$ItemStack_>, player: $ServerPlayer, name: string): number;

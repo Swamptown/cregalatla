@@ -38,57 +38,57 @@ declare module "@package/mezz/jei/api/helpers" {
     export class $IPlatformFluidHelper<T> {
     }
     export interface $IPlatformFluidHelper<T> {
-        getFluidIngredientType(): $IIngredientTypeWithSubtypes<$Fluid, T>;
-        create(arg0: $Holder_<$Fluid>, arg1: number): T;
-        create(arg0: $Holder_<$Fluid>, arg1: number, arg2: $DataComponentPatch_): T;
         bucketVolume(): number;
+        getFluidIngredientType(): $IIngredientTypeWithSubtypes<$Fluid, T>;
+        create(arg0: $Holder_<$Fluid>, arg1: number, arg2: $DataComponentPatch_): T;
+        create(arg0: $Holder_<$Fluid>, arg1: number): T;
         get fluidIngredientType(): $IIngredientTypeWithSubtypes<$Fluid, T>;
     }
     export class $IStackHelper {
     }
     export interface $IStackHelper {
+        getUidForStack(arg0: $ItemStack_, arg1: $UidContext_): $Object;
+        getUidForStack(arg0: $ITypedIngredient<$ItemStack_>, arg1: $UidContext_): $Object;
         /**
          * @deprecated
          */
         getUniqueIdentifierForStack(arg0: $ItemStack_, arg1: $UidContext_): string;
-        getUidForStack(arg0: $ItemStack_, arg1: $UidContext_): $Object;
-        getUidForStack(arg0: $ITypedIngredient<$ItemStack_>, arg1: $UidContext_): $Object;
         isEquivalent(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $UidContext_): boolean;
     }
     export class $IJeiHelpers {
     }
     export interface $IJeiHelpers {
-        getRecipeType<T>(arg0: $ResourceLocation_, arg1: $Class<T>): ($RecipeType<T>) | undefined;
+        getGuiHelper(): $IGuiHelper;
         getRecipeType(arg0: $ResourceLocation_): ($RecipeType<never>) | undefined;
-        getPlatformFluidHelper(): $IPlatformFluidHelper<never>;
-        getIngredientVisibility(): $IIngredientVisibility;
+        getRecipeType<T>(arg0: $ResourceLocation_, arg1: $Class<T>): ($RecipeType<T>) | undefined;
+        getFocusFactory(): $IFocusFactory;
+        getIngredientManager(): $IIngredientManager;
         getColorHelper(): $IColorHelper;
         getVanillaRecipeFactory(): $IVanillaRecipeFactory;
+        getPlatformFluidHelper(): $IPlatformFluidHelper<never>;
+        getAllRecipeTypes(): $Stream<$RecipeType<never>>;
+        getIngredientVisibility(): $IIngredientVisibility;
         getStackHelper(): $IStackHelper;
         getModIdHelper(): $IModIdHelper;
         getCodecHelper(): $ICodecHelper;
-        getFocusFactory(): $IFocusFactory;
-        getIngredientManager(): $IIngredientManager;
-        getAllRecipeTypes(): $Stream<$RecipeType<never>>;
-        getGuiHelper(): $IGuiHelper;
-        get platformFluidHelper(): $IPlatformFluidHelper<never>;
-        get ingredientVisibility(): $IIngredientVisibility;
+        get guiHelper(): $IGuiHelper;
+        get focusFactory(): $IFocusFactory;
+        get ingredientManager(): $IIngredientManager;
         get colorHelper(): $IColorHelper;
         get vanillaRecipeFactory(): $IVanillaRecipeFactory;
+        get platformFluidHelper(): $IPlatformFluidHelper<never>;
+        get allRecipeTypes(): $Stream<$RecipeType<never>>;
+        get ingredientVisibility(): $IIngredientVisibility;
         get stackHelper(): $IStackHelper;
         get modIdHelper(): $IModIdHelper;
         get codecHelper(): $ICodecHelper;
-        get focusFactory(): $IFocusFactory;
-        get ingredientManager(): $IIngredientManager;
-        get allRecipeTypes(): $Stream<$RecipeType<never>>;
-        get guiHelper(): $IGuiHelper;
     }
     export class $IColorHelper {
     }
     export interface $IColorHelper {
-        getColors(arg0: $TextureAtlasSprite, arg1: number, arg2: number): $List<number>;
-        getColors(arg0: $ItemStack_, arg1: number): $List<number>;
         getClosestColorName(arg0: number): string;
+        getColors(arg0: $ItemStack_, arg1: number): $List<number>;
+        getColors(arg0: $TextureAtlasSprite, arg1: number, arg2: number): $List<number>;
     }
     export class $IModIdHelper {
     }
@@ -111,12 +111,17 @@ declare module "@package/mezz/jei/api/helpers" {
     export class $IGuiHelper {
     }
     export interface $IGuiHelper {
+        getRecipeArrow(): $IDrawableStatic;
+        getRecipeArrowFilled(): $IDrawableStatic;
+        getRecipePlusSign(): $IDrawableStatic;
         /**
          * @deprecated
          */
         getScrollBoxScrollbarExtraWidth(): number;
+        getRecipeFlameEmpty(): $IDrawableStatic;
         drawableBuilder(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number): $IDrawableBuilder;
         getSlotDrawable(): $IDrawableStatic;
+        createAnimatedRecipeArrow(arg0: number): $IDrawableAnimated;
         createAnimatedRecipeFlame(arg0: number): $IDrawableAnimated;
         createWidgetFromDrawable(arg0: $IDrawable, arg1: number, arg2: number): $IRecipeWidget;
         createBlankDrawable(arg0: number, arg1: number): $IDrawableStatic;
@@ -127,31 +132,26 @@ declare module "@package/mezz/jei/api/helpers" {
          * @deprecated
          */
         createScrollGridFactory(arg0: number, arg1: number): $IScrollGridWidgetFactory<never>;
+        createScrollBoxWidget(arg0: number, arg1: number, arg2: number, arg3: number): $IScrollBoxWidget;
         /**
          * @deprecated
          */
         createScrollBoxWidget(arg0: $IDrawable, arg1: number, arg2: number, arg3: number): $IScrollBoxWidget;
-        createScrollBoxWidget(arg0: number, arg1: number, arg2: number, arg3: number): $IScrollBoxWidget;
         createTickTimer(arg0: number, arg1: number, arg2: boolean): $ITickTimer;
         createDrawable(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number): $IDrawableStatic;
         createDrawableItemStack(arg0: $ItemStack_): $IDrawable;
         createDrawableItemLike(arg0: $ItemLike_): $IDrawable;
-        createAnimatedDrawable(arg0: $IDrawableStatic, arg1: $ITickTimer, arg2: $IDrawableAnimated$StartDirection_): $IDrawableAnimated;
         createAnimatedDrawable(arg0: $IDrawableStatic, arg1: number, arg2: $IDrawableAnimated$StartDirection_, arg3: boolean): $IDrawableAnimated;
+        createAnimatedDrawable(arg0: $IDrawableStatic, arg1: $ITickTimer, arg2: $IDrawableAnimated$StartDirection_): $IDrawableAnimated;
         getRecipeFlameFilled(): $IDrawableStatic;
-        getRecipeFlameEmpty(): $IDrawableStatic;
-        createAnimatedRecipeArrow(arg0: number): $IDrawableAnimated;
         getOutputSlot(): $IDrawableStatic;
-        getRecipeArrow(): $IDrawableStatic;
-        getRecipeArrowFilled(): $IDrawableStatic;
-        getRecipePlusSign(): $IDrawableStatic;
-        get scrollBoxScrollbarExtraWidth(): number;
-        get slotDrawable(): $IDrawableStatic;
-        get recipeFlameFilled(): $IDrawableStatic;
-        get recipeFlameEmpty(): $IDrawableStatic;
-        get outputSlot(): $IDrawableStatic;
         get recipeArrow(): $IDrawableStatic;
         get recipeArrowFilled(): $IDrawableStatic;
         get recipePlusSign(): $IDrawableStatic;
+        get scrollBoxScrollbarExtraWidth(): number;
+        get recipeFlameEmpty(): $IDrawableStatic;
+        get slotDrawable(): $IDrawableStatic;
+        get recipeFlameFilled(): $IDrawableStatic;
+        get outputSlot(): $IDrawableStatic;
     }
 }

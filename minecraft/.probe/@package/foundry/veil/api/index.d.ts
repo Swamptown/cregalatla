@@ -22,8 +22,8 @@ declare module "@package/foundry/veil/api" {
     export class $TickTaskScheduler$TickTask<V> {
     }
     export interface $TickTaskScheduler$TickTask<V> extends $ScheduledFuture<V> {
-        getDelay(): number;
         toCompletableFuture(): $CompletableFuture<V>;
+        getDelay(): number;
         get delay(): number;
     }
 }

@@ -15,23 +15,23 @@ declare module "@package/net/createmod/catnip/animation" {
      */
     export type $LerpedFloat$Chaser_ = ((arg0: number, arg1: number, arg2: number) => number);
     export class $LerpedFloat {
-        static angular(): $LerpedFloat;
-        chase(arg0: number, arg1: number, arg2: $LerpedFloat$Chaser_): $LerpedFloat;
-        tickChaser(): void;
-        startWithValue(arg0: number): $LerpedFloat;
-        chaseTimed(arg0: number, arg1: number): $LerpedFloat;
-        disableSmartAngleChasing(): $LerpedFloat;
-        updateChaseSpeed(arg0: number): boolean;
-        forceNextSync(): void;
         getChaseTarget(): number;
         updateChaseTarget(arg0: number): void;
         setValueNoUpdate(arg0: number): void;
         settled(): boolean;
+        chaseTimed(arg0: number, arg1: number): $LerpedFloat;
+        disableSmartAngleChasing(): $LerpedFloat;
+        updateChaseSpeed(arg0: number): boolean;
+        forceNextSync(): void;
+        startWithValue(arg0: number): $LerpedFloat;
         writeNBT(): $CompoundTag;
         readNBT(arg0: $CompoundTag_, arg1: boolean): void;
+        static angular(): $LerpedFloat;
+        chase(arg0: number, arg1: number, arg2: $LerpedFloat$Chaser_): $LerpedFloat;
+        tickChaser(): void;
         static linear(): $LerpedFloat;
-        getValue(): number;
         getValue(arg0: number): number;
+        getValue(): number;
         setValue(arg0: number): void;
         constructor(arg0: $LerpedFloat$Interpolator_);
         get chaseTarget(): number;

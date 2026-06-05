@@ -15071,6 +15071,86 @@
     "maxDepthY": -36,
     "implosionChance": 0.05
   },
+  "rocketnautics:lunar_aged_basalt": {
+    "maxDepthY": -2,
+    "implosionChance": 0.7766667
+  },
+  "rocketnautics:lunar_fragmented_rock": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_loose_regolith": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_moss_scraggly": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_moss_short": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_moss_stiff": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_regolith": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_regolith_brick": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "rocketnautics:lunar_regolith_brick_slab": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_regolith_brick_stairs": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_regolith_slab": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_regolith_stairs": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_rock": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "rocketnautics:lunar_rock_smooth": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_rock_spiky": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_rock_tall": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_shattered_regolith": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_shattered_regolith_slab": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:lunar_shattered_regolith_stairs": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "rocketnautics:magnetic_stabilizer": {
+    "maxDepthY": -36,
+    "implosionChance": 0.05
+  },
   "rocketnautics:raw_titanium_block": {
     "maxDepthY": -36,
     "implosionChance": 0.41333333
@@ -15098,6 +15178,10 @@
   "rocketnautics:titanium_block": {
     "maxDepthY": -36,
     "implosionChance": 0.05
+  },
+  "rocketnautics:titanium_casing": {
+    "maxDepthY": 10,
+    "implosionChance": 0.82
   },
   "rocketnautics:titanium_ore": {
     "maxDepthY": -35,

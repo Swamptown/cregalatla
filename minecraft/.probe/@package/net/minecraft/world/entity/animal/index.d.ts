@@ -1,7 +1,7 @@
 import { $StrollThroughVillageGoal, $PanicGoal, $MeleeAttackGoal, $GoalSelector, $FollowParentGoal, $JumpGoal, $WaterAvoidingRandomFlyingGoal, $AvoidEntityGoal, $RandomStrollGoal, $BreedGoal, $FleeSunGoal, $MoveToBlockGoal, $TemptGoal, $FloatGoal, $RandomSwimmingGoal, $LookAtPlayerGoal, $Goal } from "@package/net/minecraft/world/entity/ai/goal";
 import { $MoveControl$Operation, $JumpControl, $MoveControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $Codec } from "@package/com/mojang/serialization";
-import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $EntityType_, $VariantHolder, $EntityType, $AgeableMob$AgeableMobGroupData, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $Saddleable, $AgeableMob, $WalkAnimationState, $Mob, $ItemSteerable, $Pose, $PortalProcessor, $SpawnGroupData, $Entity, $PathfinderMob, $TamableAnimal, $Crackiness$Level, $Shearable, $MobSpawnType_, $NeutralMob } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $ParticleOptions } from "@package/net/minecraft/core/particles";
@@ -11,7 +11,7 @@ import { $UUID_, $Stack, $Map, $UUID, $List, $Optional } from "@package/java/uti
 import { $StringRepresentable, $RandomSource, $StringRepresentable$EnumCodec } from "@package/net/minecraft/util";
 import { $Predicate_, $Predicate } from "@package/java/util/function";
 import { $InteractionResult, $InteractionHand, $InteractionHand_ } from "@package/net/minecraft/world";
-import { $BlockPos, $HolderSet_, $BlockPos_, $RegistryAccess, $Registry, $Vec3i, $HolderLookup$Provider, $Holder_, $HolderSet, $Holder } from "@package/net/minecraft/core";
+import { $BlockPos, $HolderSet_, $BlockPos_, $RegistryAccess, $Registry, $Vec3i, $Holder_, $HolderSet, $Holder } from "@package/net/minecraft/core";
 import { $SoundEvent, $SoundSource_ } from "@package/net/minecraft/sounds";
 import { $NodeEvaluator, $Path } from "@package/net/minecraft/world/level/pathfinder";
 import { $BootstrapContext } from "@package/net/minecraft/data/worldgen";
@@ -23,7 +23,7 @@ import { $BlockState } from "@package/net/minecraft/world/level/block/state";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
 import { $AmphibiousPathNavigation, $PathNavigation } from "@package/net/minecraft/world/entity/ai/navigation";
 import { $TargetingConditions } from "@package/net/minecraft/world/entity/ai/targeting";
-import { $Enum, $Record, $Class, $Object } from "@package/java/lang";
+import { $Enum, $Record, $Class } from "@package/java/lang";
 import { $WolfAccessor } from "@package/com/blackgear/vanillabackport/core/mixin/access";
 import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entity";
 import { $BlockAndTintGetter, $LevelAccessor, $Level, $Level_ } from "@package/net/minecraft/world/level";
@@ -71,7 +71,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         canMate(arg0: $Animal): boolean;
         spawnChildFromBreeding(arg0: $ServerLevel, arg1: $Animal): void;
         finalizeSpawnChildFromBreeding(arg0: $ServerLevel, arg1: $Animal, arg2: $AgeableMob): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -103,6 +102,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -127,6 +127,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -152,6 +153,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -242,13 +244,11 @@ declare module "@package/net/minecraft/world/entity/animal" {
         get loveCause(): $ServerPlayer;
     }
     export class $Chicken extends $Animal implements $VariantDataHolder<any> {
-        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Chicken;
         setVariantData(variant: $ChickenVariant_): void;
         getVariantData(): $Optional<any>;
         setChickenJockey(arg0: boolean): void;
         isChickenJockey(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $Object;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -281,6 +281,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -305,6 +306,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         flap: number;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -331,6 +333,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -448,7 +451,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         inRangeOfLeader(): boolean;
         pathToLeader(): void;
         addFollowers(arg0: $Stream<$AbstractSchoolingFish>): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -479,6 +481,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -503,6 +506,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -526,6 +530,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -615,7 +620,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         get follower(): boolean;
     }
     export class $Cod extends $AbstractSchoolingFish {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -646,6 +650,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -670,6 +675,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -693,6 +699,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -780,6 +787,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         constructor(arg0: $EntityType_<$Cod>, arg1: $Level_);
     }
     export class $Cat extends $TamableAnimal implements $VariantHolder<$Holder<$CatVariant>>, $VariantDataHolder<any> {
+        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Cat;
         setVariantData(variant: $CatDataVariant_): void;
         getVariantData(): $Optional<any>;
         getNaturalVariant(): $Holder<any>;
@@ -799,7 +807,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         setVariant(arg0: $Holder_<$CatVariant>): void;
         getVariant(): $Holder<$CatVariant>;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $Holder<$CatVariant>;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -834,6 +841,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -860,6 +868,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -885,6 +894,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1015,7 +1025,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         playWarningSound(): void;
         getStandingAnimationScale(arg0: number): number;
         static createAttributes(): $AttributeSupplier$Builder;
-        playerDied(arg0: $Player): void;
         isAngryAt(arg0: $LivingEntity): boolean;
         updatePersistentAnger(arg0: $ServerLevel, arg1: boolean): void;
         addPersistentAngerSaveData(arg0: $CompoundTag_): void;
@@ -1024,7 +1033,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         isAngry(): boolean;
         forgetCurrentTargetAndRefreshUniversalAnger(): void;
         readPersistentAngerSaveData(arg0: $Level_, arg1: $CompoundTag_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        playerDied(arg0: $Player): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1056,6 +1065,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1080,6 +1090,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -1105,6 +1116,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1199,7 +1211,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         setVariantData(variant: $CowVariant_): void;
         getVariantData(): $Optional<any>;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $Object;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1231,6 +1242,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1255,6 +1267,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -1280,6 +1293,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1384,7 +1398,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
      */
     export type $WolfVariant_ = RegistryTypes.WolfVariant;
     export class $Fox extends $Animal implements $VariantHolder<$Fox$Type> {
-        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Fox;
         isSitting(): boolean;
         setIsCrouching(arg0: boolean): void;
         setIsInterested(arg0: boolean): void;
@@ -1415,7 +1428,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static access$200(arg0: $Fox): $RandomSource;
         static access$300(arg0: $Fox): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $Fox$Type;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1449,6 +1461,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static FLAG_INTERESTED: number;
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1473,6 +1486,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -1498,6 +1512,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1648,7 +1663,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static access$100(arg0: $Dolphin): $RandomSource;
         static access$200(arg0: $Dolphin): $RandomSource;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1679,6 +1693,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1703,6 +1718,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -1726,6 +1742,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1823,7 +1840,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
     export class $Pufferfish extends $AbstractFish {
         getPuffState(): number;
         setPuffState(arg0: number): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1855,6 +1871,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1880,6 +1897,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -1904,6 +1922,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -2059,18 +2078,18 @@ declare module "@package/net/minecraft/world/entity/animal" {
      */
     export type $MushroomCow$MushroomType_ = "red" | "brown";
     export class $Bee extends $Animal implements $NeutralMob, $FlyingAnimal {
+        setHivePos(arg0: $BlockPos_): void;
         startPersistentAngerTimer(): void;
         getRemainingPersistentAngerTime(): number;
         setPersistentAngerTarget(arg0: $UUID_): void;
         getPersistentAngerTarget(): $UUID;
         setRemainingPersistentAngerTime(arg0: number): void;
-        setStayOutOfHiveCountdown(arg0: number): void;
-        hasSavedFlowerPos(): boolean;
-        getSavedFlowerPos(): $BlockPos;
         setSavedFlowerPos(arg0: $BlockPos_): void;
         dropOffNectar(): void;
         hasNectar(): boolean;
-        setHivePos(arg0: $BlockPos_): void;
+        setStayOutOfHiveCountdown(arg0: number): void;
+        hasSavedFlowerPos(): boolean;
+        getSavedFlowerPos(): $BlockPos;
         hasHive(): boolean;
         getHivePos(): $BlockPos;
         hasStung(): boolean;
@@ -2087,11 +2106,11 @@ declare module "@package/net/minecraft/world/entity/animal" {
         isHiveValid(): boolean;
         isTooFarAway(arg0: $BlockPos_): boolean;
         isFlowerValid(arg0: $BlockPos_): boolean;
-        static access$1800(arg0: $Bee): $RandomSource;
         static access$000(arg0: $Bee): $PathNavigation;
         static access$100(arg0: $Bee): $PathNavigation;
         static access$200(arg0: $Bee): $PathNavigation;
         static access$300(arg0: $Bee): $PathNavigation;
+        static access$1800(arg0: $Bee): $RandomSource;
         static access$1900(arg0: $Bee): $PathNavigation;
         static access$400(arg0: $Bee): $PathNavigation;
         static access$500(arg0: $Bee): $PathNavigation;
@@ -2102,11 +2121,11 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static access$1000(arg0: $Bee): $PathNavigation;
         static access$1100(arg0: $Bee): $PathNavigation;
         static access$1700(arg0: $Bee): $RandomSource;
+        static access$1200(arg0: $Bee): $PathNavigation;
         static access$1300(arg0: $Bee): $RandomSource;
         static access$1400(arg0: $Bee): $RandomSource;
         static access$1500(arg0: $Bee): $RandomSource;
         static access$1600(arg0: $Bee): $PathNavigation;
-        static access$1200(arg0: $Bee): $PathNavigation;
         static access$2000(arg0: $Bee): $RandomSource;
         static access$2100(arg0: $Bee): $PathNavigation;
         static access$2200(arg0: $Bee): $RandomSource;
@@ -2116,10 +2135,9 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static access$2600(arg0: $Bee): $PathNavigation;
         static access$2700(arg0: $Bee): $PathNavigation;
         static access$2800(arg0: $Bee): $PathNavigation;
-        isFlying(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
+        isFlying(): boolean;
         closerThan(arg0: $BlockPos_, arg1: number): boolean;
-        playerDied(arg0: $Player): void;
         isAngryAt(arg0: $LivingEntity): boolean;
         updatePersistentAnger(arg0: $ServerLevel, arg1: boolean): void;
         addPersistentAngerSaveData(arg0: $CompoundTag_): void;
@@ -2128,7 +2146,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         isAngry(): boolean;
         forgetCurrentTargetAndRefreshUniversalAnger(): void;
         readPersistentAngerSaveData(arg0: $Level_, arg1: $CompoundTag_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        playerDied(arg0: $Player): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -2160,6 +2178,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -2187,6 +2206,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -2216,6 +2236,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static TAG_FLOWER_POS: string;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
@@ -2351,7 +2372,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         loadFromBucketTag(arg0: $CompoundTag_): void;
         canRandomSwim(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -2382,6 +2402,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -2406,6 +2427,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -2429,6 +2451,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -2526,9 +2549,8 @@ declare module "@package/net/minecraft/world/entity/animal" {
     export class $Turtle$TurtleTravelGoal extends $Goal {
     }
     export class $WaterAnimal extends $PathfinderMob {
-        static checkSurfaceWaterAnimalSpawnRules(arg0: $EntityType_<$WaterAnimal>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         handleAirSupply(arg0: number): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        static checkSurfaceWaterAnimalSpawnRules(arg0: $EntityType_<$WaterAnimal>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -2559,6 +2581,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -2583,6 +2606,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -2606,6 +2630,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -2731,11 +2756,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         animal: $Animal;
     }
     export class $Panda extends $Animal {
-        setAttributes(): void;
         sneeze(arg0: boolean): void;
-        isScared(): boolean;
-        getRollAmount(arg0: number): number;
-        isRolling(): boolean;
         isEating(): boolean;
         isSitting(): boolean;
         getUnhappyCounter(): number;
@@ -2758,6 +2779,10 @@ declare module "@package/net/minecraft/world/entity/animal" {
         getSitAmount(arg0: number): number;
         getLieOnBackAmount(arg0: number): number;
         tryToSit(): void;
+        isScared(): boolean;
+        getRollAmount(arg0: number): number;
+        isRolling(): boolean;
+        setAttributes(): void;
         roll(arg0: boolean): void;
         getVariant(): $Panda$Gene;
         static access$000(arg0: $Panda): $RandomSource;
@@ -2771,11 +2796,10 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static access$800(arg0: $Panda): $RandomSource;
         static access$900(arg0: $Panda): $RandomSource;
         static access$1000(arg0: $Panda): $RandomSource;
-        isLazy(): boolean;
+        static createAttributes(): $AttributeSupplier$Builder;
         canPerformAction(): boolean;
         eat(arg0: boolean): void;
-        static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        isLazy(): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -2809,6 +2833,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static TOTAL_ROLL_STEPS: number;
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         static BREED_TARGETING: $TargetingConditions;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
@@ -2834,6 +2859,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -2862,6 +2888,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -2950,8 +2977,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static BASE_SAFE_FALL_DISTANCE: number;
         age: number;
         constructor(arg0: $EntityType_<$Panda>, arg1: $Level_);
-        get scared(): boolean;
-        get rolling(): boolean;
         get eating(): boolean;
         get sitting(): boolean;
         get sneezing(): boolean;
@@ -2959,6 +2984,8 @@ declare module "@package/net/minecraft/world/entity/animal" {
         get playful(): boolean;
         get brown(): boolean;
         get weak(): boolean;
+        get scared(): boolean;
+        get rolling(): boolean;
         get variant(): $Panda$Gene;
         get lazy(): boolean;
     }
@@ -2976,12 +3003,10 @@ declare module "@package/net/minecraft/world/entity/animal" {
      */
     export type $TropicalFish$Base_ = "small" | "large";
     export class $Ocelot extends $Animal {
-        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Ocelot;
         reassessTrustingGoals(): void;
         isTrusting(): boolean;
         static checkOcelotSpawnRules(arg0: $EntityType_<$Ocelot>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -3014,6 +3039,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -3040,6 +3066,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -3065,6 +3092,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -3172,7 +3200,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
     export class $Bee$BeeWanderGoal extends $Goal {
     }
     export class $Salmon extends $AbstractSchoolingFish {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -3203,6 +3230,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -3227,6 +3255,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -3250,6 +3279,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -3360,7 +3390,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
     export class $Cat$CatRelaxOnOwnerGoal extends $Goal {
     }
     export class $Turtle extends $Animal {
-        setHomePos(arg0: $BlockPos_): void;
         getHomePos(): $BlockPos;
         setTravelPos(arg0: $BlockPos_): void;
         getTravelPos(): $BlockPos;
@@ -3373,10 +3402,10 @@ declare module "@package/net/minecraft/world/entity/animal" {
         isTravelling(): boolean;
         setTravelling(arg0: boolean): void;
         static checkTurtleSpawnRules(arg0: $EntityType_<$Turtle>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
+        setHomePos(arg0: $BlockPos_): void;
         static access$000(arg0: $Turtle): $RandomSource;
         static access$100(arg0: $Turtle): $RandomSource;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -3409,6 +3438,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -3434,6 +3464,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -3459,6 +3490,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -3582,8 +3614,8 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static MIN_SPEED: number;
     }
     export class $TropicalFish$Variant extends $Record {
-        baseColor(): $DyeColor;
         patternColor(): $DyeColor;
+        baseColor(): $DyeColor;
         getPackedId(): number;
         pattern(): $TropicalFish$Pattern;
         static CODEC: $Codec<$TropicalFish$Variant>;
@@ -3594,21 +3626,19 @@ declare module "@package/net/minecraft/world/entity/animal" {
     /**
      * Values that may be interpreted as {@link $TropicalFish$Variant}.
      */
-    export type $TropicalFish$Variant_ = { baseColor?: $DyeColor_, patternColor?: $DyeColor_, pattern?: $TropicalFish$Pattern_,  } | [baseColor?: $DyeColor_, patternColor?: $DyeColor_, pattern?: $TropicalFish$Pattern_, ];
+    export type $TropicalFish$Variant_ = { pattern?: $TropicalFish$Pattern_, patternColor?: $DyeColor_, baseColor?: $DyeColor_,  } | [pattern?: $TropicalFish$Pattern_, patternColor?: $DyeColor_, baseColor?: $DyeColor_, ];
     export class $Rabbit extends $Animal implements $VariantHolder<$Rabbit$Variant> {
         getJumpSound(): $SoundEvent;
-        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Rabbit;
-        setSpeedModifier(arg0: number): void;
         getJumpCompletion(arg0: number): number;
         startJumping(): void;
         static checkRabbitSpawnRules(arg0: $EntityType_<$Rabbit>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         wantsMoreFood(): boolean;
+        setSpeedModifier(arg0: number): void;
         setVariant(arg0: $Rabbit$Variant_): void;
-        getVariant(): $Rabbit$Variant;
         static access$000(arg0: $Rabbit): boolean;
         static access$100(arg0: $Rabbit): $JumpControl;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $Rabbit$Variant;
+        getVariant(): $Rabbit$Variant;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -3642,6 +3672,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static FLEE_SPEED_MOD: number;
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -3666,6 +3697,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -3691,6 +3723,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static ATTACK_SPEED_MOD: number;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
@@ -3864,6 +3897,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         constructor(arg0: $Rabbit$Variant_);
     }
     export class $Pig extends $Animal implements $ItemSteerable, $Saddleable, $VariantDataHolder<any> {
+        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Pig;
         boost(): boolean;
         isSaddled(): boolean;
         isSaddleable(): boolean;
@@ -3872,7 +3906,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         getVariantData(): $Optional<any>;
         static createAttributes(): $AttributeSupplier$Builder;
         getSaddleSoundEvent(): $SoundEvent;
-        serializeNBT(arg0: $HolderLookup$Provider): $Object;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -3904,6 +3937,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -3928,6 +3962,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -3953,6 +3988,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -4047,21 +4083,20 @@ declare module "@package/net/minecraft/world/entity/animal" {
     export interface $WolfVariant extends RegistryMarked<RegistryTypes.WolfVariantTag, RegistryTypes.WolfVariant> {}
     export class $Sheep extends $Animal implements $Shearable {
         shear(arg0: $SoundSource_): void;
+        readyForShearing(): boolean;
         getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Sheep;
         isSheared(): boolean;
-        readyForShearing(): boolean;
-        setSheared(arg0: boolean): void;
         getHeadEatPositionScale(arg0: number): number;
         getHeadEatAngleScale(arg0: number): number;
         static getRandomSheepColor(arg0: $RandomSource): $DyeColor;
+        setSheared(arg0: boolean): void;
         setColor(arg0: $DyeColor_): void;
+        static createAttributes(): $AttributeSupplier$Builder;
         getColor(): $DyeColor;
         static getColor(arg0: $DyeColor_): number;
-        static createAttributes(): $AttributeSupplier$Builder;
         isShearable(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_): boolean;
         onSheared(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_): $List<$ItemStack>;
         spawnShearedDrop(arg0: $Level_, arg1: $BlockPos_, arg2: $ItemStack_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4093,6 +4128,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -4117,6 +4153,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -4142,6 +4179,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -4347,16 +4385,8 @@ declare module "@package/net/minecraft/world/entity/animal" {
         setPersistentAngerTarget(arg0: $UUID_): void;
         getPersistentAngerTarget(): $UUID;
         setRemainingPersistentAngerTime(arg0: number): void;
-        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Wolf;
-        setVariantData(variant: $WolfDataVariant_): void;
-        getVariantData(): $Optional<any>;
-        getCollarColor(): $DyeColor;
-        setCollarColor(arg0: $DyeColor_): void;
-        setIsInterested(arg0: boolean): void;
-        isInterested(): boolean;
-        getHeadRollAngle(arg0: number): number;
         isWet(): boolean;
-        handler$bco000$vanillabackport$vb$getAmbientSound(cir: $CallbackInfoReturnable<any>): void;
+        handler$beh000$vanillabackport$vb$getAmbientSound(cir: $CallbackInfoReturnable<any>): void;
         getWetShade(arg0: number): number;
         getBodyRollAngle(arg0: number, arg1: number): number;
         hasArmor(): boolean;
@@ -4364,12 +4394,18 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static checkWolfSpawnRules(arg0: $EntityType_<$Wolf>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         getSoundVariant(): $WolfSoundVariant;
         setSoundVariant(variant: $WolfSoundVariant_): void;
+        setVariantData(variant: $WolfDataVariant_): void;
+        getVariantData(): $Optional<any>;
+        getCollarColor(): $DyeColor;
+        setCollarColor(arg0: $DyeColor_): void;
+        setIsInterested(arg0: boolean): void;
+        isInterested(): boolean;
+        getHeadRollAngle(arg0: number): number;
         setVariant(arg0: $Holder_<$WolfVariant>): void;
         getVariant(): $Holder<$WolfVariant>;
         static access$000(arg0: $Wolf): $RandomSource;
         getTexture(): $ResourceLocation;
         static createAttributes(): $AttributeSupplier$Builder;
-        playerDied(arg0: $Player): void;
         isAngryAt(arg0: $LivingEntity): boolean;
         updatePersistentAnger(arg0: $ServerLevel, arg1: boolean): void;
         addPersistentAngerSaveData(arg0: $CompoundTag_): void;
@@ -4378,8 +4414,8 @@ declare module "@package/net/minecraft/world/entity/animal" {
         isAngry(): boolean;
         forgetCurrentTargetAndRefreshUniversalAnger(): void;
         readPersistentAngerSaveData(arg0: $Level_, arg1: $CompoundTag_): void;
+        playerDied(arg0: $Player): void;
         callSetCollarColor(arg0: $DyeColor_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $Holder<$WolfVariant>;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4412,6 +4448,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -4437,6 +4474,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -4462,6 +4500,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -4551,17 +4590,17 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static BASE_SAFE_FALL_DISTANCE: number;
         age: number;
         constructor(arg0: $EntityType_<$Wolf>, arg1: $Level_);
-        get interested(): boolean;
         get wet(): boolean;
         get tailAngle(): number;
+        get interested(): boolean;
         get texture(): $ResourceLocation;
         get angry(): boolean;
     }
     export class $Fox$FoxAlertableEntitiesSelector implements $Predicate<$LivingEntity> {
         test(arg0: $LivingEntity): boolean;
+        or(arg0: $Predicate_<$LivingEntity>): $Predicate<$LivingEntity>;
         negate(): $Predicate<$LivingEntity>;
         and(arg0: $Predicate_<$LivingEntity>): $Predicate<$LivingEntity>;
-        or(arg0: $Predicate_<$LivingEntity>): $Predicate<$LivingEntity>;
         this$0: $Fox;
         constructor(arg0: $Fox);
     }
@@ -4584,10 +4623,10 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static values(): $Panda$Gene[];
         static valueOf(arg0: string): $Panda$Gene;
         getId(): number;
+        static getRandom(arg0: $RandomSource): $Panda$Gene;
         static byName(arg0: string): $Panda$Gene;
         getSerializedName(): string;
         static byId(arg0: number): $Panda$Gene;
-        static getRandom(arg0: $RandomSource): $Panda$Gene;
         getRemappedEnumConstantName(): string;
         static WEAK: $Panda$Gene;
         static CODEC: $StringRepresentable$EnumCodec<$Panda$Gene>;
@@ -4609,7 +4648,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
     export class $Fox$StalkPreyGoal extends $Goal {
     }
     export class $AbstractGolem extends $PathfinderMob {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4640,6 +4678,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -4664,6 +4703,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -4687,6 +4727,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -4782,7 +4823,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         onSheared(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_): $List<$ItemStack>;
         spawnShearedDrop(arg0: $Level_, arg1: $BlockPos_, arg2: $ItemStack_): void;
         getVariant(): $MushroomCow$MushroomType;
-        serializeNBT(arg0: $HolderLookup$Provider): $MushroomCow$MushroomType;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4814,6 +4854,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -4838,6 +4879,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -4863,6 +4905,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -4981,17 +5024,16 @@ declare module "@package/net/minecraft/world/entity/animal" {
     export class $Panda$PandaRollGoal extends $Goal {
     }
     export class $TropicalFish extends $AbstractSchoolingFish implements $VariantHolder<$TropicalFish$Pattern> {
-        static getBaseColor(arg0: number): $DyeColor;
-        getBaseColor(): $DyeColor;
         static getPredefinedName(arg0: number): string;
+        getBaseColor(): $DyeColor;
+        static getBaseColor(arg0: number): $DyeColor;
+        static checkTropicalFishSpawnRules(arg0: $EntityType_<$TropicalFish>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static packVariant(arg0: $TropicalFish$Pattern_, arg1: $DyeColor_, arg2: $DyeColor_): number;
         static getPatternColor(arg0: number): $DyeColor;
         getPatternColor(): $DyeColor;
-        static checkTropicalFishSpawnRules(arg0: $EntityType_<$TropicalFish>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
-        setVariant(arg0: $TropicalFish$Pattern_): void;
         static getPattern(arg0: number): $TropicalFish$Pattern;
+        setVariant(arg0: $TropicalFish$Pattern_): void;
         getVariant(): $TropicalFish$Pattern;
-        serializeNBT(arg0: $HolderLookup$Provider): $TropicalFish$Pattern;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -5022,6 +5064,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -5046,6 +5089,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static COMMON_VARIANTS: $List<$TropicalFish$Variant>;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -5070,6 +5114,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -5180,15 +5225,14 @@ declare module "@package/net/minecraft/world/entity/animal" {
     export type $Parrot$Variant_ = "red_blue" | "blue" | "green" | "yellow_blue" | "gray";
     export class $SnowGolem extends $AbstractGolem implements $Shearable, $RangedAttackMob {
         shear(arg0: $SoundSource_): void;
-        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
+        readyForShearing(): boolean;
         hasPumpkin(): boolean;
         setPumpkin(arg0: boolean): void;
-        readyForShearing(): boolean;
+        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
         static createAttributes(): $AttributeSupplier$Builder;
         isShearable(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_): boolean;
         onSheared(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_): $List<$ItemStack>;
         spawnShearedDrop(arg0: $Level_, arg1: $BlockPos_, arg2: $ItemStack_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -5219,6 +5263,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -5243,6 +5288,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -5266,6 +5312,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -5383,7 +5430,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         getSquirtSound(): $SoundEvent;
         static access$000(arg0: $Squid): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -5415,6 +5461,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         oldTentacleAngle: number;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
@@ -5443,6 +5490,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -5466,6 +5514,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -5562,12 +5611,11 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static checkParrotSpawnRules(arg0: $EntityType_<$Parrot>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         setVariant(arg0: $Parrot$Variant_): void;
         getVariant(): $Parrot$Variant;
-        static getPitch(arg0: $RandomSource): number;
+        static createAttributes(): $AttributeSupplier$Builder;
+        isFlying(): boolean;
         static imitateNearbyMobs(arg0: $Level_, arg1: $Entity): boolean;
         static getAmbient(arg0: $Level_, arg1: $RandomSource): $SoundEvent;
-        isFlying(): boolean;
-        static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $Parrot$Variant;
+        static getPitch(arg0: $RandomSource): number;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -5600,6 +5648,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -5625,6 +5674,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         flap: number;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -5651,6 +5701,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -5762,15 +5813,15 @@ declare module "@package/net/minecraft/world/entity/animal" {
     export class $Bee$BaseBeeGoal extends $Goal {
     }
     export class $Bucketable {
-        /**
-         * @deprecated
-         */
-        static loadDefaultDataFromBucketTag(arg0: $Mob, arg1: $CompoundTag_): void;
         static bucketMobPickup<T extends $LivingEntity>(arg0: $Player, arg1: $InteractionHand_, arg2: T): ($InteractionResult) | undefined;
         /**
          * @deprecated
          */
         static saveDefaultDataToBucketTag(arg0: $Mob, arg1: $ItemStack_): void;
+        /**
+         * @deprecated
+         */
+        static loadDefaultDataFromBucketTag(arg0: $Mob, arg1: $CompoundTag_): void;
     }
     export interface $Bucketable {
         getPickupSound(): $SoundEvent;
@@ -5785,7 +5836,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
     export class $ShoulderRidingEntity extends $TamableAnimal {
         canSitOnShoulder(): boolean;
         setEntityOnShoulder(arg0: $ServerPlayer): boolean;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -5818,6 +5868,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -5843,6 +5894,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -5868,6 +5920,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -6015,7 +6068,6 @@ declare module "@package/net/minecraft/world/entity/animal" {
         setRemainingPersistentAngerTime(arg0: number): void;
         setPlayerCreated(arg0: boolean): void;
         static createAttributes(): $AttributeSupplier$Builder;
-        playerDied(arg0: $Player): void;
         isAngryAt(arg0: $LivingEntity): boolean;
         updatePersistentAnger(arg0: $ServerLevel, arg1: boolean): void;
         addPersistentAngerSaveData(arg0: $CompoundTag_): void;
@@ -6024,7 +6076,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         isAngry(): boolean;
         forgetCurrentTargetAndRefreshUniversalAnger(): void;
         readPersistentAngerSaveData(arg0: $Level_, arg1: $CompoundTag_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        playerDied(arg0: $Player): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -6056,6 +6108,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -6080,6 +6133,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -6103,6 +6157,7 @@ declare module "@package/net/minecraft/world/entity/animal" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

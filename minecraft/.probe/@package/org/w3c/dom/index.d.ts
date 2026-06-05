@@ -31,6 +31,8 @@ declare module "@package/org/w3c/dom" {
         static DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: number;
     }
     export interface $Node {
+        hasAttributes(): boolean;
+        getLocalName(): string;
         appendChild(arg0: $Node): $Node;
         getLastChild(): $Node;
         getNodeName(): string;
@@ -44,8 +46,10 @@ declare module "@package/org/w3c/dom" {
         getNodeValue(): string;
         insertBefore(arg0: $Node, arg1: $Node): $Node;
         getBaseURI(): string;
-        getNodeType(): number;
         setUserData(arg0: string, arg1: $Object, arg2: $UserDataHandler_): $Object;
+        normalize(): void;
+        getFeature(arg0: string, arg1: string): $Object;
+        getNodeType(): number;
         getOwnerDocument(): $Document;
         replaceChild(arg0: $Node, arg1: $Node): $Node;
         hasChildNodes(): boolean;
@@ -60,14 +64,11 @@ declare module "@package/org/w3c/dom" {
         lookupNamespaceURI(arg0: string): string;
         isEqualNode(arg0: $Node): boolean;
         getUserData(arg0: string): $Object;
-        getFeature(arg0: string, arg1: string): $Object;
-        hasAttributes(): boolean;
-        getLocalName(): string;
-        normalize(): void;
         isSupported(arg0: string, arg1: string): boolean;
         getAttributes(): $NamedNodeMap;
         getPrefix(): string;
         getChildNodes(): $NodeList;
+        get localName(): string;
         get lastChild(): $Node;
         get nodeName(): string;
         get parentNode(): $Node;
@@ -78,7 +79,6 @@ declare module "@package/org/w3c/dom" {
         get nodeType(): number;
         get ownerDocument(): $Document;
         get namespaceURI(): string;
-        get localName(): string;
         get attributes(): $NamedNodeMap;
         get childNodes(): $NodeList;
     }
@@ -89,10 +89,10 @@ declare module "@package/org/w3c/dom" {
     export class $NamedNodeMap {
     }
     export interface $NamedNodeMap {
+        getNamedItemNS(arg0: string, arg1: string): $Node;
         getNamedItem(arg0: string): $Node;
         setNamedItem(arg0: $Node): $Node;
         setNamedItemNS(arg0: $Node): $Node;
-        getNamedItemNS(arg0: string, arg1: string): $Node;
         removeNamedItemNS(arg0: string, arg1: string): $Node;
         item(arg0: number): $Node;
         getLength(): number;
@@ -107,26 +107,26 @@ declare module "@package/org/w3c/dom" {
         substringData(arg0: number, arg1: number): string;
         insertData(arg0: number, arg1: string): void;
         deleteData(arg0: number, arg1: number): void;
+        getData(): string;
         setData(arg0: string): void;
         getLength(): number;
-        getData(): string;
         get length(): number;
     }
     export class $ProcessingInstruction {
     }
     export interface $ProcessingInstruction extends $Node {
+        getData(): string;
         setData(arg0: string): void;
         getTarget(): string;
-        getData(): string;
         get target(): string;
     }
     export class $DOMImplementation {
     }
     export interface $DOMImplementation {
-        createDocumentType(arg0: string, arg1: string, arg2: string): $DocumentType;
-        hasFeature(arg0: string, arg1: string): boolean;
-        getFeature(arg0: string, arg1: string): $Object;
         createDocument(arg0: string, arg1: string, arg2: $DocumentType): $Document;
+        hasFeature(arg0: string, arg1: string): boolean;
+        createDocumentType(arg0: string, arg1: string, arg2: string): $DocumentType;
+        getFeature(arg0: string, arg1: string): $Object;
     }
     export class $UserDataHandler {
         static NODE_DELETED: number;
@@ -166,6 +166,9 @@ declare module "@package/org/w3c/dom" {
     export class $Element {
     }
     export interface $Element extends $Node {
+        removeAttributeNode(arg0: $Attr): $Attr;
+        getElementsByTagName(arg0: string): $NodeList;
+        getElementsByTagNameNS(arg0: string, arg1: string): $NodeList;
         setAttributeNodeNS(arg0: $Attr): $Attr;
         setAttributeNode(arg0: $Attr): $Attr;
         setIdAttributeNode(arg0: $Attr, arg1: boolean): void;
@@ -173,18 +176,15 @@ declare module "@package/org/w3c/dom" {
         getAttributeNode(arg0: string): $Attr;
         setAttributeNS(arg0: string, arg1: string, arg2: string): void;
         setIdAttribute(arg0: string, arg1: boolean): void;
-        removeAttributeNode(arg0: $Attr): $Attr;
-        getElementsByTagName(arg0: string): $NodeList;
-        getElementsByTagNameNS(arg0: string, arg1: string): $NodeList;
         getAttributeNS(arg0: string, arg1: string): string;
         removeAttributeNS(arg0: string, arg1: string): void;
         hasAttribute(arg0: string): boolean;
         hasAttributeNS(arg0: string, arg1: string): boolean;
         setIdAttributeNS(arg0: string, arg1: string, arg2: boolean): void;
         getSchemaTypeInfo(): $TypeInfo;
+        setAttribute(arg0: string, arg1: string): void;
         removeAttribute(arg0: string): void;
         getAttribute(arg0: string): string;
-        setAttribute(arg0: string, arg1: string): void;
         getTagName(): string;
         get schemaTypeInfo(): $TypeInfo;
         get tagName(): string;
@@ -193,24 +193,24 @@ declare module "@package/org/w3c/dom" {
     }
     export interface $Attr extends $Node {
         getSpecified(): boolean;
-        getOwnerElement(): $Element;
         getSchemaTypeInfo(): $TypeInfo;
         isId(): boolean;
+        getOwnerElement(): $Element;
         getName(): string;
         getValue(): string;
         setValue(arg0: string): void;
         get specified(): boolean;
-        get ownerElement(): $Element;
         get schemaTypeInfo(): $TypeInfo;
         get id(): boolean;
+        get ownerElement(): $Element;
         get name(): string;
     }
     export class $DOMConfiguration {
     }
     export interface $DOMConfiguration {
-        setParameter(arg0: string, arg1: $Object): void;
         canSetParameter(arg0: string, arg1: $Object): boolean;
         getParameterNames(): $DOMStringList;
+        setParameter(arg0: string, arg1: $Object): void;
         getParameter(arg0: string): $Object;
         get parameterNames(): $DOMStringList;
     }
@@ -221,15 +221,15 @@ declare module "@package/org/w3c/dom" {
     export class $DocumentType {
     }
     export interface $DocumentType extends $Node {
+        getInternalSubset(): string;
         getEntities(): $NamedNodeMap;
         getNotations(): $NamedNodeMap;
-        getInternalSubset(): string;
         getSystemId(): string;
         getPublicId(): string;
         getName(): string;
+        get internalSubset(): string;
         get entities(): $NamedNodeMap;
         get notations(): $NamedNodeMap;
-        get internalSubset(): string;
         get systemId(): string;
         get publicId(): string;
         get name(): string;
@@ -254,20 +254,6 @@ declare module "@package/org/w3c/dom" {
     export class $Document {
     }
     export interface $Document extends $Node {
-        createEntityReference(arg0: string): $EntityReference;
-        setXmlVersion(arg0: string): void;
-        createComment(arg0: string): $Comment;
-        createProcessingInstruction(arg0: string, arg1: string): $ProcessingInstruction;
-        setStrictErrorChecking(arg0: boolean): void;
-        setDocumentURI(arg0: string): void;
-        setXmlStandalone(arg0: boolean): void;
-        createCDATASection(arg0: string): $CDATASection;
-        createTextNode(arg0: string): $Text;
-        getDocumentURI(): string;
-        createAttributeNS(arg0: string, arg1: string): $Attr;
-        createAttribute(arg0: string): $Attr;
-        createElementNS(arg0: string, arg1: string): $Element;
-        createElement(arg0: string): $Element;
         importNode(arg0: $Node, arg1: boolean): $Node;
         getXmlEncoding(): string;
         getXmlVersion(): string;
@@ -283,6 +269,20 @@ declare module "@package/org/w3c/dom" {
         adoptNode(arg0: $Node): $Node;
         getElementById(arg0: string): $Element;
         getElementsByTagNameNS(arg0: string, arg1: string): $NodeList;
+        createEntityReference(arg0: string): $EntityReference;
+        setXmlVersion(arg0: string): void;
+        createComment(arg0: string): $Comment;
+        createProcessingInstruction(arg0: string, arg1: string): $ProcessingInstruction;
+        setStrictErrorChecking(arg0: boolean): void;
+        setDocumentURI(arg0: string): void;
+        setXmlStandalone(arg0: boolean): void;
+        createCDATASection(arg0: string): $CDATASection;
+        createTextNode(arg0: string): $Text;
+        getDocumentURI(): string;
+        createAttributeNS(arg0: string, arg1: string): $Attr;
+        createAttribute(arg0: string): $Attr;
+        createElementNS(arg0: string, arg1: string): $Element;
+        createElement(arg0: string): $Element;
         getImplementation(): $DOMImplementation;
         getDocumentElement(): $Element;
         get xmlEncoding(): string;

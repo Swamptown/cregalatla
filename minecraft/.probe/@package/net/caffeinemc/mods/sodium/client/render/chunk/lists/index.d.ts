@@ -18,29 +18,29 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/lists" {
      */
     export type $ChunkRenderListIterable_ = ((arg0: boolean) => $Iterator<$ChunkRenderList>);
     export class $SortedRenderLists implements $ChunkRenderListIterable, $SortedRenderListsAccessor {
-        static init$veil_$md$4ca6b6$0(arg0: $ObjectArrayList<any>): $SortedRenderLists;
+        static init$veil_$md$3b3139$0(arg0: $ObjectArrayList<any>): $SortedRenderLists;
         static empty(): $SortedRenderLists;
         iterator(): $Iterator<$ChunkRenderList>;
         iterator(arg0: boolean): $Iterator<$ChunkRenderList>;
     }
     export class $ChunkRenderList {
-        sortSections(arg0: $SectionPos, arg1: number[]): void;
-        sectionsWithGeometryIterator(arg0: boolean): $ByteIterator;
+        sectionsWithEntitiesIterator(): $ByteIterator;
+        getSectionsWithGeometryCount(): number;
+        sectionsWithSpritesIterator(): $ByteIterator;
+        getLastVisibleFrame(): number;
         getSectionsWithEntitiesCount(): number;
         getSectionsWithSpritesCount(): number;
+        sortSections(arg0: $SectionPos, arg1: number[]): void;
+        sectionsWithGeometryIterator(arg0: boolean): $ByteIterator;
         getRegion(): $RenderRegion;
         size(): number;
         reset(arg0: number): void;
         add(arg0: $RenderSection): void;
-        sectionsWithEntitiesIterator(): $ByteIterator;
-        getLastVisibleFrame(): number;
-        getSectionsWithGeometryCount(): number;
-        sectionsWithSpritesIterator(): $ByteIterator;
         constructor(arg0: $RenderRegion);
+        get sectionsWithGeometryCount(): number;
+        get lastVisibleFrame(): number;
         get sectionsWithEntitiesCount(): number;
         get sectionsWithSpritesCount(): number;
         get region(): $RenderRegion;
-        get lastVisibleFrame(): number;
-        get sectionsWithGeometryCount(): number;
     }
 }

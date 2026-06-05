@@ -8,6 +8,7 @@ declare module "@package/xaero/lib/client/gui/config/context" {
     export class $IEditConfigScreenContext {
     }
     export interface $IEditConfigScreenContext {
+        getCurrentProfile(arg0: $ConfigChannel): $ConfigProfile;
         profileExists(arg0: string, arg1: $ConfigChannel): boolean;
         getScreenTitleFormat(): string;
         isAutoConfirm(): boolean;
@@ -23,11 +24,10 @@ declare module "@package/xaero/lib/client/gui/config/context" {
         getSyncMessage(): $Component;
         getEnforcedConfig(arg0: $ConfigChannel): $Config;
         deleteProfile(arg0: $ConfigProfile, arg1: $ConfigChannel): void;
-        hasPermission(arg0: $ConfigChannel): boolean;
         createProfile(arg0: string, arg1: string, arg2: $ConfigChannel, arg3: string): void;
+        hasPermission(arg0: $ConfigChannel): boolean;
         reset(arg0: $ConfigChannel): void;
         isClientSide(): boolean;
-        getCurrentProfile(arg0: $ConfigChannel): $ConfigProfile;
         get screenTitleFormat(): string;
         get autoConfirm(): boolean;
         get dropdownNarration(): $Component;

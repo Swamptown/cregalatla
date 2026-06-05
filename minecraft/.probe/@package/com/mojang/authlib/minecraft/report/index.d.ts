@@ -5,10 +5,10 @@ import { $ByteBuffer } from "@package/java/nio";
 
 declare module "@package/com/mojang/authlib/minecraft/report" {
     export class $AbuseReport extends $Record {
+        skinUrl(): string;
         opinionComments(): string;
         evidence(): $ReportEvidence;
         reportedEntity(): $ReportedEntity;
-        skinUrl(): string;
         createdTime(): $Instant;
         static name(arg0: string, arg1: $ReportedEntity_, arg2: $Instant): $AbuseReport;
         reason(): string;
@@ -19,7 +19,7 @@ declare module "@package/com/mojang/authlib/minecraft/report" {
     /**
      * Values that may be interpreted as {@link $AbuseReport}.
      */
-    export type $AbuseReport_ = { createdTime?: $Instant, opinionComments?: string, skinUrl?: string, reason?: string, evidence?: $ReportEvidence_, reportedEntity?: $ReportedEntity_,  } | [createdTime?: $Instant, opinionComments?: string, skinUrl?: string, reason?: string, evidence?: $ReportEvidence_, reportedEntity?: $ReportedEntity_, ];
+    export type $AbuseReport_ = { reportedEntity?: $ReportedEntity_, evidence?: $ReportEvidence_, reason?: string, skinUrl?: string, opinionComments?: string, createdTime?: $Instant,  } | [reportedEntity?: $ReportedEntity_, evidence?: $ReportEvidence_, reason?: string, skinUrl?: string, opinionComments?: string, createdTime?: $Instant, ];
     export class $ReportedEntity extends $Record {
         profileId(): $UUID;
         constructor(profileId: $UUID_);
@@ -43,7 +43,7 @@ declare module "@package/com/mojang/authlib/minecraft/report" {
     /**
      * Values that may be interpreted as {@link $ReportChatMessage}.
      */
-    export type $ReportChatMessage_ = { profileId?: $UUID_, timestamp?: $Instant, signature?: $ByteBuffer, sessionId?: $UUID_, messageReported?: boolean, salt?: number, message?: string, index?: number, lastSeen?: $List_<$ByteBuffer>,  } | [profileId?: $UUID_, timestamp?: $Instant, signature?: $ByteBuffer, sessionId?: $UUID_, messageReported?: boolean, salt?: number, message?: string, index?: number, lastSeen?: $List_<$ByteBuffer>, ];
+    export type $ReportChatMessage_ = { message?: string, salt?: number, messageReported?: boolean, sessionId?: $UUID_, signature?: $ByteBuffer, timestamp?: $Instant, profileId?: $UUID_, lastSeen?: $List_<$ByteBuffer>, index?: number,  } | [message?: string, salt?: number, messageReported?: boolean, sessionId?: $UUID_, signature?: $ByteBuffer, timestamp?: $Instant, profileId?: $UUID_, lastSeen?: $List_<$ByteBuffer>, index?: number, ];
     export class $ReportEvidence extends $Record {
         messages(): $List<$ReportChatMessage>;
         constructor(messages: $List_<$ReportChatMessage_>);
@@ -53,16 +53,16 @@ declare module "@package/com/mojang/authlib/minecraft/report" {
      */
     export type $ReportEvidence_ = { messages?: $List_<$ReportChatMessage_>,  } | [messages?: $List_<$ReportChatMessage_>, ];
     export class $AbuseReportLimits extends $Record {
-        trailingContextMessageCount(): number;
-        maxEvidenceMessageCount(): number;
-        leadingContextMessageCount(): number;
         maxReportedMessageCount(): number;
         maxOpinionCommentsLength(): number;
+        leadingContextMessageCount(): number;
+        trailingContextMessageCount(): number;
+        maxEvidenceMessageCount(): number;
         static DEFAULTS: $AbuseReportLimits;
         constructor(maxOpinionCommentsLength: number, maxReportedMessageCount: number, maxEvidenceMessageCount: number, leadingContextMessageCount: number, trailingContextMessageCount: number);
     }
     /**
      * Values that may be interpreted as {@link $AbuseReportLimits}.
      */
-    export type $AbuseReportLimits_ = { maxOpinionCommentsLength?: number, maxReportedMessageCount?: number, maxEvidenceMessageCount?: number, leadingContextMessageCount?: number, trailingContextMessageCount?: number,  } | [maxOpinionCommentsLength?: number, maxReportedMessageCount?: number, maxEvidenceMessageCount?: number, leadingContextMessageCount?: number, trailingContextMessageCount?: number, ];
+    export type $AbuseReportLimits_ = { maxEvidenceMessageCount?: number, maxReportedMessageCount?: number, maxOpinionCommentsLength?: number, trailingContextMessageCount?: number, leadingContextMessageCount?: number,  } | [maxEvidenceMessageCount?: number, maxReportedMessageCount?: number, maxOpinionCommentsLength?: number, trailingContextMessageCount?: number, leadingContextMessageCount?: number, ];
 }

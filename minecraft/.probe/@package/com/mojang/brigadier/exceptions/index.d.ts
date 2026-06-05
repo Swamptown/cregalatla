@@ -65,22 +65,13 @@ declare module "@package/com/mojang/brigadier/exceptions" {
     export class $BuiltInExceptionProvider {
     }
     export interface $BuiltInExceptionProvider {
-        readerExpectedDouble(): $SimpleCommandExceptionType;
-        readerInvalidFloat(): $DynamicCommandExceptionType;
-        readerExpectedFloat(): $SimpleCommandExceptionType;
-        readerExpectedBool(): $SimpleCommandExceptionType;
-        readerExpectedSymbol(): $DynamicCommandExceptionType;
-        dispatcherUnknownCommand(): $SimpleCommandExceptionType;
-        dispatcherUnknownArgument(): $SimpleCommandExceptionType;
-        dispatcherExpectedArgumentSeparator(): $SimpleCommandExceptionType;
-        dispatcherParseException(): $DynamicCommandExceptionType;
+        longTooLow(): $Dynamic2CommandExceptionType;
         doubleTooLow(): $Dynamic2CommandExceptionType;
         doubleTooHigh(): $Dynamic2CommandExceptionType;
         floatTooLow(): $Dynamic2CommandExceptionType;
         floatTooHigh(): $Dynamic2CommandExceptionType;
         integerTooLow(): $Dynamic2CommandExceptionType;
         integerTooHigh(): $Dynamic2CommandExceptionType;
-        longTooLow(): $Dynamic2CommandExceptionType;
         longTooHigh(): $Dynamic2CommandExceptionType;
         literalIncorrect(): $DynamicCommandExceptionType;
         readerExpectedStartOfQuote(): $SimpleCommandExceptionType;
@@ -92,5 +83,14 @@ declare module "@package/com/mojang/brigadier/exceptions" {
         readerInvalidLong(): $DynamicCommandExceptionType;
         readerExpectedLong(): $SimpleCommandExceptionType;
         readerInvalidDouble(): $DynamicCommandExceptionType;
+        readerExpectedDouble(): $SimpleCommandExceptionType;
+        readerInvalidFloat(): $DynamicCommandExceptionType;
+        readerExpectedFloat(): $SimpleCommandExceptionType;
+        readerExpectedBool(): $SimpleCommandExceptionType;
+        readerExpectedSymbol(): $DynamicCommandExceptionType;
+        dispatcherUnknownCommand(): $SimpleCommandExceptionType;
+        dispatcherUnknownArgument(): $SimpleCommandExceptionType;
+        dispatcherExpectedArgumentSeparator(): $SimpleCommandExceptionType;
+        dispatcherParseException(): $DynamicCommandExceptionType;
     }
 }

@@ -4,6 +4,7 @@ import { $Throwable, $Enum } from "@package/java/lang";
 declare module "@package/net/fabricmc/fabric/api/util" {
     export class $TriState extends $Enum<$TriState> {
         getBoxed(): boolean;
+        orElseGet(arg0: $BooleanSupplier_): boolean;
         get(): boolean;
         static values(): $TriState[];
         static valueOf(arg0: string): $TriState;
@@ -12,7 +13,6 @@ declare module "@package/net/fabricmc/fabric/api/util" {
         static of(arg0: boolean): $TriState;
         orElse(arg0: boolean): boolean;
         orElseThrow<X extends $Throwable>(arg0: $Supplier_<X>): boolean;
-        orElseGet(arg0: $BooleanSupplier_): boolean;
         static TRUE: $TriState;
         static FALSE: $TriState;
         static DEFAULT: $TriState;

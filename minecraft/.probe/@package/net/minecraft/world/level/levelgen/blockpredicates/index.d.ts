@@ -16,9 +16,9 @@ declare module "@package/net/minecraft/world/level/levelgen/blockpredicates" {
     export class $InsideWorldBoundsPredicate implements $BlockPredicate {
         type(): $BlockPredicateType<never>;
         test(arg0: $WorldGenLevel, arg1: $BlockPos_): boolean;
+        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         negate(): $BiPredicate<$WorldGenLevel, $BlockPos>;
         and(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
-        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         static CODEC: $MapCodec<$InsideWorldBoundsPredicate>;
         constructor(arg0: $Vec3i);
     }
@@ -26,8 +26,14 @@ declare module "@package/net/minecraft/world/level/levelgen/blockpredicates" {
         static anyOf(...arg0: $BlockPredicate[]): $BlockPredicate;
         static anyOf(arg0: $BlockPredicate, arg1: $BlockPredicate): $BlockPredicate;
         static anyOf(arg0: $List_<$BlockPredicate>): $BlockPredicate;
-        static unobstructed(arg0: $Vec3i): $BlockPredicate;
+        static matchesBlocks(arg0: $Vec3i, arg1: $List_<$Block_>): $BlockPredicate;
+        static matchesBlocks(...arg0: $Block_[]): $BlockPredicate;
+        static matchesBlocks(arg0: $Vec3i, ...arg1: $Block_[]): $BlockPredicate;
+        static matchesBlocks(arg0: $List_<$Block_>): $BlockPredicate;
+        static solid(): $BlockPredicate;
+        static solid(arg0: $Vec3i): $BlockPredicate;
         static unobstructed(): $BlockPredicate;
+        static unobstructed(arg0: $Vec3i): $BlockPredicate;
         static matchesTag(arg0: $TagKey_<$Block>): $BlockPredicate;
         static matchesTag(arg0: $Vec3i, arg1: $TagKey_<$Block>): $BlockPredicate;
         static matchesFluids(arg0: $Vec3i, ...arg1: $Fluid_[]): $BlockPredicate;
@@ -36,19 +42,13 @@ declare module "@package/net/minecraft/world/level/levelgen/blockpredicates" {
         static wouldSurvive(arg0: $BlockState_, arg1: $Vec3i): $BlockPredicate;
         static hasSturdyFace(arg0: $Vec3i, arg1: $Direction_): $BlockPredicate;
         static hasSturdyFace(arg0: $Direction_): $BlockPredicate;
-        static noFluid(): $BlockPredicate;
         static noFluid(arg0: $Vec3i): $BlockPredicate;
+        static noFluid(): $BlockPredicate;
         static insideWorld(arg0: $Vec3i): $BlockPredicate;
-        static solid(arg0: $Vec3i): $BlockPredicate;
-        static solid(): $BlockPredicate;
-        static matchesBlocks(arg0: $Vec3i, ...arg1: $Block_[]): $BlockPredicate;
-        static matchesBlocks(arg0: $List_<$Block_>): $BlockPredicate;
-        static matchesBlocks(...arg0: $Block_[]): $BlockPredicate;
-        static matchesBlocks(arg0: $Vec3i, arg1: $List_<$Block_>): $BlockPredicate;
-        static not(arg0: $BlockPredicate): $BlockPredicate;
         static allOf(arg0: $List_<$BlockPredicate>): $BlockPredicate;
         static allOf(arg0: $BlockPredicate, arg1: $BlockPredicate): $BlockPredicate;
         static allOf(...arg0: $BlockPredicate[]): $BlockPredicate;
+        static not(arg0: $BlockPredicate): $BlockPredicate;
         static alwaysTrue(): $BlockPredicate;
         static replaceable(): $BlockPredicate;
         static replaceable(arg0: $Vec3i): $BlockPredicate;
@@ -63,18 +63,18 @@ declare module "@package/net/minecraft/world/level/levelgen/blockpredicates" {
         static stateTestingCodec<P extends $StateTestingPredicate>(arg0: $RecordCodecBuilder$Instance<P>): $Products$P1<$RecordCodecBuilder$Mu<P>, $Vec3i>;
         test(arg0: $BlockState_): boolean;
         test(arg0: $WorldGenLevel, arg1: $BlockPos_): boolean;
+        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         negate(): $BiPredicate<$WorldGenLevel, $BlockPos>;
         and(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
-        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         offset: $Vec3i;
         constructor(arg0: $Vec3i);
     }
     export class $AllOfPredicate extends $CombiningPredicate {
     }
     export class $TrueBlockPredicate implements $BlockPredicate {
+        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         negate(): $BiPredicate<$WorldGenLevel, $BlockPos>;
         and(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
-        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
     }
     export class $MatchingFluidsPredicate extends $StateTestingPredicate {
         offset: $Vec3i;
@@ -102,9 +102,9 @@ declare module "@package/net/minecraft/world/level/levelgen/blockpredicates" {
      */
     export type $BlockPredicateType_<P> = RegistryTypes.BlockPredicateType | (() => $MapCodec_<P>);
     export class $CombiningPredicate implements $BlockPredicate {
+        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         negate(): $BiPredicate<$WorldGenLevel, $BlockPos>;
         and(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
-        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
     }
     /**
      * @deprecated
@@ -118,9 +118,9 @@ declare module "@package/net/minecraft/world/level/levelgen/blockpredicates" {
         offset: $Vec3i;
     }
     export class $UnobstructedPredicate extends $Record implements $BlockPredicate {
+        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         negate(): $BiPredicate<$WorldGenLevel, $BlockPos>;
         and(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
-        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
     }
     /**
      * Values that may be interpreted as {@link $UnobstructedPredicate}.
@@ -130,9 +130,9 @@ declare module "@package/net/minecraft/world/level/levelgen/blockpredicates" {
     export class $HasSturdyFacePredicate implements $BlockPredicate {
         type(): $BlockPredicateType<never>;
         test(arg0: $WorldGenLevel, arg1: $BlockPos_): boolean;
+        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         negate(): $BiPredicate<$WorldGenLevel, $BlockPos>;
         and(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
-        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         static CODEC: $MapCodec<$HasSturdyFacePredicate>;
         constructor(arg0: $Vec3i, arg1: $Direction_);
     }
@@ -142,9 +142,9 @@ declare module "@package/net/minecraft/world/level/levelgen/blockpredicates" {
     export class $WouldSurvivePredicate implements $BlockPredicate {
         type(): $BlockPredicateType<never>;
         test(arg0: $WorldGenLevel, arg1: $BlockPos_): boolean;
+        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         negate(): $BiPredicate<$WorldGenLevel, $BlockPos>;
         and(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
-        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         static CODEC: $MapCodec<$WouldSurvivePredicate>;
         constructor(arg0: $Vec3i, arg1: $BlockState_);
     }
@@ -155,9 +155,9 @@ declare module "@package/net/minecraft/world/level/levelgen/blockpredicates" {
         constructor(arg0: $Vec3i, arg1: $TagKey_<$Block>);
     }
     export class $NotPredicate implements $BlockPredicate {
+        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
         negate(): $BiPredicate<$WorldGenLevel, $BlockPos>;
         and(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
-        or(arg0: $BiPredicate_<$WorldGenLevel, $BlockPos>): $BiPredicate<$WorldGenLevel, $BlockPos>;
     }
     export class $AnyOfPredicate extends $CombiningPredicate {
     }

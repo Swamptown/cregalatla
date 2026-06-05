@@ -2,7 +2,6 @@ import { $Level_ } from "@package/net/minecraft/world/level";
 import { $TagKey } from "@package/net/minecraft/tags";
 import { $Item_, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $Fluid } from "@package/net/minecraft/world/level/material";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $LivingEntity, $Pose, $PortalProcessor, $Entity } from "@package/net/minecraft/world/entity";
 import { $Camera } from "@package/io/github/mortuusars/exposure/world/camera";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
@@ -12,7 +11,7 @@ import { $RandomSource } from "@package/net/minecraft/util";
 import { $SynchedEntityData, $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
 import { $InteractionResult, $InteractionHand_ } from "@package/net/minecraft/world";
 import { $ServerPlayer } from "@package/net/minecraft/server/level";
-import { $HolderLookup$Provider, $BlockPos } from "@package/net/minecraft/core";
+import { $BlockPos } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $AtomicInteger } from "@package/java/util/concurrent/atomic";
 import { $CameraItem } from "@package/io/github/mortuusars/exposure/world/item/camera";
@@ -40,12 +39,12 @@ declare module "@package/io/github/mortuusars/exposure/world/entity" {
     export class $CameraOperator {
     }
     export interface $CameraOperator {
-        getActiveExposureCamera(): $Camera;
         setActiveExposureCamera(camera: $Camera): void;
         removeActiveExposureCamera(): void;
         getExposureCameraActionAnim(partialTick: number): number;
         getActiveExposureCameraOptional(): ($Camera) | undefined;
         asOperatorEntity(): $LivingEntity;
+        getActiveExposureCamera(): $Camera;
         get activeExposureCameraOptional(): ($Camera) | undefined;
     }
     export class $CameraStandEntity extends $Entity implements $CameraHolder {
@@ -73,32 +72,31 @@ declare module "@package/io/github/mortuusars/exposure/world/entity" {
         playHitSound(): void;
         playPlaceSound(): void;
         syncRotationToClientsIfNeeded(): void;
-        getCamera(): $ItemStack;
-        setCamera(cameraStack: $ItemStack_): void;
-        setDamage(damage: number): void;
-        setCooldown(cooldown: number): void;
         setHurtDir(hurtDir: number): void;
         setHurtTime(hurtTime: number): void;
         getHurtTime(): number;
-        playBreakSound(): void;
+        setCooldown(cooldown: number): void;
+        setDamage(damage: number): void;
+        getCamera(): $ItemStack;
+        setCamera(cameraStack: $ItemStack_): void;
         getCooldown(): number;
+        playBreakSound(): void;
         destroy(dropItem: $Item_): void;
         canUse(player: $Player): boolean;
         release(): void;
         operator(): $CameraOperator;
-        getCooldownPercent(): number;
-        isOnCooldown(): boolean;
         isClientSide(): boolean;
-        getHurtDir(): number;
         getPlayerExecutingExposure(): ($Player) | undefined;
         getPlayerAwardedForExposure(): ($Player) | undefined;
         getExposureAuthorEntity(): $Entity;
         getExposureCameraOperator(): ($CameraOperator) | undefined;
         getDamage(): number;
+        getHurtDir(): number;
+        getCooldownPercent(): number;
+        isOnCooldown(): boolean;
         getServerPlayerExecutingExposure(): ($ServerPlayer) | undefined;
         getServerPlayerAwardedForExposure(): ($ServerPlayer) | undefined;
         asHolderEntity(): $Entity;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -146,6 +144,7 @@ declare module "@package/io/github/mortuusars/exposure/world/entity" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;
@@ -172,13 +171,13 @@ declare module "@package/io/github/mortuusars/exposure/world/entity" {
         get ownerPlayerUuid(): $UUID;
         get closestPlayerInRange(): ($Player) | undefined;
         get operatorId(): number;
-        get cooldownPercent(): number;
-        get onCooldown(): boolean;
         get clientSide(): boolean;
         get playerExecutingExposure(): ($Player) | undefined;
         get playerAwardedForExposure(): ($Player) | undefined;
         get exposureAuthorEntity(): $Entity;
         get exposureCameraOperator(): ($CameraOperator) | undefined;
+        get cooldownPercent(): number;
+        get onCooldown(): boolean;
         get serverPlayerExecutingExposure(): ($ServerPlayer) | undefined;
         get serverPlayerAwardedForExposure(): ($ServerPlayer) | undefined;
     }

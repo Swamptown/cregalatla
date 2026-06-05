@@ -17,7 +17,7 @@ declare module "@package/top/theillusivec4/curios/api/extensions" {
     }
     export interface $ICurioSlotExtension {
         getCloneStack(arg0: $SlotContext_, arg1: $ItemStack_): $ItemStack;
-        getDisplayStack(arg0: $SlotContext_, arg1: $ItemStack_): $ItemStack;
         getSlotTooltip(arg0: $SlotContext_, arg1: $TooltipFlag): $List<$Component>;
+        getDisplayStack(arg0: $SlotContext_, arg1: $ItemStack_): $ItemStack;
     }
 }

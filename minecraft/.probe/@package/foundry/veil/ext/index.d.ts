@@ -98,12 +98,12 @@ declare module "@package/foundry/veil/ext" {
     export class $ShaderInstanceExtension {
     }
     export interface $ShaderInstanceExtension {
+        veil$recompile(arg0: boolean, arg1: string, arg2: number): void;
         veil$applyCompile(): boolean;
         veil$isRecompileReady(arg0: number): boolean;
         veil$getShaderSources(): $Collection<$ResourceLocation>;
         veil$swapBuffers(arg0: number): boolean;
         veil$getActiveBuffers(): number;
-        veil$recompile(arg0: boolean, arg1: string, arg2: number): void;
     }
     export class $CompositeStateExtension {
     }

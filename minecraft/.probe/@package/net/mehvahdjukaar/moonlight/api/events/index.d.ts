@@ -20,12 +20,12 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/events" {
         static create(arg0: $BlockState_, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: $LightningBolt): $ILightningStruckBlockEvent;
     }
     export interface $ILightningStruckBlockEvent extends $SimpleEvent {
-        getLevel(): $LevelAccessor;
         getEntity(): $LightningBolt;
+        getLevel(): $LevelAccessor;
         getState(): $BlockState;
         getPos(): $BlockPos;
-        get level(): $LevelAccessor;
         get entity(): $LightningBolt;
+        get level(): $LevelAccessor;
         get state(): $BlockState;
         get pos(): $BlockPos;
     }
@@ -34,16 +34,16 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/events" {
     }
     export interface $IFireConsumeBlockEvent extends $SimpleEvent {
         wasReplacedByFire(): boolean;
-        getChance(): number;
-        getFace(): $Direction;
         setFinalState(arg0: $BlockState_): void;
         getFinalState(): $BlockState;
+        getFace(): $Direction;
+        getChance(): number;
         getLevel(): $LevelAccessor;
         getState(): $BlockState;
         getAge(): number;
         getPos(): $BlockPos;
-        get chance(): number;
         get face(): $Direction;
+        get chance(): number;
         get level(): $LevelAccessor;
         get state(): $BlockState;
         get age(): number;
@@ -52,11 +52,11 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/events" {
     export class $IVillagerBrainEvent {
     }
     export interface $IVillagerBrainEvent extends $SimpleEvent {
-        addSensor(arg0: $SensorType_<$Sensor<$Villager>>): void;
         getVillager(): $Villager;
         getMemories(): $Map<$MemoryModuleType<never>, ($ExpirableValue<never>) | undefined>;
         addOrReplaceActivity(arg0: $Activity_, arg1: $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>): void;
         scheduleActivity(arg0: $Activity_, arg1: number, arg2: number): void;
+        addSensor(arg0: $SensorType_<$Sensor<$Villager>>): void;
         addTaskToActivity<P extends $Pair<number, $Behavior<$Villager>>>(arg0: $Activity_, arg1: P): boolean;
         getInternal(): $VillagerBrainEventInternal;
         get villager(): $Villager;
@@ -67,8 +67,8 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/events" {
         static create(arg0: $ItemStack_, arg1: $Player, arg2: boolean): $IDropItemOnDeathEvent;
     }
     export interface $IDropItemOnDeathEvent extends $SimpleEvent {
-        isBeforeDrop(): boolean;
         setReturnItemStack(arg0: $ItemStack_): void;
+        isBeforeDrop(): boolean;
         getPlayer(): $Player;
         getReturnItemStack(): $ItemStack;
         setCanceled(arg0: boolean): void;

@@ -1,6 +1,6 @@
+export * as logistics from "@package/com/simibubi/create/content/logistics";
 export * as kinetics from "@package/com/simibubi/create/content/kinetics";
 export * as trains from "@package/com/simibubi/create/content/trains";
-export * as logistics from "@package/com/simibubi/create/content/logistics";
 export * as contraptions from "@package/com/simibubi/create/content/contraptions";
 export * as processing from "@package/com/simibubi/create/content/processing";
 export * as equipment from "@package/com/simibubi/create/content/equipment";

@@ -11,9 +11,9 @@ declare module "@package/dev/latvian/mods/kubejs/text/tooltip" {
         ctrl(): $Tristate;
         shift(): $Tristate;
         alt(): $Tristate;
+        stages(): $Map<string, $Tristate>;
         advanced(): $Tristate;
         creative(): $Tristate;
-        stages(): $Map<string, $Tristate>;
         static DEFAULT: $TooltipRequirements;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $TooltipRequirements>;
         constructor(shift: $Tristate_, ctrl: $Tristate_, alt: $Tristate_, advanced: $Tristate_, creative: $Tristate_, stages: $Map_<string, $Tristate_>);
@@ -21,7 +21,7 @@ declare module "@package/dev/latvian/mods/kubejs/text/tooltip" {
     /**
      * Values that may be interpreted as {@link $TooltipRequirements}.
      */
-    export type $TooltipRequirements_ = { shift?: $Tristate_, advanced?: $Tristate_, stages?: $Map_<string, $Tristate_>, ctrl?: $Tristate_, alt?: $Tristate_, creative?: $Tristate_,  } | [shift?: $Tristate_, advanced?: $Tristate_, stages?: $Map_<string, $Tristate_>, ctrl?: $Tristate_, alt?: $Tristate_, creative?: $Tristate_, ];
+    export type $TooltipRequirements_ = { creative?: $Tristate_, alt?: $Tristate_, ctrl?: $Tristate_, stages?: $Map_<string, $Tristate_>, advanced?: $Tristate_, shift?: $Tristate_,  } | [creative?: $Tristate_, alt?: $Tristate_, ctrl?: $Tristate_, stages?: $Map_<string, $Tristate_>, advanced?: $Tristate_, shift?: $Tristate_, ];
     export class $ItemTooltipData extends $Record {
         requirements(): ($TooltipRequirements) | undefined;
         actions(): $List<$TextAction>;
@@ -32,5 +32,5 @@ declare module "@package/dev/latvian/mods/kubejs/text/tooltip" {
     /**
      * Values that may be interpreted as {@link $ItemTooltipData}.
      */
-    export type $ItemTooltipData_ = { requirements?: ($TooltipRequirements_) | undefined, filter?: ($Ingredient_) | undefined, actions?: $List_<$TextAction>,  } | [requirements?: ($TooltipRequirements_) | undefined, filter?: ($Ingredient_) | undefined, actions?: $List_<$TextAction>, ];
+    export type $ItemTooltipData_ = { actions?: $List_<$TextAction>, filter?: ($Ingredient_) | undefined, requirements?: ($TooltipRequirements_) | undefined,  } | [actions?: $List_<$TextAction>, filter?: ($Ingredient_) | undefined, requirements?: ($TooltipRequirements_) | undefined, ];
 }

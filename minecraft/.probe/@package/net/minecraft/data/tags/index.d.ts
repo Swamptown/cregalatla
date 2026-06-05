@@ -188,11 +188,11 @@ declare module "@package/net/minecraft/data/tags" {
         constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>);
     }
     export class $TagsProvider$TagAppender<T> implements $ITagAppenderExtension<T> {
-        getInternalBuilder(): $TagBuilder;
         /**
          * @deprecated
          */
         getModID(): string;
+        getInternalBuilder(): $TagBuilder;
         addOptional(arg0: $ResourceLocation_): $TagsProvider$TagAppender<T>;
         addOptionalTag(arg0: $ResourceLocation_): $TagsProvider$TagAppender<T>;
         add(...arg0: $ResourceKey_<T>[]): $TagsProvider$TagAppender<T>;
@@ -217,8 +217,8 @@ declare module "@package/net/minecraft/data/tags" {
          */
         constructor(arg0: $TagBuilder, arg1: string);
         constructor(arg0: $TagBuilder);
-        get internalBuilder(): $TagBuilder;
         get modID(): string;
+        get internalBuilder(): $TagBuilder;
     }
     export class $BannerPatternTagsProvider extends $TagsProvider<$BannerPattern> {
         registryKey: $ResourceKey<$Registry<$BannerPattern>>;
@@ -315,13 +315,13 @@ declare module "@package/net/minecraft/data/tags" {
     /**
      * Values that may be interpreted as {@link $TagsProvider$1CombinedData}.
      */
-    export type $TagsProvider$1CombinedData_<T> = { contents?: $HolderLookup$Provider, parent?: $TagsProvider$TagLookup_<any>,  } | [contents?: $HolderLookup$Provider, parent?: $TagsProvider$TagLookup_<any>, ];
+    export type $TagsProvider$1CombinedData_<T> = { parent?: $TagsProvider$TagLookup_<any>, contents?: $HolderLookup$Provider,  } | [parent?: $TagsProvider$TagLookup_<any>, contents?: $HolderLookup$Provider, ];
     export class $TagsProvider<T> implements $DataProvider, $FileHelperDataProvider {
-        contentsGetter(): $CompletableFuture<$TagsProvider$TagLookup<T>>;
         addTags(arg0: $HolderLookup$Provider): void;
         createContentsProvider(): $CompletableFuture<$HolderLookup$Provider>;
         getOrCreateRawBuilder(arg0: $TagKey_<T>): $TagBuilder;
         puzzleslib$setExistingFileHelper(fileHelper: $ExistingFileHelper): void;
+        contentsGetter(): $CompletableFuture<$TagsProvider$TagLookup<T>>;
         tag(arg0: $TagKey_<T>): $TagsProvider$TagAppender<T>;
         getName(): string;
         run(arg0: $CachedOutput_): $CompletableFuture<never>;
@@ -331,13 +331,13 @@ declare module "@package/net/minecraft/data/tags" {
         pathProvider: $PackOutput$PathProvider;
         existingFileHelper: $ExistingFileHelper;
         modId: string;
-        constructor(arg0: $PackOutput, arg1: $ResourceKey_<$Registry<T>>, arg2: $CompletableFuture<$HolderLookup$Provider>, arg3: $CompletableFuture<$TagsProvider$TagLookup_<T>>, arg4: string, arg5: $ExistingFileHelper);
         /**
          * @deprecated
          */
         constructor(arg0: $PackOutput, arg1: $ResourceKey_<$Registry<T>>, arg2: $CompletableFuture<$HolderLookup$Provider>, arg3: $CompletableFuture<$TagsProvider$TagLookup_<T>>);
-        constructor(arg0: $PackOutput, arg1: $ResourceKey_<$Registry<T>>, arg2: $CompletableFuture<$HolderLookup$Provider>);
+        constructor(arg0: $PackOutput, arg1: $ResourceKey_<$Registry<T>>, arg2: $CompletableFuture<$HolderLookup$Provider>, arg3: $CompletableFuture<$TagsProvider$TagLookup_<T>>, arg4: string, arg5: $ExistingFileHelper);
         constructor(arg0: $PackOutput, arg1: $ResourceKey_<$Registry<T>>, arg2: $CompletableFuture<$HolderLookup$Provider>, arg3: string, arg4: $ExistingFileHelper);
+        constructor(arg0: $PackOutput, arg1: $ResourceKey_<$Registry<T>>, arg2: $CompletableFuture<$HolderLookup$Provider>);
         get name(): string;
     }
     export class $InstrumentTagsProvider extends $TagsProvider<$Instrument> {

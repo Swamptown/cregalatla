@@ -16,9 +16,9 @@ declare module "@package/dev/lambdaurora/lambdynlights" {
     export class $DynamicLightSource {
     }
     export interface $DynamicLightSource extends $EntityDynamicLightSourceBehavior {
-        getDynamicLightLevel(): $Level;
         lambdynlights$updateDynamicLight(renderer: $LevelRenderer): boolean;
         lambdynlights$scheduleTrackedChunksRebuild(renderer: $LevelRenderer): void;
+        getDynamicLightLevel(): $Level;
         get dynamicLightLevel(): $Level;
     }
 }

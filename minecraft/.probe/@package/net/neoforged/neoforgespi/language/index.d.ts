@@ -31,7 +31,7 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $ModFileScanData$ClassData}.
      */
-    export type $ModFileScanData$ClassData_ = { parent?: $Type, clazz?: $Type, interfaces?: $Set_<$Type>,  } | [parent?: $Type, clazz?: $Type, interfaces?: $Set_<$Type>, ];
+    export type $ModFileScanData$ClassData_ = { clazz?: $Type, parent?: $Type, interfaces?: $Set_<$Type>,  } | [clazz?: $Type, parent?: $Type, interfaces?: $Set_<$Type>, ];
     export class $IModInfo$DependencySide extends $Enum<$IModInfo$DependencySide> {
         static values(): $IModInfo$DependencySide[];
         static valueOf(arg0: string): $IModInfo$DependencySide;
@@ -57,7 +57,7 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $ModFileScanData$AnnotationData}.
      */
-    export type $ModFileScanData$AnnotationData_ = { clazz?: $Type, memberName?: string, targetType?: $ElementType_, annotationType?: $Type, annotationData?: $Map_<string, $Object>,  } | [clazz?: $Type, memberName?: string, targetType?: $ElementType_, annotationType?: $Type, annotationData?: $Map_<string, $Object>, ];
+    export type $ModFileScanData$AnnotationData_ = { targetType?: $ElementType_, memberName?: string, clazz?: $Type, annotationData?: $Map_<string, $Object>, annotationType?: $Type,  } | [targetType?: $ElementType_, memberName?: string, clazz?: $Type, annotationData?: $Map_<string, $Object>, annotationType?: $Type, ];
     export class $IModInfo$ModVersion {
     }
     export interface $IModInfo$ModVersion {
@@ -178,5 +178,5 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $IModFileInfo$LanguageSpec}.
      */
-    export type $IModFileInfo$LanguageSpec_ = { languageName?: string, acceptedVersions?: $VersionRange,  } | [languageName?: string, acceptedVersions?: $VersionRange, ];
+    export type $IModFileInfo$LanguageSpec_ = { acceptedVersions?: $VersionRange, languageName?: string,  } | [acceptedVersions?: $VersionRange, languageName?: string, ];
 }

@@ -22,18 +22,18 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
         getIgniter(): $LivingEntity;
         getAffectedPlayers(): $List<$Player>;
         getExplosion(): $Explosion;
+        getBlock(): $LevelBlock;
         getRadius(): number;
         getLevel(): $Level;
-        getBlock(): $LevelBlock;
         getCause(): $Entity;
         getBlockState(): $BlockState;
         constructor(level: $Level_, pos: $BlockPos_, explosion: $Explosion);
         get igniter(): $LivingEntity;
         get affectedPlayers(): $List<$Player>;
         get explosion(): $Explosion;
+        get block(): $LevelBlock;
         get radius(): number;
         get level(): $Level;
-        get block(): $LevelBlock;
         get cause(): $Entity;
         get blockState(): $BlockState;
     }
@@ -43,6 +43,10 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          */
         getValues(): $Map<$Property<never>, $Comparable<never>>;
         /**
+         * Rotate the block using the specified Rotation
+         */
+        rotate(rotation: $Rotation_): $BlockStateModifyCallback;
+        /**
          * Gets the value of the pased in property
          */
         get<T extends $Comparable<T>>(property: $Property<T>): T;
@@ -51,13 +55,13 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          */
         getValue<T extends $Comparable<T>>(property: $Property<T>): T;
         /**
-         * Sets the value of the specified boolean property
-         */
-        set(property: $BooleanProperty, value: boolean): $BlockStateModifyCallback;
-        /**
          * Sets the value of the specified integer property
          */
         set(property: $IntegerProperty, value: number): $BlockStateModifyCallback;
+        /**
+         * Sets the value of the specified boolean property
+         */
+        set(property: $BooleanProperty, value: boolean): $BlockStateModifyCallback;
         /**
          * Sets the value of the specified enum property
          */
@@ -74,10 +78,6 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          * Sets the value of the specified property
          */
         setValue<T extends $Comparable<T>, V extends T>(property: $Property<T>, comparable: V): $BlockStateModifyCallback;
-        /**
-         * Rotate the block using the specified Rotation
-         */
-        rotate(rotation: $Rotation_): $BlockStateModifyCallback;
         /**
          * Mirror the block using the specified Mirror
          */
@@ -178,14 +178,6 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          */
         getPlayer(): $Player;
         /**
-         * Gets the vertical direction (UP/DOWN) closest to where the player is currently looking
-         */
-        getNearestLookingVerticalDirection(): $Direction;
-        /**
-         * Gets the hand that is placing the block
-         */
-        getHand(): $InteractionHand;
-        /**
          * Returns if the hit posiiton in the block-space is inside the 1x1x1 cube of the block
          */
         isInside(): boolean;
@@ -194,10 +186,6 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          */
         getClickLocation(): $Vec3;
         /**
-         * Gets the nearest horizontal direction to where the player is looking. NORTH if there is no player
-         */
-        getHorizontalDirection(): $Direction;
-        /**
          * Gets the direction closes to where the player is currently looking
          */
         getNearestLookingDirection(): $Direction;
@@ -205,6 +193,18 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          * Gets an array of all directions, ordered by which the player is looking closest to
          */
         getNearestLookingDirections(): $Direction[];
+        /**
+         * Gets the nearest horizontal direction to where the player is looking. NORTH if there is no player
+         */
+        getHorizontalDirection(): $Direction;
+        /**
+         * Gets the hand that is placing the block
+         */
+        getHand(): $InteractionHand;
+        /**
+         * Gets the vertical direction (UP/DOWN) closest to where the player is currently looking
+         */
+        getNearestLookingVerticalDirection(): $Direction;
         /**
          * Returns if the block being placed is replacing the block clicked
          */
@@ -222,18 +222,6 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          */
         getItem(): $ItemStack;
         /**
-         * Get the horizontal rotation of the player
-         */
-        getRotation(): number;
-        /**
-         * Set if this block is waterlogged or not
-         */
-        waterlogged(waterlogged: boolean): $BlockStateModifyPlacementCallback;
-        /**
-         * Set this block as waterlogged if it is in water
-         */
-        waterlogged(): $BlockStateModifyPlacementCallback;
-        /**
          * Checks if this block is in water
          */
         isInWater(): boolean;
@@ -241,6 +229,18 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          * Returns if the player is using the 'secondary' function of this item. Basically checks if they are holding shift
          */
         isSecondaryUseActive(): boolean;
+        /**
+         * Get the horizontal rotation of the player
+         */
+        getRotation(): number;
+        /**
+         * Set this block as waterlogged if it is in water
+         */
+        waterlogged(): $BlockStateModifyPlacementCallback;
+        /**
+         * Set if this block is waterlogged or not
+         */
+        waterlogged(waterlogged: boolean): $BlockStateModifyPlacementCallback;
         minecraftBlock: $Block;
         context: $BlockPlaceContext;
         block: $LevelBlock;
@@ -251,18 +251,18 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
         get clickedPos(): $BlockPos;
         get clickedFace(): $Direction;
         get player(): $Player;
-        get nearestLookingVerticalDirection(): $Direction;
-        get hand(): $InteractionHand;
         get inside(): boolean;
         get clickLocation(): $Vec3;
-        get horizontalDirection(): $Direction;
         get nearestLookingDirection(): $Direction;
         get nearestLookingDirections(): $Direction[];
+        get horizontalDirection(): $Direction;
+        get hand(): $InteractionHand;
+        get nearestLookingVerticalDirection(): $Direction;
         get level(): $Level;
         get item(): $ItemStack;
-        get rotation(): number;
         get inWater(): boolean;
         get secondaryUseActive(): boolean;
+        get rotation(): number;
     }
     export class $RandomTickCallback {
         getLevel(): $Level;
@@ -275,10 +275,6 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
     }
     export class $EntityBlockCallback {
         /**
-         * Returns the level
-         */
-        getLevel(): $Level;
-        /**
          * Returns the entity
          */
         getEntity(): $Entity;
@@ -287,24 +283,28 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
          */
         getBlock(): $LevelBlock;
         /**
+         * Returns the level
+         */
+        getLevel(): $Level;
+        /**
          * Returns the BlockState
          */
         getState(): $BlockState;
         /**
-         * Returns if the entity is suppressing bouncing (for players this is true if the player is crouching)
-         */
-        isSuppressingBounce(): boolean;
-        /**
          * Returns the block's position
          */
         getPos(): $BlockPos;
+        /**
+         * Returns if the entity is suppressing bouncing (for players this is true if the player is crouching)
+         */
+        isSuppressingBounce(): boolean;
         constructor(level: $Level_, entity: $Entity, pos: $BlockPos_, state: $BlockState_);
-        get level(): $Level;
         get entity(): $Entity;
         get block(): $LevelBlock;
+        get level(): $Level;
         get state(): $BlockState;
-        get suppressingBounce(): boolean;
         get pos(): $BlockPos;
+        get suppressingBounce(): boolean;
     }
     export class $CanBeReplacedCallback {
         getFluidStateAtClickedPos(): $FluidState;
@@ -313,35 +313,35 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
         getClickedPos(): $BlockPos;
         getClickedFace(): $Direction;
         getPlayer(): $Player;
-        getNearestLookingVerticalDirection(): $Direction;
-        getHand(): $InteractionHand;
         isInside(): boolean;
         getClickLocation(): $Vec3;
-        getHorizontalDirection(): $Direction;
         getNearestLookingDirection(): $Direction;
         getNearestLookingDirections(): $Direction[];
+        getHorizontalDirection(): $Direction;
+        getHand(): $InteractionHand;
+        getNearestLookingVerticalDirection(): $Direction;
         getLevel(): $Level;
         getItem(): $ItemStack;
-        getRotation(): number;
         isSecondaryUseActive(): boolean;
         canBeReplaced(): boolean;
+        getRotation(): number;
         constructor(blockPlaceContext: $BlockPlaceContext, state: $BlockState_);
         get fluidStateAtClickedPos(): $FluidState;
         get clickedBlock(): $LevelBlock;
         get clickedPos(): $BlockPos;
         get clickedFace(): $Direction;
         get player(): $Player;
-        get nearestLookingVerticalDirection(): $Direction;
-        get hand(): $InteractionHand;
         get inside(): boolean;
         get clickLocation(): $Vec3;
-        get horizontalDirection(): $Direction;
         get nearestLookingDirection(): $Direction;
         get nearestLookingDirections(): $Direction[];
+        get horizontalDirection(): $Direction;
+        get hand(): $InteractionHand;
+        get nearestLookingVerticalDirection(): $Direction;
         get level(): $Level;
         get item(): $ItemStack;
-        get rotation(): number;
         get secondaryUseActive(): boolean;
+        get rotation(): number;
     }
     export class $BlockStateRotateCallback extends $BlockStateModifyCallback {
         /**
@@ -359,11 +359,11 @@ declare module "@package/dev/latvian/mods/kubejs/block/callback" {
         /**
          * Sets the entity's velocity
          */
-        setVelocity(vec: $Vec3_): void;
+        setVelocity(x: number, y: number, z: number): void;
         /**
          * Sets the entity's velocity
          */
-        setVelocity(x: number, y: number, z: number): void;
+        setVelocity(vec: $Vec3_): void;
         /**
          * Bounce the entity upwards by bounciness * their fall velocity.
          * Do not make bounciness negative, as that is a recipe for a long and laggy trip to the void

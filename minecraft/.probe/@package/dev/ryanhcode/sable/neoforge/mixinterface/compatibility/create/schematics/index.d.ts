@@ -23,5 +23,5 @@ declare module "@package/dev/ryanhcode/sable/neoforge/mixinterface/compatibility
     /**
      * Values that may be interpreted as {@link $StructureTemplateExtension$SubLevelTemplate}.
      */
-    export type $StructureTemplateExtension$SubLevelTemplate_ = { position?: $Vector3d, orientation?: $Quaterniond, uuid?: $UUID_, template?: $StructureTemplate,  } | [position?: $Vector3d, orientation?: $Quaterniond, uuid?: $UUID_, template?: $StructureTemplate, ];
+    export type $StructureTemplateExtension$SubLevelTemplate_ = { orientation?: $Quaterniond, position?: $Vector3d, template?: $StructureTemplate, uuid?: $UUID_,  } | [orientation?: $Quaterniond, position?: $Vector3d, template?: $StructureTemplate, uuid?: $UUID_, ];
 }

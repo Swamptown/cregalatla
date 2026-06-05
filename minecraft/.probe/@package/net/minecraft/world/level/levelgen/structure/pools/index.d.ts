@@ -39,9 +39,9 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pools" {
         place(arg0: $StructureTemplateManager, arg1: $WorldGenLevel, arg2: $StructureManager, arg3: $ChunkGenerator, arg4: $BlockPos_, arg5: $BlockPos_, arg6: $Rotation_, arg7: $BoundingBox, arg8: $RandomSource, arg9: $LiquidSettings_, arg10: boolean): boolean;
         static list(arg0: $List_<$Function_<$StructureTemplatePool$Projection, $StructurePoolElement>>): $Function<$StructureTemplatePool$Projection, $ListPoolElement>;
         static single(arg0: string, arg1: $LiquidSettings_): $Function<$StructureTemplatePool$Projection, $SinglePoolElement>;
-        static single(arg0: string): $Function<$StructureTemplatePool$Projection, $SinglePoolElement>;
-        static single(arg0: string, arg1: $Holder_<$StructureProcessorList>, arg2: $LiquidSettings_): $Function<$StructureTemplatePool$Projection, $SinglePoolElement>;
         static single(arg0: string, arg1: $Holder_<$StructureProcessorList>): $Function<$StructureTemplatePool$Projection, $SinglePoolElement>;
+        static single(arg0: string, arg1: $Holder_<$StructureProcessorList>, arg2: $LiquidSettings_): $Function<$StructureTemplatePool$Projection, $SinglePoolElement>;
+        static single(arg0: string): $Function<$StructureTemplatePool$Projection, $SinglePoolElement>;
         static empty(): $Function<$StructureTemplatePool$Projection, $EmptyPoolElement>;
         static feature(arg0: $Holder_<$PlacedFeature>): $Function<$StructureTemplatePool$Projection, $FeaturePoolElement>;
         getType(): $StructurePoolElementType<never>;
@@ -56,7 +56,7 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pools" {
     }
     export class $JigsawPlacement$Placer {
         tryPlacingChildren(arg0: $PoolElementStructurePiece, arg1: $MutableObject<$VoxelShape>, arg2: number, arg3: boolean, arg4: $LevelHeightAccessor, arg5: $RandomState, arg6: $PoolAliasLookup_, arg7: $LiquidSettings_): void;
-        handler$gje000$moonlight$ml$AddSpawnBoxPieces(arg0: $PoolElementStructurePiece, arg1: $MutableObject<any>, arg2: number, arg3: boolean, arg4: $LevelHeightAccessor, arg5: $RandomState, arg6: $PoolAliasLookup_, arg7: $LiquidSettings_, arg8: $CallbackInfo): void;
+        handler$hgg000$moonlight$ml$AddSpawnBoxPieces(arg0: $PoolElementStructurePiece, arg1: $MutableObject<any>, arg2: number, arg3: boolean, arg4: $LevelHeightAccessor, arg5: $RandomState, arg6: $PoolAliasLookup_, arg7: $LiquidSettings_, arg8: $CallbackInfo): void;
         placing: $SequencedPriorityIterator<$JigsawPlacement$PieceState>;
         constructor(arg0: $Registry<$StructureTemplatePool_>, arg1: number, arg2: $ChunkGenerator, arg3: $StructureTemplateManager, arg4: $List_<$PoolElementStructurePiece>, arg5: $RandomSource);
     }
@@ -65,10 +65,10 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pools" {
     /**
      * Values that may be interpreted as {@link $JigsawPlacement$PieceState}.
      */
-    export type $JigsawPlacement$PieceState_ = { depth?: number, free?: $MutableObject<$VoxelShape>, piece?: $PoolElementStructurePiece,  } | [depth?: number, free?: $MutableObject<$VoxelShape>, piece?: $PoolElementStructurePiece, ];
+    export type $JigsawPlacement$PieceState_ = { free?: $MutableObject<$VoxelShape>, depth?: number, piece?: $PoolElementStructurePiece,  } | [free?: $MutableObject<$VoxelShape>, depth?: number, piece?: $PoolElementStructurePiece, ];
     export class $JigsawPlacement {
-        static addPieces(arg0: $Structure$GenerationContext_, arg1: $Holder_<$StructureTemplatePool>, arg2: ($ResourceLocation_) | undefined, arg3: number, arg4: $BlockPos_, arg5: boolean, arg6: ($Heightmap$Types_) | undefined, arg7: number, arg8: $PoolAliasLookup_, arg9: $DimensionPadding_, arg10: $LiquidSettings_): ($Structure$GenerationStub) | undefined;
         static generateJigsaw(arg0: $ServerLevel, arg1: $Holder_<$StructureTemplatePool>, arg2: $ResourceLocation_, arg3: number, arg4: $BlockPos_, arg5: boolean): boolean;
+        static addPieces(arg0: $Structure$GenerationContext_, arg1: $Holder_<$StructureTemplatePool>, arg2: ($ResourceLocation_) | undefined, arg3: number, arg4: $BlockPos_, arg5: boolean, arg6: ($Heightmap$Types_) | undefined, arg7: number, arg8: $PoolAliasLookup_, arg9: $DimensionPadding_, arg10: $LiquidSettings_): ($Structure$GenerationStub) | undefined;
         static LOGGER: $Logger;
         constructor();
     }

@@ -6,4 +6,5 @@ export * as caffeinemc from "@package/net/caffeinemc";
 export * as blay09 from "@package/net/blay09";
 export * as createmod from "@package/net/createmod";
 export * as mcreator from "@package/net/mcreator";
+export * as liukrast from "@package/net/liukrast";
 export * as zlt from "@package/net/zlt";

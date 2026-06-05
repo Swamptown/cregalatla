@@ -149,7 +149,7 @@ declare module "@package/net/minecraft/core/particles" {
         constructor();
     }
     export class $SimpleParticleType extends $ParticleType<$SimpleParticleType> implements $ParticleOptions, $SimpleParticleTypeAccessor {
-        static createSimpleParticleType$platform_$md$4ca6b6$0(arg0: boolean): $SimpleParticleType;
+        static createSimpleParticleType$platform_$md$3b3139$0(arg0: boolean): $SimpleParticleType;
         getType(): $ParticleType<never>;
         constructor(arg0: boolean);
         get type(): $ParticleType<never>;
@@ -167,11 +167,11 @@ declare module "@package/net/minecraft/core/particles" {
         get color(): $Vector3f;
     }
     export class $ColorParticleOption implements $ParticleOptions {
+        static streamCodec(arg0: $ParticleType_<$ColorParticleOption>): $StreamCodec<$ByteBuf, $ColorParticleOption>;
         getRed(): number;
         getGreen(): number;
         getBlue(): number;
         getAlpha(): number;
-        static streamCodec(arg0: $ParticleType_<$ColorParticleOption>): $StreamCodec<$ByteBuf, $ColorParticleOption>;
         getType(): $ParticleType<$ColorParticleOption>;
         static create(arg0: $ParticleType_<$ColorParticleOption>, arg1: number, arg2: number, arg3: number): $ColorParticleOption;
         static create(arg0: $ParticleType_<$ColorParticleOption>, arg1: number): $ColorParticleOption;
@@ -183,15 +183,15 @@ declare module "@package/net/minecraft/core/particles" {
         get type(): $ParticleType<$ColorParticleOption>;
     }
     export class $VibrationParticleOption implements $ParticleOptions {
+        getArrivalInTicks(): number;
         getDestination(): $PositionSource;
         getType(): $ParticleType<$VibrationParticleOption>;
-        getArrivalInTicks(): number;
         static CODEC: $MapCodec<$VibrationParticleOption>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $VibrationParticleOption>;
         constructor(arg0: $PositionSource, arg1: number);
+        get arrivalInTicks(): number;
         get destination(): $PositionSource;
         get type(): $ParticleType<$VibrationParticleOption>;
-        get arrivalInTicks(): number;
     }
     export class $ParticleGroup {
         getLimit(): number;
@@ -238,8 +238,8 @@ declare module "@package/net/minecraft/core/particles" {
         get type(): $ParticleType<$ItemParticleOption>;
     }
     export class $ParticleType<T extends $ParticleOptions> {
-        getOverrideLimiter(): boolean;
         streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
+        getOverrideLimiter(): boolean;
         codec(): $MapCodec<T>;
         constructor(arg0: boolean);
         get overrideLimiter(): boolean;

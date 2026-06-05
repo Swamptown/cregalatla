@@ -30,7 +30,7 @@ declare module "@package/foundry/veil/api/client/registry" {
     /**
      * Values that may be interpreted as {@link $LightTypeRegistry$LightType}.
      */
-    export type $LightTypeRegistry$LightType_<T> = RegistryTypes.VeilLightType | { debugLightFactory?: $LightTypeRegistry$DebugLightFactory_, rendererFactory?: $LightTypeRegistry$RendererFactory_<$LightData>,  } | [debugLightFactory?: $LightTypeRegistry$DebugLightFactory_, rendererFactory?: $LightTypeRegistry$RendererFactory_<$LightData>, ];
+    export type $LightTypeRegistry$LightType_<T> = RegistryTypes.VeilLightType | { rendererFactory?: $LightTypeRegistry$RendererFactory_<$LightData>, debugLightFactory?: $LightTypeRegistry$DebugLightFactory_,  } | [rendererFactory?: $LightTypeRegistry$RendererFactory_<$LightData>, debugLightFactory?: $LightTypeRegistry$DebugLightFactory_, ];
     export interface $PropertyModifierRegistry$PropertyModifierType<T, M> extends RegistryMarked<RegistryTypes.VeilPropertyModifierTag, RegistryTypes.VeilPropertyModifier> {}
     export interface $LightTypeRegistry$LightType<T> extends RegistryMarked<RegistryTypes.VeilLightTypeTag, RegistryTypes.VeilLightType> {}
     export class $LightTypeRegistry$DebugLightFactory {
@@ -67,7 +67,7 @@ declare module "@package/foundry/veil/api/client/registry" {
     /**
      * Values that may be interpreted as {@link $PropertyRegistry$PropertyType}.
      */
-    export type $PropertyRegistry$PropertyType_<T, M> = RegistryTypes.VeilProperty | { glType?: $GlslTypeSpecifier$BuiltinType_, codec?: $MapCodec_<$Property<T>>,  } | [glType?: $GlslTypeSpecifier$BuiltinType_, codec?: $MapCodec_<$Property<T>>, ];
+    export type $PropertyRegistry$PropertyType_<T, M> = RegistryTypes.VeilProperty | { codec?: $MapCodec_<$Property<T>>, glType?: $GlslTypeSpecifier$BuiltinType_,  } | [codec?: $MapCodec_<$Property<T>>, glType?: $GlslTypeSpecifier$BuiltinType_, ];
     export class $RenderTypeLayerRegistry$LayerType<T extends $RenderTypeLayer> extends $Record {
         codec(): $MapCodec<T>;
         constructor(codec: $MapCodec_<T>);

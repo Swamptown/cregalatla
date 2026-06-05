@@ -67,7 +67,7 @@ declare module "@package/net/fabricmc/fabric/api/item/v1" {
     export class $FabricItem$Settings {
     }
     export interface $FabricItem$Settings {
-        equipmentSlot(arg0: $EquipmentSlotProvider_): $Item$Properties;
         customDamage(arg0: $CustomDamageHandler_): $Item$Properties;
+        equipmentSlot(arg0: $EquipmentSlotProvider_): $Item$Properties;
     }
 }

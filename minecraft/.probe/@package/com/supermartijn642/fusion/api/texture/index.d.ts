@@ -26,7 +26,6 @@ declare module "@package/com/supermartijn642/fusion/api/texture" {
     export class $SpriteCreationContext {
     }
     export interface $SpriteCreationContext {
-        getTextureIdentifier(): $ResourceLocation;
         getTextureWidth(): number;
         getTextureHeight(): number;
         createOriginalSprite(): $TextureAtlasSprite;
@@ -34,18 +33,19 @@ declare module "@package/com/supermartijn642/fusion/api/texture" {
         getAtlasHeight(): number;
         getSpritePositionX(): number;
         getSpritePositionY(): number;
+        getTextureIdentifier(): $ResourceLocation;
         getTextureBuffers(): $NativeImage[];
         getSpriteWidth(): number;
         getSpriteHeight(): number;
         getMipmapLevels(): number;
         getAtlas(): $TextureAtlas;
-        get textureIdentifier(): $ResourceLocation;
         get textureWidth(): number;
         get textureHeight(): number;
         get atlasWidth(): number;
         get atlasHeight(): number;
         get spritePositionX(): number;
         get spritePositionY(): number;
+        get textureIdentifier(): $ResourceLocation;
         get textureBuffers(): $NativeImage[];
         get spriteWidth(): number;
         get spriteHeight(): number;
@@ -55,7 +55,7 @@ declare module "@package/com/supermartijn642/fusion/api/texture" {
     export class $TextureType<T> {
     }
     export interface $TextureType<T> extends $Serializer<T> {
-        createSprite(context: $SpriteCreationContext, data: T): $TextureAtlasSprite;
         getFrameSize(context: $SpritePreparationContext, data: T): $Pair<number, number>;
+        createSprite(context: $SpriteCreationContext, data: T): $TextureAtlasSprite;
     }
 }

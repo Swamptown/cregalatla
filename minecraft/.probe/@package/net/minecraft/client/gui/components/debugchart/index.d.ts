@@ -12,18 +12,18 @@ declare module "@package/net/minecraft/client/gui/components/debugchart" {
         constructor(arg0: $Font, arg1: $SampleStorage);
     }
     export class $AbstractDebugChart {
-        drawChart(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        getWidth(arg0: number): number;
-        renderAdditionalLinesAndLabels(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
         drawStringWithShade(arg0: $GuiGraphics, arg1: string, arg2: number, arg3: number): void;
         getSampleHeight(arg0: number): number;
         toDisplayString(arg0: number): string;
-        getSampleColor(arg0: number): number;
         getSampleColor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): number;
+        getSampleColor(arg0: number): number;
         getValueForAggregation(arg0: number): number;
         drawDimensions(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
         drawMainDimension(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
         drawAdditionalDimensions(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
+        renderAdditionalLinesAndLabels(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
+        drawChart(arg0: $GuiGraphics, arg1: number, arg2: number): void;
+        getWidth(arg0: number): number;
         static CHART_HEIGHT: number;
         static LINE_WIDTH: number;
         sampleStorage: $SampleStorage;

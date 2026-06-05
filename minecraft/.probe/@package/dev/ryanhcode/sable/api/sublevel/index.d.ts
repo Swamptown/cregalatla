@@ -21,13 +21,15 @@ import { $Vector2i, $Vector3dc, $Quaterniond } from "@package/org/joml";
 declare module "@package/dev/ryanhcode/sable/api/sublevel" {
     export class $ClientSubLevelContainer extends $SubLevelContainer {
         addDebugInfo(arg0: $Consumer_<string>): void;
+        getLevel(): $ClientLevel;
         getInterpolation(): $ClientSableInterpolationState;
-        getLightingSceneId(arg0: $ClientSubLevel): number;
         freeLightingScene(arg0: number): void;
+        getLightingSceneId(arg0: $ClientSubLevel): number;
         static DEFAULT_LOG_SIZE_LENGTH: number;
         static DEFAULT_ORIGIN: number;
         static DEFAULT_LOG_PLOT_SIZE: number;
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: number);
+        get level(): $ClientLevel;
         get interpolation(): $ClientSableInterpolationState;
     }
     export class $SubLevelObserver {
@@ -48,12 +50,12 @@ declare module "@package/dev/ryanhcode/sable/api/sublevel" {
     export interface $KinematicContraption {
         sable$liftProviders(): $Map<$BlockPos, $BlockSubLevelLiftProvider$LiftProviderContext>;
         sable$blockGetter(): $BlockGetter;
-        sable$getPosition(arg0: number): $Vector3dc;
-        sable$getPosition(): $Vector3dc;
         sable$getLocalBounds(arg0: $BoundingBox3i): void;
         sable$getMassTracker(): $MassTracker;
-        sable$getOrientation(arg0: number): $Quaterniond;
+        sable$getPosition(): $Vector3dc;
+        sable$getPosition(arg0: number): $Vector3dc;
         sable$getOrientation(): $Quaterniond;
+        sable$getOrientation(arg0: number): $Quaterniond;
         sable$isValid(): boolean;
         sable$shouldCollide(): boolean;
         sable$getFloatingClusterContainer(): $FloatingClusterContainer;
@@ -76,36 +78,36 @@ declare module "@package/dev/ryanhcode/sable/api/sublevel" {
         get level(): $ServerLevel;
     }
     export class $SubLevelContainer {
+        tick(): void;
+        static getContainer(arg0: $Level_): $SubLevelContainer;
         static getContainer(arg0: $ClientLevel): $ClientSubLevelContainer;
         static getContainer(arg0: $ServerLevel): $ServerSubLevelContainer;
-        static getContainer(arg0: $Level_): $SubLevelContainer;
         getOccupancy(): $BitSet;
         inBounds(arg0: $ChunkPos): boolean;
         inBounds(arg0: $BlockPos_): boolean;
         inBounds(arg0: number, arg1: number): boolean;
         getChunkHolder(arg0: $ChunkPos): $PlotChunkHolder;
         getLevel(): $Level;
-        tick(): void;
         getOrigin(): $Vector2i;
         getIndex(arg0: number, arg1: number): number;
+        getSubLevel(arg0: $UUID_): $SubLevel;
+        getSubLevel(arg0: number, arg1: number): $SubLevel;
+        getPlot(arg0: $ChunkPos): $LevelPlot;
+        getPlot(arg0: number, arg1: number): $LevelPlot;
+        getChunk(arg0: $ChunkPos): $LevelChunk;
         getAllSubLevels(): $List<$SubLevel>;
+        getLogPlotSize(): number;
         processSubLevelRemovals(): void;
-        removeSubLevel(arg0: number, arg1: number, arg2: $SubLevelRemovalReason_): void;
         removeSubLevel(arg0: $SubLevel, arg1: $SubLevelRemovalReason_): void;
+        removeSubLevel(arg0: number, arg1: number, arg2: $SubLevelRemovalReason_): void;
         allocateSubLevel(arg0: $UUID_, arg1: number, arg2: number, arg3: $Pose3d): $SubLevel;
         addObserver(arg0: $SubLevelObserver): void;
         allocateNewSubLevel(arg0: $Pose3d): $SubLevel;
         newPopulatedChunk(arg0: $ChunkPos, arg1: $LevelChunk): void;
         getPlayersTracking(arg0: $ChunkPos): $List<$ServerPlayer>;
-        getLogPlotSize(): number;
         getLogSideLength(): number;
         getLoadedCount(): number;
         queryIntersecting(arg0: $BoundingBox3dc): $Iterable<$SubLevel>;
-        getSubLevel(arg0: number, arg1: number): $SubLevel;
-        getSubLevel(arg0: $UUID_): $SubLevel;
-        getChunk(arg0: $ChunkPos): $LevelChunk;
-        getPlot(arg0: number, arg1: number): $LevelPlot;
-        getPlot(arg0: $ChunkPos): $LevelPlot;
         static DEFAULT_LOG_SIZE_LENGTH: number;
         static DEFAULT_ORIGIN: number;
         static DEFAULT_LOG_PLOT_SIZE: number;

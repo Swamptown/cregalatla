@@ -17,8 +17,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/syncdata/field" {
         isDestSync(): boolean;
         isPersist(): boolean;
         isReadOnlyManaged(): boolean;
-        isDrop(): boolean;
         getRawField(): $Field;
+        isDrop(): boolean;
         getContentType(): $Type;
         getName(): string;
         getFieldAccessor(): $IAccessor<never>;
@@ -30,8 +30,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/syncdata/field" {
         get destSync(): boolean;
         get persist(): boolean;
         get readOnlyManaged(): boolean;
-        get drop(): boolean;
         get rawField(): $Field;
+        get drop(): boolean;
         get contentType(): $Type;
         get name(): string;
         get fieldAccessor(): $IAccessor<never>;

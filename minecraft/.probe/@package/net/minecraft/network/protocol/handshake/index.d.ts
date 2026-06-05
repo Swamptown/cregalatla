@@ -15,10 +15,10 @@ declare module "@package/net/minecraft/network/protocol/handshake" {
         intention(): $ClientIntent;
         protocolVersion(): number;
         hostName(): string;
-        isTerminal(): boolean;
         type(): $PacketType<$ClientIntentionPacket>;
         port(): number;
         handle(arg0: $ServerHandshakePacketListener): void;
+        isTerminal(): boolean;
         isSkippable(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientIntentionPacket>;
         /**
@@ -31,7 +31,7 @@ declare module "@package/net/minecraft/network/protocol/handshake" {
     /**
      * Values that may be interpreted as {@link $ClientIntentionPacket}.
      */
-    export type $ClientIntentionPacket_ = { port?: number, protocolVersion?: number, intention?: $ClientIntent_, hostName?: string,  } | [port?: number, protocolVersion?: number, intention?: $ClientIntent_, hostName?: string, ];
+    export type $ClientIntentionPacket_ = { intention?: $ClientIntent_, protocolVersion?: number, port?: number, hostName?: string,  } | [intention?: $ClientIntent_, protocolVersion?: number, port?: number, hostName?: string, ];
     export class $HandshakeProtocols {
         static SERVERBOUND_TEMPLATE: $ProtocolInfo$Unbound<$ServerHandshakePacketListener, $FriendlyByteBuf>;
         static SERVERBOUND: $ProtocolInfo<$ServerHandshakePacketListener>;

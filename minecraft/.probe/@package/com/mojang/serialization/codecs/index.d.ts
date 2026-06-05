@@ -1,6 +1,6 @@
 import { $Supplier_, $Function_, $Consumer_, $UnaryOperator_, $BiFunction, $BiFunction_, $Function } from "@package/java/util/function";
 import { $MapCodec_, $Decoder, $Keyable_, $Decoder$Simple, $Codec$ResultFunction, $DataResult, $MapEncoder, $DynamicOps, $MapLike, $Codec, $Decoder$Boxed, $Lifecycle, $Dynamic, $RecordBuilder, $MapCodec, $Encoder, $Decoder$Terminal, $MapDecoder } from "@package/com/mojang/serialization";
-import { $Function4_, $Function3, $Function13_, $Function4, $Function5, $Pair, $Function6, $Function8_, $Function7, $Function8, $Function9, $Function3_, $Function14_, $Function10_, $Function7_, $Function15_, $Function11_, $Function6_, $Function5_, $Function16_, $Function9_, $Function12_ } from "@package/com/mojang/datafixers/util";
+import { $Function4_, $Function13_, $Function3, $Function4, $Function5, $Pair, $Function6, $Function7, $Function8_, $Function8, $Function9, $Function3_, $Function14_, $Function10_, $Function7_, $Function15_, $Function6_, $Function11_, $Function5_, $Function16_, $Function9_, $Function12_ } from "@package/com/mojang/datafixers/util";
 import { $List, $Map_, $Map } from "@package/java/util";
 import { $Record } from "@package/java/lang";
 import { $Products$P10, $Products$P11, $Products$P12, $Products$P13, $Products$P14, $Products$P15, $Products$P16, $Products$P1, $Products$P5, $Products$P4, $Products$P3, $Products$P2, $Products$P9, $Products$P8, $Products$P7, $Products$P6 } from "@package/com/mojang/datafixers";
@@ -31,30 +31,28 @@ declare module "@package/com/mojang/serialization/codecs" {
         keyCodec(): $Codec<K>;
         decode<T>(arg0: $DynamicOps<T>, arg1: $MapLike<T>): $DataResult<$Map<K, V>>;
         encode<T>(arg0: $Map_<K, V>, arg1: $DynamicOps<T>, arg2: $RecordBuilder<T>): $RecordBuilder<T>;
+        orElseGet(arg0: $Supplier_<$Map<K, V>>): $Codec<$Map<K, V>>;
+        orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<$Map<K, V>>): $Codec<$Map<K, V>>;
+        orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<$Map<K, V>>): $Codec<$Map<K, V>>;
         dispatch<E>(arg0: $Function_<E, $Map<K, V>>, arg1: $Function_<$Map<K, V>, $MapCodec<E>>): $Codec<E>;
         dispatch<E>(arg0: string, arg1: $Function_<E, $Map<K, V>>, arg2: $Function_<$Map<K, V>, $MapCodec<E>>): $Codec<E>;
         validate(arg0: $Function_<$Map<K, V>, $DataResult<$Map<K, V>>>): $Codec<$Map<K, V>>;
-        orElse(arg0: $Map_<K, V>): $Codec<$Map<K, V>>;
-        orElse(arg0: $Consumer_<string>, arg1: $Map_<K, V>): $Codec<$Map<K, V>>;
         orElse(arg0: $UnaryOperator_<string>, arg1: $Map_<K, V>): $Codec<$Map<K, V>>;
-        orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<$Map<K, V>>): $Codec<$Map<K, V>>;
-        orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<$Map<K, V>>): $Codec<$Map<K, V>>;
-        orElseGet(arg0: $Supplier_<$Map<K, V>>): $Codec<$Map<K, V>>;
+        orElse(arg0: $Consumer_<string>, arg1: $Map_<K, V>): $Codec<$Map<K, V>>;
+        orElse(arg0: $Map_<K, V>): $Codec<$Map<K, V>>;
         comapFlatMap<S>(arg0: $Function_<$Map<K, V>, $DataResult<S>>, arg1: $Function_<S, $Map<K, V>>): $Codec<S>;
-        optionalFieldOf(arg0: string, arg1: $Map_<K, V>, arg2: $Lifecycle): $MapCodec<$Map<K, V>>;
         optionalFieldOf(arg0: string): $MapCodec<($Map<K, V>) | undefined>;
         optionalFieldOf(arg0: string, arg1: $Map_<K, V>): $MapCodec<$Map<K, V>>;
+        optionalFieldOf(arg0: string, arg1: $Map_<K, V>, arg2: $Lifecycle): $MapCodec<$Map<K, V>>;
         optionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: $Map_<K, V>, arg3: $Lifecycle): $MapCodec<$Map<K, V>>;
         listOf(arg0: number, arg1: number): $Codec<$List<$Map<K, V>>>;
         listOf(): $Codec<$List<$Map<K, V>>>;
         xmap<S>(arg0: $Function_<$Map<K, V>, S>, arg1: $Function_<S, $Map<K, V>>): $Codec<S>;
         stable(): $Codec<$Map<K, V>>;
-        withLifecycle(arg0: $Lifecycle): $Codec<$Map<K, V>>;
         deprecated(arg0: number): $Codec<$Map<K, V>>;
         flatXmap<S>(arg0: $Function_<$Map<K, V>, $DataResult<S>>, arg1: $Function_<S, $DataResult<$Map<K, V>>>): $Codec<S>;
-        fieldOf(arg0: string): $MapCodec<$Map<K, V>>;
-        lenientOptionalFieldOf(arg0: string, arg1: $Map_<K, V>, arg2: $Lifecycle): $MapCodec<$Map<K, V>>;
         lenientOptionalFieldOf(arg0: string): $MapCodec<($Map<K, V>) | undefined>;
+        lenientOptionalFieldOf(arg0: string, arg1: $Map_<K, V>, arg2: $Lifecycle): $MapCodec<$Map<K, V>>;
         lenientOptionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: $Map_<K, V>, arg3: $Lifecycle): $MapCodec<$Map<K, V>>;
         lenientOptionalFieldOf(arg0: string, arg1: $Map_<K, V>): $MapCodec<$Map<K, V>>;
         mapResult(arg0: $Codec$ResultFunction<$Map_<K, V>>): $Codec<$Map<K, V>>;
@@ -76,12 +74,14 @@ declare module "@package/com/mojang/serialization/codecs" {
         boxed(): $Decoder$Boxed<$Map<K, V>>;
         terminal(): $Decoder$Terminal<$Map<K, V>>;
         simple(): $Decoder$Simple<$Map<K, V>>;
+        withLifecycle(arg0: $Lifecycle): $Encoder<$Map<K, V>>;
+        fieldOf(arg0: string): $MapEncoder<$Map<K, V>>;
         constructor(keyCodec: $Codec<K>, elementCodec: $Codec<V>);
     }
     /**
      * Values that may be interpreted as {@link $UnboundedMapCodec}.
      */
-    export type $UnboundedMapCodec_<K, V> = { keyCodec?: $Codec<any>, elementCodec?: $Codec<any>,  } | [keyCodec?: $Codec<any>, elementCodec?: $Codec<any>, ];
+    export type $UnboundedMapCodec_<K, V> = { elementCodec?: $Codec<any>, keyCodec?: $Codec<any>,  } | [elementCodec?: $Codec<any>, keyCodec?: $Codec<any>, ];
     export class $BaseMapCodec<K, V> {
     }
     export interface $BaseMapCodec<K, V> {

@@ -14,9 +14,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/project" {
     export interface $IProject extends $INBTSerializable<$CompoundTag> {
         serializeProject(arg0: $HolderLookup$Provider): $CompoundTag;
         deserializeProject(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        onClosed(arg0: $Editor): void;
         getProjectType(): $ProjectType;
         initNewProject(): void;
-        onClosed(arg0: $Editor): void;
         getDisplayName(): $Component;
         getVersion(): string;
         getName(): string;
@@ -37,9 +37,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/project" {
     export class $ProjectType {
         isProjectDirty(arg0: $IProject, arg1: $File_): boolean;
         saveProjectToFile(arg0: $IProject, arg1: $File_): void;
-        loadProjectFromFile(arg0: $File_): $IProject;
         newEmptyProject(): $IProject;
         getProjectCreator(): $Supplier<$IProject>;
+        loadProjectFromFile(arg0: $File_): $IProject;
         getName(): string;
         static of(arg0: $IGuiTexture_, arg1: string, arg2: string, arg3: $Supplier_<$IProject>): $ProjectType;
         getIcon(): $IGuiTexture;

@@ -31,8 +31,8 @@ declare module "@package/org/apache/maven/artifact/repository" {
         setPassphrase(arg0: string): void;
         setPrivateKey(arg0: string): void;
         setUsername(arg0: string): void;
-        getUsername(): string;
         getPrivateKey(): string;
+        getUsername(): string;
         getPassword(): string;
         setPassword(arg0: string): void;
         constructor(arg0: string, arg1: string);
@@ -42,15 +42,11 @@ declare module "@package/org/apache/maven/artifact/repository" {
     export interface $ArtifactRepository {
         setUrl(arg0: string): void;
         pathOfRemoteRepositoryMetadata(arg0: $ArtifactMetadata): string;
-        pathOfLocalRepositoryMetadata(arg0: $ArtifactMetadata, arg1: $ArtifactRepository): string;
         pathOf(arg0: $Artifact): string;
+        pathOfLocalRepositoryMetadata(arg0: $ArtifactMetadata, arg1: $ArtifactRepository): string;
         getBasedir(): string;
         setSnapshotUpdatePolicy(arg0: $ArtifactRepositoryPolicy): void;
         setReleaseUpdatePolicy(arg0: $ArtifactRepositoryPolicy): void;
-        /**
-         * @deprecated
-         */
-        isUniqueVersion(): boolean;
         /**
          * @deprecated
          */
@@ -64,8 +60,12 @@ declare module "@package/org/apache/maven/artifact/repository" {
         /**
          * @deprecated
          */
-        isBlacklisted(): boolean;
+        isUniqueVersion(): boolean;
         setProxy(arg0: $Proxy): void;
+        /**
+         * @deprecated
+         */
+        isBlacklisted(): boolean;
         setBlocked(arg0: boolean): void;
         getKey(): string;
         find(arg0: $Artifact): $Artifact;
@@ -82,8 +82,8 @@ declare module "@package/org/apache/maven/artifact/repository" {
         get basedir(): string;
         set snapshotUpdatePolicy(value: $ArtifactRepositoryPolicy);
         set releaseUpdatePolicy(value: $ArtifactRepositoryPolicy);
-        get uniqueVersion(): boolean;
         get projectAware(): boolean;
+        get uniqueVersion(): boolean;
         get key(): string;
         get protocol(): string;
         get releases(): $ArtifactRepositoryPolicy;

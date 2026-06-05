@@ -12,8 +12,8 @@ declare module "@package/net/neoforged/neoforge/event/level/block" {
         get originalState(): $BlockState;
     }
     export class $CropGrowEvent$Pre extends $CropGrowEvent {
-        getResult(): $CropGrowEvent$Pre$Result;
         setResult(arg0: $CropGrowEvent$Pre$Result_): void;
+        getResult(): $CropGrowEvent$Pre$Result;
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_);
     }
     export class $CropGrowEvent extends $BlockEvent {

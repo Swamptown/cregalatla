@@ -1,6 +1,3 @@
-import { $RegistryAccess$Frozen } from "@package/net/minecraft/core";
-import { $Path_, $Path } from "@package/java/nio/file";
-export * as release_protochunks from "@package/org/embeddedt/modernfix/duck/release_protochunks";
 export * as suspend_integrated_server_during_load from "@package/org/embeddedt/modernfix/duck/suspend_integrated_server_during_load";
 
 declare module "@package/org/embeddedt/modernfix/duck" {
@@ -13,15 +10,6 @@ declare module "@package/org/embeddedt/modernfix/duck" {
      * Values that may be interpreted as {@link $IProfilingServerFunctionManager}.
      */
     export type $IProfilingServerFunctionManager_ = (() => string);
-    export class $IChunkGenerator {
-    }
-    export interface $IChunkGenerator {
-        mfix$setStrongholdCachePath(arg0: $Path_, arg1: $RegistryAccess$Frozen): void;
-    }
-    /**
-     * Values that may be interpreted as {@link $IChunkGenerator}.
-     */
-    export type $IChunkGenerator_ = ((arg0: $Path, arg1: $RegistryAccess$Frozen) => void);
     export class $IBlockState {
     }
     export interface $IBlockState {

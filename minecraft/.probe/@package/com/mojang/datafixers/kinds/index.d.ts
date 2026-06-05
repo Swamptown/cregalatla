@@ -1,5 +1,5 @@
 import { $Function_, $BiFunction, $BiFunction_, $Function } from "@package/java/util/function";
-import { $Function4_, $Function3, $Function13_, $Function4, $Function5, $Function6, $Function8_, $Function7, $Function8, $Function9, $Function3_, $Function14_, $Function10_, $Function7_, $Function15_, $Function6_, $Function11_, $Function5_, $Function16_, $Function9_, $Function12_ } from "@package/com/mojang/datafixers/util";
+import { $Function4_, $Function3, $Function13_, $Function4, $Function5, $Function6, $Function7, $Function8_, $Function8, $Function9, $Function3_, $Function14_, $Function10_, $Function7_, $Function15_, $Function6_, $Function11_, $Function5_, $Function16_, $Function9_, $Function12_ } from "@package/com/mojang/datafixers/util";
 import { $Products$P10, $Products$P11, $Products$P12, $Products$P13, $Products$P14, $Products$P15, $Products$P16, $Products$P1, $Products$P5, $Products$P4, $Products$P3, $Products$P2, $Products$P9, $Products$P8, $Products$P7, $Products$P6 } from "@package/com/mojang/datafixers";
 
 declare module "@package/com/mojang/datafixers/kinds" {

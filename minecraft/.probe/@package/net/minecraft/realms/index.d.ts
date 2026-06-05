@@ -115,8 +115,8 @@ declare module "@package/net/minecraft/realms" {
         get text(): $Component;
     }
     export class $RealmsConnect {
-        abort(): void;
         tick(): void;
+        abort(): void;
         connect(arg0: $RealmsServer, arg1: $ServerAddress): void;
         onlineScreen: $Screen;
         aborted: boolean;

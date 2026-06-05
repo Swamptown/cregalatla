@@ -30,10 +30,10 @@ declare module "@package/io/github/mortuusars/exposure/world/item" {
         getDefaultMaxFrameCount(stack: $ItemStack_): number;
         getStoredFrames(stack: $ItemStack_): $List<$Frame>;
         hasFrameAt(stack: $ItemStack_, index: number): boolean;
-        getFullness(stack: $ItemStack_): number;
         getStoredFramesCount(stack: $ItemStack_): number;
         getMaxFrameCount(stack: $ItemStack_): number;
         isFull(stack: $ItemStack_): boolean;
+        getFullness(stack: $ItemStack_): number;
         hasFrames(stack: $ItemStack_): boolean;
         static BASE_ATTACK_DAMAGE_ID: $ResourceLocation;
         static DEFAULT_MAX_STACK_SIZE: number;
@@ -56,12 +56,12 @@ declare module "@package/io/github/mortuusars/exposure/world/item" {
         getDefaultMaxFrameCount(stack: $ItemStack_): number;
         getStoredFrames(stack: $ItemStack_): $List<$Frame>;
         hasFrameAt(stack: $ItemStack_, index: number): boolean;
-        getFullness(stack: $ItemStack_): number;
         getStoredFramesCount(stack: $ItemStack_): number;
         getMaxFrameCount(stack: $ItemStack_): number;
         isFull(stack: $ItemStack_): boolean;
-        getType(): $ExposureType;
+        getFullness(stack: $ItemStack_): number;
         hasFrames(stack: $ItemStack_): boolean;
+        getType(): $ExposureType;
         get type(): $ExposureType;
     }
     /**

@@ -9,12 +9,12 @@ import { $List_ } from "@package/java/util";
 
 declare module "@package/net/fabricmc/fabric/impl/client/model/loading" {
     export class $ModelLoadingEventDispatcher {
+        addExtraModels(arg0: $Consumer_<$ResourceLocation>): void;
+        loadBlockStateModels(arg0: $ResourceLocation_, arg1: $StateDefinition<$Block_, $BlockState_>): boolean;
         modifyModelAfterBake(arg0: $BakedModel, arg1: $ResourceLocation_, arg2: $ModelResourceLocation_, arg3: $UnbakedModel, arg4: $Function_<$Material, $TextureAtlasSprite>, arg5: $ModelState, arg6: $ModelBaker): $BakedModel;
         resolveModel(arg0: $ResourceLocation_): $UnbakedModel;
         modifyModelOnLoad(arg0: $UnbakedModel, arg1: $ResourceLocation_, arg2: $ModelResourceLocation_): $UnbakedModel;
         modifyModelBeforeBake(arg0: $UnbakedModel, arg1: $ResourceLocation_, arg2: $ModelResourceLocation_, arg3: $Function_<$Material, $TextureAtlasSprite>, arg4: $ModelState, arg5: $ModelBaker): $UnbakedModel;
-        addExtraModels(arg0: $Consumer_<$ResourceLocation>): void;
-        loadBlockStateModels(arg0: $ResourceLocation_, arg1: $StateDefinition<$Block_, $BlockState_>): boolean;
         constructor(arg0: $ModelBakery, arg1: $List_<$ModelLoadingPlugin_>);
     }
     export class $BlockStatesLoaderHooks {

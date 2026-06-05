@@ -10,15 +10,15 @@ declare module "@package/com/zigythebird/playeranimcore/animation/layered" {
         static DEFAULT_FIRST_PERSON_CONFIG: $FirstPersonConfiguration;
     }
     export interface $IAnimation {
-        setupAnim(state: $AnimationData): void;
-        getFirstPersonConfiguration(): $FirstPersonConfiguration;
         get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
+        getFirstPersonConfiguration(): $FirstPersonConfiguration;
+        setupAnim(state: $AnimationData): void;
         tick(state: $AnimationData): void;
         isActive(): boolean;
-        getFirstPersonMode(): $FirstPersonMode;
         canRemove(): boolean;
-        set upAnim(value: $AnimationData);
+        getFirstPersonMode(): $FirstPersonMode;
         get firstPersonConfiguration(): $FirstPersonConfiguration;
+        set upAnim(value: $AnimationData);
         get active(): boolean;
         get firstPersonMode(): $FirstPersonMode;
     }
@@ -30,18 +30,18 @@ declare module "@package/com/zigythebird/playeranimcore/animation/layered" {
         addAnimLayer(priority: number, layer: $IAnimation_): void;
         removeLayer(layer: $IAnimation_): boolean;
         removeLayer(layerLevel: number): boolean;
-        setupAnim(state: $AnimationData): void;
-        getFirstPersonConfiguration(): $FirstPersonConfiguration;
         get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
-        getLayers(): $List<$Pair<number, $IAnimation>>;
+        getFirstPersonConfiguration(): $FirstPersonConfiguration;
+        setupAnim(state: $AnimationData): void;
         tick(state: $AnimationData): void;
+        getLayers(): $List<$Pair<number, $IAnimation>>;
         getPriority(): number;
         isActive(): boolean;
         getFirstPersonMode(): $FirstPersonMode;
         canRemove(): boolean;
         constructor();
-        set upAnim(value: $AnimationData);
         get firstPersonConfiguration(): $FirstPersonConfiguration;
+        set upAnim(value: $AnimationData);
         get layers(): $List<$Pair<number, $IAnimation>>;
         get priority(): number;
         get active(): boolean;
@@ -50,17 +50,17 @@ declare module "@package/com/zigythebird/playeranimcore/animation/layered" {
     export class $AnimationContainer<T extends $IAnimation> implements $IAnimation {
         setAnim(newAnim: T): void;
         getAnim(): T;
-        setupAnim(state: $AnimationData): void;
-        getFirstPersonConfiguration(): $FirstPersonConfiguration;
         get3DTransform(bone: $PlayerAnimBone): $PlayerAnimBone;
+        getFirstPersonConfiguration(): $FirstPersonConfiguration;
+        setupAnim(state: $AnimationData): void;
         tick(state: $AnimationData): void;
         isActive(): boolean;
         getFirstPersonMode(): $FirstPersonMode;
         canRemove(): boolean;
         constructor(anim: T);
         constructor();
-        set upAnim(value: $AnimationData);
         get firstPersonConfiguration(): $FirstPersonConfiguration;
+        set upAnim(value: $AnimationData);
         get active(): boolean;
         get firstPersonMode(): $FirstPersonMode;
     }

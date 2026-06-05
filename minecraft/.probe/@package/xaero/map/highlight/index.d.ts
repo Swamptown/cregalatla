@@ -8,7 +8,6 @@ import { $PoolTextureDirectBufferUnit } from "@package/xaero/map/pool/buffer";
 
 declare module "@package/xaero/map/highlight" {
     export class $AbstractHighlighter {
-        addMinimapBlockHighlightTooltips(arg0: $List_<$Component_>, arg1: $ResourceKey_<$Level>, arg2: number, arg3: number, arg4: number): void;
         getBlockHighlightSubtleTooltip(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): $Component;
         getBlockHighlightBluntTooltip(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): $Component;
         regionHasHighlights(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): boolean;
@@ -16,6 +15,7 @@ declare module "@package/xaero/map/highlight" {
         getChunkHighlitColor(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): number[];
         calculateRegionHash(arg0: $ResourceKey_<$Level>, arg1: number, arg2: number): number;
         isCoveringOutsideDiscovered(): boolean;
+        addMinimapBlockHighlightTooltips(arg0: $List_<$Component_>, arg1: $ResourceKey_<$Level>, arg2: number, arg3: number, arg4: number): void;
         get coveringOutsideDiscovered(): boolean;
     }
     export class $DimensionHighlighterHandler {

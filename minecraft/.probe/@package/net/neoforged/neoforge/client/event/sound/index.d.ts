@@ -24,13 +24,13 @@ declare module "@package/net/neoforged/neoforge/client/event/sound" {
         get engine(): $SoundEngine;
     }
     export class $PlaySoundEvent extends $SoundEvent {
+        getOriginalSound(): $SoundInstance;
         setSound(arg0: $SoundInstance): void;
         getName(): string;
         getSound(): $SoundInstance;
-        getOriginalSound(): $SoundInstance;
         constructor(arg0: $SoundEngine, arg1: $SoundInstance);
-        get name(): string;
         get originalSound(): $SoundInstance;
+        get name(): string;
     }
     export class $PlayStreamingSourceEvent extends $SoundEvent$SoundSourceEvent {
         constructor(arg0: $SoundEngine, arg1: $SoundInstance, arg2: $Channel);

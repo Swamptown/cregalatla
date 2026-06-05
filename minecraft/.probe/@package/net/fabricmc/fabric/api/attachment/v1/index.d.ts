@@ -7,8 +7,6 @@ declare module "@package/net/fabricmc/fabric/api/attachment/v1" {
         static NBT_ATTACHMENT_KEY: string;
     }
     export interface $AttachmentTarget {
-        getAttached<A>(arg0: $AttachmentType<A>): A;
-        setAttached<A>(arg0: $AttachmentType<A>, arg1: A): A;
         getAttachedOrThrow<A>(arg0: $AttachmentType<A>): A;
         getAttachedOrSet<A>(arg0: $AttachmentType<A>, arg1: A): A;
         getAttachedOrCreate<A>(arg0: $AttachmentType<A>, arg1: $Supplier_<A>): A;
@@ -18,12 +16,14 @@ declare module "@package/net/fabricmc/fabric/api/attachment/v1" {
         hasAttached(arg0: $AttachmentType<never>): boolean;
         removeAttached<A>(arg0: $AttachmentType<A>): A;
         modifyAttached<A>(arg0: $AttachmentType<A>, arg1: $UnaryOperator_<A>): A;
+        getAttached<A>(arg0: $AttachmentType<A>): A;
+        setAttached<A>(arg0: $AttachmentType<A>, arg1: A): A;
     }
     export class $AttachmentType<A> {
     }
     export interface $AttachmentType<A> {
-        isSynced(): boolean;
         persistenceCodec(): $Codec<A>;
+        isSynced(): boolean;
         identifier(): $ResourceLocation;
         initializer(): $Supplier<A>;
         isPersistent(): boolean;

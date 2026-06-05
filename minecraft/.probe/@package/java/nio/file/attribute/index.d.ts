@@ -56,18 +56,18 @@ declare module "@package/java/nio/file/attribute" {
     }
     export interface $BasicFileAttributes {
         isRegularFile(): boolean;
-        creationTime(): $FileTime;
-        isOther(): boolean;
         lastAccessTime(): $FileTime;
         lastModifiedTime(): $FileTime;
         isSymbolicLink(): boolean;
         fileKey(): $Object;
         size(): number;
         isDirectory(): boolean;
+        creationTime(): $FileTime;
+        isOther(): boolean;
         get regularFile(): boolean;
-        get other(): boolean;
         get symbolicLink(): boolean;
         get directory(): boolean;
+        get other(): boolean;
     }
     export class $UserPrincipal {
     }

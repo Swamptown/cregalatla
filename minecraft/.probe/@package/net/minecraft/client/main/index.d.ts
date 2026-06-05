@@ -19,7 +19,7 @@ declare module "@package/net/minecraft/client/main" {
     /**
      * Values that may be interpreted as {@link $GameConfig$QuickPlayData}.
      */
-    export type $GameConfig$QuickPlayData_ = { singleplayer?: string, path?: string, realms?: string, multiplayer?: string,  } | [singleplayer?: string, path?: string, realms?: string, multiplayer?: string, ];
+    export type $GameConfig$QuickPlayData_ = { realms?: string, path?: string, singleplayer?: string, multiplayer?: string,  } | [realms?: string, path?: string, singleplayer?: string, multiplayer?: string, ];
     export class $Main {
         static main(arg0: string[]): void;
         constructor();

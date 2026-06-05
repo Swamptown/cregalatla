@@ -14,46 +14,46 @@ declare module "@package/java/awt/print" {
      */
     export type $Printable_ = ((arg0: $Graphics, arg1: $PageFormat, arg2: number) => number);
     export class $PageFormat implements $Cloneable {
-        setOrientation(arg0: number): void;
-        getOrientation(): number;
-        getWidth(): number;
-        getHeight(): number;
+        getMatrix(): number[];
         getImageableY(): number;
         getImageableHeight(): number;
         getImageableX(): number;
         getImageableWidth(): number;
         getPaper(): $Paper;
         setPaper(arg0: $Paper): void;
+        setOrientation(arg0: number): void;
+        getOrientation(): number;
+        getWidth(): number;
+        getHeight(): number;
         clone(): $Object;
-        getMatrix(): number[];
         static REVERSE_LANDSCAPE: number;
         static LANDSCAPE: number;
         static PORTRAIT: number;
         constructor();
-        get width(): number;
-        get height(): number;
+        get matrix(): number[];
         get imageableY(): number;
         get imageableHeight(): number;
         get imageableX(): number;
         get imageableWidth(): number;
-        get matrix(): number[];
+        get width(): number;
+        get height(): number;
     }
     export class $Paper implements $Cloneable {
         setImageableArea(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        getWidth(): number;
-        getHeight(): number;
         getImageableY(): number;
         getImageableHeight(): number;
         getImageableX(): number;
         getImageableWidth(): number;
-        clone(): $Object;
         setSize(arg0: number, arg1: number): void;
+        getWidth(): number;
+        getHeight(): number;
+        clone(): $Object;
         constructor();
-        get width(): number;
-        get height(): number;
         get imageableY(): number;
         get imageableHeight(): number;
         get imageableX(): number;
         get imageableWidth(): number;
+        get width(): number;
+        get height(): number;
     }
 }

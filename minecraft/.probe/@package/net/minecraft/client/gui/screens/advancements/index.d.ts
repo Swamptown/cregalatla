@@ -39,7 +39,7 @@ declare module "@package/net/minecraft/client/gui/screens/advancements" {
     /**
      * Values that may be interpreted as {@link $AdvancementTabType$Sprites}.
      */
-    export type $AdvancementTabType$Sprites_ = { middle?: $ResourceLocation_, first?: $ResourceLocation_, last?: $ResourceLocation_,  } | [middle?: $ResourceLocation_, first?: $ResourceLocation_, last?: $ResourceLocation_, ];
+    export type $AdvancementTabType$Sprites_ = { last?: $ResourceLocation_, first?: $ResourceLocation_, middle?: $ResourceLocation_,  } | [last?: $ResourceLocation_, first?: $ResourceLocation_, middle?: $ResourceLocation_, ];
     export class $AdvancementsScreen extends $Screen implements $ClientAdvancements$Listener {
         onUpdateAdvancementProgress(arg0: $AdvancementNode, arg1: $AdvancementProgress): void;
         renderWindow(arg0: $GuiGraphics, arg1: number, arg2: number): void;
@@ -98,9 +98,9 @@ declare module "@package/net/minecraft/client/gui/screens/advancements" {
         getIndex(): number;
         getRootNode(): $AdvancementNode;
         getTitle(): $Component;
+        getWidget(arg0: $AdvancementHolder_): $AdvancementWidget;
         isMouseOver(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         getScreen(): $AdvancementsScreen;
-        getWidget(arg0: $AdvancementHolder_): $AdvancementWidget;
         scroll(arg0: number, arg1: number): void;
         drawContents(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         drawTab(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: boolean): void;

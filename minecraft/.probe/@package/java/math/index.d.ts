@@ -27,25 +27,17 @@ declare module "@package/java/math" {
         static DECIMAL64: $MathContext;
         static DECIMAL32: $MathContext;
         static UNLIMITED: $MathContext;
-        constructor(arg0: number);
         constructor(arg0: string);
         constructor(arg0: number, arg1: $RoundingMode_);
+        constructor(arg0: number);
         get precision(): number;
         get roundingMode(): $RoundingMode;
     }
     export class $BigInteger extends $Number implements $Comparable<$BigInteger> {
+        or(arg0: $BigInteger): $BigInteger;
         negate(): $BigInteger;
         and(arg0: $BigInteger): $BigInteger;
         remainder(arg0: $BigInteger): $BigInteger;
-        subtract(arg0: $BigInteger): $BigInteger;
-        divide(arg0: $BigInteger): $BigInteger;
-        divideAndRemainder(arg0: $BigInteger): $BigInteger[];
-        longValueExact(): number;
-        bitLength(): number;
-        testBit(arg0: number): boolean;
-        intValueExact(): number;
-        shortValueExact(): number;
-        byteValueExact(): number;
         xor(arg0: $BigInteger): $BigInteger;
         andNot(arg0: $BigInteger): $BigInteger;
         shiftRight(arg0: number): $BigInteger;
@@ -77,48 +69,75 @@ declare module "@package/java/math" {
         shiftLeft(arg0: number): $BigInteger;
         setBit(arg0: number): $BigInteger;
         multiply(arg0: $BigInteger): $BigInteger;
-        or(arg0: $BigInteger): $BigInteger;
+        subtract(arg0: $BigInteger): $BigInteger;
+        divide(arg0: $BigInteger): $BigInteger;
+        divideAndRemainder(arg0: $BigInteger): $BigInteger[];
+        longValueExact(): number;
+        bitLength(): number;
+        testBit(arg0: number): boolean;
+        intValueExact(): number;
+        shortValueExact(): number;
+        byteValueExact(): number;
         static ZERO: $BigInteger;
         static ONE: $BigInteger;
         static TEN: $BigInteger;
         static TWO: $BigInteger;
-        constructor(arg0: number[], arg1: number, arg2: number);
+        constructor(arg0: number, arg1: number[]);
+        constructor(arg0: number, arg1: number[], arg2: number, arg3: number);
+        constructor(arg0: number, arg1: $Random);
         constructor(arg0: number, arg1: number, arg2: $Random);
         constructor(arg0: string, arg1: number);
-        constructor(arg0: number, arg1: $Random);
+        constructor(arg0: number[], arg1: number, arg2: number);
         constructor(arg0: string);
         constructor(arg0: number[]);
-        constructor(arg0: number, arg1: number[], arg2: number, arg3: number);
-        constructor(arg0: number, arg1: number[]);
         get lowestSetBit(): number;
         set bit(value: number);
     }
     export class $BigDecimal extends $Number implements $Comparable<$BigDecimal> {
         negate(): $BigDecimal;
         negate(arg0: $MathContext): $BigDecimal;
-        remainder(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
         remainder(arg0: $BigDecimal): $BigDecimal;
+        remainder(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
         precision(): number;
-        setScale(arg0: number): $BigDecimal;
-        setScale(arg0: number, arg1: $RoundingMode_): $BigDecimal;
         /**
          * @deprecated
          */
         setScale(arg0: number, arg1: number): $BigDecimal;
+        setScale(arg0: number): $BigDecimal;
+        setScale(arg0: number, arg1: $RoundingMode_): $BigDecimal;
+        abs(): $BigDecimal;
+        abs(arg0: $MathContext): $BigDecimal;
+        sqrt(arg0: $MathContext): $BigDecimal;
+        pow(arg0: number): $BigDecimal;
+        pow(arg0: number, arg1: $MathContext): $BigDecimal;
+        min(arg0: $BigDecimal): $BigDecimal;
+        max(arg0: $BigDecimal): $BigDecimal;
+        round(arg0: $MathContext): $BigDecimal;
+        signum(): number;
+        compareTo(arg0: $BigDecimal): number;
+        static valueOf(arg0: number, arg1: number): $BigDecimal;
+        static valueOf(arg0: number): $BigDecimal;
+        static valueOf(arg0: number): $BigDecimal;
+        scale(): number;
+        add(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
+        add(arg0: $BigDecimal): $BigDecimal;
+        multiply(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
+        multiply(arg0: $BigDecimal): $BigDecimal;
+        ulp(): $BigDecimal;
         subtract(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
         subtract(arg0: $BigDecimal): $BigDecimal;
-        /**
-         * @deprecated
-         */
-        divide(arg0: $BigDecimal, arg1: number, arg2: number): $BigDecimal;
-        divide(arg0: $BigDecimal, arg1: number, arg2: $RoundingMode_): $BigDecimal;
         divide(arg0: $BigDecimal, arg1: $RoundingMode_): $BigDecimal;
-        divide(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
-        divide(arg0: $BigDecimal): $BigDecimal;
         /**
          * @deprecated
          */
         divide(arg0: $BigDecimal, arg1: number): $BigDecimal;
+        divide(arg0: $BigDecimal, arg1: number, arg2: $RoundingMode_): $BigDecimal;
+        divide(arg0: $BigDecimal): $BigDecimal;
+        /**
+         * @deprecated
+         */
+        divide(arg0: $BigDecimal, arg1: number, arg2: number): $BigDecimal;
+        divide(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
         divideToIntegralValue(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
         divideToIntegralValue(arg0: $BigDecimal): $BigDecimal;
         divideAndRemainder(arg0: $BigDecimal): $BigDecimal[];
@@ -138,25 +157,6 @@ declare module "@package/java/math" {
         intValueExact(): number;
         shortValueExact(): number;
         byteValueExact(): number;
-        abs(): $BigDecimal;
-        abs(arg0: $MathContext): $BigDecimal;
-        sqrt(arg0: $MathContext): $BigDecimal;
-        pow(arg0: number): $BigDecimal;
-        pow(arg0: number, arg1: $MathContext): $BigDecimal;
-        min(arg0: $BigDecimal): $BigDecimal;
-        max(arg0: $BigDecimal): $BigDecimal;
-        round(arg0: $MathContext): $BigDecimal;
-        signum(): number;
-        compareTo(arg0: $BigDecimal): number;
-        static valueOf(arg0: number, arg1: number): $BigDecimal;
-        static valueOf(arg0: number): $BigDecimal;
-        static valueOf(arg0: number): $BigDecimal;
-        scale(): number;
-        add(arg0: $BigDecimal): $BigDecimal;
-        add(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
-        multiply(arg0: $BigDecimal): $BigDecimal;
-        multiply(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
-        ulp(): $BigDecimal;
         static ZERO: $BigDecimal;
         /**
          * @deprecated
@@ -193,21 +193,21 @@ declare module "@package/java/math" {
         static ROUND_HALF_EVEN: number;
         static TEN: $BigDecimal;
         static TWO: $BigDecimal;
-        constructor(arg0: number, arg1: $MathContext);
-        constructor(arg0: number);
-        constructor(arg0: $BigInteger, arg1: number, arg2: $MathContext);
-        constructor(arg0: $BigInteger, arg1: number);
-        constructor(arg0: string[], arg1: $MathContext);
-        constructor(arg0: string[], arg1: number, arg2: number, arg3: $MathContext);
-        constructor(arg0: string[]);
-        constructor(arg0: number, arg1: $MathContext);
-        constructor(arg0: number);
-        constructor(arg0: number);
-        constructor(arg0: $BigInteger, arg1: $MathContext);
-        constructor(arg0: $BigInteger);
-        constructor(arg0: number, arg1: $MathContext);
+        constructor(arg0: string[], arg1: number, arg2: number);
         constructor(arg0: string);
         constructor(arg0: string, arg1: $MathContext);
-        constructor(arg0: string[], arg1: number, arg2: number);
+        constructor(arg0: string[], arg1: number, arg2: number, arg3: $MathContext);
+        constructor(arg0: string[]);
+        constructor(arg0: string[], arg1: $MathContext);
+        constructor(arg0: $BigInteger, arg1: number);
+        constructor(arg0: $BigInteger, arg1: number, arg2: $MathContext);
+        constructor(arg0: number);
+        constructor(arg0: number, arg1: $MathContext);
+        constructor(arg0: number);
+        constructor(arg0: number, arg1: $MathContext);
+        constructor(arg0: number, arg1: $MathContext);
+        constructor(arg0: number);
+        constructor(arg0: $BigInteger);
+        constructor(arg0: $BigInteger, arg1: $MathContext);
     }
 }

@@ -67,14 +67,14 @@ export * as minecart from "@package/com/simibubi/create/content/contraptions/min
 
 declare module "@package/com/simibubi/create/content/contraptions" {
     export class $StructureTransform {
-        rotateFacing(arg0: $Direction_): $Direction;
-        unapply(arg0: $BlockPos_): $BlockPos;
         mirrorFacing(arg0: $Direction_): $Direction;
         unapplyWithoutOffset(arg0: $BlockPos_): $BlockPos;
         unapplyWithoutOffset(arg0: $Vec3_): $Vec3;
         applyWithoutOffset(arg0: $Vec3_): $Vec3;
         applyWithoutOffset(arg0: $BlockPos_): $BlockPos;
         applyWithoutOffsetUncentered(arg0: $Vec3_): $Vec3;
+        rotateFacing(arg0: $Direction_): $Direction;
+        unapply(arg0: $BlockPos_): $BlockPos;
         apply(arg0: $BlockState_): $BlockState;
         apply(arg0: $Vec3_): $Vec3;
         apply(arg0: $BlockEntity): void;
@@ -90,6 +90,20 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         constructor(arg0: $BlockPos_, arg1: $Direction$Axis_, arg2: $Rotation_, arg3: $Mirror_);
     }
     export class $AbstractContraptionEntity extends $Entity implements $IEntityWithComplexSpawn, $AccessorAbstractContraptionEntity, $KinematicContraption {
+        getControllingPlayer(): ($UUID) | undefined;
+        setControllingPlayer(arg0: $UUID_): void;
+        startControlling(arg0: $BlockPos_, arg1: $Player): boolean;
+        stopControlling(arg0: $BlockPos_): void;
+        handlePlayerInteraction(arg0: $Player, arg1: $BlockPos_, arg2: $Direction_, arg3: $InteractionHand_): boolean;
+        addSittingPassenger(arg0: $Entity, arg1: number): void;
+        toLocalVector(arg0: $Vec3_, arg1: number): $Vec3;
+        toLocalVector(arg0: $Vec3_, arg1: number, arg2: boolean): $Vec3;
+        alignPassenger(arg0: $Entity): void;
+        refreshPSIs(): void;
+        getPrevPositionVec(): $Vec3;
+        getYawOffset(): number;
+        static yawFromVector(arg0: $Vec3_): number;
+        static pitchFromVector(arg0: $Vec3_): number;
         writeSpawnData(arg0: $RegistryFriendlyByteBuf): void;
         readSpawnData(arg0: $RegistryFriendlyByteBuf): void;
         setContraptionMotion(arg0: $Vec3_): void;
@@ -98,10 +112,16 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         isPrevPosInvalid(): boolean;
         sable$liftProviders(): $Map<any, any>;
         sable$blockGetter(): $BlockGetter;
+        sable$getLocalBounds(arg0: $BoundingBox3i): void;
+        sable$getMassTracker(): $MassTracker;
         sable$getPosition(arg0: number): $Vector3dc;
+        sable$getOrientation(arg0: number): $Quaterniond;
+        sable$isValid(): boolean;
+        sable$shouldCollide(): boolean;
+        sable$getFloatingClusterContainer(): $FloatingClusterContainer;
         isStalled(): boolean;
-        toGlobalVector(arg0: $Vec3_, arg1: number): $Vec3;
         toGlobalVector(arg0: $Vec3_, arg1: number, arg2: boolean): $Vec3;
+        toGlobalVector(arg0: $Vec3_, arg1: number): $Vec3;
         reverseRotation(arg0: $Vec3_, arg1: number): $Vec3;
         applyRotation(arg0: $Vec3_, arg1: number): $Vec3;
         getContactPointMotion(arg0: $Vec3_): $Vec3;
@@ -114,33 +134,13 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         getPassengerPosition(arg0: $Entity, arg1: number): $Vec3;
         getContraptionName(): $Component;
         getPrevAnchorVec(): $Vec3;
-        toLocalVector(arg0: $Vec3_, arg1: number, arg2: boolean): $Vec3;
-        toLocalVector(arg0: $Vec3_, arg1: number): $Vec3;
-        alignPassenger(arg0: $Entity): void;
-        refreshPSIs(): void;
-        getPrevPositionVec(): $Vec3;
-        getYawOffset(): number;
-        static yawFromVector(arg0: $Vec3_): number;
-        static pitchFromVector(arg0: $Vec3_): number;
-        sable$getLocalBounds(arg0: $BoundingBox3i): void;
-        sable$getMassTracker(): $MassTracker;
-        sable$getOrientation(arg0: number): $Quaterniond;
-        sable$isValid(): boolean;
-        sable$shouldCollide(): boolean;
-        sable$getFloatingClusterContainer(): $FloatingClusterContainer;
-        startControlling(arg0: $BlockPos_, arg1: $Player): boolean;
-        stopControlling(arg0: $BlockPos_): void;
-        setControllingPlayer(arg0: $UUID_): void;
-        getControllingPlayer(): ($UUID) | undefined;
-        addSittingPassenger(arg0: $Entity, arg1: number): void;
-        handlePlayerInteraction(arg0: $Player, arg1: $BlockPos_, arg2: $Direction_, arg3: $InteractionHand_): boolean;
-        control(arg0: $BlockPos_, arg1: $Collection_<number>, arg2: $Player): boolean;
         move(arg0: number, arg1: number, arg2: number): void;
+        control(arg0: $BlockPos_, arg1: $Collection_<number>, arg2: $Player): boolean;
         static build(arg0: $EntityType$Builder<never>): $EntityType$Builder<never>;
+        canInteractWithBlock(arg0: $Player, arg1: $Vec3_, arg2: number): boolean;
+        canInteractWithBlock(arg0: $Player, arg1: $BlockPos_, arg2: number): boolean;
         setBlock(arg0: $BlockPos_, arg1: $StructureTemplate$StructureBlockInfo_): void;
         disassemble(): void;
-        canInteractWithBlock(arg0: $Player, arg1: $BlockPos_, arg2: number): boolean;
-        canInteractWithBlock(arg0: $Player, arg1: $Vec3_, arg2: number): boolean;
         getContraption(): $Contraption;
         registerColliding(arg0: $Entity): void;
         sable$getPosition(): $Vector3dc;
@@ -148,7 +148,6 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         sable$getLocalPose(arg0: $Pose3d, arg1: number): $Pose3d;
         railways$setSkipActorStop(arg0: boolean): void;
         railways$moveCollidedEntitiesOnDisassembly(arg0: $StructureTransform): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -197,6 +196,7 @@ declare module "@package/com/simibubi/create/content/contraptions" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;
@@ -220,6 +220,8 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
         constructor(arg0: $EntityType_<never>, arg1: $Level_);
+        get prevPositionVec(): $Vec3;
+        get yawOffset(): number;
         set contraptionMotion(value: $Vec3_);
         get readyForRender(): boolean;
         get aliveOrStale(): boolean;
@@ -229,8 +231,6 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         get anchorVec(): $Vec3;
         get contraptionName(): $Component;
         get prevAnchorVec(): $Vec3;
-        get prevPositionVec(): $Vec3;
-        get yawOffset(): number;
         get contraption(): $Contraption;
     }
     export class $ContraptionWorld extends $WrappedLevel {
@@ -263,6 +263,8 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         constructor(arg0: $Level_, arg1: $Contraption);
     }
     export class $OrientedContraptionEntity extends $AbstractContraptionEntity implements $AccessorOrientedContraptionEntity {
+        getCoupledCartsIfPresent(): $Couple<$MinecartController>;
+        static handleRelocationPacket(arg0: $ContraptionRelocationPacket_): void;
         setInitialOrientation(arg0: $Direction_): void;
         startAtInitialYaw(): void;
         static createAtYaw(arg0: $Level_, arg1: $Contraption, arg2: $Direction_, arg3: number): $OrientedContraptionEntity;
@@ -272,11 +274,8 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         isInitialOrientationPresent(): boolean;
         setCouplingId(arg0: $UUID_): void;
         getCouplingId(): $UUID;
-        getCoupledCartsIfPresent(): $Couple<$MinecartController>;
-        static handleRelocationPacket(arg0: $ContraptionRelocationPacket_): void;
         static create(arg0: $Level_, arg1: $Contraption, arg2: $Direction_): $OrientedContraptionEntity;
         railways$makeStructureTransform(): $StructureTransform;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -328,6 +327,7 @@ declare module "@package/com/simibubi/create/content/contraptions" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;
@@ -354,52 +354,52 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
         constructor(arg0: $EntityType_<never>, arg1: $Level_);
+        get coupledCartsIfPresent(): $Couple<$MinecartController>;
         get initialYaw(): number;
         get initialOrientationPresent(): boolean;
-        get coupledCartsIfPresent(): $Couple<$MinecartController>;
     }
     export class $Contraption implements $ContraptionAccessor, $AccessorContraption, $IContraptionFuel {
-        invalidateColliders(): void;
-        searchMovedStructure(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_): boolean;
-        onEntityCreated(arg0: $AbstractContraptionEntity): void;
-        onEntityInitialize(arg0: $Level_, arg1: $AbstractContraptionEntity): void;
+        static fromNBT(arg0: $Level_, arg1: $CompoundTag_, arg2: boolean): $Contraption;
+        getActorAt(arg0: $BlockPos_): $MutablePair<$StructureTemplate$StructureBlockInfo, $MovementContext>;
+        getBlockEntityClientSide(arg0: $BlockPos_): $BlockEntity;
+        getDisabledActors(): $List<$ItemStack>;
+        isActorTypeDisabled(arg0: $ItemStack_): boolean;
         setActorsActive(arg0: $ItemStack_, arg1: boolean): void;
+        getActors(): $List<$MutablePair<$StructureTemplate$StructureBlockInfo, $MovementContext>>;
+        invalidateClientContraptionChildren(): void;
+        getSeats(): $List<$BlockPos>;
+        startMoving(arg0: $Level_): void;
+        getSeatMapping(): $Map<$UUID, number>;
+        writeNBT(arg0: $HolderLookup$Provider, arg1: boolean): $CompoundTag;
+        readNBT(arg0: $Level_, arg1: $CompoundTag_, arg2: boolean): void;
+        onEntityInitialize(arg0: $Level_, arg1: $AbstractContraptionEntity): void;
         writeStorage(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
         resetClientContraption(): void;
         addBlocksToWorld(arg0: $Level_, arg1: $StructureTransform): void;
         addPassengersToWorld(arg0: $Level_, arg1: $StructureTransform, arg2: $List_<$Entity>): void;
-        isActorTypeDisabled(arg0: $ItemStack_): boolean;
-        getDisabledActors(): $List<$ItemStack>;
+        removeBlocksFromWorld(arg0: $Level_, arg1: $BlockPos_): void;
+        getContraptionWorld(): $ContraptionWorld;
+        canBeStabilized(arg0: $Direction_, arg1: $BlockPos_): boolean;
+        invalidateColliders(): void;
+        searchMovedStructure(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_): boolean;
+        onEntityCreated(arg0: $AbstractContraptionEntity): void;
+        containsBlockBreakers(): boolean;
         forEachActor(arg0: $Level_, arg1: $BiConsumer_<$MovementBehaviour, $MovementContext>): void;
         expandBoundsAroundAxis(arg0: $Direction$Axis_): void;
         getSeatOf(arg0: $UUID_): $BlockPos;
         getBearingPosOf(arg0: $UUID_): $BlockPos;
         setSeatMapping(arg0: $Map_<$UUID_, number>): void;
         getIsLegacy(): $Object2BooleanMap<$BlockPos>;
-        getActorAt(arg0: $BlockPos_): $MutablePair<$StructureTemplate$StructureBlockInfo, $MovementContext>;
         getInteractors(): $Map<$BlockPos, $MovingInteractionBehaviour>;
         isHiddenInPortal(arg0: $BlockPos_): boolean;
         getSimplifiedEntityColliders(): $CollisionList;
         tickStorage(arg0: $AbstractContraptionEntity): void;
-        removeBlocksFromWorld(arg0: $Level_, arg1: $BlockPos_): void;
-        containsBlockBreakers(): boolean;
-        getContraptionWorld(): $ContraptionWorld;
-        canBeStabilized(arg0: $Direction_, arg1: $BlockPos_): boolean;
         getOrCreateClientContraptionLazy(): $ClientContraption;
         invalidateClientContraptionStructure(): void;
-        getBlockEntityClientSide(arg0: $BlockPos_): $BlockEntity;
         railways$getFluidFuels(): $MountedFluidStorageWrapper;
-        getSeats(): $List<$BlockPos>;
-        getActors(): $List<$MutablePair<$StructureTemplate$StructureBlockInfo, $MovementContext>>;
-        invalidateClientContraptionChildren(): void;
-        startMoving(arg0: $Level_): void;
-        getSeatMapping(): $Map<$UUID, number>;
-        writeNBT(arg0: $HolderLookup$Provider, arg1: boolean): $CompoundTag;
-        readNBT(arg0: $Level_, arg1: $CompoundTag_, arg2: boolean): void;
-        static fromNBT(arg0: $Level_, arg1: $CompoundTag_, arg2: boolean): $Contraption;
-        assemble(arg0: $Level_, arg1: $BlockPos_): boolean;
-        static getRadius(arg0: $Iterable_<$Vec3i>, arg1: $Direction$Axis_): number;
         getStorage(): $MountedStorageManager;
+        static getRadius(arg0: $Iterable_<$Vec3i>, arg1: $Direction$Axis_): number;
+        assemble(arg0: $Level_, arg1: $BlockPos_): boolean;
         stop(arg0: $Level_): void;
         getType(): $ContraptionType;
         getBlocks(): $Map<$BlockPos, $StructureTemplate$StructureBlockInfo>;
@@ -415,11 +415,11 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         entity: $AbstractContraptionEntity;
         constructor();
         get disabledActors(): $List<$ItemStack>;
-        get interactors(): $Map<$BlockPos, $MovingInteractionBehaviour>;
-        get contraptionWorld(): $ContraptionWorld;
-        get orCreateClientContraptionLazy(): $ClientContraption;
-        get seats(): $List<$BlockPos>;
         get actors(): $List<$MutablePair<$StructureTemplate$StructureBlockInfo, $MovementContext>>;
+        get seats(): $List<$BlockPos>;
+        get contraptionWorld(): $ContraptionWorld;
+        get interactors(): $Map<$BlockPos, $MovingInteractionBehaviour>;
+        get orCreateClientContraptionLazy(): $ClientContraption;
         get storage(): $MountedStorageManager;
         get type(): $ContraptionType;
         get blocks(): $Map<$BlockPos, $StructureTemplate$StructureBlockInfo>;
@@ -438,36 +438,36 @@ declare module "@package/com/simibubi/create/content/contraptions" {
         get yawOffset(): number;
     }
     export class $MountedStorageManager implements $MountedStorageAccessor, $IFuelInventory {
-        getMountedItems(): $MountedItemStorageWrapper;
-        handlePlayerStorageInteraction(arg0: $Contraption, arg1: $Player, arg2: $BlockPos_): boolean;
-        railways$getFluidFuels(): $MountedFluidStorageWrapper;
-        getFuelItems(): $MountedItemStorageWrapper;
         getAllItemStorages(): $ImmutableMap<$BlockPos, $MountedItemStorage>;
         attachExternal(arg0: $IItemHandlerModifiable): void;
-        getAllItems(): $CombinedInvWrapper;
-        getFluids(): $MountedFluidStorageWrapper;
         handleSync(arg0: $MountedStorageSyncPacket_, arg1: $AbstractContraptionEntity): void;
-        addBlock(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: $BlockEntity): void;
+        getFluids(): $MountedFluidStorageWrapper;
+        getAllItems(): $CombinedInvWrapper;
+        getMountedItems(): $MountedItemStorageWrapper;
+        getFuelItems(): $MountedItemStorageWrapper;
+        handlePlayerStorageInteraction(arg0: $Contraption, arg1: $Player, arg2: $BlockPos_): boolean;
+        railways$getFluidFuels(): $MountedFluidStorageWrapper;
         tick(arg0: $AbstractContraptionEntity): void;
+        addBlock(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: $BlockEntity): void;
         initialize(): void;
         write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
         read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean, arg3: $Contraption): void;
         unmount(arg0: $Level_, arg1: $StructureTemplate$StructureBlockInfo_, arg2: $BlockPos_, arg3: $BlockEntity): void;
         getItemsBuilder(): $Map<$BlockPos, $MountedItemStorage>;
         constructor();
+        get allItemStorages(): $ImmutableMap<$BlockPos, $MountedItemStorage>;
+        get fluids(): $MountedFluidStorageWrapper;
+        get allItems(): $CombinedInvWrapper;
         get mountedItems(): $MountedItemStorageWrapper;
         get fuelItems(): $MountedItemStorageWrapper;
-        get allItemStorages(): $ImmutableMap<$BlockPos, $MountedItemStorage>;
-        get allItems(): $CombinedInvWrapper;
-        get fluids(): $MountedFluidStorageWrapper;
         get itemsBuilder(): $Map<$BlockPos, $MountedItemStorage>;
     }
     export class $MountedStorageSyncPacket extends $Record implements $ClientboundPacketPayload {
-        getTypeProvider(): $BasePacketPayload$PacketTypeProvider;
         contraptionId(): number;
         items(): $Map<$BlockPos, $MountedItemStorage>;
         handle(arg0: $LocalPlayer): void;
         fluids(): $Map<$BlockPos, $MountedFluidStorage>;
+        getTypeProvider(): $BasePacketPayload$PacketTypeProvider;
         handleInternal(arg0: $Player): void;
         type(): $CustomPacketPayload$Type<$CustomPacketPayload>;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
@@ -479,5 +479,5 @@ declare module "@package/com/simibubi/create/content/contraptions" {
     /**
      * Values that may be interpreted as {@link $MountedStorageSyncPacket}.
      */
-    export type $MountedStorageSyncPacket_ = { fluids?: $Map_<$BlockPos_, $MountedFluidStorage>, items?: $Map_<$BlockPos_, $MountedItemStorage>, contraptionId?: number,  } | [fluids?: $Map_<$BlockPos_, $MountedFluidStorage>, items?: $Map_<$BlockPos_, $MountedItemStorage>, contraptionId?: number, ];
+    export type $MountedStorageSyncPacket_ = { items?: $Map_<$BlockPos_, $MountedItemStorage>, fluids?: $Map_<$BlockPos_, $MountedFluidStorage>, contraptionId?: number,  } | [items?: $Map_<$BlockPos_, $MountedItemStorage>, fluids?: $Map_<$BlockPos_, $MountedFluidStorage>, contraptionId?: number, ];
 }

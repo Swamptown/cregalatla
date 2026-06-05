@@ -7,25 +7,25 @@ declare module "@package/net/minecraft/nbt/visitors" {
         constructor(...arg0: $FieldSelector_[]);
     }
     export class $CollectToTag implements $StreamTagVisitor {
-        getResult(): $Tag;
-        depth(): number;
-        visit(arg0: number[]): $StreamTagVisitor$ValueResult;
+        visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number[]): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
+        visit(arg0: number[]): $StreamTagVisitor$ValueResult;
         visit(arg0: number[]): $StreamTagVisitor$ValueResult;
         visit(arg0: string): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
-        visit(arg0: number): $StreamTagVisitor$ValueResult;
         visitEnd(): $StreamTagVisitor$ValueResult;
-        visitEntry(arg0: $TagType<never>, arg1: string): $StreamTagVisitor$EntryResult;
+        getResult(): $Tag;
+        depth(): number;
         visitEntry(arg0: $TagType<never>): $StreamTagVisitor$EntryResult;
+        visitEntry(arg0: $TagType<never>, arg1: string): $StreamTagVisitor$EntryResult;
         visitRootEntry(arg0: $TagType<never>): $StreamTagVisitor$ValueResult;
         visitContainerEnd(): $StreamTagVisitor$ValueResult;
-        visitElement(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$EntryResult;
         visitList(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$ValueResult;
+        visitElement(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$EntryResult;
         constructor();
         get result(): $Tag;
     }
@@ -33,13 +33,13 @@ declare module "@package/net/minecraft/nbt/visitors" {
         static INSTANCE: $SkipAll;
     }
     export interface $SkipAll extends $StreamTagVisitor {
+        visit(arg0: number): $StreamTagVisitor$ValueResult;
+        visit(arg0: number): $StreamTagVisitor$ValueResult;
+        visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number[]): $StreamTagVisitor$ValueResult;
-        visit(arg0: number): $StreamTagVisitor$ValueResult;
-        visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number[]): $StreamTagVisitor$ValueResult;
         visit(arg0: number[]): $StreamTagVisitor$ValueResult;
         visit(arg0: string): $StreamTagVisitor$ValueResult;
-        visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
         visit(arg0: number): $StreamTagVisitor$ValueResult;
@@ -48,13 +48,13 @@ declare module "@package/net/minecraft/nbt/visitors" {
         visitEntry(arg0: $TagType<never>): $StreamTagVisitor$EntryResult;
         visitRootEntry(arg0: $TagType<never>): $StreamTagVisitor$ValueResult;
         visitContainerEnd(): $StreamTagVisitor$ValueResult;
-        visitElement(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$EntryResult;
         visitList(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$ValueResult;
+        visitElement(arg0: $TagType<never>, arg1: number): $StreamTagVisitor$EntryResult;
     }
     export class $FieldTree extends $Record {
+        selectedFields(): $Map<string, $TagType<never>>;
         static createRoot(): $FieldTree;
         fieldsToRecurse(): $Map<string, $FieldTree>;
-        selectedFields(): $Map<string, $TagType<never>>;
         depth(): number;
         addEntry(arg0: $FieldSelector_): void;
         isSelected(arg0: $TagType<never>, arg1: string): boolean;
@@ -63,7 +63,7 @@ declare module "@package/net/minecraft/nbt/visitors" {
     /**
      * Values that may be interpreted as {@link $FieldTree}.
      */
-    export type $FieldTree_ = { fieldsToRecurse?: $Map_<string, $FieldTree_>, depth?: number, selectedFields?: $Map_<string, $TagType<never>>,  } | [fieldsToRecurse?: $Map_<string, $FieldTree_>, depth?: number, selectedFields?: $Map_<string, $TagType<never>>, ];
+    export type $FieldTree_ = { depth?: number, fieldsToRecurse?: $Map_<string, $FieldTree_>, selectedFields?: $Map_<string, $TagType<never>>,  } | [depth?: number, fieldsToRecurse?: $Map_<string, $FieldTree_>, selectedFields?: $Map_<string, $TagType<never>>, ];
     export class $CollectFields extends $CollectToTag {
         getMissingFieldCount(): number;
         constructor(...arg0: $FieldSelector_[]);
@@ -81,5 +81,5 @@ declare module "@package/net/minecraft/nbt/visitors" {
     /**
      * Values that may be interpreted as {@link $FieldSelector}.
      */
-    export type $FieldSelector_ = { type?: $TagType<never>, name?: string, path?: $List_<string>,  } | [type?: $TagType<never>, name?: string, path?: $List_<string>, ];
+    export type $FieldSelector_ = { path?: $List_<string>, name?: string, type?: $TagType<never>,  } | [path?: $List_<string>, name?: string, type?: $TagType<never>, ];
 }

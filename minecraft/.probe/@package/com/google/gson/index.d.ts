@@ -46,8 +46,8 @@ declare module "@package/com/google/gson" {
         setPrettyPrinting(): $GsonBuilder;
         serializeNulls(): $GsonBuilder;
         serializeSpecialFloatingPointValues(): $GsonBuilder;
-        excludeFieldsWithoutExposeAnnotation(): $GsonBuilder;
         excludeFieldsWithModifiers(...arg0: number[]): $GsonBuilder;
+        excludeFieldsWithoutExposeAnnotation(): $GsonBuilder;
         enableComplexMapKeySerialization(): $GsonBuilder;
         disableInnerClassSerialization(): $GsonBuilder;
         setLongSerializationPolicy(arg0: $LongSerializationPolicy_): $GsonBuilder;

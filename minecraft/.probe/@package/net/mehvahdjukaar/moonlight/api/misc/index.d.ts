@@ -11,9 +11,9 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/mehvahdjukaar/moonlight/api/misc" {
     export class $WorldSavedData extends $SavedData {
-        onReassigned(arg0: $Level_): void;
         getType(): $WorldSavedDataType<$WorldSavedData>;
         sync(): void;
+        onReassigned(arg0: $Level_): void;
         constructor();
         get type(): $WorldSavedDataType<$WorldSavedData>;
     }
@@ -28,18 +28,18 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/misc" {
      */
     export type $WorldSavedDataType$Scope_ = "single_overworld" | "per_level";
     export class $WorldSavedDataType<D extends $WorldSavedData> {
-        isSyncable(): boolean;
         getStreamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, D>;
+        isSyncable(): boolean;
+        getData(arg0: $Level_): D;
         setData(arg0: $Level_, arg1: D): void;
         getName(): string;
-        getData(arg0: $Level_): D;
         getCodec(): $Codec<D>;
         static CODEC: $Codec<$WorldSavedDataType<$WorldSavedData>>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $WorldSavedDataType<$WorldSavedData>>;
         constructor(arg0: $ResourceLocation_, arg1: $Function_<$ServerLevel, D>, arg2: $Supplier_<$Codec<D>>, arg3: $Supplier_<$StreamCodec<$RegistryFriendlyByteBuf, D>>, arg4: $WorldSavedDataType$Scope_);
         constructor(arg0: $ResourceLocation_, arg1: $Function_<$ServerLevel, D>, arg2: $Supplier_<$Codec<D>>, arg3: $Supplier_<$StreamCodec<$RegistryFriendlyByteBuf, D>>);
-        get syncable(): boolean;
         get streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, D>;
+        get syncable(): boolean;
         get name(): string;
         get codec(): $Codec<D>;
     }
@@ -58,5 +58,5 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/misc" {
     /**
      * Values that may be interpreted as {@link $Triplet}.
      */
-    export type $Triplet_<L, M, R> = { middle?: any, right?: any, left?: any,  } | [middle?: any, right?: any, left?: any, ];
+    export type $Triplet_<L, M, R> = { right?: any, middle?: any, left?: any,  } | [right?: any, middle?: any, left?: any, ];
 }

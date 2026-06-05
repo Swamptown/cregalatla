@@ -7,10 +7,10 @@ import { $PlacedFeature_ } from "@package/net/minecraft/world/level/levelgen/pla
 
 declare module "@package/net/minecraft/data/worldgen/biome" {
     export class $EndBiomes {
+        static endMidlands(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static theEnd(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static smallEndIslands(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static endHighlands(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
-        static endMidlands(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static endBarrens(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         constructor();
     }
@@ -23,6 +23,7 @@ declare module "@package/net/minecraft/data/worldgen/biome" {
         constructor();
     }
     export class $OverworldBiomes implements $OverworldBiomesAccessor {
+        static theVoid(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static mangroveSwamp(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static darkForest(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static oldGrowthTaiga(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>, arg2: boolean): $Biome;
@@ -43,9 +44,7 @@ declare module "@package/net/minecraft/data/worldgen/biome" {
         static dripstoneCaves(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static lushCaves(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static deepDark(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
-        static callGlobalOverworldGeneration$vanillabackport_$md$4ca6b6$0(arg0: $BiomeGenerationSettings$Builder): void;
-        static theVoid(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
-        static plains(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>, arg2: boolean, arg3: boolean, arg4: boolean): $Biome;
+        static callGlobalOverworldGeneration$vanillabackport_$md$3b3139$0(arg0: $BiomeGenerationSettings$Builder): void;
         static jungle(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static forest(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>, arg2: boolean, arg3: boolean, arg4: boolean): $Biome;
         static badlands(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>, arg2: boolean): $Biome;
@@ -53,6 +52,7 @@ declare module "@package/net/minecraft/data/worldgen/biome" {
         static river(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>, arg2: boolean): $Biome;
         static beach(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>, arg2: boolean, arg3: boolean): $Biome;
         static ocean(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>, arg2: boolean): $Biome;
+        static plains(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>, arg2: boolean, arg3: boolean, arg4: boolean): $Biome;
         static desert(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;
         static savanna(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>, arg2: boolean, arg3: boolean): $Biome;
         static swamp(arg0: $HolderGetter<$PlacedFeature_>, arg1: $HolderGetter<$ConfiguredWorldCarver_<never>>): $Biome;

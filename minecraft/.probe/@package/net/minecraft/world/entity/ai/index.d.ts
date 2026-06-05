@@ -31,10 +31,6 @@ declare module "@package/net/minecraft/world/entity/ai" {
     export class $Brain$MemoryValue<U> {
     }
     export class $Brain<E extends $LivingEntity> implements $MemoryModificationCounter, $BrainAccessor<any>, $BrainAccessor$1<any> {
-        /**
-         * @deprecated
-         */
-        getMemories(): $Map<$MemoryModuleType<never>, ($ExpirableValue<never>) | undefined>;
         getMemoryInternal<U>(arg0: $MemoryModuleType_<U>): (U) | undefined;
         /**
          * @deprecated
@@ -47,12 +43,13 @@ declare module "@package/net/minecraft/world/entity/ai" {
          */
         getRunningBehaviors(): $List<any>;
         lithium$getModCount(): number;
+        /**
+         * @deprecated
+         */
+        getMemories(): $Map<$MemoryModuleType<never>, ($ExpirableValue<never>) | undefined>;
+        tick(arg0: $ServerLevel, arg1: $Object): void;
         hasMemoryValue(arg0: $MemoryModuleType_<never>): boolean;
         removeAllBehaviors(): void;
-        checkMemory(arg0: $MemoryModuleType_<never>, arg1: $MemoryStatus_): boolean;
-        eraseMemory<U>(arg0: $MemoryModuleType_<U>): void;
-        setMemoryWithExpiry<U>(arg0: $MemoryModuleType_<U>, arg1: U, arg2: number): void;
-        getTimeUntilExpiry<U>(arg0: $MemoryModuleType_<U>): number;
         isMemoryValue<U>(arg0: $MemoryModuleType_<U>, arg1: U): boolean;
         setCoreActivities(arg0: $Set_<$Activity_>): void;
         setDefaultActivity(arg0: $Activity_): void;
@@ -66,20 +63,23 @@ declare module "@package/net/minecraft/world/entity/ai" {
         copyWithoutBehaviors(): $Brain<$Object>;
         setSchedule(arg0: $Schedule_): void;
         addActivityWithConditions(arg0: $Activity_, arg1: $ImmutableList<$Pair<number, $BehaviorControl<$Object>>>, arg2: $Set_<$Pair<$MemoryModuleType_<never>, $MemoryStatus_>>): void;
-        setActiveActivityIfPossible(arg0: $Activity_): void;
         updateActivityFromSchedule(arg0: number, arg1: number): void;
-        tick(arg0: $ServerLevel, arg1: $Object): void;
+        checkMemory(arg0: $MemoryModuleType_<never>, arg1: $MemoryStatus_): boolean;
+        eraseMemory<U>(arg0: $MemoryModuleType_<U>): void;
+        setActiveActivityIfPossible(arg0: $Activity_): void;
+        getTimeUntilExpiry<U>(arg0: $MemoryModuleType_<U>): number;
+        setMemoryWithExpiry<U>(arg0: $MemoryModuleType_<U>, arg1: U, arg2: number): void;
         static provider<E extends $LivingEntity>(arg0: $Collection_<$MemoryModuleType_<never>>, arg1: $Collection_<$SensorType_<$Sensor<E>>>): $Brain$Provider<E>;
         setMemory<U>(arg0: $MemoryModuleType_<U>, arg1: U): void;
         setMemory<U>(arg0: $MemoryModuleType_<U>, arg1: (U) | undefined): void;
         isActive(arg0: $Activity_): boolean;
         setMemoryInternal<U>(arg0: $MemoryModuleType_<U>, arg1: ($ExpirableValue<never>) | undefined): void;
-        getSchedule(): $Schedule;
-        static codec<E extends $LivingEntity>(arg0: $Collection_<$MemoryModuleType_<never>>, arg1: $Collection_<$SensorType_<$Sensor<E>>>): $Codec<$Brain<E>>;
-        memories(): $Stream<$Brain$MemoryValue<never>>;
         clearMemories(): void;
         serializeStart<T>(arg0: $DynamicOps<T>): $DataResult<T>;
+        getSchedule(): $Schedule;
+        static codec<E extends $LivingEntity>(arg0: $Collection_<$MemoryModuleType_<never>>, arg1: $Collection_<$SensorType_<$Sensor<E>>>): $Codec<$Brain<E>>;
         getMemory<U>(arg0: $MemoryModuleType_<U>): (U) | undefined;
+        memories(): $Stream<$Brain$MemoryValue<never>>;
         getAvailableBehaviorsByPriority(): $Map<number, $Map<$Activity, $Set<$Behavior<$Object>>>>;
         getSensors(): $Map<$SensorType<$Sensor<$Object>>, $Sensor<$Object>>;
         static LOGGER: $Logger;

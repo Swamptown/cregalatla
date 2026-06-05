@@ -1,6 +1,5 @@
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $MoveControl, $LookControl, $JumpControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $EntityType_, $Pose, $PortalProcessor, $AnimationState, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
@@ -9,7 +8,7 @@ import { $StringRepresentable, $RandomSource } from "@package/net/minecraft/util
 import { $Animal } from "@package/net/minecraft/world/entity/animal";
 import { $Predicate } from "@package/java/util/function";
 import { $InteractionHand } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
+import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $Brain, $Brain$Provider } from "@package/net/minecraft/world/entity/ai";
@@ -33,10 +32,10 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/minecraft/world/entity/animal/armadillo" {
     export class $Armadillo$ArmadilloState extends $Enum<$Armadillo$ArmadilloState> implements $StringRepresentable {
+        isThreatened(): boolean;
         shouldHideInShell(arg0: number): boolean;
         animationDuration(): number;
         static fromName(arg0: string): $Armadillo$ArmadilloState;
-        isThreatened(): boolean;
         static values(): $Armadillo$ArmadilloState[];
         static valueOf(arg0: string): $Armadillo$ArmadilloState;
         getSerializedName(): string;
@@ -67,7 +66,6 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         brushOffScute(): boolean;
         getState(): $Armadillo$ArmadilloState;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -99,6 +97,7 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -123,6 +122,7 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -149,6 +149,7 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static SCARE_CHECK_INTERVAL: number;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
@@ -252,8 +253,8 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         constructor(arg0: number);
     }
     export class $ArmadilloAi$ArmadilloBallUp extends $Behavior<$Armadillo> {
-        canStillUse(arg0: $ServerLevel, arg1: $Armadillo, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Armadillo): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Armadillo, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Armadillo, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Armadillo, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Armadillo, arg2: number): void;
@@ -268,9 +269,9 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
     }
     export class $ArmadilloAi {
         static getTemptations(): $Predicate<$ItemStack>;
-        static updateActivity(arg0: $Armadillo): void;
         static makeBrain(arg0: $Brain<$Armadillo>): $Brain<never>;
         static brainProvider(): $Brain$Provider<$Armadillo>;
+        static updateActivity(arg0: $Armadillo): void;
         constructor();
         static get temptations(): $Predicate<$ItemStack>;
     }

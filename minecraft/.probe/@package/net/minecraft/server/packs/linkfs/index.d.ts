@@ -1,6 +1,6 @@
 import { $File } from "@package/java/io";
 import { $Consumer_ } from "@package/java/util/function";
-import { $FileSystem, $Path_, $WatchKey, $FileStore, $WatchEvent$Kind, $Path, $WatchService } from "@package/java/nio/file";
+import { $FileSystem, $Path_, $WatchKey, $FileStore, $WatchEvent$Kind, $WatchService, $Path } from "@package/java/nio/file";
 import { $BasicFileAttributes } from "@package/java/nio/file/attribute";
 import { $Spliterator, $Iterator, $List_, $Map_, $Map } from "@package/java/util";
 import { $Record } from "@package/java/lang";
@@ -44,7 +44,7 @@ declare module "@package/net/minecraft/server/packs/linkfs" {
     /**
      * Values that may be interpreted as {@link $LinkFileSystem$DirectoryEntry}.
      */
-    export type $LinkFileSystem$DirectoryEntry_ = { files?: $Map_<string, $Path_>, children?: $Map_<string, $LinkFileSystem$DirectoryEntry_>,  } | [files?: $Map_<string, $Path_>, children?: $Map_<string, $LinkFileSystem$DirectoryEntry_>, ];
+    export type $LinkFileSystem$DirectoryEntry_ = { children?: $Map_<string, $LinkFileSystem$DirectoryEntry_>, files?: $Map_<string, $Path_>,  } | [children?: $Map_<string, $LinkFileSystem$DirectoryEntry_>, files?: $Map_<string, $Path_>, ];
     export class $LinkFileSystem$Builder {
         put(arg0: $List_<string>, arg1: $Path_): $LinkFileSystem$Builder;
         put(arg0: $List_<string>, arg1: string, arg2: $Path_): $LinkFileSystem$Builder;

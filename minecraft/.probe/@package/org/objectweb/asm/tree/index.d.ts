@@ -134,10 +134,10 @@ declare module "@package/org/objectweb/asm/tree" {
         parameters: $List<$ParameterNode>;
         visibleAnnotableParameterCount: number;
         desc: string;
-        constructor();
         constructor(arg0: number);
         constructor(arg0: number, arg1: string, arg2: string, arg3: string, arg4: string[]);
         constructor(arg0: number, arg1: number, arg2: string, arg3: string, arg4: string, arg5: string[]);
+        constructor();
     }
     export class $TryCatchBlockNode {
         accept(arg0: $MethodVisitor): void;
@@ -192,8 +192,8 @@ declare module "@package/org/objectweb/asm/tree" {
         check(arg0: number): void;
         values: $List<$Object>;
         desc: string;
-        constructor(arg0: number, arg1: string);
         constructor(arg0: string);
+        constructor(arg0: number, arg1: string);
     }
     export class $LocalVariableNode {
         accept(arg0: $MethodVisitor): void;
@@ -251,10 +251,10 @@ declare module "@package/org/objectweb/asm/tree" {
     }
     export class $AbstractInsnNode {
         getNext(): $AbstractInsnNode;
+        getOpcode(): number;
         clone(arg0: $Map_<$LabelNode, $LabelNode>): $AbstractInsnNode;
         accept(arg0: $MethodVisitor): void;
         getType(): number;
-        getOpcode(): number;
         getPrevious(): $AbstractInsnNode;
         static INT_INSN: number;
         visibleTypeAnnotations: $List<$TypeAnnotationNode>;
@@ -275,8 +275,8 @@ declare module "@package/org/objectweb/asm/tree" {
         static VAR_INSN: number;
         static JUMP_INSN: number;
         get next(): $AbstractInsnNode;
-        get type(): number;
         get opcode(): number;
+        get type(): number;
         get previous(): $AbstractInsnNode;
     }
     export class $ModuleOpenNode {

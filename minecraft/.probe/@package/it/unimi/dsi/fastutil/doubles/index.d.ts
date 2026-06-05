@@ -6,7 +6,7 @@ import { $ListIterator, $Spliterator, $List, $SequencedCollection, $Collection_,
 import { $Pair, $Stack, $Function } from "@package/it/unimi/dsi/fastutil";
 import { $Float2LongFunction_, $Float2FloatFunction_, $Float2ShortFunction, $Float2BooleanFunction, $Float2ObjectFunction_, $Float2IntFunction, $Float2ObjectFunction, $Float2ShortFunction_, $Float2CharFunction, $Float2DoubleFunction, $Float2ReferenceFunction_, $Float2FloatFunction, $Float2IntFunction_, $Float2ReferenceFunction, $Float2CharFunction_, $Float2ByteFunction_, $Float2LongFunction, $Float2DoubleFunction_, $Float2ByteFunction } from "@package/it/unimi/dsi/fastutil/floats";
 import { $DoublePredicate_ as $DoublePredicate_$1, $DoubleConsumer_ as $DoubleConsumer_$1, $DoubleUnaryOperator_ as $DoubleUnaryOperator_$1, $Function as $Function$1, $UnaryOperator, $DoubleToLongFunction, $DoubleFunction, $UnaryOperator_, $DoublePredicate as $DoublePredicate$1, $DoubleConsumer as $DoubleConsumer$1, $DoubleBinaryOperator as $DoubleBinaryOperator$1, $Consumer_, $BinaryOperator, $Predicate_, $Predicate, $DoubleToIntFunction, $DoubleUnaryOperator as $DoubleUnaryOperator$1, $Consumer, $Function_ } from "@package/java/util/function";
-import { $Object2LongFunction_, $Reference2ShortFunction, $Reference2FloatFunction_, $Object2ShortFunction, $Object2ObjectFunction_, $Reference2IntFunction_, $Object2ShortFunction_, $Object2ByteFunction_, $Reference2ByteFunction_, $Object2BooleanFunction, $Object2ReferenceFunction_, $Reference2ReferenceFunction, $Reference2ObjectFunction_, $Object2CharFunction_, $Object2FloatFunction, $Reference2CharFunction, $Reference2FloatFunction, $Object2CharFunction, $Reference2DoubleFunction_, $Object2DoubleFunction, $Reference2IntFunction, $Object2IntFunction, $Object2IntFunction_, $Reference2CharFunction_, $Reference2BooleanFunction, $Object2DoubleFunction_, $Object2ReferenceFunction, $Reference2DoubleFunction, $Object2LongFunction, $Reference2LongFunction, $Reference2ShortFunction_, $Reference2ObjectFunction, $Object2FloatFunction_, $Object2ByteFunction, $Reference2ByteFunction, $Reference2ReferenceFunction_, $Reference2LongFunction_, $Object2ObjectFunction, $ObjectBidirectionalIterator } from "@package/it/unimi/dsi/fastutil/objects";
+import { $Object2LongFunction_, $Reference2ShortFunction, $Reference2FloatFunction_, $Object2ShortFunction, $Object2ObjectFunction_, $Reference2IntFunction_, $Object2ShortFunction_, $Object2ByteFunction_, $Reference2ByteFunction_, $Object2BooleanFunction, $Object2ReferenceFunction_, $Reference2ReferenceFunction, $Reference2ObjectFunction_, $Object2CharFunction_, $Object2FloatFunction, $Reference2CharFunction, $Reference2FloatFunction, $Object2CharFunction, $Reference2DoubleFunction_, $Object2DoubleFunction, $Reference2IntFunction, $Object2IntFunction, $Object2IntFunction_, $Reference2CharFunction_, $Reference2BooleanFunction, $Object2DoubleFunction_, $Object2ReferenceFunction, $Reference2DoubleFunction, $Object2LongFunction, $Reference2LongFunction, $Reference2ShortFunction_, $Reference2ObjectFunction, $Object2FloatFunction_, $Object2ByteFunction, $Reference2ByteFunction, $Reference2ReferenceFunction_, $Reference2LongFunction_, $Object2ObjectFunction } from "@package/it/unimi/dsi/fastutil/objects";
 import { $Stream, $DoubleStream } from "@package/java/util/stream";
 import { $Char2BooleanFunction, $Char2ObjectFunction_, $Char2LongFunction, $Char2ShortFunction_, $Char2FloatFunction, $Char2IntFunction_, $Char2DoubleFunction_, $Char2ObjectFunction, $Char2CharFunction_, $Char2IntFunction, $Char2FloatFunction_, $Char2ByteFunction_, $Char2CharFunction, $Char2ShortFunction, $Char2LongFunction_, $Char2ReferenceFunction_, $Char2DoubleFunction, $Char2ByteFunction, $Char2ReferenceFunction } from "@package/it/unimi/dsi/fastutil/chars";
 import { $Boolean2FloatFunction_, $Boolean2ReferenceFunction_, $Boolean2LongFunction_, $Boolean2ShortFunction_, $Boolean2CharFunction_, $Boolean2IntFunction_, $Boolean2ObjectFunction_, $Boolean2ByteFunction_, $Boolean2DoubleFunction_ } from "@package/it/unimi/dsi/fastutil/booleans";
@@ -24,10 +24,13 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          */
         push(arg0: number): void;
         push(arg0: number): void;
-        popDouble(): number;
+        /**
+         * @deprecated
+         */
         peek(arg0: number): number;
-        top(): number;
+        popDouble(): number;
         pop(): number;
+        top(): number;
     }
     export class $DoubleCollection {
     }
@@ -256,11 +259,11 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         put(arg0: number, arg1: V): V;
         put(arg0: number, arg1: V): V;
         apply(arg0: number): V;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
@@ -270,8 +273,8 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Reference2ByteFunction_<V>): $Double2ByteFunction;
         composeByte(arg0: $Byte2DoubleFunction_): $Byte2ReferenceFunction<V>;
         andThenShort(arg0: $Reference2ShortFunction_<V>): $Double2ShortFunction;
@@ -363,6 +366,7 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         removeDouble(arg0: number): number;
         topDouble(): number;
         peekDouble(arg0: number): number;
+        push(arg0: number): void;
         size(arg0: number): void;
         compareTo(arg0: $List_<number>): number;
         indexOf(arg0: number): number;
@@ -372,14 +376,11 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         addAll(arg0: number, arg1: $DoubleCollection): boolean;
         addAll(arg0: number, arg1: $Collection_<number>): boolean;
         set(arg0: number, arg1: number): number;
-        listIterator(): $DoubleListIterator;
-        listIterator(arg0: number): $DoubleListIterator;
-        push(arg0: number): void;
         popDouble(): number;
         setElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         removeElements(arg0: number, arg1: number): void;
-        addElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         addElements(arg0: number, arg1: number[]): void;
+        addElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         /**
          * @deprecated
          */
@@ -419,6 +420,10 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         push(arg0: number): void;
+        /**
+         * @deprecated
+         */
+        peek(arg0: number): number;
         getFirst(): number;
         getLast(): number;
         addFirst(arg0: number): void;
@@ -426,14 +431,15 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         removeFirst(): number;
         removeLast(): number;
         subList(arg0: number, arg1: number): $List<number>;
+        listIterator(): $ListIterator<number>;
+        listIterator(arg0: number): $ListIterator<number>;
         /**
          * @deprecated
          */
         remove(arg0: $Object): boolean;
         get(arg0: number): number;
-        peek(arg0: number): number;
-        top(): number;
         pop(): number;
+        top(): number;
         reversed(): $SequencedCollection<number>;
         get first(): number;
         get last(): number;
@@ -536,11 +542,11 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         put(arg0: number, arg1: V): V;
         put(arg0: number, arg1: V): V;
         apply(arg0: number): V;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
@@ -550,8 +556,8 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Object2ByteFunction_<V>): $Double2ByteFunction;
         composeByte(arg0: $Byte2DoubleFunction_): $Byte2ObjectFunction<V>;
         andThenShort(arg0: $Object2ShortFunction_<V>): $Double2ShortFunction;
@@ -590,7 +596,14 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
     export class $DoublePredicate {
     }
     export interface $DoublePredicate extends $Predicate<number>, $DoublePredicate$1 {
+        or(arg0: $DoublePredicate_$1): $DoublePredicate;
+        or(arg0: $DoublePredicate_): $DoublePredicate;
+        /**
+         * @deprecated
+         */
+        or(arg0: $Predicate_<number>): $Predicate<number>;
         and(arg0: $DoublePredicate_): $DoublePredicate;
+        and(arg0: $DoublePredicate_$1): $DoublePredicate;
         /**
          * @deprecated
          */
@@ -599,12 +612,6 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
          * @deprecated
          */
         test(arg0: number): boolean;
-        /**
-         * @deprecated
-         */
-        or(arg0: $Predicate_<number>): $Predicate<number>;
-        or(arg0: $DoublePredicate_$1): $DoublePredicate;
-        or(arg0: $DoublePredicate_): $DoublePredicate;
         negate(): $Predicate<number>;
     }
     /**
@@ -749,26 +756,6 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
         second(): number;
         key(): number;
         right(): number;
-    }
-    export class $DoubleListIterator {
-    }
-    export interface $DoubleListIterator extends $DoubleBidirectionalIterator, $ListIterator<number> {
-        remove(): void;
-        /**
-         * @deprecated
-         */
-        add(arg0: number): void;
-        add(arg0: number): void;
-        /**
-         * @deprecated
-         */
-        set(arg0: number): void;
-        set(arg0: number): void;
-        next(): number;
-        /**
-         * @deprecated
-         */
-        previous(): number;
     }
     export class $Double2ShortFunction {
     }
@@ -1118,15 +1105,4 @@ declare module "@package/it/unimi/dsi/fastutil/doubles" {
      * Values that may be interpreted as {@link $Double2LongFunction}.
      */
     export type $Double2LongFunction_ = ((arg0: number) => number);
-    export class $DoubleBidirectionalIterator {
-    }
-    export interface $DoubleBidirectionalIterator extends $DoubleIterator, $ObjectBidirectionalIterator<number> {
-        previousDouble(): number;
-        back(arg0: number): number;
-        skip(arg0: number): number;
-        /**
-         * @deprecated
-         */
-        previous(): number;
-    }
 }

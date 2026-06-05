@@ -35,8 +35,8 @@ declare module "@package/net/fabricmc/loader/api/metadata" {
         get contact(): $ContactInformation;
     }
     export class $ModDependency$Kind extends $Enum<$ModDependency$Kind> {
-        isSoft(): boolean;
         isPositive(): boolean;
+        isSoft(): boolean;
         static values(): $ModDependency$Kind[];
         static valueOf(name: string): $ModDependency$Kind;
         getKey(): string;
@@ -46,8 +46,8 @@ declare module "@package/net/fabricmc/loader/api/metadata" {
         static BREAKS: $ModDependency$Kind;
         static DEPENDS: $ModDependency$Kind;
         static SUGGESTS: $ModDependency$Kind;
-        get soft(): boolean;
         get positive(): boolean;
+        get soft(): boolean;
         get key(): string;
     }
     /**
@@ -107,19 +107,19 @@ declare module "@package/net/fabricmc/loader/api/metadata" {
     export class $ModMetadata {
     }
     export interface $ModMetadata {
-        getEnvironment(): $ModEnvironment;
         getDescription(): string;
+        getEnvironment(): $ModEnvironment;
         getVersion(): $Version;
         getName(): string;
         getId(): string;
         getType(): string;
         getLicense(): $Collection<string>;
         getDependencies(): $Collection<$ModDependency>;
-        getProvides(): $Collection<string>;
         /**
          * @deprecated
          */
         getDepends(): $Collection<$ModDependency>;
+        getProvides(): $Collection<string>;
         /**
          * @deprecated
          */
@@ -147,16 +147,16 @@ declare module "@package/net/fabricmc/loader/api/metadata" {
          * @deprecated
          */
         containsCustomElement(arg0: string): boolean;
-        get environment(): $ModEnvironment;
         get description(): string;
+        get environment(): $ModEnvironment;
         get version(): $Version;
         get name(): string;
         get id(): string;
         get type(): string;
         get license(): $Collection<string>;
         get dependencies(): $Collection<$ModDependency>;
-        get provides(): $Collection<string>;
         get depends(): $Collection<$ModDependency>;
+        get provides(): $Collection<string>;
         get recommends(): $Collection<$ModDependency>;
         get suggests(): $Collection<$ModDependency>;
         get conflicts(): $Collection<$ModDependency>;

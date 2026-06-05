@@ -1,7 +1,7 @@
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $MoveControl, $LookControl, $JumpControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $EntityType_, $Pose, $PortalProcessor, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
@@ -41,11 +41,11 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
     }
     export class $PiglinBruteAi {
         static setAngerTarget(arg0: $PiglinBrute, arg1: $LivingEntity): void;
-        static initMemories(arg0: $PiglinBrute): void;
         static wasHurtBy(arg0: $PiglinBrute, arg1: $LivingEntity): void;
         static maybePlayActivitySound(arg0: $PiglinBrute): void;
-        static updateActivity(arg0: $PiglinBrute): void;
+        static initMemories(arg0: $PiglinBrute): void;
         static makeBrain(arg0: $PiglinBrute, arg1: $Brain<$PiglinBrute>): $Brain<never>;
+        static updateActivity(arg0: $PiglinBrute): void;
         constructor();
     }
     export class $PiglinArmPose extends $Enum<$PiglinArmPose> {
@@ -69,7 +69,6 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
     export class $PiglinBrute extends $AbstractPiglin {
         playAngrySound(): void;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -100,6 +99,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -125,6 +125,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -149,6 +150,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -260,14 +262,13 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         static getVisibleAdultPiglins(arg0: $Piglin): $List<$AbstractPiglin>;
         static dontKillAnyMoreHoglinsForAWhile(arg0: $AbstractPiglin): void;
         static getNearestVisibleTargetablePlayer(arg0: $AbstractPiglin): ($Player) | undefined;
+        static angerNearbyPiglins(arg0: $Player, arg1: boolean): void;
+        static pickUpItem(arg0: $Piglin, arg1: $ItemEntity): void;
+        static mobInteract(arg0: $Piglin, arg1: $Player, arg2: $InteractionHand_): $InteractionResult;
+        static isBarterCurrency(arg0: $ItemStack_): boolean;
         static isWearingGold(arg0: $LivingEntity): boolean;
         static isPlayerHoldingLovedItem(arg0: $LivingEntity): boolean;
         static isZombified(arg0: $EntityType_<never>): boolean;
-        static angerNearbyPiglins(arg0: $Player, arg1: boolean): void;
-        static isBarterCurrency(arg0: $ItemStack_): boolean;
-        static pickUpItem(arg0: $Piglin, arg1: $ItemEntity): void;
-        static mobInteract(arg0: $Piglin, arg1: $Player, arg2: $InteractionHand_): $InteractionResult;
-        static initMemories(arg0: $Piglin, arg1: $RandomSource): void;
         static wasHurtBy(arg0: $Piglin, arg1: $LivingEntity): void;
         static getSoundForCurrentActivity(arg0: $Piglin): ($SoundEvent) | undefined;
         static canAdmire(arg0: $Piglin, arg1: $ItemStack_): boolean;
@@ -275,8 +276,9 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         static isLovedItem(arg0: $ItemStack_): boolean;
         static wantsToPickup(arg0: $Piglin, arg1: $ItemStack_): boolean;
         static isIdle(arg0: $AbstractPiglin): boolean;
-        static updateActivity(arg0: $Piglin): void;
+        static initMemories(arg0: $Piglin, arg1: $RandomSource): void;
         static makeBrain(arg0: $Piglin, arg1: $Brain<$Piglin>): $Brain<never>;
+        static updateActivity(arg0: $Piglin): void;
         static REPELLENT_DETECTION_RANGE_VERTICAL: number;
         static BARTERING_ITEM: $Item;
         static REPELLENT_DETECTION_RANGE_HORIZONTAL: number;
@@ -297,7 +299,6 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         canHunt(): boolean;
         isHoldingMeleeWeapon(): boolean;
         playConvertedSound(): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -328,6 +329,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -353,6 +355,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -376,6 +379,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -471,8 +475,6 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
     export class $Piglin extends $AbstractPiglin implements $CrossbowAttackMob, $InventoryCarrier {
         performRangedAttack(arg0: $LivingEntity, arg1: number): void;
         canReplaceCurrentItem(arg0: $ItemStack_): boolean;
-        isDancing(): boolean;
-        setDancing(arg0: boolean): void;
         addToInventory(arg0: $ItemStack_): $ItemStack;
         canAddToInventory(arg0: $ItemStack_): boolean;
         static checkPiglinSpawnRules(arg0: $EntityType_<$Piglin>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
@@ -480,12 +482,13 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         onCrossbowAttackPerformed(): void;
         holdInMainHand(arg0: $ItemStack_): void;
         holdInOffHand(arg0: $ItemStack_): void;
-        getInventory(): $SimpleContainer;
+        isDancing(): boolean;
+        setDancing(arg0: boolean): void;
         static createAttributes(): $AttributeSupplier$Builder;
+        getInventory(): $SimpleContainer;
         performCrossbowAttack(arg0: $LivingEntity, arg1: number): void;
         writeInventoryToTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         readInventoryFromTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -516,6 +519,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -541,6 +545,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -565,6 +570,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

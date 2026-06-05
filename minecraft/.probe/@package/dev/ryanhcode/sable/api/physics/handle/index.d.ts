@@ -8,23 +8,23 @@ import { $Vector3dc, $Vector3d, $Quaterniondc } from "@package/org/joml";
 
 declare module "@package/dev/ryanhcode/sable/api/physics/handle" {
     export class $RigidBodyHandle {
+        applyAngularImpulse(arg0: $Vector3dc): void;
+        applyLinearImpulse(arg0: $Vector3dc): void;
+        applyTorqueImpulse(arg0: $Vector3dc): void;
+        /**
+         * @deprecated
+         */
+        getAngularVelocity(): $Vector3dc;
+        getAngularVelocity(arg0: $Vector3d): $Vector3d;
+        applyLinearAndAngularImpulse(arg0: $Vector3dc, arg1: $Vector3dc): void;
+        applyLinearAndAngularImpulse(arg0: $Vector3dc, arg1: $Vector3dc, arg2: boolean): void;
         applyForcesAndReset(arg0: $ForceTotal): void;
         /**
          * @deprecated
          */
         getLinearVelocity(): $Vector3dc;
         getLinearVelocity(arg0: $Vector3d): $Vector3d;
-        getAngularVelocity(arg0: $Vector3d): $Vector3d;
-        /**
-         * @deprecated
-         */
-        getAngularVelocity(): $Vector3dc;
-        applyLinearAndAngularImpulse(arg0: $Vector3dc, arg1: $Vector3dc, arg2: boolean): void;
-        applyLinearAndAngularImpulse(arg0: $Vector3dc, arg1: $Vector3dc): void;
-        applyAngularImpulse(arg0: $Vector3dc): void;
-        applyLinearImpulse(arg0: $Vector3dc): void;
         addLinearAndAngularVelocity(arg0: $Vector3dc, arg1: $Vector3dc): void;
-        applyTorqueImpulse(arg0: $Vector3dc): void;
         teleport(arg0: $Vector3dc, arg1: $Quaterniondc): void;
         applyImpulseAtPoint(arg0: $Vec3_, arg1: $Vec3_): void;
         applyImpulseAtPoint(arg0: $Vector3dc, arg1: $Vector3dc): void;

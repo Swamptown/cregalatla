@@ -18,7 +18,7 @@ declare module "@package/com/blackgear/vanillabackport/common/level/entities/ani
     /**
      * Values that may be interpreted as {@link $WolfDataVariant$AssetInfo}.
      */
-    export type $WolfDataVariant$AssetInfo_ = { wild?: $ClientAsset_, angry?: $ClientAsset_, tame?: $ClientAsset_,  } | [wild?: $ClientAsset_, angry?: $ClientAsset_, tame?: $ClientAsset_, ];
+    export type $WolfDataVariant$AssetInfo_ = { tame?: $ClientAsset_, angry?: $ClientAsset_, wild?: $ClientAsset_,  } | [tame?: $ClientAsset_, angry?: $ClientAsset_, wild?: $ClientAsset_, ];
     export class $CatDataVariant extends $Record implements $PriorityProvider<$SpawnContext, $SpawnCondition> {
         assetInfo(): $ClientAsset;
         spawnConditions(): $SpawnPrioritySelectors;
@@ -29,7 +29,7 @@ declare module "@package/com/blackgear/vanillabackport/common/level/entities/ani
     /**
      * Values that may be interpreted as {@link $CatDataVariant}.
      */
-    export type $CatDataVariant_ = { spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $ClientAsset_,  } | [spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $ClientAsset_, ];
+    export type $CatDataVariant_ = { assetInfo?: $ClientAsset_, spawnConditions?: $SpawnPrioritySelectors_,  } | [assetInfo?: $ClientAsset_, spawnConditions?: $SpawnPrioritySelectors_, ];
     export class $WolfDataVariant extends $Record implements $PriorityProvider<$SpawnContext, $SpawnCondition> {
         assetInfo(): $WolfDataVariant$AssetInfo;
         spawnConditions(): $SpawnPrioritySelectors;
@@ -40,7 +40,7 @@ declare module "@package/com/blackgear/vanillabackport/common/level/entities/ani
     /**
      * Values that may be interpreted as {@link $WolfDataVariant}.
      */
-    export type $WolfDataVariant_ = { spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $WolfDataVariant$AssetInfo_,  } | [spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $WolfDataVariant$AssetInfo_, ];
+    export type $WolfDataVariant_ = { assetInfo?: $WolfDataVariant$AssetInfo_, spawnConditions?: $SpawnPrioritySelectors_,  } | [assetInfo?: $WolfDataVariant$AssetInfo_, spawnConditions?: $SpawnPrioritySelectors_, ];
     export class $FrogDataVariant extends $Record implements $PriorityProvider<$SpawnContext, $SpawnCondition> {
         assetInfo(): $ClientAsset;
         spawnConditions(): $SpawnPrioritySelectors;
@@ -51,7 +51,7 @@ declare module "@package/com/blackgear/vanillabackport/common/level/entities/ani
     /**
      * Values that may be interpreted as {@link $FrogDataVariant}.
      */
-    export type $FrogDataVariant_ = { spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $ClientAsset_,  } | [spawnConditions?: $SpawnPrioritySelectors_, assetInfo?: $ClientAsset_, ];
+    export type $FrogDataVariant_ = { assetInfo?: $ClientAsset_, spawnConditions?: $SpawnPrioritySelectors_,  } | [assetInfo?: $ClientAsset_, spawnConditions?: $SpawnPrioritySelectors_, ];
     export class $PigVariant$ModelType extends $Enum<$PigVariant$ModelType> implements $StringRepresentable {
         static values(): $PigVariant$ModelType[];
         static valueOf(name: string): $PigVariant$ModelType;

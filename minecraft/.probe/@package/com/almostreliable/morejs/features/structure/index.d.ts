@@ -52,8 +52,8 @@ declare module "@package/com/almostreliable/morejs/features/structure" {
         getId(): $ResourceLocation;
         getType(): $ResourceLocation;
         getStructure(): $Structure;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -107,8 +107,8 @@ declare module "@package/com/almostreliable/morejs/features/structure" {
         get id(): $ResourceLocation;
         get type(): $ResourceLocation;
         get structure(): $Structure;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get registries(): $RegistryAccess;
     }
     export class $StructureBlockInfoModification {
     }
@@ -117,8 +117,8 @@ declare module "@package/com/almostreliable/morejs/features/structure" {
         setNbt(arg0: $CompoundTag_): void;
         setVanillaBlockState(arg0: $BlockState_): void;
         getNbt(): $CompoundTag;
-        getPosition(): $BlockPos;
         getBlock(): $Block;
+        getPosition(): $BlockPos;
         getProperties(): $Map<string, $Object>;
         getId(): string;
         setBlock(arg0: $ResourceLocation_): void;

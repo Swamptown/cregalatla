@@ -15,14 +15,14 @@ import { $Holder_, $RegistryAccess } from "@package/net/minecraft/core";
 import { $SimpleTrade, $TransformableTrade$Transformer_ } from "@package/com/almostreliable/morejs/features/villager/trades";
 import { $TradeItem, $TradeFilter_, $OfferExtension, $IntRange } from "@package/com/almostreliable/morejs/features/villager";
 import { $Object } from "@package/java/lang";
-import { $Merchant, $MerchantOffer, $MerchantOffers } from "@package/net/minecraft/world/item/trading";
+import { $Merchant, $MerchantOffers, $MerchantOffer } from "@package/net/minecraft/world/item/trading";
 
 declare module "@package/com/almostreliable/morejs/features/villager/events" {
     export class $SingleUpdateOfferEventJS extends $UpdateOfferEventJS {
-        getUsedTrades(): $List<$VillagerTrades$ItemListing>;
         createRandomOffer(): $MerchantOffer;
-        setOffer(arg0: $MerchantOffer): void;
         setOffer(arg0: $VillagerTrades$ItemListing_): void;
+        setOffer(arg0: $MerchantOffer): void;
+        getUsedTrades(): $List<$VillagerTrades$ItemListing>;
         getOffer(): $MerchantOffer;
         constructor(arg0: $AbstractVillager, arg1: $MerchantOffers, arg2: $VillagerTrades$ItemListing_[], arg3: $MerchantOffer);
         get usedTrades(): $List<$VillagerTrades$ItemListing>;
@@ -80,8 +80,8 @@ declare module "@package/com/almostreliable/morejs/features/villager/events" {
         constructor(arg0: $Table<$VillagerProfession_, number, $List_<$VillagerTrades$ItemListing_>>);
     }
     export class $PostUpdateOfferEventJS extends $UpdateOfferEventJS {
-        addOffer(arg0: $MerchantOffer): void;
         addTrade(arg0: $VillagerTrades$ItemListing_): void;
+        addOffer(arg0: $MerchantOffer): void;
         static invoke(arg0: $AbstractVillager, arg1: $MerchantOffers): void;
         constructor(arg0: $AbstractVillager, arg1: $MerchantOffers);
     }
@@ -90,8 +90,8 @@ declare module "@package/com/almostreliable/morejs/features/villager/events" {
         forEachOffers(arg0: $BiConsumer_<$OfferExtension, number>): void;
         getPlayer(): $Player;
         getLevel(): $Level;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -133,8 +133,8 @@ declare module "@package/com/almostreliable/morejs/features/villager/events" {
         get merchant(): $Merchant;
         get player(): $Player;
         get level(): $Level;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get registries(): $RegistryAccess;
         get entity(): $LivingEntity;
     }
     export class $VillagerTradingEventJS$ForEachCallback {
@@ -147,24 +147,25 @@ declare module "@package/com/almostreliable/morejs/features/villager/events" {
      */
     export type $VillagerTradingEventJS$ForEachCallback_ = ((arg0: $List<$VillagerTrades$ItemListing>, arg1: number, arg2: $VillagerProfession) => void);
     export class $UpdateOfferEventJS implements $KubeLivingEntityEvent {
-        createRandomOffer(arg0: $List_<$VillagerTrades$ItemListing_>): $MerchantOffer;
+        getVillagerTrades(arg0: $VillagerProfession_, arg1: number): $List<$VillagerTrades$ItemListing>;
+        getVillagerTrades(arg0: $VillagerProfession_): $List<$VillagerTrades$ItemListing>;
+        getWandererTrades(arg0: number): $List<$VillagerTrades$ItemListing>;
+        getWandererTrades(): $List<$VillagerTrades$ItemListing>;
+        isProfession(arg0: $VillagerProfession_): boolean;
         isVillager(): boolean;
         isWanderer(): boolean;
-        isProfession(arg0: $VillagerProfession_): boolean;
         isUnknownTrader(): boolean;
+        createRandomOffer(arg0: $List_<$VillagerTrades$ItemListing_>): $MerchantOffer;
         getAllOffers(): $MerchantOffers;
+        getEntity(): $LivingEntity;
         getProfession(): $VillagerProfession;
         getVillagerData(): $VillagerData;
-        getVillagerTrades(arg0: $VillagerProfession_): $List<$VillagerTrades$ItemListing>;
-        getVillagerTrades(arg0: $VillagerProfession_, arg1: number): $List<$VillagerTrades$ItemListing>;
-        getWandererTrades(): $List<$VillagerTrades$ItemListing>;
-        getWandererTrades(arg0: number): $List<$VillagerTrades$ItemListing>;
         getRandom(): $RandomSource;
         getVillagerLevel(): number;
         getPlayer(): $Player;
         getLevel(): $Level;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -201,26 +202,27 @@ declare module "@package/com/almostreliable/morejs/features/villager/events" {
          * `cancel` denotes a `false` outcome.
          */
         cancel(): $Object;
-        getEntity(): $LivingEntity;
         constructor(arg0: $AbstractVillager, arg1: $MerchantOffers);
         get villager(): boolean;
         get wanderer(): boolean;
         get unknownTrader(): boolean;
         get allOffers(): $MerchantOffers;
+        get entity(): $LivingEntity;
         get villagerData(): $VillagerData;
         get random(): $RandomSource;
         get villagerLevel(): number;
         get player(): $Player;
         get level(): $Level;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
-        get entity(): $LivingEntity;
+        get registries(): $RegistryAccess;
     }
     export class $WandererTradingEventJS implements $KubeEvent {
         removeVanillaTypedTrades(): void;
         removeVanillaTypedTrades(arg0: number): void;
-        removeModdedTypedTrades(): void;
         removeModdedTypedTrades(arg0: number): void;
+        removeModdedTypedTrades(): void;
+        addCustomTrade(arg0: number, arg1: $TransformableTrade$Transformer_): void;
+        removeTrades(arg0: $TradeFilter_): void;
         /**
          * @deprecated
          */
@@ -232,13 +234,11 @@ declare module "@package/com/almostreliable/morejs/features/villager/events" {
         /**
          * @deprecated
          */
-        removeModdedTrades(): void;
+        removeModdedTrades(arg0: number): void;
         /**
          * @deprecated
          */
-        removeModdedTrades(arg0: number): void;
-        addCustomTrade(arg0: number, arg1: $TransformableTrade$Transformer_): void;
-        removeTrades(arg0: $TradeFilter_): void;
+        removeModdedTrades(): void;
         getTrades(arg0: number): $List<$VillagerTrades$ItemListing>;
         addTrade(arg0: number, arg1: $TradeItem[], arg2: $TradeItem): $SimpleTrade;
         addTrade<T extends $VillagerTrades$ItemListing>(arg0: number, arg1: T): T;

@@ -5,10 +5,10 @@ declare module "@package/java/util/function" {
     export class $IntPredicate {
     }
     export interface $IntPredicate {
+        or(arg0: $IntPredicate_): $IntPredicate;
         negate(): $IntPredicate;
         and(arg0: $IntPredicate_): $IntPredicate;
         test(arg0: number): boolean;
-        or(arg0: $IntPredicate_): $IntPredicate;
     }
     /**
      * Values that may be interpreted as {@link $IntPredicate}.
@@ -132,10 +132,10 @@ declare module "@package/java/util/function" {
     export class $LongPredicate {
     }
     export interface $LongPredicate {
+        or(arg0: $LongPredicate_): $LongPredicate;
         negate(): $LongPredicate;
         and(arg0: $LongPredicate_): $LongPredicate;
         test(arg0: number): boolean;
-        or(arg0: $LongPredicate_): $LongPredicate;
     }
     /**
      * Values that may be interpreted as {@link $LongPredicate}.
@@ -183,10 +183,10 @@ declare module "@package/java/util/function" {
     export class $DoublePredicate {
     }
     export interface $DoublePredicate {
+        or(arg0: $DoublePredicate_): $DoublePredicate;
         negate(): $DoublePredicate;
         and(arg0: $DoublePredicate_): $DoublePredicate;
         test(arg0: number): boolean;
-        or(arg0: $DoublePredicate_): $DoublePredicate;
     }
     /**
      * Values that may be interpreted as {@link $DoublePredicate}.
@@ -269,10 +269,10 @@ declare module "@package/java/util/function" {
     export class $BiPredicate<T, U> {
     }
     export interface $BiPredicate<T, U> {
+        or(arg0: $BiPredicate_<T, U>): $BiPredicate<T, U>;
         negate(): $BiPredicate<T, U>;
         and(arg0: $BiPredicate_<T, U>): $BiPredicate<T, U>;
         test(arg0: T, arg1: U): boolean;
-        or(arg0: $BiPredicate_<T, U>): $BiPredicate<T, U>;
     }
     /**
      * Values that may be interpreted as {@link $BiPredicate}.
@@ -368,14 +368,14 @@ declare module "@package/java/util/function" {
      */
     export type $BooleanSupplier_ = (() => boolean);
     export class $Predicate<T> {
-        static not<T>(arg0: $Predicate_<T>): $Predicate<T>;
         static isEqual<T>(arg0: $Object): $Predicate<T>;
+        static not<T>(arg0: $Predicate_<T>): $Predicate<T>;
     }
     export interface $Predicate<T> {
+        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
         test(arg0: T): boolean;
-        or(arg0: $Predicate_<T>): $Predicate<T>;
     }
     /**
      * Values that may be interpreted as {@link $Predicate}.

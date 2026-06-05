@@ -1,6 +1,6 @@
 import { $PotionAccessor } from "@package/com/yungnickyoung/minecraft/yungsapi/mixin/accessor";
 import { $BrewingRecipeRegistryAccessor } from "@package/dev/emi/emi/mixin/accessor";
-import { $Ingredient, $Ingredient_ } from "@package/net/minecraft/world/item/crafting";
+import { $Ingredient_, $Ingredient } from "@package/net/minecraft/world/item/crafting";
 import { $Item_, $Item, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $Component } from "@package/net/minecraft/network/chat";
@@ -20,15 +20,15 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/minecraft/world/item/alchemy" {
     export class $PotionBrewing$Builder implements $PotionBrewingBuilderAccessor, $FabricBrewingRecipeRegistryBuilder {
+        registerItemRecipe(arg0: $Item_, arg1: $Ingredient_, arg2: $Item_): void;
+        getEnabledFeatures(): $FeatureFlagSet;
         addContainerRecipe(arg0: $Item_, arg1: $Item_, arg2: $Item_): void;
         addMix(arg0: $Holder_<$Potion>, arg1: $Item_, arg2: $Holder_<$Potion>): void;
         addStartMix(arg0: $Item_, arg1: $Holder_<$Potion>): void;
-        registerItemRecipe(arg0: $Item_, arg1: $Ingredient_, arg2: $Item_): void;
-        getEnabledFeatures(): $FeatureFlagSet;
-        addRecipe(arg0: $IBrewingRecipe): void;
-        addRecipe(arg0: $Ingredient_, arg1: $Ingredient_, arg2: $ItemStack_): void;
-        registerPotionRecipe(arg0: $Holder_<any>, arg1: $Ingredient_, arg2: $Holder_<any>): void;
         registerRecipes(arg0: $Ingredient_, arg1: $Holder_<any>): void;
+        registerPotionRecipe(arg0: $Holder_<any>, arg1: $Ingredient_, arg2: $Holder_<any>): void;
+        addRecipe(arg0: $Ingredient_, arg1: $Ingredient_, arg2: $ItemStack_): void;
+        addRecipe(arg0: $IBrewingRecipe): void;
         build(): $PotionBrewing;
         addContainer(arg0: $Item_): void;
         morejs$getContainers(): $List<$Ingredient>;
@@ -41,19 +41,19 @@ declare module "@package/net/minecraft/world/item/alchemy" {
         constructor(arg0: $FeatureFlagSet);
     }
     export class $PotionContents extends $Record {
-        withEffectAdded(arg0: $MobEffectInstance): $PotionContents;
-        forEachEffect(arg0: $Consumer_<$MobEffectInstance>): void;
-        static addPotionTooltip(arg0: $Iterable_<$MobEffectInstance>, arg1: $Consumer_<$Component>, arg2: number, arg3: number): void;
-        addPotionTooltip(arg0: $Consumer_<$Component>, arg1: number, arg2: number): void;
         customColor(): (number) | undefined;
         customEffects(): $List<$MobEffectInstance>;
         getAllEffects(): $Iterable<$MobEffectInstance>;
         withPotion(arg0: $Holder_<$Potion>): $PotionContents;
         static getColorOptional(arg0: $Iterable_<$MobEffectInstance>): $OptionalInt;
         hasEffects(): boolean;
+        forEachEffect(arg0: $Consumer_<$MobEffectInstance>): void;
+        static addPotionTooltip(arg0: $Iterable_<$MobEffectInstance>, arg1: $Consumer_<$Component>, arg2: number, arg3: number): void;
+        addPotionTooltip(arg0: $Consumer_<$Component>, arg1: number, arg2: number): void;
+        withEffectAdded(arg0: $MobEffectInstance): $PotionContents;
         is(arg0: $Holder_<$Potion>): boolean;
-        static getColor(arg0: $Holder_<$Potion>): number;
         static getColor(arg0: $Iterable_<$MobEffectInstance>): number;
+        static getColor(arg0: $Holder_<$Potion>): number;
         getColor(): number;
         static createItemStack(arg0: $Item_, arg1: $Holder_<$Potion>): $ItemStack;
         potion(): ($Holder<$Potion>) | undefined;
@@ -67,7 +67,7 @@ declare module "@package/net/minecraft/world/item/alchemy" {
     /**
      * Values that may be interpreted as {@link $PotionContents}.
      */
-    export type $PotionContents_ = { potion?: ($Holder_<$Potion>) | undefined, customColor?: (number) | undefined, customEffects?: $List_<$MobEffectInstance>,  } | [potion?: ($Holder_<$Potion>) | undefined, customColor?: (number) | undefined, customEffects?: $List_<$MobEffectInstance>, ];
+    export type $PotionContents_ = { customEffects?: $List_<$MobEffectInstance>, customColor?: (number) | undefined, potion?: ($Holder_<$Potion>) | undefined,  } | [customEffects?: $List_<$MobEffectInstance>, customColor?: (number) | undefined, potion?: ($Holder_<$Potion>) | undefined, ];
     export class $Potions {
         static bootstrap(arg0: $Registry<$Potion_>): $Holder<$Potion>;
         static SLOWNESS: $Holder<$Potion>;
@@ -124,11 +124,11 @@ declare module "@package/net/minecraft/world/item/alchemy" {
         hasContainerMix(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
         hasPotionMix(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
         static addVanillaMixes(arg0: $PotionBrewing$Builder): void;
+        isBrewablePotion(arg0: $Holder_<$Potion>): boolean;
+        getRecipes(): $List<$IBrewingRecipe>;
         isIngredient(arg0: $ItemStack_): boolean;
         hasMix(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
         isInput(arg0: $ItemStack_): boolean;
-        getRecipes(): $List<$IBrewingRecipe>;
-        isBrewablePotion(arg0: $Holder_<$Potion>): boolean;
         static bootstrap(arg0: $FeatureFlagSet, arg1: $RegistryAccess): $PotionBrewing;
         /**
          * @deprecated
@@ -162,14 +162,14 @@ declare module "@package/net/minecraft/world/item/alchemy" {
     /**
      * Values that may be interpreted as {@link $PotionBrewing$Mix}.
      */
-    export type $PotionBrewing$Mix_<T> = { ingredient?: $Ingredient_, to?: $Holder_<any>, from?: $Holder_<any>,  } | [ingredient?: $Ingredient_, to?: $Holder_<any>, from?: $Holder_<any>, ];
+    export type $PotionBrewing$Mix_<T> = { from?: $Holder_<any>, to?: $Holder_<any>, ingredient?: $Ingredient_,  } | [from?: $Holder_<any>, to?: $Holder_<any>, ingredient?: $Ingredient_, ];
     export interface $Potion extends RegistryMarked<RegistryTypes.PotionTag, RegistryTypes.Potion> {}
     export class $Potion implements $FeatureElement, $PotionAccessor {
         hasInstantEffects(): boolean;
         static getName(arg0: ($Holder_<$Potion>) | undefined, arg1: string): string;
-        requiredFeatures(...arg0: $FeatureFlag[]): $Potion;
-        requiredFeatures(): $FeatureFlagSet;
         getEffects(): $List<$MobEffectInstance>;
+        requiredFeatures(): $FeatureFlagSet;
+        requiredFeatures(...arg0: $FeatureFlag[]): $Potion;
         isEnabled(arg0: $FeatureFlagSet): boolean;
         getName(): string;
         setName(arg0: string): void;

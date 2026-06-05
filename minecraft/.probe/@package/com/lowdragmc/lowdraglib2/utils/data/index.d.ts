@@ -27,17 +27,17 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/data" {
     }
     export class $BlockInfo implements $IPersistedSerializable, $IConfigurable {
         postEntity(arg0: $BlockEntity): void;
-        static fromBlockState(arg0: $BlockState_): $BlockInfo;
-        static fromBlock(arg0: $Block_): $BlockInfo;
-        setItemStack(arg0: $ItemStack_): void;
         getItemStackForm(): $ItemStack;
         getItemStackForm(arg0: $LevelReader, arg1: $BlockPos_): $ItemStack;
         setHasBlockEntity(arg0: boolean): void;
         setPostCreate(arg0: $Consumer_<$BlockEntity>): void;
+        static fromBlock(arg0: $Block_): $BlockInfo;
+        setItemStack(arg0: $ItemStack_): void;
+        static fromBlockState(arg0: $BlockState_): $BlockInfo;
+        setBlockState(arg0: $BlockState_): void;
         setTag(arg0: $CompoundTag_): void;
         getBlockState(): $BlockState;
         hasBlockEntity(): boolean;
-        setBlockState(arg0: $BlockState_): void;
         beforeSerialize(): void;
         writeToBuff(arg0: $ByteBuf): void;
         serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
@@ -52,14 +52,14 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/data" {
         createDirectConfigurator(): $Configurator;
         getConfigurableName(): string;
         static EMPTY: $BlockInfo;
-        constructor(arg0: $Block_);
         constructor();
+        constructor(arg0: $Block_);
         constructor(arg0: $BlockState_, arg1: boolean);
         constructor(arg0: $BlockState_, arg1: boolean, arg2: $ItemStack_, arg3: $Consumer_<$BlockEntity>);
         constructor(arg0: $BlockState_);
         constructor(arg0: $BlockState_, arg1: $Consumer_<$BlockEntity>);
-        set itemStack(value: $ItemStack_);
         set postCreate(value: $Consumer_<$BlockEntity>);
+        set itemStack(value: $ItemStack_);
         set tag(value: $CompoundTag_);
         get configurableName(): string;
     }
@@ -71,5 +71,5 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/data" {
     /**
      * Values that may be interpreted as {@link $BlockPosFace}.
      */
-    export type $BlockPosFace_ = { pos?: $BlockPos_, facing?: $Direction_,  } | [pos?: $BlockPos_, facing?: $Direction_, ];
+    export type $BlockPosFace_ = { facing?: $Direction_, pos?: $BlockPos_,  } | [facing?: $Direction_, pos?: $BlockPos_, ];
 }

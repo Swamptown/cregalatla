@@ -5,8 +5,8 @@ declare module "@package/de/keksuccino/fancymenu/util/resource/resources/audio" 
     export class $PlayableResourceWithAudio {
     }
     export interface $PlayableResourceWithAudio extends $PlayableResource {
-        setVolume(arg0: number): void;
         getVolume(): number;
+        setVolume(arg0: number): void;
     }
     export class $IAudio {
     }

@@ -1,7 +1,6 @@
 import { $GoalSelector, $Goal } from "@package/net/minecraft/world/entity/ai/goal";
 import { $MoveControl, $LookControl, $JumpControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $Codec } from "@package/com/mojang/serialization";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $EntityType_, $OwnableEntity, $Pose, $PortalProcessor, $VariantHolder, $PlayerRideableJumping, $AgeableMob$AgeableMobGroupData, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $Saddleable, $HasCustomInventoryScreen, $AgeableMob, $WalkAnimationState, $Mob, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
@@ -10,7 +9,7 @@ import { $StringRepresentable, $RandomSource } from "@package/net/minecraft/util
 import { $Wolf, $Animal } from "@package/net/minecraft/world/entity/animal";
 import { $InteractionResult, $ContainerListener, $InteractionHand, $SimpleContainer, $Container } from "@package/net/minecraft/world";
 import { $IntUnaryOperator_, $DoubleSupplier_ } from "@package/java/util/function";
-import { $HolderLookup$Provider, $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
+import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $SoundEvent, $SoundSource_ } from "@package/net/minecraft/sounds";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
@@ -78,10 +77,9 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
     export type $Llama$Variant_ = "creamy" | "white" | "brown" | "gray";
     export class $AbstractChestedHorse extends $AbstractHorse {
         hasChest(): boolean;
-        setChest(arg0: boolean): void;
         static createBaseChestedHorseAttributes(): $AttributeSupplier$Builder;
+        setChest(arg0: boolean): void;
         playChestEquipsSound(): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -114,6 +112,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         swingingArm: $InteractionHand;
         static INV_BASE_COUNT: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -142,6 +141,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         tailCounter: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -171,6 +171,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -281,9 +282,8 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         getCaravanHead(): $Llama;
         setVariant(arg0: $Llama$Variant_): void;
         getVariant(): $Llama$Variant;
-        getStrength(): number;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $Llama$Variant;
+        getStrength(): number;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -316,6 +316,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         swingingArm: $InteractionHand;
         static INV_BASE_COUNT: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -344,6 +345,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         tailCounter: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -373,6 +375,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -475,7 +478,6 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
     export class $ZombieHorse extends $AbstractHorse {
         static checkZombieHorseSpawnRules(arg0: $EntityType_<$Animal>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -508,6 +510,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         swingingArm: $InteractionHand;
         static INV_BASE_COUNT: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -536,6 +539,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         tailCounter: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -565,6 +569,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -670,26 +675,15 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         target: $LivingEntity;
     }
     export class $AbstractHorse extends $Animal implements $ContainerListener, $HasCustomInventoryScreen, $OwnableEntity, $PlayerRideableJumping, $Saddleable {
-        getInventoryColumns(): number;
         isTamed(): boolean;
-        containerChanged(arg0: $Container): void;
-        canJump(): boolean;
-        onPlayerJump(arg0: number): void;
+        getOwnerUUID(): $UUID;
         isSaddled(): boolean;
         isSaddleable(): boolean;
         equipSaddle(arg0: $ItemStack_, arg1: $SoundSource_): void;
-        getOwnerUUID(): $UUID;
-        static createBaseHorseAttributes(): $AttributeSupplier$Builder;
-        getRiddenRotation(arg0: $LivingEntity): $Vec2;
-        executeRidersJump(arg0: number, arg1: $Vec3_): void;
-        handleStartJump(arg0: number): void;
-        handleStopJump(): void;
-        openCustomInventoryScreen(arg0: $Player): void;
-        fedFood(arg0: $Player, arg1: $ItemStack_): $InteractionResult;
-        doPlayerRide(arg0: $Player): void;
-        handleEating(arg0: $Player, arg1: $ItemStack_): boolean;
-        canPerformRearing(): boolean;
-        canParent(): boolean;
+        containerChanged(arg0: $Container): void;
+        canJump(): boolean;
+        onPlayerJump(arg0: number): void;
+        getInventoryColumns(): number;
         createInventory(): void;
         addBehaviourGoals(): void;
         setTamed(arg0: boolean): void;
@@ -704,8 +698,8 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         setTemper(arg0: number): void;
         modifyTemper(arg0: number): number;
         getMaxTemper(): number;
-        getInventorySize(): number;
         static getInventorySize(arg0: number): number;
+        getInventorySize(): number;
         syncSaddleToClients(): void;
         standIfPossible(): void;
         getAngrySound(): $SoundEvent;
@@ -730,15 +724,25 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         hasInventoryChanged(arg0: $Container): boolean;
         getAmbientStandInterval(): number;
         getBodyArmorAccess(): $Container;
+        getRiddenRotation(arg0: $LivingEntity): $Vec2;
+        executeRidersJump(arg0: number, arg1: $Vec3_): void;
+        handleStartJump(arg0: number): void;
+        handleStopJump(): void;
+        openCustomInventoryScreen(arg0: $Player): void;
+        fedFood(arg0: $Player, arg1: $ItemStack_): $InteractionResult;
+        doPlayerRide(arg0: $Player): void;
+        handleEating(arg0: $Player, arg1: $ItemStack_): boolean;
+        canPerformRearing(): boolean;
+        canParent(): boolean;
+        static createBaseHorseAttributes(): $AttributeSupplier$Builder;
         getFlag(arg0: number): boolean;
-        setFlag(arg0: number, arg1: boolean): void;
-        getInventory(): $Container;
-        getEatingSound(): $SoundEvent;
         setOwnerUUID(arg0: $UUID_): void;
+        setFlag(arg0: number, arg1: boolean): void;
+        getEatingSound(): $SoundEvent;
+        getInventory(): $Container;
         getOwner(): $LivingEntity;
         getJumpCooldown(): number;
         getSaddleSoundEvent(): $SoundEvent;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -771,6 +775,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         swingingArm: $InteractionHand;
         static INV_BASE_COUNT: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -799,6 +804,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         tailCounter: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -828,6 +834,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -921,9 +928,9 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         static BASE_SAFE_FALL_DISTANCE: number;
         age: number;
         constructor(arg0: $EntityType_<$AbstractHorse>, arg1: $Level_);
-        get inventoryColumns(): number;
         get saddled(): boolean;
         get saddleable(): boolean;
+        get inventoryColumns(): number;
         get maxTemper(): number;
         get angrySound(): $SoundEvent;
         get ambientStandSound(): $SoundEvent;
@@ -951,7 +958,6 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         isTrap(): boolean;
         static checkSkeletonHorseSpawnRules(arg0: $EntityType_<$Animal>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -984,6 +990,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         swingingArm: $InteractionHand;
         static INV_BASE_COUNT: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1012,6 +1019,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         tailCounter: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -1041,6 +1049,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1137,7 +1146,6 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
     }
     export class $TraderLlama extends $Llama {
         setDespawnDelay(arg0: number): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $Llama$Variant;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1170,6 +1178,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         swingingArm: $InteractionHand;
         static INV_BASE_COUNT: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1198,6 +1207,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         tailCounter: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -1227,6 +1237,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1324,7 +1335,6 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         set despawnDelay(value: number);
     }
     export class $Mule extends $AbstractChestedHorse {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1357,6 +1367,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         swingingArm: $InteractionHand;
         static INV_BASE_COUNT: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1385,6 +1396,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         tailCounter: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -1414,6 +1426,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1531,7 +1544,6 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         getMarkings(): $Markings;
         setVariant(arg0: $Variant_): void;
         getVariant(): $Variant;
-        serializeNBT(arg0: $HolderLookup$Provider): $Variant;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1564,6 +1576,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         swingingArm: $InteractionHand;
         static INV_BASE_COUNT: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1592,6 +1605,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         tailCounter: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -1621,6 +1635,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1717,7 +1732,6 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         get markings(): $Markings;
     }
     export class $Donkey extends $AbstractChestedHorse {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1750,6 +1764,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         swingingArm: $InteractionHand;
         static INV_BASE_COUNT: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1778,6 +1793,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         tailCounter: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -1807,6 +1823,7 @@ declare module "@package/net/minecraft/world/entity/animal/horse" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

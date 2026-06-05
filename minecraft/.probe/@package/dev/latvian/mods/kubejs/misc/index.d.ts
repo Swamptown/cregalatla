@@ -77,10 +77,10 @@ declare module "@package/dev/latvian/mods/kubejs/misc" {
         constructor(i: $ResourceLocation_);
     }
     export class $PoiTypeBuilder extends $BuilderBase<$PoiType> {
+        blocks(r: $BlockState_[]): this;
         maxTickets(i: number): this;
         validRange(i: number): this;
         block(r: $Block_): this;
-        blocks(r: $BlockState_[]): this;
         registryKey: $ResourceKey<$Registry<$PoiType>>;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
@@ -106,13 +106,13 @@ declare module "@package/dev/latvian/mods/kubejs/misc" {
         constructor(i: $ResourceLocation_);
     }
     export class $MobEffectBuilder extends $BuilderBase<$MobEffect> {
+        modifyAttribute(attribute: $ResourceLocation_, id: $ResourceLocation_, amount: number, operation: $AttributeModifier$Operation_): this;
         harmful(): this;
         beneficial(): this;
         effectTick(effectTick: $MobEffectBuilder$EffectEntityCallback_): this;
-        modifyAttribute(attribute: $ResourceLocation_, id: $ResourceLocation_, amount: number, operation: $AttributeModifier$Operation_): this;
-        instant(instant: boolean): this;
-        instant(): this;
         category(c: $MobEffectCategory_): this;
+        instant(): this;
+        instant(instant: boolean): this;
         color(col: $KubeColor_): this;
         registryKey: $ResourceKey<$Registry<$MobEffect>>;
         sourceLine: $SourceLine;

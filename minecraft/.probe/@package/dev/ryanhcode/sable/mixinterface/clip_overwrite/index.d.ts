@@ -7,16 +7,16 @@ declare module "@package/dev/ryanhcode/sable/mixinterface/clip_overwrite" {
     export class $LevelPoseProviderExtension {
     }
     export interface $LevelPoseProviderExtension {
+        sable$getPose(arg0: $SubLevel): $Pose3dc;
         sable$pushPoseSupplier(arg0: $Function_<$SubLevel, $Pose3dc>): void;
         sable$popPoseSupplier(): void;
-        sable$getPose(arg0: $SubLevel): $Pose3dc;
     }
     export class $ClipContextExtension {
     }
     export interface $ClipContextExtension {
-        sable$setIgnoredSubLevel(arg0: $SubLevel): void;
-        sable$setSubLevelIgnoring(arg0: $Predicate_<$SubLevel>): void;
         sable$setIgnoreMainLevel(arg0: boolean): void;
+        sable$setSubLevelIgnoring(arg0: $Predicate_<$SubLevel>): void;
+        sable$setIgnoredSubLevel(arg0: $SubLevel): void;
         sable$doNotProject(): boolean;
         sable$getIgnoredSubLevel(): $SubLevel;
         sable$getSubLevelIgnoring(): $Predicate<$SubLevel>;

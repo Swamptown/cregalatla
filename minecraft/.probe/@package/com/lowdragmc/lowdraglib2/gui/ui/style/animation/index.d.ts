@@ -11,8 +11,8 @@ import { $Map_, $Map } from "@package/java/util";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style/animation" {
     export class $TransitionAnimation<T> implements $IFrameValueHandler<T> {
-        getTargetValue(): T;
         getSubscription(): $ISubscription;
+        getTargetValue(): T;
         getCurrentValue(): T;
         accept(arg0: $AnimationRuntime, arg1: T): void;
         stop(): void;
@@ -23,8 +23,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style/animation" {
         property: $Property<T>;
         animation: $Animation;
         constructor(arg0: $StyleBag, arg1: $Property<T>, arg2: $Animation_);
-        get targetValue(): T;
         get subscription(): $ISubscription;
+        get targetValue(): T;
         get currentValue(): T;
         get initialValue(): T;
     }

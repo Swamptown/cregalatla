@@ -91,6 +91,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/resource" {
     }
     export class $ColorsResource extends $Resource<number> {
         serializeResource(arg0: number, arg1: $HolderLookup$Provider): $Tag;
+        deserializeResource(arg0: $Tag_, arg1: $HolderLookup$Provider): number;
         static INSTANCE: $ColorsResource;
         constructor();
     }
@@ -133,15 +134,15 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/resource" {
         get type(): $ResourceProviderType;
     }
     export class $ResourceInstance<T> implements $INBTSerializable<$CompoundTag> {
+        getDisplayMode(): $Resource$DisplayMode;
         listAllResources(): $List<$Map$Entry<$IResourcePath, $CompoundTag>>;
         createSelectorDialog(arg0: number, arg1: number, arg2: $Consumer_<$CompoundTag>, arg3: $Runnable_): $Dialog;
         addCustomProvider(arg0: $IResourceProvider<$CompoundTag_>): void;
-        getDisplayMode(): $Resource$DisplayMode;
-        removeBuiltinProvider(arg0: $IResourceProvider<$CompoundTag_>): void;
         getUiWidth(): number;
         setUiWidth(arg0: number): void;
         setDisplayMode(arg0: $Resource$DisplayMode_): void;
         addBuiltinProvider(arg0: $IResourceProvider<$CompoundTag_>): void;
+        removeBuiltinProvider(arg0: $IResourceProvider<$CompoundTag_>): void;
         removeCustomProvider(arg0: $IResourceProvider<$CompoundTag_>): void;
         getBuiltinProviders(): $Map<$ResourceProviderType, $List<$IResourceProvider<$CompoundTag>>>;
         getCustomProviders(): $Map<$ResourceProviderType, $List<$IResourceProvider<$CompoundTag>>>;

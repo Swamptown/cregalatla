@@ -22,18 +22,18 @@ import { $TickingBlockEntity } from "@package/net/minecraft/world/level/block/en
 
 declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
     export class $DummyWorld extends $Level {
+        getParticleManager(): $ParticleManager;
         isFilledBlock(arg0: $BlockPos_): boolean;
         tickWorld(): void;
         setParticleManager(arg0: $ParticleManager): void;
         prepareLighting(arg0: $BlockPos_): void;
         getFilledBlocks(): $LongSet;
         getAsClientWorld(): $Supplier<$ClientLevel>;
-        getParticleManager(): $ParticleManager;
         addEntity(arg0: $Entity): void;
         getBounds(): $AABB;
         removeEntity(arg0: number, arg1: $Entity$RemovalReason_): void;
-        createParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): $Particle;
         tickEntities(): void;
+        createParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): $Particle;
         self(): $EntityGetter;
         restoringBlockSnapshots: boolean;
         neighborUpdater: $NeighborUpdater;
@@ -100,8 +100,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
         static MIN_ENTITY_SPAWN_Y: number;
         blockEntityTickers: $List<$TickingBlockEntity>;
         captureBlockSnapshots: boolean;
-        constructor();
         constructor(arg0: $Level_);
+        constructor();
         get allRenderedEntities(): $Iterable<$Entity>;
         set blockFilter(value: $Predicate_<$BlockPos>);
     }

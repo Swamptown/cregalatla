@@ -7,27 +7,27 @@ export * as event from "@package/com/zigythebird/playeranimcore/animation/keyfra
 
 declare module "@package/com/zigythebird/playeranimcore/animation/keyframe" {
     export class $KeyframeStack extends $Record {
-        getLastZAxisKeyframeTime(): number;
-        hasKeyframes(): boolean;
-        getLastXAxisKeyframeTime(): number;
-        getLastYAxisKeyframeTime(): number;
         yKeyframes(): $List<$Keyframe>;
         zKeyframes(): $List<$Keyframe>;
         getKeyFramesForAxis(axis: $Axis_): $List<$Keyframe>;
+        hasKeyframes(): boolean;
+        getLastXAxisKeyframeTime(): number;
+        getLastYAxisKeyframeTime(): number;
+        getLastZAxisKeyframeTime(): number;
         xKeyframes(): $List<$Keyframe>;
         getLastKeyframeTime(): number;
         static from(otherStack: $KeyframeStack_): $KeyframeStack;
         constructor(xKeyframes: $List_<$Keyframe_>, yKeyframes: $List_<$Keyframe_>, zKeyframes: $List_<$Keyframe_>);
         constructor();
-        get lastZAxisKeyframeTime(): number;
         get lastXAxisKeyframeTime(): number;
         get lastYAxisKeyframeTime(): number;
+        get lastZAxisKeyframeTime(): number;
         get lastKeyframeTime(): number;
     }
     /**
      * Values that may be interpreted as {@link $KeyframeStack}.
      */
-    export type $KeyframeStack_ = { zKeyframes?: $List_<$Keyframe_>, yKeyframes?: $List_<$Keyframe_>, xKeyframes?: $List_<$Keyframe_>,  } | [zKeyframes?: $List_<$Keyframe_>, yKeyframes?: $List_<$Keyframe_>, xKeyframes?: $List_<$Keyframe_>, ];
+    export type $KeyframeStack_ = { xKeyframes?: $List_<$Keyframe_>, yKeyframes?: $List_<$Keyframe_>, zKeyframes?: $List_<$Keyframe_>,  } | [xKeyframes?: $List_<$Keyframe_>, yKeyframes?: $List_<$Keyframe_>, zKeyframes?: $List_<$Keyframe_>, ];
     export class $KeyframeLocation<T extends $Keyframe> extends $Record {
         keyframe(): T;
         startTick(): number;
@@ -36,10 +36,10 @@ declare module "@package/com/zigythebird/playeranimcore/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $KeyframeLocation}.
      */
-    export type $KeyframeLocation_<T> = { startTick?: number, keyframe?: $Keyframe_,  } | [startTick?: number, keyframe?: $Keyframe_, ];
+    export type $KeyframeLocation_<T> = { keyframe?: $Keyframe_, startTick?: number,  } | [keyframe?: $Keyframe_, startTick?: number, ];
     export class $BoneAnimation extends $Record {
-        hasKeyframes(): boolean;
         bendKeyFrames(): $List<$Keyframe>;
+        hasKeyframes(): boolean;
         rotationKeyFrames(): $KeyframeStack;
         positionKeyFrames(): $KeyframeStack;
         scaleKeyFrames(): $KeyframeStack;
@@ -49,21 +49,21 @@ declare module "@package/com/zigythebird/playeranimcore/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $BoneAnimation}.
      */
-    export type $BoneAnimation_ = { rotationKeyFrames?: $KeyframeStack_, bendKeyFrames?: $List_<$Keyframe_>, positionKeyFrames?: $KeyframeStack_, scaleKeyFrames?: $KeyframeStack_,  } | [rotationKeyFrames?: $KeyframeStack_, bendKeyFrames?: $List_<$Keyframe_>, positionKeyFrames?: $KeyframeStack_, scaleKeyFrames?: $KeyframeStack_, ];
+    export type $BoneAnimation_ = { positionKeyFrames?: $KeyframeStack_, bendKeyFrames?: $List_<$Keyframe_>, rotationKeyFrames?: $KeyframeStack_, scaleKeyFrames?: $KeyframeStack_,  } | [positionKeyFrames?: $KeyframeStack_, bendKeyFrames?: $List_<$Keyframe_>, rotationKeyFrames?: $KeyframeStack_, scaleKeyFrames?: $KeyframeStack_, ];
     export class $AnimationPoint extends $Record {
+        currentTick(): number;
         transitionLength(): number;
         animationEndValue(): number;
         animationStartValue(): number;
         easingArgs(): $List<$List<$Expression>>;
         easingType(): $EasingType;
-        currentTick(): number;
         constructor(keyframe: $Keyframe_, currentTick: number, transitionLength: number, animationStartValue: number, animationEndValue: number);
         constructor(easingType: $EasingType_, easingArgs: $List_<$List_<$Expression>>, currentTick: number, transitionLength: number, animationStartValue: number, animationEndValue: number);
     }
     /**
      * Values that may be interpreted as {@link $AnimationPoint}.
      */
-    export type $AnimationPoint_ = { transitionLength?: number, currentTick?: number, easingType?: $EasingType_, animationStartValue?: number, animationEndValue?: number, easingArgs?: $List_<$List_<$Expression>>,  } | [transitionLength?: number, currentTick?: number, easingType?: $EasingType_, animationStartValue?: number, animationEndValue?: number, easingArgs?: $List_<$List_<$Expression>>, ];
+    export type $AnimationPoint_ = { animationEndValue?: number, animationStartValue?: number, easingType?: $EasingType_, currentTick?: number, transitionLength?: number, easingArgs?: $List_<$List_<$Expression>>,  } | [animationEndValue?: number, animationStartValue?: number, easingType?: $EasingType_, currentTick?: number, transitionLength?: number, easingArgs?: $List_<$List_<$Expression>>, ];
     export class $Keyframe extends $Record {
         static getKeyframeAtTime(list: $List_<$Keyframe_>, tick: number): $Keyframe;
         easingArgs(): $List<$List<$Expression>>;
@@ -80,5 +80,5 @@ declare module "@package/com/zigythebird/playeranimcore/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $Keyframe}.
      */
-    export type $Keyframe_ = { easingArgs?: $List_<$List_<$Expression>>, easingType?: $EasingType_, endValue?: $List_<$Expression>, length?: number, startValue?: $List_<$Expression>,  } | [easingArgs?: $List_<$List_<$Expression>>, easingType?: $EasingType_, endValue?: $List_<$Expression>, length?: number, startValue?: $List_<$Expression>, ];
+    export type $Keyframe_ = { length?: number, endValue?: $List_<$Expression>, easingType?: $EasingType_, easingArgs?: $List_<$List_<$Expression>>, startValue?: $List_<$Expression>,  } | [length?: number, endValue?: $List_<$Expression>, easingType?: $EasingType_, easingArgs?: $List_<$List_<$Expression>>, startValue?: $List_<$Expression>, ];
 }

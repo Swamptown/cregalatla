@@ -6,7 +6,7 @@ import { $Services_ } from "@package/net/minecraft/server";
 import { $Either } from "@package/com/mojang/datafixers/util";
 import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $CompletableFuture, $Executor, $Executor_ } from "@package/java/util/concurrent";
-import { $EntityType_, $Entity, $LivingEntity } from "@package/net/minecraft/world/entity";
+import { $EntityType_, $Entity, $LivingEntity, $SlotAccess } from "@package/net/minecraft/world/entity";
 import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $Mesh } from "@package/dev/tr7zw/skinlayers/api";
 import { $LevelBlock } from "@package/dev/latvian/mods/kubejs/level";
@@ -57,7 +57,8 @@ import { $PistonMovingBlockEntity } from "@package/net/minecraft/world/level/blo
 import { $BeaconBlockEntityLightSource } from "@package/dev/lambdaurora/lambdynlights/echo";
 import { $GameEventListener, $GameEvent, $GameEventListener$Provider, $PositionSource, $GameEvent$Context_, $GameEventListener$DeliveryMode } from "@package/net/minecraft/world/level/gameevent";
 import { $BlockEntityRenderPredicate, $BlockEntityRenderPredicate_ } from "@package/net/caffeinemc/mods/sodium/api/blockentity";
-import { $UUID_, $Set_, $Map, $List, $Map_, $List_, $Set, $UUID } from "@package/java/util";
+import { $UUID_, $Set_, $ArrayList, $Map, $List, $Map_, $List_, $Set, $UUID } from "@package/java/util";
+import { $DecoratedPotEntityAccess } from "@package/com/beansgalaxy/backpacks/access";
 import { $BlockEntityTypeExtension } from "@package/dev/engine_room/flywheel/impl/extension";
 import { $WrappedBlockEntityTickInvokerAccessor } from "@package/net/caffeinemc/mods/lithium/mixin/world/block_entity_ticking/sleeping";
 import { $ObjIntConsumer_, $UnaryOperator_, $BooleanSupplier_, $Predicate_, $Function_ } from "@package/java/util/function";
@@ -69,6 +70,7 @@ import { $RenderAttachmentBlockEntity } from "@package/net/fabricmc/fabric/api/r
 import { $SetChangedHandlingBlockEntity, $SleepingBlockEntity } from "@package/net/caffeinemc/mods/lithium/common/block/entity";
 import { $Packet } from "@package/net/minecraft/network/protocol";
 import { $Enum, $Record, $Class, $Object } from "@package/java/lang";
+import { $IBlockEntity } from "@package/com/ishland/c2me/base/mixin/access";
 import { $SectionedEntityMovementListener } from "@package/net/caffeinemc/mods/lithium/common/tracking/entity";
 import { $LootTable } from "@package/net/minecraft/world/level/storage/loot";
 import { $ItemLike_, $Spawner, $BlockGetter, $BaseCommandBlock, $BaseSpawner, $Level_, $Level } from "@package/net/minecraft/world/level";
@@ -77,10 +79,12 @@ import { $TrialSpawner$StateAccessor, $TrialSpawner, $TrialSpawnerState_, $Trial
 import { $TagKey_, $TagKey } from "@package/net/minecraft/tags";
 import { $BlockEntityVisualizer } from "@package/dev/engine_room/flywheel/api/visualization";
 import { $Logger } from "@package/org/slf4j";
+import { $Fraction } from "@package/org/apache/commons/lang3/math";
 import { $CustomData, $ResolvableProfile_, $ResolvableProfile } from "@package/net/minecraft/world/item/component";
 import { $SupportCache } from "@package/net/caffeinemc/mods/lithium/common/world/blockentity";
 import { $ItemEntity } from "@package/net/minecraft/world/entity/item";
 import { $ClientboundBlockEntityDataPacket, $ClientGamePacketListener } from "@package/net/minecraft/network/protocol/game";
+import { $BulkComponent, $BulkComponent_, $BulkComponent$ItemlessStack_ } from "@package/com/beansgalaxy/backpacks/components";
 import { $LoadingCache } from "@package/com/google/common/cache";
 import { $ResourceKey, $ResourceLocation_, $ResourceKey_, $ResourceLocation } from "@package/net/minecraft/resources";
 import { $ByteBuf } from "@package/io/netty/buffer";
@@ -103,8 +107,8 @@ declare module "@package/net/minecraft/world/level/block/entity" {
      */
     export type $BeehiveBlockEntity$BeeReleaseStatus_ = "honey_delivered" | "bee_released" | "emergency";
     export class $SculkCatalystBlockEntity extends $BlockEntity implements $GameEventListener$Provider<$SculkCatalystBlockEntity$CatalystListener> {
-        getListener(): $SculkCatalystBlockEntity$CatalystListener;
         static serverTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $SculkCatalystBlockEntity): void;
+        getListener(): $SculkCatalystBlockEntity$CatalystListener;
         worldPosition: $BlockPos;
         level: $Level;
         static ATTACHMENTS_NBT_KEY: string;
@@ -114,16 +118,12 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         get listener(): $SculkCatalystBlockEntity$CatalystListener;
     }
     export class $HopperBlockEntity extends $RandomizableContainerBlockEntity implements $Hopper, $LithiumInventory, $InventoryChangeListener, $UpdateReceiver, $SectionedEntityMovementListener, $InventoryChangeTracker, $SleepingBlockEntity {
-        static addItem(arg0: $Container, arg1: $ItemEntity): boolean;
         static addItem(arg0: $Container, arg1: $Container, arg2: $ItemStack_, arg3: $Direction_): $ItemStack;
-        lithium$handleInventoryContentModified(arg0: $Container): void;
+        static addItem(arg0: $Container, arg1: $ItemEntity): boolean;
         lithium$handleInventoryRemoved(arg0: $Container): void;
         lithium$handleComparatorAdded(arg0: $Container): boolean;
-        lithium$getTickWrapper(): $WrappedBlockEntityTickInvokerAccessor;
-        lithium$setTickWrapper(arg0: $WrappedBlockEntityTickInvokerAccessor): void;
-        lithium$setSleepingTicker(arg0: $TickingBlockEntity): void;
-        lithium$getSleepingTicker(): $TickingBlockEntity;
-        lithium$startSleeping(): boolean;
+        lithium$handleInventoryContentModified(arg0: $Container): void;
+        setCooldown(arg0: number): void;
         static suckInItems(arg0: $Level_, arg1: $Hopper): boolean;
         getLevelX(): number;
         getLevelY(): number;
@@ -131,18 +131,22 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         isGridAligned(): boolean;
         isOnCustomCooldown(): boolean;
         static getItemsAtAndAbove(arg0: $Level_, arg1: $Hopper): $List<$ItemEntity>;
-        handler$cae003$lithium$setInventoryStackListReplacement(arg0: $NonNullList<any>, arg1: $CallbackInfo): void;
+        handler$ccb003$lithium$setInventoryStackListReplacement(arg0: $NonNullList<any>, arg1: $CallbackInfo): void;
         getLastUpdateTime(): number;
         getExtractBlockInventory(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $Container;
         getInsertInventory(arg0: $Level_): $Container;
         getInsertBlockInventory(arg0: $Level_): $Container;
         lithium$handleEntityMovement(arg0: $Class<any>): void;
-        setCooldown(arg0: number): void;
+        static pushItemsTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $HopperBlockEntity): void;
+        lithium$getTickWrapper(): $WrappedBlockEntityTickInvokerAccessor;
+        lithium$setTickWrapper(arg0: $WrappedBlockEntityTickInvokerAccessor): void;
+        lithium$setSleepingTicker(arg0: $TickingBlockEntity): void;
+        lithium$getSleepingTicker(): $TickingBlockEntity;
+        lithium$startSleeping(): boolean;
+        static getContainerAt(arg0: $Level_, arg1: $BlockPos_): $Container;
         lithium$invalidateCacheOnUndirectedNeighborUpdate(): void;
         lithium$invalidateCacheOnNeighborUpdate(arg0: $Direction_): void;
         lithium$invalidateCacheOnNeighborUpdate(arg0: boolean): void;
-        static getContainerAt(arg0: $Level_, arg1: $BlockPos_): $Container;
-        static pushItemsTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $HopperBlockEntity): void;
         static entityInside(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Entity, arg4: $HopperBlockEntity): void;
         getSuckAabb(): $AABB;
         generateLootLithium(): void;
@@ -170,13 +174,13 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         hasComparators: number;
         lootTableSeed: number;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
+        set cooldown(value: number);
         get levelX(): number;
         get levelY(): number;
         get levelZ(): number;
         get gridAligned(): boolean;
         get onCustomCooldown(): boolean;
         get lastUpdateTime(): number;
-        set cooldown(value: number);
         get suckAabb(): $AABB;
         set ticker(value: $TickingBlockEntity);
         get sleeping(): boolean;
@@ -192,16 +196,16 @@ declare module "@package/net/minecraft/world/level/block/entity" {
      */
     export type $BlockEntityTicker_<T> = ((arg0: $Level, arg1: $BlockPos, arg2: $BlockState, arg3: T) => void);
     export class $SkullBlockEntity extends $BlockEntity implements $SkullSettings {
-        static fetchProfileById(arg0: $UUID_, arg1: $Services_, arg2: $BooleanSupplier_): $CompletableFuture<($GameProfile) | undefined>;
-        getAnimation(arg0: number): number;
-        getOwnerProfile(): $ResolvableProfile;
-        static fetchGameProfile(arg0: string): $CompletableFuture<($GameProfile) | undefined>;
-        static fetchGameProfile(arg0: $UUID_): $CompletableFuture<($GameProfile) | undefined>;
         getHeadLayers(): $Mesh;
         setupHeadLayers(box: $Mesh): void;
         setLastTexture(texture: $ResourceLocation_): void;
         getLastTexture(): $ResourceLocation;
         static fetchProfileByName(arg0: string, arg1: $Services_): $CompletableFuture<($GameProfile) | undefined>;
+        static fetchProfileById(arg0: $UUID_, arg1: $Services_, arg2: $BooleanSupplier_): $CompletableFuture<($GameProfile) | undefined>;
+        getAnimation(arg0: number): number;
+        getOwnerProfile(): $ResolvableProfile;
+        static fetchGameProfile(arg0: string): $CompletableFuture<($GameProfile) | undefined>;
+        static fetchGameProfile(arg0: $UUID_): $CompletableFuture<($GameProfile) | undefined>;
         getNoteBlockSound(): $ResourceLocation;
         setOwner(arg0: $ResolvableProfile_): void;
         static clear(): void;
@@ -218,9 +222,9 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         hasComparators: number;
         remove: boolean;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
-        get ownerProfile(): $ResolvableProfile;
         get headLayers(): $Mesh;
         set upHeadLayers(value: $Mesh);
+        get ownerProfile(): $ResolvableProfile;
         get noteBlockSound(): $ResourceLocation;
         set owner(value: $ResolvableProfile_);
         get mesh(): $Mesh;
@@ -235,8 +239,8 @@ declare module "@package/net/minecraft/world/level/block/entity" {
      */
     export type $LidBlockEntity_ = ((arg0: number) => number);
     export class $ComparatorBlockEntity extends $BlockEntity {
-        getOutputSignal(): number;
         setOutputSignal(arg0: number): void;
+        getOutputSignal(): number;
         worldPosition: $BlockPos;
         level: $Level;
         static ATTACHMENTS_NBT_KEY: string;
@@ -293,19 +297,18 @@ declare module "@package/net/minecraft/world/level/block/entity" {
     export class $BeehiveBlockEntity$BeeData {
     }
     export class $BeaconBlockEntity extends $BlockEntity implements $MenuProvider, $Nameable, $BeaconBlockEntityLightSource {
-        createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
+        static tick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BeaconBlockEntity): void;
         static filterEffect(arg0: $Holder_<$MobEffect>): $Holder<$MobEffect>;
-        lambdynlights$getDynamicLightBeam(): $BeaconLightBehavior;
         getBeamSections(): $List<$BeaconBlockEntity$BeaconBeamSection>;
+        lambdynlights$getDynamicLightBeam(): $BeaconLightBehavior;
         lambdynlights$setDynamicLightBeam(beam: $BeaconLightBehavior_): void;
         lambdynlights$getLevels(): number;
+        createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
         getDisplayName(): $Component;
-        static tick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BeaconBlockEntity): void;
         getName(): $Component;
-        static playSound(arg0: $Level_, arg1: $BlockPos_, arg2: $SoundEvent_): void;
         getCustomName(): $Component;
         setCustomName(arg0: $Component_): void;
-        getUpdatePacket(): $ClientboundBlockEntityDataPacket;
+        static playSound(arg0: $Level_, arg1: $BlockPos_, arg2: $SoundEvent_): void;
         shouldTriggerClientSideContainerClosingOnOpen(): boolean;
         hasCustomName(): boolean;
         writeClientSideData(arg0: $AbstractContainerMenu, arg1: $RegistryFriendlyByteBuf): void;
@@ -327,15 +330,14 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
         get displayName(): $Component;
         get name(): $Component;
-        get updatePacket(): $ClientboundBlockEntityDataPacket;
     }
     export class $SculkShriekerBlockEntity$VibrationUser implements $VibrationSystem$User {
+        requiresAdjacentChunksToBeTicking(): boolean;
         getListenableEvents(): $TagKey<$GameEvent>;
         canTriggerAvoidVibration(): boolean;
         calculateTravelTimeInTicks(arg0: number): number;
         isValidVibration(arg0: $Holder_<$GameEvent>, arg1: $GameEvent$Context_): boolean;
         onDataChanged(): void;
-        requiresAdjacentChunksToBeTicking(): boolean;
         get listenableEvents(): $TagKey<$GameEvent>;
     }
     export class $SignText {
@@ -382,20 +384,20 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
     }
     export class $BlockEntityType<T extends $BlockEntity> implements $BlockEntityTypeAccessor, $ExtendedBlockEntityType<any>, $BlockEntityTypeExtension<any>, $FabricBlockEntityType, $AccessorBlockEntityType {
-        flywheel$getVisualizer(): $BlockEntityVisualizer<any>;
-        flywheel$setVisualizer(visualizer: $BlockEntityVisualizer<any>): void;
         sodium$removeRenderPredicate(arg0: $BlockEntityRenderPredicate_<any>): boolean;
         sodium$getRenderPredicates(): $BlockEntityRenderPredicate<any>[];
         sodium$addRenderPredicate(arg0: $BlockEntityRenderPredicate_<any>): void;
         addSupportedBlock(arg0: $Block_): void;
+        flywheel$getVisualizer(): $BlockEntityVisualizer<any>;
+        flywheel$setVisualizer(visualizer: $BlockEntityVisualizer<any>): void;
         isValid(arg0: $BlockState_): boolean;
         static getKey(arg0: $BlockEntityType_<never>): $ResourceLocation;
         create(arg0: $BlockPos_, arg1: $BlockState_): $Object;
-        getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): $Object;
         builtInRegistryHolder(): $Holder$Reference<$BlockEntityType<never>>;
-        setValidBlocks(arg0: $Set_<$Block_>): void;
+        getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): $Object;
         getValidBlocks(): $Set<$Block>;
         neoforge$setValidBlocks(arg0: $Set_<$Block_>): void;
+        setValidBlocks(arg0: $Set_<$Block_>): void;
         static BLAST_FURNACE: $BlockEntityType<$BlastFurnaceBlockEntity>;
         static HANGING_SIGN: $BlockEntityType<$HangingSignBlockEntity>;
         static COMPARATOR: $BlockEntityType<$ComparatorBlockEntity>;
@@ -475,18 +477,17 @@ declare module "@package/net/minecraft/world/level/block/entity" {
     }
     export class $CampfireBlockEntity extends $BlockEntity implements $Clearable, $SleepingBlockEntity {
         dowse(): void;
+        lithium$getTickWrapper(): $WrappedBlockEntityTickInvokerAccessor;
+        lithium$setTickWrapper(arg0: $WrappedBlockEntityTickInvokerAccessor): void;
+        lithium$setSleepingTicker(arg0: $TickingBlockEntity): void;
+        lithium$getSleepingTicker(): $TickingBlockEntity;
         getCookableRecipe(arg0: $ItemStack_): ($RecipeHolder<$CampfireCookingRecipe>) | undefined;
         placeFood(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number): boolean;
         getItems(): $NonNullList<$ItemStack>;
         static particleTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $CampfireBlockEntity): void;
         static cookTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $CampfireBlockEntity): void;
         static cooldownTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $CampfireBlockEntity): void;
-        lithium$getTickWrapper(): $WrappedBlockEntityTickInvokerAccessor;
-        lithium$setTickWrapper(arg0: $WrappedBlockEntityTickInvokerAccessor): void;
-        lithium$setSleepingTicker(arg0: $TickingBlockEntity): void;
-        lithium$getSleepingTicker(): $TickingBlockEntity;
         clearContent(): void;
-        getUpdatePacket(): $ClientboundBlockEntityDataPacket;
         lithium$startSleeping(): boolean;
         wakeUpNow(): void;
         setTicker(arg0: $TickingBlockEntity): void;
@@ -501,12 +502,11 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         cookingProgress: number[];
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
         get items(): $NonNullList<$ItemStack>;
-        get updatePacket(): $ClientboundBlockEntityDataPacket;
         set ticker(value: $TickingBlockEntity);
         get sleeping(): boolean;
     }
     export class $BarrelBlockEntity extends $RandomizableContainerBlockEntity implements $LithiumInventory, $InventoryChangeTracker {
-        handler$caa000$lithium$setInventoryStackListReplacement(arg0: $NonNullList<any>, arg1: $CallbackInfo): void;
+        handler$cbn000$lithium$setInventoryStackListReplacement(arg0: $NonNullList<any>, arg1: $CallbackInfo): void;
         updateBlockState(arg0: $BlockState_, arg1: boolean): void;
         recheckOpen(): void;
         playSound(arg0: $BlockState_, arg1: $SoundEvent_): void;
@@ -537,32 +537,32 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         get height(): number;
     }
     export class $SculkSensorBlockEntity$VibrationUser implements $VibrationSystem$User {
+        requiresAdjacentChunksToBeTicking(): boolean;
         getListenableEvents(): $TagKey<$GameEvent>;
         canTriggerAvoidVibration(): boolean;
         calculateTravelTimeInTicks(arg0: number): number;
         isValidVibration(arg0: $Holder_<$GameEvent>, arg1: $GameEvent$Context_): boolean;
         onDataChanged(): void;
-        requiresAdjacentChunksToBeTicking(): boolean;
         get listenableEvents(): $TagKey<$GameEvent>;
     }
     export class $PotDecorations extends $Record {
-        front(): ($Item) | undefined;
-        back(): ($Item) | undefined;
         ordered(): $List<$Item>;
         static load(arg0: $CompoundTag_): $PotDecorations;
         save(arg0: $CompoundTag_): $CompoundTag;
         left(): ($Item) | undefined;
         right(): ($Item) | undefined;
+        front(): ($Item) | undefined;
+        back(): ($Item) | undefined;
         static CODEC: $Codec<$PotDecorations>;
         static EMPTY: $PotDecorations;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $PotDecorations>;
-        constructor(arg0: $Item_, arg1: $Item_, arg2: $Item_, arg3: $Item_);
         constructor(arg0: ($Item_) | undefined, arg1: ($Item_) | undefined, arg2: ($Item_) | undefined, arg3: ($Item_) | undefined);
+        constructor(arg0: $Item_, arg1: $Item_, arg2: $Item_, arg3: $Item_);
     }
     /**
      * Values that may be interpreted as {@link $PotDecorations}.
      */
-    export type $PotDecorations_ = { front?: ($Item_) | undefined, back?: ($Item_) | undefined, left?: ($Item_) | undefined, right?: ($Item_) | undefined,  } | [front?: ($Item_) | undefined, back?: ($Item_) | undefined, left?: ($Item_) | undefined, right?: ($Item_) | undefined, ];
+    export type $PotDecorations_ = { right?: ($Item_) | undefined, left?: ($Item_) | undefined, back?: ($Item_) | undefined, front?: ($Item_) | undefined,  } | [right?: ($Item_) | undefined, left?: ($Item_) | undefined, back?: ($Item_) | undefined, front?: ($Item_) | undefined, ];
     export class $BannerPatternLayers extends $Record {
         layers(): $List<$BannerPatternLayers$Layer>;
         removeLast(): $BannerPatternLayers;
@@ -577,13 +577,13 @@ declare module "@package/net/minecraft/world/level/block/entity" {
      */
     export type $BannerPatternLayers_ = { layers?: $List_<$BannerPatternLayers$Layer_>,  } | [layers?: $List_<$BannerPatternLayers$Layer_>, ];
     export class $ChestBlockEntity extends $RandomizableContainerBlockEntity implements $LidBlockEntity, $InventoryChangeEmitter, $LithiumInventory, $InventoryChangeTracker {
-        handler$cac001$lithium$setInventoryStackListReplacement(arg0: $NonNullList<any>, arg1: $CallbackInfo): void;
+        handler$cbp001$lithium$setInventoryStackListReplacement(arg0: $NonNullList<any>, arg1: $CallbackInfo): void;
         getOpenNess(arg0: number): number;
         static swapContents(arg0: $ChestBlockEntity, arg1: $ChestBlockEntity): void;
         signalOpenCount(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: number, arg4: number): void;
+        static getOpenCount(arg0: $BlockGetter, arg1: $BlockPos_): number;
         static lidAnimateTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ChestBlockEntity): void;
         recheckOpen(): void;
-        static getOpenCount(arg0: $BlockGetter, arg1: $BlockPos_): number;
         static playSound(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $SoundEvent_): void;
         generateLootLithium(): void;
         listenForContentChangesOnce(arg0: $LithiumStackList, arg1: $InventoryChangeListener): void;
@@ -619,7 +619,7 @@ declare module "@package/net/minecraft/world/level/block/entity" {
     /**
      * Values that may be interpreted as {@link $BeehiveBlockEntity$Occupant}.
      */
-    export type $BeehiveBlockEntity$Occupant_ = { ticksInHive?: number, minTicksInHive?: number, entityData?: $CustomData,  } | [ticksInHive?: number, minTicksInHive?: number, entityData?: $CustomData, ];
+    export type $BeehiveBlockEntity$Occupant_ = { entityData?: $CustomData, minTicksInHive?: number, ticksInHive?: number,  } | [entityData?: $CustomData, minTicksInHive?: number, ticksInHive?: number, ];
     export class $CalibratedSculkSensorBlockEntity extends $SculkSensorBlockEntity {
         worldPosition: $BlockPos;
         level: $Level;
@@ -628,36 +628,15 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         remove: boolean;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
     }
-    export class $BlockEntity extends $AttachmentHolder implements $IBlockEntityExtension, $RenderDataBlockEntity, $RenderAttachmentBlockEntity, $SupportCache, $ComparatorTracker, $SetChangedHandlingBlockEntity, $Cullable, $AccessorBlockEntity, $BlockEntityAccessor {
-        setTimeout(): void;
+    export class $BlockEntity extends $AttachmentHolder implements $IBlockEntityExtension, $RenderDataBlockEntity, $RenderAttachmentBlockEntity, $SupportCache, $ComparatorTracker, $SetChangedHandlingBlockEntity, $Cullable, $AccessorBlockEntity, $BlockEntityAccessor, $IBlockEntity {
         getLevel(): $Level;
         setLevel(arg0: $Level_): void;
+        setTimeout(): void;
         getType(): $BlockEntityType<never>;
         components(): $DataComponentMap;
-        isRemoved(): boolean;
-        handler$dbd000$yumi_mc_core$yumi$onPopulateCrashDetails(crashReportCategory: $CrashReportCategory, ci: $CallbackInfo): void;
-        getBlockPos(): $BlockPos;
-        getBlockState(): $BlockState;
-        saveCustomAndMetadata(arg0: $HolderLookup$Provider): $CompoundTag;
-        /**
-         * @deprecated
-         */
-        removeComponentsFromTag(arg0: $CompoundTag_): void;
-        collectComponents(): $DataComponentMap;
-        applyComponents(arg0: $DataComponentMap_, arg1: $DataComponentPatch_): void;
-        getPersistentData(): $CompoundTag;
-        setRemoved(): void;
-        static setChanged(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): void;
-        setChanged(): void;
-        fillCrashReportCategory(arg0: $CrashReportCategory): void;
-        onlyOpCanSetNbt(): boolean;
-        isForcedVisible(): boolean;
-        setCulled(value: boolean): void;
-        isCulled(): boolean;
-        setOutOfCamera(value: boolean): void;
-        isOutOfCamera(): boolean;
         isValidBlockState(arg0: $BlockState_): boolean;
         static getPosFromTag(arg0: $CompoundTag_): $BlockPos;
+        handler$fae000$collective$setLevel(arg0: $Level_, arg1: $CallbackInfo): void;
         hasLevel(): boolean;
         loadAdditional(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         loadWithComponents(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
@@ -672,6 +651,7 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         static loadStatic(arg0: $BlockPos_, arg1: $BlockState_, arg2: $CompoundTag_, arg3: $HolderLookup$Provider): $BlockEntity;
         getUpdatePacket(): $Packet<$ClientGamePacketListener>;
         getUpdateTag(arg0: $HolderLookup$Provider): $CompoundTag;
+        handler$fae000$collective$setRemoved(arg0: $CallbackInfo): void;
         clearRemoved(): void;
         triggerEvent(arg0: number, arg1: number): boolean;
         /**
@@ -683,19 +663,41 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         collectImplicitComponents(arg0: $DataComponentMap$Builder): void;
         setComponents(arg0: $DataComponentMap_): void;
         static parseCustomNameSafe(arg0: string, arg1: $HolderLookup$Provider): $Component;
+        static setChanged(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): void;
+        setChanged(): void;
+        isRemoved(): boolean;
+        setRemoved(): void;
+        fillCrashReportCategory(arg0: $CrashReportCategory): void;
+        getPersistentData(): $CompoundTag;
+        onlyOpCanSetNbt(): boolean;
+        isForcedVisible(): boolean;
+        setCulled(value: boolean): void;
+        isCulled(): boolean;
+        setOutOfCamera(value: boolean): void;
+        isOutOfCamera(): boolean;
         getRenderAttachmentData(): $Object;
         getRenderData(): $Object;
         lithium$isSupported(): boolean;
         lithium$onComparatorAdded(arg0: $Direction_, arg1: number): void;
         lithium$hasAnyComparatorNearby(): boolean;
+        handler$dfl000$yumi_mc_core$yumi$onPopulateCrashDetails(crashReportCategory: $CrashReportCategory, ci: $CallbackInfo): void;
+        getBlockPos(): $BlockPos;
+        getBlockState(): $BlockState;
+        saveCustomAndMetadata(arg0: $HolderLookup$Provider): $CompoundTag;
+        /**
+         * @deprecated
+         */
+        removeComponentsFromTag(arg0: $CompoundTag_): void;
+        collectComponents(): $DataComponentMap;
+        applyComponents(arg0: $DataComponentMap_, arg1: $DataComponentPatch_): void;
         onLoad(): void;
-        hasCustomOutlineRendering(arg0: $Player): boolean;
-        invalidateCapabilities(): void;
-        requestModelDataUpdate(): void;
-        onDataPacket(arg0: $Connection, arg1: $ClientboundBlockEntityDataPacket, arg2: $HolderLookup$Provider): void;
         handleUpdateTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         onChunkUnloaded(): void;
         getModelData(): $ModelData;
+        invalidateCapabilities(): void;
+        requestModelDataUpdate(): void;
+        hasCustomOutlineRendering(arg0: $Player): boolean;
+        onDataPacket(arg0: $Connection, arg1: $ClientboundBlockEntityDataPacket, arg2: $HolderLookup$Provider): void;
         lithium$handleSetChanged(): void;
         setWorldPosition(arg0: $BlockPos_): void;
         callSaveMetadata(arg0: $CompoundTag_): void;
@@ -706,12 +708,12 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         remove: boolean;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
         get type(): $BlockEntityType<never>;
-        get blockPos(): $BlockPos;
+        get updatePacket(): $Packet<$ClientGamePacketListener>;
         get persistentData(): $CompoundTag;
         get forcedVisible(): boolean;
-        get updatePacket(): $Packet<$ClientGamePacketListener>;
         get renderAttachmentData(): $Object;
         get renderData(): $Object;
+        get blockPos(): $BlockPos;
         get modelData(): $ModelData;
     }
     export class $ShulkerBoxBlockEntity$AnimationStatus extends $Enum<$ShulkerBoxBlockEntity$AnimationStatus> {
@@ -727,6 +729,11 @@ declare module "@package/net/minecraft/world/level/block/entity" {
      */
     export type $ShulkerBoxBlockEntity$AnimationStatus_ = "closed" | "opening" | "opened" | "closing";
     export class $ShulkerBoxBlockEntity extends $RandomizableContainerBlockEntity implements $WorldlyContainer, $LithiumInventory, $InventoryChangeTracker, $SleepingBlockEntity {
+        static tick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ShulkerBoxBlockEntity): void;
+        handler$ccc004$lithium$setInventoryStackListReplacement(arg0: $NonNullList<any>, arg1: $CallbackInfo): void;
+        loadFromTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        getProgress(arg0: number): number;
+        getAnimationStatus(): $ShulkerBoxBlockEntity$AnimationStatus;
         getSlotsForFace(arg0: $Direction_): number[];
         canPlaceItemThroughFace(arg0: number, arg1: $ItemStack_, arg2: $Direction_): boolean;
         canTakeItemThroughFace(arg0: number, arg1: $ItemStack_, arg2: $Direction_): boolean;
@@ -734,14 +741,9 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         lithium$setTickWrapper(arg0: $WrappedBlockEntityTickInvokerAccessor): void;
         lithium$setSleepingTicker(arg0: $TickingBlockEntity): void;
         lithium$getSleepingTicker(): $TickingBlockEntity;
-        handler$caf004$lithium$setInventoryStackListReplacement(arg0: $NonNullList<any>, arg1: $CallbackInfo): void;
-        loadFromTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        getAnimationStatus(): $ShulkerBoxBlockEntity$AnimationStatus;
-        getProgress(arg0: number): number;
-        static tick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ShulkerBoxBlockEntity): void;
         isClosed(): boolean;
-        getColor(): $DyeColor;
         getBoundingBox(arg0: $BlockState_): $AABB;
+        getColor(): $DyeColor;
         generateLootLithium(): void;
         listenForContentChangesOnce(arg0: $LithiumStackList, arg1: $InventoryChangeListener): void;
         listenForMajorInventoryChanges(arg0: $InventoryChangeListener): void;
@@ -797,8 +799,8 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         brush(arg0: number, arg1: $Player, arg2: $Direction_): boolean;
         setLootTable(arg0: $ResourceKey_<$LootTable>, arg1: number): void;
         getHitDirection(): $Direction;
-        unpackLootTable(arg0: $Player): void;
         checkReset(): void;
+        unpackLootTable(arg0: $Player): void;
         getItem(): $ItemStack;
         worldPosition: $BlockPos;
         level: $Level;
@@ -824,31 +826,31 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
     }
     export class $BaseContainerBlockEntity extends $BlockEntity implements $Container, $MenuProvider, $Nameable, $InventoryChangeEmitter, $SpecialLogicInventory {
-        createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
-        createMenu(arg0: number, arg1: $Inventory): $AbstractContainerMenu;
-        setItem(arg0: number, arg1: $ItemStack_): void;
-        getItems(): $NonNullList<$ItemStack>;
+        removeItem(arg0: number, arg1: number): $ItemStack;
+        lithium$emitStackListReplaced(): void;
         getDefaultName(): $Component;
         setItems(arg0: $NonNullList<$ItemStack_>): void;
         lithium$forwardContentChangeOnce(arg0: $InventoryChangeListener, arg1: $LithiumStackList): void;
         lithium$emitContentModified(): void;
         lithium$forwardMajorInventoryChanges(arg0: $InventoryChangeListener): void;
         lithium$stopForwardingMajorInventoryChanges(arg0: $InventoryChangeListener): void;
-        handler$cab000$lithium$readNbtStackListReplacement(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: $CallbackInfo): void;
-        static canUnlock(arg0: $Player, arg1: $LockCode_, arg2: $Component_): boolean;
-        wrapOperation$eme000$fabric_transfer_api_v1$fabric_redirectMarkDirty(arg0: $BaseContainerBlockEntity, arg1: $Operation_<any>): void;
         fabric_setSuppress(arg0: boolean): void;
         fabric_onFinalCommit(arg0: number, arg1: $ItemStack_, arg2: $ItemStack_): void;
+        handler$cbo000$lithium$readNbtStackListReplacement(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: $CallbackInfo): void;
+        static canUnlock(arg0: $Player, arg1: $LockCode_, arg2: $Component_): boolean;
+        wrapOperation$ffm000$fabric_transfer_api_v1$fabric_redirectMarkDirty(arg0: $BaseContainerBlockEntity, arg1: $Operation_<any>): void;
         canOpen(arg0: $Player): boolean;
+        setItem(arg0: number, arg1: $ItemStack_): void;
+        createMenu(arg0: number, arg1: $Inventory): $AbstractContainerMenu;
+        createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
+        getItems(): $NonNullList<$ItemStack>;
         clearContent(): void;
-        lithium$emitStackListReplaced(): void;
-        removeItem(arg0: number, arg1: number): $ItemStack;
-        getDisplayName(): $Component;
         getItem(arg0: number): $ItemStack;
+        getDisplayName(): $Component;
         getName(): $Component;
         isEmpty(): boolean;
-        removeItemNoUpdate(arg0: number): $ItemStack;
         stillValid(arg0: $Player): boolean;
+        removeItemNoUpdate(arg0: number): $ItemStack;
         getCustomName(): $Component;
         lithium$emitRemoved(): void;
         lithium$emitFirstComparatorAdded(): void;
@@ -858,9 +860,9 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         countItem(arg0: $Item_): number;
         hasAnyOf(arg0: $Set_<$Item_>): boolean;
         hasAnyMatching(arg0: $Predicate_<$ItemStack>): boolean;
-        getMaxStackSize(arg0: $ItemStack_): number;
-        getMaxStackSize(): number;
         canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
+        getMaxStackSize(): number;
+        getMaxStackSize(arg0: $ItemStack_): number;
         shouldTriggerClientSideContainerClosingOnOpen(): boolean;
         hasCustomName(): boolean;
         emitCallbackReplaced(): void;
@@ -868,8 +870,6 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         setTransferCooldown(arg0: number): void;
         canReceiveTransferCooldown(): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
-        self(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -883,18 +883,20 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
+        getBlock(level: $Level_): $LevelBlock;
+        self(): $Container;
         writeClientSideData(arg0: $AbstractContainerMenu, arg1: $RegistryFriendlyByteBuf): void;
         shouldCloseCurrentScreen(): boolean;
-        isEmpty(): boolean;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
-        find(match: $ItemPredicate_): number;
         find(): number;
-        count(match: $ItemPredicate_): number;
+        find(match: $ItemPredicate_): number;
         count(): number;
+        count(match: $ItemPredicate_): number;
         countNonEmpty(match: $ItemPredicate_): number;
         countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
+        isEmpty(): boolean;
         inventoryChangeListeners: $ReferenceArraySet<any>;
         worldPosition: $BlockPos;
         level: $Level;
@@ -922,15 +924,15 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         validBlocks: $Set<$Block>;
     }
     export class $CommandBlockEntity extends $BlockEntity {
-        getMode(): $CommandBlockEntity$Mode;
-        onModeSwitch(): void;
         getCommandBlock(): $BaseCommandBlock;
+        onModeSwitch(): void;
         setAutomatic(arg0: boolean): void;
         isPowered(): boolean;
         setPowered(arg0: boolean): void;
         markConditionMet(): boolean;
         wasConditionMet(): boolean;
         isConditional(): boolean;
+        getMode(): $CommandBlockEntity$Mode;
         isAutomatic(): boolean;
         worldPosition: $BlockPos;
         level: $Level;
@@ -938,9 +940,9 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         hasComparators: number;
         remove: boolean;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
-        get mode(): $CommandBlockEntity$Mode;
         get commandBlock(): $BaseCommandBlock;
         get conditional(): boolean;
+        get mode(): $CommandBlockEntity$Mode;
     }
     export class $DecoratedPotPatterns {
         static getPatternFromItem(arg0: $Item_): $ResourceKey<$DecoratedPotPattern>;
@@ -985,16 +987,16 @@ declare module "@package/net/minecraft/world/level/block/entity" {
     export type $StructureBlockEntity$UpdateType_ = "update_data" | "save_area" | "load_area" | "scan_area";
     export class $SculkCatalystBlockEntity$CatalystListener implements $GameEventListener {
         getSculkSpreader(): $SculkSpreader;
+        getListenerRadius(): number;
         getListenerSource(): $PositionSource;
         handleGameEvent(arg0: $ServerLevel, arg1: $Holder_<$GameEvent>, arg2: $GameEvent$Context_, arg3: $Vec3_): boolean;
         getDeliveryMode(): $GameEventListener$DeliveryMode;
-        getListenerRadius(): number;
         static PULSE_TICKS: number;
         sculkSpreader: $SculkSpreader;
         constructor(arg0: $BlockState_, arg1: $PositionSource);
+        get listenerRadius(): number;
         get listenerSource(): $PositionSource;
         get deliveryMode(): $GameEventListener$DeliveryMode;
-        get listenerRadius(): number;
     }
     export class $DaylightDetectorBlockEntity extends $BlockEntity {
         worldPosition: $BlockPos;
@@ -1006,27 +1008,28 @@ declare module "@package/net/minecraft/world/level/block/entity" {
     }
     export interface $BlockEntityType<T> extends RegistryMarked<RegistryTypes.BlockEntityTypeTag, RegistryTypes.BlockEntityType> {}
     export class $CrafterBlockEntity extends $RandomizableContainerBlockEntity implements $CraftingContainer, $SleepingBlockEntity, $SetChangedHandlingBlockEntity {
-        getRedstoneSignal(): number;
-        setTriggered(arg0: boolean): void;
-        setCraftingTicksRemaining(arg0: number): void;
-        fillStackedContents(arg0: $StackedContents): void;
+        setSlotState(arg0: number, arg1: boolean): void;
+        isSlotDisabled(arg0: number): boolean;
+        isTriggered(): boolean;
         lithium$getTickWrapper(): $WrappedBlockEntityTickInvokerAccessor;
         lithium$setTickWrapper(arg0: $WrappedBlockEntityTickInvokerAccessor): void;
         lithium$setSleepingTicker(arg0: $TickingBlockEntity): void;
         lithium$getSleepingTicker(): $TickingBlockEntity;
-        setSlotState(arg0: number, arg1: boolean): void;
-        isSlotDisabled(arg0: number): boolean;
-        isTriggered(): boolean;
+        fillStackedContents(arg0: $StackedContents): void;
         static serverTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $CrafterBlockEntity): void;
+        setTriggered(arg0: boolean): void;
+        setCraftingTicksRemaining(arg0: number): void;
+        getRedstoneSignal(): number;
         getWidth(): number;
         getHeight(): number;
-        asCraftInput(): $CraftingInput;
         asPositionedCraftInput(): $CraftingInput$Positioned;
+        asCraftInput(): $CraftingInput;
         lithium$startSleeping(): boolean;
         wakeUpNow(): void;
         setTicker(arg0: $TickingBlockEntity): void;
         sleepOnlyCurrentTick(): void;
         isSleeping(): boolean;
+        getItems(): $List<$ItemStack>;
         inventoryChangeListeners: $ReferenceArraySet<any>;
         static CONTAINER_WIDTH: number;
         level: $Level;
@@ -1046,12 +1049,13 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         containerData: $ContainerData;
         lootTableSeed: number;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
-        get redstoneSignal(): number;
         set craftingTicksRemaining(value: number);
+        get redstoneSignal(): number;
         get width(): number;
         get height(): number;
         set ticker(value: $TickingBlockEntity);
         get sleeping(): boolean;
+        get items(): $List<$ItemStack>;
     }
     export class $HangingSignBlockEntity extends $SignBlockEntity {
         worldPosition: $BlockPos;
@@ -1109,17 +1113,11 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         get sleeping(): boolean;
     }
     export class $StructureBlockEntity extends $BlockEntity {
-        setMode(arg0: $StructureMode_): void;
-        getMode(): $StructureMode;
-        saveStructure(arg0: boolean): boolean;
-        saveStructure(): boolean;
-        usedBy(arg0: $Player): boolean;
-        createdBy(arg0: $LivingEntity): void;
-        placeStructure(arg0: $ServerLevel): void;
-        unloadStructure(): void;
+        setSeed(arg0: number): void;
+        getSeed(): number;
         getStructureName(): string;
-        setStructureName(arg0: string): void;
         setStructureName(arg0: $ResourceLocation_): void;
+        setStructureName(arg0: string): void;
         hasStructureName(): boolean;
         getStructurePos(): $BlockPos;
         setStructurePos(arg0: $BlockPos_): void;
@@ -1144,11 +1142,16 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         setShowBoundingBox(arg0: boolean): void;
         isPowered(): boolean;
         setPowered(arg0: boolean): void;
-        setSeed(arg0: number): void;
-        getSeed(): number;
+        usedBy(arg0: $Player): boolean;
+        createdBy(arg0: $LivingEntity): void;
+        saveStructure(): boolean;
+        saveStructure(arg0: boolean): boolean;
+        placeStructure(arg0: $ServerLevel): void;
+        unloadStructure(): void;
+        setMode(arg0: $StructureMode_): void;
+        getMode(): $StructureMode;
         getMirror(): $Mirror;
         getRotation(): $Rotation;
-        getUpdatePacket(): $ClientboundBlockEntityDataPacket;
         worldPosition: $BlockPos;
         level: $Level;
         static AUTHOR_TAG: string;
@@ -1159,22 +1162,15 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         static MAX_SIZE_PER_AXIS: number;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
         get structureLoadable(): boolean;
-        get updatePacket(): $ClientboundBlockEntityDataPacket;
     }
     export class $AbstractFurnaceBlockEntity extends $BaseContainerBlockEntity implements $WorldlyContainer, $RecipeCraftingHolder, $StackedContentsCompatible, $LithiumInventory, $InventoryChangeTracker, $SleepingBlockEntity, $SetChangedHandlingBlockEntity, $AccessorAbstractFurnaceBlockEntity, $SpecialLogicInventory, $Clearable, $AbstractFurnaceBlockEntityAccess, $FurnaceBEAccessor {
-        setRecipeUsed(arg0: $RecipeHolder_<never>): void;
-        fillStackedContents(arg0: $StackedContents): void;
-        /**
-         * @deprecated
-         */
-        static getFuel(): $Map<$Item, number>;
-        static buildFuels(arg0: $ObjIntConsumer_<$Either<$Item, $TagKey<$Item>>>): void;
+        static invalidateCache(): void;
         getBurnDuration(arg0: $ItemStack_): number;
         static isFuel(arg0: $ItemStack_): boolean;
         getSlotsForFace(arg0: $Direction_): number[];
         canPlaceItemThroughFace(arg0: number, arg1: $ItemStack_, arg2: $Direction_): boolean;
         canTakeItemThroughFace(arg0: number, arg1: $ItemStack_, arg2: $Direction_): boolean;
-        handler$ema000$fabric_transfer_api_v1$setStackSuppressUpdate(arg0: number, arg1: $ItemStack_, arg2: $CallbackInfo): void;
+        handler$ffi000$fabric_transfer_api_v1$setStackSuppressUpdate(arg0: number, arg1: $ItemStack_, arg2: $CallbackInfo): void;
         getRecipeUsed(): $RecipeHolder<never>;
         awardUsedRecipes(arg0: $Player, arg1: $List_<$ItemStack_>): void;
         awardUsedRecipesAndPopExperience(arg0: $ServerPlayer): void;
@@ -1182,8 +1178,14 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         lithium$setTickWrapper(arg0: $WrappedBlockEntityTickInvokerAccessor): void;
         lithium$setSleepingTicker(arg0: $TickingBlockEntity): void;
         lithium$getSleepingTicker(): $TickingBlockEntity;
+        fillStackedContents(arg0: $StackedContents): void;
+        /**
+         * @deprecated
+         */
+        static getFuel(): $Map<$Item, number>;
+        static buildFuels(arg0: $ObjIntConsumer_<$Either<$Item, $TagKey<$Item>>>): void;
+        setRecipeUsed(arg0: $RecipeHolder_<never>): void;
         static serverTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $AbstractFurnaceBlockEntity): void;
-        static invalidateCache(): void;
         getRecipesToAwardAndPopExperience(arg0: $ServerLevel, arg1: $Vec3_): $List<$RecipeHolder<never>>;
         static add(arg0: $Map_<$Item_, number>, arg1: $ItemLike_, arg2: number): void;
         static add(arg0: $Map_<$Item_, number>, arg1: $TagKey_<$Item>, arg2: number): void;
@@ -1260,15 +1262,15 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         get displayName(): $Component;
     }
     export class $BeehiveBlockEntity extends $BlockEntity {
-        emptyAllLivingFromHive(arg0: $Player, arg1: $BlockState_, arg2: $BeehiveBlockEntity$BeeReleaseStatus_): void;
-        getOccupantCount(): number;
+        isFull(): boolean;
         isFireNearby(): boolean;
         isSedated(): boolean;
         static getHoneyLevel(arg0: $BlockState_): number;
         addOccupant(arg0: $Entity): void;
         storeBee(arg0: $BeehiveBlockEntity$Occupant_): void;
         static serverTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BeehiveBlockEntity): void;
-        isFull(): boolean;
+        emptyAllLivingFromHive(arg0: $Player, arg1: $BlockState_, arg2: $BeehiveBlockEntity$BeeReleaseStatus_): void;
+        getOccupantCount(): number;
         isEmpty(): boolean;
         static IGNORED_BEE_TAGS: $List<string>;
         worldPosition: $BlockPos;
@@ -1279,10 +1281,10 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         hasComparators: number;
         remove: boolean;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
-        get occupantCount(): number;
+        get full(): boolean;
         get fireNearby(): boolean;
         get sedated(): boolean;
-        get full(): boolean;
+        get occupantCount(): number;
         get empty(): boolean;
     }
     export class $TickingBlockEntity {
@@ -1301,7 +1303,6 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         getSpawner(): $BaseSpawner;
         static serverTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $SpawnerBlockEntity): void;
         static clientTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $SpawnerBlockEntity): void;
-        getUpdatePacket(): $ClientboundBlockEntityDataPacket;
         worldPosition: $BlockPos;
         level: $Level;
         static ATTACHMENTS_NBT_KEY: string;
@@ -1309,11 +1310,10 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         remove: boolean;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
         get spawner(): $BaseSpawner;
-        get updatePacket(): $ClientboundBlockEntityDataPacket;
     }
     export class $BellBlockEntity extends $BlockEntity {
-        onHit(arg0: $Direction_): void;
         static serverTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BellBlockEntity): void;
+        onHit(arg0: $Direction_): void;
         static clientTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BellBlockEntity): void;
         worldPosition: $BlockPos;
         ticks: number;
@@ -1340,6 +1340,7 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
     }
     export class $SignBlockEntity extends $BlockEntity {
+        static tick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $SignBlockEntity): void;
         createDefaultSignText(): $SignText;
         getFrontText(): $SignText;
         getBackText(): $SignText;
@@ -1357,15 +1358,15 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         getSignInteractionFailedSoundEvent(): $SoundEvent;
         canExecuteClickCommands(arg0: boolean, arg1: $Player): boolean;
         setText(arg0: $SignText, arg1: boolean): boolean;
-        static tick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $SignBlockEntity): void;
         getText(arg0: boolean): $SignText;
+        getUpdatePacket(): $ClientboundBlockEntityDataPacket;
         worldPosition: $BlockPos;
         level: $Level;
         static ATTACHMENTS_NBT_KEY: string;
         hasComparators: number;
         remove: boolean;
-        constructor(arg0: $BlockPos_, arg1: $BlockState_);
         constructor(arg0: $BlockEntityType_<any>, arg1: $BlockPos_, arg2: $BlockState_);
+        constructor(arg0: $BlockPos_, arg1: $BlockState_);
         get frontText(): $SignText;
         get backText(): $SignText;
         get textLineHeight(): number;
@@ -1373,30 +1374,31 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         set allowedPlayerEditor(value: $UUID_);
         get playerWhoMayEdit(): $UUID;
         get signInteractionFailedSoundEvent(): $SoundEvent;
+        get updatePacket(): $ClientboundBlockEntityDataPacket;
     }
     export class $JukeboxBlockEntity extends $BlockEntity implements $Clearable, $ContainerSingleItem$BlockContainerSingleItem, $SpecialLogicInventory {
-        getTheItem(): $ItemStack;
-        setTheItem(arg0: $ItemStack_): void;
+        static tick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $JukeboxBlockEntity): void;
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
         fabric_setSuppress(arg0: boolean): void;
         fabric_onFinalCommit(arg0: number, arg1: $ItemStack_, arg2: $ItemStack_): void;
         onSongChanged(): void;
         splitTheItem(arg0: number): $ItemStack;
-        handler$zie000$yungsapi$checkIfLevelNull(arg0: $ItemStack_, arg1: $CallbackInfo): void;
+        handler$zji000$yungsapi$checkIfLevelNull(arg0: $ItemStack_, arg1: $CallbackInfo): void;
         getContainerBlockEntity(): $BlockEntity;
         setSongItemWithoutPlaying(arg0: $ItemStack_): void;
         tryForcePlaySong(): void;
+        getTheItem(): $ItemStack;
+        setTheItem(arg0: $ItemStack_): void;
         popOutTheItem(): void;
         getSongPlayer(): $JukeboxSongPlayer;
         getComparatorOutput(): number;
-        static tick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $JukeboxBlockEntity): void;
-        getMaxStackSize(): number;
         canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
+        getMaxStackSize(): number;
         stillValid(arg0: $Player): boolean;
         fabric_onTransfer(arg0: number, arg1: $TransactionContext): void;
-        setItem(arg0: number, arg1: $ItemStack_): void;
-        removeTheItem(): $ItemStack;
         removeItem(arg0: number, arg1: number): $ItemStack;
+        removeTheItem(): $ItemStack;
+        setItem(arg0: number, arg1: $ItemStack_): void;
         getItem(arg0: number): $ItemStack;
         isEmpty(): boolean;
         getContainerSize(): number;
@@ -1410,8 +1412,6 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         setTransferCooldown(arg0: number): void;
         canReceiveTransferCooldown(): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
-        self(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -1425,16 +1425,18 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
-        isEmpty(): boolean;
+        getBlock(level: $Level_): $LevelBlock;
+        self(): $Container;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
-        find(match: $ItemPredicate_): number;
         find(): number;
-        count(match: $ItemPredicate_): number;
+        find(match: $ItemPredicate_): number;
         count(): number;
+        count(match: $ItemPredicate_): number;
         countNonEmpty(match: $ItemPredicate_): number;
         countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
+        isEmpty(): boolean;
         worldPosition: $BlockPos;
         static SONG_ITEM_TAG_ID: string;
         level: $Level;
@@ -1487,11 +1489,11 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         constructor();
     }
     export class $SculkSensorBlockEntity extends $BlockEntity implements $GameEventListener$Provider<$VibrationSystem$Listener>, $VibrationSystem {
+        createVibrationUser(): $VibrationSystem$User;
+        setLastVibrationFrequency(arg0: number): void;
         getVibrationUser(): $VibrationSystem$User;
         getLastVibrationFrequency(): number;
         getVibrationData(): $VibrationSystem$Data;
-        createVibrationUser(): $VibrationSystem$User;
-        setLastVibrationFrequency(arg0: number): void;
         getListener(): $VibrationSystem$Listener;
         worldPosition: $BlockPos;
         level: $Level;
@@ -1505,9 +1507,9 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         get listener(): $VibrationSystem$Listener;
     }
     export class $TrialSpawnerBlockEntity extends $BlockEntity implements $Spawner, $TrialSpawner$StateAccessor {
-        getTrialSpawner(): $TrialSpawner;
-        setEntityId(arg0: $EntityType_<never>, arg1: $RandomSource): void;
         markUpdated(): void;
+        setEntityId(arg0: $EntityType_<never>, arg1: $RandomSource): void;
+        getTrialSpawner(): $TrialSpawner;
         getState(): $TrialSpawnerState;
         setState(arg0: $Level_, arg1: $TrialSpawnerState_): void;
         getUpdatePacket(): $ClientboundBlockEntityDataPacket;
@@ -1521,7 +1523,7 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         get updatePacket(): $ClientboundBlockEntityDataPacket;
     }
     export class $DispenserBlockEntity extends $RandomizableContainerBlockEntity implements $LithiumInventory, $InventoryChangeTracker, $DispenserBlockEntityAccessor {
-        handler$cad002$lithium$setInventoryStackListReplacement(arg0: $NonNullList<any>, arg1: $CallbackInfo): void;
+        handler$cca002$lithium$setInventoryStackListReplacement(arg0: $NonNullList<any>, arg1: $CallbackInfo): void;
         getRandomSlot(arg0: $RandomSource): number;
         insertItem(arg0: $ItemStack_): $ItemStack;
         generateLootLithium(): void;
@@ -1541,19 +1543,20 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         hasComparators: number;
         lootTableSeed: number;
         remove: boolean;
-        constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
+        constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
     }
     export class $TheEndGatewayBlockEntity extends $TheEndPortalBlockEntity {
+        isSpawning(): boolean;
+        getSpawnPercent(arg0: number): number;
+        setExitPosition(arg0: $BlockPos_, arg1: boolean): void;
         static beamAnimationTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $TheEndGatewayBlockEntity): void;
         static portalTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $TheEndGatewayBlockEntity): void;
         getParticleAmount(): number;
         isCoolingDown(): boolean;
         static triggerCooldown(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $TheEndGatewayBlockEntity): void;
         getPortalPosition(arg0: $ServerLevel, arg1: $BlockPos_): $Vec3;
-        isSpawning(): boolean;
-        getSpawnPercent(arg0: number): number;
-        setExitPosition(arg0: $BlockPos_, arg1: boolean): void;
+        getUpdatePacket(): $ClientboundBlockEntityDataPacket;
         getCooldownPercent(arg0: number): number;
         worldPosition: $BlockPos;
         level: $Level;
@@ -1561,9 +1564,10 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         hasComparators: number;
         remove: boolean;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
+        get spawning(): boolean;
         get particleAmount(): number;
         get coolingDown(): boolean;
-        get spawning(): boolean;
+        get updatePacket(): $ClientboundBlockEntityDataPacket;
     }
     export class $FurnaceBlockEntity extends $AbstractFurnaceBlockEntity {
         inventoryChangeListeners: $ReferenceArraySet<any>;
@@ -1700,17 +1704,17 @@ declare module "@package/net/minecraft/world/level/block/entity" {
     /**
      * Values that may be interpreted as {@link $BannerPattern}.
      */
-    export type $BannerPattern_ = RegistryTypes.BannerPattern | { assetId?: $ResourceLocation_, translationKey?: string,  } | [assetId?: $ResourceLocation_, translationKey?: string, ];
+    export type $BannerPattern_ = RegistryTypes.BannerPattern | { translationKey?: string, assetId?: $ResourceLocation_,  } | [translationKey?: string, assetId?: $ResourceLocation_, ];
     export class $LecternBlockEntity extends $BlockEntity implements $Clearable, $MenuProvider, $LecternBlockEntityAccessor {
-        createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
-        setBook(arg0: $ItemStack_): void;
-        setBook(arg0: $ItemStack_, arg1: $Player): void;
-        getBook(): $ItemStack;
-        getRedstoneSignal(): number;
         hasBook(): boolean;
         onBookItemRemove(): void;
         setPage(arg0: number): void;
         getPage(): number;
+        createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
+        setBook(arg0: $ItemStack_, arg1: $Player): void;
+        setBook(arg0: $ItemStack_): void;
+        getBook(): $ItemStack;
+        getRedstoneSignal(): number;
         clearContent(): void;
         getDisplayName(): $Component;
         shouldTriggerClientSideContainerClosingOnOpen(): boolean;
@@ -1741,8 +1745,8 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         getBaseColor(): $DyeColor;
         getItem(): $ItemStack;
         getName(): $Component;
-        getCustomName(): $Component;
         getUpdatePacket(): $ClientboundBlockEntityDataPacket;
+        getCustomName(): $Component;
         getDisplayName(): $Component;
         hasCustomName(): boolean;
         static MAX_PATTERNS: number;
@@ -1757,8 +1761,8 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         get baseColor(): $DyeColor;
         get item(): $ItemStack;
         get name(): $Component;
-        get customName(): $Component;
         get updatePacket(): $ClientboundBlockEntityDataPacket;
+        get customName(): $Component;
         get displayName(): $Component;
     }
     export class $Hopper {
@@ -1777,20 +1781,20 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         get suckAabb(): $AABB;
     }
     export class $ChiseledBookShelfBlockEntity extends $BlockEntity implements $Container, $LithiumTransferConditionInventory {
-        setItem(arg0: number, arg1: $ItemStack_): void;
+        removeItem(arg0: number, arg1: number): $ItemStack;
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
+        setItem(arg0: number, arg1: $ItemStack_): void;
         clearContent(): void;
         getLastInteractedSlot(): number;
-        removeItem(arg0: number, arg1: number): $ItemStack;
         getItem(arg0: number): $ItemStack;
         isEmpty(): boolean;
         count(): number;
-        getMaxStackSize(): number;
+        stillValid(arg0: $Player): boolean;
         getContainerSize(): number;
         removeItemNoUpdate(arg0: number): $ItemStack;
         canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
-        stillValid(arg0: $Player): boolean;
+        getMaxStackSize(): number;
         startOpen(arg0: $Player): void;
         stopOpen(arg0: $Player): void;
         countItem(arg0: $Item_): number;
@@ -1799,8 +1803,6 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         getMaxStackSize(arg0: $ItemStack_): number;
         setTransferCooldown(arg0: number): void;
         canReceiveTransferCooldown(): boolean;
-        self(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -1814,16 +1816,18 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
-        isEmpty(): boolean;
+        getBlock(level: $Level_): $LevelBlock;
+        self(): $Container;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
-        find(match: $ItemPredicate_): number;
         find(): number;
-        count(match: $ItemPredicate_): number;
+        find(match: $ItemPredicate_): number;
         count(): number;
+        count(match: $ItemPredicate_): number;
         countNonEmpty(match: $ItemPredicate_): number;
         countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
+        isEmpty(): boolean;
         worldPosition: $BlockPos;
         static MAX_BOOKS_IN_STORAGE: number;
         level: $Level;
@@ -1841,12 +1845,12 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         get allItems(): $List<$ItemStack>;
     }
     export class $ConduitBlockEntity extends $BlockEntity {
-        isHunting(): boolean;
         getActiveRotation(arg0: number): number;
+        isHunting(): boolean;
         static serverTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ConduitBlockEntity): void;
         isActive(): boolean;
-        static clientTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ConduitBlockEntity): void;
         getUpdatePacket(): $ClientboundBlockEntityDataPacket;
+        static clientTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ConduitBlockEntity): void;
         worldPosition: $BlockPos;
         tickCount: number;
         level: $Level;
@@ -1859,13 +1863,13 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         get updatePacket(): $ClientboundBlockEntityDataPacket;
     }
     export class $ContainerOpenersCounter {
-        onOpen(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): void;
-        openerCountChanged(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: number, arg4: number): void;
-        isOwnContainer(arg0: $Player): boolean;
         incrementOpeners(arg0: $Player, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_): void;
         decrementOpeners(arg0: $Player, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_): void;
         getOpenerCount(): number;
         recheckOpeners(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): void;
+        openerCountChanged(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: number, arg4: number): void;
+        isOwnContainer(arg0: $Player): boolean;
+        onOpen(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): void;
         onClose(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): void;
         constructor();
         get openerCount(): number;
@@ -1880,13 +1884,12 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         setPlacementPriority(arg0: number): void;
         setSelectionPriority(arg0: number): void;
         getFinalState(): string;
+        generate(arg0: $ServerLevel, arg1: number, arg2: boolean): void;
         getName(): $ResourceLocation;
         setName(arg0: $ResourceLocation_): void;
         getPool(): $ResourceKey<$StructureTemplatePool>;
         getTarget(): $ResourceLocation;
         setTarget(arg0: $ResourceLocation_): void;
-        generate(arg0: $ServerLevel, arg1: number, arg2: boolean): void;
-        getUpdatePacket(): $ClientboundBlockEntityDataPacket;
         static TARGET: string;
         worldPosition: $BlockPos;
         level: $Level;
@@ -1900,7 +1903,6 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         remove: boolean;
         static NAME: string;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
-        get updatePacket(): $ClientboundBlockEntityDataPacket;
     }
     export class $CalibratedSculkSensorBlockEntity$VibrationUser extends $SculkSensorBlockEntity$VibrationUser {
     }
@@ -1915,43 +1917,52 @@ declare module "@package/net/minecraft/world/level/block/entity" {
     /**
      * Values that may be interpreted as {@link $BannerPatternLayers$Layer}.
      */
-    export type $BannerPatternLayers$Layer_ = { pattern?: $Holder_<$BannerPattern>, color?: $DyeColor_,  } | [pattern?: $Holder_<$BannerPattern>, color?: $DyeColor_, ];
-    export class $DecoratedPotBlockEntity extends $BlockEntity implements $RandomizableContainer, $ContainerSingleItem$BlockContainerSingleItem {
+    export type $BannerPatternLayers$Layer_ = { color?: $DyeColor_, pattern?: $Holder_<$BannerPattern>,  } | [color?: $DyeColor_, pattern?: $Holder_<$BannerPattern>, ];
+    export class $DecoratedPotBlockEntity extends $BlockEntity implements $RandomizableContainer, $ContainerSingleItem$BlockContainerSingleItem, $DecoratedPotEntityAccess {
+        setLootTable(arg0: $ResourceKey_<$LootTable>): void;
+        setLootTableSeed(arg0: number): void;
+        setFromItem(arg0: $ItemStack_): void;
+        static createDecoratedPotItem(arg0: $PotDecorations_): $ItemStack;
+        getBulkComponent(): $BulkComponent;
+        setBulkComponent(arg0: $BulkComponent_): void;
+        splitTheItem(arg0: number): $ItemStack;
+        getContainerBlockEntity(): $BlockEntity;
+        setItem(arg0: number, arg1: $ItemStack_): void;
         getTheItem(): $ItemStack;
         setTheItem(arg0: $ItemStack_): void;
         getPotAsItem(): $ItemStack;
-        setLootTable(arg0: $ResourceKey_<$LootTable>): void;
-        setLootTableSeed(arg0: number): void;
-        splitTheItem(arg0: number): $ItemStack;
-        getContainerBlockEntity(): $BlockEntity;
-        setFromItem(arg0: $ItemStack_): void;
-        static createDecoratedPotItem(arg0: $PotDecorations_): $ItemStack;
+        item(): $SlotAccess;
+        getContainerSize(): number;
+        wobble(arg0: $DecoratedPotBlockEntity$WobbleStyle_): void;
         getDecorations(): $PotDecorations;
-        getDirection(): $Direction;
         getLootTable(): $ResourceKey<$LootTable>;
         getLootTableSeed(): number;
-        wobble(arg0: $DecoratedPotBlockEntity$WobbleStyle_): void;
+        getDirection(): $Direction;
         tryLoadLootTable(arg0: $CompoundTag_): boolean;
         trySaveLootTable(arg0: $CompoundTag_): boolean;
         setLootTable(arg0: $ResourceKey_<$LootTable>, arg1: number): void;
         unpackLootTable(arg0: $Player): void;
         stillValid(arg0: $Player): boolean;
+        isFull(): boolean;
+        insertIntoFocus(arg0: $ItemStack_): boolean;
+        tryFillFocusedItem(arg0: $Holder_<$Item>, arg1: $ArrayList<$BulkComponent$ItemlessStack_>): void;
+        takeFromFocus(): $ItemStack;
+        getFullness(): number;
+        getWeight(): $Fraction;
         startOpen(arg0: $Player): void;
         stopOpen(arg0: $Player): void;
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
         countItem(arg0: $Item_): number;
         hasAnyOf(arg0: $Set_<$Item_>): boolean;
         hasAnyMatching(arg0: $Predicate_<$ItemStack>): boolean;
-        getMaxStackSize(arg0: $ItemStack_): number;
-        getMaxStackSize(): number;
         canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
+        getMaxStackSize(): number;
+        getMaxStackSize(arg0: $ItemStack_): number;
         removeTheItem(): $ItemStack;
         clearContent(): void;
         setTransferCooldown(arg0: number): void;
         canReceiveTransferCooldown(): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
-        self(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -1965,41 +1976,48 @@ declare module "@package/net/minecraft/world/level/block/entity" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
-        isEmpty(): boolean;
+        getBlock(level: $Level_): $LevelBlock;
+        self(): $Container;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
-        find(match: $ItemPredicate_): number;
         find(): number;
-        count(match: $ItemPredicate_): number;
+        find(match: $ItemPredicate_): number;
         count(): number;
+        count(match: $ItemPredicate_): number;
         countNonEmpty(match: $ItemPredicate_): number;
         countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
+        isEmpty(): boolean;
         static TAG_SHERDS: string;
-        worldPosition: $BlockPos;
-        lootTable: $ResourceKey<$LootTable>;
         lastWobbleStyle: $DecoratedPotBlockEntity$WobbleStyle;
         static TAG_ITEM: string;
         level: $Level;
-        wobbleStartedAtTick: number;
         static ATTACHMENTS_NBT_KEY: string;
-        hasComparators: number;
         static EVENT_POT_WOBBLES: number;
-        lootTableSeed: number;
         remove: boolean;
+        worldPosition: $BlockPos;
+        lootTable: $ResourceKey<$LootTable>;
+        bulkContainer: $BulkComponent;
+        wobbleStartedAtTick: number;
+        hasComparators: number;
+        lootTableSeed: number;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
-        get potAsItem(): $ItemStack;
-        get containerBlockEntity(): $BlockEntity;
         set fromItem(value: $ItemStack_);
+        get containerBlockEntity(): $BlockEntity;
+        get potAsItem(): $ItemStack;
+        get containerSize(): number;
         get decorations(): $PotDecorations;
         get direction(): $Direction;
+        get full(): boolean;
+        get fullness(): number;
+        get weight(): $Fraction;
         set transferCooldown(value: number);
         get mutable(): boolean;
         get slots(): number;
         get width(): number;
         get height(): number;
-        get empty(): boolean;
         get allItems(): $List<$ItemStack>;
+        get empty(): boolean;
     }
     export class $SculkShriekerBlockEntity extends $BlockEntity implements $GameEventListener$Provider<$VibrationSystem$Listener>, $VibrationSystem {
         getVibrationUser(): $VibrationSystem$User;

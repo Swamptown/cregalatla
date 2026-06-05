@@ -87,7 +87,6 @@ declare module "@package/net/minecraft/data/loot/packs" {
      */
     export type $VanillaFishingLoot_ = { registries?: $HolderLookup$Provider,  } | [registries?: $HolderLookup$Provider, ];
     export class $VanillaChestLoot extends $Record implements $LootTableSubProvider {
-        bastionHoglinStableLootTable(): $LootTable$Builder;
         ancientCityLootTable(): $LootTable$Builder;
         desertPyramidLootTable(): $LootTable$Builder;
         jungleTempleLootTable(): $LootTable$Builder;
@@ -104,6 +103,7 @@ declare module "@package/net/minecraft/data/loot/packs" {
         strongholdLibraryLootTable(): $LootTable$Builder;
         woodlandMansionLootTable(): $LootTable$Builder;
         spawnerLootTables(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
+        bastionHoglinStableLootTable(): $LootTable$Builder;
         generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         registries(): $HolderLookup$Provider;
         constructor(arg0: $HolderLookup$Provider);

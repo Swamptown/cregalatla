@@ -56,11 +56,11 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
         static INSTANCE: $FalseCondition;
     }
     export class $ConditionalOps<T> extends $RegistryOps<T> {
+        static createConditionalCodec<T>(arg0: $Codec<T>): $Codec<(T) | undefined>;
+        static createConditionalCodec<T>(arg0: $Codec<T>, arg1: string): $Codec<(T) | undefined>;
         static createConditionalCodecWithConditions<T>(arg0: $Codec<T>, arg1: string): $Codec<($WithConditions<T>) | undefined>;
         static createConditionalCodecWithConditions<T>(arg0: $Codec<T>): $Codec<($WithConditions<T>) | undefined>;
         static decodeListWithElementConditions<T>(arg0: $Codec<T>): $Codec<$List<T>>;
-        static createConditionalCodec<T>(arg0: $Codec<T>): $Codec<(T) | undefined>;
-        static createConditionalCodec<T>(arg0: $Codec<T>, arg1: string): $Codec<(T) | undefined>;
         static retrieveContext(): $MapCodec<$ICondition$IContext>;
         delegate: $DynamicOps<T>;
         static DEFAULT_CONDITIONS_KEY: string;
@@ -105,13 +105,13 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
      */
     export type $NotCondition_ = { value?: $ICondition,  } | [value?: $ICondition, ];
     export class $ICondition {
-        static getWithConditionalCodec<V, T>(arg0: $Codec<(T) | undefined>, arg1: $DynamicOps<V>, arg2: V): (T) | undefined;
         static getConditionally<V, T>(arg0: $Codec<T>, arg1: $DynamicOps<V>, arg2: V): (T) | undefined;
-        static writeConditions(arg0: $DynamicOps<$JsonElement_>, arg1: $JsonObject_, arg2: $List_<$ICondition>): void;
-        static writeConditions(arg0: $HolderLookup$Provider, arg1: $JsonObject_, arg2: $List_<$ICondition>): void;
         static writeConditions(arg0: $HolderLookup$Provider, arg1: $JsonObject_, ...arg2: $ICondition[]): void;
+        static writeConditions(arg0: $HolderLookup$Provider, arg1: $JsonObject_, arg2: $List_<$ICondition>): void;
+        static writeConditions(arg0: $DynamicOps<$JsonElement_>, arg1: $JsonObject_, arg2: $List_<$ICondition>): void;
         static getWithWithConditionsCodec<V, T>(arg0: $Codec<($WithConditions_<T>) | undefined>, arg1: $DynamicOps<V>, arg2: V): (T) | undefined;
         static conditionsMatched<V>(arg0: $DynamicOps<V>, arg1: V): boolean;
+        static getWithConditionalCodec<V, T>(arg0: $Codec<(T) | undefined>, arg1: $DynamicOps<V>, arg2: V): (T) | undefined;
         static CODEC: $Codec<$ICondition>;
         static LIST_CODEC: $Codec<$List<$ICondition>>;
     }
@@ -180,10 +180,10 @@ declare module "@package/net/neoforged/neoforge/common/conditions" {
         itemExists(arg0: string, arg1: string): $ICondition;
         tagEmpty(arg0: $TagKey_<$Item>): $ICondition;
         modLoaded(arg0: string): $ICondition;
+        or(...arg0: $ICondition[]): $ICondition;
         and(...arg0: $ICondition[]): $ICondition;
         not(arg0: $ICondition): $ICondition;
         TRUE(): $ICondition;
         FALSE(): $ICondition;
-        or(...arg0: $ICondition[]): $ICondition;
     }
 }

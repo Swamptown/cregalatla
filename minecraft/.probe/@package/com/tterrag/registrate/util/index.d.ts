@@ -17,8 +17,8 @@ export * as entry from "@package/com/tterrag/registrate/util/entry";
 
 declare module "@package/com/tterrag/registrate/util" {
     export class $CreativeModeTabModifier implements $CreativeModeTab$Output {
-        getFlags(): $FeatureFlagSet;
         hasPermissions(): boolean;
+        getFlags(): $FeatureFlagSet;
         accept(arg0: $Supplier_<$ItemLike>): void;
         accept(arg0: $ItemStack_, arg1: $CreativeModeTab$TabVisibility_): void;
         accept(arg0: $Supplier_<$ItemLike>, arg1: $CreativeModeTab$TabVisibility_): void;
@@ -33,24 +33,24 @@ declare module "@package/com/tterrag/registrate/util" {
         get parameters(): $CreativeModeTab$ItemDisplayParameters;
     }
     export class $DataIngredient {
+        static items<T extends $ItemLike>(arg0: $NonNullSupplier_<T>, ...arg1: $NonNullSupplier_<T>[]): $DataIngredient;
+        static items<T extends $ItemLike>(arg0: T, ...arg1: T[]): $DataIngredient;
+        static ingredient(arg0: $Ingredient_, arg1: $ItemLike_): $DataIngredient;
+        static ingredient(arg0: $Ingredient_, arg1: $ResourceLocation_, ...arg2: $ItemPredicate_[]): $DataIngredient;
+        static ingredient(arg0: $Ingredient_, arg1: $TagKey_<$Item>): $DataIngredient;
         toVanilla(): $Ingredient;
         getCriterion(arg0: $RegistrateRecipeProvider): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
         getStackingIds(): $IntList;
         isCustom(): boolean;
         hasNoItems(): boolean;
         getCustomIngredient(): $ICustomIngredient;
-        static ingredient(arg0: $Ingredient_, arg1: $ResourceLocation_, ...arg2: $ItemPredicate_[]): $DataIngredient;
-        static ingredient(arg0: $Ingredient_, arg1: $TagKey_<$Item>): $DataIngredient;
-        static ingredient(arg0: $Ingredient_, arg1: $ItemLike_): $DataIngredient;
+        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
+        static tag(arg0: $TagKey_<$Item>): $DataIngredient;
         negate(): $Predicate<$ItemStack>;
         and(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
-        static items<T extends $ItemLike>(arg0: $NonNullSupplier_<T>, ...arg1: $NonNullSupplier_<T>[]): $DataIngredient;
-        static items<T extends $ItemLike>(arg0: T, ...arg1: T[]): $DataIngredient;
-        static tag(arg0: $TagKey_<$Item>): $DataIngredient;
         test(arg0: $ItemStack_): boolean;
         isEmpty(): boolean;
         getId(): $ResourceLocation;
-        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         isSimple(): boolean;
         static stacks(arg0: $ItemStack_, ...arg1: $ItemStack_[]): $DataIngredient;
         get stackingIds(): $IntList;

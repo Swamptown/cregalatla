@@ -22,7 +22,7 @@ declare module "@package/dev/latvian/mods/kubejs/gui/chest" {
     /**
      * Values that may be interpreted as {@link $ChestMenuClickHandler}.
      */
-    export type $ChestMenuClickHandler_ = { autoHandle?: boolean, callback?: $ChestMenuClickEvent$Callback_, type?: $ClickType_, button?: number,  } | [autoHandle?: boolean, callback?: $ChestMenuClickEvent$Callback_, type?: $ClickType_, button?: number, ];
+    export type $ChestMenuClickHandler_ = { callback?: $ChestMenuClickEvent$Callback_, autoHandle?: boolean, button?: number, type?: $ClickType_,  } | [callback?: $ChestMenuClickEvent$Callback_, autoHandle?: boolean, button?: number, type?: $ClickType_, ];
     export class $ChestMenuInventoryClickEvent$Callback {
     }
     export interface $ChestMenuInventoryClickEvent$Callback {
@@ -95,8 +95,8 @@ declare module "@package/dev/latvian/mods/kubejs/gui/chest" {
         setShiftLeftClicked(callback: $ChestMenuClickEvent$Callback_): void;
         setShiftRightClicked(callback: $ChestMenuClickEvent$Callback_): void;
         setDoubleClicked(callback: $ChestMenuClickEvent$Callback_): void;
-        setItem(stack: $ItemStack_): void;
         clicked(type: $ClickType_, button: number, callback: $ChestMenuClickEvent$Callback_, autoHandle: boolean): void;
+        setItem(stack: $ItemStack_): void;
         setThrown(callback: $ChestMenuClickEvent$Callback_): void;
         getItem(): $ItemStack;
         data: $Map<string, $Object>;

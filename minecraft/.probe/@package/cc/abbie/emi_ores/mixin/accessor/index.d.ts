@@ -11,10 +11,10 @@ declare module "@package/cc/abbie/emi_ores/mixin/accessor" {
     export class $RandomBlockMatchTestAccessor {
     }
     export interface $RandomBlockMatchTestAccessor {
-        getProbability(): number;
         getBlock(): $Block;
-        get probability(): number;
+        getProbability(): number;
         get block(): $Block;
+        get probability(): number;
     }
     export class $TrapezoidHeightAccessor {
     }

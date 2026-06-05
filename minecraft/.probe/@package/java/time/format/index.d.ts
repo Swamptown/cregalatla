@@ -18,9 +18,9 @@ declare module "@package/java/time/format" {
      */
     export type $ResolverStyle_ = "strict" | "smart" | "lenient";
     export class $TextStyle extends $Enum<$TextStyle> {
-        isStandalone(): boolean;
         asStandalone(): $TextStyle;
         asNormal(): $TextStyle;
+        isStandalone(): boolean;
         static values(): $TextStyle[];
         static valueOf(arg0: string): $TextStyle;
         static SHORT_STANDALONE: $TextStyle;
@@ -36,13 +36,6 @@ declare module "@package/java/time/format" {
      */
     export type $TextStyle_ = "full" | "full_standalone" | "short" | "short_standalone" | "narrow" | "narrow_standalone";
     export class $DateTimeFormatter {
-        static ofLocalizedDate(arg0: $FormatStyle_): $DateTimeFormatter;
-        static ofLocalizedTime(arg0: $FormatStyle_): $DateTimeFormatter;
-        static ofLocalizedDateTime(arg0: $FormatStyle_): $DateTimeFormatter;
-        static ofLocalizedDateTime(arg0: $FormatStyle_, arg1: $FormatStyle_): $DateTimeFormatter;
-        static ofLocalizedPattern(arg0: string): $DateTimeFormatter;
-        static parsedExcessDays(): $TemporalQuery<$Period>;
-        static parsedLeapSecond(): $TemporalQuery<boolean>;
         withLocale(arg0: $Locale): $DateTimeFormatter;
         localizedBy(arg0: $Locale): $DateTimeFormatter;
         getDecimalStyle(): $DecimalStyle;
@@ -57,10 +50,17 @@ declare module "@package/java/time/format" {
         parseUnresolved(arg0: $CharSequence, arg1: $ParsePosition): $TemporalAccessor;
         toFormat(): $Format;
         toFormat(arg0: $TemporalQuery_<never>): $Format;
-        getChronology(): $Chronology;
+        static ofLocalizedDate(arg0: $FormatStyle_): $DateTimeFormatter;
+        static ofLocalizedTime(arg0: $FormatStyle_): $DateTimeFormatter;
+        static ofLocalizedDateTime(arg0: $FormatStyle_, arg1: $FormatStyle_): $DateTimeFormatter;
+        static ofLocalizedDateTime(arg0: $FormatStyle_): $DateTimeFormatter;
+        static ofLocalizedPattern(arg0: string): $DateTimeFormatter;
+        static parsedExcessDays(): $TemporalQuery<$Period>;
+        static parsedLeapSecond(): $TemporalQuery<boolean>;
+        getZone(): $ZoneId;
         getLocale(): $Locale;
         formatTo(arg0: $TemporalAccessor, arg1: $Appendable): void;
-        getZone(): $ZoneId;
+        getChronology(): $Chronology;
         format(arg0: $TemporalAccessor): string;
         parse<T>(arg0: $CharSequence, arg1: $TemporalQuery_<T>): T;
         parse(arg0: $CharSequence, arg1: $ParsePosition): $TemporalAccessor;
@@ -86,28 +86,28 @@ declare module "@package/java/time/format" {
         get decimalStyle(): $DecimalStyle;
         get resolverStyle(): $ResolverStyle;
         get resolverFields(): $Set<$TemporalField>;
-        get chronology(): $Chronology;
-        get locale(): $Locale;
         get zone(): $ZoneId;
+        get locale(): $Locale;
+        get chronology(): $Chronology;
     }
     export class $DecimalStyle {
-        getPositiveSign(): string;
-        getNegativeSign(): string;
-        static getAvailableLocales(): $Set<$Locale>;
-        getDecimalSeparator(): string;
         static ofDefaultLocale(): $DecimalStyle;
         withZeroDigit(arg0: string): $DecimalStyle;
         withPositiveSign(arg0: string): $DecimalStyle;
         withNegativeSign(arg0: string): $DecimalStyle;
         withDecimalSeparator(arg0: string): $DecimalStyle;
+        getPositiveSign(): string;
+        getNegativeSign(): string;
         getZeroDigit(): string;
+        getDecimalSeparator(): string;
+        static getAvailableLocales(): $Set<$Locale>;
         static of(arg0: $Locale): $DecimalStyle;
         static STANDARD: $DecimalStyle;
         get positiveSign(): string;
         get negativeSign(): string;
-        static get availableLocales(): $Set<$Locale>;
-        get decimalSeparator(): string;
         get zeroDigit(): string;
+        get decimalSeparator(): string;
+        static get availableLocales(): $Set<$Locale>;
     }
     export class $FormatStyle extends $Enum<$FormatStyle> {
         static values(): $FormatStyle[];

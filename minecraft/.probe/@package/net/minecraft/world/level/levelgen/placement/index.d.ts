@@ -32,10 +32,10 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
         constructor();
     }
     export class $PlacedFeature extends $Record {
-        place(arg0: $WorldGenLevel, arg1: $ChunkGenerator, arg2: $RandomSource, arg3: $BlockPos_): boolean;
-        placement(): $List<$PlacementModifier>;
-        placeWithBiomeCheck(arg0: $WorldGenLevel, arg1: $ChunkGenerator, arg2: $RandomSource, arg3: $BlockPos_): boolean;
         getFeatures(): $Stream<$ConfiguredFeature<never, never>>;
+        placeWithBiomeCheck(arg0: $WorldGenLevel, arg1: $ChunkGenerator, arg2: $RandomSource, arg3: $BlockPos_): boolean;
+        placement(): $List<$PlacementModifier>;
+        place(arg0: $WorldGenLevel, arg1: $ChunkGenerator, arg2: $RandomSource, arg3: $BlockPos_): boolean;
         feature(): $Holder<$ConfiguredFeature<never, never>>;
         static CODEC: $Codec<$Holder<$PlacedFeature>>;
         static DIRECT_CODEC: $Codec<$PlacedFeature>;
@@ -124,8 +124,8 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
     }
     export class $HeightRangePlacement extends $PlacementModifier implements $HeightRangePlacementAccessor {
         static of(arg0: $HeightProvider): $HeightRangePlacement;
-        static uniform(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_): $HeightRangePlacement;
         static triangle(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_): $HeightRangePlacement;
+        static uniform(arg0: $VerticalAnchor_, arg1: $VerticalAnchor_): $HeightRangePlacement;
         getHeight(): $HeightProvider;
         static CODEC: $MapCodec<$HeightRangePlacement>;
         get height(): $HeightProvider;
@@ -181,8 +181,8 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
         getLevel(): $WorldGenLevel;
         getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
         generator(): $ChunkGenerator;
-        getBlockState(arg0: $BlockPos_): $BlockState;
         getMinBuildHeight(): number;
+        getBlockState(arg0: $BlockPos_): $BlockState;
         constructor(arg0: $WorldGenLevel, arg1: $ChunkGenerator, arg2: ($PlacedFeature_) | undefined);
         get level(): $WorldGenLevel;
         get minBuildHeight(): number;

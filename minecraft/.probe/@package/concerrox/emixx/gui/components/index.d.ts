@@ -23,10 +23,10 @@ declare module "@package/concerrox/emixx/gui/components" {
         get TEXTURE$emixx_common(): $ResourceLocation;
     }
     export class $ImageButton extends $SizedButtonWidget {
-        matchScreenManagerVisibility(): $ImageButton;
-        withTexture(customTexture: $ResourceLocation_, width: number, height: number): $ImageButton;
         static withTexture$default(arg0: $ImageButton, arg1: $ResourceLocation_, arg2: number, arg3: number, arg4: number, arg5: $Object): $ImageButton;
         static access$getTEXTURE$cp(): $ResourceLocation;
+        matchScreenManagerVisibility(): $ImageButton;
+        withTexture(customTexture: $ResourceLocation_, width: number, height: number): $ImageButton;
         static SPRITES: $WidgetSprites;
         visible: boolean;
         createNarration: $Button$CreateNarration;
@@ -75,9 +75,9 @@ declare module "@package/concerrox/emixx/gui/components" {
         getOnCheckedChangeListener(): $Switch$OnCheckedChangeListener;
         getY(): number;
         build(): $Switch;
-        getX(): number;
         setX(<set-?>: number): void;
         setY(<set-?>: number): void;
+        getX(): number;
         constructor(message: $Component_);
         set checked(value: boolean);
     }

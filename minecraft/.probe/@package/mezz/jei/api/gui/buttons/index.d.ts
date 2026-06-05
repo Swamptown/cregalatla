@@ -20,10 +20,10 @@ declare module "@package/mezz/jei/api/gui/buttons" {
     export class $IIconButtonController {
     }
     export interface $IIconButtonController {
-        drawExtras(arg0: $GuiGraphics, arg1: $Rect2i, arg2: number, arg3: number, arg4: number): void;
         getTooltips(arg0: $ITooltipBuilder): void;
-        initState(arg0: $IButtonState): void;
+        drawExtras(arg0: $GuiGraphics, arg1: $Rect2i, arg2: number, arg3: number, arg4: number): void;
         updateState(arg0: $IButtonState): void;
+        initState(arg0: $IButtonState): void;
         onPress(arg0: $IJeiUserInput): boolean;
     }
     /**

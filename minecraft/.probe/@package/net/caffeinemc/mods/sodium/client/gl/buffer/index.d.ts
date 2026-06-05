@@ -32,8 +32,8 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/buffer" {
         setActiveMapping(arg0: $GlBufferMapping): void;
     }
     export class $GlMutableBuffer extends $GlBuffer {
-        getSize(): number;
         setSize(arg0: number): void;
+        getSize(): number;
         constructor();
     }
     export class $GlBufferUsage extends $Enum<$GlBufferUsage> {
@@ -89,14 +89,14 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/buffer" {
      */
     export type $GlBufferMapFlags_ = "read" | "write" | "persistent" | "invalidate_buffer" | "invalidate_range" | "explicit_flush" | "coherent" | "unsynchronized";
     export class $GlBufferMapping {
+        isDisposed(): boolean;
         getBufferObject(): $GlBuffer;
         getMemoryBuffer(): $ByteBuffer;
         dispose(): void;
         write(arg0: $ByteBuffer, arg1: number): void;
-        isDisposed(): boolean;
         constructor(arg0: $GlBuffer, arg1: $ByteBuffer);
+        get disposed(): boolean;
         get bufferObject(): $GlBuffer;
         get memoryBuffer(): $ByteBuffer;
-        get disposed(): boolean;
     }
 }

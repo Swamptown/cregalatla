@@ -28,8 +28,8 @@ declare module "@package/net/fabricmc/fabric/api/registry" {
     export interface $FabricBrewingRecipeRegistryBuilder {
         registerItemRecipe(arg0: $Item_, arg1: $Ingredient_, arg2: $Item_): void;
         getEnabledFeatures(): $FeatureFlagSet;
-        registerPotionRecipe(arg0: $Holder_<$Potion>, arg1: $Ingredient_, arg2: $Holder_<$Potion>): void;
         registerRecipes(arg0: $Ingredient_, arg1: $Holder_<$Potion>): void;
+        registerPotionRecipe(arg0: $Holder_<$Potion>, arg1: $Ingredient_, arg2: $Holder_<$Potion>): void;
         get enabledFeatures(): $FeatureFlagSet;
     }
 }

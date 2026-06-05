@@ -26,12 +26,10 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
     export class $MobSpawnEvent extends $EntityEvent {
         getLevel(): $ServerLevelAccessor;
         getY(): number;
-        getEntity(): $Mob;
         getX(): number;
         getZ(): number;
         get level(): $ServerLevelAccessor;
         get y(): number;
-        get entity(): $Mob;
         get x(): number;
         get z(): number;
     }
@@ -77,18 +75,18 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
      */
     export type $LivingChangeTargetEvent$LivingTargetType_ = "mob_target" | "behavior_target";
     export class $MobSpawnEvent$SpawnPlacementCheck extends $Event {
-        getPlacementCheckResult(): boolean;
         getDefaultResult(): boolean;
+        getPlacementCheckResult(): boolean;
         getSpawnType(): $MobSpawnType;
+        setResult(arg0: $MobSpawnEvent$SpawnPlacementCheck$Result_): void;
         getLevel(): $ServerLevelAccessor;
         getResult(): $MobSpawnEvent$SpawnPlacementCheck$Result;
-        setResult(arg0: $MobSpawnEvent$SpawnPlacementCheck$Result_): void;
         getRandom(): $RandomSource;
         getEntityType(): $EntityType<never>;
         getPos(): $BlockPos;
         constructor(arg0: $EntityType_<never>, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource, arg5: boolean);
-        get placementCheckResult(): boolean;
         get defaultResult(): boolean;
+        get placementCheckResult(): boolean;
         get spawnType(): $MobSpawnType;
         get level(): $ServerLevelAccessor;
         get random(): $RandomSource;
@@ -156,13 +154,13 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
         constructor(arg0: $LivingEntity);
     }
     export class $MobEffectEvent$Applicable extends $MobEffectEvent {
-        getEffectSource(): $Entity;
         getApplicationResult(): boolean;
-        getResult(): $MobEffectEvent$Applicable$Result;
+        getEffectSource(): $Entity;
         setResult(arg0: $MobEffectEvent$Applicable$Result_): void;
+        getResult(): $MobEffectEvent$Applicable$Result;
         constructor(arg0: $LivingEntity, arg1: $MobEffectInstance, arg2: $Entity);
-        get effectSource(): $Entity;
         get applicationResult(): boolean;
+        get effectSource(): $Entity;
     }
     export class $LivingEntityUseItemEvent$Stop extends $LivingEntityUseItemEvent implements $ICancellableEvent {
         setCanceled(arg0: boolean): void;
@@ -256,8 +254,8 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
         get parent(): $Mob;
     }
     export class $SpawnClusterSizeEvent extends $LivingEvent {
-        getSize(): number;
         setSize(arg0: number): void;
+        getSize(): number;
         constructor(arg0: $Mob);
     }
     export class $MobEffectEvent extends $LivingEvent {
@@ -299,8 +297,8 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
         get player(): $Player;
     }
     export class $MobDespawnEvent extends $MobSpawnEvent {
-        getResult(): $MobDespawnEvent$Result;
         setResult(arg0: $MobDespawnEvent$Result_): void;
+        getResult(): $MobDespawnEvent$Result;
         constructor(arg0: $Mob, arg1: $ServerLevelAccessor);
     }
     export class $MobEffectEvent$Applicable$Result extends $Enum<$MobEffectEvent$Applicable$Result> {
@@ -316,9 +314,9 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
     export type $MobEffectEvent$Applicable$Result_ = "apply" | "default" | "do_not_apply";
     export class $LivingFallEvent extends $LivingEvent implements $ICancellableEvent {
         setDamageMultiplier(arg0: number): void;
+        getDamageMultiplier(): number;
         getDistance(): number;
         setDistance(arg0: number): void;
-        getDamageMultiplier(): number;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $LivingEntity, arg1: number, arg2: number);
@@ -369,8 +367,8 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
     }
     export class $LivingIncomingDamageEvent extends $LivingEvent implements $ICancellableEvent {
         getContainer(): $DamageContainer;
-        getOriginalAmount(): number;
         setAmount(arg0: number): void;
+        getOriginalAmount(): number;
         addReductionModifier(arg0: $DamageContainer$Reduction_, arg1: $IReductionFunction_): void;
         setInvulnerabilityTicks(arg0: number): void;
         getSource(): $DamageSource;
@@ -404,8 +402,8 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
         get tamer(): $Player;
     }
     export class $LivingChangeTargetEvent extends $LivingEvent implements $ICancellableEvent {
-        getOriginalAboutToBeSetTarget(): $LivingEntity;
         setNewAboutToBeSetTarget(arg0: $LivingEntity): void;
+        getOriginalAboutToBeSetTarget(): $LivingEntity;
         getNewAboutToBeSetTarget(): $LivingEntity;
         getTargetType(): $LivingChangeTargetEvent$ILivingTargetType;
         setCanceled(arg0: boolean): void;
@@ -427,10 +425,10 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
     export class $EffectParticleModificationEvent extends $LivingEvent {
         getOriginalParticleOptions(): $ParticleOptions;
         setParticleOptions(arg0: $ParticleOptions_): void;
-        setVisible(arg0: boolean): void;
         getEffect(): $MobEffectInstance;
         isVisible(): boolean;
         getParticleOptions(): $ParticleOptions;
+        setVisible(arg0: boolean): void;
         constructor(arg0: $LivingEntity, arg1: $MobEffectInstance);
         get originalParticleOptions(): $ParticleOptions;
         get effect(): $MobEffectInstance;
@@ -468,11 +466,11 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
     export interface $LivingChangeTargetEvent$ILivingTargetType {
     }
     export class $LivingShieldBlockEvent extends $LivingEvent implements $ICancellableEvent {
-        setBlocked(arg0: boolean): void;
         getOriginalBlockedDamage(): number;
         getDamageSource(): $DamageSource;
         setShieldDamage(arg0: number): void;
         getOriginalBlock(): boolean;
+        setBlocked(arg0: boolean): void;
         getBlocked(): boolean;
         setBlockedDamage(arg0: number): void;
         shieldDamage(): number;
@@ -507,8 +505,8 @@ declare module "@package/net/neoforged/neoforge/event/entity/living" {
     export class $MobSpawnEvent$PositionCheck extends $MobSpawnEvent {
         getSpawner(): $BaseSpawner;
         getSpawnType(): $MobSpawnType;
-        getResult(): $MobSpawnEvent$PositionCheck$Result;
         setResult(arg0: $MobSpawnEvent$PositionCheck$Result_): void;
+        getResult(): $MobSpawnEvent$PositionCheck$Result;
         constructor(arg0: $Mob, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BaseSpawner);
         get spawner(): $BaseSpawner;
         get spawnType(): $MobSpawnType;

@@ -143,8 +143,8 @@ declare module "@package/net/minecraft/client/gui/screens/multiplayer" {
         list: $AbstractSelectionList<$ServerLinksScreen$LinkListEntry>;
     }
     export class $ServerSelectionList extends $ObjectSelectionList<$ServerSelectionList$Entry> {
-        updateNetworkServers(arg0: $List_<$LanServer>): void;
         updateOnlineServers(arg0: $ServerList): void;
+        updateNetworkServers(arg0: $List_<$LanServer>): void;
         removed(): void;
         static access$000(arg0: $ServerSelectionList, arg1: $AbstractSelectionList$Entry<any>): void;
         static access$100(arg0: $ServerSelectionList, arg1: number): number;

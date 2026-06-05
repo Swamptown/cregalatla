@@ -13,11 +13,11 @@ declare module "@package/com/mojang/math" {
     export class $OctahedralGroup extends $Enum<$OctahedralGroup> implements $StringRepresentable {
         inverts(arg0: $Direction$Axis_): boolean;
         transformation(): $Matrix3f;
+        rotate(arg0: $FrontAndTop_): $FrontAndTop;
+        rotate(arg0: $Direction_): $Direction;
         static values(): $OctahedralGroup[];
         static valueOf(arg0: string): $OctahedralGroup;
         compose(arg0: $OctahedralGroup_): $OctahedralGroup;
-        rotate(arg0: $FrontAndTop_): $FrontAndTop;
-        rotate(arg0: $Direction_): $Direction;
         inverse(): $OctahedralGroup;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
@@ -92,6 +92,8 @@ declare module "@package/com/mojang/math" {
         constructor(arg0: number, arg1: number);
     }
     export class $Transformation implements $ITransformationExtension {
+        getNormalMatrix(): $Matrix3f;
+        getMatrix(): $Matrix4f;
         getLeftRotation(): $Quaternionf;
         getRightRotation(): $Quaternionf;
         static identity(): $Transformation;
@@ -100,25 +102,23 @@ declare module "@package/com/mojang/math" {
         slerp(arg0: $Transformation, arg1: number): $Transformation;
         getTranslation(): $Vector3f;
         getScale(): $Vector3f;
-        getMatrix(): $Matrix4f;
-        getNormalMatrix(): $Matrix3f;
-        isIdentity(): boolean;
-        transformNormal(arg0: $Vector3f): void;
-        transformPosition(arg0: $Vector4f): void;
         applyOrigin(arg0: $Vector3f): $Transformation;
         rotateTransform(arg0: $Direction_): $Direction;
         blockCenterToCorner(): $Transformation;
         blockCornerToCenter(): $Transformation;
+        isIdentity(): boolean;
+        transformNormal(arg0: $Vector3f): void;
+        transformPosition(arg0: $Vector4f): void;
         static CODEC: $Codec<$Transformation>;
         static EXTENDED_CODEC: $Codec<$Transformation>;
         constructor(arg0: $Matrix4f);
         constructor(arg0: $Vector3f, arg1: $Quaternionf, arg2: $Vector3f, arg3: $Quaternionf);
+        get normalMatrix(): $Matrix3f;
+        get matrix(): $Matrix4f;
         get leftRotation(): $Quaternionf;
         get rightRotation(): $Quaternionf;
         get translation(): $Vector3f;
         get scale(): $Vector3f;
-        get matrix(): $Matrix4f;
-        get normalMatrix(): $Matrix3f;
     }
     export class $Constants {
         static PI: number;
@@ -149,16 +149,16 @@ declare module "@package/com/mojang/math" {
     export class $FieldsAreNonnullByDefault implements $Annotation {
     }
     export class $GivensParameters extends $Record {
+        sinHalf(): number;
+        cosHalf(): number;
         static fromUnnormalized(arg0: number, arg1: number): $GivensParameters;
         aroundZ(arg0: $Quaternionf): $Quaternionf;
         aroundZ(arg0: $Matrix3f): $Matrix3f;
-        aroundY(arg0: $Quaternionf): $Quaternionf;
         aroundY(arg0: $Matrix3f): $Matrix3f;
+        aroundY(arg0: $Quaternionf): $Quaternionf;
         aroundX(arg0: $Matrix3f): $Matrix3f;
         aroundX(arg0: $Quaternionf): $Quaternionf;
         static fromPositiveAngle(arg0: number): $GivensParameters;
-        sinHalf(): number;
-        cosHalf(): number;
         sin(): number;
         cos(): number;
         inverse(): $GivensParameters;
@@ -167,13 +167,13 @@ declare module "@package/com/mojang/math" {
     /**
      * Values that may be interpreted as {@link $GivensParameters}.
      */
-    export type $GivensParameters_ = { sinHalf?: number, cosHalf?: number,  } | [sinHalf?: number, cosHalf?: number, ];
+    export type $GivensParameters_ = { cosHalf?: number, sinHalf?: number,  } | [cosHalf?: number, sinHalf?: number, ];
     export class $MatrixUtil {
         static eigenvalueJacobi(arg0: $Matrix3f, arg1: number): $Quaternionf;
-        static isPureTranslation(arg0: $Matrix4f): boolean;
-        static isOrthonormal(arg0: $Matrix4f): boolean;
-        static mulComponentWise(arg0: $Matrix4f, arg1: number): $Matrix4f;
         static svdDecompose(arg0: $Matrix3f): $Triple<$Quaternionf, $Vector3f, $Quaternionf>;
+        static isPureTranslation(arg0: $Matrix4f): boolean;
+        static mulComponentWise(arg0: $Matrix4f, arg1: number): $Matrix4f;
+        static isOrthonormal(arg0: $Matrix4f): boolean;
     }
     export class $Axis {
         static of(arg0: $Vector3f): $Axis;

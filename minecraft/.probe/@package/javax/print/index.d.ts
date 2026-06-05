@@ -22,7 +22,6 @@ declare module "@package/javax/print" {
     export class $PrintService {
     }
     export interface $PrintService {
-        getAttribute<T extends $PrintServiceAttribute>(arg0: $Class<T>): T;
         createPrintJob(): $DocPrintJob;
         addPrintServiceAttributeListener(arg0: $PrintServiceAttributeListener_): void;
         removePrintServiceAttributeListener(arg0: $PrintServiceAttributeListener_): void;
@@ -39,6 +38,7 @@ declare module "@package/javax/print" {
         equals(arg0: $Object): boolean;
         hashCode(): number;
         getAttributes(): $PrintServiceAttributeSet;
+        getAttribute<T extends $PrintServiceAttribute>(arg0: $Class<T>): T;
         get supportedDocFlavors(): $DocFlavor[];
         get supportedAttributeCategories(): $Class<never>[];
         get serviceUIFactory(): $ServiceUIFactory;
@@ -61,15 +61,15 @@ declare module "@package/javax/print" {
     export class $Doc {
     }
     export interface $Doc {
+        getReaderForText(): $Reader;
         getDocFlavor(): $DocFlavor;
         getPrintData(): $Object;
         getStreamForBytes(): $InputStream;
-        getReaderForText(): $Reader;
         getAttributes(): $DocAttributeSet;
+        get readerForText(): $Reader;
         get docFlavor(): $DocFlavor;
         get printData(): $Object;
         get streamForBytes(): $InputStream;
-        get readerForText(): $Reader;
         get attributes(): $DocAttributeSet;
     }
     export class $ServiceUIFactory {

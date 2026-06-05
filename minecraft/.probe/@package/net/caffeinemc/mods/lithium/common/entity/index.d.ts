@@ -38,9 +38,9 @@ declare module "@package/net/caffeinemc/mods/lithium/common/entity" {
     export class $NavigatingEntity {
     }
     export interface $NavigatingEntity {
-        lithium$setRegisteredToWorld(arg0: $PathNavigation): void;
         lithium$getRegisteredNavigation(): $PathNavigation;
         lithium$isRegisteredToWorld(): boolean;
+        lithium$setRegisteredToWorld(arg0: $PathNavigation): void;
         lithium$updateNavigationRegistration(): void;
     }
     export class $PositionedEntityTrackingSection {

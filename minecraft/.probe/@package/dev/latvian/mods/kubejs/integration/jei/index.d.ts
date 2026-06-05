@@ -223,10 +223,16 @@ declare module "@package/dev/latvian/mods/kubejs/integration/jei" {
     export class $KubeJSJEIPlugin implements $IModPlugin {
         onRuntimeAvailable(runtime: $IJeiRuntime): void;
         registerRecipes(registration: $IRecipeRegistration): void;
-        loadRemote(event: $RemoteRecipeViewerDataUpdatedEvent): void;
         getPluginUid(): $ResourceLocation;
         registerItemSubtypes(registration: $ISubtypeRegistration): void;
         registerFluidSubtypes<T>(registration: $ISubtypeRegistration, platformFluidHelper: $IPlatformFluidHelper<T>): void;
+        loadRemote(event: $RemoteRecipeViewerDataUpdatedEvent): void;
+        registerVanillaCategoryExtensions(arg0: $IVanillaCategoryExtensionRegistration): void;
+        registerRecipeTransferHandlers(arg0: $IRecipeTransferRegistration): void;
+        registerIngredients(arg0: $IModIngredientRegistration): void;
+        registerExtraIngredients(arg0: $IExtraIngredientRegistration_): void;
+        registerIngredientAliases(arg0: $IIngredientAliasRegistration): void;
+        registerModInfo(arg0: $IModInfoRegistration_): void;
         registerCategories(arg0: $IRecipeCategoryRegistration): void;
         registerRecipeCatalysts(arg0: $IRecipeCatalystRegistration): void;
         registerGuiHandlers(arg0: $IGuiHandlerRegistration): void;
@@ -234,12 +240,6 @@ declare module "@package/dev/latvian/mods/kubejs/integration/jei" {
         registerRuntime(arg0: $IRuntimeRegistration): void;
         onRuntimeUnavailable(): void;
         onConfigManagerAvailable(arg0: $IJeiConfigManager_): void;
-        registerVanillaCategoryExtensions(arg0: $IVanillaCategoryExtensionRegistration): void;
-        registerRecipeTransferHandlers(arg0: $IRecipeTransferRegistration): void;
-        registerIngredients(arg0: $IModIngredientRegistration): void;
-        registerExtraIngredients(arg0: $IExtraIngredientRegistration_): void;
-        registerIngredientAliases(arg0: $IIngredientAliasRegistration): void;
-        registerModInfo(arg0: $IModInfoRegistration_): void;
         static DISABLED: boolean;
         static ID: $ResourceLocation;
         constructor();

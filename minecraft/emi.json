@@ -218,9 +218,9 @@
   "craft_history": [],
   "recipe_defaults": {
     "added": [
+      "jei:/createaddition/mixing/biomass_from_stricks",
       "jei:/createaddition/mixing/bioethanol",
-      "jei:/createaddition/compacting/seed_oil",
-      "jei:/createaddition/mixing/biomass_from_stricks"
+      "jei:/createaddition/compacting/seed_oil"
     ],
     "tags": {},
     "resolutions": {},

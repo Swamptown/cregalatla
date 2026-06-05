@@ -32,6 +32,7 @@ declare module "@package/net/minecraft/network/protocol/common" {
     export class $ClientCommonPacketListener {
     }
     export interface $ClientCommonPacketListener extends $ClientCookiePacketListener, $ClientboundPacketListener, $IClientCommonPacketListenerExtension {
+        handleDisconnect(arg0: $ClientboundDisconnectPacket_): void;
         handleUpdateTags(arg0: $ClientboundUpdateTagsPacket): void;
         handleCustomPayload(arg0: $ClientboundCustomPayloadPacket_): void;
         handleKeepAlive(arg0: $ClientboundKeepAlivePacket): void;
@@ -42,7 +43,6 @@ declare module "@package/net/minecraft/network/protocol/common" {
         handleTransfer(arg0: $ClientboundTransferPacket_): void;
         handleCustomReportDetails(arg0: $ClientboundCustomReportDetailsPacket_): void;
         handleServerLinks(arg0: $ClientboundServerLinksPacket_): void;
-        handleDisconnect(arg0: $ClientboundDisconnectPacket_): void;
     }
     export class $ClientboundCustomPayloadPacket extends $Record implements $Packet<$ClientCommonPacketListener> {
         payload(): $CustomPacketPayload;
@@ -130,7 +130,7 @@ declare module "@package/net/minecraft/network/protocol/common" {
     /**
      * Values that may be interpreted as {@link $ServerboundResourcePackPacket}.
      */
-    export type $ServerboundResourcePackPacket_ = { id?: $UUID_, action?: $ServerboundResourcePackPacket$Action_,  } | [id?: $UUID_, action?: $ServerboundResourcePackPacket$Action_, ];
+    export type $ServerboundResourcePackPacket_ = { action?: $ServerboundResourcePackPacket$Action_, id?: $UUID_,  } | [action?: $ServerboundResourcePackPacket$Action_, id?: $UUID_, ];
     export class $ServerboundKeepAlivePacket implements $Packet<$ServerCommonPacketListener> {
         type(): $PacketType<$ServerboundKeepAlivePacket>;
         getId(): number;
@@ -159,7 +159,7 @@ declare module "@package/net/minecraft/network/protocol/common" {
     /**
      * Values that may be interpreted as {@link $ClientboundStoreCookiePacket}.
      */
-    export type $ClientboundStoreCookiePacket_ = { key?: $ResourceLocation_, payload?: number[],  } | [key?: $ResourceLocation_, payload?: number[], ];
+    export type $ClientboundStoreCookiePacket_ = { payload?: number[], key?: $ResourceLocation_,  } | [payload?: number[], key?: $ResourceLocation_, ];
     export class $ClientboundDisconnectPacket extends $Record implements $Packet<$ClientCommonPacketListener> {
         type(): $PacketType<$ClientboundDisconnectPacket>;
         reason(): $Component;
@@ -210,7 +210,7 @@ declare module "@package/net/minecraft/network/protocol/common" {
     /**
      * Values that may be interpreted as {@link $ClientboundResourcePackPushPacket}.
      */
-    export type $ClientboundResourcePackPushPacket_ = { hash?: string, url?: string, prompt?: ($Component_) | undefined, id?: $UUID_, required?: boolean,  } | [hash?: string, url?: string, prompt?: ($Component_) | undefined, id?: $UUID_, required?: boolean, ];
+    export type $ClientboundResourcePackPushPacket_ = { id?: $UUID_, prompt?: ($Component_) | undefined, url?: string, hash?: string, required?: boolean,  } | [id?: $UUID_, prompt?: ($Component_) | undefined, url?: string, hash?: string, required?: boolean, ];
     export class $ServerCommonPacketListener {
     }
     export interface $ServerCommonPacketListener extends $ServerCookiePacketListener, $ServerPacketListener, $IServerCommonPacketListenerExtension {
@@ -251,9 +251,9 @@ declare module "@package/net/minecraft/network/protocol/common" {
      */
     export type $ClientboundCustomReportDetailsPacket_ = { details?: $Map_<string, string>,  } | [details?: $Map_<string, string>, ];
     export class $ServerboundResourcePackPacket$Action extends $Enum<$ServerboundResourcePackPacket$Action> {
-        isTerminal(): boolean;
         static values(): $ServerboundResourcePackPacket$Action[];
         static valueOf(arg0: string): $ServerboundResourcePackPacket$Action;
+        isTerminal(): boolean;
         static INVALID_URL: $ServerboundResourcePackPacket$Action;
         static ACCEPTED: $ServerboundResourcePackPacket$Action;
         static DOWNLOADED: $ServerboundResourcePackPacket$Action;

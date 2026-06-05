@@ -17,7 +17,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/utils" {
     /**
      * Values that may be interpreted as {@link $IHistoryStack$HistoryItem}.
      */
-    export type $IHistoryStack$HistoryItem_ = { source?: $Object, action?: $EditAction, name?: $Component_,  } | [source?: $Object, action?: $EditAction, name?: $Component_, ];
+    export type $IHistoryStack$HistoryItem_ = { name?: $Component_, action?: $EditAction, source?: $Object,  } | [name?: $Component_, action?: $EditAction, source?: $Object, ];
     export class $ModularUITooltipComponent implements $TooltipComponent {
         modularUI: $ModularUI;
         constructor(arg0: $ModularUI);

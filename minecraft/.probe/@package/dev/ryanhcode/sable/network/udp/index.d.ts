@@ -10,12 +10,12 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/dev/ryanhcode/sable/network/udp" {
     export class $SableUDPServer {
-        isConnectedTo(arg0: $ServerPlayer): boolean;
-        receiveAuthenticationPacket(arg0: $UUID_, arg1: $InetSocketAddress): void;
-        receiveAlivePacket(arg0: $InetSocketAddress): void;
         sendUDPPacket(arg0: $ServerPlayer, arg1: $SableUDPPacket_, arg2: boolean): boolean;
         beginAuthentication(arg0: $ServerPlayer): void;
         sendPings(): void;
+        isConnectedTo(arg0: $ServerPlayer): boolean;
+        receiveAuthenticationPacket(arg0: $UUID_, arg1: $InetSocketAddress): void;
+        receiveAlivePacket(arg0: $InetSocketAddress): void;
         static getServer(arg0: $MinecraftServer): $SableUDPServer;
         static PING_INTERVAL: number;
         constructor(arg0: $MinecraftServer, arg1: $Channel);

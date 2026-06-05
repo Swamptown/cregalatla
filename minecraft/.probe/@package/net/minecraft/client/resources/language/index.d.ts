@@ -21,8 +21,8 @@ declare module "@package/net/minecraft/client/resources/language" {
         static set language(value: $Language);
     }
     export class $LanguageManager implements $ResourceManagerReloadListener, $IdentifiableResourceReloadListener {
-        onResourceManagerReload(arg0: $ResourceManager): void;
         getLanguages(): $SortedMap<string, $LanguageInfo>;
+        onResourceManagerReload(arg0: $ResourceManager): void;
         getSelected(): string;
         getLanguage(arg0: string): $LanguageInfo;
         getFabricId(): $ResourceLocation;
@@ -52,8 +52,8 @@ declare module "@package/net/minecraft/client/resources/language" {
         constructor();
     }
     export class $LanguageInfo extends $Record {
-        toComponent(): $Component;
         bidirectional(): boolean;
+        toComponent(): $Component;
         region(): string;
         name(): string;
         static CODEC: $Codec<$LanguageInfo>;
@@ -62,5 +62,5 @@ declare module "@package/net/minecraft/client/resources/language" {
     /**
      * Values that may be interpreted as {@link $LanguageInfo}.
      */
-    export type $LanguageInfo_ = { bidirectional?: boolean, region?: string, name?: string,  } | [bidirectional?: boolean, region?: string, name?: string, ];
+    export type $LanguageInfo_ = { name?: string, region?: string, bidirectional?: boolean,  } | [name?: string, region?: string, bidirectional?: boolean, ];
 }

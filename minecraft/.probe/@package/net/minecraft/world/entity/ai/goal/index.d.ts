@@ -92,6 +92,7 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         constructor(arg0: $Mob);
     }
     export class $GoalSelector {
+        tick(): void;
         getAvailableGoals(): $Set<$WrappedGoal>;
         enableControlFlag(arg0: $Goal$Flag_): void;
         addGoal(arg0: number, arg1: $Goal): void;
@@ -99,7 +100,6 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         disableControlFlag(arg0: $Goal$Flag_): void;
         removeAllGoals(arg0: $Predicate_<$Goal>): void;
         removeGoal(arg0: $Goal): void;
-        tick(): void;
         setControlFlag(arg0: $Goal$Flag_, arg1: boolean): void;
         constructor(arg0: $Supplier_<$ProfilerFiller>);
         get availableGoals(): $Set<$WrappedGoal>;
@@ -135,7 +135,6 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         set minAttackInterval(value: number);
     }
     export class $MoveToBlockGoal extends $Goal implements $LithiumMoveToBlockGoal {
-        findNearestBlock(): boolean;
         nextStartTick(arg0: $PathfinderMob): number;
         isReachedTarget(): boolean;
         isValidTarget(arg0: $LevelReader, arg1: $BlockPos_): boolean;
@@ -144,6 +143,7 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         getMoveToTarget(): $BlockPos;
         shouldRecalculatePath(): boolean;
         lithium$findNearestBlock(arg0: $Predicate_<any>, arg1: $BiPredicate_<any, any>, arg2: boolean): boolean;
+        findNearestBlock(): boolean;
         speedModifier: number;
         mob: $PathfinderMob;
         tryTicks: number;
@@ -170,8 +170,8 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
     }
     export class $RangedCrossbowAttackGoal<T extends $Mob> extends $Goal {
         static PATHFINDING_DELAY_RANGE: $UniformInt;
-        constructor(arg0: T, arg1: number, arg2: number);
         constructor<M extends $Monster>(arg0: M, arg1: number, arg2: number);
+        constructor(arg0: T, arg1: number, arg2: number);
     }
     export class $TradeWithPlayerGoal extends $Goal {
         constructor(arg0: $AbstractVillager);
@@ -225,8 +225,8 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         constructor(arg0: $Mob, arg1: number, arg2: number, arg3: number);
     }
     export class $RangedAttackGoal extends $Goal {
-        constructor(arg0: $RangedAttackMob_, arg1: number, arg2: number, arg3: number);
         constructor(arg0: $RangedAttackMob_, arg1: number, arg2: number, arg3: number, arg4: number);
+        constructor(arg0: $RangedAttackMob_, arg1: number, arg2: number, arg3: number);
     }
     export class $Goal$Flag extends $Enum<$Goal$Flag> {
         static values(): $Goal$Flag[];
@@ -273,7 +273,7 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
     export class $RemoveBlockGoal extends $MoveToBlockGoal implements $LithiumMoveToBlockGoal {
         playDestroyProgressSound(arg0: $LevelAccessor, arg1: $BlockPos_): void;
         playBreakSound(arg0: $Level_, arg1: $BlockPos_): void;
-        redirect$bkd000$lithium$redirectFindNearestBlock(arg0: $RemoveBlockGoal): boolean;
+        redirect$bma000$lithium$redirectFindNearestBlock(arg0: $RemoveBlockGoal): boolean;
         speedModifier: number;
         mob: $PathfinderMob;
         tryTicks: number;
@@ -383,13 +383,13 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         get attackInterval(): number;
     }
     export class $Goal {
+        tick(): void;
+        adjustedTickDelay(arg0: number): number;
+        static reducedTickDelay(arg0: number): number;
         canContinueToUse(): boolean;
         isInterruptable(): boolean;
         requiresUpdateEveryTick(): boolean;
-        adjustedTickDelay(arg0: number): number;
-        static reducedTickDelay(arg0: number): number;
         getFlags(): $EnumSet<$Goal$Flag>;
-        tick(): void;
         start(): void;
         stop(): void;
         canUse(): boolean;

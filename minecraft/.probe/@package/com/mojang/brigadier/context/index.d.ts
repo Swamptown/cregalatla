@@ -10,11 +10,11 @@ declare module "@package/com/mojang/brigadier/context" {
         hasNodes(): boolean;
         isForked(): boolean;
         getLastChild(): $CommandContext<S>;
-        getRange(): $StringRange;
         getCommand(): $Command<S>;
-        getChild(): $CommandContext<S>;
         getInput(): string;
+        getChild(): $CommandContext<S>;
         getSource(): S;
+        getRange(): $StringRange;
         getRootNode(): $CommandNode<S>;
         getArgument<V>(arg0: string, arg1: $Class<V>): V;
         copyFor(arg0: S): $CommandContext<S>;
@@ -23,11 +23,11 @@ declare module "@package/com/mojang/brigadier/context" {
         get redirectModifier(): $RedirectModifier<S>;
         get forked(): boolean;
         get lastChild(): $CommandContext<S>;
-        get range(): $StringRange;
         get command(): $Command<S>;
-        get child(): $CommandContext<S>;
         get input(): string;
+        get child(): $CommandContext<S>;
         get source(): S;
+        get range(): $StringRange;
         get rootNode(): $CommandNode<S>;
     }
     export class $ParsedCommandNode<S> {
@@ -65,16 +65,16 @@ declare module "@package/com/mojang/brigadier/context" {
     export type $ContextChain$Stage_ = "modify" | "execute";
     export class $CommandContextBuilder<S> {
         withArgument(arg0: string, arg1: $ParsedArgument<S, never>): $CommandContextBuilder<S>;
+        getNodes(): $List<$ParsedCommandNode<S>>;
+        withSource(arg0: S): $CommandContextBuilder<S>;
         withCommand(arg0: $Command_<S>): $CommandContextBuilder<S>;
         withChild(arg0: $CommandContextBuilder<S>): $CommandContextBuilder<S>;
         findSuggestionContext(arg0: number): $SuggestionContext<S>;
-        getNodes(): $List<$ParsedCommandNode<S>>;
-        withSource(arg0: S): $CommandContextBuilder<S>;
         getLastChild(): $CommandContextBuilder<S>;
-        getRange(): $StringRange;
         getCommand(): $Command<S>;
         getChild(): $CommandContextBuilder<S>;
         getSource(): S;
+        getRange(): $StringRange;
         copy(): $CommandContextBuilder<S>;
         build(arg0: string): $CommandContext<S>;
         getArguments(): $Map<string, $ParsedArgument<S, never>>;
@@ -84,32 +84,32 @@ declare module "@package/com/mojang/brigadier/context" {
         constructor(arg0: $CommandDispatcher<S>, arg1: S, arg2: $CommandNode<S>, arg3: number);
         get nodes(): $List<$ParsedCommandNode<S>>;
         get lastChild(): $CommandContextBuilder<S>;
-        get range(): $StringRange;
         get command(): $Command<S>;
         get child(): $CommandContextBuilder<S>;
         get source(): S;
+        get range(): $StringRange;
         get arguments(): $Map<string, $ParsedArgument<S, never>>;
         get rootNode(): $CommandNode<S>;
         get dispatcher(): $CommandDispatcher<S>;
     }
     export class $ContextChain<S> {
-        static runModifier<S>(arg0: $CommandContext<S>, arg1: S, arg2: $ResultConsumer_<S>, arg3: boolean): $Collection<S>;
         static runExecutable<S>(arg0: $CommandContext<S>, arg1: S, arg2: $ResultConsumer_<S>, arg3: boolean): number;
+        static runModifier<S>(arg0: $CommandContext<S>, arg1: S, arg2: $ResultConsumer_<S>, arg3: boolean): $Collection<S>;
         getTopContext(): $CommandContext<S>;
         static tryFlatten<S>(arg0: $CommandContext<S>): ($ContextChain<S>) | undefined;
         nextStage(): $ContextChain<S>;
-        executeAll(arg0: S, arg1: $ResultConsumer_<S>): number;
         getStage(): $ContextChain$Stage;
+        executeAll(arg0: S, arg1: $ResultConsumer_<S>): number;
         constructor(arg0: $List_<$CommandContext<S>>, arg1: $CommandContext<S>);
         get topContext(): $CommandContext<S>;
         get stage(): $ContextChain$Stage;
     }
     export class $ParsedArgument<S, T> {
-        getRange(): $StringRange;
         getResult(): T;
+        getRange(): $StringRange;
         constructor(arg0: number, arg1: number, arg2: T);
-        get range(): $StringRange;
         get result(): T;
+        get range(): $StringRange;
     }
     export class $SuggestionContext<S> {
         parent: $CommandNode<S>;

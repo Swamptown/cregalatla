@@ -21,7 +21,7 @@ declare module "@package/net/neoforged/neoforge/registries/datamaps" {
     /**
      * Values that may be interpreted as {@link $DataMapEntry$Removal}.
      */
-    export type $DataMapEntry$Removal_<T, R> = { key?: $Either<$TagKey_<any>, $ResourceKey_<any>>, remover?: ($DataMapValueRemover_<R, T>) | undefined,  } | [key?: $Either<$TagKey_<any>, $ResourceKey_<any>>, remover?: ($DataMapValueRemover_<R, T>) | undefined, ];
+    export type $DataMapEntry$Removal_<T, R> = { remover?: ($DataMapValueRemover_<R, T>) | undefined, key?: $Either<$TagKey_<any>, $ResourceKey_<any>>,  } | [remover?: ($DataMapValueRemover_<R, T>) | undefined, key?: $Either<$TagKey_<any>, $ResourceKey_<any>>, ];
     export class $DataMapFile<T, R> extends $Record {
         values(): $Map<$Either<$TagKey<R>, $ResourceKey<R>>, ($WithConditions<$DataMapEntry<T>>) | undefined>;
         replace(): boolean;
@@ -32,7 +32,7 @@ declare module "@package/net/neoforged/neoforge/registries/datamaps" {
     /**
      * Values that may be interpreted as {@link $DataMapFile}.
      */
-    export type $DataMapFile_<T, R> = { removals?: $List_<$DataMapEntry$Removal_<any, any>>, replace?: boolean, values?: $Map_<$Either<$TagKey_<any>, $ResourceKey_<any>>, ($WithConditions_<$DataMapEntry_<T>>) | undefined>,  } | [removals?: $List_<$DataMapEntry$Removal_<any, any>>, replace?: boolean, values?: $Map_<$Either<$TagKey_<any>, $ResourceKey_<any>>, ($WithConditions_<$DataMapEntry_<T>>) | undefined>, ];
+    export type $DataMapFile_<T, R> = { values?: $Map_<$Either<$TagKey_<any>, $ResourceKey_<any>>, ($WithConditions_<$DataMapEntry_<T>>) | undefined>, replace?: boolean, removals?: $List_<$DataMapEntry$Removal_<any, any>>,  } | [values?: $Map_<$Either<$TagKey_<any>, $ResourceKey_<any>>, ($WithConditions_<$DataMapEntry_<T>>) | undefined>, replace?: boolean, removals?: $List_<$DataMapEntry$Removal_<any, any>>, ];
     export class $DataMapsUpdatedEvent extends $Event {
         ifRegistry<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Consumer_<$Registry<T>>): void;
         getRegistryKey(): $ResourceKey<$Registry<never>>;

@@ -3,8 +3,8 @@ import { $MethodInfo } from "@package/javassist/bytecode";
 
 declare module "@package/javassist/expr" {
     export class $Handler extends $Expr {
-        insertBefore(arg0: string): void;
         isFinally(): boolean;
+        insertBefore(arg0: string): void;
         getType(): $CtClass;
         get finally(): boolean;
         get type(): $CtClass;

@@ -16,7 +16,7 @@ declare module "@package/net/neoforged/neoforge/server/permission/nodes" {
     /**
      * Values that may be interpreted as {@link $PermissionDynamicContextKey}.
      */
-    export type $PermissionDynamicContextKey_<T> = { typeToken?: $Class<any>, serializer?: $Function_<any, string>, name?: string,  } | [typeToken?: $Class<any>, serializer?: $Function_<any, string>, name?: string, ];
+    export type $PermissionDynamicContextKey_<T> = { name?: string, serializer?: $Function_<any, string>, typeToken?: $Class<any>,  } | [name?: string, serializer?: $Function_<any, string>, typeToken?: $Class<any>, ];
     export class $PermissionNode<T> {
         getNodeName(): string;
         setInformation(arg0: $Component_, arg1: $Component_): $PermissionNode<any>;

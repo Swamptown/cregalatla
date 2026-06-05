@@ -26,14 +26,14 @@ declare module "@package/net/minecraft/client/gui/components/tabs" {
     export class $Tab {
     }
     export interface $Tab {
-        getTabTitle(): $Component;
         doLayout(arg0: $ScreenRectangle_): void;
+        getTabTitle(): $Component;
         visitChildren(arg0: $Consumer_<$AbstractWidget>): void;
         get tabTitle(): $Component;
     }
     export class $GridLayoutTab implements $Tab {
-        getTabTitle(): $Component;
         doLayout(arg0: $ScreenRectangle_): void;
+        getTabTitle(): $Component;
         visitChildren(arg0: $Consumer_<$AbstractWidget>): void;
         layout: $GridLayout;
         constructor(arg0: $Component_);
@@ -44,11 +44,11 @@ declare module "@package/net/minecraft/client/gui/components/tabs" {
         selectTab(arg0: number, arg1: boolean): void;
         static builder(arg0: $TabManager, arg1: number): $TabNavigationBar$Builder;
         render(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
-        keyPressed(arg0: number): boolean;
-        setWidth(arg0: number): void;
         updateNarration(arg0: $NarrationElementOutput): void;
         narrationPriority(): $NarratableEntry$NarrationPriority;
         arrangeElements(): void;
+        keyPressed(arg0: number): boolean;
+        setWidth(arg0: number): void;
         isActive(): boolean;
         yacl$getLayout(): $LinearLayout;
         yacl$getWidth(): number;

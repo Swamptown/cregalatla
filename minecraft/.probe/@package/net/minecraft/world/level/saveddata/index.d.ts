@@ -25,5 +25,5 @@ declare module "@package/net/minecraft/world/level/saveddata" {
     /**
      * Values that may be interpreted as {@link $SavedData$Factory}.
      */
-    export type $SavedData$Factory_<T> = { deserializer?: $BiFunction_<$CompoundTag, $HolderLookup$Provider, $SavedData>, type?: $DataFixTypes_, constructor?: $Supplier_<$SavedData>,  } | [deserializer?: $BiFunction_<$CompoundTag, $HolderLookup$Provider, $SavedData>, type?: $DataFixTypes_, constructor?: $Supplier_<$SavedData>, ];
+    export type $SavedData$Factory_<T> = { type?: $DataFixTypes_, deserializer?: $BiFunction_<$CompoundTag, $HolderLookup$Provider, $SavedData>, constructor?: $Supplier_<$SavedData>,  } | [type?: $DataFixTypes_, deserializer?: $BiFunction_<$CompoundTag, $HolderLookup$Provider, $SavedData>, constructor?: $Supplier_<$SavedData>, ];
 }

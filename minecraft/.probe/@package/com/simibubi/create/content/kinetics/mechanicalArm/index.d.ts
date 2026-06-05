@@ -15,17 +15,17 @@ import { $BlockEntityType_, $BlockEntity } from "@package/net/minecraft/world/le
 
 declare module "@package/com/simibubi/create/content/kinetics/mechanicalArm" {
     export class $ArmInteractionPoint {
+        getSlotCount(arg0: $ArmBlockEntity): number;
+        keepAlive(): void;
         updateCachedState(): void;
-        cycleMode(): void;
         getTargetAngles(arg0: $BlockPos_, arg1: boolean): $ArmAngleTarget;
         static transformPos(arg0: $CompoundTag_, arg1: $StructureTransform): void;
         static isInteractable(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): boolean;
-        getSlotCount(arg0: $ArmBlockEntity): number;
-        getMode(): $ArmInteractionPoint$Mode;
+        cycleMode(): void;
         getLevel(): $Level;
         setLevel(arg0: $Level_): void;
+        getMode(): $ArmInteractionPoint$Mode;
         isValid(): boolean;
-        keepAlive(): void;
         extract(arg0: $ArmBlockEntity, arg1: number, arg2: number, arg3: boolean): $ItemStack;
         extract(arg0: $ArmBlockEntity, arg1: number, arg2: boolean): $ItemStack;
         insert(arg0: $ArmBlockEntity, arg1: $ItemStack_, arg2: boolean): $ItemStack;
@@ -78,9 +78,9 @@ declare module "@package/com/simibubi/create/content/kinetics/mechanicalArm" {
      */
     export type $ArmInteractionPoint$Mode_ = "deposit" | "take";
     export class $ArmInteractionPointType {
+        canCreatePoint(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): boolean;
         static getPrimaryType(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $ArmInteractionPointType;
         createPoint(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $ArmInteractionPoint;
-        canCreatePoint(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): boolean;
         static init(): void;
         getPriority(): number;
         static SORTED_TYPES_VIEW: $List<$ArmInteractionPointType>;

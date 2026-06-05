@@ -406,13 +406,13 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
          */
         carrot(): $CropBlockBuilder$ShapeBuilder;
         /**
-         * Makes the block to have a box like potato for each stage.
-         */
-        potato(): $CropBlockBuilder$ShapeBuilder;
-        /**
          * Makes the block to have a box like wheat for each stage.
          */
         wheat(): $CropBlockBuilder$ShapeBuilder;
+        /**
+         * Makes the block to have a box like potato for each stage.
+         */
+        potato(): $CropBlockBuilder$ShapeBuilder;
         /**
          * Describe the shape of the crop at a specific age.
          * min/max coordinates are double values between 0 and 16.
@@ -458,6 +458,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(p: $BlockBuilder);
     }
     export class $CropBlockBuilder extends $BlockBuilder {
+        growTick(growSpeedCallback: $ToDoubleFunction_<$RandomTickCallback>): this;
         /**
          * Remove seed drops from the loot table, does not prevent seed item from creating.
          */
@@ -465,15 +466,14 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         farmersCanPlant(): this;
         bonemeal(bonemealCallback: $ToIntFunction_<$RandomTickCallback>): this;
         survive(surviveCallback: $CropBlockBuilder$SurviveCallback_): this;
-        growTick(growSpeedCallback: $ToDoubleFunction_<$RandomTickCallback>): this;
-        /**
-         * Add a crop output with a specific amount.
-         */
-        crop(output: $Holder_<$Item>, chance: $NumberProvider_): this;
         /**
          * Add a crop output with exactly one output.
          */
         crop(output: $Holder_<$Item>): this;
+        /**
+         * Add a crop output with a specific amount.
+         */
+        crop(output: $Holder_<$Item>, chance: $NumberProvider_): this;
         /**
          * Set the age of the crop. Note that the box will be the same for all ages (A full block size).
          */

@@ -28,29 +28,26 @@ export * as packs from "@package/net/minecraft/data/loot/packs";
 
 declare module "@package/net/minecraft/data/loot" {
     export class $LootTableProvider implements $DataProvider {
+        getTables(): $List<$LootTableProvider$SubProviderEntry>;
         getName(): string;
         run(arg0: $CachedOutput_): $CompletableFuture<never>;
         validate(arg0: $WritableRegistry<$LootTable>, arg1: $ValidationContext, arg2: $ProblemReporter$Collector): void;
-        getTables(): $List<$LootTableProvider$SubProviderEntry>;
         constructor(arg0: $PackOutput, arg1: $Set_<$ResourceKey_<$LootTable>>, arg2: $List_<$LootTableProvider$SubProviderEntry_>, arg3: $CompletableFuture<$HolderLookup$Provider>);
-        get name(): string;
         get tables(): $List<$LootTableProvider$SubProviderEntry>;
+        get name(): string;
     }
     export class $BlockLootSubProvider implements $LootTableSubProvider, $BlockLootSubProviderAccessor, $BlockLootTableGeneratorAccessor, $FabricBlockLootTableGenerator {
-        static noDrop(): $LootTable$Builder;
-        applyExplosionDecay<T extends $FunctionUserBuilder<T>>(arg0: $ItemLike_, arg1: $FunctionUserBuilder<T>): T;
         createSilkTouchOrShearsDispatchTable(arg0: $Block_, arg1: $LootPoolEntryContainer$Builder<never>): $LootTable$Builder;
+        applyExplosionDecay<T extends $FunctionUserBuilder<T>>(arg0: $ItemLike_, arg1: $FunctionUserBuilder<T>): T;
+        createBannerDrop(arg0: $Block_): $LootTable$Builder;
+        createShearsDispatchTable(arg0: $Block_, arg1: $LootPoolEntryContainer$Builder<never>): $LootTable$Builder;
+        createSingleItemTableWithSilkTouch(arg0: $Block_, arg1: $ItemLike_): $LootTable$Builder;
+        createSingleItemTableWithSilkTouch(arg0: $Block_, arg1: $ItemLike_, arg2: $NumberProvider_): $LootTable$Builder;
         createSilkTouchOnlyTable(arg0: $ItemLike_): $LootTable$Builder;
         createPotFlowerItemTable(arg0: $ItemLike_): $LootTable$Builder;
         createSlabItemTable(arg0: $Block_): $LootTable$Builder;
-        createShulkerBoxDrop(arg0: $Block_): $LootTable$Builder;
-        createSingleItemTableWithSilkTouch(arg0: $Block_, arg1: $ItemLike_): $LootTable$Builder;
-        createSingleItemTableWithSilkTouch(arg0: $Block_, arg1: $ItemLike_, arg2: $NumberProvider_): $LootTable$Builder;
-        createShearsDispatchTable(arg0: $Block_, arg1: $LootPoolEntryContainer$Builder<never>): $LootTable$Builder;
-        createBannerDrop(arg0: $Block_): $LootTable$Builder;
-        dropWhenSilkTouch(arg0: $Block_): void;
-        createSilkTouchDispatchTable(arg0: $Block_, arg1: $LootPoolEntryContainer$Builder<never>): $LootTable$Builder;
         createNameableBlockEntityTable(arg0: $Block_): $LootTable$Builder;
+        createShulkerBoxDrop(arg0: $Block_): $LootTable$Builder;
         createCopperOreDrops(arg0: $Block_): $LootTable$Builder;
         createLapisOreDrops(arg0: $Block_): $LootTable$Builder;
         createRedstoneOreDrops(arg0: $Block_): $LootTable$Builder;
@@ -76,6 +73,8 @@ declare module "@package/net/minecraft/data/loot" {
         dropPottedContents(arg0: $Block_): void;
         otherWhenSilkTouch(arg0: $Block_, arg1: $Block_): void;
         getKnownBlocks(): $Iterable<$Block>;
+        static noDrop(): $LootTable$Builder;
+        createSilkTouchDispatchTable(arg0: $Block_, arg1: $LootPoolEntryContainer$Builder<never>): $LootTable$Builder;
         hasShearsOrSilkTouch(): $LootItemCondition$Builder;
         doesNotHaveShearsOrSilkTouch(): $LootItemCondition$Builder;
         static createSelfDropDispatchTable(arg0: $Block_, arg1: $LootItemCondition$Builder_, arg2: $LootPoolEntryContainer$Builder<never>): $LootTable$Builder;
@@ -85,14 +84,15 @@ declare module "@package/net/minecraft/data/loot" {
         createSinglePropConditionTable<T extends $Comparable<T>>(arg0: $Block_, arg1: $Property<T>, arg2: T): $LootTable$Builder;
         hasSilkTouch(): $LootItemCondition$Builder;
         dropSelf(arg0: $Block_): void;
+        dropWhenSilkTouch(arg0: $Block_): void;
         dropOther(arg0: $Block_, arg1: $ItemLike_): void;
-        createSingleItemTable(arg0: $ItemLike_, arg1: $NumberProvider_): $LootTable$Builder;
         createSingleItemTable(arg0: $ItemLike_): $LootTable$Builder;
+        createSingleItemTable(arg0: $ItemLike_, arg1: $NumberProvider_): $LootTable$Builder;
         applyExplosionCondition<T extends $ConditionUserBuilder<T>>(arg0: $ItemLike_, arg1: $ConditionUserBuilder<T>): T;
+        generate(): void;
+        generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         add(arg0: $Block_, arg1: $LootTable$Builder): void;
         add(arg0: $Block_, arg1: $Function_<$Block, $LootTable$Builder>): void;
-        generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
-        generate(): void;
         withConditions(...arg0: $ResourceCondition[]): $BlockLootSubProvider;
         create$hasSilkTouch(): $LootItemCondition$Builder;
         getRegistries(): $HolderLookup$Provider;
@@ -103,8 +103,8 @@ declare module "@package/net/minecraft/data/loot" {
         registries: $HolderLookup$Provider;
         map: $Map<$ResourceKey<$LootTable>, $LootTable$Builder>;
         static NORMAL_LEAVES_SAPLING_CHANCES: number[];
-        constructor(arg0: $Set_<$Item_>, arg1: $FeatureFlagSet, arg2: $HolderLookup$Provider);
         constructor(arg0: $Set_<$Item_>, arg1: $FeatureFlagSet, arg2: $Map_<$ResourceKey_<$LootTable>, $LootTable$Builder>, arg3: $HolderLookup$Provider);
+        constructor(arg0: $Set_<$Item_>, arg1: $FeatureFlagSet, arg2: $HolderLookup$Provider);
         get knownBlocks(): $Iterable<$Block>;
     }
     export class $LootTableProvider$SubProviderEntry extends $Record {
@@ -132,10 +132,10 @@ declare module "@package/net/minecraft/data/loot" {
         getKnownEntityTypes(): $Stream<$EntityType<never>>;
         killedByFrog(): $LootItemCondition$Builder;
         killedByFrogVariant(arg0: $ResourceKey_<$FrogVariant>): $LootItemCondition$Builder;
-        add(arg0: $EntityType_<never>, arg1: $LootTable$Builder): void;
-        add(arg0: $EntityType_<never>, arg1: $ResourceKey_<$LootTable>, arg2: $LootTable$Builder): void;
         generate(arg0: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
         generate(): void;
+        add(arg0: $EntityType_<never>, arg1: $LootTable$Builder): void;
+        add(arg0: $EntityType_<never>, arg1: $ResourceKey_<$LootTable>, arg2: $LootTable$Builder): void;
         registries: $HolderLookup$Provider;
         map: $Map<$EntityType<never>, $Map<$ResourceKey<$LootTable>, $LootTable$Builder>>;
         constructor(arg0: $FeatureFlagSet, arg1: $FeatureFlagSet, arg2: $HolderLookup$Provider);

@@ -11,31 +11,35 @@ import { $RenderRegionExtension } from "@package/foundry/veil/forge/ext";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/region" {
     export class $RenderRegion$DeviceResources {
+        getGeometryArena(): $GlBufferArena;
+        getIndexBuffer(): $GlBuffer;
         deleteTessellation(arg0: $CommandList): void;
+        deleteIndexedTessellation(arg0: $CommandList): void;
+        shouldDelete(): boolean;
         getTessellation(): $GlTessellation;
         updateTessellation(arg0: $CommandList, arg1: $GlTessellation): void;
         getIndexedTessellation(): $GlTessellation;
         updateIndexedTessellation(arg0: $CommandList, arg1: $GlTessellation): void;
         getGeometryBuffer(): $GlBuffer;
         getIndexArena(): $GlBufferArena;
-        deleteIndexedTessellation(arg0: $CommandList): void;
-        shouldDelete(): boolean;
         delete(arg0: $CommandList): void;
-        getIndexBuffer(): $GlBuffer;
-        getGeometryArena(): $GlBufferArena;
         constructor(arg0: $CommandList, arg1: $StagingBuffer);
+        get geometryArena(): $GlBufferArena;
+        get indexBuffer(): $GlBuffer;
         get tessellation(): $GlTessellation;
         get indexedTessellation(): $GlTessellation;
         get geometryBuffer(): $GlBuffer;
         get indexArena(): $GlBufferArena;
-        get indexBuffer(): $GlBuffer;
-        get geometryArena(): $GlBufferArena;
     }
     export class $RenderRegion implements $RenderRegionExtension {
+        getChunkX(): number;
+        getChunkY(): number;
+        getChunkZ(): number;
+        removeSection(arg0: $RenderSection): void;
         getOriginX(): number;
         getOriginY(): number;
-        getRenderList(): $ChunkRenderList;
         veil$getPerspectiveRenderList(): $ChunkRenderList;
+        getRenderList(): $ChunkRenderList;
         getOriginZ(): number;
         createResources(arg0: $CommandList): $RenderRegion$DeviceResources;
         refreshTesselation(arg0: $CommandList): void;
@@ -43,8 +47,8 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/region" 
         createStorage(arg0: $TerrainRenderPass): $SectionRenderDataStorage;
         getStorage(arg0: $TerrainRenderPass): $SectionRenderDataStorage;
         getSection(arg0: number): $RenderSection;
-        getY(): number;
         addSection(arg0: $RenderSection): void;
+        getY(): number;
         update(arg0: $CommandList): void;
         isEmpty(): boolean;
         getResources(): $RenderRegion$DeviceResources;
@@ -52,10 +56,6 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/region" 
         delete(arg0: $CommandList): void;
         getX(): number;
         getZ(): number;
-        removeSection(arg0: $RenderSection): void;
-        getChunkX(): number;
-        getChunkY(): number;
-        getChunkZ(): number;
         static REGION_LENGTH: number;
         static REGION_WIDTH: number;
         static REGION_LENGTH_SH: number;
@@ -67,6 +67,9 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/region" 
         static REGION_SIZE: number;
         static REGION_HEIGHT: number;
         constructor(arg0: number, arg1: number, arg2: number, arg3: $StagingBuffer);
+        get chunkX(): number;
+        get chunkY(): number;
+        get chunkZ(): number;
         get originX(): number;
         get originY(): number;
         get renderList(): $ChunkRenderList;
@@ -76,8 +79,5 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/region" 
         get resources(): $RenderRegion$DeviceResources;
         get x(): number;
         get z(): number;
-        get chunkX(): number;
-        get chunkY(): number;
-        get chunkZ(): number;
     }
 }

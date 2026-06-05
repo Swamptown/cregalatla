@@ -244,13 +244,13 @@ declare module "@package/java/lang/reflect" {
         get annotatedExceptionTypes(): $AnnotatedType[];
     }
     export class $AccessFlag extends $Enum<$AccessFlag> {
+        sourceModifier(): boolean;
+        locations(): $Set<$AccessFlag$Location>;
+        locations(arg0: $ClassFileFormatVersion_): $Set<$AccessFlag$Location>;
         static values(): $AccessFlag[];
         static valueOf(arg0: string): $AccessFlag;
         static maskToAccessFlags(arg0: number, arg1: $AccessFlag$Location_): $Set<$AccessFlag>;
         mask(): number;
-        sourceModifier(): boolean;
-        locations(): $Set<$AccessFlag$Location>;
-        locations(arg0: $ClassFileFormatVersion_): $Set<$AccessFlag$Location>;
         static TRANSITIVE: $AccessFlag;
         static SYNCHRONIZED: $AccessFlag;
         static VOLATILE: $AccessFlag;

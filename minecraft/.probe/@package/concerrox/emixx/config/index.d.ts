@@ -13,6 +13,14 @@ import { $ConfigScreen } from "@package/dev/emi/emi/screen";
 
 declare module "@package/concerrox/emixx/config" {
     export class $EmiPlusPlusConfig$Companion {
+        getCONFIG_SPEC(): $ModConfigSpec;
+        getEmiOnlyInRecipeBook(): $ModConfigSpec$BooleanValue;
+        getCONFIG_DIRECTORY_PATH(): $Path;
+        getEnableCreativeModeTabs(): $ModConfigSpec$BooleanValue;
+        getShowCreativeTabNameInSearchbar(): $ModConfigSpec$BooleanValue;
+        getDisabledCreativeModeTabs(): $ModConfigSpec$ConfigValue<$List<string>>;
+        getEnableStackGroups(): $ModConfigSpec$BooleanValue;
+        getEnableCreateStackGroupButton(): $ModConfigSpec$BooleanValue;
         setEnableCreativeModeTabs(<set-?>: $ModConfigSpec$BooleanValue): void;
         setSyncSelectedCreativeModeTab(<set-?>: $ModConfigSpec$BooleanValue): void;
         setShowCreativeTabNameInSearchbar(<set-?>: $ModConfigSpec$BooleanValue): void;
@@ -21,19 +29,11 @@ declare module "@package/concerrox/emixx/config" {
         setEnableCreateStackGroupButton(<set-?>: $ModConfigSpec$BooleanValue): void;
         setEmiOnlyInRecipeBook(<set-?>: $ModConfigSpec$BooleanValue): void;
         getSyncSelectedCreativeModeTab(): $ModConfigSpec$BooleanValue;
-        getCONFIG_DIRECTORY_PATH(): $Path;
-        getEnableCreativeModeTabs(): $ModConfigSpec$BooleanValue;
-        getShowCreativeTabNameInSearchbar(): $ModConfigSpec$BooleanValue;
-        getDisabledCreativeModeTabs(): $ModConfigSpec$ConfigValue<$List<string>>;
-        getEnableStackGroups(): $ModConfigSpec$BooleanValue;
-        getEnableCreateStackGroupButton(): $ModConfigSpec$BooleanValue;
         save(): void;
         ensureLoaded(): void;
-        getEmiOnlyInRecipeBook(): $ModConfigSpec$BooleanValue;
-        getCONFIG_SPEC(): $ModConfigSpec;
         constructor($constructor_marker: $DefaultConstructorMarker);
-        get CONFIG_DIRECTORY_PATH(): $Path;
         get CONFIG_SPEC(): $ModConfigSpec;
+        get CONFIG_DIRECTORY_PATH(): $Path;
     }
     export class $EmiPlusPlusConfig {
         static access$getCONFIG_SPEC$cp(): $ModConfigSpec;

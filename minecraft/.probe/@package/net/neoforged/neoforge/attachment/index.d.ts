@@ -24,30 +24,28 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/neoforged/neoforge/attachment" {
     export class $AttachmentInternals {
-        static onPlayerClone(arg0: $PlayerEvent$Clone): void;
-        static onLivingConvert(arg0: $LivingConversionEvent$Post): void;
         static copyChunkAttachmentsOnPromotion(arg0: $HolderLookup$Provider, arg1: $AttachmentHolder$AsField, arg2: $AttachmentHolder$AsField): void;
+        static onLivingConvert(arg0: $LivingConversionEvent$Post): void;
+        static onPlayerClone(arg0: $PlayerEvent$Clone): void;
         static copyEntityAttachments(arg0: $Entity, arg1: $Entity, arg2: boolean): void;
     }
     export class $AttachmentHolder implements $IAttachmentHolder, $AttachmentHolderAccessor {
         removeData<T>(arg0: $AttachmentType_<T>): T;
-        setData<T>(arg0: $AttachmentType_<T>, arg1: T): T;
         getData<T>(arg0: $AttachmentType_<T>): T;
-        serializeAttachments(arg0: $HolderLookup$Provider): $CompoundTag;
+        setData<T>(arg0: $AttachmentType_<T>, arg1: T): T;
         hasAttachments(): boolean;
         hasData(arg0: $AttachmentType_<never>): boolean;
         getExistingDataOrNull<T>(arg0: $AttachmentType_<T>): T;
+        serializeAttachments(arg0: $HolderLookup$Provider): $CompoundTag;
         removeData<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
-        setData<T>(arg0: $Supplier_<$AttachmentType<T>>, arg1: T): T;
         getData<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
-        syncData(arg0: $AttachmentType_<never>): void;
-        syncData(arg0: $Supplier_<$AttachmentType<never>>): void;
+        setData<T>(arg0: $Supplier_<$AttachmentType<T>>, arg1: T): T;
         hasData<T>(arg0: $Supplier_<$AttachmentType<T>>): boolean;
         getExistingDataOrNull<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
-        getExistingData<T>(arg0: $Supplier_<$AttachmentType<T>>): (T) | undefined;
         getExistingData<T>(arg0: $AttachmentType_<T>): (T) | undefined;
-        getAttached<A>(arg0: $AttachmentType$1<A>): A;
-        setAttached<A>(arg0: $AttachmentType$1<A>, arg1: A): A;
+        getExistingData<T>(arg0: $Supplier_<$AttachmentType<T>>): (T) | undefined;
+        syncData(arg0: $AttachmentType_<never>): void;
+        syncData(arg0: $Supplier_<$AttachmentType<never>>): void;
         getAttachedOrThrow<A>(arg0: $AttachmentType$1<A>): A;
         getAttachedOrSet<A>(arg0: $AttachmentType$1<A>, arg1: A): A;
         getAttachedOrCreate<A>(arg0: $AttachmentType$1<A>, arg1: $Supplier_<A>): A;
@@ -57,6 +55,8 @@ declare module "@package/net/neoforged/neoforge/attachment" {
         hasAttached(arg0: $AttachmentType$1<never>): boolean;
         removeAttached<A>(arg0: $AttachmentType$1<A>): A;
         modifyAttached<A>(arg0: $AttachmentType$1<A>, arg1: $UnaryOperator_<A>): A;
+        getAttached<A>(arg0: $AttachmentType$1<A>): A;
+        setAttached<A>(arg0: $AttachmentType$1<A>, arg1: A): A;
         invokeGetAttachmentMap(): $Map<$AttachmentType<never>, $Object>;
         static ATTACHMENTS_NBT_KEY: string;
         constructor();
@@ -83,15 +83,15 @@ declare module "@package/net/neoforged/neoforge/attachment" {
         constructor(arg0: $IAttachmentHolder);
     }
     export class $AttachmentSync {
-        static syncInitialPlayerAttachments(arg0: $ServerPlayer): void;
         static syncChunkUpdate(arg0: $LevelChunk, arg1: $AttachmentHolder$AsField, arg2: $AttachmentType_<never>): void;
         static syncLevelUpdate(arg0: $ServerLevel, arg1: $AttachmentType_<never>): void;
-        static syncEntityUpdate(arg0: $Entity, arg1: $AttachmentType_<never>): void;
+        static syncInitialPlayerAttachments(arg0: $ServerPlayer): void;
         static syncBlockEntityUpdate(arg0: $BlockEntity, arg1: $AttachmentType_<never>): void;
-        static syncInitialLevelAttachments(arg0: $ServerLevel, arg1: $ServerPlayer): void;
-        static syncInitialEntityAttachments(arg0: $Entity, arg1: $ServerPlayer, arg2: $Consumer_<$Packet<$ClientGamePacketListener>>): void;
+        static syncEntityUpdate(arg0: $Entity, arg1: $AttachmentType_<never>): void;
         static onChunkSent(arg0: $ChunkWatchEvent$Sent): void;
+        static syncInitialLevelAttachments(arg0: $ServerLevel, arg1: $ServerPlayer): void;
         static receiveSyncedDataAttachments(arg0: $AttachmentHolder, arg1: $RegistryAccess, arg2: $List_<$AttachmentType_<never>>, arg3: number[]): void;
+        static syncInitialEntityAttachments(arg0: $Entity, arg1: $ServerPlayer, arg2: $Consumer_<$Packet<$ClientGamePacketListener>>): void;
         static SYNCED_ATTACHMENT_TYPES: $Registry<$AttachmentType<never>>;
         static ATTACHMENT_TYPE_ADD_CALLBACK: $AddCallback<$AttachmentType<never>>;
     }
@@ -124,19 +124,19 @@ declare module "@package/net/neoforged/neoforge/attachment" {
     export interface $IAttachmentHolder extends $AttachmentTarget, $IAttachmentHolderMixin {
         removeData<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
         removeData<T>(arg0: $AttachmentType_<T>): T;
-        setData<T>(arg0: $AttachmentType_<T>, arg1: T): T;
-        setData<T>(arg0: $Supplier_<$AttachmentType<T>>, arg1: T): T;
         getData<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
         getData<T>(arg0: $AttachmentType_<T>): T;
-        syncData(arg0: $AttachmentType_<never>): void;
-        syncData(arg0: $Supplier_<$AttachmentType<never>>): void;
+        setData<T>(arg0: $Supplier_<$AttachmentType<T>>, arg1: T): T;
+        setData<T>(arg0: $AttachmentType_<T>, arg1: T): T;
         hasAttachments(): boolean;
         hasData<T>(arg0: $Supplier_<$AttachmentType<T>>): boolean;
         hasData(arg0: $AttachmentType_<never>): boolean;
-        getExistingDataOrNull<T>(arg0: $AttachmentType_<T>): T;
         getExistingDataOrNull<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
-        getExistingData<T>(arg0: $Supplier_<$AttachmentType<T>>): (T) | undefined;
+        getExistingDataOrNull<T>(arg0: $AttachmentType_<T>): T;
         getExistingData<T>(arg0: $AttachmentType_<T>): (T) | undefined;
+        getExistingData<T>(arg0: $Supplier_<$AttachmentType<T>>): (T) | undefined;
+        syncData(arg0: $AttachmentType_<never>): void;
+        syncData(arg0: $Supplier_<$AttachmentType<never>>): void;
     }
     export class $AttachmentType$Builder<T> {
         build(): $AttachmentType<T>;

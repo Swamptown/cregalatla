@@ -43,11 +43,11 @@ declare module "@package/javax/management" {
     export class $Descriptor {
     }
     export interface $Descriptor extends $Serializable, $Cloneable {
-        getFieldValues(...arg0: string[]): $Object[];
         setField(arg0: string, arg1: $Object): void;
         removeField(arg0: string): void;
-        setFields(arg0: string[], arg1: $Object[]): void;
+        getFieldValues(...arg0: string[]): $Object[];
         isValid(): boolean;
+        setFields(arg0: string[], arg1: $Object[]): void;
         equals(arg0: $Object): boolean;
         hashCode(): number;
         clone(): $Object;
@@ -81,10 +81,10 @@ declare module "@package/javax/management" {
     export interface $DynamicMBean {
         getMBeanInfo(): $MBeanInfo;
         setAttributes(arg0: $AttributeList): $AttributeList;
-        getAttribute(arg0: string): $Object;
         setAttribute(arg0: $Attribute): void;
         invoke(arg0: string, arg1: $Object[], arg2: string[]): $Object;
         getAttributes(arg0: string[]): $AttributeList;
+        getAttribute(arg0: string): $Object;
         get MBeanInfo(): $MBeanInfo;
     }
     export class $Attribute implements $Serializable {

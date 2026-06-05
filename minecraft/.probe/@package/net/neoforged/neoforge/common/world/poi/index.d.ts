@@ -38,7 +38,7 @@ declare module "@package/net/neoforged/neoforge/common/world/poi" {
         static extendPoiTypes(): void;
     }
     export class $ExtendPoiTypesEvent extends $Event implements $IModBusEvent {
-        addStatesToPoi(arg0: $ResourceKey_<$PoiType>, arg1: $Set_<$BlockState_>): void;
         addBlockToPoi(arg0: $ResourceKey_<$PoiType>, arg1: $Block_): void;
+        addStatesToPoi(arg0: $ResourceKey_<$PoiType>, arg1: $Set_<$BlockState_>): void;
     }
 }

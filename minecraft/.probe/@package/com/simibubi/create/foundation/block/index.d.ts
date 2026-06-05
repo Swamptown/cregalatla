@@ -29,16 +29,16 @@ declare module "@package/com/simibubi/create/foundation/block" {
         static onRemove(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_): void;
     }
     export interface $IBE<T extends $BlockEntity> extends $EntityBlock {
-        getBlockEntityClass(): $Class<T>;
         getBlockEntityType(): $BlockEntityType<T>;
         getBlockEntityOptional(arg0: $BlockGetter, arg1: $BlockPos_): (T) | undefined;
+        getBlockEntityClass(): $Class<T>;
+        newBlockEntity(arg0: $BlockPos_, arg1: $BlockState_): $BlockEntity;
         withBlockEntityDo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Consumer_<T>): void;
         onBlockEntityUse(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<T, $InteractionResult>): $InteractionResult;
         onBlockEntityUseItemOn(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<T, $ItemInteractionResult>): $ItemInteractionResult;
-        newBlockEntity(arg0: $BlockPos_, arg1: $BlockState_): $BlockEntity;
-        getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): T;
         getTicker<S extends $BlockEntity>(arg0: $Level_, arg1: $BlockState_, arg2: $BlockEntityType_<S>): $BlockEntityTicker<S>;
-        get blockEntityClass(): $Class<T>;
+        getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): T;
         get blockEntityType(): $BlockEntityType<T>;
+        get blockEntityClass(): $Class<T>;
     }
 }

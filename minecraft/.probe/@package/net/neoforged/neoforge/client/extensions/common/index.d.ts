@@ -48,23 +48,23 @@ declare module "@package/net/neoforged/neoforge/client/extensions/common" {
         static DEFAULT: $IClientFluidTypeExtensions;
     }
     export interface $IClientFluidTypeExtensions {
+        getTintColor(): number;
+        getTintColor(arg0: $FluidStack_): number;
+        getTintColor(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
+        getStillTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
         getStillTexture(arg0: $FluidStack_): $ResourceLocation;
         getStillTexture(): $ResourceLocation;
-        getStillTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
-        getFlowingTexture(): $ResourceLocation;
         getFlowingTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
+        getFlowingTexture(): $ResourceLocation;
         getFlowingTexture(arg0: $FluidStack_): $ResourceLocation;
         getRenderOverlayTexture(arg0: $Minecraft): $ResourceLocation;
         renderOverlay(arg0: $Minecraft, arg1: $PoseStack): void;
         renderFluid(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_, arg3: $VertexConsumer, arg4: $BlockState_): boolean;
         modifyFogColor(arg0: $Camera, arg1: number, arg2: $ClientLevel, arg3: number, arg4: number, arg5: $Vector3f): $Vector3f;
         modifyFogRender(arg0: $Camera, arg1: $FogRenderer$FogMode_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $FogShape_): void;
-        getTintColor(): number;
-        getTintColor(arg0: $FluidStack_): number;
-        getTintColor(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
         getOverlayTexture(arg0: $FluidStack_): $ResourceLocation;
-        getOverlayTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
         getOverlayTexture(): $ResourceLocation;
+        getOverlayTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
     }
     export class $IClientBlockExtensions {
         static of(arg0: $Block_): $IClientBlockExtensions;
@@ -127,9 +127,9 @@ declare module "@package/net/neoforged/neoforge/client/extensions/common" {
         static DEFAULT: $IClientMobEffectExtensions;
     }
     export interface $IClientMobEffectExtensions {
+        isVisibleInInventory(arg0: $MobEffectInstance): boolean;
         isVisibleInGui(arg0: $MobEffectInstance): boolean;
         renderGuiIcon(arg0: $MobEffectInstance, arg1: $Gui, arg2: $GuiGraphics, arg3: number, arg4: number, arg5: number, arg6: number): boolean;
-        isVisibleInInventory(arg0: $MobEffectInstance): boolean;
         renderInventoryIcon(arg0: $MobEffectInstance, arg1: $EffectRenderingInventoryScreen<never>, arg2: $GuiGraphics, arg3: number, arg4: number, arg5: number): boolean;
         renderInventoryText(arg0: $MobEffectInstance, arg1: $EffectRenderingInventoryScreen<never>, arg2: $GuiGraphics, arg3: number, arg4: number, arg5: number): boolean;
     }

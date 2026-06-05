@@ -1,13 +1,12 @@
 import { $GoalSelector, $Goal } from "@package/net/minecraft/world/entity/ai/goal";
 import { $JumpControl, $MoveControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $EntityDimensions, $PowerableMob, $EntityType_, $Entity$RemovalReason, $LivingEntity, $Pose, $PortalProcessor, $WalkAnimationState } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $Stack } from "@package/java/util";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $InteractionHand } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos } from "@package/net/minecraft/core";
+import { $BlockPos } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $BlockState_ } from "@package/net/minecraft/world/level/block/state";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
@@ -33,17 +32,16 @@ declare module "@package/net/minecraft/world/entity/boss/wither" {
          * @deprecated
          */
         static canDestroy(arg0: $BlockState_): boolean;
-        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
         getInvulnerableTicks(): number;
         setInvulnerableTicks(arg0: number): void;
         getAlternativeTarget(arg0: number): number;
         setAlternativeTarget(arg0: number, arg1: number): void;
         getHeadYRot(arg0: number): number;
         getHeadXRot(arg0: number): number;
+        performRangedAttack(arg0: $LivingEntity, arg1: number): void;
         isPowered(): boolean;
         makeInvulnerable(): void;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -74,6 +72,7 @@ declare module "@package/net/minecraft/world/entity/boss/wither" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -98,6 +97,7 @@ declare module "@package/net/minecraft/world/entity/boss/wither" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -121,6 +121,7 @@ declare module "@package/net/minecraft/world/entity/boss/wither" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

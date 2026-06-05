@@ -8,7 +8,7 @@ import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $UUID } from "@package/java/util";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $EntityDataAccessor, $SynchedEntityData } from "@package/net/minecraft/network/syncher";
-import { $HolderLookup$Provider, $BlockPos } from "@package/net/minecraft/core";
+import { $BlockPos } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $AtomicInteger } from "@package/java/util/concurrent/atomic";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
@@ -18,7 +18,6 @@ import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entit
 declare module "@package/net/neoforged/neoforge/entity" {
     export class $PartEntity<T extends $Entity> extends $Entity {
         getParent(): $CompoundTag;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -66,6 +65,7 @@ declare module "@package/net/neoforged/neoforge/entity" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;
@@ -91,10 +91,10 @@ declare module "@package/net/neoforged/neoforge/entity" {
         get parent(): $CompoundTag;
     }
     export class $XpOrbTargetingEvent extends $Event {
-        getFollowingPlayer(): $Player;
         setFollowingPlayer(arg0: $Player): void;
         getXpOrb(): $ExperienceOrb;
         getScanDistance(): number;
+        getFollowingPlayer(): $Player;
         constructor(arg0: $ExperienceOrb, arg1: number);
         get xpOrb(): $ExperienceOrb;
         get scanDistance(): number;

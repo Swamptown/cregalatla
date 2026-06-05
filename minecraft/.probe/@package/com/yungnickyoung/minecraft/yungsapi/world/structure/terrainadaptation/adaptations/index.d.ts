@@ -64,32 +64,32 @@ declare module "@package/com/yungnickyoung/minecraft/yungsapi/world/structure/te
     /**
      * Values that may be interpreted as {@link $EnhancedTerrainAdaptation$Padding}.
      */
-    export type $EnhancedTerrainAdaptation$Padding_ = { x?: number, top?: number, bottom?: number, z?: number,  } | [x?: number, top?: number, bottom?: number, z?: number, ];
+    export type $EnhancedTerrainAdaptation$Padding_ = { top?: number, x?: number, z?: number, bottom?: number,  } | [top?: number, x?: number, z?: number, bottom?: number, ];
     export class $SmallCarvedTopNoBeardAdaptation extends $EnhancedTerrainAdaptation {
         static CODEC: $MapCodec<$SmallCarvedTopNoBeardAdaptation>;
         static NONE: $EnhancedTerrainAdaptation;
         constructor();
     }
     export class $EnhancedTerrainAdaptation {
-        getAquiferOverride(): $AquiferOverride;
+        getKernelRadius(): number;
+        getBottomOffset(): number;
         computeDensityFactor(arg0: number, arg1: number, arg2: number, arg3: number): number;
         topAction(): $EnhancedTerrainAdaptation$TerrainAction;
         bottomAction(): $EnhancedTerrainAdaptation$TerrainAction;
         getKernelSize(): number;
         getKernelDistance(): number;
-        getBottomOffset(): number;
         getKernel(): number[];
-        getKernelRadius(): number;
         getPadding(): $EnhancedTerrainAdaptation$Padding;
+        getAquiferOverride(): $AquiferOverride;
         type(): $EnhancedTerrainAdaptationType<never>;
         static NONE: $EnhancedTerrainAdaptation;
-        get aquiferOverride(): $AquiferOverride;
+        get kernelRadius(): number;
+        get bottomOffset(): number;
         get kernelSize(): number;
         get kernelDistance(): number;
-        get bottomOffset(): number;
         get kernel(): number[];
-        get kernelRadius(): number;
         get padding(): $EnhancedTerrainAdaptation$Padding;
+        get aquiferOverride(): $AquiferOverride;
     }
     export class $CustomAdaptation extends $EnhancedTerrainAdaptation {
         static CODEC: $MapCodec<$CustomAdaptation>;

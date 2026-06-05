@@ -23,10 +23,10 @@ declare module "@package/xaero/hud/controls/key" {
         constructor(arg0: $KeyMappingControllerManager);
     }
     export class $KeyMappingController implements $Iterable<$KeyMappingFunction> {
-        isXaeroKey(): boolean;
         setPressed(arg0: boolean): void;
-        isPressed(): boolean;
+        isXaeroKey(): boolean;
         getKeyMapping(): $KeyMapping;
+        isPressed(): boolean;
         add(arg0: $KeyMappingFunction): void;
         iterator(): $Iterator<$KeyMappingFunction>;
         getFunctions(): $Iterable<$KeyMappingFunction>;

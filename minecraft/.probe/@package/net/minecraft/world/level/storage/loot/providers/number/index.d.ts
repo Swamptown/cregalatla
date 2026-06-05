@@ -39,7 +39,7 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/number
     /**
      * Values that may be interpreted as {@link $UniformGenerator}.
      */
-    export type $UniformGenerator_ = { max?: $NumberProvider_, min?: $NumberProvider_,  } | [max?: $NumberProvider_, min?: $NumberProvider_, ];
+    export type $UniformGenerator_ = { min?: $NumberProvider_, max?: $NumberProvider_,  } | [min?: $NumberProvider_, max?: $NumberProvider_, ];
     export class $ConstantValue extends $Record implements $NumberProvider {
         static exactly(arg0: number): $ConstantValue;
         value(): number;
@@ -87,9 +87,9 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/number
     }
     export interface $LootNumberProviderType extends RegistryMarked<RegistryTypes.LootNumberProviderTypeTag, RegistryTypes.LootNumberProviderType> {}
     export class $ScoreboardValue extends $Record implements $NumberProvider {
+        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         static fromScoreboard(arg0: $LootContext$EntityTarget_, arg1: string, arg2: number): $ScoreboardValue;
         static fromScoreboard(arg0: $LootContext$EntityTarget_, arg1: string): $ScoreboardValue;
-        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         target(): $ScoreboardNameProvider;
         getFloat(arg0: $LootContext): number;
         scale(): number;
@@ -105,7 +105,7 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/number
     /**
      * Values that may be interpreted as {@link $ScoreboardValue}.
      */
-    export type $ScoreboardValue_ = { target?: $ScoreboardNameProvider, score?: string, scale?: number,  } | [target?: $ScoreboardNameProvider, score?: string, scale?: number, ];
+    export type $ScoreboardValue_ = { scale?: number, score?: string, target?: $ScoreboardNameProvider,  } | [scale?: number, score?: string, target?: $ScoreboardNameProvider, ];
     export class $EnchantmentLevelProvider extends $Record implements $NumberProvider {
         static forEnchantmentLevel(arg0: $LevelBasedValue): $EnchantmentLevelProvider;
         amount(): $LevelBasedValue;
@@ -148,5 +148,5 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/number
     /**
      * Values that may be interpreted as {@link $BinomialDistributionGenerator}.
      */
-    export type $BinomialDistributionGenerator_ = { p?: $NumberProvider_, n?: $NumberProvider_,  } | [p?: $NumberProvider_, n?: $NumberProvider_, ];
+    export type $BinomialDistributionGenerator_ = { n?: $NumberProvider_, p?: $NumberProvider_,  } | [n?: $NumberProvider_, p?: $NumberProvider_, ];
 }

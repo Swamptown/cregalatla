@@ -38,9 +38,9 @@ declare module "@package/net/minecraft/core/component" {
         test(arg0: $DataComponentMap_): boolean;
         test(arg0: $DataComponentHolder_): boolean;
         static builder(): $DataComponentPredicate$Builder;
+        or(arg0: $Predicate_<$DataComponentMap>): $Predicate<$DataComponentMap>;
         negate(): $Predicate<$DataComponentMap>;
         and(arg0: $Predicate_<$DataComponentMap>): $Predicate<$DataComponentMap>;
-        or(arg0: $Predicate_<$DataComponentMap>): $Predicate<$DataComponentMap>;
         static CODEC: $Codec<$DataComponentPredicate>;
         static EMPTY: $DataComponentPredicate;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $DataComponentPredicate>;
@@ -103,10 +103,10 @@ declare module "@package/net/minecraft/core/component" {
     /**
      * Values that may be interpreted as {@link $DataComponentPatch$PatchKey}.
      */
-    export type $DataComponentPatch$PatchKey_ = { removed?: boolean, type?: $DataComponentType_<never>,  } | [removed?: boolean, type?: $DataComponentType_<never>, ];
+    export type $DataComponentPatch$PatchKey_ = { type?: $DataComponentType_<never>, removed?: boolean,  } | [type?: $DataComponentType_<never>, removed?: boolean, ];
     export class $TypedDataComponent<T> extends $Record {
-        static createUnchecked<T>(arg0: $DataComponentType_<T>, arg1: $Object): $TypedDataComponent<T>;
         static fromEntryUnchecked(arg0: $Map$Entry<$DataComponentType_<never>, $Object>): $TypedDataComponent<never>;
+        static createUnchecked<T>(arg0: $DataComponentType_<T>, arg1: $Object): $TypedDataComponent<T>;
         encodeValue<D>(arg0: $DynamicOps<D>): $DataResult<D>;
         type(): $DataComponentType<T>;
         value(): T;
@@ -137,11 +137,11 @@ declare module "@package/net/minecraft/core/component" {
      */
     export type $DataComponentType_<T> = RegistryTypes.EnchantmentEffectComponentType | RegistryTypes.DataComponentType;
     export class $PatchedDataComponentMap implements $DataComponentMap, $ChangePublisher<any> {
+        lithium$unsubscribe(arg0: $ChangeSubscriber<any>): number;
+        applyPatch(arg0: $DataComponentPatch_): void;
+        isPatchEmpty(): boolean;
         restorePatch(arg0: $DataComponentPatch_): void;
         asPatch(): $DataComponentPatch;
-        isPatchEmpty(): boolean;
-        applyPatch(arg0: $DataComponentPatch_): void;
-        lithium$unsubscribe(arg0: $ChangeSubscriber<any>): number;
         remove<T>(arg0: $DataComponentType_<T>): T;
         size(): number;
         get<T>(arg0: $DataComponentType_<T>): T;
@@ -307,7 +307,7 @@ declare module "@package/net/minecraft/core/component" {
         get transient(): boolean;
     }
     export class $DataComponents implements $DataComponentsAccessor {
-        static mfix$getCache$modernfix_$md$4ca6b6$0(): $EncoderCache;
+        static mfix$getCache$modernfix_$md$3b3139$0(): $EncoderCache;
         static bootstrap(arg0: $Registry<$DataComponentType_<never>>): $DataComponentType<never>;
         static CONTAINER_LOOT: $DataComponentType<$SeededContainerLoot>;
         static TRIM: $DataComponentType<$ArmorTrim>;
@@ -389,8 +389,8 @@ declare module "@package/net/minecraft/core/component" {
      */
     export type $DataComponentMap$Builder$SimpleMap_ = { map?: $Reference2ObjectMap<$DataComponentType_<never>, $Object>,  } | [map?: $Reference2ObjectMap<$DataComponentType_<never>, $Object>, ];
     export class $DataComponentType$Builder<T> {
-        cacheEncoding(): $DataComponentType$Builder<T>;
         networkSynchronized(arg0: $StreamCodec<$RegistryFriendlyByteBuf, T>): $DataComponentType$Builder<T>;
+        cacheEncoding(): $DataComponentType$Builder<T>;
         persistent(arg0: $Codec<T>): $DataComponentType$Builder<T>;
         build(): $DataComponentType<T>;
         constructor();

@@ -6,27 +6,27 @@ import { $Document, $DOMImplementation } from "@package/org/w3c/dom";
 
 declare module "@package/javax/xml/parsers" {
     export class $DocumentBuilder {
-        setErrorHandler(arg0: $ErrorHandler): void;
-        getDOMImplementation(): $DOMImplementation;
-        setEntityResolver(arg0: $EntityResolver_): void;
-        newDocument(): $Document;
         isNamespaceAware(): boolean;
         isValidating(): boolean;
         getSchema(): $Schema;
         isXIncludeAware(): boolean;
+        setErrorHandler(arg0: $ErrorHandler): void;
+        getDOMImplementation(): $DOMImplementation;
+        setEntityResolver(arg0: $EntityResolver_): void;
+        newDocument(): $Document;
         reset(): void;
-        parse(arg0: $InputSource): $Document;
-        parse(arg0: $InputStream): $Document;
-        parse(arg0: $InputStream, arg1: string): $Document;
         parse(arg0: string): $Document;
         parse(arg0: $File_): $Document;
-        set errorHandler(value: $ErrorHandler);
-        get DOMImplementation(): $DOMImplementation;
-        set entityResolver(value: $EntityResolver_);
+        parse(arg0: $InputSource): $Document;
+        parse(arg0: $InputStream, arg1: string): $Document;
+        parse(arg0: $InputStream): $Document;
         get namespaceAware(): boolean;
         get validating(): boolean;
         get schema(): $Schema;
         get XIncludeAware(): boolean;
+        set errorHandler(value: $ErrorHandler);
+        get DOMImplementation(): $DOMImplementation;
+        set entityResolver(value: $EntityResolver_);
     }
     export class $DocumentBuilderFactory {
         static newDefaultNSInstance(): $DocumentBuilderFactory;
@@ -46,10 +46,10 @@ declare module "@package/javax/xml/parsers" {
         getSchema(): $Schema;
         setSchema(arg0: $Schema): void;
         isXIncludeAware(): boolean;
-        getAttribute(arg0: string): $Object;
         setAttribute(arg0: string, arg1: $Object): void;
-        static newInstance(arg0: string, arg1: $ClassLoader): $DocumentBuilderFactory;
         static newInstance(): $DocumentBuilderFactory;
+        static newInstance(arg0: string, arg1: $ClassLoader): $DocumentBuilderFactory;
+        getAttribute(arg0: string): $Object;
         newDocumentBuilder(): $DocumentBuilder;
         setNamespaceAware(arg0: boolean): void;
         setValidating(arg0: boolean): void;

@@ -1,7 +1,7 @@
 import { $ZombieAttackGoal, $MeleeAttackGoal, $GoalSelector, $RandomStrollGoal, $RangedAttackGoal, $MoveToBlockGoal, $OpenDoorGoal, $RemoveBlockGoal, $BreakDoorGoal, $Goal } from "@package/net/minecraft/world/entity/ai/goal";
 import { $MoveControl$Operation, $JumpControl, $BodyRotationControl, $MoveControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
-import { $Tag_, $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $Tag_, $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $EntityType_, $VariantHolder, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $Saddleable, $FlyingMob, $AgeableMob, $WalkAnimationState, $Mob, $PowerableMob, $ItemSteerable, $Pose, $PortalProcessor, $SpawnGroupData, $Entity, $PathfinderMob, $Shearable, $MobSpawnType_, $NeutralMob, $TraceableEntity } from "@package/net/minecraft/world/entity";
 import { $GuardianEntityLightSource } from "@package/dev/lambdaurora/lambdynlights/echo";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
@@ -59,7 +59,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         wantsToSwim(): boolean;
         setSearchingForLand(arg0: boolean): void;
         static access$002(arg0: $Drowned, arg1: $PathNavigation): $PathNavigation;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -92,6 +91,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static ZOMBIE_LEADER_CHANCE: number;
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -117,6 +117,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -143,6 +144,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -235,7 +237,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $Endermite extends $Monster {
         static checkEndermiteSpawnRules(arg0: $EntityType_<$Endermite>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -266,6 +267,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -290,6 +292,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -313,6 +316,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -402,7 +406,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $Vindicator extends $AbstractIllager {
         static access$000(arg0: $Vindicator): $RandomSource;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -433,6 +436,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -457,6 +461,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static IS_CELEBRATING: $EntityDataAccessor<boolean>;
@@ -481,6 +486,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -578,6 +584,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         set randomEffect(value: $RandomSource);
     }
     export class $Slime extends $Mob implements $Enemy {
+        isTiny(): boolean;
         getParticleType(): $ParticleOptions;
         spawnCustomParticles(): boolean;
         getSquishSound(): $SoundEvent;
@@ -590,10 +597,8 @@ declare module "@package/net/minecraft/world/entity/monster" {
         doPlayJumpSound(): boolean;
         getSoundPitch(): number;
         getJumpSound(): $SoundEvent;
-        isTiny(): boolean;
-        getSize(): number;
         setSize(arg0: number, arg1: boolean): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        getSize(): number;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -623,6 +628,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -648,6 +654,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -672,6 +679,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -761,6 +769,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         removeStingerTime: number;
         static BASE_SAFE_FALL_DISTANCE: number;
         constructor(arg0: $EntityType_<$Slime>, arg1: $Level_);
+        get tiny(): boolean;
         get particleType(): $ParticleOptions;
         get squishSound(): $SoundEvent;
         get jumpDelay(): number;
@@ -768,7 +777,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         get attackDamage(): number;
         get soundPitch(): number;
         get jumpSound(): $SoundEvent;
-        get tiny(): boolean;
     }
     export class $Shulker extends $AbstractGolem implements $VariantHolder<($DyeColor) | undefined>, $Enemy {
         static getProgressAabb(arg0: number, arg1: $Direction_, arg2: number): $AABB;
@@ -781,15 +789,14 @@ declare module "@package/net/minecraft/world/entity/monster" {
         getClientPeekAmount(arg0: number): number;
         getRenderPosition(arg0: number): ($Vec3) | undefined;
         setVariant(arg0: ($DyeColor_) | undefined): void;
-        getVariant(): ($DyeColor) | undefined;
         static access$000(arg0: $Shulker): $RandomSource;
         static access$100(arg0: $Shulker): $RandomSource;
         static access$200(arg0: $Shulker): $RandomSource;
         static access$300(arg0: $Shulker): $RandomSource;
         static access$400(arg0: $Shulker): $RandomSource;
-        getColor(): $DyeColor;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): ($DyeColor) | undefined;
+        getColor(): $DyeColor;
+        getVariant(): ($DyeColor) | undefined;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static DATA_PEEK_ID: $EntityDataAccessor<number>;
@@ -821,6 +828,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -845,6 +853,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -868,6 +877,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -962,7 +972,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $AbstractIllager extends $Raider {
         getArmPose(): $AbstractIllager$IllagerArmPose;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -993,6 +1002,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1017,6 +1027,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static IS_CELEBRATING: $EntityDataAccessor<boolean>;
@@ -1041,6 +1052,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1136,9 +1148,8 @@ declare module "@package/net/minecraft/world/entity/monster" {
         isAdult(): boolean;
         getAttackAnimationRemainingTicks(): number;
         playAngrySound(): void;
-        updateActivity(): void;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        updateActivity(): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1169,6 +1180,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1193,6 +1205,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -1217,6 +1230,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1316,7 +1330,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $Drowned$DrownedSwimUpGoal extends $Goal {
     }
     export class $WitherSkeleton extends $AbstractSkeleton {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1347,6 +1360,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1371,6 +1385,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -1394,6 +1409,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1489,7 +1505,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         isShaking(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
         getStepSound(): $SoundEvent;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1520,6 +1535,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1544,6 +1560,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -1567,6 +1584,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1677,7 +1695,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         getCurrentSpell(): $SpellcasterIllager$IllagerSpell;
         getSpellCastingTime(): number;
         static access$000(arg0: $SpellcasterIllager): $PathNavigation;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1708,6 +1725,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1732,6 +1750,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static IS_CELEBRATING: $EntityDataAccessor<boolean>;
@@ -1756,6 +1775,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -1918,7 +1938,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         getPersistentAngerTarget(): $UUID;
         setRemainingPersistentAngerTime(arg0: number): void;
         static checkZombifiedPiglinSpawnRules(arg0: $EntityType_<$ZombifiedPiglin>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
-        playerDied(arg0: $Player): void;
         isAngryAt(arg0: $LivingEntity): boolean;
         updatePersistentAnger(arg0: $ServerLevel, arg1: boolean): void;
         addPersistentAngerSaveData(arg0: $CompoundTag_): void;
@@ -1927,7 +1946,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         isAngry(): boolean;
         forgetCurrentTargetAndRefreshUniversalAnger(): void;
         readPersistentAngerSaveData(arg0: $Level_, arg1: $CompoundTag_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        playerDied(arg0: $Player): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -1959,6 +1978,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static ZOMBIE_LEADER_CHANCE: number;
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -1983,6 +2003,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -2009,6 +2030,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -2118,7 +2140,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         getExplosionPower(): number;
         static checkGhastSpawnRules(arg0: $EntityType_<$Ghast>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -2148,6 +2169,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -2172,6 +2194,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -2195,6 +2218,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -2285,9 +2309,9 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $Drowned$DrownedTridentAttackGoal extends $RangedAttackGoal {
     }
     export class $Guardian$GuardianAttackSelector implements $Predicate<$LivingEntity> {
+        or(arg0: $Predicate_<$LivingEntity>): $Predicate<$LivingEntity>;
         negate(): $Predicate<$LivingEntity>;
         and(arg0: $Predicate_<$LivingEntity>): $Predicate<$LivingEntity>;
-        or(arg0: $Predicate_<$LivingEntity>): $Predicate<$LivingEntity>;
     }
     export class $Phantom$PhantomCircleAroundAnchorGoal extends $Phantom$PhantomMoveTargetGoal {
     }
@@ -2300,12 +2324,11 @@ declare module "@package/net/minecraft/world/entity/monster" {
         isChargingCrossbow(): boolean;
         setChargingCrossbow(arg0: boolean): void;
         onCrossbowAttackPerformed(): void;
-        getInventory(): $SimpleContainer;
         static createAttributes(): $AttributeSupplier$Builder;
+        getInventory(): $SimpleContainer;
         performCrossbowAttack(arg0: $LivingEntity, arg1: number): void;
         writeInventoryToTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         readInventoryFromTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -2336,6 +2359,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -2360,6 +2384,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static IS_CELEBRATING: $EntityDataAccessor<boolean>;
@@ -2384,6 +2409,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -2478,7 +2504,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         getStunnedTick(): number;
         getRoarTick(): number;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -2510,6 +2535,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -2534,6 +2560,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static IS_CELEBRATING: $EntityDataAccessor<boolean>;
@@ -2558,6 +2585,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -2660,7 +2688,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static access$300(arg0: $Evoker): $RandomSource;
         static access$400(arg0: $Evoker): $RandomSource;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -2691,6 +2718,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -2715,6 +2743,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static IS_CELEBRATING: $EntityDataAccessor<boolean>;
@@ -2739,6 +2768,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -2833,7 +2863,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         setUsingItem(arg0: boolean): void;
         isDrinkingPotion(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -2864,6 +2893,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -2888,6 +2918,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static IS_CELEBRATING: $EntityDataAccessor<boolean>;
@@ -2912,6 +2943,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -3003,8 +3035,8 @@ declare module "@package/net/minecraft/world/entity/monster" {
         get drinkingPotion(): boolean;
     }
     export class $Vex extends $Monster implements $TraceableEntity {
-        setLimitedLife(arg0: number): void;
         setBoundOrigin(arg0: $BlockPos_): void;
+        setLimitedLife(arg0: number): void;
         isCharging(): boolean;
         getBoundOrigin(): $BlockPos;
         setIsCharging(arg0: boolean): void;
@@ -3019,7 +3051,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static access$700(arg0: $Vex): $MoveControl;
         static createAttributes(): $AttributeSupplier$Builder;
         getOwner(): $Entity;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -3051,6 +3082,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -3075,6 +3107,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -3098,6 +3131,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -3214,13 +3248,12 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $Bogged extends $AbstractSkeleton implements $Shearable {
         shear(arg0: $SoundSource_): void;
-        isSheared(): boolean;
         readyForShearing(): boolean;
+        isSheared(): boolean;
         setSheared(arg0: boolean): void;
         isShearable(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_): boolean;
         onSheared(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_): $List<$ItemStack>;
         spawnShearedDrop(arg0: $Level_, arg1: $BlockPos_, arg2: $ItemStack_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -3251,6 +3284,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         static SHEARED_TAG_NAME: string;
@@ -3276,6 +3310,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -3299,6 +3334,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -3410,7 +3446,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         hasPatrolTarget(): boolean;
         findPatrolTarget(): void;
         setPatrolling(arg0: boolean): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -3441,6 +3476,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -3465,6 +3501,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -3488,6 +3525,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -3612,7 +3650,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         setClimbing(arg0: boolean): void;
         isClimbing(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -3643,6 +3680,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -3667,6 +3705,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -3690,6 +3729,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -3798,7 +3838,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         isCreepy(): boolean;
         setBeingStaredAt(): void;
         static createAttributes(): $AttributeSupplier$Builder;
-        playerDied(arg0: $Player): void;
         isAngryAt(arg0: $LivingEntity): boolean;
         updatePersistentAnger(arg0: $ServerLevel, arg1: boolean): void;
         addPersistentAngerSaveData(arg0: $CompoundTag_): void;
@@ -3807,7 +3846,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         isAngry(): boolean;
         forgetCurrentTargetAndRefreshUniversalAnger(): void;
         readPersistentAngerSaveData(arg0: $Level_, arg1: $CompoundTag_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        playerDied(arg0: $Player): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -3838,6 +3877,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -3862,6 +3902,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -3885,6 +3926,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -3975,7 +4017,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $Stray extends $AbstractSkeleton {
         static checkStraySpawnRules(arg0: $EntityType_<$Stray>, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4006,6 +4047,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -4030,6 +4072,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -4053,6 +4096,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -4145,7 +4189,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $Husk extends $Zombie {
         static checkHuskSpawnRules(arg0: $EntityType_<$Husk>, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4177,6 +4220,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static ZOMBIE_LEADER_CHANCE: number;
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -4201,6 +4245,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -4227,6 +4272,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -4339,9 +4385,11 @@ declare module "@package/net/minecraft/world/entity/monster" {
      */
     export type $RangedAttackMob_ = ((arg0: $LivingEntity, arg1: number) => void);
     export class $Guardian extends $Monster implements $GuardianEntityLightSource {
+        getFlopSound(): $SoundEvent;
         lambdynlights$getDynamicLightBeam(): $LineLightBehavior;
         lambdynlights$setDynamicLightBeam(beam: $LineLightBehavior): void;
-        getFlopSound(): $SoundEvent;
+        isMoving(): boolean;
+        getAttackDuration(): number;
         setMoving(arg0: boolean): void;
         setActiveAttackTarget(arg0: number): void;
         hasActiveAttackTarget(): boolean;
@@ -4351,10 +4399,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         getSpikesAnimation(arg0: number): number;
         getClientSideAttackTime(): number;
         static checkGuardianSpawnRules(arg0: $EntityType_<$Guardian>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
-        getAttackDuration(): number;
-        isMoving(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4386,6 +4431,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -4410,6 +4456,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -4433,6 +4480,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -4520,8 +4568,8 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static BASE_SAFE_FALL_DISTANCE: number;
         constructor(arg0: $EntityType_<$Guardian>, arg1: $Level_);
         get flopSound(): $SoundEvent;
-        get clientSideAttackTime(): number;
         get attackDuration(): number;
+        get clientSideAttackTime(): number;
     }
     export class $Vex$VexCopyOwnerTargetGoal extends $TargetGoal {
         mob: $Mob;
@@ -4559,7 +4607,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static createAttributes(): $AttributeSupplier$Builder;
         isSuffocating(): boolean;
         getSaddleSoundEvent(): $SoundEvent;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4591,6 +4638,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -4615,6 +4663,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -4640,6 +4689,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -4754,7 +4804,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         setVillagerXp(arg0: number): void;
         setVariant(arg0: $VillagerType_): void;
         getVariant(): $VillagerType;
-        serializeNBT(arg0: $HolderLookup$Provider): $VillagerType;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4786,6 +4835,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static ZOMBIE_LEADER_CHANCE: number;
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -4811,6 +4861,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -4837,6 +4888,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -4943,7 +4995,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $CaveSpider extends $Spider {
         static createCaveSpider(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4974,6 +5025,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -4998,6 +5050,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -5021,6 +5074,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -5137,7 +5191,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         performRangedAttack(arg0: $LivingEntity, arg1: number): void;
         getIllusionOffsets(arg0: number): $Vec3[];
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -5168,6 +5221,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -5192,6 +5246,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static IS_CELEBRATING: $EntityDataAccessor<boolean>;
@@ -5216,6 +5271,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -5319,7 +5375,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $MagmaCube extends $Slime {
         static checkMagmaCubeSpawnRules(arg0: $EntityType_<$MagmaCube>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -5349,6 +5404,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -5374,6 +5430,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -5398,6 +5455,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -5505,7 +5563,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static access$000(arg0: $Zombie): $RandomSource;
         static createAttributes(): $AttributeSupplier$Builder;
         getStepSound(): $SoundEvent;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -5537,6 +5594,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static ZOMBIE_LEADER_CHANCE: number;
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -5561,6 +5619,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -5587,6 +5646,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -5680,13 +5740,12 @@ declare module "@package/net/minecraft/world/entity/monster" {
         get stepSound(): $SoundEvent;
     }
     export class $Monster extends $PathfinderMob implements $Enemy {
-        isPreventingPlayerRest(arg0: $Player): boolean;
         static createMonsterAttributes(): $AttributeSupplier$Builder;
         updateNoActionTime(): void;
         static isDarkEnoughToSpawn(arg0: $ServerLevelAccessor, arg1: $BlockPos_, arg2: $RandomSource): boolean;
         static checkMonsterSpawnRules(arg0: $EntityType_<$Monster>, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static checkAnyLightMonsterSpawnRules(arg0: $EntityType_<$Monster>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        isPreventingPlayerRest(arg0: $Player): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -5717,6 +5776,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -5741,6 +5801,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -5764,6 +5825,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -5879,13 +5941,13 @@ declare module "@package/net/minecraft/world/entity/monster" {
         getSwellDir(): number;
         getSwelling(arg0: number): number;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         autoSpinAttackItemStack: $ItemStack;
         lerpYRot: number;
         static DEFAULT_BASE_GRAVITY: number;
+        static DATA_IS_POWERED: $EntityDataAccessor<boolean>;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
         static USE_ITEM_INTERVAL: number;
@@ -5910,6 +5972,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -5934,6 +5997,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -5957,6 +6021,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -6049,7 +6114,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $Giant extends $Monster {
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -6080,6 +6144,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -6104,6 +6169,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -6127,6 +6193,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -6217,7 +6284,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         isFreezeConverting(): boolean;
         setFreezeConverting(arg0: boolean): void;
         doFreezeConversion(): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -6248,6 +6314,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -6272,6 +6339,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -6295,6 +6363,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -6406,7 +6475,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $Blaze extends $Monster {
         setCharged(arg0: boolean): void;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -6437,6 +6505,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -6461,6 +6530,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -6484,6 +6554,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -6579,7 +6650,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $Silverfish extends $Monster {
         static checkSilverfishSpawnRules(arg0: $EntityType_<$Silverfish>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -6610,6 +6680,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -6634,6 +6705,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -6657,6 +6729,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -6744,7 +6817,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         constructor(arg0: $EntityType_<$Silverfish>, arg1: $Level_);
     }
     export class $ElderGuardian extends $Guardian {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -6776,6 +6848,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         static ELDER_SIZE_SCALE: number;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
@@ -6801,6 +6874,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -6824,6 +6898,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -6929,7 +7004,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static access$900(arg0: $Phantom): $RandomSource;
         static access$1000(arg0: $Phantom): $RandomSource;
         static access$1100(arg0: $Phantom): $RandomSource;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -6959,6 +7033,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -6983,6 +7058,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -7007,6 +7083,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

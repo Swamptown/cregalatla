@@ -6,13 +6,13 @@ import { $Vec3_ } from "@package/net/minecraft/world/phys";
 
 declare module "@package/dev/ryanhcode/sable/sublevel/water_occlusion" {
     export class $WaterOcclusionContainer<T extends $WaterOcclusionRegion> {
-        getOccludingRegion(arg0: $Vec3_): T;
         getRegions(): $Set<T>;
         removeRegion(arg0: $WaterOcclusionRegion): void;
+        getOccludingRegion(arg0: $Vec3_): T;
         static getContainer(arg0: $Level_): $WaterOcclusionContainer<never>;
         markDirty(arg0: $BlockPos_): void;
-        addRegion(arg0: $BoundedBitVolume3i): $WaterOcclusionRegion;
         isOccluded(arg0: $Vec3_): boolean;
+        addRegion(arg0: $BoundedBitVolume3i): $WaterOcclusionRegion;
         constructor(arg0: $Level_);
         get regions(): $Set<T>;
     }

@@ -13,7 +13,7 @@ import { $Direction$Axis_, $Direction_, $Direction } from "@package/net/minecraf
 import { $TransformationHelper$TransformOrigin_ } from "@package/net/neoforged/neoforge/common/util";
 import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
 import { $ResourceLocation_, $ResourceLocation } from "@package/net/minecraft/resources";
-import { $CeilingHangingSignBlock, $IronBarsBlock, $WallSignBlock, $Block_, $WallBlock, $PressurePlateBlock, $StandingSignBlock, $RotatedPillarBlock, $FenceGateBlock, $DoorBlock, $FenceBlock, $StairBlock, $ButtonBlock, $TrapDoorBlock, $CrossCollisionBlock, $Block, $WallHangingSignBlock, $SlabBlock } from "@package/net/minecraft/world/level/block";
+import { $CeilingHangingSignBlock, $IronBarsBlock, $WallSignBlock, $Block_, $WallBlock, $PressurePlateBlock, $StandingSignBlock, $RotatedPillarBlock, $DoorBlock, $FenceGateBlock, $FenceBlock, $StairBlock, $ButtonBlock, $TrapDoorBlock, $CrossCollisionBlock, $Block, $WallHangingSignBlock, $SlabBlock } from "@package/net/minecraft/world/level/block";
 import { $Enum, $Comparable, $Object } from "@package/java/lang";
 import { $Transformation } from "@package/com/mojang/math";
 import { $Vector3f, $Quaternionf } from "@package/org/joml";
@@ -32,15 +32,6 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         rotation(arg0: $ModelBuilder$FaceRotation_): $ModelBuilder$ElementBuilder$FaceBuilder;
     }
     export class $ModelProvider<T extends $ModelBuilder<T>> implements $DataProvider {
-        cube(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_, arg3: $ResourceLocation_, arg4: $ResourceLocation_, arg5: $ResourceLocation_, arg6: $ResourceLocation_): T;
-        carpet(arg0: string, arg1: $ResourceLocation_): T;
-        crop(arg0: string, arg1: $ResourceLocation_): T;
-        leaves(arg0: string, arg1: $ResourceLocation_): T;
-        slab(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_, arg3: $ResourceLocation_): T;
-        torch(arg0: string, arg1: $ResourceLocation_): T;
-        pressurePlate(arg0: string, arg1: $ResourceLocation_): T;
-        stairs(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_, arg3: $ResourceLocation_): T;
-        fenceGate(arg0: string, arg1: $ResourceLocation_): T;
         cubeColumn(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_): T;
         cubeColumnHorizontal(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_): T;
         orientable(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_, arg3: $ResourceLocation_): T;
@@ -49,12 +40,8 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         slabTop(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_, arg3: $ResourceLocation_): T;
         getExistingFile(arg0: $ResourceLocation_): $ModelFile$ExistingModelFile;
         buttonPressed(arg0: string, arg1: $ResourceLocation_): T;
-        withExistingParent(arg0: string, arg1: $ResourceLocation_): T;
-        withExistingParent(arg0: string, arg1: string): T;
-        modLoc(arg0: string): $ResourceLocation;
-        cubeAll(arg0: string, arg1: $ResourceLocation_): T;
-        singleTexture(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_): T;
         singleTexture(arg0: string, arg1: $ResourceLocation_, arg2: string, arg3: $ResourceLocation_): T;
+        singleTexture(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_): T;
         cubeTop(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_): T;
         cubeBottomTop(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_, arg3: $ResourceLocation_): T;
         orientableVertical(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_): T;
@@ -63,6 +50,19 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         fenceInventory(arg0: string, arg1: $ResourceLocation_): T;
         wallInventory(arg0: string, arg1: $ResourceLocation_): T;
         torchWall(arg0: string, arg1: $ResourceLocation_): T;
+        cube(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_, arg3: $ResourceLocation_, arg4: $ResourceLocation_, arg5: $ResourceLocation_, arg6: $ResourceLocation_): T;
+        carpet(arg0: string, arg1: $ResourceLocation_): T;
+        crop(arg0: string, arg1: $ResourceLocation_): T;
+        leaves(arg0: string, arg1: $ResourceLocation_): T;
+        slab(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_, arg3: $ResourceLocation_): T;
+        torch(arg0: string, arg1: $ResourceLocation_): T;
+        withExistingParent(arg0: string, arg1: $ResourceLocation_): T;
+        withExistingParent(arg0: string, arg1: string): T;
+        modLoc(arg0: string): $ResourceLocation;
+        cubeAll(arg0: string, arg1: $ResourceLocation_): T;
+        pressurePlate(arg0: string, arg1: $ResourceLocation_): T;
+        stairs(arg0: string, arg1: $ResourceLocation_, arg2: $ResourceLocation_, arg3: $ResourceLocation_): T;
+        fenceGate(arg0: string, arg1: $ResourceLocation_): T;
         pressurePlateDown(arg0: string, arg1: $ResourceLocation_): T;
         fencePost(arg0: string, arg1: $ResourceLocation_): T;
         fenceSide(arg0: string, arg1: $ResourceLocation_): T;
@@ -107,6 +107,8 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         constructor(arg0: $PackOutput, arg1: string, arg2: string, arg3: $Function_<$ResourceLocation, T>, arg4: $ExistingFileHelper);
     }
     export class $ModelBuilder$RootTransformsBuilder {
+        leftRotation(arg0: number, arg1: number, arg2: number, arg3: boolean): $ModelBuilder$RootTransformsBuilder;
+        leftRotation(arg0: $Quaternionf): $ModelBuilder$RootTransformsBuilder;
         postRotation(arg0: $Quaternionf): $ModelBuilder$RootTransformsBuilder;
         postRotation(arg0: number, arg1: number, arg2: number, arg3: boolean): $ModelBuilder$RootTransformsBuilder;
         rightRotation(arg0: number, arg1: number, arg2: number, arg3: boolean): $ModelBuilder$RootTransformsBuilder;
@@ -114,17 +116,15 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         origin(arg0: $TransformationHelper$TransformOrigin_): $ModelBuilder$RootTransformsBuilder;
         origin(arg0: $Vector3f): $ModelBuilder$RootTransformsBuilder;
         end(): $ModelBuilder<T>;
+        scale(arg0: number): $ModelBuilder$RootTransformsBuilder;
         scale(arg0: $Vector3f): $ModelBuilder$RootTransformsBuilder;
         scale(arg0: number, arg1: number, arg2: number): $ModelBuilder$RootTransformsBuilder;
-        scale(arg0: number): $ModelBuilder$RootTransformsBuilder;
         transform(arg0: $Transformation): $ModelBuilder$RootTransformsBuilder;
-        translation(arg0: number, arg1: number, arg2: number): $ModelBuilder$RootTransformsBuilder;
         translation(arg0: $Vector3f): $ModelBuilder$RootTransformsBuilder;
+        translation(arg0: number, arg1: number, arg2: number): $ModelBuilder$RootTransformsBuilder;
         toJson(): $JsonObject;
-        rotation(arg0: $Quaternionf): $ModelBuilder$RootTransformsBuilder;
         rotation(arg0: number, arg1: number, arg2: number, arg3: boolean): $ModelBuilder$RootTransformsBuilder;
-        leftRotation(arg0: number, arg1: number, arg2: number, arg3: boolean): $ModelBuilder$RootTransformsBuilder;
-        leftRotation(arg0: $Quaternionf): $ModelBuilder$RootTransformsBuilder;
+        rotation(arg0: $Quaternionf): $ModelBuilder$RootTransformsBuilder;
     }
     export class $BlockStateProvider$ConfiguredModelList {
         toJSON(): $JsonElement;
@@ -152,9 +152,9 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         test(arg0: $BlockState_): boolean;
         with<T extends $Comparable<T>>(arg0: $Property<T>, arg1: T): $VariantBlockStateBuilder$PartialBlockstate;
         getOwner(): $Block;
+        or(arg0: $Predicate_<$BlockState>): $Predicate<$BlockState>;
         negate(): $Predicate<$BlockState>;
         and(arg0: $Predicate_<$BlockState>): $Predicate<$BlockState>;
-        or(arg0: $Predicate_<$BlockState>): $Predicate<$BlockState>;
         get setStates(): $SortedMap<$Property<never>, $Comparable<never>>;
         set models(value: $ConfiguredModel[]);
         get owner(): $Block;
@@ -173,16 +173,16 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         constructor(arg0: $ResourceLocation_, arg1: $ExistingFileHelper);
     }
     export class $ModelBuilder<T extends $ModelBuilder<T>> extends $ModelFile implements $ModelBuilderMixinDuck<any> {
-        texture(arg0: string, arg1: string): $Object;
         texture(arg0: string, arg1: $ResourceLocation_): $Object;
+        texture(arg0: string, arg1: string): $Object;
+        renderType(arg0: string): $Object;
+        renderType(arg0: $ResourceLocation_): $Object;
         transforms(): $ModelBuilder$TransformsBuilder;
         guiLight(arg0: $BlockModel$GuiLight_): $Object;
         customLoader<L extends $CustomLoaderBuilder<T>>(arg0: $BiFunction_<$Object, $ExistingFileHelper, L>): L;
         rootTransforms(): $ModelBuilder$RootTransformsBuilder;
         getElementCount(): number;
         createVibrantVaults$uncheckedTexture(arg0: string, arg1: $ResourceLocation_): $ModelBuilder<any>;
-        renderType(arg0: string): $Object;
-        renderType(arg0: $ResourceLocation_): $Object;
         parent(arg0: $ModelFile): $Object;
         ao(arg0: boolean): $Object;
         element(): $ModelBuilder$ElementBuilder;
@@ -198,8 +198,8 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         constructor(arg0: $ResourceLocation_, arg1: $ExistingFileHelper);
     }
     export class $ModelFile {
-        getUncheckedLocation(): $ResourceLocation;
         assertExistence(): void;
+        getUncheckedLocation(): $ResourceLocation;
         getLocation(): $ResourceLocation;
         get uncheckedLocation(): $ResourceLocation;
         get location(): $ResourceLocation;
@@ -222,8 +222,8 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
     }
     export class $ItemModelBuilder$OverrideBuilder {
         model(arg0: $ModelFile): $ItemModelBuilder$OverrideBuilder;
-        end(): $ItemModelBuilder;
         predicate(arg0: $ResourceLocation_, arg1: number): $ItemModelBuilder$OverrideBuilder;
+        end(): $ItemModelBuilder;
         constructor(arg0: $ItemModelBuilder);
     }
     export class $ModelFile$ExistingModelFile extends $ModelFile {
@@ -297,20 +297,20 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         slabBlock(arg0: $SlabBlock, arg1: $ModelFile, arg2: $ModelFile, arg3: $ModelFile): void;
         buttonBlock(arg0: $ButtonBlock, arg1: $ModelFile, arg2: $ModelFile): void;
         buttonBlock(arg0: $ButtonBlock, arg1: $ResourceLocation_): void;
-        getMultipartBuilder(arg0: $Block_): $MultiPartBlockStateBuilder;
+        itemModels(): $ItemModelProvider;
         modLoc(arg0: string): $ResourceLocation;
         cubeAll(arg0: $Block_): $ModelFile;
-        simpleBlock(arg0: $Block_, arg1: $Function_<$ModelFile, $ConfiguredModel[]>): void;
-        simpleBlock(arg0: $Block_): void;
         simpleBlock(arg0: $Block_, ...arg1: $ConfiguredModel[]): void;
         simpleBlock(arg0: $Block_, arg1: $ModelFile): void;
-        itemModels(): $ItemModelProvider;
+        simpleBlock(arg0: $Block_): void;
+        simpleBlock(arg0: $Block_, arg1: $Function_<$ModelFile, $ConfiguredModel[]>): void;
         pressurePlateBlock(arg0: $PressurePlateBlock, arg1: $ModelFile, arg2: $ModelFile): void;
         pressurePlateBlock(arg0: $PressurePlateBlock, arg1: $ResourceLocation_): void;
         signBlock(arg0: $StandingSignBlock, arg1: $WallSignBlock, arg2: $ModelFile): void;
         signBlock(arg0: $StandingSignBlock, arg1: $WallSignBlock, arg2: $ResourceLocation_): void;
         hangingSignBlock(arg0: $CeilingHangingSignBlock, arg1: $WallHangingSignBlock, arg2: $ModelFile): void;
         hangingSignBlock(arg0: $CeilingHangingSignBlock, arg1: $WallHangingSignBlock, arg2: $ResourceLocation_): void;
+        getMultipartBuilder(arg0: $Block_): $MultiPartBlockStateBuilder;
         fourWayMultipart(arg0: $MultiPartBlockStateBuilder, arg1: $ModelFile): void;
         fourWayBlock(arg0: $CrossCollisionBlock, arg1: $ModelFile, arg2: $ModelFile): void;
         fenceGateBlock(arg0: $FenceGateBlock, arg1: $ModelFile, arg2: $ModelFile, arg3: $ModelFile, arg4: $ModelFile): void;
@@ -379,19 +379,19 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
      */
     export type $ModelBuilder$FaceRotation_ = "zero" | "clockwise_90" | "upside_down" | "counterclockwise_90";
     export class $ModelBuilder$TransformsBuilder$TransformVecBuilder {
+        leftRotation(arg0: number, arg1: number, arg2: number): $ModelBuilder$TransformsBuilder$TransformVecBuilder;
         rightRotation(arg0: number, arg1: number, arg2: number): $ModelBuilder$TransformsBuilder$TransformVecBuilder;
         end(): $ModelBuilder$TransformsBuilder;
-        scale(arg0: number, arg1: number, arg2: number): $ModelBuilder$TransformsBuilder$TransformVecBuilder;
         scale(arg0: number): $ModelBuilder$TransformsBuilder$TransformVecBuilder;
+        scale(arg0: number, arg1: number, arg2: number): $ModelBuilder$TransformsBuilder$TransformVecBuilder;
         translation(arg0: number, arg1: number, arg2: number): $ModelBuilder$TransformsBuilder$TransformVecBuilder;
         rotation(arg0: number, arg1: number, arg2: number): $ModelBuilder$TransformsBuilder$TransformVecBuilder;
-        leftRotation(arg0: number, arg1: number, arg2: number): $ModelBuilder$TransformsBuilder$TransformVecBuilder;
     }
     export class $ModelBuilder$ElementBuilder {
         allFacesExcept(arg0: $BiConsumer_<$Direction, $ModelBuilder$ElementBuilder$FaceBuilder>, arg1: $Set_<$Direction_>): $ModelBuilder$ElementBuilder;
         textureAll(arg0: string): $ModelBuilder$ElementBuilder;
-        emissivity(arg0: number, arg1: number): $ModelBuilder$ElementBuilder;
         allFaces(arg0: $BiConsumer_<$Direction, $ModelBuilder$ElementBuilder$FaceBuilder>): $ModelBuilder$ElementBuilder;
+        emissivity(arg0: number, arg1: number): $ModelBuilder$ElementBuilder;
         texture(arg0: string): $ModelBuilder$ElementBuilder;
         cube(arg0: string): $ModelBuilder$ElementBuilder;
         faces(arg0: $BiConsumer_<$Direction, $ModelBuilder$ElementBuilder$FaceBuilder>): $ModelBuilder$ElementBuilder;
@@ -400,9 +400,9 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         to(arg0: number, arg1: number, arg2: number): $ModelBuilder$ElementBuilder;
         ao(arg0: boolean): $ModelBuilder$ElementBuilder;
         color(arg0: number): $ModelBuilder$ElementBuilder;
-        rotation(): $ModelBuilder$ElementBuilder$RotationBuilder;
-        face(arg0: $Direction_): $ModelBuilder$ElementBuilder$FaceBuilder;
         shade(arg0: boolean): $ModelBuilder$ElementBuilder;
+        face(arg0: $Direction_): $ModelBuilder$ElementBuilder$FaceBuilder;
+        rotation(): $ModelBuilder$ElementBuilder$RotationBuilder;
         constructor(arg0: $ModelBuilder<any>);
     }
     export class $MultiPartBlockStateBuilder implements $IGeneratedBlockState {
@@ -427,8 +427,8 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         constructor(arg0: $ModelBuilder<any>);
     }
     export class $ConfiguredModel$Builder<T> {
-        buildLast(): $ConfiguredModel;
         nextModel(): $ConfiguredModel$Builder<T>;
+        buildLast(): $ConfiguredModel;
         modelFile(arg0: $ModelFile): $ConfiguredModel$Builder<T>;
         addModel(): T;
         uvLock(arg0: boolean): $ConfiguredModel$Builder<T>;
@@ -460,7 +460,7 @@ declare module "@package/net/neoforged/neoforge/client/model/generators" {
         model: $ModelFile;
         static DEFAULT_WEIGHT: number;
         constructor(arg0: $ModelFile);
-        constructor(arg0: $ModelFile, arg1: number, arg2: number, arg3: boolean);
         constructor(arg0: $ModelFile, arg1: number, arg2: number, arg3: boolean, arg4: number);
+        constructor(arg0: $ModelFile, arg1: number, arg2: number, arg3: boolean);
     }
 }

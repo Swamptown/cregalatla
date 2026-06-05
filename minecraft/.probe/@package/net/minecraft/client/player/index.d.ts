@@ -10,7 +10,7 @@ import { $RandomSource } from "@package/net/minecraft/util";
 import { $PlayerInfo, $ClientPacketListener, $ClientLevel } from "@package/net/minecraft/client/multiplayer";
 import { $InteractionHand } from "@package/net/minecraft/world";
 import { $AnimationProcessor } from "@package/com/zigythebird/playeranimcore/animation";
-import { $HolderLookup$Provider, $BlockPos } from "@package/net/minecraft/core";
+import { $BlockPos } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $PlayerFreezeExtension } from "@package/dev/ryanhcode/sable/mixinterface/player_freezing";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
@@ -46,9 +46,8 @@ export * as inventory from "@package/net/minecraft/client/player/inventory";
 
 declare module "@package/net/minecraft/client/player" {
     export class $LocalPlayer extends $AbstractClientPlayer implements $AccessorLocalPlayer, $IMixinLocalPlayer, $LocalClientPlayerKJS, $PlayerFreezeExtension {
-        getRecipeBook(): $ClientRecipeBook;
         getCurrentMood(): number;
-        handler$cpa000$xaerominimap$onTickStart(arg0: $CallbackInfo): void;
+        handler$dci000$xaerominimap$onTickStart(arg0: $CallbackInfo): void;
         clientSideCloseContainer(): void;
         hurtTo(arg0: number): void;
         sendRidingJump(): void;
@@ -69,6 +68,7 @@ declare module "@package/net/minecraft/client/player" {
         getWaterVision(): number;
         onGameModeChanged(arg0: $GameType_): void;
         sable$calculateViewVector2(arg0: number, arg1: number): $Vec3;
+        getRecipeBook(): $ClientRecipeBook;
         drop(arg0: boolean): boolean;
         getStatsCounter(): $StatsCounter;
         shouldShowDeathScreen(): boolean;
@@ -78,7 +78,6 @@ declare module "@package/net/minecraft/client/player" {
         railways$getYRotLast(): number;
         getPermissionLevelKonkrete(): number;
         getMinecraft(): $Minecraft;
-        serializeNBT(arg0: $HolderLookup$Provider): $Player;
         lerpYRot: number;
         static USE_ITEM_INTERVAL: number;
         lerpYHeadRot: number;
@@ -92,6 +91,7 @@ declare module "@package/net/minecraft/client/player" {
         static CRAFTING_SLOT_OFFSET: number;
         xBob: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         input: $Input;
         boardingCooldown: number;
@@ -214,6 +214,7 @@ declare module "@package/net/minecraft/client/player" {
         static SWIMMING_BB_HEIGHT: number;
         verticalCollisionBelow: boolean;
         experienceLevel: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static PERSISTED_NBT_TAG: string;
         xxa: number;
@@ -233,6 +234,7 @@ declare module "@package/net/minecraft/client/player" {
         dimensions: $EntityDimensions;
         static ENDER_SLOT_OFFSET: number;
         firstTick: boolean;
+        instance: $Player;
         static HELD_ITEM_SLOT: number;
         uuid: $UUID;
         yBobO: number;
@@ -287,7 +289,6 @@ declare module "@package/net/minecraft/client/player" {
         static DATA_SHOULDER_RIGHT: $EntityDataAccessor<$CompoundTag>;
         currentExplosionCause: $Entity;
         constructor(arg0: $Minecraft, arg1: $ClientLevel, arg2: $ClientPacketListener, arg3: $StatsCounter, arg4: $ClientRecipeBook, arg5: boolean, arg6: boolean);
-        get recipeBook(): $ClientRecipeBook;
         get currentMood(): number;
         get jumpRidingScale(): number;
         set permissionLevel(value: number);
@@ -297,6 +298,7 @@ declare module "@package/net/minecraft/client/player" {
         get activePortalLocalTransition(): $Portal$Transition;
         get autoJumpEnabled(): boolean;
         get waterVision(): number;
+        get recipeBook(): $ClientRecipeBook;
         get statsCounter(): $StatsCounter;
         get handsBusy(): boolean;
         get permissionLevelKonkrete(): number;
@@ -316,14 +318,13 @@ declare module "@package/net/minecraft/client/player" {
         getPlayerInfo(): $PlayerInfo;
         getDeltaMovementLerped(arg0: number): $Vec3;
         getSkin(): $PlayerSkin;
-        handler$gmk000$create_sa$getSkinMixin(arg0: $CallbackInfoReturnable<any>): void;
+        handler$hke000$create_sa$getSkinMixin(arg0: $CallbackInfoReturnable<any>): void;
         getFieldOfViewModifier(): number;
-        handler$gln000$platform$updateFov(cir: $CallbackInfoReturnable<any>, currentFov: number): void;
+        handler$hip000$platform$updateFov(cir: $CallbackInfoReturnable<any>, currentFov: number): void;
         playerAnimLib$getAnimManager(): $PlayerAnimManager;
         playerAnimLib$getAnimation(id: $ResourceLocation_): $IAnimation;
         playerAnimLib$getAnimProcessor(): $AnimationProcessor;
         flywheel$getPlayerInfo(): $PlayerInfo;
-        serializeNBT(arg0: $HolderLookup$Provider): $Player;
         lerpYRot: number;
         static USE_ITEM_INTERVAL: number;
         lerpYHeadRot: number;
@@ -336,6 +337,7 @@ declare module "@package/net/minecraft/client/player" {
         swingingArm: $InteractionHand;
         static CRAFTING_SLOT_OFFSET: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         boardingCooldown: number;
         static DATA_POSE: $EntityDataAccessor<$Pose>;
@@ -451,6 +453,7 @@ declare module "@package/net/minecraft/client/player" {
         static SWIMMING_BB_HEIGHT: number;
         verticalCollisionBelow: boolean;
         experienceLevel: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static PERSISTED_NBT_TAG: string;
         xxa: number;
@@ -469,6 +472,7 @@ declare module "@package/net/minecraft/client/player" {
         dimensions: $EntityDimensions;
         static ENDER_SLOT_OFFSET: number;
         firstTick: boolean;
+        instance: $Player;
         static HELD_ITEM_SLOT: number;
         uuid: $UUID;
         lastHurtByPlayer: $Player;
@@ -526,9 +530,9 @@ declare module "@package/net/minecraft/client/player" {
         get fieldOfViewModifier(): number;
     }
     export class $Input {
+        tick(arg0: boolean, arg1: number): void;
         hasForwardImpulse(): boolean;
         getMoveVector(): $Vec2;
-        tick(arg0: boolean, arg1: number): void;
         forwardImpulse: number;
         jumping: boolean;
         left: boolean;
@@ -541,7 +545,6 @@ declare module "@package/net/minecraft/client/player" {
         get moveVector(): $Vec2;
     }
     export class $RemotePlayer extends $AbstractClientPlayer implements $LivingEntityStickExtension {
-        serializeNBT(arg0: $HolderLookup$Provider): $Player;
         lerpYRot: number;
         static USE_ITEM_INTERVAL: number;
         lerpYHeadRot: number;
@@ -554,6 +557,7 @@ declare module "@package/net/minecraft/client/player" {
         swingingArm: $InteractionHand;
         static CRAFTING_SLOT_OFFSET: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         boardingCooldown: number;
         static DATA_POSE: $EntityDataAccessor<$Pose>;
@@ -669,6 +673,7 @@ declare module "@package/net/minecraft/client/player" {
         static SWIMMING_BB_HEIGHT: number;
         verticalCollisionBelow: boolean;
         experienceLevel: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static PERSISTED_NBT_TAG: string;
         xxa: number;
@@ -687,6 +692,7 @@ declare module "@package/net/minecraft/client/player" {
         dimensions: $EntityDimensions;
         static ENDER_SLOT_OFFSET: number;
         firstTick: boolean;
+        instance: $Player;
         static HELD_ITEM_SLOT: number;
         uuid: $UUID;
         lastHurtByPlayer: $Player;

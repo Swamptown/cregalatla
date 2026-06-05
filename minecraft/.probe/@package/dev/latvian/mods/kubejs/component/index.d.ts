@@ -27,32 +27,32 @@ import { $ResourceLocation_, $ResourceKey_ } from "@package/net/minecraft/resour
 
 declare module "@package/dev/latvian/mods/kubejs/component" {
     export class $DataComponentWrapper {
-        static getTypeInfo(type: $DataComponentType_<never>): $TypeInfo;
-        static tryWrapComponent<T>(type: $DataComponentType_<T>, value: $Object): $DataResult<(T) | undefined>;
-        static patchToString(builder: $StringBuilder, ops: $DynamicOps<$Tag_>, patch: $DataComponentPatch_): $StringBuilder;
-        static visualPatch(patch: $DataComponentPatch_): $DataComponentPatch;
+        static readPatch(registryOps: $DynamicOps<$Tag_>, reader: $StringReader): $DataComponentPatch;
         static wrapType(object: $Object): $DataComponentType<never>;
         static patchOf(from: $Object): $DataComponentPatch;
         /**
          * @deprecated
          */
         static patchOf(ops: $DynamicOps<$Tag_>, o: $Object): $DataComponentPatch;
+        static readComponentType(stringReader: $StringReader): $DataComponentType<never>;
+        static tryMapOf(o: $Object): $DataResult<$DataComponentMap>;
+        static tryPatchOf(o: $Object): $DataResult<$DataComponentPatch>;
         static readPredicate(registryOps: $DynamicOps<$Tag_>, reader: $StringReader): $DataComponentPredicate;
-        /**
-         * @deprecated
-         */
-        static mapOrEmptyOf(ops: $DynamicOps<$Tag_>, o: $Object): $DataComponentMap;
         static mapOrEmptyOf(from: $Object): $DataComponentMap;
         /**
          * @deprecated
          */
-        static patchOrEmptyOf(ops: $DynamicOps<$Tag_>, o: $Object): $DataComponentPatch;
+        static mapOrEmptyOf(ops: $DynamicOps<$Tag_>, o: $Object): $DataComponentMap;
         static patchOrEmptyOf(from: $Object): $DataComponentPatch;
+        /**
+         * @deprecated
+         */
+        static patchOrEmptyOf(ops: $DynamicOps<$Tag_>, o: $Object): $DataComponentPatch;
         static mapToString(builder: $StringBuilder, ops: $DynamicOps<$Tag_>, map: $DataComponentMap_): $StringBuilder;
-        static readComponentType(stringReader: $StringReader): $DataComponentType<never>;
-        static tryMapOf(o: $Object): $DataResult<$DataComponentMap>;
-        static tryPatchOf(o: $Object): $DataResult<$DataComponentPatch>;
-        static readPatch(registryOps: $DynamicOps<$Tag_>, reader: $StringReader): $DataComponentPatch;
+        static visualPatch(patch: $DataComponentPatch_): $DataComponentPatch;
+        static tryWrapComponent<T>(type: $DataComponentType_<T>, value: $Object): $DataResult<(T) | undefined>;
+        static patchToString(builder: $StringBuilder, ops: $DynamicOps<$Tag_>, patch: $DataComponentPatch_): $StringBuilder;
+        static getTypeInfo(type: $DataComponentType_<never>): $TypeInfo;
         static filter(from: $Object, target: $TypeInfo_): boolean;
         static readMap(registryOps: $DynamicOps<$Tag_>, reader: $StringReader): $DataComponentMap;
         /**
@@ -198,15 +198,15 @@ declare module "@package/dev/latvian/mods/kubejs/component" {
         set<T extends keyof DataComponentTypes.InputMap>(type: T, data: DataComponentTypes.InputMap[T]): this;
     }
     export interface $MutableDataComponentHolderFunctions extends $ComponentFunctions {
-        getComponentMap(): $DataComponentMap;
-        patch(components: $DataComponentPatch_): $ComponentFunctions;
         getComponentHolder(): $MutableDataComponentHolder;
+        getComponentMap(): $DataComponentMap;
+        patch(components: $DataComponentPatch_): this;
         get<T extends keyof DataComponentTypes.OutputMap>(type: T): DataComponentTypes.OutputMap[T] | null;
         getOrDefault<T extends keyof DataComponentTypes.OutputMap>(type: T, _default: DataComponentTypes.OutputMap[T]): DataComponentTypes.OutputMap[T];
         set(components: $DataComponentMap_): this;
         set<T extends keyof DataComponentTypes.InputMap>(type: T, data: DataComponentTypes.InputMap[T]): this;
-        get componentMap(): $DataComponentMap;
         get componentHolder(): $MutableDataComponentHolder;
+        get componentMap(): $DataComponentMap;
     }
     export class $DataComponentWrapper$PatchBuilder {
     }

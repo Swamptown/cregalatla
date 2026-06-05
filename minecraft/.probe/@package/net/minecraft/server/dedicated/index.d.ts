@@ -24,13 +24,13 @@ declare module "@package/net/minecraft/server/dedicated" {
     export class $Settings<T extends $Settings<T>> {
         static dispatchNumberOrString<V>(arg0: $IntFunction_<V>, arg1: $Function_<string, V>): $Function<string, V>;
         getLegacyBoolean(arg0: string): boolean;
-        getMutable<V>(arg0: string, arg1: $Function_<string, V>, arg2: $Function_<V, string>, arg3: V): $Settings$MutableValue<V>;
-        getMutable(arg0: string, arg1: number): $Settings$MutableValue<number>;
-        getMutable<V>(arg0: string, arg1: $Function_<string, V>, arg2: V): $Settings$MutableValue<V>;
-        getMutable(arg0: string, arg1: boolean): $Settings$MutableValue<boolean>;
         getLegacyString(arg0: string): string;
         getLegacy<V>(arg0: string, arg1: $Function_<string, V>): V;
         cloneProperties(): $Properties;
+        getMutable<V>(arg0: string, arg1: $Function_<string, V>, arg2: V): $Settings$MutableValue<V>;
+        getMutable(arg0: string, arg1: boolean): $Settings$MutableValue<boolean>;
+        getMutable<V>(arg0: string, arg1: $Function_<string, V>, arg2: $Function_<V, string>, arg3: V): $Settings$MutableValue<V>;
+        getMutable(arg0: string, arg1: number): $Settings$MutableValue<number>;
         reload(arg0: $RegistryAccess, arg1: $Properties): T;
         get<V>(arg0: string, arg1: $Function_<string, V>, arg2: $UnaryOperator_<V>, arg3: $Function_<V, string>, arg4: V): V;
         get<V>(arg0: string, arg1: $Function_<string, V>, arg2: V): V;
@@ -57,13 +57,12 @@ declare module "@package/net/minecraft/server/dedicated" {
     /**
      * Values that may be interpreted as {@link $DedicatedServerProperties$WorldDimensionData}.
      */
-    export type $DedicatedServerProperties$WorldDimensionData_ = { levelType?: string, generatorSettings?: $JsonObject_,  } | [levelType?: string, generatorSettings?: $JsonObject_, ];
+    export type $DedicatedServerProperties$WorldDimensionData_ = { generatorSettings?: $JsonObject_, levelType?: string,  } | [generatorSettings?: $JsonObject_, levelType?: string, ];
     export class $ServerWatchdog implements $Runnable {
         run(): void;
         constructor(arg0: $DedicatedServer);
     }
     export class $DedicatedPlayerList extends $PlayerList {
-        getServer(): $DedicatedServer;
         static WHITELIST_FILE: $File;
         maxPlayers: number;
         static USERBANLIST_FILE: $File;
@@ -72,7 +71,6 @@ declare module "@package/net/minecraft/server/dedicated" {
         static CHAT_FILTERED_FULL: $Component;
         static DUPLICATE_LOGIN_DISCONNECT_MESSAGE: $Component;
         constructor(arg0: $DedicatedServer, arg1: $LayeredRegistryAccess<$RegistryLayer_>, arg2: $PlayerDataStorage);
-        get server(): $DedicatedServer;
     }
     export class $Settings$MutableValue<V> implements $Supplier<V> {
         get(): V;
@@ -80,17 +78,17 @@ declare module "@package/net/minecraft/server/dedicated" {
         this$0: $Settings<any>;
     }
     export class $DedicatedServer extends $MinecraftServer implements $ServerInterface {
+        getServerName(): string;
         convertOldUsers(): boolean;
         getLevelIdName(): string;
         getMaxTickLength(): number;
+        getServerPort(): number;
         handleConsoleInputs(): void;
         handleConsoleInput(arg0: string, arg1: $CommandSourceStack): void;
         getServerIp(): string;
         showGui(): void;
         getPluginNames(): string;
         storeUsingWhiteList(arg0: boolean): void;
-        getServerPort(): number;
-        getServerName(): string;
         getProperties(): $DedicatedServerProperties;
         runCommand(arg0: string): string;
         static VANILLA_BRAND: string;
@@ -106,17 +104,17 @@ declare module "@package/net/minecraft/server/dedicated" {
         static DEMO_SETTINGS: $LevelSettings;
         playerDataStorage: $PlayerDataStorage;
         constructor(arg0: $Thread, arg1: $LevelStorageSource$LevelStorageAccess, arg2: $PackRepository, arg3: $WorldStem_, arg4: $DedicatedServerSettings, arg5: $DataFixer, arg6: $Services_, arg7: $ChunkProgressListenerFactory_);
+        get serverName(): string;
         get levelIdName(): string;
         get maxTickLength(): number;
+        get serverPort(): number;
         get serverIp(): string;
         get pluginNames(): string;
-        get serverPort(): number;
-        get serverName(): string;
         get properties(): $DedicatedServerProperties;
     }
     export class $DedicatedServerProperties extends $Settings<$DedicatedServerProperties> {
-        createDimensions(arg0: $RegistryAccess): $WorldDimensions;
         static fromFile(arg0: $Path_): $DedicatedServerProperties;
+        createDimensions(arg0: $RegistryAccess): $WorldDimensions;
         onlineMode: boolean;
         opPermissionLevel: number;
         allowNether: boolean;

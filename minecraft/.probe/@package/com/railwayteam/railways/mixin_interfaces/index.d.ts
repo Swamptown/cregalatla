@@ -146,9 +146,9 @@ declare module "@package/com/railwayteam/railways/mixin_interfaces" {
     export class $IGenerallySearchableNavigation {
     }
     export interface $IGenerallySearchableNavigation {
-        railways$searchGeneral(arg0: number, arg1: boolean, arg2: $IGenerallySearchableNavigation$PointTest_): void;
-        railways$searchGeneral(arg0: number, arg1: number, arg2: boolean, arg3: $IGenerallySearchableNavigation$PointTest_): void;
         railways$findNearestApproachableSwitch(arg0: boolean): $Pair<$TrackSwitch, $Pair<boolean, ($TrackSwitchBlock$SwitchState) | undefined>>;
+        railways$searchGeneral(arg0: number, arg1: number, arg2: boolean, arg3: $IGenerallySearchableNavigation$PointTest_): void;
+        railways$searchGeneral(arg0: number, arg1: boolean, arg2: $IGenerallySearchableNavigation$PointTest_): void;
     }
     export class $IContraptionFuel {
     }

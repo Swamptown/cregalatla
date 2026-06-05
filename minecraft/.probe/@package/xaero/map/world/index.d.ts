@@ -26,12 +26,12 @@ declare module "@package/xaero/map/world" {
         get empty(): boolean;
     }
     export class $MapWorld {
+        setIgnoreHeightmaps(arg0: boolean): void;
         getFutureDimensionId(): $ResourceKey<$Level>;
         getFutureDimension(): $MapDimension;
         toggleDimension(arg0: boolean): void;
         getCustomDimensionId(): $ResourceKey<$Level>;
         getCurrentMultiworld(): string;
-        setIgnoreHeightmaps(arg0: boolean): void;
         isUsingCustomDimension(): boolean;
         isUsingUnknownDimensionType(): boolean;
         isMultiplayer(): boolean;
@@ -70,15 +70,15 @@ declare module "@package/xaero/map/world" {
         getMapConnections(): $MapConnectionManager;
         isUsingDefaultMapTeleport(): boolean;
         isUsingDefaultPlayerTeleport(): boolean;
+        isIgnoreHeightmaps(): boolean;
         isCacheOnlyMode(): boolean;
         getCurrentDimension(): $MapDimension;
         getCurrentDimensionId(): $ResourceKey<$Level>;
+        getDimension(arg0: $ResourceKey_<$Level>): $MapDimension;
         getMapProcessor(): $MapProcessor;
         clearAllCachedHighlightHashes(): void;
-        isIgnoreHeightmaps(): boolean;
-        getDimension(arg0: $ResourceKey_<$Level>): $MapDimension;
-        load(): void;
         getDimensions(arg0: $List_<$MapDimension>): void;
+        load(): void;
         saveConfig(): void;
         constructor(arg0: string, arg1: string, arg2: $MapProcessor);
         get futureDimension(): $MapDimension;
@@ -109,28 +109,28 @@ declare module "@package/xaero/map/world" {
         get mapProcessor(): $MapProcessor;
     }
     export class $MapConnectionNode {
-        getNamedString(arg0: $MapWorld): string;
         getDimId(): $ResourceKey<$Level>;
         getMw(): string;
+        getNamedString(arg0: $MapWorld): string;
         static fromString(arg0: string): $MapConnectionNode;
         constructor(arg0: $ResourceKey_<$Level>, arg1: string);
         get dimId(): $ResourceKey<$Level>;
         get mw(): string;
     }
     export class $MapDimension {
+        startFullMapReload(arg0: number, arg1: boolean, arg2: $MapProcessor): void;
+        clearFullMapReload(): void;
+        calculateDimScale(arg0: $Registry<$DimensionType_>): number;
         calculateDimDiv(arg0: $Registry<$DimensionType_>, arg1: $DimensionType_): number;
-        getDimId(): $ResourceKey<$Level>;
         getCurrentMultiworld(): string;
         static getDimensionType(arg0: $MapDimension, arg1: $ResourceKey_<$Level>, arg2: $Registry<$DimensionType_>): $DimensionType;
         getDimensionType(arg0: $Registry<$DimensionType_>): $DimensionType;
         getDimensionTypeId(): $ResourceLocation;
         getHighlightHandler(): $DimensionHighlighterHandler;
-        getWorldSaveDetectedRegions(): $Iterable<$Hashtable<number, $RegionDetection>>;
-        startFullMapReload(arg0: number, arg1: boolean, arg2: $MapProcessor): void;
-        clearFullMapReload(): void;
         getFullReloader(): $MapFullReloader;
         isUsingUnknownDimensionType(arg0: $Registry<$DimensionType_>): boolean;
-        calculateDimScale(arg0: $Registry<$DimensionType_>): number;
+        getDimId(): $ResourceKey<$Level>;
+        getWorldSaveDetectedRegions(): $Iterable<$Hashtable<number, $RegionDetection>>;
         getMultiworldIdsCopy(): $List<string>;
         getMultiworldName(arg0: string): string;
         getCaveModeType(): number;
@@ -151,8 +151,6 @@ declare module "@package/xaero/map/world" {
         getDimensionEffects(arg0: $Registry<$DimensionType_>): $DimensionSpecialEffects;
         onCreationUnsynced(): void;
         getPlayerMapKey(): $MapConnectionNode;
-        onClearCachedHighlightHash(arg0: number, arg1: number): void;
-        onClearCachedHighlightHashes(): void;
         getFutureCustomSelectedMultiworld(): string;
         isFutureUsingWorldSaveUnsynced(): boolean;
         deleteMultiworldId(arg0: string): void;
@@ -170,6 +168,8 @@ declare module "@package/xaero/map/world" {
         setMultiworldName(arg0: string, arg1: string): void;
         saveConfigUnsynced(): void;
         pickDefaultCustomMultiworldUnsynced(): void;
+        onClearCachedHighlightHash(arg0: number, arg1: number): void;
+        onClearCachedHighlightHashes(): void;
         getMapWorld(): $MapWorld;
         isCacheOnlyMode(arg0: $Registry<$DimensionType_>): boolean;
         isUsingWorldSave(): boolean;
@@ -181,12 +181,12 @@ declare module "@package/xaero/map/world" {
         currentMultiworldWritable: boolean;
         regionsToCache: $ArrayList<$LeveledRegion<never>>;
         constructor(arg0: $MapWorld, arg1: $ResourceKey_<$Level>, arg2: $HighlighterRegistry);
-        get dimId(): $ResourceKey<$Level>;
         get currentMultiworld(): string;
         get dimensionTypeId(): $ResourceLocation;
         get highlightHandler(): $DimensionHighlighterHandler;
-        get worldSaveDetectedRegions(): $Iterable<$Hashtable<number, $RegionDetection>>;
         get fullReloader(): $MapFullReloader;
+        get dimId(): $ResourceKey<$Level>;
+        get worldSaveDetectedRegions(): $Iterable<$Hashtable<number, $RegionDetection>>;
         get multiworldIdsCopy(): $List<string>;
         get caveModeType(): number;
         set multiworldUnsynced(value: string);

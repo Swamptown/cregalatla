@@ -63,7 +63,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $RequestEntityKubedexPayload}.
      */
-    export type $RequestEntityKubedexPayload_ = { flags?: number, entityId?: number,  } | [flags?: number, entityId?: number, ];
+    export type $RequestEntityKubedexPayload_ = { entityId?: number, flags?: number,  } | [entityId?: number, flags?: number, ];
     export class $SyncStagesPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<never>;
         handle(ctx: $IPayloadContext): void;
@@ -104,20 +104,20 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $RequestInventoryKubedexPayload}.
      */
-    export type $RequestInventoryKubedexPayload_ = { slots?: $List_<number>, flags?: number, stacks?: $List_<$ItemStack_>,  } | [slots?: $List_<number>, flags?: number, stacks?: $List_<$ItemStack_>, ];
+    export type $RequestInventoryKubedexPayload_ = { stacks?: $List_<$ItemStack_>, flags?: number, slots?: $List_<number>,  } | [stacks?: $List_<$ItemStack_>, flags?: number, slots?: $List_<number>, ];
     export class $NetworkKubeEvent implements $KubePlayerEvent {
-        /**
-         * The channel of the packet.
-         */
-        getChannel(): string;
         /**
          * The data of the packet.
          */
         getData(): $CompoundTag;
+        /**
+         * The channel of the packet.
+         */
+        getChannel(): string;
         getPlayer(): $Player;
         getLevel(): $Level;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -156,12 +156,12 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
         cancel(): $Object;
         getEntity(): $LivingEntity;
         constructor(p: $Player, c: string, d: $CompoundTag_);
-        get channel(): string;
         get data(): $CompoundTag;
+        get channel(): string;
         get player(): $Player;
         get level(): $Level;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get registries(): $RegistryAccess;
         get entity(): $LivingEntity;
     }
     export class $RemoveStagePayload extends $Record implements $CustomPacketPayload {
@@ -217,7 +217,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $RequestBlockKubedexPayload}.
      */
-    export type $RequestBlockKubedexPayload_ = { pos?: $BlockPos_, flags?: number,  } | [pos?: $BlockPos_, flags?: number, ];
+    export type $RequestBlockKubedexPayload_ = { flags?: number, pos?: $BlockPos_,  } | [flags?: number, pos?: $BlockPos_, ];
     export class $WebServerUpdateJSONPayload extends $Record implements $CustomPacketPayload {
         requiredTag(): string;
         payload(): $JsonElement;
@@ -232,7 +232,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $WebServerUpdateJSONPayload}.
      */
-    export type $WebServerUpdateJSONPayload_ = { requiredTag?: string, event?: string, payload?: $JsonElement_,  } | [requiredTag?: string, event?: string, payload?: $JsonElement_, ];
+    export type $WebServerUpdateJSONPayload_ = { event?: string, requiredTag?: string, payload?: $JsonElement_,  } | [event?: string, requiredTag?: string, payload?: $JsonElement_, ];
     export class $KubeServerData extends $Record {
         recipeViewerData(): ($RecipeViewerData) | undefined;
         itemTooltipData(): $List<$ItemTooltipData>;
@@ -243,7 +243,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $KubeServerData}.
      */
-    export type $KubeServerData_ = { recipeViewerData?: ($RecipeViewerData_) | undefined, itemTooltipData?: $List_<$ItemTooltipData_>,  } | [recipeViewerData?: ($RecipeViewerData_) | undefined, itemTooltipData?: $List_<$ItemTooltipData_>, ];
+    export type $KubeServerData_ = { itemTooltipData?: $List_<$ItemTooltipData_>, recipeViewerData?: ($RecipeViewerData_) | undefined,  } | [itemTooltipData?: $List_<$ItemTooltipData_>, recipeViewerData?: ($RecipeViewerData_) | undefined, ];
     export class $WebServerUpdateNBTPayload extends $Record implements $CustomPacketPayload {
         requiredTag(): string;
         payload(): ($Tag) | undefined;
@@ -258,7 +258,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $WebServerUpdateNBTPayload}.
      */
-    export type $WebServerUpdateNBTPayload_ = { requiredTag?: string, event?: string, payload?: ($Tag_) | undefined,  } | [requiredTag?: string, event?: string, payload?: ($Tag_) | undefined, ];
+    export type $WebServerUpdateNBTPayload_ = { event?: string, requiredTag?: string, payload?: ($Tag_) | undefined,  } | [event?: string, requiredTag?: string, payload?: ($Tag_) | undefined, ];
     export class $KubeJSNet$Kubedex {
         static REQUEST_BLOCK: $CustomPacketPayload$Type<$RequestBlockKubedexPayload>;
         static REQUEST_INVENTORY: $CustomPacketPayload$Type<$RequestInventoryKubedexPayload>;
@@ -267,8 +267,8 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     export interface $KubeJSNet$Kubedex {
     }
     export class $KubeJSNet {
-        static sendToAllPlayers(payload: $CustomPacketPayload_, ...payloads: $CustomPacketPayload_[]): void;
         static safeSendToPlayer(player: $ServerPlayer, payload: $CustomPacketPayload_, ...payloads: $CustomPacketPayload_[]): void;
+        static sendToAllPlayers(payload: $CustomPacketPayload_, ...payloads: $CustomPacketPayload_[]): void;
         static register(event: $RegisterPayloadHandlersEvent): void;
         static WEB_SERVER_NBT_UPDATE: $CustomPacketPayload$Type<$WebServerUpdateNBTPayload>;
         static DISPLAY_CLIENT_ERRORS: $CustomPacketPayload$Type<$DisplayClientErrorsPayload>;
@@ -300,7 +300,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $SendDataFromClientPayload}.
      */
-    export type $SendDataFromClientPayload_ = { channel?: string, data?: $CompoundTag_,  } | [channel?: string, data?: $CompoundTag_, ];
+    export type $SendDataFromClientPayload_ = { data?: $CompoundTag_, channel?: string,  } | [data?: $CompoundTag_, channel?: string, ];
     export class $AddStagePayload extends $Record implements $CustomPacketPayload {
         stage(): string;
         type(): $CustomPacketPayload$Type<never>;
@@ -329,7 +329,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $DisplayServerErrorsPayload}.
      */
-    export type $DisplayServerErrorsPayload_ = { scriptType?: number, errors?: $List_<$ConsoleLine>, warnings?: $List_<$ConsoleLine>,  } | [scriptType?: number, errors?: $List_<$ConsoleLine>, warnings?: $List_<$ConsoleLine>, ];
+    export type $DisplayServerErrorsPayload_ = { warnings?: $List_<$ConsoleLine>, errors?: $List_<$ConsoleLine>, scriptType?: number,  } | [warnings?: $List_<$ConsoleLine>, errors?: $List_<$ConsoleLine>, scriptType?: number, ];
     export class $SendDataFromServerPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<never>;
         data(): $CompoundTag;
@@ -343,7 +343,7 @@ declare module "@package/dev/latvian/mods/kubejs/net" {
     /**
      * Values that may be interpreted as {@link $SendDataFromServerPayload}.
      */
-    export type $SendDataFromServerPayload_ = { channel?: string, data?: $CompoundTag_,  } | [channel?: string, data?: $CompoundTag_, ];
+    export type $SendDataFromServerPayload_ = { data?: $CompoundTag_, channel?: string,  } | [data?: $CompoundTag_, channel?: string, ];
     export class $DisplayClientErrorsPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<never>;
         handle(ctx: $IPayloadContext): void;

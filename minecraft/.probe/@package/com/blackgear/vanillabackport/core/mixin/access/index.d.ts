@@ -50,11 +50,11 @@ declare module "@package/com/blackgear/vanillabackport/core/mixin/access" {
     export class $SoundEngineAccessor {
     }
     export interface $SoundEngineAccessor {
-        isLoaded(): boolean;
         getInstanceToChannel(): $Map<$SoundInstance, $ChannelAccess$ChannelHandle>;
         callCalculateVolume(arg0: $SoundInstance): number;
-        get loaded(): boolean;
+        isLoaded(): boolean;
         get instanceToChannel(): $Map<$SoundInstance, $ChannelAccess$ChannelHandle>;
+        get loaded(): boolean;
     }
     export class $BundleContentsAccessor {
         static callGetWeight(stack: $ItemStack_): $Fraction;
@@ -64,10 +64,10 @@ declare module "@package/com/blackgear/vanillabackport/core/mixin/access" {
     export class $BlockRenderDispatcherAccessor {
     }
     export interface $BlockRenderDispatcherAccessor {
-        getBlockColors(): $BlockColors;
         getBlockEntityRenderer(): $BlockEntityWithoutLevelRenderer;
-        get blockColors(): $BlockColors;
+        getBlockColors(): $BlockColors;
         get blockEntityRenderer(): $BlockEntityWithoutLevelRenderer;
+        get blockColors(): $BlockColors;
     }
     export class $TextureSlotAccessor {
         static create(name: string): $TextureSlot;

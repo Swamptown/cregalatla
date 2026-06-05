@@ -22,11 +22,11 @@ declare module "@package/net/minecraft/server/bossevents" {
         get ids(): $Collection<$ResourceLocation>;
     }
     export class $CustomBossEvent extends $ServerBossEvent {
-        addOfflinePlayer(arg0: $UUID_): void;
         setPlayers(arg0: $Collection_<$ServerPlayer>): boolean;
         onPlayerDisconnect(arg0: $ServerPlayer): void;
         onPlayerConnect(arg0: $ServerPlayer): void;
         getTextId(): $ResourceLocation;
+        addOfflinePlayer(arg0: $UUID_): void;
         getDisplayName(): $Component;
         static load(arg0: $CompoundTag_, arg1: $ResourceLocation_, arg2: $HolderLookup$Provider): $CustomBossEvent;
         getValue(): number;

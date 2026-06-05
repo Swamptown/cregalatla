@@ -40,24 +40,22 @@ declare module "@package/dev/emi/emi/api" {
     export class $EmiRegistry {
     }
     export interface $EmiRegistry extends $GlobalMixin {
+        addGenericScreenBoundsProvider(arg0: $EmiScreenBoundsProvider_<$Screen>): void;
         addScreenBoundsProvider<T extends $Screen>(arg0: $Class<T>, arg1: $EmiScreenBoundsProvider_<T>): void;
         isStackDisabled(arg0: $EmiIngredient): boolean;
         addDeferredRecipes(arg0: $Consumer_<$Consumer<$EmiRecipe>>): void;
-        addEmiStackAfter(arg0: $EmiStack, arg1: $Predicate_<$EmiStack>): void;
         addEmiStackAfter(stack: $EmiStack, other: $EmiStack): void;
+        addEmiStackAfter(arg0: $EmiStack, arg1: $Predicate_<$EmiStack>): void;
         addDragDropHandler<T extends $Screen>(arg0: $Class<T>, arg1: $EmiDragDropHandler_<T>): void;
         addStackProvider<T extends $Screen>(arg0: $Class<T>, arg1: $EmiStackProvider_<T>): void;
         addRecipeHandler<T extends $AbstractContainerMenu>(arg0: $MenuType_<T>, arg1: $EmiRecipeHandler<T>): void;
-        addRecipeDecorator(category: $EmiRecipeCategory, decorator: $EmiRecipeDecorator_): void;
         addRecipeDecorator(arg0: $EmiRecipeDecorator_): void;
-        addGenericScreenBoundsProvider(arg0: $EmiScreenBoundsProvider_<$Screen>): void;
-        addRecipe(arg0: $EmiRecipe): void;
-        removeRecipes(arg0: $Predicate_<$EmiRecipe>): void;
-        removeRecipes(id: $ResourceLocation_): void;
-        setDefaultComparison(key: $Object, comparison: $Comparison): void;
+        addRecipeDecorator(category: $EmiRecipeCategory, decorator: $EmiRecipeDecorator_): void;
+        addWorkstation(arg0: $EmiRecipeCategory, arg1: $EmiIngredient): void;
+        setDefaultComparison(arg0: $Object, arg1: $Function_<$Comparison, $Comparison>): void;
         setDefaultComparison(stack: $EmiStack, comparison: $Function_<$Comparison, $Comparison>): void;
         setDefaultComparison(stack: $EmiStack, comparison: $Comparison): void;
-        setDefaultComparison(arg0: $Object, arg1: $Function_<$Comparison, $Comparison>): void;
+        setDefaultComparison(key: $Object, comparison: $Comparison): void;
         addExclusionArea<T extends $Screen>(arg0: $Class<T>, arg1: $EmiExclusionArea_<T>): void;
         addGenericExclusionArea(arg0: $EmiExclusionArea_<$Screen>): void;
         addGenericStackProvider(arg0: $EmiStackProvider_<$Screen>): void;
@@ -69,7 +67,9 @@ declare module "@package/dev/emi/emi/api" {
         addEmiStack(arg0: $EmiStack): void;
         removeEmiStacks(arg0: $Predicate_<$EmiStack>): void;
         removeEmiStacks(stack: $EmiStack): void;
-        addWorkstation(arg0: $EmiRecipeCategory, arg1: $EmiIngredient): void;
+        addRecipe(arg0: $EmiRecipe): void;
+        removeRecipes(id: $ResourceLocation_): void;
+        removeRecipes(arg0: $Predicate_<$EmiRecipe>): void;
         addAlias(arg0: $EmiIngredient, arg1: $Component_): void;
         addCategory(arg0: $EmiRecipeCategory): void;
         getRecipeManager(): $RecipeManager;

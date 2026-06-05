@@ -29,16 +29,12 @@ declare module "@package/org/apache/maven/artifact" {
         static LATEST_VERSION: string;
     }
     export interface $Artifact extends $Comparable<$Artifact> {
-        setGroupId(arg0: string): void;
         hasClassifier(): boolean;
         getBaseVersion(): string;
         setBaseVersion(arg0: string): void;
         getDependencyConflictId(): string;
-        addMetadata(arg0: $ArtifactMetadata): void;
         getMetadataList(): $Collection<$ArtifactMetadata>;
         setRepository(arg0: $ArtifactRepository): void;
-        updateVersion(arg0: string, arg1: $ArtifactRepository): void;
-        getDownloadUrl(): string;
         setDownloadUrl(arg0: string): void;
         getDependencyFilter(): $ArtifactFilter;
         setDependencyFilter(arg0: $ArtifactFilter_): void;
@@ -46,6 +42,7 @@ declare module "@package/org/apache/maven/artifact" {
         setDependencyTrail(arg0: $List_<string>): void;
         setVersionRange(arg0: $VersionRange): void;
         selectVersion(arg0: string): void;
+        setGroupId(arg0: string): void;
         setArtifactId(arg0: string): void;
         setResolved(arg0: boolean): void;
         setResolvedVersion(arg0: string): void;
@@ -54,10 +51,12 @@ declare module "@package/org/apache/maven/artifact" {
         getAvailableVersions(): $List<$ArtifactVersion>;
         setAvailableVersions(arg0: $List_<$ArtifactVersion>): void;
         setOptional(arg0: boolean): void;
-        isSnapshot(): boolean;
-        getRepository(): $ArtifactRepository;
+        addMetadata(arg0: $ArtifactMetadata): void;
+        getDownloadUrl(): string;
         setScope(arg0: string): void;
+        isSnapshot(): boolean;
         setVersion(arg0: string): void;
+        getRepository(): $ArtifactRepository;
         getVersion(): string;
         getId(): string;
         getType(): string;
@@ -69,11 +68,12 @@ declare module "@package/org/apache/maven/artifact" {
         getGroupId(): string;
         getArtifactId(): string;
         getClassifier(): string;
-        getDependencyTrail(): $List<string>;
         getSelectedVersion(): $ArtifactVersion;
         isSelectedVersionKnown(): boolean;
+        getDependencyTrail(): $List<string>;
         getVersionRange(): $VersionRange;
         isOptional(): boolean;
+        updateVersion(arg0: string, arg1: $ArtifactRepository): void;
         get dependencyConflictId(): string;
         get metadataList(): $Collection<$ArtifactMetadata>;
         set resolvedVersion(value: string);

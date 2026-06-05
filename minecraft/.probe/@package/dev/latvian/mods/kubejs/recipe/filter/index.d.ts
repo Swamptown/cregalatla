@@ -32,15 +32,15 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/filter" {
     export type $RecipeFilter_ = RegExp | "*" | "-" | $RecipeFilter[] | { or?: $RecipeFilter_[], not?: $RecipeFilter_, id?: SpecialTypes.RecipeId, type?: RegistryTypes.RecipeSerializer, group?: string, mod?: SpecialTypes.ModId, input?: $Ingredient_, output?: $ItemStack_,  } | ((cx: $RecipeMatchContext) => boolean);
     export class $TypeFilter implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         constructor(t: $ResourceLocation_);
     }
     export class $RecipeMatchContext$Impl extends $Record implements $RecipeMatchContext {
+        cx(): $Context;
         ops(): $RegistryOpsContainer;
         recipe(): $RecipeLikeKJS;
-        cx(): $Context;
         registries(): $RegistryAccessContainer;
         constructor(recipe: $KubeRecipe);
         constructor(registries: $RegistryAccessContainer, ops: $RegistryOpsContainer, recipe: $RecipeLikeKJS);
@@ -48,43 +48,43 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/filter" {
     /**
      * Values that may be interpreted as {@link $RecipeMatchContext$Impl}.
      */
-    export type $RecipeMatchContext$Impl_ = { recipe?: $RecipeLikeKJS, cx?: $Context, registries?: $RegistryAccessContainer, ops?: $RegistryOpsContainer,  } | [recipe?: $RecipeLikeKJS, cx?: $Context, registries?: $RegistryAccessContainer, ops?: $RegistryOpsContainer, ];
+    export type $RecipeMatchContext$Impl_ = { cx?: $Context, recipe?: $RecipeLikeKJS, ops?: $RegistryOpsContainer, registries?: $RegistryAccessContainer,  } | [cx?: $Context, recipe?: $RecipeLikeKJS, ops?: $RegistryOpsContainer, registries?: $RegistryAccessContainer, ];
     export class $OrFilter implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         list: $List<$RecipeFilter>;
         constructor();
     }
     export class $OutputFilter implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         constructor(match: $ReplacementMatchInfo_);
     }
     export class $AndFilter implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         list: $List<$RecipeFilter>;
         constructor();
     }
     export class $GroupFilter implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         constructor(g: string);
     }
     export class $ConstantFilter extends $Record implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
         filter(): boolean;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         static TRUE: $ConstantFilter;
         static FALSE: $ConstantFilter;
         constructor(filter: boolean);
@@ -95,9 +95,9 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/filter" {
     export type $ConstantFilter_ = { filter?: boolean,  } | [filter?: boolean, ];
     export class $IDFilter implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         id: $ResourceLocation;
         constructor(i: $ResourceLocation_);
     }
@@ -109,23 +109,23 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/filter" {
         static clearInternCache(): void;
         test(cx: $RecipeMatchContext): boolean;
         static of(i: $Pattern): $RegexIDFilter;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
     }
     export class $ModFilter implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         constructor(m: string);
     }
     export class $NotFilter extends $Record implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
         original(): $RecipeFilter;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         constructor(original: $RecipeFilter_);
     }
     /**
@@ -135,9 +135,9 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/filter" {
     export class $InputFilter extends $Record implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
         match(): $ReplacementMatchInfo;
+        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         negate(): $Predicate<$RecipeMatchContext>;
         and(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
-        or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;
         constructor(match: $ReplacementMatchInfo_);
     }
     /**

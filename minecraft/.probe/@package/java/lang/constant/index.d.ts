@@ -30,8 +30,8 @@ declare module "@package/java/lang/constant" {
     export class $DirectMethodHandleDesc {
     }
     export interface $DirectMethodHandleDesc extends $MethodHandleDesc {
-        lookupDescriptor(): string;
         isOwnerInterface(): boolean;
+        lookupDescriptor(): string;
         methodName(): string;
         kind(): $DirectMethodHandleDesc$Kind;
         owner(): $ClassDesc;
@@ -113,11 +113,11 @@ declare module "@package/java/lang/constant" {
         dropParameterTypes(arg0: number, arg1: number): $MethodTypeDesc;
     }
     export class $DynamicConstantDesc<T> implements $ConstantDesc {
-        constantName(): string;
-        constantType(): $ClassDesc;
         bootstrapArgs(): $ConstantDesc[];
         static ofCanonical<T>(arg0: $DirectMethodHandleDesc, arg1: string, arg2: $ClassDesc, arg3: $ConstantDesc_[]): $ConstantDesc;
         bootstrapArgsList(): $List<$ConstantDesc>;
+        constantName(): string;
+        constantType(): $ClassDesc;
         static of<T>(arg0: $DirectMethodHandleDesc, ...arg1: $ConstantDesc_[]): $DynamicConstantDesc<T>;
         static of<T>(arg0: $DirectMethodHandleDesc): $DynamicConstantDesc<T>;
         resolveConstantDesc(arg0: $MethodHandles$Lookup): T;

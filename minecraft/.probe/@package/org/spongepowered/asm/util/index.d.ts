@@ -6,8 +6,8 @@ export * as perf from "@package/org/spongepowered/asm/util/perf";
 
 declare module "@package/org/spongepowered/asm/util" {
     export class $PrettyPrinter {
-        addWithIndices(arg0: $Collection_<never>): $PrettyPrinter;
         addIndexed(arg0: $Object[]): $PrettyPrinter;
+        addWithIndices(arg0: $Collection_<never>): $PrettyPrinter;
         hr(): $PrettyPrinter;
         hr(arg0: string): $PrettyPrinter;
         log(arg0: $ILogger, arg1: $Level): $PrettyPrinter;

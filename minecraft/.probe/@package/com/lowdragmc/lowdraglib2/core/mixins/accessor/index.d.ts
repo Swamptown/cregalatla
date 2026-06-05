@@ -64,9 +64,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/core/mixins/accessor" {
     }
     export interface $SlotAccessor {
         getY(): number;
-        getX(): number;
         setX(arg0: number): void;
         setY(arg0: number): void;
+        getX(): number;
     }
     export class $DelegatingOpsAccessor<T> {
     }

@@ -48,7 +48,7 @@ declare module "@package/net/minecraft/util/eventlog" {
     /**
      * Values that may be interpreted as {@link $EventLogDirectory$FileId}.
      */
-    export type $EventLogDirectory$FileId_ = { index?: number, date?: $LocalDate,  } | [index?: number, date?: $LocalDate, ];
+    export type $EventLogDirectory$FileId_ = { date?: $LocalDate, index?: number,  } | [date?: $LocalDate, index?: number, ];
     export class $JsonEventLogReader<T> {
         static create<T>(arg0: $Codec<T>, arg1: $Reader): $JsonEventLogReader<T>;
     }

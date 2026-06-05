@@ -1,7 +1,7 @@
 import { $NewRegistryEvent } from "@package/net/neoforged/neoforge/registries";
 import { $Holder_ } from "@package/net/minecraft/core";
 import { $SoundEvent, $Music } from "@package/net/minecraft/sounds";
-import { $AmbientAdditionsSettings, $AmbientParticleSettings, $AmbientMoodSettings, $MobSpawnSettings$MobSpawnCost_, $MobSpawnSettings$MobSpawnCost } from "@package/net/minecraft/world/level/biome";
+import { $AmbientAdditionsSettings, $AmbientMoodSettings, $AmbientParticleSettings, $MobSpawnSettings$MobSpawnCost_, $MobSpawnSettings$MobSpawnCost } from "@package/net/minecraft/world/level/biome";
 import { $EntityType, $EntityType_ } from "@package/net/minecraft/world/entity";
 import { $Map_, $Map } from "@package/java/util";
 

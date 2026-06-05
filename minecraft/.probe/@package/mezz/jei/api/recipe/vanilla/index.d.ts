@@ -41,45 +41,45 @@ declare module "@package/mezz/jei/api/recipe/vanilla" {
     export class $IJeiGrindstoneRecipe {
     }
     export interface $IJeiGrindstoneRecipe {
+        getUid(): $ResourceLocation;
         getTopInputs(): $List<$ItemStack>;
         getBottomInputs(): $List<$ItemStack>;
         getMinXpReward(): number;
         getMaxXpReward(): number;
         isOutputRenderOnly(): boolean;
         getOutputs(): $List<$ItemStack>;
-        getUid(): $ResourceLocation;
+        get uid(): $ResourceLocation;
         get topInputs(): $List<$ItemStack>;
         get bottomInputs(): $List<$ItemStack>;
         get minXpReward(): number;
         get maxXpReward(): number;
         get outputRenderOnly(): boolean;
         get outputs(): $List<$ItemStack>;
-        get uid(): $ResourceLocation;
     }
     export class $IJeiBrewingRecipe {
     }
     export interface $IJeiBrewingRecipe {
+        getUid(): $ResourceLocation;
         getPotionInputs(): $List<$ItemStack>;
         getPotionOutput(): $ItemStack;
-        getIngredients(): $List<$ItemStack>;
         getBrewingSteps(): number;
-        getUid(): $ResourceLocation;
+        getIngredients(): $List<$ItemStack>;
+        get uid(): $ResourceLocation;
         get potionInputs(): $List<$ItemStack>;
         get potionOutput(): $ItemStack;
-        get ingredients(): $List<$ItemStack>;
         get brewingSteps(): number;
-        get uid(): $ResourceLocation;
+        get ingredients(): $List<$ItemStack>;
     }
     export class $IJeiAnvilRecipe {
     }
     export interface $IJeiAnvilRecipe {
+        getUid(): $ResourceLocation;
         getLeftInputs(): $List<$ItemStack>;
         getRightInputs(): $List<$ItemStack>;
         getOutputs(): $List<$ItemStack>;
-        getUid(): $ResourceLocation;
+        get uid(): $ResourceLocation;
         get leftInputs(): $List<$ItemStack>;
         get rightInputs(): $List<$ItemStack>;
         get outputs(): $List<$ItemStack>;
-        get uid(): $ResourceLocation;
     }
 }

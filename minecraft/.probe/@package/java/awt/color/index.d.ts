@@ -2,14 +2,14 @@ import { $Serializable } from "@package/java/io";
 
 declare module "@package/java/awt/color" {
     export class $ColorSpace implements $Serializable {
+        isCS_sRGB(): boolean;
+        fromRGB(arg0: number[]): number[];
+        getMinValue(arg0: number): number;
+        getMaxValue(arg0: number): number;
         toRGB(arg0: number[]): number[];
         toCIEXYZ(arg0: number[]): number[];
         fromCIEXYZ(arg0: number[]): number[];
-        getMinValue(arg0: number): number;
-        getMaxValue(arg0: number): number;
         getNumComponents(): number;
-        isCS_sRGB(): boolean;
-        fromRGB(arg0: number[]): number[];
         getName(arg0: number): string;
         static getInstance(arg0: number): $ColorSpace;
         getType(): number;

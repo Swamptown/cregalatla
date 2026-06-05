@@ -7,8 +7,8 @@ import { $FanProcessingType } from "@package/com/simibubi/create/content/kinetic
 declare module "@package/com/simibubi/create/content/kinetics/belt/transport" {
     export class $TransportedItemStack implements $Comparable<$TransportedItemStack> {
         getTargetSideOffset(): number;
-        clearFanProcessingData(): void;
         getSimilar(): $TransportedItemStack;
+        clearFanProcessingData(): void;
         compareTo(arg0: $TransportedItemStack): number;
         static read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $TransportedItemStack;
         copy(): $TransportedItemStack;

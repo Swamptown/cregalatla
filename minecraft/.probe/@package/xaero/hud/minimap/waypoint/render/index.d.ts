@@ -38,10 +38,10 @@ declare module "@package/xaero/hud/minimap/waypoint/render" {
          */
         updateWaypointCollection(): void;
         renderElement(arg0: $Waypoint, arg1: boolean, arg2: boolean, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $MinimapElementRenderInfo, arg8: $GuiGraphics, arg9: $MultiBufferSource$BufferSource): boolean;
+        drawSetChange(arg0: $MinimapSession, arg1: $GuiGraphics, arg2: $Window): void;
         /**
          * @deprecated
          */
         drawSetChange(arg0: $WaypointsManager, arg1: $GuiGraphics, arg2: $Window): void;
-        drawSetChange(arg0: $MinimapSession, arg1: $GuiGraphics, arg2: $Window): void;
     }
 }

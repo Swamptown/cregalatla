@@ -11,7 +11,7 @@ import { $StringRepresentable, $RandomSource } from "@package/net/minecraft/util
 import { $Bucketable, $Animal } from "@package/net/minecraft/world/entity/animal";
 import { $Predicate } from "@package/java/util/function";
 import { $InteractionHand } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
+import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $SoundEvent } from "@package/net/minecraft/sounds";
@@ -36,8 +36,8 @@ import { $Vector3f } from "@package/org/joml";
 
 declare module "@package/net/minecraft/world/entity/animal/axolotl" {
     export class $PlayDead extends $Behavior<$Axolotl> {
-        canStillUse(arg0: $ServerLevel, arg1: $Axolotl, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Axolotl): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Axolotl, arg2: number): boolean;
         start(arg0: $ServerLevel, arg1: $Axolotl, arg2: number): void;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
@@ -63,8 +63,8 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
     }
     export class $AxolotlAi {
         static getTemptations(): $Predicate<$ItemStack>;
-        static updateActivity(arg0: $Axolotl): void;
         static makeBrain(arg0: $Brain<$Axolotl>): $Brain<never>;
+        static updateActivity(arg0: $Axolotl): void;
         constructor();
         static get temptations(): $Predicate<$ItemStack>;
     }
@@ -83,23 +83,22 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
     }
     export class $Axolotl extends $Animal implements $LerpingModel, $VariantHolder<$Axolotl$Variant>, $Bucketable {
         getPickupSound(): $SoundEvent;
+        handleAirSupply(arg0: number): void;
         fromBucket(): boolean;
         setFromBucket(arg0: boolean): void;
         saveToBucketTag(arg0: $ItemStack_): void;
         loadFromBucketTag(arg0: $CompoundTag_): void;
         getBucketItemStack(): $ItemStack;
-        handleAirSupply(arg0: number): void;
-        static checkAxolotlSpawnRules(arg0: $EntityType_<$LivingEntity>, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
-        getModelRotationValues(): $Map<string, $Vector3f>;
         isPlayingDead(): boolean;
         rehydrate(): void;
         setPlayingDead(arg0: boolean): void;
         static onStopAttacking(arg0: $Axolotl, arg1: $LivingEntity): void;
         applySupportingEffects(arg0: $Player): void;
+        static checkAxolotlSpawnRules(arg0: $EntityType_<$LivingEntity>, arg1: $ServerLevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
+        getModelRotationValues(): $Map<string, $Vector3f>;
         setVariant(arg0: $Axolotl$Variant_): void;
         getVariant(): $Axolotl$Variant;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $Axolotl$Variant;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -132,6 +131,7 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -157,6 +157,7 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         verticalCollisionBelow: boolean;
         static VARIANT_TAG: string;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -184,6 +185,7 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

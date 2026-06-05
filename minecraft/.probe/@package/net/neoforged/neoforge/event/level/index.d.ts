@@ -121,8 +121,8 @@ declare module "@package/net/neoforged/neoforge/event/level" {
     }
     export class $LevelEvent extends $Event implements $EventHandlerImplCommon$LevelEventAttachment {
         getLevel(): $LevelAccessor;
-        architectury$attachLevel(level: $LevelAccessor): void;
         architectury$getAttachedLevel(): $LevelAccessor;
+        architectury$attachLevel(level: $LevelAccessor): void;
         constructor(arg0: $LevelAccessor);
         get level(): $LevelAccessor;
     }
@@ -147,30 +147,30 @@ declare module "@package/net/neoforged/neoforge/event/level" {
         get portalSize(): $PortalShape;
     }
     export class $BlockDropsEvent extends $BlockEvent implements $ICancellableEvent {
-        getBreaker(): $Entity;
-        getTool(): $ItemStack;
         setDroppedExperience(arg0: number): void;
         getDroppedExperience(): number;
+        getBreaker(): $Entity;
+        getTool(): $ItemStack;
         getLevel(): $ServerLevel;
+        getDrops(): $List<$ItemEntity>;
         setCanceled(arg0: boolean): void;
         getBlockEntity(): $BlockEntity;
-        getDrops(): $List<$ItemEntity>;
         isCanceled(): boolean;
         constructor(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: $List_<$ItemEntity>, arg5: $Entity, arg6: $ItemStack_);
         get breaker(): $Entity;
         get tool(): $ItemStack;
         get level(): $ServerLevel;
-        get blockEntity(): $BlockEntity;
         get drops(): $List<$ItemEntity>;
+        get blockEntity(): $BlockEntity;
     }
     export class $BlockEvent$NeighborNotifyEvent extends $BlockEvent implements $ICancellableEvent {
-        getForceRedstoneUpdate(): boolean;
         getNotifiedSides(): $EnumSet<$Direction>;
+        getForceRedstoneUpdate(): boolean;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $EnumSet<$Direction_>, arg4: boolean);
-        get forceRedstoneUpdate(): boolean;
         get notifiedSides(): $EnumSet<$Direction>;
+        get forceRedstoneUpdate(): boolean;
     }
     export class $LevelEvent$CreateSpawnPosition extends $LevelEvent implements $ICancellableEvent {
         getSettings(): $ServerLevelData;
@@ -180,13 +180,13 @@ declare module "@package/net/neoforged/neoforge/event/level" {
         get settings(): $ServerLevelData;
     }
     export class $BlockEvent$FarmlandTrampleEvent extends $BlockEvent implements $ICancellableEvent {
-        getFallDistance(): number;
         getEntity(): $Entity;
+        getFallDistance(): number;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: number, arg4: $Entity);
-        get fallDistance(): number;
         get entity(): $Entity;
+        get fallDistance(): number;
     }
     export class $BlockEvent$EntityPlaceEvent extends $BlockEvent implements $ICancellableEvent {
         getPlacedBlock(): $BlockState;
@@ -202,8 +202,8 @@ declare module "@package/net/neoforged/neoforge/event/level" {
         get entity(): $Entity;
     }
     export class $NoteBlockEvent$Play extends $NoteBlockEvent implements $ICancellableEvent {
-        getInstrument(): $NoteBlockInstrument;
         setInstrument(arg0: $NoteBlockInstrument_): void;
+        getInstrument(): $NoteBlockInstrument;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: number, arg4: $NoteBlockInstrument_);
@@ -213,8 +213,8 @@ declare module "@package/net/neoforged/neoforge/event/level" {
     }
     export class $ChunkDataEvent extends $ChunkEvent {
         getData(): $CompoundTag;
-        constructor(arg0: $ChunkAccess, arg1: $CompoundTag_);
         constructor(arg0: $ChunkAccess, arg1: $LevelAccessor, arg2: $CompoundTag_);
+        constructor(arg0: $ChunkAccess, arg1: $CompoundTag_);
         get data(): $CompoundTag;
     }
     export class $BlockEvent$EntityMultiPlaceEvent extends $BlockEvent$EntityPlaceEvent implements $ICancellableEvent {
@@ -270,11 +270,11 @@ declare module "@package/net/neoforged/neoforge/event/level" {
     }
     export class $BlockGrowFeatureEvent extends $LevelEvent implements $ICancellableEvent {
         getFeature(): $Holder<$ConfiguredFeature<never, never>>;
+        getRandom(): $RandomSource;
         setFeature(arg0: $Holder_<$ConfiguredFeature<never, never>>): void;
         setFeature(arg0: $ResourceKey_<$ConfiguredFeature<never, never>>): void;
-        setCanceled(arg0: boolean): void;
-        getRandom(): $RandomSource;
         getPos(): $BlockPos;
+        setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $LevelAccessor, arg1: $RandomSource, arg2: $BlockPos_, arg3: $Holder_<$ConfiguredFeature<never, never>>);
         get random(): $RandomSource;
@@ -308,9 +308,9 @@ declare module "@package/net/neoforged/neoforge/event/level" {
         get chunk(): $ChunkAccess;
     }
     export class $NoteBlockEvent extends $BlockEvent {
-        getNote(): $NoteBlockEvent$Note;
         getOctave(): $NoteBlockEvent$Octave;
         setNote(arg0: $NoteBlockEvent$Note_, arg1: $NoteBlockEvent$Octave_): void;
+        getNote(): $NoteBlockEvent$Note;
         getVanillaNoteId(): number;
         get octave(): $NoteBlockEvent$Octave;
         get vanillaNoteId(): number;
@@ -334,8 +334,8 @@ declare module "@package/net/neoforged/neoforge/event/level" {
         get pos(): $BlockPos;
     }
     export class $BlockEvent$BlockToolModificationEvent extends $BlockEvent implements $ICancellableEvent {
-        getHeldItemStack(): $ItemStack;
         getItemAbility(): $ItemAbility;
+        getHeldItemStack(): $ItemStack;
         getPlayer(): $Player;
         setFinalState(arg0: $BlockState_): void;
         getFinalState(): $BlockState;
@@ -344,8 +344,8 @@ declare module "@package/net/neoforged/neoforge/event/level" {
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $BlockState_, arg1: $UseOnContext, arg2: $ItemAbility_, arg3: boolean);
-        get heldItemStack(): $ItemStack;
         get itemAbility(): $ItemAbility;
+        get heldItemStack(): $ItemStack;
         get player(): $Player;
         get simulated(): boolean;
         get context(): $UseOnContext;

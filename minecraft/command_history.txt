@@ -1,32 +1,3 @@
-/tp mxwl
-/tp SirPotato42 Rasgajag
-/gamemode creative SirPotato42
-/tp mxwl
-/tp SirPotato42 Rasgajag
-/tp HeroBryan1 Rasgajag
-/tp SirPotato42 Rasgajag
-/kick SirPotato42
-/kill
-/tp SirPotato42 Rasgajag
-/give SirPotato42 mymod:closed_scroll
-/setavatar @a
-/setavatar mxwl
-/setavatar HeroBryan1
-/setavatar @r
-/give @a cregalatla:bending_coin 3
-/advancement revoke Rasgajag everything
-/clear @a
-/tp CherriRacc00n
-/gamemode creative
-/reload
-/kubejs reload client-scripts
-/tp Rasgajag ~ ~1000 ~
-/tp Rasgajag ~ ~100 ~
-/tp Rasgajag ~ ~500 ~
-/tp Rasgajag ~ ~1000 ~
-/fill ~ ~ ~ ~ ~ ~ minecraft:diamond_block
-/tp ~ 10 ~
-/tp ~ 100 ~
 /fill ~ ~ ~ ~ ~ ~ minecraft:diamond_block
 /advancement grant Rasgajag only mymod:bend
 /tp ~ ~100 ~
@@ -48,3 +19,32 @@
 /kill e4863986-f9df-4ac9-ad85-e181303a6da1
 /time set day
 /tick unfreeze
+/deop CherriRacc00n
+/deop LilGumbo
+/deop mxwl
+/deop N30_c0r3
+/deop SirPotato42
+/deop teeeal
+/whitelist add Rasgajag
+/whitelist list
+/whitelist on
+/chunky center -416 99
+/setworldspawn -416 69 99
+/gamerule spawnRadius 0
+/chunky help
+/chunky worldborder
+/chunky spawn
+/chunky help 2
+/chunky radius 100
+/chunky selection
+/chunky radius 30000
+/worldborder center -416 99
+/worldborder set 300000
+/chunky worldborder
+/chunky start
+/chunky cancel
+/chunky confirm
+/worldborder set 10000
+/chunky worldborder
+/chunky start
+/probejs

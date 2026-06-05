@@ -27,24 +27,24 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema/postprocessing" {
     /**
      * Values that may be interpreted as {@link $RecipePostProcessorType}.
      */
-    export type $RecipePostProcessorType_<T> = { id?: $ResourceLocation_, mapCodec?: $Function_<$RecipeTypeRegistryContext, $MapCodec<$RecipePostProcessor>>,  } | [id?: $ResourceLocation_, mapCodec?: $Function_<$RecipeTypeRegistryContext, $MapCodec<$RecipePostProcessor>>, ];
+    export type $RecipePostProcessorType_<T> = { mapCodec?: $Function_<$RecipeTypeRegistryContext, $MapCodec<$RecipePostProcessor>>, id?: $ResourceLocation_,  } | [mapCodec?: $Function_<$RecipeTypeRegistryContext, $MapCodec<$RecipePostProcessor>>, id?: $ResourceLocation_, ];
     export class $RecipePostProcessor {
     }
     export interface $RecipePostProcessor {
-        type(): $RecipePostProcessorType<never>;
         process(ctx: $RecipeValidationContext, recipe: $KubeRecipe): void;
+        type(): $RecipePostProcessorType<never>;
     }
     export class $KeyPatternCleanupPostProcessor extends $Record implements $RecipePostProcessor {
+        patternName(): string;
+        process(ctx: $RecipeValidationContext, recipe: $KubeRecipe): void;
         type(): $RecipePostProcessorType<never>;
         component(): $RecipeComponent<never>;
-        process(ctx: $RecipeValidationContext, recipe: $KubeRecipe): void;
         keyName(): string;
-        patternName(): string;
         static TYPE: $RecipePostProcessorType<$KeyPatternCleanupPostProcessor>;
         constructor(patternName: string, keyName: string, component: $RecipeComponent<never>);
     }
     /**
      * Values that may be interpreted as {@link $KeyPatternCleanupPostProcessor}.
      */
-    export type $KeyPatternCleanupPostProcessor_ = { component?: $RecipeComponent<never>, patternName?: string, keyName?: string,  } | [component?: $RecipeComponent<never>, patternName?: string, keyName?: string, ];
+    export type $KeyPatternCleanupPostProcessor_ = { keyName?: string, patternName?: string, component?: $RecipeComponent<never>,  } | [keyName?: string, patternName?: string, component?: $RecipeComponent<never>, ];
 }

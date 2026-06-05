@@ -7,9 +7,9 @@ declare module "@package/dev/engine_room/flywheel/api/instance" {
     }
     export interface $InstanceHandle {
         setDeleted(): void;
-        setVisible(arg0: boolean): void;
         isVisible(): boolean;
         setChanged(): void;
+        setVisible(arg0: boolean): void;
     }
     export class $InstancerProvider {
     }
@@ -42,9 +42,9 @@ declare module "@package/dev/engine_room/flywheel/api/instance" {
     export interface $InstanceType<I extends $Instance> {
         cullShader(): $ResourceLocation;
         vertexShader(): $ResourceLocation;
+        layout(): $Layout;
         writer(): $InstanceWriter<I>;
         create(arg0: $InstanceHandle): I;
-        layout(): $Layout;
     }
     export class $Instance {
     }
@@ -52,8 +52,8 @@ declare module "@package/dev/engine_room/flywheel/api/instance" {
         type(): $InstanceType<never>;
         delete(): void;
         handle(): $InstanceHandle;
-        setVisible(visible: boolean): void;
         setChanged(): void;
+        setVisible(visible: boolean): void;
         set visible(value: boolean);
     }
 }

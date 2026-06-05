@@ -12,13 +12,14 @@ import { $RandomSource } from "@package/net/minecraft/util";
 import { $Function } from "@package/java/util/function";
 import { $Reference2ObjectArrayMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $SoundEvent } from "@package/net/minecraft/sounds";
-import { $HolderSet_, $Holder, $BlockPos_, $Direction_, $Holder$Reference, $Registry, $Direction, $IdMapper } from "@package/net/minecraft/core";
+import { $HolderSet_, $Holder, $BlockPos_, $Direction_, $Registry, $Holder$Reference, $Direction, $IdMapper } from "@package/net/minecraft/core";
 import { $PathType, $PathType_ } from "@package/net/minecraft/world/level/pathfinder";
 import { $Operation_ } from "@package/com/llamalad7/mixinextras/injector/wrapoperation";
 import { $IFluidStateExtension, $IFluidExtension } from "@package/net/neoforged/neoforge/common/extensions";
 import { $StateDefinition, $StateDefinition$Builder, $BlockState_, $StateHolder, $BlockState } from "@package/net/minecraft/world/level/block/state";
 import { RegistryMarked, RegistryTypes } from "@special/types";
 import { $Enum, $Comparable_, $Comparable, $Object } from "@package/java/lang";
+import { $IFlowableFluid } from "@package/com/ishland/c2me/base/mixin/access";
 import { $Short2BooleanMap, $Short2ObjectMap } from "@package/it/unimi/dsi/fastutil/shorts";
 import { $Explosion, $LevelAccessor, $LevelReader, $BlockGetter, $Level_ } from "@package/net/minecraft/world/level";
 import { $TagKey, $TagKey_ } from "@package/net/minecraft/tags";
@@ -57,7 +58,7 @@ declare module "@package/net/minecraft/world/level/material" {
         constructor();
     }
     export class $WaterFluid extends $FlowingFluid {
-        wrapOperation$fkh000$sable$addUnderwaterParticle(arg0: $Level_, arg1: $ParticleOptions_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $Operation_<any>): void;
+        wrapOperation$gep000$sable$addUnderwaterParticle(arg0: $Level_, arg1: $ParticleOptions_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $Operation_<any>): void;
         static FLUID_STATE_REGISTRY: $IdMapper<$FluidState>;
         static FALLING: $BooleanProperty;
         static LEVEL: $IntegerProperty;
@@ -81,43 +82,43 @@ declare module "@package/net/minecraft/world/level/material" {
      */
     export type $MapColor$Brightness_ = "low" | "normal" | "high" | "lowest";
     export class $Fluid implements $IFluidExtension, $InjectedFluidExtension, $FluidVariantCache, $FluidKJS {
-        getPickupSound(): ($SoundEvent) | undefined;
-        handler$emc000$fabric_transfer_api_v1$hookGetBucketFillSound(arg0: $CallbackInfoReturnable<any>): void;
+        tick(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidState): void;
         isSame(arg0: $Fluid_): boolean;
-        registerDefaultState(arg0: $FluidState): void;
-        isSource(arg0: $FluidState): boolean;
-        fabric_getCachedFluidVariant(): $FluidVariant;
-        createFluidStateDefinition(arg0: $StateDefinition$Builder<$Fluid_, $FluidState>): void;
         getDripParticle(): $ParticleOptions;
         canBeReplacedWith(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Fluid_, arg4: $Direction_): boolean;
         getTickDelay(arg0: $LevelReader): number;
         getOwnHeight(arg0: $FluidState): number;
+        getPickupSound(): ($SoundEvent) | undefined;
+        handler$ffk000$fabric_transfer_api_v1$hookGetBucketFillSound(arg0: $CallbackInfoReturnable<any>): void;
+        registerDefaultState(arg0: $FluidState): void;
+        fabric_getCachedFluidVariant(): $FluidVariant;
+        createFluidStateDefinition(arg0: $StateDefinition$Builder<$Fluid_, $FluidState>): void;
+        isSource(arg0: $FluidState): boolean;
         getShape(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_): $VoxelShape;
         getHeight(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_): number;
-        tick(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidState): void;
         isEmpty(): boolean;
         /**
          * @deprecated
          */
         is(arg0: $TagKey_<$Fluid>): boolean;
-        getBucket(): $Item;
-        getStateDefinition(): $StateDefinition<$Fluid, $FluidState>;
-        animateTick(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidState, arg3: $RandomSource): void;
-        getKey(): $ResourceKey<any>;
         getAmount(arg0: $FluidState): number;
         getFluidType(): $FluidType;
-        getId(): string;
-        getFlow(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $FluidState): $Vec3;
+        getBucket(): $Item;
         defaultFluidState(): $FluidState;
-        getExplosionResistance(): number;
+        getId(): string;
         isRandomlyTicking(): boolean;
         /**
          * @deprecated
          */
         builtInRegistryHolder(): $Holder$Reference<$Fluid>;
-        randomTick(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidState, arg3: $RandomSource): void;
-        asHolder(): $Holder<any>;
         createLegacyBlock(arg0: $FluidState): $BlockState;
+        randomTick(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidState, arg3: $RandomSource): void;
+        asHolder(): $Holder$Reference<any>;
+        getFlow(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $FluidState): $Vec3;
+        getExplosionResistance(): number;
+        getKey(): $ResourceKey<any>;
+        getStateDefinition(): $StateDefinition<$Fluid, $FluidState>;
+        animateTick(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidState, arg3: $RandomSource): void;
         canConvertToSource(arg0: $FluidState, arg1: $Level_, arg2: $BlockPos_): boolean;
         supportsBoating(arg0: $FluidState, arg1: $Boat): boolean;
         move(arg0: $FluidState, arg1: $LivingEntity, arg2: $Vec3_, arg3: number): boolean;
@@ -129,27 +130,27 @@ declare module "@package/net/minecraft/world/level/material" {
         arch$holder(): $Holder<$Fluid>;
         getFluid(): $Fluid;
         getAmount(): number;
-        isEmpty(): boolean;
         getRegistryId(): $ResourceKey<$Registry<$Fluid>>;
         getRegistry(): $Registry<$Fluid>;
+        isEmpty(): boolean;
         arch$registryName(): $ResourceLocation;
-        specialEquals(o: $Object, shallow: boolean): boolean;
         getIdLocation(): $ResourceLocation;
         getMod(): string;
         getTagKeys(): $List<$TagKey<$Fluid>>;
         getTags(): $List<$ResourceLocation>;
         hasTag(tag: $ResourceLocation_): boolean;
+        specialEquals(o: $Object, shallow: boolean): boolean;
         copy(amount: number): $FluidLike;
         static FLUID_STATE_REGISTRY: $IdMapper<$FluidState>;
         stateDefinition: $StateDefinition<$Fluid, $FluidState>;
         constructor();
-        get pickupSound(): ($SoundEvent) | undefined;
         get dripParticle(): $ParticleOptions;
-        get bucket(): $Item;
-        get key(): $ResourceKey<any>;
+        get pickupSound(): ($SoundEvent) | undefined;
         get fluidType(): $FluidType;
+        get bucket(): $Item;
         get id(): string;
         get randomlyTicking(): boolean;
+        get key(): $ResourceKey<any>;
         get fluid(): $Fluid;
         get registryId(): $ResourceKey<$Registry<$Fluid>>;
         get registry(): $Registry<$Fluid>;
@@ -163,9 +164,9 @@ declare module "@package/net/minecraft/world/level/material" {
      */
     export type $Fluid_ = RegistryTypes.Fluid;
     export class $MapColor {
-        calculateRGBColor(arg0: $MapColor$Brightness_): number;
         static getColorFromPackedId(arg0: number): number;
         getPackedId(arg0: $MapColor$Brightness_): number;
+        calculateRGBColor(arg0: $MapColor$Brightness_): number;
         static byId(arg0: number): $MapColor;
         col: number;
         static WOOD: $MapColor;
@@ -239,7 +240,9 @@ declare module "@package/net/minecraft/world/level/material" {
         stateDefinition: $StateDefinition<$Fluid, $FluidState>;
         constructor();
     }
-    export class $FlowingFluid extends $Fluid implements $FlowingFluidAccessor {
+    export class $FlowingFluid extends $Fluid implements $FlowingFluidAccessor, $IFlowableFluid {
+        getFlowing(arg0: number, arg1: boolean): $FluidState;
+        getFlowing(): $Fluid;
         /**
          * @deprecated
          */
@@ -254,15 +257,16 @@ declare module "@package/net/minecraft/world/level/material" {
         spreadTo(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_, arg4: $FluidState): void;
         getSpread(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $Map<$Direction, $FluidState>;
         getSlopeDistance(arg0: $LevelReader, arg1: $BlockPos_, arg2: number, arg3: $Direction_, arg4: $BlockState_, arg5: $BlockPos_, arg6: $Short2ObjectMap<$Pair<$BlockState_, $FluidState>>, arg7: $Short2BooleanMap): number;
-        handler$bll000$lithium$getSpread(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $CallbackInfoReturnable<any>): void;
+        handler$bni000$lithium$getSpread(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $CallbackInfoReturnable<any>): void;
         getSpreadDelay(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidState, arg3: $FluidState): number;
-        handler$fci000$create$canPassThroughOnWaterWheel(arg0: $BlockGetter, arg1: $Fluid_, arg2: $BlockPos_, arg3: $BlockState_, arg4: $Direction_, arg5: $BlockPos_, arg6: $BlockState_, arg7: $FluidState, arg8: $CallbackInfoReturnable<any>): void;
-        getFlowing(arg0: number, arg1: boolean): $FluidState;
-        getFlowing(): $Fluid;
+        handler$fma000$create$canPassThroughOnWaterWheel(arg0: $BlockGetter, arg1: $Fluid_, arg2: $BlockPos_, arg3: $BlockState_, arg4: $Direction_, arg5: $BlockPos_, arg6: $BlockState_, arg7: $FluidState, arg8: $CallbackInfoReturnable<any>): void;
         getSource(arg0: boolean): $FluidState;
         getSource(): $Fluid;
         spread(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidState): void;
         create$getNewLiquid(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $FluidState;
+        invokeGetLevelDecreasePerBlock(arg0: $LevelReader): number;
+        invokeReceivesFlow(arg0: $Direction_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BlockPos_, arg5: $BlockState_): boolean;
+        invokeIsMatchingAndStill(arg0: $FluidState): boolean;
         static FLUID_STATE_REGISTRY: $IdMapper<$FluidState>;
         static FALLING: $BooleanProperty;
         static LEVEL: $IntegerProperty;
@@ -283,32 +287,32 @@ declare module "@package/net/minecraft/world/level/material" {
      */
     export type $PushReaction_ = "normal" | "destroy" | "block" | "ignore" | "push_only";
     export class $FluidState extends $StateHolder<$Fluid, $FluidState> implements $IFluidStateExtension {
-        isSource(): boolean;
+        tick(arg0: $Level_, arg1: $BlockPos_): void;
         getDripParticle(): $ParticleOptions;
         canBeReplacedWith(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Fluid_, arg3: $Direction_): boolean;
         getOwnHeight(): number;
-        shouldRenderBackwardUpFace(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        isSource(): boolean;
         isSourceOfType(arg0: $Fluid_): boolean;
+        shouldRenderBackwardUpFace(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
         getShape(arg0: $BlockGetter, arg1: $BlockPos_): $VoxelShape;
         getHeight(arg0: $BlockGetter, arg1: $BlockPos_): number;
-        tick(arg0: $Level_, arg1: $BlockPos_): void;
         isEmpty(): boolean;
         holder(): $Holder<$Fluid>;
         getType(): $Fluid;
         is(arg0: $HolderSet_<$Fluid>): boolean;
         is(arg0: $Fluid_): boolean;
         is(arg0: $TagKey_<$Fluid>): boolean;
-        animateTick(arg0: $Level_, arg1: $BlockPos_, arg2: $RandomSource): void;
         getAmount(): number;
         getTags(): $Stream<$TagKey<$Fluid>>;
+        isRandomlyTicking(): boolean;
+        createLegacyBlock(): $BlockState;
+        randomTick(arg0: $Level_, arg1: $BlockPos_, arg2: $RandomSource): void;
         getFlow(arg0: $BlockGetter, arg1: $BlockPos_): $Vec3;
         /**
          * @deprecated
          */
         getExplosionResistance(): number;
-        isRandomlyTicking(): boolean;
-        randomTick(arg0: $Level_, arg1: $BlockPos_, arg2: $RandomSource): void;
-        createLegacyBlock(): $BlockState;
+        animateTick(arg0: $Level_, arg1: $BlockPos_, arg2: $RandomSource): void;
         canConvertToSource(arg0: $Level_, arg1: $BlockPos_): boolean;
         supportsBoating(arg0: $Boat): boolean;
         move(arg0: $LivingEntity, arg1: $Vec3_, arg2: number): boolean;
@@ -327,9 +331,9 @@ declare module "@package/net/minecraft/world/level/material" {
         static NAME_TAG: string;
         propertiesCodec: $MapCodec<$FluidState>;
         constructor(arg0: $Fluid_, arg1: $Reference2ObjectArrayMap<$Property<never>, $Comparable_<never>>, arg2: $MapCodec_<$FluidState>);
-        get source(): boolean;
         get dripParticle(): $ParticleOptions;
         get ownHeight(): number;
+        get source(): boolean;
         get empty(): boolean;
         get type(): $Fluid;
         get amount(): number;

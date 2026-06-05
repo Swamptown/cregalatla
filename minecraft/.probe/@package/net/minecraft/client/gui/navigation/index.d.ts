@@ -16,18 +16,18 @@ declare module "@package/net/minecraft/client/gui/navigation" {
         step(arg0: $ScreenDirection_): $ScreenRectangle;
         width(): number;
         height(): number;
-        containsPoint(arg0: number, arg1: number): boolean;
         getBorder(arg0: $ScreenDirection_): $ScreenRectangle;
         getBoundInDirection(arg0: $ScreenDirection_): number;
         overlapsInAxis(arg0: $ScreenRectangle_, arg1: $ScreenAxis_): boolean;
         getCenterInAxis(arg0: $ScreenAxis_): number;
+        containsPoint(arg0: number, arg1: number): boolean;
         constructor(arg0: number, arg1: number, arg2: number, arg3: number);
         constructor(arg0: $ScreenPosition_, arg1: number, arg2: number);
     }
     /**
      * Values that may be interpreted as {@link $ScreenRectangle}.
      */
-    export type $ScreenRectangle_ = { height?: number, width?: number, position?: $ScreenPosition_,  } | [height?: number, width?: number, position?: $ScreenPosition_, ];
+    export type $ScreenRectangle_ = { position?: $ScreenPosition_, width?: number, height?: number,  } | [position?: $ScreenPosition_, width?: number, height?: number, ];
     export class $FocusNavigationEvent$InitialFocus implements $FocusNavigationEvent {
         getVerticalDirectionForInitialFocus(): $ScreenDirection;
         constructor();
@@ -47,9 +47,9 @@ declare module "@package/net/minecraft/client/gui/navigation" {
         getNegative(): $ScreenDirection;
         static values(): $ScreenAxis[];
         static valueOf(arg0: string): $ScreenAxis;
-        getDirection(arg0: boolean): $ScreenDirection;
         orthogonal(): $ScreenAxis;
         getPositive(): $ScreenDirection;
+        getDirection(arg0: boolean): $ScreenDirection;
         static VERTICAL: $ScreenAxis;
         static HORIZONTAL: $ScreenAxis;
         get negative(): $ScreenDirection;
@@ -86,14 +86,14 @@ declare module "@package/net/minecraft/client/gui/navigation" {
      */
     export type $FocusNavigationEvent$TabNavigation_ = { forward?: boolean,  } | [forward?: boolean, ];
     export class $ScreenDirection extends $Enum<$ScreenDirection> {
+        isPositive(): boolean;
         isAfter(arg0: number, arg1: number): boolean;
         isBefore(arg0: number, arg1: number): boolean;
-        isPositive(): boolean;
         static values(): $ScreenDirection[];
         static valueOf(arg0: string): $ScreenDirection;
+        coordinateValueComparator(): $IntComparator;
         getOpposite(): $ScreenDirection;
         getAxis(): $ScreenAxis;
-        coordinateValueComparator(): $IntComparator;
         static DOWN: $ScreenDirection;
         static LEFT: $ScreenDirection;
         static RIGHT: $ScreenDirection;

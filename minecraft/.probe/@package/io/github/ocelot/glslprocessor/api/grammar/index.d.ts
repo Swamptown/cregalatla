@@ -22,8 +22,8 @@ declare module "@package/io/github/ocelot/glslprocessor/api/grammar" {
         constructor(arg0: $GlslType_, arg1: string);
     }
     export class $GlslTypeSpecifier$BuiltinType extends $Enum<$GlslTypeSpecifier$BuiltinType> implements $GlslTypeSpecifier {
-        isUnsignedInteger(): boolean;
         isBool(): boolean;
+        isUnsignedInteger(): boolean;
         isVector(): boolean;
         isMatrix(): boolean;
         isInteger(): boolean;
@@ -158,8 +158,8 @@ declare module "@package/io/github/ocelot/glslprocessor/api/grammar" {
         static IMAGE2DARRAY: $GlslTypeSpecifier$BuiltinType;
         static BOOL: $GlslTypeSpecifier$BuiltinType;
         static ISAMPLER2DRECT: $GlslTypeSpecifier$BuiltinType;
-        get unsignedInteger(): boolean;
         get bool(): boolean;
+        get unsignedInteger(): boolean;
         get vector(): boolean;
         get matrix(): boolean;
         get integer(): boolean;

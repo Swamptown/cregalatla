@@ -1,5 +1,5 @@
-import { $Consumer_, $Supplier, $IntConsumer_, $Supplier_, $LongSupplier_, $IntSupplier_ } from "@package/java/util/function";
-import { $Throwable, $ModuleLayer, $Runnable } from "@package/java/lang";
+import { $Consumer_, $Supplier, $Supplier_, $IntConsumer_, $LongSupplier_, $IntSupplier_ } from "@package/java/util/function";
+import { $Throwable, $Runnable, $ModuleLayer } from "@package/java/lang";
 
 declare module "@package/net/neoforged/neoforgespi/earlywindow" {
     export class $ImmediateWindowProvider {

@@ -7,10 +7,10 @@ declare module "@package/net/minecraft/util/monitoring/jmx" {
         static registerJmxMonitoring(arg0: $MinecraftServer): void;
         getMBeanInfo(): $MBeanInfo;
         setAttributes(arg0: $AttributeList): $AttributeList;
-        getAttribute(arg0: string): $Object;
         setAttribute(arg0: $Attribute): void;
         invoke(arg0: string, arg1: $Object[], arg2: string[]): $Object;
         getAttributes(arg0: string[]): $AttributeList;
+        getAttribute(arg0: string): $Object;
         get MBeanInfo(): $MBeanInfo;
     }
     export class $MinecraftServerStatistics$AttributeDescription {

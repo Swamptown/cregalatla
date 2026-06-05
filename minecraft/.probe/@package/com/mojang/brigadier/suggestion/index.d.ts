@@ -7,20 +7,20 @@ import { $List_, $Collection_, $List } from "@package/java/util";
 declare module "@package/com/mojang/brigadier/suggestion" {
     export class $SuggestionsBuilder {
         restart(): $SuggestionsBuilder;
-        suggest(arg0: string): $SuggestionsBuilder;
+        getRemainingLowerCase(): string;
         suggest(arg0: string, arg1: $Message_): $SuggestionsBuilder;
+        suggest(arg0: string): $SuggestionsBuilder;
         suggest(arg0: number): $SuggestionsBuilder;
         suggest(arg0: number, arg1: $Message_): $SuggestionsBuilder;
         buildFuture(): $CompletableFuture<$Suggestions>;
         createOffset(arg0: number): $SuggestionsBuilder;
-        getRemainingLowerCase(): string;
         getInput(): string;
+        getRemaining(): string;
         add(arg0: $SuggestionsBuilder): $SuggestionsBuilder;
         build(): $Suggestions;
-        getRemaining(): string;
         getStart(): number;
-        constructor(arg0: string, arg1: number);
         constructor(arg0: string, arg1: string, arg2: number);
+        constructor(arg0: string, arg1: number);
         get remainingLowerCase(): string;
         get input(): string;
         get remaining(): string;
@@ -47,8 +47,8 @@ declare module "@package/com/mojang/brigadier/suggestion" {
      */
     export type $SuggestionProvider_<S> = ((arg0: $CommandContext<S>, arg1: $SuggestionsBuilder) => $CompletableFuture<$Suggestions>);
     export class $Suggestion implements $Comparable<$Suggestion> {
-        getRange(): $StringRange;
         getTooltip(): $Message;
+        getRange(): $StringRange;
         expand(arg0: string, arg1: $StringRange): $Suggestion;
         compareTo(arg0: $Suggestion): number;
         apply(arg0: string): string;
@@ -56,8 +56,8 @@ declare module "@package/com/mojang/brigadier/suggestion" {
         getText(): string;
         constructor(arg0: $StringRange, arg1: string, arg2: $Message_);
         constructor(arg0: $StringRange, arg1: string);
-        get range(): $StringRange;
         get tooltip(): $Message;
+        get range(): $StringRange;
         get text(): string;
     }
 }

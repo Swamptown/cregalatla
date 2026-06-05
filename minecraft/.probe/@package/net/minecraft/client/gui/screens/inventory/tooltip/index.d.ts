@@ -78,8 +78,8 @@ declare module "@package/net/minecraft/client/gui/screens/inventory/tooltip" {
         get height(): number;
     }
     export class $TooltipRenderUtil {
-        static renderTooltipBackground(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         static renderTooltipBackground(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
+        static renderTooltipBackground(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         static MOUSE_OFFSET: number;
         static PADDING_LEFT: number;
         static PADDING_RIGHT: number;

@@ -28,9 +28,9 @@ declare module "@package/com/almostreliable/morejs/features/villager/trades" {
         constructor(arg0: $TradeItem[], arg1: $BlockPosFinder_);
     }
     export class $PotionTrade extends $TransformableTrade<$PotionTrade> {
-        potions(...arg0: $Potion_[]): $PotionTrade;
         onlyBrewablePotion(): $PotionTrade;
         noBrewablePotion(): $PotionTrade;
+        potions(...arg0: $Potion_[]): $PotionTrade;
         item(arg0: $Item_): $PotionTrade;
         constructor(arg0: $TradeItem[]);
     }
@@ -56,9 +56,9 @@ declare module "@package/com/almostreliable/morejs/features/villager/trades" {
         maxUses(arg0: number): T;
         priceMultiplier(arg0: number): T;
         villagerExperience(arg0: number): T;
-        getOffer(arg0: $Entity, arg1: $RandomSource): $MerchantOffer;
         getFirstInput(): $TradeItem;
         getSecondInput(): $TradeItem;
+        getOffer(arg0: $Entity, arg1: $RandomSource): $MerchantOffer;
         transform(arg0: $TransformableTrade$Transformer_): T;
         constructor(arg0: $TradeItem[]);
         get firstInput(): $TradeItem;

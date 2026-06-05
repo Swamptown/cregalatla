@@ -13,23 +13,23 @@ declare module "@package/net/neoforged/neoforge/client/entity/animation/json" {
         static getInterpolationList(): string;
         static init(): void;
         static getTarget(arg0: $ResourceLocation_): $AnimationTarget;
-        static getInterpolation(arg0: $ResourceLocation_): $AnimationChannel$Interpolation;
         static getTargetName(arg0: $AnimationTarget_): $ResourceLocation;
+        static getInterpolation(arg0: $ResourceLocation_): $AnimationChannel$Interpolation;
         static get targetList(): string;
         static get interpolationList(): string;
     }
     export class $AnimationHolder {
         get(): $AnimationDefinition;
         key(): $ResourceLocation;
-        getOrNull(): $AnimationDefinition;
         isBound(): boolean;
+        getOrNull(): $AnimationDefinition;
         static EMPTY_ANIMATION: $AnimationDefinition;
-        get orNull(): $AnimationDefinition;
         get bound(): boolean;
+        get orNull(): $AnimationDefinition;
     }
     export class $AnimationLoader extends $SimpleJsonResourceReloadListener {
-        getAnimation(arg0: $ResourceLocation_): $AnimationDefinition;
         getAnimationHolder(arg0: $ResourceLocation_): $AnimationHolder;
+        getAnimation(arg0: $ResourceLocation_): $AnimationDefinition;
         static INSTANCE: $AnimationLoader;
     }
     export class $AnimationParser {

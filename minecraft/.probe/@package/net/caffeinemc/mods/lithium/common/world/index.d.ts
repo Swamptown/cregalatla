@@ -32,7 +32,7 @@ declare module "@package/net/caffeinemc/mods/lithium/common/world" {
     /**
      * Values that may be interpreted as {@link $LithiumData$Data}.
      */
-    export type $LithiumData$Data_ = { chunkSectionChangeCallbacks?: $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>, entityMovementTrackers?: $LithiumInterner<$SectionedEntityMovementTracker<never, never>>, activeNavigations?: $ReferenceOpenHashSet<$PathNavigation>, gameEventDispatchers?: $GameEventDispatcherStorage_, blockChangeTrackers?: $LithiumInterner<$SectionedBlockChangeTracker>, ominousBanner?: $ItemStack_,  } | [chunkSectionChangeCallbacks?: $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>, entityMovementTrackers?: $LithiumInterner<$SectionedEntityMovementTracker<never, never>>, activeNavigations?: $ReferenceOpenHashSet<$PathNavigation>, gameEventDispatchers?: $GameEventDispatcherStorage_, blockChangeTrackers?: $LithiumInterner<$SectionedBlockChangeTracker>, ominousBanner?: $ItemStack_, ];
+    export type $LithiumData$Data_ = { blockChangeTrackers?: $LithiumInterner<$SectionedBlockChangeTracker>, gameEventDispatchers?: $GameEventDispatcherStorage_, activeNavigations?: $ReferenceOpenHashSet<$PathNavigation>, entityMovementTrackers?: $LithiumInterner<$SectionedEntityMovementTracker<never, never>>, chunkSectionChangeCallbacks?: $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>, ominousBanner?: $ItemStack_,  } | [blockChangeTrackers?: $LithiumInterner<$SectionedBlockChangeTracker>, gameEventDispatchers?: $GameEventDispatcherStorage_, activeNavigations?: $ReferenceOpenHashSet<$PathNavigation>, entityMovementTrackers?: $LithiumInterner<$SectionedEntityMovementTracker<never, never>>, chunkSectionChangeCallbacks?: $Long2ReferenceOpenHashMap<$ChunkSectionChangeCallback>, ominousBanner?: $ItemStack_, ];
     export class $ChunkAwareEntityIterable<T extends $EntityAccess> {
     }
     export interface $ChunkAwareEntityIterable<T extends $EntityAccess> {
@@ -88,5 +88,5 @@ declare module "@package/net/caffeinemc/mods/lithium/common/world" {
     /**
      * Values that may be interpreted as {@link $GameEventDispatcherStorage}.
      */
-    export type $GameEventDispatcherStorage_ = { loadedChunks?: $LongOpenHashSet, storage?: $Long2ReferenceOpenHashMap<$Int2ObjectMap<$GameEventListenerRegistry>>,  } | [loadedChunks?: $LongOpenHashSet, storage?: $Long2ReferenceOpenHashMap<$Int2ObjectMap<$GameEventListenerRegistry>>, ];
+    export type $GameEventDispatcherStorage_ = { storage?: $Long2ReferenceOpenHashMap<$Int2ObjectMap<$GameEventListenerRegistry>>, loadedChunks?: $LongOpenHashSet,  } | [storage?: $Long2ReferenceOpenHashMap<$Int2ObjectMap<$GameEventListenerRegistry>>, loadedChunks?: $LongOpenHashSet, ];
 }

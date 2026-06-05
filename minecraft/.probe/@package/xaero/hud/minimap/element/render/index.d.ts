@@ -41,36 +41,36 @@ declare module "@package/xaero/hud/minimap/element/render" {
         constructor(arg0: $MinimapElementRenderLocation, arg1: $Entity, arg2: $Player, arg3: $Vec3_, arg4: boolean, arg5: number, arg6: $RenderTarget, arg7: number, arg8: $ResourceKey_<$Level>);
     }
     export class $MinimapElementReader<E, RC> {
-        getRenderY(arg0: E, arg1: RC, arg2: number): number;
-        getCoordinateScale(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): number;
-        shouldScalePartialCoordinates(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): boolean;
-        isAlwaysHighlightedWhenHovered(arg0: E, arg1: RC): boolean;
-        getFilterName(arg0: E): string;
-        getMenuTextFillLeftPadding(arg0: E): number;
-        shouldScaleBoxWithOptionalScale(): boolean;
         getLeftSideLength(arg0: E, arg1: $Minecraft): number;
         getBoxScale(arg0: $MinimapElementRenderLocation, arg1: E, arg2: RC): number;
         getInteractionBoxLeft(arg0: E, arg1: RC, arg2: number): number;
         getInteractionBoxRight(arg0: E, arg1: RC, arg2: number): number;
         getInteractionBoxTop(arg0: E, arg1: RC, arg2: number): number;
         getInteractionBoxBottom(arg0: E, arg1: RC, arg2: number): number;
+        getRenderX(arg0: E, arg1: RC, arg2: number): number;
         getRenderZ(arg0: E, arg1: RC, arg2: number): number;
         getRenderBoxLeft(arg0: E, arg1: RC, arg2: number): number;
         getRenderBoxRight(arg0: E, arg1: RC, arg2: number): number;
         getRenderBoxTop(arg0: E, arg1: RC, arg2: number): number;
         getRenderBoxBottom(arg0: E, arg1: RC, arg2: number): number;
-        getRenderX(arg0: E, arg1: RC, arg2: number): number;
+        getFilterName(arg0: E): string;
+        getMenuTextFillLeftPadding(arg0: E): number;
+        shouldScaleBoxWithOptionalScale(): boolean;
         getRightClickTitleBackgroundColor(arg0: E): number;
-        isInteractable(arg0: $MinimapElementRenderLocation, arg1: E): boolean;
+        getRenderY(arg0: E, arg1: RC, arg2: number): number;
+        getCoordinateScale(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): number;
+        shouldScalePartialCoordinates(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): boolean;
+        isAlwaysHighlightedWhenHovered(arg0: E, arg1: RC): boolean;
         getMenuName(arg0: E): string;
+        isInteractable(arg0: $MinimapElementRenderLocation, arg1: E): boolean;
         isHidden(arg0: E, arg1: RC): boolean;
         constructor();
     }
     export class $MinimapElementRenderer<E, RC> implements $Comparable<$MinimapElementRenderer<never, never>> {
-        getElementReader(): $MinimapElementReader<E, RC>;
-        renderElement(arg0: E, arg1: boolean, arg2: boolean, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $MinimapElementRenderInfo, arg8: $GuiGraphics, arg9: $MultiBufferSource$BufferSource): boolean;
         preRender(arg0: $MinimapElementRenderInfo, arg1: $MultiBufferSource$BufferSource, arg2: $MultiTextureRenderTypeRendererProvider): void;
         postRender(arg0: $MinimapElementRenderInfo, arg1: $MultiBufferSource$BufferSource, arg2: $MultiTextureRenderTypeRendererProvider): void;
+        getElementReader(): $MinimapElementReader<E, RC>;
+        renderElement(arg0: E, arg1: boolean, arg2: boolean, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $MinimapElementRenderInfo, arg8: $GuiGraphics, arg9: $MultiBufferSource$BufferSource): boolean;
         getOrder(): number;
         getProvider(): $MinimapElementRenderProvider<E, RC>;
         compareTo(arg0: $MinimapElementRenderer<never, never>): number;

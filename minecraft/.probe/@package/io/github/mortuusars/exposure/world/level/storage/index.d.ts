@@ -16,8 +16,8 @@ declare module "@package/io/github/mortuusars/exposure/world/level/storage" {
         toValueString(): string;
         static texture(texture: $ResourceLocation_): $ExposureIdentifier;
         texture(): $ResourceLocation;
-        mapId<T>(mappingFunc: $Function_<string, T>): (T) | undefined;
         isId(): boolean;
+        mapId<T>(mappingFunc: $Function_<string, T>): (T) | undefined;
         isEmpty(): boolean;
         map<T>(ifId: $Function_<string, T>, ifTexture: $Function_<$ResourceLocation, T>): T;
         static id(id: string): $ExposureIdentifier;

@@ -526,10 +526,6 @@ declare module "@package/java/lang" {
          */
         security(): number;
         static parse(arg0: string): $Runtime$Version;
-        interim(): number;
-        equalsIgnoreOptional(arg0: $Object): boolean;
-        patch(): number;
-        compareToIgnoreOptional(arg0: $Runtime$Version): number;
         /**
          * @deprecated
          */
@@ -541,6 +537,10 @@ declare module "@package/java/lang" {
         pre(): (string) | undefined;
         build(): (number) | undefined;
         optional(): (string) | undefined;
+        interim(): number;
+        equalsIgnoreOptional(arg0: $Object): boolean;
+        patch(): number;
+        compareToIgnoreOptional(arg0: $Runtime$Version): number;
     }
     export class $NamedPackage {
     }

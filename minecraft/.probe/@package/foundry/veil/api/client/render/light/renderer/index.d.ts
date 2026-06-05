@@ -3,7 +3,7 @@ import { $CullFrustum } from "@package/foundry/veil/api/client/render";
 import { $VertexConsumer } from "@package/com/mojang/blaze3d/vertex";
 import { $LightData } from "@package/foundry/veil/api/client/render/light/data";
 import { $AdvancedFbo } from "@package/foundry/veil/api/client/render/framebuffer";
-import { $LightTypeRegistry$LightType_, $LightTypeRegistry$LightType } from "@package/foundry/veil/api/client/registry";
+import { $LightTypeRegistry$LightType, $LightTypeRegistry$LightType_ } from "@package/foundry/veil/api/client/registry";
 import { $Map, $Collection } from "@package/java/util";
 import { $NativeResource } from "@package/org/lwjgl/system";
 
@@ -34,9 +34,9 @@ declare module "@package/foundry/veil/api/client/render/light/renderer" {
         static createInvertedCube(arg0: $VertexConsumer): void;
     }
     export interface $LightTypeRenderer<T extends $LightData> extends $NativeResource {
-        addLight(arg0: T): $LightRenderHandle<T>;
-        prepareLights(arg0: $LightRenderer, arg1: $CullFrustum): void;
         steal(arg0: $LightRenderHandle<T>): $LightRenderHandle<T>;
+        prepareLights(arg0: $LightRenderer, arg1: $CullFrustum): void;
+        addLight(arg0: T): $LightRenderHandle<T>;
         renderLights(arg0: $LightRenderer): void;
         getLights(): $Collection<$LightRenderHandle<T>>;
         getVisibleLights(): number;

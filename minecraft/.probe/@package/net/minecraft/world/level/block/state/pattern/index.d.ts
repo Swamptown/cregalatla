@@ -11,27 +11,27 @@ declare module "@package/net/minecraft/world/level/block/state/pattern" {
     export class $BlockPattern$BlockCacheLoader extends $CacheLoader<$BlockPos, $BlockInWorld> {
     }
     export class $BlockPatternBuilder {
-        where(arg0: string, arg1: $Predicate_<$BlockInWorld>): $BlockPatternBuilder;
         aisle(...arg0: string[]): $BlockPatternBuilder;
+        where(arg0: string, arg1: $Predicate_<$BlockInWorld>): $BlockPatternBuilder;
         static start(): $BlockPatternBuilder;
         build(): $BlockPattern;
     }
     export class $BlockInWorld {
+        getEntity(): $BlockEntity;
         static hasState(arg0: $Predicate_<$BlockState>): $Predicate<$BlockInWorld>;
         getLevel(): $LevelReader;
-        getEntity(): $BlockEntity;
         getState(): $BlockState;
         getPos(): $BlockPos;
         constructor(arg0: $LevelReader, arg1: $BlockPos_, arg2: boolean);
-        get level(): $LevelReader;
         get entity(): $BlockEntity;
+        get level(): $LevelReader;
         get state(): $BlockState;
         get pos(): $BlockPos;
     }
     export class $BlockPattern implements $BlockPatternExtended {
-        static createLevelCache(arg0: $LevelReader, arg1: boolean): $LoadingCache<$BlockPos, $BlockInWorld>;
         lithium$setRequiredBlock(arg0: $Block_, arg1: number): void;
         static translateAndRotate(arg0: $BlockPos_, arg1: $Direction_, arg2: $Direction_, arg3: number, arg4: number, arg5: number): $BlockPos;
+        static createLevelCache(arg0: $LevelReader, arg1: boolean): $LoadingCache<$BlockPos, $BlockInWorld>;
         getPattern(): $Predicate<$BlockInWorld>[][][];
         getWidth(): number;
         getHeight(): number;
@@ -45,16 +45,16 @@ declare module "@package/net/minecraft/world/level/block/state/pattern" {
         get depth(): number;
     }
     export class $BlockPattern$BlockPatternMatch {
-        getFrontTopLeft(): $BlockPos;
-        getUp(): $Direction;
-        getForwards(): $Direction;
         getBlock(arg0: number, arg1: number, arg2: number): $BlockInWorld;
+        getUp(): $Direction;
+        getFrontTopLeft(): $BlockPos;
+        getForwards(): $Direction;
         getWidth(): number;
         getHeight(): number;
         getDepth(): number;
         constructor(arg0: $BlockPos_, arg1: $Direction_, arg2: $Direction_, arg3: $LoadingCache<$BlockPos_, $BlockInWorld>, arg4: number, arg5: number, arg6: number);
-        get frontTopLeft(): $BlockPos;
         get up(): $Direction;
+        get frontTopLeft(): $BlockPos;
         get forwards(): $Direction;
         get width(): number;
         get height(): number;

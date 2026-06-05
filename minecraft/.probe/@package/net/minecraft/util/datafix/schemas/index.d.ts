@@ -220,8 +220,8 @@ declare module "@package/net/minecraft/util/datafix/schemas" {
         constructor(arg0: number, arg1: $Schema);
     }
     export class $V1451_6 extends $NamespacedSchema {
-        static packNamespacedWithDot(arg0: string): string;
         static createCriterionTypes(arg0: $Schema): $Map<string, $Supplier<$TypeTemplate>>;
+        static packNamespacedWithDot(arg0: string): string;
         static REPACK_OBJECTIVE_ID: $Hook$HookFunction;
         static SPECIAL_OBJECTIVE_MARKER: string;
         static UNPACK_OBJECTIVE_ID: $Hook$HookFunction;
@@ -334,12 +334,12 @@ declare module "@package/net/minecraft/util/datafix/schemas" {
         static NAMESPACED_STRING_CODEC: $PrimitiveCodec<string>;
         constructor(arg0: number, arg1: $Schema);
     }
+    export class $V1022 extends $Schema {
+        constructor(arg0: number, arg1: $Schema);
+    }
     export class $V3685 extends $NamespacedSchema {
         static abstractArrow(arg0: $Schema): $TypeTemplate;
         static NAMESPACED_STRING_CODEC: $PrimitiveCodec<string>;
-        constructor(arg0: number, arg1: $Schema);
-    }
-    export class $V1022 extends $Schema {
         constructor(arg0: number, arg1: $Schema);
     }
     export class $V3689 extends $NamespacedSchema {

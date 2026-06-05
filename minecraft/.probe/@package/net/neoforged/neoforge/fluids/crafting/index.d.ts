@@ -39,7 +39,7 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
     /**
      * Values that may be interpreted as {@link $FluidIngredientType}.
      */
-    export type $FluidIngredientType_<T> = RegistryTypes.NeoforgeFluidIngredientType | { streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>, codec?: $MapCodec_<$FluidIngredient_>,  } | [streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>, codec?: $MapCodec_<$FluidIngredient_>, ];
+    export type $FluidIngredientType_<T> = RegistryTypes.NeoforgeFluidIngredientType | { codec?: $MapCodec_<$FluidIngredient_>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>,  } | [codec?: $MapCodec_<$FluidIngredient_>, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FluidIngredient_>, ];
     export class $DataComponentFluidIngredient extends $FluidIngredient {
         generateStacks(): $Stream<$FluidStack>;
         isStrict(): boolean;
@@ -84,8 +84,8 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
         toNestedJson(): $JsonElement;
         matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
         matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
-        self(): $SizedFluidIngredient;
         replaceThisWith(cx: $RecipeScriptContext, _with: $Object): $Object;
+        self(): $SizedFluidIngredient;
         static NESTED_CODEC: $Codec<$SizedFluidIngredient>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $SizedFluidIngredient>;
         static FLAT_CODEC: $Codec<$SizedFluidIngredient>;
@@ -108,9 +108,9 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
         getType(): $FluidIngredientType<never>;
         isSimple(): boolean;
         self(): $FluidIngredient;
+        or(arg0: $Predicate_<$FluidStack>): $Predicate<$FluidStack>;
         negate(): $Predicate<$FluidStack>;
         and(arg0: $Predicate_<$FluidStack>): $Predicate<$FluidStack>;
-        or(arg0: $Predicate_<$FluidStack>): $Predicate<$FluidStack>;
         withAmount(amount: number): $SizedFluidIngredient;
         matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
         matches(cx: $RecipeMatchContext, _in: $FluidIngredient_, exact: boolean): boolean;
@@ -171,8 +171,8 @@ declare module "@package/net/neoforged/neoforge/fluids/crafting" {
         constructor(arg0: $List_<$FluidIngredient_>);
     }
     export class $DifferenceFluidIngredient extends $FluidIngredient {
-        subtracted(): $FluidIngredient;
         generateStacks(): $Stream<$FluidStack>;
+        subtracted(): $FluidIngredient;
         base(): $FluidIngredient;
         static of(arg0: $FluidIngredient_, arg1: $FluidIngredient_): $FluidIngredient;
         static CODEC_NON_EMPTY: $Codec<$FluidIngredient>;

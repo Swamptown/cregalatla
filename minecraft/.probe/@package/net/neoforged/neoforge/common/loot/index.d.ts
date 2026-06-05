@@ -15,14 +15,14 @@ import { $ItemAbility_, $ItemAbility } from "@package/net/neoforged/neoforge/com
 
 declare module "@package/net/neoforged/neoforge/common/loot" {
     export class $CanItemPerformAbility implements $LootItemCondition, $CanItemPerformAbilityAccess {
+        static canItemPerformAbility(arg0: $ItemAbility_): $LootItemCondition$Builder;
         getReferencedContextParams(): $Set<$LootContextParam<never>>;
         test(arg0: $LootContext): boolean;
         getType(): $LootItemConditionType;
-        static canItemPerformAbility(arg0: $ItemAbility_): $LootItemCondition$Builder;
         validate(arg0: $ValidationContext): void;
+        or(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
         negate(): $Predicate<$LootContext>;
         and(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
-        or(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
         getAbility(): $ItemAbility;
         static CODEC: $MapCodec<$CanItemPerformAbility>;
         static LOOT_CONDITION_TYPE: $LootItemConditionType;
@@ -49,9 +49,9 @@ declare module "@package/net/neoforged/neoforge/common/loot" {
         getType(): $LootItemConditionType;
         getReferencedContextParams(): $Set<$LootContextParam<never>>;
         validate(arg0: $ValidationContext): void;
+        or(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
         negate(): $Predicate<$LootContext>;
         and(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
-        or(arg0: $Predicate_<$LootContext>): $Predicate<$LootContext>;
         static UNKNOWN_LOOT_TABLE: $ResourceLocation;
         static CODEC: $MapCodec<$LootTableIdCondition>;
         static LOOT_TABLE_ID: $LootItemConditionType;
@@ -65,8 +65,8 @@ declare module "@package/net/neoforged/neoforge/common/loot" {
     }
     export class $LootTableIdCondition$Builder implements $LootItemCondition$Builder {
         build(): $LootItemCondition;
-        and(arg0: $LootItemCondition$Builder_): $AllOfCondition$Builder;
         or(arg0: $LootItemCondition$Builder_): $AnyOfCondition$Builder;
+        and(arg0: $LootItemCondition$Builder_): $AllOfCondition$Builder;
         invert(): $LootItemCondition$Builder;
         constructor(arg0: $ResourceLocation_);
     }

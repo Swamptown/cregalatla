@@ -7,5 +7,5 @@ export * as nio from "@package/java/nio";
 export * as net from "@package/java/net";
 export * as io from "@package/java/io";
 export * as beans from "@package/java/beans";
-export * as security from "@package/java/security";
 export * as math from "@package/java/math";
+export * as security from "@package/java/security";

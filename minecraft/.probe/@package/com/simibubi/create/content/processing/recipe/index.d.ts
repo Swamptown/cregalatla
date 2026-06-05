@@ -1,5 +1,5 @@
 import { $BlazeBurnerBlock$HeatLevel, $BlazeBurnerBlock$HeatLevel_ } from "@package/com/simibubi/create/content/processing/burner";
-import { $RecipeSerializer, $Ingredient, $Recipe, $RecipeInput, $RecipeType } from "@package/net/minecraft/world/item/crafting";
+import { $RecipeSerializer, $Ingredient, $Recipe, $RecipeType, $RecipeInput } from "@package/net/minecraft/world/item/crafting";
 import { $MapCodec_, $MapCodec, $Codec } from "@package/com/mojang/serialization";
 import { $Item_, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $ProcessingRecipeAccessor } from "@package/com/drmangotea/tfmg/mixin/accessor";
@@ -84,22 +84,22 @@ declare module "@package/com/simibubi/create/content/processing/recipe" {
         rollResults(arg0: $List_<$ProcessingOutput>, arg1: $RandomSource): $List<$ItemStack>;
         rollResults(arg0: $RandomSource): $List<$ItemStack>;
         enforceNextResult(arg0: $Supplier_<$ItemStack>): void;
-        getTypeInfo(): $IRecipeTypeInfo;
+        getSerializer(): $RecipeSerializer<never>;
+        static streamCodec<P extends $ProcessingRecipeParams, R extends $ProcessingRecipe<never, P>>(arg0: $ProcessingRecipe$Factory_<P, R>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, P>): $StreamCodec<$RegistryFriendlyByteBuf, R>;
         getResultItem(arg0: $HolderLookup$Provider): $ItemStack;
         getIngredients(): $NonNullList<$Ingredient>;
         canCraftInDimensions(arg0: number, arg1: number): boolean;
         assemble(arg0: I, arg1: $HolderLookup$Provider): $ItemStack;
-        getSerializer(): $RecipeSerializer<never>;
-        static streamCodec<P extends $ProcessingRecipeParams, R extends $ProcessingRecipe<never, P>>(arg0: $ProcessingRecipe$Factory_<P, R>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, P>): $StreamCodec<$RegistryFriendlyByteBuf, R>;
+        getTypeInfo(): $IRecipeTypeInfo;
         validate(): $List<string>;
         getType(): $RecipeType<never>;
         getParams(): P;
         static codec<P extends $ProcessingRecipeParams, R extends $ProcessingRecipe<never, P>>(arg0: $ProcessingRecipe$Factory_<P, R>, arg1: $MapCodec_<P>): $MapCodec<R>;
         getGroup(): string;
         isSpecial(): boolean;
+        getToastSymbol(): $ItemStack;
         isIncomplete(): boolean;
         showNotification(): boolean;
-        getToastSymbol(): $ItemStack;
         getRemainingItems(arg0: I): $NonNullList<$ItemStack>;
         tfmg$ingredients(): $NonNullList<$Ingredient>;
         tfmg$fluidIngredients(): $NonNullList<$SizedFluidIngredient>;
@@ -113,15 +113,15 @@ declare module "@package/com/simibubi/create/content/processing/recipe" {
         get rollableResults(): $List<$ProcessingOutput>;
         get fluidIngredients(): $NonNullList<$SizedFluidIngredient>;
         get fluidResults(): $NonNullList<$FluidStack>;
-        get typeInfo(): $IRecipeTypeInfo;
-        get ingredients(): $NonNullList<$Ingredient>;
         get serializer(): $RecipeSerializer<never>;
+        get ingredients(): $NonNullList<$Ingredient>;
+        get typeInfo(): $IRecipeTypeInfo;
         get type(): $RecipeType<never>;
         get params(): P;
         get group(): string;
         get special(): boolean;
-        get incomplete(): boolean;
         get toastSymbol(): $ItemStack;
+        get incomplete(): boolean;
     }
     export class $ProcessingRecipeParams {
         static CODEC: $MapCodec<$ProcessingRecipeParams>;

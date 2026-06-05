@@ -556,9 +556,9 @@ declare module "@package/org/jline/utils" {
         constructor();
     }
     export class $ColorPalette {
-        loadPalette(): boolean;
         getDistanceName(): string;
         canChange(): boolean;
+        loadPalette(): boolean;
         setColor(arg0: number, arg1: number): void;
         round(arg0: number): number;
         round(arg0: number, arg1: number, arg2: number): number;
@@ -604,14 +604,11 @@ declare module "@package/org/jline/utils" {
      */
     export type $AttributedCharSequence$ForceMode_ = "none" | "force256colors" | "forcetruecolors";
     export class $AttributedCharSequence implements $CharSequence {
+        runStart(arg0: number): number;
         styleAt(arg0: number): $AttributedStyle;
         toAttributedString(): $AttributedString;
-        /**
-         * @deprecated
-         */
-        toAnsi(arg0: number, arg1: boolean, arg2: string, arg3: string): string;
-        toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_): string;
         toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_, arg2: $ColorPalette): string;
+        toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_): string;
         toAnsi(arg0: number, arg1: $AttributedCharSequence$ForceMode_, arg2: $ColorPalette, arg3: string, arg4: string): string;
         toAnsi(): string;
         toAnsi(arg0: $Terminal): string;
@@ -619,6 +616,10 @@ declare module "@package/org/jline/utils" {
          * @deprecated
          */
         toAnsi(arg0: number, arg1: boolean): string;
+        /**
+         * @deprecated
+         */
+        toAnsi(arg0: number, arg1: boolean, arg2: string, arg3: string): string;
         /**
          * @deprecated
          */
@@ -636,7 +637,6 @@ declare module "@package/org/jline/utils" {
         columnSubSequence(arg0: number, arg1: number): $AttributedString;
         columnSplitLength(arg0: number, arg1: boolean, arg2: boolean): $List<$AttributedString>;
         columnSplitLength(arg0: number): $List<$AttributedString>;
-        runStart(arg0: number): number;
         println(arg0: $Terminal): void;
         isHidden(arg0: number): boolean;
         charAt(arg0: number): string;

@@ -18,13 +18,13 @@ declare module "@package/net/minecraft/server/rcon" {
     }
     export class $NetworkDataOutputStream {
         writeFloat(arg0: number): void;
-        writeString(arg0: string): void;
-        writeShort(arg0: number): void;
         toByteArray(): number[];
+        writeShort(arg0: number): void;
         reset(): void;
         write(arg0: number): void;
         writeInt(arg0: number): void;
         writeBytes(arg0: number[]): void;
+        writeString(arg0: string): void;
         constructor(arg0: number);
     }
     export class $PktUtils {

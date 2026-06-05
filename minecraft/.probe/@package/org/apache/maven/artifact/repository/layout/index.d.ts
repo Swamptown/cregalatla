@@ -8,8 +8,8 @@ declare module "@package/org/apache/maven/artifact/repository/layout" {
     }
     export interface $ArtifactRepositoryLayout {
         pathOfRemoteRepositoryMetadata(arg0: $ArtifactMetadata): string;
-        pathOfLocalRepositoryMetadata(arg0: $ArtifactMetadata, arg1: $ArtifactRepository): string;
         pathOf(arg0: $Artifact): string;
+        pathOfLocalRepositoryMetadata(arg0: $ArtifactMetadata, arg1: $ArtifactRepository): string;
         getId(): string;
         get id(): string;
     }

@@ -12,10 +12,10 @@ declare module "@package/com/mojang/datafixers/schemas" {
         getParent(): $Schema;
         getType(arg0: $DSL$TypeReference_): $Type<never>;
         types(): $Set<string>;
-        findChoiceType(arg0: $DSL$TypeReference_): $TaggedChoice$TaggedChoiceType<never>;
         getChoiceType(arg0: $DSL$TypeReference_, arg1: string): $Type<never>;
         getTypeRaw(arg0: $DSL$TypeReference_): $Type<never>;
         getVersionKey(): number;
+        findChoiceType(arg0: $DSL$TypeReference_): $TaggedChoice$TaggedChoiceType<never>;
         resolveTemplate(arg0: string): $TypeTemplate;
         registerSimple(arg0: $Map_<string, $Supplier_<$TypeTemplate>>, arg1: string): void;
         registerType(arg0: boolean, arg1: $DSL$TypeReference_, arg2: $Supplier_<$TypeTemplate>): void;

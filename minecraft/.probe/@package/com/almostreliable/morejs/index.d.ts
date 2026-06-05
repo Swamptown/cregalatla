@@ -49,11 +49,11 @@ declare module "@package/com/almostreliable/morejs" {
         constructor();
     }
     export class $MoreJSBinding {
-        static weightedList(): $WeightedList$Builder<$Object>;
-        static findStructure(arg0: $BlockPos_, arg1: $ServerLevel, arg2: $HolderSet_<$Structure>, arg3: number): $BlockPos;
-        static findBiome(arg0: $BlockPos_, arg1: $ServerLevel, arg2: $HolderSet_<$Biome>, arg3: number): $BlockPos;
         static ofTradeItem(arg1: $Object): $TradeItem;
         static ofWeightedList(arg0: $Object): $WeightedList<$Object>;
+        static findStructure(arg0: $BlockPos_, arg1: $ServerLevel, arg2: $HolderSet_<$Structure>, arg3: number): $BlockPos;
+        static findBiome(arg0: $BlockPos_, arg1: $ServerLevel, arg2: $HolderSet_<$Biome>, arg3: number): $BlockPos;
+        static weightedList(): $WeightedList$Builder<$Object>;
         static range(arg0: $Object): $IntRange;
         constructor();
     }
@@ -68,18 +68,10 @@ declare module "@package/com/almostreliable/morejs" {
         constructor(arg0: $IEventBus);
     }
     export class $Plugin implements $KubeJSPlugin {
-        registerTypeWrappers(arg0: $TypeWrapperRegistry): void;
-        registerBindings(arg0: $BindingRegistry_): void;
         registerEvents(arg0: $EventGroupRegistry_): void;
-        attachServerData(event: $AttachedData<$MinecraftServer>): void;
-        registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
-        /**
-         * @deprecated
-         */
-        clearCaches(): void;
-        beforeScriptsLoaded(manager: $ScriptManager): void;
-        initStartup(): void;
-        afterScriptsLoaded(manager: $ScriptManager): void;
+        registerBindings(arg0: $BindingRegistry_): void;
+        registerTypeWrappers(arg0: $TypeWrapperRegistry): void;
+        breakpoint(args: $Object[]): void;
         registerBuilderTypes(registry: $BuilderTypeRegistry_): void;
         registerServerRegistries(registry: $ServerRegistryRegistry_): void;
         registerTypeDescriptions(registry: $TypeDescriptionRegistry): void;
@@ -94,9 +86,9 @@ declare module "@package/com/almostreliable/morejs" {
         registerRecipeViewerEntryTypes(registry: $Consumer_<$RecipeViewerEntryType>): void;
         registerDataComponentTypeDescriptions(registry: $DataComponentTypeInfoRegistry_): void;
         registerLocalWebServerAPIs(registry: $LocalWebServerAPIRegistry_): void;
-        registerLocalWebServer(registry: $LocalWebServerRegistry): void;
         registerClasses(filter: $ClassFilter): void;
         registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
+        registerLocalWebServer(registry: $LocalWebServerRegistry): void;
         registerLocalWebServerWithAuth(registry: $LocalWebServerRegistry): void;
         localWebServerStarted(server: $LocalWebServer_): void;
         registerItemNameProviders(registry: $NameProvider$Registry_<$Item, $ItemStack>): void;
@@ -106,10 +98,18 @@ declare module "@package/com/almostreliable/morejs" {
         generateLang(event: $LangKubeEvent_): void;
         exportServerData(_export: $DataExport): void;
         beforeRecipeLoading(event: $RecipesKubeEvent, manager: $RecipeManagerKJS, recipeJsons: $Map_<$ResourceLocation_, $JsonElement_>): void;
-        breakpoint(args: $Object[]): void;
+        attachServerData(event: $AttachedData<$MinecraftServer>): void;
+        registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
+        /**
+         * @deprecated
+         */
+        clearCaches(): void;
+        beforeScriptsLoaded(manager: $ScriptManager): void;
+        initStartup(): void;
+        afterScriptsLoaded(manager: $ScriptManager): void;
         init(): void;
-        attachPlayerData(event: $AttachedData<$Player>): void;
         attachLevelData(event: $AttachedData<$Level_>): void;
+        attachPlayerData(event: $AttachedData<$Player>): void;
         afterInit(): void;
         constructor();
     }

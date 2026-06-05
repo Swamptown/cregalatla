@@ -35,18 +35,18 @@ declare module "@package/com/mojang/brigadier" {
     export class $ImmutableStringReader {
     }
     export interface $ImmutableStringReader {
+        getRemaining(): string;
         getString(): string;
-        canRead(arg0: number): boolean;
         canRead(): boolean;
+        canRead(arg0: number): boolean;
         peek(): string;
         peek(arg0: number): string;
-        getRemaining(): string;
         getCursor(): number;
         getRemainingLength(): number;
         getTotalLength(): number;
         getRead(): string;
-        get string(): string;
         get remaining(): string;
+        get string(): string;
         get cursor(): number;
         get remainingLength(): number;
         get totalLength(): number;
@@ -114,21 +114,21 @@ declare module "@package/com/mojang/brigadier" {
     }
     export class $StringReader implements $ImmutableStringReader {
         skipWhitespace(): void;
-        getString(): string;
         readFloat(): number;
-        readString(): string;
+        getRemaining(): string;
+        getString(): string;
         readBoolean(): boolean;
         readLong(): number;
         readDouble(): number;
         read(): string;
         readInt(): number;
-        canRead(): boolean;
         canRead(arg0: number): boolean;
+        canRead(): boolean;
         peek(arg0: number): string;
         peek(): string;
         skip(): void;
         expect(arg0: string): void;
-        getRemaining(): string;
+        readString(): string;
         getCursor(): number;
         setCursor(arg0: number): void;
         getRemainingLength(): number;
@@ -142,8 +142,8 @@ declare module "@package/com/mojang/brigadier" {
         readStringUntil(arg0: string): string;
         constructor(arg0: $StringReader);
         constructor(arg0: string);
-        get string(): string;
         get remaining(): string;
+        get string(): string;
         get remainingLength(): number;
         get totalLength(): number;
     }

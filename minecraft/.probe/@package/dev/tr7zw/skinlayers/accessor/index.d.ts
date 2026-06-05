@@ -57,13 +57,13 @@ declare module "@package/dev/tr7zw/skinlayers/accessor" {
     export class $ModelPartInjector {
     }
     export interface $ModelPartInjector {
-        isVisible(): boolean;
         setInjectedMesh(arg0: $Mesh, arg1: $OffsetProvider_): void;
         prepareTranslateAndRotate(arg0: $PoseStack): void;
         getInjectedMesh(): $Mesh;
         getOffsetProvider(): $OffsetProvider;
-        get visible(): boolean;
+        isVisible(): boolean;
         get offsetProvider(): $OffsetProvider;
+        get visible(): boolean;
     }
     export class $PlayerEntityModelAccessor {
     }

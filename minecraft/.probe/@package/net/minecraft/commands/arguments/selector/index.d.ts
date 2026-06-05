@@ -16,7 +16,13 @@ export * as options from "@package/net/minecraft/commands/arguments/selector/opt
 
 declare module "@package/net/minecraft/commands/arguments/selector" {
     export class $EntitySelectorParser implements $FabricEntitySelectorReader {
+        getOrder(): $BiConsumer<$Vec3, $List<$Entity>>;
+        isTag(): boolean;
+        static allowSelectors<S>(arg0: S): boolean;
         hasTeamNotEquals(): boolean;
+        finalizePredicates(): void;
+        parseOptions(): void;
+        parseNameOrUUID(): void;
         shouldInvertValue(): boolean;
         addPredicate(arg0: $Predicate_<$Entity>): void;
         hasAdvancements(): boolean;
@@ -55,32 +61,26 @@ declare module "@package/net/minecraft/commands/arguments/selector" {
         hasNameNotEquals(): boolean;
         setHasNameNotEquals(arg0: boolean): void;
         setHasNameEquals(arg0: boolean): void;
-        isTag(): boolean;
         fillSuggestions(arg0: $SuggestionsBuilder, arg1: $Consumer_<$SuggestionsBuilder>): $CompletableFuture<$Suggestions>;
         setCustomFlag(arg0: $ResourceLocation_, arg1: boolean): void;
         getCustomFlag(arg0: $ResourceLocation_): boolean;
-        finalizePredicates(): void;
-        parseOptions(): void;
-        parseNameOrUUID(): void;
-        static allowSelectors<S>(arg0: S): boolean;
         getLevel(): $MinMaxBounds$Ints;
         setLevel(arg0: $MinMaxBounds$Ints_): void;
         getY(): number;
-        getOrder(): $BiConsumer<$Vec3, $List<$Entity>>;
         isLimited(): boolean;
         parse(): $EntitySelector;
         getSelector(): $EntitySelector;
         getReader(): $StringReader;
         setOrder(arg0: $BiConsumer_<$Vec3, $List<$Entity>>): void;
+        isSorted(): boolean;
         parseSelector(): void;
+        setX(arg0: number): void;
+        setY(arg0: number): void;
+        setZ(arg0: number): void;
         getX(): number;
         getZ(): number;
         getDistance(): $MinMaxBounds$Doubles;
         setDistance(arg0: $MinMaxBounds$Doubles_): void;
-        isSorted(): boolean;
-        setX(arg0: number): void;
-        setY(arg0: number): void;
-        setZ(arg0: number): void;
         static ERROR_SELECTORS_NOT_ALLOWED: $SimpleCommandExceptionType;
         static SUGGEST_NOTHING: $BiFunction<$SuggestionsBuilder, $Consumer<$SuggestionsBuilder>, $CompletableFuture<$Suggestions>>;
         static SYNTAX_NOT: string;
@@ -96,32 +96,32 @@ declare module "@package/net/minecraft/commands/arguments/selector" {
         static ORDER_NEAREST: $BiConsumer<$Vec3, $List<$Entity>>;
         static ORDER_FURTHEST: $BiConsumer<$Vec3, $List<$Entity>>;
         constructor(arg0: $StringReader, arg1: boolean);
+        get tag(): boolean;
         set includesEntities(value: boolean);
         get typeLimited(): boolean;
         set suggestions(value: $BiFunction_<$SuggestionsBuilder, $Consumer<$SuggestionsBuilder>, $CompletableFuture<$Suggestions>>);
         get currentEntity(): boolean;
         set maxResults(value: number);
-        get tag(): boolean;
         get selector(): $EntitySelector;
         get reader(): $StringReader;
     }
     export class $EntitySelector {
-        includesEntities(): boolean;
+        usesSelector(): boolean;
+        isWorldLimited(): boolean;
+        static joinNames(arg0: $List_<$Entity>): $Component;
         findSingleEntity(arg0: $CommandSourceStack): $Entity;
         findEntities(arg0: $CommandSourceStack): $List<$Entity>;
         findPlayers(arg0: $CommandSourceStack): $List<$ServerPlayer>;
         findSinglePlayer(arg0: $CommandSourceStack): $ServerPlayer;
         getMaxResults(): number;
         isSelfSelector(): boolean;
-        usesSelector(): boolean;
-        isWorldLimited(): boolean;
-        static joinNames(arg0: $List_<$Entity>): $Component;
+        includesEntities(): boolean;
         static ORDER_ARBITRARY: $BiConsumer<$Vec3, $List<$Entity>>;
         contextFreePredicates: $List<$Predicate<$Entity>>;
         static INFINITE: number;
         constructor(arg0: number, arg1: boolean, arg2: boolean, arg3: $List_<$Predicate_<$Entity>>, arg4: $MinMaxBounds$Doubles_, arg5: $Function_<$Vec3, $Vec3>, arg6: $AABB_, arg7: $BiConsumer_<$Vec3, $List<$Entity>>, arg8: boolean, arg9: string, arg10: $UUID_, arg11: $EntityType_<never>, arg12: boolean);
+        get worldLimited(): boolean;
         get maxResults(): number;
         get selfSelector(): boolean;
-        get worldLimited(): boolean;
     }
 }

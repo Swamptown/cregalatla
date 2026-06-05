@@ -151,8 +151,8 @@ declare module "@package/net/minecraft/client/gui/screens/worldselection" {
      */
     export type $WorldCreationContext$OptionsModifier_ = (() => void);
     export class $SwitchGrid$SwitchBuilder {
-        withIsActiveCondition(arg0: $BooleanSupplier_): $SwitchGrid$SwitchBuilder;
         withInfo(arg0: $Component_): $SwitchGrid$SwitchBuilder;
+        withIsActiveCondition(arg0: $BooleanSupplier_): $SwitchGrid$SwitchBuilder;
         build(arg0: $SwitchGrid$Builder, arg1: $GridLayout, arg2: number): $SwitchGrid$LabeledSwitch;
         constructor(arg0: $Component_, arg1: $BooleanSupplier_, arg2: $Consumer_<boolean>, arg3: number);
     }
@@ -235,6 +235,7 @@ declare module "@package/net/minecraft/client/gui/screens/worldselection" {
         loadWorldStem(arg0: $Dynamic<never>, arg1: boolean, arg2: $PackRepository): $WorldStem;
         recreateWorldData(arg0: $LevelStorageSource$LevelStorageAccess): $Pair<$LevelSettings, $WorldCreationContext>;
         static confirmWorldCreation(arg0: $Minecraft, arg1: $CreateWorldScreen, arg2: $Lifecycle, arg3: $Runnable_, arg4: boolean): void;
+        localvar$faj000$collective$loadLevel_bl2(arg0: boolean): boolean;
         openWorld(arg0: string, arg1: $Runnable_): void;
         createFreshLevel(arg0: string, arg1: $LevelSettings, arg2: $WorldOptions, arg3: $Function_<$RegistryAccess, $WorldDimensions>, arg4: $Screen): void;
         constructor(arg0: $Minecraft, arg1: $LevelStorageSource);
@@ -320,7 +321,7 @@ declare module "@package/net/minecraft/client/gui/screens/worldselection" {
     /**
      * Values that may be interpreted as {@link $SwitchGrid$InfoUnderneathSettings}.
      */
-    export type $SwitchGrid$InfoUnderneathSettings_ = { alwaysMaxHeight?: boolean, maxInfoRows?: number,  } | [alwaysMaxHeight?: boolean, maxInfoRows?: number, ];
+    export type $SwitchGrid$InfoUnderneathSettings_ = { maxInfoRows?: number, alwaysMaxHeight?: boolean,  } | [maxInfoRows?: number, alwaysMaxHeight?: boolean, ];
     export class $WorldCreationContext extends $Record {
         selectedDimensions(): $WorldDimensions;
         worldgenLoadContext(): $RegistryAccess$Frozen;
@@ -328,10 +329,10 @@ declare module "@package/net/minecraft/client/gui/screens/worldselection" {
         withDimensions(arg0: $WorldCreationContext$DimensionsUpdater_): $WorldCreationContext;
         withDataConfiguration(arg0: $WorldDataConfiguration_): $WorldCreationContext;
         worldgenRegistries(): $LayeredRegistryAccess<$RegistryLayer>;
-        withOptions(arg0: $WorldCreationContext$OptionsModifier_): $WorldCreationContext;
-        dataPackResources(): $ReloadableServerResources;
         dataConfiguration(): $WorldDataConfiguration;
         datapackDimensions(): $Registry<$LevelStem>;
+        withOptions(arg0: $WorldCreationContext$OptionsModifier_): $WorldCreationContext;
+        dataPackResources(): $ReloadableServerResources;
         validate(): void;
         options(): $WorldOptions;
         constructor(arg0: $WorldGenSettings_, arg1: $LayeredRegistryAccess<$RegistryLayer_>, arg2: $ReloadableServerResources, arg3: $WorldDataConfiguration_);
@@ -341,7 +342,7 @@ declare module "@package/net/minecraft/client/gui/screens/worldselection" {
     /**
      * Values that may be interpreted as {@link $WorldCreationContext}.
      */
-    export type $WorldCreationContext_ = { dataPackResources?: $ReloadableServerResources, datapackDimensions?: $Registry<$LevelStem_>, worldgenRegistries?: $LayeredRegistryAccess<$RegistryLayer_>, selectedDimensions?: $WorldDimensions_, options?: $WorldOptions, dataConfiguration?: $WorldDataConfiguration_,  } | [dataPackResources?: $ReloadableServerResources, datapackDimensions?: $Registry<$LevelStem_>, worldgenRegistries?: $LayeredRegistryAccess<$RegistryLayer_>, selectedDimensions?: $WorldDimensions_, options?: $WorldOptions, dataConfiguration?: $WorldDataConfiguration_, ];
+    export type $WorldCreationContext_ = { options?: $WorldOptions, selectedDimensions?: $WorldDimensions_, worldgenRegistries?: $LayeredRegistryAccess<$RegistryLayer_>, datapackDimensions?: $Registry<$LevelStem_>, dataPackResources?: $ReloadableServerResources, dataConfiguration?: $WorldDataConfiguration_,  } | [options?: $WorldOptions, selectedDimensions?: $WorldDimensions_, worldgenRegistries?: $LayeredRegistryAccess<$RegistryLayer_>, datapackDimensions?: $Registry<$LevelStem_>, dataPackResources?: $ReloadableServerResources, dataConfiguration?: $WorldDataConfiguration_, ];
     export class $ConfirmExperimentalFeaturesScreen$DetailsScreen$PackListEntry extends $ObjectSelectionList$Entry<$ConfirmExperimentalFeaturesScreen$DetailsScreen$PackListEntry> {
         /**
          * @deprecated
@@ -363,11 +364,11 @@ declare module "@package/net/minecraft/client/gui/screens/worldselection" {
      */
     export type $WorldCreationContext$DimensionsUpdater_ = (() => void);
     export class $SwitchGrid$Builder {
-        increaseRow(): void;
-        withPaddingLeft(arg0: number): $SwitchGrid$Builder;
         withInfoUnderneath(arg0: number, arg1: boolean): $SwitchGrid$Builder;
         withRowSpacing(arg0: number): $SwitchGrid$Builder;
         addSwitch(arg0: $Component_, arg1: $BooleanSupplier_, arg2: $Consumer_<boolean>): $SwitchGrid$SwitchBuilder;
+        increaseRow(): void;
+        withPaddingLeft(arg0: number): $SwitchGrid$Builder;
         build(arg0: $Consumer_<$LayoutElement>): $SwitchGrid;
         infoUnderneath: ($SwitchGrid$InfoUnderneathSettings) | undefined;
         width: number;
@@ -377,41 +378,41 @@ declare module "@package/net/minecraft/client/gui/screens/worldselection" {
         constructor(arg0: number);
     }
     export class $WorldCreationUiState {
+        updateDimensions(arg0: $WorldCreationContext$DimensionsUpdater_): void;
+        getTargetFolder(): string;
+        tryUpdateDataConfiguration(arg0: $WorldDataConfiguration_): boolean;
+        getPresetEditor(): $PresetEditor;
         setWorldType(arg0: $WorldCreationUiState$WorldTypeEntry_): void;
         getAltPresetList(): $List<$WorldCreationUiState$WorldTypeEntry>;
         getNormalPresetList(): $List<$WorldCreationUiState$WorldTypeEntry>;
+        setGameRules(arg0: $GameRules): void;
         isGenerateStructures(): boolean;
         setGenerateStructures(arg0: boolean): void;
         isBonusChest(): boolean;
         setBonusChest(arg0: boolean): void;
-        getPresetEditor(): $PresetEditor;
-        setGameRules(arg0: $GameRules): void;
-        updateDimensions(arg0: $WorldCreationContext$DimensionsUpdater_): void;
-        getTargetFolder(): string;
-        tryUpdateDataConfiguration(arg0: $WorldDataConfiguration_): boolean;
         onChanged(): void;
-        getWorldType(): $WorldCreationUiState$WorldTypeEntry;
         setAllowCommands(arg0: boolean): void;
-        setSettings(arg0: $WorldCreationContext_): void;
-        getSettings(): $WorldCreationContext;
-        setGameMode(arg0: $WorldCreationUiState$SelectedGameMode_): void;
-        getGameMode(): $WorldCreationUiState$SelectedGameMode;
         setSeed(arg0: string): void;
         getSeed(): string;
+        setSettings(arg0: $WorldCreationContext_): void;
+        getSettings(): $WorldCreationContext;
+        getGameMode(): $WorldCreationUiState$SelectedGameMode;
+        getWorldType(): $WorldCreationUiState$WorldTypeEntry;
+        setGameMode(arg0: $WorldCreationUiState$SelectedGameMode_): void;
         getName(): string;
         setName(arg0: string): void;
         isDebug(): boolean;
-        addListener(arg0: $Consumer_<$WorldCreationUiState>): void;
-        isHardcore(): boolean;
         getDifficulty(): $Difficulty;
+        addListener(arg0: $Consumer_<$WorldCreationUiState>): void;
         getGameRules(): $GameRules;
+        isHardcore(): boolean;
         isAllowCommands(): boolean;
         setDifficulty(arg0: $Difficulty_): void;
         constructor(arg0: $Path_, arg1: $WorldCreationContext_, arg2: ($ResourceKey_<$WorldPreset>) | undefined, arg3: $OptionalLong);
+        get targetFolder(): string;
+        get presetEditor(): $PresetEditor;
         get altPresetList(): $List<$WorldCreationUiState$WorldTypeEntry>;
         get normalPresetList(): $List<$WorldCreationUiState$WorldTypeEntry>;
-        get presetEditor(): $PresetEditor;
-        get targetFolder(): string;
         get debug(): boolean;
         get hardcore(): boolean;
     }
@@ -498,8 +499,8 @@ declare module "@package/net/minecraft/client/gui/screens/worldselection" {
         height: number;
     }
     export class $WorldCreationUiState$WorldTypeEntry extends $Record {
-        describePreset(): $Component;
         isAmplified(): boolean;
+        describePreset(): $Component;
         preset(): $Holder<$WorldPreset>;
         constructor(preset: $Holder_<$WorldPreset>);
         get amplified(): boolean;
@@ -513,13 +514,13 @@ declare module "@package/net/minecraft/client/gui/screens/worldselection" {
     /**
      * Values that may be interpreted as {@link $SwitchGrid$LabeledSwitch}.
      */
-    export type $SwitchGrid$LabeledSwitch_ = { isActiveCondition?: $BooleanSupplier_, button?: $CycleButton<boolean>, stateSupplier?: $BooleanSupplier_,  } | [isActiveCondition?: $BooleanSupplier_, button?: $CycleButton<boolean>, stateSupplier?: $BooleanSupplier_, ];
+    export type $SwitchGrid$LabeledSwitch_ = { button?: $CycleButton<boolean>, isActiveCondition?: $BooleanSupplier_, stateSupplier?: $BooleanSupplier_,  } | [button?: $CycleButton<boolean>, isActiveCondition?: $BooleanSupplier_, stateSupplier?: $BooleanSupplier_, ];
     export class $WorldOpenFlows$1Data extends $Record {
     }
     /**
      * Values that may be interpreted as {@link $WorldOpenFlows$1Data}.
      */
-    export type $WorldOpenFlows$1Data_ = { levelSettings?: $LevelSettings, options?: $WorldOptions, existingDimensions?: $Registry<$LevelStem_>,  } | [levelSettings?: $LevelSettings, options?: $WorldOptions, existingDimensions?: $Registry<$LevelStem_>, ];
+    export type $WorldOpenFlows$1Data_ = { options?: $WorldOptions, levelSettings?: $LevelSettings, existingDimensions?: $Registry<$LevelStem_>,  } | [options?: $WorldOptions, levelSettings?: $LevelSettings, existingDimensions?: $Registry<$LevelStem_>, ];
     export class $ConfirmExperimentalFeaturesScreen extends $Screen {
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;

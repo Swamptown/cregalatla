@@ -124,9 +124,9 @@ declare module "@package/net/minecraft/stats" {
         constructor();
     }
     export class $RecipeBookSettings {
-        setOpen(arg0: $RecipeBookType_, arg1: boolean): void;
         isFiltering(arg0: $RecipeBookType_): boolean;
         setFiltering(arg0: $RecipeBookType_, arg1: boolean): void;
+        setOpen(arg0: $RecipeBookType_, arg1: boolean): void;
         isOpen(arg0: $RecipeBookType_): boolean;
         write(arg0: $CompoundTag_): void;
         write(arg0: $FriendlyByteBuf): void;
@@ -137,22 +137,22 @@ declare module "@package/net/minecraft/stats" {
         constructor();
     }
     export class $RecipeBook {
-        copyOverData(arg0: $RecipeBook): void;
         willHighlight(arg0: $RecipeHolder_<never>): boolean;
         removeHighlight(arg0: $RecipeHolder_<never>): void;
-        setOpen(arg0: $RecipeBookType_, arg1: boolean): void;
+        copyOverData(arg0: $RecipeBook): void;
         addHighlight(arg0: $ResourceLocation_): void;
         addHighlight(arg0: $RecipeHolder_<never>): void;
-        isFiltering(arg0: $RecipeBookType_): boolean;
         isFiltering(arg0: $RecipeBookMenu<never, never>): boolean;
+        isFiltering(arg0: $RecipeBookType_): boolean;
         setFiltering(arg0: $RecipeBookType_, arg1: boolean): void;
         setBookSettings(arg0: $RecipeBookSettings): void;
         getBookSettings(): $RecipeBookSettings;
         setBookSetting(arg0: $RecipeBookType_, arg1: boolean, arg2: boolean): void;
+        setOpen(arg0: $RecipeBookType_, arg1: boolean): void;
         remove(arg0: $ResourceLocation_): void;
         remove(arg0: $RecipeHolder_<never>): void;
-        add(arg0: $RecipeHolder_<never>): void;
         add(arg0: $ResourceLocation_): void;
+        add(arg0: $RecipeHolder_<never>): void;
         contains(arg0: $ResourceLocation_): boolean;
         contains(arg0: $RecipeHolder_<never>): boolean;
         isOpen(arg0: $RecipeBookType_): boolean;

@@ -21,11 +21,11 @@ declare module "@package/dev/ryanhcode/sable/mixinterface/entity/entity_sublevel
     export interface $EntityMovementExtension {
         sable$getInBlockStatePos(): $BlockPos;
         sable$getCollisionInfo(): $SubLevelEntityCollision$CollisionInfo;
-        sable$setTrackingSubLevel(arg0: $SubLevel): void;
-        sable$setLastTrackingSubLevelID(arg0: $UUID_): void;
         sable$getTrackingSubLevel(): $SubLevel;
         sable$getLastTrackingSubLevelID(): $UUID;
         sable$setPosField(arg0: $Vec3_): void;
+        sable$setTrackingSubLevel(arg0: $SubLevel): void;
+        sable$setLastTrackingSubLevelID(arg0: $UUID_): void;
     }
     export class $LivingEntityMovementExtension {
     }

@@ -17,6 +17,9 @@ declare module "@package/xaero/common/minimap/write" {
         constructor();
     }
     export class $MinimapWriter {
+        setClearBlockColours(arg0: boolean): void;
+        resetShortBlocks(): void;
+        onRender(): void;
         setupDimensionHighlightHandler(arg0: $ResourceKey_<$Level>): void;
         getLoadSide(): number;
         getUpdateRadiusInChunks(): number;
@@ -26,7 +29,6 @@ declare module "@package/xaero/common/minimap/write" {
         loadBlockColor(arg0: number, arg1: $Level_, arg2: number, arg3: number, arg4: $LevelChunk, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $Heightmap$Types_, arg11: $MinimapTile, arg12: $MinimapChunk, arg13: $MinimapChunk, arg14: $MinimapChunk, arg15: $MinimapChunk, arg16: number, arg17: number, arg18: number, arg19: boolean, arg20: boolean, arg21: number, arg22: number, arg23: number, arg24: boolean, arg25: number, arg26: number, arg27: boolean, arg28: number, arg29: number, arg30: boolean, arg31: $List_<number>, arg32: $List_<$BlockState_>, arg33: $List_<number>, arg34: number[], arg35: number[], arg36: number[], arg37: number[], arg38: number[], arg39: number[], arg40: number[], arg41: number[], arg42: number[], arg43: boolean, arg44: number, arg45: $BlockPos$MutableBlockPos, arg46: $BlockPos$MutableBlockPos, arg47: number, arg48: number, arg49: $IXaeroMinimap, arg50: $MinimapWriterHelper, arg51: number, arg52: boolean, arg53: boolean, arg54: number, arg55: number, arg56: number, arg57: number, arg58: boolean, arg59: boolean, arg60: boolean, arg61: boolean, arg62: $BlockPos$MutableBlockPos, arg63: boolean): $MinimapTile;
         findBlock(arg0: $Level_, arg1: $LevelChunk, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: $BlockPos$MutableBlockPos, arg9: $BlockPos$MutableBlockPos, arg10: number, arg11: boolean, arg12: $List_<number>, arg13: $List_<$BlockState_>, arg14: number, arg15: boolean, arg16: $List_<number>, arg17: boolean, arg18: boolean, arg19: $BlockPos$MutableBlockPos, arg20: boolean): $Block;
         getFixedSkyLightBlockBrightness(arg0: number, arg1: number, arg2: number): number;
-        onRender(): void;
         getLoadedCaving(): number;
         getLoadingMapChunkX(): number;
         getLoadingMapChunkZ(): number;
@@ -35,8 +37,6 @@ declare module "@package/xaero/common/minimap/write" {
         getLoadedMapChunkZ(): number;
         getLoadedMapChunkX(): number;
         getLoadedLevels(): number;
-        setClearBlockColours(arg0: boolean): void;
-        resetShortBlocks(): void;
         getDimensionHighlightHandler(): $DimensionHighlighterHandler;
         getLoadedSideInChunks(): number;
         isLoadedNonWorldMap(): boolean;
@@ -62,6 +62,7 @@ declare module "@package/xaero/common/minimap/write" {
         loadedLightOverlayMinLight: number;
         loadingLightOverlayType: number;
         constructor(arg0: $IXaeroMinimap, arg1: $MinimapSession, arg2: $BlockStateShortShapeCache, arg3: $HighlighterRegistry);
+        set clearBlockColours(value: boolean);
         set upDimensionHighlightHandler(value: $ResourceKey_<$Level>);
         get loadSide(): number;
         get updateRadiusInChunks(): number;
@@ -73,7 +74,6 @@ declare module "@package/xaero/common/minimap/write" {
         get loadedMapChunkZ(): number;
         get loadedMapChunkX(): number;
         get loadedLevels(): number;
-        set clearBlockColours(value: boolean);
         get dimensionHighlightHandler(): $DimensionHighlighterHandler;
         get loadedSideInChunks(): number;
         get loadedNonWorldMap(): boolean;

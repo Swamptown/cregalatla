@@ -12,10 +12,10 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/item/additional_placeme
     export class $AdditionalItemPlacement {
         static getBlockPlacer(): $BlockPlacerItem;
         getPlacedBlock(): $Block;
-        overrideUseOn(arg0: $UseOnContext, arg1: $FoodProperties_): $InteractionResult;
         overrideGetPlacementState(arg0: $BlockPlaceContext): $BlockState;
         overridePlace(arg0: $BlockPlaceContext): $InteractionResult;
         overrideUpdatePlacementContext(arg0: $BlockPlaceContext): $BlockPlaceContext;
+        overrideUseOn(arg0: $UseOnContext, arg1: $FoodProperties_): $InteractionResult;
         constructor(arg0: $Block_);
         static get blockPlacer(): $BlockPlacerItem;
         get placedBlock(): $Block;

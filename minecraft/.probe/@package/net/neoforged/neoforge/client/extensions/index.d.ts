@@ -76,19 +76,19 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
         getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
         getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getRenderPasses(arg0: $ItemStack_, arg1: boolean): $List<$BakedModel>;
+        getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
         applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
-        getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
     }
     export class $IDimensionSpecialEffectsExtension {
     }
     export interface $IDimensionSpecialEffectsExtension {
         adjustLightmapColors(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $Vector3f): void;
-        tickRain(arg0: $ClientLevel, arg1: number, arg2: $Camera): boolean;
-        renderClouds(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $PoseStack, arg4: number, arg5: number, arg6: number, arg7: $Matrix4f, arg8: $Matrix4f): boolean;
         renderSnowAndRain(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $LightTexture, arg4: number, arg5: number, arg6: number): boolean;
+        tickRain(arg0: $ClientLevel, arg1: number, arg2: $Camera): boolean;
         renderSky(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $Camera, arg5: $Matrix4f, arg6: boolean, arg7: $Runnable_): boolean;
+        renderClouds(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $PoseStack, arg4: number, arg5: number, arg6: number, arg7: $Matrix4f, arg8: $Matrix4f): boolean;
     }
     export class $IAbstractWidgetExtension {
     }
@@ -101,8 +101,8 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
         getDisplayName(): $Component;
         getKey(): $InputConstants$Key;
         setToDefault(): void;
-        isConflictContextAndModifierActive(): boolean;
         isActiveAndMatches(arg0: $InputConstants$Key): boolean;
+        isConflictContextAndModifierActive(): boolean;
         getKeyConflictContext(): $IKeyConflictContext;
         getKeyModifier(): $KeyModifier;
         getDefaultKeyModifier(): $KeyModifier;

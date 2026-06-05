@@ -86,15 +86,15 @@ declare module "@package/net/neoforged/neoforge/network/configuration" {
     export type $SyncConfig_ = { listener?: $ServerConfigurationPacketListener,  } | [listener?: $ServerConfigurationPacketListener, ];
     export class $CheckExtensibleEnums$ExtensionData extends $Record {
         entries(): $List<string>;
-        vanillaCount(): number;
         totalCount(): number;
+        vanillaCount(): number;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $CheckExtensibleEnums$ExtensionData>;
         constructor(vanillaCount: number, totalCount: number, entries: $List_<string>);
     }
     /**
      * Values that may be interpreted as {@link $CheckExtensibleEnums$ExtensionData}.
      */
-    export type $CheckExtensibleEnums$ExtensionData_ = { totalCount?: number, entries?: $List_<string>, vanillaCount?: number,  } | [totalCount?: number, entries?: $List_<string>, vanillaCount?: number, ];
+    export type $CheckExtensibleEnums$ExtensionData_ = { entries?: $List_<string>, totalCount?: number, vanillaCount?: number,  } | [entries?: $List_<string>, totalCount?: number, vanillaCount?: number, ];
     export class $RegistryDataMapNegotiation extends $Record implements $ICustomConfigurationTask {
         listener(): $ServerConfigurationPacketListener;
         run(arg0: $Consumer_<$CustomPacketPayload>): void;
@@ -123,20 +123,20 @@ declare module "@package/net/neoforged/neoforge/network/configuration" {
      */
     export type $CheckFeatureFlags_ = { listener?: $ServerConfigurationPacketListener,  } | [listener?: $ServerConfigurationPacketListener, ];
     export class $CheckExtensibleEnums$EnumEntry extends $Record {
-        networkCheck(): $NetworkedEnum$NetworkCheck;
+        isExtended(): boolean;
         isServerbound(): boolean;
         isClientbound(): boolean;
-        isExtended(): boolean;
         className(): string;
         data(): ($CheckExtensibleEnums$ExtensionData) | undefined;
+        networkCheck(): $NetworkedEnum$NetworkCheck;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $CheckExtensibleEnums$EnumEntry>;
         constructor(className: string, networkCheck: $NetworkedEnum$NetworkCheck_, data: ($CheckExtensibleEnums$ExtensionData_) | undefined);
+        get extended(): boolean;
         get serverbound(): boolean;
         get clientbound(): boolean;
-        get extended(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $CheckExtensibleEnums$EnumEntry}.
      */
-    export type $CheckExtensibleEnums$EnumEntry_ = { className?: string, networkCheck?: $NetworkedEnum$NetworkCheck_, data?: ($CheckExtensibleEnums$ExtensionData_) | undefined,  } | [className?: string, networkCheck?: $NetworkedEnum$NetworkCheck_, data?: ($CheckExtensibleEnums$ExtensionData_) | undefined, ];
+    export type $CheckExtensibleEnums$EnumEntry_ = { networkCheck?: $NetworkedEnum$NetworkCheck_, className?: string, data?: ($CheckExtensibleEnums$ExtensionData_) | undefined,  } | [networkCheck?: $NetworkedEnum$NetworkCheck_, className?: string, data?: ($CheckExtensibleEnums$ExtensionData_) | undefined, ];
 }

@@ -31,9 +31,9 @@ export * as metadata from "@package/net/minecraft/data/metadata";
 declare module "@package/net/minecraft/data" {
     export class $BlockFamily {
         shouldGenerateModel(): boolean;
-        getBaseBlock(): $Block;
         getRecipeGroupPrefix(): (string) | undefined;
         getRecipeUnlockedBy(): (string) | undefined;
+        getBaseBlock(): $Block;
         shouldGenerateRecipe(): boolean;
         getVariants(): $Map<$BlockFamily$Variant, $Block>;
         get(arg0: $BlockFamily$Variant_): $Block;
@@ -50,7 +50,7 @@ declare module "@package/net/minecraft/data" {
     /**
      * Values that may be interpreted as {@link $HashCache$ProviderCacheBuilder}.
      */
-    export type $HashCache$ProviderCacheBuilder_ = { version?: string, data?: $ConcurrentMap<$Path_, $HashCode>,  } | [version?: string, data?: $ConcurrentMap<$Path_, $HashCode>, ];
+    export type $HashCache$ProviderCacheBuilder_ = { data?: $ConcurrentMap<$Path_, $HashCode>, version?: string,  } | [data?: $ConcurrentMap<$Path_, $HashCode>, version?: string, ];
     export class $HashCache$UpdateFunction {
     }
     export interface $HashCache$UpdateFunction {
@@ -149,7 +149,7 @@ declare module "@package/net/minecraft/data" {
     /**
      * Values that may be interpreted as {@link $HashCache$ProviderCache}.
      */
-    export type $HashCache$ProviderCache_ = { version?: string, data?: $ImmutableMap<$Path_, $HashCode>,  } | [version?: string, data?: $ImmutableMap<$Path_, $HashCode>, ];
+    export type $HashCache$ProviderCache_ = { data?: $ImmutableMap<$Path_, $HashCode>, version?: string,  } | [data?: $ImmutableMap<$Path_, $HashCode>, version?: string, ];
     export class $HashCache$UpdateResult extends $Record {
         writes(): number;
         providerId(): string;
@@ -159,7 +159,7 @@ declare module "@package/net/minecraft/data" {
     /**
      * Values that may be interpreted as {@link $HashCache$UpdateResult}.
      */
-    export type $HashCache$UpdateResult_ = { writes?: number, providerId?: string, cache?: $HashCache$ProviderCache_,  } | [writes?: number, providerId?: string, cache?: $HashCache$ProviderCache_, ];
+    export type $HashCache$UpdateResult_ = { providerId?: string, writes?: number, cache?: $HashCache$ProviderCache_,  } | [providerId?: string, writes?: number, cache?: $HashCache$ProviderCache_, ];
     export class $DataGenerator$PackGenerator {
         addProvider<T extends $DataProvider>(arg0: $DataProvider$Factory_<T>): T;
         this$0: $DataGenerator;
@@ -222,8 +222,8 @@ declare module "@package/net/minecraft/data" {
         get family(): $BlockFamily;
     }
     export class $DataProvider {
-        static saveStable<T>(arg0: $CachedOutput_, arg1: $HolderLookup$Provider, arg2: $Codec<T>, arg3: T, arg4: $Path_): $CompletableFuture<never>;
         static saveStable(arg0: $CachedOutput_, arg1: $JsonElement_, arg2: $Path_): $CompletableFuture<never>;
+        static saveStable<T>(arg0: $CachedOutput_, arg1: $HolderLookup$Provider, arg2: $Codec<T>, arg3: T, arg4: $Path_): $CompletableFuture<never>;
         static FIXED_ORDER_FIELDS: $ToIntFunction<string>;
         static INDENT_WIDTH: $AtomicInteger;
         static KEY_COMPARATOR: $Comparator<string>;

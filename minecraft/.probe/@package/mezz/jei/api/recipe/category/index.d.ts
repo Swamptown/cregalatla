@@ -17,29 +17,29 @@ declare module "@package/mezz/jei/api/recipe/category" {
     }
     export interface $IRecipeCategory<T> {
         getRecipeType(): $RecipeType<T>;
-        getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: $IRecipeSlotsView_, arg3: number, arg4: number): void;
-        getRegistryName(arg0: T): $ResourceLocation;
-        /**
-         * @deprecated
-         */
-        getBackground(): $IDrawable;
-        onDisplayedIngredientsUpdate(arg0: T, arg1: $List_<$IRecipeSlotDrawable>, arg2: $IFocusGroup): void;
         setRecipe(arg0: $IRecipeLayoutBuilder, arg1: T, arg2: $IFocusGroup): void;
+        onDisplayedIngredientsUpdate(arg0: T, arg1: $List_<$IRecipeSlotDrawable>, arg2: $IFocusGroup): void;
         /**
          * @deprecated
          */
         getTooltipStrings(arg0: T, arg1: $IRecipeSlotsView_, arg2: number, arg3: number): $List<$Component>;
-        createRecipeExtras(arg0: $IRecipeExtrasBuilder, arg1: T, arg2: $IFocusGroup): void;
         /**
          * @deprecated
          */
         createRecipeExtras(arg0: $IRecipeExtrasBuilder, arg1: T, arg2: $IRecipeSlotsView_, arg3: $IFocusGroup): void;
+        createRecipeExtras(arg0: $IRecipeExtrasBuilder, arg1: T, arg2: $IFocusGroup): void;
         /**
          * @deprecated
          */
         handleInput(arg0: T, arg1: number, arg2: number, arg3: $InputConstants$Key): boolean;
         isHandled(arg0: T): boolean;
+        /**
+         * @deprecated
+         */
+        getBackground(): $IDrawable;
         needsRecipeBorder(): boolean;
+        getRegistryName(arg0: T): $ResourceLocation;
+        getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: $IRecipeSlotsView_, arg3: number, arg4: number): void;
         getWidth(): number;
         getHeight(): number;
         getIcon(): $IDrawable;

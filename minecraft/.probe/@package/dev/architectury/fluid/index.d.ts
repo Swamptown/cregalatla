@@ -7,21 +7,21 @@ import { $Tag_, $Tag } from "@package/net/minecraft/nbt";
 import { $TooltipProvider } from "@package/net/minecraft/world/item/component";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
 import { $Component } from "@package/net/minecraft/network/chat";
-import { $DataComponentType, $DataComponentMap_, $DataComponentType_, $DataComponentPatch_, $PatchedDataComponentMap, $DataComponentPatch, $DataComponentHolder } from "@package/net/minecraft/core/component";
+import { $DataComponentType, $DataComponentMap_, $DataComponentType_, $DataComponentPatch_, $DataComponentMap, $DataComponentPatch, $DataComponentHolder } from "@package/net/minecraft/core/component";
 import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/dev/architectury/fluid" {
     export class $FluidStack implements $DataComponentHolder {
         isFluidEqual(other: $FluidStack): boolean;
-        getFluid(): $Fluid;
-        getTranslationKey(): string;
-        setAmount(amount: number): void;
-        static bucketAmount(): number;
         copyWithAmount(amount: number): $FluidStack;
         getRawFluidSupplier(): $Supplier<$Fluid>;
+        static bucketAmount(): number;
         getRawFluid(): $Fluid;
         isFluidStackEqual(other: $FluidStack): boolean;
         isComponentEqual(other: $FluidStack): boolean;
+        setAmount(amount: number): void;
+        getFluid(): $Fluid;
+        getTranslationKey(): string;
         getName(): $Component;
         remove<T>(type: $DataComponentType_<T>): T;
         update<T, U>(type: $DataComponentType_<T>, component: T, updateContext: U, updater: $BiFunction_<T, U, T>): T;
@@ -45,10 +45,9 @@ declare module "@package/dev/architectury/fluid" {
         grow(amount: number): void;
         getPatch(): $DataComponentPatch;
         shrink(amount: number): void;
-        getComponents(): $PatchedDataComponentMap;
-        applyComponents(patch: $DataComponentPatch_): void;
-        applyComponents(patch: $DataComponentMap_): void;
         getAmount(): number;
+        applyComponents(patch: $DataComponentMap_): void;
+        applyComponents(patch: $DataComponentPatch_): void;
         has(arg0: $DataComponentType_<never>): boolean;
         get<T>(arg0: $DataComponentType_<T>): T;
         getOrDefault<T>(arg0: $DataComponentType_<T>, arg1: T): T;
@@ -57,14 +56,15 @@ declare module "@package/dev/architectury/fluid" {
         has(arg0: $Supplier_<$DataComponentType<never>>): boolean;
         get<T>(arg0: $Supplier_<$DataComponentType<T>>): T;
         getOrDefault<T>(arg0: $Supplier_<$DataComponentType<T>>, arg1: T): T;
+        getComponents(): $DataComponentMap;
         static CODEC: $Codec<$FluidStack>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $FluidStack>;
-        get fluid(): $Fluid;
-        get translationKey(): string;
         get rawFluidSupplier(): $Supplier<$Fluid>;
         get rawFluid(): $Fluid;
+        get fluid(): $Fluid;
+        get translationKey(): string;
         get name(): $Component;
         get patch(): $DataComponentPatch;
-        get components(): $PatchedDataComponentMap;
+        get components(): $DataComponentMap;
     }
 }

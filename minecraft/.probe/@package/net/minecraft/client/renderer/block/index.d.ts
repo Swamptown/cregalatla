@@ -25,12 +25,12 @@ export * as model from "@package/net/minecraft/client/renderer/block/model";
 
 declare module "@package/net/minecraft/client/renderer/block" {
     export class $ModelBlockRenderer$Cache implements $ModelBlockRendererCacheExtension {
+        sable$setOnSubLevel(arg0: boolean): void;
+        sable$getOnSubLevel(): boolean;
         enable(): void;
         disable(): void;
         getLightColor(arg0: $BlockState_, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
         getShadeBrightness(arg0: $BlockState_, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
-        sable$setOnSubLevel(arg0: boolean): void;
-        sable$getOnSubLevel(): boolean;
     }
     export class $BlockRenderDispatcher implements $ResourceManagerReloadListener, $BlockRenderDispatcherAccessor, $IdentifiableResourceReloadListener {
         getModelRenderer(): $ModelBlockRenderer;
@@ -39,25 +39,25 @@ declare module "@package/net/minecraft/client/renderer/block" {
          */
         renderSingleBlock(arg0: $BlockState_, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: number, arg4: number): void;
         renderSingleBlock(arg0: $BlockState_, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: number, arg4: number, arg5: $ModelData, arg6: $RenderType): void;
-        renderBatched(arg0: $BlockState_, arg1: $BlockPos_, arg2: $BlockAndTintGetter, arg3: $PoseStack, arg4: $VertexConsumer, arg5: boolean, arg6: $RandomSource, arg7: $ModelData, arg8: $RenderType): void;
-        renderBatched(arg0: $BlockState_, arg1: $BlockPos_, arg2: $BlockAndTintGetter, arg3: $PoseStack, arg4: $VertexConsumer, arg5: boolean, arg6: $RandomSource): void;
-        onResourceManagerReload(arg0: $ResourceManager): void;
-        wrapMethod$cdh000$aeronautics$renderBreakingTexture(arg0: $BlockState_, arg1: $BlockPos_, arg2: $BlockAndTintGetter, arg3: $PoseStack, arg4: $VertexConsumer, arg5: $ModelData, arg6: $Operation_<any>): void;
+        wrapMethod$cfe000$aeronautics$renderBreakingTexture(arg0: $BlockState_, arg1: $BlockPos_, arg2: $BlockAndTintGetter, arg3: $PoseStack, arg4: $VertexConsumer, arg5: $ModelData, arg6: $Operation_<any>): void;
         renderLiquid(arg0: $BlockPos_, arg1: $BlockAndTintGetter, arg2: $VertexConsumer, arg3: $BlockState_, arg4: $FluidState): void;
         getLiquidBlockRenderer(): $LiquidBlockRenderer;
+        renderBatched(arg0: $BlockState_, arg1: $BlockPos_, arg2: $BlockAndTintGetter, arg3: $PoseStack, arg4: $VertexConsumer, arg5: boolean, arg6: $RandomSource): void;
+        renderBatched(arg0: $BlockState_, arg1: $BlockPos_, arg2: $BlockAndTintGetter, arg3: $PoseStack, arg4: $VertexConsumer, arg5: boolean, arg6: $RandomSource, arg7: $ModelData, arg8: $RenderType): void;
+        onResourceManagerReload(arg0: $ResourceManager): void;
         getFabricId(): $ResourceLocation;
         getFabricDependencies(): $Collection<any>;
+        getBlockModelShaper(): $BlockModelShaper;
+        getBlockModel(arg0: $BlockState_): $BakedModel;
         /**
          * @deprecated
          */
         renderBreakingTexture(arg0: $BlockState_, arg1: $BlockPos_, arg2: $BlockAndTintGetter, arg3: $PoseStack, arg4: $VertexConsumer): void;
         renderBreakingTexture(arg0: $BlockState_, arg1: $BlockPos_, arg2: $BlockAndTintGetter, arg3: $PoseStack, arg4: $VertexConsumer, arg5: $ModelData): void;
-        getBlockModelShaper(): $BlockModelShaper;
-        getBlockModel(arg0: $BlockState_): $BakedModel;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
-        getBlockColors(): $BlockColors;
         getBlockEntityRenderer(): $BlockEntityWithoutLevelRenderer;
+        getBlockColors(): $BlockColors;
         modelRenderer: $ModelBlockRenderer;
         constructor(arg0: $BlockModelShaper, arg1: $BlockEntityWithoutLevelRenderer, arg2: $BlockColors);
         get liquidBlockRenderer(): $LiquidBlockRenderer;
@@ -65,8 +65,8 @@ declare module "@package/net/minecraft/client/renderer/block" {
         get fabricDependencies(): $Collection<any>;
         get blockModelShaper(): $BlockModelShaper;
         get name(): string;
-        get blockColors(): $BlockColors;
         get blockEntityRenderer(): $BlockEntityWithoutLevelRenderer;
+        get blockColors(): $BlockColors;
     }
     export class $ModelBlockRenderer$AmbientVertexRemap extends $Enum<$ModelBlockRenderer$AmbientVertexRemap> {
     }
@@ -87,35 +87,36 @@ declare module "@package/net/minecraft/client/renderer/block" {
      */
     export type $ModelBlockRenderer$SizeInfo_ = "down" | "up" | "north" | "south" | "west" | "east" | "flip_down" | "flip_up" | "flip_north" | "flip_south" | "flip_west" | "flip_east";
     export class $ModelBlockRenderer {
-        calculateShape(arg0: $BlockAndTintGetter, arg1: $BlockState_, arg2: $BlockPos_, arg3: number[], arg4: $Direction_, arg5: number[], arg6: $BitSet): void;
-        tesselateBlock(arg0: $BlockAndTintGetter, arg1: $BakedModel, arg2: $BlockState_, arg3: $BlockPos_, arg4: $PoseStack, arg5: $VertexConsumer, arg6: boolean, arg7: $RandomSource, arg8: number, arg9: number, arg10: $ModelData, arg11: $RenderType): void;
-        /**
-         * @deprecated
-         */
-        tesselateBlock(arg0: $BlockAndTintGetter, arg1: $BakedModel, arg2: $BlockState_, arg3: $BlockPos_, arg4: $PoseStack, arg5: $VertexConsumer, arg6: boolean, arg7: $RandomSource, arg8: number, arg9: number): void;
-        static enableCaching(): void;
-        static clearCache(): void;
-        renderModel(arg0: $PoseStack$Pose, arg1: $VertexConsumer, arg2: $BlockState_, arg3: $BakedModel, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: $ModelData, arg10: $RenderType): void;
-        /**
-         * @deprecated
-         */
-        renderModel(arg0: $PoseStack$Pose, arg1: $VertexConsumer, arg2: $BlockState_, arg3: $BakedModel, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): void;
         tesselateWithAO(arg0: $BlockAndTintGetter, arg1: $BakedModel, arg2: $BlockState_, arg3: $BlockPos_, arg4: $PoseStack, arg5: $VertexConsumer, arg6: boolean, arg7: $RandomSource, arg8: number, arg9: number, arg10: $ModelData, arg11: $RenderType): void;
         /**
          * @deprecated
          */
         tesselateWithAO(arg0: $BlockAndTintGetter, arg1: $BakedModel, arg2: $BlockState_, arg3: $BlockPos_, arg4: $PoseStack, arg5: $VertexConsumer, arg6: boolean, arg7: $RandomSource, arg8: number, arg9: number): void;
-        tesselateWithoutAO(arg0: $BlockAndTintGetter, arg1: $BakedModel, arg2: $BlockState_, arg3: $BlockPos_, arg4: $PoseStack, arg5: $VertexConsumer, arg6: boolean, arg7: $RandomSource, arg8: number, arg9: number, arg10: $ModelData, arg11: $RenderType): void;
         /**
          * @deprecated
          */
         tesselateWithoutAO(arg0: $BlockAndTintGetter, arg1: $BakedModel, arg2: $BlockState_, arg3: $BlockPos_, arg4: $PoseStack, arg5: $VertexConsumer, arg6: boolean, arg7: $RandomSource, arg8: number, arg9: number): void;
-        wrapOperation$flf000$sable$getShade(arg0: $BlockAndTintGetter, arg1: $Direction_, arg2: boolean, arg3: $Operation_<any>): number;
+        tesselateWithoutAO(arg0: $BlockAndTintGetter, arg1: $BakedModel, arg2: $BlockState_, arg3: $BlockPos_, arg4: $PoseStack, arg5: $VertexConsumer, arg6: boolean, arg7: $RandomSource, arg8: number, arg9: number, arg10: $ModelData, arg11: $RenderType): void;
+        wrapOperation$gfn000$sable$getShade(arg0: $BlockAndTintGetter, arg1: $Direction_, arg2: boolean, arg3: $Operation_<any>): number;
+        /**
+         * @deprecated
+         */
+        tesselateBlock(arg0: $BlockAndTintGetter, arg1: $BakedModel, arg2: $BlockState_, arg3: $BlockPos_, arg4: $PoseStack, arg5: $VertexConsumer, arg6: boolean, arg7: $RandomSource, arg8: number, arg9: number): void;
+        tesselateBlock(arg0: $BlockAndTintGetter, arg1: $BakedModel, arg2: $BlockState_, arg3: $BlockPos_, arg4: $PoseStack, arg5: $VertexConsumer, arg6: boolean, arg7: $RandomSource, arg8: number, arg9: number, arg10: $ModelData, arg11: $RenderType): void;
+        static enableCaching(): void;
+        calculateShape(arg0: $BlockAndTintGetter, arg1: $BlockState_, arg2: $BlockPos_, arg3: number[], arg4: $Direction_, arg5: number[], arg6: $BitSet): void;
+        static clearCache(): void;
+        /**
+         * @deprecated
+         */
+        renderModel(arg0: $PoseStack$Pose, arg1: $VertexConsumer, arg2: $BlockState_, arg3: $BakedModel, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): void;
+        renderModel(arg0: $PoseStack$Pose, arg1: $VertexConsumer, arg2: $BlockState_, arg3: $BakedModel, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: $ModelData, arg10: $RenderType): void;
         static CACHE: $ThreadLocal<$ModelBlockRenderer$Cache>;
         static DIRECTIONS: $Direction[];
         constructor(arg0: $BlockColors);
     }
     export class $BlockModelShaper {
+        static statePropertiesToString(arg0: $Map_<$Property<never>, $Comparable_<never>>): string;
         replaceCache(arg0: $Map_<$BlockState_, $BakedModel>): void;
         getTexture(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_): $TextureAtlasSprite;
         getModelManager(): $ModelManager;
@@ -124,19 +125,18 @@ declare module "@package/net/minecraft/client/renderer/block" {
          * @deprecated
          */
         getParticleIcon(arg0: $BlockState_): $TextureAtlasSprite;
-        static stateToModelLocation(arg0: $ResourceLocation_, arg1: $BlockState_): $ModelResourceLocation;
         static stateToModelLocation(arg0: $BlockState_): $ModelResourceLocation;
-        static statePropertiesToString(arg0: $Map_<$Property<never>, $Comparable_<never>>): string;
+        static stateToModelLocation(arg0: $ResourceLocation_, arg1: $BlockState_): $ModelResourceLocation;
         constructor(arg0: $ModelManager);
         get modelManager(): $ModelManager;
     }
     export class $LiquidBlockRenderer {
-        static shouldRenderFace(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $BlockState_, arg4: $Direction_, arg5: $BlockState_): boolean;
-        static shouldRenderFace(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $BlockState_, arg4: $Direction_, arg5: $FluidState): boolean;
+        handler$zdo000$fabric_rendering_fluids_v1$onHeadRender(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $VertexConsumer, arg3: $BlockState_, arg4: $FluidState, arg5: $CallbackInfo): void;
+        handler$zdo000$fabric_rendering_fluids_v1$onResourceReloadReturn(arg0: $CallbackInfo): void;
         tesselate(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $VertexConsumer, arg3: $BlockState_, arg4: $FluidState): void;
         setupSprites(): void;
-        handler$zci000$fabric_rendering_fluids_v1$onHeadRender(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $VertexConsumer, arg3: $BlockState_, arg4: $FluidState, arg5: $CallbackInfo): void;
-        handler$zci000$fabric_rendering_fluids_v1$onResourceReloadReturn(arg0: $CallbackInfo): void;
+        static shouldRenderFace(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $BlockState_, arg4: $Direction_, arg5: $BlockState_): boolean;
+        static shouldRenderFace(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $BlockState_, arg4: $Direction_, arg5: $FluidState): boolean;
         constructor();
     }
     export class $ModelBlockRenderer$AdjacencyInfo extends $Enum<$ModelBlockRenderer$AdjacencyInfo> {

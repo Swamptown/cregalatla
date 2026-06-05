@@ -6,6 +6,8 @@ import { $GlslUnaryNode, $GlslAssignmentNode, $GlslPrecisionNode, $GlslCompareNo
 
 declare module "@package/io/github/ocelot/glslprocessor/api/visitor" {
     export class $GlslNodeVisitor {
+        visitUnary(arg0: $GlslUnaryNode): void;
+        visitVariable(arg0: $GlslVariableNode): void;
         visitForLoop(arg0: $GlslForLoopNode): $GlslNodeVisitor;
         visitForLoopEnd(arg0: $GlslForLoopNode): void;
         visitWhileLoop(arg0: $GlslWhileLoopNode): $GlslNodeVisitor;
@@ -19,7 +21,6 @@ declare module "@package/io/github/ocelot/glslprocessor/api/visitor" {
         visitCompare(arg0: $GlslCompareNode): void;
         visitCondition(arg0: $GlslConditionalNode): void;
         visitPrecision(arg0: $GlslPrecisionNode): void;
-        visitUnary(arg0: $GlslUnaryNode): void;
         visitFunctionInvocation(arg0: $GlslInvokeFunctionNode): $GlslInvokeVisitor;
         visitPrimitiveConstructor(arg0: $GlslPrimitiveConstructorNode): void;
         visitVariableDeclaration(arg0: $GlslVariableDeclarationNode): void;
@@ -27,17 +28,16 @@ declare module "@package/io/github/ocelot/glslprocessor/api/visitor" {
         visitGetField(arg0: $GlslGetFieldNode): void;
         visitNewField(arg0: $GlslNewFieldNode): void;
         visitStructDeclaration(arg0: $GlslStructDeclarationNode): void;
-        visitVariable(arg0: $GlslVariableNode): void;
         visitOperation(arg0: $GlslOperationNode): void;
         visitConstant(arg0: $GlslConstantNode): void;
-        constructor(arg0: $GlslNodeVisitor);
         constructor();
+        constructor(arg0: $GlslNodeVisitor);
     }
     export class $GlslSwitchVisitor {
         visitSwitchEnd(arg0: $GlslSwitchNode): void;
         visitLabel(arg0: $GlslCaseLabelNode): $GlslNodeVisitor;
-        constructor();
         constructor(arg0: $GlslSwitchVisitor);
+        constructor();
     }
     export class $GlslBitwiseVisitor {
         visitNode(arg0: number): $GlslNodeVisitor;

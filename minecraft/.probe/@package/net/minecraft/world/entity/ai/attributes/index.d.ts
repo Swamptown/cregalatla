@@ -26,18 +26,18 @@ declare module "@package/net/minecraft/world/entity/ai/attributes" {
         createInstance(arg0: $Consumer_<$AttributeInstance>, arg1: $Holder_<$Attribute>): $AttributeInstance;
         getValue(arg0: $Holder_<$Attribute>): number;
         static builder(): $AttributeSupplier$Builder;
-        hasModifier(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_): boolean;
         getBaseValue(arg0: $Holder_<$Attribute>): number;
+        hasModifier(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_): boolean;
         instances: $Map<$Holder<$Attribute>, $AttributeInstance>;
         constructor(arg0: $Map_<$Holder_<$Attribute>, $AttributeInstance>);
     }
     export class $DefaultAttributes implements $DefaultAttributeRegistryAccessor {
-        static getRegistry$fabric_object_builder_api_v1_$md$4ca6b6$0(): $Map<any, any>;
+        static getRegistry$fabric_object_builder_api_v1_$md$3b3139$0(): $Map<any, any>;
         static hasSupplier(arg0: $EntityType_<never>): boolean;
         static validate(): void;
         static getSupplier(arg0: $EntityType_<$LivingEntity>): $AttributeSupplier;
         constructor();
-        static get registry$fabric_object_builder_api_v1_$md$4ca6b6$0(): $Map<any, any>;
+        static get registry$fabric_object_builder_api_v1_$md$3b3139$0(): $Map<any, any>;
     }
     export class $AttributeModifier$Operation extends $Enum<$AttributeModifier$Operation> implements $StringRepresentable {
         static values(): $AttributeModifier$Operation[];
@@ -59,53 +59,53 @@ declare module "@package/net/minecraft/world/entity/ai/attributes" {
      */
     export type $AttributeModifier$Operation_ = "add_value" | "add_multiplied_base" | "add_multiplied_total";
     export class $AttributeInstance {
-        addOrUpdateTransientModifier(arg0: $AttributeModifier_): void;
-        setDirty(): void;
         addPermanentModifier(arg0: $AttributeModifier_): void;
+        setDirty(): void;
+        addOrUpdateTransientModifier(arg0: $AttributeModifier_): void;
         addOrReplacePermanentModifier(arg0: $AttributeModifier_): void;
-        getAttribute(): $Holder<$Attribute>;
-        getModifiers(arg0: $AttributeModifier$Operation_): $Map<$ResourceLocation, $AttributeModifier>;
         getModifiers(): $Set<$AttributeModifier>;
+        getModifiers(arg0: $AttributeModifier$Operation_): $Map<$ResourceLocation, $AttributeModifier>;
         load(arg0: $CompoundTag_): void;
         getValue(): number;
         save(): $CompoundTag;
-        replaceFrom(arg0: $AttributeInstance): void;
-        hasModifier(arg0: $ResourceLocation_): boolean;
+        getAttribute(): $Holder<$Attribute>;
         getModifier(arg0: $ResourceLocation_): $AttributeModifier;
         removeModifier(arg0: $AttributeModifier_): void;
         removeModifier(arg0: $ResourceLocation_): boolean;
         addTransientModifier(arg0: $AttributeModifier_): void;
         getBaseValue(): number;
+        replaceFrom(arg0: $AttributeInstance): void;
         setBaseValue(arg0: number): void;
+        hasModifier(arg0: $ResourceLocation_): boolean;
         removeModifiers(): void;
         static ID_FIELD: string;
         constructor(arg0: $Holder_<$Attribute>, arg1: $Consumer_<$AttributeInstance>);
-        get attribute(): $Holder<$Attribute>;
         get value(): number;
+        get attribute(): $Holder<$Attribute>;
     }
     export class $Attribute implements $IAttributeExtension {
+        setSyncable(arg0: boolean): $Attribute;
         setSentiment(arg0: $Attribute$Sentiment_): $Attribute;
         isClientSyncable(): boolean;
         sanitizeValue(arg0: number): number;
         getMergedStyle(arg0: boolean): $TextColor;
-        setSyncable(arg0: boolean): $Attribute;
         getDefaultValue(): number;
         getDescriptionId(): string;
         getStyle(arg0: boolean): $ChatFormatting;
+        toValueComponent(arg0: $AttributeModifier$Operation_, arg1: number, arg2: $TooltipFlag): $MutableComponent;
+        getDebugInfo(arg0: $AttributeModifier_, arg1: $TooltipFlag): $Component;
         toComponent(arg0: $AttributeModifier_, arg1: $TooltipFlag): $MutableComponent;
         getBaseId(): $ResourceLocation;
         toBaseComponent(arg0: number, arg1: number, arg2: boolean, arg3: $TooltipFlag): $MutableComponent;
-        toValueComponent(arg0: $AttributeModifier$Operation_, arg1: number, arg2: $TooltipFlag): $MutableComponent;
-        getDebugInfo(arg0: $AttributeModifier_, arg1: $TooltipFlag): $Component;
         static MERGED_GRAY: $TextColor;
         static MERGED_RED: $TextColor;
         static CODEC: $Codec<$Holder<$Attribute>>;
         static MERGED_BLUE: $TextColor;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $Holder<$Attribute>>;
         constructor(arg0: string, arg1: number);
+        set syncable(value: boolean);
         set sentiment(value: $Attribute$Sentiment_);
         get clientSyncable(): boolean;
-        set syncable(value: boolean);
         get defaultValue(): number;
         get descriptionId(): string;
         get baseId(): $ResourceLocation;
@@ -162,17 +162,17 @@ declare module "@package/net/minecraft/world/entity/ai/attributes" {
         getSyncableAttributes(): $Collection<$AttributeInstance>;
         getAttributesToSync(): $Set<$AttributeInstance>;
         getModifierValue(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_): number;
-        assignBaseValues(arg0: $AttributeMap): void;
-        addTransientAttributeModifiers(arg0: $Multimap<$Holder_<$Attribute>, $AttributeModifier_>): void;
         hasAttribute(arg0: $Holder_<$Attribute>): boolean;
+        addTransientAttributeModifiers(arg0: $Multimap<$Holder_<$Attribute>, $AttributeModifier_>): void;
+        assignBaseValues(arg0: $AttributeMap): void;
         load(arg0: $ListTag_): void;
         getValue(arg0: $Holder_<$Attribute>): number;
         getInstance(arg0: $Holder_<$Attribute>): $AttributeInstance;
         save(): $ListTag;
-        hasModifier(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_): boolean;
         removeAttributeModifiers(arg0: $Multimap<$Holder_<$Attribute>, $AttributeModifier_>): void;
         getAttributesToUpdate(): $Set<$AttributeInstance>;
         getBaseValue(arg0: $Holder_<$Attribute>): number;
+        hasModifier(arg0: $Holder_<$Attribute>, arg1: $ResourceLocation_): boolean;
         assignAllValues(arg0: $AttributeMap): void;
         constructor(arg0: $AttributeSupplier);
         get syncableAttributes(): $Collection<$AttributeInstance>;
@@ -194,7 +194,7 @@ declare module "@package/net/minecraft/world/entity/ai/attributes" {
     /**
      * Values that may be interpreted as {@link $AttributeModifier}.
      */
-    export type $AttributeModifier_ = { id?: $ResourceLocation_, operation?: $AttributeModifier$Operation_, amount?: number,  } | [id?: $ResourceLocation_, operation?: $AttributeModifier$Operation_, amount?: number, ];
+    export type $AttributeModifier_ = { operation?: $AttributeModifier$Operation_, id?: $ResourceLocation_, amount?: number,  } | [operation?: $AttributeModifier$Operation_, id?: $ResourceLocation_, amount?: number, ];
     export class $Attribute$Sentiment extends $Enum<$Attribute$Sentiment> {
         static values(): $Attribute$Sentiment[];
         static valueOf(arg0: string): $Attribute$Sentiment;

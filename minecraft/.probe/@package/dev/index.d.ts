@@ -10,5 +10,6 @@ export * as lopyluna from "@package/dev/lopyluna";
 export * as eriksonn from "@package/dev/eriksonn";
 export * as tr7zw from "@package/dev/tr7zw";
 export * as isxander from "@package/dev/isxander";
-export * as yumi from "@package/dev/yumi";
 export * as devce from "@package/dev/devce";
+export * as yumi from "@package/dev/yumi";
+export * as egg from "@package/dev/egg";

@@ -4,16 +4,16 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/team/unnamed/mocha/parser/ast" {
     export class $IdentifierExpression implements $Expression {
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         name(): string;
         write(arg0: $ByteBuf): void;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: string);
     }
     export class $StatementExpression implements $Expression {
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         write(arg0: $ByteBuf): void;
         op(): $StatementExpression$Op;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: $StatementExpression$Op_);
     }
@@ -30,15 +30,15 @@ declare module "@package/team/unnamed/mocha/parser/ast" {
     export class $ExpressionVisitor<R> {
     }
     export interface $ExpressionVisitor<R> {
+        visitCall(arg0: $CallExpression): R;
+        visitBinary(arg0: $BinaryExpression): R;
+        visitUnary(arg0: $UnaryExpression): R;
         visitArrayAccess(arg0: $ArrayAccessExpression): R;
         visitIdentifier(arg0: $IdentifierExpression): R;
         visitTernaryConditional(arg0: $TernaryConditionalExpression): R;
         visitExecutionScope(arg0: $ExecutionScopeExpression): R;
-        visitBinary(arg0: $BinaryExpression): R;
         visitAccess(arg0: $AccessExpression): R;
-        visitUnary(arg0: $UnaryExpression): R;
         visitStatement(arg0: $StatementExpression): R;
-        visitCall(arg0: $CallExpression): R;
         visit(arg0: $Expression): R;
         visitString(arg0: $StringExpression): R;
         visitFloat(arg0: $FloatExpression): R;
@@ -48,11 +48,11 @@ declare module "@package/team/unnamed/mocha/parser/ast" {
      */
     export type $ExpressionVisitor_<R> = ((arg0: $Expression) => R);
     export class $ExecutionScopeExpression implements $Expression {
-        write(arg0: $ByteBuf): void;
         visit<R>(arg0: $ExpressionVisitor_<R>): R;
+        write(arg0: $ByteBuf): void;
         expressions(): $List<$Expression>;
-        constructor(arg0: $ByteBuf);
         constructor(arg0: $List_<$Expression>);
+        constructor(arg0: $ByteBuf);
     }
     export class $BinaryExpression$Op extends $Enum<$BinaryExpression$Op> {
         static values(): $BinaryExpression$Op[];
@@ -80,13 +80,13 @@ declare module "@package/team/unnamed/mocha/parser/ast" {
      */
     export type $BinaryExpression$Op_ = "and" | "or" | "lt" | "lte" | "gt" | "gte" | "add" | "sub" | "mul" | "div" | "arrow" | "null_coalesce" | "assign" | "conditional" | "eq" | "neq";
     export class $BinaryExpression implements $Expression {
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         write(arg0: $ByteBuf): void;
         op(): $BinaryExpression$Op;
-        left(): $Expression;
         left(arg0: $Expression): void;
+        left(): $Expression;
         right(arg0: $Expression): void;
         right(): $Expression;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: $BinaryExpression$Op_, arg1: $Expression, arg2: $Expression);
     }
@@ -102,75 +102,75 @@ declare module "@package/team/unnamed/mocha/parser/ast" {
      */
     export type $UnaryExpression$Op_ = "logical_negation" | "arithmetical_negation" | "return";
     export class $AccessExpression implements $Expression {
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         object(arg0: $Expression): void;
         object(): $Expression;
         write(arg0: $ByteBuf): void;
         property(): string;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: $Expression, arg1: string);
     }
     export class $TernaryConditionalExpression implements $Expression {
-        trueExpression(): $Expression;
         trueExpression(arg0: $Expression): void;
+        trueExpression(): $Expression;
         falseExpression(): $Expression;
         falseExpression(arg0: $Expression): void;
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         write(arg0: $ByteBuf): void;
         condition(): $Expression;
         condition(arg0: $Expression): void;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: $Expression, arg1: $Expression, arg2: $Expression);
     }
     export class $UnaryExpression implements $Expression {
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         write(arg0: $ByteBuf): void;
         op(): $UnaryExpression$Op;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
-        expression(arg0: $Expression): void;
         expression(): $Expression;
+        expression(arg0: $Expression): void;
         constructor(arg0: $ByteBuf);
         constructor(arg0: $UnaryExpression$Op_, arg1: $Expression);
     }
     export class $CallExpression implements $Expression {
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         write(arg0: $ByteBuf): void;
         function(arg0: $Expression): void;
         function(): $Expression;
         arguments(): $List<$Expression>;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: $Expression, arg1: $List_<$Expression>);
     }
     export class $FloatExpression implements $Expression {
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         value(): number;
         static of(arg0: number): $FloatExpression;
         static of(arg0: number): $FloatExpression;
         write(arg0: $ByteBuf): void;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         static ZERO: $FloatExpression;
         static ONE: $FloatExpression;
         constructor(arg0: $ByteBuf);
     }
     export class $StringExpression implements $Expression {
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         value(): string;
         write(arg0: $ByteBuf): void;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: string);
     }
     export class $ArrayAccessExpression implements $Expression {
-        index(arg0: $Expression): void;
+        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         index(): $Expression;
+        index(arg0: $Expression): void;
         array(arg0: $Expression): void;
         array(): $Expression;
         write(arg0: $ByteBuf): void;
-        visit<R>(arg0: $ExpressionVisitor_<R>): R;
         constructor(arg0: $ByteBuf);
         constructor(arg0: $Expression, arg1: $Expression);
     }
     export class $Expression {
     }
     export interface $Expression {
-        write(arg0: $ByteBuf): void;
         visit<R>(arg0: $ExpressionVisitor_<R>): R;
+        write(arg0: $ByteBuf): void;
     }
 }

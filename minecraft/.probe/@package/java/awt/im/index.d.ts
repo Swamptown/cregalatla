@@ -7,16 +7,16 @@ import { $Map_, $Locale, $Map } from "@package/java/util";
 declare module "@package/java/awt/im" {
     export class $InputContext {
         removeNotify(arg0: $Component): void;
-        dispatchEvent(arg0: $AWTEvent): void;
+        endComposition(): void;
         selectInputMethod(arg0: $Locale): boolean;
         setCharacterSubsets(arg0: $Character$Subset[]): void;
         setCompositionEnabled(arg0: boolean): void;
         isCompositionEnabled(): boolean;
         reconvert(): void;
         getInputMethodControlObject(): $Object;
-        endComposition(): void;
-        getLocale(): $Locale;
         dispose(): void;
+        getLocale(): $Locale;
+        dispatchEvent(arg0: $AWTEvent): void;
         static getInstance(): $InputContext;
         set characterSubsets(value: $Character$Subset[]);
         get inputMethodControlObject(): $Object;

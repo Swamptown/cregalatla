@@ -1,5 +1,5 @@
 import { $Level_ } from "@package/net/minecraft/world/level";
-import { $BlockPos_, $Holder_, $Registry, $Holder$Reference, $Holder } from "@package/net/minecraft/core";
+import { $BlockPos_, $Holder_, $Holder$Reference, $Registry, $Holder } from "@package/net/minecraft/core";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $MapCodec, $Codec } from "@package/com/mojang/serialization";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
@@ -14,8 +14,8 @@ export * as vibrations from "@package/net/minecraft/world/level/gameevent/vibrat
 
 declare module "@package/net/minecraft/world/level/gameevent" {
     export class $DynamicGameEventListener<T extends $GameEventListener> {
-        getListener(): T;
         move(arg0: $ServerLevel): void;
+        getListener(): T;
         remove(arg0: $ServerLevel): void;
         add(arg0: $ServerLevel): void;
         constructor(arg0: T);
@@ -45,13 +45,13 @@ declare module "@package/net/minecraft/world/level/gameevent" {
     export class $GameEventListener {
     }
     export interface $GameEventListener {
+        getListenerRadius(): number;
         getListenerSource(): $PositionSource;
         handleGameEvent(arg0: $ServerLevel, arg1: $Holder_<$GameEvent>, arg2: $GameEvent$Context_, arg3: $Vec3_): boolean;
         getDeliveryMode(): $GameEventListener$DeliveryMode;
-        getListenerRadius(): number;
+        get listenerRadius(): number;
         get listenerSource(): $PositionSource;
         get deliveryMode(): $GameEventListener$DeliveryMode;
-        get listenerRadius(): number;
     }
     export class $EntityPositionSource$Type implements $PositionSourceType<$EntityPositionSource> {
         streamCodec(): $StreamCodec<$ByteBuf, $EntityPositionSource>;

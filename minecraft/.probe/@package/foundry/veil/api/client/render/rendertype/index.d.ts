@@ -1,4 +1,4 @@
-import { $RenderStateShard$TexturingStateShard, $RenderType$OutlineProperty, $RenderStateShard$LineStateShard, $RenderStateShard$OverlayStateShard, $RenderStateShard$CullStateShard, $RenderStateShard$TransparencyStateShard, $RenderType$OutlineProperty_, $RenderStateShard$EmptyTextureStateShard, $RenderType$CompositeState, $RenderStateShard$OutputStateShard, $RenderStateShard$ShaderStateShard, $RenderStateShard$WriteMaskStateShard, $RenderStateShard$DepthTestStateShard, $RenderStateShard, $RenderStateShard$LightmapStateShard, $RenderStateShard$ColorLogicStateShard, $RenderStateShard$LayeringStateShard } from "@package/net/minecraft/client/renderer";
+import { $RenderStateShard$TexturingStateShard, $RenderType$OutlineProperty, $RenderStateShard$LineStateShard, $RenderStateShard$OverlayStateShard, $RenderStateShard$CullStateShard, $RenderStateShard$TransparencyStateShard, $RenderType$OutlineProperty_, $RenderStateShard$EmptyTextureStateShard, $RenderType$CompositeState, $RenderStateShard$OutputStateShard, $RenderStateShard$ShaderStateShard, $RenderStateShard$WriteMaskStateShard, $RenderStateShard, $RenderStateShard$DepthTestStateShard, $RenderStateShard$LightmapStateShard, $RenderStateShard$ColorLogicStateShard, $RenderStateShard$LayeringStateShard } from "@package/net/minecraft/client/renderer";
 import { $ResourceLocation } from "@package/net/minecraft/resources";
 import { $List } from "@package/java/util";
 export * as layer from "@package/foundry/veil/api/client/render/rendertype/layer";
@@ -29,10 +29,10 @@ declare module "@package/foundry/veil/api/client/render/rendertype" {
     export interface $VeilRenderTypeAccessor {
         outputState(): $RenderStateShard$OutputStateShard;
         states(): $List<$RenderStateShard>;
-        veilShaderId(): $ResourceLocation;
         outlineProperty(): $RenderType$OutlineProperty;
         textureState(): $RenderStateShard$EmptyTextureStateShard;
         cullState(): $RenderStateShard$CullStateShard;
+        veilShaderId(): $ResourceLocation;
         shaderState(): $RenderStateShard$ShaderStateShard;
         transparencyState(): $RenderStateShard$TransparencyStateShard;
         depthTestState(): $RenderStateShard$DepthTestStateShard;

@@ -6,8 +6,8 @@ import { $ItemColor } from "@package/net/minecraft/client/color/item";
 import { $FluidType_, $BaseFlowingFluid, $FluidType, $BaseFlowingFluid$Flowing, $BaseFlowingFluid$Properties, $FluidType$Properties } from "@package/net/neoforged/neoforge/fluids";
 import { $IClientBlockExtensions, $IClientItemExtensions } from "@package/net/neoforged/neoforge/client/extensions/common";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
-import { $FluidEntry, $EntityEntry, $RegistryEntry, $MenuEntry, $BlockEntityEntry } from "@package/com/tterrag/registrate/util/entry";
 import { $Supplier_, $Consumer_, $Function_, $Supplier } from "@package/java/util/function";
+import { $RegistryEntry, $ItemEntry } from "@package/com/tterrag/registrate/util/entry";
 import { $BlockPos, $BlockPos_, $Registry } from "@package/net/minecraft/core";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
 import { $BlockState_, $BlockState, $BlockBehaviour$Properties } from "@package/net/minecraft/world/level/block/state";
@@ -45,20 +45,21 @@ declare module "@package/com/tterrag/registrate/builders" {
      */
     export type $FluidBuilder$FluidTypeFactory_ = ((arg0: $FluidType$Properties, arg1: $ResourceLocation, arg2: $ResourceLocation) => $FluidType_);
     export class $ItemBuilder<T extends $Item, P> extends $AbstractBuilder<$Item, T, P, $ItemBuilder<T, P>> {
-        removeTab(arg0: $ResourceKey_<$CreativeModeTab>): $ItemBuilder<T, P>;
         defaultModel(): $ItemBuilder<T, P>;
+        removeTab(arg0: $ResourceKey_<$CreativeModeTab>): $ItemBuilder<T, P>;
         compostable(arg0: number): $ItemBuilder<T, P>;
-        clientExtension(arg0: $NonNullSupplier_<$Supplier<$IClientItemExtensions>>): $ItemBuilder<T, P>;
         /**
          * @deprecated
          */
         clientExtension(arg0: $Function_<T, $NonNullSupplier<$Supplier<$IClientItemExtensions>>>): $ItemBuilder<T, P>;
+        clientExtension(arg0: $NonNullSupplier_<$Supplier<$IClientItemExtensions>>): $ItemBuilder<T, P>;
         model(arg0: $NonNullBiConsumer_<$DataGenContext<$Item, T>, $RegistrateItemModelProvider>): $ItemBuilder<T, P>;
         initialProperties(arg0: $NonNullSupplier_<$Item$Properties>): $ItemBuilder<T, P>;
         defaultLang(): $ItemBuilder<T, P>;
         burnTime(arg0: number): $ItemBuilder<T, P>;
-        recipe(arg0: $NonNullBiConsumer_<$DataGenContext<$Item, T>, $RegistrateRecipeProvider>): $ItemBuilder<T, P>;
         tag(...arg0: $TagKey_<$Item>[]): $ItemBuilder<T, P>;
+        recipe(arg0: $NonNullBiConsumer_<$DataGenContext<$Item, T>, $RegistrateRecipeProvider>): $ItemBuilder<T, P>;
+        register(): $ItemEntry<T>;
         properties(arg0: $NonNullUnaryOperator_<$Item$Properties>): $ItemBuilder<T, P>;
         tab(arg0: $ResourceKey_<$CreativeModeTab>, arg1: $NonNullBiConsumer_<$DataGenContext<$Item, T>, $CreativeModeTabModifier>): $ItemBuilder<T, P>;
         /**
@@ -72,32 +73,30 @@ declare module "@package/com/tterrag/registrate/builders" {
         get(): T;
     }
     export class $MenuBuilder<T extends $AbstractContainerMenu, S extends $Screen, P> extends $AbstractBuilder<$MenuType<never>, $MenuType<T>, P, $MenuBuilder<T, S, P>> {
-        register(): $MenuEntry<$MenuType<T>>;
         get(): $MenuType<T>;
         constructor(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $MenuBuilder$ForgeMenuFactory_<$MenuType<T>>, arg5: $NonNullSupplier_<$MenuBuilder$ScreenFactory<$MenuType<T>, $MenuBuilder<T, S, P>>>);
         constructor(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $MenuBuilder$MenuFactory_<$MenuType<T>>, arg5: $NonNullSupplier_<$MenuBuilder$ScreenFactory<$MenuType<T>, $MenuBuilder<T, S, P>>>);
     }
     export class $FluidBuilder<T extends $BaseFlowingFluid, P> extends $AbstractBuilder<$Fluid, T, P, $FluidBuilder<T, P>> {
-        defaultLang(): $FluidBuilder<T, P>;
-        noBlock(): $FluidBuilder<T, P>;
-        noBucket(): $FluidBuilder<T, P>;
-        fluidProperties(arg0: $NonNullConsumer_<$BaseFlowingFluid$Properties>): $FluidBuilder<T, P>;
+        bucket<I extends $BucketItem>(arg0: $NonNullBiFunction_<$BaseFlowingFluid, $Item$Properties, I>): $ItemBuilder<I, $FluidBuilder<T, P>>;
+        bucket(): $ItemBuilder<$BucketItem, $FluidBuilder<T, P>>;
         defaultSource(): $FluidBuilder<T, P>;
         defaultBlock(): $FluidBuilder<T, P>;
         defaultBucket(): $FluidBuilder<T, P>;
+        fluidProperties(arg0: $NonNullConsumer_<$BaseFlowingFluid$Properties>): $FluidBuilder<T, P>;
         renderType(arg0: $Supplier_<$Supplier<$RenderType>>): $FluidBuilder<T, P>;
-        bucket<I extends $BucketItem>(arg0: $NonNullBiFunction_<$BaseFlowingFluid, $Item$Properties, I>): $ItemBuilder<I, $FluidBuilder<T, P>>;
-        bucket(): $ItemBuilder<$BucketItem, $FluidBuilder<T, P>>;
+        noBlock(): $FluidBuilder<T, P>;
+        noBucket(): $FluidBuilder<T, P>;
+        defaultLang(): $FluidBuilder<T, P>;
         tag(...arg0: $TagKey_<$Fluid>[]): $FluidBuilder<T, P>;
-        register(): $FluidEntry<T>;
         source(arg0: $NonNullFunction_<$BaseFlowingFluid$Properties, $BaseFlowingFluid>): $FluidBuilder<T, P>;
         properties(arg0: $NonNullConsumer_<$FluidType$Properties>): $FluidBuilder<T, P>;
-        static create<T extends $BaseFlowingFluid, P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $ResourceLocation_, arg5: $ResourceLocation_, arg6: $NonNullSupplier_<$FluidType>, arg7: $NonNullFunction_<$BaseFlowingFluid$Properties, T>): $FluidBuilder<T, P>;
+        static create<T extends $BaseFlowingFluid, P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $ResourceLocation_, arg5: $ResourceLocation_, arg6: $FluidBuilder$FluidTypeFactory_, arg7: $NonNullFunction_<$BaseFlowingFluid$Properties, T>): $FluidBuilder<T, P>;
+        static create<P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $ResourceLocation_, arg5: $ResourceLocation_): $FluidBuilder<$BaseFlowingFluid$Flowing, P>;
         static create<P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $ResourceLocation_, arg5: $ResourceLocation_, arg6: $FluidBuilder$FluidTypeFactory_): $FluidBuilder<$BaseFlowingFluid$Flowing, P>;
         static create<P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $ResourceLocation_, arg5: $ResourceLocation_, arg6: $NonNullSupplier_<$FluidType>): $FluidBuilder<$BaseFlowingFluid$Flowing, P>;
-        static create<P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $ResourceLocation_, arg5: $ResourceLocation_): $FluidBuilder<$BaseFlowingFluid$Flowing, P>;
-        static create<T extends $BaseFlowingFluid, P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $ResourceLocation_, arg5: $ResourceLocation_, arg6: $FluidBuilder$FluidTypeFactory_, arg7: $NonNullFunction_<$BaseFlowingFluid$Properties, T>): $FluidBuilder<T, P>;
         static create<T extends $BaseFlowingFluid, P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $ResourceLocation_, arg5: $ResourceLocation_, arg6: $NonNullFunction_<$BaseFlowingFluid$Properties, T>): $FluidBuilder<T, P>;
+        static create<T extends $BaseFlowingFluid, P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $ResourceLocation_, arg5: $ResourceLocation_, arg6: $NonNullSupplier_<$FluidType>, arg7: $NonNullFunction_<$BaseFlowingFluid$Properties, T>): $FluidBuilder<T, P>;
         block<B extends $LiquidBlock>(arg0: $NonNullBiFunction_<T, $BlockBehaviour$Properties, B>): $BlockBuilder<B, $FluidBuilder<T, P>>;
         block(): $BlockBuilder<$LiquidBlock, $FluidBuilder<T, P>>;
         lang(arg0: string): $FluidBuilder<T, P>;
@@ -107,25 +106,25 @@ declare module "@package/com/tterrag/registrate/builders" {
         constructor(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $ResourceLocation_, arg5: $ResourceLocation_, arg6: $NonNullSupplier_<$FluidType>, arg7: $NonNullFunction_<$BaseFlowingFluid$Properties, T>);
     }
     export class $AbstractBuilder<R, T extends R, P, S extends $AbstractBuilder<R, T, P, S>> implements $Builder<R, T, P, S> {
-        asSupplier(): $NonNullSupplier<T>;
         asOptional(): S;
         getRegistryKey(): $ResourceKey<$Registry<R>>;
+        asSupplier(): $NonNullSupplier<T>;
         tag<TP extends $TagsProvider<R>>(arg0: $ProviderType_<TP>, ...arg1: $TagKey_<R>[]): S;
         getName(): string;
         register(): $RegistryEntry<R, T>;
         getParent(): P;
-        lang(arg0: $NonNullFunction_<T, string>): S;
         lang(arg0: $NonNullFunction_<T, string>, arg1: string): S;
+        lang(arg0: $NonNullFunction_<T, string>): S;
         getOwner(): $AbstractRegistrate<never>;
         removeTag<TP extends $TagsProvider<R>>(arg0: $ProviderType_<TP>, ...arg1: $TagKey_<R>[]): S;
         addMiscData<D extends $RegistrateProvider>(arg0: $ProviderType_<D>, arg1: $NonNullConsumer_<D>): S;
         dataMap<D>(arg0: $DataMapType<R, D>, arg1: D): S;
         dataMap<D>(arg0: $DataMapType<R, D>, arg1: $NonNullFunction_<$DataGenContext<R, T>, D>): S;
         onRegisterAfter<OR>(arg0: $ResourceKey_<$Registry<OR>>, arg1: $NonNullConsumer_<T>): S;
-        getEntry(): T;
         setData<D extends $RegistrateProvider>(arg0: $ProviderType_<D>, arg1: $NonNullBiConsumer_<$DataGenContext<R, T>, D>): S;
         transform<R2, T2 extends R2, P2, S2 extends $Builder<R2, T2, P2, S2>>(arg0: $NonNullFunction_<S, S2>): S2;
         build(): P;
+        getEntry(): T;
         onRegister(arg0: $NonNullConsumer_<T>): S;
         lazy(): $NonNullSupplier<T>;
         get(): T;
@@ -156,21 +155,20 @@ declare module "@package/com/tterrag/registrate/builders" {
      */
     export type $BuilderCallback_ = ((arg0: string, arg1: $ResourceKey<$Registry<any>>, arg2: $Builder<any, any, never, never>, arg3: $NonNullSupplier<any>, arg4: $NonNullFunction<$DeferredHolder<any, any>, $RegistryEntry<any, any>>) => $RegistryEntry<any, any>);
     export class $EntityBuilder<T extends $Entity, P> extends $AbstractBuilder<$EntityType<never>, $EntityType<T>, P, $EntityBuilder<T, P>> {
-        renderer(arg0: $NonNullSupplier_<$NonNullFunction<$EntityRendererProvider$Context, $EntityRenderer<$EntityType<T>>>>): $EntityBuilder<$EntityType<T>, P>;
-        defaultLang(): $EntityBuilder<$EntityType<T>, P>;
-        /**
-         * @deprecated
-         */
-        spawnEgg(arg0: number, arg1: number): $ItemBuilder<$SpawnEggItem, $EntityBuilder<$EntityType<T>, P>>;
         spawnPlacement(arg0: $SpawnPlacementType_, arg1: $Heightmap$Types_, arg2: $SpawnPlacements$SpawnPredicate_<$EntityType<T>>, arg3: $RegisterSpawnPlacementsEvent$Operation_): $EntityBuilder<$EntityType<T>, P>;
         /**
          * @deprecated
          */
         defaultSpawnEgg(arg0: number, arg1: number): $EntityBuilder<$EntityType<T>, P>;
         loot(arg0: $NonNullBiConsumer_<$RegistrateEntityLootTables, $EntityType<$EntityType<T>>>): $EntityBuilder<$EntityType<T>, P>;
+        renderer(arg0: $NonNullSupplier_<$NonNullFunction<$EntityRendererProvider$Context, $EntityRenderer<$EntityType<T>>>>): $EntityBuilder<$EntityType<T>, P>;
+        defaultLang(): $EntityBuilder<$EntityType<T>, P>;
+        /**
+         * @deprecated
+         */
+        spawnEgg(arg0: number, arg1: number): $ItemBuilder<$SpawnEggItem, $EntityBuilder<$EntityType<T>, P>>;
         attributes(arg0: $Supplier_<$AttributeSupplier$Builder>): $EntityBuilder<$EntityType<T>, P>;
         tag(...arg0: $TagKey_<$EntityType<never>>[]): $EntityBuilder<$EntityType<T>, P>;
-        register(): $EntityEntry<$EntityType<T>>;
         properties(arg0: $NonNullConsumer_<$EntityType$Builder<$EntityType<T>>>): $EntityBuilder<$EntityType<T>, P>;
         static create<T extends $Entity, P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $EntityType$EntityFactory_<T>, arg5: $MobCategory_): $EntityBuilder<T, P>;
         lang(arg0: string): $EntityBuilder<$EntityType<T>, P>;
@@ -179,13 +177,12 @@ declare module "@package/com/tterrag/registrate/builders" {
     export class $Builder<R, T extends R, P, S extends $Builder<R, T, P, S>> {
     }
     export interface $Builder<R, T extends R, P, S extends $Builder<R, T, P, S>> extends $NonNullSupplier<$RegistryEntry<R, T>> {
-        asSupplier(): $NonNullSupplier<$RegistryEntry<R, T>>;
         addMiscData<D extends $RegistrateProvider>(arg0: $ProviderType_<D>, arg1: $NonNullConsumer_<D>): S;
         dataMap<D>(arg0: $DataMapType<R, D>, arg1: D): S;
         dataMap<D>(arg0: $DataMapType<R, D>, arg1: $NonNullFunction_<$DataGenContext<R, $RegistryEntry<R, T>>, D>): S;
         onRegisterAfter<OR>(arg0: $ResourceKey_<$Registry<OR>>, arg1: $NonNullConsumer_<$RegistryEntry<R, T>>): S;
         getRegistryKey(): $ResourceKey<$Registry<R>>;
-        getEntry(): $RegistryEntry<R, T>;
+        asSupplier(): $NonNullSupplier<$RegistryEntry<R, T>>;
         setData<D extends $RegistrateProvider>(arg0: $ProviderType_<D>, arg1: $NonNullBiConsumer_<$DataGenContext<R, $RegistryEntry<R, T>>, D>): S;
         getName(): string;
         transform<R2, T2 extends R2, P2, S2 extends $Builder<R2, T2, P2, S2>>(arg0: $NonNullFunction_<S, S2>): S2;
@@ -193,31 +190,32 @@ declare module "@package/com/tterrag/registrate/builders" {
         getParent(): P;
         build(): P;
         getOwner(): $AbstractRegistrate<never>;
+        getEntry(): $RegistryEntry<R, T>;
         onRegister(arg0: $NonNullConsumer_<$RegistryEntry<R, T>>): S;
         get(): $RegistryEntry<R, T>;
         get registryKey(): $ResourceKey<$Registry<R>>;
-        get entry(): $RegistryEntry<R, T>;
         get name(): string;
         get parent(): P;
         get owner(): $AbstractRegistrate<never>;
+        get entry(): $RegistryEntry<R, T>;
     }
     export class $BlockBuilder<T extends $Block, P> extends $AbstractBuilder<$Block, T, P, $BlockBuilder<T, P>> {
+        simpleBlockEntity<BE extends $BlockEntity>(arg0: $BlockEntityBuilder$BlockEntityFactory_<BE>): $BlockBuilder<T, P>;
+        defaultBlockstate(): $BlockBuilder<T, P>;
+        defaultLoot(): $BlockBuilder<T, P>;
         simpleItem(): $BlockBuilder<T, P>;
         clientExtension(arg0: $NonNullSupplier_<$Supplier<$IClientBlockExtensions>>): $BlockBuilder<T, P>;
         /**
          * @deprecated
          */
         clientExtension(arg0: $Function_<T, $NonNullSupplier<$Supplier<$IClientBlockExtensions>>>): $BlockBuilder<T, P>;
-        defaultBlockstate(): $BlockBuilder<T, P>;
-        defaultLoot(): $BlockBuilder<T, P>;
-        simpleBlockEntity<BE extends $BlockEntity>(arg0: $BlockEntityBuilder$BlockEntityFactory_<BE>): $BlockBuilder<T, P>;
+        loot(arg0: $NonNullBiConsumer_<$RegistrateBlockLootTables, T>): $BlockBuilder<T, P>;
         initialProperties(arg0: $NonNullSupplier_<$Block>): $BlockBuilder<T, P>;
         defaultLang(): $BlockBuilder<T, P>;
-        loot(arg0: $NonNullBiConsumer_<$RegistrateBlockLootTables, T>): $BlockBuilder<T, P>;
+        tag(...arg0: $TagKey_<$Block>[]): $BlockBuilder<T, P>;
         recipe(arg0: $NonNullBiConsumer_<$DataGenContext<$Block, T>, $RegistrateRecipeProvider>): $BlockBuilder<T, P>;
         item<I extends $Item>(arg0: $NonNullBiFunction_<T, $Item$Properties, I>): $ItemBuilder<I, $BlockBuilder<T, P>>;
         item(): $ItemBuilder<$BlockItem, $BlockBuilder<T, P>>;
-        tag(...arg0: $TagKey_<$Block>[]): $BlockBuilder<T, P>;
         properties(arg0: $NonNullUnaryOperator_<$BlockBehaviour$Properties>): $BlockBuilder<T, P>;
         color(arg0: $NonNullSupplier_<$Supplier<$BlockColor>>): $BlockBuilder<T, P>;
         static create<T extends $Block, P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $NonNullFunction_<$BlockBehaviour$Properties, T>): $BlockBuilder<T, P>;
@@ -249,11 +247,10 @@ declare module "@package/com/tterrag/registrate/builders" {
      */
     export type $MenuBuilder$ScreenFactory_<M, T> = ((arg0: M, arg1: $Inventory, arg2: $Component) => T);
     export class $BlockEntityBuilder<T extends $BlockEntity, P> extends $AbstractBuilder<$BlockEntityType<never>, $BlockEntityType<T>, P, $BlockEntityBuilder<T, P>> {
-        renderer(arg0: $NonNullSupplier_<$NonNullFunction<$BlockEntityRendererProvider$Context, $BlockEntityRenderer<$BlockEntityType<T>>>>): $BlockEntityBuilder<$BlockEntityType<T>, P>;
-        validBlock(arg0: $NonNullSupplier_<$Block>): $BlockEntityBuilder<$BlockEntityType<T>, P>;
         validBlocks(...arg0: $NonNullSupplier_<$Block>[]): $BlockEntityBuilder<$BlockEntityType<T>, P>;
+        validBlock(arg0: $NonNullSupplier_<$Block>): $BlockEntityBuilder<$BlockEntityType<T>, P>;
         registerCapability(arg0: $Consumer_<$RegisterCapabilitiesEvent>): $BlockEntityBuilder<$BlockEntityType<T>, P>;
-        register(): $BlockEntityEntry<$BlockEntityType<T>>;
+        renderer(arg0: $NonNullSupplier_<$NonNullFunction<$BlockEntityRendererProvider$Context, $BlockEntityRenderer<$BlockEntityType<T>>>>): $BlockEntityBuilder<$BlockEntityType<T>, P>;
         static create<T extends $BlockEntity, P>(arg0: $AbstractRegistrate<never>, arg1: P, arg2: string, arg3: $BuilderCallback_, arg4: $BlockEntityBuilder$BlockEntityFactory_<T>): $BlockEntityBuilder<T, P>;
         get(): $BlockEntityType<T>;
     }

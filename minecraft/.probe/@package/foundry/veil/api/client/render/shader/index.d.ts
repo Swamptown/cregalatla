@@ -11,25 +11,25 @@ export * as uniform from "@package/foundry/veil/api/client/render/shader/uniform
 
 declare module "@package/foundry/veil/api/client/render/shader" {
     export class $ShaderPreDefinitions {
+        setStatic(arg0: string, arg1: string): void;
+        setStatic(arg0: string): void;
+        getStaticDefinitions(): $Map<string, string>;
         remove(arg0: string): void;
         set(arg0: string, arg1: string): void;
         set(arg0: string): void;
         getDefinition(arg0: string): string;
         addListener(arg0: $Consumer_<string>): void;
         getDefinitions(): $Map<string, string>;
-        setStatic(arg0: string, arg1: string): void;
-        setStatic(arg0: string): void;
-        getStaticDefinitions(): $Map<string, string>;
         constructor();
-        get definitions(): $Map<string, string>;
         get staticDefinitions(): $Map<string, string>;
+        get definitions(): $Map<string, string>;
     }
     export class $ShaderFeature extends $Enum<$ShaderFeature> {
+        modifyShader(arg0: number, arg1: $GlslTree): void;
         getDefinitionName(): string;
         static values(): $ShaderFeature[];
         static valueOf(arg0: string): $ShaderFeature;
         isSupported(): boolean;
-        modifyShader(arg0: number, arg1: $GlslTree): void;
         static CODEC: $Codec<$ShaderFeature>;
         static COMPUTE: $ShaderFeature;
         static INT64: $ShaderFeature;

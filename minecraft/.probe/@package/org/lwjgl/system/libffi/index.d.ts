@@ -17,10 +17,10 @@ declare module "@package/org/lwjgl/system/libffi" {
         constructor(arg0: number, arg1: number);
     }
     export class $FFIType extends $Struct<$FFIType> implements $NativeResource {
-        alignment(arg0: number): $FFIType;
-        alignment(): number;
         static nsize(arg0: number): number;
         static nsize(arg0: number, arg1: number): void;
+        alignment(arg0: number): $FFIType;
+        alignment(): number;
         size(): number;
         size(arg0: number): $FFIType;
         type(arg0: number): $FFIType;

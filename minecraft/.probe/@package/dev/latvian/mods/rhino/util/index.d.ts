@@ -62,8 +62,8 @@ declare module "@package/dev/latvian/mods/rhino/util" {
         static EMPTY: $ArrayValueProvider;
     }
     export interface $ArrayValueProvider {
-        getErrorSource(): $Object;
         getArrayValue(arg1: number): $Object;
+        getErrorSource(): $Object;
         getLength(): number;
         createList(arg1: $TypeInfo_): $Object;
         createArray(arg1: $TypeInfo_): $Object;

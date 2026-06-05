@@ -33,10 +33,10 @@ declare module "@package/concerrox/emixx" {
      */
     export type $EmiPlusPlusPlatform_ = (() => $Path_);
     export class $EmiPlusPlusKt {
-        static text(type: string, path: string): $MutableComponent;
-        static text(path: string): $MutableComponent;
-        static text(type: string, path: string, ...args: $Object[]): $MutableComponent;
         static res(path: string): $ResourceLocation;
+        static text(type: string, path: string, ...args: $Object[]): $MutableComponent;
+        static text(path: string): $MutableComponent;
+        static text(type: string, path: string): $MutableComponent;
         static getMinecraft(): $Minecraft;
         static get minecraft(): $Minecraft;
     }

@@ -9,8 +9,8 @@ declare module "@package/org/spongepowered/asm/mixin/transformer" {
     }
     export interface $IMixinTransformer {
         reload(arg0: string, arg1: $ClassNode): $List<string>;
-        audit(arg0: $MixinEnvironment): void;
         getExtensions(): $IExtensionRegistry;
+        audit(arg0: $MixinEnvironment): void;
         generateClass(arg0: $MixinEnvironment, arg1: string, arg2: $ClassNode): boolean;
         generateClass(arg0: $MixinEnvironment, arg1: string): number[];
         computeFramesForClass(arg0: $MixinEnvironment, arg1: string, arg2: $ClassNode): boolean;

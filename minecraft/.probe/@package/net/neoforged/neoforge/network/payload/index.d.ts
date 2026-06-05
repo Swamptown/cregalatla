@@ -36,12 +36,12 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
      */
     export type $CommonVersionPayload_ = { versions?: $List_<number>,  } | [versions?: $List_<number>, ];
     export class $ClientboundCustomSetTimePayload extends $Record implements $CustomPacketPayload {
-        gameRule(): boolean;
         gameTime(): number;
         dayTimeFraction(): number;
         dayTimePerTick(): number;
         type(): $CustomPacketPayload$Type<$ClientboundCustomSetTimePayload>;
         dayTime(): number;
+        gameRule(): boolean;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
         static TYPE: $CustomPacketPayload$Type<$ClientboundCustomSetTimePayload>;
@@ -51,7 +51,7 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
     /**
      * Values that may be interpreted as {@link $ClientboundCustomSetTimePayload}.
      */
-    export type $ClientboundCustomSetTimePayload_ = { gameRule?: boolean, dayTime?: number, dayTimePerTick?: number, dayTimeFraction?: number, gameTime?: number,  } | [gameRule?: boolean, dayTime?: number, dayTimePerTick?: number, dayTimeFraction?: number, gameTime?: number, ];
+    export type $ClientboundCustomSetTimePayload_ = { dayTimeFraction?: number, dayTimePerTick?: number, dayTime?: number, gameRule?: boolean, gameTime?: number,  } | [dayTimeFraction?: number, dayTimePerTick?: number, dayTime?: number, gameRule?: boolean, gameTime?: number, ];
     export class $FrozenRegistryPayload extends $Record implements $CustomPacketPayload {
         registryName(): $ResourceLocation;
         type(): $CustomPacketPayload$Type<$FrozenRegistryPayload>;
@@ -161,7 +161,7 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
     /**
      * Values that may be interpreted as {@link $ModdedNetworkQueryComponent}.
      */
-    export type $ModdedNetworkQueryComponent_ = { version?: string, optional?: boolean, flow?: ($PacketFlow_) | undefined, id?: $ResourceLocation_,  } | [version?: string, optional?: boolean, flow?: ($PacketFlow_) | undefined, id?: $ResourceLocation_, ];
+    export type $ModdedNetworkQueryComponent_ = { flow?: ($PacketFlow_) | undefined, optional?: boolean, version?: string, id?: $ResourceLocation_,  } | [flow?: ($PacketFlow_) | undefined, optional?: boolean, version?: string, id?: $ResourceLocation_, ];
     export class $AdvancedOpenScreenPayload extends $Record implements $CustomPacketPayload {
         additionalData(): number[];
         menuType(): $MenuType<never>;
@@ -177,7 +177,7 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
     /**
      * Values that may be interpreted as {@link $AdvancedOpenScreenPayload}.
      */
-    export type $AdvancedOpenScreenPayload_ = { menuType?: $MenuType_<never>, windowId?: number, name?: $Component_, additionalData?: number[],  } | [menuType?: $MenuType_<never>, windowId?: number, name?: $Component_, additionalData?: number[], ];
+    export type $AdvancedOpenScreenPayload_ = { windowId?: number, menuType?: $MenuType_<never>, additionalData?: number[], name?: $Component_,  } | [windowId?: number, menuType?: $MenuType_<never>, additionalData?: number[], name?: $Component_, ];
     export class $SyncAttachmentsPayload$LevelTarget extends $Record implements $SyncAttachmentsPayload$Target {
         constructor();
     }
@@ -246,7 +246,7 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
     /**
      * Values that may be interpreted as {@link $ConfigFilePayload}.
      */
-    export type $ConfigFilePayload_ = { fileName?: string, contents?: number[],  } | [fileName?: string, contents?: number[], ];
+    export type $ConfigFilePayload_ = { contents?: number[], fileName?: string,  } | [contents?: number[], fileName?: string, ];
     export class $FeatureFlagAcknowledgePayload implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$FeatureFlagAcknowledgePayload>;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
@@ -270,8 +270,8 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
      */
     export type $ModdedNetworkSetupFailedPayload_ = { failureReasons?: $Map_<$ResourceLocation_, $Component_>,  } | [failureReasons?: $Map_<$ResourceLocation_, $Component_>, ];
     export class $FeatureFlagDataPayload extends $Record implements $CustomPacketPayload {
-        moddedFlags(): $Set<$ResourceLocation>;
         type(): $CustomPacketPayload$Type<$FeatureFlagDataPayload>;
+        moddedFlags(): $Set<$ResourceLocation>;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
         static TYPE: $CustomPacketPayload$Type<$FeatureFlagDataPayload>;
@@ -283,8 +283,8 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
      */
     export type $FeatureFlagDataPayload_ = { moddedFlags?: $Set_<$ResourceLocation_>,  } | [moddedFlags?: $Set_<$ResourceLocation_>, ];
     export class $AdvancedAddEntityPayload extends $Record implements $CustomPacketPayload {
-        customPayload(): number[];
         type(): $CustomPacketPayload$Type<$AdvancedAddEntityPayload>;
+        customPayload(): number[];
         entityId(): number;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
@@ -311,7 +311,7 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
     /**
      * Values that may be interpreted as {@link $SyncAttachmentsPayload}.
      */
-    export type $SyncAttachmentsPayload_ = { syncPayload?: number[], target?: $SyncAttachmentsPayload$Target, types?: $List_<$AttachmentType_<never>>,  } | [syncPayload?: number[], target?: $SyncAttachmentsPayload$Target, types?: $List_<$AttachmentType_<never>>, ];
+    export type $SyncAttachmentsPayload_ = { target?: $SyncAttachmentsPayload$Target, syncPayload?: number[], types?: $List_<$AttachmentType_<never>>,  } | [target?: $SyncAttachmentsPayload$Target, syncPayload?: number[], types?: $List_<$AttachmentType_<never>>, ];
     export class $KnownRegistryDataMapsPayload extends $Record implements $CustomPacketPayload {
         dataMaps(): $Map<$ResourceKey<$Registry<never>>, $List<$KnownRegistryDataMapsPayload$KnownDataMap>>;
         type(): $CustomPacketPayload$Type<$KnownRegistryDataMapsPayload>;
@@ -342,7 +342,7 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
     /**
      * Values that may be interpreted as {@link $ModdedNetworkComponent}.
      */
-    export type $ModdedNetworkComponent_ = { version?: (string) | undefined, id?: $ResourceLocation_,  } | [version?: (string) | undefined, id?: $ResourceLocation_, ];
+    export type $ModdedNetworkComponent_ = { id?: $ResourceLocation_, version?: (string) | undefined,  } | [id?: $ResourceLocation_, version?: (string) | undefined, ];
     export class $ExtensibleEnumDataPayload extends $Record implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$ExtensibleEnumDataPayload>;
         enumEntries(): $Map<string, $CheckExtensibleEnums$EnumEntry>;
@@ -371,7 +371,7 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
     /**
      * Values that may be interpreted as {@link $CommonRegisterPayload}.
      */
-    export type $CommonRegisterPayload_ = { version?: number, channels?: $Set_<$ResourceLocation_>, protocol?: $ConnectionProtocol_,  } | [version?: number, channels?: $Set_<$ResourceLocation_>, protocol?: $ConnectionProtocol_, ];
+    export type $CommonRegisterPayload_ = { channels?: $Set_<$ResourceLocation_>, version?: number, protocol?: $ConnectionProtocol_,  } | [channels?: $Set_<$ResourceLocation_>, version?: number, protocol?: $ConnectionProtocol_, ];
     export class $FrozenRegistrySyncCompletedPayload implements $CustomPacketPayload {
         type(): $CustomPacketPayload$Type<$FrozenRegistrySyncCompletedPayload>;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
@@ -407,10 +407,10 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
     export type $ModdedNetworkQueryPayload_ = { queries?: $Map_<$ConnectionProtocol_, $Set_<$ModdedNetworkQueryComponent_>>,  } | [queries?: $Map_<$ConnectionProtocol_, $Set_<$ModdedNetworkQueryComponent_>>, ];
     export class $AdvancedContainerSetDataPayload extends $Record implements $CustomPacketPayload {
         dataId(): number;
-        toVanillaPacket(): $ClientboundContainerSetDataPacket;
         containerId(): number;
         type(): $CustomPacketPayload$Type<$AdvancedContainerSetDataPayload>;
         value(): number;
+        toVanillaPacket(): $ClientboundContainerSetDataPacket;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
         static TYPE: $CustomPacketPayload$Type<$AdvancedContainerSetDataPayload>;
@@ -420,7 +420,7 @@ declare module "@package/net/neoforged/neoforge/network/payload" {
     /**
      * Values that may be interpreted as {@link $AdvancedContainerSetDataPayload}.
      */
-    export type $AdvancedContainerSetDataPayload_ = { value?: number, containerId?: number, dataId?: number,  } | [value?: number, containerId?: number, dataId?: number, ];
+    export type $AdvancedContainerSetDataPayload_ = { dataId?: number, containerId?: number, value?: number,  } | [dataId?: number, containerId?: number, value?: number, ];
     export class $SplitPacketPayload extends $Record implements $CustomPacketPayload {
         payload(): number[];
         type(): $CustomPacketPayload$Type<$SplitPacketPayload>;

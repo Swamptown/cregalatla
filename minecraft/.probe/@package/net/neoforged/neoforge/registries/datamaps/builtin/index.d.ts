@@ -84,7 +84,7 @@ declare module "@package/net/neoforged/neoforge/registries/datamaps/builtin" {
     /**
      * Values that may be interpreted as {@link $Compostable}.
      */
-    export type $Compostable_ = { chance?: number, canVillagerCompost?: boolean,  } | [chance?: number, canVillagerCompost?: boolean, ];
+    export type $Compostable_ = { canVillagerCompost?: boolean, chance?: number,  } | [canVillagerCompost?: boolean, chance?: number, ];
     export class $BiomeVillagerType extends $Record {
         type(): $VillagerType;
         static TYPE_CODEC: $Codec<$BiomeVillagerType>;

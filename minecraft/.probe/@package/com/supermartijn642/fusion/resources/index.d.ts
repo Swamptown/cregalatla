@@ -1,12 +1,12 @@
 
 declare module "@package/com/supermartijn642/fusion/resources" {
     export class $FusionPackMetadata {
-        getMinimumVersion(): string;
-        isMinVersionSatisfied(): boolean;
         hasOverridesFolder(): boolean;
         getOverridesFolder(): string;
+        getMinimumVersion(): string;
+        isMinVersionSatisfied(): boolean;
+        get overridesFolder(): string;
         get minimumVersion(): string;
         get minVersionSatisfied(): boolean;
-        get overridesFolder(): string;
     }
 }

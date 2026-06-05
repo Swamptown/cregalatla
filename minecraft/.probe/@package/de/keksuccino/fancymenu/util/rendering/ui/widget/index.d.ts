@@ -67,19 +67,21 @@ declare module "@package/de/keksuccino/fancymenu/util/rendering/ui/widget" {
     export class $UniqueWidget {
     }
     export interface $UniqueWidget {
-        getWidgetIdentifierFancyMenu(): string;
         setWidgetIdentifierFancyMenu(arg0: string): $AbstractWidget;
+        getWidgetIdentifierFancyMenu(): string;
     }
     export class $CustomizableWidget {
     }
     export interface $CustomizableWidget {
-        resolveLabelScaleFancyMenu(): number;
         resetWidgetSizeAndPositionFancyMenu(): void;
+        addHoverOrFocusStateListenerFancyMenu(arg0: $Consumer_<boolean>): void;
+        resolveLabelScaleFancyMenu(): number;
         tickFocusStateListenersFancyMenu(arg0: boolean): void;
         isNineSliceCustomBackgroundTexture_FancyMenu(): boolean;
+        isHiddenFancyMenu(): boolean;
+        resetWidgetCustomizationsFancyMenu(): void;
         tickHoverStateListenersFancyMenu(arg0: boolean): void;
         tickHoverOrFocusStateListenersFancyMenu(arg0: boolean): void;
-        addHoverOrFocusStateListenerFancyMenu(arg0: $Consumer_<boolean>): void;
         addResetCustomizationsListenerFancyMenu(arg0: $Runnable_): void;
         getResetCustomizationsListenersFancyMenu(): $List<$Runnable>;
         addHoverStateListenerFancyMenu(arg0: $Consumer_<boolean>): void;
@@ -152,8 +154,6 @@ declare module "@package/de/keksuccino/fancymenu/util/rendering/ui/widget" {
         stopCustomClickSoundFancyMenu(): void;
         stopHoverSoundFancyMenu(): void;
         stopUnhoverSoundFancyMenu(): void;
-        isHiddenFancyMenu(): boolean;
-        resetWidgetCustomizationsFancyMenu(): void;
         get nineSliceCustomBackgroundTexture_FancyMenu(): boolean;
         get resetCustomizationsListenersFancyMenu(): $List<$Runnable>;
         get hoverStateListenersFancyMenu(): $List<$Consumer<boolean>>;

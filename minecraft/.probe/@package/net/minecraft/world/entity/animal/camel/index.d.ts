@@ -1,7 +1,6 @@
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $MoveControl, $MoveControl$Operation, $LookControl, $JumpControl, $BodyRotationControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
-import { $EntityType_, $Pose, $PortalProcessor, $PlayerRideableJumping, $AnimationState, $EntityDimensions, $Entity$RemovalReason, $Saddleable, $AgeableMob, $WalkAnimationState, $Mob } from "@package/net/minecraft/world/entity";
+import { $EntityType_, $Pose, $PortalProcessor, $PlayerRideableJumping, $AnimationState, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $Saddleable, $AgeableMob, $WalkAnimationState, $Mob } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $Stack, $Map } from "@package/java/util";
@@ -9,7 +8,7 @@ import { $AbstractHorse } from "@package/net/minecraft/world/entity/animal/horse
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $Predicate } from "@package/java/util/function";
 import { $InteractionHand, $SimpleContainer } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos } from "@package/net/minecraft/core";
+import { $BlockPos } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $Brain, $Brain$Provider } from "@package/net/minecraft/world/entity/ai";
@@ -56,9 +55,9 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
     export class $CamelAi {
         static getTemptations(): $Predicate<$ItemStack>;
         static initMemories(arg0: $Camel, arg1: $RandomSource): void;
-        static updateActivity(arg0: $Camel): void;
         static makeBrain(arg0: $Brain<$Camel>): $Brain<never>;
         static brainProvider(): $Brain$Provider<$Camel>;
+        static updateActivity(arg0: $Camel): void;
         constructor();
         static get temptations(): $Predicate<$ItemStack>;
     }
@@ -77,7 +76,6 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
     }
     export class $Camel extends $AbstractHorse implements $PlayerRideableJumping, $Saddleable {
         getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Camel;
-        resetLastPoseChangeTick(arg0: number): void;
         isDashing(): boolean;
         setDashing(arg0: boolean): void;
         refuseToMove(): boolean;
@@ -89,8 +87,8 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         standUp(): void;
         canCamelChangePose(): boolean;
         sitDown(): void;
+        resetLastPoseChangeTick(arg0: number): void;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         sitAnimationState: $AnimationState;
@@ -127,6 +125,7 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         static LAST_POSE_CHANGE_TICK: $EntityDataAccessor<number>;
         static INV_BASE_COUNT: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -155,6 +154,7 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         tailCounter: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -184,6 +184,7 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

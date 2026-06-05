@@ -11,19 +11,19 @@ declare module "@package/com/mojang/brigadier/builder" {
         getLiteral(): string;
     }
     export class $ArgumentBuilder<S, T extends $ArgumentBuilder<S, T>> {
-        getRedirect(): $CommandNode<S>;
         executes(arg0: $Command_<S>): T;
         getRequirement(): $Predicate<S>;
         isFork(): boolean;
         getRedirectModifier(): $RedirectModifier<S>;
+        getRedirect(): $CommandNode<S>;
         then(arg0: $ArgumentBuilder<S, never>): T;
         then(arg0: $CommandNode<S>): T;
         getCommand(): $Command<S>;
-        fork(arg0: $CommandNode<S>, arg1: $RedirectModifier_<S>): T;
-        redirect(arg0: $CommandNode<S>, arg1: $SingleRedirectModifier_<S>): T;
         redirect(arg0: $CommandNode<S>): T;
-        requires(arg0: $Predicate_<S>): T;
+        redirect(arg0: $CommandNode<S>, arg1: $SingleRedirectModifier_<S>): T;
         build(): $CommandNode<S>;
+        requires(arg0: $Predicate_<S>): T;
+        fork(arg0: $CommandNode<S>, arg1: $RedirectModifier_<S>): T;
         getArguments(): $Collection<$CommandNode<S>>;
         forward(arg0: $CommandNode<S>, arg1: $RedirectModifier_<S>, arg2: boolean): T;
         constructor();

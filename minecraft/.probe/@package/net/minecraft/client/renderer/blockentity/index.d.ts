@@ -98,7 +98,7 @@ declare module "@package/net/minecraft/client/renderer/blockentity" {
         constructor();
     }
     export class $SkullBlockRenderer implements $BlockEntityRenderer<$SkullBlockEntity> {
-        handler$ghg000$skinlayers3d$render(skullBlockEntity: $SkullBlockEntity, f: number, poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, i: number, j: number, info: $CallbackInfo): void;
+        handler$hei000$skinlayers3d$render(skullBlockEntity: $SkullBlockEntity, f: number, poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, i: number, j: number, info: $CallbackInfo): void;
         static createSkullRenderers(arg0: $EntityModelSet): $Map<$SkullBlock$Type, $SkullModelBase>;
         static renderSkull(arg0: $Direction_, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: $SkullModelBase, arg7: $RenderType): void;
         render(arg0: $SkullBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
@@ -123,7 +123,7 @@ declare module "@package/net/minecraft/client/renderer/blockentity" {
         get viewDistance(): number;
     }
     export class $PistonHeadRenderer implements $BlockEntityRenderer<$PistonMovingBlockEntity> {
-        handler$zbj000$sodium_extra$render(arg0: $PistonMovingBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: $CallbackInfo): void;
+        handler$zcp000$sodium_extra$render(arg0: $PistonMovingBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: $CallbackInfo): void;
         getViewDistance(): number;
         render(arg0: $PistonMovingBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
         getRenderBoundingBox(arg0: $PistonMovingBlockEntity): $AABB;
@@ -144,10 +144,10 @@ declare module "@package/net/minecraft/client/renderer/blockentity" {
         get viewDistance(): number;
     }
     export class $BlockEntityRendererProvider$Context {
+        bakeLayer(arg0: $ModelLayerLocation): $ModelPart;
         getEntityRenderer(): $EntityRenderDispatcher;
         getBlockRenderDispatcher(): $BlockRenderDispatcher;
         getModelSet(): $EntityModelSet;
-        bakeLayer(arg0: $ModelLayerLocation): $ModelPart;
         getFont(): $Font;
         getItemRenderer(): $ItemRenderer;
         getBlockEntityRenderDispatcher(): $BlockEntityRenderDispatcher;
@@ -160,15 +160,15 @@ declare module "@package/net/minecraft/client/renderer/blockentity" {
         get blockEntityRenderDispatcher(): $BlockEntityRenderDispatcher;
     }
     export class $BlockEntityRenderDispatcher implements $ResourceManagerReloadListener, $BlockEntityRenderDispatcherExtension {
+        handler$dff000$entityculling$render(blockEntity: $BlockEntity, f: number, poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, info: $CallbackInfo): void;
+        modify$ghn000$sable$moveCameraPosForCheck(arg0: $Vec3_): $Vec3;
         onResourceManagerReload(arg0: $ResourceManager): void;
         setLevel(arg0: $Level_): void;
-        modify$fnf000$sable$moveCameraPosForCheck(arg0: $Vec3_): $Vec3;
-        handler$dan000$entityculling$render(blockEntity: $BlockEntity, f: number, poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, info: $CallbackInfo): void;
         prepare(arg0: $Level_, arg1: $Camera, arg2: $HitResult): void;
-        sable$setCameraPosition(arg0: $Vec3_): void;
-        getRenderer<E extends $BlockEntity>(arg0: E): $BlockEntityRenderer<E>;
         render<E extends $BlockEntity>(arg0: E, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_): void;
+        getRenderer<E extends $BlockEntity>(arg0: E): $BlockEntityRenderer<E>;
         renderItem<E extends $BlockEntity>(arg0: E, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: number, arg4: number): boolean;
+        sable$setCameraPosition(arg0: $Vec3_): void;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
         cameraHitResult: $HitResult;
@@ -178,6 +178,7 @@ declare module "@package/net/minecraft/client/renderer/blockentity" {
         get name(): string;
     }
     export class $SignRenderer implements $BlockEntityRenderer<$SignBlockEntity> {
+        getSignMaterial(arg0: $WoodType_): $Material;
         renderSignWithText(arg0: $SignBlockEntity, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: number, arg4: number, arg5: $BlockState_, arg6: $SignBlock, arg7: $WoodType_, arg8: $Model): void;
         getSignModelRenderScale(): number;
         getSignTextRenderScale(): number;
@@ -192,7 +193,6 @@ declare module "@package/net/minecraft/client/renderer/blockentity" {
         static getDarkColor(arg0: $SignText): number;
         render(arg0: $SignBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
         getRenderBoundingBox(arg0: $SignBlockEntity): $AABB;
-        getSignMaterial(arg0: $WoodType_): $Material;
         getViewDistance(): number;
         shouldRenderOffScreen(arg0: $SignBlockEntity): boolean;
         shouldRender(arg0: $SignBlockEntity, arg1: $Vec3_): boolean;
@@ -257,9 +257,9 @@ declare module "@package/net/minecraft/client/renderer/blockentity" {
         get viewDistance(): number;
     }
     export class $BeaconRenderer implements $BlockEntityRenderer<$BeaconBlockEntity> {
-        handler$zzo000$sodium_extra$render(arg0: $BeaconBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: $CallbackInfo): void;
+        handler$zce000$sodium_extra$render(arg0: $BeaconBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: $CallbackInfo): void;
         static renderBeaconBeam(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: $ResourceLocation_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
-        handler$zbh001$sodium_extra$render(arg0: $BeaconBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: $CallbackInfo): void;
+        handler$zcn001$sodium_extra$render(arg0: $BeaconBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: $CallbackInfo): void;
         getViewDistance(): number;
         render(arg0: $BeaconBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
         shouldRenderOffScreen(arg0: $BeaconBlockEntity): boolean;
@@ -271,9 +271,9 @@ declare module "@package/net/minecraft/client/renderer/blockentity" {
         get viewDistance(): number;
     }
     export class $BannerRenderer implements $BlockEntityRenderer<$BannerBlockEntity> {
+        static createBodyLayer(): $LayerDefinition;
         static renderPatterns(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: number, arg4: $ModelPart, arg5: $Material, arg6: boolean, arg7: $DyeColor_, arg8: $BannerPatternLayers_): void;
         static renderPatterns(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: number, arg4: $ModelPart, arg5: $Material, arg6: boolean, arg7: $DyeColor_, arg8: $BannerPatternLayers_, arg9: boolean): void;
-        static createBodyLayer(): $LayerDefinition;
         render(arg0: $BannerBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
         getRenderBoundingBox(arg0: $BannerBlockEntity): $AABB;
         getViewDistance(): number;
@@ -297,7 +297,7 @@ declare module "@package/net/minecraft/client/renderer/blockentity" {
         constructor(arg0: $ModelPart);
     }
     export class $EnchantTableRenderer implements $BlockEntityRenderer<$EnchantingTableBlockEntity> {
-        handler$zbi000$sodium_extra$render(arg0: $EnchantingTableBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: $CallbackInfo): void;
+        handler$zco000$sodium_extra$render(arg0: $EnchantingTableBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: $CallbackInfo): void;
         render(arg0: $EnchantingTableBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
         getRenderBoundingBox(arg0: $EnchantingTableBlockEntity): $AABB;
         getViewDistance(): number;

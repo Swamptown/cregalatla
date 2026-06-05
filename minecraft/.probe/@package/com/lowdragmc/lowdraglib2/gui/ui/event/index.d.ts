@@ -62,24 +62,24 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/event" {
     /**
      * Values that may be interpreted as {@link $HoverTooltips}.
      */
-    export type $HoverTooltips_ = { tooltipStack?: $ItemStack_, tooltipFont?: $Font, tooltipTexts?: $List_<$Component_>, tooltipComponent?: $TooltipComponent,  } | [tooltipStack?: $ItemStack_, tooltipFont?: $Font, tooltipTexts?: $List_<$Component_>, tooltipComponent?: $TooltipComponent, ];
+    export type $HoverTooltips_ = { tooltipFont?: $Font, tooltipStack?: $ItemStack_, tooltipComponent?: $TooltipComponent, tooltipTexts?: $List_<$Component_>,  } | [tooltipFont?: $Font, tooltipStack?: $ItemStack_, tooltipComponent?: $TooltipComponent, tooltipTexts?: $List_<$Component_>, ];
     export class $DragHandler {
         startDrag(arg0: $Object, arg1: $IGuiTexture_, arg2: $UIElement): void;
         startDrag(arg0: $Object, arg1: $IGuiTexture_): void;
         startDrag(arg0: $Object): void;
         startDrag(arg0: $Object, arg1: $IGuiTexture_, arg2: $UIElement, arg3: $UIElement): void;
         startDrag(): void;
-        getDraggingObject<T>(): T;
         setDragTexture(arg0: number, arg1: number, arg2: number, arg3: number): void;
+        getDraggingObject<T>(): T;
         setOffsetX(arg0: number): void;
         setOffsetY(arg0: number): void;
         stopDrag(): void;
         stopDrag(arg0: $UIElement): void;
         setStartX(arg0: number): void;
         setStartY(arg0: number): void;
+        isDragging(): boolean;
         setWidth(arg0: number): void;
         setHeight(arg0: number): void;
-        isDragging(): boolean;
         dragTexture: $IGuiTexture;
         offsetX: number;
         offsetY: number;
@@ -105,12 +105,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/event" {
      */
     export type $UIEvent$EventPhase_ = "capture" | "at_target" | "bubble";
     export class $UIEventDispatcher {
-        static dispatchEvent(arg0: $UIEvent): void;
-        static dispatchEvent(arg0: $UIEvent, arg1: boolean, arg2: boolean, arg3: boolean): void;
         static dispatchDirectEvent(arg0: $UIEvent): void;
         static dispatchDirectEvent(arg0: $UIEvent, arg1: boolean): void;
         static dispatchAllChildren(arg0: $UIEvent): boolean;
         static dispatchAllChildren(arg0: $UIEvent, arg1: boolean, arg2: boolean): boolean;
+        static dispatchEvent(arg0: $UIEvent): void;
+        static dispatchEvent(arg0: $UIEvent, arg1: boolean, arg2: boolean, arg3: boolean): void;
     }
     export class $UIEventListener {
     }

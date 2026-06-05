@@ -15,7 +15,7 @@ import { $Projectile } from "@package/net/minecraft/world/entity/projectile";
 import { $RecipeScriptContext } from "@package/dev/latvian/mods/kubejs/recipe";
 import { $NoteBlockInstrument, $Property, $NoteBlockInstrument_ } from "@package/net/minecraft/world/level/block/state/properties";
 import { $BlockPlaceContext, $UseOnContext } from "@package/net/minecraft/world/item/context";
-import { $RenderShape, $Mirror_, $SoundType_, $SoundType, $Block, $Block_, $Rotation_, $SupportType_ } from "@package/net/minecraft/world/level/block";
+import { $RenderShape, $Mirror_, $SoundType_, $SoundType, $Block, $Rotation_, $Block_, $SupportType_ } from "@package/net/minecraft/world/level/block";
 import { $BlockStateKJS, $BlockBehaviourKJS } from "@package/dev/latvian/mods/kubejs/core";
 import { $RelativeURL } from "@package/dev/latvian/mods/kubejs/web";
 import { $HitResult, $Vec3, $Vec3_, $BlockHitResult } from "@package/net/minecraft/world/phys";
@@ -33,6 +33,7 @@ import { $PathType, $PathType_, $PathComputationType_ } from "@package/net/minec
 import { $Reference2ObjectArrayMap, $Reference2ObjectMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ShapeUpdateHandlingBlockBehaviour } from "@package/net/caffeinemc/mods/lithium/common/block/entity";
 import { $Enum, $Comparable_, $Comparable, $Object } from "@package/java/lang";
+import { $IState } from "@package/com/ishland/c2me/base/mixin/access";
 import { $LootTable, $LootParams$Builder } from "@package/net/minecraft/world/level/storage/loot";
 import { $BlockAndTintGetter, $Explosion, $LevelAccessor, $LevelReader, $BlockGetter, $SignalGetter, $Level_ } from "@package/net/minecraft/world/level";
 import { $BlockBehaviourInvoker } from "@package/org/embeddedt/modernfix/common/mixin/perf/reduce_blockstate_cache_rebuilds";
@@ -100,8 +101,10 @@ declare module "@package/net/minecraft/world/level/block/state" {
         constructor(arg0: O);
     }
     export class $BlockBehaviour implements $FeatureElement, $BlockBehaviourInvoker, $ShapeUpdateHandlingBlockBehaviour, $AbstractBlockAccessor, $BlockBehaviourAccessor$1, $BlockBehaviourKJS, $BlockBehaviourAccessor {
+        tick(arg0: $BlockState_, arg1: $ServerLevel, arg2: $BlockPos_, arg3: $RandomSource): void;
         asBlock(): $Block;
         static simpleCodec<B extends $Block>(arg0: $Function_<$BlockBehaviour$Properties, B>): $MapCodec<B>;
+        getSeed(arg0: $BlockState_, arg1: $BlockPos_): number;
         setHasCollision(arg0: boolean): void;
         setExplosionResistance(arg0: number): void;
         setIsRandomlyTicking(arg0: boolean): void;
@@ -116,31 +119,19 @@ declare module "@package/net/minecraft/world/level/block/state" {
         defaultMapColor(): $MapColor;
         defaultDestroyTime(): number;
         getShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $CollisionContext): $VoxelShape;
-        getSeed(arg0: $BlockState_, arg1: $BlockPos_): number;
-        tick(arg0: $BlockState_, arg1: $ServerLevel, arg2: $BlockPos_, arg3: $RandomSource): void;
-        properties(): $BlockBehaviour$Properties;
         rotate(arg0: $BlockState_, arg1: $Rotation_): $BlockState;
+        properties(): $BlockBehaviour$Properties;
         mirror(arg0: $BlockState_, arg1: $Mirror_): $BlockState;
         codec(): $MapCodec<$Block>;
         onRemove(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_, arg4: boolean): void;
-        asItem(): $Item;
-        requiredFeatures(): $FeatureFlagSet;
-        getFluidState(arg0: $BlockState_): $FluidState;
-        getRenderShape(arg0: $BlockState_): $RenderShape;
-        isAir(arg0: $BlockState_): boolean;
-        attack(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Player): void;
-        useItemOn(arg0: $ItemStack_, arg1: $BlockState_, arg2: $Level_, arg3: $BlockPos_, arg4: $Player, arg5: $InteractionHand_, arg6: $BlockHitResult): $ItemInteractionResult;
-        canSurvive(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_): boolean;
-        getLootTable(): $ResourceKey<$LootTable>;
-        /**
-         * @deprecated
-         */
-        getSoundType(arg0: $BlockState_): $SoundType;
-        getCollisionShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $CollisionContext): $VoxelShape;
-        entityInside(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Entity): void;
-        isCollisionShapeFullBlock(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
-        onExplosionHit(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Explosion, arg4: $BiConsumer_<$ItemStack, $BlockPos>): void;
         triggerEvent(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: number, arg4: number): boolean;
+        getFluidState(arg0: $BlockState_): $FluidState;
+        requiredFeatures(): $FeatureFlagSet;
+        getCollisionShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $CollisionContext): $VoxelShape;
+        useShapeForLightOcclusion(arg0: $BlockState_): boolean;
+        isRandomlyTicking(arg0: $BlockState_): boolean;
+        propagatesSkylightDown(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
+        getLightBlock(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): number;
         getOcclusionShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): $VoxelShape;
         getShadeBrightness(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): number;
         isSignalSource(arg0: $BlockState_): boolean;
@@ -155,10 +146,6 @@ declare module "@package/net/minecraft/world/level/block/state" {
         getInteractionShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): $VoxelShape;
         neighborChanged(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Block_, arg4: $BlockPos_, arg5: boolean): void;
         onPlace(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_, arg4: boolean): void;
-        useShapeForLightOcclusion(arg0: $BlockState_): boolean;
-        isRandomlyTicking(arg0: $BlockState_): boolean;
-        propagatesSkylightDown(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
-        getLightBlock(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): number;
         updateIndirectNeighbourShapes(arg0: $BlockState_, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: number, arg4: number): void;
         randomTick(arg0: $BlockState_, arg1: $ServerLevel, arg2: $BlockPos_, arg3: $RandomSource): void;
         spawnAfterBreak(arg0: $BlockState_, arg1: $ServerLevel, arg2: $BlockPos_, arg3: $ItemStack_, arg4: boolean): void;
@@ -171,20 +158,34 @@ declare module "@package/net/minecraft/world/level/block/state" {
         getMenuProvider(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_): $MenuProvider;
         onProjectileHit(arg0: $Level_, arg1: $BlockState_, arg2: $BlockHitResult, arg3: $Projectile): void;
         static propertiesCodec<B extends $Block>(): $RecordCodecBuilder<B, $BlockBehaviour$Properties>;
+        entityInside(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Entity): void;
+        isCollisionShapeFullBlock(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
+        canSurvive(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_): boolean;
+        getLootTable(): $ResourceKey<$LootTable>;
+        /**
+         * @deprecated
+         */
+        getSoundType(arg0: $BlockState_): $SoundType;
+        onExplosionHit(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Explosion, arg4: $BiConsumer_<$ItemStack, $BlockPos>): void;
+        asItem(): $Item;
+        getRenderShape(arg0: $BlockState_): $RenderShape;
+        isAir(arg0: $BlockState_): boolean;
+        attack(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Player): void;
+        useItemOn(arg0: $ItemStack_, arg1: $BlockState_, arg2: $Level_, arg3: $BlockPos_, arg4: $Player, arg5: $InteractionHand_, arg6: $BlockHitResult): $ItemInteractionResult;
         isEnabled(arg0: $FeatureFlagSet): boolean;
         lithium$handleShapeUpdate(arg0: $LevelReader, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockPos_, arg4: $BlockState_): void;
         getTypeData(): $Map<string, $Object>;
-        getKey(): $ResourceKey<$Block>;
         getId(): string;
         asHolder(): $Holder<$Block>;
         getRegistryId(): $ResourceKey<$Registry<$Block>>;
         getRegistry(): $Registry<$Block>;
-        specialEquals(o: $Object, shallow: boolean): boolean;
+        getKey(): $ResourceKey<$Block>;
         getIdLocation(): $ResourceLocation;
         getMod(): string;
         getTagKeys(): $List<$TagKey<$Block>>;
         getTags(): $List<$ResourceLocation>;
         hasTag(tag: $ResourceLocation_): boolean;
+        specialEquals(o: $Object, shallow: boolean): boolean;
         getHasCollision(): boolean;
         create$getShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $CollisionContext): $VoxelShape;
         getProperties(): $BlockBehaviour$Properties;
@@ -205,30 +206,38 @@ declare module "@package/net/minecraft/world/level/block/state" {
         get maxVerticalOffset(): number;
         get lootTable(): $ResourceKey<$LootTable>;
         get typeData(): $Map<string, $Object>;
-        get key(): $ResourceKey<$Block>;
         get id(): string;
         get registryId(): $ResourceKey<$Registry<$Block>>;
         get registry(): $Registry<$Block>;
+        get key(): $ResourceKey<$Block>;
         get idLocation(): $ResourceLocation;
         get mod(): string;
         get tagKeys(): $List<$TagKey<$Block>>;
         get tags(): $List<$ResourceLocation>;
     }
     export class $BlockState extends $BlockBehaviour$BlockStateBase implements $IBlockStateExtension, $BlockStateExtension {
-        sable$getProperty(arg0: $PhysicsBlockPropertyTypes$PhysicsBlockPropertyType_<any>): $Object;
         sable$loadProperties(arg0: $StateDefinition<any, any>, arg1: $PhysicsBlockPropertiesDefinition_): void;
-        isEmpty(): boolean;
+        sable$getProperty(arg0: $PhysicsBlockPropertyTypes$PhysicsBlockPropertyType_<any>): $Object;
         rotate(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $Rotation_): $BlockState;
-        getCloneItemStack(arg0: $HitResult, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Player): $ItemStack;
+        isEmpty(): boolean;
         addLandingEffects(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $BlockState_, arg3: $LivingEntity, arg4: number): boolean;
-        getSoundType(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Entity): $SoundType;
         getFriction(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Entity): number;
         isScaffolding(arg0: $LivingEntity): boolean;
         isBed(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $LivingEntity): boolean;
         setBedOccupied(arg0: $Level_, arg1: $BlockPos_, arg2: $LivingEntity, arg3: boolean): void;
         getBedDirection(arg0: $LevelReader, arg1: $BlockPos_): $Direction;
+        getToolModifiedState(arg0: $UseOnContext, arg1: $ItemAbility_, arg2: boolean): $BlockState;
+        canRedstoneConnectTo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
+        hidesNeighborFace(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_): boolean;
+        supportsExternalFaceHiding(): boolean;
+        onBlockStateChange(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockState_): void;
+        canBeHydrated(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $BlockPos_): boolean;
+        getAppearance(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $Direction_, arg3: $BlockState_, arg4: $BlockPos_): $BlockState;
+        getBubbleColumnDirection(): $BubbleColumnDirection;
+        shouldHideAdjacentFluidFace(arg0: $Direction_, arg1: $FluidState): boolean;
         collisionExtendsVertically(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Entity): boolean;
         addRunningEffects(arg0: $Level_, arg1: $BlockPos_, arg2: $Entity): boolean;
+        getSoundType(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Entity): $SoundType;
         hasDynamicLightEmission(): boolean;
         getLightEmission(arg0: $BlockGetter, arg1: $BlockPos_): number;
         ignitedByLava(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
@@ -265,16 +274,8 @@ declare module "@package/net/minecraft/world/level/block/state" {
         canDropFromExplosion(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Explosion): boolean;
         onBlockExploded(arg0: $Level_, arg1: $BlockPos_, arg2: $Explosion): void;
         shouldDisplayFluidOverlay(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState): boolean;
-        handler$zcj000$fabric_rendering_fluids_v1$shouldDisplayFluidOverlay(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $CallbackInfoReturnable<any>): void;
-        getToolModifiedState(arg0: $UseOnContext, arg1: $ItemAbility_, arg2: boolean): $BlockState;
-        canRedstoneConnectTo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
-        hidesNeighborFace(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_): boolean;
-        supportsExternalFaceHiding(): boolean;
-        onBlockStateChange(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockState_): void;
-        canBeHydrated(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $BlockPos_): boolean;
-        getAppearance(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $Direction_, arg3: $BlockState_, arg4: $BlockPos_): $BlockState;
-        getBubbleColumnDirection(): $BubbleColumnDirection;
-        shouldHideAdjacentFluidFace(arg0: $Direction_, arg1: $FluidState): boolean;
+        handler$zdp000$fabric_rendering_fluids_v1$shouldDisplayFluidOverlay(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $CallbackInfoReturnable<any>): void;
+        getCloneItemStack(arg0: $HitResult, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Player): $ItemStack;
         static PROPERTIES_TAG: string;
         owner: $Block;
         cache: $BlockBehaviour$BlockStateBase$Cache;
@@ -284,9 +285,9 @@ declare module "@package/net/minecraft/world/level/block/state" {
         propertiesCodec: $MapCodec<$BlockState>;
         constructor(arg0: $Block_, arg1: $Reference2ObjectArrayMap<$Property<never>, $Comparable_<never>>, arg2: $MapCodec_<$BlockState_>);
         get empty(): boolean;
+        get bubbleColumnDirection(): $BubbleColumnDirection;
         get slimeBlock(): boolean;
         get stickyBlock(): boolean;
-        get bubbleColumnDirection(): $BubbleColumnDirection;
     }
     /**
      * Values that may be interpreted as {@link $BlockState}.
@@ -302,62 +303,60 @@ declare module "@package/net/minecraft/world/level/block/state" {
      */
     export type $StateDefinition$Factory_<O, S> = ((arg0: O, arg1: $Reference2ObjectArrayMap<$Property<never>, $Comparable<never>>, arg2: $MapCodec<S>) => S);
     export class $BlockBehaviour$BlockStateBase extends $StateHolder<$Block, $BlockState> implements $IBlockState, $BlockStateKJS {
-        initCache(): void;
-        getShape(arg0: $BlockGetter, arg1: $BlockPos_): $VoxelShape;
-        getShape(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $CollisionContext): $VoxelShape;
-        clearCache(): void;
+        tick(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $RandomSource): void;
         getBlock(): $Block;
         getSeed(arg0: $BlockPos_): number;
-        tick(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $RandomSource): void;
-        is(arg0: $Holder_<$Block>): boolean;
-        is(arg0: $Block_): boolean;
-        is(arg0: $ResourceKey_<$Block>): boolean;
-        is(arg0: $TagKey_<$Block>): boolean;
-        is(arg0: $TagKey_<$Block>, arg1: $Predicate_<$BlockBehaviour$BlockStateBase>): boolean;
-        is(arg0: $HolderSet_<$Block>): boolean;
-        getOffset(arg0: $BlockGetter, arg1: $BlockPos_): $Vec3;
+        getShape(arg0: $BlockGetter, arg1: $BlockPos_): $VoxelShape;
+        getShape(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $CollisionContext): $VoxelShape;
+        initCache(): void;
+        clearCache(): void;
         /**
          * @deprecated
          */
         rotate(arg0: $Rotation_): $BlockState;
+        is(arg0: $TagKey_<$Block>): boolean;
+        is(arg0: $Block_): boolean;
+        is(arg0: $ResourceKey_<$Block>): boolean;
+        is(arg0: $Holder_<$Block>): boolean;
+        is(arg0: $HolderSet_<$Block>): boolean;
+        is(arg0: $TagKey_<$Block>, arg1: $Predicate_<$BlockBehaviour$BlockStateBase>): boolean;
+        getOffset(arg0: $BlockGetter, arg1: $BlockPos_): $Vec3;
         mirror(arg0: $Mirror_): $BlockState;
         onRemove(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: boolean): void;
-        getFluidState(): $FluidState;
-        getRenderShape(): $RenderShape;
-        isAir(): boolean;
-        attack(arg0: $Level_, arg1: $BlockPos_, arg2: $Player): void;
-        useItemOn(arg0: $ItemStack_, arg1: $Level_, arg2: $Player, arg3: $InteractionHand_, arg4: $BlockHitResult): $ItemInteractionResult;
-        hasBlockEntity(): boolean;
-        instrument(): $NoteBlockInstrument;
-        canSurvive(arg0: $LevelReader, arg1: $BlockPos_): boolean;
-        /**
-         * @deprecated
-         */
-        getSoundType(): $SoundType;
+        asState(): $BlockState;
+        triggerEvent(arg0: $Level_, arg1: $BlockPos_, arg2: number, arg3: number): boolean;
         getDestroySpeed(arg0: $BlockGetter, arg1: $BlockPos_): number;
         requiresCorrectToolForDrops(): boolean;
         /**
          * @deprecated
          */
         blocksMotion(): boolean;
+        getFluidState(): $FluidState;
         getCollisionShape(arg0: $BlockGetter, arg1: $BlockPos_): $VoxelShape;
         getCollisionShape(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $CollisionContext): $VoxelShape;
         getTags(): $Stream<$TagKey<$Block>>;
-        entityInside(arg0: $Level_, arg1: $BlockPos_, arg2: $Entity): void;
-        isCollisionShapeFullBlock(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
-        getPistonPushReaction(): $PushReaction;
-        onExplosionHit(arg0: $Level_, arg1: $BlockPos_, arg2: $Explosion, arg3: $BiConsumer_<$ItemStack, $BlockPos>): void;
-        isSuffocating(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        useShapeForLightOcclusion(): boolean;
         /**
          * @deprecated
          */
-        getLightEmission(): number;
+        liquid(): boolean;
+        canOcclude(): boolean;
+        isRedstoneConductor(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        isViewBlocking(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        hasPostProcess(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        emissiveRendering(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        isRandomlyTicking(): boolean;
+        handler$ibg000$ferritecore$cacheStateHead(arg0: $CallbackInfo): void;
+        handler$ibg000$ferritecore$cacheStateTail(arg0: $CallbackInfo): void;
+        getBlockHolder(): $Holder<$Block>;
         /**
          * @deprecated
          */
-        ignitedByLava(): boolean;
-        triggerEvent(arg0: $Level_, arg1: $BlockPos_, arg2: number, arg3: number): boolean;
-        asState(): $BlockState;
+        isSolid(): boolean;
+        isValidSpawn(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $EntityType_<never>): boolean;
+        propagatesSkylightDown(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        getLightBlock(arg0: $BlockGetter, arg1: $BlockPos_): number;
+        getFaceOcclusionShape(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): $VoxelShape;
         getOcclusionShape(arg0: $BlockGetter, arg1: $BlockPos_): $VoxelShape;
         hasLargeCollisionShape(): boolean;
         getMapColor(arg0: $BlockGetter, arg1: $BlockPos_): $MapColor;
@@ -377,31 +376,9 @@ declare module "@package/net/minecraft/world/level/block/state" {
         entityCanStandOnFace(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Entity, arg3: $Direction_): boolean;
         hasOffsetFunction(): boolean;
         handleNeighborChanged(arg0: $Level_, arg1: $BlockPos_, arg2: $Block_, arg3: $BlockPos_, arg4: boolean): void;
-        updateNeighbourShapes(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: number, arg3: number): void;
         updateNeighbourShapes(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: number): void;
+        updateNeighbourShapes(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: number, arg3: number): void;
         onPlace(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: boolean): void;
-        useShapeForLightOcclusion(): boolean;
-        /**
-         * @deprecated
-         */
-        liquid(): boolean;
-        canOcclude(): boolean;
-        isRedstoneConductor(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
-        isViewBlocking(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
-        hasPostProcess(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
-        emissiveRendering(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
-        isRandomlyTicking(): boolean;
-        handler$hdi000$ferritecore$cacheStateHead(arg0: $CallbackInfo): void;
-        handler$hdi000$ferritecore$cacheStateTail(arg0: $CallbackInfo): void;
-        getBlockHolder(): $Holder<$Block>;
-        /**
-         * @deprecated
-         */
-        isSolid(): boolean;
-        isValidSpawn(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $EntityType_<never>): boolean;
-        propagatesSkylightDown(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
-        getLightBlock(arg0: $BlockGetter, arg1: $BlockPos_): number;
-        getFaceOcclusionShape(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): $VoxelShape;
         updateIndirectNeighbourShapes(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: number, arg3: number): void;
         updateIndirectNeighbourShapes(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: number): void;
         randomTick(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $RandomSource): void;
@@ -416,14 +393,37 @@ declare module "@package/net/minecraft/world/level/block/state" {
         getMenuProvider(arg0: $Level_, arg1: $BlockPos_): $MenuProvider;
         getTicker<T extends $BlockEntity>(arg0: $Level_, arg1: $BlockEntityType_<T>): $BlockEntityTicker<T>;
         onProjectileHit(arg0: $Level_, arg1: $BlockState_, arg2: $BlockHitResult, arg3: $Projectile): void;
-        isFaceSturdy(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_, arg3: $SupportType_): boolean;
         isFaceSturdy(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
+        isFaceSturdy(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_, arg3: $SupportType_): boolean;
         shouldSpawnTerrainParticles(): boolean;
         isCacheInvalid(): boolean;
         setDestroySpeed(arg0: number): void;
         setRequiresTool(arg0: boolean): void;
         setLightEmission(arg0: number): void;
-        getKey(): $ResourceKey<$Block>;
+        entityInside(arg0: $Level_, arg1: $BlockPos_, arg2: $Entity): void;
+        isCollisionShapeFullBlock(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        canSurvive(arg0: $LevelReader, arg1: $BlockPos_): boolean;
+        /**
+         * @deprecated
+         */
+        getSoundType(): $SoundType;
+        getPistonPushReaction(): $PushReaction;
+        onExplosionHit(arg0: $Level_, arg1: $BlockPos_, arg2: $Explosion, arg3: $BiConsumer_<$ItemStack, $BlockPos>): void;
+        isSuffocating(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        /**
+         * @deprecated
+         */
+        getLightEmission(): number;
+        /**
+         * @deprecated
+         */
+        ignitedByLava(): boolean;
+        getRenderShape(): $RenderShape;
+        isAir(): boolean;
+        attack(arg0: $Level_, arg1: $BlockPos_, arg2: $Player): void;
+        useItemOn(arg0: $ItemStack_, arg1: $Level_, arg2: $Player, arg3: $InteractionHand_, arg4: $BlockHitResult): $ItemInteractionResult;
+        hasBlockEntity(): boolean;
+        instrument(): $NoteBlockInstrument;
         getId(): string;
         randomTickOverride(state: $BlockState_, level: $ServerLevel, pos: $BlockPos_, random: $RandomSource): boolean;
         asHolder(): $Holder<$Block>;
@@ -432,12 +432,13 @@ declare module "@package/net/minecraft/world/level/block/state" {
         replaceThisWith(cx: $RecipeScriptContext, _with: $Object): $Object;
         getWebIconURL(size: number): $RelativeURL;
         toString(): string;
-        specialEquals(o: $Object, shallow: boolean): boolean;
+        getKey(): $ResourceKey<$Block>;
         getIdLocation(): $ResourceLocation;
         getMod(): string;
         getTagKeys(): $List<$TagKey<$Block>>;
         getTags(): $List<$ResourceLocation>;
         hasTag(tag: $ResourceLocation_): boolean;
+        specialEquals(o: $Object, shallow: boolean): boolean;
         static PROPERTIES_TAG: string;
         owner: $Block;
         cache: $BlockBehaviour$BlockStateBase$Cache;
@@ -447,20 +448,20 @@ declare module "@package/net/minecraft/world/level/block/state" {
         constructor(arg0: $Block_, arg1: $Reference2ObjectArrayMap<$Property<never>, $Comparable_<never>>, arg2: $MapCodec_<$BlockState_>);
         get block(): $Block;
         get fluidState(): $FluidState;
-        get renderShape(): $RenderShape;
-        get air(): boolean;
-        get soundType(): $SoundType;
-        get pistonPushReaction(): $PushReaction;
-        get signalSource(): boolean;
         get randomlyTicking(): boolean;
         get blockHolder(): $Holder<$Block>;
         get solid(): boolean;
+        get signalSource(): boolean;
         get cacheInvalid(): boolean;
         set requiresTool(value: boolean);
-        get key(): $ResourceKey<$Block>;
+        get soundType(): $SoundType;
+        get pistonPushReaction(): $PushReaction;
+        get renderShape(): $RenderShape;
+        get air(): boolean;
         get id(): string;
         get registryId(): $ResourceKey<$Registry<$Block>>;
         get registry(): $Registry<$Block>;
+        get key(): $ResourceKey<$Block>;
         get idLocation(): $ResourceLocation;
         get mod(): string;
         get tagKeys(): $List<$TagKey<$Block>>;
@@ -488,13 +489,15 @@ declare module "@package/net/minecraft/world/level/block/state" {
         speedFactor(arg0: number): $BlockBehaviour$Properties;
         jumpFactor(arg0: number): $BlockBehaviour$Properties;
         dynamicShape(): $BlockBehaviour$Properties;
-        lightLevel(arg0: $ToIntFunction_<$BlockState>): $BlockBehaviour$Properties;
-        static ofFullCopy(arg0: $BlockBehaviour): $BlockBehaviour$Properties;
-        noLootTable(): $BlockBehaviour$Properties;
         /**
          * @deprecated
          */
         static ofLegacyCopy(arg0: $BlockBehaviour): $BlockBehaviour$Properties;
+        offsetType(arg0: $BlockBehaviour$OffsetType_): $BlockBehaviour$Properties;
+        noTerrainParticles(): $BlockBehaviour$Properties;
+        static ofFullCopy(arg0: $BlockBehaviour): $BlockBehaviour$Properties;
+        noLootTable(): $BlockBehaviour$Properties;
+        lightLevel(arg0: $ToIntFunction_<$BlockState>): $BlockBehaviour$Properties;
         noCollission(): $BlockBehaviour$Properties;
         noOcclusion(): $BlockBehaviour$Properties;
         instabreak(): $BlockBehaviour$Properties;
@@ -504,19 +507,10 @@ declare module "@package/net/minecraft/world/level/block/state" {
          */
         dropsLike(arg0: $Block_): $BlockBehaviour$Properties;
         lootFrom(arg0: $Supplier_<$Block>): $BlockBehaviour$Properties;
-        offsetType(arg0: $BlockBehaviour$OffsetType_): $BlockBehaviour$Properties;
-        noTerrainParticles(): $BlockBehaviour$Properties;
         static of(): $BlockBehaviour$Properties;
-        requiredFeatures(...arg0: $FeatureFlag[]): $BlockBehaviour$Properties;
-        sound(arg0: $SoundType_): $BlockBehaviour$Properties;
-        air(): $BlockBehaviour$Properties;
-        instrument(arg0: $NoteBlockInstrument_): $BlockBehaviour$Properties;
-        strength(arg0: number): $BlockBehaviour$Properties;
-        strength(arg0: number, arg1: number): $BlockBehaviour$Properties;
-        requiresCorrectToolForDrops(): $BlockBehaviour$Properties;
         friction(arg0: number): $BlockBehaviour$Properties;
-        isSuffocating(arg0: $BlockBehaviour$StatePredicate_): $BlockBehaviour$Properties;
-        ignitedByLava(): $BlockBehaviour$Properties;
+        requiresCorrectToolForDrops(): $BlockBehaviour$Properties;
+        requiredFeatures(...arg0: $FeatureFlag[]): $BlockBehaviour$Properties;
         liquid(): $BlockBehaviour$Properties;
         pushReaction(arg0: $PushReaction_): $BlockBehaviour$Properties;
         mapColor(arg0: $MapColor): $BlockBehaviour$Properties;
@@ -534,15 +528,22 @@ declare module "@package/net/minecraft/world/level/block/state" {
          */
         forceSolidOff(): $BlockBehaviour$Properties;
         isValidSpawn(arg0: $BlockBehaviour$StateArgumentPredicate_<$EntityType<never>>): $BlockBehaviour$Properties;
+        isSuffocating(arg0: $BlockBehaviour$StatePredicate_): $BlockBehaviour$Properties;
+        ignitedByLava(): $BlockBehaviour$Properties;
+        sound(arg0: $SoundType_): $BlockBehaviour$Properties;
+        air(): $BlockBehaviour$Properties;
+        instrument(arg0: $NoteBlockInstrument_): $BlockBehaviour$Properties;
+        strength(arg0: number, arg1: number): $BlockBehaviour$Properties;
+        strength(arg0: number): $BlockBehaviour$Properties;
         getHasCollision(): boolean;
         isRequiresCorrectToolForDrops(): boolean;
         getLootTableSupplier(): $Supplier<$ResourceKey<$LootTable>>;
         setLootTableSupplier(supplier: $Supplier_<$ResourceKey<$LootTable>>): void;
         getDestroyTime(): number;
+        getIsAir(): boolean;
         getIsRandomlyTicking(): boolean;
         getDynamicShape(): boolean;
         getCanOcclude(): boolean;
-        getIsAir(): boolean;
         getIsValidSpawn(): $BlockBehaviour$StateArgumentPredicate<$EntityType<never>>;
         getIsRedstoneConductor(): $BlockBehaviour$StatePredicate;
         getIsSuffocating(): $BlockBehaviour$StatePredicate;
@@ -574,15 +575,15 @@ declare module "@package/net/minecraft/world/level/block/state" {
         setForceSolidOff(arg0: boolean): void;
         setForceSolidOn(arg0: boolean): void;
         setReplaceable(arg0: boolean): void;
-        getLiquid(): boolean;
-        getSoundType(): $SoundType;
-        getFriction(): number;
         getLuminance(): $ToIntFunction<$BlockState>;
-        getJumpFactor(): number;
-        getSpeedFactor(): number;
-        getExplosionResistance(): number;
+        getFriction(): number;
         getMapColor(): $Function<$BlockState, $MapColor>;
         getDrops(): $ResourceKey<$LootTable>;
+        getJumpFactor(): number;
+        getSpeedFactor(): number;
+        getSoundType(): $SoundType;
+        getExplosionResistance(): number;
+        getLiquid(): boolean;
         offsetFunction: $BlockBehaviour$OffsetFunction;
         canOcclude: boolean;
         lightEmission: $ToIntFunction<$BlockState>;
@@ -605,7 +606,7 @@ declare module "@package/net/minecraft/world/level/block/state" {
      * Values that may be interpreted as {@link $BlockBehaviour$StateArgumentPredicate}.
      */
     export type $BlockBehaviour$StateArgumentPredicate_<A> = ((arg0: $BlockState, arg1: $BlockGetter, arg2: $BlockPos, arg3: A) => boolean);
-    export class $StateHolder<O, S> implements $StateHolderAccessor<any, any>, $FastMapStateHolder<any> {
+    export class $StateHolder<O, S> implements $StateHolderAccessor<any, any>, $FastMapStateHolder<any>, $IState<any> {
         getValues(): $Map<$Property<never>, $Comparable<never>>;
         getValue<T extends $Comparable<T>>(arg0: $Property<T>): T;
         getProperties(): $Collection<$Property<never>>;
@@ -613,10 +614,9 @@ declare module "@package/net/minecraft/world/level/block/state" {
         hasProperty<T extends $Comparable<T>>(arg0: $Property<T>): boolean;
         static codec<O, S extends $StateHolder<O, S>>(arg0: $Codec<O>, arg1: $Function_<O, S>): $Codec<S>;
         cycle<T extends $Comparable<T>>(arg0: $Property<T>): $Object;
-        replacePropertyMap(arg0: $Reference2ObjectMap<any, any>): void;
-        static findNextInCollection<T>(arg0: $Collection_<T>, arg1: T): T;
+        getNeighborTable(): $Table<any, any, any>;
         getOptionalValue<T extends $Comparable<T>>(arg0: $Property<T>): (T) | undefined;
-        redirect$hde000$ferritecore$getNeighborFromFastMap(arg0: $Table<any, any, any>, arg1: $Object, arg2: $Object): $Object;
+        redirect$ibc000$ferritecore$getNeighborFromFastMap(arg0: $Table<any, any, any>, arg1: $Object, arg2: $Object): $Object;
         trySetValue<T extends $Comparable<T>, V extends T>(arg0: $Property<T>, arg1: V): $Object;
         populateNeighbours(arg0: $Map_<any, any>): void;
         getStateMap(): $FastMap<any>;
@@ -625,8 +625,10 @@ declare module "@package/net/minecraft/world/level/block/state" {
         setStateMap(arg0: $FastMap<any>): void;
         setStateIndex(arg0: number): void;
         setNeighborTable(arg0: $Table<any, any, any>): void;
-        getNeighborTable(): $Table<any, any, any>;
+        static findNextInCollection<T>(arg0: $Collection_<T>, arg1: T): T;
+        replacePropertyMap(arg0: $Reference2ObjectMap<any, any>): void;
         getOwner(): $Object;
+        getCodec(): $MapCodec<$Object>;
         static PROPERTIES_TAG: string;
         owner: $Object;
         static PROPERTY_ENTRY_TO_STRING_FUNCTION: $Function<$Map$Entry<$Property<never>, $Comparable<never>>, string>;

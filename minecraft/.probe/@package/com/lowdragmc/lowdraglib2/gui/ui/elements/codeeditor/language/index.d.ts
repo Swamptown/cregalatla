@@ -22,16 +22,16 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor/la
         constructor();
     }
     export class $Token extends $Record {
-        text(): string;
         type(): $TokenType;
         endIndex(): number;
         startIndex(): number;
+        text(): string;
         constructor(text: string, type: $TokenType, startIndex: number, endIndex: number);
     }
     /**
      * Values that may be interpreted as {@link $Token}.
      */
-    export type $Token_ = { startIndex?: number, endIndex?: number, text?: string, type?: $TokenType,  } | [startIndex?: number, endIndex?: number, text?: string, type?: $TokenType, ];
+    export type $Token_ = { text?: string, endIndex?: number, startIndex?: number, type?: $TokenType,  } | [text?: string, endIndex?: number, startIndex?: number, type?: $TokenType, ];
     export class $LanguageDefinition implements $ILanguageDefinition {
         compileTokenPattern(): $LanguageDefinition;
         getTokenPattern(): $Pattern;
@@ -58,9 +58,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor/la
         getPattern(): string;
         test(arg0: $Matcher): boolean;
         setPattern(arg0: string): $TokenType;
+        or(arg0: $Predicate_<$Matcher>): $Predicate<$Matcher>;
         negate(): $Predicate<$Matcher>;
         and(arg0: $Predicate_<$Matcher>): $Predicate<$Matcher>;
-        or(arg0: $Predicate_<$Matcher>): $Predicate<$Matcher>;
         name: string;
         constructor(arg0: string);
     }

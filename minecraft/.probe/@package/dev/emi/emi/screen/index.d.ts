@@ -29,17 +29,17 @@ declare module "@package/dev/emi/emi/screen" {
         constructor(this$0: $ConfigScreen);
     }
     export class $EmiScreenManager$ScreenSpace implements $GlobalMixin {
-        containsNotExcluded(x: number, y: number): boolean;
         getRawOffsetFromMouse(mouseX: number, mouseY: number): number;
         getRawX(off: number): number;
         getRawY(off: number): number;
         getClosestEdge(x: number, y: number): number;
         getEdgeX(off: number): number;
         getEdgeY(off: number): number;
+        containsNotExcluded(x: number, y: number): boolean;
         getPage(page: number): $List<$EmiIngredient>;
+        getRawOffset(x: number, y: number): number;
         getY(x: number, y: number): number;
         getWidth(y: number): number;
-        getRawOffset(x: number, y: number): number;
         getStacks(): $List<$EmiIngredient>;
         contains(x: number, y: number): boolean;
         getType(): $SidebarType;
@@ -59,8 +59,8 @@ declare module "@package/dev/emi/emi/screen" {
         get type(): $SidebarType;
     }
     export class $StackBatcher implements $GlobalMixin {
-        repopulate(): void;
         isPopulated(): boolean;
+        repopulate(): void;
         begin(x: number, y: number, z: number): void;
         static isEnabled(): boolean;
         render(batchable: $StackBatcher$Batchable, draw: $GuiGraphics, x: number, y: number, delta: number): void;
@@ -76,7 +76,7 @@ declare module "@package/dev/emi/emi/screen" {
     export class $ConfigScreen extends $Screen implements $GlobalMixin {
         setActiveBind(bind: $EmiBind, offset: number): void;
         static getFieldTooltip(field: $Field): $List<$ClientTooltipComponent>;
-        modify$bbb000$emixx$init(widget: $GuiEventListener): $GuiEventListener;
+        modify$bck000$emixx$init(widget: $GuiEventListener): $GuiEventListener;
         objectMutator<T>(field: $Field): $ConfigScreen$Mutator<T>;
         updateChanges(): void;
         jump(jump: string): void;

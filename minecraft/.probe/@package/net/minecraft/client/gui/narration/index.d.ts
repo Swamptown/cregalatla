@@ -22,9 +22,9 @@ declare module "@package/net/minecraft/client/gui/narration" {
         nest(): $NarrationElementOutput;
     }
     export class $NarratableEntry$NarrationPriority extends $Enum<$NarratableEntry$NarrationPriority> {
-        isTerminal(): boolean;
         static values(): $NarratableEntry$NarrationPriority[];
         static valueOf(arg0: string): $NarratableEntry$NarrationPriority;
+        isTerminal(): boolean;
         static HOVERED: $NarratableEntry$NarrationPriority;
         static NONE: $NarratableEntry$NarrationPriority;
         static FOCUSED: $NarratableEntry$NarrationPriority;

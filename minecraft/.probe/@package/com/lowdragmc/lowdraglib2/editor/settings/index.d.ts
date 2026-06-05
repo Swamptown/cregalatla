@@ -12,12 +12,12 @@ import { $IConfigurable } from "@package/com/lowdragmc/lowdraglib2/configurator"
 
 declare module "@package/com/lowdragmc/lowdraglib2/editor/settings" {
     export class $EditorSettings implements $IPersistedSerializable {
+        getSettingsFile(): $File;
         unregisterSettings(arg0: $ResourceLocation_): void;
         setSettingsFile(arg0: $File_): $EditorSettings;
-        getSettingsFile(): $File;
+        registerSettings<T extends $Settings>(arg0: T, arg1: $Codec<T>): void;
         loadAllSettingsFromFile(): void;
         applyCurrentSettings(): void;
-        registerSettings<T extends $Settings>(arg0: T, arg1: $Codec<T>): void;
         createSettingsPanel(): $UIElement;
         saveAllSettingsToFile(): void;
         restoreSettings(): void;

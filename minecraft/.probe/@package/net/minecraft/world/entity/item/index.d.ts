@@ -11,7 +11,7 @@ import { $FallingBlockEntityAccessor } from "@package/com/simibubi/create/founda
 import { $UUID, $UUID_ } from "@package/java/util";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $SynchedEntityData, $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
-import { $HolderLookup$Provider, $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
+import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $AtomicInteger } from "@package/java/util/concurrent/atomic";
 import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
@@ -25,8 +25,8 @@ import { $ChangeSubscriber$CountChangeSubscriber, $ChangeSubscriber, $ChangePubl
 
 declare module "@package/net/minecraft/world/entity/item" {
     export class $ItemEntity extends $Entity implements $TraceableEntity, $ItemEntityAccessor, $ChangePublisher<any>, $ChangeSubscriber$CountChangeSubscriber<any>, $ItemEntityKJS {
-        setItem(arg0: $ItemStack_): void;
-        handler$dgd000$item_obliterator$discardItemEntities(arg0: $CompoundTag_, arg1: $CallbackInfo): void;
+        static areMergable(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
+        handler$dkl000$item_obliterator$discardItemEntities(arg0: $CompoundTag_, arg1: $CallbackInfo): void;
         setNoPickUpDelay(): void;
         setNeverPickUp(): void;
         hasPickUpDelay(): boolean;
@@ -35,7 +35,7 @@ declare module "@package/net/minecraft/world/entity/item" {
         makeFakeItem(): void;
         getSpin(arg0: number): number;
         lithium$unsubscribe(arg0: $ChangeSubscriber<any>): number;
-        static areMergable(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
+        setItem(arg0: $ItemStack_): void;
         getItem(): $ItemStack;
         static merge(arg0: $ItemStack_, arg1: $ItemStack_, arg2: number): $ItemStack;
         copy(): $ItemEntity;
@@ -43,12 +43,12 @@ declare module "@package/net/minecraft/world/entity/item" {
         setTarget(arg0: $UUID_): void;
         getOwner(): $Entity;
         getAge(): number;
-        setPickUpDelay(arg0: number): void;
-        setThrower(arg0: $Entity): void;
         lithium$notify(arg0: $ItemStack_, arg1: number): void;
         lithium$notifyCount(arg0: $ItemStack_, arg1: number, arg2: number): void;
         lithium$forceUnsubscribe(arg0: $ItemStack_, arg1: number): void;
         lithium$subscribe(arg0: $ChangeSubscriber<any>, arg1: number): void;
+        setPickUpDelay(arg0: number): void;
+        setThrower(arg0: $Entity): void;
         setDefaultPickUpDelay(): void;
         lithium$isSubscribedWithData(arg0: $ChangeSubscriber<$ItemStack_>, arg1: number): boolean;
         lithium$unsubscribeWithData(arg0: $ChangeSubscriber<$Object>, arg1: number): void;
@@ -61,7 +61,6 @@ declare module "@package/net/minecraft/world/entity/item" {
         getTicksUntilDespawn(): number;
         setTicksUntilDespawn(ticks: number): void;
         lithium$getOwner(): $UUID;
-        serializeNBT(arg0: $HolderLookup$Provider): $Object;
         firstTick: boolean;
         lifespan: number;
         wasEyeInWater: boolean;
@@ -113,6 +112,7 @@ declare module "@package/net/minecraft/world/entity/item" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;
@@ -146,10 +146,9 @@ declare module "@package/net/minecraft/world/entity/item" {
         getFuse(): number;
         setFuse(arg0: number): void;
         getOwner(): $LivingEntity;
-        getBlockState(): $BlockState;
         setBlockState(arg0: $BlockState_): void;
         explode(): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        getBlockState(): $BlockState;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -197,6 +196,7 @@ declare module "@package/net/minecraft/world/entity/item" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static TAG_FUSE: string;
         static DEFAULT_BB_HEIGHT: number;
@@ -225,16 +225,15 @@ declare module "@package/net/minecraft/world/entity/item" {
     }
     export class $FallingBlockEntity extends $Entity implements $FallingBlockEntityAccessor {
         static fall(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $FallingBlockEntity;
-        callOnBrokenAfterFall(arg0: $Block_, arg1: $BlockPos_): void;
-        setBlockState(state: $BlockState_): void;
-        static callInit$create_$md$4ca6b6$0(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $BlockState_): $FallingBlockEntity;
         setStartPos(arg0: $BlockPos_): void;
         getStartPos(): $BlockPos;
-        handler$eib000$architectury$handleLand(ci: $CallbackInfo, block: $Block_, blockPos2: $BlockPos_, bl: boolean, bl2: boolean, d: number, blockState: $BlockState_): void;
+        handler$fap000$architectury$handleLand(ci: $CallbackInfo, block: $Block_, blockPos2: $BlockPos_, bl: boolean, bl2: boolean, d: number, blockState: $BlockState_): void;
+        callOnBrokenAfterFall(arg0: $Block_, arg1: $BlockPos_): void;
+        setBlockState(state: $BlockState_): void;
+        static callInit$create_$md$3b3139$0(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $BlockState_): $FallingBlockEntity;
         disableDrop(): void;
         setHurtsEntities(arg0: number, arg1: number): void;
         getBlockState(): $BlockState;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         blockState: $BlockState;
         cancelDrop: boolean;
@@ -287,6 +286,7 @@ declare module "@package/net/minecraft/world/entity/item" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;

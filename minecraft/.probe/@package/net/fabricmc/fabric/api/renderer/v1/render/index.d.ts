@@ -21,10 +21,6 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/render" {
     export class $RenderContext {
     }
     export interface $RenderContext {
-        hasTransform(): boolean;
-        getEmitter(): $QuadEmitter;
-        getRenderType(): $RenderType;
-        getModelData(): $ModelData;
         isFaceCulled(arg0: $Direction_): boolean;
         itemTransformationMode(): $ItemDisplayContext;
         /**
@@ -45,9 +41,13 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/render" {
         popModelData(): void;
         usesAmbientOcclusion(): $TriState;
         setUsesAmbientOcclusion(arg0: $TriState_): void;
+        hasTransform(): boolean;
+        getEmitter(): $QuadEmitter;
+        getModelData(): $ModelData;
+        getRenderType(): $RenderType;
         get emitter(): $QuadEmitter;
-        get renderType(): $RenderType;
         get modelData(): $ModelData;
+        get renderType(): $RenderType;
     }
     /**
      * @deprecated

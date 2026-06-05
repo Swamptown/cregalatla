@@ -4,9 +4,9 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/net/neoforged/neoforge/network/connection" {
     export class $ConnectionType extends $Enum<$ConnectionType> {
-        isOther(): boolean;
         static values(): $ConnectionType[];
         static valueOf(arg0: string): $ConnectionType;
+        isOther(): boolean;
         isNeoForge(): boolean;
         static OTHER: $ConnectionType;
         static NEOFORGE: $ConnectionType;

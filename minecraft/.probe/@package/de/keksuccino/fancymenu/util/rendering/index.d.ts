@@ -5,15 +5,15 @@ export * as ui from "@package/de/keksuccino/fancymenu/util/rendering/ui";
 
 declare module "@package/de/keksuccino/fancymenu/util/rendering" {
     export class $AspectRatio {
-        getInputHeight(): number;
         getInputWidth(): number;
+        getInputHeight(): number;
+        getAspectRatioSizeByMaximumSize(arg0: number, arg1: number): number[];
         getAspectRatioHeight(arg0: number): number;
         getAspectRatioWidth(arg0: number): number;
-        getAspectRatioSizeByMaximumSize(arg0: number, arg1: number): number[];
         getAspectRatioSizeByMinimumSize(arg0: number, arg1: number): number[];
         constructor(arg0: number, arg1: number);
-        get inputHeight(): number;
         get inputWidth(): number;
+        get inputHeight(): number;
     }
     export class $DrawableColor {
         getAsFloats(): $DrawableColor$FloatColor;
@@ -50,5 +50,5 @@ declare module "@package/de/keksuccino/fancymenu/util/rendering" {
     /**
      * Values that may be interpreted as {@link $DrawableColor$FloatColor}.
      */
-    export type $DrawableColor$FloatColor_ = { red?: number, alpha?: number, green?: number, blue?: number,  } | [red?: number, alpha?: number, green?: number, blue?: number, ];
+    export type $DrawableColor$FloatColor_ = { alpha?: number, red?: number, blue?: number, green?: number,  } | [alpha?: number, red?: number, blue?: number, green?: number, ];
 }

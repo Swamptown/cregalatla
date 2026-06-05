@@ -1,14 +1,14 @@
 import { $GoalSelector, $Goal } from "@package/net/minecraft/world/entity/ai/goal";
 import { $MoveControl, $LookControl, $JumpControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
-import { $EntityType_, $Pose, $PortalProcessor, $EntityType, $Entity, $EntityDimensions, $Entity$RemovalReason, $WalkAnimationState } from "@package/net/minecraft/world/entity";
+import { $EntityType_, $Pose, $PortalProcessor, $EntityType, $Entity, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $SavedData, $SavedData$Factory } from "@package/net/minecraft/world/level/saveddata";
 import { $UUID, $Stack, $Set } from "@package/java/util";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $Predicate, $Supplier } from "@package/java/util/function";
 import { $InteractionHand, $Difficulty_ } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos, $Holder_, $BlockPos_, $HolderGetter } from "@package/net/minecraft/core";
+import { $BlockPos, $Holder_, $BlockPos_, $HolderGetter } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerLevel, $ServerPlayer } from "@package/net/minecraft/server/level";
 import { $SoundEvent } from "@package/net/minecraft/sounds";
@@ -40,6 +40,7 @@ declare module "@package/net/minecraft/world/entity/raid" {
     export class $Raider$ObtainRaidLeaderBannerGoal<T extends $Raider> extends $Goal {
     }
     export class $Raid {
+        hasFirstWaveSpawned(): boolean;
         isVictory(): boolean;
         isBetweenWaves(): boolean;
         getTotalRaidersAlive(): number;
@@ -48,7 +49,7 @@ declare module "@package/net/minecraft/world/entity/raid" {
         setRaidOmenLevel(arg0: number): void;
         absorbRaidOmen(arg0: $ServerPlayer): boolean;
         getHealthOfLivingRaiders(): number;
-        hasFirstWaveSpawned(): boolean;
+        tick(): void;
         static getLeaderBannerInstance(arg0: $HolderGetter<$BannerPattern_>): $ItemStack;
         getRaidOmenLevel(): number;
         getMaxRaidOmenLevel(): number;
@@ -66,7 +67,6 @@ declare module "@package/net/minecraft/world/entity/raid" {
         getNumGroups(arg0: $Difficulty_): number;
         getEnchantOdds(): number;
         getLevel(): $Level;
-        tick(): void;
         stop(): void;
         getId(): number;
         save(arg0: $CompoundTag_): $CompoundTag;
@@ -81,8 +81,8 @@ declare module "@package/net/minecraft/world/entity/raid" {
         static VALID_RAID_RADIUS_SQR: number;
         static MAX_NO_ACTION_TIME: number;
         static DEFAULT_MAX_RAID_OMEN_LEVEL: number;
-        constructor(arg0: $ServerLevel, arg1: $CompoundTag_);
         constructor(arg0: number, arg1: $ServerLevel, arg2: $BlockPos_);
+        constructor(arg0: $ServerLevel, arg1: $CompoundTag_);
         get victory(): boolean;
         get betweenWaves(): boolean;
         get totalRaidersAlive(): number;
@@ -134,11 +134,11 @@ declare module "@package/net/minecraft/world/entity/raid" {
     export class $Raider$HoldGroundAttackGoal extends $Goal {
     }
     export class $Raids extends $SavedData {
+        tick(): void;
+        getNearbyRaid(arg0: $BlockPos_, arg1: number): $Raid;
         createOrExtendRaid(arg0: $ServerPlayer, arg1: $BlockPos_): $Raid;
         static getFileId(arg0: $Holder_<$DimensionType>): string;
-        getNearbyRaid(arg0: $BlockPos_, arg1: number): $Raid;
         static canJoinRaid(arg0: $Raider, arg1: $Raid): boolean;
-        tick(): void;
         get(arg0: number): $Raid;
         static load(arg0: $ServerLevel, arg1: $CompoundTag_): $Raids;
         static factory(arg0: $ServerLevel): $SavedData$Factory<$Raids>;
@@ -165,7 +165,6 @@ declare module "@package/net/minecraft/world/entity/raid" {
         static access$200(arg0: $Raider): boolean;
         static access$300(arg0: $Raider): $RandomSource;
         static access$400(arg0: $Raider): $RandomSource;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -196,6 +195,7 @@ declare module "@package/net/minecraft/world/entity/raid" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -220,6 +220,7 @@ declare module "@package/net/minecraft/world/entity/raid" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static IS_CELEBRATING: $EntityDataAccessor<boolean>;
@@ -244,6 +245,7 @@ declare module "@package/net/minecraft/world/entity/raid" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

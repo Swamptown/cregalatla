@@ -2,7 +2,7 @@ import { $JsonDeserializationContext_, $JsonDeserializer, $JsonSerializationCont
 import { $RegistryBuilder } from "@package/net/neoforged/neoforge/registries";
 import { $RegistryDataAccessor } from "@package/foundry/veil/mixin/registry/accessor";
 import { $DelegatingOpsAccessor } from "@package/com/lowdragmc/lowdraglib2/core/mixins/accessor";
-import { $Decoder, $Decoder$Simple, $Codec$ResultFunction, $Encoder_, $DataResult, $DynamicOps, $MapLike, $ListBuilder, $Codec, $Decoder$Boxed, $Lifecycle, $Dynamic, $RecordBuilder, $MapCodec, $Encoder, $Decoder$Terminal, $Decoder_ } from "@package/com/mojang/serialization";
+import { $Decoder, $Decoder$Simple, $Codec$ResultFunction, $Encoder_, $DataResult, $MapEncoder, $DynamicOps, $MapLike, $ListBuilder, $Codec, $Decoder$Boxed, $Lifecycle, $Dynamic, $RecordBuilder, $MapCodec, $Encoder, $Decoder$Terminal, $Decoder_ } from "@package/com/mojang/serialization";
 import { $Pair } from "@package/com/mojang/datafixers/util";
 import { $StringReader } from "@package/com/mojang/brigadier";
 import { $ResourceManager, $Resource, $ResourceProvider_ } from "@package/net/minecraft/server/packs/resources";
@@ -30,20 +30,20 @@ declare module "@package/net/minecraft/resources" {
         getPath(): string;
         withPrefix(arg0: string): $ResourceLocation;
         withSuffix(arg0: string): $ResourceLocation;
-        static fromNamespaceAndPath(arg0: string, arg1: string): $ResourceLocation;
         static tryParse(arg0: string): $ResourceLocation;
+        static fromNamespaceAndPath(arg0: string, arg1: string): $ResourceLocation;
         static withDefaultNamespace(arg0: string): $ResourceLocation;
         static isValidPath(arg0: string): boolean;
         static isValidNamespace(arg0: string): boolean;
         static bySeparator(arg0: string, arg1: string): $ResourceLocation;
         static tryBySeparator(arg0: string, arg1: string): $ResourceLocation;
         static tryBuild(arg0: string, arg1: string): $ResourceLocation;
-        withPath(arg0: $UnaryOperator_<string>): $ResourceLocation;
         withPath(arg0: string): $ResourceLocation;
+        withPath(arg0: $UnaryOperator_<string>): $ResourceLocation;
         compareNamespaced(arg0: $ResourceLocation_): number;
         toDebugFileName(): string;
-        toLanguageKey(arg0: string, arg1: string): string;
         toLanguageKey(): string;
+        toLanguageKey(arg0: string, arg1: string): string;
         toLanguageKey(arg0: string): string;
         toShortLanguageKey(): string;
         static isAllowedInResourceLocation(arg0: string): boolean;
@@ -89,35 +89,33 @@ declare module "@package/net/minecraft/resources" {
     /**
      * Values that may be interpreted as {@link $RegistryDataLoader$RegistryData}.
      */
-    export type $RegistryDataLoader$RegistryData_<T> = { key?: $ResourceKey_<$Registry<any>>, requiredNonEmpty?: boolean, registryBuilderConsumer?: $Consumer_<$RegistryBuilder<any>>, elementCodec?: $Codec<any>,  } | [key?: $ResourceKey_<$Registry<any>>, requiredNonEmpty?: boolean, registryBuilderConsumer?: $Consumer_<$RegistryBuilder<any>>, elementCodec?: $Codec<any>, ];
+    export type $RegistryDataLoader$RegistryData_<T> = { registryBuilderConsumer?: $Consumer_<$RegistryBuilder<any>>, requiredNonEmpty?: boolean, key?: $ResourceKey_<$Registry<any>>, elementCodec?: $Codec<any>,  } | [registryBuilderConsumer?: $Consumer_<$RegistryBuilder<any>>, requiredNonEmpty?: boolean, key?: $ResourceKey_<$Registry<any>>, elementCodec?: $Codec<any>, ];
     export class $HolderSetCodec<E> implements $Codec<$HolderSet<E>> {
         decode<T>(arg0: $DynamicOps<T>, arg1: T): $DataResult<$Pair<$HolderSet<E>, T>>;
         encode<T>(arg0: $HolderSet_<E>, arg1: $DynamicOps<T>, arg2: T): $DataResult<T>;
         static create<E>(arg0: $ResourceKey_<$Registry<E>>, arg1: $Codec<$Holder_<E>>, arg2: boolean): $Codec<$HolderSet<E>>;
+        orElseGet(arg0: $Supplier_<$HolderSet<E>>): $Codec<$HolderSet<E>>;
+        orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<$HolderSet<E>>): $Codec<$HolderSet<E>>;
+        orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<$HolderSet<E>>): $Codec<$HolderSet<E>>;
         dispatch<E>(arg0: $Function_<E, $HolderSet<E>>, arg1: $Function_<$HolderSet<E>, $MapCodec<E>>): $Codec<E>;
         dispatch<E>(arg0: string, arg1: $Function_<E, $HolderSet<E>>, arg2: $Function_<$HolderSet<E>, $MapCodec<E>>): $Codec<E>;
         validate(arg0: $Function_<$HolderSet<E>, $DataResult<$HolderSet<E>>>): $Codec<$HolderSet<E>>;
-        orElse(arg0: $HolderSet_<E>): $Codec<$HolderSet<E>>;
-        orElse(arg0: $Consumer_<string>, arg1: $HolderSet_<E>): $Codec<$HolderSet<E>>;
         orElse(arg0: $UnaryOperator_<string>, arg1: $HolderSet_<E>): $Codec<$HolderSet<E>>;
-        orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<$HolderSet<E>>): $Codec<$HolderSet<E>>;
-        orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<$HolderSet<E>>): $Codec<$HolderSet<E>>;
-        orElseGet(arg0: $Supplier_<$HolderSet<E>>): $Codec<$HolderSet<E>>;
+        orElse(arg0: $Consumer_<string>, arg1: $HolderSet_<E>): $Codec<$HolderSet<E>>;
+        orElse(arg0: $HolderSet_<E>): $Codec<$HolderSet<E>>;
         comapFlatMap<S>(arg0: $Function_<$HolderSet<E>, $DataResult<S>>, arg1: $Function_<S, $HolderSet<E>>): $Codec<S>;
-        optionalFieldOf(arg0: string, arg1: $HolderSet_<E>, arg2: $Lifecycle): $MapCodec<$HolderSet<E>>;
         optionalFieldOf(arg0: string): $MapCodec<($HolderSet<E>) | undefined>;
         optionalFieldOf(arg0: string, arg1: $HolderSet_<E>): $MapCodec<$HolderSet<E>>;
+        optionalFieldOf(arg0: string, arg1: $HolderSet_<E>, arg2: $Lifecycle): $MapCodec<$HolderSet<E>>;
         optionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: $HolderSet_<E>, arg3: $Lifecycle): $MapCodec<$HolderSet<E>>;
         listOf(arg0: number, arg1: number): $Codec<$List<$HolderSet<E>>>;
         listOf(): $Codec<$List<$HolderSet<E>>>;
         xmap<S>(arg0: $Function_<$HolderSet<E>, S>, arg1: $Function_<S, $HolderSet<E>>): $Codec<S>;
         stable(): $Codec<$HolderSet<E>>;
-        withLifecycle(arg0: $Lifecycle): $Codec<$HolderSet<E>>;
         deprecated(arg0: number): $Codec<$HolderSet<E>>;
         flatXmap<S>(arg0: $Function_<$HolderSet<E>, $DataResult<S>>, arg1: $Function_<S, $DataResult<$HolderSet<E>>>): $Codec<S>;
-        fieldOf(arg0: string): $MapCodec<$HolderSet<E>>;
-        lenientOptionalFieldOf(arg0: string, arg1: $HolderSet_<E>, arg2: $Lifecycle): $MapCodec<$HolderSet<E>>;
         lenientOptionalFieldOf(arg0: string): $MapCodec<($HolderSet<E>) | undefined>;
+        lenientOptionalFieldOf(arg0: string, arg1: $HolderSet_<E>, arg2: $Lifecycle): $MapCodec<$HolderSet<E>>;
         lenientOptionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: $HolderSet_<E>, arg3: $Lifecycle): $MapCodec<$HolderSet<E>>;
         lenientOptionalFieldOf(arg0: string, arg1: $HolderSet_<E>): $MapCodec<$HolderSet<E>>;
         mapResult(arg0: $Codec$ResultFunction<$HolderSet_<E>>): $Codec<$HolderSet<E>>;
@@ -139,16 +137,18 @@ declare module "@package/net/minecraft/resources" {
         boxed(): $Decoder$Boxed<$HolderSet<E>>;
         terminal(): $Decoder$Terminal<$HolderSet<E>>;
         simple(): $Decoder$Simple<$HolderSet<E>>;
+        withLifecycle(arg0: $Lifecycle): $Encoder<$HolderSet<E>>;
+        fieldOf(arg0: string): $MapEncoder<$HolderSet<E>>;
     }
     export class $RegistryOps<T> extends $DelegatingOps<T> {
+        static injectRegistryContext<T>(arg0: $Dynamic<T>, arg1: $HolderLookup$Provider): $Dynamic<T>;
         static retrieveGetter<E, O>(arg0: $ResourceKey_<$Registry<E>>): $RecordCodecBuilder<O, $HolderGetter<E>>;
         static retrieveRegistryLookup<E>(arg0: $ResourceKey_<$Registry<E>>): $MapCodec<$HolderLookup$RegistryLookup<E>>;
         static retrieveElement<E, O>(arg0: $ResourceKey_<E>): $RecordCodecBuilder<O, $Holder$Reference<E>>;
-        static injectRegistryContext<T>(arg0: $Dynamic<T>, arg1: $HolderLookup$Provider): $Dynamic<T>;
         getter<E>(arg0: $ResourceKey_<$Registry<E>>): ($HolderGetter<E>) | undefined;
         owner<E>(arg0: $ResourceKey_<$Registry<E>>): ($HolderOwner<E>) | undefined;
-        static create<T>(arg0: $DynamicOps<T>, arg1: $RegistryOps$RegistryInfoLookup_): $RegistryOps<T>;
         static create<T>(arg0: $DynamicOps<T>, arg1: $HolderLookup$Provider): $RegistryOps<T>;
+        static create<T>(arg0: $DynamicOps<T>, arg1: $RegistryOps$RegistryInfoLookup_): $RegistryOps<T>;
         withParent<U>(arg0: $DynamicOps<U>): $RegistryOps<U>;
         delegate: $DynamicOps<T>;
         lookupProvider: $RegistryOps$RegistryInfoLookup;
@@ -166,7 +166,7 @@ declare module "@package/net/minecraft/resources" {
     /**
      * Values that may be interpreted as {@link $RegistryOps$RegistryInfo}.
      */
-    export type $RegistryOps$RegistryInfo_<T> = { elementsLifecycle?: $Lifecycle, getter?: $HolderGetter<any>, owner?: $HolderOwner<any>,  } | [elementsLifecycle?: $Lifecycle, getter?: $HolderGetter<any>, owner?: $HolderOwner<any>, ];
+    export type $RegistryOps$RegistryInfo_<T> = { owner?: $HolderOwner<any>, getter?: $HolderGetter<any>, elementsLifecycle?: $Lifecycle,  } | [owner?: $HolderOwner<any>, getter?: $HolderGetter<any>, elementsLifecycle?: $Lifecycle, ];
     export class $RegistryOps$RegistryInfoLookup {
     }
     export interface $RegistryOps$RegistryInfoLookup {
@@ -177,18 +177,18 @@ declare module "@package/net/minecraft/resources" {
      */
     export type $RegistryOps$RegistryInfoLookup_ = ((arg0: $ResourceKey<$Registry<any>>) => ($RegistryOps$RegistryInfo_<T>) | undefined);
     export class $DelegatingOps<T> implements $DynamicOps<T>, $DelegatingOpsAccessor<any> {
+        getMap(arg0: T): $DataResult<$MapLike<T>>;
+        createLong(arg0: number): T;
+        createString(arg0: string): T;
         getStringValue(arg0: T): $DataResult<string>;
         getStream(arg0: T): $DataResult<$Stream<T>>;
         createMap(arg0: $Stream<$Pair<T, T>>): T;
         createMap(arg0: $Map_<T, T>): T;
+        emptyMap(): T;
         remove(arg0: T, arg1: string): T;
         empty(): T;
         emptyList(): T;
         getByteBuffer(arg0: T): $DataResult<$ByteBuffer>;
-        emptyMap(): T;
-        getMap(arg0: T): $DataResult<$MapLike<T>>;
-        createLong(arg0: number): T;
-        createString(arg0: string): T;
         getList(arg0: T): $DataResult<$Consumer<$Consumer<T>>>;
         createList(arg0: $Stream<T>): T;
         getBooleanValue(arg0: T): $DataResult<boolean>;
@@ -237,30 +237,28 @@ declare module "@package/net/minecraft/resources" {
         encode<T>(arg0: $Holder_<E>, arg1: $DynamicOps<T>, arg2: T): $DataResult<T>;
         static create<E>(arg0: $ResourceKey_<$Registry<E>>, arg1: $Codec<E>): $RegistryFileCodec<E>;
         static create<E>(arg0: $ResourceKey_<$Registry<E>>, arg1: $Codec<E>, arg2: boolean): $RegistryFileCodec<E>;
+        orElseGet(arg0: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
+        orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
+        orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
         dispatch<E>(arg0: $Function_<E, $Holder<E>>, arg1: $Function_<$Holder<E>, $MapCodec<E>>): $Codec<E>;
         dispatch<E>(arg0: string, arg1: $Function_<E, $Holder<E>>, arg2: $Function_<$Holder<E>, $MapCodec<E>>): $Codec<E>;
         validate(arg0: $Function_<$Holder<E>, $DataResult<$Holder<E>>>): $Codec<$Holder<E>>;
-        orElse(arg0: $Holder_<E>): $Codec<$Holder<E>>;
-        orElse(arg0: $Consumer_<string>, arg1: $Holder_<E>): $Codec<$Holder<E>>;
         orElse(arg0: $UnaryOperator_<string>, arg1: $Holder_<E>): $Codec<$Holder<E>>;
-        orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
-        orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
-        orElseGet(arg0: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
+        orElse(arg0: $Consumer_<string>, arg1: $Holder_<E>): $Codec<$Holder<E>>;
+        orElse(arg0: $Holder_<E>): $Codec<$Holder<E>>;
         comapFlatMap<S>(arg0: $Function_<$Holder<E>, $DataResult<S>>, arg1: $Function_<S, $Holder<E>>): $Codec<S>;
-        optionalFieldOf(arg0: string, arg1: $Holder_<E>, arg2: $Lifecycle): $MapCodec<$Holder<E>>;
         optionalFieldOf(arg0: string): $MapCodec<($Holder<E>) | undefined>;
         optionalFieldOf(arg0: string, arg1: $Holder_<E>): $MapCodec<$Holder<E>>;
+        optionalFieldOf(arg0: string, arg1: $Holder_<E>, arg2: $Lifecycle): $MapCodec<$Holder<E>>;
         optionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: $Holder_<E>, arg3: $Lifecycle): $MapCodec<$Holder<E>>;
         listOf(arg0: number, arg1: number): $Codec<$List<$Holder<E>>>;
         listOf(): $Codec<$List<$Holder<E>>>;
         xmap<S>(arg0: $Function_<$Holder<E>, S>, arg1: $Function_<S, $Holder<E>>): $Codec<S>;
         stable(): $Codec<$Holder<E>>;
-        withLifecycle(arg0: $Lifecycle): $Codec<$Holder<E>>;
         deprecated(arg0: number): $Codec<$Holder<E>>;
         flatXmap<S>(arg0: $Function_<$Holder<E>, $DataResult<S>>, arg1: $Function_<S, $DataResult<$Holder<E>>>): $Codec<S>;
-        fieldOf(arg0: string): $MapCodec<$Holder<E>>;
-        lenientOptionalFieldOf(arg0: string, arg1: $Holder_<E>, arg2: $Lifecycle): $MapCodec<$Holder<E>>;
         lenientOptionalFieldOf(arg0: string): $MapCodec<($Holder<E>) | undefined>;
+        lenientOptionalFieldOf(arg0: string, arg1: $Holder_<E>, arg2: $Lifecycle): $MapCodec<$Holder<E>>;
         lenientOptionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: $Holder_<E>, arg3: $Lifecycle): $MapCodec<$Holder<E>>;
         lenientOptionalFieldOf(arg0: string, arg1: $Holder_<E>): $MapCodec<$Holder<E>>;
         mapResult(arg0: $Codec$ResultFunction<$Holder_<E>>): $Codec<$Holder<E>>;
@@ -282,6 +280,8 @@ declare module "@package/net/minecraft/resources" {
         boxed(): $Decoder$Boxed<$Holder<E>>;
         terminal(): $Decoder$Terminal<$Holder<E>>;
         simple(): $Decoder$Simple<$Holder<E>>;
+        withLifecycle(arg0: $Lifecycle): $Encoder<$Holder<E>>;
+        fieldOf(arg0: string): $MapEncoder<$Holder<E>>;
     }
     export class $ResourceLocation$Serializer implements $JsonDeserializer<$ResourceLocation>, $JsonSerializer<$ResourceLocation> {
         serialize(arg0: $ResourceLocation_, arg1: $Type, arg2: $JsonSerializationContext): $JsonElement;
@@ -289,19 +289,19 @@ declare module "@package/net/minecraft/resources" {
         constructor();
     }
     export class $ResourceKey<T> implements $Comparable<$ResourceKey<never>>, $SpecialEquality {
-        static createRegistryKey<T>(arg0: $ResourceLocation_): $ResourceKey<$Registry<T>>;
         static streamCodec<T>(arg0: $ResourceKey_<$Registry<T>>): $StreamCodec<$ByteBuf, $ResourceKey<T>>;
         isFor(arg0: $ResourceKey_<$Registry<never>>): boolean;
         getNamespace(): string;
         getPath(): string;
+        static createRegistryKey<T>(arg0: $ResourceLocation_): $ResourceKey<$Registry<T>>;
         cast<E>(arg0: $ResourceKey_<$Registry<E>>): ($ResourceKey<E>) | undefined;
         compareTo(arg0: $ResourceKey_<never>): number;
         location(): $ResourceLocation;
         static create<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $ResourceLocation_): $ResourceKey<T>;
         registry(): $ResourceLocation;
         static codec<T>(arg0: $ResourceKey_<$Registry<T>>): $Codec<$ResourceKey<T>>;
-        specialEquals(o: $Object, shallow: boolean): boolean;
         registryKey(): $ResourceKey<$Registry<$ResourceKey<never>>>;
+        specialEquals(o: $Object, shallow: boolean): boolean;
         constructor(arg0: $ResourceLocation_, arg1: $ResourceLocation_);
         get namespace(): string;
         get path(): string;
@@ -311,8 +311,8 @@ declare module "@package/net/minecraft/resources" {
      */
     export type $ResourceKey_<T> = RegistryTypes.ResolveObject<T>;
     export class $RegistryDataLoader {
-        static loadContentsFromManager<E>(arg0: $ResourceManager, arg1: $RegistryOps$RegistryInfoLookup_, arg2: $WritableRegistry<E>, arg3: $Decoder_<E>, arg4: $Map_<$ResourceKey_<never>, $Exception>): void;
         static loadContentsFromNetwork<E>(arg0: $Map_<$ResourceKey_<$Registry<never>>, $List_<$RegistrySynchronization$PackedRegistryEntry_>>, arg1: $ResourceProvider_, arg2: $RegistryOps$RegistryInfoLookup_, arg3: $WritableRegistry<E>, arg4: $Decoder_<E>, arg5: $Map_<$ResourceKey_<never>, $Exception>): void;
+        static loadContentsFromManager<E>(arg0: $ResourceManager, arg1: $RegistryOps$RegistryInfoLookup_, arg2: $WritableRegistry<E>, arg3: $Decoder_<E>, arg4: $Map_<$ResourceKey_<never>, $Exception>): void;
         static load(arg0: $Map_<$ResourceKey_<$Registry<never>>, $List_<$RegistrySynchronization$PackedRegistryEntry_>>, arg1: $ResourceProvider_, arg2: $RegistryAccess, arg3: $List_<$RegistryDataLoader$RegistryData_<never>>): $RegistryAccess$Frozen;
         static load(arg0: $ResourceManager, arg1: $RegistryAccess, arg2: $List_<$RegistryDataLoader$RegistryData_<never>>): $RegistryAccess$Frozen;
         static createContext(arg0: $RegistryAccess, arg1: $List_<$RegistryDataLoader$Loader_<never>>): $RegistryOps$RegistryInfoLookup;
@@ -325,30 +325,28 @@ declare module "@package/net/minecraft/resources" {
         decode<T>(arg0: $DynamicOps<T>, arg1: T): $DataResult<$Pair<$Holder<E>, T>>;
         encode<T>(arg0: $Holder_<E>, arg1: $DynamicOps<T>, arg2: T): $DataResult<T>;
         static create<E>(arg0: $ResourceKey_<$Registry<E>>): $RegistryFixedCodec<E>;
+        orElseGet(arg0: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
+        orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
+        orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
         dispatch<E>(arg0: $Function_<E, $Holder<E>>, arg1: $Function_<$Holder<E>, $MapCodec<E>>): $Codec<E>;
         dispatch<E>(arg0: string, arg1: $Function_<E, $Holder<E>>, arg2: $Function_<$Holder<E>, $MapCodec<E>>): $Codec<E>;
         validate(arg0: $Function_<$Holder<E>, $DataResult<$Holder<E>>>): $Codec<$Holder<E>>;
-        orElse(arg0: $Holder_<E>): $Codec<$Holder<E>>;
-        orElse(arg0: $Consumer_<string>, arg1: $Holder_<E>): $Codec<$Holder<E>>;
         orElse(arg0: $UnaryOperator_<string>, arg1: $Holder_<E>): $Codec<$Holder<E>>;
-        orElseGet(arg0: $Consumer_<string>, arg1: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
-        orElseGet(arg0: $UnaryOperator_<string>, arg1: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
-        orElseGet(arg0: $Supplier_<$Holder<E>>): $Codec<$Holder<E>>;
+        orElse(arg0: $Consumer_<string>, arg1: $Holder_<E>): $Codec<$Holder<E>>;
+        orElse(arg0: $Holder_<E>): $Codec<$Holder<E>>;
         comapFlatMap<S>(arg0: $Function_<$Holder<E>, $DataResult<S>>, arg1: $Function_<S, $Holder<E>>): $Codec<S>;
-        optionalFieldOf(arg0: string, arg1: $Holder_<E>, arg2: $Lifecycle): $MapCodec<$Holder<E>>;
         optionalFieldOf(arg0: string): $MapCodec<($Holder<E>) | undefined>;
         optionalFieldOf(arg0: string, arg1: $Holder_<E>): $MapCodec<$Holder<E>>;
+        optionalFieldOf(arg0: string, arg1: $Holder_<E>, arg2: $Lifecycle): $MapCodec<$Holder<E>>;
         optionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: $Holder_<E>, arg3: $Lifecycle): $MapCodec<$Holder<E>>;
         listOf(arg0: number, arg1: number): $Codec<$List<$Holder<E>>>;
         listOf(): $Codec<$List<$Holder<E>>>;
         xmap<S>(arg0: $Function_<$Holder<E>, S>, arg1: $Function_<S, $Holder<E>>): $Codec<S>;
         stable(): $Codec<$Holder<E>>;
-        withLifecycle(arg0: $Lifecycle): $Codec<$Holder<E>>;
         deprecated(arg0: number): $Codec<$Holder<E>>;
         flatXmap<S>(arg0: $Function_<$Holder<E>, $DataResult<S>>, arg1: $Function_<S, $DataResult<$Holder<E>>>): $Codec<S>;
-        fieldOf(arg0: string): $MapCodec<$Holder<E>>;
-        lenientOptionalFieldOf(arg0: string, arg1: $Holder_<E>, arg2: $Lifecycle): $MapCodec<$Holder<E>>;
         lenientOptionalFieldOf(arg0: string): $MapCodec<($Holder<E>) | undefined>;
+        lenientOptionalFieldOf(arg0: string, arg1: $Holder_<E>, arg2: $Lifecycle): $MapCodec<$Holder<E>>;
         lenientOptionalFieldOf(arg0: string, arg1: $Lifecycle, arg2: $Holder_<E>, arg3: $Lifecycle): $MapCodec<$Holder<E>>;
         lenientOptionalFieldOf(arg0: string, arg1: $Holder_<E>): $MapCodec<$Holder<E>>;
         mapResult(arg0: $Codec$ResultFunction<$Holder_<E>>): $Codec<$Holder<E>>;
@@ -370,6 +368,8 @@ declare module "@package/net/minecraft/resources" {
         boxed(): $Decoder$Boxed<$Holder<E>>;
         terminal(): $Decoder$Terminal<$Holder<E>>;
         simple(): $Decoder$Simple<$Holder<E>>;
+        withLifecycle(arg0: $Lifecycle): $Encoder<$Holder<E>>;
+        fieldOf(arg0: string): $MapEncoder<$Holder<E>>;
     }
     export class $ResourceKey$InternKey extends $Record {
     }
@@ -378,8 +378,8 @@ declare module "@package/net/minecraft/resources" {
      */
     export type $ResourceKey$InternKey_ = { location?: $ResourceLocation_, registry?: $ResourceLocation_,  } | [location?: $ResourceLocation_, registry?: $ResourceLocation_, ];
     export class $FileToIdConverter {
-        listMatchingResourceStacks(arg0: $ResourceManager): $Map<$ResourceLocation, $List<$Resource>>;
         listMatchingResourcesFromNamespace(arg0: $ResourceManager, arg1: string): $Map<$ResourceLocation, $Resource>;
+        listMatchingResourceStacks(arg0: $ResourceManager): $Map<$ResourceLocation, $List<$Resource>>;
         listMatchingResourceStacksFromNamespace(arg0: $ResourceManager, arg1: string): $Map<$ResourceLocation, $List<$Resource>>;
         idToFile(arg0: $ResourceLocation_): $ResourceLocation;
         listMatchingResources(arg0: $ResourceManager): $Map<$ResourceLocation, $Resource>;
@@ -388,17 +388,17 @@ declare module "@package/net/minecraft/resources" {
         constructor(arg0: string, arg1: string);
     }
     export class $RegistryDataLoader$Loader<T> extends $Record {
+        loadingErrors(): $Map<$ResourceKey<never>, $Exception>;
         loadFromNetwork(arg0: $Map_<$ResourceKey_<$Registry<never>>, $List_<$RegistrySynchronization$PackedRegistryEntry_>>, arg1: $ResourceProvider_, arg2: $RegistryOps$RegistryInfoLookup_): void;
         loadFromResources(arg0: $ResourceManager, arg1: $RegistryOps$RegistryInfoLookup_): void;
         data(): $RegistryDataLoader$RegistryData<T>;
         registry(): $WritableRegistry<T>;
-        loadingErrors(): $Map<$ResourceKey<never>, $Exception>;
         constructor(data: $RegistryDataLoader$RegistryData_<T>, registry: $WritableRegistry<T>, loadingErrors: $Map_<$ResourceKey_<never>, $Exception>);
     }
     /**
      * Values that may be interpreted as {@link $RegistryDataLoader$Loader}.
      */
-    export type $RegistryDataLoader$Loader_<T> = { loadingErrors?: $Map_<$ResourceKey_<never>, $Exception>, registry?: $WritableRegistry<any>, data?: $RegistryDataLoader$RegistryData_<any>,  } | [loadingErrors?: $Map_<$ResourceKey_<never>, $Exception>, registry?: $WritableRegistry<any>, data?: $RegistryDataLoader$RegistryData_<any>, ];
+    export type $RegistryDataLoader$Loader_<T> = { registry?: $WritableRegistry<any>, loadingErrors?: $Map_<$ResourceKey_<never>, $Exception>, data?: $RegistryDataLoader$RegistryData_<any>,  } | [registry?: $WritableRegistry<any>, loadingErrors?: $Map_<$ResourceKey_<never>, $Exception>, data?: $RegistryDataLoader$RegistryData_<any>, ];
     export class $RegistryOps$HolderLookupAdapter implements $RegistryOps$RegistryInfoLookup {
         lookup<E>(arg0: $ResourceKey_<$Registry<E>>): ($RegistryOps$RegistryInfo<E>) | undefined;
         lookupProvider: $HolderLookup$Provider;

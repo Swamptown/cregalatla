@@ -2,9 +2,9 @@ import { $MountedStorageManager } from "@package/com/simibubi/create/content/con
 
 declare module "@package/com/simibubi/create/content/contraptions/minecart" {
     export class $TrainCargoManager extends $MountedStorageManager {
+        getTicksSinceLastExchange(): number;
         resetIdleCargoTracker(): void;
         tickIdleCargoTracker(): void;
-        getTicksSinceLastExchange(): number;
         getVersion(): number;
         constructor();
         get ticksSinceLastExchange(): number;

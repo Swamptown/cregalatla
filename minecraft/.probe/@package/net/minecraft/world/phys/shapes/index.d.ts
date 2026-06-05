@@ -18,7 +18,7 @@ import { $VoxelShapeAccessor } from "@package/com/blackgear/vanillabackport/core
 
 declare module "@package/net/minecraft/world/phys/shapes" {
     export class $ArrayVoxelShape extends $VoxelShape implements $ArrayVoxelShapeInvoker, $VoxelShapeAccess, $ArrayVSAccess {
-        static init$lithium_$md$4ca6b6$0(arg0: $DiscreteVoxelShape, arg1: $DoubleList, arg2: $DoubleList, arg3: $DoubleList): $ArrayVoxelShape;
+        static init$lithium_$md$3b3139$0(arg0: $DiscreteVoxelShape, arg1: $DoubleList, arg2: $DoubleList, arg3: $DoubleList): $ArrayVoxelShape;
         setXPoints(arg0: $DoubleList): void;
         setYPoints(arg0: $DoubleList): void;
         setZPoints(arg0: $DoubleList): void;
@@ -30,9 +30,9 @@ declare module "@package/net/minecraft/world/phys/shapes" {
         constructor(arg0: $DiscreteVoxelShape, arg1: $DoubleList, arg2: $DoubleList, arg3: $DoubleList);
     }
     export class $BitSetDiscreteVoxelShape extends $DiscreteVoxelShape implements $BitSetDiscreteVoxelShapeAccessor$1, $DiscreteVoxelShapeAccessor, $BitSetDiscreteVoxelShapeAccessor, $DiscreteVSAccess, $BitSetDVSAccess {
-        static forAllBoxes(arg0: $DiscreteVoxelShape, arg1: $DiscreteVoxelShape$IntLineConsumer_, arg2: boolean): void;
-        isInterior(arg0: number, arg1: number, arg2: number): boolean;
         static withFilledBounds(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): $BitSetDiscreteVoxelShape;
+        isInterior(arg0: number, arg1: number, arg2: number): boolean;
+        static forAllBoxes(arg0: $DiscreteVoxelShape, arg1: $DiscreteVoxelShape$IntLineConsumer_, arg2: boolean): void;
         static join(arg0: $DiscreteVoxelShape, arg1: $DiscreteVoxelShape, arg2: $IndexMerger, arg3: $IndexMerger, arg4: $IndexMerger, arg5: $BooleanOp_): $BitSetDiscreteVoxelShape;
         getIndex(arg0: number, arg1: number, arg2: number): number;
         getStorage(): $BitSet;
@@ -48,8 +48,8 @@ declare module "@package/net/minecraft/world/phys/shapes" {
         zSize: number;
         ySize: number;
         xSize: number;
-        constructor(arg0: number, arg1: number, arg2: number);
         constructor(arg0: $DiscreteVoxelShape);
+        constructor(arg0: number, arg1: number, arg2: number);
         get storage(): $BitSet;
         get XMin(): number;
         get YMin(): number;
@@ -79,12 +79,12 @@ declare module "@package/net/minecraft/world/phys/shapes" {
         get endY(): number;
     }
     export class $EntityCollisionContext implements $CollisionContext {
+        handler$cbb000$lithium$canWalkOnFluid(arg0: $FluidState, arg1: $FluidState, arg2: $CallbackInfoReturnable<any>): void;
+        handler$cbb000$lithium$isHolding(arg0: $Item_, arg1: $CallbackInfoReturnable<any>): void;
         getHeldItem(): $ItemStack;
-        handler$bpe000$lithium$isHolding(arg0: $Item_, arg1: $CallbackInfoReturnable<any>): void;
-        handler$bpe000$lithium$canWalkOnFluid(arg0: $FluidState, arg1: $FluidState, arg2: $CallbackInfoReturnable<any>): void;
+        getEntity(): $Entity;
         isAbove(arg0: $VoxelShape, arg1: $BlockPos_, arg2: boolean): boolean;
         isHoldingItem(arg0: $Item_): boolean;
-        getEntity(): $Entity;
         canStandOnFluid(arg0: $FluidState, arg1: $FluidState): boolean;
         isDescending(): boolean;
         static EMPTY: $CollisionContext;
@@ -104,6 +104,8 @@ declare module "@package/net/minecraft/world/phys/shapes" {
         static blockOccudes(arg0: $VoxelShape, arg1: $VoxelShape, arg2: $Direction_): boolean;
         static mergedFaceOccludes(arg0: $VoxelShape, arg1: $VoxelShape, arg2: $Direction_): boolean;
         static faceShapeOccludes(arg0: $VoxelShape, arg1: $VoxelShape): boolean;
+        static or(arg0: $VoxelShape, arg1: $VoxelShape): $VoxelShape;
+        static or(arg0: $VoxelShape, ...arg1: $VoxelShape[]): $VoxelShape;
         static lcm(arg0: number, arg1: number): number;
         static join(arg0: $VoxelShape, arg1: $VoxelShape, arg2: $BooleanOp_): $VoxelShape;
         static empty(): $VoxelShape;
@@ -112,8 +114,6 @@ declare module "@package/net/minecraft/world/phys/shapes" {
         static box(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): $VoxelShape;
         static block(): $VoxelShape;
         static collide(arg0: $Direction$Axis_, arg1: $AABB_, arg2: $Iterable_<$VoxelShape>, arg3: number): number;
-        static or(arg0: $VoxelShape, arg1: $VoxelShape): $VoxelShape;
-        static or(arg0: $VoxelShape, ...arg1: $VoxelShape[]): $VoxelShape;
         static joinIsNotEmpty(arg0: $VoxelShape, arg1: $VoxelShape, arg2: $BooleanOp_): boolean;
         static getFaceShape(arg0: $VoxelShape, arg1: $Direction_): $VoxelShape;
         static INFINITY: $VoxelShape;
@@ -133,29 +133,29 @@ declare module "@package/net/minecraft/world/phys/shapes" {
         get descending(): boolean;
     }
     export class $VoxelShape implements $VoxelShapeAccessor, $OffsetVoxelShapeCache, $VoxelShapeAccessor$1, $FastVoxelShapeIterable, $VoxelShapeAccess {
-        singleEncompassing(): $VoxelShape;
-        forAllBoxes(arg0: $Shapes$DoubleLineConsumer_): void;
-        forAllEdges(arg0: $Shapes$DoubleLineConsumer_): void;
-        findIndex(arg0: $Direction$Axis_, arg1: number): number;
         collideX(arg0: $AxisCycle_, arg1: $AABB_, arg2: number): number;
         lithium$setShape(arg0: number, arg1: $Direction_, arg2: $VoxelShape): void;
         lithium$getOffsetSimplifiedShape(arg0: number, arg1: $Direction_): $VoxelShape;
         sable$allBoxes(): $Iterator<any>;
+        singleEncompassing(): $VoxelShape;
+        forAllBoxes(arg0: $Shapes$DoubleLineConsumer_): void;
+        forAllEdges(arg0: $Shapes$DoubleLineConsumer_): void;
+        findIndex(arg0: $Direction$Axis_, arg1: number): number;
         move(arg0: number, arg1: number, arg2: number): $VoxelShape;
         get(arg0: $Direction$Axis_, arg1: number): number;
-        min(arg0: $Direction$Axis_, arg1: number, arg2: number): number;
         min(arg0: $Direction$Axis_): number;
+        min(arg0: $Direction$Axis_, arg1: number, arg2: number): number;
         max(arg0: $Direction$Axis_, arg1: number, arg2: number): number;
         max(arg0: $Direction$Axis_): number;
         isEmpty(): boolean;
         bounds(): $AABB;
         optimize(): $VoxelShape;
         collide(arg0: $Direction$Axis_, arg1: $AABB_, arg2: number): number;
-        clip(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_): $BlockHitResult;
-        getCoords(arg0: $Direction$Axis_): $DoubleList;
-        getFaceShape(arg0: $Direction_): $VoxelShape;
         closestPointTo(arg0: $Vec3_): ($Vec3) | undefined;
         toAabbs(): $List<$AABB>;
+        clip(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_): $BlockHitResult;
+        getFaceShape(arg0: $Direction_): $VoxelShape;
+        getCoords(arg0: $Direction$Axis_): $DoubleList;
         callGetCoords(arg0: $Direction$Axis_): $DoubleList;
         copycats$getShape(): $DiscreteVoxelShape;
         copycats$setShape(arg0: $DiscreteVoxelShape): void;
@@ -169,15 +169,14 @@ declare module "@package/net/minecraft/world/phys/shapes" {
         get empty(): boolean;
     }
     export class $CubePointRange extends $AbstractDoubleList {
-        handler$bpg000$lithium$initScale(arg0: number, arg1: $CallbackInfo): void;
+        handler$cbd000$lithium$initScale(arg0: number, arg1: $CallbackInfo): void;
         /**
          * @deprecated
          */
         remove(arg0: $Object): boolean;
         get(arg0: number): number;
-        peek(arg0: number): number;
-        top(): number;
         pop(): number;
+        top(): number;
         reversed(): $SequencedCollection<number>;
         constructor(arg0: number);
     }
@@ -243,25 +242,24 @@ declare module "@package/net/minecraft/world/phys/shapes" {
          */
         remove(arg0: $Object): boolean;
         get(arg0: number): number;
-        peek(arg0: number): number;
-        top(): number;
         pop(): number;
+        top(): number;
         reversed(): $SequencedCollection<number>;
         constructor(arg0: $DoubleList, arg1: $DoubleList, arg2: boolean);
         get list(): $DoubleList;
     }
     export class $DiscreteVoxelShape implements $DiscreteVoxelShapeAccessor, $DiscreteVSAccess {
-        firstFull(arg0: $Direction$Axis_): number;
+        isFull(arg0: number, arg1: number, arg2: number): boolean;
+        isFull(arg0: $AxisCycle_, arg1: number, arg2: number, arg3: number): boolean;
+        forAllFaces(arg0: $DiscreteVoxelShape$IntFaceConsumer_): void;
         firstFull(arg0: $Direction$Axis_, arg1: number, arg2: number): number;
-        lastFull(arg0: $Direction$Axis_): number;
+        firstFull(arg0: $Direction$Axis_): number;
         lastFull(arg0: $Direction$Axis_, arg1: number, arg2: number): number;
+        lastFull(arg0: $Direction$Axis_): number;
         forAllBoxes(arg0: $DiscreteVoxelShape$IntLineConsumer_, arg1: boolean): void;
         forAllEdges(arg0: $DiscreteVoxelShape$IntLineConsumer_, arg1: boolean): void;
         isFullWide(arg0: $AxisCycle_, arg1: number, arg2: number, arg3: number): boolean;
         isFullWide(arg0: number, arg1: number, arg2: number): boolean;
-        forAllFaces(arg0: $DiscreteVoxelShape$IntFaceConsumer_): void;
-        isFull(arg0: $AxisCycle_, arg1: number, arg2: number, arg3: number): boolean;
-        isFull(arg0: number, arg1: number, arg2: number): boolean;
         isEmpty(): boolean;
         fill(arg0: number, arg1: number, arg2: number): void;
         getSize(arg0: $Direction$Axis_): number;
@@ -283,9 +281,8 @@ declare module "@package/net/minecraft/world/phys/shapes" {
          */
         remove(arg0: $Object): boolean;
         get(arg0: number): number;
-        peek(arg0: number): number;
-        top(): number;
         pop(): number;
+        top(): number;
         reversed(): $SequencedCollection<number>;
         constructor(arg0: $DoubleList, arg1: number);
     }

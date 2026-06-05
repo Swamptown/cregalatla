@@ -6,25 +6,25 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/io/github/mortuusars/exposure/world/camera/component" {
     export class $ShutterSpeed implements $StringRepresentable {
-        getDurationMilliseconds(): number;
         shouldCauseTickingSound(): boolean;
         getDurationTicks(): number;
         getNotation(): string;
         getStopsDifference(relative: $ShutterSpeed): number;
+        getDurationMilliseconds(): number;
         getStops(): number;
-        getSerializedName(): string;
         getBrightness(): number;
+        getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static CODEC: $Codec<$ShutterSpeed>;
         static DEFAULT: $ShutterSpeed;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ShutterSpeed>;
         constructor(notation: string);
-        get durationMilliseconds(): number;
         get durationTicks(): number;
         get notation(): string;
+        get durationMilliseconds(): number;
         get stops(): number;
-        get serializedName(): string;
         get brightness(): number;
+        get serializedName(): string;
         get remappedEnumConstantName(): string;
     }
     export class $FocalRange implements $StringRepresentable {

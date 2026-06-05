@@ -4,8 +4,8 @@ declare module "@package/dev/ryanhcode/sable/mixinterface/sublevel_render/vanill
     export class $RenderSectionExtension {
     }
     export interface $RenderSectionExtension {
-        sable$addDirtyListener(arg0: $RenderSectionExtension$DirtyListener_): void;
         sable$setListening(arg0: boolean): void;
+        sable$addDirtyListener(arg0: $RenderSectionExtension$DirtyListener_): void;
     }
     export class $RenderSectionExtension$DirtyListener {
     }

@@ -11,16 +11,16 @@ export * as tasks from "@package/net/minecraft/commands/execution/tasks";
 
 declare module "@package/net/minecraft/commands/execution" {
     export class $ExecutionContext<T> implements $AutoCloseable {
-        frameControlForDepth(arg0: number): $Frame$FrameControl;
-        discardAtDepthOrHigher(arg0: number): void;
-        forkLimit(): number;
         incrementCost(): void;
+        forkLimit(): number;
         runCommandQueue(): void;
+        static queueInitialCommandExecution<T extends $ExecutionCommandSource<T>>(arg0: $ExecutionContext<T>, arg1: string, arg2: $ContextChain<T>, arg3: T, arg4: $CommandResultCallback_): void;
         tracer(arg0: $TraceCallbacks): void;
         tracer(): $TraceCallbacks;
         queueNext(arg0: $CommandQueueEntry_<T>): void;
-        static queueInitialCommandExecution<T extends $ExecutionCommandSource<T>>(arg0: $ExecutionContext<T>, arg1: string, arg2: $ContextChain<T>, arg3: T, arg4: $CommandResultCallback_): void;
         static queueInitialFunctionCall<T extends $ExecutionCommandSource<T>>(arg0: $ExecutionContext<T>, arg1: $InstantiatedFunction<T>, arg2: T, arg3: $CommandResultCallback_): void;
+        frameControlForDepth(arg0: number): $Frame$FrameControl;
+        discardAtDepthOrHigher(arg0: number): void;
         close(): void;
         profiler(): $ProfilerFiller;
         constructor(arg0: number, arg1: number, arg2: $ProfilerFiller);
@@ -131,10 +131,10 @@ declare module "@package/net/minecraft/commands/execution" {
      */
     export type $EntryAction_<T> = ((arg0: $ExecutionContext<T>, arg1: $Frame) => void);
     export class $Frame extends $Record {
-        frameControl(): $Frame$FrameControl;
         returnValueConsumer(): $CommandResultCallback;
         returnSuccess(arg0: number): void;
         returnFailure(): void;
+        frameControl(): $Frame$FrameControl;
         depth(): number;
         discard(): void;
         constructor(arg0: number, arg1: $CommandResultCallback_, arg2: $Frame$FrameControl_);
@@ -142,7 +142,7 @@ declare module "@package/net/minecraft/commands/execution" {
     /**
      * Values that may be interpreted as {@link $Frame}.
      */
-    export type $Frame_ = { depth?: number, returnValueConsumer?: $CommandResultCallback_, frameControl?: $Frame$FrameControl_,  } | [depth?: number, returnValueConsumer?: $CommandResultCallback_, frameControl?: $Frame$FrameControl_, ];
+    export type $Frame_ = { returnValueConsumer?: $CommandResultCallback_, depth?: number, frameControl?: $Frame$FrameControl_,  } | [returnValueConsumer?: $CommandResultCallback_, depth?: number, frameControl?: $Frame$FrameControl_, ];
     export class $CustomCommandExecutor$WithErrorHandling<T extends $ExecutionCommandSource<T>> implements $CustomCommandExecutor<T> {
         runGuarded(arg0: T, arg1: $ContextChain<T>, arg2: $ChainModifiers_, arg3: $ExecutionControl<T>): void;
         run(arg0: T, arg1: $ContextChain<T>, arg2: $ChainModifiers_, arg3: $ExecutionControl<T>): void;

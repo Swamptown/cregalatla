@@ -19,8 +19,8 @@ declare module "@package/net/minecraft/util/debugchart" {
     export class $LocalSampleLogger extends $AbstractSampleLogger implements $SampleStorage {
         size(): number;
         reset(): void;
-        get(arg0: number, arg1: number): number;
         get(arg0: number): number;
+        get(arg0: number, arg1: number): number;
         capacity(): number;
         static CAPACITY: number;
         defaults: number[];
@@ -68,11 +68,11 @@ declare module "@package/net/minecraft/util/debugchart" {
      */
     export type $RemoteDebugSampleType_ = "tick_time";
     export class $AbstractSampleLogger implements $SampleLogger {
-        logSample(arg0: number): void;
-        logPartialSample(arg0: number, arg1: number): void;
-        logFullSample(arg0: number[]): void;
         useSample(): void;
         resetSample(): void;
+        logFullSample(arg0: number[]): void;
+        logSample(arg0: number): void;
+        logPartialSample(arg0: number, arg1: number): void;
         defaults: number[];
         sample: number[];
         constructor(arg0: number, arg1: number[]);
@@ -80,14 +80,14 @@ declare module "@package/net/minecraft/util/debugchart" {
     export class $SampleLogger {
     }
     export interface $SampleLogger {
+        logFullSample(arg0: number[]): void;
         logSample(arg0: number): void;
         logPartialSample(arg0: number, arg1: number): void;
-        logFullSample(arg0: number[]): void;
     }
     export class $RemoteSampleLogger extends $AbstractSampleLogger {
         defaults: number[];
         sample: number[];
-        constructor(arg0: number, arg1: $DebugSampleSubscriptionTracker, arg2: $RemoteDebugSampleType_);
         constructor(arg0: number, arg1: $DebugSampleSubscriptionTracker, arg2: $RemoteDebugSampleType_, arg3: number[]);
+        constructor(arg0: number, arg1: $DebugSampleSubscriptionTracker, arg2: $RemoteDebugSampleType_);
     }
 }

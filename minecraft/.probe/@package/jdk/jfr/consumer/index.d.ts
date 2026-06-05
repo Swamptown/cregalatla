@@ -53,8 +53,8 @@ declare module "@package/jdk/jfr/consumer" {
     }
     export class $RecordedObject {
         hasField(arg0: string): boolean;
-        getInstant(arg0: string): $Instant;
         getDuration(arg0: string): $Duration;
+        getInstant(arg0: string): $Instant;
         getString(arg0: string): string;
         getClass(arg0: string): $RecordedClass;
         getBoolean(arg0: string): boolean;

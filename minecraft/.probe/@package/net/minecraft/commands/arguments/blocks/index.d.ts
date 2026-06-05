@@ -19,11 +19,11 @@ import { $ArgumentType } from "@package/com/mojang/brigadier/arguments";
 
 declare module "@package/net/minecraft/commands/arguments/blocks" {
     export class $BlockStateParser {
-        static fillSuggestions(arg0: $HolderLookup<$Block_>, arg1: $SuggestionsBuilder, arg2: boolean, arg3: boolean): $CompletableFuture<$Suggestions>;
+        static parseForBlock(arg0: $HolderLookup<$Block_>, arg1: $StringReader, arg2: boolean): $BlockStateParser$BlockResult;
+        static parseForBlock(arg0: $HolderLookup<$Block_>, arg1: string, arg2: boolean): $BlockStateParser$BlockResult;
         static parseForTesting(arg0: $HolderLookup<$Block_>, arg1: string, arg2: boolean): $Either<$BlockStateParser$BlockResult, $BlockStateParser$TagResult>;
         static parseForTesting(arg0: $HolderLookup<$Block_>, arg1: $StringReader, arg2: boolean): $Either<$BlockStateParser$BlockResult, $BlockStateParser$TagResult>;
-        static parseForBlock(arg0: $HolderLookup<$Block_>, arg1: string, arg2: boolean): $BlockStateParser$BlockResult;
-        static parseForBlock(arg0: $HolderLookup<$Block_>, arg1: $StringReader, arg2: boolean): $BlockStateParser$BlockResult;
+        static fillSuggestions(arg0: $HolderLookup<$Block_>, arg1: $SuggestionsBuilder, arg2: boolean, arg3: boolean): $CompletableFuture<$Suggestions>;
         static serialize(arg0: $BlockState_): string;
         static ERROR_EXPECTED_END_OF_PROPERTIES: $SimpleCommandExceptionType;
         static ERROR_EXPECTED_VALUE: $Dynamic2CommandExceptionType;
@@ -43,11 +43,11 @@ declare module "@package/net/minecraft/commands/arguments/blocks" {
     /**
      * Values that may be interpreted as {@link $BlockStateParser$BlockResult}.
      */
-    export type $BlockStateParser$BlockResult_ = { nbt?: $CompoundTag_, blockState?: $BlockState_, properties?: $Map_<$Property<never>, $Comparable_<never>>,  } | [nbt?: $CompoundTag_, blockState?: $BlockState_, properties?: $Map_<$Property<never>, $Comparable_<never>>, ];
+    export type $BlockStateParser$BlockResult_ = { properties?: $Map_<$Property<never>, $Comparable_<never>>, blockState?: $BlockState_, nbt?: $CompoundTag_,  } | [properties?: $Map_<$Property<never>, $Comparable_<never>>, blockState?: $BlockState_, nbt?: $CompoundTag_, ];
     export class $BlockPredicateArgument implements $ArgumentType<$BlockPredicateArgument$Result> {
-        static getBlockPredicate(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Predicate<$BlockInWorld>;
-        static blockPredicate(arg0: $CommandBuildContext): $BlockPredicateArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static blockPredicate(arg0: $CommandBuildContext): $BlockPredicateArgument;
+        static getBlockPredicate(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Predicate<$BlockInWorld>;
         getExamples(): $Collection<string>;
         static parse(arg0: $HolderLookup<$Block_>, arg1: $StringReader): $BlockPredicateArgument$Result;
         parse<S>(arg0: $StringReader, arg1: S): $BlockPredicateArgument$Result;
@@ -61,9 +61,9 @@ declare module "@package/net/minecraft/commands/arguments/blocks" {
         requiresNbt(): boolean;
     }
     export class $BlockPredicateArgument$TagPredicate implements $BlockPredicateArgument$Result {
+        or(arg0: $Predicate_<$BlockInWorld>): $Predicate<$BlockInWorld>;
         negate(): $Predicate<$BlockInWorld>;
         and(arg0: $Predicate_<$BlockInWorld>): $Predicate<$BlockInWorld>;
-        or(arg0: $Predicate_<$BlockInWorld>): $Predicate<$BlockInWorld>;
     }
     export class $BlockStateParser$TagResult extends $Record {
         vagueProperties(): $Map<string, string>;
@@ -74,10 +74,10 @@ declare module "@package/net/minecraft/commands/arguments/blocks" {
     /**
      * Values that may be interpreted as {@link $BlockStateParser$TagResult}.
      */
-    export type $BlockStateParser$TagResult_ = { nbt?: $CompoundTag_, tag?: $HolderSet_<$Block>, vagueProperties?: $Map_<string, string>,  } | [nbt?: $CompoundTag_, tag?: $HolderSet_<$Block>, vagueProperties?: $Map_<string, string>, ];
+    export type $BlockStateParser$TagResult_ = { vagueProperties?: $Map_<string, string>, tag?: $HolderSet_<$Block>, nbt?: $CompoundTag_,  } | [vagueProperties?: $Map_<string, string>, tag?: $HolderSet_<$Block>, nbt?: $CompoundTag_, ];
     export class $BlockStateArgument implements $ArgumentType<$BlockInput> {
-        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getBlock(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $BlockInput;
+        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getExamples(): $Collection<string>;
         parse(arg0: $StringReader): $BlockInput;
         static block(arg0: $CommandBuildContext): $BlockStateArgument;
@@ -86,9 +86,9 @@ declare module "@package/net/minecraft/commands/arguments/blocks" {
         get examples(): $Collection<string>;
     }
     export class $BlockPredicateArgument$BlockPredicate implements $BlockPredicateArgument$Result {
+        or(arg0: $Predicate_<$BlockInWorld>): $Predicate<$BlockInWorld>;
         negate(): $Predicate<$BlockInWorld>;
         and(arg0: $Predicate_<$BlockInWorld>): $Predicate<$BlockInWorld>;
-        or(arg0: $Predicate_<$BlockInWorld>): $Predicate<$BlockInWorld>;
     }
     export class $BlockInput implements $Predicate<$BlockInWorld> {
         getDefinedProperties(): $Set<$Property<never>>;
@@ -96,9 +96,9 @@ declare module "@package/net/minecraft/commands/arguments/blocks" {
         test(arg0: $ServerLevel, arg1: $BlockPos_): boolean;
         test(arg0: $BlockInWorld): boolean;
         getState(): $BlockState;
+        or(arg0: $Predicate_<$BlockInWorld>): $Predicate<$BlockInWorld>;
         negate(): $Predicate<$BlockInWorld>;
         and(arg0: $Predicate_<$BlockInWorld>): $Predicate<$BlockInWorld>;
-        or(arg0: $Predicate_<$BlockInWorld>): $Predicate<$BlockInWorld>;
         constructor(arg0: $BlockState_, arg1: $Set_<$Property<never>>, arg2: $CompoundTag_);
         get definedProperties(): $Set<$Property<never>>;
         get state(): $BlockState;

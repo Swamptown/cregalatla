@@ -219,10 +219,10 @@ declare module "@package/net/minecraft/world/level/storage/loot/entries" {
         otherwise(arg0: $LootPoolEntryContainer$Builder<never>): $AlternativesEntry$Builder;
         getConditions(): $List<$LootItemCondition>;
         append(arg0: $LootPoolEntryContainer$Builder<never>): $EntryGroup$Builder;
+        unwrap(): T;
         build(): $LootPoolEntryContainer;
         when<E>(arg0: $Iterable_<E>, arg1: $Function_<E, $LootItemCondition$Builder>): T;
         when(arg0: $LootItemCondition$Builder_): T;
-        unwrap(): T;
         constructor();
         get this(): T;
         get conditions(): $List<$LootItemCondition>;

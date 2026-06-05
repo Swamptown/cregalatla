@@ -1,7 +1,7 @@
 import { $GoalSelector, $Goal } from "@package/net/minecraft/world/entity/ai/goal";
 import { $Codec } from "@package/com/mojang/serialization";
-import { $Tag_, $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
-import { $EntityType_, $VariantHolder, $EntityDimensions, $Entity$RemovalReason, $AgeableMob, $WalkAnimationState, $Mob, $Pose, $PortalProcessor, $Entity, $ReputationEventHandler } from "@package/net/minecraft/world/entity";
+import { $Tag_, $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $EntityType_, $VariantHolder, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $AgeableMob, $WalkAnimationState, $Mob, $Pose, $PortalProcessor, $Entity, $ReputationEventHandler } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $ParticleOptions_ } from "@package/net/minecraft/core/particles";
@@ -56,11 +56,11 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/minecraft/world/entity/npc" {
     export class $VillagerProfession extends $Record {
+        acquirableJobSite(): $Predicate<$Holder<$PoiType>>;
         workSound(): $SoundEvent;
         secondaryPoi(): $ImmutableSet<$Block>;
         requestedItems(): $ImmutableSet<$Item>;
         heldJobSite(): $Predicate<$Holder<$PoiType>>;
-        acquirableJobSite(): $Predicate<$Holder<$PoiType>>;
         name(): string;
         static CARTOGRAPHER: $VillagerProfession;
         static MASON: $VillagerProfession;
@@ -83,8 +83,12 @@ declare module "@package/net/minecraft/world/entity/npc" {
     /**
      * Values that may be interpreted as {@link $VillagerProfession}.
      */
-    export type $VillagerProfession_ = RegistryTypes.VillagerProfession | { heldJobSite?: $Predicate_<$Holder<$PoiType>>, secondaryPoi?: $ImmutableSet<$Block_>, acquirableJobSite?: $Predicate_<$Holder<$PoiType>>, workSound?: $SoundEvent_, requestedItems?: $ImmutableSet<$Item_>, name?: string,  } | [heldJobSite?: $Predicate_<$Holder<$PoiType>>, secondaryPoi?: $ImmutableSet<$Block_>, acquirableJobSite?: $Predicate_<$Holder<$PoiType>>, workSound?: $SoundEvent_, requestedItems?: $ImmutableSet<$Item_>, name?: string, ];
+    export type $VillagerProfession_ = RegistryTypes.VillagerProfession | { workSound?: $SoundEvent_, acquirableJobSite?: $Predicate_<$Holder<$PoiType>>, secondaryPoi?: $ImmutableSet<$Block_>, heldJobSite?: $Predicate_<$Holder<$PoiType>>, name?: string, requestedItems?: $ImmutableSet<$Item_>,  } | [workSound?: $SoundEvent_, acquirableJobSite?: $Predicate_<$Holder<$PoiType>>, secondaryPoi?: $ImmutableSet<$Block_>, heldJobSite?: $Predicate_<$Holder<$PoiType>>, name?: string, requestedItems?: $ImmutableSet<$Item_>, ];
     export class $AbstractVillager extends $AgeableMob implements $InventoryCarrier, $Npc, $Merchant {
+        notifyTradeUpdated(arg0: $ItemStack_): void;
+        getTradeUpdatedSound(arg0: boolean): $SoundEvent;
+        getNotifyTradeSound(): $SoundEvent;
+        playCelebrateSound(): void;
         addParticlesAroundSelf(arg0: $ParticleOptions_): void;
         getOffers(): $MerchantOffers;
         getVillagerXp(): number;
@@ -101,17 +105,12 @@ declare module "@package/net/minecraft/world/entity/npc" {
         overrideOffers(arg0: $MerchantOffers): void;
         overrideXp(arg0: number): void;
         notifyTrade(arg0: $MerchantOffer): void;
-        notifyTradeUpdated(arg0: $ItemStack_): void;
-        getTradeUpdatedSound(arg0: boolean): $SoundEvent;
-        getNotifyTradeSound(): $SoundEvent;
-        playCelebrateSound(): void;
-        getInventory(): $SimpleContainer;
         isClientSide(): boolean;
+        getInventory(): $SimpleContainer;
         writeInventoryToTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         readInventoryFromTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         openTradingScreen(arg0: $Player, arg1: $Component_, arg2: number): void;
         canRestock(): boolean;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -144,6 +143,7 @@ declare module "@package/net/minecraft/world/entity/npc" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -168,6 +168,7 @@ declare module "@package/net/minecraft/world/entity/npc" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -193,6 +194,7 @@ declare module "@package/net/minecraft/world/entity/npc" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -280,22 +282,21 @@ declare module "@package/net/minecraft/world/entity/npc" {
         static BASE_SAFE_FALL_DISTANCE: number;
         age: number;
         constructor(arg0: $EntityType_<$AbstractVillager>, arg1: $Level_);
+        get notifyTradeSound(): $SoundEvent;
         get villagerXp(): number;
         get trading(): boolean;
-        get notifyTradeSound(): $SoundEvent;
-        get inventory(): $SimpleContainer;
         get clientSide(): boolean;
+        get inventory(): $SimpleContainer;
     }
     export class $WanderingTrader extends $AbstractVillager {
-        getDespawnDelay(): number;
-        setDespawnDelay(arg0: number): void;
         setWanderTarget(arg0: $BlockPos_): void;
         getWanderTarget(): $BlockPos;
+        setDespawnDelay(arg0: number): void;
+        getDespawnDelay(): number;
         static access$000(arg0: $WanderingTrader): $PathNavigation;
         static access$100(arg0: $WanderingTrader): $PathNavigation;
         static access$200(arg0: $WanderingTrader): $PathNavigation;
         static access$300(arg0: $WanderingTrader): $PathNavigation;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -328,6 +329,7 @@ declare module "@package/net/minecraft/world/entity/npc" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -352,6 +354,7 @@ declare module "@package/net/minecraft/world/entity/npc" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -377,6 +380,7 @@ declare module "@package/net/minecraft/world/entity/npc" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -506,7 +510,6 @@ declare module "@package/net/minecraft/world/entity/npc" {
         constructor(arg0: number, arg1: $TagKey_<$Structure>, arg2: string, arg3: $Holder_<$MapDecorationType>, arg4: number, arg5: number);
     }
     export class $Villager extends $AbstractVillager implements $ReputationEventHandler, $VillagerDataHolder, $VillagerEntityAccessor {
-        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Villager;
         onReputationEventFrom(arg0: $ReputationEventType, arg1: $Entity): void;
         setOffers(arg0: $MerchantOffers): void;
         refreshBrain(arg0: $ServerLevel): void;
@@ -519,7 +522,7 @@ declare module "@package/net/minecraft/world/entity/npc" {
         wantsToSpawnGolem(arg0: number): boolean;
         wantsMoreFood(): boolean;
         assignProfessionWhenSpawned(): boolean;
-        handler$gkf000$moonlight$reg(arg0: $Brain<any>, arg1: $CallbackInfo): void;
+        handler$hhh000$moonlight$reg(arg0: $Brain<any>, arg1: $CallbackInfo): void;
         restock(): void;
         shouldRestock(): boolean;
         playWorkSound(): void;
@@ -531,13 +534,12 @@ declare module "@package/net/minecraft/world/entity/npc" {
         hasFarmSeeds(): boolean;
         gossip(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         spawnGolemIfNeeded(arg0: $ServerLevel, arg1: number, arg2: number): void;
-        static fabric_setItemFoodValues$fabric_content_registries_v0_$md$4ca6b6$0(arg0: $Map_<any, any>): void;
-        static fabric_setGatherableItems$fabric_content_registries_v0_$md$4ca6b6$1(arg0: $Set_<any>): void;
-        static fabric_getGatherableItems$fabric_content_registries_v0_$md$4ca6b6$2(): $Set<any>;
+        static fabric_setItemFoodValues$fabric_content_registries_v0_$md$3b3139$0(arg0: $Map_<any, any>): void;
+        static fabric_setGatherableItems$fabric_content_registries_v0_$md$3b3139$1(arg0: $Set_<any>): void;
+        static fabric_getGatherableItems$fabric_content_registries_v0_$md$3b3139$2(): $Set<any>;
         static createAttributes(): $AttributeSupplier$Builder;
         setVariant(arg0: $VillagerType_): void;
         getVariant(): $VillagerType;
-        serializeNBT(arg0: $HolderLookup$Provider): $VillagerType;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -570,6 +572,7 @@ declare module "@package/net/minecraft/world/entity/npc" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -594,6 +597,7 @@ declare module "@package/net/minecraft/world/entity/npc" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -620,6 +624,7 @@ declare module "@package/net/minecraft/world/entity/npc" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -730,6 +735,8 @@ declare module "@package/net/minecraft/world/entity/npc" {
      */
     export type $VillagerTrades$TypeSpecificTrade_ = { trades?: $Map_<$VillagerType_, $VillagerTrades$ItemListing_>,  } | [trades?: $Map_<$VillagerType_, $VillagerTrades$ItemListing_>, ];
     export class $ClientSideMerchant implements $Merchant {
+        notifyTradeUpdated(arg0: $ItemStack_): void;
+        getNotifyTradeSound(): $SoundEvent;
         getOffers(): $MerchantOffers;
         getVillagerXp(): number;
         setTradingPlayer(arg0: $Player): void;
@@ -738,15 +745,13 @@ declare module "@package/net/minecraft/world/entity/npc" {
         overrideOffers(arg0: $MerchantOffers): void;
         overrideXp(arg0: number): void;
         notifyTrade(arg0: $MerchantOffer): void;
-        notifyTradeUpdated(arg0: $ItemStack_): void;
-        getNotifyTradeSound(): $SoundEvent;
         isClientSide(): boolean;
         openTradingScreen(arg0: $Player, arg1: $Component_, arg2: number): void;
         canRestock(): boolean;
         constructor(arg0: $Player);
+        get notifyTradeSound(): $SoundEvent;
         get offers(): $MerchantOffers;
         get villagerXp(): number;
-        get notifyTradeSound(): $SoundEvent;
         get clientSide(): boolean;
     }
     export class $VillagerTrades$EnchantedItemForEmeralds implements $VillagerTrades$ItemListing, $TradeMatcher$Filterable {

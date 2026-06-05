@@ -65,12 +65,12 @@ declare module "@package/io/github/mortuusars/exposure/world/camera" {
     /**
      * Values that may be interpreted as {@link $FilmColor}.
      */
-    export type $FilmColor_ = { a?: number, g?: number, b?: number, r?: number,  } | [a?: number, g?: number, b?: number, r?: number, ];
+    export type $FilmColor_ = { g?: number, a?: number, r?: number, b?: number,  } | [g?: number, a?: number, r?: number, b?: number, ];
     export class $Camera {
-        idMatches(id: $CameraId_): boolean;
-        inSelfieMode(): boolean;
         isShutterOpen(): boolean;
         mapAttachment<T extends $Item, R>(attachment: $Attachment_<T>, func: $BiFunction_<T, $ItemStack, R>): (R) | undefined;
+        inSelfieMode(): boolean;
+        idMatches(id: $CameraId_): boolean;
         createSyncPacket(): $Packet;
         ifPresent(ifPresent: $BiConsumer_<$CameraItem, $ItemStack>): $Camera;
         ifPresent(ifPresent: $BiConsumer_<$CameraItem, $ItemStack>, orElse: $Runnable_): $Camera;

@@ -5,3 +5,4 @@ export * as net from "@package/net/createmod/catnip/net";
 export * as data from "@package/net/createmod/catnip/data";
 export * as lang from "@package/net/createmod/catnip/lang";
 export * as levelWrappers from "@package/net/createmod/catnip/levelWrappers";
+export * as math from "@package/net/createmod/catnip/math";

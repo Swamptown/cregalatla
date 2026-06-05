@@ -41,9 +41,9 @@ declare module "@package/net/neoforged/neoforge/client/model/data" {
     }
     export class $ModelProperty<T> implements $Predicate<T> {
         test(arg0: T): boolean;
+        or(arg0: $Predicate_<T>): $Predicate<T>;
         negate(): $Predicate<T>;
         and(arg0: $Predicate_<T>): $Predicate<T>;
-        or(arg0: $Predicate_<T>): $Predicate<T>;
         constructor();
         constructor(arg0: $Predicate_<T>);
     }

@@ -7,9 +7,9 @@ export * as settings from "@package/com/lowdragmc/lowdraglib2/editor/settings";
 
 declare module "@package/com/lowdragmc/lowdraglib2/editor" {
     export class $ClipboardManager {
+        copyDirect(arg0: $Object): void;
         getClipboardType(): $Class<never>;
         paste<T>(): T;
-        copyDirect(arg0: $Object): void;
         getClipboardContent(): $Object;
         clear(): void;
         copy(arg0: $Supplier_<never>): void;

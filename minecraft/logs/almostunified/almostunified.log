@@ -1,2 +1,12 @@
-[23:16:09.962] [INFO]: Loading config 'startup.json'.
-[23:16:17.034] [INFO]: Loaded plugins: almostunified:common, almostunified:neoforge
+[18:59:01.943] [INFO]: Loading config 'startup.json'.
+[18:59:09.948] [INFO]: Loaded plugins: almostunified:common, almostunified:neoforge
+[18:59:37.366] [WARN]: Reload detected. Reconstructing runtime.
+[18:59:37.368] [INFO]: Loading config 'debug.json'.
+[18:59:37.371] [INFO]: Loading config 'placeholders.json'.
+[18:59:37.375] [INFO]: Loading config 'tags.json'.
+[18:59:37.688] [INFO]: Loading config 'duplicates.json'.
+[18:59:37.691] [INFO]: Recipe count: 10305
+[18:59:37.738] [INFO]: 9194 out of 10305 recipes were loaded for unification.
+[18:59:37.990] [INFO]: Recipe count afterwards: 10289 (done in 298.7 ms)
+[18:59:39.025] [ERROR]: The following recipes were unified and threw exceptions when being loaded: [create_submarine:electrolyzer]
+[18:59:39.025] [WARN]: Try to add them to the ignore list and if the problem is gone, report it to the Almost Unified developers.

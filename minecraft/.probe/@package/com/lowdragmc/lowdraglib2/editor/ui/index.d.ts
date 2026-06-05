@@ -34,23 +34,23 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui" {
     /**
      * Values that may be interpreted as {@link $SplittableWindow$LayoutConfig}.
      */
-    export type $SplittableWindow$LayoutConfig_ = { first?: $SplittableWindow$LayoutConfig_, percentage?: number, second?: $SplittableWindow$LayoutConfig_,  } | [first?: $SplittableWindow$LayoutConfig_, percentage?: number, second?: $SplittableWindow$LayoutConfig_, ];
+    export type $SplittableWindow$LayoutConfig_ = { percentage?: number, first?: $SplittableWindow$LayoutConfig_, second?: $SplittableWindow$LayoutConfig_,  } | [percentage?: number, first?: $SplittableWindow$LayoutConfig_, second?: $SplittableWindow$LayoutConfig_, ];
     export class $View extends $UIElement {
-        createTab(): $Tab;
         setCanRemove(arg0: boolean): void;
         getViewContainer(): $ViewContainer;
         isCanRemove(): boolean;
         setOnRemove(arg0: $Runnable_): void;
         setDynamicName(arg0: $Supplier_<$Component>): void;
+        createTab(): $Tab;
         getName(): string;
         setName(arg0: string): void;
         getIcon(): $IGuiTexture;
         setIcon(arg0: $IGuiTexture_): void;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
-        constructor(arg0: string);
         constructor();
         constructor(arg0: string, arg1: $IGuiTexture_);
+        constructor(arg0: string);
         get viewContainer(): $ViewContainer;
         set onRemove(value: $Runnable_);
         set dynamicName(value: $Supplier_<$Component>);
@@ -83,8 +83,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui" {
         closeWindow(): void;
         createNewEditor(arg0: $Supplier_<$Editor>): $Editor;
         removeEditor(arg0: $Editor): void;
-        showEditor(arg0: $Editor): void;
         hasMultipleEditors(): boolean;
+        showEditor(arg0: $Editor): void;
         isMaximized(): boolean;
         retoreWindow(): void;
         maximizeWindow(): void;
@@ -107,11 +107,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui" {
         get editors(): $LinkedHashMap<$Editor, $UIElement>;
     }
     export class $Editor extends $UIElement {
+        getTop(): $UIElement;
         getAllViews(): $List<$View>;
         askToSaveProject(arg0: $Runnable_): void;
         isCurrentProjectDirty(): boolean;
-        saveProject(arg0: $Runnable_): void;
         saveProject(arg0: $Runnable_, arg1: boolean): void;
+        saveProject(arg0: $Runnable_): void;
         saveAsProject(arg0: $Runnable_): void;
         closeCurrentProject(arg0: boolean, arg1: $Runnable_): void;
         getCurrentProject(): $IProject;
@@ -119,7 +120,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui" {
         openSettingsPanel(): void;
         loadProject(arg0: $IProject, arg1: $File_): void;
         static emptyEditor(): $Editor;
-        getTop(): $UIElement;
         getMenuContainer(): $UIElement;
         getTopPlaceholder(): $UIElement;
         getButtonContainer(): $UIElement;
@@ -141,9 +141,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui" {
         close(): void;
         getIcon(): $UIElement;
         getTitle(): $Component;
-        getWindow(): $EditorWindow;
-        openMenu(arg0: number, arg1: number, arg2: $TreeBuilder$Menu): void;
         openMenu<T, C>(arg0: number, arg1: number, arg2: $TreeNode<T, C>, arg3: $UIElementProvider_<T>): $Menu<T, C>;
+        openMenu(arg0: number, arg1: number, arg2: $TreeBuilder$Menu): void;
+        getWindow(): $EditorWindow;
         leftWindow: $SplittableWindow;
         static CODEC: $Codec<$UIElement>;
         resourceView: $ResourceView;

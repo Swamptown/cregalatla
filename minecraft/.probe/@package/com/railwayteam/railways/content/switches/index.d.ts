@@ -38,9 +38,9 @@ declare module "@package/com/railwayteam/railways/content/switches" {
         get locked(): boolean;
     }
     export class $TrackSwitchBlock$SwitchState extends $Enum<$TrackSwitchBlock$SwitchState> implements $StringRepresentable {
-        canSwitchTo(arg0: $TrackSwitchBlock$SwitchState_, arg1: $TrackSwitchBlock$SwitchConstraint): boolean;
         nextStateForPonder(arg0: $TrackSwitchBlock$SwitchConstraint): $TrackSwitchBlock$SwitchState;
         static fromSteerDirection(arg0: $TravellingPoint$SteerDirection_, arg1: boolean): $TrackSwitchBlock$SwitchState;
+        canSwitchTo(arg0: $TrackSwitchBlock$SwitchState_, arg1: $TrackSwitchBlock$SwitchConstraint): boolean;
         nextStateFor(arg0: $TrackSwitch, arg1: $TrackSwitchBlock$SwitchConstraint): $TrackSwitchBlock$SwitchState;
         static values(): $TrackSwitchBlock$SwitchState[];
         static valueOf(arg0: string): $TrackSwitchBlock$SwitchState;

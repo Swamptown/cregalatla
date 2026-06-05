@@ -11,46 +11,46 @@ import { $List, $List_ } from "@package/java/util";
 declare module "@package/io/github/mortuusars/exposure/neoforge/api/event" {
     export class $FrameAddedEvent extends $Event {
         getPositionsInFrame(): $List<$BlockPos>;
-        getCameraHolder(): $CameraHolder;
         getCameraHolderEntity(): $Entity;
+        getCameraHolder(): $CameraHolder;
         getEntitiesInFrame(): $List<$LivingEntity>;
-        getCamera(): $ItemStack;
         getFrame(): $Frame;
+        getCamera(): $ItemStack;
         constructor(cameraHolder: $CameraHolder, camera: $ItemStack_, frame: $Frame_, positionsInFrame: $List_<$BlockPos_>, entitiesInFrame: $List_<$LivingEntity>);
         get positionsInFrame(): $List<$BlockPos>;
-        get cameraHolder(): $CameraHolder;
         get cameraHolderEntity(): $Entity;
+        get cameraHolder(): $CameraHolder;
         get entitiesInFrame(): $List<$LivingEntity>;
-        get camera(): $ItemStack;
         get frame(): $Frame;
+        get camera(): $ItemStack;
     }
     export class $ModifyFrameExtraDataEvent extends $Event {
         getPositionsInFrame(): $List<$BlockPos>;
-        getCameraHolder(): $CameraHolder;
         getCameraHolderEntity(): $Entity;
+        getCameraHolder(): $CameraHolder;
         getCaptureProperties(): $CaptureParameters;
         getEntitiesInFrame(): $List<$LivingEntity>;
         getCamera(): $ItemStack;
         getData(): $ExtraData;
         constructor(cameraHolder: $CameraHolder, stack: $ItemStack_, captureParameters: $CaptureParameters_, positionsInFrame: $List_<$BlockPos_>, entitiesInFrame: $List_<$LivingEntity>, data: $ExtraData);
         get positionsInFrame(): $List<$BlockPos>;
-        get cameraHolder(): $CameraHolder;
         get cameraHolderEntity(): $Entity;
+        get cameraHolder(): $CameraHolder;
         get captureProperties(): $CaptureParameters;
         get entitiesInFrame(): $List<$LivingEntity>;
         get camera(): $ItemStack;
         get data(): $ExtraData;
     }
     export class $ModifyEntityInFrameDataEvent extends $Event {
-        getCameraHolder(): $CameraHolder;
         getCameraHolderEntity(): $Entity;
         getEntityInFrame(): $LivingEntity;
+        getCameraHolder(): $CameraHolder;
         getCamera(): $ItemStack;
         getData(): $ExtraData;
         constructor(cameraHolder: $CameraHolder, camera: $ItemStack_, entityInFrame: $LivingEntity, data: $ExtraData);
-        get cameraHolder(): $CameraHolder;
         get cameraHolderEntity(): $Entity;
         get entityInFrame(): $LivingEntity;
+        get cameraHolder(): $CameraHolder;
         get camera(): $ItemStack;
         get data(): $ExtraData;
     }

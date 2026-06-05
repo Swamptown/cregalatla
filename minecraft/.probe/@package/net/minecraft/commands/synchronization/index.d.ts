@@ -23,9 +23,9 @@ declare module "@package/net/minecraft/commands/synchronization" {
         unpack(arg0: A): $SingletonArgumentInfo$Template;
     }
     export class $ArgumentTypeInfos {
-        static registerByClass<A extends $ArgumentType<never>, T extends $ArgumentTypeInfo$Template<A>, I extends $ArgumentTypeInfo<A, T>>(arg0: $Class<A>, arg1: I): I;
         static isClassRecognized(arg0: $Class<never>): boolean;
         static byClass<A extends $ArgumentType<never>>(arg0: A): $ArgumentTypeInfo<A, never>;
+        static registerByClass<A extends $ArgumentType<never>, T extends $ArgumentTypeInfo$Template<A>, I extends $ArgumentTypeInfo<A, T>>(arg0: $Class<A>, arg1: I): I;
         static bootstrap(arg0: $Registry<$ArgumentTypeInfo_<never, never>>): $ArgumentTypeInfo<never, never>;
         static unpack<A extends $ArgumentType<never>>(arg0: A): $ArgumentTypeInfo$Template<A>;
         static BY_CLASS: $Map<$Class<never>, $ArgumentTypeInfo<never, never>>;
@@ -36,10 +36,10 @@ declare module "@package/net/minecraft/commands/synchronization" {
     export interface $ArgumentTypeInfo<A, T> extends RegistryMarked<RegistryTypes.CommandArgumentTypeTag, RegistryTypes.CommandArgumentType> {}
     export class $ArgumentUtils {
         static findUsedArgumentTypes<T>(arg0: $CommandNode<T>): $Set<$ArgumentType<never>>;
-        static serializeNodeToJson<S>(arg0: $CommandDispatcher<S>, arg1: $CommandNode<S>): $JsonObject;
         static createNumberFlags(arg0: boolean, arg1: boolean): number;
         static numberHasMin(arg0: number): boolean;
         static numberHasMax(arg0: number): boolean;
+        static serializeNodeToJson<S>(arg0: $CommandDispatcher<S>, arg1: $CommandNode<S>): $JsonObject;
         constructor();
     }
     export class $ArgumentTypeInfo<A extends $ArgumentType<never>, T extends $ArgumentTypeInfo$Template<A>> {

@@ -43,33 +43,33 @@ declare module "@package/mezz/jei/api/gui/widgets" {
     export class $IRecipeExtrasBuilder {
     }
     export interface $IRecipeExtrasBuilder {
-        addDrawable(arg0: $IDrawable, arg1: number, arg2: number): void;
         addDrawable(arg0: $IDrawable): $IPlaceable<never>;
+        addDrawable(arg0: $IDrawable, arg1: number, arg2: number): void;
+        addSlottedWidget(arg0: $ISlottedRecipeWidget, arg1: $List_<$IRecipeSlotDrawable>): void;
+        addInputHandler(arg0: $IJeiInputHandler_): void;
+        addGuiEventListener(arg0: $IJeiGuiEventListener_): void;
+        addScrollGridWidget(arg0: $List_<$IRecipeSlotDrawable>, arg1: number, arg2: number): $IScrollGridWidget;
         /**
          * @deprecated
          */
         addAnimatedRecipeArrow(arg0: number, arg1: number, arg2: number): void;
         addAnimatedRecipeArrow(arg0: number): $IPlaceable<never>;
+        addAnimatedRecipeFlame(arg0: number): $IPlaceable<never>;
         /**
          * @deprecated
          */
         addAnimatedRecipeFlame(arg0: number, arg1: number, arg2: number): void;
-        addAnimatedRecipeFlame(arg0: number): $IPlaceable<never>;
         /**
          * @deprecated
          */
         addRecipeArrow(arg0: number, arg1: number): void;
         addRecipeArrow(): $IPlaceable<never>;
+        addRecipePlusSign(): $IPlaceable<never>;
         /**
          * @deprecated
          */
         addRecipePlusSign(arg0: number, arg1: number): void;
-        addRecipePlusSign(): $IPlaceable<never>;
         addScrollBoxWidget(arg0: number, arg1: number, arg2: number, arg3: number): $IScrollBoxWidget;
-        addSlottedWidget(arg0: $ISlottedRecipeWidget, arg1: $List_<$IRecipeSlotDrawable>): void;
-        addInputHandler(arg0: $IJeiInputHandler_): void;
-        addGuiEventListener(arg0: $IJeiGuiEventListener_): void;
-        addScrollGridWidget(arg0: $List_<$IRecipeSlotDrawable>, arg1: number, arg2: number): $IScrollGridWidget;
         getRecipeSlots(): $IRecipeSlotDrawablesView;
         addText(arg0: $List_<$FormattedText>, arg1: number, arg2: number): $ITextWidget;
         /**
@@ -87,6 +87,7 @@ declare module "@package/mezz/jei/api/gui/widgets" {
     export class $ITextWidget {
     }
     export interface $ITextWidget extends $IPlaceable<$ITextWidget> {
+        setLineSpacing(arg0: number): $ITextWidget;
         /**
          * @deprecated
          */
@@ -111,24 +112,23 @@ declare module "@package/mezz/jei/api/gui/widgets" {
          * @deprecated
          */
         alignVerticalBottom(): $ITextWidget;
-        setLineSpacing(arg0: number): $ITextWidget;
         setFont(arg0: $Font): $ITextWidget;
-        setShadow(arg0: boolean): $ITextWidget;
         setColor(arg0: number): $ITextWidget;
+        setShadow(arg0: boolean): $ITextWidget;
         setTextAlignment(arg0: $HorizontalAlignment_): $ITextWidget;
         setTextAlignment(arg0: $VerticalAlignment_): $ITextWidget;
         set lineSpacing(value: number);
         set font(value: $Font);
-        set shadow(value: boolean);
         set color(value: number);
+        set shadow(value: boolean);
     }
     export class $IRecipeWidget {
     }
     export interface $IRecipeWidget {
         drawWidget(arg0: $GuiGraphics, arg1: number, arg2: number): void;
+        tick(): void;
         getTooltip(arg0: $ITooltipBuilder, arg1: number, arg2: number): void;
         getPosition(): $ScreenPosition;
-        tick(): void;
         /**
          * @deprecated
          */

@@ -28,7 +28,7 @@ declare module "@package/net/minecraft/network/protocol/status" {
     /**
      * Values that may be interpreted as {@link $ServerStatus$Players}.
      */
-    export type $ServerStatus$Players_ = { online?: number, sample?: $List_<$GameProfile>, max?: number,  } | [online?: number, sample?: $List_<$GameProfile>, max?: number, ];
+    export type $ServerStatus$Players_ = { sample?: $List_<$GameProfile>, online?: number, max?: number,  } | [sample?: $List_<$GameProfile>, online?: number, max?: number, ];
     export class $ClientStatusPacketListener {
     }
     export interface $ClientStatusPacketListener extends $ClientPongPacketListener, $ClientboundPacketListener {
@@ -45,7 +45,7 @@ declare module "@package/net/minecraft/network/protocol/status" {
     /**
      * Values that may be interpreted as {@link $ServerStatus$Version}.
      */
-    export type $ServerStatus$Version_ = { protocol?: number, name?: string,  } | [protocol?: number, name?: string, ];
+    export type $ServerStatus$Version_ = { name?: string, protocol?: number,  } | [name?: string, protocol?: number, ];
     export class $ClientboundStatusResponsePacket extends $Record implements $Packet<$ClientStatusPacketListener> {
         cachedStatus(): string;
         type(): $PacketType<$ClientboundStatusResponsePacket>;
@@ -62,7 +62,7 @@ declare module "@package/net/minecraft/network/protocol/status" {
     /**
      * Values that may be interpreted as {@link $ClientboundStatusResponsePacket}.
      */
-    export type $ClientboundStatusResponsePacket_ = { cachedStatus?: string, status?: $ServerStatus_,  } | [cachedStatus?: string, status?: $ServerStatus_, ];
+    export type $ClientboundStatusResponsePacket_ = { status?: $ServerStatus_, cachedStatus?: string,  } | [status?: $ServerStatus_, cachedStatus?: string, ];
     export class $ServerboundStatusRequestPacket implements $Packet<$ServerStatusPacketListener> {
         type(): $PacketType<$ServerboundStatusRequestPacket>;
         handle(arg0: $ServerStatusPacketListener): void;
@@ -88,10 +88,10 @@ declare module "@package/net/minecraft/network/protocol/status" {
         constructor();
     }
     export class $ServerStatus extends $Record implements $ServerDataExtension {
-        favicon(): ($ServerStatus$Favicon) | undefined;
         preventsChatReports(): boolean;
         setPreventsChatReports(arg0: boolean): void;
         isModded(): boolean;
+        favicon(): ($ServerStatus$Favicon) | undefined;
         version(): ($ServerStatus$Version) | undefined;
         description(): $Component;
         players(): ($ServerStatus$Players) | undefined;
@@ -107,7 +107,7 @@ declare module "@package/net/minecraft/network/protocol/status" {
     /**
      * Values that may be interpreted as {@link $ServerStatus}.
      */
-    export type $ServerStatus_ = { description?: $Component_, favicon?: ($ServerStatus$Favicon_) | undefined, version?: ($ServerStatus$Version_) | undefined, isModded?: boolean, players?: ($ServerStatus$Players_) | undefined, enforcesSecureChat?: boolean,  } | [description?: $Component_, favicon?: ($ServerStatus$Favicon_) | undefined, version?: ($ServerStatus$Version_) | undefined, isModded?: boolean, players?: ($ServerStatus$Players_) | undefined, enforcesSecureChat?: boolean, ];
+    export type $ServerStatus_ = { players?: ($ServerStatus$Players_) | undefined, isModded?: boolean, version?: ($ServerStatus$Version_) | undefined, favicon?: ($ServerStatus$Favicon_) | undefined, description?: $Component_, enforcesSecureChat?: boolean,  } | [players?: ($ServerStatus$Players_) | undefined, isModded?: boolean, version?: ($ServerStatus$Version_) | undefined, favicon?: ($ServerStatus$Favicon_) | undefined, description?: $Component_, enforcesSecureChat?: boolean, ];
     export class $StatusProtocols {
         static CLIENTBOUND: $ProtocolInfo<$ClientStatusPacketListener>;
         static CLIENTBOUND_TEMPLATE: $ProtocolInfo$Unbound<$ClientStatusPacketListener, $FriendlyByteBuf>;

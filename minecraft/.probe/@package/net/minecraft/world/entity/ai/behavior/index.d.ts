@@ -16,6 +16,7 @@ import { $Brain } from "@package/net/minecraft/world/entity/ai";
 import { $WeightedEntry$IntrusiveBase } from "@package/net/minecraft/util/random";
 import { $TargetingConditions } from "@package/net/minecraft/world/entity/ai/targeting";
 import { $Enum, $Object, $Iterable } from "@package/java/lang";
+import { $IWeightedList, $IWeightedListEntry } from "@package/com/ishland/c2me/base/mixin/access";
 import { $TagKey, $TagKey_ } from "@package/net/minecraft/tags";
 import { $PoiType } from "@package/net/minecraft/world/entity/ai/village/poi";
 import { $ItemStack_ } from "@package/net/minecraft/world/item";
@@ -42,8 +43,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(arg0: number, arg1: number);
     }
     export class $TradeWithVillager extends $Behavior<$Villager> {
-        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
@@ -61,8 +62,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $JumpOnBed extends $Behavior<$Mob> {
-        canStillUse(arg0: $ServerLevel, arg1: $Mob, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Mob): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Mob, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Mob, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Mob, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Mob, arg2: number): void;
@@ -71,8 +72,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(arg0: number);
     }
     export class $WorkAtComposter extends $WorkAtPoi implements $FarmerWorkTaskAccessor {
-        static fabric_setCompostables$fabric_content_registries_v0_$md$4ca6b6$0(arg0: $List_<any>): void;
-        static fabric_getCompostable$fabric_content_registries_v0_$md$4ca6b6$1(): $List<any>;
+        static fabric_setCompostables$fabric_content_registries_v0_$md$3b3139$0(arg0: $List_<any>): void;
+        static fabric_getCompostable$fabric_content_registries_v0_$md$3b3139$1(): $List<any>;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();
@@ -95,13 +96,13 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(arg0: $MemoryModuleType_<number>);
     }
     export class $PrepareRamNearestTarget$RamCandidate {
-        getStartPosition(): $BlockPos;
         getTargetPosition(): $BlockPos;
+        getStartPosition(): $BlockPos;
         getTarget(): $LivingEntity;
         target: $LivingEntity;
         constructor(arg0: $BlockPos_, arg1: $BlockPos_, arg2: $LivingEntity);
-        get startPosition(): $BlockPos;
         get targetPosition(): $BlockPos;
+        get startPosition(): $BlockPos;
     }
     export class $SetWalkTargetAwayFrom {
         static entity(arg0: $MemoryModuleType_<$Entity>, arg1: number, arg2: number, arg3: boolean): $OneShot<$PathfinderMob>;
@@ -109,8 +110,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $ShowTradesToPlayer extends $Behavior<$Villager> {
-        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
@@ -152,8 +153,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
     }
     export class $RamTarget extends $Behavior<$Goat> {
         finishRam(arg0: $ServerLevel, arg1: $Goat): void;
-        canStillUse(arg0: $ServerLevel, arg1: $Goat, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Goat): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Goat, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Goat, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Goat, arg2: number): void;
         static TIME_OUT_DURATION: number;
@@ -163,8 +164,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(arg0: $Function_<$Goat, $UniformInt>, arg1: $TargetingConditions, arg2: number, arg3: $ToDoubleFunction_<$Goat>, arg4: $Function_<$Goat, $SoundEvent>, arg5: $Function_<$Goat, $SoundEvent>);
     }
     export class $GoToPotentialJobSite extends $Behavior<$Villager> {
-        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         speedModifier: number;
@@ -185,8 +186,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $Croak extends $Behavior<$Frog> {
-        canStillUse(arg0: $ServerLevel, arg1: $Frog, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Frog): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Frog, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Frog, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Frog, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Frog, arg2: number): void;
@@ -209,8 +210,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $Swim extends $Behavior<$Mob> {
-        canStillUse(arg0: $ServerLevel, arg1: $Mob, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Mob): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Mob, arg2: number): boolean;
         static shouldSwim(arg0: $Mob): boolean;
         tick(arg0: $ServerLevel, arg1: $Mob, arg2: number): void;
         static DEFAULT_DURATION: number;
@@ -218,8 +219,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(arg0: number);
     }
     export class $LookAndFollowTradingPlayerSink extends $Behavior<$Villager> {
-        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
@@ -262,20 +263,20 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
     export class $Behavior<E extends $LivingEntity> implements $BehaviorControl<E> {
         doStop(arg0: $ServerLevel, arg1: E, arg2: number): void;
         tickOrStop(arg0: $ServerLevel, arg1: E, arg2: number): void;
+        tryStart(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
+        checkExtraStartConditions(arg0: $ServerLevel, arg1: E): boolean;
         canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         hasRequiredMemories(arg0: $LivingEntity): boolean;
-        checkExtraStartConditions(arg0: $ServerLevel, arg1: E): boolean;
-        tryStart(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
-        tick(arg0: $ServerLevel, arg1: E, arg2: number): void;
         timedOut(arg0: number): boolean;
+        tick(arg0: $ServerLevel, arg1: E, arg2: number): void;
         start(arg0: $ServerLevel, arg1: E, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: E, arg2: number): void;
         debugString(): string;
         getStatus(): $Behavior$Status;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
-        constructor(arg0: $Map_<$MemoryModuleType_<never>, $MemoryStatus_>);
         constructor(arg0: $Map_<$MemoryModuleType_<never>, $MemoryStatus_>, arg1: number);
+        constructor(arg0: $Map_<$MemoryModuleType_<never>, $MemoryStatus_>);
         constructor(arg0: $Map_<$MemoryModuleType_<never>, $MemoryStatus_>, arg1: number, arg2: number);
         get status(): $Behavior$Status;
     }
@@ -290,8 +291,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $CrossbowAttack<E extends $Mob, T extends $LivingEntity> extends $Behavior<E> {
-        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: E): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: E, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: E, arg2: number): void;
         static DEFAULT_DURATION: number;
@@ -303,8 +304,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $VillagerPanicTrigger extends $Behavior<$Villager> {
-        static hasHostile(arg0: $LivingEntity): boolean;
         canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
+        static hasHostile(arg0: $LivingEntity): boolean;
         tick(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         static isHurt(arg0: $LivingEntity): boolean;
@@ -313,8 +314,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $AnimalPanic<E extends $PathfinderMob> extends $Behavior<E> {
-        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: E): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: E, arg2: number): void;
         start(arg0: $ServerLevel, arg1: E, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: E, arg2: number): void;
@@ -343,17 +344,17 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $WorkAtPoi extends $Behavior<$Villager> {
+        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
         useWorkstation(arg0: $ServerLevel, arg1: $Villager): void;
         canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
-        checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
         start(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();
     }
     export class $CelebrateVillagersSurvivedRaid extends $Behavior<$Villager> {
-        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         static DEFAULT_DURATION: number;
@@ -409,7 +410,7 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         maxLongJumpWidth: number;
         constructor(arg0: $UniformInt, arg1: number, arg2: number, arg3: number, arg4: $Function_<E, $SoundEvent>, arg5: $TagKey_<$Block>, arg6: number, arg7: $BiPredicate_<E, $BlockPos>);
     }
-    export class $ShufflingList<U> implements $Iterable<U>, $WeightedListIterable<any> {
+    export class $ShufflingList<U> implements $Iterable<U>, $WeightedListIterable<any>, $IWeightedList<any> {
         add(arg0: $Object, arg1: number): $ShufflingList<$Object>;
         iterator(): $Iterator<any>;
         stream(): $Stream<$Object>;
@@ -417,8 +418,10 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         static codec<U>(arg0: $Codec<U>): $Codec<$ShufflingList<U>>;
         spliterator(): $Spliterator<U>;
         forEach(arg0: $Consumer_<U>): void;
+        getEntries(): $List<$ShufflingList$WeightedEntry<$Object>>;
         entries: $List<$ShufflingList$WeightedEntry<$Object>>;
         constructor();
+        constructor(arg0: $List_<$ShufflingList$WeightedEntry<$Object>>);
         [Symbol.iterator](): Iterator<any>
     }
     export class $SetWalkTargetFromAttackTargetIfTargetOutOfReach {
@@ -438,8 +441,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
     export class $EntityTracker implements $PositionTracker {
         currentBlockPosition(): $BlockPos;
         isVisibleBy(arg0: $LivingEntity): boolean;
-        currentPosition(): $Vec3;
         getEntity(): $Entity;
+        currentPosition(): $Vec3;
         constructor(arg0: $Entity, arg1: boolean);
         get entity(): $Entity;
     }
@@ -460,8 +463,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
     }
     export class $FollowTemptation extends $Behavior<$PathfinderMob> {
         canStillUse(arg0: $ServerLevel, arg1: $PathfinderMob, arg2: number): boolean;
-        getSpeedModifier(arg0: $PathfinderMob): number;
         tick(arg0: $ServerLevel, arg1: $PathfinderMob, arg2: number): void;
+        getSpeedModifier(arg0: $PathfinderMob): number;
         start(arg0: $ServerLevel, arg1: $PathfinderMob, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $PathfinderMob, arg2: number): void;
         static DEFAULT_DURATION: number;
@@ -472,11 +475,13 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(arg0: $Function_<$LivingEntity, number>, arg1: $Function_<$LivingEntity, number>);
         constructor(arg0: $Function_<$LivingEntity, number>);
     }
-    export class $ShufflingList$WeightedEntry<T> {
+    export class $ShufflingList$WeightedEntry<T> implements $IWeightedListEntry {
         setRandom(arg0: number): void;
         getData(): T;
         static codec<E>(arg0: $Codec<E>): $Codec<$ShufflingList$WeightedEntry<E>>;
         getWeight(): number;
+        invokeGetShuffledOrder(): number;
+        invokeSetShuffledOrder(arg0: number): void;
         data: T;
         weight: number;
         constructor(arg0: T, arg1: number);
@@ -487,8 +492,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $VillagerMakeLove extends $Behavior<$Villager> {
-        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
@@ -558,23 +563,23 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
      */
     export type $GateBehavior$RunningPolicy_ = "run_one" | "try_all";
     export class $BehaviorUtils {
+        static setWalkAndLookTargetMemories(arg0: $LivingEntity, arg1: $Entity, arg2: number, arg3: number): void;
+        static setWalkAndLookTargetMemories(arg0: $LivingEntity, arg1: $BlockPos_, arg2: number, arg3: number): void;
+        static setWalkAndLookTargetMemories(arg0: $LivingEntity, arg1: $PositionTracker, arg2: number, arg3: number): void;
+        static lookAtEntity(arg0: $LivingEntity, arg1: $LivingEntity): void;
         static targetIsValid(arg0: $Brain<never>, arg1: $MemoryModuleType_<$LivingEntity>, arg2: $EntityType_<never>): boolean;
+        static lockGazeAndWalkToEachOther(arg0: $LivingEntity, arg1: $LivingEntity, arg2: number, arg3: number): void;
         static getTargetNearestMe(arg0: $LivingEntity, arg1: $LivingEntity, arg2: $LivingEntity): $LivingEntity;
+        static entityIsVisible(arg0: $Brain<never>, arg1: $LivingEntity): boolean;
         static isBreeding(arg0: $LivingEntity): boolean;
         static getNearestTarget(arg0: $LivingEntity, arg1: ($LivingEntity) | undefined, arg2: $LivingEntity): $LivingEntity;
-        static lockGazeAndWalkToEachOther(arg0: $LivingEntity, arg1: $LivingEntity, arg2: number, arg3: number): void;
-        static entityIsVisible(arg0: $Brain<never>, arg1: $LivingEntity): boolean;
         static isWithinAttackRange(arg0: $Mob, arg1: $LivingEntity, arg2: number): boolean;
-        static lookAtEntity(arg0: $LivingEntity, arg1: $LivingEntity): void;
-        static setWalkAndLookTargetMemories(arg0: $LivingEntity, arg1: $PositionTracker, arg2: number, arg3: number): void;
-        static setWalkAndLookTargetMemories(arg0: $LivingEntity, arg1: $BlockPos_, arg2: number, arg3: number): void;
-        static setWalkAndLookTargetMemories(arg0: $LivingEntity, arg1: $Entity, arg2: number, arg3: number): void;
         static getLivingEntityFromUUIDMemory(arg0: $LivingEntity, arg1: $MemoryModuleType_<$UUID_>): ($LivingEntity) | undefined;
-        static throwItem(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $Vec3_, arg3: $Vec3_, arg4: number): void;
-        static throwItem(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $Vec3_): void;
         static getRandomSwimmablePos(arg0: $PathfinderMob, arg1: number, arg2: number): $Vec3;
         static findSectionClosestToVillage(arg0: $ServerLevel, arg1: $SectionPos, arg2: number): $SectionPos;
         static isOtherTargetMuchFurtherAwayThanCurrentAttackTarget(arg0: $LivingEntity, arg1: $LivingEntity, arg2: number): boolean;
+        static throwItem(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $Vec3_): void;
+        static throwItem(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $Vec3_, arg3: $Vec3_, arg4: number): void;
         static canSee(arg0: $LivingEntity, arg1: $LivingEntity): boolean;
     }
     export class $PositionTracker {
@@ -600,9 +605,9 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
      */
     export type $GateBehavior$OrderPolicy_ = "ordered" | "shuffled";
     export class $GiveGiftToHero extends $Behavior<$Villager> implements $GiveGiftsToHeroTaskAccessor {
-        static fabric_getGifts$fabric_content_registries_v0_$md$4ca6b6$0(): $Map<any, any>;
-        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
+        static fabric_getGifts$fabric_content_registries_v0_$md$3b3139$0(): $Map<any, any>;
         tick(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
@@ -611,8 +616,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(arg0: number);
     }
     export class $MoveToTargetSink extends $Behavior<$Mob> {
-        canStillUse(arg0: $ServerLevel, arg1: $Mob, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Mob): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Mob, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Mob, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Mob, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Mob, arg2: number): void;
@@ -656,8 +661,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         getJumpCandidate(arg0: $ServerLevel): ($LongJumpToRandomPos$PossibleJump) | undefined;
         static defaultAcceptableLandingSpot<E extends $Mob>(arg0: E, arg1: $BlockPos_): boolean;
         pickCandidate(arg0: $ServerLevel, arg1: E, arg2: number): void;
-        canStillUse(arg0: $ServerLevel, arg1: $Mob, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Mob): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Mob, arg2: number): boolean;
         calculateOptimalJumpVector(arg0: $Mob, arg1: $Vec3_): $Vec3;
         tick(arg0: $ServerLevel, arg1: E, arg2: number): void;
         start(arg0: $ServerLevel, arg1: E, arg2: number): void;
@@ -689,8 +694,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $UseBonemeal extends $Behavior<$Villager> {
-        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
@@ -709,8 +714,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $AnimalMakeLove extends $Behavior<$Animal> {
-        canStillUse(arg0: $ServerLevel, arg1: $Animal, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Animal): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Animal, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Animal, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Animal, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Animal, arg2: number): void;
@@ -739,8 +744,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $HarvestFarmland extends $Behavior<$Villager> {
-        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Villager): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Villager, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Villager, arg2: number): void;

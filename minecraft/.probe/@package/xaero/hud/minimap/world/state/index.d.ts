@@ -10,7 +10,6 @@ import { $Object } from "@package/java/lang";
 
 declare module "@package/xaero/hud/minimap/world/state" {
     export class $MinimapWorldState {
-        getAutoContainerPathIgnoreCaseCache(): $XaeroPath;
         getAutoRootContainerPath(): $XaeroPath;
         getCurrentContainerPath(): $XaeroPath;
         getCurrentRootContainerPath(): $XaeroPath;
@@ -25,35 +24,36 @@ declare module "@package/xaero/hud/minimap/world/state" {
         setOutdatedAutoRootContainerPath(arg0: number, arg1: $XaeroPath): void;
         getOutdatedAutoRootContainerPath(arg0: number): $XaeroPath;
         setAutoWorldPath(arg0: $XaeroPath): void;
+        getAutoContainerPathIgnoreCaseCache(): $XaeroPath;
         constructor();
         get currentContainerPath(): $XaeroPath;
         get currentRootContainerPath(): $XaeroPath;
         get customContainerPath(): $XaeroPath;
     }
     export class $MinimapWorldStateUpdater {
+        onServerLevelId(arg0: number): void;
         hasServerLevelId(arg0: $MinimapWorldRootContainer): boolean;
         getAutoWorldNodeBase(arg0: $MinimapWorldRootContainer): $Object;
-        /**
-         * @deprecated
-         */
-        getAutoRootContainerPath(arg0: number, arg1: $ClientPacketListener, arg2: $MinimapSession): $XaeroPath;
         getAutoRootContainerPath(arg0: number): $XaeroPath;
         /**
          * @deprecated
          */
-        ignoreContainerCase(arg0: $XaeroPath, arg1: $XaeroPath, arg2: $MinimapSession): $XaeroPath;
+        getAutoRootContainerPath(arg0: number, arg1: $ClientPacketListener, arg2: $MinimapSession): $XaeroPath;
         ignoreContainerCase(arg0: $XaeroPath, arg1: $XaeroPath): $XaeroPath;
+        /**
+         * @deprecated
+         */
+        ignoreContainerCase(arg0: $XaeroPath, arg1: $XaeroPath, arg2: $MinimapSession): $XaeroPath;
         getPotentialWorldNode(arg0: $ResourceKey_<$Level>, arg1: boolean): string;
         /**
          * @deprecated
          */
         getPotentialWorldNode(arg0: $ResourceKey_<$Level>, arg1: boolean, arg2: $MinimapSession): string;
-        getPotentialContainerPath(): $XaeroPath;
         /**
          * @deprecated
          */
         getPotentialContainerPath(arg0: $MinimapSession): $XaeroPath;
-        onServerLevelId(arg0: number): void;
+        getPotentialContainerPath(): $XaeroPath;
         setCurrentWorldSpawn(arg0: $BlockPos_): void;
         update(): void;
         /**

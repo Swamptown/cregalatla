@@ -13,8 +13,8 @@ import { $HitResult } from "@package/net/minecraft/world/phys";
 
 declare module "@package/net/minecraft/client/tutorial" {
     export class $MovementTutorialStepInstance implements $TutorialStepInstance {
-        onInput(arg0: $Input): void;
         tick(): void;
+        onInput(arg0: $Input): void;
         clear(): void;
         onMouse(arg0: number, arg1: number): void;
         onLookAt(arg0: $ClientLevel, arg1: $HitResult): void;
@@ -40,8 +40,8 @@ declare module "@package/net/minecraft/client/tutorial" {
     export class $TutorialStepInstance {
     }
     export interface $TutorialStepInstance {
-        onInput(arg0: $Input): void;
         tick(): void;
+        onInput(arg0: $Input): void;
         clear(): void;
         onLookAt(arg0: $ClientLevel, arg1: $HitResult): void;
         onOpenInventory(): void;
@@ -66,8 +66,8 @@ declare module "@package/net/minecraft/client/tutorial" {
         constructor(arg0: $Tutorial);
     }
     export class $CompletedTutorialStepInstance implements $TutorialStepInstance {
-        onInput(arg0: $Input): void;
         tick(): void;
+        onInput(arg0: $Input): void;
         clear(): void;
         onLookAt(arg0: $ClientLevel, arg1: $HitResult): void;
         onOpenInventory(): void;
@@ -77,10 +77,10 @@ declare module "@package/net/minecraft/client/tutorial" {
         constructor(arg0: $Tutorial);
     }
     export class $Tutorial {
+        tick(): void;
         onInput(arg0: $Input): void;
         onInventoryAction(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $ClickAction_): void;
         isSurvival(): boolean;
-        tick(): void;
         static key(arg0: string): $Component;
         start(): void;
         stop(): void;

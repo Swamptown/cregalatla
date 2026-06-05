@@ -69,7 +69,7 @@ export * as player from "@package/net/minecraft/client/renderer/entity/player";
 
 declare module "@package/net/minecraft/client/renderer/entity" {
     export class $EnderDragonRenderer$DragonModel extends $EntityModel<$EnderDragon> {
-        handler$cpd002$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        handler$dcl002$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         prepareMobModel(arg0: $EnderDragon, arg1: number, arg2: number, arg3: number): void;
         setupAnim(arg0: $EnderDragon, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         attackTime: number;
@@ -164,9 +164,9 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $EntityRendererProvider$Context {
+        bakeLayer(arg0: $ModelLayerLocation): $ModelPart;
         getBlockRenderDispatcher(): $BlockRenderDispatcher;
         getModelSet(): $EntityModelSet;
-        bakeLayer(arg0: $ModelLayerLocation): $ModelPart;
         getFont(): $Font;
         getItemRenderer(): $ItemRenderer;
         getEntityRenderDispatcher(): $EntityRenderDispatcher;
@@ -213,25 +213,25 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $EntityRenderer<T extends $Entity> implements $EntityRendererAccessor, $EntityRendererExtension, $EntityRendererInter<any> {
-        getTextureLocation(arg0: $Object): $ResourceLocation;
-        renderLeash<E extends $Entity>(arg0: $Object, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: E): void;
-        renderNameTag(arg0: $Object, arg1: $Component_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
+        getFusionModelParts(): $List<any>;
         getBlockLightLevel(arg0: $Object, arg1: $BlockPos_): number;
         getSkyLightLevel(arg0: $Object, arg1: $BlockPos_): number;
-        modifyReturnValue$fln000$sable$getPackedLightCoords(arg0: number, arg1: $Entity, arg2: number): number;
-        getFusionModelParts(): $List<any>;
+        modifyReturnValue$ggf000$sable$getPackedLightCoords(arg0: number, arg1: $Entity, arg2: number): number;
+        renderLeash<E extends $Entity>(arg0: $Object, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: E): void;
+        renderNameTag(arg0: $Object, arg1: $Component_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
         setFusionModelParts(parts: $List_<any>): void;
         entityCullingIgnoresCulling(entity: $Entity): boolean;
         entityCullingGetCullingBox(entity: $Entity): $AABB;
+        getTextureLocation(arg0: $Object): $ResourceLocation;
         getShadowRadius(arg0: $Object): number;
+        render(arg0: $Object, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
+        shouldShowName(arg0: $Object): boolean;
+        getPackedLightCoords(arg0: $Object, arg1: number): number;
+        shouldRender(arg0: $Object, arg1: $Frustum, arg2: number, arg3: number, arg4: number): boolean;
+        getFont(): $Font;
         shadowShouldShowName(entity: $Entity): boolean;
         getRenderOffset(arg0: $Object, arg1: number): $Vec3;
         shadowRenderNameTag(entity: $Entity, component: $Component_, poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, light: number, delta: number): void;
-        getPackedLightCoords(arg0: $Object, arg1: number): number;
-        render(arg0: $Object, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
-        getFont(): $Font;
-        shouldShowName(arg0: $Object): boolean;
-        shouldRender(arg0: $Object, arg1: $Frustum, arg2: number, arg3: number, arg4: number): boolean;
         callGetBlockLightLevel<T extends $Entity>(arg0: T, arg1: $BlockPos_): number;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
@@ -242,7 +242,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         get font(): $Font;
     }
     export class $PaintingRenderer extends $EntityRenderer<$Painting> {
-        handler$zbm000$sodium_extra$render(arg0: $Painting, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: $CallbackInfo): void;
+        handler$zdc000$sodium_extra$render(arg0: $Painting, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: $CallbackInfo): void;
         getTextureLocation(arg0: $Painting): $ResourceLocation;
         render(arg0: $Painting, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         shadowRadius: number;
@@ -293,9 +293,10 @@ declare module "@package/net/minecraft/client/renderer/entity" {
     }
     export class $ArmorStandRenderer extends $LivingEntityRenderer<$ArmorStand, $ArmorStandArmorModel> {
         setupRotations(arg0: $ArmorStand, arg1: $PoseStack, arg2: number, arg3: number, arg4: number, arg5: number): void;
+        handler$ekd001$beansbackpacks$registerBackRenderer(arg0: $EntityRendererProvider$Context, arg1: $CallbackInfo): void;
         getTextureLocation(arg0: $ArmorStand): $ResourceLocation;
-        getRenderType(arg0: $ArmorStand, arg1: boolean, arg2: boolean, arg3: boolean): $RenderType;
         shouldShowName(arg0: $ArmorStand): boolean;
+        getRenderType(arg0: $ArmorStand, arg1: boolean, arg2: boolean, arg3: boolean): $RenderType;
         static DEFAULT_SKIN_LOCATION: $ResourceLocation;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
@@ -413,8 +414,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ShulkerBulletRenderer extends $EntityRenderer<$ShulkerBullet> {
-        getTextureLocation(arg0: $ShulkerBullet): $ResourceLocation;
         getBlockLightLevel(arg0: $ShulkerBullet, arg1: $BlockPos_): number;
+        getTextureLocation(arg0: $ShulkerBullet): $ResourceLocation;
         render(arg0: $ShulkerBullet, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
@@ -499,8 +500,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $GlowSquidRenderer extends $SquidRenderer<$GlowSquid> {
-        getTextureLocation(arg0: $GlowSquid): $ResourceLocation;
         getBlockLightLevel(arg0: $GlowSquid, arg1: $BlockPos_): number;
+        getTextureLocation(arg0: $GlowSquid): $ResourceLocation;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
         defaultModel: $EntityModel<any>;
@@ -686,8 +687,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $DragonFireballRenderer extends $EntityRenderer<$DragonFireball> {
-        getTextureLocation(arg0: $DragonFireball): $ResourceLocation;
         getBlockLightLevel(arg0: $DragonFireball, arg1: $BlockPos_): number;
+        getTextureLocation(arg0: $DragonFireball): $ResourceLocation;
         render(arg0: $DragonFireball, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
@@ -698,8 +699,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
     }
     export class $EndermanRenderer extends $MobRenderer<$EnderMan, $EndermanModel<$EnderMan>> {
         getTextureLocation(arg0: $EnderMan): $ResourceLocation;
-        getRenderOffset(arg0: $EnderMan, arg1: number): $Vec3;
         render(arg0: $EnderMan, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
+        getRenderOffset(arg0: $EnderMan, arg1: number): $Vec3;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
         defaultModel: $EntityModel<any>;
@@ -712,22 +713,22 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $EntityRenderDispatcher implements $ResourceManagerReloadListener, $EntityRenderDispatcherAccessor$1, $EntityRenderDispatcherAccessor {
+        setRenderHitBoxes(arg0: boolean): void;
         cameraOrientation(): $Quaternionf;
+        getSkinMap(): $Map<$PlayerSkin$Model, $EntityRenderer<$Player>>;
         onResourceManagerReload(arg0: $ResourceManager): void;
         setLevel(arg0: $Level_): void;
-        getSkinMap(): $Map<$PlayerSkin$Model, $EntityRenderer<$Player>>;
         prepare(arg0: $Level_, arg1: $Camera, arg2: $Entity): void;
-        shouldRenderHitBoxes(): boolean;
-        getRenderer<T extends $Entity>(arg0: T): $EntityRenderer<T>;
-        getPackedLightCoords<E extends $Entity>(arg0: E, arg1: number): number;
         render<E extends $Entity>(arg0: E, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $PoseStack, arg7: $MultiBufferSource_, arg8: number): void;
-        getItemInHandRenderer(): $ItemInHandRenderer;
-        distanceToSqr(arg0: number, arg1: number, arg2: number): number;
         distanceToSqr(arg0: $Entity): number;
+        distanceToSqr(arg0: number, arg1: number, arg2: number): number;
+        getPackedLightCoords<E extends $Entity>(arg0: E, arg1: number): number;
+        getRenderer<T extends $Entity>(arg0: T): $EntityRenderer<T>;
         shouldRender<E extends $Entity>(arg0: E, arg1: $Frustum, arg2: number, arg3: number, arg4: number): boolean;
+        getItemInHandRenderer(): $ItemInHandRenderer;
         overrideCameraOrientation(arg0: $Quaternionf): void;
         setRenderShadow(arg0: boolean): void;
-        setRenderHitBoxes(arg0: boolean): void;
+        shouldRenderHitBoxes(): boolean;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
         create$getRenderers(): $Map<$EntityType<never>, $EntityRenderer<never>>;
@@ -737,16 +738,16 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         textureManager: $TextureManager;
         camera: $Camera;
         constructor(arg0: $Minecraft, arg1: $TextureManager, arg2: $ItemRenderer, arg3: $BlockRenderDispatcher, arg4: $Font, arg5: $Options, arg6: $EntityModelSet);
-        set level(value: $Level_);
+        set renderHitBoxes(value: boolean);
         get skinMap(): $Map<$PlayerSkin$Model, $EntityRenderer<$Player>>;
+        set level(value: $Level_);
         get itemInHandRenderer(): $ItemInHandRenderer;
         set renderShadow(value: boolean);
-        set renderHitBoxes(value: boolean);
         get name(): string;
     }
     export class $MagmaCubeRenderer extends $MobRenderer<$MagmaCube, $LavaSlimeModel<$MagmaCube>> {
-        getTextureLocation(arg0: $MagmaCube): $ResourceLocation;
         getBlockLightLevel(arg0: $MagmaCube, arg1: $BlockPos_): number;
+        getTextureLocation(arg0: $MagmaCube): $ResourceLocation;
         scale(arg0: $MagmaCube, arg1: $PoseStack, arg2: number): void;
         render(arg0: $MagmaCube, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         shadowRadius: number;
@@ -862,8 +863,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $VexRenderer extends $MobRenderer<$Vex, $VexModel> {
-        getTextureLocation(arg0: $Vex): $ResourceLocation;
         getBlockLightLevel(arg0: $Vex, arg1: $BlockPos_): number;
+        getTextureLocation(arg0: $Vex): $ResourceLocation;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
         defaultModel: $EntityModel<any>;
@@ -876,8 +877,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $EndCrystalRenderer extends $EntityRenderer<$EndCrystal> {
-        getTextureLocation(arg0: $EndCrystal): $ResourceLocation;
         static createBodyLayer(): $LayerDefinition;
+        getTextureLocation(arg0: $EndCrystal): $ResourceLocation;
         static getY(arg0: $EndCrystal, arg1: number): number;
         render(arg0: $EndCrystal, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         shouldRender(arg0: $EndCrystal, arg1: $Frustum, arg2: number, arg3: number, arg4: number): boolean;
@@ -916,8 +917,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ExperienceOrbRenderer extends $EntityRenderer<$ExperienceOrb> {
-        getTextureLocation(arg0: $ExperienceOrb): $ResourceLocation;
         getBlockLightLevel(arg0: $ExperienceOrb, arg1: $BlockPos_): number;
+        getTextureLocation(arg0: $ExperienceOrb): $ResourceLocation;
         render(arg0: $ExperienceOrb, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
@@ -1003,8 +1004,9 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         get model(): M;
     }
     export class $AllayRenderer extends $MobRenderer<$Allay, $AllayModel> {
-        getTextureLocation(arg0: $Allay): $ResourceLocation;
+        handler$ekc000$beansbackpacks$registerBackRenderer(arg0: $EntityRendererProvider$Context, arg1: $CallbackInfo): void;
         getBlockLightLevel(arg0: $Allay, arg1: $BlockPos_): number;
+        getTextureLocation(arg0: $Allay): $ResourceLocation;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
         defaultModel: $EntityModel<any>;
@@ -1080,8 +1082,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
     }
     export class $StriderRenderer extends $MobRenderer<$Strider, $StriderModel<$Strider>> {
         getTextureLocation(arg0: $Strider): $ResourceLocation;
-        getShadowRadius(arg0: $Strider): number;
         isShaking(arg0: $Strider): boolean;
+        getShadowRadius(arg0: $Strider): number;
         scale(arg0: $Strider, arg1: $PoseStack, arg2: number): void;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
@@ -1095,22 +1097,22 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $LivingEntityRenderer<T extends $LivingEntity, M extends $EntityModel<T>> extends $EntityRenderer<T> implements $RenderLayerParent<T, M>, $LivingEntityRendererAccessor<any, any>, $AccessorLivingEntityRenderer<any> {
+        static isEntityUpsideDown(arg0: $LivingEntity): boolean;
         getBob(arg0: T, arg1: number): number;
         setupRotations(arg0: T, arg1: $PoseStack, arg2: number, arg3: number, arg4: number, arg5: number): void;
         isBodyVisible(arg0: T): boolean;
         getWhiteOverlayProgress(arg0: T, arg1: number): number;
         getFlipDegrees(arg0: T): number;
         static getOverlayCoords(arg0: $LivingEntity, arg1: number): number;
-        getShadowRadius(arg0: T): number;
         isShaking(arg0: T): boolean;
+        getShadowRadius(arg0: T): number;
         scale(arg0: T, arg1: $PoseStack, arg2: number): void;
-        addLayer(arg0: $RenderLayer<T, M>): boolean;
         render(arg0: T, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
-        getModel(): M;
-        getRenderType(arg0: T, arg1: boolean, arg2: boolean, arg3: boolean): $RenderType;
         shouldShowName(arg0: T): boolean;
         getAttackAnim(arg0: T, arg1: number): number;
-        static isEntityUpsideDown(arg0: $LivingEntity): boolean;
+        addLayer(arg0: $RenderLayer<T, M>): boolean;
+        getModel(): M;
+        getRenderType(arg0: T, arg1: boolean, arg2: boolean, arg3: boolean): $RenderType;
         callAddFeature(arg0: $RenderLayer<T, M>): boolean;
         callSetupRotations(arg0: T, arg1: $PoseStack, arg2: number, arg3: number, arg4: number, arg5: number): void;
         shadowRadius: number;
@@ -1123,11 +1125,11 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context, arg1: M, arg2: number);
     }
     export class $BoatRenderer extends $EntityRenderer<$Boat> {
+        getModelWithLocation(arg0: $Boat): $Pair<$ResourceLocation, $ListModel<$Boat>>;
         /**
          * @deprecated
          */
         getTextureLocation(arg0: $Boat): $ResourceLocation;
-        getModelWithLocation(arg0: $Boat): $Pair<$ResourceLocation, $ListModel<$Boat>>;
         render(arg0: $Boat, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
@@ -1137,7 +1139,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context, arg1: boolean);
     }
     export class $MobRenderer<T extends $Mob, M extends $EntityModel<T>> extends $LivingEntityRenderer<T, M> {
-        md4ca6b6$vanillabackport$getShadowRadius$0(arg0: $Entity): number;
+        md3b3139$vanillabackport$getShadowRadius$0(arg0: $Entity): number;
         getShadowRadius(arg0: T): number;
         shouldShowName(arg0: T): boolean;
         shadowRadius: number;
@@ -1221,8 +1223,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context, arg1: number);
     }
     export class $WitherBossRenderer extends $MobRenderer<$WitherBoss, $WitherBossModel<$WitherBoss>> {
-        getTextureLocation(arg0: $WitherBoss): $ResourceLocation;
         getBlockLightLevel(arg0: $WitherBoss, arg1: $BlockPos_): number;
+        getTextureLocation(arg0: $WitherBoss): $ResourceLocation;
         scale(arg0: $WitherBoss, arg1: $PoseStack, arg2: number): void;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
@@ -1237,8 +1239,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
     }
     export class $WitherSkullRenderer extends $EntityRenderer<$WitherSkull> {
         static createSkullLayer(): $LayerDefinition;
-        getTextureLocation(arg0: $WitherSkull): $ResourceLocation;
         getBlockLightLevel(arg0: $WitherSkull, arg1: $BlockPos_): number;
+        getTextureLocation(arg0: $WitherSkull): $ResourceLocation;
         render(arg0: $WitherSkull, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
@@ -1334,8 +1336,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $BlazeRenderer extends $MobRenderer<$Blaze, $BlazeModel<$Blaze>> {
-        getTextureLocation(arg0: $Blaze): $ResourceLocation;
         getBlockLightLevel(arg0: $Blaze, arg1: $BlockPos_): number;
+        getTextureLocation(arg0: $Blaze): $ResourceLocation;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
         defaultModel: $EntityModel<any>;
@@ -1348,14 +1350,14 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ItemFrameRenderer<T extends $ItemFrame> extends $EntityRenderer<T> {
-        handler$zbk000$sodium_extra$render(arg0: $ItemFrame, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: $CallbackInfo): void;
-        handler$zoh000$exposure$onItemFrameRender(entity: $ItemFrame, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, ci: $CallbackInfo): void;
-        getTextureLocation(arg0: T): $ResourceLocation;
-        renderNameTag(arg0: T, arg1: $Component_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
+        handler$zda000$sodium_extra$render(arg0: $ItemFrame, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: $CallbackInfo): void;
+        handler$baa000$exposure$onItemFrameRender(entity: $ItemFrame, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, ci: $CallbackInfo): void;
         getBlockLightLevel(arg0: T, arg1: $BlockPos_): number;
-        getRenderOffset(arg0: T, arg1: number): $Vec3;
+        renderNameTag(arg0: T, arg1: $Component_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
+        getTextureLocation(arg0: T): $ResourceLocation;
         render(arg0: T, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         shouldShowName(arg0: T): boolean;
+        getRenderOffset(arg0: T, arg1: number): $Vec3;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
         entityRenderDispatcher: $EntityRenderDispatcher;
@@ -1394,8 +1396,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         setupRotations(arg0: $Shulker, arg1: $PoseStack, arg2: number, arg3: number, arg4: number, arg5: number): void;
         static getTextureLocation(arg0: $DyeColor_): $ResourceLocation;
         getTextureLocation(arg0: $Shulker): $ResourceLocation;
-        getRenderOffset(arg0: $Shulker, arg1: number): $Vec3;
         shouldRender(arg0: $Shulker, arg1: $Frustum, arg2: number, arg3: number, arg4: number): boolean;
+        getRenderOffset(arg0: $Shulker, arg1: number): $Vec3;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
         defaultModel: $EntityModel<any>;
@@ -1450,8 +1452,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
     }
     export class $EnderDragonRenderer extends $EntityRenderer<$EnderDragon> {
         static renderCrystalBeams(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $PoseStack, arg6: $MultiBufferSource_, arg7: number): void;
-        getTextureLocation(arg0: $EnderDragon): $ResourceLocation;
         static createBodyLayer(): $LayerDefinition;
+        getTextureLocation(arg0: $EnderDragon): $ResourceLocation;
         render(arg0: $EnderDragon, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         shadowRadius: number;
         static LEASH_RENDER_STEPS: number;
@@ -1591,23 +1593,23 @@ declare module "@package/net/minecraft/client/renderer/entity" {
     }
     export class $ItemRenderer implements $ResourceManagerReloadListener, $ItemRendererAccessor$1, $ItemRendererAccessor$2, $ItemRendererAccessor, $IdentifiableResourceReloadListener {
         onResourceManagerReload(arg0: $ResourceManager): void;
-        renderStatic(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: number, arg3: number, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: $Level_, arg7: number): void;
-        renderStatic(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: boolean, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: $Level_, arg7: number, arg8: number, arg9: number): void;
-        getItemModelShaper(): $ItemModelShaper;
-        renderModelLists(arg0: $BakedModel, arg1: $ItemStack_, arg2: number, arg3: number, arg4: $PoseStack, arg5: $VertexConsumer): void;
-        localvar$zoj000$exposure$renderItem(model: $BakedModel, stack: $ItemStack_, displayContext: $ItemDisplayContext_, leftHand: boolean, poseStack: $PoseStack, buffer: $MultiBufferSource_, combinedLight: number, combinedOverlay: number): $BakedModel;
-        handler$bab000$ldlib2$injectRenderItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel, arg8: $CallbackInfo): void;
-        static getCompassFoilBuffer(arg0: $MultiBufferSource_, arg1: $RenderType, arg2: $PoseStack$Pose): $VertexConsumer;
-        static getFoilBufferDirect(arg0: $MultiBufferSource_, arg1: $RenderType, arg2: boolean, arg3: boolean): $VertexConsumer;
-        static getFoilBuffer(arg0: $MultiBufferSource_, arg1: $RenderType, arg2: boolean, arg3: boolean): $VertexConsumer;
         render(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel): void;
-        getFabricId(): $ResourceLocation;
-        getFabricDependencies(): $Collection<any>;
-        static hasAnimatedTexture$sodium_$md$4ca6b6$1(arg0: $ItemStack_): boolean;
-        getModel(arg0: $ItemStack_, arg1: $Level_, arg2: $LivingEntity, arg3: number): $BakedModel;
+        static getFoilBufferDirect(arg0: $MultiBufferSource_, arg1: $RenderType, arg2: boolean, arg3: boolean): $VertexConsumer;
         static getArmorFoilBuffer(arg0: $MultiBufferSource_, arg1: $RenderType, arg2: boolean): $VertexConsumer;
         renderQuadList(arg0: $PoseStack, arg1: $VertexConsumer, arg2: $List_<$BakedQuad>, arg3: $ItemStack_, arg4: number, arg5: number): void;
         getBlockEntityRenderer(): $BlockEntityWithoutLevelRenderer;
+        getFabricId(): $ResourceLocation;
+        getFabricDependencies(): $Collection<any>;
+        static hasAnimatedTexture$sodium_$md$3b3139$1(arg0: $ItemStack_): boolean;
+        renderStatic(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: boolean, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: $Level_, arg7: number, arg8: number, arg9: number): void;
+        renderStatic(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: number, arg3: number, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: $Level_, arg7: number): void;
+        getItemModelShaper(): $ItemModelShaper;
+        renderModelLists(arg0: $BakedModel, arg1: $ItemStack_, arg2: number, arg3: number, arg4: $PoseStack, arg5: $VertexConsumer): void;
+        localvar$bac000$exposure$renderItem(model: $BakedModel, stack: $ItemStack_, displayContext: $ItemDisplayContext_, leftHand: boolean, poseStack: $PoseStack, buffer: $MultiBufferSource_, combinedLight: number, combinedOverlay: number): $BakedModel;
+        handler$bbk000$ldlib2$injectRenderItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel, arg8: $CallbackInfo): void;
+        static getCompassFoilBuffer(arg0: $MultiBufferSource_, arg1: $RenderType, arg2: $PoseStack$Pose): $VertexConsumer;
+        static getFoilBuffer(arg0: $MultiBufferSource_, arg1: $RenderType, arg2: boolean, arg3: boolean): $VertexConsumer;
+        getModel(arg0: $ItemStack_, arg1: $Level_, arg2: $LivingEntity, arg3: number): $BakedModel;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
         invokeRenderBakedItemModel(arg0: $BakedModel, arg1: $ItemStack_, arg2: number, arg3: number, arg4: $PoseStack, arg5: $VertexConsumer): void;
@@ -1625,9 +1627,9 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         textureManager: $TextureManager;
         static TRIDENT_IN_HAND_MODEL: $ModelResourceLocation;
         constructor(arg0: $Minecraft, arg1: $TextureManager, arg2: $ModelManager, arg3: $ItemColors, arg4: $BlockEntityWithoutLevelRenderer);
-        get itemModelShaper(): $ItemModelShaper;
         get fabricId(): $ResourceLocation;
         get fabricDependencies(): $Collection<any>;
+        get itemModelShaper(): $ItemModelShaper;
         get name(): string;
     }
     export class $WardenRenderer extends $MobRenderer<$Warden, $WardenModel<$Warden>> {

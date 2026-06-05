@@ -14,14 +14,14 @@ declare module "@package/java/security/cert" {
         get type(): string;
     }
     export class $Certificate implements $Serializable {
-        verify(arg0: $PublicKey, arg1: string): void;
-        verify(arg0: $PublicKey, arg1: $Provider): void;
-        verify(arg0: $PublicKey): void;
-        getPublicKey(): $PublicKey;
         getType(): string;
         getEncoded(): number[];
-        get publicKey(): $PublicKey;
+        verify(arg0: $PublicKey): void;
+        verify(arg0: $PublicKey, arg1: string): void;
+        verify(arg0: $PublicKey, arg1: $Provider): void;
+        getPublicKey(): $PublicKey;
         get type(): string;
         get encoded(): number[];
+        get publicKey(): $PublicKey;
     }
 }

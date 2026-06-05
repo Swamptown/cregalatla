@@ -16,22 +16,22 @@ declare module "@package/net/fabricmc/fabric/impl/lookup/block" {
         getLookup(): $BlockApiLookupImpl<A, C>;
         invalidate(): void;
         find(arg0: $BlockState_, arg1: C): A;
-        getBlockEntity(): $BlockEntity;
         getPos(): $BlockPos;
+        getBlockEntity(): $BlockEntity;
         find(arg0: C): A;
         constructor(arg0: $BlockApiLookupImpl<A, C>, arg1: $ServerLevel, arg2: $BlockPos_);
         get world(): $ServerLevel;
         get lookup(): $BlockApiLookupImpl<A, C>;
-        get blockEntity(): $BlockEntity;
         get pos(): $BlockPos;
+        get blockEntity(): $BlockEntity;
     }
     export class $BlockApiLookupImpl<A, C> implements $BlockApiLookup<A, C> {
-        registerForBlocks(arg0: $BlockApiLookup$BlockApiProvider_<A, C>, ...arg1: $Block_[]): void;
-        getFallbackProviders(): $List<$BlockApiLookup$BlockApiProvider<A, C>>;
         registerForBlockEntities(arg0: $BlockApiLookup$BlockEntityApiProvider_<A, C>, ...arg1: $BlockEntityType_<never>[]): void;
+        getFallbackProviders(): $List<$BlockApiLookup$BlockApiProvider<A, C>>;
+        registerForBlocks(arg0: $BlockApiLookup$BlockApiProvider_<A, C>, ...arg1: $Block_[]): void;
+        contextClass(): $Class<C>;
         registerSelf(...arg0: $BlockEntityType_<never>[]): void;
         registerFallback(arg0: $BlockApiLookup$BlockApiProvider_<A, C>): void;
-        contextClass(): $Class<C>;
         getProvider(arg0: $Block_): $BlockApiLookup$BlockApiProvider<A, C>;
         static get<A, C>(arg0: $ResourceLocation_, arg1: $Class<A>, arg2: $Class<C>): $BlockApiLookup<A, C>;
         find(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): A;

@@ -1,5 +1,5 @@
 import { $Consumer_, $BiConsumer_, $Supplier_, $Function_, $BiFunction_, $Function, $Supplier } from "@package/java/util/function";
-import { $Function4_, $Function8_, $Function6_, $Function11_, $Function5_, $Function3_, $Function9_, $Function10_, $Function7_, $Function12_ } from "@package/com/mojang/datafixers/util";
+import { $Function4_, $Function8_, $Function11_, $Function6_, $Function5_, $Function3_, $Function9_, $Function10_, $Function7_, $Function12_ } from "@package/com/mojang/datafixers/util";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
 import { $SyncValueHolder } from "@package/com/lowdragmc/lowdraglib2/syncdata";
 import { $ModularUI } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
@@ -23,7 +23,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/rpc" {
     /**
      * Values that may be interpreted as {@link $RPCEvent}.
      */
-    export type $RPCEvent_ = { argHolders?: $SyncValueHolder<any>[], executor?: $Function_<$Object[], $Object>, returnHolder?: $SyncValueHolder<any>,  } | [argHolders?: $SyncValueHolder<any>[], executor?: $Function_<$Object[], $Object>, returnHolder?: $SyncValueHolder<any>, ];
+    export type $RPCEvent_ = { executor?: $Function_<$Object[], $Object>, argHolders?: $SyncValueHolder<any>[], returnHolder?: $SyncValueHolder<any>,  } | [executor?: $Function_<$Object[], $Object>, argHolders?: $SyncValueHolder<any>[], returnHolder?: $SyncValueHolder<any>, ];
     export class $RPCEmitter extends $Record {
         modularProvider(): $Supplier<$ModularUI>;
         event(): $RPCEvent;
@@ -34,7 +34,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/rpc" {
     /**
      * Values that may be interpreted as {@link $RPCEmitter}.
      */
-    export type $RPCEmitter_ = { modularProvider?: $Supplier_<$ModularUI>, event?: $RPCEvent_,  } | [modularProvider?: $Supplier_<$ModularUI>, event?: $RPCEvent_, ];
+    export type $RPCEmitter_ = { event?: $RPCEvent_, modularProvider?: $Supplier_<$ModularUI>,  } | [event?: $RPCEvent_, modularProvider?: $Supplier_<$ModularUI>, ];
     export class $RPCEventBuilder {
         executor(arg0: $Function_<$Object[], $Object>): $RPCEventBuilder;
         returnType(arg0: $Type, arg1: $Object): $RPCEventBuilder;

@@ -19,8 +19,8 @@ declare module "@package/xaero/hud/minimap/module" {
         getWorldState(): $MinimapWorldState;
         getWorldManagerIO(): $MinimapWorldManagerIO;
         getDimensionHelper(): $MinimapDimensionHelper;
-        getMultiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
         getWaypointSession(): $WaypointSession;
+        getMultiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
         getWorldStateUpdater(): $MinimapWorldStateUpdater;
         getRadarSession(): $RadarSession;
         getWorldManager(): $MinimapWorldManager;
@@ -33,8 +33,8 @@ declare module "@package/xaero/hud/minimap/module" {
         get worldState(): $MinimapWorldState;
         get worldManagerIO(): $MinimapWorldManagerIO;
         get dimensionHelper(): $MinimapDimensionHelper;
-        get multiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
         get waypointSession(): $WaypointSession;
+        get multiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
         get worldStateUpdater(): $MinimapWorldStateUpdater;
         get radarSession(): $RadarSession;
         get worldManager(): $MinimapWorldManager;

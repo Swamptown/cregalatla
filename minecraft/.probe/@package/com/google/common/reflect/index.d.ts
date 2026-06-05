@@ -80,8 +80,8 @@ declare module "@package/com/google/common/reflect" {
         getSubtype(subclass: $Class<never>): $TypeToken<T>;
         isSubtypeOf(type: $TypeToken<never>): boolean;
         isSubtypeOf(supertype: $Type): boolean;
-        where<X>(typeParam: $TypeParameter<X>, typeArg: $TypeToken<X>): $TypeToken<T>;
         where<X>(typeParam: $TypeParameter<X>, typeArg: $Class<X>): $TypeToken<T>;
+        where<X>(typeParam: $TypeParameter<X>, typeArg: $TypeToken<X>): $TypeToken<T>;
         method(method: $Method): $Invokable<T, $Object>;
         isArray(): boolean;
         isPrimitive(): boolean;

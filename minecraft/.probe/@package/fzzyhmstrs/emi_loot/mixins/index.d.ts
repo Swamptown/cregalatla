@@ -57,10 +57,10 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $SetDamageLootFunctionAccessor {
     }
     export interface $SetDamageLootFunctionAccessor {
-        getDurabilityRange(): $NumberProvider;
         getAdd(): boolean;
-        get durabilityRange(): $NumberProvider;
+        getDurabilityRange(): $NumberProvider;
         get add(): boolean;
+        get durabilityRange(): $NumberProvider;
     }
     export class $AlternativeLootConditionAccessor {
     }
@@ -83,10 +83,10 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $SetEnchantmentsLootFunctionAccessor {
     }
     export interface $SetEnchantmentsLootFunctionAccessor {
-        getAdd(): boolean;
         getEnchantments(): $Map<$Holder<$Enchantment>, $NumberProvider>;
-        get add(): boolean;
+        getAdd(): boolean;
         get enchantments(): $Map<$Holder<$Enchantment>, $NumberProvider>;
+        get add(): boolean;
     }
     export class $SetAttributesLootFunctionAccessor {
     }
@@ -110,14 +110,14 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $SetFireworkExplosionLootFunctionAccessor {
     }
     export interface $SetFireworkExplosionLootFunctionAccessor {
+        getFadeColors(): ($IntList) | undefined;
         callApply(arg0: $FireworkExplosion_): $FireworkExplosion;
         getColors(): ($IntList) | undefined;
-        getFadeColors(): ($IntList) | undefined;
         getTrail(): (boolean) | undefined;
         getTwinkle(): (boolean) | undefined;
         getShape(): ($FireworkExplosion$Shape) | undefined;
-        get colors(): ($IntList) | undefined;
         get fadeColors(): ($IntList) | undefined;
+        get colors(): ($IntList) | undefined;
         get trail(): (boolean) | undefined;
         get twinkle(): (boolean) | undefined;
         get shape(): ($FireworkExplosion$Shape) | undefined;
@@ -329,8 +329,8 @@ declare module "@package/fzzyhmstrs/emi_loot/mixins" {
     export class $SetBookCoverLootFunctionAccessor {
     }
     export interface $SetBookCoverLootFunctionAccessor {
-        callApply(arg0: $WrittenBookContent_): $WrittenBookContent;
         getAuthor(): (string) | undefined;
+        callApply(arg0: $WrittenBookContent_): $WrittenBookContent;
         getGeneration(): (number) | undefined;
         getTitle(): ($Filterable<string>) | undefined;
         get author(): (string) | undefined;

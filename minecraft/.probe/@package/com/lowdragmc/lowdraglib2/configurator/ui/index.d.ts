@@ -10,8 +10,8 @@ import { $TextField, $Label } from "@package/com/lowdragmc/lowdraglib2/gui/ui/el
 
 declare module "@package/com/lowdragmc/lowdraglib2/configurator/ui" {
     export class $Configurator extends $UIElement {
-        notifyChanges(arg0: $Configurator): void;
         notifyChanges(): void;
+        notifyChanges(arg0: $Configurator): void;
         setPastable(arg0: $Predicate_<$Class<never>>, arg1: $Consumer_<never>): $Configurator;
         setPastable<T>(arg0: $Class<T>, arg1: $Consumer_<T>): $Configurator;
         getNotifyName(): $Component;
@@ -24,8 +24,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/configurator/ui" {
         setNotifyName(arg0: $Component_): $Configurator;
         getLabel(): $Component;
         addChild(arg0: $UIElement): $Configurator;
-        setLabel(arg0: $Component_): $Configurator;
         setLabel(arg0: string): $Configurator;
+        setLabel(arg0: $Component_): $Configurator;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
         lineContainer: $UIElement;
@@ -60,9 +60,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/configurator/ui" {
         get value(): $CompoundTag;
     }
     export class $StringConfigurator extends $ValueConfigurator<string> {
-        setResourceLocation(arg0: boolean): $StringConfigurator;
         isResourceLocation(): boolean;
         setTextValidator(arg0: $Predicate_<string>): $StringConfigurator;
+        setResourceLocation(arg0: boolean): $StringConfigurator;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
         lineContainer: $UIElement;

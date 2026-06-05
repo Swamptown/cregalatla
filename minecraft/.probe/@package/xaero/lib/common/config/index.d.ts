@@ -11,7 +11,6 @@ export * as sync from "@package/xaero/lib/common/config/sync";
 
 declare module "@package/xaero/lib/common/config" {
     export class $Config {
-        setChangeListener(arg0: $IConfigChangeListener): void;
         getFailedSerializedValue(arg0: $ConfigOption<never>): string;
         clearDirtyOptions(): void;
         setOptionDefault<T>(arg0: $ConfigOption<T>): void;
@@ -25,6 +24,7 @@ declare module "@package/xaero/lib/common/config" {
         postSave(): void;
         setDefaults(): void;
         copyOptionsFrom(arg0: $Config): void;
+        setChangeListener(arg0: $IConfigChangeListener): void;
         reset(): void;
         get<T>(arg0: $ConfigOption<T>): T;
         set<T>(arg0: $ConfigOption<T>, arg1: T): T;

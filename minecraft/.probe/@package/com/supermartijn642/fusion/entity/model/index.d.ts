@@ -23,18 +23,18 @@ declare module "@package/com/supermartijn642/fusion/entity/model" {
         get vanillaModel(): boolean;
     }
     export class $EntityLayerProperties {
+        chooseModel(entity: $Entity): $Triple<$ModelPart, $ResourceLocation, number>;
         gatherModels(output: $Consumer_<$ModelPart>): void;
         identifier(): $ModelLayerLocation;
         transformed(properties: $VanillaModelLayerProperties): $EntityLayerProperties;
-        chooseModel(entity: $Entity): $Triple<$ModelPart, $ResourceLocation, number>;
         static RANDOM: $RandomSource;
         constructor(identifier: $ModelLayerLocation, defaultModel: $List_<$EntityLayerProperties$ModelOption>, conditionals: $List_<$Pair<$EntityModelPredicate, $List_<$EntityLayerProperties$ModelOption>>>);
     }
     export class $FusionModelPart extends $SubModelPart {
+        renderPart(part: $SubModelPart, poseStack: $PoseStack, vertexConsumer: $VertexConsumer, i: number, j: number, k: number): void;
         clear(): void;
         setup(entity: $Entity, bufferSource: $MultiBufferSource_): void;
         setProperties(properties: $EntityLayerProperties, vanillaProperties: $VanillaModelLayerProperties): void;
-        renderPart(part: $SubModelPart, poseStack: $PoseStack, vertexConsumer: $VertexConsumer, i: number, j: number, k: number): void;
         visible: boolean;
         static DEFAULT_SCALE: number;
         zRot: number;
@@ -53,9 +53,9 @@ declare module "@package/com/supermartijn642/fusion/entity/model" {
         constructor(layerIndex: number, original: $ModelPart);
     }
     export class $SubModelPart extends $ModelPart {
+        validateModelHasImportantChildren(model: $ModelPart, missingPartOutput: $Consumer_<string>): void;
         finish(): void;
         mirror(target: $ModelPart): void;
-        validateModelHasImportantChildren(model: $ModelPart, missingPartOutput: $Consumer_<string>): void;
         visible: boolean;
         static DEFAULT_SCALE: number;
         zRot: number;

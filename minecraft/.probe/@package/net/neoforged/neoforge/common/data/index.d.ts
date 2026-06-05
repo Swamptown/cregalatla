@@ -11,7 +11,7 @@ import { $MetadataSectionType } from "@package/net/minecraft/server/packs/metada
 import { $BiConsumer, $Consumer, $Supplier_, $Consumer_ } from "@package/java/util/function";
 import { $HolderLookup$Provider, $Holder_, $RegistrySetBuilder$PatchedRegistries_, $Registry, $RegistrySetBuilder } from "@package/net/minecraft/core";
 import { $Path_ } from "@package/java/nio/file";
-import { $OverlayMetadataSection$OverlayEntry, $OverlayMetadataSection$OverlayEntry_, $PackType_, $PackType } from "@package/net/minecraft/server/packs";
+import { $OverlayMetadataSection$OverlayEntry_, $OverlayMetadataSection$OverlayEntry, $PackType_, $PackType } from "@package/net/minecraft/server/packs";
 import { $WithConditions$Builder, $WithConditions_, $ICondition, $WithConditions } from "@package/net/neoforged/neoforge/common/conditions";
 import { $Enum, $Record } from "@package/java/lang";
 import { $DataMapValueRemover, $DataMapFile, $AdvancedDataMapType, $DataMapType } from "@package/net/neoforged/neoforge/registries/datamaps";
@@ -32,16 +32,16 @@ export * as fixes from "@package/net/neoforged/neoforge/common/data/fixes";
 declare module "@package/net/neoforged/neoforge/common/data" {
     export class $SoundDefinition$Sound {
         attenuationDistance(arg0: number): $SoundDefinition$Sound;
-        stream(): $SoundDefinition$Sound;
         stream(arg0: boolean): $SoundDefinition$Sound;
+        stream(): $SoundDefinition$Sound;
         weight(arg0: number): $SoundDefinition$Sound;
+        pitch(arg0: number): $SoundDefinition$Sound;
+        pitch(arg0: number): $SoundDefinition$Sound;
         volume(arg0: number): $SoundDefinition$Sound;
         volume(arg0: number): $SoundDefinition$Sound;
-        static sound(arg0: $ResourceLocation_, arg1: $SoundDefinition$SoundType_): $SoundDefinition$Sound;
         preload(arg0: boolean): $SoundDefinition$Sound;
         preload(): $SoundDefinition$Sound;
-        pitch(arg0: number): $SoundDefinition$Sound;
-        pitch(arg0: number): $SoundDefinition$Sound;
+        static sound(arg0: $ResourceLocation_, arg1: $SoundDefinition$SoundType_): $SoundDefinition$Sound;
     }
     export class $GlobalLootModifierProvider implements $DataProvider {
         getName(): string;
@@ -149,8 +149,8 @@ declare module "@package/net/neoforged/neoforge/common/data" {
      */
     export type $SpriteSourceProvider$SourceList_ = { sources?: $List_<$SpriteSource>,  } | [sources?: $List_<$SpriteSource>, ];
     export class $ExistingFileHelper implements $ExistingFileHelperAccessor {
-        trackGenerated(arg0: $ResourceLocation_, arg1: $ExistingFileHelper$IResourceType): void;
         trackGenerated(arg0: $ResourceLocation_, arg1: $PackType_, arg2: string, arg3: string): void;
+        trackGenerated(arg0: $ResourceLocation_, arg1: $ExistingFileHelper$IResourceType): void;
         isEnabled(): boolean;
         getResource(arg0: $ResourceLocation_, arg1: $PackType_, arg2: string, arg3: string): $Resource;
         getResource(arg0: $ResourceLocation_, arg1: $PackType_): $Resource;
@@ -202,8 +202,8 @@ declare module "@package/net/neoforged/neoforge/common/data" {
         add(arg0: $Block_, arg1: string): void;
         add(arg0: $ItemStack_, arg1: string): void;
         addEffect(arg0: $Supplier_<$MobEffect>, arg1: string): void;
-        addTag(arg0: $Supplier_<$TagKey<never>>, arg1: string): void;
         addEntityType(arg0: $Supplier_<$EntityType<never>>, arg1: string): void;
+        addTag(arg0: $Supplier_<$TagKey<never>>, arg1: string): void;
         constructor(arg0: $PackOutput, arg1: string, arg2: string);
         get name(): string;
     }

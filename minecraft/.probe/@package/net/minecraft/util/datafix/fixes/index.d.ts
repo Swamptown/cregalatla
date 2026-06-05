@@ -369,8 +369,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     }
     export class $BlockRenameFix extends $DataFix {
         static create(arg0: $Schema, arg1: string, arg2: $Function_<string, string>): $DataFix;
-        makeRule(): $TypeRewriteRule;
         renameBlock(arg0: string): string;
+        makeRule(): $TypeRewriteRule;
         constructor(arg0: $Schema, arg1: string);
     }
     export class $WriteAndReadFix extends $DataFix {
@@ -523,15 +523,15 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         hasComponent(arg0: string): boolean;
         write(): $Dynamic<never>;
         static read(arg0: $Dynamic<never>): ($ItemStackComponentizationFix$ItemStackData) | undefined;
-        is(arg0: string): boolean;
         is(arg0: $Set_<string>): boolean;
-        setComponent(arg0: string, arg1: $Dynamic<never>): void;
+        is(arg0: string): boolean;
         setComponent(arg0: string, arg1: $OptionalDynamic<never>): void;
+        setComponent(arg0: string, arg1: $Dynamic<never>): void;
+        moveTagInto(arg0: string, arg1: $Dynamic<never>, arg2: string): $Dynamic<never>;
         removeTag(arg0: string): $OptionalDynamic<never>;
         moveTagToComponent(arg0: string, arg1: string, arg2: $Dynamic<never>): void;
         moveTagToComponent(arg0: string, arg1: string): void;
         fixSubTag(arg0: string, arg1: boolean, arg2: $UnaryOperator_<$Dynamic<never>>): void;
-        moveTagInto(arg0: string, arg1: $Dynamic<never>, arg2: string): $Dynamic<never>;
         tag: $Dynamic<never>;
     }
     export class $EntityRavagerRenameFix extends $SimplestEntityRenameFix {
@@ -594,10 +594,10 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         static upgradeBlockStateTag(arg0: $Dynamic<never>): $Dynamic<never>;
         static upgradeBlock(arg0: string): string;
         static upgradeBlock(arg0: number): string;
-        static bootstrap2(): void;
         static bootstrap0(): void;
-        static bootstrap3(): void;
         static bootstrap1(): void;
+        static bootstrap2(): void;
+        static bootstrap3(): void;
         static bootstrap4(): void;
         static bootstrap5(): void;
         static bootstrap6(): void;
@@ -642,8 +642,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     export class $LeavesFix$Section {
         skippable(): boolean;
         readStorage(arg0: $Dynamic<never>): void;
-        getStateId(arg0: string, arg1: boolean, arg2: number): number;
         getBlock(arg0: number): number;
+        getStateId(arg0: string, arg1: boolean, arg2: number): number;
         write(arg0: $Typed<never>): $Typed<never>;
         getIndex(): number;
         isSkippable(): boolean;
@@ -1065,7 +1065,7 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     /**
      * Values that may be interpreted as {@link $StructuresBecomeConfiguredFix$Conversion}.
      */
-    export type $StructuresBecomeConfiguredFix$Conversion_ = { fallback?: string, biomeMapping?: $Map_<string, string>,  } | [fallback?: string, biomeMapping?: $Map_<string, string>, ];
+    export type $StructuresBecomeConfiguredFix$Conversion_ = { biomeMapping?: $Map_<string, string>, fallback?: string,  } | [biomeMapping?: $Map_<string, string>, fallback?: string, ];
     export class $EntityHealthFix extends $DataFix {
         makeRule(): $TypeRewriteRule;
         fixTag(arg0: $Dynamic<never>): $Dynamic<never>;

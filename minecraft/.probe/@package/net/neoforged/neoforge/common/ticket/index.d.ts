@@ -19,8 +19,8 @@ declare module "@package/net/neoforged/neoforge/common/ticket" {
     }
     export class $SimpleTicket<T> {
         setManager(arg0: $ITicketManager<T>, ...arg1: $ITicketManager<T>[]): void;
-        invalidate(): void;
         isValid(): boolean;
+        invalidate(): void;
         matches(arg0: T): boolean;
         validate(): void;
         unload(arg0: $ITicketManager<T>): boolean;

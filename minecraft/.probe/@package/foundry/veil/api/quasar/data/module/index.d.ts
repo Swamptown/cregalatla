@@ -12,8 +12,8 @@ declare module "@package/foundry/veil/api/quasar/data/module" {
     /**
      * Values that may be interpreted as {@link $ModuleType}.
      */
-    export type $ModuleType_<T> = RegistryTypes.VeilQuasarModuleTypeRender | RegistryTypes.VeilQuasarModuleTypeInit | RegistryTypes.VeilQuasarModuleTypeUpdate | (() => $MapCodec_<T>);
-    export interface $ModuleType<T> extends RegistryMarked<RegistryTypes.VeilQuasarModuleTypeUpdateTag, RegistryTypes.VeilQuasarModuleTypeUpdate> {}
+    export type $ModuleType_<T> = RegistryTypes.VeilQuasarModuleTypeUpdate | RegistryTypes.VeilQuasarModuleTypeRender | RegistryTypes.VeilQuasarModuleTypeInit | (() => $MapCodec_<T>);
+    export interface $ModuleType<T> extends RegistryMarked<RegistryTypes.VeilQuasarModuleTypeInitTag, RegistryTypes.VeilQuasarModuleTypeInit> {}
     export class $ParticleModuleData {
         static UPDATE_DIRECT_CODEC: $Codec<$ParticleModuleData>;
         static RENDER_DIRECT_CODEC: $Codec<$ParticleModuleData>;

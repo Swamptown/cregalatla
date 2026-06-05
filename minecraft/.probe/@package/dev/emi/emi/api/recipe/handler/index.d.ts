@@ -25,17 +25,17 @@ declare module "@package/dev/emi/emi/api/recipe/handler" {
         getScreenHandler(): T;
         getDestination(): $EmiCraftContext$Destination;
         getType(): $EmiCraftContext$Type;
+        getAmount(): number;
         getScreen(): $AbstractContainerScreen<T>;
         getInventory(): $EmiPlayerInventory;
-        getAmount(): number;
         constructor(screen: $AbstractContainerScreen<T>, inventory: $EmiPlayerInventory, type: $EmiCraftContext$Type_, destination: $EmiCraftContext$Destination_, amount: number);
         constructor(screen: $AbstractContainerScreen<T>, inventory: $EmiPlayerInventory, type: $EmiCraftContext$Type_);
         get screenHandler(): T;
         get destination(): $EmiCraftContext$Destination;
         get type(): $EmiCraftContext$Type;
+        get amount(): number;
         get screen(): $AbstractContainerScreen<T>;
         get inventory(): $EmiPlayerInventory;
-        get amount(): number;
     }
     export class $EmiCraftContext$Type extends $Enum<$EmiCraftContext$Type> implements $GlobalMixin {
         static values(): $EmiCraftContext$Type[];
@@ -53,8 +53,8 @@ declare module "@package/dev/emi/emi/api/recipe/handler" {
     export interface $EmiRecipeHandler<T extends $AbstractContainerMenu> extends $GlobalMixin {
         supportsRecipe(arg0: $EmiRecipe): boolean;
         alwaysDisplaySupport(recipe: $EmiRecipe): boolean;
-        canCraft(arg0: $EmiRecipe, arg1: $EmiCraftContext<T>): boolean;
         craft(arg0: $EmiRecipe, arg1: $EmiCraftContext<T>): boolean;
+        canCraft(arg0: $EmiRecipe, arg1: $EmiCraftContext<T>): boolean;
         getTooltip(recipe: $EmiRecipe, context: $EmiCraftContext<T>): $List<$ClientTooltipComponent>;
         render(recipe: $EmiRecipe, context: $EmiCraftContext<T>, widgets: $List_<$Widget>, draw: $GuiGraphics): void;
         getInventory(arg0: $AbstractContainerScreen<T>): $EmiPlayerInventory;

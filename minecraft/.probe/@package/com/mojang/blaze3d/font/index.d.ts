@@ -33,13 +33,13 @@ declare module "@package/com/mojang/blaze3d/font" {
     export class $GlyphInfo {
     }
     export interface $GlyphInfo {
-        getShadowOffset(): number;
-        getAdvance(arg0: boolean): number;
-        getAdvance(): number;
-        bake(arg0: $Function_<$SheetGlyphInfo, $BakedGlyph>): $BakedGlyph;
         getBoldOffset(): number;
-        get shadowOffset(): number;
+        getShadowOffset(): number;
+        getAdvance(): number;
+        getAdvance(arg0: boolean): number;
+        bake(arg0: $Function_<$SheetGlyphInfo, $BakedGlyph>): $BakedGlyph;
         get boldOffset(): number;
+        get shadowOffset(): number;
     }
     export class $TrueTypeGlyphProvider implements $GlyphProvider {
         getSupportedGlyphs(): $IntSet;
@@ -60,11 +60,11 @@ declare module "@package/com/mojang/blaze3d/font" {
      */
     export type $SpaceProvider$Definition_ = { advances?: $Map_<number, number>,  } | [advances?: $Map_<number, number>, ];
     export class $TrueTypeGlyphProvider$Glyph implements $GlyphInfo {
+        getBoldOffset(): number;
         getShadowOffset(): number;
         getAdvance(arg0: boolean): number;
-        getBoldOffset(): number;
-        get shadowOffset(): number;
         get boldOffset(): number;
+        get shadowOffset(): number;
     }
     export class $SpaceProvider implements $GlyphProvider {
         getSupportedGlyphs(): $IntSet;
@@ -76,27 +76,27 @@ declare module "@package/com/mojang/blaze3d/font" {
     export class $SheetGlyphInfo {
     }
     export interface $SheetGlyphInfo {
-        getTop(): number;
-        getLeft(): number;
-        getRight(): number;
-        upload(arg0: number, arg1: number): void;
-        isColored(): boolean;
-        getBottom(): number;
         getPixelWidth(): number;
         getPixelHeight(): number;
         getOversample(): number;
         getBearingLeft(): number;
         getBearingTop(): number;
-        get top(): number;
-        get left(): number;
-        get right(): number;
-        get colored(): boolean;
-        get bottom(): number;
+        getTop(): number;
+        getRight(): number;
+        getLeft(): number;
+        upload(arg0: number, arg1: number): void;
+        isColored(): boolean;
+        getBottom(): number;
         get pixelWidth(): number;
         get pixelHeight(): number;
         get oversample(): number;
         get bearingLeft(): number;
         get bearingTop(): number;
+        get top(): number;
+        get right(): number;
+        get left(): number;
+        get colored(): boolean;
+        get bottom(): number;
     }
     export class $GlyphProvider {
         static BASELINE: number;

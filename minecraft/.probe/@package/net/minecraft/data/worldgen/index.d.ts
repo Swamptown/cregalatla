@@ -6,7 +6,7 @@ import { $StructureProcessorList_, $StructureProcessorList } from "@package/net/
 import { $List } from "@package/java/util";
 import { $PoolAliasBinding } from "@package/net/minecraft/world/level/levelgen/structure/pools/alias";
 import { $ToFloatFunction, $CubicSpline } from "@package/net/minecraft/util";
-import { $Holder$Reference, $Registry, $HolderGetter, $HolderLookup$RegistryLookup } from "@package/net/minecraft/core";
+import { $Registry, $Holder$Reference, $HolderGetter, $HolderLookup$RegistryLookup } from "@package/net/minecraft/core";
 import { $ResourceKey_, $ResourceKey } from "@package/net/minecraft/resources";
 import { $ConfiguredWorldCarver_, $ConfiguredWorldCarver } from "@package/net/minecraft/world/level/levelgen/carver";
 import { $StructureSet_, $Structure_ } from "@package/net/minecraft/world/level/levelgen/structure";
@@ -70,10 +70,10 @@ declare module "@package/net/minecraft/data/worldgen" {
         constructor();
     }
     export class $TerrainProvider {
+        static buildErosionOffsetSpline<C, I extends $ToFloatFunction<C>>(arg0: I, arg1: I, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean, arg9: boolean, arg10: $ToFloatFunction<number>): $CubicSpline<C, I>;
+        static overworldOffset<C, I extends $ToFloatFunction<C>>(arg0: I, arg1: I, arg2: I, arg3: boolean): $CubicSpline<C, I>;
         static overworldFactor<C, I extends $ToFloatFunction<C>>(arg0: I, arg1: I, arg2: I, arg3: I, arg4: boolean): $CubicSpline<C, I>;
         static overworldJaggedness<C, I extends $ToFloatFunction<C>>(arg0: I, arg1: I, arg2: I, arg3: I, arg4: boolean): $CubicSpline<C, I>;
-        static overworldOffset<C, I extends $ToFloatFunction<C>>(arg0: I, arg1: I, arg2: I, arg3: boolean): $CubicSpline<C, I>;
-        static buildErosionOffsetSpline<C, I extends $ToFloatFunction<C>>(arg0: I, arg1: I, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean, arg9: boolean, arg10: $ToFloatFunction<number>): $CubicSpline<C, I>;
         constructor();
     }
     export class $SnowyVillagePools {
@@ -82,8 +82,8 @@ declare module "@package/net/minecraft/data/worldgen" {
         constructor();
     }
     export class $Pools {
-        static parseKey(arg0: string): $ResourceKey<$StructureTemplatePool>;
         static createKey(arg0: string): $ResourceKey<$StructureTemplatePool>;
+        static parseKey(arg0: string): $ResourceKey<$StructureTemplatePool>;
         static register(arg0: $BootstrapContext<$StructureTemplatePool_>, arg1: string, arg2: $StructureTemplatePool_): void;
         static bootstrap(arg0: $BootstrapContext<$StructureTemplatePool_>): void;
         static EMPTY: $ResourceKey<$StructureTemplatePool>;
@@ -134,8 +134,8 @@ declare module "@package/net/minecraft/data/worldgen" {
         static nether(): $SurfaceRules$RuleSource;
         static overworldLike(arg0: boolean, arg1: boolean, arg2: boolean): $SurfaceRules$RuleSource;
         static end(): $SurfaceRules$RuleSource;
-        static air(): $SurfaceRules$RuleSource;
         static overworld(): $SurfaceRules$RuleSource;
+        static air(): $SurfaceRules$RuleSource;
         constructor();
     }
     export class $BastionPieces {

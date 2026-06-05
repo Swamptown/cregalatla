@@ -8,18 +8,18 @@ import { $KubeEntityEvent } from "@package/dev/latvian/mods/kubejs/entity";
 
 declare module "@package/com/almostreliable/morejs/features/teleport" {
     export class $EntityTeleportsEventJS implements $KubeEntityEvent {
-        getY(): number;
         getEntity(): $Entity;
+        getY(): number;
         getType(): $TeleportType;
-        getX(): number;
-        getZ(): number;
         setX(arg0: number): void;
         setY(arg0: number): void;
         setZ(arg0: number): void;
+        getX(): number;
+        getZ(): number;
         getPlayer(): $Player;
         getLevel(): $Level;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -62,8 +62,8 @@ declare module "@package/com/almostreliable/morejs/features/teleport" {
         get type(): $TeleportType;
         get player(): $Player;
         get level(): $Level;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get registries(): $RegistryAccess;
     }
     export class $TeleportType extends $Enum<$TeleportType> {
         static values(): $TeleportType[];

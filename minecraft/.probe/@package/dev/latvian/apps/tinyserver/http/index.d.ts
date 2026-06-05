@@ -9,9 +9,9 @@ export * as response from "@package/dev/latvian/apps/tinyserver/http/response";
 
 declare module "@package/dev/latvian/apps/tinyserver/http" {
     export class $HTTPMethod extends $Enum<$HTTPMethod> {
+        body(): boolean;
         static values(): $HTTPMethod[];
         static valueOf(name: string): $HTTPMethod;
-        body(): boolean;
         static fromString(method: string): $HTTPMethod;
         static TRACE: $HTTPMethod;
         static HEAD: $HTTPMethod;
@@ -37,53 +37,53 @@ declare module "@package/dev/latvian/apps/tinyserver/http" {
     /**
      * Values that may be interpreted as {@link $HTTPPathHandler}.
      */
-    export type $HTTPPathHandler_<REQ> = { method?: $HTTPMethod_, handler?: $HTTPHandler_<$HTTPRequest>, path?: $CompiledPath_,  } | [method?: $HTTPMethod_, handler?: $HTTPHandler_<$HTTPRequest>, path?: $CompiledPath_, ];
+    export type $HTTPPathHandler_<REQ> = { path?: $CompiledPath_, handler?: $HTTPHandler_<$HTTPRequest>, method?: $HTTPMethod_,  } | [path?: $CompiledPath_, handler?: $HTTPHandler_<$HTTPRequest>, method?: $HTTPMethod_, ];
     export class $Body {
         getPostData(): $Map<string, $OptionalString>;
         contentType(): string;
-        text(): string;
         byteBuffer(): $ByteBuffer;
         name(): string;
         fileName(): string;
         bytes(): number[];
         property(key: string): $OptionalString;
+        text(): string;
         constructor();
         get postData(): $Map<string, $OptionalString>;
     }
     export class $HTTPRequest {
         fullPath(): string;
-        variables(): $Map<string, $OptionalString>;
-        cookie(key: string): $OptionalString;
-        cookies(): $Map<string, $OptionalString>;
-        preInit(session: $HTTPConnection<never>, startTime: $Instant, method: $HTTPMethod_): void;
-        ip(): string;
-        formData(key: string): $OptionalString;
+        createPreResponse(handler: $HTTPHandler_<never>): $HTTPResponse;
+        afterResponse(payload: $HTTPPayload, response: $HTTPResponse, handler: $HTTPHandler_<never>, error: $Throwable): void;
+        queryString(): string;
+        mainBody(): $Body;
         formData(): $Map<string, $OptionalString>;
+        formData(key: string): $OptionalString;
         acceptedEncodings(): $Set<string>;
         bodyBuffer(): $ByteBuffer;
         bodyList(): $List<$Body>;
         gitHubSignature(): string;
         gitHubEvent(): string;
-        mainBody(): $Body;
-        createPreResponse(handler: $HTTPHandler_<never>): $HTTPResponse;
-        afterResponse(payload: $HTTPPayload, response: $HTTPResponse, handler: $HTTPHandler_<never>, error: $Throwable): void;
-        queryString(): string;
-        variable(name: string): $OptionalString;
+        cookie(key: string): $OptionalString;
+        cookies(): $Map<string, $OptionalString>;
+        preInit(session: $HTTPConnection<never>, startTime: $Instant, method: $HTTPMethod_): void;
+        ip(): string;
+        header(name: string): $OptionalString;
         country(): string;
+        variable(name: string): $OptionalString;
         method(): $HTTPMethod;
         init(path: string, pathParts: string[], compiledPath: $CompiledPath_, headers: $List_<$Header_>, queryString: string, query: $Map_<string, $OptionalString_>): void;
         startTime(): $Instant;
         query(): $Map<string, $OptionalString>;
         query(key: string): $OptionalString;
         path(): string;
-        header(name: string): $OptionalString;
         server(): $HTTPServer<never>;
         connection(): $HTTPConnection<never>;
         userAgent(): string;
         pathParts(): string[];
         headers(): $List<$Header>;
-        ipv6(): string;
         afterInit(): void;
+        variables(): $Map<string, $OptionalString>;
+        ipv6(): string;
         handleResponse(payload: $HTTPPayload, response: $HTTPResponse, error: $Throwable): $HTTPResponse;
         constructor();
     }

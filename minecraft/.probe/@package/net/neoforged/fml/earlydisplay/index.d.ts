@@ -40,7 +40,7 @@ declare module "@package/net/neoforged/fml/earlydisplay" {
     /**
      * Values that may be interpreted as {@link $RenderElement$DisplayContext}.
      */
-    export type $RenderElement$DisplayContext_ = { height?: number, colourScheme?: $ColourScheme_, scale?: number, width?: number, elementShader?: $ElementShader, performance?: $PerformanceInfo,  } | [height?: number, colourScheme?: $ColourScheme_, scale?: number, width?: number, elementShader?: $ElementShader, performance?: $PerformanceInfo, ];
+    export type $RenderElement$DisplayContext_ = { performance?: $PerformanceInfo, elementShader?: $ElementShader, width?: number, scale?: number, colourScheme?: $ColourScheme_, height?: number,  } | [performance?: $PerformanceInfo, elementShader?: $ElementShader, width?: number, scale?: number, colourScheme?: $ColourScheme_, height?: number, ];
     export class $ColourScheme$Colour extends $Record {
         red(): number;
         blue(): number;
@@ -54,7 +54,7 @@ declare module "@package/net/neoforged/fml/earlydisplay" {
     /**
      * Values that may be interpreted as {@link $ColourScheme$Colour}.
      */
-    export type $ColourScheme$Colour_ = { green?: number, blue?: number, red?: number,  } | [green?: number, blue?: number, red?: number, ];
+    export type $ColourScheme$Colour_ = { red?: number, blue?: number, green?: number,  } | [red?: number, blue?: number, green?: number, ];
     export class $ElementShader$RenderType extends $Enum<$ElementShader$RenderType> {
         static values(): $ElementShader$RenderType[];
         static valueOf(arg0: string): $ElementShader$RenderType;

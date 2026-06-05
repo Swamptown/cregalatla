@@ -4,8 +4,7 @@ import { $TagKey } from "@package/net/minecraft/tags";
 import { $JumpControl, $MoveControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $Fluid } from "@package/net/minecraft/world/level/material";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
-import { $AnimationState, $EntityDimensions, $EntityType_, $Entity$RemovalReason, $Pose, $PortalProcessor, $WalkAnimationState, $Mob, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
+import { $AnimationState, $EntityDimensions, $EntityType_, $Entity$RemovalReason, $LivingEntity, $Pose, $PortalProcessor, $WalkAnimationState, $Mob, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
@@ -14,7 +13,7 @@ import { $RandomSource } from "@package/net/minecraft/util";
 import { $SynchedEntityData, $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
 import { $InteractionHand } from "@package/net/minecraft/world";
 import { $DamageContainer } from "@package/net/neoforged/neoforge/common/damagesource";
-import { $HolderLookup$Provider, $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
+import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $AtomicInteger } from "@package/java/util/concurrent/atomic";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
@@ -25,11 +24,10 @@ import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entit
 
 declare module "@package/net/minecraft/world/entity/ambient" {
     export class $Bat extends $AmbientCreature {
-        static checkBatSpawnRules(arg0: $EntityType_<$Bat>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         setResting(arg0: boolean): void;
         isResting(): boolean;
+        static checkBatSpawnRules(arg0: $EntityType_<$Bat>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -60,6 +58,7 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         swingingArm: $InteractionHand;
         static ID_TAG: string;
         restAnimationState: $AnimationState;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -84,6 +83,7 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -107,6 +107,7 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         flyAnimationState: $AnimationState;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
@@ -197,7 +198,6 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         constructor(arg0: $EntityType_<$Bat>, arg1: $Level_);
     }
     export class $AmbientCreature extends $Mob {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -227,6 +227,7 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -251,6 +252,7 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -274,6 +276,7 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

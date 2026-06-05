@@ -14,13 +14,13 @@ export * as schemas from "@package/net/minecraft/util/datafix/schemas";
 declare module "@package/net/minecraft/util/datafix" {
     export class $DataFixTypes extends $Enum<$DataFixTypes> {
         static values(): $DataFixTypes[];
-        update(arg0: $DataFixer, arg1: $CompoundTag_, arg2: number, arg3: number): $CompoundTag;
         update<T>(arg0: $DataFixer, arg1: $Dynamic<T>, arg2: number, arg3: number): $Dynamic<T>;
+        update(arg0: $DataFixer, arg1: $CompoundTag_, arg2: number, arg3: number): $CompoundTag;
         static valueOf(arg0: string): $DataFixTypes;
         static currentVersion(): number;
-        wrapCodec<A>(arg0: $Codec<A>, arg1: $DataFixer, arg2: number): $Codec<A>;
         updateToCurrentVersion(arg0: $DataFixer, arg1: $CompoundTag_, arg2: number): $CompoundTag;
         updateToCurrentVersion<T>(arg0: $DataFixer, arg1: $Dynamic<T>, arg2: number): $Dynamic<T>;
+        wrapCodec<A>(arg0: $Codec<A>, arg1: $DataFixer, arg2: number): $Codec<A>;
         static SAVED_DATA_MAP_DATA: $DataFixTypes;
         static WORLD_GEN_SETTINGS: $DataFixTypes;
         static SAVED_DATA_MAP_INDEX: $DataFixTypes;
@@ -57,8 +57,8 @@ declare module "@package/net/minecraft/util/datafix" {
         static createPlainTextComponent<T>(arg0: $DynamicOps<T>, arg1: string): $Dynamic<T>;
         static wrapLiteralStringAsComponent<T>(arg0: $Dynamic<T>): $Dynamic<T>;
         static createEmptyComponent<T>(arg0: $DynamicOps<T>): $Dynamic<T>;
-        static extractTranslationString(arg0: string): (string) | undefined;
         static createTranslatableComponent<T>(arg0: $DynamicOps<T>, arg1: string): $Dynamic<T>;
+        static extractTranslationString(arg0: string): (string) | undefined;
         constructor();
     }
     export class $ExtraDataFixUtils {

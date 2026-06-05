@@ -1,15 +1,16 @@
-import { $IntUnaryOperator, $Supplier_, $Function_, $Function, $Supplier } from "@package/java/util/function";
 import { $MapCodec, $Codec } from "@package/com/mojang/serialization";
 import { $Logger } from "@package/org/slf4j";
-import { $ResourceLocation_, $ResourceLocation } from "@package/net/minecraft/resources";
+import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $ResourceManager, $Resource } from "@package/net/minecraft/server/packs/resources";
-import { $SpriteContents } from "@package/net/minecraft/client/renderer/texture";
 import { $List, $Map_, $Map, $List_ } from "@package/java/util";
-import { $Record } from "@package/java/lang";
 import { $NativeImage } from "@package/com/mojang/blaze3d/platform";
 import { $SpriteSource$SpriteSupplier, $SpriteResourceLoader, $SpriteSource$Output, $SpriteSourceType, $SpriteResourceLoader_, $SpriteSource } from "@package/net/minecraft/client/renderer/texture/atlas";
 import { $SpriteSourceListMixin$PalettedPermutationsAccessor } from "@package/com/blackgear/vanillabackport/core/mixin/client";
 import { $ResourceLocationPattern } from "@package/net/minecraft/util";
+import { $IntUnaryOperator, $Supplier_, $Function_, $Function, $Supplier } from "@package/java/util/function";
+import { $ResourceLocation_, $ResourceLocation } from "@package/net/minecraft/resources";
+import { $SpriteContents } from "@package/net/minecraft/client/renderer/texture";
+import { $Record } from "@package/java/lang";
 
 declare module "@package/net/minecraft/client/renderer/texture/atlas/sources" {
     export class $SingleFile implements $SpriteSource {
@@ -19,10 +20,11 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas/sources" {
         constructor(arg0: $ResourceLocation_, arg1: ($ResourceLocation_) | undefined);
     }
     export class $PalettedPermutations implements $SpriteSource, $SpriteSourceListMixin$PalettedPermutationsAccessor {
-        static loadPaletteEntryFromImage(arg0: $ResourceManager, arg1: $ResourceLocation_): number[];
         getPaletteKey(): $ResourceLocation;
         getPermutations(): $Map<any, any>;
         setPermutations(arg0: $Map_<any, any>): void;
+        handler$ekp000$beansbackpacks$injectBackpackTrims(arg0: $ResourceManager, arg1: $SpriteSource$Output, arg2: $CallbackInfo): void;
+        static loadPaletteEntryFromImage(arg0: $ResourceManager, arg1: $ResourceLocation_): number[];
         setTextures(arg0: $List_<any>): void;
         run(arg0: $ResourceManager, arg1: $SpriteSource$Output): void;
         type(): $SpriteSourceType;
@@ -76,7 +78,7 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas/sources" {
     /**
      * Values that may be interpreted as {@link $PalettedPermutations$PalettedSpriteSupplier}.
      */
-    export type $PalettedPermutations$PalettedSpriteSupplier_ = { palette?: $Supplier_<$IntUnaryOperator>, permutationLocation?: $ResourceLocation_, baseImage?: $LazyLoadedImage,  } | [palette?: $Supplier_<$IntUnaryOperator>, permutationLocation?: $ResourceLocation_, baseImage?: $LazyLoadedImage, ];
+    export type $PalettedPermutations$PalettedSpriteSupplier_ = { permutationLocation?: $ResourceLocation_, palette?: $Supplier_<$IntUnaryOperator>, baseImage?: $LazyLoadedImage,  } | [permutationLocation?: $ResourceLocation_, palette?: $Supplier_<$IntUnaryOperator>, baseImage?: $LazyLoadedImage, ];
     export class $Unstitcher$Region extends $Record {
         x(): number;
         y(): number;
@@ -89,5 +91,5 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas/sources" {
     /**
      * Values that may be interpreted as {@link $Unstitcher$Region}.
      */
-    export type $Unstitcher$Region_ = { y?: number, x?: number, height?: number, sprite?: $ResourceLocation_, width?: number,  } | [y?: number, x?: number, height?: number, sprite?: $ResourceLocation_, width?: number, ];
+    export type $Unstitcher$Region_ = { sprite?: $ResourceLocation_, height?: number, x?: number, y?: number, width?: number,  } | [sprite?: $ResourceLocation_, height?: number, x?: number, y?: number, width?: number, ];
 }

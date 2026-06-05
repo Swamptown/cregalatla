@@ -1,7 +1,7 @@
 import { $Int2ByteFunction_, $IntSpliterator, $Int2ShortFunction, $IntIterator, $Int2ObjectFunction_, $Int2CharFunction, $Int2DoubleFunction_, $Int2ReferenceFunction_, $Int2IntFunction_, $Int2LongFunction_, $Int2CharFunction_, $Int2FloatFunction_, $Int2LongFunction, $Int2IntFunction, $Int2DoubleFunction, $Int2FloatFunction, $Int2ByteFunction, $Int2ObjectFunction, $Int2ReferenceFunction, $Int2BooleanFunction, $Int2ShortFunction_ } from "@package/it/unimi/dsi/fastutil/ints";
 import { $Long2ReferenceFunction_, $Long2LongFunction, $Long2FloatFunction, $Long2ShortFunction, $Long2BooleanFunction, $Long2ObjectFunction, $Long2CharFunction_, $Long2ReferenceFunction, $Long2FloatFunction_, $Long2ByteFunction_, $Long2CharFunction, $Long2ObjectFunction_, $Long2ShortFunction_, $Long2IntFunction, $Long2LongFunction_, $Long2ByteFunction, $Long2IntFunction_, $Long2DoubleFunction, $Long2DoubleFunction_ } from "@package/it/unimi/dsi/fastutil/longs";
 import { $Byte2ReferenceFunction, $Byte2LongFunction_, $Byte2DoubleFunction, $Byte2ShortFunction, $Byte2LongFunction, $Byte2ShortFunction_, $Byte2BooleanFunction, $Byte2ByteFunction, $Byte2IntFunction_, $Byte2ObjectFunction_, $Byte2FloatFunction, $Byte2DoubleFunction_, $Byte2CharFunction, $Byte2ObjectFunction, $Byte2ByteFunction_, $Byte2CharFunction_, $Byte2ReferenceFunction_, $Byte2IntFunction, $Byte2FloatFunction_ } from "@package/it/unimi/dsi/fastutil/bytes";
-import { $Map, $Map$Entry, $ListIterator, $Spliterator, $List, $Collection, $Comparator, $Set, $Iterator, $Spliterator$OfPrimitive } from "@package/java/util";
+import { $PrimitiveIterator, $Map, $Map$Entry, $ListIterator, $Spliterator, $List, $Collection, $Comparator, $Set, $Iterator, $Spliterator$OfPrimitive } from "@package/java/util";
 import { $Function } from "@package/it/unimi/dsi/fastutil";
 import { $Float2LongFunction_, $Float2FloatFunction_, $Float2ShortFunction, $Float2BooleanFunction, $Float2ObjectFunction_, $Float2IntFunction, $Float2ObjectFunction, $Float2ShortFunction_, $Float2CharFunction, $Float2DoubleFunction, $Float2ReferenceFunction_, $Float2FloatFunction, $Float2IntFunction_, $Float2ReferenceFunction, $Float2CharFunction_, $Float2ByteFunction_, $Float2LongFunction, $Float2DoubleFunction_, $Float2ByteFunction } from "@package/it/unimi/dsi/fastutil/floats";
 import { $IntPredicate, $IntFunction_, $IntToDoubleFunction, $Function as $Function$1, $UnaryOperator, $BiConsumer_, $IntConsumer_, $IntToLongFunction, $IntUnaryOperator, $UnaryOperator_, $IntFunction, $Consumer_, $Predicate_, $Predicate, $Consumer, $IntConsumer, $IntPredicate_, $Function_, $IntUnaryOperator_, $BiFunction_ } from "@package/java/util/function";
@@ -96,27 +96,27 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
     export class $ShortPredicate {
     }
     export interface $ShortPredicate extends $Predicate<number>, $IntPredicate {
-        negate(): $ShortPredicate;
-        /**
-         * @deprecated
-         */
-        and(arg0: $Predicate_<number>): $Predicate<number>;
-        and(arg0: $ShortPredicate_): $ShortPredicate;
-        /**
-         * @deprecated
-         */
-        test(arg0: number): boolean;
-        /**
-         * @deprecated
-         */
-        test(arg0: number): boolean;
-        test(arg0: number): boolean;
+        or(arg0: $ShortPredicate_): $ShortPredicate;
+        or(arg0: $IntPredicate_): $ShortPredicate;
         /**
          * @deprecated
          */
         or(arg0: $Predicate_<number>): $Predicate<number>;
-        or(arg0: $ShortPredicate_): $ShortPredicate;
-        or(arg0: $IntPredicate_): $ShortPredicate;
+        and(arg0: $ShortPredicate_): $ShortPredicate;
+        /**
+         * @deprecated
+         */
+        and(arg0: $Predicate_<number>): $Predicate<number>;
+        /**
+         * @deprecated
+         */
+        test(arg0: number): boolean;
+        test(arg0: number): boolean;
+        /**
+         * @deprecated
+         */
+        test(arg0: number): boolean;
+        negate(): $Predicate<number>;
     }
     /**
      * Values that may be interpreted as {@link $ShortPredicate}.
@@ -229,19 +229,24 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
      */
     export type $Short2LongFunction_ = ((arg0: number) => number);
     export class $ShortCollection {
-        [Symbol.iterator](): Iterator<number>
     }
     export interface $ShortCollection extends $Collection<number>, $ShortIterable {
         /**
          * @deprecated
          */
+        toShortArray(arg0: number[]): number[];
+        toShortArray(): number[];
+        /**
+         * @deprecated
+         */
         remove(arg0: $Object): boolean;
-        add(arg0: number): boolean;
         /**
          * @deprecated
          */
         add(arg0: number): boolean;
+        add(arg0: number): boolean;
         toArray(arg0: number[]): number[];
+        iterator(): $ShortIterator;
         /**
          * @deprecated
          */
@@ -252,7 +257,6 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
          */
         contains(arg0: $Object): boolean;
         contains(arg0: number): boolean;
-        spliterator(): $ShortSpliterator;
         addAll(arg0: $ShortCollection): boolean;
         removeAll(arg0: $ShortCollection): boolean;
         retainAll(arg0: $ShortCollection): boolean;
@@ -266,18 +270,12 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
          * @deprecated
          */
         removeIf(arg0: $Predicate_<number>): boolean;
-        removeIf(arg0: $IntPredicate_): boolean;
         removeIf(arg0: $ShortPredicate_): boolean;
+        removeIf(arg0: $IntPredicate_): boolean;
         intSpliterator(): $IntSpliterator;
         intIterator(): $IntIterator;
         intParallelStream(): $IntStream;
-        toShortArray(): number[];
-        /**
-         * @deprecated
-         */
-        toShortArray(arg0: number[]): number[];
-        iterator(): $Iterator<number>;
-        [Symbol.iterator](): Iterator<number>
+        spliterator(): $Spliterator<number>;
     }
     export class $Short2ReferenceFunction<V> {
     }
@@ -301,11 +299,11 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
          * @deprecated
          */
         apply(arg0: number): V;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
@@ -315,8 +313,8 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Reference2ByteFunction_<V>): $Short2ByteFunction;
         composeByte(arg0: $Byte2ShortFunction_): $Byte2ReferenceFunction<V>;
         andThenShort(arg0: $Reference2ShortFunction_<V>): $Short2ShortFunction;
@@ -520,11 +518,11 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
          * @deprecated
          */
         apply(arg0: number): V;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
@@ -534,8 +532,8 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Object2ByteFunction_<V>): $Short2ByteFunction;
         composeByte(arg0: $Byte2ShortFunction_): $Byte2ObjectFunction<V>;
         andThenShort(arg0: $Object2ShortFunction_<V>): $Short2ShortFunction;
@@ -666,12 +664,12 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
          */
         getOrDefault(arg0: $Object, arg1: V): V;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, V, V>): V;
+        defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Short2ObjectFunction_<V>): V;
-        defaultReturnValue(): V;
-        defaultReturnValue(arg0: V): void;
         values(): $Collection<V>;
         keySet(): $Set<number>;
     }
@@ -684,8 +682,8 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
         [Symbol.iterator](): Iterator<number>
     }
     export interface $ShortList extends $List<number>, $Comparable<$List<number>>, $ShortCollection {
-        getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         removeShort(arg0: number): number;
+        getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         /**
          * @deprecated
          */
@@ -798,12 +796,12 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
          */
         getOrDefault(arg0: $Object, arg1: boolean): boolean;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, boolean, boolean>): boolean;
+        defaultReturnValue(): boolean;
+        defaultReturnValue(arg0: boolean): void;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Short2BooleanFunction_): boolean;
-        defaultReturnValue(): boolean;
-        defaultReturnValue(arg0: boolean): void;
         computeIfAbsentNullable(arg0: number, arg1: $IntFunction_<boolean>): boolean;
         get(arg0: number): boolean;
         values(): $Collection<boolean>;
@@ -814,7 +812,6 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
         static of(...arg0: number[]): $ShortSet;
         static of(arg0: number): $ShortSet;
         static of(arg0: number, arg1: number, arg2: number): $ShortSet;
-        [Symbol.iterator](): Iterator<number>
     }
     export interface $ShortSet extends $ShortCollection, $Set<number> {
         remove(arg0: number): boolean;
@@ -835,8 +832,7 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
          * @deprecated
          */
         rem(arg0: number): boolean;
-        iterator(): $Iterator<number>;
-        [Symbol.iterator](): Iterator<number>
+        iterator(): $ShortIterator;
     }
     export class $Short2FloatFunction {
     }
@@ -984,6 +980,19 @@ declare module "@package/it/unimi/dsi/fastutil/shorts" {
      * Values that may be interpreted as {@link $ShortUnaryOperator}.
      */
     export type $ShortUnaryOperator_ = ((arg0: number) => number);
+    export class $ShortIterator {
+    }
+    export interface $ShortIterator extends $PrimitiveIterator<number, $ShortConsumer> {
+        nextShort(): number;
+        forEachRemaining(arg0: $IntConsumer_): void;
+        /**
+         * @deprecated
+         */
+        forEachRemaining(arg0: $Consumer_<number>): void;
+        forEachRemaining(arg0: $ShortConsumer_): void;
+        skip(arg0: number): number;
+        next(): number;
+    }
     export class $Short2IntFunction {
     }
     export interface $Short2IntFunction extends $Function<number, number>, $IntUnaryOperator {

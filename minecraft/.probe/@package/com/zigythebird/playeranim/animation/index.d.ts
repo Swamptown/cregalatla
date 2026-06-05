@@ -7,8 +7,8 @@ declare module "@package/com/zigythebird/playeranim/animation" {
     export class $PlayerAnimManager extends $AnimationStack {
         updatePart(part: $ModelPart, secondLayer: $ModelPart, bone: $PlayerAnimBone): void;
         setTickDelta(tickDelta: number): void;
-        updatedAt(updateTime: number): void;
         isFirstTick(): boolean;
+        updatedAt(updateTime: number): void;
         getTickDelta(): number;
         getPlayer(): $AbstractClientPlayer;
         getLastUpdateTime(): number;

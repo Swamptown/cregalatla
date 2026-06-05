@@ -35,8 +35,8 @@ declare module "@package/net/minecraft/util/profiling/metrics/profiling" {
         get recording(): boolean;
     }
     export class $ServerMetricsSamplersProvider implements $MetricsSamplerProvider {
-        static runtimeIndependentSamplers(): $Set<$MetricSampler>;
         static tickTimeSampler(arg0: $LongSupplier_): $MetricSampler;
+        static runtimeIndependentSamplers(): $Set<$MetricSampler>;
         samplers(arg0: $Supplier_<$ProfileCollector>): $Set<$MetricSampler>;
         constructor(arg0: $LongSupplier_, arg1: boolean);
     }

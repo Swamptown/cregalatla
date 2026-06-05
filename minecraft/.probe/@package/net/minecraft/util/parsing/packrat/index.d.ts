@@ -13,7 +13,7 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
     /**
      * Values that may be interpreted as {@link $ErrorEntry}.
      */
-    export type $ErrorEntry_<S> = { cursor?: number, suggestions?: $SuggestionSupplier_<any>, reason?: $Object,  } | [cursor?: number, suggestions?: $SuggestionSupplier_<any>, reason?: $Object, ];
+    export type $ErrorEntry_<S> = { suggestions?: $SuggestionSupplier_<any>, cursor?: number, reason?: $Object,  } | [suggestions?: $SuggestionSupplier_<any>, cursor?: number, reason?: $Object, ];
     export class $ParseState$CacheEntry<T> extends $Record {
     }
     /**
@@ -65,9 +65,9 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
     export type $Term$Reference_<S, T> = { name?: $Atom_<any>,  } | [name?: $Atom_<any>, ];
     export class $Term<S> {
         static cut<S>(): $Term<S>;
+        static sequence<S>(...arg0: $Term_<S>[]): $Term<S>;
         static empty<S>(): $Term<S>;
         static optional<S>(arg0: $Term_<S>): $Term<S>;
-        static sequence<S>(...arg0: $Term_<S>[]): $Term<S>;
         static alternative<S>(...arg0: $Term_<S>[]): $Term<S>;
         static named<S>(arg0: $Atom_<never>): $Term<S>;
         static marker<S, T>(arg0: $Atom_<T>, arg1: T): $Term<S>;
@@ -123,8 +123,8 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
     export type $ParseState$CacheKey_<T> = { name?: $Atom_<any>, mark?: number,  } | [name?: $Atom_<any>, mark?: number, ];
     export class $ParseState<S> {
         parseTopRule<T>(arg0: $Atom_<T>): (T) | undefined;
-        restore(arg0: number): void;
         errorCollector(): $ErrorCollector<S>;
+        restore(arg0: number): void;
         parse<T>(arg0: $Atom_<T>): (T) | undefined;
         input(): S;
         mark(): number;
@@ -178,7 +178,7 @@ declare module "@package/net/minecraft/util/parsing/packrat" {
     /**
      * Values that may be interpreted as {@link $Rule$WrappedTerm}.
      */
-    export type $Rule$WrappedTerm_<S, T> = { child?: $Term_<any>, action?: $Rule$RuleAction_<any, any>,  } | [child?: $Term_<any>, action?: $Rule$RuleAction_<any, any>, ];
+    export type $Rule$WrappedTerm_<S, T> = { action?: $Rule$RuleAction_<any, any>, child?: $Term_<any>,  } | [action?: $Rule$RuleAction_<any, any>, child?: $Term_<any>, ];
     export class $Rule$SimpleRuleAction<T> {
     }
     export interface $Rule$SimpleRuleAction<T> {

@@ -10,8 +10,8 @@ declare module "@package/net/caffeinemc/mods/sodium/client/gl/attribute" {
     export class $GlVertexFormat {
         getShaderBindings(): $GlVertexAttributeBinding[];
         getStride(): number;
-        getAttribute(arg0: $VertexFormatAttribute_): $GlVertexAttribute;
         static builder(arg0: number): $GlVertexFormat$Builder;
+        getAttribute(arg0: $VertexFormatAttribute_): $GlVertexAttribute;
         constructor(arg0: $Map_<$VertexFormatAttribute_, $GlVertexAttribute>, arg1: $GlVertexAttributeBinding[], arg2: number);
         get shaderBindings(): $GlVertexAttributeBinding[];
         get stride(): number;

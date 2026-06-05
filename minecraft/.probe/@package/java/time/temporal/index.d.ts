@@ -106,13 +106,13 @@ declare module "@package/java/time/temporal" {
     export class $Temporal {
     }
     export interface $Temporal extends $TemporalAccessor {
-        plus(arg0: number, arg1: $TemporalUnit): $Temporal;
-        plus(arg0: $TemporalAmount_): $Temporal;
         minus(arg0: $TemporalAmount_): $Temporal;
         minus(arg0: number, arg1: $TemporalUnit): $Temporal;
         isSupported(arg0: $TemporalUnit): boolean;
-        with(arg0: $TemporalField, arg1: number): $Temporal;
         with(arg0: $TemporalAdjuster_): $Temporal;
+        with(arg0: $TemporalField, arg1: number): $Temporal;
+        plus(arg0: number, arg1: $TemporalUnit): $Temporal;
+        plus(arg0: $TemporalAmount_): $Temporal;
         until(arg0: $Temporal, arg1: $TemporalUnit): number;
     }
     export class $TemporalAmount {
@@ -184,24 +184,24 @@ declare module "@package/java/time/temporal" {
      */
     export type $ChronoField_ = "nano_of_second" | "nano_of_day" | "micro_of_second" | "micro_of_day" | "milli_of_second" | "milli_of_day" | "second_of_minute" | "second_of_day" | "minute_of_hour" | "minute_of_day" | "hour_of_ampm" | "clock_hour_of_ampm" | "hour_of_day" | "clock_hour_of_day" | "ampm_of_day" | "day_of_week" | "aligned_day_of_week_in_month" | "aligned_day_of_week_in_year" | "day_of_month" | "day_of_year" | "epoch_day" | "aligned_week_of_month" | "aligned_week_of_year" | "month_of_year" | "proleptic_month" | "year_of_era" | "year" | "era" | "instant_seconds" | "offset_seconds";
     export class $ValueRange implements $Serializable {
-        isValidIntValue(arg0: number): boolean;
-        isFixed(): boolean;
-        getLargestMinimum(): number;
-        getSmallestMaximum(): number;
-        getMinimum(): number;
+        getMaximum(): number;
         isIntValue(): boolean;
         isValidValue(arg0: number): boolean;
         checkValidIntValue(arg0: number, arg1: $TemporalField): number;
         checkValidValue(arg0: number, arg1: $TemporalField): number;
-        getMaximum(): number;
+        getMinimum(): number;
+        isValidIntValue(arg0: number): boolean;
+        isFixed(): boolean;
+        getLargestMinimum(): number;
+        getSmallestMaximum(): number;
         static of(arg0: number, arg1: number): $ValueRange;
         static of(arg0: number, arg1: number, arg2: number): $ValueRange;
         static of(arg0: number, arg1: number, arg2: number, arg3: number): $ValueRange;
+        get maximum(): number;
+        get intValue(): boolean;
+        get minimum(): number;
         get fixed(): boolean;
         get largestMinimum(): number;
         get smallestMaximum(): number;
-        get minimum(): number;
-        get intValue(): boolean;
-        get maximum(): number;
     }
 }

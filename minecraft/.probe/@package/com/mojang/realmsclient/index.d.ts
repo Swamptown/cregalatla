@@ -42,7 +42,7 @@ declare module "@package/com/mojang/realmsclient" {
     /**
      * Values that may be interpreted as {@link $RealmsAvailability$Result}.
      */
-    export type $RealmsAvailability$Result_ = { exception?: $RealmsServiceException, type?: $RealmsAvailability$Type_,  } | [exception?: $RealmsServiceException, type?: $RealmsAvailability$Type_, ];
+    export type $RealmsAvailability$Result_ = { type?: $RealmsAvailability$Type_, exception?: $RealmsServiceException,  } | [type?: $RealmsAvailability$Type_, exception?: $RealmsServiceException, ];
     export class $RealmsMainScreen$RealmsCall<T> {
     }
     export interface $RealmsMainScreen$RealmsCall<T> {
@@ -161,6 +161,7 @@ declare module "@package/com/mojang/realmsclient" {
      */
     export type $RealmsMainScreen$LayoutState_ = "loading" | "no_realms" | "list";
     export class $RealmsMainScreen extends $RealmsScreen {
+        getSelectedServer(): $RealmsServer;
         static isSnapshot(): boolean;
         static refreshPendingInvites(): void;
         static refreshServerList(): void;
@@ -196,6 +197,7 @@ declare module "@package/com/mojang/realmsclient" {
         static COLOR_LINK: number;
         font: $Font;
         constructor(arg0: $Screen);
+        get selectedServer(): $RealmsServer;
         static get snapshot(): boolean;
     }
     export class $RealmsMainScreen$ParentEntry extends $RealmsMainScreen$Entry {

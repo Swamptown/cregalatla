@@ -53,12 +53,12 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
     }
     export class $EntityTeleportEvent extends $EntityEvent implements $ICancellableEvent {
         setTargetX(arg0: number): void;
-        setTargetY(arg0: number): void;
-        setTargetZ(arg0: number): void;
         getPrevX(): number;
         getPrevY(): number;
         getPrevZ(): number;
         getPrev(): $Vec3;
+        setTargetY(arg0: number): void;
+        setTargetZ(arg0: number): void;
         getTargetX(): number;
         getTargetY(): number;
         getTargetZ(): number;
@@ -76,8 +76,8 @@ declare module "@package/net/neoforged/neoforge/event/entity" {
         getPearlEntity(): $ThrownEnderpearl;
         setAttackDamage(arg0: number): void;
         getPlayer(): $ServerPlayer;
-        getAttackDamage(): number;
         getHitResult(): $HitResult;
+        getAttackDamage(): number;
         constructor(arg0: $ServerPlayer, arg1: number, arg2: number, arg3: number, arg4: $ThrownEnderpearl, arg5: number, arg6: $HitResult);
         get pearlEntity(): $ThrownEnderpearl;
         get player(): $ServerPlayer;

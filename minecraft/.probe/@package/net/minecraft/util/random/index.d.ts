@@ -11,9 +11,9 @@ declare module "@package/net/minecraft/util/random" {
         get weight(): $Weight;
     }
     export class $SimpleWeightedRandomList<E> extends $WeightedRandomList<$WeightedEntry$Wrapper<E>> {
-        static wrappedCodecAllowingEmpty<E>(arg0: $Codec<E>): $Codec<$SimpleWeightedRandomList<E>>;
         static wrappedCodec<E>(arg0: $Codec<E>): $Codec<$SimpleWeightedRandomList<E>>;
         getRandomValue(arg0: $RandomSource): ($WeightedEntry$Wrapper<E>) | undefined;
+        static wrappedCodecAllowingEmpty<E>(arg0: $Codec<E>): $Codec<$SimpleWeightedRandomList<E>>;
         static builder<E>(): $SimpleWeightedRandomList$Builder<E>;
         static single<E>(arg0: E): $SimpleWeightedRandomList<E>;
         static empty<E>(): $SimpleWeightedRandomList<E>;
@@ -42,14 +42,14 @@ declare module "@package/net/minecraft/util/random" {
         static create<E extends $WeightedEntry>(): $WeightedRandomList<E>;
         static create<E extends $WeightedEntry>(...arg0: E[]): $WeightedRandomList<E>;
         unwrap(): $List<any>;
-        static codec<E extends $WeightedEntry>(arg0: $Codec<E>): $Codec<$WeightedRandomList<E>>;
         getRandom(arg0: $RandomSource): (E) | undefined;
+        static codec<E extends $WeightedEntry>(arg0: $Codec<E>): $Codec<$WeightedRandomList<E>>;
         constructor(arg0: $List_<E>);
         get empty(): boolean;
     }
     export class $Weight {
-        asInt(): number;
         static of(arg0: number): $Weight;
+        asInt(): number;
         static CODEC: $Codec<$Weight>;
     }
     export class $WeightedEntry$Wrapper<T> extends $Record implements $WeightedEntry {
@@ -62,11 +62,11 @@ declare module "@package/net/minecraft/util/random" {
     /**
      * Values that may be interpreted as {@link $WeightedEntry$Wrapper}.
      */
-    export type $WeightedEntry$Wrapper_<T> = { weight?: $Weight, data?: any,  } | [weight?: $Weight, data?: any, ];
+    export type $WeightedEntry$Wrapper_<T> = { data?: any, weight?: $Weight,  } | [data?: any, weight?: $Weight, ];
     export class $WeightedRandom {
-        static getRandomItem<T extends $WeightedEntry>(arg0: $RandomSource, arg1: $List_<T>): (T) | undefined;
-        static getRandomItem<T extends $WeightedEntry>(arg0: $RandomSource, arg1: $List_<T>, arg2: number): (T) | undefined;
         static getTotalWeight(arg0: $List_<$WeightedEntry_>): number;
         static getWeightedItem<T extends $WeightedEntry>(arg0: $List_<T>, arg1: number): (T) | undefined;
+        static getRandomItem<T extends $WeightedEntry>(arg0: $RandomSource, arg1: $List_<T>): (T) | undefined;
+        static getRandomItem<T extends $WeightedEntry>(arg0: $RandomSource, arg1: $List_<T>, arg2: number): (T) | undefined;
     }
 }

@@ -23,10 +23,10 @@ declare module "@package/net/fabricmc/fabric/mixin/object/builder" {
         getHasCollision(): boolean;
         isRequiresCorrectToolForDrops(): boolean;
         getDestroyTime(): number;
+        getIsAir(): boolean;
         getIsRandomlyTicking(): boolean;
         getDynamicShape(): boolean;
         getCanOcclude(): boolean;
-        getIsAir(): boolean;
         getIsValidSpawn(): $BlockBehaviour$StateArgumentPredicate<$EntityType<never>>;
         getIsRedstoneConductor(): $BlockBehaviour$StatePredicate;
         getIsSuffocating(): $BlockBehaviour$StatePredicate;
@@ -58,15 +58,15 @@ declare module "@package/net/fabricmc/fabric/mixin/object/builder" {
         setForceSolidOff(arg0: boolean): void;
         setForceSolidOn(arg0: boolean): void;
         setReplaceable(arg0: boolean): void;
-        getLiquid(): boolean;
-        getSoundType(): $SoundType;
-        getFriction(): number;
         getLuminance(): $ToIntFunction<$BlockState>;
-        getJumpFactor(): number;
-        getSpeedFactor(): number;
-        getExplosionResistance(): number;
+        getFriction(): number;
         getMapColor(): $Function<$BlockState, $MapColor>;
         getDrops(): $ResourceKey<$LootTable>;
+        getJumpFactor(): number;
+        getSpeedFactor(): number;
+        getSoundType(): $SoundType;
+        getExplosionResistance(): number;
+        getLiquid(): boolean;
         get destroyTime(): number;
         get isValidSpawn(): $BlockBehaviour$StateArgumentPredicate<$EntityType<never>>;
         get isRedstoneConductor(): $BlockBehaviour$StatePredicate;
@@ -76,11 +76,11 @@ declare module "@package/net/fabricmc/fabric/mixin/object/builder" {
         get emissiveRendering(): $BlockBehaviour$StatePredicate;
         get pushReaction(): $PushReaction;
         get instrument(): $NoteBlockInstrument;
-        get soundType(): $SoundType;
-        get friction(): number;
         get luminance(): $ToIntFunction<$BlockState>;
+        get friction(): number;
         get jumpFactor(): number;
         get speedFactor(): number;
+        get soundType(): $SoundType;
         get explosionResistance(): number;
     }
     export class $AbstractBlockAccessor {

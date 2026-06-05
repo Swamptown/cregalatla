@@ -5,17 +5,21 @@ import { $RecipeUpdateListener, $AbstractFurnaceRecipeBookComponent, $RecipeBook
 import { $Executor } from "@package/java/util/concurrent";
 import { $AbstractContainerScreenAccessor } from "@package/yalter/mousetweaks/mixin";
 import { $LivingEntity } from "@package/net/minecraft/world/entity";
+import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $NarratorStatus, $Minecraft } from "@package/net/minecraft/client";
 import { $FeatureFlagSet } from "@package/net/minecraft/world/flag";
 import { $Map, $Set, $List, $List_, $Optional } from "@package/java/util";
 import { $AccessorSmithingScreen } from "@package/com/illusivesoulworks/polymorph/mixin/core";
+import { $TraitMenuAccessor } from "@package/com/beansgalaxy/backpacks/access";
 import { $AbstractHorse } from "@package/net/minecraft/world/entity/animal/horse";
 import { $AbstractContainerScreenAccessor as $AbstractContainerScreenAccessor$1 } from "@package/net/blay09/mods/balm/mixin";
 import { $SimpleContainer, $InteractionHand_, $Container } from "@package/net/minecraft/world";
 import { $Holder, $NonNullList } from "@package/net/minecraft/core";
+import { $CreativeModeInventoryScreenAccessor as $CreativeModeInventoryScreenAccessor$2 } from "@package/com/example/createthrusters/mixin";
 import { $BlockState_ } from "@package/net/minecraft/world/level/block/state";
 import { $ModularUI } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 import { $HorseInventoryMenu, $ChestMenu, $FurnaceMenu, $MenuType, $LecternMenu, $ClickType_, $BeaconMenu, $CartographyTableMenu, $StonecutterMenu, $AnvilMenu, $Slot, $ShulkerBoxMenu, $ItemCombinerMenu, $EnchantmentMenu, $CrafterMenu, $CraftingMenu, $SmokerMenu, $BlastFurnaceMenu, $MerchantMenu, $SmithingMenu, $HopperMenu, $GrindstoneMenu, $DispenserMenu, $AbstractContainerMenu, $BrewingStandMenu, $AbstractFurnaceMenu, $InventoryMenu, $LoomMenu, $ContainerListener } from "@package/net/minecraft/world/inventory";
+import { $TextFieldHelper } from "@package/net/minecraft/client/gui/font";
 import { $Record } from "@package/java/lang";
 import { $CreativeModeInventoryScreenAccessor } from "@package/com/blackgear/vanillabackport/core/mixin/access";
 import { $FabricCreativeInventoryScreen } from "@package/net/fabricmc/fabric/api/client/itemgroup/v1";
@@ -33,7 +37,7 @@ import { $WoodType } from "@package/net/minecraft/world/level/block/state/proper
 import { $Screen, $Screen$DeferredTooltipRendering } from "@package/net/minecraft/client/gui/screens";
 import { $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $Font, $GuiGraphics } from "@package/net/minecraft/client/gui";
-import { $SignBlockEntity, $StructureBlockEntity, $JigsawBlockEntity, $CommandBlockEntity } from "@package/net/minecraft/world/level/block/entity";
+import { $SignBlockEntity, $SignText, $StructureBlockEntity, $JigsawBlockEntity, $CommandBlockEntity } from "@package/net/minecraft/world/level/block/entity";
 import { $CreativeModeInventoryScreenAccessor as $CreativeModeInventoryScreenAccessor$1 } from "@package/dev/simulated_team/simulated/mixin/accessor";
 import { $ContainerEventHandler } from "@package/net/minecraft/client/gui/components/events";
 import { $Vector3f, $Quaternionf } from "@package/org/joml";
@@ -46,6 +50,8 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
+        beans_Backpacks_3$progress: number;
+        beans_Backpacks_3$yRot: number;
         clickedSlot: $Slot;
         static CUBE_MAP: $CubeMap;
         title: $Component;
@@ -63,6 +69,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        beans_Backpacks_3$yRotO: number;
         imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
@@ -142,9 +149,9 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(arg0: $EnchantmentMenu, arg1: $Inventory, arg2: $Component_);
     }
     export class $BookViewScreen$BookAccess extends $Record {
-        static fromItem(arg0: $ItemStack_): $BookViewScreen$BookAccess;
         getPageCount(): number;
         getPage(arg0: number): $FormattedText;
+        static fromItem(arg0: $ItemStack_): $BookViewScreen$BookAccess;
         pages(): $List<$Component>;
         constructor(arg0: $List_<$Component_>);
         get pageCount(): number;
@@ -300,10 +307,11 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(arg0: $BrewingStandMenu, arg1: $Inventory, arg2: $Component_);
     }
     export class $CreativeModeInventoryScreen extends $EffectRenderingInventoryScreen<$CreativeModeInventoryScreen$ItemPickerMenu> implements $CreativeModeInventoryScreenAccessor, $FabricCreativeInventoryScreen {
+        getCurrentPage(): number;
+        renderTabButton(arg0: $GuiGraphics, arg1: $CreativeModeTab_): void;
         checkTabClicked(arg0: $CreativeModeTab_, arg1: number, arg2: number): boolean;
         insideScrollbar(arg0: number, arg1: number): boolean;
         checkTabHovering(arg0: $GuiGraphics, arg1: $CreativeModeTab_, arg2: number, arg3: number): boolean;
-        renderTabButton(arg0: $GuiGraphics, arg1: $CreativeModeTab_): void;
         setCurrentPage(arg0: $CreativeTabsScreenPage): void;
         switchToPage(arg0: number): boolean;
         switchToNextPage(): boolean;
@@ -312,13 +320,12 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         getItemGroupsOnPage(arg0: number): $List<any>;
         getSelectedItemGroup(): $CreativeModeTab;
         setSelectedItemGroup(arg0: $CreativeModeTab_): boolean;
-        static getSelectedTab$vanillabackport_$md$4ca6b6$0(): $CreativeModeTab;
+        static getSelectedTab$vanillabackport_$md$3b3139$0(): $CreativeModeTab;
         selectTab(arg0: $CreativeModeTab_): void;
         getPageCount(): number;
         getPage(arg0: $CreativeModeTab_): number;
         static handleHotbarLoadOrSave(arg0: $Minecraft, arg1: number, arg2: boolean, arg3: boolean): void;
         isInventoryOpen(): boolean;
-        getCurrentPage(): $CreativeTabsScreenPage;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -367,7 +374,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         searchBox: $EditBox;
         font: $Font;
         constructor(arg0: $LocalPlayer, arg1: $FeatureFlagSet, arg2: boolean);
-        static get selectedTab$vanillabackport_$md$4ca6b6$0(): $CreativeModeTab;
+        static get selectedTab$vanillabackport_$md$3b3139$0(): $CreativeModeTab;
         get pageCount(): number;
         get inventoryOpen(): boolean;
     }
@@ -505,14 +512,14 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
     }
     export class $BookViewScreen extends $Screen {
         pageBack(): void;
-        setPage(arg0: number): boolean;
-        getClickedComponentStyleAt(arg0: number, arg1: number): $Style;
         createMenuControls(): void;
         pageForward(): void;
         forcePage(arg0: number): boolean;
         setBookAccess(arg0: $BookViewScreen$BookAccess_): void;
         closeScreen(): void;
         createPageControlButtons(): void;
+        setPage(arg0: number): boolean;
+        getClickedComponentStyleAt(arg0: number, arg1: number): $Style;
         static BOOK_LOCATION: $ResourceLocation;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -539,10 +546,10 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         width: number;
         screenExecutor: $Executor;
         font: $Font;
-        constructor(arg0: $BookViewScreen$BookAccess_);
         constructor();
-        set page(value: number);
+        constructor(arg0: $BookViewScreen$BookAccess_);
         set bookAccess(value: $BookViewScreen$BookAccess_);
+        set page(value: number);
     }
     export class $BeaconScreen extends $AbstractContainerScreen<$BeaconMenu> {
         updateButtons(): void;
@@ -812,8 +819,8 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(arg0: $FurnaceMenu, arg1: $Inventory, arg2: $Component_);
     }
     export class $MerchantScreen$TradeOfferButton extends $Button {
-        getIndex(): number;
         renderToolTip(arg0: $GuiGraphics, arg1: number, arg2: number): void;
+        getIndex(): number;
         static SPRITES: $WidgetSprites;
         visible: boolean;
         createNarration: $Button$CreateNarration;
@@ -1026,41 +1033,46 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(arg0: $SmokerMenu, arg1: $Inventory, arg2: $Component_);
     }
     export class $EnchantmentNames {
-        static getInstance(): $EnchantmentNames;
-        initSeed(arg0: number): void;
         getRandomName(arg0: $Font, arg1: number): $FormattedText;
+        initSeed(arg0: number): void;
+        static getInstance(): $EnchantmentNames;
         static get instance(): $EnchantmentNames;
     }
-    export class $AbstractContainerScreen<T extends $AbstractContainerMenu> extends $Screen implements $MenuAccess<T>, $AbstractContainerScreenAccessor$1, $ContainerEventHandler, $HandledScreenAccessor, $AbstractContainerScreenAccessor, $CreativeModeInventoryScreenAccessor$1, $ContainerScreenLockTooltip, $ContainerScreenDrawTooltip, $IMixinAbstractContainerScreen {
-        getSlotColor(arg0: number): number;
-        findSlot(arg0: number, arg1: number): $Slot;
-        getMenu(): T;
+    export class $AbstractContainerScreen<T extends $AbstractContainerMenu> extends $Screen implements $MenuAccess<T>, $AbstractContainerScreenAccessor$1, $ContainerEventHandler, $HandledScreenAccessor, $AbstractContainerScreenAccessor, $CreativeModeInventoryScreenAccessor$1, $TraitMenuAccessor, $ContainerScreenLockTooltip, $ContainerScreenDrawTooltip, $CreativeModeInventoryScreenAccessor$2, $IMixinAbstractContainerScreen {
         getXSize(): number;
         getYSize(): number;
+        getSlotColor(arg0: number): number;
+        findSlot(arg0: number, arg1: number): $Slot;
+        slotClicked(arg0: $Slot, arg1: number, arg2: number, arg3: $ClickType_): void;
         getGuiTop(): number;
         getGuiLeft(): number;
         renderTooltip(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        recalculateQuickCraftRemaining(): void;
-        clearDraggingState(): void;
-        handleSlotStateChanged(arg0: number, arg1: number, arg2: boolean): void;
-        checkHotbarKeyPressed(arg0: number, arg1: number): boolean;
-        getSlotUnderMouse(): $Slot;
-        shulkerboxtooltip$lockTooltipPosition(graphics: $GuiGraphics, font: $Font, text: $List_<any>, data: $Optional<any>, stack: $ItemStack_, x: number, y: number): void;
-        shulkerboxtooltip$drawMouseoverTooltip(graphics: $GuiGraphics, font: $Font, text: $List_<any>, data: $Optional<any>, stack: $ItemStack_, x: number, y: number): void;
         containerTick(): void;
         renderLabels(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         renderBg(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
         isHovering(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
         isHovering(arg0: $Slot, arg1: number, arg2: number): boolean;
         hasClickedOutside(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
-        slotClicked(arg0: $Slot, arg1: number, arg2: number, arg3: $ClickType_): void;
         renderSlot(arg0: $GuiGraphics, arg1: $Slot): void;
         static renderSlotHighlight(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        static renderSlotHighlight(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
         renderSlotHighlight(arg0: $GuiGraphics, arg1: $Slot, arg2: number, arg3: number, arg4: number): void;
+        static renderSlotHighlight(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
+        handler$eka000$beansbackpacks$renderTooltip(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: $CallbackInfo): void;
         renderFloatingItem(arg0: $GuiGraphics, arg1: $ItemStack_, arg2: number, arg3: number, arg4: string): void;
         getTooltipFromContainerItem(arg0: $ItemStack_): $List<$Component>;
+        recalculateQuickCraftRemaining(): void;
         renderSlotContents(arg0: $GuiGraphics, arg1: $ItemStack_, arg2: $Slot, arg3: string): void;
+        handler$eka000$beansbackpacks$renderBackpackDraggedSlot(arg0: $GuiGraphics, arg1: $Slot, arg2: $CallbackInfo): void;
+        handler$eka000$beansbackpacks$backpackDragged(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfoReturnable<any>): void;
+        handler$eka000$beansbackpacks$backpackReleased(arg0: number, arg1: number, arg2: number, arg3: $CallbackInfoReturnable<any>): void;
+        clearDraggingState(): void;
+        handleSlotStateChanged(arg0: number, arg1: number, arg2: boolean): void;
+        checkHotbarKeyPressed(arg0: number, arg1: number): boolean;
+        getSlotUnderMouse(): $Slot;
+        clickTraitMenu(arg0: number, arg1: number, arg2: number, arg3: $CallbackInfoReturnable<any>): void;
+        shulkerboxtooltip$lockTooltipPosition(graphics: $GuiGraphics, font: $Font, text: $List_<any>, data: $Optional<any>, stack: $ItemStack_, x: number, y: number): void;
+        shulkerboxtooltip$drawMouseoverTooltip(graphics: $GuiGraphics, font: $Font, text: $List_<any>, data: $Optional<any>, stack: $ItemStack_, x: number, y: number): void;
+        getMenu(): T;
         getY(): number;
         getX(): number;
         getLeftPos(): number;
@@ -1140,8 +1152,8 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         get _draggingItem_FancyMenu(): $ItemStack;
     }
     export class $CreativeInventoryListener implements $ContainerListener {
-        slotChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: $ItemStack_): void;
         dataChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: number): void;
+        slotChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: $ItemStack_): void;
         constructor(arg0: $Minecraft);
     }
     export class $BlastFurnaceScreen extends $AbstractFurnaceScreen<$BlastFurnaceMenu> {
@@ -1338,11 +1350,11 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(arg0: $BaseCommandBlock);
     }
     export class $ItemCombinerScreen<T extends $ItemCombinerMenu> extends $AbstractContainerScreen<T> implements $ContainerListener {
-        slotChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: $ItemStack_): void;
-        dataChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: number): void;
         subInit(): void;
         renderFg(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
         renderErrorIcon(arg0: $GuiGraphics, arg1: number, arg2: number): void;
+        dataChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: number): void;
+        slotChanged(arg0: $AbstractContainerMenu, arg1: number, arg2: $ItemStack_): void;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -1425,22 +1437,28 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
-        deferredTooltipRendering: $Screen$DeferredTooltipRendering;
+        line: number;
+        signField: $TextFieldHelper;
+        sign: $SignBlockEntity;
         static CUBE_MAP: $CubeMap;
         title: $Component;
-        static FOOTER_SEPARATOR: $ResourceLocation;
-        narratorButton: $CycleButton<$NarratorStatus>;
         renderables: $List<$Renderable>;
         static INWORLD_HEADER_SEPARATOR: $ResourceLocation;
         woodType: $WoodType;
         static MAGIC_TEXT_SCALE: number;
-        narratables: $List<$NarratableEntry>;
-        width: number;
         static PANORAMA: $PanoramaRenderer;
         static MAGIC_SCALE_NUMBER: number;
-        screenExecutor: $Executor;
+        text: $SignText;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        deferredTooltipRendering: $Screen$DeferredTooltipRendering;
+        static FOOTER_SEPARATOR: $ResourceLocation;
+        narratorButton: $CycleButton<$NarratorStatus>;
+        isFrontText: boolean;
+        narratables: $List<$NarratableEntry>;
+        width: number;
+        messages: string[];
+        screenExecutor: $Executor;
         font: $Font;
         constructor(arg0: $SignBlockEntity, arg1: boolean, arg2: boolean);
     }
@@ -1596,11 +1614,11 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         height: number;
     }
     export class $CreativeModeInventoryScreen$ItemPickerMenu extends $AbstractContainerMenu {
-        calculateRowCount(): number;
         getRowIndexForScroll(arg0: number): number;
         getScrollForRowIndex(arg0: number): number;
-        scrollTo(arg0: number): void;
         subtractInputFromScroll(arg0: number, arg1: number): number;
+        calculateRowCount(): number;
+        scrollTo(arg0: number): void;
         canScroll(): boolean;
         static QUICKCRAFT_HEADER_START: number;
         remoteSlots: $NonNullList<$ItemStack>;
@@ -1655,21 +1673,27 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
-        deferredTooltipRendering: $Screen$DeferredTooltipRendering;
+        line: number;
+        signField: $TextFieldHelper;
+        sign: $SignBlockEntity;
         static CUBE_MAP: $CubeMap;
         title: $Component;
-        static FOOTER_SEPARATOR: $ResourceLocation;
-        narratorButton: $CycleButton<$NarratorStatus>;
         renderables: $List<$Renderable>;
-        static MAGIC_BACKGROUND_SCALE: number;
         static INWORLD_HEADER_SEPARATOR: $ResourceLocation;
         woodType: $WoodType;
-        narratables: $List<$NarratableEntry>;
-        width: number;
         static PANORAMA: $PanoramaRenderer;
-        screenExecutor: $Executor;
+        text: $SignText;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        deferredTooltipRendering: $Screen$DeferredTooltipRendering;
+        static FOOTER_SEPARATOR: $ResourceLocation;
+        narratorButton: $CycleButton<$NarratorStatus>;
+        static MAGIC_BACKGROUND_SCALE: number;
+        isFrontText: boolean;
+        narratables: $List<$NarratableEntry>;
+        width: number;
+        messages: string[];
+        screenExecutor: $Executor;
         font: $Font;
         constructor(arg0: $SignBlockEntity, arg1: boolean, arg2: boolean);
     }
@@ -1779,26 +1803,32 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(arg0: $AnvilMenu, arg1: $Inventory, arg2: $Component_);
     }
     export class $AbstractSignEditScreen extends $Screen {
-        getSignTextScale(): $Vector3f;
         offsetSign(arg0: $GuiGraphics, arg1: $BlockState_): void;
         renderSignBackground(arg0: $GuiGraphics, arg1: $BlockState_): void;
+        getSignTextScale(): $Vector3f;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
-        deferredTooltipRendering: $Screen$DeferredTooltipRendering;
+        line: number;
+        signField: $TextFieldHelper;
+        sign: $SignBlockEntity;
         static CUBE_MAP: $CubeMap;
         title: $Component;
-        static FOOTER_SEPARATOR: $ResourceLocation;
-        narratorButton: $CycleButton<$NarratorStatus>;
         renderables: $List<$Renderable>;
         static INWORLD_HEADER_SEPARATOR: $ResourceLocation;
         woodType: $WoodType;
-        narratables: $List<$NarratableEntry>;
-        width: number;
         static PANORAMA: $PanoramaRenderer;
-        screenExecutor: $Executor;
+        text: $SignText;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        deferredTooltipRendering: $Screen$DeferredTooltipRendering;
+        static FOOTER_SEPARATOR: $ResourceLocation;
+        narratorButton: $CycleButton<$NarratorStatus>;
+        isFrontText: boolean;
+        narratables: $List<$NarratableEntry>;
+        width: number;
+        messages: string[];
+        screenExecutor: $Executor;
         font: $Font;
         constructor(arg0: $SignBlockEntity, arg1: boolean, arg2: boolean);
         constructor(arg0: $SignBlockEntity, arg1: boolean, arg2: boolean, arg3: $Component_);

@@ -20,6 +20,7 @@ import { $RegistryFriendlyByteBuf, $FriendlyByteBuf } from "@package/net/minecra
 import { $BlockState_ } from "@package/net/minecraft/world/level/block/state";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
 import { $GameProfile } from "@package/com/mojang/authlib";
+import { $UtilityContainer } from "@package/com/beansgalaxy/backpacks/container";
 import { $PlayerEnderChestContainer, $AbstractContainerMenu, $ClickAction_, $InventoryMenu } from "@package/net/minecraft/world/inventory";
 import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entity";
 import { $MerchantOffers } from "@package/net/minecraft/world/item/trading";
@@ -39,16 +40,18 @@ import { $Stat_ } from "@package/net/minecraft/stats";
 import { $Vector3dc } from "@package/org/joml";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID_, $Set_, $Stack, $OptionalInt, $UUID, $List, $Collection_, $List_, $Collection, $Optional } from "@package/java/util";
+import { $ViewableAccessor, $BackData, $PlayerAccessor } from "@package/com/beansgalaxy/backpacks/access";
 import { $PlayerStatsJS, $KubeJSInventoryListener } from "@package/dev/latvian/mods/kubejs/player";
 import { $AbstractHorse } from "@package/net/minecraft/world/entity/animal/horse";
 import { $WardenSpawnTracker } from "@package/net/minecraft/world/entity/monster/warden";
 import { $Supplier_, $Consumer_, $Predicate_ } from "@package/java/util/function";
 import { $DataHolder } from "@package/dev/tr7zw/notenoughanimations/versionless/animations";
 import { $AccessorPlayer } from "@package/com/illusivesoulworks/comforts/mixin";
-import { $BlockPos, $GlobalPos, $BlockPos_, $GlobalPos_, $HolderLookup$Provider, $Direction_, $NonNullList } from "@package/net/minecraft/core";
+import { $BlockPos, $GlobalPos, $BlockPos_, $GlobalPos_, $Direction_, $NonNullList } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerPlayer } from "@package/net/minecraft/server/level";
 import { $Enum, $Record, $Object } from "@package/java/lang";
+import { $ViewableBackpack, $PlaceProgress } from "@package/com/beansgalaxy/backpacks/util";
 import { $GameType_, $BaseCommandBlock, $Level_ } from "@package/net/minecraft/world/level";
 import { $IntList, $Int2IntMap } from "@package/it/unimi/dsi/fastutil/ints";
 import { $LaunchedPlungerEntity } from "@package/dev/simulated_team/simulated/content/entities/launched_plunger";
@@ -77,7 +80,7 @@ declare module "@package/net/minecraft/world/entity/player" {
     /**
      * Values that may be interpreted as {@link $ProfileKeyPair}.
      */
-    export type $ProfileKeyPair_ = { privateKey?: $PrivateKey, publicKey?: $ProfilePublicKey_, refreshedAfter?: $Instant,  } | [privateKey?: $PrivateKey, publicKey?: $ProfilePublicKey_, refreshedAfter?: $Instant, ];
+    export type $ProfileKeyPair_ = { publicKey?: $ProfilePublicKey_, privateKey?: $PrivateKey, refreshedAfter?: $Instant,  } | [publicKey?: $ProfilePublicKey_, privateKey?: $PrivateKey, refreshedAfter?: $Instant, ];
     export class $ProfilePublicKey$Data extends $Record {
         keySignature(): number[];
         validateSignature(arg0: $SignatureValidator_, arg1: $UUID_): boolean;
@@ -93,7 +96,7 @@ declare module "@package/net/minecraft/world/entity/player" {
     /**
      * Values that may be interpreted as {@link $ProfilePublicKey$Data}.
      */
-    export type $ProfilePublicKey$Data_ = { keySignature?: number[], key?: $PublicKey, expiresAt?: $Instant,  } | [keySignature?: number[], key?: $PublicKey, expiresAt?: $Instant, ];
+    export type $ProfilePublicKey$Data_ = { expiresAt?: $Instant, key?: $PublicKey, keySignature?: number[],  } | [expiresAt?: $Instant, key?: $PublicKey, keySignature?: number[], ];
     export class $Abilities {
         loadSaveData(arg0: $CompoundTag_): void;
         getWalkingSpeed(): number;
@@ -111,68 +114,79 @@ declare module "@package/net/minecraft/world/entity/player" {
         flying: boolean;
         constructor();
     }
-    export class $Inventory implements $Container, $Nameable {
+    export class $Inventory implements $Container, $Nameable, $BackData {
+        removeItem(arg0: number, arg1: number): $ItemStack;
+        removeItem(arg0: $ItemStack_): void;
+        tick(): void;
+        hasAnyMatching(arg0: $Predicate_<any>): boolean;
+        getSlotWithRemainingSpace(arg0: $ItemStack_): number;
+        placeItemBackInInventory(arg0: $ItemStack_): void;
+        placeItemBackInInventory(arg0: $ItemStack_, arg1: boolean): void;
+        handler$ele000$beansbackpacks$backpackInit(arg0: $Player, arg1: $CallbackInfo): void;
         static getSelectionSize(): number;
         hasRemainingSpaceForItem(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
-        getFreeSlot(): number;
         getSuitableHotbarSlot(): number;
         pickSlot(arg0: number): void;
         findSlotMatchingUnusedItem(arg0: $ItemStack_): number;
         swapPaint(arg0: number): void;
         clearOrCountMatchingItems(arg0: $Predicate_<$ItemStack>, arg1: number, arg2: $Container): number;
-        getSlotWithRemainingSpace(arg0: $ItemStack_): number;
+        handler$ejf000$beansbackpacks$tickCarriedBackpack(arg0: $CallbackInfo): void;
+        handler$ejf000$beansbackpacks$addToBackpackBeforeInventory(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
+        handler$ejf000$beansbackpacks$addToBackpackAfterInventory(arg0: number, arg1: $ItemStack_, arg2: $CallbackInfoReturnable<any>): void;
         getArmor(arg0: number): $ItemStack;
-        handler$gjc000$moonlight$ml$fireDropEvent(arg0: $CallbackInfo, arg1: $List_<any>, arg2: number): void;
-        handler$gjc000$moonlight$ml$restoreNotDropped(arg0: $CallbackInfo, arg1: $List_<any>, arg2: number): void;
+        handler$hge000$moonlight$ml$fireDropEvent(arg0: $CallbackInfo, arg1: $List_<any>, arg2: number): void;
+        handler$hge000$moonlight$ml$restoreNotDropped(arg0: $CallbackInfo, arg1: $List_<any>, arg2: number): void;
         getTimesChanged(): number;
-        removeFromSelected(arg0: boolean): $ItemStack;
-        setItem(arg0: number, arg1: $ItemStack_): void;
-        hasAnyMatching(arg0: $Predicate_<any>): boolean;
+        setActionKey(arg0: boolean): void;
+        setMenuKey(arg0: boolean): void;
+        getTinySlot(): number;
+        setTinySlot(arg0: number): void;
+        getPlaceProgress(): $PlaceProgress;
+        isMenuKeyDown(): boolean;
         fillStackedContents(arg0: $StackedContents): void;
-        placeItemBackInInventory(arg0: $ItemStack_, arg1: boolean): void;
-        placeItemBackInInventory(arg0: $ItemStack_): void;
+        setItem(arg0: number, arg1: $ItemStack_): void;
+        removeFromSelected(arg0: boolean): $ItemStack;
+        getUtility(): $UtilityContainer;
+        getFreeSlot(): number;
         clearContent(): void;
-        removeItem(arg0: $ItemStack_): void;
-        removeItem(arg0: number, arg1: number): $ItemStack;
-        tick(): void;
-        getSelected(): $ItemStack;
         getItem(arg0: number): $ItemStack;
+        getSelected(): $ItemStack;
         getName(): $Component;
         load(arg0: $ListTag_): void;
         isEmpty(): boolean;
-        add(arg0: $ItemStack_): boolean;
         add(arg0: number, arg1: $ItemStack_): boolean;
+        add(arg0: $ItemStack_): boolean;
         contains(arg0: $ItemStack_): boolean;
         contains(arg0: $Predicate_<$ItemStack>): boolean;
         contains(arg0: $TagKey_<$Item>): boolean;
         save(arg0: $ListTag_): $ListTag;
         replaceWith(arg0: $Inventory): void;
         addResource(arg0: number, arg1: $ItemStack_): number;
-        findSlotMatchingItem(arg0: $ItemStack_): number;
-        setPickedItem(arg0: $ItemStack_): void;
-        static isHotbarSlot(arg0: number): boolean;
+        stillValid(arg0: $Player): boolean;
+        beans_Backpacks_3$getBody(): $NonNullList<any>;
         dropAll(): void;
         getContainerSize(): number;
         removeItemNoUpdate(arg0: number): $ItemStack;
         getDestroySpeed(arg0: $BlockState_): number;
-        stillValid(arg0: $Player): boolean;
         setChanged(): void;
+        findSlotMatchingItem(arg0: $ItemStack_): number;
+        setPickedItem(arg0: $ItemStack_): void;
+        static isHotbarSlot(arg0: number): boolean;
+        isActionKeyDown(): boolean;
         startOpen(arg0: $Player): void;
         stopOpen(arg0: $Player): void;
         canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
         countItem(arg0: $Item_): number;
         hasAnyOf(arg0: $Set_<$Item_>): boolean;
-        getMaxStackSize(arg0: $ItemStack_): number;
-        getMaxStackSize(): number;
         canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
+        getMaxStackSize(): number;
+        getMaxStackSize(arg0: $ItemStack_): number;
         getDisplayName(): $Component;
-        hasCustomName(): boolean;
         getCustomName(): $Component;
+        hasCustomName(): boolean;
         setTransferCooldown(arg0: number): void;
         canReceiveTransferCooldown(): boolean;
         lithium$itemInsertionTestRequiresStackSize1(): boolean;
-        self(): $Container;
-        getBlock(level: $Level_): $LevelBlock;
         isMutable(): boolean;
         setStackInSlot(slot: number, stack: $ItemStack_): void;
         getSlots(): number;
@@ -186,35 +200,45 @@ declare module "@package/net/minecraft/world/entity/player" {
         getHeight(): number;
         setChanged(): void;
         asContainer(): $Container;
-        isEmpty(): boolean;
+        getBlock(level: $Level_): $LevelBlock;
+        self(): $Container;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         clear(match: $ItemPredicate_): void;
-        find(match: $ItemPredicate_): number;
         find(): number;
-        count(match: $ItemPredicate_): number;
+        find(match: $ItemPredicate_): number;
         count(): number;
+        count(match: $ItemPredicate_): number;
         countNonEmpty(match: $ItemPredicate_): number;
         countNonEmpty(): number;
         getAllItems(): $List<$ItemStack>;
+        isEmpty(): boolean;
         static NOT_FOUND_INDEX: number;
-        armor: $NonNullList<$ItemStack>;
+        instance: $Inventory;
         static INVENTORY_SIZE: number;
+        static ALL_ARMOR_SLOTS: number[];
+        offhand: $NonNullList<$ItemStack>;
+        beans_Backpacks_3$body: $NonNullList<any>;
+        armor: $NonNullList<$ItemStack>;
+        placeProgress: $PlaceProgress;
         static POP_TIME_DURATION: number;
         static SLOT_OFFHAND: number;
-        static ALL_ARMOR_SLOTS: number[];
         items: $NonNullList<$ItemStack>;
-        offhand: $NonNullList<$ItemStack>;
         selected: number;
         static HELMET_SLOT_ONLY: number[];
         player: $Player;
         constructor(arg0: $Player);
         static get selectionSize(): number;
-        get freeSlot(): number;
         get suitableHotbarSlot(): number;
         get timesChanged(): number;
+        set actionKey(value: boolean);
+        set menuKey(value: boolean);
+        get menuKeyDown(): boolean;
+        get utility(): $UtilityContainer;
+        get freeSlot(): number;
         get name(): $Component;
-        set pickedItem(value: $ItemStack_);
         get containerSize(): number;
+        set pickedItem(value: $ItemStack_);
+        get actionKeyDown(): boolean;
         get displayName(): $Component;
         get customName(): $Component;
         set transferCooldown(value: number);
@@ -299,14 +323,14 @@ declare module "@package/net/minecraft/world/entity/player" {
         getBiggestCraftableStack(arg0: $RecipeHolder_<never>, arg1: number, arg2: $IntList): number;
         getBiggestCraftableStack(arg0: $RecipeHolder_<never>, arg1: $IntList): number;
         static fromStackingIndex(arg0: number): $ItemStack;
-        canCraft(arg0: $Recipe<never>, arg1: $IntList): boolean;
+        take(arg0: number, arg1: number): number;
+        accountSimpleStack(arg0: $ItemStack_): void;
         canCraft(arg0: $Recipe<never>, arg1: $IntList, arg2: number): boolean;
-        static getStackingIndex(arg0: $ItemStack_): number;
+        canCraft(arg0: $Recipe<never>, arg1: $IntList): boolean;
         accountStack(arg0: $ItemStack_): void;
         accountStack(arg0: $ItemStack_, arg1: number): void;
-        accountSimpleStack(arg0: $ItemStack_): void;
+        static getStackingIndex(arg0: $ItemStack_): number;
         has(arg0: number): boolean;
-        take(arg0: number, arg1: number): number;
         put(arg0: number, arg1: number): void;
         clear(): void;
         contents: $Int2IntMap;
@@ -315,76 +339,21 @@ declare module "@package/net/minecraft/world/entity/player" {
     export class $ProfilePublicKey$ValidationException extends $ThrowingComponent {
         constructor(arg0: $Component_);
     }
-    export class $Player extends $LivingEntity implements $IPlayerExtension, $CameraHolder, $CameraOperator, $PlayerData, $PlayerTypewriterExtension, $PlayerLaunchedPlungerExtension, $EntityDynamicLightSource, $PlayerFreezeExtension, $AccessorPlayer, $PlayerSettings, $PlayerKJS {
-        addItem(arg0: $ItemStack_): boolean;
+    export class $Player extends $LivingEntity implements $IPlayerExtension, $CameraHolder, $CameraOperator, $PlayerData, $PlayerTypewriterExtension, $PlayerLaunchedPlungerExtension, $ViewableAccessor, $PlayerAccessor, $EntityDynamicLightSource, $PlayerFreezeExtension, $AccessorPlayer, $PlayerSettings, $PlayerKJS {
         getPrefixes(): $Collection<$MutableComponent>;
+        addItem(arg0: $ItemStack_): boolean;
+        getData(holder: $DataHolder<any>, builder: $Supplier_<any>): $Object;
         drop(arg0: $ItemStack_, arg1: boolean): $ItemEntity;
         drop(arg0: $ItemStack_, arg1: boolean, arg2: boolean): $ItemEntity;
-        getData(holder: $DataHolder<any>, builder: $Supplier_<any>): $Object;
-        getInventoryChangeListener(): $KubeJSInventoryListener;
-        getCooldowns(): $ItemCooldowns;
-        respawn(): void;
-        attack(arg0: $Entity): void;
-        resetAttackStrengthTicker(): void;
-        /**
-         * Checks, whether the player is in Creative mode.
-         */
-        isCreative(): boolean;
-        getInventory(): $Inventory;
-        displayClientMessage(arg0: $Component_, arg1: boolean): void;
-        getAbilities(): $Abilities;
-        isLocalPlayer(): boolean;
-        getGameProfile(): $GameProfile;
-        isReducedDebugInfo(): boolean;
-        isTextFilteringEnabled(): boolean;
-        getActiveExposureCamera(): $Camera;
         getScoreboard(): $Scoreboard;
-        awardStat(arg0: $ResourceLocation_, arg1: number): void;
-        awardStat(arg0: $Stat_<never>): void;
-        awardStat(arg0: $ResourceLocation_): void;
-        awardStat(arg0: $Stat_<never>, arg1: number): void;
-        getLuck(): number;
-        canPlayerFitWithinBlocksAndEntitiesWhen(arg0: $Pose_): boolean;
-        playNotifySound(arg0: $SoundEvent_, arg1: $SoundSource_, arg2: number, arg3: number): void;
-        doCloseContainer(): void;
-        redirect$fhc000$sable$fixRidingBoundingBox(arg0: $AABB_, arg1: $AABB_): $AABB;
-        getShoulderEntityLeft(): $CompoundTag;
-        getShoulderEntityRight(): $CompoundTag;
-        removeEntitiesOnShoulder(): void;
-        getScore(): number;
-        setScore(arg0: number): void;
-        increaseScore(arg0: number): void;
-        startAutoSpinAttack(arg0: number, arg1: number, arg2: $ItemStack_): void;
-        resetStat(arg0: $Stat_<never>): void;
-        setLastDeathLocation(arg0: ($GlobalPos_) | undefined): void;
-        destroyVanishingCursedItems(): void;
-        /**
-         * @deprecated
-         */
-        getDestroySpeed(arg0: $BlockState_): number;
-        getDigSpeed(arg0: $BlockState_, arg1: $BlockPos_): number;
-        hasCorrectToolForDrops(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_): boolean;
-        /**
-         * @deprecated
-         */
-        hasCorrectToolForDrops(arg0: $BlockState_): boolean;
-        setShoulderEntityLeft(arg0: $CompoundTag_): void;
-        setShoulderEntityRight(arg0: $CompoundTag_): void;
-        getLastDeathLocation(): ($GlobalPos) | undefined;
-        handler$dog000$railways$addModDataVersions(arg0: $CompoundTag_, arg1: $CallbackInfo): void;
-        disableShield(): void;
-        canHarmPlayer(arg0: $Player): boolean;
-        causeFoodExhaustion(arg0: number): void;
-        openTextEdit(arg0: $SignBlockEntity, arg1: boolean): void;
-        openMinecartCommandBlock(arg0: $BaseCommandBlock): void;
-        openCommandBlock(arg0: $CommandBlockEntity): void;
-        openStructureBlock(arg0: $StructureBlockEntity): void;
-        openJigsawBlock(arg0: $JigsawBlockEntity): void;
-        openHorseInventory(arg0: $AbstractHorse, arg1: $Container): void;
-        openMenu(arg0: $MenuProvider): $OptionalInt;
-        sendMerchantOffers(arg0: number, arg1: $MerchantOffers, arg2: number, arg3: number, arg4: boolean, arg5: boolean): void;
-        openItemGui(arg0: $ItemStack_, arg1: $InteractionHand_): void;
-        interactOn(arg0: $Entity, arg1: $InteractionHand_): $InteractionResult;
+        createItemCooldowns(): $ItemCooldowns;
+        blockActionRestricted(arg0: $Level_, arg1: $BlockPos_, arg2: $GameType_): boolean;
+        mayBuild(): boolean;
+        static createAttributes(): $AttributeSupplier$Builder;
+        stopSleepInBed(arg0: boolean, arg1: boolean): void;
+        updateIsUnderwater(): boolean;
+        isDisableBodyRotation(): boolean;
+        setDisableBodyRotation(disableBodyRotation: boolean): void;
         getEnchantedDamage(arg0: $Entity, arg1: number, arg2: $DamageSource_): number;
         getAttackStrengthScale(arg0: number): number;
         entityInteractionRange(): number;
@@ -404,7 +373,7 @@ declare module "@package/net/minecraft/world/entity/player" {
         tryResetCurrentImpulseContext(): void;
         resetCurrentImpulseContext(): void;
         tryToStartFallFlying(): boolean;
-        handler$bgm000$fabric_entity_events_v1$injectElytraCheck(arg0: $CallbackInfoReturnable<any>): void;
+        handler$bif000$fabric_entity_events_v1$injectElytraCheck(arg0: $CallbackInfoReturnable<any>): void;
         startFallFlying(): void;
         stopFallFlying(): void;
         giveExperiencePoints(arg0: number): void;
@@ -462,6 +431,10 @@ declare module "@package/net/minecraft/world/entity/player" {
         simulated$setCurrentTypewriter(arg0: $BlockPos_): void;
         simulated$setLaunchedPlunger(arg0: $LaunchedPlungerEntity): void;
         simulated$getLaunchedPlunger(): $LaunchedPlungerEntity;
+        beans_Backpacks_3$getViewable(): $ViewableBackpack;
+        isUtilityScoped(): boolean;
+        setUtilityScoped(arg0: boolean): void;
+        setItemUsed(arg0: $ItemStack_): void;
         sable$getFrozenToSubLevel(): $UUID;
         sable$getFrozenToSubLevelAnchor(): $Vector3dc;
         sable$tickStopFreezing(): void;
@@ -486,25 +459,80 @@ declare module "@package/net/minecraft/world/entity/player" {
         getInventory(): $InventoryKJS;
         getCraftingGrid(): $InventoryKJS;
         getData(): $AttachedData<any>;
-        isDisableBodyRotation(): boolean;
-        setDisableBodyRotation(disableBodyRotation: boolean): void;
-        createItemCooldowns(): $ItemCooldowns;
-        blockActionRestricted(arg0: $Level_, arg1: $BlockPos_, arg2: $GameType_): boolean;
-        mayBuild(): boolean;
-        static createAttributes(): $AttributeSupplier$Builder;
-        stopSleepInBed(arg0: boolean, arg1: boolean): void;
-        updateIsUnderwater(): boolean;
+        getInventoryChangeListener(): $KubeJSInventoryListener;
         closeMenu(): void;
         updatePlayerPose(): void;
-        handler$cnl003$notenoughanimations$tick(info: $CallbackInfo): void;
-        handler$cnl000$notenoughanimations$overrideMaxHeadRoationRelativeToBody(ci: $CallbackInfoReturnable<any>): void;
+        handler$dbd003$notenoughanimations$tick(info: $CallbackInfo): void;
+        handler$dbd000$notenoughanimations$overrideMaxHeadRoationRelativeToBody(ci: $CallbackInfoReturnable<any>): void;
         isSecondaryUseActive(): boolean;
         wantsToStopRiding(): boolean;
         isStayingOnGroundSurface(): boolean;
+        canPlayerFitWithinBlocksAndEntitiesWhen(arg0: $Pose_): boolean;
+        playNotifySound(arg0: $SoundEvent_, arg1: $SoundSource_, arg2: number, arg3: number): void;
+        doCloseContainer(): void;
+        redirect$gbk000$sable$fixRidingBoundingBox(arg0: $AABB_, arg1: $AABB_): $AABB;
+        getShoulderEntityLeft(): $CompoundTag;
+        getShoulderEntityRight(): $CompoundTag;
+        removeEntitiesOnShoulder(): void;
+        getScore(): number;
+        setScore(arg0: number): void;
+        increaseScore(arg0: number): void;
+        startAutoSpinAttack(arg0: number, arg1: number, arg2: $ItemStack_): void;
+        resetStat(arg0: $Stat_<never>): void;
+        setLastDeathLocation(arg0: ($GlobalPos_) | undefined): void;
+        destroyVanishingCursedItems(): void;
+        /**
+         * @deprecated
+         */
+        getDestroySpeed(arg0: $BlockState_): number;
+        getDigSpeed(arg0: $BlockState_, arg1: $BlockPos_): number;
+        hasCorrectToolForDrops(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_): boolean;
+        /**
+         * @deprecated
+         */
+        hasCorrectToolForDrops(arg0: $BlockState_): boolean;
+        setShoulderEntityLeft(arg0: $CompoundTag_): void;
+        setShoulderEntityRight(arg0: $CompoundTag_): void;
+        getLastDeathLocation(): ($GlobalPos) | undefined;
+        handler$eda000$railways$addModDataVersions(arg0: $CompoundTag_, arg1: $CallbackInfo): void;
+        disableShield(): void;
+        canHarmPlayer(arg0: $Player): boolean;
+        causeFoodExhaustion(arg0: number): void;
+        openTextEdit(arg0: $SignBlockEntity, arg1: boolean): void;
+        openMinecartCommandBlock(arg0: $BaseCommandBlock): void;
+        openCommandBlock(arg0: $CommandBlockEntity): void;
+        openStructureBlock(arg0: $StructureBlockEntity): void;
+        openJigsawBlock(arg0: $JigsawBlockEntity): void;
+        openHorseInventory(arg0: $AbstractHorse, arg1: $Container): void;
+        openMenu(arg0: $MenuProvider): $OptionalInt;
+        sendMerchantOffers(arg0: number, arg1: $MerchantOffers, arg2: number, arg3: number, arg4: boolean, arg5: boolean): void;
+        openItemGui(arg0: $ItemStack_, arg1: $InteractionHand_): void;
+        interactOn(arg0: $Entity, arg1: $InteractionHand_): $InteractionResult;
+        awardStat(arg0: $ResourceLocation_): void;
+        awardStat(arg0: $Stat_<never>, arg1: number): void;
+        awardStat(arg0: $ResourceLocation_, arg1: number): void;
+        awardStat(arg0: $Stat_<never>): void;
+        getLuck(): number;
         sable$freezeTo(arg0: $UUID_, arg1: $Vector3dc): void;
+        getCooldowns(): $ItemCooldowns;
+        respawn(): void;
+        attack(arg0: $Entity): void;
+        resetAttackStrengthTicker(): void;
+        /**
+         * Checks, whether the player is in Creative mode.
+         */
+        isCreative(): boolean;
+        getInventory(): $Inventory;
+        displayClientMessage(arg0: $Component_, arg1: boolean): void;
+        getAbilities(): $Abilities;
+        isLocalPlayer(): boolean;
+        getGameProfile(): $GameProfile;
+        isReducedDebugInfo(): boolean;
+        isTextFilteringEnabled(): boolean;
+        getActiveExposureCamera(): $Camera;
+        mayFly(): boolean;
         openMenu(arg0: $MenuProvider, arg1: $Consumer_<$RegistryFriendlyByteBuf>): $OptionalInt;
         openMenu(arg0: $MenuProvider, arg1: $BlockPos_): $OptionalInt;
-        mayFly(): boolean;
         isCloseEnough(arg0: $Entity, arg1: number): boolean;
         isFakePlayer(): boolean;
         getServerPlayerExecutingExposure(): ($ServerPlayer) | undefined;
@@ -546,7 +574,6 @@ declare module "@package/net/minecraft/world/entity/player" {
         sendData(channel: string, data: $CompoundTag_): void;
         sendData(channel: string): void;
         setSleepCounter(arg0: number): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $Player;
         lastHurtByPlayerTime: number;
         autoSpinAttackItemStack: $ItemStack;
         lerpYRot: number;
@@ -575,6 +602,7 @@ declare module "@package/net/minecraft/world/entity/player" {
         swingingArm: $InteractionHand;
         static CRAFTING_SLOT_OFFSET: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         static WAKE_UP_DURATION: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -606,6 +634,7 @@ declare module "@package/net/minecraft/world/entity/player" {
         experienceLevel: number;
         hurtDir: number;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static PERSISTED_NBT_TAG: string;
         static DEFAULT_BB_HEIGHT: number;
@@ -635,6 +664,7 @@ declare module "@package/net/minecraft/world/entity/player" {
         static ENDER_SLOT_OFFSET: number;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $Player;
         static ARMOR_SLOT_OFFSET: number;
         static SLEEP_DURATION: number;
         static HELD_ITEM_SLOT: number;
@@ -740,15 +770,7 @@ declare module "@package/net/minecraft/world/entity/player" {
         currentExplosionCause: $Entity;
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: number, arg3: $GameProfile);
         get prefixes(): $Collection<$MutableComponent>;
-        get inventoryChangeListener(): $KubeJSInventoryListener;
-        get cooldowns(): $ItemCooldowns;
-        get creative(): boolean;
-        get abilities(): $Abilities;
-        get localPlayer(): boolean;
-        get gameProfile(): $GameProfile;
-        get textFilteringEnabled(): boolean;
         get scoreboard(): $Scoreboard;
-        get luck(): number;
         get sleepingLongEnough(): boolean;
         get sleepTimer(): number;
         get xpNeededForNextLevel(): number;
@@ -766,11 +788,20 @@ declare module "@package/net/minecraft/world/entity/player" {
         get exposureAuthorEntity(): $Entity;
         get exposureCameraOperator(): $Optional<any>;
         get lastHeldItems(): $ItemStack[];
+        set itemUsed(value: $ItemStack_);
         set thinArms(value: boolean);
         get stages(): $Stages;
         get craftingGrid(): $InventoryKJS;
+        get inventoryChangeListener(): $KubeJSInventoryListener;
         get secondaryUseActive(): boolean;
         get stayingOnGroundSurface(): boolean;
+        get luck(): number;
+        get cooldowns(): $ItemCooldowns;
+        get creative(): boolean;
+        get abilities(): $Abilities;
+        get localPlayer(): boolean;
+        get gameProfile(): $GameProfile;
+        get textFilteringEnabled(): boolean;
         get fakePlayer(): boolean;
         get serverPlayerExecutingExposure(): ($ServerPlayer) | undefined;
         get serverPlayerAwardedForExposure(): ($ServerPlayer) | undefined;

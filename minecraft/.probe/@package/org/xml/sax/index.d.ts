@@ -12,13 +12,13 @@ declare module "@package/org/xml/sax" {
     export class $Locator {
     }
     export interface $Locator {
-        getColumnNumber(): number;
         getSystemId(): string;
         getPublicId(): string;
+        getColumnNumber(): number;
         getLineNumber(): number;
-        get columnNumber(): number;
         get systemId(): string;
         get publicId(): string;
+        get columnNumber(): number;
         get lineNumber(): number;
     }
     export class $InputSource {
@@ -40,17 +40,17 @@ declare module "@package/org/xml/sax" {
         get empty(): boolean;
     }
     export class $SAXParseException extends $SAXException {
-        getColumnNumber(): number;
         getSystemId(): string;
         getPublicId(): string;
+        getColumnNumber(): number;
         getLineNumber(): number;
         constructor(arg0: string, arg1: $Locator);
         constructor(arg0: string, arg1: $Locator, arg2: $Exception);
         constructor(arg0: string, arg1: string, arg2: string, arg3: number, arg4: number, arg5: $Exception);
         constructor(arg0: string, arg1: string, arg2: string, arg3: number, arg4: number);
-        get columnNumber(): number;
         get systemId(): string;
         get publicId(): string;
+        get columnNumber(): number;
         get lineNumber(): number;
     }
     export class $SAXException extends $Exception {
@@ -80,18 +80,18 @@ declare module "@package/org/xml/sax" {
         characters(arg0: string[], arg1: number, arg2: number): void;
         ignorableWhitespace(arg0: string[], arg1: number, arg2: number): void;
         endDocument(): void;
+        setDocumentLocator(arg0: $Locator): void;
         endPrefixMapping(arg0: string): void;
         startPrefixMapping(arg0: string, arg1: string): void;
         skippedEntity(arg0: string): void;
         declaration(arg0: string, arg1: string, arg2: string): void;
-        setDocumentLocator(arg0: $Locator): void;
         set documentLocator(value: $Locator);
     }
     export class $Attributes {
     }
     export interface $Attributes {
-        getQName(arg0: number): string;
         getLocalName(arg0: number): string;
+        getQName(arg0: number): string;
         getLength(): number;
         getValue(arg0: string, arg1: string): string;
         getValue(arg0: string): string;

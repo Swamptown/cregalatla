@@ -36,15 +36,15 @@ declare module "@package/net/neoforged/neoforge/event/village" {
         get registryAccess(): $RegistryAccess;
     }
     export class $VillageSiegeEvent extends $Event implements $ICancellableEvent {
-        getSiege(): $VillageSiege;
         getAttemptedSpawnPos(): $Vec3;
+        getSiege(): $VillageSiege;
         getPlayer(): $Player;
         getLevel(): $Level;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $VillageSiege, arg1: $Level_, arg2: $Player, arg3: $Vec3_);
-        get siege(): $VillageSiege;
         get attemptedSpawnPos(): $Vec3;
+        get siege(): $VillageSiege;
         get player(): $Player;
         get level(): $Level;
     }

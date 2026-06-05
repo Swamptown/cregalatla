@@ -29,10 +29,11 @@ declare module "@package/net/minecraft/util/profiling" {
         get nanoDuration(): number;
     }
     export class $ActiveProfiler implements $ProfileCollector {
-        getEntry(arg0: string): $ActiveProfiler$PathEntry;
-        push(arg0: string): void;
         push(arg0: $Supplier_<string>): void;
+        push(arg0: string): void;
         pop(): void;
+        getEntry(arg0: string): $ActiveProfiler$PathEntry;
+        markForCharting(arg0: $MetricCategory_): void;
         startTick(): void;
         endTick(): void;
         incrementCounter(arg0: string, arg1: number): void;
@@ -41,7 +42,6 @@ declare module "@package/net/minecraft/util/profiling" {
         popPush(arg0: string): void;
         getResults(): $ProfileResults;
         getChartedPaths(): $Set<$Pair<string, $MetricCategory>>;
-        markForCharting(arg0: $MetricCategory_): void;
         incrementCounter(arg0: string): void;
         incrementCounter(arg0: $Supplier_<string>): void;
         constructor(arg0: $LongSupplier_, arg1: $IntSupplier_, arg2: boolean);
@@ -49,19 +49,19 @@ declare module "@package/net/minecraft/util/profiling" {
         get chartedPaths(): $Set<$Pair<string, $MetricCategory>>;
     }
     export class $InactiveProfiler implements $ProfileCollector {
-        getEntry(arg0: string): $ActiveProfiler$PathEntry;
-        push(arg0: string): void;
         push(arg0: $Supplier_<string>): void;
+        push(arg0: string): void;
         pop(): void;
+        getEntry(arg0: string): $ActiveProfiler$PathEntry;
+        markForCharting(arg0: $MetricCategory_): void;
         startTick(): void;
         endTick(): void;
-        incrementCounter(arg0: string, arg1: number): void;
         incrementCounter(arg0: $Supplier_<string>, arg1: number): void;
+        incrementCounter(arg0: string, arg1: number): void;
         popPush(arg0: string): void;
         popPush(arg0: $Supplier_<string>): void;
         getResults(): $ProfileResults;
         getChartedPaths(): $Set<$Pair<string, $MetricCategory>>;
-        markForCharting(arg0: $MetricCategory_): void;
         incrementCounter(arg0: string): void;
         incrementCounter(arg0: $Supplier_<string>): void;
         static INSTANCE: $InactiveProfiler;
@@ -89,15 +89,15 @@ declare module "@package/net/minecraft/util/profiling" {
         push(arg0: $Supplier_<string>): void;
         push(arg0: string): void;
         pop(): void;
+        markForCharting(arg0: $MetricCategory_): void;
         startTick(): void;
         endTick(): void;
-        incrementCounter(arg0: string): void;
         incrementCounter(arg0: string, arg1: number): void;
+        incrementCounter(arg0: string): void;
         incrementCounter(arg0: $Supplier_<string>): void;
         incrementCounter(arg0: $Supplier_<string>, arg1: number): void;
-        popPush(arg0: string): void;
         popPush(arg0: $Supplier_<string>): void;
-        markForCharting(arg0: $MetricCategory_): void;
+        popPush(arg0: string): void;
     }
     export class $ContinuousProfiler {
         enable(): void;

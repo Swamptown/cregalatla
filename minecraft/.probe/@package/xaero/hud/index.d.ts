@@ -25,40 +25,40 @@ export * as compat from "@package/xaero/hud/compat";
 declare module "@package/xaero/hud" {
     export class $Hud {
         getOldSystemCompatibility(): $OldSystemCompatibility;
-        getSessionHandler(): $ModuleSessionHandler;
         getPushboxManager(): $PushboxManager;
         getPresetManager(): $HudPresetManager;
         getModuleManager(): $ModuleManager;
+        getSessionHandler(): $ModuleSessionHandler;
         getEventHandler(): $HudEventHandler;
         constructor(arg0: $ModuleManager, arg1: $PushboxManager, arg2: $HudPresetManager, arg3: $HudEventHandler, arg4: $ModuleSessionHandler, arg5: $OldSystemCompatibility);
         get oldSystemCompatibility(): $OldSystemCompatibility;
-        get sessionHandler(): $ModuleSessionHandler;
         get pushboxManager(): $PushboxManager;
         get presetManager(): $HudPresetManager;
         get moduleManager(): $ModuleManager;
+        get sessionHandler(): $ModuleSessionHandler;
         get eventHandler(): $HudEventHandler;
     }
     export class $HudSession {
+        static getCurrentSession(): $HudSession;
+        static getForPlayer(arg0: $LocalPlayer): $HudSession;
+        getHudMod(): $HudMod;
         /**
          * @deprecated
          */
         getMultiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
         tryCleanup(): void;
         getKeyMappingTickHandler(): $KeyMappingTickHandler;
-        static getForPlayer(arg0: $LocalPlayer): $HudSession;
-        getHudMod(): $HudMod;
         getSession<MS extends $ModuleSession<MS>>(arg0: $HudModule<MS>): MS;
         /**
          * @deprecated
          */
         getControls(): $ControlsHandler;
         init(arg0: $ClientPacketListener): void;
-        static getCurrentSession(): $HudSession;
         constructor(arg0: $HudMod);
+        static get currentSession(): $HudSession;
+        get hudMod(): $HudMod;
         get multiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
         get keyMappingTickHandler(): $KeyMappingTickHandler;
-        get hudMod(): $HudMod;
         get controls(): $ControlsHandler;
-        static get currentSession(): $HudSession;
     }
 }

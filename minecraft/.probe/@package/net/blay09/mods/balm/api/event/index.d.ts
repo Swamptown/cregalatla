@@ -20,11 +20,11 @@ export * as server from "@package/net/blay09/mods/balm/api/event/server";
 
 declare module "@package/net/blay09/mods/balm/api/event" {
     export class $LivingDeathEvent extends $BalmEvent {
-        getDamageSource(): $DamageSource;
         getEntity(): $LivingEntity;
+        getDamageSource(): $DamageSource;
         constructor(arg0: $LivingEntity, arg1: $DamageSource_);
-        get damageSource(): $DamageSource;
         get entity(): $LivingEntity;
+        get damageSource(): $DamageSource;
     }
     export class $CommandEvent extends $BalmEvent {
         getParseResults(): $ParseResults<$CommandSourceStack>;
@@ -55,26 +55,26 @@ declare module "@package/net/blay09/mods/balm/api/event" {
         getPlayer(): $Player;
         getLevel(): $Level;
         getState(): $BlockState;
-        getBlockEntity(): $BlockEntity;
         getPos(): $BlockPos;
+        getBlockEntity(): $BlockEntity;
         constructor(arg0: $Level_, arg1: $Player, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BlockEntity);
         get player(): $Player;
         get level(): $Level;
         get state(): $BlockState;
-        get blockEntity(): $BlockEntity;
         get pos(): $BlockPos;
+        get blockEntity(): $BlockEntity;
     }
     export class $CropGrowEvent$Pre extends $CropGrowEvent {
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_);
     }
     export class $LivingDamageEvent extends $BalmEvent {
-        setDamageAmount(arg0: number): void;
-        getDamageSource(): $DamageSource;
-        getDamageAmount(): number;
         getEntity(): $LivingEntity;
+        getDamageSource(): $DamageSource;
+        setDamageAmount(arg0: number): void;
+        getDamageAmount(): number;
         constructor(arg0: $LivingEntity, arg1: $DamageSource_, arg2: number);
-        get damageSource(): $DamageSource;
         get entity(): $LivingEntity;
+        get damageSource(): $DamageSource;
     }
     export class $PlayerRespawnEvent extends $BalmEvent {
         getOldPlayer(): $ServerPlayer;
@@ -93,17 +93,17 @@ declare module "@package/net/blay09/mods/balm/api/event" {
     export class $UseBlockEvent extends $BalmEvent {
         getInteractionResult(): $InteractionResult;
         getPlayer(): $Player;
-        getHand(): $InteractionHand;
         getHitResult(): $BlockHitResult;
-        getLevel(): $Level;
+        getHand(): $InteractionHand;
         setResult(arg0: $InteractionResult_): void;
+        getLevel(): $Level;
         constructor(arg0: $Player, arg1: $Level_, arg2: $InteractionHand_, arg3: $BlockHitResult);
         get interactionResult(): $InteractionResult;
         get player(): $Player;
-        get hand(): $InteractionHand;
         get hitResult(): $BlockHitResult;
-        get level(): $Level;
+        get hand(): $InteractionHand;
         set result(value: $InteractionResult_);
+        get level(): $Level;
     }
     export class $PlayerLogoutEvent extends $BalmEvent {
         getPlayer(): $ServerPlayer;
@@ -111,11 +111,11 @@ declare module "@package/net/blay09/mods/balm/api/event" {
         get player(): $ServerPlayer;
     }
     export class $EntityAddedEvent extends $BalmEvent {
-        getLevel(): $Level;
         getEntity(): $Entity;
+        getLevel(): $Level;
         constructor(arg0: $Entity, arg1: $Level_);
-        get level(): $Level;
         get entity(): $Entity;
+        get level(): $Level;
     }
     export class $PlayerOpenMenuEvent extends $BalmEvent {
         getPlayer(): $ServerPlayer;
@@ -161,14 +161,14 @@ declare module "@package/net/blay09/mods/balm/api/event" {
         getInteractionResult(): $InteractionResult;
         getPlayer(): $Player;
         getHand(): $InteractionHand;
-        getLevel(): $Level;
         setResult(arg0: $InteractionResult_): void;
+        getLevel(): $Level;
         constructor(arg0: $Player, arg1: $Level_, arg2: $InteractionHand_);
         get interactionResult(): $InteractionResult;
         get player(): $Player;
         get hand(): $InteractionHand;
-        get level(): $Level;
         set result(value: $InteractionResult_);
+        get level(): $Level;
     }
     export class $LivingHealEvent extends $BalmEvent {
         getEntity(): $LivingEntity;

@@ -53,28 +53,28 @@ declare module "@package/net/blay09/mods/balm/api/event/client/screen" {
         constructor(arg0: $Screen, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number);
     }
     export class $ScreenDrawEvent extends $BalmEvent {
+        getGuiGraphics(): $GuiGraphics;
         getTickDelta(): number;
         getScreen(): $Screen;
         getMouseX(): number;
         getMouseY(): number;
-        getGuiGraphics(): $GuiGraphics;
         constructor(arg0: $Screen, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number);
+        get guiGraphics(): $GuiGraphics;
         get tickDelta(): number;
         get screen(): $Screen;
         get mouseX(): number;
         get mouseY(): number;
-        get guiGraphics(): $GuiGraphics;
     }
     export class $ScreenMouseEvent extends $BalmEvent {
+        getButton(): number;
         getScreen(): $Screen;
         getMouseX(): number;
         getMouseY(): number;
-        getButton(): number;
         constructor(arg0: $Screen, arg1: number, arg2: number, arg3: number);
+        get button(): number;
         get screen(): $Screen;
         get mouseX(): number;
         get mouseY(): number;
-        get button(): number;
     }
     export class $ScreenInitEvent$Pre extends $ScreenInitEvent {
         constructor(arg0: $Screen);
@@ -83,15 +83,15 @@ declare module "@package/net/blay09/mods/balm/api/event/client/screen" {
         constructor(arg0: $Screen, arg1: number, arg2: number, arg3: number);
     }
     export class $ContainerScreenDrawEvent extends $BalmEvent {
+        getGuiGraphics(): $GuiGraphics;
         getScreen(): $Screen;
         getMouseX(): number;
         getMouseY(): number;
-        getGuiGraphics(): $GuiGraphics;
         constructor(arg0: $Screen, arg1: $GuiGraphics, arg2: number, arg3: number);
+        get guiGraphics(): $GuiGraphics;
         get screen(): $Screen;
         get mouseX(): number;
         get mouseY(): number;
-        get guiGraphics(): $GuiGraphics;
     }
     export class $ScreenInitEvent extends $BalmEvent {
         getScreen(): $Screen;
@@ -111,14 +111,14 @@ declare module "@package/net/blay09/mods/balm/api/event/client/screen" {
         constructor(arg0: $Screen, arg1: number, arg2: number, arg3: number);
     }
     export class $ScreenKeyEvent extends $BalmEvent {
+        getScanCode(): number;
         getModifiers(): number;
         getKey(): number;
         getScreen(): $Screen;
-        getScanCode(): number;
         constructor(arg0: $Screen, arg1: number, arg2: number, arg3: number);
+        get scanCode(): number;
         get modifiers(): number;
         get key(): number;
         get screen(): $Screen;
-        get scanCode(): number;
     }
 }

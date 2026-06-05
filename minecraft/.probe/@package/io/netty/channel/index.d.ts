@@ -29,26 +29,26 @@ declare module "@package/io/netty/channel" {
     }
     export interface $ChannelOutboundInvoker {
         voidPromise(): $ChannelPromise;
-        deregister(arg0: $ChannelPromise): $ChannelFuture;
-        deregister(): $ChannelFuture;
-        writeAndFlush(arg0: $Object): $ChannelFuture;
-        writeAndFlush(arg0: $Object, arg1: $ChannelPromise): $ChannelFuture;
+        newSucceededFuture(): $ChannelFuture;
         newPromise(): $ChannelPromise;
         newProgressivePromise(): $ChannelProgressivePromise;
-        newSucceededFuture(): $ChannelFuture;
         newFailedFuture(arg0: $Throwable): $ChannelFuture;
-        bind(arg0: $SocketAddress): $ChannelFuture;
+        writeAndFlush(arg0: $Object, arg1: $ChannelPromise): $ChannelFuture;
+        writeAndFlush(arg0: $Object): $ChannelFuture;
+        deregister(arg0: $ChannelPromise): $ChannelFuture;
+        deregister(): $ChannelFuture;
         bind(arg0: $SocketAddress, arg1: $ChannelPromise): $ChannelFuture;
+        bind(arg0: $SocketAddress): $ChannelFuture;
         flush(): $ChannelOutboundInvoker;
         write(arg0: $Object, arg1: $ChannelPromise): $ChannelFuture;
         write(arg0: $Object): $ChannelFuture;
         read(): $ChannelOutboundInvoker;
         connect(arg0: $SocketAddress, arg1: $SocketAddress, arg2: $ChannelPromise): $ChannelFuture;
-        connect(arg0: $SocketAddress, arg1: $ChannelPromise): $ChannelFuture;
         connect(arg0: $SocketAddress, arg1: $SocketAddress): $ChannelFuture;
         connect(arg0: $SocketAddress): $ChannelFuture;
-        close(): $ChannelFuture;
+        connect(arg0: $SocketAddress, arg1: $ChannelPromise): $ChannelFuture;
         close(arg0: $ChannelPromise): $ChannelFuture;
+        close(): $ChannelFuture;
         disconnect(): $ChannelFuture;
         disconnect(arg0: $ChannelPromise): $ChannelFuture;
     }
@@ -65,13 +65,13 @@ declare module "@package/io/netty/channel" {
     }
     export interface $ChannelInboundInvoker {
         fireExceptionCaught(arg0: $Throwable): $ChannelInboundInvoker;
-        fireChannelActive(): $ChannelInboundInvoker;
+        fireChannelRead(arg0: $Object): $ChannelInboundInvoker;
         fireChannelRegistered(): $ChannelInboundInvoker;
         fireChannelUnregistered(): $ChannelInboundInvoker;
+        fireChannelActive(): $ChannelInboundInvoker;
         fireChannelInactive(): $ChannelInboundInvoker;
-        fireUserEventTriggered(arg0: $Object): $ChannelInboundInvoker;
-        fireChannelRead(arg0: $Object): $ChannelInboundInvoker;
         fireChannelReadComplete(): $ChannelInboundInvoker;
+        fireUserEventTriggered(arg0: $Object): $ChannelInboundInvoker;
         fireChannelWritabilityChanged(): $ChannelInboundInvoker;
     }
     export class $ChannelInboundHandlerAdapter extends $ChannelHandlerAdapter implements $ChannelInboundHandler {
@@ -132,9 +132,9 @@ declare module "@package/io/netty/channel" {
     export class $ChannelProgressivePromise {
     }
     export interface $ChannelProgressivePromise extends $ProgressivePromise<void>, $ChannelProgressiveFuture, $ChannelPromise {
+        addListeners(...arg0: $GenericFutureListener_<$Future<void>>[]): $ChannelProgressivePromise;
         syncUninterruptibly(): $ChannelProgressivePromise;
         setFailure(arg0: $Throwable): $ChannelProgressivePromise;
-        addListeners(...arg0: $GenericFutureListener_<$Future<void>>[]): $ChannelProgressivePromise;
         unvoid(): $ChannelProgressivePromise;
         setSuccess(arg0: void): $ChannelProgressivePromise;
         setSuccess(): $ChannelProgressivePromise;
@@ -151,14 +151,14 @@ declare module "@package/io/netty/channel" {
     }
     export interface $Channel$Unsafe {
         recvBufAllocHandle(): $RecvByteBufAllocator$Handle;
-        closeForcibly(): void;
         outboundBuffer(): $ChannelOutboundBuffer;
+        closeForcibly(): void;
         voidPromise(): $ChannelPromise;
         deregister(arg0: $ChannelPromise): void;
-        localAddress(): $SocketAddress;
+        bind(arg0: $SocketAddress, arg1: $ChannelPromise): void;
         remoteAddress(): $SocketAddress;
         beginRead(): void;
-        bind(arg0: $SocketAddress, arg1: $ChannelPromise): void;
+        localAddress(): $SocketAddress;
         flush(): void;
         register(arg0: $EventLoop, arg1: $ChannelPromise): void;
         write(arg0: $Object, arg1: $ChannelPromise): void;
@@ -172,16 +172,16 @@ declare module "@package/io/netty/channel" {
     export class $RecvByteBufAllocator$Handle {
     }
     export interface $RecvByteBufAllocator$Handle {
-        continueReading(): boolean;
-        readComplete(): void;
-        incMessagesRead(arg0: number): void;
-        lastBytesRead(arg0: number): void;
-        lastBytesRead(): number;
-        attemptedBytesRead(): number;
         attemptedBytesRead(arg0: number): void;
-        guess(): number;
+        attemptedBytesRead(): number;
+        readComplete(): void;
+        lastBytesRead(): number;
+        lastBytesRead(arg0: number): void;
+        incMessagesRead(arg0: number): void;
+        continueReading(): boolean;
         reset(arg0: $ChannelConfig): void;
         allocate(arg0: $ByteBufAllocator): $ByteBuf;
+        guess(): number;
     }
     export class $ChannelOutboundHandler {
     }
@@ -305,11 +305,11 @@ declare module "@package/io/netty/channel" {
         constructor();
     }
     export class $ChannelOutboundBuffer {
+        removeBytes(arg0: number): void;
+        nioBufferSize(): number;
         bytesBeforeUnwritable(): number;
         bytesBeforeWritable(): number;
         addFlush(): void;
-        nioBufferSize(): number;
-        removeBytes(arg0: number): void;
         getUserDefinedWritability(arg0: number): boolean;
         setUserDefinedWritability(arg0: number, arg1: boolean): void;
         totalPendingWriteBytes(): number;
@@ -336,8 +336,8 @@ declare module "@package/io/netty/channel" {
     export class $ChannelFuture {
     }
     export interface $ChannelFuture extends $Future<void> {
-        syncUninterruptibly(): $ChannelFuture;
         addListeners(...arg0: $GenericFutureListener_<$Future<void>>[]): $ChannelFuture;
+        syncUninterruptibly(): $ChannelFuture;
         removeListeners(...arg0: $GenericFutureListener_<$Future<void>>[]): $ChannelFuture;
         await(): $ChannelFuture;
         isVoid(): boolean;
@@ -349,13 +349,13 @@ declare module "@package/io/netty/channel" {
         get void(): boolean;
     }
     export class $ChannelHandlerAdapter implements $ChannelHandler {
+        isSharable(): boolean;
         handlerAdded(arg0: $ChannelHandlerContext): void;
         handlerRemoved(arg0: $ChannelHandlerContext): void;
         /**
          * @deprecated
          */
         exceptionCaught(arg0: $ChannelHandlerContext, arg1: $Throwable): void;
-        isSharable(): boolean;
         constructor();
         get sharable(): boolean;
     }
@@ -363,28 +363,28 @@ declare module "@package/io/netty/channel" {
     }
     export interface $ChannelPipeline extends $ChannelInboundInvoker, $ChannelOutboundInvoker, $Iterable<$Map$Entry<string, $ChannelHandler>> {
         firstContext(): $ChannelHandlerContext;
-        lastContext(): $ChannelHandlerContext;
         fireExceptionCaught(arg0: $Throwable): $ChannelPipeline;
-        fireChannelActive(): $ChannelPipeline;
-        fireChannelRegistered(): $ChannelPipeline;
-        fireChannelUnregistered(): $ChannelPipeline;
-        fireChannelInactive(): $ChannelPipeline;
-        fireUserEventTriggered(arg0: $Object): $ChannelPipeline;
-        fireChannelRead(arg0: $Object): $ChannelPipeline;
-        fireChannelReadComplete(): $ChannelPipeline;
-        fireChannelWritabilityChanged(): $ChannelPipeline;
         addAfter(arg0: string, arg1: string, arg2: $ChannelHandler): $ChannelPipeline;
         addAfter(arg0: $EventExecutorGroup, arg1: string, arg2: string, arg3: $ChannelHandler): $ChannelPipeline;
-        addBefore(arg0: string, arg1: string, arg2: $ChannelHandler): $ChannelPipeline;
         addBefore(arg0: $EventExecutorGroup, arg1: string, arg2: string, arg3: $ChannelHandler): $ChannelPipeline;
+        addBefore(arg0: string, arg1: string, arg2: $ChannelHandler): $ChannelPipeline;
+        fireChannelRead(arg0: $Object): $ChannelPipeline;
+        fireChannelRegistered(): $ChannelPipeline;
+        fireChannelUnregistered(): $ChannelPipeline;
+        fireChannelActive(): $ChannelPipeline;
+        fireChannelInactive(): $ChannelPipeline;
+        fireChannelReadComplete(): $ChannelPipeline;
+        fireUserEventTriggered(arg0: $Object): $ChannelPipeline;
+        fireChannelWritabilityChanged(): $ChannelPipeline;
+        lastContext(): $ChannelHandlerContext;
+        remove<T extends $ChannelHandler>(arg0: $Class<T>): T;
         remove(arg0: $ChannelHandler): $ChannelPipeline;
         remove(arg0: string): $ChannelHandler;
-        remove<T extends $ChannelHandler>(arg0: $Class<T>): T;
         get(arg0: string): $ChannelHandler;
         get<T extends $ChannelHandler>(arg0: $Class<T>): T;
-        context(arg0: $ChannelHandler): $ChannelHandlerContext;
-        context(arg0: $Class<$ChannelHandler>): $ChannelHandlerContext;
         context(arg0: string): $ChannelHandlerContext;
+        context(arg0: $Class<$ChannelHandler>): $ChannelHandlerContext;
+        context(arg0: $ChannelHandler): $ChannelHandlerContext;
         flush(): $ChannelPipeline;
         replace<T extends $ChannelHandler>(arg0: $Class<T>, arg1: string, arg2: $ChannelHandler): T;
         replace(arg0: string, arg1: string, arg2: $ChannelHandler): $ChannelHandler;
@@ -415,10 +415,10 @@ declare module "@package/io/netty/channel" {
     export class $ChannelPromise {
     }
     export interface $ChannelPromise extends $ChannelFuture, $Promise<void> {
+        addListeners(...arg0: $GenericFutureListener_<$Future<void>>[]): $ChannelPromise;
         syncUninterruptibly(): $ChannelPromise;
         trySuccess(): boolean;
         setFailure(arg0: $Throwable): $ChannelPromise;
-        addListeners(...arg0: $GenericFutureListener_<$Future<void>>[]): $ChannelPromise;
         unvoid(): $ChannelPromise;
         setSuccess(): $ChannelPromise;
         setSuccess(arg0: void): $ChannelPromise;
@@ -439,9 +439,9 @@ declare module "@package/io/netty/channel" {
         bytesBeforeWritable(): number;
         eventLoop(): $EventLoop;
         alloc(): $ByteBufAllocator;
-        localAddress(): $SocketAddress;
         remoteAddress(): $SocketAddress;
         isWritable(): boolean;
+        localAddress(): $SocketAddress;
         parent(): $Channel;
         flush(): $Channel;
         isOpen(): boolean;
@@ -470,30 +470,30 @@ declare module "@package/io/netty/channel" {
     export class $ChannelConfig {
     }
     export interface $ChannelConfig {
-        setAllocator(arg0: $ByteBufAllocator): $ChannelConfig;
-        getRecvByteBufAllocator<T extends $RecvByteBufAllocator>(): T;
         isAutoRead(): boolean;
-        isAutoClose(): boolean;
-        setWriteBufferHighWaterMark(arg0: number): $ChannelConfig;
+        getWriteSpinCount(): number;
         getConnectTimeoutMillis(): number;
         /**
          * @deprecated
          */
-        getMaxMessagesPerRead(): number;
+        setMaxMessagesPerRead(arg0: number): $ChannelConfig;
+        setWriteSpinCount(arg0: number): $ChannelConfig;
+        setAllocator(arg0: $ByteBufAllocator): $ChannelConfig;
+        setRecvByteBufAllocator(arg0: $RecvByteBufAllocator_): $ChannelConfig;
+        setMessageSizeEstimator(arg0: $MessageSizeEstimator_): $ChannelConfig;
+        setWriteBufferWaterMark(arg0: $WriteBufferWaterMark): $ChannelConfig;
         /**
          * @deprecated
          */
-        setMaxMessagesPerRead(arg0: number): $ChannelConfig;
-        getWriteSpinCount(): number;
-        setWriteSpinCount(arg0: number): $ChannelConfig;
-        setRecvByteBufAllocator(arg0: $RecvByteBufAllocator_): $ChannelConfig;
+        getMaxMessagesPerRead(): number;
+        getWriteBufferHighWaterMark(): number;
+        setWriteBufferHighWaterMark(arg0: number): $ChannelConfig;
         getWriteBufferLowWaterMark(): number;
         setWriteBufferLowWaterMark(arg0: number): $ChannelConfig;
         getMessageSizeEstimator(): $MessageSizeEstimator;
-        setMessageSizeEstimator(arg0: $MessageSizeEstimator_): $ChannelConfig;
         getWriteBufferWaterMark(): $WriteBufferWaterMark;
-        setWriteBufferWaterMark(arg0: $WriteBufferWaterMark): $ChannelConfig;
-        getWriteBufferHighWaterMark(): number;
+        getRecvByteBufAllocator<T extends $RecvByteBufAllocator>(): T;
+        isAutoClose(): boolean;
         setAutoClose(arg0: boolean): $ChannelConfig;
         setOptions(arg0: $Map_<$ChannelOption<never>, never>): boolean;
         setOption<T>(arg0: $ChannelOption<T>, arg1: T): boolean;
@@ -515,14 +515,14 @@ declare module "@package/io/netty/channel" {
     export class $ChannelId {
     }
     export interface $ChannelId extends $Serializable, $Comparable<$ChannelId> {
-        asLongText(): string;
         asShortText(): string;
+        asLongText(): string;
     }
     export class $ChannelProgressiveFuture {
     }
     export interface $ChannelProgressiveFuture extends $ChannelFuture, $ProgressiveFuture<void> {
-        syncUninterruptibly(): $ChannelProgressiveFuture;
         addListeners(...arg0: $GenericFutureListener_<$Future<void>>[]): $ChannelProgressiveFuture;
+        syncUninterruptibly(): $ChannelProgressiveFuture;
         removeListeners(...arg0: $GenericFutureListener_<$Future<void>>[]): $ChannelProgressiveFuture;
         await(): $ChannelProgressiveFuture;
         sync(): $ChannelProgressiveFuture;
@@ -534,17 +534,17 @@ declare module "@package/io/netty/channel" {
     }
     export interface $ChannelHandlerContext extends $AttributeMap, $ChannelInboundInvoker, $ChannelOutboundInvoker {
         fireExceptionCaught(arg0: $Throwable): $ChannelHandlerContext;
-        fireChannelActive(): $ChannelHandlerContext;
-        fireChannelRegistered(): $ChannelHandlerContext;
-        fireChannelUnregistered(): $ChannelHandlerContext;
-        fireChannelInactive(): $ChannelHandlerContext;
-        fireUserEventTriggered(arg0: $Object): $ChannelHandlerContext;
-        fireChannelRead(arg0: $Object): $ChannelHandlerContext;
-        fireChannelReadComplete(): $ChannelHandlerContext;
         /**
          * @deprecated
          */
         hasAttr<T>(arg0: $AttributeKey<T>): boolean;
+        fireChannelRead(arg0: $Object): $ChannelHandlerContext;
+        fireChannelRegistered(): $ChannelHandlerContext;
+        fireChannelUnregistered(): $ChannelHandlerContext;
+        fireChannelActive(): $ChannelHandlerContext;
+        fireChannelInactive(): $ChannelHandlerContext;
+        fireChannelReadComplete(): $ChannelHandlerContext;
+        fireUserEventTriggered(arg0: $Object): $ChannelHandlerContext;
         fireChannelWritabilityChanged(): $ChannelHandlerContext;
         alloc(): $ByteBufAllocator;
         executor(): $EventExecutor;

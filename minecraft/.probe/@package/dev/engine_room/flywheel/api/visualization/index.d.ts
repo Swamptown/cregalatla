@@ -10,9 +10,9 @@ declare module "@package/dev/engine_room/flywheel/api/visualization" {
     export class $VisualizationContext {
     }
     export interface $VisualizationContext {
-        instancerProvider(): $InstancerProvider;
         renderOrigin(): $Vec3i;
         createEmbedding(arg0: $Vec3i): $VisualEmbedding;
+        instancerProvider(): $InstancerProvider;
     }
     export class $EntityVisualizer<T extends $Entity> {
     }

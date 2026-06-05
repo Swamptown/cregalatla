@@ -18,19 +18,19 @@ import { $Enum, $Object } from "@package/java/lang";
 
 declare module "@package/com/almostreliable/morejs/features/enchantment" {
     export class $EnchantmentTableTooltipEventJS extends $EnchantmentTableEventJS {
+        getRequiredLevel(): number;
         getClue(): $EnchantmentInstance;
         clearComponents(): void;
         getClueId(): $ResourceLocation;
-        getRequiredLevel(): number;
-        removeComponent(arg0: number): void;
         getSlot(): number;
         addComponent(arg0: number, arg1: $Component_): void;
         addComponent(arg0: $Component_): void;
         getComponents(): $List<$Component>;
+        removeComponent(arg0: number): void;
         constructor(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $Level_, arg3: $Player, arg4: $EnchantmentMenu, arg5: number, arg6: $List_<$Component_>);
+        get requiredLevel(): number;
         get clue(): $EnchantmentInstance;
         get clueId(): $ResourceLocation;
-        get requiredLevel(): number;
         get slot(): number;
         get components(): $List<$Component>;
     }
@@ -40,9 +40,9 @@ declare module "@package/com/almostreliable/morejs/features/enchantment" {
         clearClue(): void;
         hasEnchantment(arg0: $ResourceLocation_): boolean;
         hasEnchantment(arg0: $ResourceLocation_, arg1: $IntRange): boolean;
-        getClue(): $EnchantmentInstance;
         getRequiredLevel(): number;
         setRequiredLevel(arg0: number): void;
+        getClue(): $EnchantmentInstance;
         randomClue(): void;
         getEnchantmentIds(): $List<$ResourceLocation>;
         removeEnchantments(arg0: $BiPredicate_<$Holder<$Enchantment>, number>): void;
@@ -68,8 +68,8 @@ declare module "@package/com/almostreliable/morejs/features/enchantment" {
         getPlayer(): $Player;
         getLevel(): $Level;
         getItem(): $ItemStack;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -111,8 +111,8 @@ declare module "@package/com/almostreliable/morejs/features/enchantment" {
         get player(): $Player;
         get level(): $Level;
         get item(): $ItemStack;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get registries(): $RegistryAccess;
     }
     export class $EnchantmentMenuState {
         setCurrentItem(arg0: $ItemStack_): void;

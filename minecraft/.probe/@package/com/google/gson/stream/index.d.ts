@@ -23,13 +23,13 @@ declare module "@package/com/google/gson/stream" {
     export class $JsonWriter implements $Closeable, $Flushable {
         setLenient(arg0: boolean): void;
         name(arg0: string): $JsonWriter;
-        value(arg0: number): $JsonWriter;
-        value(arg0: number): $JsonWriter;
-        value(arg0: number): $JsonWriter;
         value(arg0: boolean): $JsonWriter;
-        value(arg0: boolean): $JsonWriter;
-        value(arg0: string): $JsonWriter;
+        value(arg0: number): $JsonWriter;
         value(arg0: $Number): $JsonWriter;
+        value(arg0: number): $JsonWriter;
+        value(arg0: number): $JsonWriter;
+        value(arg0: string): $JsonWriter;
+        value(arg0: boolean): $JsonWriter;
         flush(): void;
         close(): void;
         nullValue(): $JsonWriter;

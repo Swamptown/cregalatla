@@ -46,13 +46,13 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/renderer" {
         getRenderTypes(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $RandomSource, arg4: $ModelData): $ChunkRenderTypeSet;
         getViewDistance(): number;
         render(arg0: $BlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
-        shouldRenderOffScreen(arg0: $BlockEntity): boolean;
-        getRenderBoundingBox(arg0: $BlockEntity): $AABB;
-        renderItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel): void;
-        isGui3d(): boolean;
-        shouldRender(arg0: $BlockEntity, arg1: $Vec3_): boolean;
         useBlockLight(arg0: $ItemStack_): boolean;
         renderModel(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_, arg4: $RandomSource, arg5: $ModelData, arg6: $RenderType): $List<$BakedQuad>;
+        shouldRenderOffScreen(arg0: $BlockEntity): boolean;
+        getRenderBoundingBox(arg0: $BlockEntity): $AABB;
+        shouldRender(arg0: $BlockEntity, arg1: $Vec3_): boolean;
+        renderItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel): void;
+        isGui3d(): boolean;
         getRegistryHolderOptional(): ($AutoRegistry$Holder<$LDLRegisterClient, $IRenderer, $Supplier<$IRenderer>>) | undefined;
         isLDLRegister(): boolean;
         getRegisterUIClient(): $LDLRegisterClient;
@@ -112,13 +112,13 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/renderer" {
         getViewDistance(): number;
         copy(): $IRenderer;
         render(arg0: $BlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
-        shouldRenderOffScreen(arg0: $BlockEntity): boolean;
-        getRenderBoundingBox(arg0: $BlockEntity): $AABB;
-        renderItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel): void;
-        isGui3d(): boolean;
-        shouldRender(arg0: $BlockEntity, arg1: $Vec3_): boolean;
         useBlockLight(arg0: $ItemStack_): boolean;
         renderModel(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_, arg4: $RandomSource, arg5: $ModelData, arg6: $RenderType): $List<$BakedQuad>;
+        shouldRenderOffScreen(arg0: $BlockEntity): boolean;
+        getRenderBoundingBox(arg0: $BlockEntity): $AABB;
+        shouldRender(arg0: $BlockEntity, arg1: $Vec3_): boolean;
+        renderItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel): void;
+        isGui3d(): boolean;
         get viewDistance(): number;
         get gui3d(): boolean;
     }

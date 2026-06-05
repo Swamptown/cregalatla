@@ -87,9 +87,9 @@ declare module "@package/net/minecraft/commands/arguments/coordinates" {
         get examples(): $Collection<string>;
     }
     export class $ColumnPosArgument implements $ArgumentType<$Coordinates> {
-        static columnPos(): $ColumnPosArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getColumnPos(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $ColumnPos;
+        static columnPos(): $ColumnPosArgument;
         getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): $Coordinates;
         parse(arg0: $StringReader): $Coordinates;
@@ -101,12 +101,12 @@ declare module "@package/net/minecraft/commands/arguments/coordinates" {
         isXRelative(): boolean;
         isYRelative(): boolean;
         isZRelative(): boolean;
+        static absolute(arg0: number, arg1: number, arg2: number): $WorldCoordinates;
+        static absolute(arg0: $Vec2): $WorldCoordinates;
         getPosition(arg0: $CommandSourceStack): $Vec3;
         static current(): $WorldCoordinates;
         static parseInt(arg0: $StringReader): $WorldCoordinates;
         static parseDouble(arg0: $StringReader, arg1: boolean): $WorldCoordinates;
-        static absolute(arg0: $Vec2): $WorldCoordinates;
-        static absolute(arg0: number, arg1: number, arg2: number): $WorldCoordinates;
         getRotation(arg0: $CommandSourceStack): $Vec2;
         getBlockPos(arg0: $CommandSourceStack): $BlockPos;
         constructor(arg0: $WorldCoordinate, arg1: $WorldCoordinate, arg2: $WorldCoordinate);
@@ -128,10 +128,10 @@ declare module "@package/net/minecraft/commands/arguments/coordinates" {
         get ZRelative(): boolean;
     }
     export class $Vec2Argument implements $ArgumentType<$Coordinates> {
-        static vec2(arg0: boolean): $Vec2Argument;
-        static vec2(): $Vec2Argument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static getVec2(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $Vec2;
+        static vec2(arg0: boolean): $Vec2Argument;
+        static vec2(): $Vec2Argument;
         getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): $Coordinates;
         parse(arg0: $StringReader): $Coordinates;

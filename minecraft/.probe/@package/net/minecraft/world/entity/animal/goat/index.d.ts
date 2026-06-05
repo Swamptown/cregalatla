@@ -1,8 +1,7 @@
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $JumpControl, $MoveControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
-import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $Pose, $PortalProcessor, $AgeableMob, $WalkAnimationState, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
+import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $LivingEntity, $Pose, $PortalProcessor, $WalkAnimationState, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $Stack } from "@package/java/util";
@@ -10,9 +9,8 @@ import { $RandomSource } from "@package/net/minecraft/util";
 import { $Animal } from "@package/net/minecraft/world/entity/animal";
 import { $Predicate } from "@package/java/util/function";
 import { $InteractionHand } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
+import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
-import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $SoundEvent } from "@package/net/minecraft/sounds";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
 import { $PathNavigation } from "@package/net/minecraft/world/entity/ai/navigation";
@@ -34,8 +32,8 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
     export class $GoatAi {
         static getTemptations(): $Predicate<$ItemStack>;
         static initMemories(arg0: $Goat, arg1: $RandomSource): void;
-        static updateActivity(arg0: $Goat): void;
         static makeBrain(arg0: $Brain<$Goat>): $Brain<never>;
+        static updateActivity(arg0: $Goat): void;
         static MAX_LONG_JUMP_WIDTH: number;
         static RAM_PREPARE_TIME: number;
         static ADULT_RAM_KNOCKBACK_FORCE: number;
@@ -48,7 +46,6 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
         static get temptations(): $Predicate<$ItemStack>;
     }
     export class $Goat extends $Animal {
-        getBreedOffspring(arg0: $ServerLevel, arg1: $AgeableMob): $Goat;
         createHorn(): $ItemStack;
         isScreamingGoat(): boolean;
         removeHorns(): void;
@@ -61,7 +58,6 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
         getRammingXHeadRot(): number;
         static checkGoatSpawnRules(arg0: $EntityType_<$Animal>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -94,6 +90,7 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         static GOAT_FALL_DAMAGE_REDUCTION: number;
@@ -120,6 +117,7 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -146,6 +144,7 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

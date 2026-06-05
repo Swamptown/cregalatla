@@ -25,7 +25,7 @@ declare module "@package/com/mojang/authlib/yggdrasil/request" {
     /**
      * Values that may be interpreted as {@link $AbuseReportRequest}.
      */
-    export type $AbuseReportRequest_ = { version?: number, report?: $AbuseReport_, id?: $UUID_, realmInfo?: $AbuseReportRequest$RealmInfo_, thirdPartyServerInfo?: $AbuseReportRequest$ThirdPartyServerInfo_, clientInfo?: $AbuseReportRequest$ClientInfo_, reportType?: string,  } | [version?: number, report?: $AbuseReport_, id?: $UUID_, realmInfo?: $AbuseReportRequest$RealmInfo_, thirdPartyServerInfo?: $AbuseReportRequest$ThirdPartyServerInfo_, clientInfo?: $AbuseReportRequest$ClientInfo_, reportType?: string, ];
+    export type $AbuseReportRequest_ = { realmInfo?: $AbuseReportRequest$RealmInfo_, id?: $UUID_, report?: $AbuseReport_, version?: number, reportType?: string, clientInfo?: $AbuseReportRequest$ClientInfo_, thirdPartyServerInfo?: $AbuseReportRequest$ThirdPartyServerInfo_,  } | [realmInfo?: $AbuseReportRequest$RealmInfo_, id?: $UUID_, report?: $AbuseReport_, version?: number, reportType?: string, clientInfo?: $AbuseReportRequest$ClientInfo_, thirdPartyServerInfo?: $AbuseReportRequest$ThirdPartyServerInfo_, ];
     export class $AbuseReportRequest$ClientInfo extends $Record {
         clientVersion(): string;
         locale(): string;

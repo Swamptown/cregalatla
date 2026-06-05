@@ -36,8 +36,8 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/nbt" {
      */
     export type $LootNbtProviderType_ = RegistryTypes.LootNbtProviderType | { codec?: $MapCodec_<$NbtProvider>,  } | [codec?: $MapCodec_<$NbtProvider>, ];
     export class $ContextNbtProvider implements $NbtProvider {
-        static forContextEntity(arg0: $LootContext$EntityTarget_): $NbtProvider;
         getReferencedContextParams(): $Set<$LootContextParam<never>>;
+        static forContextEntity(arg0: $LootContext$EntityTarget_): $NbtProvider;
         get(arg0: $LootContext): $Tag;
         getType(): $LootNbtProviderType;
         static INLINE_CODEC: $Codec<$ContextNbtProvider>;

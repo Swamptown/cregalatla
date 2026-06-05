@@ -20,7 +20,10 @@ export * as common from "@package/xaero/hud/minimap/common";
 
 declare module "@package/xaero/hud/minimap" {
     export class $Minimap {
-        usingFBO(): boolean;
+        getInfoDisplays(): $InfoDisplays;
+        getOverMapRendererHandler(): $MinimapElementOverMapRendererHandler;
+        getWorldRendererHandler(): $MinimapElementWorldRendererHandler;
+        setCrashedWith(arg0: $Throwable): void;
         getWaypointWorldRenderer(): $WaypointWorldRenderer;
         getMinimapFBORenderer(): $MinimapFBORenderer;
         getCrashedWith(): $Throwable;
@@ -39,13 +42,13 @@ declare module "@package/xaero/hud/minimap" {
          */
         getWaypointsIngameRenderer(): $WaypointsIngameRenderer;
         getMinimapSafeModeRenderer(): $MinimapSafeModeRenderer;
+        usingFBO(): boolean;
         getCompassRenderer(): $CompassRenderer;
         getModMain(): $HudMod;
-        getInfoDisplays(): $InfoDisplays;
-        getOverMapRendererHandler(): $MinimapElementOverMapRendererHandler;
-        getWorldRendererHandler(): $MinimapElementWorldRendererHandler;
-        setCrashedWith(arg0: $Throwable): void;
         constructor(arg0: $HudMod);
+        get infoDisplays(): $InfoDisplays;
+        get overMapRendererHandler(): $MinimapElementOverMapRendererHandler;
+        get worldRendererHandler(): $MinimapElementWorldRendererHandler;
         get waypointWorldRenderer(): $WaypointWorldRenderer;
         get minimapFBORenderer(): $MinimapFBORenderer;
         get waypointsGuiRenderer(): $WaypointsGuiRenderer;
@@ -55,8 +58,5 @@ declare module "@package/xaero/hud/minimap" {
         get minimapSafeModeRenderer(): $MinimapSafeModeRenderer;
         get compassRenderer(): $CompassRenderer;
         get modMain(): $HudMod;
-        get infoDisplays(): $InfoDisplays;
-        get overMapRendererHandler(): $MinimapElementOverMapRendererHandler;
-        get worldRendererHandler(): $MinimapElementWorldRendererHandler;
     }
 }

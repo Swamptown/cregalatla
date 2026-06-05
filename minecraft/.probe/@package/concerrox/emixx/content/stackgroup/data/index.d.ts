@@ -41,9 +41,9 @@ declare module "@package/concerrox/emixx/content/stackgroup/data" {
         constructor();
     }
     export class $StackGroup {
-        setEnabled$emixx_common(<set-?>: boolean): void;
         isEnabled$emixx_common(): boolean;
         getOptimizedIds(): $Set<$ResourceLocation>;
+        setEnabled$emixx_common(<set-?>: boolean): void;
         getName(): $Component;
         match(arg0: $EmiIngredient): boolean;
         getId(): $ResourceLocation;

@@ -25,11 +25,27 @@ export * as vertex from "@package/net/caffeinemc/mods/sodium/client/render/verte
 
 declare module "@package/net/caffeinemc/mods/sodium/client/render" {
     export class $SodiumWorldRenderer implements $SodiumWorldRendererExtension$1, $SodiumWorldRendererAccessor, $SodiumWorldRendererExtension {
+        handler$gib000$sable$setupTerrain(arg0: $Camera, arg1: $Viewport, arg2: boolean, arg3: boolean, arg4: $CallbackInfo): void;
+        handler$cfd000$aeronautics$setupLevititeShaders(arg0: $RenderType, arg1: $ChunkRenderMatrices_, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        handler$cfd000$aeronautics$cleanupLevititeShaders(arg0: $RenderType, arg1: $ChunkRenderMatrices_, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        handler$gib000$sable$drawRenderSources(arg0: $RenderType, arg1: $ChunkRenderMatrices_, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        isBoxVisible(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
+        handler$gib000$sable$scheduleRebuildForChunk(arg0: number, arg1: number, arg2: number, arg3: boolean, arg4: $CallbackInfo): void;
+        sable$getSubLevelRenderSectionManager(arg0: $ClientSubLevel): $SubLevelRenderSectionManager;
+        sable$freeRenderSectionManager(arg0: $ClientSubLevel): void;
+        handler$gib000$sable$isTerrainRenderComplete(arg0: $CallbackInfoReturnable<any>): void;
+        handler$gib000$sable$markGraphDirty(arg0: $Camera, arg1: $Viewport, arg2: boolean, arg3: boolean, arg4: $CallbackInfo): void;
         isEntityVisible(arg0: $Entity): boolean;
-        setLevel(arg0: $ClientLevel): void;
         getDebugStrings(): $Collection<string>;
+        setLevel(arg0: $ClientLevel): void;
         reload(): void;
         static instance(): $SodiumWorldRenderer;
+        static instanceNullable(): $SodiumWorldRenderer;
+        veil$getSortedRenderLists(): $SortedRenderLists;
+        veil$setSortedRenderLists(arg0: $SortedRenderLists): void;
+        veil$getTaskLists(): $Map<any, any>;
+        veil$setTaskLists(arg0: $Map_<any, any>): void;
+        iterateVisibleBlockEntities(arg0: $Consumer_<$BlockEntity>): void;
         getVisibleChunkCount(): number;
         isTerrainRenderComplete(): boolean;
         scheduleTerrainUpdate(): void;
@@ -41,26 +57,10 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render" {
         renderBlockEntities(arg0: $PoseStack, arg1: $RenderBuffers, arg2: $Long2ObjectMap<$SortedSet<$BlockDestructionProgress>>, arg3: $Camera, arg4: number, arg5: $LocalBooleanRef): void;
         getChunksDebugString(): string;
         isSectionReady(arg0: number, arg1: number, arg2: number): boolean;
-        iterateVisibleBlockEntities(arg0: $Consumer_<$BlockEntity>): void;
-        static instanceNullable(): $SodiumWorldRenderer;
-        veil$getSortedRenderLists(): $SortedRenderLists;
-        veil$setSortedRenderLists(arg0: $SortedRenderLists): void;
-        veil$getTaskLists(): $Map<any, any>;
-        veil$setTaskLists(arg0: $Map_<any, any>): void;
-        handler$fnj000$sable$markGraphDirty(arg0: $Camera, arg1: $Viewport, arg2: boolean, arg3: boolean, arg4: $CallbackInfo): void;
-        handler$fnj000$sable$drawRenderSources(arg0: $RenderType, arg1: $ChunkRenderMatrices_, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
-        handler$fnj000$sable$isTerrainRenderComplete(arg0: $CallbackInfoReturnable<any>): void;
-        handler$fnj000$sable$setupTerrain(arg0: $Camera, arg1: $Viewport, arg2: boolean, arg3: boolean, arg4: $CallbackInfo): void;
-        handler$cdg000$aeronautics$setupLevititeShaders(arg0: $RenderType, arg1: $ChunkRenderMatrices_, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
-        handler$cdg000$aeronautics$cleanupLevititeShaders(arg0: $RenderType, arg1: $ChunkRenderMatrices_, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
-        isBoxVisible(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
-        handler$fnj000$sable$scheduleRebuildForChunk(arg0: number, arg1: number, arg2: number, arg3: boolean, arg4: $CallbackInfo): void;
-        sable$getSubLevelRenderSectionManager(arg0: $ClientSubLevel): $SubLevelRenderSectionManager;
-        sable$freeRenderSectionManager(arg0: $ClientSubLevel): void;
         getRenderSectionManager(): $RenderSectionManager;
         constructor(arg0: $Minecraft);
-        set level(value: $ClientLevel);
         get debugStrings(): $Collection<string>;
+        set level(value: $ClientLevel);
         get visibleChunkCount(): number;
         get terrainRenderComplete(): boolean;
         get chunksDebugString(): string;

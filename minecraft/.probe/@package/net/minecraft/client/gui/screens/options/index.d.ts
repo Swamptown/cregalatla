@@ -290,7 +290,7 @@ declare module "@package/net/minecraft/client/gui/screens/options" {
     }
     export class $OptionsScreen extends $Screen {
         static createDifficultyButton(arg0: number, arg1: number, arg2: string, arg3: $Minecraft): $CycleButton<$Difficulty>;
-        handler$fmg000$sable$createSableButton(arg0: $CallbackInfoReturnable<any>): void;
+        handler$ggo000$sable$createSableButton(arg0: $CallbackInfoReturnable<any>): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static TELEMETRY: $Component;

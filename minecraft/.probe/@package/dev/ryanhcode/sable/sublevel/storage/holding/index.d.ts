@@ -22,15 +22,15 @@ declare module "@package/dev/ryanhcode/sable/sublevel/storage/holding" {
     /**
      * Values that may be interpreted as {@link $GlobalSavedSubLevelPointer}.
      */
-    export type $GlobalSavedSubLevelPointer_ = { chunkPos?: $ChunkPos, storageIndex?: number, subLevelIndex?: number,  } | [chunkPos?: $ChunkPos, storageIndex?: number, subLevelIndex?: number, ];
+    export type $GlobalSavedSubLevelPointer_ = { storageIndex?: number, chunkPos?: $ChunkPos, subLevelIndex?: number,  } | [storageIndex?: number, chunkPos?: $ChunkPos, subLevelIndex?: number, ];
     export class $SubLevelHoldingChunkMap implements $AutoCloseable {
-        moveToUnloaded(arg0: $ServerSubLevel, arg1: $ChunkPos): void;
-        getHoldingSubLevel(arg0: $UUID_): $HoldingSubLevel;
         processChanges(): void;
         queueDeletion(arg0: $ServerSubLevel): void;
+        getHoldingSubLevel(arg0: $UUID_): $HoldingSubLevel;
+        moveToUnloaded(arg0: $ServerSubLevel, arg1: $ChunkPos): void;
+        getStorage(): $SubLevelStorage;
         updateChunkStatus(arg0: $ChunkPos, arg1: boolean): void;
         saveAll(): void;
-        getStorage(): $SubLevelStorage;
         close(): void;
         static VERBOSE: boolean;
         constructor(arg0: $ServerLevel, arg1: $ServerSubLevelContainer);
@@ -46,12 +46,12 @@ declare module "@package/dev/ryanhcode/sable/sublevel/storage/holding" {
     /**
      * Values that may be interpreted as {@link $SavedSubLevelPointer}.
      */
-    export type $SavedSubLevelPointer_ = { storageIndex?: number, subLevelIndex?: number,  } | [storageIndex?: number, subLevelIndex?: number, ];
+    export type $SavedSubLevelPointer_ = { subLevelIndex?: number, storageIndex?: number,  } | [subLevelIndex?: number, storageIndex?: number, ];
     export class $SubLevelHoldingChunk {
         acceptHoldingSubLevel(arg0: $HoldingSubLevel): void;
         getLoadedHoldingSubLevels(): $Iterable<$HoldingSubLevel>;
-        collectReadySubLevels(arg0: $ServerLevel, arg1: $Object2ObjectMap<$UUID_, $HoldingSubLevel>): void;
         getSubLevelPointers(): $List<$SavedSubLevelPointer>;
+        collectReadySubLevels(arg0: $ServerLevel, arg1: $Object2ObjectMap<$UUID_, $HoldingSubLevel>): void;
         getChunkPos(): $ChunkPos;
         writeTo(arg0: $CompoundTag_): void;
         static from(arg0: $ChunkPos, arg1: $CompoundTag_): $SubLevelHoldingChunk;

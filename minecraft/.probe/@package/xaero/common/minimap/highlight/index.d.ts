@@ -6,8 +6,8 @@ import { $List } from "@package/java/util";
 
 declare module "@package/xaero/common/minimap/highlight" {
     export class $DimensionHighlighterHandler {
-        addBlockHighlightTooltips(arg0: $InfoDisplayCompiler, arg1: number, arg2: number, arg3: number, arg4: boolean): void;
         shouldApplyRegionHighlights(arg0: number, arg1: number, arg2: boolean): boolean;
+        addBlockHighlightTooltips(arg0: $InfoDisplayCompiler, arg1: number, arg2: number, arg3: number, arg4: boolean): void;
         shouldApplyTileChunkHighlights(arg0: number, arg1: number, arg2: number, arg3: number, arg4: boolean): boolean;
         applyChunkHighlightColors(arg0: number, arg1: number): number[];
         getVersion(): number;

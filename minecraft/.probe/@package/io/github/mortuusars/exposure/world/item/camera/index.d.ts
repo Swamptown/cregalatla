@@ -36,12 +36,12 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
         setEndTick(stack: $ItemStack_, tick: number): void;
         getLastReleaseTick(stack: $ItemStack_): number;
         setLastReleaseTick(stack: $ItemStack_, tick: number): void;
+        getRemainingTicks(holder: $CameraHolder, stack: $ItemStack_): number;
         getTicksSinceLastRelease(holder: $CameraHolder, stack: $ItemStack_): number;
         getEndTick(stack: $ItemStack_): number;
         getStartTick(stack: $ItemStack_): number;
-        getRemainingTicks(holder: $CameraHolder, stack: $ItemStack_): number;
-        isTicking(holder: $CameraHolder, stack: $ItemStack_): boolean;
         tick(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_): boolean;
+        isTicking(holder: $CameraHolder, stack: $ItemStack_): boolean;
         set(holder: $CameraHolder, stack: $ItemStack_, ticks: number): void;
         stop(stack: $ItemStack_): void;
         constructor();
@@ -51,6 +51,7 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
         removedSound(): ($SoundEffect) | undefined;
         playRemoveSoundSided(entity: $Entity): void;
         playInsertSoundSided(entity: $Entity): void;
+        ifPresentOrElse(stack: $ItemStack_, ifPresent: $BiConsumer_<T, $ItemStack>, orElse: $Runnable_): $Attachment<T>;
         ifPresent(stack: $ItemStack_, ifPresent: $Consumer_<$ItemStack>): $Attachment<T>;
         ifPresent(stack: $ItemStack_, ifPresent: $BiConsumer_<T, $ItemStack>): $Attachment<T>;
         get(stack: $ItemStack_): $StoredItemStack;
@@ -63,30 +64,29 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
         set(stack: $ItemStack_, attachment: $ItemStack_): $Attachment<T>;
         isPresent(stack: $ItemStack_): boolean;
         orElse(stack: $ItemStack_, orElse: $Runnable_): $Attachment<T>;
-        ifPresentOrElse(stack: $ItemStack_, ifPresent: $BiConsumer_<T, $ItemStack>, orElse: $Runnable_): $Attachment<T>;
-        mapOrElse<R>(stack: $ItemStack_, ifPresentMappingFunc: $Function_<$ItemStack, R>, orElseSupplier: $Supplier_<R>): R;
         mapOrElse<R>(stack: $ItemStack_, ifPresentMappingFunc: $BiFunction_<T, $ItemStack, R>, orElseSupplier: $Supplier_<R>): R;
+        mapOrElse<R>(stack: $ItemStack_, ifPresentMappingFunc: $Function_<$ItemStack, R>, orElseSupplier: $Supplier_<R>): R;
         maxCount(): $Supplier<number>;
-        itemType(): $Class<T>;
         itemPredicate(): $Predicate<$ItemStack>;
+        itemType(): $Class<T>;
         static FILTER: $Attachment<$Item>;
         static FILM: $Attachment<$FilmRollItem>;
         static FLASH: $Attachment<$Item>;
         static LENS: $Attachment<$Item>;
-        constructor(id: $ResourceLocation_, component: $DataComponentType_<$StoredItemStack>, itemPredicate: $Predicate_<$ItemStack>, itemType: $Class<T>, maxCount: $Supplier_<number>);
         constructor(id: $ResourceLocation_, component: $DataComponentType_<$StoredItemStack>, itemPredicate: $Predicate_<$ItemStack>, itemType: $Class<T>, maxCount: $Supplier_<number>, insertedSound: $SoundEffect_, removedSound: $SoundEffect_);
+        constructor(id: $ResourceLocation_, component: $DataComponentType_<$StoredItemStack>, itemPredicate: $Predicate_<$ItemStack>, itemType: $Class<T>, maxCount: $Supplier_<number>);
         constructor(id: $ResourceLocation_, component: $DataComponentType_<$StoredItemStack>, itemPredicate: $Predicate_<$ItemStack>, itemType: $Class<T>, maxCount: $Supplier_<number>, insertedSound: ($SoundEffect_) | undefined, removedSound: ($SoundEffect_) | undefined);
     }
     /**
      * Values that may be interpreted as {@link $Attachment}.
      */
-    export type $Attachment_<T> = { itemPredicate?: $Predicate_<$ItemStack>, removedSound?: ($SoundEffect_) | undefined, insertedSound?: ($SoundEffect_) | undefined, id?: $ResourceLocation_, maxCount?: $Supplier_<number>, component?: $DataComponentType_<$StoredItemStack>, itemType?: $Class<$Item_>,  } | [itemPredicate?: $Predicate_<$ItemStack>, removedSound?: ($SoundEffect_) | undefined, insertedSound?: ($SoundEffect_) | undefined, id?: $ResourceLocation_, maxCount?: $Supplier_<number>, component?: $DataComponentType_<$StoredItemStack>, itemType?: $Class<$Item_>, ];
+    export type $Attachment_<T> = { component?: $DataComponentType_<$StoredItemStack>, maxCount?: $Supplier_<number>, id?: $ResourceLocation_, insertedSound?: ($SoundEffect_) | undefined, removedSound?: ($SoundEffect_) | undefined, itemPredicate?: $Predicate_<$ItemStack>, itemType?: $Class<$Item_>,  } | [component?: $DataComponentType_<$StoredItemStack>, maxCount?: $Supplier_<number>, id?: $ResourceLocation_, insertedSound?: ($SoundEffect_) | undefined, removedSound?: ($SoundEffect_) | undefined, itemPredicate?: $Predicate_<$ItemStack>, itemType?: $Class<$Item_>, ];
     export class $Shutter {
-        playOpenSound(holder: $CameraHolder): void;
         playCloseSound(holder: $CameraHolder): void;
+        playOpenSound(holder: $CameraHolder): void;
         onClosed(onClosed: $TriConsumer_<$CameraHolder, $ServerLevel, $ItemStack>): void;
-        onOpen(onOpen: $TriConsumer_<$CameraHolder, $ServerLevel, $ItemStack>): void;
         tick(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_): boolean;
+        onOpen(onOpen: $TriConsumer_<$CameraHolder, $ServerLevel, $ItemStack>): void;
         isOpen(stack: $ItemStack_): boolean;
         getState(stack: $ItemStack_): $ShutterState;
         setState(stack: $ItemStack_, shutterState: $ShutterState_): void;
@@ -96,9 +96,9 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
         constructor();
     }
     export class $ShutterState extends $Record {
+        shutterSpeed(): $ShutterSpeed;
         openedAtTick(): number;
         getCloseTick(): number;
-        shutterSpeed(): $ShutterSpeed;
         isOpen(): boolean;
         static open(openedAt: number, shutterSpeed: $ShutterSpeed): $ShutterState;
         static closed(): $ShutterState;
@@ -111,14 +111,11 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
     /**
      * Values that may be interpreted as {@link $ShutterState}.
      */
-    export type $ShutterState_ = { shutterSpeed?: $ShutterSpeed, isOpen?: boolean, openedAtTick?: number,  } | [shutterSpeed?: $ShutterSpeed, isOpen?: boolean, openedAtTick?: number, ];
+    export type $ShutterState_ = { openedAtTick?: number, isOpen?: boolean, shutterSpeed?: $ShutterSpeed,  } | [openedAtTick?: number, isOpen?: boolean, shutterSpeed?: $ShutterSpeed, ];
     export class $CameraItem extends $Item implements $IItemExtension {
         getShutter(): $Shutter;
         hasAttachmentsMenu(): boolean;
         handleStandSneakInteraction(stand: $CameraStandEntity, player: $Player, hand: $InteractionHand_, cameraStack: $ItemStack_): $InteractionResult;
-        getOrCreateId(stack: $ItemStack_): $CameraId;
-        setDisassembled(stack: $ItemStack_, disassembled: boolean): void;
-        activateOnStand(player: $Player, stack: $ItemStack_, cameraStand: $CameraStandEntity): $InteractionResultHolder<$ItemStack>;
         getFlash(): $Flash;
         getAvailableShutterSpeeds(): $List<$ShutterSpeed>;
         getFilmAttachment(): $Attachment<never>;
@@ -141,29 +138,32 @@ declare module "@package/io/github/mortuusars/exposure/world/item/camera" {
         actionPerformed(stack: $ItemStack_, holder: $CameraHolder): void;
         activateInHand(player: $Player, stack: $ItemStack_, hand: $InteractionHand_): $InteractionResultHolder<$ItemStack>;
         calculateCooldownAfterShot(stack: $ItemStack_, captureParameters: $CaptureParameters_): number;
-        openCameraAttachments(player: $Player, slotIndex: number, openedFromGUI: boolean): $InteractionResultHolder<$ItemStack>;
         openCameraAttachments(player: $Player, stack: $ItemStack_, openedFromGUI: boolean): $InteractionResultHolder<$ItemStack>;
+        openCameraAttachments(player: $Player, slotIndex: number, openedFromGUI: boolean): $InteractionResultHolder<$ItemStack>;
         canTakePhoto(holder: $CameraHolder, stack: $ItemStack_): boolean;
         addNewFrame(level: $ServerLevel, holder: $CameraHolder, stack: $ItemStack_, captureParameters: $CaptureParameters_): void;
+        getOrCreateId(stack: $ItemStack_): $CameraId;
+        setDisassembled(stack: $ItemStack_, disassembled: boolean): void;
+        activateOnStand(player: $Player, stack: $ItemStack_, cameraStand: $CameraStandEntity): $InteractionResultHolder<$ItemStack>;
         getPositionsInFrame(cameraHolder: $CameraHolder, pov: $PointOfView_, fov: number): $List<$BlockPos>;
         createFrame(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_, captureParameters: $CaptureParameters_, positionsInFrame: $List_<$BlockPos_>, entitiesInFrame: $List_<$LivingEntity>): $Frame;
         addFrameToFilm(stack: $ItemStack_, frame: $Frame_): void;
         onFrameAdded(holder: $CameraHolder, level: $ServerLevel, stack: $ItemStack_, frame: $Frame_, positionsInFrame: $List_<$BlockPos_>, entitiesInFrame: $List_<$LivingEntity>): void;
         handleProjectionResult(level: $ServerLevel, holder: $CameraHolder, stack: $ItemStack_, projectionState: $CameraInstance$ProjectionState_, error: ($TranslatableError_) | undefined): void;
         static getGlassTintColor(stack: $ItemStack_, tintIndex: number): number;
-        getFilter(registryAccess: $RegistryAccess, stack: $ItemStack_): ($Filter) | undefined;
         tick(holder: $CameraHolder, stack: $ItemStack_): boolean;
+        getFilter(registryAccess: $RegistryAccess, stack: $ItemStack_): ($Filter) | undefined;
         release(holder: $CameraHolder, stack: $ItemStack_): $InteractionResultHolder<$ItemStack>;
         isActive(stack: $ItemStack_): boolean;
-        getFov(level: $Level_, stack: $ItemStack_): number;
         activate(entity: $Entity, stack: $ItemStack_): $InteractionResultHolder<$ItemStack>;
         deactivate(entity: $Entity, stack: $ItemStack_): $InteractionResultHolder<$ItemStack>;
         setActive(stack: $ItemStack_, active: boolean): void;
         getTimer(): $Timer;
+        getLastActionTime(stack: $ItemStack_): number;
+        getFov(level: $Level_, stack: $ItemStack_): number;
+        getAttachments(): $List<$Attachment<never>>;
         getCooldownPercent(holder: $CameraHolder, stack: $ItemStack_): number;
         isOnCooldown(holder: $CameraHolder, stack: $ItemStack_): boolean;
-        getLastActionTime(stack: $ItemStack_): number;
-        getAttachments(): $List<$Attachment<never>>;
         static BASE_ATTACK_DAMAGE_ID: $ResourceLocation;
         static PROJECT_COOLDOWN: number;
         static DEFAULT_MAX_STACK_SIZE: number;

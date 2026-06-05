@@ -45,8 +45,8 @@ declare module "@package/net/minecraft/util/parsing/packrat/commands" {
      */
     export type $ResourceSuggestion_ = (() => $Stream<$ResourceLocation_>);
     export class $Grammar<T> extends $Record {
-        parseForSuggestions(arg0: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parseForCommands(arg0: $StringReader): T;
+        parseForSuggestions(arg0: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         rules(): $Dictionary<$StringReader>;
         parse(arg0: $ParseState<$StringReader>): (T) | undefined;
         top(): $Atom<T>;

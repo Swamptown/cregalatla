@@ -74,8 +74,8 @@ declare module "@package/dev/latvian/mods/kubejs/item/custom" {
         constructor(builder: $ShearsItemBuilder);
     }
     export class $ShearsItemBuilder extends $ItemBuilder {
-        speedBaseline(f: number): this;
         static isCustomShears(stack: $ItemStack_): boolean;
+        speedBaseline(f: number): this;
         sourceLine: $SourceLine;
         static SHEAR_TAGS: $ResourceLocation[];
         id: $ResourceLocation;
@@ -308,6 +308,10 @@ declare module "@package/dev/latvian/mods/kubejs/item/custom" {
     }
     export class $HandheldItemBuilder extends $ItemBuilder {
         /**
+         * Sets the attack damage bonus of the tool.
+         */
+        attackDamageBonus(f: number): this;
+        /**
          * Sets the base attack damage of the tool. Different tools have different baselines.
          * 
          * For example, a sword has a baseline of 3, while an axe has a baseline of 6.
@@ -327,10 +331,6 @@ declare module "@package/dev/latvian/mods/kubejs/item/custom" {
          * Modifies the tool tier.
          */
         modifyTier(callback: $Consumer_<$MutableToolTier>): this;
-        /**
-         * Sets the attack damage bonus of the tool.
-         */
-        attackDamageBonus(f: number): this;
         tier(t: $Tier_): this;
         /**
          * Sets the attack speed of the tool.

@@ -23,10 +23,10 @@ declare module "@package/net/minecraft/client/gui/font/glyphs" {
         constructor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number);
     }
     export class $BakedGlyph implements $ReverseRenderableBakedGlyph {
-        renderType(arg0: $Font$DisplayMode_): $RenderType;
-        render(arg0: boolean, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $VertexConsumer, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         renderEffect(arg0: $BakedGlyph$Effect, arg1: $Matrix4f, arg2: $VertexConsumer, arg3: number): void;
         bits_n_bobs$renderReverse(arg0: boolean, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $VertexConsumer, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
+        renderType(arg0: $Font$DisplayMode_): $RenderType;
+        render(arg0: boolean, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $VertexConsumer, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         constructor(arg0: $GlyphRenderTypes_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number);
     }
     export class $SpecialGlyphs$PixelProvider {
@@ -46,14 +46,14 @@ declare module "@package/net/minecraft/client/gui/font/glyphs" {
         static values(): $SpecialGlyphs[];
         static valueOf(arg0: string): $SpecialGlyphs;
         bake(arg0: $Function_<$SheetGlyphInfo, $BakedGlyph>): $BakedGlyph;
+        getBoldOffset(): number;
         getShadowOffset(): number;
         getAdvance(arg0: boolean): number;
-        getBoldOffset(): number;
         image: $NativeImage;
         static WHITE: $SpecialGlyphs;
         static MISSING: $SpecialGlyphs;
-        get shadowOffset(): number;
         get boldOffset(): number;
+        get shadowOffset(): number;
     }
     /**
      * Values that may be interpreted as {@link $SpecialGlyphs}.

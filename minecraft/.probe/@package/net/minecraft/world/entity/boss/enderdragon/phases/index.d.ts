@@ -10,19 +10,19 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
     export class $DragonPhaseInstance {
     }
     export interface $DragonPhaseInstance {
+        getFlyTargetLocation(): $Vec3;
+        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_, arg3: $Player): void;
         isSitting(): boolean;
         doClientTick(): void;
         doServerTick(): void;
-        getFlyTargetLocation(): $Vec3;
         getFlySpeed(): number;
         getTurnSpeed(): number;
         onHurt(arg0: $DamageSource_, arg1: number): number;
-        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_, arg3: $Player): void;
         begin(): void;
         end(): void;
         getPhase(): $EnderDragonPhase<$DragonPhaseInstance>;
-        get sitting(): boolean;
         get flyTargetLocation(): $Vec3;
+        get sitting(): boolean;
         get flySpeed(): number;
         get turnSpeed(): number;
         get phase(): $EnderDragonPhase<$DragonPhaseInstance>;
@@ -109,20 +109,20 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
         constructor(arg0: $EnderDragon);
     }
     export class $AbstractDragonPhaseInstance implements $DragonPhaseInstance {
+        getFlyTargetLocation(): $Vec3;
+        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_, arg3: $Player): void;
         isSitting(): boolean;
         doClientTick(): void;
         doServerTick(): void;
-        getFlyTargetLocation(): $Vec3;
         getFlySpeed(): number;
         getTurnSpeed(): number;
         onHurt(arg0: $DamageSource_, arg1: number): number;
-        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_, arg3: $Player): void;
         begin(): void;
         end(): void;
         dragon: $EnderDragon;
         constructor(arg0: $EnderDragon);
-        get sitting(): boolean;
         get flyTargetLocation(): $Vec3;
+        get sitting(): boolean;
         get flySpeed(): number;
         get turnSpeed(): number;
     }

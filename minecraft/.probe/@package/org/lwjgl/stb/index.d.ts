@@ -17,9 +17,9 @@ declare module "@package/org/lwjgl/stb" {
      */
     export type $STBIWriteCallbackI_ = ((arg0: number, arg1: number, arg2: number) => void);
     export class $STBIWriteCallback extends $Callback implements $STBIWriteCallbackI {
-        static create(arg0: number): $STBIWriteCallback;
-        static create(arg0: $STBIWriteCallbackI_): $STBIWriteCallback;
         static getData(arg0: number, arg1: number): $ByteBuffer;
+        static create(arg0: $STBIWriteCallbackI_): $STBIWriteCallback;
+        static create(arg0: number): $STBIWriteCallback;
         static createSafe(arg0: number): $STBIWriteCallback;
         callback(arg0: number, arg1: number): void;
         getCallInterface(): $FFICIF;

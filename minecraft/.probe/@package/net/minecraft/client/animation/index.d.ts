@@ -30,7 +30,7 @@ declare module "@package/net/minecraft/client/animation" {
     /**
      * Values that may be interpreted as {@link $AnimationDefinition}.
      */
-    export type $AnimationDefinition_ = { lengthInSeconds?: number, boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, looping?: boolean,  } | [lengthInSeconds?: number, boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, looping?: boolean, ];
+    export type $AnimationDefinition_ = { boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, lengthInSeconds?: number, looping?: boolean,  } | [boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, lengthInSeconds?: number, looping?: boolean, ];
     export class $AnimationChannel$Interpolation {
     }
     export interface $AnimationChannel$Interpolation {
@@ -48,8 +48,8 @@ declare module "@package/net/minecraft/client/animation" {
         constructor();
     }
     export class $AnimationDefinition$Builder {
-        static withLength(arg0: number): $AnimationDefinition$Builder;
         addAnimation(arg0: string, arg1: $AnimationChannel_): $AnimationDefinition$Builder;
+        static withLength(arg0: number): $AnimationDefinition$Builder;
         build(): $AnimationDefinition;
         looping(): $AnimationDefinition$Builder;
     }
@@ -62,7 +62,7 @@ declare module "@package/net/minecraft/client/animation" {
     /**
      * Values that may be interpreted as {@link $Keyframe}.
      */
-    export type $Keyframe_ = { target?: $Vector3f, interpolation?: $AnimationChannel$Interpolation_, timestamp?: number,  } | [target?: $Vector3f, interpolation?: $AnimationChannel$Interpolation_, timestamp?: number, ];
+    export type $Keyframe_ = { timestamp?: number, interpolation?: $AnimationChannel$Interpolation_, target?: $Vector3f,  } | [timestamp?: number, interpolation?: $AnimationChannel$Interpolation_, target?: $Vector3f, ];
     export class $AnimationChannel$Interpolations {
         static CATMULLROM: $AnimationChannel$Interpolation;
         static LINEAR: $AnimationChannel$Interpolation;

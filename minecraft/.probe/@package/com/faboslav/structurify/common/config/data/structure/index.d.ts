@@ -8,11 +8,11 @@ declare module "@package/com/faboslav/structurify/common/config/data/structure" 
         defaultOverrideGlobalFlatnessCheck(arg0: boolean): void;
         overrideGlobalFlatnessCheck(arg0: boolean): void;
         defaultEnable(arg0: boolean): void;
+        defaultIsEnabled(): boolean;
+        allowNonSolidBlocks(arg0: boolean): void;
         defaultIsOverridingGlobalFlatnessCheck(): boolean;
         areNonSolidBlocksAllowed(): boolean;
         isOverridingGlobalFlatnessCheck(): boolean;
-        defaultIsEnabled(): boolean;
-        allowNonSolidBlocks(arg0: boolean): void;
         isUsingDefaultValues(): boolean;
         enable(arg0: boolean): void;
         isEnabled(): boolean;
@@ -57,16 +57,16 @@ declare module "@package/com/faboslav/structurify/common/config/data/structure" 
         getHeightProviderData(): $HeightProviderData;
         getProjectStartToHeightmap(): $ProjectStartToHeightmap;
         getVerticalMaxDistanceFromCenter(): number;
-        getSize(): number;
         setSize(arg0: number): void;
+        getSize(): number;
         static MIN_SIZE: number;
         static MAX_VERTICAL_MAX_DISTANCE_FROM_CENTER: number;
         static MAX_HORIZONTAL_MAX_DISTANCE_FROM_CENTER: number;
         static MAX_SIZE: number;
         static MIN_VERTICAL_MAX_DISTANCE_FROM_CENTER: number;
         static MIN_HORIZONTAL_MAX_DISTANCE_FROM_CENTER: number;
-        constructor(arg0: number, arg1: number, arg2: number, arg3: $HeightProviderData, arg4: $ProjectStartToHeightmap_);
         constructor();
+        constructor(arg0: number, arg1: number, arg2: number, arg3: $HeightProviderData, arg4: $ProjectStartToHeightmap_);
         get usingSize(): boolean;
         get usingMaxDistanceFromCenter(): boolean;
         get usingHeightProvider(): boolean;
@@ -84,11 +84,11 @@ declare module "@package/com/faboslav/structurify/common/config/data/structure" 
     }
     export class $DistanceFromWorldCenterCheckData {
         setMinDistanceFromWorldCenter(arg0: number): void;
+        overrideGlobalDistanceFromWorldCenter(arg0: boolean): void;
         isOverridingGlobalDistanceFromWorldCenter(): boolean;
         setMaxDistanceFromWorldCenter(arg0: number): void;
         getMaxDistanceFromWorldCenter(): number;
         getMinDistanceFromWorldCenter(): number;
-        overrideGlobalDistanceFromWorldCenter(arg0: boolean): void;
         isUsingDefaultValues(): boolean;
         isEnabled(): boolean;
         static OVERRIDE_GLOBAL_DISTANCE_FROM_WORLD_CENTER_DEFAULT_VALUE: boolean;
@@ -101,16 +101,16 @@ declare module "@package/com/faboslav/structurify/common/config/data/structure" 
     }
     export class $BiomeCheckData {
         defaultEnable(arg0: boolean): void;
-        defaultOverrideGlobalBiomeCheck(arg0: boolean): void;
-        overrideGlobalBiomeCheck(arg0: boolean): void;
         isOverridingGlobalBiomeCheck(): boolean;
         defaultIsOverridingGlobalBiomeCheck(): boolean;
         setBlacklistedBiomes(arg0: $List_<string>): void;
         defaultIsEnabled(): boolean;
+        defaultOverrideGlobalBiomeCheck(arg0: boolean): void;
+        overrideGlobalBiomeCheck(arg0: boolean): void;
         isUsingDefaultValues(): boolean;
+        getBlacklistedBiomes(): $List<string>;
         setMode(arg0: $BiomeCheckData$BiomeCheckMode_): void;
         getMode(): $BiomeCheckData$BiomeCheckMode;
-        getBlacklistedBiomes(): $List<string>;
         enable(arg0: boolean): void;
         isEnabled(): boolean;
         static IS_ENABLED_DEFAULT_VALUE: boolean;
@@ -123,10 +123,10 @@ declare module "@package/com/faboslav/structurify/common/config/data/structure" 
         get enabled(): boolean;
     }
     export class $OverlapCheckData {
+        defaultIsExcludedFromOverlapPrevention(): boolean;
+        isExcludedFromOverlapPrevention(): boolean;
         defaultExcludeFromOverlapPrevention(arg0: boolean): void;
         excludeFromOverlapPrevention(arg0: boolean): void;
-        isExcludedFromOverlapPrevention(): boolean;
-        defaultIsExcludedFromOverlapPrevention(): boolean;
         isUsingDefaultValues(): boolean;
         static IS_EXCLUDED_FROM_OVERLAP_PREVENTION_DEFAULT_VALUE: boolean;
         constructor();

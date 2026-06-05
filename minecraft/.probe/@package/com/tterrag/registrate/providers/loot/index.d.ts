@@ -43,8 +43,8 @@ declare module "@package/com/tterrag/registrate/providers/loot" {
         static BLOCK: $RegistrateLootTableProvider$LootType<$RegistrateBlockLootTables>;
     }
     export interface $RegistrateLootTableProvider$LootType<T extends $RegistrateLootTables> {
-        getLootSet(): $LootContextParamSet;
         getLootCreator(arg0: $HolderLookup$Provider, arg1: $AbstractRegistrate<never>, arg2: $Consumer_<T>): T;
+        getLootSet(): $LootContextParamSet;
         get lootSet(): $LootContextParamSet;
     }
     export class $RegistrateLootTables {

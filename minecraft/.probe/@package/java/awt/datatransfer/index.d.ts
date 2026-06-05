@@ -1,5 +1,5 @@
 import { $Reader, $Externalizable, $ObjectInput, $ObjectOutput } from "@package/java/io";
-import { $Object, $ClassLoader, $Cloneable, $Class } from "@package/java/lang";
+import { $Object, $Cloneable, $ClassLoader, $Class } from "@package/java/lang";
 import { $EventObject, $Map, $EventListener } from "@package/java/util";
 
 declare module "@package/java/awt/datatransfer" {
@@ -10,16 +10,15 @@ declare module "@package/java/awt/datatransfer" {
         removeFlavorListener(arg0: $FlavorListener_): void;
         getFlavorListeners(): $FlavorListener[];
         setContents(arg0: $Transferable, arg1: $ClipboardOwner_): void;
+        getData(arg0: $DataFlavor): $Object;
         getContents(arg0: $Object): $Transferable;
         getName(): string;
-        getData(arg0: $DataFlavor): $Object;
         constructor(arg0: string);
         get availableDataFlavors(): $DataFlavor[];
         get flavorListeners(): $FlavorListener[];
         get name(): string;
     }
     export class $DataFlavor implements $Externalizable, $Cloneable {
-        getMimeType(): string;
         isRepresentationClassInputStream(): boolean;
         isRepresentationClassByteBuffer(): boolean;
         isFlavorTextType(): boolean;
@@ -40,6 +39,7 @@ declare module "@package/java/awt/datatransfer" {
         isFlavorSerializedObjectType(): boolean;
         isFlavorRemoteObjectType(): boolean;
         isFlavorJavaFileListType(): boolean;
+        getMimeType(): string;
         getSubType(): string;
         getRepresentationClass(): $Class<never>;
         getPrimaryType(): string;
@@ -67,11 +67,10 @@ declare module "@package/java/awt/datatransfer" {
         static allHtmlFlavor: $DataFlavor;
         static fragmentHtmlFlavor: $DataFlavor;
         constructor();
-        constructor(arg0: string, arg1: string);
-        constructor(arg0: string);
         constructor(arg0: string, arg1: string, arg2: $ClassLoader);
+        constructor(arg0: string);
+        constructor(arg0: string, arg1: string);
         constructor(arg0: $Class<never>, arg1: string);
-        get mimeType(): string;
         get representationClassInputStream(): boolean;
         get representationClassByteBuffer(): boolean;
         get flavorTextType(): boolean;
@@ -86,6 +85,7 @@ declare module "@package/java/awt/datatransfer" {
         get flavorSerializedObjectType(): boolean;
         get flavorRemoteObjectType(): boolean;
         get flavorJavaFileListType(): boolean;
+        get mimeType(): string;
         get subType(): string;
         get representationClass(): $Class<never>;
         get primaryType(): string;
@@ -93,9 +93,9 @@ declare module "@package/java/awt/datatransfer" {
     export class $Transferable {
     }
     export interface $Transferable {
+        isDataFlavorSupported(arg0: $DataFlavor): boolean;
         getTransferDataFlavors(): $DataFlavor[];
         getTransferData(arg0: $DataFlavor): $Object;
-        isDataFlavorSupported(arg0: $DataFlavor): boolean;
         get transferDataFlavors(): $DataFlavor[];
     }
     export class $FlavorMap {

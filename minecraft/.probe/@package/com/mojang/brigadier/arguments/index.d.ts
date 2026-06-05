@@ -9,9 +9,9 @@ declare module "@package/com/mojang/brigadier/arguments" {
     export class $StringArgumentType implements $ArgumentType<string> {
         static greedyString(): $StringArgumentType;
         static escapeIfRequired(arg0: string): string;
-        static getString(arg0: $CommandContext<never>, arg1: string): string;
         static word(): $StringArgumentType;
         getExamples(): $Collection<string>;
+        static getString(arg0: $CommandContext<never>, arg1: string): string;
         getType(): $StringArgumentType$StringType;
         static string(): $StringArgumentType;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
@@ -24,16 +24,16 @@ declare module "@package/com/mojang/brigadier/arguments" {
         static floatArg(arg0: number): $FloatArgumentType;
         static floatArg(): $FloatArgumentType;
         static floatArg(arg0: number, arg1: number): $FloatArgumentType;
+        getMaximum(): number;
         getMinimum(): number;
         getExamples(): $Collection<string>;
-        getMaximum(): number;
         static getFloat(arg0: $CommandContext<never>, arg1: string): number;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse<S>(arg0: $StringReader, arg1: S): number;
         parse(arg0: $StringReader): number;
+        get maximum(): number;
         get minimum(): number;
         get examples(): $Collection<string>;
-        get maximum(): number;
     }
     export class $ArgumentType<T> {
     }
@@ -65,36 +65,36 @@ declare module "@package/com/mojang/brigadier/arguments" {
         static doubleArg(arg0: number): $DoubleArgumentType;
         static doubleArg(): $DoubleArgumentType;
         static doubleArg(arg0: number, arg1: number): $DoubleArgumentType;
+        getMaximum(): number;
         getMinimum(): number;
         getExamples(): $Collection<string>;
-        getMaximum(): number;
         static getDouble(arg0: $CommandContext<never>, arg1: string): number;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse<S>(arg0: $StringReader, arg1: S): number;
         parse(arg0: $StringReader): number;
+        get maximum(): number;
         get minimum(): number;
         get examples(): $Collection<string>;
-        get maximum(): number;
     }
     export class $LongArgumentType implements $ArgumentType<number> {
         static longArg(arg0: number): $LongArgumentType;
         static longArg(): $LongArgumentType;
         static longArg(arg0: number, arg1: number): $LongArgumentType;
+        getMaximum(): number;
         getMinimum(): number;
         getExamples(): $Collection<string>;
-        getMaximum(): number;
         static getLong(arg0: $CommandContext<never>, arg1: string): number;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse<S>(arg0: $StringReader, arg1: S): number;
         parse(arg0: $StringReader): number;
+        get maximum(): number;
         get minimum(): number;
         get examples(): $Collection<string>;
-        get maximum(): number;
     }
     export class $IntegerArgumentType implements $ArgumentType<number> {
+        getMaximum(): number;
         getMinimum(): number;
         getExamples(): $Collection<string>;
-        getMaximum(): number;
         static getInteger(arg0: $CommandContext<never>, arg1: string): number;
         static integer(arg0: number): $IntegerArgumentType;
         static integer(arg0: number, arg1: number): $IntegerArgumentType;
@@ -102,8 +102,8 @@ declare module "@package/com/mojang/brigadier/arguments" {
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse<S>(arg0: $StringReader, arg1: S): number;
         parse(arg0: $StringReader): number;
+        get maximum(): number;
         get minimum(): number;
         get examples(): $Collection<string>;
-        get maximum(): number;
     }
 }

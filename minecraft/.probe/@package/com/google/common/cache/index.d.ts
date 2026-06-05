@@ -17,9 +17,9 @@ declare module "@package/com/google/common/cache" {
     export class $LoadingCache<K, V> {
     }
     export interface $LoadingCache<K, V> extends $Cache<K, V>, $Function<K, V> {
+        getUnchecked(key: K): V;
         refresh(key: K): void;
         getAll(keys: $Iterable_<K>): $ImmutableMap<K, V>;
-        getUnchecked(key: K): V;
         get(key: K): V;
         /**
          * @deprecated
@@ -28,6 +28,7 @@ declare module "@package/com/google/common/cache" {
         asMap(): $ConcurrentMap<K, V>;
     }
     export class $CacheStats {
+        minus(other: $CacheStats): $CacheStats;
         loadSuccessCount(): number;
         loadExceptionCount(): number;
         totalLoadTime(): number;
@@ -39,7 +40,6 @@ declare module "@package/com/google/common/cache" {
         loadExceptionRate(): number;
         averageLoadPenalty(): number;
         plus(other: $CacheStats): $CacheStats;
-        minus(other: $CacheStats): $CacheStats;
         missCount(): number;
         hitCount(): number;
         constructor(hitCount: number, missCount: number, loadSuccessCount: number, loadExceptionCount: number, totalLoadTime: number, evictionCount: number);
@@ -47,9 +47,9 @@ declare module "@package/com/google/common/cache" {
     export class $Cache<K, V> {
     }
     export interface $Cache<K, V> {
-        cleanUp(): void;
         getIfPresent(key: $Object): V;
         getAllPresent(keys: $Iterable_<never>): $ImmutableMap<K, V>;
+        cleanUp(): void;
         invalidate(key: $Object): void;
         size(): number;
         get(key: K, loader: $Callable_<V>): V;

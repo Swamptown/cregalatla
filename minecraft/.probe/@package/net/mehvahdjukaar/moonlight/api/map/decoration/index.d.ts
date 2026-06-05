@@ -36,9 +36,9 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/map/decoration" {
         getDisplayName(): ($Component) | undefined;
         getType(): $Holder<$MLMapDecorationType<never, never>>;
         hasFlag(arg0: number): boolean;
-        getRotation(): number;
-        shouldSave(): boolean;
         getPos(): $BlockPos;
+        shouldSave(): boolean;
+        getRotation(): number;
         static HAS_SMALL_TEXTURE_FLAG: number;
         static REFERENCE_CODEC: $Codec<$MLMapMarker<never>>;
         constructor(arg0: $Holder_<$MLMapDecorationType<never, never>>, arg1: $BlockPos_, arg2: number, arg3: ($Component_) | undefined, arg4: (boolean) | undefined, arg5: (boolean) | undefined, arg6: boolean);
@@ -46,8 +46,8 @@ declare module "@package/net/mehvahdjukaar/moonlight/api/map/decoration" {
         get flags(): number;
         get displayName(): ($Component) | undefined;
         get type(): $Holder<$MLMapDecorationType<never, never>>;
-        get rotation(): number;
         get pos(): $BlockPos;
+        get rotation(): number;
     }
     export interface $MLMapDecorationType<D, M> extends RegistryMarked<RegistryTypes.MoonlightMapMarkerTag, RegistryTypes.MoonlightMapMarker> {}
     export class $MLMapDecorationType<D extends $MLMapDecoration, M extends $MLMapMarker<D>> {

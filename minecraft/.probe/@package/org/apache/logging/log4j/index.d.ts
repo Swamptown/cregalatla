@@ -476,11 +476,11 @@ declare module "@package/org/apache/logging/log4j" {
         remove(marker: $Marker): boolean;
         equals(obj: $Object): boolean;
         hashCode(): number;
+        isInstanceOf(m: $Marker): boolean;
+        isInstanceOf(name: string): boolean;
         getParents(): $Marker[];
         hasParents(): boolean;
         addParents(...markers: $Marker[]): $Marker;
-        isInstanceOf(m: $Marker): boolean;
-        isInstanceOf(name: string): boolean;
         setParents(...markers: $Marker[]): $Marker;
         get name(): string;
     }

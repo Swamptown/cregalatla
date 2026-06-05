@@ -3,10 +3,10 @@ import { $ObjectCategoryDataGsonSerializer, $ObjectCategoryDataNbtSerializer } f
 
 declare module "@package/xaero/hud/minimap/common/radar/category" {
     export class $EntityRadarCategorySerializers {
-        getGson(): $ObjectCategoryDataGsonSerializer<$EntityRadarCategoryData>;
         getNbt(): $ObjectCategoryDataNbtSerializer<$EntityRadarCategoryData, $EntityRadarCategoryData$Builder>;
+        getGson(): $ObjectCategoryDataGsonSerializer<$EntityRadarCategoryData>;
         constructor(arg0: $ObjectCategoryDataGsonSerializer<$EntityRadarCategoryData>, arg1: $ObjectCategoryDataNbtSerializer<$EntityRadarCategoryData, $EntityRadarCategoryData$Builder>);
-        get gson(): $ObjectCategoryDataGsonSerializer<$EntityRadarCategoryData>;
         get nbt(): $ObjectCategoryDataNbtSerializer<$EntityRadarCategoryData, $EntityRadarCategoryData$Builder>;
+        get gson(): $ObjectCategoryDataGsonSerializer<$EntityRadarCategoryData>;
     }
 }

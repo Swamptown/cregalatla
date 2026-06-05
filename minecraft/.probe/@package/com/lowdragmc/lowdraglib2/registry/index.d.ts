@@ -1,5 +1,5 @@
 import { $LDLRegisterClient, $LDLRegister } from "@package/com/lowdragmc/lowdraglib2/registry/annotation";
-import { $Consumer_, $Predicate_, $BiFunction_, $Function, $Supplier } from "@package/java/util/function";
+import { $Consumer_, $Predicate_, $BiFunction_, $Supplier, $Function } from "@package/java/util/function";
 import { $Annotation } from "@package/java/lang/annotation";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $Tag_, $Tag } from "@package/net/minecraft/nbt";
@@ -86,7 +86,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/registry" {
     /**
      * Values that may be interpreted as {@link $AutoRegistry$Holder}.
      */
-    export type $AutoRegistry$Holder_<A, C, V> = { annotation?: $Annotation, value?: any, clazz?: $Class<any>,  } | [annotation?: $Annotation, value?: any, clazz?: $Class<any>, ];
+    export type $AutoRegistry$Holder_<A, C, V> = { value?: any, annotation?: $Annotation, clazz?: $Class<any>,  } | [value?: any, annotation?: $Annotation, clazz?: $Class<any>, ];
     export class $LDLRegistry$String<V> extends $LDLRegistry<string, V> {
         static REGISTERED: $Map<$ResourceLocation, $LDLRegistry<never, never>>;
         constructor(arg0: $ResourceLocation_);
@@ -100,9 +100,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/registry" {
         static REGISTERED: $Map<$ResourceLocation, $LDLRegistry<never, never>>;
     }
     export class $LDLRegistry<K, V> implements $Iterable<V> {
-        optionalCodec(): $Codec<(V) | undefined>;
         setMissingKey(arg0: K): $LDLRegistry<K, V>;
-        containValue(arg0: V): boolean;
+        optionalCodec(): $Codec<(V) | undefined>;
         writeBuf(arg0: V, arg1: $RegistryFriendlyByteBuf): void;
         readBuf(arg0: $RegistryFriendlyByteBuf): V;
         saveToNBT(arg0: V): $Tag;
@@ -111,9 +110,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/registry" {
         registerOrOverride(arg0: K, arg1: V): V;
         getOrDefaultKey(arg0: V, arg1: K): K;
         getMissingKey(): K;
-        unfreeze(): void;
+        containValue(arg0: V): boolean;
         getRegistryName(): $ResourceLocation;
         streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, V>;
+        unfreeze(): void;
         remove(arg0: K): boolean;
         get(arg0: K): V;
         values(): $Set<V>;

@@ -70,8 +70,14 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
     export class $ObjectBidirectionalIterator<K> {
     }
     export interface $ObjectBidirectionalIterator<K> extends $ObjectIterator<K>, $BidirectionalIterator<K> {
-        back(arg0: number): number;
         skip(arg0: number): number;
+        back(arg0: number): number;
+    }
+    export class $Object2LongMap$FastEntrySet<K> {
+    }
+    export interface $Object2LongMap$FastEntrySet<K> extends $ObjectSet<$Object2LongMap$Entry<K>> {
+        fastIterator(): $ObjectIterator<$Object2LongMap$Entry<$Object2LongMap$Entry<K>>>;
+        fastForEach(arg0: $Consumer_<$Object2LongMap$Entry<$Object2LongMap$Entry<K>>>): void;
     }
     export class $Reference2ReferenceMap<K, V> {
     }
@@ -108,29 +114,25 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         /**
          * @deprecated
          */
-        mergeLong(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
-        mergeLong(arg0: K, arg1: number, arg2: $LongBinaryOperator_): number;
-        mergeLong(arg0: K, arg1: number, arg2: $LongBinaryOperator_$1): number;
+        computeLongIfAbsentPartial(arg0: K, arg1: $Object2LongFunction_<K>): number;
+        computeLongIfPresent(arg0: K, arg1: $BiFunction_<K, number, number>): number;
+        computeLong(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         object2LongEntrySet(): $ObjectSet<$Object2LongMap$Entry<K>>;
         /**
          * @deprecated
          */
-        computeLongIfAbsentPartial(arg0: K, arg1: $Object2LongFunction_<K>): number;
-        computeLongIfPresent(arg0: K, arg1: $BiFunction_<K, number, number>): number;
+        computeLongIfAbsent(arg0: K, arg1: $ToLongFunction_<K>): number;
+        mergeLong(arg0: K, arg1: number, arg2: $LongBinaryOperator_$1): number;
+        mergeLong(arg0: K, arg1: number, arg2: $LongBinaryOperator_): number;
         /**
          * @deprecated
          */
-        computeLongIfAbsent(arg0: K, arg1: $ToLongFunction_<K>): number;
-        computeLong(arg0: K, arg1: $BiFunction_<K, number, number>): number;
+        mergeLong(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
         remove(arg0: $Object, arg1: number): boolean;
         /**
          * @deprecated
          */
         remove(arg0: $Object, arg1: $Object): boolean;
-        /**
-         * @deprecated
-         */
-        remove(arg0: $Object): number;
         size(): number;
         /**
          * @deprecated
@@ -178,6 +180,7 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         getOrDefault(arg0: $Object, arg1: number): number;
         defaultReturnValue(arg0: number): void;
         defaultReturnValue(): number;
+        remove(arg0: $Object): number;
         entrySet(): $Set<$Map$Entry<K, number>>;
         keySet(): $Set<K>;
     }
@@ -402,13 +405,13 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
          */
         computeFloatIfAbsent(arg0: K, arg1: $ToDoubleFunction_<K>): number;
         computeFloatIfPresent(arg0: K, arg1: $BiFunction_<K, number, number>): number;
-        computeFloat(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         mergeFloat(arg0: K, arg1: number, arg2: $FloatBinaryOperator_): number;
+        mergeFloat(arg0: K, arg1: number, arg2: $DoubleBinaryOperator_$1): number;
         /**
          * @deprecated
          */
         mergeFloat(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
-        mergeFloat(arg0: K, arg1: number, arg2: $DoubleBinaryOperator_$1): number;
+        computeFloat(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         remove(arg0: $Object, arg1: number): boolean;
         /**
          * @deprecated
@@ -583,12 +586,10 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
     export class $Object2DoubleMap<K> {
     }
     export interface $Object2DoubleMap<K> extends $Object2DoubleFunction<K>, $Map<K, number> {
-        mergeDouble(arg0: K, arg1: number, arg2: $DoubleBinaryOperator_$1): number;
-        mergeDouble(arg0: K, arg1: number, arg2: $DoubleBinaryOperator_): number;
         /**
          * @deprecated
          */
-        mergeDouble(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
+        computeDoubleIfAbsentPartial(arg0: K, arg1: $Object2DoubleFunction_<K>): number;
         /**
          * @deprecated
          */
@@ -598,7 +599,9 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         /**
          * @deprecated
          */
-        computeDoubleIfAbsentPartial(arg0: K, arg1: $Object2DoubleFunction_<K>): number;
+        mergeDouble(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
+        mergeDouble(arg0: K, arg1: number, arg2: $DoubleBinaryOperator_$1): number;
+        mergeDouble(arg0: K, arg1: number, arg2: $DoubleBinaryOperator_): number;
         remove(arg0: $Object, arg1: number): boolean;
         /**
          * @deprecated
@@ -992,6 +995,8 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
     }
     export class $AbstractObjectList<K> extends $AbstractObjectCollection<K> implements $ObjectList<K>, $Stack<K> {
         getElements(arg0: number, arg1: $Object[], arg2: number, arg3: number): void;
+        push(arg0: K): void;
+        pop(): K;
         remove(arg0: number): K;
         size(arg0: number): void;
         compareTo(arg0: $List_<K>): number;
@@ -1003,13 +1008,10 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         set(arg0: number, arg1: K): K;
         peek(arg0: number): K;
         top(): K;
-        listIterator(arg0: number): $ObjectListIterator<K>;
-        push(arg0: K): void;
-        pop(): K;
         setElements(arg0: number, arg1: K[], arg2: number, arg3: number): void;
         removeElements(arg0: number, arg1: number): void;
-        addElements(arg0: number, arg1: K[], arg2: number, arg3: number): void;
         addElements(arg0: number, arg1: K[]): void;
+        addElements(arg0: number, arg1: K[], arg2: number, arg3: number): void;
         addAll(arg0: $ObjectList<K>): boolean;
         addAll(arg0: number, arg1: $ObjectList<K>): boolean;
         sort(arg0: $Comparator<K>): void;
@@ -1024,6 +1026,7 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         removeFirst(): K;
         removeLast(): K;
         listIterator(): $ListIterator<K>;
+        listIterator(arg0: number): $ObjectListIterator<K>;
         reversed(): $SequencedCollection<K>;
         get first(): K;
         get last(): K;
@@ -1081,13 +1084,16 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
     export class $Reference2FloatMap$Entry<K> {
     }
     export interface $Reference2FloatMap$Entry<K> extends $Map$Entry<K, number> {
-        getFloatValue(): number;
-        setValue(arg0: number): number;
+        /**
+         * @deprecated
+         */
+        getValue(): number;
         /**
          * @deprecated
          */
         setValue(arg0: number): number;
-        getValue(): number;
+        setValue(arg0: number): number;
+        getFloatValue(): number;
         get floatValue(): number;
     }
     export class $Object2ObjectMap$Entry<K, V> {
@@ -1202,18 +1208,18 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         /**
          * @deprecated
          */
-        computeIntIfAbsentPartial(arg0: K, arg1: $Object2IntFunction_<K>): number;
-        computeIntIfPresent(arg0: K, arg1: $BiFunction_<K, number, number>): number;
-        computeInt(arg0: K, arg1: $BiFunction_<K, number, number>): number;
+        mergeInt(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
         mergeInt(arg0: K, arg1: number, arg2: $IntBinaryOperator_): number;
         /**
          * @deprecated
          */
-        mergeInt(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
+        computeIntIfAbsent(arg0: K, arg1: $ToIntFunction_<K>): number;
         /**
          * @deprecated
          */
-        computeIntIfAbsent(arg0: K, arg1: $ToIntFunction_<K>): number;
+        computeIntIfAbsentPartial(arg0: K, arg1: $Object2IntFunction_<K>): number;
+        computeIntIfPresent(arg0: K, arg1: $BiFunction_<K, number, number>): number;
+        computeInt(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         replaceAll(arg0: $BiFunction_<K, number, number>): void;
         compute(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         computeIfAbsent(arg0: K, arg1: $Function_<K, number>): number;
@@ -1310,18 +1316,18 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         /**
          * @deprecated
          */
-        mergeLong(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
-        mergeLong(arg0: K, arg1: number, arg2: $LongBinaryOperator_$1): number;
-        /**
-         * @deprecated
-         */
         computeLongIfAbsentPartial(arg0: K, arg1: $Object2LongFunction_<K>): number;
         computeLongIfPresent(arg0: K, arg1: $BiFunction_<K, number, number>): number;
+        computeLong(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         /**
          * @deprecated
          */
         computeLongIfAbsent(arg0: K, arg1: $ToLongFunction_<K>): number;
-        computeLong(arg0: K, arg1: $BiFunction_<K, number, number>): number;
+        mergeLong(arg0: K, arg1: number, arg2: $LongBinaryOperator_$1): number;
+        /**
+         * @deprecated
+         */
+        mergeLong(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
         remove(arg0: $Object, arg1: number): boolean;
         /**
          * @deprecated
@@ -1360,6 +1366,7 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         computeIfPresent(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         values(): $LongCollection;
         keySet(): $Set<K>;
+        remove(arg0: $Object): number;
         entrySet(): $Set<$Map$Entry<K, number>>;
         get empty(): boolean;
     }
@@ -1592,23 +1599,23 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         getOrDefault(arg0: $Object, arg1: number): number;
         defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        object2IntEntrySet(): $ObjectSet<$Object2IntMap$Entry<K>>;
+        /**
+         * @deprecated
+         */
+        mergeInt(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
+        mergeInt(arg0: K, arg1: number, arg2: $IntBinaryOperator_$1): number;
+        mergeInt(arg0: K, arg1: number, arg2: $IntBinaryOperator_): number;
+        /**
+         * @deprecated
+         */
+        computeIntIfAbsent(arg0: K, arg1: $ToIntFunction_<K>): number;
         /**
          * @deprecated
          */
         computeIntIfAbsentPartial(arg0: K, arg1: $Object2IntFunction_<K>): number;
         computeIntIfPresent(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         computeInt(arg0: K, arg1: $BiFunction_<K, number, number>): number;
-        mergeInt(arg0: K, arg1: number, arg2: $IntBinaryOperator_): number;
-        mergeInt(arg0: K, arg1: number, arg2: $IntBinaryOperator_$1): number;
-        /**
-         * @deprecated
-         */
-        mergeInt(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
-        /**
-         * @deprecated
-         */
-        computeIntIfAbsent(arg0: K, arg1: $ToIntFunction_<K>): number;
-        object2IntEntrySet(): $ObjectSet<$Object2IntMap$Entry<K>>;
         remove(arg0: $Object): number;
         values(): $Collection<number>;
     }
@@ -1791,14 +1798,14 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
          */
         computeFloatIfAbsent(arg0: K, arg1: $ToDoubleFunction_<K>): number;
         computeFloatIfPresent(arg0: K, arg1: $BiFunction_<K, number, number>): number;
-        computeFloat(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         object2FloatEntrySet(): $ObjectSet<$Object2FloatMap$Entry<K>>;
+        mergeFloat(arg0: K, arg1: number, arg2: $DoubleBinaryOperator_$1): number;
         mergeFloat(arg0: K, arg1: number, arg2: $FloatBinaryOperator_): number;
         /**
          * @deprecated
          */
         mergeFloat(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
-        mergeFloat(arg0: K, arg1: number, arg2: $DoubleBinaryOperator_$1): number;
+        computeFloat(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         remove(arg0: $Object, arg1: number): boolean;
         /**
          * @deprecated
@@ -2082,8 +2089,8 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         addAndMoveToFirst(arg0: K): boolean;
         addAndMoveToLast(arg0: K): boolean;
         tailSet(arg0: K): $SortedSet<K>;
-        constructor(arg0: K[], arg1: number, arg2: $Hash$Strategy<K>);
         constructor(arg0: K[], arg1: number, arg2: number, arg3: $Hash$Strategy<K>);
+        constructor(arg0: K[], arg1: number, arg2: $Hash$Strategy<K>);
         constructor(arg0: K[], arg1: $Hash$Strategy<K>);
         constructor(arg0: number, arg1: number, arg2: $Hash$Strategy<K>);
         constructor(arg0: $ObjectCollection<K>, arg1: number, arg2: $Hash$Strategy<K>);
@@ -2147,12 +2154,14 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
      */
     export type $Reference2ByteFunction_<K> = ((arg0: $Object) => number);
     export class $Object2LongOpenHashMap<K> extends $AbstractObject2LongMap<K> implements $Serializable, $Cloneable, $Hash {
+        object2LongEntrySet(): $Object2LongMap$FastEntrySet<K>;
         addTo(arg0: K, arg1: number): number;
         clone(): $Object;
         trim(arg0: number): boolean;
         trim(): boolean;
         ensureCapacity(arg0: number): void;
         values(): $LongCollection;
+        remove(arg0: $Object): number;
         entrySet(): $Set<$Map$Entry<K, number>>;
         constructor(arg0: number, arg1: number);
         constructor(arg0: K[], arg1: number[]);
@@ -2223,30 +2232,30 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         getOrDefault(arg0: $Object, arg1: number): number;
         defaultReturnValue(): number;
         defaultReturnValue(arg0: number): void;
+        reference2IntEntrySet(): $ObjectSet<$Reference2IntMap$Entry<K>>;
+        /**
+         * @deprecated
+         */
+        mergeInt(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
+        mergeInt(arg0: K, arg1: number, arg2: $IntBinaryOperator_$1): number;
+        mergeInt(arg0: K, arg1: number, arg2: $IntBinaryOperator_): number;
+        /**
+         * @deprecated
+         */
+        computeIntIfAbsent(arg0: K, arg1: $ToIntFunction_<K>): number;
         /**
          * @deprecated
          */
         computeIntIfAbsentPartial(arg0: K, arg1: $Reference2IntFunction_<K>): number;
         computeIntIfPresent(arg0: K, arg1: $BiFunction_<K, number, number>): number;
         computeInt(arg0: K, arg1: $BiFunction_<K, number, number>): number;
-        mergeInt(arg0: K, arg1: number, arg2: $IntBinaryOperator_): number;
-        mergeInt(arg0: K, arg1: number, arg2: $IntBinaryOperator_$1): number;
-        /**
-         * @deprecated
-         */
-        mergeInt(arg0: K, arg1: number, arg2: $BiFunction_<number, number, number>): number;
-        /**
-         * @deprecated
-         */
-        computeIntIfAbsent(arg0: K, arg1: $ToIntFunction_<K>): number;
-        reference2IntEntrySet(): $ObjectSet<$Reference2IntMap$Entry<K>>;
         remove(arg0: $Object): number;
         values(): $Collection<number>;
     }
     export class $Object2ByteLinkedOpenHashMap<K> extends $AbstractObject2ByteSortedMap<K> implements $Serializable, $Cloneable, $Hash {
-        removeLastByte(): number;
         object2ByteEntrySet(): $Object2ByteSortedMap$FastSortedEntrySet<K>;
         removeFirstByte(): number;
+        removeLastByte(): number;
         addTo(arg0: K, arg1: number): number;
         clone(): $Object;
         trim(arg0: number): boolean;
@@ -2256,7 +2265,6 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
         getAndMoveToLast(arg0: K): number;
         putAndMoveToFirst(arg0: K, arg1: number): number;
         putAndMoveToLast(arg0: K, arg1: number): number;
-        headMap(arg0: K): $SortedMap<K, number>;
         entrySet(): $Set<$Map$Entry<K, number>>;
         remove(arg0: $Object): number;
         constructor(arg0: $Map_<K, number>);
@@ -2359,13 +2367,16 @@ declare module "@package/it/unimi/dsi/fastutil/objects" {
     export class $Object2FloatMap$Entry<K> {
     }
     export interface $Object2FloatMap$Entry<K> extends $Map$Entry<K, number> {
-        getFloatValue(): number;
-        setValue(arg0: number): number;
+        /**
+         * @deprecated
+         */
+        getValue(): number;
         /**
          * @deprecated
          */
         setValue(arg0: number): number;
-        getValue(): number;
+        setValue(arg0: number): number;
+        getFloatValue(): number;
         get floatValue(): number;
     }
     export class $Reference2ObjectFunction<K, V> {

@@ -32,11 +32,11 @@ declare module "@package/concerrox/emixx/content/creativemodetab/gui/itemtab" {
         constructor($constructor_marker: $DefaultConstructorMarker);
     }
     export class $ItemTabNavigationBar extends $AbstractWidget {
-        getVisibleTabs(): $List<$ItemTab>;
-        setTabs(tabs: $List_<$ItemTab>): void;
         getTabButtons$emixx_common(): $List<$TabButton>;
         setFocusedChild(child: $GuiEventListener): void;
+        setTabs(tabs: $List_<$ItemTab>): void;
         setTabButtons$emixx_common(<set-?>: $List_<$TabButton>): void;
+        getVisibleTabs(): $List<$ItemTab>;
         pos(x: number, y: number): $ItemTabNavigationBar;
         arrangeElements(): void;
         static Companion: $ItemTabNavigationBar$Companion;
@@ -52,9 +52,9 @@ declare module "@package/concerrox/emixx/content/creativemodetab/gui/itemtab" {
         height: number;
         constructor(tabManager: $ItemTabManager, isVertical: boolean, isRightSide: boolean);
         constructor(arg0: $ItemTabManager, arg1: boolean, arg2: boolean, arg3: number, arg4: $DefaultConstructorMarker);
-        get visibleTabs(): $List<$ItemTab>;
-        set tabs(value: $List_<$ItemTab>);
         set focusedChild(value: $GuiEventListener);
+        set tabs(value: $List_<$ItemTab>);
+        get visibleTabs(): $List<$ItemTab>;
     }
     export class $ItemTabNavigationBar$Companion {
         constructor($constructor_marker: $DefaultConstructorMarker);
@@ -73,8 +73,8 @@ declare module "@package/concerrox/emixx/content/creativemodetab/gui/itemtab" {
      */
     export type $ItemTabButton$ButtonStyle_ = "top" | "left" | "right";
     export class $ItemTab implements $Tab {
-        getTabTitle(): $Component;
         doLayout(rectangle: $ScreenRectangle_): void;
+        getTabTitle(): $Component;
         getCreativeModeTab(): $CreativeModeTab;
         visitChildren(consumer: $Consumer_<$AbstractWidget>): void;
         constructor(creativeModeTab: $CreativeModeTab_);
@@ -82,9 +82,9 @@ declare module "@package/concerrox/emixx/content/creativemodetab/gui/itemtab" {
         get creativeModeTab(): $CreativeModeTab;
     }
     export class $ItemTabManager extends $TabManager {
-        onTabSelected(tab: $ItemTab): void;
         getOnTabSelectedListener(): $Function1<$ItemTab, $Unit>;
         setOnTabSelectedListener(<set-?>: $Function1_<$ItemTab, $Unit>): void;
+        onTabSelected(tab: $ItemTab): void;
         constructor(addWidget: $Consumer_<$AbstractWidget>, removeWidget: $Consumer_<$AbstractWidget>);
     }
 }

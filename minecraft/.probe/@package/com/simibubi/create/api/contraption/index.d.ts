@@ -8,8 +8,8 @@ export * as transformable from "@package/com/simibubi/create/api/contraption/tra
 
 declare module "@package/com/simibubi/create/api/contraption" {
     export class $ContraptionType {
-        is(arg0: $TagKey_<$ContraptionType>): boolean;
         static fromType(arg0: string): $Contraption;
+        is(arg0: $TagKey_<$ContraptionType>): boolean;
         factory: $Supplier<$Contraption>;
         holder: $Holder$Reference<$ContraptionType>;
         constructor(arg0: $Supplier_<$Contraption>);

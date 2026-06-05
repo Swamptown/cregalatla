@@ -5,8 +5,8 @@ import { $ConfigOption } from "@package/xaero/lib/common/config/option";
 
 declare module "@package/xaero/lib/common/config/listener/handler" {
     export class $HandlerBasedConfigChangeListener implements $IConfigChangeListener {
-        onFullChange(arg0: $Config): void;
         postLoad(): void;
+        onFullChange(arg0: $Config): void;
         register(arg0: $ConfigOption<never>, arg1: $Consumer_<$Config>): void;
         onChange(arg0: $Config, arg1: $ConfigOption<never>): void;
         onRemoved(arg0: $Config): void;

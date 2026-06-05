@@ -1,15 +1,14 @@
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $JumpControl, $MoveControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $EnderDragonPart } from "@package/net/minecraft/world/entity/boss";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
-import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $Pose, $PortalProcessor, $WalkAnimationState, $Mob, $Entity } from "@package/net/minecraft/world/entity";
+import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $LivingEntity, $Pose, $PortalProcessor, $WalkAnimationState, $Mob, $Entity } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $Stack } from "@package/java/util";
 import { $EndDragonFight } from "@package/net/minecraft/world/level/dimension/end";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $InteractionHand } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
+import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $Path, $Node } from "@package/net/minecraft/world/level/pathfinder";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
@@ -36,7 +35,6 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon" {
         getBeamTarget(): $BlockPos;
         showsBottom(): boolean;
         setBeamTarget(arg0: $BlockPos_): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -84,6 +82,7 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;
@@ -111,23 +110,22 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon" {
         set showBottom(value: boolean);
     }
     export class $EnderDragon extends $Mob implements $Enemy {
-        setDragonFight(arg0: $EndDragonFight): void;
         getDragonFight(): $EndDragonFight;
+        setDragonFight(arg0: $EndDragonFight): void;
+        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_): void;
         setFightOrigin(arg0: $BlockPos_): void;
         getFightOrigin(): $BlockPos;
         getLatencyPos(arg0: number, arg1: number): number[];
         reallyHurt(arg0: $DamageSource_, arg1: number): boolean;
         findClosestNode(arg0: number, arg1: number, arg2: number): number;
         findClosestNode(): number;
-        onCrystalDestroyed(arg0: $EndCrystal, arg1: $BlockPos_, arg2: $DamageSource_): void;
         getSubEntities(): $EnderDragonPart[];
         getHeadPartYOffset(arg0: number, arg1: number[], arg2: number[]): number;
         getHeadLookVector(arg0: number): $Vec3;
         getPhaseManager(): $EnderDragonPhaseManager;
-        findPath(arg0: number, arg1: number, arg2: $Node): $Path;
-        hurt(arg0: $EnderDragonPart, arg1: $DamageSource_, arg2: number): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        hurt(arg0: $EnderDragonPart, arg1: $DamageSource_, arg2: number): boolean;
+        findPath(arg0: number, arg1: number, arg2: $Node): $Path;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -158,6 +156,7 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -184,6 +183,7 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon" {
         verticalCollisionBelow: boolean;
         flapTime: number;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static DATA_PHASE: $EntityDataAccessor<number>;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
@@ -209,6 +209,7 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

@@ -6,6 +6,8 @@ import { $RenderedImage } from "@package/java/awt/image";
 
 declare module "@package/java/awt/image/renderable" {
     export class $RenderContext implements $Cloneable {
+        getRenderingHints(): $RenderingHints;
+        setRenderingHints(arg0: $RenderingHints): void;
         setTransform(arg0: $AffineTransform): void;
         /**
          * @deprecated
@@ -20,8 +22,6 @@ declare module "@package/java/awt/image/renderable" {
         setAreaOfInterest(arg0: $Shape): void;
         getAreaOfInterest(): $Shape;
         getTransform(): $AffineTransform;
-        setRenderingHints(arg0: $RenderingHints): void;
-        getRenderingHints(): $RenderingHints;
         clone(): $Object;
         constructor(arg0: $AffineTransform);
         constructor(arg0: $AffineTransform, arg1: $RenderingHints);
@@ -34,7 +34,6 @@ declare module "@package/java/awt/image/renderable" {
     export interface $RenderableImage {
         createScaledRendering(arg0: number, arg1: number, arg2: $RenderingHints): $RenderedImage;
         createDefaultRendering(): $RenderedImage;
-        isDynamic(): boolean;
         createRendering(arg0: $RenderContext): $RenderedImage;
         getSources(): $Vector<$RenderableImage>;
         getPropertyNames(): string[];
@@ -42,13 +41,14 @@ declare module "@package/java/awt/image/renderable" {
         getHeight(): number;
         getMinX(): number;
         getMinY(): number;
+        isDynamic(): boolean;
         getProperty(arg0: string): $Object;
-        get dynamic(): boolean;
         get sources(): $Vector<$RenderableImage>;
         get propertyNames(): string[];
         get width(): number;
         get height(): number;
         get minX(): number;
         get minY(): number;
+        get dynamic(): boolean;
     }
 }

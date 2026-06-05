@@ -14,12 +14,12 @@ declare module "@package/net/neoforged/neoforge/server" {
         constructor();
     }
     export class $ServerLifecycleHooks {
+        static handleServerAboutToStart(arg0: $MinecraftServer): void;
+        static handleServerStarting(arg0: $MinecraftServer): void;
         static handleServerStarted(arg0: $MinecraftServer): void;
         static handleServerStopping(arg0: $MinecraftServer): void;
         static expectServerStopped(): void;
         static handleServerStopped(arg0: $MinecraftServer): void;
-        static handleServerAboutToStart(arg0: $MinecraftServer): void;
-        static handleServerStarting(arg0: $MinecraftServer): void;
         static getCurrentServer(): $MinecraftServer;
         static handleExit(arg0: number): void;
         constructor();

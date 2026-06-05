@@ -39,13 +39,12 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 declare module "@package/com/simibubi/create/content/trains/bogey" {
     export class $AbstractBogeyBlock<T extends $AbstractBogeyBlockEntity> extends $Block implements $IBE<T>, $ProperWaterloggedBlock, $SpecialBlockItemRequirement, $IWrenchable {
         getRequiredItems(arg0: $BlockState_, arg1: $BlockEntity): $ItemRequirement;
-        isTrackAxisAlongFirstCoordinate(arg0: $BlockState_): boolean;
         isOnIncompatibleTrack(arg0: $Carriage, arg1: boolean): boolean;
         getTrackType(arg0: $BogeyStyle): $TrackMaterial$TrackType;
         getValidPathfindingTypes(arg0: $BogeyStyle): $Set<$TrackMaterial$TrackType>;
         static registerStandardBogey(arg0: $ResourceLocation_): void;
-        getStickySurfaces(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $EnumSet<$Direction>;
         getWheelPointSpacing(): number;
+        isTrackAxisAlongFirstCoordinate(arg0: $BlockState_): boolean;
         getWheelRadius(): number;
         getConnectorAnchorOffset(arg0: boolean): $Vec3;
         allowsSingleBogeyCarriage(): boolean;
@@ -60,17 +59,18 @@ declare module "@package/com/simibubi/create/content/trains/bogey" {
         propertiesToCopy(): $List<$Property<never>>;
         canBeUpsideDown(): boolean;
         isUpsideDown(arg0: $BlockState_): boolean;
+        getStickySurfaces(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $EnumSet<$Direction>;
         getRotatedBlockState(arg0: $BlockState_, arg1: $Direction_): $BlockState;
         getVersion(arg0: $BlockState_, arg1: boolean): $BlockState;
         getSize(): $BogeySizes$BogeySize;
         getDefaultStyle(): $BogeyStyle;
         getBlockEntityOptional(arg0: $BlockGetter, arg1: $BlockPos_): (T) | undefined;
+        newBlockEntity(arg0: $BlockPos_, arg1: $BlockState_): $BlockEntity;
         withBlockEntityDo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Consumer_<T>): void;
         onBlockEntityUse(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<T, $InteractionResult>): $InteractionResult;
         onBlockEntityUseItemOn(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<T, $ItemInteractionResult>): $ItemInteractionResult;
-        newBlockEntity(arg0: $BlockPos_, arg1: $BlockState_): $BlockEntity;
-        getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): T;
         getTicker<S extends $BlockEntity>(arg0: $Level_, arg1: $BlockState_, arg2: $BlockEntityType_<S>): $BlockEntityTicker<S>;
+        getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): T;
         updateWater(arg0: $LevelAccessor, arg1: $BlockState_, arg2: $BlockPos_): void;
         withWater(arg0: $BlockState_, arg1: $BlockPlaceContext): $BlockState;
         fluidState(arg0: $BlockState_): $FluidState;

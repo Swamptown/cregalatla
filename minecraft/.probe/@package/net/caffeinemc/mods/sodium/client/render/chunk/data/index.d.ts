@@ -13,13 +13,13 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/data" {
         static EMPTY: $BuiltSectionInfo;
     }
     export class $SectionRenderDataStorage {
-        getDataPointer(arg0: number): number;
-        removeVertexData(arg0: number): void;
-        removeIndexData(arg0: number): void;
-        setVertexData(arg0: number, arg1: $GlBufferSegment, arg2: number[]): void;
-        setIndexData(arg0: number, arg1: $GlBufferSegment): void;
         onBufferResized(): void;
         onIndexBufferResized(): void;
+        getDataPointer(arg0: number): number;
+        removeVertexData(arg0: number): void;
+        setVertexData(arg0: number, arg1: $GlBufferSegment, arg2: number[]): void;
+        setIndexData(arg0: number, arg1: $GlBufferSegment): void;
+        removeIndexData(arg0: number): void;
         removeData(arg0: number): void;
         delete(): void;
         constructor(arg0: boolean);

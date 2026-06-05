@@ -1,21 +1,22 @@
 import { $ChunkPos, $LevelHeightAccessor } from "@package/net/minecraft/world/level";
 import { $ProbabilityFeatureConfiguration } from "@package/net/minecraft/world/level/levelgen/feature/configurations";
-import { $MapCodec, $Codec } from "@package/com/mojang/serialization";
+import { $Codec, $MapCodec } from "@package/com/mojang/serialization";
 import { $Fluid, $FluidState } from "@package/net/minecraft/world/level/material";
 import { $Biome } from "@package/net/minecraft/world/level/biome";
-import { $CarvingMask, $ChunkAccess } from "@package/net/minecraft/world/level/chunk";
+import { $CarvingMask, $ChunkGenerator, $ChunkAccess } from "@package/net/minecraft/world/level/chunk";
 import { $Set } from "@package/java/util";
 import { $HeightProvider } from "@package/net/minecraft/world/level/levelgen/heightproviders";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $Function_ } from "@package/java/util/function";
-import { $BlockPos, $BlockPos_, $RegistryAccess, $HolderSet, $BlockPos$MutableBlockPos, $HolderSet_, $Holder } from "@package/net/minecraft/core";
+import { $BlockPos, $HolderSet, $BlockPos$MutableBlockPos, $HolderSet_, $Holder, $BlockPos_, $RegistryAccess } from "@package/net/minecraft/core";
 import { $FloatProvider } from "@package/net/minecraft/util/valueproviders";
 import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
 import { RegistryMarked, RegistryTypes } from "@special/types";
 import { $MutableBoolean } from "@package/org/apache/commons/lang3/mutable";
 import { $Block } from "@package/net/minecraft/world/level/block";
 import { $Record } from "@package/java/lang";
-import { $Aquifer, $RandomState, $VerticalAnchor, $SurfaceRules$RuleSource, $WorldGenerationContext, $NoiseChunk, $VerticalAnchor_, $NoiseBasedChunkGenerator } from "@package/net/minecraft/world/level/levelgen";
+import { $Aquifer, $WorldGenerationContext, $VerticalAnchor_, $NoiseBasedChunkGenerator, $RandomState, $VerticalAnchor, $SurfaceRules$RuleSource, $NoiseChunk } from "@package/net/minecraft/world/level/levelgen";
+import { $IHasChunkGenerator } from "@package/dev/devce/rocketnautics/content/world";
 
 declare module "@package/net/minecraft/world/level/levelgen/carver" {
     export interface $WorldCarver<C> extends RegistryMarked<RegistryTypes.WorldgenCarverTag, RegistryTypes.WorldgenCarver> {}
@@ -56,7 +57,8 @@ declare module "@package/net/minecraft/world/level/levelgen/carver" {
         get caveBound(): number;
         get YScale(): number;
     }
-    export class $CarvingContext extends $WorldGenerationContext {
+    export class $CarvingContext extends $WorldGenerationContext implements $IHasChunkGenerator {
+        rocketnautics$getGenerator(): $ChunkGenerator;
         /**
          * @deprecated
          */
@@ -142,14 +144,14 @@ declare module "@package/net/minecraft/world/level/levelgen/carver" {
         constructor(arg0: number, arg1: $HeightProvider, arg2: $FloatProvider, arg3: $VerticalAnchor_, arg4: $CarverDebugSettings, arg5: $HolderSet_<$Block>, arg6: $FloatProvider, arg7: $FloatProvider, arg8: $FloatProvider);
     }
     export class $WorldCarver<C extends $CarverConfiguration> {
-        getRange(): number;
+        static canReach(arg0: $ChunkPos, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
         configuredCodec(): $MapCodec<$ConfiguredWorldCarver<C>>;
         carveEllipsoid(arg0: $CarvingContext, arg1: C, arg2: $ChunkAccess, arg3: $Function_<$BlockPos, $Holder<$Biome>>, arg4: $Aquifer, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CarvingMask, arg11: $WorldCarver$CarveSkipChecker_): boolean;
         carveBlock(arg0: $CarvingContext, arg1: C, arg2: $ChunkAccess, arg3: $Function_<$BlockPos, $Holder<$Biome>>, arg4: $CarvingMask, arg5: $BlockPos$MutableBlockPos, arg6: $BlockPos$MutableBlockPos, arg7: $Aquifer, arg8: $MutableBoolean): boolean;
         canReplaceBlock(arg0: C, arg1: $BlockState_): boolean;
         carve(arg0: $CarvingContext, arg1: C, arg2: $ChunkAccess, arg3: $Function_<$BlockPos, $Holder<$Biome>>, arg4: $RandomSource, arg5: $Aquifer, arg6: $ChunkPos, arg7: $CarvingMask): boolean;
         isStartChunk(arg0: C, arg1: $RandomSource): boolean;
-        static canReach(arg0: $ChunkPos, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
+        getRange(): number;
         configured(arg0: C): $ConfiguredWorldCarver<C>;
         static CAVE: $WorldCarver<$CaveCarverConfiguration>;
         static LAVA: $FluidState;
@@ -177,9 +179,9 @@ declare module "@package/net/minecraft/world/level/levelgen/carver" {
         constructor(arg0: $FloatProvider, arg1: $FloatProvider, arg2: number, arg3: $FloatProvider, arg4: number, arg5: number);
     }
     export class $ConfiguredWorldCarver<WC extends $CarverConfiguration> extends $Record {
-        worldCarver(): $WorldCarver<WC>;
         carve(arg0: $CarvingContext, arg1: $ChunkAccess, arg2: $Function_<$BlockPos, $Holder<$Biome>>, arg3: $RandomSource, arg4: $Aquifer, arg5: $ChunkPos, arg6: $CarvingMask): boolean;
         isStartChunk(arg0: $RandomSource): boolean;
+        worldCarver(): $WorldCarver<WC>;
         config(): WC;
         static CODEC: $Codec<$Holder<$ConfiguredWorldCarver<never>>>;
         static DIRECT_CODEC: $Codec<$ConfiguredWorldCarver<never>>;

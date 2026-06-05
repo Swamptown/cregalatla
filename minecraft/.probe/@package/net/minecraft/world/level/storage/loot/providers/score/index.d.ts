@@ -8,9 +8,9 @@ import { $LootContextParam } from "@package/net/minecraft/world/level/storage/lo
 
 declare module "@package/net/minecraft/world/level/storage/loot/providers/score" {
     export class $ContextScoreboardNameProvider extends $Record implements $ScoreboardNameProvider {
+        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         static forTarget(arg0: $LootContext$EntityTarget_): $ScoreboardNameProvider;
         getScoreHolder(arg0: $LootContext): $ScoreHolder;
-        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         target(): $LootContext$EntityTarget;
         getType(): $LootScoreProviderType;
         static INLINE_CODEC: $Codec<$ContextScoreboardNameProvider>;
@@ -26,8 +26,8 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/score"
     export class $ScoreboardNameProvider {
     }
     export interface $ScoreboardNameProvider {
-        getScoreHolder(arg0: $LootContext): $ScoreHolder;
         getReferencedContextParams(): $Set<$LootContextParam<never>>;
+        getScoreHolder(arg0: $LootContext): $ScoreHolder;
         getType(): $LootScoreProviderType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
         get type(): $LootScoreProviderType;
@@ -48,8 +48,8 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/score"
         constructor();
     }
     export class $FixedScoreboardNameProvider extends $Record implements $ScoreboardNameProvider {
-        getScoreHolder(arg0: $LootContext): $ScoreHolder;
         getReferencedContextParams(): $Set<$LootContextParam<never>>;
+        getScoreHolder(arg0: $LootContext): $ScoreHolder;
         name(): string;
         static forName(arg0: string): $ScoreboardNameProvider;
         getType(): $LootScoreProviderType;

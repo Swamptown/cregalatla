@@ -86,7 +86,7 @@ declare module "@package/cpw/mods/jarhandling" {
     /**
      * Values that may be interpreted as {@link $SecureJar$Provider}.
      */
-    export type $SecureJar$Provider_ = { serviceName?: string, providers?: $List_<string>,  } | [serviceName?: string, providers?: $List_<string>, ];
+    export type $SecureJar$Provider_ = { providers?: $List_<string>, serviceName?: string,  } | [providers?: $List_<string>, serviceName?: string, ];
     export class $SecureJar$Status extends $Enum<$SecureJar$Status> {
         static values(): $SecureJar$Status[];
         static valueOf(arg0: string): $SecureJar$Status;

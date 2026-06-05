@@ -21,15 +21,9 @@ import { $RegisterCapabilitiesEvent } from "@package/net/neoforged/neoforge/capa
 
 declare module "@package/com/drmangotea/tfmg/content/machinery/vat/base" {
     export class $VatBlockEntity extends $SmartBlockEntity implements $IHaveGoggleInformation, $IMultiBlockEntityContainer$Fluid {
-        isController(): boolean;
-        getController(): $BlockPos;
-        getMatchingRecipe(): $VatMachineRecipe;
-        handleRecipe(): void;
-        isAtValidLocation(arg0: $IVatMachine$PositionRequirement_, arg1: $BlockPos_): boolean;
-        isAtCenter(arg0: $BlockPos_): boolean;
-        applyVatSize(arg0: number): void;
-        addMachineTooltip(arg0: string, arg1: boolean, arg2: $List_<$Component_>): void;
-        getOtherVatBE(arg0: $Direction_): $VatBlockEntity;
+        getTank(arg0: number): $IFluidTank;
+        getExtraData(): $Object;
+        addToGoggleTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
         setController(arg0: $BlockPos_): void;
         getTotalFluidUnits(arg0: number): number;
         removeController(arg0: boolean): void;
@@ -48,29 +42,35 @@ declare module "@package/com/drmangotea/tfmg/content/machinery/vat/base" {
         getTankSize(arg0: number): number;
         setTankSize(arg0: number, arg1: number): void;
         hasTank(): boolean;
-        getTank(arg0: number): $IFluidTank;
-        getTotalTankSize(): number;
+        getOtherVatBE(arg0: $Direction_): $VatBlockEntity;
+        getMatchingRecipe(): $VatMachineRecipe;
+        handleRecipe(): void;
+        isAtValidLocation(arg0: $IVatMachine$PositionRequirement_, arg1: $BlockPos_): boolean;
+        isAtCenter(arg0: $BlockPos_): boolean;
+        applyVatSize(arg0: number): void;
+        addMachineTooltip(arg0: string, arg1: boolean, arg2: $List_<$Component_>): void;
         updateTemperature(): void;
-        addToGoggleTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
+        getControllerBE(): $VatBlockEntity;
+        getTotalTankSize(): number;
+        isController(): boolean;
+        getController(): $BlockPos;
         getTanks(): $Couple<$SmartFluidTankBehaviour>;
-        getFluid(arg0: number): $FluidStack;
         getMaxWidth(): number;
         static getMaxHeight(): number;
+        getFluid(arg0: number): $FluidStack;
         static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
+        evaluate(): void;
         updateState(): void;
+        getTotalCapacity(): number;
         getWidth(): number;
         getHeight(): number;
-        evaluate(): void;
         write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
-        getTotalCapacity(): number;
         getMaxLength(arg0: $Direction$Axis_, arg1: number): number;
         setWidth(arg0: number): void;
         setHeight(arg0: number): void;
-        getExtraData(): $Object;
         containedFluidTooltip(arg0: $List_<$Component_>, arg1: boolean, arg2: $IFluidHandler): boolean;
         getIcon(arg0: boolean): $ItemStack;
         getMainAxisOf(arg0: $BlockEntity): $Direction$Axis;
-        getControllerBE<T extends $BlockEntity>(): T;
         level: $Level;
         fluidLevel: $LerpedFloat[];
         recipe: $VatMachineRecipe;
@@ -85,18 +85,18 @@ declare module "@package/com/drmangotea/tfmg/content/machinery/vat/base" {
         outputInventory: $VatInventory;
         inputInventory: $VatInventory;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
-        get matchingRecipe(): $VatMachineRecipe;
         get lastKnownPos(): $BlockPos;
         get mainConnectionAxis(): $Direction$Axis;
         static get capacityMultiplier(): number;
         get fillState(): number;
         set windows(value: boolean);
+        get matchingRecipe(): $VatMachineRecipe;
+        get controllerBE(): $VatBlockEntity;
         get totalTankSize(): number;
         get tanks(): $Couple<$SmartFluidTankBehaviour>;
         get maxWidth(): number;
         static get maxHeight(): number;
         get totalCapacity(): number;
-        get controllerBE(): T;
     }
     export class $IVatMachine$PositionRequirement extends $Enum<$IVatMachine$PositionRequirement> {
         static values(): $IVatMachine$PositionRequirement[];

@@ -6,13 +6,13 @@ declare module "@package/dev/latvian/apps/tinyserver/content" {
     export class $ResponseContent {
     }
     export interface $ResponseContent {
+        bodyPublisher(): $HttpRequest$BodyPublisher;
         type(): string;
         length(): number;
         toBytes(): number[];
         write(out: $OutputStream): void;
         transferTo(connection: $HTTPConnection<never>): void;
         hasData(): boolean;
-        bodyPublisher(): $HttpRequest$BodyPublisher;
     }
     /**
      * Values that may be interpreted as {@link $ResponseContent}.

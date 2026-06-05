@@ -14,21 +14,21 @@ declare module "@package/mezz/jei/api/runtime/config" {
     export class $IJeiConfigValue<T> {
     }
     export interface $IJeiConfigValue<T> {
-        getSerializer(): $IJeiConfigValueSerializer<T>;
         getLocalizedDescription(): $Component;
+        getSerializer(): $IJeiConfigValueSerializer<T>;
+        getLocalizedName(): $Component;
         /**
          * @deprecated
          */
         getDescription(): string;
-        getLocalizedName(): $Component;
         getName(): string;
         getValue(): T;
         set(arg0: T): boolean;
         getDefaultValue(): T;
-        get serializer(): $IJeiConfigValueSerializer<T>;
         get localizedDescription(): $Component;
-        get description(): string;
+        get serializer(): $IJeiConfigValueSerializer<T>;
         get localizedName(): $Component;
+        get description(): string;
         get name(): string;
         get value(): T;
         get defaultValue(): T;

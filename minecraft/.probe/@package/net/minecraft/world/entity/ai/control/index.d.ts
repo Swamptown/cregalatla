@@ -8,8 +8,8 @@ declare module "@package/net/minecraft/world/entity/ai/control" {
     export interface $Control {
     }
     export class $JumpControl implements $Control {
-        jump(): void;
         tick(): void;
+        jump(): void;
         constructor(arg0: $Mob);
     }
     export class $MoveControl$Operation extends $Enum<$MoveControl$Operation> {
@@ -25,6 +25,7 @@ declare module "@package/net/minecraft/world/entity/ai/control" {
      */
     export type $MoveControl$Operation_ = "wait" | "move_to" | "strafe" | "jumping";
     export class $LookControl implements $Control {
+        tick(): void;
         clampHeadRotationToBody(): void;
         getWantedX(): number;
         getWantedY(): number;
@@ -33,11 +34,10 @@ declare module "@package/net/minecraft/world/entity/ai/control" {
         getYRotD(): (number) | undefined;
         getXRotD(): (number) | undefined;
         isLookingAtTarget(): boolean;
-        tick(): void;
-        setLookAt(arg0: $Entity, arg1: number, arg2: number): void;
         setLookAt(arg0: $Vec3_): void;
         setLookAt(arg0: $Entity): void;
         setLookAt(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
+        setLookAt(arg0: $Entity, arg1: number, arg2: number): void;
         setLookAt(arg0: number, arg1: number, arg2: number): void;
         rotateTowards(arg0: number, arg1: number, arg2: number): number;
         mob: $Mob;
@@ -85,15 +85,15 @@ declare module "@package/net/minecraft/world/entity/ai/control" {
         constructor(arg0: $Mob);
     }
     export class $MoveControl implements $Control {
-        rotlerp(arg0: number, arg1: number, arg2: number): number;
+        tick(): void;
         getSpeedModifier(): number;
-        setWantedPosition(arg0: number, arg1: number, arg2: number, arg3: number): void;
-        hasWanted(): boolean;
+        rotlerp(arg0: number, arg1: number, arg2: number): number;
         strafe(arg0: number, arg1: number): void;
         getWantedX(): number;
         getWantedY(): number;
         getWantedZ(): number;
-        tick(): void;
+        hasWanted(): boolean;
+        setWantedPosition(arg0: number, arg1: number, arg2: number, arg3: number): void;
         speedModifier: number;
         mob: $Mob;
         strafeForwards: number;

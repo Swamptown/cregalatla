@@ -41,6 +41,14 @@ declare module "@side-only/server/events/recipes" {
         priority(arg0: number): this;
         fluid(arg0: $FluidIngredient_): this;
     }
+    export class Create$Milling extends $KubeRecipe {
+        results(results: $List_<any>): this;
+        ingredients(ingredients: $List_<any>): this;
+        processingTime(processingTime: $TickDuration_): this;
+        heatRequirement(heatRequirement: $HeatCondition_): this;
+        superheated(): this;
+        heated(): this;
+    }
     export class Create$MechanicalCrafting extends $KubeRecipe {
         result(result: $ItemStack_): this;
         pattern(pattern: $List_<string>): this;
@@ -57,14 +65,6 @@ declare module "@side-only/server/events/recipes" {
         noNotification(): this;
         noMirror(): this;
     }
-    export class Create$Milling extends $KubeRecipe {
-        results(results: $List_<any>): this;
-        ingredients(ingredients: $List_<any>): this;
-        processingTime(processingTime: $TickDuration_): this;
-        heatRequirement(heatRequirement: $HeatCondition_): this;
-        superheated(): this;
-        heated(): this;
-    }
     export class Createmetallurgy$Grinding extends $KubeRecipe {
         results(results: $List_<any>): this;
         ingredients(ingredients: $List_<any>): this;
@@ -75,19 +75,19 @@ declare module "@side-only/server/events/recipes" {
     }
     export class DocumentedRecipes {
         minecraft: {
-            smoking(result: $ItemStack_, ingredient: $Ingredient_, xp?: number, time?: $TickDuration_): Minecraft$Smoking;
-            crafting_shapeless(result: $ItemStack_, ingredients: $List_<$Ingredient_>): Minecraft$CraftingShapeless;
-            crafting_shaped(result: $ItemStack_, pattern: $List_<string>, key: $Map_<string, $Ingredient_>): Minecraft$CraftingShaped;
-            smithing_transform(result: $ItemStack_, template: $Ingredient_, base: $Ingredient_, addition: $Ingredient_): Minecraft$SmithingTransform;
-            blasting(result: $ItemStack_, ingredient: $Ingredient_, xp?: number, time?: $TickDuration_): Minecraft$Blasting;
-            stonecutting(result: $ItemStack_, ingredient: $Ingredient_): Minecraft$Stonecutting;
-            smelting(result: $ItemStack_, ingredient: $Ingredient_, xp?: number, time?: $TickDuration_): Minecraft$Smelting;
-            campfire_cooking(result: $ItemStack_, ingredient: $Ingredient_, xp?: number, time?: $TickDuration_): Minecraft$CampfireCooking;
             smithing_trim(template: $Ingredient_, base: $Ingredient_, addition: $Ingredient_): Minecraft$SmithingTrim;
+            smoking(result: $ItemStack_, ingredient: $Ingredient_, xp?: number, time?: $TickDuration_): Minecraft$Smoking;
+            smithing_transform(result: $ItemStack_, template: $Ingredient_, base: $Ingredient_, addition: $Ingredient_): Minecraft$SmithingTransform;
+            stonecutting(result: $ItemStack_, ingredient: $Ingredient_): Minecraft$Stonecutting;
+            blasting(result: $ItemStack_, ingredient: $Ingredient_, xp?: number, time?: $TickDuration_): Minecraft$Blasting;
+            crafting_shaped(result: $ItemStack_, pattern: $List_<string>, key: $Map_<string, $Ingredient_>): Minecraft$CraftingShaped;
+            campfire_cooking(result: $ItemStack_, ingredient: $Ingredient_, xp?: number, time?: $TickDuration_): Minecraft$CampfireCooking;
+            smelting(result: $ItemStack_, ingredient: $Ingredient_, xp?: number, time?: $TickDuration_): Minecraft$Smelting;
+            crafting_shapeless(result: $ItemStack_, ingredients: $List_<$Ingredient_>): Minecraft$CraftingShapeless;
         }
         kubejs: {
-            shapeless(result: $ItemStack_, ingredients: $List_<$Ingredient_>): Kubejs$Shapeless;
             shaped(result: $ItemStack_, pattern: $List_<string>, key: $Map_<string, $Ingredient_>): Kubejs$Shaped;
+            shapeless(result: $ItemStack_, ingredients: $List_<$Ingredient_>): Kubejs$Shapeless;
         }
         createoreexcavation: {
             drilling(output: any, ticks: $TickDuration_, veinId: string, drill?: $Ingredient_, priority?: number, fluid?: $FluidIngredient_, stress?: number): Createoreexcavation$Drilling;
@@ -95,32 +95,32 @@ declare module "@side-only/server/events/recipes" {
             vein(name: $Component_, icon: $ItemStack_, placement: $RandomSpreadStructurePlacementJS, priority?: number, finite?: $ThreeState, amountMultiplierMin?: number, amountMultiplierMax?: number, biomeWhitelist?: string, biomeBlacklist?: string): Createoreexcavation$Vein;
         }
         createmetallurgy: {
-            grinding(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Createmetallurgy$Grinding;
-            entity_melting(results: $List_<any>, entity: $DamagedEntityIngredient, ingredients?: $List_<any>, processingTime?: $TickDuration_, minHeatRequirement?: number, maxHeatRequirement?: number): Createmetallurgy$EntityMelting;
             bulk_melting(results: $List_<any>, ingredients?: $List_<any>, processingTime?: $TickDuration_, minHeatRequirement?: number, maxHeatRequirement?: number): Createmetallurgy$BulkMelting;
             alloying(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Createmetallurgy$Alloying;
             casting_in_basin(result: $CastingOutput, ingredients: $List_<any>, processingTime?: $TickDuration_, moldConsumed?: boolean): Createmetallurgy$CastingInBasin;
-            melting(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Createmetallurgy$Melting;
+            grinding(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Createmetallurgy$Grinding;
+            entity_melting(results: $List_<any>, entity: $DamagedEntityIngredient, ingredients?: $List_<any>, processingTime?: $TickDuration_, minHeatRequirement?: number, maxHeatRequirement?: number): Createmetallurgy$EntityMelting;
             casting_in_table(result: $CastingOutput, ingredients: $List_<any>, processingTime?: $TickDuration_, moldConsumed?: boolean): Createmetallurgy$CastingInTable;
+            melting(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Createmetallurgy$Melting;
         }
         create: {
-            item_application(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$ItemApplication;
-            mechanical_crafting(result: $ItemStack_, pattern: $List_<string>, key: $Map_<string, $Ingredient_>, acceptMirrored?: boolean): Create$MechanicalCrafting;
-            cutting(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Cutting;
-            basin(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Basin;
-            sequenced_assembly(results: $List_<$ProcessingOutput>, ingredient: $Ingredient_, sequence: $List_<$KubeRecipe>, transitionalItem?: $ProcessingOutput, loops?: number): Create$SequencedAssembly;
-            pressing(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Pressing;
-            deploying(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Deploying;
-            milling(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Milling;
-            filling(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Filling;
-            haunting(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Haunting;
-            mixing(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Mixing;
-            sandpaper_polishing(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$SandpaperPolishing;
-            crushing(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Crushing;
             emptying(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Emptying;
+            sequenced_assembly(results: $List_<$ProcessingOutput>, ingredient: $Ingredient_, sequence: $List_<$KubeRecipe>, transitionalItem?: $ProcessingOutput, loops?: number): Create$SequencedAssembly;
+            filling(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Filling;
             splashing(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Splashing;
-            compacting(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Compacting;
+            haunting(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Haunting;
+            sandpaper_polishing(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$SandpaperPolishing;
+            pressing(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Pressing;
+            milling(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Milling;
+            item_application(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$ItemApplication;
             conversion(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Conversion;
+            deploying(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Deploying;
+            crushing(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Crushing;
+            cutting(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Cutting;
+            mixing(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Mixing;
+            compacting(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Compacting;
+            mechanical_crafting(result: $ItemStack_, pattern: $List_<string>, key: $Map_<string, $Ingredient_>, acceptMirrored?: boolean): Create$MechanicalCrafting;
+            basin(results: $List_<any>, ingredients: $List_<any>, processingTime?: $TickDuration_): Create$Basin;
         }
     }
     export class Create$Conversion extends $KubeRecipe {

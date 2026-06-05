@@ -8,21 +8,21 @@ import { $RootConfigIO } from "@package/xaero/hud/minimap/world/container/config
 
 declare module "@package/xaero/hud/minimap/world/io" {
     export class $MinimapWorldManagerIO {
-        saveAllWorlds(arg0: $MinimapSession): void;
         loadWorldsFromAllSources(arg0: $MinimapSession, arg1: $ClientPacketListener): void;
+        saveAllWorlds(arg0: $MinimapSession): void;
         saveWorld(arg0: $MinimapWorld): void;
         saveWorld(arg0: $MinimapWorld, arg1: boolean): void;
         getRootConfigIO(): $RootConfigIO;
         saveWorlds(arg0: $MinimapWorldContainer): void;
         getWorldFile(arg0: $MinimapWorld): $Path;
-        onRootContainerAdded(arg0: $MinimapWorldRootContainer): void;
         convertWorldDimFilesToFolders(): void;
         loadAllWorlds(arg0: $MinimapSession): void;
         static copyTempFilesBack(arg0: $Path_): void;
         convertWorldDimFoldersToSingleFolder(arg0: $MinimapSession): void;
         loadWorldFile(arg0: $MinimapWorldContainer, arg1: string, arg2: $Path_): boolean;
-        loadWorld(arg0: $MinimapWorld, arg1: $Path_): void;
         checkWorldFileLine(arg0: string[], arg1: $MinimapWorld): boolean;
+        onRootContainerAdded(arg0: $MinimapWorldRootContainer): void;
+        loadWorld(arg0: $MinimapWorld, arg1: $Path_): void;
         constructor(arg0: $HudMod);
         get rootConfigIO(): $RootConfigIO;
     }

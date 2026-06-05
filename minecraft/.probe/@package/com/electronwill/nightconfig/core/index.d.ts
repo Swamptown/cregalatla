@@ -83,16 +83,16 @@ declare module "@package/com/electronwill/nightconfig/core" {
     export class $CommentedConfig {
         static fake(arg0: $Config): $CommentedConfig;
         static wrap(arg0: $Map_<string, $Object>, arg1: $ConfigFormat<never>): $CommentedConfig;
-        static of(arg0: $Supplier_<$Map<string, $Object>>, arg1: $ConfigFormat<$CommentedConfig>): $CommentedConfig;
         static of(arg0: $ConfigFormat<$CommentedConfig>): $CommentedConfig;
-        static copy(arg0: $UnmodifiableConfig): $CommentedConfig;
-        static copy(arg0: $UnmodifiableConfig, arg1: $ConfigFormat<never>): $CommentedConfig;
-        static copy(arg0: $UnmodifiableCommentedConfig): $CommentedConfig;
-        static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>): $CommentedConfig;
-        static copy(arg0: $UnmodifiableCommentedConfig, arg1: $ConfigFormat<never>): $CommentedConfig;
+        static of(arg0: $Supplier_<$Map<string, $Object>>, arg1: $ConfigFormat<$CommentedConfig>): $CommentedConfig;
         static copy(arg0: $UnmodifiableCommentedConfig, arg1: $Supplier_<$Map<string, $Object>>): $CommentedConfig;
+        static copy(arg0: $UnmodifiableCommentedConfig, arg1: $ConfigFormat<never>): $CommentedConfig;
         static copy(arg0: $UnmodifiableCommentedConfig, arg1: $Supplier_<$Map<string, $Object>>, arg2: $ConfigFormat<$CommentedConfig>): $CommentedConfig;
         static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>, arg2: $ConfigFormat<never>): $CommentedConfig;
+        static copy(arg0: $UnmodifiableConfig, arg1: $ConfigFormat<never>): $CommentedConfig;
+        static copy(arg0: $UnmodifiableCommentedConfig): $CommentedConfig;
+        static copy(arg0: $UnmodifiableConfig): $CommentedConfig;
+        static copy(arg0: $UnmodifiableConfig, arg1: $Supplier_<$Map<string, $Object>>): $CommentedConfig;
         static inMemory(): $CommentedConfig;
         /**
          * @deprecated
@@ -120,20 +120,20 @@ declare module "@package/com/electronwill/nightconfig/core" {
         static concurrentCopy(arg0: $UnmodifiableConfig): $CommentedConfig;
     }
     export interface $CommentedConfig extends $UnmodifiableCommentedConfig, $Config {
-        entrySet(): $Set<$CommentedConfig$Entry>;
-        checked(): $CommentedConfig;
         setComment(arg0: string, arg1: string): string;
         setComment(arg0: $List_<string>, arg1: string): string;
-        createSubConfig(): $CommentedConfig;
+        entrySet(): $Set<$CommentedConfig$Entry>;
         putAllComments(arg0: $UnmodifiableCommentedConfig): void;
         putAllComments(arg0: $Map_<string, $UnmodifiableCommentedConfig$CommentNode>): void;
         /**
          * @deprecated
          */
         commentMap(): $Map<string, string>;
+        clearComments(): void;
         removeComment(arg0: $List_<string>): string;
         removeComment(arg0: string): string;
-        clearComments(): void;
+        checked(): $Config;
+        createSubConfig(): $Config;
         unmodifiable(): $UnmodifiableConfig;
     }
     export class $CommentedConfig$Entry {

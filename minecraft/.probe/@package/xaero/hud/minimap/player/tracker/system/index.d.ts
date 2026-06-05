@@ -15,8 +15,8 @@ declare module "@package/xaero/hud/minimap/player/tracker/system" {
     export class $ITrackedPlayerReader<P> {
     }
     export interface $ITrackedPlayerReader<P> {
-        getY(arg0: P): number;
         getDimension(arg0: P): $ResourceKey<$Level>;
+        getY(arg0: P): number;
         getId(arg0: P): $UUID;
         getX(arg0: P): number;
         getZ(arg0: P): number;

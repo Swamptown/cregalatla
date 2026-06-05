@@ -24,34 +24,34 @@ declare module "@package/com/mojang/blaze3d/pipeline" {
     export class $RenderTarget implements $FramebufferRenderTargetAccessor, $PerformanceRenderTargetExtension, $RenderTargetExtension {
         clear(arg0: boolean): void;
         resize(arg0: number, arg1: number, arg2: boolean): void;
-        veil$clearColorBuffer(arg0: boolean): void;
         bindRead(): void;
         unbindRead(): void;
-        copyDepthFrom(arg0: $RenderTarget): void;
+        handler$zlc000$veil$copyDepthFrom(arg0: $RenderTarget, arg1: $CallbackInfo): void;
+        createBuffers(arg0: number, arg1: number, arg2: boolean): void;
+        setFilterMode(arg0: number): void;
+        handler$zll000$veil$createBuffers(arg0: $CallbackInfo): void;
+        handler$zll000$veil$bindRead(arg0: $CallbackInfo): void;
+        handler$zll000$veil$bindWrite(arg0: boolean, arg1: $CallbackInfo): void;
+        handler$ckc000$sodium$blitToScreen(arg0: number, arg1: number, arg2: boolean, arg3: $CallbackInfo): void;
+        handler$zlc000$veil$clear(arg0: boolean, arg1: $CallbackInfo): void;
+        handler$zll000$veil$getColorTextureId(arg0: $CallbackInfoReturnable<any>): void;
+        getDepthTextureId(): number;
+        handler$zll000$veil$getDepthTextureId(arg0: $CallbackInfoReturnable<any>): void;
+        enableStencil(): void;
+        isStencilEnabled(): boolean;
+        veil$setWrapper(arg0: $AdvancedFbo): void;
+        veil$getTexture(arg0: number): number;
+        handler$zll000$veil$destroyBuffers(arg0: $CallbackInfo): void;
         getColorTextureId(): number;
         setClearColor(arg0: number, arg1: number, arg2: number, arg3: number): void;
         checkStatus(): void;
         bindWrite(arg0: boolean): void;
         unbindWrite(): void;
-        blitToScreen(arg0: number, arg1: number, arg2: boolean): void;
         blitToScreen(arg0: number, arg1: number): void;
+        blitToScreen(arg0: number, arg1: number, arg2: boolean): void;
         destroyBuffers(): void;
-        setFilterMode(arg0: number): void;
-        handler$zkh000$veil$createBuffers(arg0: $CallbackInfo): void;
-        handler$zkh000$veil$bindRead(arg0: $CallbackInfo): void;
-        handler$zkh000$veil$bindWrite(arg0: boolean, arg1: $CallbackInfo): void;
-        handler$chg000$sodium$blitToScreen(arg0: number, arg1: number, arg2: boolean, arg3: $CallbackInfo): void;
-        handler$zjo000$veil$clear(arg0: boolean, arg1: $CallbackInfo): void;
-        handler$zkh000$veil$getColorTextureId(arg0: $CallbackInfoReturnable<any>): void;
-        getDepthTextureId(): number;
-        handler$zkh000$veil$getDepthTextureId(arg0: $CallbackInfoReturnable<any>): void;
-        enableStencil(): void;
-        isStencilEnabled(): boolean;
-        veil$setWrapper(arg0: $AdvancedFbo): void;
-        veil$getTexture(arg0: number): number;
-        handler$zkh000$veil$destroyBuffers(arg0: $CallbackInfo): void;
-        createBuffers(arg0: number, arg1: number, arg2: boolean): void;
-        handler$zjo000$veil$copyDepthFrom(arg0: $RenderTarget, arg1: $CallbackInfo): void;
+        copyDepthFrom(arg0: $RenderTarget): void;
+        veil$clearColorBuffer(arg0: boolean): void;
         getClearChannels(): number[];
         useDepth: boolean;
         filterMode: number;
@@ -61,9 +61,9 @@ declare module "@package/com/mojang/blaze3d/pipeline" {
         viewHeight: number;
         height: number;
         constructor(arg0: boolean);
-        get colorTextureId(): number;
         get depthTextureId(): number;
         get stencilEnabled(): boolean;
+        get colorTextureId(): number;
         get clearChannels(): number[];
     }
     export class $MainTarget extends $RenderTarget {
@@ -79,14 +79,14 @@ declare module "@package/com/mojang/blaze3d/pipeline" {
         constructor(arg0: number, arg1: number);
     }
     export class $RenderPipeline {
+        getRecordingQueue(): $ConcurrentLinkedQueue<$RenderCall>;
+        getProcessedQueue(): $ConcurrentLinkedQueue<$RenderCall>;
         canBeginRecording(): boolean;
         canBeginProcessing(): boolean;
         beginProcessing(): boolean;
         processRecordedQueue(): void;
         endProcessing(): void;
         startRendering(): $ConcurrentLinkedQueue<$RenderCall>;
-        getRecordingQueue(): $ConcurrentLinkedQueue<$RenderCall>;
-        getProcessedQueue(): $ConcurrentLinkedQueue<$RenderCall>;
         beginRecording(): boolean;
         endRecording(): void;
         recordRenderCall(arg0: $RenderCall_): void;

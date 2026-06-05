@@ -14,5 +14,5 @@ declare module "@package/com/zigythebird/playeranimcore/math" {
     /**
      * Values that may be interpreted as {@link $Vec3f}.
      */
-    export type $Vec3f_ = { y?: number, x?: number, z?: number,  } | [y?: number, x?: number, z?: number, ];
+    export type $Vec3f_ = { x?: number, y?: number, z?: number,  } | [x?: number, y?: number, z?: number, ];
 }

@@ -1,12 +1,13 @@
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $MoveControl, $LookControl, $JumpControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $EntityType_, $Pose, $PortalProcessor, $PathfinderMob, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $GameEventListener, $GameEvent, $GameEvent$Context_, $GameEventListener$DeliveryMode } from "@package/net/minecraft/world/level/gameevent";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $Stack } from "@package/java/util";
+import { $ViewableAccessor } from "@package/com/beansgalaxy/backpacks/access";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $InteractionHand, $SimpleContainer } from "@package/net/minecraft/world";
 import { $HolderLookup$Provider, $BlockPos, $Holder_, $BlockPos_ } from "@package/net/minecraft/core";
@@ -14,6 +15,7 @@ import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerPlayer } from "@package/net/minecraft/server/level";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
 import { $PathNavigation } from "@package/net/minecraft/world/entity/ai/navigation";
+import { $ViewableBackpack } from "@package/com/beansgalaxy/backpacks/util";
 import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entity";
 import { $Level_ } from "@package/net/minecraft/world/level";
 import { $TagKey } from "@package/net/minecraft/tags";
@@ -35,9 +37,7 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         getDeliveryMode(): $GameEventListener$DeliveryMode;
         get deliveryMode(): $GameEventListener$DeliveryMode;
     }
-    export class $Allay extends $PathfinderMob implements $InventoryCarrier, $VibrationSystem {
-        getVibrationUser(): $VibrationSystem$User;
-        getVibrationData(): $VibrationSystem$Data;
+    export class $Allay extends $PathfinderMob implements $InventoryCarrier, $VibrationSystem, $ViewableAccessor {
         isDancing(): boolean;
         setDancing(arg0: boolean): void;
         hasItemInHand(): boolean;
@@ -45,11 +45,13 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         setJukeboxPlaying(arg0: $BlockPos_, arg1: boolean): void;
         getHoldingItemAnimationProgress(arg0: number): number;
         getSpinningProgress(arg0: number): number;
-        getInventory(): $SimpleContainer;
+        getVibrationUser(): $VibrationSystem$User;
+        getVibrationData(): $VibrationSystem$Data;
         static createAttributes(): $AttributeSupplier$Builder;
+        beans_Backpacks_3$getViewable(): $ViewableBackpack;
+        getInventory(): $SimpleContainer;
         writeInventoryToTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         readInventoryFromTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -81,6 +83,7 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -105,6 +108,7 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -129,6 +133,7 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -216,25 +221,25 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         removeStingerTime: number;
         static BASE_SAFE_FALL_DISTANCE: number;
         constructor(arg0: $EntityType_<$Allay>, arg1: $Level_);
+        get spinning(): boolean;
         get vibrationUser(): $VibrationSystem$User;
         get vibrationData(): $VibrationSystem$Data;
-        get spinning(): boolean;
         get inventory(): $SimpleContainer;
     }
     export class $AllayAi {
         static getLikedPlayer(arg0: $LivingEntity): ($ServerPlayer) | undefined;
         static hearNoteblock(arg0: $LivingEntity, arg1: $BlockPos_): void;
-        static updateActivity(arg0: $Allay): void;
         static makeBrain(arg0: $Brain<$Allay>): $Brain<never>;
+        static updateActivity(arg0: $Allay): void;
         constructor();
     }
     export class $Allay$VibrationUser implements $VibrationSystem$User {
+        requiresAdjacentChunksToBeTicking(): boolean;
         getListenableEvents(): $TagKey<$GameEvent>;
         canTriggerAvoidVibration(): boolean;
         calculateTravelTimeInTicks(arg0: number): number;
         isValidVibration(arg0: $Holder_<$GameEvent>, arg1: $GameEvent$Context_): boolean;
         onDataChanged(): void;
-        requiresAdjacentChunksToBeTicking(): boolean;
         get listenableEvents(): $TagKey<$GameEvent>;
     }
 }

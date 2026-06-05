@@ -55,18 +55,18 @@ declare module "@package/com/simibubi/create/content/trains/schedule" {
         constructor();
     }
     export class $ScheduleRuntime implements $AccessorScheduleRuntime {
+        returnSchedule(arg0: $HolderLookup$Provider): $ItemStack;
         setSchedulePresentClientside(arg0: boolean): void;
         transitInterrupted(): void;
         tickConditions(arg0: $Level_): void;
-        startCooldown(): void;
-        returnSchedule(arg0: $HolderLookup$Provider): $ItemStack;
-        startCurrentInstruction(arg0: $Level_): $DiscoveredPath;
         destinationReached(): void;
+        startCurrentInstruction(arg0: $Level_): $DiscoveredPath;
+        startCooldown(): void;
         getWaitingStatus(arg0: $Level_): $MutableComponent;
         discardSchedule(): void;
+        tick(arg0: $Level_): void;
         submitPredictions(): $Collection<$GlobalTrainDisplayData$TrainDeparturePrediction>;
         setSchedule(arg0: $Schedule, arg1: boolean): void;
-        tick(arg0: $Level_): void;
         write(arg0: $HolderLookup$Provider): $CompoundTag;
         read(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         getSchedule(): $Schedule;

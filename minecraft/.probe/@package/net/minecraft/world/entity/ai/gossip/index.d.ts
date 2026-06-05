@@ -11,7 +11,7 @@ declare module "@package/net/minecraft/world/entity/ai/gossip" {
     /**
      * Values that may be interpreted as {@link $GossipContainer$GossipEntry}.
      */
-    export type $GossipContainer$GossipEntry_ = { value?: number, type?: $GossipType_, target?: $UUID_,  } | [value?: number, type?: $GossipType_, target?: $UUID_, ];
+    export type $GossipContainer$GossipEntry_ = { type?: $GossipType_, value?: number, target?: $UUID_,  } | [type?: $GossipType_, value?: number, target?: $UUID_, ];
     export class $GossipType extends $Enum<$GossipType> implements $StringRepresentable {
         static values(): $GossipType[];
         static valueOf(arg0: string): $GossipType;

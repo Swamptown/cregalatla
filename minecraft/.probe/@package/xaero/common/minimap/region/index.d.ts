@@ -5,11 +5,11 @@ import { $IntBuffer } from "@package/java/nio";
 
 declare module "@package/xaero/common/minimap/region" {
     export class $MinimapChunk {
+        putColour(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[], arg6: number): void;
+        isChanged(): boolean;
         getLevelToRefresh(arg0: number): number;
         isBlockTextureUpload(): boolean;
-        putColour(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number[], arg6: number): void;
         isHasSomething(): boolean;
-        isChanged(): boolean;
         updateBuffers(arg0: number, arg1: number[][]): void;
         setLevelsBuffered(arg0: number): void;
         recycleTiles(): void;
@@ -26,10 +26,10 @@ declare module "@package/xaero/common/minimap/region" {
         getTile(arg0: number, arg1: number): $MinimapTile;
         reset(arg0: number, arg1: number): void;
         cleanup(arg0: $MinimapInterface): void;
+        setChanged(arg0: boolean): void;
         bindTexture(arg0: number): number;
         getX(): number;
         getZ(): number;
-        setChanged(arg0: boolean): void;
         static LIGHT_LEVELS: number;
         static INT_BUFFER_SIZE: number;
         static SIZE_TILES: number;
@@ -38,10 +38,10 @@ declare module "@package/xaero/common/minimap/region" {
         get z(): number;
     }
     export class $MinimapTile {
-        isWasTransfered(): boolean;
         static isSlimeChunk(arg0: $ModSettings, arg1: number, arg2: number, arg3: number): boolean;
         isSlimeChunk(): boolean;
         isChunkGrid(): boolean;
+        isWasTransfered(): boolean;
         recycle(): void;
         isHasSomething(): boolean;
         setWasTransfered(arg0: boolean): void;

@@ -7,13 +7,13 @@ import { $Vector3dc, $Vector3fc } from "@package/org/joml";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/translucent_sorting/data" {
     export class $TranslucentData {
+        prepareTrigger(arg0: boolean): void;
         getSortType(): $SortType;
         static writeQuadVertexIndexes(arg0: $IntBuffer, arg1: number): void;
         static writeQuadVertexIndexes(arg0: $IntBuffer, arg1: number[]): void;
         static vertexCountToQuadCount(arg0: number): number;
         static quadCountToIndexBytes(arg0: number): number;
         static indexBytesToQuadCount(arg0: number): number;
-        prepareTrigger(arg0: boolean): void;
         static VERTICES_PER_QUAD: number;
         static BYTES_PER_QUAD: number;
         static BYTES_PER_INDEX: number;
@@ -24,10 +24,10 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/transluc
     export class $PresentSortData {
     }
     export interface $PresentSortData {
-        getIntBuffer(): $IntBuffer;
         getIndexBuffer(): $NativeBuffer;
-        get intBuffer(): $IntBuffer;
+        getIntBuffer(): $IntBuffer;
         get indexBuffer(): $NativeBuffer;
+        get intBuffer(): $IntBuffer;
     }
     /**
      * Values that may be interpreted as {@link $PresentSortData}.
@@ -52,8 +52,8 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/transluc
         andThen(arg0: $IntConsumer_): $IntConsumer;
     }
     export class $Sorter implements $PresentSortData {
-        writeIndexBuffer(arg0: $CombinedCameraPos, arg1: boolean): void;
         getIndexBuffer(): $NativeBuffer;
+        writeIndexBuffer(arg0: $CombinedCameraPos, arg1: boolean): void;
         getIntBuffer(): $IntBuffer;
         constructor();
         get indexBuffer(): $NativeBuffer;

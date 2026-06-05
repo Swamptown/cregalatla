@@ -307,12 +307,12 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          * @deprecated
          */
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
+        defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Int2IntFunction_): number;
-        defaultReturnValue(): number;
-        defaultReturnValue(arg0: number): void;
         mergeInt(arg0: number, arg1: number, arg2: $IntBinaryOperator_): number;
         mergeInt(arg0: number, arg1: number, arg2: $IntBinaryOperator_$1): number;
         int2IntEntrySet(): $ObjectSet<$Int2IntMap$Entry>;
@@ -337,11 +337,10 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
         ensureCapacity(arg0: number): void;
         static toListWithExpectedSize(arg0: $IntStream, arg1: number): $IntArrayList;
         subList(arg0: number, arg1: number): $List<number>;
-        listIterator(arg0: number): $IntListIterator;
+        listIterator(arg0: number): $ListIterator<number>;
         get(arg0: number): number;
-        peek(arg0: number): number;
-        top(): number;
         pop(): number;
+        top(): number;
         reversed(): $SequencedCollection<number>;
         static DEFAULT_INITIAL_CAPACITY: number;
         constructor(arg0: $IntList);
@@ -369,6 +368,9 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
         set(arg0: number): void;
         set(arg0: number): void;
         next(): number;
+        /**
+         * @deprecated
+         */
         previous(): number;
     }
     export class $IntList {
@@ -485,11 +487,11 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         setValue(arg0: number): number;
         setValue(arg0: number): number;
-        getIntKey(): number;
         getIntValue(): number;
+        getIntKey(): number;
         getKey(): number;
-        get intKey(): number;
         get intValue(): number;
+        get intKey(): number;
         get key(): number;
     }
     export class $Int2CharFunction {
@@ -569,11 +571,11 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
         put(arg0: number, arg1: V): V;
         put(arg0: number, arg1: V): V;
         apply(arg0: number): V;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
@@ -583,8 +585,8 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Object2ByteFunction_<V>): $Int2ByteFunction;
         composeByte(arg0: $Byte2IntFunction_): $Byte2ObjectFunction<V>;
         andThenShort(arg0: $Object2ShortFunction_<V>): $Int2ShortFunction;
@@ -866,7 +868,14 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
     export class $IntPredicate {
     }
     export interface $IntPredicate extends $Predicate<number>, $IntPredicate$1 {
+        or(arg0: $IntPredicate_$1): $IntPredicate;
+        or(arg0: $IntPredicate_): $IntPredicate;
+        /**
+         * @deprecated
+         */
+        or(arg0: $Predicate_<number>): $Predicate<number>;
         and(arg0: $IntPredicate_): $IntPredicate;
+        and(arg0: $IntPredicate_$1): $IntPredicate;
         /**
          * @deprecated
          */
@@ -875,12 +884,6 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          * @deprecated
          */
         test(arg0: number): boolean;
-        /**
-         * @deprecated
-         */
-        or(arg0: $Predicate_<number>): $Predicate<number>;
-        or(arg0: $IntPredicate_$1): $IntPredicate;
-        or(arg0: $IntPredicate_): $IntPredicate;
         negate(): $Predicate<number>;
     }
     /**
@@ -891,6 +894,7 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
         getElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         topInt(): number;
         peekInt(arg0: number): number;
+        push(arg0: number): void;
         size(arg0: number): void;
         compareTo(arg0: $List_<number>): number;
         indexOf(arg0: number): number;
@@ -900,15 +904,12 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
         addAll(arg0: number, arg1: $IntCollection): boolean;
         addAll(arg0: number, arg1: $Collection_<number>): boolean;
         set(arg0: number, arg1: number): number;
-        listIterator(): $IntListIterator;
-        listIterator(arg0: number): $IntListIterator;
-        push(arg0: number): void;
         popInt(): number;
         setElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
         removeInt(arg0: number): number;
         removeElements(arg0: number, arg1: number): void;
-        addElements(arg0: number, arg1: number[]): void;
         addElements(arg0: number, arg1: number[], arg2: number, arg3: number): void;
+        addElements(arg0: number, arg1: number[]): void;
         /**
          * @deprecated
          */
@@ -952,6 +953,10 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          * @deprecated
          */
         push(arg0: number): void;
+        /**
+         * @deprecated
+         */
+        peek(arg0: number): number;
         getFirst(): number;
         getLast(): number;
         addFirst(arg0: number): void;
@@ -959,10 +964,11 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
         removeFirst(): number;
         removeLast(): number;
         subList(arg0: number, arg1: number): $List<number>;
+        listIterator(): $ListIterator<number>;
+        listIterator(arg0: number): $ListIterator<number>;
         get(arg0: number): number;
-        peek(arg0: number): number;
-        top(): number;
         pop(): number;
+        top(): number;
         reversed(): $SequencedCollection<number>;
         get first(): number;
         get last(): number;
@@ -1005,12 +1011,12 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         parallelStream(): $Stream<number>;
         rem(arg0: number): boolean;
-        removeIf(arg0: $IntPredicate_): boolean;
-        removeIf(arg0: $IntPredicate_$1): boolean;
         /**
          * @deprecated
          */
         removeIf(arg0: $Predicate_<number>): boolean;
+        removeIf(arg0: $IntPredicate_$1): boolean;
+        removeIf(arg0: $IntPredicate_): boolean;
         intSpliterator(): $IntSpliterator;
         intIterator(): $IntIterator;
         intParallelStream(): $IntStream;
@@ -1056,16 +1062,16 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         headMap(arg0: number): $Int2ObjectSortedMap<V>;
         headMap(arg0: number): $Int2ObjectSortedMap<V>;
+        tailMap(arg0: number): $Int2ObjectSortedMap<V>;
         /**
          * @deprecated
          */
         tailMap(arg0: number): $Int2ObjectSortedMap<V>;
-        tailMap(arg0: number): $Int2ObjectSortedMap<V>;
         keySet(): $IntSortedSet;
         firstIntKey(): number;
         lastIntKey(): number;
-        lastKey(): number;
         firstKey(): number;
+        lastKey(): number;
         values(): $ObjectCollection<V>;
         entrySet(): $Set<$Map$Entry<number, V>>;
         comparator(): $Comparator<number>;
@@ -1110,11 +1116,11 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
         put(arg0: number, arg1: V): V;
         put(arg0: number, arg1: V): V;
         apply(arg0: number): V;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
@@ -1124,8 +1130,8 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Reference2ByteFunction_<V>): $Int2ByteFunction;
         composeByte(arg0: $Byte2IntFunction_): $Byte2ReferenceFunction<V>;
         andThenShort(arg0: $Reference2ShortFunction_<V>): $Int2ShortFunction;
@@ -1220,12 +1226,12 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, number, number>): number;
+        defaultReturnValue(arg0: number): void;
+        defaultReturnValue(): number;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Int2DoubleFunction_): number;
-        defaultReturnValue(): number;
-        defaultReturnValue(arg0: number): void;
         computeIfAbsentNullable(arg0: number, arg1: $IntFunction_<number>): number;
         remove(arg0: number): number;
         get(arg0: number): number;
@@ -1280,10 +1286,13 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
     export class $IntBidirectionalIterator {
     }
     export interface $IntBidirectionalIterator extends $IntIterator, $ObjectBidirectionalIterator<number> {
-        back(arg0: number): number;
         skip(arg0: number): number;
-        previousInt(): number;
+        /**
+         * @deprecated
+         */
         previous(): number;
+        back(arg0: number): number;
+        previousInt(): number;
     }
     export class $IntStack {
     }
@@ -1295,10 +1304,13 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         push(arg0: number): void;
         push(arg0: number): void;
-        popInt(): number;
+        /**
+         * @deprecated
+         */
         peek(arg0: number): number;
-        top(): number;
+        popInt(): number;
         pop(): number;
+        top(): number;
     }
     export class $Int2ObjectMap<V> {
     }
@@ -1338,13 +1350,13 @@ declare module "@package/it/unimi/dsi/fastutil/ints" {
          */
         getOrDefault(arg0: $Object, arg1: V): V;
         computeIfPresent(arg0: number, arg1: $BiFunction_<number, V, V>): V;
-        int2ObjectEntrySet(): $ObjectSet<$Int2ObjectMap$Entry<V>>;
+        defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         /**
          * @deprecated
          */
         computeIfAbsentPartial(arg0: number, arg1: $Int2ObjectFunction_<V>): V;
-        defaultReturnValue(): V;
-        defaultReturnValue(arg0: V): void;
+        int2ObjectEntrySet(): $ObjectSet<$Int2ObjectMap$Entry<V>>;
         entrySet(): $Set<$Map$Entry<number, V>>;
         keySet(): $Set<number>;
     }

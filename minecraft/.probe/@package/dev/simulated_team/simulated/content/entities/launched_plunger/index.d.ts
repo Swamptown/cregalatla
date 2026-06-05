@@ -1,16 +1,15 @@
 import { $Level_ } from "@package/net/minecraft/world/level";
 import { $TagKey } from "@package/net/minecraft/tags";
 import { $Fluid } from "@package/net/minecraft/world/level/material";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $Pose, $PortalProcessor } from "@package/net/minecraft/world/entity";
 import { $RigidBodyHandle } from "@package/dev/ryanhcode/sable/api/physics/handle";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
+import { $ThrowableProjectile } from "@package/net/minecraft/world/entity/projectile";
 import { $UUID } from "@package/java/util";
 import { $ServerSubLevel } from "@package/dev/ryanhcode/sable/sublevel";
-import { $ThrowableProjectile } from "@package/net/minecraft/world/entity/projectile";
 import { $RandomSource } from "@package/net/minecraft/util";
-import { $SynchedEntityData, $EntityDataAccessor_, $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
-import { $HolderLookup$Provider, $BlockPos, $Direction } from "@package/net/minecraft/core";
+import { $EntityDataAccessor, $SynchedEntityData, $EntityDataAccessor_ } from "@package/net/minecraft/network/syncher";
+import { $BlockPos, $Direction } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $AtomicInteger } from "@package/java/util/concurrent/atomic";
 import { $Vec3 } from "@package/net/minecraft/world/phys";
@@ -18,7 +17,9 @@ import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entit
 
 declare module "@package/dev/simulated_team/simulated/content/entities/launched_plunger" {
     export class $LaunchedPlungerEntity extends $ThrowableProjectile {
+        getOther(): $LaunchedPlungerEntity;
         resetPlunged(): void;
+        setOther(arg0: $LaunchedPlungerEntity): void;
         isPlunged(): boolean;
         getAttachmentPos(): $Vec3;
         getAttachmentPos(arg0: number): $Vec3;
@@ -26,14 +27,11 @@ declare module "@package/dev/simulated_team/simulated/content/entities/launched_
         getPlungedTime(): number;
         getAnimationOffset(): number;
         getClientSmoothedVelocity(arg0: number): $Vec3;
-        getOther(): $LaunchedPlungerEntity;
-        setOther(arg0: $LaunchedPlungerEntity): void;
         physicsTick(arg0: $ServerSubLevel, arg1: $RigidBodyHandle, arg2: number): void;
+        getData<T>(arg0: $EntityDataAccessor_<T>): T;
         setData<T>(arg0: $EntityDataAccessor_<T>, arg1: T): void;
         static create(arg0: $EntityType_<$LaunchedPlungerEntity>, arg1: $Level_): $LaunchedPlungerEntity;
         getTarget(): $Vec3;
-        getData<T>(arg0: $EntityDataAccessor_<T>): T;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -86,6 +84,7 @@ declare module "@package/dev/simulated_team/simulated/content/entities/launched_
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;

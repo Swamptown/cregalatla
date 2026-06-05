@@ -16,12 +16,12 @@ declare module "@package/com/simibubi/create/content/kinetics/fan/processing" {
     }
     export interface $FanProcessingType {
         isValidAt(arg0: $Level_, arg1: $BlockPos_): boolean;
-        spawnProcessingParticles(arg0: $Level_, arg1: $Vec3_): void;
-        canProcess(arg0: $ItemStack_, arg1: $Level_): boolean;
         morphAirFlow(arg0: $FanProcessingType$AirFlowParticleAccess, arg1: $RandomSource): void;
         affectEntity(arg0: $Entity, arg1: $Level_): void;
-        getPriority(): number;
+        spawnProcessingParticles(arg0: $Level_, arg1: $Vec3_): void;
+        canProcess(arg0: $ItemStack_, arg1: $Level_): boolean;
         process(arg0: $ItemStack_, arg1: $Level_): $List<$ItemStack>;
+        getPriority(): number;
         get priority(): number;
     }
     /**

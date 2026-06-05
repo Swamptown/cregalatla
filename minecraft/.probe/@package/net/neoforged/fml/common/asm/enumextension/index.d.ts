@@ -17,15 +17,15 @@ declare module "@package/net/neoforged/fml/common/asm/enumextension" {
     export interface $IExtensibleEnum {
     }
     export class $ExtensionInfo extends $Record {
-        vanillaCount(): number;
         extended(): boolean;
         totalCount(): number;
         netCheck(): $NetworkedEnum$NetworkCheck;
         static nonExtended<T extends $Enum<T>>(arg0: $Class<T>): $ExtensionInfo;
+        vanillaCount(): number;
         constructor(extended: boolean, vanillaCount: number, totalCount: number, netCheck: $NetworkedEnum$NetworkCheck_);
     }
     /**
      * Values that may be interpreted as {@link $ExtensionInfo}.
      */
-    export type $ExtensionInfo_ = { extended?: boolean, totalCount?: number, vanillaCount?: number, netCheck?: $NetworkedEnum$NetworkCheck_,  } | [extended?: boolean, totalCount?: number, vanillaCount?: number, netCheck?: $NetworkedEnum$NetworkCheck_, ];
+    export type $ExtensionInfo_ = { vanillaCount?: number, totalCount?: number, extended?: boolean, netCheck?: $NetworkedEnum$NetworkCheck_,  } | [vanillaCount?: number, totalCount?: number, extended?: boolean, netCheck?: $NetworkedEnum$NetworkCheck_, ];
 }

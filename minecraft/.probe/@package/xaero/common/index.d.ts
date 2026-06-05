@@ -30,8 +30,8 @@ import { $IPacketHandler } from "@package/xaero/lib/common/packet";
 import { $RenderedPlayerTrackerManager } from "@package/xaero/hud/minimap/player/tracker/system";
 import { $SupportMods } from "@package/xaero/common/mods";
 import { $ModSettings } from "@package/xaero/common/settings";
-import { $Minimap } from "@package/xaero/hud/minimap";
 import { $Logger } from "@package/org/apache/logging/log4j";
+import { $Minimap } from "@package/xaero/hud/minimap";
 import { $WaypointSharingHandler, $WaypointsManager } from "@package/xaero/common/minimap/waypoints";
 import { $PlayerTrackerMinimapElementRenderer } from "@package/xaero/hud/minimap/player/tracker";
 export * as server from "@package/xaero/common/server";
@@ -50,33 +50,23 @@ export * as cache from "@package/xaero/common/cache";
 
 declare module "@package/xaero/common" {
     export class $HudMod implements $IXaeroMinimap {
-        setSettings(arg0: $ModSettings): void;
-        getSettings(): $ModSettings;
-        isStandalone(): boolean;
-        getEvents(): $ClientEvents;
-        getInterfaces(): $InterfaceManager;
-        getMessage(): string;
-        getHud(): $Hud;
-        setMessage(arg0: string): void;
-        getMinimap(): $Minimap;
-        getModJAR(): $File;
-        getPatreon(): $PatreonMod;
-        getHudIO(): $HudIO;
-        isFairPlay(): boolean;
-        isOutdated(): boolean;
-        loadLater(): void;
-        loadServer(): void;
         getOldConfigFileName(): string;
         getConfigSubFolder(): $Path;
         getDefaultConfigsSubFolder(): $Path;
         ensureControlsRegister(): void;
+        isOutdated(): boolean;
+        getPatreon(): $PatreonMod;
         getVersionID(): string;
+        getMinimap(): $Minimap;
+        loadLater(): void;
         getMinimapFolder(): $Path;
         getKeyMappingControllers(): $KeyMappingControllerManager;
         getHudConfigs(): $ConfigChannel;
         isLoadedClient(): boolean;
         isLoadedServer(): boolean;
+        loadServer(): void;
         getConfigFile(): $Path;
+        getModJAR(): $File;
         resetSettings(): void;
         setOutdated(arg0: boolean): void;
         getLatestVersion(): string;
@@ -97,6 +87,7 @@ declare module "@package/xaero/common" {
         setLatestVersionMD5(arg0: string): void;
         getLatestVersionMD5(): string;
         getEntityRadarCategoryManager(): $EntityRadarCategoryManager;
+        isFairPlay(): boolean;
         getTrackedPlayerRenderer(): $PlayerTrackerMinimapElementRenderer;
         /**
          * @deprecated
@@ -116,34 +107,37 @@ declare module "@package/xaero/common" {
         getModCommonEvents(): $ModCommonEvents;
         tryLoadLater(): void;
         tryLoadLaterServer(): void;
+        getHud(): $Hud;
         getHudRenderer(): $HudRenderer;
+        getHudIO(): $HudIO;
         isFirstStageLoaded(): boolean;
         getInfoDisplaysIO(): $InfoDisplayIO;
         getEntityRadarCategorySerializers(): $EntityRadarCategorySerializers;
+        isStandalone(): boolean;
+        setSettings(arg0: $ModSettings): void;
+        getSettings(): $ModSettings;
+        getEvents(): $ClientEvents;
+        getInterfaces(): $InterfaceManager;
+        getMessage(): string;
+        setMessage(arg0: string): void;
         waypointsFile: $Path;
         static INSTANCE: $HudMod;
         static LOGGER: $Logger;
         static FAIRPLAY: boolean;
         shouldLoadLegacySettings: boolean;
         minimapFolder: $Path;
-        get standalone(): boolean;
-        get events(): $ClientEvents;
-        get interfaces(): $InterfaceManager;
-        get hud(): $Hud;
-        get minimap(): $Minimap;
-        get modJAR(): $File;
-        get patreon(): $PatreonMod;
-        get hudIO(): $HudIO;
-        get fairPlay(): boolean;
         get oldConfigFileName(): string;
         get configSubFolder(): $Path;
         get defaultConfigsSubFolder(): $Path;
+        get patreon(): $PatreonMod;
         get versionID(): string;
+        get minimap(): $Minimap;
         get keyMappingControllers(): $KeyMappingControllerManager;
         get hudConfigs(): $ConfigChannel;
         get loadedClient(): boolean;
         get loadedServer(): boolean;
         get configFile(): $Path;
+        get modJAR(): $File;
         get waypointsFolder(): $Path;
         get supportMods(): $SupportMods;
         get modEvents(): $ModClientEvents;
@@ -152,6 +146,7 @@ declare module "@package/xaero/common" {
         get controlsRegister(): $ControlsRegister;
         get interfaceRenderer(): $InterfaceRenderer;
         get entityRadarCategoryManager(): $EntityRadarCategoryManager;
+        get fairPlay(): boolean;
         get trackedPlayerRenderer(): $PlayerTrackerMinimapElementRenderer;
         get playerTrackerSystemManager(): $PlayerTrackerSystemManager;
         get playerTracker(): $RenderedPlayerTrackerManager;
@@ -162,42 +157,47 @@ declare module "@package/xaero/common" {
         get platformContext(): $PlatformContext;
         get modClientEvents(): $ModClientEvents;
         get modCommonEvents(): $ModCommonEvents;
+        get hud(): $Hud;
         get hudRenderer(): $HudRenderer;
+        get hudIO(): $HudIO;
         get firstStageLoaded(): boolean;
         get infoDisplaysIO(): $InfoDisplayIO;
         get entityRadarCategorySerializers(): $EntityRadarCategorySerializers;
+        get standalone(): boolean;
+        get events(): $ClientEvents;
+        get interfaces(): $InterfaceManager;
     }
     /**
      * @deprecated
      */
     export class $XaeroMinimapSession extends $HudSession {
+        static getCurrentSession(): $XaeroMinimapSession;
+        getMinimapProcessor(): $MinimapProcessor;
         getModMain(): $IXaeroMinimap;
         static getForPlayer(arg0: $LocalPlayer): $XaeroMinimapSession;
         getWaypointsManager(): $WaypointsManager;
         getWaypointSharing(): $WaypointSharingHandler;
-        static getCurrentSession(): $XaeroMinimapSession;
-        getMinimapProcessor(): $MinimapProcessor;
         constructor(arg0: $HudMod);
+        static get currentSession(): $XaeroMinimapSession;
+        get minimapProcessor(): $MinimapProcessor;
         get modMain(): $IXaeroMinimap;
         get waypointsManager(): $WaypointsManager;
         get waypointSharing(): $WaypointSharingHandler;
-        static get currentSession(): $XaeroMinimapSession;
-        get minimapProcessor(): $MinimapProcessor;
     }
     export class $PlatformContext {
-        getLoaderClientOnly(): $PlatformContextLoaderClientOnly;
-        getLoaderCommon(): $PlatformContextLoaderCommon;
-        createMinimapWriter(arg0: $IXaeroMinimap, arg1: $MinimapSession, arg2: $BlockStateShortShapeCache, arg3: $HighlighterRegistry): $MinimapWriter;
         createCommonEvents(arg0: $HudMod): $CommonEvents;
         createModCommonEvents(arg0: $IXaeroMinimap): $ModCommonEvents;
         createClientEvents(arg0: $HudMod): $ClientEvents;
         createModClientEvents(arg0: $IXaeroMinimap): $ModClientEvents;
         createSupportMods(arg0: $IXaeroMinimap): $SupportMods;
         getModInfoVersion(): string;
+        getLoaderClientOnly(): $PlatformContextLoaderClientOnly;
+        getLoaderCommon(): $PlatformContextLoaderCommon;
+        createMinimapWriter(arg0: $IXaeroMinimap, arg1: $MinimapSession, arg2: $BlockStateShortShapeCache, arg3: $HighlighterRegistry): $MinimapWriter;
         constructor();
+        get modInfoVersion(): string;
         get loaderClientOnly(): $PlatformContextLoaderClientOnly;
         get loaderCommon(): $PlatformContextLoaderCommon;
-        get modInfoVersion(): string;
     }
     export class $PlatformContextLoaderClientOnly {
         preInit(arg0: string, arg1: $IXaeroMinimap): void;
@@ -214,21 +214,6 @@ declare module "@package/xaero/common" {
         static wrongWaypointsFile: $File;
     }
     export interface $IXaeroMinimap {
-        setSettings(arg0: $ModSettings): void;
-        getSettings(): $ModSettings;
-        isStandalone(): boolean;
-        getEvents(): $ClientEvents;
-        getInterfaces(): $InterfaceManager;
-        getMessage(): string;
-        getHud(): $Hud;
-        setMessage(arg0: string): void;
-        getMinimap(): $Minimap;
-        getModId(): string;
-        getModJAR(): $File;
-        getPatreon(): $PatreonMod;
-        getHudIO(): $HudIO;
-        isFairPlay(): boolean;
-        isOutdated(): boolean;
         getFileLayoutID(): string;
         getVersionsURL(): string;
         getUpdateLink(): string;
@@ -236,10 +221,14 @@ declare module "@package/xaero/common" {
         getSettingsKey(): $Object;
         getServerSettingsKey(): $Object;
         ensureControlsRegister(): void;
+        isOutdated(): boolean;
+        getPatreon(): $PatreonMod;
         getVersionID(): string;
+        getMinimap(): $Minimap;
         isLoadedClient(): boolean;
         isLoadedServer(): boolean;
         getConfigFile(): $Path;
+        getModJAR(): $File;
         resetSettings(): void;
         setOutdated(arg0: boolean): void;
         getLatestVersion(): string;
@@ -257,6 +246,7 @@ declare module "@package/xaero/common" {
         setLatestVersionMD5(arg0: string): void;
         getLatestVersionMD5(): string;
         getEntityRadarCategoryManager(): $EntityRadarCategoryManager;
+        isFairPlay(): boolean;
         getTrackedPlayerRenderer(): $PlayerTrackerMinimapElementRenderer;
         /**
          * @deprecated
@@ -276,27 +266,30 @@ declare module "@package/xaero/common" {
         getModCommonEvents(): $ModCommonEvents;
         tryLoadLater(): void;
         tryLoadLaterServer(): void;
+        getHud(): $Hud;
         getHudRenderer(): $HudRenderer;
+        getHudIO(): $HudIO;
         isFirstStageLoaded(): boolean;
-        get standalone(): boolean;
-        get events(): $ClientEvents;
-        get interfaces(): $InterfaceManager;
-        get hud(): $Hud;
-        get minimap(): $Minimap;
-        get modId(): string;
-        get modJAR(): $File;
-        get patreon(): $PatreonMod;
-        get hudIO(): $HudIO;
-        get fairPlay(): boolean;
+        isStandalone(): boolean;
+        setSettings(arg0: $ModSettings): void;
+        getSettings(): $ModSettings;
+        getEvents(): $ClientEvents;
+        getInterfaces(): $InterfaceManager;
+        getMessage(): string;
+        setMessage(arg0: string): void;
+        getModId(): string;
         get fileLayoutID(): string;
         get versionsURL(): string;
         get updateLink(): string;
         get settingsKey(): $Object;
         get serverSettingsKey(): $Object;
+        get patreon(): $PatreonMod;
         get versionID(): string;
+        get minimap(): $Minimap;
         get loadedClient(): boolean;
         get loadedServer(): boolean;
         get configFile(): $Path;
+        get modJAR(): $File;
         get waypointsFile(): $Path;
         get waypointsFolder(): $Path;
         get supportMods(): $SupportMods;
@@ -306,6 +299,7 @@ declare module "@package/xaero/common" {
         get controlsRegister(): $ControlsRegister;
         get interfaceRenderer(): $InterfaceRenderer;
         get entityRadarCategoryManager(): $EntityRadarCategoryManager;
+        get fairPlay(): boolean;
         get trackedPlayerRenderer(): $PlayerTrackerMinimapElementRenderer;
         get playerTrackerSystemManager(): $PlayerTrackerSystemManager;
         get playerTracker(): $RenderedPlayerTrackerManager;
@@ -316,7 +310,13 @@ declare module "@package/xaero/common" {
         get platformContext(): $PlatformContext;
         get modClientEvents(): $ModClientEvents;
         get modCommonEvents(): $ModCommonEvents;
+        get hud(): $Hud;
         get hudRenderer(): $HudRenderer;
+        get hudIO(): $HudIO;
         get firstStageLoaded(): boolean;
+        get standalone(): boolean;
+        get events(): $ClientEvents;
+        get interfaces(): $InterfaceManager;
+        get modId(): string;
     }
 }

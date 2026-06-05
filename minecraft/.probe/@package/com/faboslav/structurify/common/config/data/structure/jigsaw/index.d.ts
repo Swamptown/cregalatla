@@ -4,14 +4,13 @@ import { $HeightProvider } from "@package/net/minecraft/world/level/levelgen/hei
 
 declare module "@package/com/faboslav/structurify/common/config/data/structure/jigsaw" {
     export class $HeightProviderData {
-        setPlateau(arg0: number): void;
-        setMinInclusive(arg0: $VerticalAnchorData): void;
-        setMaxInclusive(arg0: $VerticalAnchorData): void;
         static fromHeightProvider(arg0: $HeightProvider): $HeightProviderData;
-        toHeightProvider(): $HeightProvider;
+        setMinInclusive(arg0: $VerticalAnchorData): void;
+        setPlateau(arg0: number): void;
         getMinInclusive(): $VerticalAnchorData;
         getMaxInclusive(): $VerticalAnchorData;
         getPlateau(): number;
+        toHeightProvider(): $HeightProvider;
         setType(arg0: $HeightProviderData$Type_): void;
         clone(): $HeightProviderData;
         getValue(): $VerticalAnchorData;
@@ -19,6 +18,7 @@ declare module "@package/com/faboslav/structurify/common/config/data/structure/j
         getType(): $HeightProviderData$Type;
         setInner(arg0: number): void;
         getInner(): number;
+        setMaxInclusive(arg0: $VerticalAnchorData): void;
         constructor(arg0: $HeightProviderData$Type_, arg1: $VerticalAnchorData, arg2: $VerticalAnchorData, arg3: $VerticalAnchorData, arg4: number, arg5: number);
     }
     export class $VerticalAnchorData {

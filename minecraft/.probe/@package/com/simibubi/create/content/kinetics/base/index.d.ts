@@ -7,6 +7,7 @@ import { $SmartBlockEntity } from "@package/com/simibubi/create/foundation/block
 import { $LangBuilder } from "@package/net/createmod/catnip/lang";
 import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $List, $List_ } from "@package/java/util";
+import { $PreciseKineticOutputAccess, $HeldKineticAngleAccess } from "@package/com/example/createthrusters/lib/kinetics";
 import { $IFluidHandler } from "@package/net/neoforged/neoforge/fluids/capability";
 import { $HolderLookup$Provider, $BlockPos, $BlockPos_, $Direction_, $Direction$Axis, $Direction$Axis_ } from "@package/net/minecraft/core";
 import { $KineticBlockEntityExtension } from "@package/dev/simulated_team/simulated/mixin_interface/extra_kinetics";
@@ -22,17 +23,17 @@ declare module "@package/com/simibubi/create/content/kinetics/base" {
     export class $IRotate {
     }
     export interface $IRotate extends $IWrenchable {
-        getMinimumRequiredSpeedLevel(): $IRotate$SpeedLevel;
-        hideStressImpact(): boolean;
-        showCapacityWithAnnotation(): boolean;
         hasShaftTowards(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_): boolean;
+        showCapacityWithAnnotation(): boolean;
+        hideStressImpact(): boolean;
         getRotationAxis(arg0: $BlockState_): $Direction$Axis;
+        getMinimumRequiredSpeedLevel(): $IRotate$SpeedLevel;
         get minimumRequiredSpeedLevel(): $IRotate$SpeedLevel;
     }
     export class $IRotate$SpeedLevel extends $Enum<$IRotate$SpeedLevel> {
-        static getFormattedSpeedText(arg0: number, arg1: boolean): $LangBuilder;
-        getParticleSpeed(): number;
         getSpeedValue(): number;
+        getParticleSpeed(): number;
+        static getFormattedSpeedText(arg0: number, arg1: boolean): $LangBuilder;
         getTextColor(): $ChatFormatting;
         static values(): $IRotate$SpeedLevel[];
         static valueOf(arg0: string): $IRotate$SpeedLevel;
@@ -42,8 +43,8 @@ declare module "@package/com/simibubi/create/content/kinetics/base" {
         static SLOW: $IRotate$SpeedLevel;
         static NONE: $IRotate$SpeedLevel;
         static FAST: $IRotate$SpeedLevel;
-        get particleSpeed(): number;
         get speedValue(): number;
+        get particleSpeed(): number;
         get textColor(): $ChatFormatting;
         get color(): number;
     }
@@ -51,18 +52,8 @@ declare module "@package/com/simibubi/create/content/kinetics/base" {
      * Values that may be interpreted as {@link $IRotate$SpeedLevel}.
      */
     export type $IRotate$SpeedLevel_ = "none" | "slow" | "medium" | "fast";
-    export class $KineticBlockEntity extends $SmartBlockEntity implements $IHaveGoggleInformation, $IHaveHoveringInformation, $KineticBlockEntityExtension {
-        warnOfMovement(): void;
-        clearKineticInformation(): void;
-        onSpeedChanged(arg0: number): void;
-        addToGoggleTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
-        simulated$setConnectedToExtraKinetics(arg0: boolean): void;
-        simulated$getConnectedToExtraKinetics(): boolean;
-        simulated$setValidationCountdown(arg0: number): void;
-        calculateAddedStressCapacity(): number;
-        hasNetwork(): boolean;
-        getOrCreateNetwork(): $KineticNetwork;
-        calculateStressApplied(): number;
+    export class $KineticBlockEntity extends $SmartBlockEntity implements $IHaveGoggleInformation, $IHaveHoveringInformation, $KineticBlockEntityExtension, $HeldKineticAngleAccess, $PreciseKineticOutputAccess {
+        handler$dma000$simulated$addExtraKineticsInfo(arg0: $List_<any>, arg1: boolean, arg2: $CallbackInfoReturnable<any>): void;
         static convertToLinear(arg0: number): number;
         static convertToAngular(arg0: number): number;
         isOverStressed(): boolean;
@@ -71,30 +62,46 @@ declare module "@package/com/simibubi/create/content/kinetics/base" {
         isCustomConnection(arg0: $KineticBlockEntity, arg1: $BlockState_, arg2: $BlockState_): boolean;
         tickAudio(): void;
         getRotationAngleOffset(arg0: $Direction$Axis_): number;
+        simulated$setConnectedToExtraKinetics(arg0: boolean): void;
+        simulated$getConnectedToExtraKinetics(): boolean;
+        redirect$dlk000$simulated$useProperSource(arg0: $Level_, arg1: $BlockPos_): $BlockEntity;
+        redirect$dlk000$simulated$useProperSource2(arg0: $Level_, arg1: $BlockPos_): $BlockEntity;
+        simulated$setValidationCountdown(arg0: number): void;
+        ct$setHeldAngle(arg0: $Direction$Axis_, arg1: number): boolean;
+        ct$clearHeldAngles(): boolean;
+        ct$hasHeldAngle(arg0: $Direction$Axis_): boolean;
+        ct$getAbsoluteRotationAngle(arg0: $Direction$Axis_): number;
+        ct$applyPreciseAngleOutput(arg0: number): void;
+        ct$clearPreciseAngleOutput(): void;
+        addToGoggleTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
+        handler$dlk000$simulated$injectRemove(arg0: $CallbackInfo): void;
+        handler$dlk000$simulated$saveConnected(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean, arg3: $CallbackInfo): void;
+        handler$dlk000$simulated$readConnected(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean, arg3: $CallbackInfo): void;
+        getTheoreticalSpeed(): number;
+        setNetwork(arg0: number): void;
+        handler$dlk000$simulated$removeConnected(arg0: $CallbackInfo): void;
+        isSpeedRequirementFulfilled(): boolean;
+        hasNetwork(): boolean;
+        getOrCreateNetwork(): $KineticNetwork;
+        calculateStressApplied(): number;
+        calculateAddedStressCapacity(): number;
         needsSpeedUpdate(): boolean;
         attachKinetics(): void;
         getFlickerScore(): number;
         hasSource(): boolean;
         removeSource(): void;
-        redirect$dha000$simulated$useProperSource(arg0: $Level_, arg1: $BlockPos_): $BlockEntity;
         detachKinetics(): void;
         getGeneratedSpeed(): number;
         updateFromNetwork(arg0: number, arg1: number, arg2: number): void;
-        handler$dha000$simulated$injectRemove(arg0: $CallbackInfo): void;
-        handler$dha000$simulated$saveConnected(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean, arg3: $CallbackInfo): void;
-        handler$dha000$simulated$readConnected(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean, arg3: $CallbackInfo): void;
-        getTheoreticalSpeed(): number;
-        redirect$dha000$simulated$useProperSource2(arg0: $Level_, arg1: $BlockPos_): $BlockEntity;
-        setNetwork(arg0: number): void;
-        handler$dha000$simulated$removeConnected(arg0: $CallbackInfo): void;
-        isSpeedRequirementFulfilled(): boolean;
-        handler$dhg000$simulated$addExtraKineticsInfo(arg0: $List_<any>, arg1: boolean, arg2: $CallbackInfoReturnable<any>): void;
-        isSource(): boolean;
-        addToTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
+        onSpeedChanged(arg0: number): void;
         static convertToDirection(arg0: number, arg1: $Direction_): number;
         static switchToBlockState(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): void;
-        setSource(arg0: $BlockPos_): void;
+        warnOfMovement(): void;
+        clearKineticInformation(): void;
+        addToTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
+        isSource(): boolean;
         setSpeed(arg0: number): void;
+        setSource(arg0: $BlockPos_): void;
         getSpeed(): number;
         containedFluidTooltip(arg0: $List_<$Component_>, arg1: boolean, arg2: $IFluidHandler): boolean;
         getIcon(arg0: boolean): $ItemStack;
@@ -109,11 +116,11 @@ declare module "@package/com/simibubi/create/content/kinetics/base" {
         preventSpeedUpdate: number;
         network: number;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
-        get orCreateNetwork(): $KineticNetwork;
         get overStressed(): boolean;
-        get flickerScore(): number;
-        get generatedSpeed(): number;
         get theoreticalSpeed(): number;
         get speedRequirementFulfilled(): boolean;
+        get orCreateNetwork(): $KineticNetwork;
+        get flickerScore(): number;
+        get generatedSpeed(): number;
     }
 }

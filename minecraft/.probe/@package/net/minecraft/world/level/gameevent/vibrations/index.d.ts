@@ -15,19 +15,19 @@ declare module "@package/net/minecraft/world/level/gameevent/vibrations" {
     export class $VibrationSystem$User {
     }
     export interface $VibrationSystem$User {
-        canReceiveVibration(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $Holder_<$GameEvent>, arg3: $GameEvent$Context_): boolean;
         getPositionSource(): $PositionSource;
+        requiresAdjacentChunksToBeTicking(): boolean;
+        getListenerRadius(): number;
+        onReceiveVibration(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $Holder_<$GameEvent>, arg3: $Entity, arg4: $Entity, arg5: number): void;
         getListenableEvents(): $TagKey<$GameEvent>;
         canTriggerAvoidVibration(): boolean;
         calculateTravelTimeInTicks(arg0: number): number;
         isValidVibration(arg0: $Holder_<$GameEvent>, arg1: $GameEvent$Context_): boolean;
         onDataChanged(): void;
-        requiresAdjacentChunksToBeTicking(): boolean;
-        getListenerRadius(): number;
-        onReceiveVibration(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $Holder_<$GameEvent>, arg3: $Entity, arg4: $Entity, arg5: number): void;
+        canReceiveVibration(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $Holder_<$GameEvent>, arg3: $GameEvent$Context_): boolean;
         get positionSource(): $PositionSource;
-        get listenableEvents(): $TagKey<$GameEvent>;
         get listenerRadius(): number;
+        get listenableEvents(): $TagKey<$GameEvent>;
     }
     export class $VibrationSystem$Data {
         shouldReloadVibrationParticle(): boolean;
@@ -60,8 +60,8 @@ declare module "@package/net/minecraft/world/level/gameevent/vibrations" {
         getEntity(arg0: $ServerLevel): ($Entity) | undefined;
         pos(): $Vec3;
         distance(): number;
-        uuid(): $UUID;
         gameEvent(): $Holder<$GameEvent>;
+        uuid(): $UUID;
         static CODEC: $Codec<$VibrationInfo>;
         constructor(arg0: $Holder_<$GameEvent>, arg1: number, arg2: $Vec3_, arg3: $UUID_, arg4: $UUID_);
         constructor(arg0: $Holder_<$GameEvent>, arg1: number, arg2: $Vec3_, arg3: $Entity);
@@ -70,17 +70,17 @@ declare module "@package/net/minecraft/world/level/gameevent/vibrations" {
     /**
      * Values that may be interpreted as {@link $VibrationInfo}.
      */
-    export type $VibrationInfo_ = { projectileOwnerUuid?: $UUID_, entity?: $Entity, distance?: number, pos?: $Vec3_, uuid?: $UUID_, gameEvent?: $Holder_<$GameEvent>,  } | [projectileOwnerUuid?: $UUID_, entity?: $Entity, distance?: number, pos?: $Vec3_, uuid?: $UUID_, gameEvent?: $Holder_<$GameEvent>, ];
+    export type $VibrationInfo_ = { uuid?: $UUID_, pos?: $Vec3_, distance?: number, entity?: $Entity, projectileOwnerUuid?: $UUID_, gameEvent?: $Holder_<$GameEvent>,  } | [uuid?: $UUID_, pos?: $Vec3_, distance?: number, entity?: $Entity, projectileOwnerUuid?: $UUID_, gameEvent?: $Holder_<$GameEvent>, ];
     export class $VibrationSystem$Ticker {
         static tick(arg0: $Level_, arg1: $VibrationSystem$Data, arg2: $VibrationSystem$User): void;
     }
     export interface $VibrationSystem$Ticker {
     }
     export class $VibrationSystem {
-        static getResonanceEventByFrequency(arg0: number): $ResourceKey<$GameEvent>;
-        static getGameEventFrequency(arg0: $ResourceKey_<$GameEvent>): number;
         static getGameEventFrequency(arg0: $Holder_<$GameEvent>): number;
+        static getGameEventFrequency(arg0: $ResourceKey_<$GameEvent>): number;
         static getRedstoneStrengthForDistance(arg0: number, arg1: number): number;
+        static getResonanceEventByFrequency(arg0: number): $ResourceKey<$GameEvent>;
         static DEFAULT_VIBRATION_FREQUENCY: number;
         static RESONANCE_EVENTS: $List<$ResourceKey<$GameEvent>>;
         /**
@@ -96,14 +96,14 @@ declare module "@package/net/minecraft/world/level/gameevent/vibrations" {
     }
     export class $VibrationSystem$Listener implements $GameEventListener {
         static distanceBetweenInBlocks(arg0: $BlockPos_, arg1: $BlockPos_): number;
-        forceScheduleVibration(arg0: $ServerLevel, arg1: $Holder_<$GameEvent>, arg2: $GameEvent$Context_, arg3: $Vec3_): void;
+        getListenerRadius(): number;
         getListenerSource(): $PositionSource;
         handleGameEvent(arg0: $ServerLevel, arg1: $Holder_<$GameEvent>, arg2: $GameEvent$Context_, arg3: $Vec3_): boolean;
-        getListenerRadius(): number;
+        forceScheduleVibration(arg0: $ServerLevel, arg1: $Holder_<$GameEvent>, arg2: $GameEvent$Context_, arg3: $Vec3_): void;
         getDeliveryMode(): $GameEventListener$DeliveryMode;
         constructor(arg0: $VibrationSystem);
-        get listenerSource(): $PositionSource;
         get listenerRadius(): number;
+        get listenerSource(): $PositionSource;
         get deliveryMode(): $GameEventListener$DeliveryMode;
     }
 }

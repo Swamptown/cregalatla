@@ -6,7 +6,7 @@ import { $Pair } from "@package/org/apache/commons/lang3/tuple";
 import { $Executor_, $CompletableFuture } from "@package/java/util/concurrent";
 import { $IdentifiableResourceReloadListener } from "@package/net/fabricmc/fabric/api/resource";
 import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
-import { $ResourceManager, $PreparableReloadListener$PreparationBarrier_, $PreparableReloadListener } from "@package/net/minecraft/server/packs/resources";
+import { $ResourceManager, $PreparableReloadListener, $PreparableReloadListener$PreparationBarrier_ } from "@package/net/minecraft/server/packs/resources";
 import { $Comparator, $Map, $List, $Map_, $Collection_, $List_, $Collection, $BitSet } from "@package/java/util";
 import { $ResourceModelManagerAccessor, $ResourceAtlasSetAccessor } from "@package/foundry/veil/mixin/resource/accessor";
 import { $BlockModelShaper } from "@package/net/minecraft/client/renderer/block";
@@ -76,24 +76,24 @@ declare module "@package/net/minecraft/client/resources/model" {
         get particleIcon(): $TextureAtlasSprite;
     }
     export class $ModelBakery implements $ModelBakeryAccessor, $ModelBakeryAccessor$1, $ModelLoaderExtension, $ModelLoaderHooks {
+        registerModelAndLoadDependencies(arg0: $ModelResourceLocation_, arg1: $UnbakedModel): void;
+        localvar$dhg000$puzzleslib$init(blockStateModelLoader: $BlockStateModelLoader): $BlockStateModelLoader;
+        handler$hjd000$platform$addModel(ci: $CallbackInfo): void;
+        wrapOperation$bbl000$ldlib2$injectStateToModelLocation(arg0: $Logger, arg1: string, arg2: $Object[], arg3: $Operation_<any>): void;
+        modifyExpressionValue$bbl000$ldlib2$changeLoadedModel(arg0: $Collection_<any>, arg1: $ModelResourceLocation_, arg2: $LocalRef<any>): $Collection<any>;
+        continuity$setModelWrappingHandler(handler: $ModelWrappingHandler): void;
+        fabric_getDispatcher(): $ModelLoadingEventDispatcher;
+        fabric_getMissingModel(): $UnbakedModel;
+        fabric_getOrLoadModel(arg0: $ResourceLocation_): $UnbakedModel;
+        fabric_add(arg0: $ModelResourceLocation_, arg1: $UnbakedModel): void;
         getBakedTopLevelModels(): $Map<$ModelResourceLocation, $BakedModel>;
         bakeModels(arg0: $ModelBakery$TextureGetter_): void;
         getModelGroups(): $Object2IntMap<$BlockState>;
         getModel(arg0: $ResourceLocation_): $UnbakedModel;
         continuity$getModelWrappingHandler(): $ModelWrappingHandler;
-        registerModelAndLoadDependencies(arg0: $ModelResourceLocation_, arg1: $UnbakedModel): void;
-        localvar$dco000$puzzleslib$init(blockStateModelLoader: $BlockStateModelLoader): $BlockStateModelLoader;
-        handler$gmb000$platform$addModel(ci: $CallbackInfo): void;
-        continuity$setModelWrappingHandler(handler: $ModelWrappingHandler): void;
-        fabric_getDispatcher(): $ModelLoadingEventDispatcher;
-        fabric_getMissingModel(): $UnbakedModel;
-        wrapOperation$bac000$ldlib2$injectStateToModelLocation(arg0: $Logger, arg1: string, arg2: $Object[], arg3: $Operation_<any>): void;
-        modifyExpressionValue$bac000$ldlib2$changeLoadedModel(arg0: $Collection_<any>, arg1: $ModelResourceLocation_, arg2: $LocalRef<any>): $Collection<any>;
-        fabric_getOrLoadModel(arg0: $ResourceLocation_): $UnbakedModel;
-        fabric_add(arg0: $ModelResourceLocation_, arg1: $UnbakedModel): void;
-        callGetModel(arg0: $ResourceLocation_): $UnbakedModel;
         invokeGetModel(arg0: $ResourceLocation_): $UnbakedModel;
         getTopLevelModels(): $Map<$ModelResourceLocation, $UnbakedModel>;
+        callGetModel(arg0: $ResourceLocation_): $UnbakedModel;
         static BLOCK_ENTITY_MARKER: $BlockModel;
         static ITEM_MODEL_GENERATOR: $ItemModelGenerator;
         topLevelModels: $Map<$ModelResourceLocation, $UnbakedModel>;
@@ -142,10 +142,10 @@ declare module "@package/net/minecraft/client/resources/model" {
         getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
         getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getRenderPasses(arg0: $ItemStack_, arg1: boolean): $List<$BakedModel>;
+        getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
         applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
-        getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
         isVanillaAdapter(): boolean;
         constructor(arg0: $ItemTransforms, arg1: $ItemOverrides, arg2: $TextureAtlasSprite, arg3: boolean);
         get customRenderer(): boolean;
@@ -166,7 +166,6 @@ declare module "@package/net/minecraft/client/resources/model" {
         getModelBakery(): $ModelBakery;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         close(): void;
-        requiresRender(arg0: $BlockState_, arg1: $BlockState_): boolean;
         getFabricId(): $ResourceLocation;
         getFabricDependencies(): $Collection<any>;
         getModel(arg0: $ModelResourceLocation_): $BakedModel;
@@ -174,6 +173,7 @@ declare module "@package/net/minecraft/client/resources/model" {
         getMissingModel(): $BakedModel;
         getAtlas(arg0: $ResourceLocation_): $TextureAtlas;
         updateMaxMipLevel(arg0: number): void;
+        requiresRender(arg0: $BlockState_, arg1: $BlockState_): boolean;
         getName(): string;
         getModel(arg0: $ResourceLocation_): $BakedModel;
         getModels(): $Map<$ModelResourceLocation, $BakedModel>;
@@ -200,14 +200,14 @@ declare module "@package/net/minecraft/client/resources/model" {
         getTransforms(): $ItemTransforms;
         getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getOverrides(): $ItemOverrides;
+        getModelData(level: $BlockAndTintGetter, pos: $BlockPos_, state: $BlockState_, modelData: $ModelData): $ModelData;
         applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         isGui3d(): boolean;
         usesBlockLight(): boolean;
-        getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         getParticleIcon(): $TextureAtlasSprite;
-        useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
+        getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         useAmbientOcclusion(): boolean;
-        getModelData(level: $BlockAndTintGetter, pos: $BlockPos_, state: $BlockState_, modelData: $ModelData): $ModelData;
+        useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
         getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
         getRenderPasses(arg0: $ItemStack_, arg1: boolean): $List<$BakedModel>;
         isVanilla: boolean;
@@ -233,22 +233,22 @@ declare module "@package/net/minecraft/client/resources/model" {
         bake(arg0: $ResourceLocation_, arg1: $ModelState): $BakedModel;
     }
     export class $SimpleBakedModel$Builder {
-        handler$hdj000$ferritecore$deduplicate(arg0: $Direction_, arg1: $BakedQuad, arg2: $CallbackInfoReturnable<any>): void;
-        handler$hdj000$ferritecore$deduplicate(arg0: $BakedQuad, arg1: $CallbackInfoReturnable<any>): void;
+        handler$ibh000$ferritecore$deduplicate(arg0: $Direction_, arg1: $BakedQuad, arg2: $CallbackInfoReturnable<any>): void;
+        handler$ibh000$ferritecore$deduplicate(arg0: $BakedQuad, arg1: $CallbackInfoReturnable<any>): void;
+        addUnculledFace(arg0: $BakedQuad): $SimpleBakedModel$Builder;
+        addCulledFace(arg0: $Direction_, arg1: $BakedQuad): $SimpleBakedModel$Builder;
         item(): $SimpleBakedModel$Builder;
+        build(arg0: $RenderTypeGroup_): $BakedModel;
         /**
          * @deprecated
          */
         build(): $BakedModel;
-        build(arg0: $RenderTypeGroup_): $BakedModel;
         particle(arg0: $TextureAtlasSprite): $SimpleBakedModel$Builder;
-        addUnculledFace(arg0: $BakedQuad): $SimpleBakedModel$Builder;
-        addCulledFace(arg0: $Direction_, arg1: $BakedQuad): $SimpleBakedModel$Builder;
         constructor(arg0: $BlockModel, arg1: $ItemOverrides, arg2: boolean);
         constructor(arg0: boolean, arg1: boolean, arg2: boolean, arg3: $ItemTransforms, arg4: $ItemOverrides);
     }
     export class $MultiPartBakedModel$Builder {
-        redirect$hdg000$ferritecore$build(arg0: $List_<any>): $MultiPartBakedModel;
+        redirect$ibe000$ferritecore$build(arg0: $List_<any>): $MultiPartBakedModel;
         add(arg0: $Predicate_<$BlockState>, arg1: $BakedModel): void;
         build(): $BakedModel;
         constructor();
@@ -310,7 +310,7 @@ declare module "@package/net/minecraft/client/resources/model" {
     /**
      * Values that may be interpreted as {@link $BlockStateModelLoader$LoadedJson}.
      */
-    export type $BlockStateModelLoader$LoadedJson_ = { source?: string, data?: $JsonElement_,  } | [source?: string, data?: $JsonElement_, ];
+    export type $BlockStateModelLoader$LoadedJson_ = { data?: $JsonElement_, source?: string,  } | [data?: $JsonElement_, source?: string, ];
     export class $ModelBakery$TextureGetter {
     }
     export interface $ModelBakery$TextureGetter {
@@ -321,15 +321,15 @@ declare module "@package/net/minecraft/client/resources/model" {
      */
     export type $ModelBakery$TextureGetter_ = ((arg0: $ModelResourceLocation, arg1: $Material) => $TextureAtlasSprite);
     export class $AtlasSet$AtlasEntry extends $Record implements $AutoCloseable {
-        atlas(): $TextureAtlas;
         atlasInfoLocation(): $ResourceLocation;
+        atlas(): $TextureAtlas;
         close(): void;
         constructor(arg0: $TextureAtlas, arg1: $ResourceLocation_);
     }
     /**
      * Values that may be interpreted as {@link $AtlasSet$AtlasEntry}.
      */
-    export type $AtlasSet$AtlasEntry_ = { atlas?: $TextureAtlas, atlasInfoLocation?: $ResourceLocation_,  } | [atlas?: $TextureAtlas, atlasInfoLocation?: $ResourceLocation_, ];
+    export type $AtlasSet$AtlasEntry_ = { atlasInfoLocation?: $ResourceLocation_, atlas?: $TextureAtlas,  } | [atlasInfoLocation?: $ResourceLocation_, atlas?: $TextureAtlas, ];
     export class $SimpleBakedModel implements $BakedModel, $SimpleBakedModelAccessor {
         getQuads(arg0: $BlockState_, arg1: $Direction_, arg2: $RandomSource): $List<$BakedQuad>;
         isCustomRenderer(): boolean;
@@ -345,10 +345,10 @@ declare module "@package/net/minecraft/client/resources/model" {
         emitItemQuads(arg0: $ItemStack_, arg1: $Supplier_<any>, arg2: $RenderContext): void;
         getQuads(arg0: $BlockState_, arg1: $Direction_, arg2: $RandomSource, arg3: $ModelData, arg4: $RenderType): $List<$BakedQuad>;
         getRenderPasses(arg0: $ItemStack_, arg1: boolean): $List<$BakedModel>;
+        getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
         applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
-        getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
         isVanillaAdapter(): boolean;
         getBlockRenderTypes(): $ChunkRenderTypeSet;
         itemRenderTypes: $List<$RenderType>;
@@ -374,13 +374,13 @@ declare module "@package/net/minecraft/client/resources/model" {
     /**
      * Values that may be interpreted as {@link $ModelManager$ReloadState}.
      */
-    export type $ModelManager$ReloadState_ = { modelCache?: $Map_<$BlockState_, $BakedModel>, missingModel?: $BakedModel, modelBakery?: $ModelBakery, readyForUpload?: $CompletableFuture<void>, atlasPreparations?: $Map_<$ResourceLocation_, $AtlasSet$StitchResult>,  } | [modelCache?: $Map_<$BlockState_, $BakedModel>, missingModel?: $BakedModel, modelBakery?: $ModelBakery, readyForUpload?: $CompletableFuture<void>, atlasPreparations?: $Map_<$ResourceLocation_, $AtlasSet$StitchResult>, ];
+    export type $ModelManager$ReloadState_ = { modelBakery?: $ModelBakery, missingModel?: $BakedModel, modelCache?: $Map_<$BlockState_, $BakedModel>, atlasPreparations?: $Map_<$ResourceLocation_, $AtlasSet$StitchResult>, readyForUpload?: $CompletableFuture<void>,  } | [modelBakery?: $ModelBakery, missingModel?: $BakedModel, modelCache?: $Map_<$BlockState_, $BakedModel>, atlasPreparations?: $Map_<$ResourceLocation_, $AtlasSet$StitchResult>, readyForUpload?: $CompletableFuture<void>, ];
     export class $BlockStateModelLoader implements $BlockStatesLoaderHooks {
         loadBlockStateDefinitions(arg0: $ResourceLocation_, arg1: $StateDefinition<$Block_, $BlockState_>): void;
         static getValueHelper<T extends $Comparable<T>>(arg0: $Property<T>, arg1: string): T;
-        getModelGroups(): $Object2IntMap<$BlockState>;
         loadAllBlockStates(): void;
         fabric_setLoadingOverride(arg0: $BlockStatesLoaderHooks$LoadingOverride_): void;
+        getModelGroups(): $Object2IntMap<$BlockState>;
         static SINGLETON_MODEL_GROUP: number;
         static BLOCKSTATE_LISTER: $FileToIdConverter;
         constructor(arg0: $Map_<$ResourceLocation_, $List_<$BlockStateModelLoader$LoadedJson_>>, arg1: $ProfilerFiller, arg2: $UnbakedModel, arg3: $BlockColors, arg4: $BiConsumer_<$ModelResourceLocation, $UnbakedModel>);
@@ -393,8 +393,8 @@ declare module "@package/net/minecraft/client/resources/model" {
      */
     export type $BlockStateModelLoader$LoadedModel_ = { key?: $Supplier_<$BlockStateModelLoader$ModelGroupKey>, model?: $UnbakedModel,  } | [key?: $Supplier_<$BlockStateModelLoader$ModelGroupKey>, model?: $UnbakedModel, ];
     export class $MultiPartBakedModel implements $BakedModel, $IDynamicBakedModel, $FabricBakedModel {
-        redirect$hdh000$ferritecore$redirectCacheGet(arg0: $Map_<any, any>, arg1: $Object): $Object;
-        redirect$hdh000$ferritecore$redirectCachePut(arg0: $Map_<any, any>, arg1: $Object, arg2: $Object): $Object;
+        redirect$ibf000$ferritecore$redirectCacheGet(arg0: $Map_<any, any>, arg1: $Object): $Object;
+        redirect$ibf000$ferritecore$redirectCachePut(arg0: $Map_<any, any>, arg1: $Object, arg2: $Object): $Object;
         getSelectors(arg0: $BlockState_): $BitSet;
         emitBlockQuads(arg0: $BlockAndTintGetter, arg1: $BlockState_, arg2: $BlockPos_, arg3: $Supplier_<any>, arg4: $RenderContext): void;
         emitItemQuads(arg0: $ItemStack_, arg1: $Supplier_<any>, arg2: $RenderContext): void;
@@ -407,6 +407,7 @@ declare module "@package/net/minecraft/client/resources/model" {
         getTransforms(): $ItemTransforms;
         getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         getOverrides(): $ItemOverrides;
+        getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
         applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         isGui3d(): boolean;
         usesBlockLight(): boolean;
@@ -417,7 +418,6 @@ declare module "@package/net/minecraft/client/resources/model" {
         getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
         useAmbientOcclusion(): boolean;
-        getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
         getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
         getRenderPasses(arg0: $ItemStack_, arg1: boolean): $List<$BakedModel>;
         particleIcon: $TextureAtlasSprite;
@@ -440,7 +440,7 @@ declare module "@package/net/minecraft/client/resources/model" {
     /**
      * Values that may be interpreted as {@link $ModelBakery$BakedCacheKey}.
      */
-    export type $ModelBakery$BakedCacheKey_ = { id?: $ResourceLocation_, isUvLocked?: boolean, transformation?: $Transformation,  } | [id?: $ResourceLocation_, isUvLocked?: boolean, transformation?: $Transformation, ];
+    export type $ModelBakery$BakedCacheKey_ = { transformation?: $Transformation, isUvLocked?: boolean, id?: $ResourceLocation_,  } | [transformation?: $Transformation, isUvLocked?: boolean, id?: $ResourceLocation_, ];
     export class $BlockStateModelLoader$ModelGroupKey extends $Record {
     }
     /**
@@ -465,14 +465,14 @@ declare module "@package/net/minecraft/client/resources/model" {
      */
     export type $ModelResourceLocation_ = { id?: $ResourceLocation_, variant?: string,  } | [id?: $ResourceLocation_, variant?: string, ];
     export class $ModelBakery$ModelBakerImpl implements $ModelBaker, $BakerImplHooks {
+        fabric_getTextureGetter(): $Function<any, any>;
         getTopLevelModel(arg0: $ModelResourceLocation_): $UnbakedModel;
-        bakeUncached(arg0: $UnbakedModel, arg1: $ModelState, arg2: $Function_<$Material, $TextureAtlasSprite>): $BakedModel;
         bakeUncached(arg0: $UnbakedModel, arg1: $ModelState): $BakedModel;
+        bakeUncached(arg0: $UnbakedModel, arg1: $ModelState, arg2: $Function_<$Material, $TextureAtlasSprite>): $BakedModel;
         getModelTextureGetter(): $Function<$Material, $TextureAtlasSprite>;
         getModel(arg0: $ResourceLocation_): $UnbakedModel;
-        bake(arg0: $ResourceLocation_, arg1: $ModelState, arg2: $Function_<$Material, $TextureAtlasSprite>): $BakedModel;
         bake(arg0: $ResourceLocation_, arg1: $ModelState): $BakedModel;
-        fabric_getTextureGetter(): $Function<any, any>;
+        bake(arg0: $ResourceLocation_, arg1: $ModelState, arg2: $Function_<$Material, $TextureAtlasSprite>): $BakedModel;
         this$0: $ModelBakery;
         constructor(arg0: $ModelBakery, arg1: $ModelBakery$TextureGetter_, arg2: $ModelResourceLocation_);
         get modelTextureGetter(): $Function<$Material, $TextureAtlasSprite>;

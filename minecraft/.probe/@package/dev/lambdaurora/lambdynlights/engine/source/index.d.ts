@@ -12,23 +12,24 @@ declare module "@package/dev/lambdaurora/lambdynlights/engine/source" {
     export interface $EntityDynamicLightSource extends $DynamicLightSource {
         dynamicLightTick(): void;
         getLuminance(): number;
+        isDynamicLightEnabled(): boolean;
+        splitIntoDynamicLightEntries(cellHasher: $CellHasher): $Stream<$SpatialLookupEntry>;
         getDynamicLightX(): number;
         getDynamicLightY(): number;
         getDynamicLightZ(): number;
         resetDynamicLight(): void;
-        isDynamicLightEnabled(): boolean;
-        splitIntoDynamicLightEntries(cellHasher: $CellHasher): $Stream<$SpatialLookupEntry>;
         get luminance(): number;
+        get dynamicLightEnabled(): boolean;
         get dynamicLightX(): number;
         get dynamicLightY(): number;
         get dynamicLightZ(): number;
-        get dynamicLightEnabled(): boolean;
     }
     export class $EntityDynamicLightSourceBehavior {
         static tickEntity(entity: $Entity): void;
     }
     export interface $EntityDynamicLightSourceBehavior extends $EntityDynamicLightSource {
         setLuminance(arg0: number): void;
+        getDynamicLightChunksToRebuild(forced: boolean): $Long2ObjectMap<$ChunkRebuildStatus>;
         setDynamicLightEnabled(enabled: boolean): void;
         getDynamicLightPrevX(): number;
         getDynamicLightPrevY(): number;
@@ -38,7 +39,6 @@ declare module "@package/dev/lambdaurora/lambdynlights/engine/source" {
         setLastDynamicLuminance(arg0: number): void;
         lambdynlights$getTrackedLitChunkPos(): $LongSet;
         lambdynlights$setTrackedLitChunkPos(arg0: $LongSet): void;
-        getDynamicLightChunksToRebuild(forced: boolean): $Long2ObjectMap<$ChunkRebuildStatus>;
         set luminance(value: number);
         set dynamicLightEnabled(value: boolean);
         get dynamicLightPrevX(): number;
@@ -49,9 +49,9 @@ declare module "@package/dev/lambdaurora/lambdynlights/engine/source" {
         static gatherClosestChunks(x: number, y: number, z: number, chunkConsumer: $LongConsumer_): void;
     }
     export interface $DynamicLightSource {
-        getDynamicLightId(): number;
         getDynamicLightChunksToRebuild(arg0: boolean): $Long2ObjectMap<$ChunkRebuildStatus>;
         splitIntoDynamicLightEntries(arg0: $CellHasher): $Stream<$SpatialLookupEntry>;
+        getDynamicLightId(): number;
         get dynamicLightId(): number;
     }
 }

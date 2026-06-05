@@ -405,13 +405,13 @@ declare module "@package/javax/swing/event" {
     export class $DocumentEvent$ElementChange {
     }
     export interface $DocumentEvent$ElementChange {
-        getElement(): $Element;
         getChildrenRemoved(): $Element[];
         getChildrenAdded(): $Element[];
+        getElement(): $Element;
         getIndex(): number;
-        get element(): $Element;
         get childrenRemoved(): $Element[];
         get childrenAdded(): $Element[];
+        get element(): $Element;
         get index(): number;
     }
     export class $DocumentEvent {
@@ -464,9 +464,9 @@ declare module "@package/javax/swing/event" {
     export class $AncestorListener {
     }
     export interface $AncestorListener extends $EventListener {
+        ancestorMoved(arg0: $AncestorEvent): void;
         ancestorAdded(arg0: $AncestorEvent): void;
         ancestorRemoved(arg0: $AncestorEvent): void;
-        ancestorMoved(arg0: $AncestorEvent): void;
     }
     export class $AncestorEvent extends $AWTEvent {
         getAncestorParent(): $Container;
@@ -534,9 +534,9 @@ declare module "@package/javax/swing/event" {
     export class $ListDataListener {
     }
     export interface $ListDataListener extends $EventListener {
-        contentsChanged(arg0: $ListDataEvent): void;
         intervalAdded(arg0: $ListDataEvent): void;
         intervalRemoved(arg0: $ListDataEvent): void;
+        contentsChanged(arg0: $ListDataEvent): void;
     }
     export class $ChangeEvent extends $EventObject {
         constructor(arg0: $Object);

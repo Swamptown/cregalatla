@@ -28,7 +28,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/animation" {
     /**
      * Values that may be interpreted as {@link $Animation}.
      */
-    export type $Animation_ = { ease?: $IEase_, duration?: number, delay?: number,  } | [ease?: $IEase_, duration?: number, delay?: number, ];
+    export type $Animation_ = { delay?: number, duration?: number, ease?: $IEase_,  } | [delay?: number, duration?: number, ease?: $IEase_, ];
     export class $AnimationEngine {
         updateFrame(): void;
         getAppTime(): number;

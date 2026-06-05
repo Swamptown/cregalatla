@@ -16,16 +16,16 @@ declare module "@package/mezz/jei/api/gui/handlers" {
     }
     export interface $IGuiClickableArea {
         isTooltipEnabled(): boolean;
-        getTooltip(arg0: $ITooltipBuilder): void;
+        getArea(): $Rect2i;
         /**
          * @deprecated
          */
         getTooltipStrings(): $List<$Component>;
-        getArea(): $Rect2i;
+        getTooltip(arg0: $ITooltipBuilder): void;
         onClick(arg0: $IFocusFactory, arg1: $IRecipesGui): void;
         get tooltipEnabled(): boolean;
-        get tooltipStrings(): $List<$Component>;
         get area(): $Rect2i;
+        get tooltipStrings(): $List<$Component>;
     }
     export class $IGuiContainerHandler<T extends $AbstractContainerScreen<never>> {
     }
@@ -41,20 +41,20 @@ declare module "@package/mezz/jei/api/gui/handlers" {
     export class $IGhostIngredientHandler<T extends $Screen> {
     }
     export interface $IGhostIngredientHandler<T extends $Screen> {
-        getTargetsTyped<I>(arg0: T, arg1: $ITypedIngredient<I>, arg2: boolean): $List<$IGhostIngredientHandler$Target<I>>;
         onComplete(): void;
+        getTargetsTyped<I>(arg0: T, arg1: $ITypedIngredient<I>, arg2: boolean): $List<$IGhostIngredientHandler$Target<I>>;
         shouldHighlightTargets(): boolean;
     }
     export class $IGuiProperties {
     }
     export interface $IGuiProperties {
+        screenClass(): $Class<$Screen>;
         guiXSize(): number;
         guiYSize(): number;
-        screenClass(): $Class<$Screen>;
-        screenWidth(): number;
-        screenHeight(): number;
         guiLeft(): number;
         guiTop(): number;
+        screenWidth(): number;
+        screenHeight(): number;
     }
     export class $IScreenHandler<T extends $Screen> {
     }

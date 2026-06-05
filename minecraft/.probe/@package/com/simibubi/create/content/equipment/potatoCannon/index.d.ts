@@ -2,7 +2,6 @@ import { $Level_ } from "@package/net/minecraft/world/level";
 import { $TagKey } from "@package/net/minecraft/tags";
 import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $Fluid } from "@package/net/minecraft/world/level/material";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $IEntityWithComplexSpawn } from "@package/net/neoforged/neoforge/entity";
 import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $Pose, $PortalProcessor, $Entity, $EntityType$Builder } from "@package/net/minecraft/world/entity";
 import { $PotatoProjectileEntityExtension } from "@package/dev/eriksonn/aeronautics/mixinterface";
@@ -11,7 +10,7 @@ import { $UUID } from "@package/java/util";
 import { $AbstractHurtingProjectile } from "@package/net/minecraft/world/entity/projectile";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $SynchedEntityData, $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
-import { $HolderLookup$Provider, $BlockPos } from "@package/net/minecraft/core";
+import { $BlockPos } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $AtomicInteger } from "@package/java/util/concurrent/atomic";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
@@ -22,8 +21,7 @@ import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entit
 
 declare module "@package/com/simibubi/create/content/equipment/potatoCannon" {
     export class $PotatoProjectileEntity extends $AbstractHurtingProjectile implements $IEntityWithComplexSpawn, $PotatoProjectileEntityExtension, $PotatoProjectileEntityAccessor {
-        writeSpawnData(arg0: $RegistryFriendlyByteBuf): void;
-        readSpawnData(arg0: $RegistryFriendlyByteBuf): void;
+        static playHitSound(arg0: $Level_, arg1: $Vec3_): void;
         setEnchantmentEffectsFromCannon(arg0: $ItemStack_): void;
         getProjectileType(): $PotatoCannonProjectileType;
         getStuckEntity(): $Entity;
@@ -32,12 +30,12 @@ declare module "@package/com/simibubi/create/content/equipment/potatoCannon" {
         static playLaunchSound(arg0: $Level_, arg1: $Vec3_, arg2: number): void;
         aeronautics$setIsFromMountedPotatoCannon(arg0: boolean): void;
         aeronautics$setDamageMultiplier(arg0: number): void;
-        static playHitSound(arg0: $Level_, arg1: $Vec3_): void;
+        writeSpawnData(arg0: $RegistryFriendlyByteBuf): void;
+        readSpawnData(arg0: $RegistryFriendlyByteBuf): void;
         setItem(arg0: $ItemStack_): void;
         getItem(): $ItemStack;
         static build(arg0: $EntityType$Builder<never>): $EntityType$Builder<never>;
         recoveryChance(arg0: number): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -90,6 +88,7 @@ declare module "@package/com/simibubi/create/content/equipment/potatoCannon" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;

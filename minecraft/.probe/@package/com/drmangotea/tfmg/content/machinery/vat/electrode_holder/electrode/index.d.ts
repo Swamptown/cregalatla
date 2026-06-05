@@ -12,10 +12,10 @@ declare module "@package/com/drmangotea/tfmg/content/machinery/vat/electrode_hol
     export class $Electrode {
         getResistance(): number;
         getOperationId(): string;
-        getOrCreateDescriptionId(): string;
-        getDisplayName(): $Component;
         tick(arg0: $VatBlockEntity, arg1: $Level_, arg2: $BlockPos_, arg3: boolean, arg4: boolean): void;
+        getOrCreateDescriptionId(): string;
         getItem(): $ItemEntry<never>;
+        getDisplayName(): $Component;
         getKey(): $ResourceLocation;
         getStack(): $ItemStack;
         getDescriptionId(): string;
@@ -23,8 +23,8 @@ declare module "@package/com/drmangotea/tfmg/content/machinery/vat/electrode_hol
         get resistance(): number;
         get operationId(): string;
         get orCreateDescriptionId(): string;
-        get displayName(): $Component;
         get item(): $ItemEntry<never>;
+        get displayName(): $Component;
         get key(): $ResourceLocation;
         get stack(): $ItemStack;
         get descriptionId(): string;

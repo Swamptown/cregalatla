@@ -22,8 +22,8 @@ declare module "@package/net/createmod/catnip/net/base" {
     export class $BasePacketPayload {
     }
     export interface $BasePacketPayload extends $CustomPacketPayload {
-        getTypeProvider(): $BasePacketPayload$PacketTypeProvider;
         type(): $CustomPacketPayload$Type<$CustomPacketPayload>;
+        getTypeProvider(): $BasePacketPayload$PacketTypeProvider;
         get typeProvider(): $BasePacketPayload$PacketTypeProvider;
     }
     /**

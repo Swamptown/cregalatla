@@ -59,15 +59,15 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
     }
     export class $PreTagWrapper$AddAction extends $Record implements $Consumer<$TagKubeEvent> {
         tag(): $ResourceLocation;
-        accept(e: $TagKubeEvent): void;
         filters(): $Object[];
+        accept(e: $TagKubeEvent): void;
         andThen(arg0: $Consumer_<$TagKubeEvent>): $Consumer<$TagKubeEvent>;
         constructor(tag: $ResourceLocation_, filters: $Object[]);
     }
     /**
      * Values that may be interpreted as {@link $PreTagWrapper$AddAction}.
      */
-    export type $PreTagWrapper$AddAction_ = { filters?: $Object[], tag?: $ResourceLocation_,  } | [filters?: $Object[], tag?: $ResourceLocation_, ];
+    export type $PreTagWrapper$AddAction_ = { tag?: $ResourceLocation_, filters?: $Object[],  } | [tag?: $ResourceLocation_, filters?: $Object[], ];
     export class $PreTagKubeEvent extends $TagKubeEvent {
         static handle(tagEventHolders: $Map_<$ResourceKey_<never>, $PreTagKubeEvent>): void;
         registryKey: $ResourceKey<never>;
@@ -92,10 +92,10 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
     export class $TagEventFilter$Or extends $Record implements $TagEventFilter {
         testElementId(resourceLocation: $ResourceLocation_): boolean;
         testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
+        filters(): $List<$TagEventFilter>;
         remove(wrapper: $TagWrapper): number;
         add(wrapper: $TagWrapper): number;
         unwrap(): $Stream<$TagEventFilter>;
-        filters(): $List<$TagEventFilter>;
         constructor(filters: $List_<$TagEventFilter_>);
     }
     /**
@@ -203,15 +203,15 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
     }
     export class $PreTagWrapper$RemoveAction extends $Record implements $Consumer<$TagKubeEvent> {
         tag(): $ResourceLocation;
-        accept(e: $TagKubeEvent): void;
         filters(): $Object[];
+        accept(e: $TagKubeEvent): void;
         andThen(arg0: $Consumer_<$TagKubeEvent>): $Consumer<$TagKubeEvent>;
         constructor(tag: $ResourceLocation_, filters: $Object[]);
     }
     /**
      * Values that may be interpreted as {@link $PreTagWrapper$RemoveAction}.
      */
-    export type $PreTagWrapper$RemoveAction_ = { filters?: $Object[], tag?: $ResourceLocation_,  } | [filters?: $Object[], tag?: $ResourceLocation_, ];
+    export type $PreTagWrapper$RemoveAction_ = { tag?: $ResourceLocation_, filters?: $Object[],  } | [tag?: $ResourceLocation_, filters?: $Object[], ];
     export class $PreTagWrapper extends $TagWrapper {
         preEvent: $PreTagKubeEvent;
         entries: $List<$TagLoader$EntryWithSource>;

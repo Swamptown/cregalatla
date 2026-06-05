@@ -10,13 +10,13 @@ declare module "@package/net/fabricmc/fabric/api/recipe/v1/ingredient" {
     export class $CustomIngredient {
     }
     export interface $CustomIngredient {
+        getSerializer(): $CustomIngredientSerializer<never>;
         getMatchingStacks(): $List<$ItemStack>;
         toVanilla(): $Ingredient;
         requiresTesting(): boolean;
-        getSerializer(): $CustomIngredientSerializer<never>;
         test(arg0: $ItemStack_): boolean;
-        get matchingStacks(): $List<$ItemStack>;
         get serializer(): $CustomIngredientSerializer<never>;
+        get matchingStacks(): $List<$ItemStack>;
     }
     export class $FabricIngredient {
     }

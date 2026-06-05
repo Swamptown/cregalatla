@@ -16,8 +16,8 @@ declare module "@package/foundry/veil/mixin/pipeline/accessor" {
     export class $PipelineNativeImageAccessor {
     }
     export interface $PipelineNativeImageAccessor {
-        getPixels(): number;
         invokeCheckAllocated(): void;
+        getPixels(): number;
         get pixels(): number;
     }
     export class $PipelineReloadableResourceManagerAccessor {

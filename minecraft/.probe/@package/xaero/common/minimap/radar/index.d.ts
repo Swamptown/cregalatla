@@ -16,19 +16,11 @@ declare module "@package/xaero/common/minimap/radar" {
         /**
          * @deprecated
          */
-        setLastRenderViewEntity(arg0: $Entity): void;
-        /**
-         * @deprecated
-         */
         getTeamColour(arg0: $Entity): number;
         /**
          * @deprecated
          */
-        getEntityCategoryManager(): $EntityRadarCategoryManager;
-        /**
-         * @deprecated
-         */
-        getRadarListsIterator(): $Iterator<$MinimapRadarList>;
+        setLastRenderViewEntity(arg0: $Entity): void;
         /**
          * @deprecated
          */
@@ -41,6 +33,14 @@ declare module "@package/xaero/common/minimap/radar" {
          * @deprecated
          */
         getEntityBrightness(arg0: number, arg1: number, arg2: number, arg3: boolean): number;
+        /**
+         * @deprecated
+         */
+        getEntityCategoryManager(): $EntityRadarCategoryManager;
+        /**
+         * @deprecated
+         */
+        getRadarListsIterator(): $Iterator<$MinimapRadarList>;
         /**
          * @deprecated
          */

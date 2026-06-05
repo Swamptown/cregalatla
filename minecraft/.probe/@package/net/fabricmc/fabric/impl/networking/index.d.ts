@@ -24,6 +24,7 @@ declare module "@package/net/fabricmc/fabric/impl/networking" {
      */
     export type $PacketCallbackListener_ = ((arg0: $Packet<never>) => void);
     export class $AbstractNetworkAddon<H> {
+        endSession(): void;
         registerChannels(arg0: $Map_<$ResourceLocation_, H>): void;
         registerChannel(arg0: $ResourceLocation_, arg1: H): boolean;
         unregisterChannel(arg0: $ResourceLocation_): H;
@@ -31,7 +32,6 @@ declare module "@package/net/fabricmc/fabric/impl/networking" {
         lateInit(): void;
         getHandler(arg0: $ResourceLocation_): H;
         handleDisconnect(): void;
-        endSession(): void;
         get receivableChannels(): $Set<$ResourceLocation>;
     }
 }

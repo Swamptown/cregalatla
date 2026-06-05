@@ -18,6 +18,7 @@ import { $CharSequence, $Enum, $Exception, $Throwable, $Record, $Class, $Runnabl
 import { $Cipher } from "@package/javax/crypto";
 import { $ChunkPos } from "@package/net/minecraft/world/level";
 import { $IntList } from "@package/it/unimi/dsi/fastutil/ints";
+import { $OutputStream } from "@package/java/io";
 import { $Marker } from "@package/org/slf4j";
 import { $Component_, $Component } from "@package/net/minecraft/network/chat";
 import { $ClientLoginPacketListener } from "@package/net/minecraft/network/protocol/login";
@@ -79,7 +80,7 @@ declare module "@package/net/minecraft/network" {
     /**
      * Values that may be interpreted as {@link $DisconnectionDetails}.
      */
-    export type $DisconnectionDetails_ = { report?: ($Path_) | undefined, bugReportLink?: ($URI) | undefined, reason?: $Component_,  } | [report?: ($Path_) | undefined, bugReportLink?: ($URI) | undefined, reason?: $Component_, ];
+    export type $DisconnectionDetails_ = { bugReportLink?: ($URI) | undefined, report?: ($Path_) | undefined, reason?: $Component_,  } | [bugReportLink?: ($URI) | undefined, report?: ($Path_) | undefined, reason?: $Component_, ];
     export class $PacketListener {
     }
     export interface $PacketListener {
@@ -128,25 +129,25 @@ declare module "@package/net/minecraft/network" {
     }
     export class $RegistryFriendlyByteBuf extends $FriendlyByteBuf {
         getConnectionType(): $ConnectionType;
+        static decorator(arg0: $RegistryAccess, arg1: $ConnectionType_): $Function<$ByteBuf, $RegistryFriendlyByteBuf>;
         /**
          * @deprecated
          */
         static decorator(arg0: $RegistryAccess): $Function<$ByteBuf, $RegistryFriendlyByteBuf>;
-        static decorator(arg0: $RegistryAccess, arg1: $ConnectionType_): $Function<$ByteBuf, $RegistryFriendlyByteBuf>;
         registryAccess(): $RegistryAccess;
         static MAX_COMPONENT_STRING_LENGTH: number;
         static MAX_STRING_LENGTH: number;
         static DEFAULT_NBT_QUOTA: number;
-        constructor(arg0: $ByteBuf, arg1: $RegistryAccess, arg2: $ConnectionType_);
         /**
          * @deprecated
          */
         constructor(arg0: $ByteBuf, arg1: $RegistryAccess);
+        constructor(arg0: $ByteBuf, arg1: $RegistryAccess, arg2: $ConnectionType_);
         get connectionType(): $ConnectionType;
     }
     export class $ProtocolSwapHandler {
-        static handleOutboundTerminalPacket(arg0: $ChannelHandlerContext, arg1: $Packet<never>): void;
         static handleInboundTerminalPacket(arg0: $ChannelHandlerContext, arg1: $Packet<never>): void;
+        static handleOutboundTerminalPacket(arg0: $ChannelHandlerContext, arg1: $Packet<never>): void;
     }
     export interface $ProtocolSwapHandler {
     }
@@ -160,6 +161,22 @@ declare module "@package/net/minecraft/network" {
         tick(): void;
     }
     export class $FriendlyByteBuf extends $ByteBuf implements $IFriendlyByteBufExtension {
+        /**
+         * @deprecated
+         */
+        readWithCodecTrusted<T>(arg0: $DynamicOps<$Tag_>, arg1: $Codec<T>): T;
+        writeShortLE(arg0: number): $FriendlyByteBuf;
+        writeMedium(arg0: number): $FriendlyByteBuf;
+        retain(arg0: number): $FriendlyByteBuf;
+        retain(): $FriendlyByteBuf;
+        /**
+         * @deprecated
+         */
+        readWithCodec<T>(arg0: $DynamicOps<$Tag_>, arg1: $Codec<T>, arg2: $NbtAccounter): T;
+        /**
+         * @deprecated
+         */
+        writeWithCodec<T>(arg0: $DynamicOps<$Tag_>, arg1: $Codec<T>, arg2: T): $FriendlyByteBuf;
         readJsonWithCodec<T>(arg0: $Codec<T>): T;
         writeJsonWithCodec<T>(arg0: $Codec<T>, arg1: T): void;
         writeUtf(arg0: string, arg1: number): $FriendlyByteBuf;
@@ -182,11 +199,11 @@ declare module "@package/net/minecraft/network" {
         readVarIntArray(arg0: number): number[];
         readVarIntArray(): number[];
         writeLongArray(arg0: number[]): $FriendlyByteBuf;
-        readLongArray(arg0: number[]): number[];
-        readLongArray(): number[];
         readLongArray(arg0: number[], arg1: number): number[];
-        static readBlockPos(arg0: $ByteBuf): $BlockPos;
+        readLongArray(): number[];
+        readLongArray(arg0: number[]): number[];
         readBlockPos(): $BlockPos;
+        static readBlockPos(arg0: $ByteBuf): $BlockPos;
         readChunkPos(): $ChunkPos;
         writeChunkPos(arg0: $ChunkPos): $FriendlyByteBuf;
         readSectionPos(): $SectionPos;
@@ -215,94 +232,92 @@ declare module "@package/net/minecraft/network" {
         writeBlockHitResult(arg0: $BlockHitResult): void;
         readBitSet(): $BitSet;
         writeBitSet(arg0: $BitSet): void;
-        setShortLE(arg0: number, arg1: number): $FriendlyByteBuf;
-        setMediumLE(arg0: number, arg1: number): $FriendlyByteBuf;
-        setBytes(arg0: number, arg1: number[], arg2: number, arg3: number): $FriendlyByteBuf;
-        setBytes(arg0: number, arg1: number[]): $FriendlyByteBuf;
-        setBytes(arg0: number, arg1: $ByteBuf, arg2: number, arg3: number): $FriendlyByteBuf;
-        setBytes(arg0: number, arg1: $ByteBuf, arg2: number): $FriendlyByteBuf;
-        setBytes(arg0: number, arg1: $ByteBuf): $FriendlyByteBuf;
-        setZero(arg0: number, arg1: number): $FriendlyByteBuf;
-        readerIndex(arg0: number): $FriendlyByteBuf;
-        writerIndex(arg0: number): $FriendlyByteBuf;
+        markReaderIndex(): $FriendlyByteBuf;
+        resetReaderIndex(): $FriendlyByteBuf;
         markWriterIndex(): $FriendlyByteBuf;
+        resetWriterIndex(): $FriendlyByteBuf;
         discardReadBytes(): $FriendlyByteBuf;
+        discardSomeReadBytes(): $FriendlyByteBuf;
         ensureWritable(arg0: number): $FriendlyByteBuf;
-        /**
-         * @deprecated
-         */
-        readWithCodecTrusted<T>(arg0: $DynamicOps<$Tag_>, arg1: $Codec<T>): T;
-        /**
-         * @deprecated
-         */
-        readWithCodec<T>(arg0: $DynamicOps<$Tag_>, arg1: $Codec<T>, arg2: $NbtAccounter): T;
-        /**
-         * @deprecated
-         */
-        writeWithCodec<T>(arg0: $DynamicOps<$Tag_>, arg1: $Codec<T>, arg2: T): $FriendlyByteBuf;
+        setShortLE(arg0: number, arg1: number): $FriendlyByteBuf;
+        setMedium(arg0: number, arg1: number): $FriendlyByteBuf;
+        setMediumLE(arg0: number, arg1: number): $FriendlyByteBuf;
+        setBytes(arg0: number, arg1: $ByteBuf, arg2: number, arg3: number): $FriendlyByteBuf;
+        setBytes(arg0: number, arg1: number[]): $FriendlyByteBuf;
+        setZero(arg0: number, arg1: number): $FriendlyByteBuf;
         writeIntLE(arg0: number): $FriendlyByteBuf;
-        writeLongLE(arg0: number): $FriendlyByteBuf;
-        writeChar(arg0: number): $FriendlyByteBuf;
-        skipBytes(arg0: number): $FriendlyByteBuf;
-        writeDouble(arg0: number): $FriendlyByteBuf;
+        readerIndex(arg0: number): $FriendlyByteBuf;
         readUtf(): string;
         readUtf(arg0: number): string;
         getSource(): $ByteBuf;
-        getBytes(arg0: number, arg1: $ByteBuf, arg2: number, arg3: number): $FriendlyByteBuf;
+        writeChar(arg0: number): $FriendlyByteBuf;
+        writeShort(arg0: number): $FriendlyByteBuf;
+        skipBytes(arg0: number): $FriendlyByteBuf;
+        writeBoolean(arg0: boolean): $FriendlyByteBuf;
+        writeByte(arg0: number): $FriendlyByteBuf;
+        writeLong(arg0: number): $FriendlyByteBuf;
+        clear(): $FriendlyByteBuf;
+        getBytes(arg0: number, arg1: $OutputStream, arg2: number): $FriendlyByteBuf;
+        getBytes(arg0: number, arg1: number[], arg2: number, arg3: number): $FriendlyByteBuf;
         getBytes(arg0: number, arg1: number[]): $FriendlyByteBuf;
-        getBytes(arg0: number, arg1: $ByteBuf): $FriendlyByteBuf;
+        getBytes(arg0: number, arg1: $ByteBuf, arg2: number, arg3: number): $FriendlyByteBuf;
         getBytes(arg0: number, arg1: $ByteBuf, arg2: number): $FriendlyByteBuf;
+        getBytes(arg0: number, arg1: $ByteBuffer): $FriendlyByteBuf;
+        writeInt(arg0: number): $FriendlyByteBuf;
+        setBoolean(arg0: number, arg1: boolean): $FriendlyByteBuf;
+        setByte(arg0: number, arg1: number): $FriendlyByteBuf;
+        setChar(arg0: number, arg1: number): $FriendlyByteBuf;
         setShort(arg0: number, arg1: number): $FriendlyByteBuf;
-        setFloat(arg0: number, arg1: number): $FriendlyByteBuf;
-        setDouble(arg0: number, arg1: number): $FriendlyByteBuf;
-        writeBytes(arg0: $ByteBuffer): $FriendlyByteBuf;
-        writeBytes(arg0: number[], arg1: number, arg2: number): $FriendlyByteBuf;
+        capacity(arg0: number): $FriendlyByteBuf;
+        readBytes(arg0: $ByteBuf, arg1: number): $FriendlyByteBuf;
+        readBytes(arg0: $OutputStream, arg1: number): $FriendlyByteBuf;
         writeBytes(arg0: number[]): $FriendlyByteBuf;
+        writeBytes(arg0: $ByteBuffer): $FriendlyByteBuf;
         writeBytes(arg0: $ByteBuf, arg1: number): $FriendlyByteBuf;
+        writeBytes(arg0: $ByteBuf): $FriendlyByteBuf;
         writeDate(arg0: $Date): $FriendlyByteBuf;
         writeMap<K, V>(arg0: $Map_<K, V>, arg1: $StreamEncoder_<$FriendlyByteBuf, K>, arg2: $StreamEncoder_<$FriendlyByteBuf, V>): void;
-        readUUID(): $UUID;
+        writeBlockPos(arg0: $BlockPos_): $FriendlyByteBuf;
+        static writeBlockPos(arg0: $ByteBuf, arg1: $BlockPos_): void;
         static readUUID(arg0: $ByteBuf): $UUID;
-        static writeUUID(arg0: $ByteBuf, arg1: $UUID_): void;
+        readUUID(): $UUID;
         writeUUID(arg0: $UUID_): $FriendlyByteBuf;
+        static writeUUID(arg0: $ByteBuf, arg1: $UUID_): void;
         readList<T>(arg0: $StreamDecoder_<$FriendlyByteBuf, T>): $List<T>;
-        readMap<K, V>(arg0: $StreamDecoder_<$FriendlyByteBuf, K>, arg1: $StreamDecoder_<$FriendlyByteBuf, V>): $Map<K, V>;
         readMap<K, V, M extends $Map<K, V>>(arg0: $IntFunction_<M>, arg1: $StreamDecoder_<$FriendlyByteBuf, K>, arg2: $StreamDecoder_<$FriendlyByteBuf, V>): M;
-        static writeByteArray(arg0: $ByteBuf, arg1: number[]): void;
-        writeByteArray(arg0: number[]): $FriendlyByteBuf;
-        static readByteArray(arg0: $ByteBuf, arg1: number): number[];
-        static readByteArray(arg0: $ByteBuf): number[];
-        readByteArray(arg0: number): number[];
-        readByteArray(): number[];
-        readNbt(): $CompoundTag;
-        static readNbt(arg0: $ByteBuf, arg1: $NbtAccounter): $Tag;
+        readMap<K, V>(arg0: $StreamDecoder_<$FriendlyByteBuf, K>, arg1: $StreamDecoder_<$FriendlyByteBuf, V>): $Map<K, V>;
         readNbt(arg0: $NbtAccounter): $Tag;
+        static readNbt(arg0: $ByteBuf, arg1: $NbtAccounter): $Tag;
+        readNbt(): $CompoundTag;
         static readNbt(arg0: $ByteBuf): $CompoundTag;
-        writeNbt(arg0: $Tag_): $FriendlyByteBuf;
         static writeNbt(arg0: $ByteBuf, arg1: $Tag_): void;
+        writeNbt(arg0: $Tag_): $FriendlyByteBuf;
+        readByteArray(): number[];
+        static readByteArray(arg0: $ByteBuf): number[];
+        static readByteArray(arg0: $ByteBuf, arg1: number): number[];
+        readByteArray(arg0: number): number[];
+        writeByteArray(arg0: number[]): $FriendlyByteBuf;
+        static writeByteArray(arg0: $ByteBuf, arg1: number[]): void;
         writeVector3f(arg0: $Vector3f): void;
         static writeVector3f(arg0: $ByteBuf, arg1: $Vector3f): void;
         readQuaternion(): $Quaternionf;
         static readQuaternion(arg0: $ByteBuf): $Quaternionf;
-        writeQuaternion(arg0: $Quaternionf): void;
         static writeQuaternion(arg0: $ByteBuf, arg1: $Quaternionf): void;
-        readVector3f(): $Vector3f;
+        writeQuaternion(arg0: $Quaternionf): void;
         static readVector3f(arg0: $ByteBuf): $Vector3f;
+        readVector3f(): $Vector3f;
         static readNullable<T, B extends $ByteBuf>(arg0: B, arg1: $StreamDecoder_<B, T>): T;
         readNullable<T>(arg0: $StreamDecoder_<$FriendlyByteBuf, T>): T;
-        writeNullable<T>(arg0: T, arg1: $StreamEncoder_<$FriendlyByteBuf, T>): void;
         static writeNullable<T, B extends $ByteBuf>(arg0: B, arg1: T, arg2: $StreamEncoder_<B, T>): void;
-        touch(): $FriendlyByteBuf;
-        static writeBlockPos(arg0: $ByteBuf, arg1: $BlockPos_): void;
-        writeBlockPos(arg0: $BlockPos_): $FriendlyByteBuf;
+        writeNullable<T>(arg0: T, arg1: $StreamEncoder_<$FriendlyByteBuf, T>): void;
         writeObjectCollection<T>(arg0: $Collection_<T>, arg1: $BiConsumer_<T, $FriendlyByteBuf>): void;
         writeByte(arg0: number): $FriendlyByteBuf;
         writeMap<K, V>(arg0: $Map_<K, V>, arg1: $StreamEncoder_<$FriendlyByteBuf, K>, arg2: $TriConsumer_<$FriendlyByteBuf, K, V>): void;
+        writeArray<T>(arg0: T[], arg1: $StreamEncoder_<$FriendlyByteBuf, T>): $FriendlyByteBuf;
         readMap<K, V>(arg0: $StreamDecoder_<$FriendlyByteBuf, K>, arg1: $BiFunction_<$FriendlyByteBuf, K, V>): $Map<K, V>;
         readArray<T>(arg0: $IntFunction_<T[]>, arg1: $StreamDecoder_<$FriendlyByteBuf, T>): T[];
-        writeArray<T>(arg0: T[], arg1: $StreamEncoder_<$FriendlyByteBuf, T>): $FriendlyByteBuf;
-        retain(arg0: number): $ByteBuf;
-        retain(): $ByteBuf;
+        touch(): $ByteBuf;
+        touch(arg0: $Object): $ByteBuf;
         static MAX_COMPONENT_STRING_LENGTH: number;
         static MAX_STRING_LENGTH: number;
         static DEFAULT_NBT_QUOTA: number;
@@ -345,17 +360,17 @@ declare module "@package/net/minecraft/network" {
         constructor(arg0: $ProtocolInfo<T>);
     }
     export class $PacketSendListener {
-        static exceptionallySend(arg0: $Supplier_<$Packet<never>>): $PacketSendListener;
         static thenRun(arg0: $Runnable_): $PacketSendListener;
+        static exceptionallySend(arg0: $Supplier_<$Packet<never>>): $PacketSendListener;
     }
     export interface $PacketSendListener {
         onFailure(): $Packet<never>;
         onSuccess(): void;
     }
     export class $CompressionEncoder extends $MessageToByteEncoder<$ByteBuf> {
+        getThreshold(): number;
         setThreshold(arg0: number): void;
         encode(arg0: $ChannelHandlerContext, arg1: $ByteBuf, arg2: $ByteBuf): void;
-        getThreshold(): number;
         constructor(arg0: number);
     }
     export class $PacketBundlePacker extends $MessageToMessageDecoder<$Packet<never>> {
@@ -441,17 +456,17 @@ declare module "@package/net/minecraft/network" {
     export class $Connection extends $SimpleChannelInboundHandler<$Packet<never>> implements $DialtoneConnectionExtensions, $ConnectionExtension {
         getInboundProtocol(): $ProtocolInfo<never>;
         setEncryptionKey(arg0: $Cipher, arg1: $Cipher): void;
+        static connectToServer(arg0: $InetSocketAddress, arg1: boolean, arg2: $LocalSampleLogger): $Connection;
+        initiateServerboundStatusConnection(arg0: string, arg1: number, arg2: $ClientStatusPacketListener): void;
         getPacketListener(): $PacketListener;
         getSending(): $PacketFlow;
         channelRead0(arg0: $ChannelHandlerContext, arg1: $Packet<never>): void;
         getReceiving(): $PacketFlow;
         setListenerForServerboundHandshake(arg0: $PacketListener): void;
-        initiateServerboundStatusConnection(arg0: string, arg1: number, arg2: $ClientStatusPacketListener): void;
         runOnceConnected(arg0: $Consumer_<$Connection>): void;
         flushChannel(): void;
         tickSecond(): void;
         getLoggableAddress(arg0: boolean): string;
-        static connectToServer(arg0: $InetSocketAddress, arg1: boolean, arg2: $LocalSampleLogger): $Connection;
         setBandwidthLogger(arg0: $LocalSampleLogger): void;
         configurePacketHandler(arg0: $ChannelPipeline): void;
         static configureSerialization(arg0: $ChannelPipeline, arg1: $PacketFlow_, arg2: boolean, arg3: $BandwidthDebugMonitor): void;
@@ -464,17 +479,18 @@ declare module "@package/net/minecraft/network" {
         e4mc$exportKeyingMaterial(label: number[], context: number[], length: number): number[];
         sable$setUDPChannel(arg0: $Channel): void;
         sable$getUDPChannel(): $Channel;
+        tick(): void;
         isConnected(): boolean;
         getRemoteAddress(): $SocketAddress;
-        tick(): void;
         static connect(arg0: $InetSocketAddress, arg1: boolean, arg2: $Connection): $ChannelFuture;
         setReadOnly(): void;
         channel(): $Channel;
-        disconnect(arg0: $DisconnectionDetails_): void;
         disconnect(arg0: $Component_): void;
+        disconnect(arg0: $DisconnectionDetails_): void;
+        send(arg0: $Packet<never>): void;
         send(arg0: $Packet<never>, arg1: $PacketSendListener): void;
         send(arg0: $Packet<never>, arg1: $PacketSendListener, arg2: boolean): void;
-        send(arg0: $Packet<never>): void;
+        isEncrypted(): boolean;
         getDirection(): $PacketFlow;
         static connectToLocalServer(arg0: $SocketAddress): $Connection;
         initiateServerboundPlayConnection<S extends $ServerboundPacketListener, C extends $ClientboundPacketListener>(arg0: string, arg1: number, arg2: $ProtocolInfo<S>, arg3: $ProtocolInfo<C>, arg4: C, arg5: boolean): void;
@@ -483,7 +499,6 @@ declare module "@package/net/minecraft/network" {
         setupOutboundProtocol(arg0: $ProtocolInfo<never>): void;
         isMemoryConnection(): boolean;
         handleDisconnection(): void;
-        isEncrypted(): boolean;
         static PACKET_MARKER: $Marker;
         bandwidthDebugMonitor: $BandwidthDebugMonitor;
         static PACKET_SENT_MARKER: $Marker;
@@ -505,10 +520,10 @@ declare module "@package/net/minecraft/network" {
         get averageSentPackets(): number;
         get connected(): boolean;
         get remoteAddress(): $SocketAddress;
+        get encrypted(): boolean;
         get direction(): $PacketFlow;
         set upOutboundProtocol(value: $ProtocolInfo<never>);
         get memoryConnection(): boolean;
-        get encrypted(): boolean;
     }
     export class $ProtocolInfo<T extends $PacketListener> {
     }

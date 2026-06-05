@@ -20,11 +20,11 @@ declare module "@package/com/simibubi/create/content/kinetics/belt/behaviour" {
      */
     export type $TransportedItemStackHandlerBehaviour$ProcessingCallback_ = ((arg0: number, arg1: $Function<$TransportedItemStack, $TransportedItemStackHandlerBehaviour$TransportedResult>) => void);
     export class $TransportedItemStackHandlerBehaviour extends $BlockEntityBehaviour {
-        handleProcessingOnAllItems(arg0: $Function_<$TransportedItemStack, $TransportedItemStackHandlerBehaviour$TransportedResult>): void;
-        handleProcessingOnItem(arg0: $TransportedItemStack, arg1: $TransportedItemStackHandlerBehaviour$TransportedResult): void;
         getWorldPositionOf(arg0: $TransportedItemStack): $Vec3;
         withStackPlacement(arg0: $TransportedItemStackHandlerBehaviour$PositionGetter_): $TransportedItemStackHandlerBehaviour;
+        handleProcessingOnAllItems(arg0: $Function_<$TransportedItemStack, $TransportedItemStackHandlerBehaviour$TransportedResult>): void;
         handleCenteredProcessingOnAllItems(arg0: number, arg1: $Function_<$TransportedItemStack, $TransportedItemStackHandlerBehaviour$TransportedResult>): void;
+        handleProcessingOnItem(arg0: $TransportedItemStack, arg1: $TransportedItemStackHandlerBehaviour$TransportedResult): void;
         blockEntity: $SmartBlockEntity;
         static TYPE: $BehaviourType<$TransportedItemStackHandlerBehaviour>;
         constructor(arg0: $SmartBlockEntity, arg1: $TransportedItemStackHandlerBehaviour$ProcessingCallback_);
@@ -34,9 +34,9 @@ declare module "@package/com/simibubi/create/content/kinetics/belt/behaviour" {
         hasHeldOutput(): boolean;
         getHeldOutput(): $TransportedItemStack;
         static doNothing(): $TransportedItemStackHandlerBehaviour$TransportedResult;
-        static convertToAndLeaveHeld(arg0: $List_<$TransportedItemStack>, arg1: $TransportedItemStack): $TransportedItemStackHandlerBehaviour$TransportedResult;
         doesNothing(): boolean;
         static removeItem(): $TransportedItemStackHandlerBehaviour$TransportedResult;
+        static convertToAndLeaveHeld(arg0: $List_<$TransportedItemStack>, arg1: $TransportedItemStack): $TransportedItemStackHandlerBehaviour$TransportedResult;
         getOutputs(): $List<$TransportedItemStack>;
         static convertTo(arg0: $List_<$TransportedItemStack>): $TransportedItemStackHandlerBehaviour$TransportedResult;
         static convertTo(arg0: $TransportedItemStack): $TransportedItemStackHandlerBehaviour$TransportedResult;

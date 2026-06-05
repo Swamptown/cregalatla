@@ -4,10 +4,10 @@ import { $ByteBuffer } from "@package/java/nio";
 
 declare module "@package/xaero/map/pool/buffer" {
     export class $PoolTextureDirectBufferUnit implements $PoolUnit {
+        static createBuffer(): $ByteBuffer;
         getDirectBuffer(): $ByteBuffer;
         reset(): void;
         create(...arg0: $Object[]): void;
-        static createBuffer(): $ByteBuffer;
         constructor(...arg0: $Object[]);
         get directBuffer(): $ByteBuffer;
     }

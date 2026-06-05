@@ -5,15 +5,15 @@ export * as option from "@package/dev/lambdaurora/spruceui/option";
 
 declare module "@package/dev/lambdaurora/spruceui" {
     export class $Position implements $SprucePositioned {
-        setAnchor(anchor: $SprucePositioned): void;
         setRelativeY(y: number): void;
         getRelativeY(): number;
         getRelativeX(): number;
         setRelativeX(x: number): void;
+        setAnchor(anchor: $SprucePositioned): void;
         getAnchor(): $SprucePositioned;
-        getY(): number;
         static origin(): $Position;
         move(x: number, y: number): $Position;
+        getY(): number;
         static of(anchor: $SprucePositioned, x: number, y: number): $Position;
         static of(x: number, y: number): $Position;
         copy(): $Position;

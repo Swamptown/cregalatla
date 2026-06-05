@@ -1,5 +1,5 @@
 import { $Direction_, $Direction } from "@package/net/minecraft/core";
-import { $ModelProperties_, $ModelProperties, $FaceUV$Rotation_ } from "@package/software/bernie/geckolib/loading/json/raw";
+import { $ModelProperties, $ModelProperties_, $FaceUV$Rotation_ } from "@package/software/bernie/geckolib/loading/json/raw";
 import { $List, $List_ } from "@package/java/util";
 import { $Record } from "@package/java/lang";
 import { $BoneSnapshot } from "@package/software/bernie/geckolib/animation/state";
@@ -17,8 +17,24 @@ declare module "@package/software/bernie/geckolib/cache/object" {
     /**
      * Values that may be interpreted as {@link $BakedGeoModel}.
      */
-    export type $BakedGeoModel_ = { topLevelBones?: $List_<$GeoBone>, properties?: $ModelProperties_,  } | [topLevelBones?: $List_<$GeoBone>, properties?: $ModelProperties_, ];
+    export type $BakedGeoModel_ = { properties?: $ModelProperties_, topLevelBones?: $List_<$GeoBone>,  } | [properties?: $ModelProperties_, topLevelBones?: $List_<$GeoBone>, ];
     export class $GeoBone {
+        getScaleX(): number;
+        getScaleY(): number;
+        getScaleZ(): number;
+        getPosZ(): number;
+        getRotZ(): number;
+        getChildBones(): $List<$GeoBone>;
+        getLocalPosition(): $Vector3d;
+        setRotZ(arg0: number): void;
+        setPosZ(arg0: number): void;
+        setScaleX(arg0: number): void;
+        setScaleY(arg0: number): void;
+        setScaleZ(arg0: number): void;
+        getCubes(): $List<$GeoCube>;
+        getPositionVector(): $Vector3d;
+        getScaleVector(): $Vector3d;
+        addRotationOffsetFromBone(arg0: $GeoBone): void;
         markRotationAsChanged(): void;
         markPositionAsChanged(): void;
         markScaleAsChanged(): void;
@@ -53,34 +69,18 @@ declare module "@package/software/bernie/geckolib/cache/object" {
         getModelPosition(): $Vector3d;
         setModelPosition(arg0: $Vector3d): void;
         getModelRotationMatrix(): $Matrix4f;
-        getScaleX(): number;
-        getScaleY(): number;
-        getScaleZ(): number;
-        getPosZ(): number;
-        getRotZ(): number;
-        getChildBones(): $List<$GeoBone>;
-        getLocalPosition(): $Vector3d;
-        setRotZ(arg0: number): void;
-        setPosZ(arg0: number): void;
-        setScaleX(arg0: number): void;
-        setScaleY(arg0: number): void;
-        setScaleZ(arg0: number): void;
-        getPositionVector(): $Vector3d;
-        getScaleVector(): $Vector3d;
-        addRotationOffsetFromBone(arg0: $GeoBone): void;
-        getCubes(): $List<$GeoCube>;
-        updatePosition(arg0: number, arg1: number, arg2: number): void;
         updateScale(arg0: number, arg1: number, arg2: number): void;
         setPosX(arg0: number): void;
-        setPosY(arg0: number): void;
         getPosX(): number;
+        setPosY(arg0: number): void;
         getPosY(): number;
+        updatePosition(arg0: number, arg1: number, arg2: number): void;
+        updateRotation(arg0: number, arg1: number, arg2: number): void;
+        getWorldPosition(): $Vector3d;
         getRotY(): number;
         setRotY(arg0: number): void;
         getRotX(): number;
         setRotX(arg0: number): void;
-        getWorldPosition(): $Vector3d;
-        updateRotation(arg0: number, arg1: number, arg2: number): void;
         setHidden(arg0: boolean): void;
         getName(): string;
         isHidden(): boolean;
@@ -89,17 +89,17 @@ declare module "@package/software/bernie/geckolib/cache/object" {
         getRotationVector(): $Vector3d;
         saveSnapshot(): $BoneSnapshot;
         constructor(arg0: $GeoBone, arg1: string, arg2: boolean, arg3: number, arg4: boolean, arg5: boolean);
+        get childBones(): $List<$GeoBone>;
+        get localPosition(): $Vector3d;
+        get cubes(): $List<$GeoCube>;
+        get positionVector(): $Vector3d;
+        get scaleVector(): $Vector3d;
         get initialSnapshot(): $BoneSnapshot;
         set childrenHidden(value: boolean);
         get hidingChildren(): boolean;
         get inflate(): number;
         get reset(): boolean;
         get modelRotationMatrix(): $Matrix4f;
-        get childBones(): $List<$GeoBone>;
-        get localPosition(): $Vector3d;
-        get positionVector(): $Vector3d;
-        get scaleVector(): $Vector3d;
-        get cubes(): $List<$GeoCube>;
         get worldPosition(): $Vector3d;
         get name(): string;
         get parent(): $GeoBone;
@@ -108,29 +108,29 @@ declare module "@package/software/bernie/geckolib/cache/object" {
     }
     export class $GeoQuad extends $Record {
         vertices(): $GeoVertex[];
+        normal(): $Vector3f;
         direction(): $Direction;
-        static build(arg0: $GeoVertex_[], arg1: number, arg2: number, arg3: number, arg4: number, arg5: $FaceUV$Rotation_, arg6: number, arg7: number, arg8: boolean, arg9: $Direction_): $GeoQuad;
         /**
          * @deprecated
          */
         static build(arg0: $GeoVertex_[], arg1: number[], arg2: number[], arg3: number, arg4: number, arg5: boolean, arg6: $Direction_): $GeoQuad;
+        static build(arg0: $GeoVertex_[], arg1: number, arg2: number, arg3: number, arg4: number, arg5: $FaceUV$Rotation_, arg6: number, arg7: number, arg8: boolean, arg9: $Direction_): $GeoQuad;
         /**
          * @deprecated
          */
         static build(arg0: $GeoVertex_[], arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: $Direction_): $GeoQuad;
         static build(arg0: $GeoVertex_[], arg1: number[], arg2: number[], arg3: $FaceUV$Rotation_, arg4: number, arg5: number, arg6: boolean, arg7: $Direction_): $GeoQuad;
-        normal(): $Vector3f;
         constructor(vertices: $GeoVertex_[], normal: $Vector3f, direction: $Direction_);
     }
     /**
      * Values that may be interpreted as {@link $GeoQuad}.
      */
-    export type $GeoQuad_ = { vertices?: $GeoVertex_[], direction?: $Direction_, normal?: $Vector3f,  } | [vertices?: $GeoVertex_[], direction?: $Direction_, normal?: $Vector3f, ];
+    export type $GeoQuad_ = { normal?: $Vector3f, direction?: $Direction_, vertices?: $GeoVertex_[],  } | [normal?: $Vector3f, direction?: $Direction_, vertices?: $GeoVertex_[], ];
     export class $GeoCube extends $Record {
         quads(): $GeoQuad[];
-        pivot(): $Vec3;
         size(): $Vec3;
         inflate(): number;
+        pivot(): $Vec3;
         mirror(): boolean;
         rotation(): $Vec3;
         constructor(quads: $GeoQuad_[], pivot: $Vec3_, rotation: $Vec3_, size: $Vec3_, inflate: number, mirror: boolean);
@@ -138,7 +138,7 @@ declare module "@package/software/bernie/geckolib/cache/object" {
     /**
      * Values that may be interpreted as {@link $GeoCube}.
      */
-    export type $GeoCube_ = { mirror?: boolean, pivot?: $Vec3_, quads?: $GeoQuad_[], rotation?: $Vec3_, size?: $Vec3_, inflate?: number,  } | [mirror?: boolean, pivot?: $Vec3_, quads?: $GeoQuad_[], rotation?: $Vec3_, size?: $Vec3_, inflate?: number, ];
+    export type $GeoCube_ = { rotation?: $Vec3_, quads?: $GeoQuad_[], pivot?: $Vec3_, mirror?: boolean, inflate?: number, size?: $Vec3_,  } | [rotation?: $Vec3_, quads?: $GeoQuad_[], pivot?: $Vec3_, mirror?: boolean, inflate?: number, size?: $Vec3_, ];
     export class $GeoVertex extends $Record {
         withUVs(arg0: number, arg1: number): $GeoVertex;
         texU(): number;
@@ -150,5 +150,5 @@ declare module "@package/software/bernie/geckolib/cache/object" {
     /**
      * Values that may be interpreted as {@link $GeoVertex}.
      */
-    export type $GeoVertex_ = { position?: $Vector3f, texV?: number, texU?: number,  } | [position?: $Vector3f, texV?: number, texU?: number, ];
+    export type $GeoVertex_ = { texV?: number, position?: $Vector3f, texU?: number,  } | [texV?: number, position?: $Vector3f, texU?: number, ];
 }

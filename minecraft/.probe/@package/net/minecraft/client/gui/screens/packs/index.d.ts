@@ -19,9 +19,9 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
     export class $PackSelectionScreen$Watcher implements $AutoCloseable {
     }
     export class $PackSelectionModel {
-        updateRepoSelectedList(): void;
-        getUnselected(): $Stream<$PackSelectionModel$Entry>;
         findNewPacks(): void;
+        getUnselected(): $Stream<$PackSelectionModel$Entry>;
+        updateRepoSelectedList(): void;
         getSelected(): $Stream<$PackSelectionModel$Entry>;
         commit(): void;
         iconGetter: $Function<$Pack, $ResourceLocation>;
@@ -73,12 +73,12 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
         constructor(arg0: $Minecraft, arg1: $PackSelectionScreen, arg2: number, arg3: number, arg4: $Component_);
     }
     export class $PackSelectionModel$EntryBase implements $PackSelectionModel$Entry {
+        getPackSource(): $PackSource;
+        canMoveUp(): boolean;
+        canMoveDown(): boolean;
         getSelfList(): $List<$Pack>;
         getOtherList(): $List<$Pack>;
         toggleSelection(): void;
-        canMoveUp(): boolean;
-        canMoveDown(): boolean;
-        getIconTexture(): $ResourceLocation;
         moveUp(): void;
         moveDown(): void;
         getDescription(): $Component;
@@ -87,24 +87,24 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
         getTitle(): $Component;
         isRequired(): boolean;
         getCompatibility(): $PackCompatibility;
+        getIconTexture(): $ResourceLocation;
         isFixedPosition(): boolean;
-        getPackSource(): $PackSource;
         getExtendedDescription(): $Component;
         canSelect(): boolean;
         canUnselect(): boolean;
         this$0: $PackSelectionModel;
         pack: $Pack;
         constructor(arg0: $PackSelectionModel, arg1: $Pack);
+        get packSource(): $PackSource;
         get selfList(): $List<$Pack>;
         get otherList(): $List<$Pack>;
-        get iconTexture(): $ResourceLocation;
         get description(): $Component;
         get id(): string;
         get title(): $Component;
         get required(): boolean;
         get compatibility(): $PackCompatibility;
+        get iconTexture(): $ResourceLocation;
         get fixedPosition(): boolean;
-        get packSource(): $PackSource;
         get extendedDescription(): $Component;
     }
     export class $PackSelectionScreen extends $Screen {
@@ -147,13 +147,13 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
     export class $PackSelectionModel$Entry {
     }
     export interface $PackSelectionModel$Entry {
+        getPackSource(): $PackSource;
         getExtendedDescription(): $Component;
         unselect(): void;
         canSelect(): boolean;
         canUnselect(): boolean;
         canMoveUp(): boolean;
         canMoveDown(): boolean;
-        getIconTexture(): $ResourceLocation;
         moveUp(): void;
         moveDown(): void;
         getDescription(): $Component;
@@ -163,17 +163,17 @@ declare module "@package/net/minecraft/client/gui/screens/packs" {
         getTitle(): $Component;
         isRequired(): boolean;
         getCompatibility(): $PackCompatibility;
+        getIconTexture(): $ResourceLocation;
         isFixedPosition(): boolean;
-        getPackSource(): $PackSource;
+        get packSource(): $PackSource;
         get extendedDescription(): $Component;
-        get iconTexture(): $ResourceLocation;
         get description(): $Component;
         get id(): string;
         get selected(): boolean;
         get title(): $Component;
         get required(): boolean;
         get compatibility(): $PackCompatibility;
+        get iconTexture(): $ResourceLocation;
         get fixedPosition(): boolean;
-        get packSource(): $PackSource;
     }
 }

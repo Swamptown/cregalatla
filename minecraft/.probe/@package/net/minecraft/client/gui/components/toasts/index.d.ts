@@ -11,13 +11,13 @@ import { $GuiGraphics } from "@package/net/minecraft/client/gui";
 
 declare module "@package/net/minecraft/client/gui/components/toasts" {
     export class $ToastComponent {
+        freeSlots(): number;
         addToast(arg0: $Toast_): void;
         clear(): void;
         getMinecraft(): $Minecraft;
         render(arg0: $GuiGraphics): void;
-        freeSlots(): number;
         getToast<T extends $Toast>(arg0: $Class<T>, arg1: $Object): T;
-        handler$zch000$sodium_extra$goodByeToasts(arg0: $Toast_, arg1: $CallbackInfo): void;
+        handler$zdn000$sodium_extra$goodByeToasts(arg0: $Toast_, arg1: $CallbackInfo): void;
         getNotificationDisplayTimeMultiplier(): number;
         minecraft: $Minecraft;
         visible: $List<$ToastComponent$ToastInstance<never>>;
@@ -112,12 +112,14 @@ declare module "@package/net/minecraft/client/gui/components/toasts" {
         get toast(): T;
     }
     export class $SystemToast implements $Toast {
+        static onFileDropFailure(arg0: $Minecraft, arg1: number): void;
+        static onPackCopyFailure(arg0: $Minecraft, arg1: string): void;
         static forceHide(arg0: $ToastComponent, arg1: $SystemToast$SystemToastId): void;
         forceHide(): void;
-        static onPackCopyFailure(arg0: $Minecraft, arg1: string): void;
         static onChunkSaveFailure(arg0: $Minecraft, arg1: $ChunkPos): void;
         static onChunkLoadFailure(arg0: $Minecraft, arg1: $ChunkPos): void;
         static onLowDiskSpace(arg0: $Minecraft): void;
+        getToken(): $SystemToast$SystemToastId;
         static multiline(arg0: $Minecraft, arg1: $SystemToast$SystemToastId, arg2: $Component_, arg3: $Component_): $SystemToast;
         reset(arg0: $Component_, arg1: $Component_): void;
         static add(arg0: $ToastComponent, arg1: $SystemToast$SystemToastId, arg2: $Component_, arg3: $Component_): void;
@@ -127,11 +129,9 @@ declare module "@package/net/minecraft/client/gui/components/toasts" {
         static addOrUpdate(arg0: $ToastComponent, arg1: $SystemToast$SystemToastId, arg2: $Component_, arg3: $Component_): void;
         static onWorldAccessFailure(arg0: $Minecraft, arg1: string): void;
         static onWorldDeleteFailure(arg0: $Minecraft, arg1: string): void;
-        static onFileDropFailure(arg0: $Minecraft, arg1: number): void;
         slotCount(): number;
-        getToken(): $Object;
         constructor(arg0: $SystemToast$SystemToastId, arg1: $Component_, arg2: $Component_);
-        get token(): $Object;
+        get token(): $SystemToast$SystemToastId;
     }
     export class $TutorialToast implements $Toast {
         hide(): void;

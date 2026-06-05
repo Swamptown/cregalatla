@@ -38,10 +38,10 @@ declare module "@package/net/minecraft/util/profiling/metrics" {
         static create(arg0: string, arg1: $MetricCategory_, arg2: $DoubleSupplier_): $MetricSampler;
         getCategory(): $MetricCategory;
         onStartTick(): void;
-        getSampler(): $DoubleSupplier;
-        triggersThreshold(): boolean;
         onEndTick(arg0: number): void;
         onFinished(): void;
+        getSampler(): $DoubleSupplier;
+        triggersThreshold(): boolean;
         thresholdTest: $MetricSampler$ThresholdTest;
         constructor(arg0: string, arg1: $MetricCategory_, arg2: $DoubleSupplier_, arg3: $Runnable_, arg4: $MetricSampler$ThresholdTest_);
         get name(): string;

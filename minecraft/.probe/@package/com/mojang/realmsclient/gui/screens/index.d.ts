@@ -524,8 +524,8 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         constructor(arg0: $Screen, arg1: $Backup);
     }
     export class $AddRealmPopupScreen extends $RealmsScreen {
-        static renderDiamond(arg0: $GuiGraphics, arg1: $Button): void;
         static updateCarouselImages(arg0: $ResourceManager): void;
+        static renderDiamond(arg0: $GuiGraphics, arg1: $Button): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;

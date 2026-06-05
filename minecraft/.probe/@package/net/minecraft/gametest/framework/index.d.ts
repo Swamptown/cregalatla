@@ -39,12 +39,12 @@ import { $ArgumentType } from "@package/com/mojang/brigadier/arguments";
 
 declare module "@package/net/minecraft/gametest/framework" {
     export class $GameTestRunner$Builder {
+        batcher(arg0: $GameTestRunner$GameTestBatcher_): $GameTestRunner$Builder;
         existingStructureSpawner(arg0: $StructureGridSpawner): $GameTestRunner$Builder;
         newStructureSpawner(arg0: $GameTestRunner$StructureSpawner_): $GameTestRunner$Builder;
         haltOnError(arg0: boolean): $GameTestRunner$Builder;
         static fromBatches(arg0: $Collection_<$GameTestBatch_>, arg1: $ServerLevel): $GameTestRunner$Builder;
         static fromInfo(arg0: $Collection_<$GameTestInfo>, arg1: $ServerLevel): $GameTestRunner$Builder;
-        batcher(arg0: $GameTestRunner$GameTestBatcher_): $GameTestRunner$Builder;
         build(): $GameTestRunner;
     }
     export class $AfterBatch implements $Annotation {
@@ -58,6 +58,8 @@ declare module "@package/net/minecraft/gametest/framework" {
         constructor();
     }
     export class $MultipleTestTracker {
+        getDoneCount(): number;
+        addFailureListener(arg0: $Consumer_<$GameTestInfo>): void;
         addTestToTrack(arg0: $GameTestInfo): void;
         getProgressBar(): string;
         hasFailedRequired(): boolean;
@@ -66,42 +68,40 @@ declare module "@package/net/minecraft/gametest/framework" {
         hasFailedOptional(): boolean;
         getFailedOptionalCount(): number;
         getFailedOptional(): $Collection<$GameTestInfo>;
-        getDoneCount(): number;
-        addFailureListener(arg0: $Consumer_<$GameTestInfo>): void;
         remove(arg0: $GameTestInfo): void;
         isDone(): boolean;
         addListener(arg0: $GameTestListener): void;
         getTotalCount(): number;
         constructor(arg0: $Collection_<$GameTestInfo>);
         constructor();
+        get doneCount(): number;
         get progressBar(): string;
         get failedRequiredCount(): number;
         get failedRequired(): $Collection<$GameTestInfo>;
         get failedOptionalCount(): number;
         get failedOptional(): $Collection<$GameTestInfo>;
-        get doneCount(): number;
         get done(): boolean;
         get totalCount(): number;
     }
     export class $StructureUtils {
-        static findStructureBlockContainingPos(arg0: $BlockPos_, arg1: number, arg2: $ServerLevel): ($BlockPos) | undefined;
-        static findStructureBlocks(arg0: $BlockPos_, arg1: number, arg2: $ServerLevel): $Stream<$BlockPos>;
-        static findNearestStructureBlock(arg0: $BlockPos_, arg1: number, arg2: $ServerLevel): ($BlockPos) | undefined;
-        static findStructureByTestFunction(arg0: $BlockPos_, arg1: number, arg2: $ServerLevel, arg3: string): $Stream<$BlockPos>;
-        static lookedAtStructureBlockPos(arg0: $BlockPos_, arg1: $Entity, arg2: $ServerLevel): $Stream<$BlockPos>;
-        static getStructureBounds(arg0: $StructureBlockEntity): $AABB;
+        static getStructureOrigin(arg0: $StructureBlockEntity): $BlockPos;
+        static clearSpaceForStructure(arg0: $BoundingBox, arg1: $ServerLevel): void;
+        static getRotationStepsForRotation(arg0: $Rotation_): number;
+        static getTransformedFarCorner(arg0: $BlockPos_, arg1: $Vec3i, arg2: $Rotation_): $BlockPos;
+        static createNewEmptyStructureBlock(arg0: string, arg1: $BlockPos_, arg2: $Vec3i, arg3: $Rotation_, arg4: $ServerLevel): void;
+        static removeBarriers(arg0: $AABB_, arg1: $ServerLevel): void;
         static getRotationForRotationSteps(arg0: number): $Rotation;
         static getStructureBoundingBox(arg0: $StructureBlockEntity): $BoundingBox;
         static getStructureBoundingBox(arg0: $BlockPos_, arg1: $Vec3i, arg2: $Rotation_): $BoundingBox;
         static prepareTestStructure(arg0: $GameTestInfo, arg1: $BlockPos_, arg2: $Rotation_, arg3: $ServerLevel): $StructureBlockEntity;
         static addCommandBlockAndButtonToStartTest(arg0: $BlockPos_, arg1: $BlockPos_, arg2: $Rotation_, arg3: $ServerLevel): void;
         static encaseStructure(arg0: $AABB_, arg1: $ServerLevel, arg2: boolean): void;
-        static clearSpaceForStructure(arg0: $BoundingBox, arg1: $ServerLevel): void;
-        static getTransformedFarCorner(arg0: $BlockPos_, arg1: $Vec3i, arg2: $Rotation_): $BlockPos;
-        static removeBarriers(arg0: $AABB_, arg1: $ServerLevel): void;
-        static getRotationStepsForRotation(arg0: $Rotation_): number;
-        static createNewEmptyStructureBlock(arg0: string, arg1: $BlockPos_, arg2: $Vec3i, arg3: $Rotation_, arg4: $ServerLevel): void;
-        static getStructureOrigin(arg0: $StructureBlockEntity): $BlockPos;
+        static getStructureBounds(arg0: $StructureBlockEntity): $AABB;
+        static findStructureBlockContainingPos(arg0: $BlockPos_, arg1: number, arg2: $ServerLevel): ($BlockPos) | undefined;
+        static findStructureBlocks(arg0: $BlockPos_, arg1: number, arg2: $ServerLevel): $Stream<$BlockPos>;
+        static findNearestStructureBlock(arg0: $BlockPos_, arg1: number, arg2: $ServerLevel): ($BlockPos) | undefined;
+        static findStructureByTestFunction(arg0: $BlockPos_, arg1: number, arg2: $ServerLevel, arg3: string): $Stream<$BlockPos>;
+        static lookedAtStructureBlockPos(arg0: $BlockPos_, arg1: $Entity, arg2: $ServerLevel): $Stream<$BlockPos>;
         static DEFAULT_TEST_STRUCTURES_DIR: string;
         static testStructuresDir: string;
         static DEFAULT_Y_SEARCH_RADIUS: number;
@@ -138,9 +138,9 @@ declare module "@package/net/minecraft/gametest/framework" {
         testBatchFinished(arg0: $GameTestBatch_): void;
     }
     export class $RetryOptions extends $Record {
-        static noRetries(): $RetryOptions;
         unlimitedTries(): boolean;
         numberOfTries(): number;
+        static noRetries(): $RetryOptions;
         hasTriesLeft(arg0: number, arg1: number): boolean;
         hasRetries(): boolean;
         haltOnFailure(): boolean;
@@ -167,7 +167,7 @@ declare module "@package/net/minecraft/gametest/framework" {
         constructor(arg0: $File_);
     }
     export class $GameTestServer extends $MinecraftServer {
-        handler$gmn000$fabric_gametest_api_v1$isDedicated(arg0: $CallbackInfoReturnable<any>): void;
+        handler$hkh000$fabric_gametest_api_v1$isDedicated(arg0: $CallbackInfoReturnable<any>): void;
         static create(arg0: $Thread, arg1: $LevelStorageSource$LevelStorageAccess, arg2: $PackRepository, arg3: $Collection_<$TestFunction_>, arg4: $BlockPos_): $GameTestServer;
         static VANILLA_BRAND: string;
         proxy: $Proxy;
@@ -194,17 +194,17 @@ declare module "@package/net/minecraft/gametest/framework" {
      */
     export type $GameTestRunner$StructureSpawner_ = ((arg0: $GameTestInfo) => ($GameTestInfo) | undefined);
     export class $GameTest implements $Annotation {
-        skyAccess(): boolean;
+        templateNamespace(): string;
         rotationSteps(): number;
+        manualOnly(): boolean;
         setupTicks(): number;
         requiredSuccesses(): number;
-        manualOnly(): boolean;
-        timeoutTicks(): number;
+        skyAccess(): boolean;
         attempts(): number;
+        timeoutTicks(): number;
         batch(): string;
         required(): boolean;
         template(): string;
-        templateNamespace(): string;
     }
     export class $GameTestTimeoutException extends $RuntimeException {
         constructor(arg0: string);
@@ -225,9 +225,9 @@ declare module "@package/net/minecraft/gametest/framework" {
      */
     export type $TestCommand$TestSummaryDisplayer_ = { level?: $ServerLevel, tracker?: $MultipleTestTracker,  } | [level?: $ServerLevel, tracker?: $MultipleTestTracker, ];
     export class $TestClassNameArgument implements $ArgumentType<string> {
-        static getTestClassName(arg0: $CommandContext<$CommandSourceStack>, arg1: string): string;
         static testClassName(): $TestClassNameArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static getTestClassName(arg0: $CommandContext<$CommandSourceStack>, arg1: string): string;
         getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): string;
         parse(arg0: $StringReader): string;
@@ -266,11 +266,11 @@ declare module "@package/net/minecraft/gametest/framework" {
         testFailed(arg0: $GameTestInfo, arg1: $GameTestRunner): void;
     }
     export class $TestFunction extends $Record {
-        skyAccess(): boolean;
+        manualOnly(): boolean;
         setupTicks(): number;
         requiredSuccesses(): number;
+        skyAccess(): boolean;
         batchName(): string;
-        manualOnly(): boolean;
         maxTicks(): number;
         isFlaky(): boolean;
         maxAttempts(): number;
@@ -288,10 +288,11 @@ declare module "@package/net/minecraft/gametest/framework" {
     /**
      * Values that may be interpreted as {@link $TestFunction}.
      */
-    export type $TestFunction_ = { rotation?: $Rotation_, testName?: string, manualOnly?: boolean, maxAttempts?: number, setupTicks?: number, function?: $Consumer_<$GameTestHelper>, required?: boolean, structureName?: string, maxTicks?: number, skyAccess?: boolean, batchName?: string, requiredSuccesses?: number,  } | [rotation?: $Rotation_, testName?: string, manualOnly?: boolean, maxAttempts?: number, setupTicks?: number, function?: $Consumer_<$GameTestHelper>, required?: boolean, structureName?: string, maxTicks?: number, skyAccess?: boolean, batchName?: string, requiredSuccesses?: number, ];
+    export type $TestFunction_ = { batchName?: string, skyAccess?: boolean, maxTicks?: number, structureName?: string, required?: boolean, function?: $Consumer_<$GameTestHelper>, setupTicks?: number, maxAttempts?: number, manualOnly?: boolean, testName?: string, rotation?: $Rotation_, requiredSuccesses?: number,  } | [batchName?: string, skyAccess?: boolean, maxTicks?: number, structureName?: string, required?: boolean, function?: $Consumer_<$GameTestHelper>, setupTicks?: number, maxAttempts?: number, manualOnly?: boolean, testName?: string, rotation?: $Rotation_, requiredSuccesses?: number, ];
     export class $GameTestInfo {
+        succeed(): void;
+        getTick(): number;
         requiredSuccesses(): number;
-        getStructureBounds(): $AABB;
         retryOptions(): $RetryOptions;
         setStructureBlockPos(arg0: $BlockPos_): void;
         startExecution(arg0: number): $GameTestInfo;
@@ -301,21 +302,21 @@ declare module "@package/net/minecraft/gametest/framework" {
         hasFailed(): boolean;
         hasStarted(): boolean;
         getRunTime(): number;
-        handler$fii000$sable$removeSublevels(arg0: $CallbackInfo, arg1: $AABB_): void;
+        handler$gda000$sable$removeSublevels(arg0: $CallbackInfo, arg1: $AABB_): void;
         prepareTestStructure(): $GameTestInfo;
         isFlaky(): boolean;
         copyReset(): $GameTestInfo;
         setNorthWestCorner(arg0: $BlockPos_): void;
-        succeed(): void;
+        getStructureBounds(): $AABB;
         setRunAtTickTime(arg0: number, arg1: $Runnable_): void;
         getTimeoutTicks(): number;
         getStructureBlockPos(): $BlockPos;
         maxAttempts(): number;
-        getTestFunction(): $TestFunction;
-        placeStructure(): $GameTestInfo;
-        getStructureName(): string;
-        getLevel(): $ServerLevel;
         tick(arg0: $GameTestRunner): void;
+        getTestFunction(): $TestFunction;
+        getStructureName(): string;
+        placeStructure(): $GameTestInfo;
+        getLevel(): $ServerLevel;
         isDone(): boolean;
         fail(arg0: $Throwable): void;
         getListeners(): $Stream<$GameTestListener>;
@@ -324,16 +325,15 @@ declare module "@package/net/minecraft/gametest/framework" {
         isRequired(): boolean;
         isOptional(): boolean;
         getError(): $Throwable;
-        getTick(): number;
         getRotation(): $Rotation;
         sequences: $Collection<$GameTestSequence>;
         constructor(arg0: $TestFunction_, arg1: $Rotation_, arg2: $ServerLevel, arg3: $RetryOptions_);
-        get structureBounds(): $AABB;
         get structureBlockEntity(): $StructureBlockEntity;
         get testName(): string;
         get runTime(): number;
         get flaky(): boolean;
         set northWestCorner(value: $BlockPos_);
+        get structureBounds(): $AABB;
         get timeoutTicks(): number;
         get testFunction(): $TestFunction;
         get structureName(): string;
@@ -346,10 +346,10 @@ declare module "@package/net/minecraft/gametest/framework" {
         get rotation(): $Rotation;
     }
     export class $TestFunctionArgument implements $ArgumentType<$TestFunction> {
-        static suggestTestFunction<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
-        static getTestFunction(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $TestFunction;
-        static testFunctionArgument(): $TestFunctionArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static getTestFunction(arg0: $CommandContext<$CommandSourceStack>, arg1: string): $TestFunction;
+        static suggestTestFunction<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        static testFunctionArgument(): $TestFunctionArgument;
         getExamples(): $Collection<string>;
         parse(arg0: $StringReader): $TestFunction;
         parse<S>(arg0: $StringReader, arg1: S): $TestFunction;
@@ -364,15 +364,15 @@ declare module "@package/net/minecraft/gametest/framework" {
         constructor(arg0: $BlockPos_, arg1: number, arg2: boolean);
     }
     export class $TestCommand {
+        static toGameTestInfo(arg0: $CommandSourceStack, arg1: $RetryOptions_, arg2: $TestFunctionFinder_, arg3: number): $Stream<$GameTestInfo>;
         static stopTests(): number;
         static toGameTestInfos(arg0: $CommandSourceStack, arg1: $RetryOptions_, arg2: $StructureBlockPosFinder_): $Stream<$GameTestInfo>;
-        static toGameTestInfo(arg0: $CommandSourceStack, arg1: $RetryOptions_, arg2: $TestFunctionFinder_, arg3: number): $Stream<$GameTestInfo>;
         static createTestPositionAround(arg0: $CommandSourceStack): $BlockPos;
         static trackAndStartRunner(arg0: $CommandSourceStack, arg1: $ServerLevel, arg2: $GameTestRunner): number;
         static saveAndExportTestStructure(arg0: $CommandSourceStack, arg1: $StructureBlockEntity): number;
         static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
-        static say(arg0: $ServerLevel, arg1: string, arg2: $ChatFormatting_): void;
         static say(arg0: $CommandSourceStack, arg1: string): void;
+        static say(arg0: $ServerLevel, arg1: string, arg2: $ChatFormatting_): void;
         static STRUCTURE_BLOCK_NEARBY_SEARCH_RADIUS: number;
         static STRUCTURE_BLOCK_FULL_SEARCH_RADIUS: number;
         constructor();
@@ -386,17 +386,17 @@ declare module "@package/net/minecraft/gametest/framework" {
         static forgetFailedTests(): void;
         static isTestClass(arg0: string): boolean;
         static getAllTestClassNames(): $Collection<string>;
-        static getAllTestFunctions(): $Collection<$TestFunction>;
         static findTestFunction(arg0: string): ($TestFunction) | undefined;
         static getTestFunction(arg0: string): $TestFunction;
-        /**
-         * @deprecated
-         */
-        static register(arg0: $Method, arg1: $Set_<string>): void;
+        static getAllTestFunctions(): $Collection<$TestFunction>;
         /**
          * @deprecated
          */
         static register(arg0: $Class<never>): void;
+        /**
+         * @deprecated
+         */
+        static register(arg0: $Method, arg1: $Set_<string>): void;
         /**
          * @deprecated
          */
@@ -417,12 +417,25 @@ declare module "@package/net/minecraft/gametest/framework" {
     /**
      * Values that may be interpreted as {@link $GameTestBatch}.
      */
-    export type $GameTestBatch_ = { gameTestInfos?: $Collection_<$GameTestInfo>, afterBatchFunction?: $Consumer_<$ServerLevel>, name?: string, beforeBatchFunction?: $Consumer_<$ServerLevel>,  } | [gameTestInfos?: $Collection_<$GameTestInfo>, afterBatchFunction?: $Consumer_<$ServerLevel>, name?: string, beforeBatchFunction?: $Consumer_<$ServerLevel>, ];
+    export type $GameTestBatch_ = { name?: string, afterBatchFunction?: $Consumer_<$ServerLevel>, gameTestInfos?: $Collection_<$GameTestInfo>, beforeBatchFunction?: $Consumer_<$ServerLevel>,  } | [name?: string, afterBatchFunction?: $Consumer_<$ServerLevel>, gameTestInfos?: $Collection_<$GameTestInfo>, beforeBatchFunction?: $Consumer_<$ServerLevel>, ];
     export class $GameTestHelper implements $GameTestHelperAccessor {
-        spawnWithNoFreeWill<E extends $Mob>(arg0: $EntityType_<E>, arg1: number, arg2: number, arg3: number): E;
+        relativeVec(arg0: $Vec3_): $Vec3;
+        succeed(): void;
+        startSequence(): $GameTestSequence;
+        getTick(): number;
+        setBiome(arg0: $ResourceKey_<$Biome>): void;
+        pressButton(arg0: $BlockPos_): void;
+        pressButton(arg0: number, arg1: number, arg2: number): void;
+        makeMockPlayer(arg0: $GameType_): $Player;
+        killAllEntities(): void;
+        killAllEntitiesOfClass(arg0: $Class<any>): void;
+        absoluteVec(arg0: $Vec3_): $Vec3;
+        findOneEntity<E extends $Entity>(arg0: $EntityType_<E>): E;
+        findClosestEntity<E extends $Entity>(arg0: $EntityType_<E>, arg1: number, arg2: number, arg3: number, arg4: number): E;
         spawnWithNoFreeWill<E extends $Mob>(arg0: $EntityType_<E>, arg1: $Vec3_): E;
-        spawnWithNoFreeWill<E extends $Mob>(arg0: $EntityType_<E>, arg1: $BlockPos_): E;
         spawnWithNoFreeWill<E extends $Mob>(arg0: $EntityType_<E>, arg1: number, arg2: number, arg3: number): E;
+        spawnWithNoFreeWill<E extends $Mob>(arg0: $EntityType_<E>, arg1: number, arg2: number, arg3: number): E;
+        spawnWithNoFreeWill<E extends $Mob>(arg0: $EntityType_<E>, arg1: $BlockPos_): E;
         walkTo(arg0: $Mob, arg1: $BlockPos_, arg2: number): $GameTestSequence;
         makeAboutToDrown(arg0: $LivingEntity): $LivingEntity;
         withLowHealth(arg0: $LivingEntity): $LivingEntity;
@@ -432,20 +445,14 @@ declare module "@package/net/minecraft/gametest/framework" {
         makeMockServerPlayerInLevel(): $ServerPlayer;
         pulseRedstone(arg0: $BlockPos_, arg1: number): void;
         setNight(): void;
-        assertBlock(arg0: $BlockPos_, arg1: $Predicate_<$Block>, arg2: $Supplier_<string>): void;
         assertBlock(arg0: $BlockPos_, arg1: $Predicate_<$Block>, arg2: string): void;
+        assertBlock(arg0: $BlockPos_, arg1: $Predicate_<$Block>, arg2: $Supplier_<string>): void;
         succeedWhenBlockPresent(arg0: $Block_, arg1: $BlockPos_): void;
         succeedWhenBlockPresent(arg0: $Block_, arg1: number, arg2: number, arg3: number): void;
         assertBlockEntityData<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $Predicate_<T>, arg2: $Supplier_<string>): void;
         assertRedstoneSignal(arg0: $BlockPos_, arg1: $Direction_, arg2: $IntPredicate_, arg3: $Supplier_<string>): void;
-        makeMockPlayer(arg0: $GameType_): $Player;
-        killAllEntities(): void;
-        killAllEntitiesOfClass(arg0: $Class<any>): void;
-        absoluteVec(arg0: $Vec3_): $Vec3;
-        findOneEntity<E extends $Entity>(arg0: $EntityType_<E>): E;
-        findClosestEntity<E extends $Entity>(arg0: $EntityType_<E>, arg1: number, arg2: number, arg3: number, arg4: number): E;
-        assertEntityInstancePresent(arg0: $Entity, arg1: number, arg2: number, arg3: number): void;
         assertEntityInstancePresent(arg0: $Entity, arg1: $BlockPos_): void;
+        assertEntityInstancePresent(arg0: $Entity, arg1: number, arg2: number, arg3: number): void;
         assertItemEntityCountIs(arg0: $Item_, arg1: $BlockPos_, arg2: number, arg3: number): void;
         assertItemEntityNotPresent(arg0: $Item_): void;
         assertItemEntityNotPresent(arg0: $Item_, arg1: $BlockPos_, arg2: number): void;
@@ -460,14 +467,13 @@ declare module "@package/net/minecraft/gametest/framework" {
         assertAtTickTimeContainerEmpty(arg0: number, arg1: $BlockPos_): void;
         succeedWhenEntityData<E extends $Entity, T>(arg0: $BlockPos_, arg1: $EntityType_<E>, arg2: $Function_<E, T>, arg3: T): void;
         assertEntityPosition(arg0: $Entity, arg1: $AABB_, arg2: string): void;
-        assertEntityProperty<E extends $Entity, T>(arg0: E, arg1: $Function_<E, T>, arg2: string, arg3: T): void;
         assertEntityProperty<E extends $Entity>(arg0: E, arg1: $Predicate_<E>, arg2: string): void;
+        assertEntityProperty<E extends $Entity, T>(arg0: E, arg1: $Function_<E, T>, arg2: string, arg3: T): void;
         assertLivingEntityHasMobEffect(arg0: $LivingEntity, arg1: $Holder_<$MobEffect>, arg2: number): void;
-        succeedWhenEntityPresent(arg0: $EntityType_<never>, arg1: $BlockPos_): void;
         succeedWhenEntityPresent(arg0: $EntityType_<never>, arg1: number, arg2: number, arg3: number): void;
-        succeedWhenEntityNotPresent(arg0: $EntityType_<never>, arg1: $BlockPos_): void;
+        succeedWhenEntityPresent(arg0: $EntityType_<never>, arg1: $BlockPos_): void;
         succeedWhenEntityNotPresent(arg0: $EntityType_<never>, arg1: number, arg2: number, arg3: number): void;
-        succeed(): void;
+        succeedWhenEntityNotPresent(arg0: $EntityType_<never>, arg1: $BlockPos_): void;
         succeedIf(arg0: $Runnable_): void;
         succeedOnTickWhen(arg0: number, arg1: $Runnable_): void;
         failIf(arg0: $Runnable_): void;
@@ -476,87 +482,81 @@ declare module "@package/net/minecraft/gametest/framework" {
         assertValueEqual<N>(arg0: N, arg1: N, arg2: string): void;
         forEveryBlockInStructure(arg0: $Consumer_<$BlockPos>): void;
         onEachTick(arg0: $Runnable_): void;
-        relativeVec(arg0: $Vec3_): $Vec3;
-        pressButton(arg0: $BlockPos_): void;
-        pressButton(arg0: number, arg1: number, arg2: number): void;
-        assertBlockProperty<T extends $Comparable<T>>(arg0: $BlockPos_, arg1: $Property<T>, arg2: T): void;
+        runAtTickTime(arg0: number, arg1: $Runnable_): void;
         assertBlockProperty<T extends $Comparable<T>>(arg0: $BlockPos_, arg1: $Property<T>, arg2: $Predicate_<T>, arg3: string): void;
+        assertBlockProperty<T extends $Comparable<T>>(arg0: $BlockPos_, arg1: $Property<T>, arg2: T): void;
         assertBlockPresent(arg0: $Block_, arg1: number, arg2: number, arg3: number): void;
         assertBlockPresent(arg0: $Block_, arg1: $BlockPos_): void;
+        pullLever(arg0: $BlockPos_): void;
+        pullLever(arg0: number, arg1: number, arg2: number): void;
+        succeedWhen(arg0: $Runnable_): void;
         assertContainerContains(arg0: $BlockPos_, arg1: $Item_): void;
         assertContainerEmpty(arg0: $BlockPos_): void;
-        assertEntitiesPresent(arg0: $EntityType_<never>, arg1: $BlockPos_, arg2: number, arg3: number): void;
+        runAfterDelay(arg0: number, arg1: $Runnable_): void;
+        assertFalse(arg0: boolean, arg1: string): void;
+        assertBlockNotPresent(arg0: $Block_, arg1: $BlockPos_): void;
+        assertBlockNotPresent(arg0: $Block_, arg1: number, arg2: number, arg3: number): void;
         assertEntitiesPresent(arg0: $EntityType_<never>, arg1: number): void;
-        pullLever(arg0: number, arg1: number, arg2: number): void;
-        pullLever(arg0: $BlockPos_): void;
-        succeedWhen(arg0: $Runnable_): void;
-        runAtTickTime(arg0: number, arg1: $Runnable_): void;
-        assertEntityNotPresent(arg0: $EntityType_<never>, arg1: $Vec3_, arg2: $Vec3_): void;
-        assertEntityNotPresent(arg0: $EntityType_<never>, arg1: number, arg2: number, arg3: number): void;
+        assertEntitiesPresent(arg0: $EntityType_<never>, arg1: $BlockPos_, arg2: number, arg3: number): void;
         assertEntityNotPresent(arg0: $EntityType_<never>, arg1: $BlockPos_): void;
         assertEntityNotPresent(arg0: $EntityType_<never>): void;
-        runAfterDelay(arg0: number, arg1: $Runnable_): void;
-        assertTrue(arg0: boolean, arg1: string): void;
-        assertFalse(arg0: boolean, arg1: string): void;
-        assertBlockNotPresent(arg0: $Block_, arg1: number, arg2: number, arg3: number): void;
-        assertBlockNotPresent(arg0: $Block_, arg1: $BlockPos_): void;
+        assertEntityNotPresent(arg0: $EntityType_<never>, arg1: $Vec3_, arg2: $Vec3_): void;
+        assertEntityNotPresent(arg0: $EntityType_<never>, arg1: number, arg2: number, arg3: number): void;
+        assertEntityPresent(arg0: $EntityType_<never>): void;
         assertEntityPresent(arg0: $EntityType_<never>, arg1: $Vec3_, arg2: $Vec3_): void;
         assertEntityPresent(arg0: $EntityType_<never>, arg1: $BlockPos_): void;
         assertEntityPresent(arg0: $EntityType_<never>, arg1: number, arg2: number, arg3: number): void;
-        assertEntityPresent(arg0: $EntityType_<never>): void;
         assertEntityPresent(arg0: $EntityType_<never>, arg1: $BlockPos_, arg2: number): void;
         absolutePos(arg0: $BlockPos_): $BlockPos;
-        assertItemEntityPresent(arg0: $Item_): void;
         assertItemEntityPresent(arg0: $Item_, arg1: $BlockPos_, arg2: number): void;
+        assertItemEntityPresent(arg0: $Item_): void;
         assertBlockState(arg0: $BlockPos_, arg1: $Predicate_<$BlockState>, arg2: $Supplier_<string>): void;
-        setBiome(arg0: $ResourceKey_<$Biome>): void;
-        getEntities<T extends $Entity>(arg0: $EntityType_<T>, arg1: $BlockPos_, arg2: number): $List<T>;
         getEntities<T extends $Entity>(arg0: $EntityType_<T>): $List<T>;
+        getEntities<T extends $Entity>(arg0: $EntityType_<T>, arg1: $BlockPos_, arg2: number): $List<T>;
+        relativePos(arg0: $BlockPos_): $BlockPos;
+        useBlock(arg0: $BlockPos_, arg1: $Player, arg2: $BlockHitResult): void;
+        useBlock(arg0: $BlockPos_, arg1: $Player): void;
+        useBlock(arg0: $BlockPos_): void;
         findEntities<E extends $Entity>(arg0: $EntityType_<E>, arg1: $Vec3_, arg2: number): $List<E>;
         findEntities<E extends $Entity>(arg0: $EntityType_<E>, arg1: number, arg2: number, arg3: number, arg4: number): $List<E>;
-        useBlock(arg0: $BlockPos_, arg1: $Player, arg2: $BlockHitResult): void;
-        useBlock(arg0: $BlockPos_): void;
-        useBlock(arg0: $BlockPos_, arg1: $Player): void;
-        relativePos(arg0: $BlockPos_): $BlockPos;
-        setDayTime(arg0: number): void;
-        tickPrecipitation(arg0: $BlockPos_): void;
-        tickPrecipitation(): void;
-        spawnItem(arg0: $Item_, arg1: $Vec3_): $ItemEntity;
         spawnItem(arg0: $Item_, arg1: number, arg2: number, arg3: number): $ItemEntity;
         spawnItem(arg0: $Item_, arg1: $BlockPos_): $ItemEntity;
+        spawnItem(arg0: $Item_, arg1: $Vec3_): $ItemEntity;
+        setDayTime(arg0: number): void;
+        tickPrecipitation(): void;
+        tickPrecipitation(arg0: $BlockPos_): void;
         placeAt(arg0: $Player, arg1: $ItemStack_, arg2: $BlockPos_, arg3: $Direction_): void;
         getLevel(): $ServerLevel;
-        startSequence(): $GameTestSequence;
         getHeight(arg0: $Heightmap$Types_, arg1: number, arg2: number): number;
         getBounds(): $AABB;
-        fail(arg0: string, arg1: $BlockPos_): void;
         fail(arg0: string): void;
         fail(arg0: string, arg1: $Entity): void;
+        fail(arg0: string, arg1: $BlockPos_): void;
         moveTo(arg0: $Mob, arg1: number, arg2: number, arg3: number): void;
         setBlock(arg0: $BlockPos_, arg1: $Block_): void;
+        setBlock(arg0: number, arg1: number, arg2: number, arg3: $BlockState_): void;
         setBlock(arg0: $BlockPos_, arg1: $BlockState_): void;
         setBlock(arg0: number, arg1: number, arg2: number, arg3: $Block_): void;
-        setBlock(arg0: number, arg1: number, arg2: number, arg3: $BlockState_): void;
-        getTick(): number;
+        destroyBlock(arg0: $BlockPos_): void;
+        randomTick(arg0: $BlockPos_): void;
+        assertTrue(arg0: boolean, arg1: string): void;
         getBlockState(arg0: $BlockPos_): $BlockState;
         getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_): T;
         spawn<E extends $Entity>(arg0: $EntityType_<E>, arg1: number, arg2: number, arg3: number): E;
         spawn<E extends $Entity>(arg0: $EntityType_<E>, arg1: number, arg2: number, arg3: number): E;
-        spawn<E extends $Entity>(arg0: $EntityType_<E>, arg1: $Vec3_): E;
         spawn<E extends $Entity>(arg0: $EntityType_<E>, arg1: $BlockPos_): E;
-        randomTick(arg0: $BlockPos_): void;
-        destroyBlock(arg0: $BlockPos_): void;
+        spawn<E extends $Entity>(arg0: $EntityType_<E>, arg1: $Vec3_): E;
         getTestInfo(): $GameTestInfo;
         getFinalCheckAdded(): boolean;
         setFinalCheckAdded(arg0: boolean): void;
         testInfo: $GameTestInfo;
         constructor(arg0: $GameTestInfo);
-        get testRotation(): $Rotation;
+        get tick(): number;
         set biome(value: $ResourceKey_<$Biome>);
+        get testRotation(): $Rotation;
         set dayTime(value: number);
         get level(): $ServerLevel;
         get bounds(): $AABB;
-        get tick(): number;
     }
     export class $LogTestReporter implements $TestReporter {
         onTestFailed(arg0: $GameTestInfo): void;
@@ -588,26 +588,26 @@ declare module "@package/net/minecraft/gametest/framework" {
      */
     export type $TestFunctionFinder_ = (() => $Stream<$TestFunction_>);
     export class $GameTestSequence {
-        thenExecuteAfter(arg0: number, arg1: $Runnable_): $GameTestSequence;
         thenIdle(arg0: number): $GameTestSequence;
         thenExecute(arg0: $Runnable_): $GameTestSequence;
         thenExecuteFor(arg0: number, arg1: $Runnable_): $GameTestSequence;
         tickAndContinue(arg0: number): void;
         tickAndFailIfNotComplete(arg0: number): void;
         thenTrigger(): $GameTestSequence$Condition;
-        thenWaitUntil(arg0: number, arg1: $Runnable_): $GameTestSequence;
+        thenExecuteAfter(arg0: number, arg1: $Runnable_): $GameTestSequence;
         thenWaitUntil(arg0: $Runnable_): $GameTestSequence;
+        thenWaitUntil(arg0: number, arg1: $Runnable_): $GameTestSequence;
         thenSucceed(): void;
         thenFail(arg0: $Supplier_<$Exception>): void;
         parent: $GameTestInfo;
         constructor(arg0: $GameTestInfo);
     }
     export class $GameTestBatchFactory {
-        static toGameTestBatch(arg0: $Collection_<$GameTestInfo>, arg1: string, arg2: number): $GameTestBatch;
         static fromTestFunction(arg0: $Collection_<$TestFunction_>, arg1: $ServerLevel): $Collection<$GameTestBatch>;
         static toGameTestInfo(arg0: $TestFunction_, arg1: number, arg2: $ServerLevel): $GameTestInfo;
         static fromGameTestInfo(arg0: number): $GameTestRunner$GameTestBatcher;
         static fromGameTestInfo(): $GameTestRunner$GameTestBatcher;
+        static toGameTestBatch(arg0: $Collection_<$GameTestInfo>, arg1: string, arg2: number): $GameTestBatch;
         constructor();
     }
     export class $ExhaustedAttemptsException extends $Throwable {
@@ -638,16 +638,16 @@ declare module "@package/net/minecraft/gametest/framework" {
      */
     export type $GameTestRunner$GameTestBatcher_ = ((arg0: $Collection<$GameTestInfo>) => $Collection_<$GameTestBatch_>);
     export class $TestCommand$Runner {
-        verify(): number;
         export(): number;
-        run(): number;
-        run(arg0: number, arg1: number): number;
         run(arg0: number): number;
+        run(arg0: number, arg1: number): number;
         run(arg0: $RetryOptions_, arg1: number, arg2: number): number;
+        run(): number;
         run(arg0: $RetryOptions_): number;
         run(arg0: $RetryOptions_, arg1: number): number;
         reset(): number;
         clear(): number;
+        verify(): number;
         locate(): number;
         constructor(arg0: $TestFinder<$TestCommand$Runner>);
     }

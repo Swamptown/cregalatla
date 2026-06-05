@@ -7,8 +7,8 @@ declare module "@package/net/fabricmc/fabric/api/transfer/v1/transaction" {
          * @deprecated
          */
         static getCurrentUnsafe(): $TransactionContext;
-        static openOuter(): $Transaction;
         static openNested(arg0: $TransactionContext): $Transaction;
+        static openOuter(): $Transaction;
         static isOpen(): boolean;
         static get lifecycle(): $Transaction$Lifecycle;
         static get currentUnsafe(): $TransactionContext;
@@ -31,10 +31,10 @@ declare module "@package/net/fabricmc/fabric/api/transfer/v1/transaction" {
     export class $TransactionContext {
     }
     export interface $TransactionContext {
+        addCloseCallback(arg0: $TransactionContext$CloseCallback_): void;
         nestingDepth(): number;
         getOpenTransaction(arg0: number): $Transaction;
         addOuterCloseCallback(arg0: $TransactionContext$OuterCloseCallback_): void;
-        addCloseCallback(arg0: $TransactionContext$CloseCallback_): void;
         openNested(): $Transaction;
     }
     export class $Transaction$Lifecycle extends $Enum<$Transaction$Lifecycle> {

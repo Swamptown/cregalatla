@@ -87,24 +87,24 @@ declare module "@package/concerrox/emixx/content/creativemodetab/gui" {
         constructor(screen: $CreativeModeTabConfigScreen, disabledCreativeModeTabs: $Set_<$ResourceLocation_>);
     }
     export class $CreativeModeTabGui {
-        onMouseScrolled$emixx_common(amount: number): boolean;
-        contains$emixx_common(mouseX: number, mouseY: number): boolean;
-        getRightTabNavigationBar$emixx_common(): $ItemTabNavigationBar;
-        setTabCount-WZ4Q5Ns$emixx_common(<set-?>: number): void;
-        initialize$emixx_common(screen: $Screen): void;
         getTabCount-pVg5ArA$emixx_common(): number;
         selectTab$emixx_common(tabIndex: number, playClickSound: boolean): void;
         getCurrentTheme(): $CreativeModeTabGui$TabTheme;
         getTopTabNavigationBar$emixx_common(): $ItemTabNavigationBar;
         getLeftTabNavigationBar$emixx_common(): $ItemTabNavigationBar;
+        onMouseScrolled$emixx_common(amount: number): boolean;
+        contains$emixx_common(mouseX: number, mouseY: number): boolean;
+        getRightTabNavigationBar$emixx_common(): $ItemTabNavigationBar;
+        setTabCount-WZ4Q5Ns$emixx_common(<set-?>: number): void;
+        initialize$emixx_common(screen: $Screen): void;
         static VERTICAL_TAB_WIDTH: number;
         static CREATIVE_MODE_TAB_HEIGHT: number;
         static INSTANCE: $CreativeModeTabGui;
-        get rightTabNavigationBar$emixx_common(): $ItemTabNavigationBar;
-        set tabCount-WZ4Q5Ns$emixx_common(value: number);
         get tabCount-pVg5ArA$emixx_common(): number;
         get currentTheme(): $CreativeModeTabGui$TabTheme;
         get topTabNavigationBar$emixx_common(): $ItemTabNavigationBar;
         get leftTabNavigationBar$emixx_common(): $ItemTabNavigationBar;
+        get rightTabNavigationBar$emixx_common(): $ItemTabNavigationBar;
+        set tabCount-WZ4Q5Ns$emixx_common(value: number);
     }
 }

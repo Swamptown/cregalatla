@@ -18,8 +18,8 @@ declare module "@package/com/almostreliable/morejs/features/misc" {
         isIgnoreHoldingCheck(): boolean;
         getPlayer(): $Player;
         getLevel(): $Level;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -63,8 +63,8 @@ declare module "@package/com/almostreliable/morejs/features/misc" {
         get previousTargetPlayer(): $Player;
         get player(): $Player;
         get level(): $Level;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get registries(): $RegistryAccess;
         get entity(): $LivingEntity;
     }
     export class $ExperiencePlayerEventJS implements $KubePlayerEvent {
@@ -81,8 +81,8 @@ declare module "@package/com/almostreliable/morejs/features/misc" {
         getExperienceLevel(): number;
         getPlayer(): $Player;
         getLevel(): $Level;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -125,8 +125,8 @@ declare module "@package/com/almostreliable/morejs/features/misc" {
         get xpNeededForNextLevel(): number;
         get player(): $Player;
         get level(): $Level;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get registries(): $RegistryAccess;
         get entity(): $LivingEntity;
     }
     export class $PiglinPlayerBehaviorEventJS$PiglinBehavior extends $Enum<$PiglinPlayerBehaviorEventJS$PiglinBehavior> {

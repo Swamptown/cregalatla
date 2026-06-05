@@ -29,5 +29,5 @@ declare module "@package/com/blackgear/vanillabackport/common/api/wolf" {
     /**
      * Values that may be interpreted as {@link $WolfSoundVariant}.
      */
-    export type $WolfSoundVariant_ = { deathSound?: $Holder_<$SoundEvent>, whineSound?: $Holder_<$SoundEvent>, hurtSound?: $Holder_<$SoundEvent>, pantSound?: $Holder_<$SoundEvent>, ambientSound?: $Holder_<$SoundEvent>, growlSound?: $Holder_<$SoundEvent>,  } | [deathSound?: $Holder_<$SoundEvent>, whineSound?: $Holder_<$SoundEvent>, hurtSound?: $Holder_<$SoundEvent>, pantSound?: $Holder_<$SoundEvent>, ambientSound?: $Holder_<$SoundEvent>, growlSound?: $Holder_<$SoundEvent>, ];
+    export type $WolfSoundVariant_ = { pantSound?: $Holder_<$SoundEvent>, hurtSound?: $Holder_<$SoundEvent>, whineSound?: $Holder_<$SoundEvent>, deathSound?: $Holder_<$SoundEvent>, growlSound?: $Holder_<$SoundEvent>, ambientSound?: $Holder_<$SoundEvent>,  } | [pantSound?: $Holder_<$SoundEvent>, hurtSound?: $Holder_<$SoundEvent>, whineSound?: $Holder_<$SoundEvent>, deathSound?: $Holder_<$SoundEvent>, growlSound?: $Holder_<$SoundEvent>, ambientSound?: $Holder_<$SoundEvent>, ];
 }

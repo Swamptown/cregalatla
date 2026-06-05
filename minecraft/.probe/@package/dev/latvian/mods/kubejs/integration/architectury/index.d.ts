@@ -30,17 +30,10 @@ import { $RecipeManagerKJS } from "@package/dev/latvian/mods/kubejs/core";
 
 declare module "@package/dev/latvian/mods/kubejs/integration/architectury" {
     export class $ArchitecturyIntegration implements $KubeJSPlugin {
-        registerTypeWrappers(registry: $TypeWrapperRegistry): void;
         static wrapArchFluid(o: $Object): $FluidStack;
-        attachServerData(event: $AttachedData<$MinecraftServer>): void;
-        registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
-        /**
-         * @deprecated
-         */
-        clearCaches(): void;
-        beforeScriptsLoaded(manager: $ScriptManager): void;
-        initStartup(): void;
-        afterScriptsLoaded(manager: $ScriptManager): void;
+        registerTypeWrappers(registry: $TypeWrapperRegistry): void;
+        registerEvents(registry: $EventGroupRegistry_): void;
+        breakpoint(args: $Object[]): void;
         registerBuilderTypes(registry: $BuilderTypeRegistry_): void;
         registerServerRegistries(registry: $ServerRegistryRegistry_): void;
         registerBindings(bindings: $BindingRegistry_): void;
@@ -56,9 +49,9 @@ declare module "@package/dev/latvian/mods/kubejs/integration/architectury" {
         registerRecipeViewerEntryTypes(registry: $Consumer_<$RecipeViewerEntryType>): void;
         registerDataComponentTypeDescriptions(registry: $DataComponentTypeInfoRegistry_): void;
         registerLocalWebServerAPIs(registry: $LocalWebServerAPIRegistry_): void;
-        registerLocalWebServer(registry: $LocalWebServerRegistry): void;
         registerClasses(filter: $ClassFilter): void;
         registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
+        registerLocalWebServer(registry: $LocalWebServerRegistry): void;
         registerLocalWebServerWithAuth(registry: $LocalWebServerRegistry): void;
         localWebServerStarted(server: $LocalWebServer_): void;
         registerItemNameProviders(registry: $NameProvider$Registry_<$Item, $ItemStack>): void;
@@ -68,12 +61,19 @@ declare module "@package/dev/latvian/mods/kubejs/integration/architectury" {
         generateLang(event: $LangKubeEvent_): void;
         exportServerData(_export: $DataExport): void;
         beforeRecipeLoading(event: $RecipesKubeEvent, manager: $RecipeManagerKJS, recipeJsons: $Map_<$ResourceLocation_, $JsonElement_>): void;
-        breakpoint(args: $Object[]): void;
+        attachServerData(event: $AttachedData<$MinecraftServer>): void;
+        registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
+        /**
+         * @deprecated
+         */
+        clearCaches(): void;
+        beforeScriptsLoaded(manager: $ScriptManager): void;
+        initStartup(): void;
+        afterScriptsLoaded(manager: $ScriptManager): void;
         init(): void;
-        attachPlayerData(event: $AttachedData<$Player>): void;
         attachLevelData(event: $AttachedData<$Level_>): void;
+        attachPlayerData(event: $AttachedData<$Player>): void;
         afterInit(): void;
-        registerEvents(registry: $EventGroupRegistry_): void;
         constructor();
     }
 }

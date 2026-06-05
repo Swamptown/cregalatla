@@ -1,2 +1,2 @@
 export * as keksuccino from "@package/de/keksuccino";
-export * as maxhenkel from "@package/de/maxhenkel";
+export * as johni0702 from "@package/de/johni0702";

@@ -22,7 +22,7 @@ declare module "@package/io/github/mortuusars/exposure/data" {
     /**
      * Values that may be interpreted as {@link $Filter}.
      */
-    export type $Filter_ = RegistryTypes.ExposureFilter | { attachmentTexture?: $ResourceLocation_, predicate?: $ItemPredicate_, attachmentTintColor?: $Color_, shader?: $ResourceLocation_,  } | [attachmentTexture?: $ResourceLocation_, predicate?: $ItemPredicate_, attachmentTintColor?: $Color_, shader?: $ResourceLocation_, ];
+    export type $Filter_ = RegistryTypes.ExposureFilter | { shader?: $ResourceLocation_, attachmentTintColor?: $Color_, predicate?: $ItemPredicate_, attachmentTexture?: $ResourceLocation_,  } | [shader?: $ResourceLocation_, attachmentTintColor?: $Color_, predicate?: $ItemPredicate_, attachmentTexture?: $ResourceLocation_, ];
     export interface $ColorPalette extends RegistryMarked<RegistryTypes.ExposureColorPaletteTag, RegistryTypes.ExposureColorPalette> {}
     export interface $Lens extends RegistryMarked<RegistryTypes.ExposureLensTag, RegistryTypes.ExposureLens> {}
     export class $Lens extends $Record {
@@ -34,7 +34,7 @@ declare module "@package/io/github/mortuusars/exposure/data" {
     /**
      * Values that may be interpreted as {@link $Lens}.
      */
-    export type $Lens_ = RegistryTypes.ExposureLens | { focalRange?: $FocalRange, predicate?: $ItemPredicate_,  } | [focalRange?: $FocalRange, predicate?: $ItemPredicate_, ];
+    export type $Lens_ = RegistryTypes.ExposureLens | { predicate?: $ItemPredicate_, focalRange?: $FocalRange,  } | [predicate?: $ItemPredicate_, focalRange?: $FocalRange, ];
     export interface $Filter extends RegistryMarked<RegistryTypes.ExposureFilterTag, RegistryTypes.ExposureFilter> {}
     export class $ColorPalette extends $Record {
         toColorList(): $List<$Color>;

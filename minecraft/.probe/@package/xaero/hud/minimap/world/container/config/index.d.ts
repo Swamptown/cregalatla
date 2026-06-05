@@ -8,13 +8,14 @@ declare module "@package/xaero/hud/minimap/world/container/config" {
         getSortType(): $WaypointsSort;
         isTeleportationEnabled(): boolean;
         isSortReversed(): boolean;
+        getSubWorldConnections(): $MinimapWorldConnectionManager;
+        resetSubWorldConnections(arg0: boolean): void;
         getServerTeleportCommandFormat(): string;
         getServerTeleportCommandRotationFormat(): string;
         isUsingDefaultTeleportCommand(): boolean;
         setUsingDefaultTeleportCommand(arg0: boolean): void;
         setServerTeleportCommandFormat(arg0: string): void;
         setServerTeleportCommandRotationFormat(arg0: string): void;
-        setUsingMultiworldDetection(arg0: boolean): void;
         isUsingMultiworldDetection(): boolean;
         getDefaultMultiworldId(): string;
         setDefaultMultiworldId(arg0: string): void;
@@ -25,8 +26,7 @@ declare module "@package/xaero/hud/minimap/world/container/config" {
         toggleSortReversed(): void;
         isIgnoreServerLevelId(): boolean;
         setIgnoreServerLevelId(arg0: boolean): void;
-        resetSubWorldConnections(arg0: boolean): void;
-        getSubWorldConnections(): $MinimapWorldConnectionManager;
+        setUsingMultiworldDetection(arg0: boolean): void;
         isIgnoreHeightmaps(): boolean;
         setLoaded(arg0: boolean): void;
         isLoaded(): boolean;

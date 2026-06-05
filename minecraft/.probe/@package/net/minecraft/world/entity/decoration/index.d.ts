@@ -1,14 +1,15 @@
 import { $Codec, $MapCodec } from "@package/com/mojang/serialization";
-import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $EntityType_, $Pose, $PortalProcessor, $VariantHolder, $Entity, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $ItemFrameAccessor } from "@package/com/simibubi/create/foundation/mixin/accessor";
 import { $UUID, $Stack } from "@package/java/util";
+import { $ViewableAccessor } from "@package/com/beansgalaxy/backpacks/access";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $Predicate } from "@package/java/util/function";
 import { $InteractionHand } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos, $Holder_, $Holder, $BlockPos_, $Direction_, $NonNullList, $Rotations, $Direction } from "@package/net/minecraft/core";
+import { $BlockPos, $Holder_, $Holder, $BlockPos_, $Direction_, $NonNullList, $Rotations, $Direction } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $SoundEvent } from "@package/net/minecraft/sounds";
@@ -18,6 +19,7 @@ import { RegistryMarked, RegistryTypes } from "@special/types";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
 import { $MapId } from "@package/net/minecraft/world/level/saveddata/maps";
 import { $Record } from "@package/java/lang";
+import { $ViewableBackpack } from "@package/com/beansgalaxy/backpacks/util";
 import { $EntityInLevelCallback } from "@package/net/minecraft/world/level/entity";
 import { $Level_ } from "@package/net/minecraft/world/level";
 import { $TagKey } from "@package/net/minecraft/tags";
@@ -37,7 +39,6 @@ import { $DamageSource_ } from "@package/net/minecraft/world/damagesource";
 
 declare module "@package/net/minecraft/world/entity/decoration" {
     export class $GlowItemFrame extends $ItemFrame {
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -86,6 +87,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         direction: $Direction;
@@ -113,7 +115,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_);
         constructor(arg0: $EntityType_<$ItemFrame>, arg1: $Level_);
     }
-    export class $ArmorStand extends $LivingEntity implements $EquipmentEntity {
+    export class $ArmorStand extends $LivingEntity implements $EquipmentEntity, $ViewableAccessor {
         isShowArms(): boolean;
         isNoBasePlate(): boolean;
         setShowArms(arg0: boolean): void;
@@ -133,10 +135,10 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         getRightArmPose(): $Rotations;
         getLeftLegPose(): $Rotations;
         getRightLegPose(): $Rotations;
-        isSmall(): boolean;
-        isMarker(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        isMarker(): boolean;
+        beans_Backpacks_3$getViewable(): $ViewableBackpack;
+        isSmall(): boolean;
         lastHurtByPlayerTime: number;
         autoSpinAttackItemStack: $ItemStack;
         armorItems: $NonNullList<$ItemStack>;
@@ -163,6 +165,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         static CLIENT_FLAG_SMALL: number;
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         lastHit: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         static DATA_RIGHT_LEG_POSE: $EntityDataAccessor<$Rotations>;
@@ -190,6 +193,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         verticalCollisionBelow: boolean;
         static DATA_LEFT_ARM_POSE: $EntityDataAccessor<$Rotations>;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static DISABLE_TAKING_OFFSET: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -218,6 +222,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $ArmorStand;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
         swingTime: number;
@@ -296,13 +301,12 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         static BASE_SAFE_FALL_DISTANCE: number;
         constructor(arg0: $EntityType_<$ArmorStand>, arg1: $Level_);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number);
-        get small(): boolean;
         get marker(): boolean;
+        get small(): boolean;
     }
     export class $LeashFenceKnotEntity extends $BlockAttachedEntity {
         static getOrCreateKnot(arg0: $Level_, arg1: $BlockPos_): $LeashFenceKnotEntity;
         playPlacementSound(): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -352,6 +356,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;
@@ -433,9 +438,8 @@ declare module "@package/net/minecraft/world/entity/decoration" {
     export class $HangingEntity extends $BlockAttachedEntity {
         playPlacementSound(): void;
         calculateSupportBox(): $AABB;
-        setDirection(arg0: $Direction_): void;
         calculateBoundingBox(arg0: $BlockPos_, arg1: $Direction_): $AABB;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        setDirection(arg0: $Direction_): void;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -484,6 +488,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         direction: $Direction;
@@ -507,8 +512,8 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
-        constructor(arg0: $EntityType_<$HangingEntity>, arg1: $Level_);
         constructor(arg0: $EntityType_<$HangingEntity>, arg1: $Level_, arg2: $BlockPos_);
+        constructor(arg0: $EntityType_<$HangingEntity>, arg1: $Level_);
     }
     export class $PaintingVariant extends $Record {
         assetId(): $ResourceLocation;
@@ -524,24 +529,23 @@ declare module "@package/net/minecraft/world/entity/decoration" {
     /**
      * Values that may be interpreted as {@link $PaintingVariant}.
      */
-    export type $PaintingVariant_ = RegistryTypes.PaintingVariant | { height?: number, width?: number, assetId?: $ResourceLocation_,  } | [height?: number, width?: number, assetId?: $ResourceLocation_, ];
+    export type $PaintingVariant_ = RegistryTypes.PaintingVariant | { assetId?: $ResourceLocation_, width?: number, height?: number,  } | [assetId?: $ResourceLocation_, width?: number, height?: number, ];
     export class $ItemFrame extends $HangingEntity implements $ItemFrameEntityKJS, $ItemFrameAccessor {
-        setItem(arg0: $ItemStack_, arg1: boolean): void;
-        setItem(arg0: $ItemStack_): void;
-        getPlaceSound(): $SoundEvent;
-        getBreakSound(): $SoundEvent;
-        setRotation(arg0: number): void;
         getAnalogOutput(): number;
+        setRotation(arg0: number): void;
+        setItem(arg0: $ItemStack_): void;
+        setItem(arg0: $ItemStack_, arg1: boolean): void;
         getRemoveItemSound(): $SoundEvent;
         getAddItemSound(): $SoundEvent;
         getRotateItemSound(): $SoundEvent;
         getFrameItemStack(): $ItemStack;
         getFramedMapId(arg0: $ItemStack_): $MapId;
         hasFramedMap(): boolean;
+        getBreakSound(): $SoundEvent;
+        getPlaceSound(): $SoundEvent;
         getItem(): $ItemStack;
         getRotation(): number;
         create$getFrameItemStack(): $ItemStack;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -590,6 +594,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         direction: $Direction;
@@ -617,19 +622,18 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_);
         constructor(arg0: $EntityType_<$ItemFrame>, arg1: $Level_, arg2: $BlockPos_, arg3: $Direction_);
         constructor(arg0: $EntityType_<$ItemFrame>, arg1: $Level_);
-        get placeSound(): $SoundEvent;
-        get breakSound(): $SoundEvent;
         get analogOutput(): number;
         get removeItemSound(): $SoundEvent;
         get addItemSound(): $SoundEvent;
         get rotateItemSound(): $SoundEvent;
         get frameItemStack(): $ItemStack;
+        get breakSound(): $SoundEvent;
+        get placeSound(): $SoundEvent;
     }
     export class $Painting extends $HangingEntity implements $VariantHolder<$Holder<$PaintingVariant>> {
         setVariant(arg0: $Holder_<$PaintingVariant>): void;
         static create(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_): ($Painting) | undefined;
         getVariant(): $Holder<$PaintingVariant>;
-        serializeNBT(arg0: $HolderLookup$Provider): $Holder<$PaintingVariant>;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -680,6 +684,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         direction: $Direction;
@@ -713,7 +718,6 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         survives(): boolean;
         recalculateBoundingBox(): void;
         getPos(): $BlockPos;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -762,6 +766,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;
@@ -783,7 +788,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         dimensions: $EntityDimensions;
-        constructor(arg0: $EntityType_<$BlockAttachedEntity>, arg1: $Level_, arg2: $BlockPos_);
         constructor(arg0: $EntityType_<$BlockAttachedEntity>, arg1: $Level_);
+        constructor(arg0: $EntityType_<$BlockAttachedEntity>, arg1: $Level_, arg2: $BlockPos_);
     }
 }

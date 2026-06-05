@@ -8,35 +8,35 @@ import { $FormattedCharSequence_ } from "@package/net/minecraft/util";
 
 declare module "@package/dev/emi/emi/runtime" {
     export class $EmiDrawContext implements $GlobalMixin {
-        drawTextWithShadow(text: $FormattedCharSequence_, x: number, y: number, color: number): void;
         drawTextWithShadow(text: $Component_, x: number, y: number): void;
+        drawTextWithShadow(text: $FormattedCharSequence_, x: number, y: number, color: number): void;
         drawTextWithShadow(text: $Component_, x: number, y: number, color: number): void;
-        drawCenteredText(text: $Component_, x: number, y: number): void;
-        drawCenteredText(text: $Component_, x: number, y: number, color: number): void;
         drawStack(stack: $EmiIngredient, x: number, y: number): void;
         drawStack(stack: $EmiIngredient, x: number, y: number, delta: number, flags: number): void;
         drawStack(stack: $EmiIngredient, x: number, y: number, flags: number): void;
-        drawTexture(texture: $ResourceLocation_, x: number, y: number, z: number, u: number, v: number, width: number, height: number): void;
+        drawCenteredText(text: $Component_, x: number, y: number): void;
+        drawCenteredText(text: $Component_, x: number, y: number, color: number): void;
         drawTexture(texture: $ResourceLocation_, x: number, y: number, u: number, v: number, width: number, height: number): void;
         drawTexture(texture: $ResourceLocation_, x: number, y: number, width: number, height: number, u: number, v: number, regionWidth: number, regionHeight: number, textureWidth: number, textureHeight: number): void;
         drawTexture(texture: $ResourceLocation_, x: number, y: number, z: number, u: number, v: number, width: number, height: number, textureWidth: number, textureHeight: number): void;
+        drawTexture(texture: $ResourceLocation_, x: number, y: number, z: number, u: number, v: number, width: number, height: number): void;
         drawText(text: $FormattedCharSequence_, x: number, y: number, color: number): void;
-        drawText(text: $Component_, x: number, y: number, color: number): void;
         drawText(text: $Component_, x: number, y: number): void;
+        drawText(text: $Component_, x: number, y: number, color: number): void;
         drawCenteredTextWithShadow(text: $Component_, x: number, y: number): void;
         drawCenteredTextWithShadow(text: $Component_, x: number, y: number, color: number): void;
-        setColor(r: number, g: number, b: number, a: number): void;
+        push(): void;
+        pop(): void;
         setColor(r: number, g: number, b: number): void;
+        setColor(r: number, g: number, b: number, a: number): void;
         static wrap(context: $GuiGraphics): $EmiDrawContext;
         fill(x: number, y: number, width: number, height: number, color: number): void;
         raw(): $GuiGraphics;
-        push(): void;
-        pop(): void;
-        enableBlend(): void;
-        disableBlend(): void;
+        matrices(): $PoseStack;
         disableDepthTest(): void;
         enableDepthTest(): void;
-        matrices(): $PoseStack;
+        enableBlend(): void;
+        disableBlend(): void;
         resetColor(): void;
     }
 }

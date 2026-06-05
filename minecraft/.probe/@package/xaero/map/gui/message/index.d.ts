@@ -12,10 +12,10 @@ declare module "@package/xaero/map/gui/message" {
     }
     export class $MessageBox {
         addMessageWithSource(arg0: $Component_, arg1: $Component_): void;
-        getCapacity(): number;
         getIterator(): $Iterator<$Message>;
+        getCapacity(): number;
         addMessage(arg0: $Component_): void;
-        get capacity(): number;
         get iterator(): $Iterator<$Message>;
+        get capacity(): number;
     }
 }

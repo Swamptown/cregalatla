@@ -1,7 +1,6 @@
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $JumpControl, $MoveControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $LivingEntity, $Pose, $PortalProcessor, $WalkAnimationState, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
@@ -9,7 +8,7 @@ import { $UUID, $Stack } from "@package/java/util";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $Animal } from "@package/net/minecraft/world/entity/animal";
 import { $InteractionHand } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
+import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $SoundEvent } from "@package/net/minecraft/sounds";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
@@ -51,7 +50,6 @@ declare module "@package/net/minecraft/world/entity/monster/hoglin" {
         setImmuneToZombification(arg0: boolean): void;
         canBeHunted(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -83,6 +81,7 @@ declare module "@package/net/minecraft/world/entity/monster/hoglin" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -107,6 +106,7 @@ declare module "@package/net/minecraft/world/entity/monster/hoglin" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -133,6 +133,7 @@ declare module "@package/net/minecraft/world/entity/monster/hoglin" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -232,8 +233,8 @@ declare module "@package/net/minecraft/world/entity/monster/hoglin" {
         static isPosNearNearestRepellent(arg0: $Hoglin, arg1: $BlockPos_): boolean;
         static isPacified(arg0: $Hoglin): boolean;
         static getSoundForCurrentActivity(arg0: $Hoglin): ($SoundEvent) | undefined;
-        static updateActivity(arg0: $Hoglin): void;
         static makeBrain(arg0: $Brain<$Hoglin>): $Brain<never>;
+        static updateActivity(arg0: $Hoglin): void;
         static REPELLENT_DETECTION_RANGE_VERTICAL: number;
         static REPELLENT_DETECTION_RANGE_HORIZONTAL: number;
         constructor();

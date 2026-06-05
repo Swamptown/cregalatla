@@ -15,41 +15,41 @@ export * as encoding from "@package/dev/latvian/apps/tinyserver/http/response/en
 declare module "@package/dev/latvian/apps/tinyserver/http/response" {
     export class $HTTPResponse {
         static accepted(): $HTTPResponse;
-        static upgrade(upgrade: $HTTPUpgrade<never>): $HTTPResponse;
         static movedPermanently(location: string): $HTTPResponse;
         static redirectTemporary(location: string): $HTTPResponse;
         static redirectPermanently(location: string): $HTTPResponse;
         static noContent(): $HTTPResponse;
+        static upgrade(upgrade: $HTTPUpgrade<never>): $HTTPResponse;
         static redirect(location: string): $HTTPResponse;
-        static created(): $HTTPResponse;
         static ok(): $HTTPResponse;
+        static created(): $HTTPResponse;
     }
     export interface $HTTPResponse {
-        jpeg(img: $BufferedImage): $HTTPResponse;
+        gzip(): $HTTPResponse;
         png(img: $BufferedImage): $HTTPResponse;
         html(text: string): $HTTPResponse;
-        cookie(key: string, value: string): $HTTPResponse;
-        cookie(key: string, value: string, properties: $UnaryOperator_<$CookieResponse$Builder>): $HTTPResponse;
-        cors(): $HTTPResponse;
-        cors(value: string): $HTTPResponse;
-        gzip(): $HTTPResponse;
+        jpeg(img: $BufferedImage): $HTTPResponse;
         removeCookie(key: string): $HTTPResponse;
         noCache(): $HTTPResponse;
         privateCache(duration: $Duration_): $HTTPResponse;
         publicCache(duration: $Duration_): $HTTPResponse;
-        text(text: string): $HTTPResponse;
-        text(text: $Iterable_<string>): $HTTPResponse;
+        cors(value: string): $HTTPResponse;
+        cors(): $HTTPResponse;
+        cookie(key: string, value: string): $HTTPResponse;
+        cookie(key: string, value: string, properties: $UnaryOperator_<$CookieResponse$Builder>): $HTTPResponse;
         deflate(): $HTTPResponse;
+        header(header: string, value: $Object): $HTTPResponse;
+        content(file: $Path_): $HTTPResponse;
+        content(string: $CharSequence, type: string): $HTTPResponse;
+        content(file: $Path_, overrideType: string): $HTTPResponse;
+        content(bytes: number[], type: string): $HTTPResponse;
+        content(content: $ResponseContent_): $HTTPResponse;
         cache(isPublic: boolean, duration: $Duration_): $HTTPResponse;
         status(): $HTTPStatus;
         encoding(encoding: $ResponseContentEncoding): $HTTPResponse;
         build(payload: $HTTPPayload): void;
-        header(header: string, value: $Object): $HTTPResponse;
-        content(string: $CharSequence, type: string): $HTTPResponse;
-        content(file: $Path_): $HTTPResponse;
-        content(file: $Path_, overrideType: string): $HTTPResponse;
-        content(bytes: number[], type: string): $HTTPResponse;
-        content(content: $ResponseContent_): $HTTPResponse;
+        text(text: $Iterable_<string>): $HTTPResponse;
+        text(text: string): $HTTPResponse;
         json(json: string): $HTTPResponse;
     }
     export class $HTTPStatus extends $Enum<$HTTPStatus> implements $HTTPResponse {
@@ -68,29 +68,29 @@ declare module "@package/dev/latvian/apps/tinyserver/http/response" {
         statusCode(): $StatusCode;
         build(payload: $HTTPPayload): void;
         static fromCode(code: number): $HTTPStatus;
-        jpeg(img: $BufferedImage): $HTTPResponse;
+        gzip(): $HTTPResponse;
         png(img: $BufferedImage): $HTTPResponse;
         html(text: string): $HTTPResponse;
-        cookie(key: string, value: string): $HTTPResponse;
-        cookie(key: string, value: string, properties: $UnaryOperator_<$CookieResponse$Builder>): $HTTPResponse;
-        cors(): $HTTPResponse;
-        cors(value: string): $HTTPResponse;
-        gzip(): $HTTPResponse;
+        jpeg(img: $BufferedImage): $HTTPResponse;
         removeCookie(key: string): $HTTPResponse;
         noCache(): $HTTPResponse;
         privateCache(duration: $Duration_): $HTTPResponse;
         publicCache(duration: $Duration_): $HTTPResponse;
-        text(text: string): $HTTPResponse;
-        text(text: $Iterable_<string>): $HTTPResponse;
+        cors(value: string): $HTTPResponse;
+        cors(): $HTTPResponse;
+        cookie(key: string, value: string): $HTTPResponse;
+        cookie(key: string, value: string, properties: $UnaryOperator_<$CookieResponse$Builder>): $HTTPResponse;
         deflate(): $HTTPResponse;
-        cache(isPublic: boolean, duration: $Duration_): $HTTPResponse;
-        encoding(encoding: $ResponseContentEncoding): $HTTPResponse;
         header(header: string, value: $Object): $HTTPResponse;
-        content(string: $CharSequence, type: string): $HTTPResponse;
         content(file: $Path_): $HTTPResponse;
+        content(string: $CharSequence, type: string): $HTTPResponse;
         content(file: $Path_, overrideType: string): $HTTPResponse;
         content(bytes: number[], type: string): $HTTPResponse;
         content(content: $ResponseContent_): $HTTPResponse;
+        cache(isPublic: boolean, duration: $Duration_): $HTTPResponse;
+        encoding(encoding: $ResponseContentEncoding): $HTTPResponse;
+        text(text: $Iterable_<string>): $HTTPResponse;
+        text(text: string): $HTTPResponse;
         json(json: string): $HTTPResponse;
         static ALL: $List<$HTTPStatus>;
         static REQUEST_TIMEOUT: $HTTPStatus;
@@ -163,6 +163,8 @@ declare module "@package/dev/latvian/apps/tinyserver/http/response" {
         constructor();
     }
     export class $HTTPPayload {
+        setStatus(status: $HTTPStatus_): void;
+        addHeader(header: string, value: $Object): void;
         setCacheControl(cacheControl: string): void;
         getCacheControl(): string;
         setCors(cors: string): void;
@@ -170,15 +172,13 @@ declare module "@package/dev/latvian/apps/tinyserver/http/response" {
         setCookie(key: string, value: string): void;
         setUpgrade(upgrade: $HTTPUpgrade<never>): void;
         addEncoding(encoding: $ResponseContentEncoding): void;
-        setResponse(response: $HTTPResponse): void;
-        setStatus(status: $HTTPStatus_): void;
-        addHeader(header: string, value: $Object): void;
         getUpgrade(): $HTTPUpgrade<never>;
-        getCookie(key: string): string;
+        setResponse(response: $HTTPResponse): void;
         getHeader(header: string): $OptionalString;
+        process(req: $HTTPRequest, keepAliveTimeout: number, maxKeepAliveConnections: number): void;
+        getCookie(key: string): string;
         clear(): void;
         write(connection: $HTTPConnection<never>, writeBody: boolean): void;
-        process(req: $HTTPRequest, keepAliveTimeout: number, maxKeepAliveConnections: number): void;
         getStatus(): $HTTPStatus;
         getBody(): $ResponseContent;
         setBody(body: $ResponseContent_): void;

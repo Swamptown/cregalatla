@@ -67,22 +67,22 @@ declare module "@package/dev/emi/emi/screen/widget/config" {
         constructor(id: string, text: $Component_);
     }
     export class $ListWidget extends $AbstractContainerEventHandler implements $Renderable, $NarratableEntry, $GlobalMixin {
+        getMaxScroll(): number;
         setRenderSelection(renderSelection: boolean): void;
         getSelectedOrNull(): $ListWidget$Entry;
         setLeftPos(left: number): void;
         unfocusTextField(): void;
         getFocusedTextField(): $EditBox;
-        getMaxScroll(): number;
+        updateSize(width: number, height: number, top: number, bottom: number): void;
         setScrollAmount(amount: number): void;
         centerScrollOn(entry: $ListWidget$Entry): void;
         getHoveredEntry(): $ListWidget$Entry;
-        updateSize(width: number, height: number, top: number, bottom: number): void;
         getLogicalHeight(): number;
         addEntry(entry: $ListWidget$Entry): number;
         render(draw: $GuiGraphics, mouseX: number, mouseY: number, delta: number): void;
-        setSelected(entry: $ListWidget$Entry): void;
         updateNarration(var1: $NarrationElementOutput): void;
         narrationPriority(): $NarratableEntry$NarrationPriority;
+        setSelected(entry: $ListWidget$Entry): void;
         getTotalHeight(): number;
         getRowWidth(): number;
         getRowLeft(): number;
@@ -91,11 +91,11 @@ declare module "@package/dev/emi/emi/screen/widget/config" {
         isActive(): boolean;
         padding: number;
         constructor(client: $Minecraft, width: number, height: number, top: number, bottom: number);
+        get maxScroll(): number;
         set renderSelection(value: boolean);
         get selectedOrNull(): $ListWidget$Entry;
         set leftPos(value: number);
         get focusedTextField(): $EditBox;
-        get maxScroll(): number;
         get hoveredEntry(): $ListWidget$Entry;
         get logicalHeight(): number;
         set selected(value: $ListWidget$Entry);

@@ -42,9 +42,9 @@ declare module "@package/net/minecraft/client/server" {
         constructor();
     }
     export class $IntegratedServer extends $MinecraftServer implements $IDeferrableIntegratedServer, $SableToastableServer {
-        sable$reportSubLevelPhysicsFailure(arg0: $ServerSubLevel): void;
-        sable$reportSubLevelLoadFailure(arg0: $GlobalSavedSubLevelPointer_): void;
         sable$reportSubLevelSaveFailure(arg0: $SubLevelData): void;
+        sable$reportSubLevelLoadFailure(arg0: $GlobalSavedSubLevelPointer_): void;
+        sable$reportSubLevelPhysicsFailure(arg0: $ServerSubLevel): void;
         mfix$markClientLoadFinished(): void;
         setUUID(arg0: $UUID_): void;
         static VANILLA_BRAND: string;
@@ -70,9 +70,9 @@ declare module "@package/net/minecraft/client/server" {
         get motd(): string;
     }
     export class $LanServerPinger extends $Thread {
-        static createPingString(arg0: string, arg1: string): string;
         static parseMotd(arg0: string): string;
         static parseAddress(arg0: string): string;
+        static createPingString(arg0: string, arg1: string): string;
         static MULTICAST_GROUP: string;
         static PING_PORT: number;
         static MIN_PRIORITY: number;

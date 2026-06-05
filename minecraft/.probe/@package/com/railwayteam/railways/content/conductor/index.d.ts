@@ -1,7 +1,6 @@
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $MoveControl, $LookControl, $JumpControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
-import { $EntityType_, $Pose, $PortalProcessor, $EntityDimensions, $Entity$RemovalReason, $WalkAnimationState } from "@package/net/minecraft/world/entity";
+import { $EntityType_, $Pose, $PortalProcessor, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $List, $Stack, $Map, $Set } from "@package/java/util";
@@ -9,7 +8,7 @@ import { $RandomSource } from "@package/net/minecraft/util";
 import { $AbstractGolem } from "@package/net/minecraft/world/entity/animal";
 import { $PlayerModel } from "@package/net/minecraft/client/model";
 import { $InteractionHand } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos, $BlockPos_, $SectionPos, $Vec3i } from "@package/net/minecraft/core";
+import { $BlockPos, $BlockPos_, $SectionPos, $Vec3i } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerPlayer } from "@package/net/minecraft/server/level";
 import { $BlockState_ } from "@package/net/minecraft/world/level/block/state";
@@ -34,8 +33,8 @@ export * as toolbox from "@package/com/railwayteam/railways/content/conductor/to
 
 declare module "@package/com/railwayteam/railways/content/conductor" {
     export class $ConductorEntity extends $AbstractGolem {
-        getForwardSignalStrength(): number;
         addSchedule(arg0: $ItemStack_): void;
+        getForwardSignalStrength(): number;
         isHoldingSchedules(): boolean;
         isCarryingToolbox(): boolean;
         setJob(arg0: $ConductorEntity$Job_): void;
@@ -63,17 +62,16 @@ declare module "@package/com/railwayteam/railways/content/conductor" {
         isPossessedAndClient(): boolean;
         getOrCreateToolboxHolder(): $MountedToolbox;
         static defaultColor(): $DyeColor;
+        canReach(arg0: $Vec3i): boolean;
         doCheckFallDamage(arg0: number, arg1: boolean): void;
         stopViewing(arg0: $ServerPlayer): void;
-        canReach(arg0: $Vec3i): boolean;
         setColor(arg0: $DyeColor_): void;
-        static canSpyInteract(arg0: $BlockState_): boolean;
-        getColor(): $DyeColor;
-        static spawn(arg0: $Level_, arg1: $BlockPos_, arg2: $ItemStack_): $ConductorEntity;
-        static isPlayerDisguised(arg0: $Player): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
+        getColor(): $DyeColor;
+        static isPlayerDisguised(arg0: $Player): boolean;
+        static canSpyInteract(arg0: $BlockState_): boolean;
         turnView(arg0: number, arg1: number): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        static spawn(arg0: $Level_, arg1: $BlockPos_, arg2: $ItemStack_): $ConductorEntity;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -107,6 +105,7 @@ declare module "@package/com/railwayteam/railways/content/conductor" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -133,6 +132,7 @@ declare module "@package/com/railwayteam/railways/content/conductor" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -162,6 +162,7 @@ declare module "@package/com/railwayteam/railways/content/conductor" {
         visualBaseModel: $PlayerModel<never>;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static HOLDING_SCHEDULES: $EntityDataAccessor<boolean>;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;

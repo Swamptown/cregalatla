@@ -33,44 +33,29 @@ declare module "@package/foundry/veil/api/client/render/shader/program" {
         removeTexture(arg0: $CharSequence): void;
     }
     export class $ProgramDefinition extends $Record {
+        definitionDefaults(): $Map<string, string>;
         tesselationControl(): $ResourceLocation;
         tesselationEvaluation(): $ResourceLocation;
         geometry(): $ResourceLocation;
         getMacros(arg0: $Set_<string>, arg1: $ShaderPreDefinitions): $Map<string, string>;
-        blendMode(): $ShaderBlendMode;
         shaders(): $Int2ObjectMap<$ResourceLocation>;
-        compute(): $ResourceLocation;
+        blendMode(): $ShaderBlendMode;
         fragment(): $ResourceLocation;
-        samplers(): $Map<string, $ShaderTextureSource>;
+        compute(): $ResourceLocation;
         definitions(): string[];
         requiredFeatures(): $ShaderFeature[];
+        samplers(): $Map<string, $ShaderTextureSource>;
         vertex(): $ResourceLocation;
-        definitionDefaults(): $Map<string, string>;
         constructor(vertex: $ResourceLocation_, tesselationControl: $ResourceLocation_, tesselationEvaluation: $ResourceLocation_, geometry: $ResourceLocation_, fragment: $ResourceLocation_, compute: $ResourceLocation_, definitions: string[], definitionDefaults: $Map_<string, string>, samplers: $Map_<string, $ShaderTextureSource>, shaders: $Int2ObjectMap<$ResourceLocation_>, requiredFeatures: $ShaderFeature_[], blendMode: $ShaderBlendMode_);
     }
     /**
      * Values that may be interpreted as {@link $ProgramDefinition}.
      */
-    export type $ProgramDefinition_ = { blendMode?: $ShaderBlendMode_, definitionDefaults?: $Map_<string, string>, requiredFeatures?: $ShaderFeature_[], samplers?: $Map_<string, $ShaderTextureSource>, fragment?: $ResourceLocation_, geometry?: $ResourceLocation_, definitions?: string[], tesselationControl?: $ResourceLocation_, compute?: $ResourceLocation_, shaders?: $Int2ObjectMap<$ResourceLocation_>, vertex?: $ResourceLocation_, tesselationEvaluation?: $ResourceLocation_,  } | [blendMode?: $ShaderBlendMode_, definitionDefaults?: $Map_<string, string>, requiredFeatures?: $ShaderFeature_[], samplers?: $Map_<string, $ShaderTextureSource>, fragment?: $ResourceLocation_, geometry?: $ResourceLocation_, definitions?: string[], tesselationControl?: $ResourceLocation_, compute?: $ResourceLocation_, shaders?: $Int2ObjectMap<$ResourceLocation_>, vertex?: $ResourceLocation_, tesselationEvaluation?: $ResourceLocation_, ];
+    export type $ProgramDefinition_ = { vertex?: $ResourceLocation_, shaders?: $Int2ObjectMap<$ResourceLocation_>, compute?: $ResourceLocation_, tesselationControl?: $ResourceLocation_, definitions?: string[], geometry?: $ResourceLocation_, fragment?: $ResourceLocation_, samplers?: $Map_<string, $ShaderTextureSource>, requiredFeatures?: $ShaderFeature_[], definitionDefaults?: $Map_<string, string>, blendMode?: $ShaderBlendMode_, tesselationEvaluation?: $ResourceLocation_,  } | [vertex?: $ResourceLocation_, shaders?: $Int2ObjectMap<$ResourceLocation_>, compute?: $ResourceLocation_, tesselationControl?: $ResourceLocation_, definitions?: string[], geometry?: $ResourceLocation_, fragment?: $ResourceLocation_, samplers?: $Map_<string, $ShaderTextureSource>, requiredFeatures?: $ShaderFeature_[], definitionDefaults?: $Map_<string, string>, blendMode?: $ShaderBlendMode_, tesselationEvaluation?: $ResourceLocation_, ];
     export class $ShaderProgram {
         static unbind(): void;
     }
     export interface $ShaderProgram extends $NativeResource, $UniformAccess, $TextureUniformAccess {
-        getDefinitionDependencies(): $Set<string>;
-        getRequiredFeatures(): $Set<$ShaderFeature>;
-        getFormat(): $VertexFormat;
-        isValid(): boolean;
-        bind(): void;
-        getName(): $ResourceLocation;
-        getDefinition(): $ProgramDefinition;
-        /**
-         * @deprecated
-         */
-        toShaderInstance(): $ShaderInstance;
-        getShaders(): $Int2ObjectMap<$CompiledShader>;
-        setDefaultUniforms(arg0: $VertexFormat$Mode_): void;
-        setDefaultUniforms(arg0: $VertexFormat$Mode_, arg1: $Matrix4fc, arg2: $Matrix4fc): void;
-        getProgram(): number;
         setUniformBlock(arg0: $CharSequence, arg1: number): void;
         setStorageBlock(arg0: $CharSequence, arg1: number): void;
         hasTesselation(): boolean;
@@ -78,22 +63,29 @@ declare module "@package/foundry/veil/api/client/render/shader/program" {
         getVertexShader(): $CompiledShader;
         getGeometryShader(): $CompiledShader;
         getTessellationControlShader(): $CompiledShader;
+        hasVertex(): boolean;
         getTessellationEvaluationShader(): $CompiledShader;
         getFragmentShader(): $CompiledShader;
         getComputeShader(): $CompiledShader;
-        hasVertex(): boolean;
         hasGeometry(): boolean;
         hasFragment(): boolean;
         isCompute(): boolean;
+        getDefinitionDependencies(): $Set<string>;
+        getRequiredFeatures(): $Set<$ShaderFeature>;
+        isValid(): boolean;
+        bind(): void;
+        getFormat(): $VertexFormat;
+        getName(): $ResourceLocation;
+        getDefinition(): $ProgramDefinition;
+        getProgram(): number;
+        setDefaultUniforms(arg0: $VertexFormat$Mode_): void;
+        setDefaultUniforms(arg0: $VertexFormat$Mode_, arg1: $Matrix4fc, arg2: $Matrix4fc): void;
+        /**
+         * @deprecated
+         */
+        toShaderInstance(): $ShaderInstance;
+        getShaders(): $Int2ObjectMap<$CompiledShader>;
         getUniform(arg0: $CharSequence): $ShaderUniformAccess;
-        get definitionDependencies(): $Set<string>;
-        get requiredFeatures(): $Set<$ShaderFeature>;
-        get format(): $VertexFormat;
-        get valid(): boolean;
-        get name(): $ResourceLocation;
-        get definition(): $ProgramDefinition;
-        get shaders(): $Int2ObjectMap<$CompiledShader>;
-        get program(): number;
         get activeDynamicBuffers(): number;
         get vertexShader(): $CompiledShader;
         get geometryShader(): $CompiledShader;
@@ -102,30 +94,38 @@ declare module "@package/foundry/veil/api/client/render/shader/program" {
         get fragmentShader(): $CompiledShader;
         get computeShader(): $CompiledShader;
         get compute(): boolean;
+        get definitionDependencies(): $Set<string>;
+        get requiredFeatures(): $Set<$ShaderFeature>;
+        get valid(): boolean;
+        get format(): $VertexFormat;
+        get name(): $ResourceLocation;
+        get definition(): $ProgramDefinition;
+        get program(): number;
+        get shaders(): $Int2ObjectMap<$CompiledShader>;
     }
     export class $UniformAccess {
     }
     export interface $UniformAccess {
-        hasUniformBlock(arg0: $CharSequence): boolean;
-        hasStorageBlock(arg0: $CharSequence): boolean;
-        getUniformSafe(arg0: $CharSequence): $ShaderUniformAccess;
-        getUniformLocation(arg0: $CharSequence): number;
-        getUniform(arg0: $CharSequence): $ShaderUniformAccess;
-        hasUniform(arg0: $CharSequence): boolean;
         setUniformBlock(arg0: $CharSequence, arg1: number): void;
         setStorageBlock(arg0: $CharSequence, arg1: number): void;
         getUniformBlock(arg0: $CharSequence): number;
         getStorageBlock(arg0: $CharSequence): number;
+        hasUniformBlock(arg0: $CharSequence): boolean;
+        hasStorageBlock(arg0: $CharSequence): boolean;
+        getUniformSafe(arg0: $CharSequence): $ShaderUniformAccess;
+        getUniformLocation(arg0: $CharSequence): number;
+        hasUniform(arg0: $CharSequence): boolean;
+        getUniform(arg0: $CharSequence): $ShaderUniformAccess;
     }
     export class $ShaderBlendMode extends $Record {
-        colorEquation(): $ShaderBlendMode$BlendEquation;
-        alphaEquation(): $ShaderBlendMode$BlendEquation;
-        apply(): void;
         srcColorFactor(): $GlStateManager$SourceFactor;
         dstColorFactor(): $GlStateManager$DestFactor;
         srcAlphaFactor(): $GlStateManager$SourceFactor;
         dstAlphaFactor(): $GlStateManager$DestFactor;
         hasEquation(): boolean;
+        colorEquation(): $ShaderBlendMode$BlendEquation;
+        alphaEquation(): $ShaderBlendMode$BlendEquation;
+        apply(): void;
         static CODEC: $Codec<$ShaderBlendMode>;
         static DESTINATION_FACTOR_CODEC: $Codec<$GlStateManager$DestFactor>;
         static SOURCE_FACTOR_CODEC: $Codec<$GlStateManager$SourceFactor>;
@@ -134,5 +134,5 @@ declare module "@package/foundry/veil/api/client/render/shader/program" {
     /**
      * Values that may be interpreted as {@link $ShaderBlendMode}.
      */
-    export type $ShaderBlendMode_ = { colorEquation?: $ShaderBlendMode$BlendEquation, srcColorFactor?: $GlStateManager$SourceFactor_, dstAlphaFactor?: $GlStateManager$DestFactor_, dstColorFactor?: $GlStateManager$DestFactor_, alphaEquation?: $ShaderBlendMode$BlendEquation, srcAlphaFactor?: $GlStateManager$SourceFactor_,  } | [colorEquation?: $ShaderBlendMode$BlendEquation, srcColorFactor?: $GlStateManager$SourceFactor_, dstAlphaFactor?: $GlStateManager$DestFactor_, dstColorFactor?: $GlStateManager$DestFactor_, alphaEquation?: $ShaderBlendMode$BlendEquation, srcAlphaFactor?: $GlStateManager$SourceFactor_, ];
+    export type $ShaderBlendMode_ = { alphaEquation?: $ShaderBlendMode$BlendEquation, dstColorFactor?: $GlStateManager$DestFactor_, dstAlphaFactor?: $GlStateManager$DestFactor_, srcColorFactor?: $GlStateManager$SourceFactor_, colorEquation?: $ShaderBlendMode$BlendEquation, srcAlphaFactor?: $GlStateManager$SourceFactor_,  } | [alphaEquation?: $ShaderBlendMode$BlendEquation, dstColorFactor?: $GlStateManager$DestFactor_, dstAlphaFactor?: $GlStateManager$DestFactor_, srcColorFactor?: $GlStateManager$SourceFactor_, colorEquation?: $ShaderBlendMode$BlendEquation, srcAlphaFactor?: $GlStateManager$SourceFactor_, ];
 }

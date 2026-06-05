@@ -16,10 +16,10 @@ declare module "@package/top/theillusivec4/curios/api/type/inventory" {
         grow(arg0: number): void;
         shrink(arg0: number): void;
         getSlots(): number;
+        setStackInSlot(arg0: number, arg1: $ItemStack_): void;
         getStackInSlot(arg0: number): $ItemStack;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
-        setStackInSlot(arg0: number, arg1: $ItemStack_): void;
         get slots(): number;
     }
     export class $ICurioStacksHandler {
@@ -38,11 +38,11 @@ declare module "@package/top/theillusivec4/curios/api/type/inventory" {
         getSizeShift(): number;
         copyModifiers(arg0: $ICurioStacksHandler): void;
         updateActiveState(arg0: number): void;
-        getDropRule(): $ICurio$DropRule;
         getActiveStates(): $NonNullList<boolean>;
+        getDropRule(): $ICurio$DropRule;
         getCosmeticStacks(): $IDynamicStackHandler;
-        addPermanentModifier(arg0: $AttributeModifier_): void;
         clearModifiers(): void;
+        addPermanentModifier(arg0: $AttributeModifier_): void;
         getIdentifier(): string;
         getStacks(): $IDynamicStackHandler;
         getModifiers(): $Map<$ResourceLocation, $AttributeModifier>;
@@ -51,30 +51,30 @@ declare module "@package/top/theillusivec4/curios/api/type/inventory" {
          * @deprecated
          */
         grow(arg0: number): void;
+        isVisible(): boolean;
+        removeModifier(arg0: $ResourceLocation_): void;
+        addTransientModifier(arg0: $AttributeModifier_): void;
         /**
          * @deprecated
          */
         shrink(arg0: number): void;
         getSlots(): number;
         getRenders(): $NonNullList<boolean>;
-        removeModifier(arg0: $ResourceLocation_): void;
-        addTransientModifier(arg0: $AttributeModifier_): void;
-        isVisible(): boolean;
         deserializeNBT(arg0: $CompoundTag_): void;
         serializeNBT(): $CompoundTag;
         getSyncTag(): $CompoundTag;
         get permanentModifiers(): $Set<$AttributeModifier>;
         get cachedModifiers(): $Set<$AttributeModifier>;
         get sizeShift(): number;
-        get dropRule(): $ICurio$DropRule;
         get activeStates(): $NonNullList<boolean>;
+        get dropRule(): $ICurio$DropRule;
         get cosmeticStacks(): $IDynamicStackHandler;
         get identifier(): string;
         get stacks(): $IDynamicStackHandler;
         get modifiers(): $Map<$ResourceLocation, $AttributeModifier>;
+        get visible(): boolean;
         get slots(): number;
         get renders(): $NonNullList<boolean>;
-        get visible(): boolean;
         get syncTag(): $CompoundTag;
     }
 }

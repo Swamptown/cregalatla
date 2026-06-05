@@ -5,12 +5,12 @@ declare module "@package/net/caffeinemc/mods/lithium/common/block/entity/invento
     export class $InventoryChangeEmitter {
     }
     export interface $InventoryChangeEmitter {
+        lithium$emitStackListReplaced(): void;
         lithium$forwardContentChangeOnce(arg0: $InventoryChangeListener, arg1: $LithiumStackList): void;
         lithium$emitContentModified(): void;
         emitCallbackReplaced(): void;
         lithium$forwardMajorInventoryChanges(arg0: $InventoryChangeListener): void;
         lithium$stopForwardingMajorInventoryChanges(arg0: $InventoryChangeListener): void;
-        lithium$emitStackListReplaced(): void;
         lithium$emitRemoved(): void;
         lithium$emitFirstComparatorAdded(): void;
     }
@@ -25,8 +25,8 @@ declare module "@package/net/caffeinemc/mods/lithium/common/block/entity/invento
     }
     export interface $InventoryChangeListener {
         handleStackListReplaced(arg0: $Container): void;
-        lithium$handleInventoryContentModified(arg0: $Container): void;
         lithium$handleInventoryRemoved(arg0: $Container): void;
         lithium$handleComparatorAdded(arg0: $Container): boolean;
+        lithium$handleInventoryContentModified(arg0: $Container): void;
     }
 }

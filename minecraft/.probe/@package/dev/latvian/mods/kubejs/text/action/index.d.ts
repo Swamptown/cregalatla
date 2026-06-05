@@ -6,8 +6,8 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/dev/latvian/mods/kubejs/text/action" {
     export class $TextActionBuilder {
-        removeText(match: $Component_): void;
         removeExactText(match: $Component_): void;
+        removeText(match: $Component_): void;
         removeLine(line: number): void;
         insert(line: number, text: $List_<$Component_>): void;
         clear(): void;
@@ -67,7 +67,7 @@ declare module "@package/dev/latvian/mods/kubejs/text/action" {
     /**
      * Values that may be interpreted as {@link $InsertTextAction}.
      */
-    export type $InsertTextAction_ = { line?: number, lines?: $List_<$Component_>,  } | [line?: number, lines?: $List_<$Component_>, ];
+    export type $InsertTextAction_ = { lines?: $List_<$Component_>, line?: number,  } | [lines?: $List_<$Component_>, line?: number, ];
     export class $RemoveExactTextTextAction extends $Record implements $TextAction {
         type(): $TooltipActionType<never>;
         apply(lines: $List_<$Component_>): void;
@@ -109,5 +109,5 @@ declare module "@package/dev/latvian/mods/kubejs/text/action" {
     /**
      * Values that may be interpreted as {@link $TooltipActionType}.
      */
-    export type $TooltipActionType_<T> = { type?: number, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $TextAction>,  } | [type?: number, streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $TextAction>, ];
+    export type $TooltipActionType_<T> = { streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $TextAction>, type?: number,  } | [streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $TextAction>, type?: number, ];
 }

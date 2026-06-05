@@ -1,25 +1,25 @@
-import { $InputStream, $OutputStream } from "@package/java/io";
+import { $OutputStream, $InputStream } from "@package/java/io";
 export * as entity from "@package/org/apache/http/entity";
 
 declare module "@package/org/apache/http" {
     export class $HttpEntity {
     }
     export interface $HttpEntity {
+        isRepeatable(): boolean;
+        isStreaming(): boolean;
         isChunked(): boolean;
         /**
          * @deprecated
          */
         consumeContent(): void;
-        isRepeatable(): boolean;
-        isStreaming(): boolean;
         getContentType(): $Header;
         getContentEncoding(): $Header;
         getContentLength(): number;
         writeTo(arg0: $OutputStream): void;
         getContent(): $InputStream;
-        get chunked(): boolean;
         get repeatable(): boolean;
         get streaming(): boolean;
+        get chunked(): boolean;
         get contentType(): $Header;
         get contentEncoding(): $Header;
         get contentLength(): number;

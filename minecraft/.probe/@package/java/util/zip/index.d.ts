@@ -10,13 +10,6 @@ declare module "@package/java/util/zip" {
     export class $ZipEntry implements $ZipConstants, $Cloneable {
         getLastModifiedTime(): $FileTime;
         setLastModifiedTime(arg0: $FileTime): $ZipEntry;
-        getName(): string;
-        clone(): $Object;
-        getMethod(): number;
-        getSize(): number;
-        getComment(): string;
-        isDirectory(): boolean;
-        getTime(): number;
         setTime(arg0: number): void;
         setTimeLocal(arg0: $LocalDateTime): void;
         getTimeLocal(): $LocalDateTime;
@@ -33,10 +26,17 @@ declare module "@package/java/util/zip" {
         setExtra(arg0: number[]): void;
         getExtra(): number[];
         setComment(arg0: string): void;
+        getName(): string;
+        clone(): $Object;
+        getMethod(): number;
+        getSize(): number;
+        isDirectory(): boolean;
+        getComment(): string;
+        getTime(): number;
         static STORED: number;
         static DEFLATED: number;
-        constructor(arg0: string);
         constructor(arg0: $ZipEntry);
+        constructor(arg0: string);
         get name(): string;
         get directory(): boolean;
     }
@@ -45,7 +45,6 @@ declare module "@package/java/util/zip" {
     export interface $ZipConstants {
     }
     export class $ZipFile implements $ZipConstants, $Closeable {
-        getEntry(arg0: string): $ZipEntry;
         getName(): string;
         size(): number;
         stream(): $Stream<$ZipEntry>;
@@ -53,11 +52,12 @@ declare module "@package/java/util/zip" {
         entries(): $Enumeration<$ZipEntry>;
         getInputStream(arg0: $ZipEntry): $InputStream;
         getComment(): string;
+        getEntry(arg0: string): $ZipEntry;
         static OPEN_DELETE: number;
         static OPEN_READ: number;
-        constructor(arg0: string);
-        constructor(arg0: $File_, arg1: $Charset);
         constructor(arg0: string, arg1: $Charset);
+        constructor(arg0: $File_, arg1: $Charset);
+        constructor(arg0: string);
         constructor(arg0: $File_, arg1: number);
         constructor(arg0: $File_);
         constructor(arg0: $File_, arg1: number, arg2: $Charset);

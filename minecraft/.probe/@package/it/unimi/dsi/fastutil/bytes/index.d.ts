@@ -375,27 +375,27 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
     export class $BytePredicate {
     }
     export interface $BytePredicate extends $Predicate<number>, $IntPredicate {
-        negate(): $BytePredicate;
-        /**
-         * @deprecated
-         */
-        and(arg0: $Predicate_<number>): $Predicate<number>;
-        and(arg0: $BytePredicate_): $BytePredicate;
-        /**
-         * @deprecated
-         */
-        test(arg0: number): boolean;
-        /**
-         * @deprecated
-         */
-        test(arg0: number): boolean;
-        test(arg0: number): boolean;
+        or(arg0: $BytePredicate_): $BytePredicate;
+        or(arg0: $IntPredicate_): $BytePredicate;
         /**
          * @deprecated
          */
         or(arg0: $Predicate_<number>): $Predicate<number>;
-        or(arg0: $BytePredicate_): $BytePredicate;
-        or(arg0: $IntPredicate_): $BytePredicate;
+        and(arg0: $BytePredicate_): $BytePredicate;
+        /**
+         * @deprecated
+         */
+        and(arg0: $Predicate_<number>): $Predicate<number>;
+        /**
+         * @deprecated
+         */
+        test(arg0: number): boolean;
+        test(arg0: number): boolean;
+        /**
+         * @deprecated
+         */
+        test(arg0: number): boolean;
+        negate(): $Predicate<number>;
     }
     /**
      * Values that may be interpreted as {@link $BytePredicate}.
@@ -565,12 +565,12 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          */
         parallelStream(): $Stream<number>;
         rem(arg0: number): boolean;
-        removeIf(arg0: $IntPredicate_): boolean;
-        removeIf(arg0: $BytePredicate_): boolean;
         /**
          * @deprecated
          */
         removeIf(arg0: $Predicate_<number>): boolean;
+        removeIf(arg0: $BytePredicate_): boolean;
+        removeIf(arg0: $IntPredicate_): boolean;
         intSpliterator(): $IntSpliterator;
         intIterator(): $IntIterator;
         intParallelStream(): $IntStream;
@@ -706,11 +706,11 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         apply(arg0: number): V;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
@@ -720,8 +720,8 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Reference2ByteFunction_<V>): $Byte2ByteFunction;
         composeByte(arg0: $Byte2ByteFunction_): $Byte2ReferenceFunction<V>;
         andThenShort(arg0: $Reference2ShortFunction_<V>): $Byte2ShortFunction;
@@ -833,11 +833,11 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         apply(arg0: number): V;
+        containsKey(arg0: number): boolean;
         /**
          * @deprecated
          */
         containsKey(arg0: $Object): boolean;
-        containsKey(arg0: number): boolean;
         getOrDefault(arg0: number, arg1: V): V;
         /**
          * @deprecated
@@ -847,8 +847,8 @@ declare module "@package/it/unimi/dsi/fastutil/bytes" {
          * @deprecated
          */
         compose<T>(arg0: $Function_<T, number>): $Function$1<T, V>;
-        defaultReturnValue(): V;
         defaultReturnValue(arg0: V): void;
+        defaultReturnValue(): V;
         andThenByte(arg0: $Object2ByteFunction_<V>): $Byte2ByteFunction;
         composeByte(arg0: $Byte2ByteFunction_): $Byte2ObjectFunction<V>;
         andThenShort(arg0: $Object2ShortFunction_<V>): $Byte2ShortFunction;

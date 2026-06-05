@@ -29,8 +29,8 @@ declare module "@package/com/blackgear/vanillabackport/common/api/variant" {
      */
     export type $ClientAsset_ = { id?: $ResourceLocation_, path?: $ResourceLocation_,  } | [id?: $ResourceLocation_, path?: $ResourceLocation_, ];
     export class $ModelAndTexture<T> extends $Record {
-        model(): T;
         asset(): $ClientAsset;
+        model(): T;
         static streamCodec<T>(modelCodec: $StreamCodec<$RegistryFriendlyByteBuf, T>): $StreamCodec<$RegistryFriendlyByteBuf, $ModelAndTexture<T>>;
         static codec<T>(codec: $Codec<T>, entry: T): $MapCodec<$ModelAndTexture<T>>;
         constructor(model: T, path: $ResourceLocation_);

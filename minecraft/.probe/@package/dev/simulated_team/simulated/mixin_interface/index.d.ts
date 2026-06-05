@@ -24,8 +24,8 @@ declare module "@package/dev/simulated_team/simulated/mixin_interface" {
     export class $TickerExtension {
     }
     export interface $TickerExtension {
-        simulated$setPlaying(arg0: boolean): void;
         simulated$isPlaying(): boolean;
+        simulated$setPlaying(arg0: boolean): void;
     }
     export class $PlayerTypewriterExtension {
     }

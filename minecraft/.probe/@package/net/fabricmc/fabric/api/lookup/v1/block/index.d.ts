@@ -22,15 +22,15 @@ declare module "@package/net/fabricmc/fabric/api/lookup/v1/block" {
         static get<A, C>(arg0: $ResourceLocation_, arg1: $Class<A>, arg2: $Class<C>): $BlockApiLookup<A, C>;
     }
     export interface $BlockApiLookup<A, C> {
+        registerForBlockEntities(arg0: $BlockApiLookup$BlockEntityApiProvider_<A, C>, ...arg1: $BlockEntityType_<never>[]): void;
         registerForBlocks(arg0: $BlockApiLookup$BlockApiProvider_<A, C>, ...arg1: $Block_[]): void;
         registerForBlockEntity<T extends $BlockEntity>(arg0: $BiFunction_<T, C, A>, arg1: $BlockEntityType_<T>): void;
-        registerForBlockEntities(arg0: $BlockApiLookup$BlockEntityApiProvider_<A, C>, ...arg1: $BlockEntityType_<never>[]): void;
+        contextClass(): $Class<C>;
         registerSelf(...arg0: $BlockEntityType_<never>[]): void;
         registerFallback(arg0: $BlockApiLookup$BlockApiProvider_<A, C>): void;
-        contextClass(): $Class<C>;
         getProvider(arg0: $Block_): $BlockApiLookup$BlockApiProvider<A, C>;
-        find(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): A;
         find(arg0: $Level_, arg1: $BlockPos_, arg2: C): A;
+        find(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): A;
         getId(): $ResourceLocation;
         apiClass(): $Class<A>;
         get id(): $ResourceLocation;
@@ -52,11 +52,11 @@ declare module "@package/net/fabricmc/fabric/api/lookup/v1/block" {
         getLookup(): $BlockApiLookup<A, C>;
         find(arg0: C): A;
         find(arg0: $BlockState_, arg1: C): A;
-        getBlockEntity(): $BlockEntity;
         getPos(): $BlockPos;
+        getBlockEntity(): $BlockEntity;
         get world(): $ServerLevel;
         get lookup(): $BlockApiLookup<A, C>;
-        get blockEntity(): $BlockEntity;
         get pos(): $BlockPos;
+        get blockEntity(): $BlockEntity;
     }
 }

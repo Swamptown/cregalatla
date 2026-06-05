@@ -12,8 +12,8 @@ declare module "@package/dev/latvian/mods/kubejs/stages" {
         removeNoUpdate(stage: string): boolean;
         getPlayer(): $Player;
         toggle(stage: string): boolean;
-        getAll(): $Collection<string>;
         has(stage: string): boolean;
+        getAll(): $Collection<string>;
         remove(stage: string): boolean;
         clear(): boolean;
         replace(stages: $Collection_<string>): void;
@@ -60,8 +60,8 @@ declare module "@package/dev/latvian/mods/kubejs/stages" {
         addNoUpdate(stage: string): boolean;
         removeNoUpdate(stage: string): boolean;
         getPlayer(): $Player;
-        getAll(): $Collection<string>;
         has(stage: string): boolean;
+        getAll(): $Collection<string>;
         clear(): boolean;
         replace(stages: $Collection_<string>): void;
         sync(): void;

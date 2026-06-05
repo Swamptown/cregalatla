@@ -48,10 +48,10 @@ declare module "@package/net/minecraft/network/chat" {
      */
     export type $SignableCommand$Argument_<S> = { node?: $ArgumentCommandNode<any, never>, value?: string,  } | [node?: $ArgumentCommandNode<any, never>, value?: string, ];
     export class $ChatTypeDecoration extends $Record {
+        static teamMessage(arg0: string): $ChatTypeDecoration;
         static withSender(arg0: string): $ChatTypeDecoration;
         static incomingDirectMessage(arg0: string): $ChatTypeDecoration;
         static outgoingDirectMessage(arg0: string): $ChatTypeDecoration;
-        static teamMessage(arg0: string): $ChatTypeDecoration;
         parameters(): $List<$ChatTypeDecoration$Parameter>;
         style(): $Style;
         translationKey(): string;
@@ -63,19 +63,19 @@ declare module "@package/net/minecraft/network/chat" {
     /**
      * Values that may be interpreted as {@link $ChatTypeDecoration}.
      */
-    export type $ChatTypeDecoration_ = { translationKey?: string, parameters?: $List_<$ChatTypeDecoration$Parameter_>, style?: $Style,  } | [translationKey?: string, parameters?: $List_<$ChatTypeDecoration$Parameter_>, style?: $Style, ];
+    export type $ChatTypeDecoration_ = { style?: $Style, parameters?: $List_<$ChatTypeDecoration$Parameter_>, translationKey?: string,  } | [style?: $Style, parameters?: $List_<$ChatTypeDecoration$Parameter_>, translationKey?: string, ];
     export class $MessageSignatureCache {
         pack(arg0: $MessageSignature_): number;
-        push(arg0: $List_<$MessageSignature_>): void;
         push(arg0: $SignedMessageBody_, arg1: $MessageSignature_): void;
+        push(arg0: $List_<$MessageSignature_>): void;
         unpack(arg0: number): $MessageSignature;
         static createDefault(): $MessageSignatureCache;
         static NOT_FOUND: number;
         constructor(arg0: number);
     }
     export class $SignedMessageLink extends $Record {
-        isDescendantOf(arg0: $SignedMessageLink_): boolean;
         updateSignature(arg0: $SignatureUpdater$Output_): void;
+        isDescendantOf(arg0: $SignedMessageLink_): boolean;
         sender(): $UUID;
         static unsigned(arg0: $UUID_): $SignedMessageLink;
         index(): number;
@@ -88,14 +88,14 @@ declare module "@package/net/minecraft/network/chat" {
     /**
      * Values that may be interpreted as {@link $SignedMessageLink}.
      */
-    export type $SignedMessageLink_ = { sender?: $UUID_, sessionId?: $UUID_, index?: number,  } | [sender?: $UUID_, sessionId?: $UUID_, index?: number, ];
+    export type $SignedMessageLink_ = { sessionId?: $UUID_, sender?: $UUID_, index?: number,  } | [sessionId?: $UUID_, sender?: $UUID_, index?: number, ];
     export class $SignedMessageBody extends $Record {
         updateSignature(arg0: $SignatureUpdater$Output_): void;
-        pack(arg0: $MessageSignatureCache): $SignedMessageBody$Packed;
         lastSeen(): $LastSeenMessages;
+        pack(arg0: $MessageSignatureCache): $SignedMessageBody$Packed;
+        content(): string;
         static unsigned(arg0: string): $SignedMessageBody;
         timeStamp(): $Instant;
-        content(): string;
         salt(): number;
         static MAP_CODEC: $MapCodec<$SignedMessageBody>;
         constructor(arg0: string, arg1: $Instant, arg2: number, arg3: $LastSeenMessages_);
@@ -103,23 +103,23 @@ declare module "@package/net/minecraft/network/chat" {
     /**
      * Values that may be interpreted as {@link $SignedMessageBody}.
      */
-    export type $SignedMessageBody_ = { lastSeen?: $LastSeenMessages_, salt?: number, timeStamp?: $Instant, content?: string,  } | [lastSeen?: $LastSeenMessages_, salt?: number, timeStamp?: $Instant, content?: string, ];
+    export type $SignedMessageBody_ = { timeStamp?: $Instant, salt?: number, lastSeen?: $LastSeenMessages_, content?: string,  } | [timeStamp?: $Instant, salt?: number, lastSeen?: $LastSeenMessages_, content?: string, ];
     export class $ComponentContents {
     }
     export interface $ComponentContents {
+        visit<T>(arg0: $FormattedText$StyledContentConsumer_<T>, arg1: $Style): (T) | undefined;
+        visit<T>(arg0: $FormattedText$ContentConsumer_<T>): (T) | undefined;
         type(): $ComponentContents$Type<never>;
         resolve(arg0: $CommandSourceStack, arg1: $Entity, arg2: number): $MutableComponent;
-        visit<T>(arg0: $FormattedText$ContentConsumer_<T>): (T) | undefined;
-        visit<T>(arg0: $FormattedText$StyledContentConsumer_<T>, arg1: $Style): (T) | undefined;
     }
     /**
      * Values that may be interpreted as {@link $ComponentContents}.
      */
     export type $ComponentContents_ = (() => $ComponentContents$Type_<never>);
     export class $RemoteChatSession extends $Record {
-        createMessageValidator(arg0: $Duration_): $SignedMessageValidator;
         profilePublicKey(): $ProfilePublicKey;
         createMessageDecoder(arg0: $UUID_): $SignedMessageChain$Decoder;
+        createMessageValidator(arg0: $Duration_): $SignedMessageValidator;
         sessionId(): $UUID;
         hasExpired(): boolean;
         asData(): $RemoteChatSession$Data;
@@ -152,7 +152,7 @@ declare module "@package/net/minecraft/network/chat" {
     /**
      * Values that may be interpreted as {@link $ChatType}.
      */
-    export type $ChatType_ = RegistryTypes.ChatType | { chat?: $ChatTypeDecoration_, narration?: $ChatTypeDecoration_,  } | [chat?: $ChatTypeDecoration_, narration?: $ChatTypeDecoration_, ];
+    export type $ChatType_ = RegistryTypes.ChatType | { narration?: $ChatTypeDecoration_, chat?: $ChatTypeDecoration_,  } | [narration?: $ChatTypeDecoration_, chat?: $ChatTypeDecoration_, ];
     export class $ChatTypeDecoration$Parameter extends $Enum<$ChatTypeDecoration$Parameter> implements $StringRepresentable {
         static values(): $ChatTypeDecoration$Parameter[];
         static valueOf(arg0: string): $ChatTypeDecoration$Parameter;
@@ -180,7 +180,7 @@ declare module "@package/net/minecraft/network/chat" {
     /**
      * Values that may be interpreted as {@link $LastSeenTrackedEntry}.
      */
-    export type $LastSeenTrackedEntry_ = { signature?: $MessageSignature_, pending?: boolean,  } | [signature?: $MessageSignature_, pending?: boolean, ];
+    export type $LastSeenTrackedEntry_ = { pending?: boolean, signature?: $MessageSignature_,  } | [pending?: boolean, signature?: $MessageSignature_, ];
     export class $OutgoingChatMessage {
         static create(arg0: $PlayerChatMessage_): $OutgoingChatMessage;
     }
@@ -223,9 +223,9 @@ declare module "@package/net/minecraft/network/chat" {
     }
     export class $SignedMessageBody$Packed extends $Record {
         lastSeen(): $LastSeenMessages$Packed;
+        content(): string;
         timeStamp(): $Instant;
         write(arg0: $FriendlyByteBuf): void;
-        content(): string;
         unpack(arg0: $MessageSignatureCache): ($SignedMessageBody) | undefined;
         salt(): number;
         constructor(arg0: $FriendlyByteBuf);
@@ -234,7 +234,7 @@ declare module "@package/net/minecraft/network/chat" {
     /**
      * Values that may be interpreted as {@link $SignedMessageBody$Packed}.
      */
-    export type $SignedMessageBody$Packed_ = { lastSeen?: $LastSeenMessages$Packed_, salt?: number, timeStamp?: $Instant, content?: string,  } | [lastSeen?: $LastSeenMessages$Packed_, salt?: number, timeStamp?: $Instant, content?: string, ];
+    export type $SignedMessageBody$Packed_ = { timeStamp?: $Instant, salt?: number, lastSeen?: $LastSeenMessages$Packed_, content?: string,  } | [timeStamp?: $Instant, salt?: number, lastSeen?: $LastSeenMessages$Packed_, content?: string, ];
     export class $LastSeenMessages extends $Record {
         updateSignature(arg0: $SignatureUpdater$Output_): void;
         pack(arg0: $MessageSignatureCache): $LastSeenMessages$Packed;
@@ -333,8 +333,8 @@ declare module "@package/net/minecraft/network/chat" {
         get empty(): boolean;
     }
     export class $OutgoingChatMessage$Player extends $Record implements $OutgoingChatMessage {
-        message(): $PlayerChatMessage;
         content(): $Component;
+        message(): $PlayerChatMessage;
         sendToPlayer(arg0: $ServerPlayer, arg1: boolean, arg2: $ChatType$Bound_): void;
         constructor(arg0: $PlayerChatMessage_);
     }
@@ -343,8 +343,8 @@ declare module "@package/net/minecraft/network/chat" {
      */
     export type $OutgoingChatMessage$Player_ = { message?: $PlayerChatMessage_,  } | [message?: $PlayerChatMessage_, ];
     export class $SignedMessageChain {
-        decoder(arg0: $ProfilePublicKey_): $SignedMessageChain$Decoder;
         encoder(arg0: $Signer_): $SignedMessageChain$Encoder;
+        decoder(arg0: $ProfilePublicKey_): $SignedMessageChain$Decoder;
         lastTimeStamp: $Instant;
         static LOGGER: $Logger;
         nextLink: $SignedMessageLink;
@@ -352,11 +352,11 @@ declare module "@package/net/minecraft/network/chat" {
     }
     export class $MessageSignature extends $Record {
         pack(arg0: $MessageSignatureCache): $MessageSignature$Packed;
-        asByteBuffer(): $ByteBuffer;
-        verify(arg0: $SignatureValidator_, arg1: $SignatureUpdater_): boolean;
         bytes(): number[];
         static write(arg0: $FriendlyByteBuf, arg1: $MessageSignature_): void;
         static read(arg0: $FriendlyByteBuf): $MessageSignature;
+        verify(arg0: $SignatureValidator_, arg1: $SignatureUpdater_): boolean;
+        asByteBuffer(): $ByteBuffer;
         static BYTES: number;
         static CODEC: $Codec<$MessageSignature>;
         constructor(arg0: number[]);
@@ -380,8 +380,8 @@ declare module "@package/net/minecraft/network/chat" {
         constructor();
     }
     export class $ComponentSerialization {
-        static createLegacyComponentMatcher<T extends $StringRepresentable, E>(arg0: T[], arg1: $Function_<T, $MapCodec<E>>, arg2: $Function_<E, T>, arg3: string): $MapCodec<E>;
         static flatCodec(arg0: number): $Codec<$Component>;
+        static createLegacyComponentMatcher<T extends $StringRepresentable, E>(arg0: T[], arg1: $Function_<T, $MapCodec<E>>, arg2: $Function_<E, T>, arg3: string): $MapCodec<E>;
         static TRUSTED_CONTEXT_FREE_STREAM_CODEC: $StreamCodec<$ByteBuf, $Component>;
         static CODEC: $Codec<$Component>;
         static TRUSTED_OPTIONAL_STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, ($Component) | undefined>;
@@ -436,17 +436,17 @@ declare module "@package/net/minecraft/network/chat" {
      */
     export type $ChatTypeDecoration$Parameter$Selector_ = ((arg0: $Component, arg1: $ChatType$Bound) => $Component_);
     export class $FormattedText {
-        static of(arg0: string, arg1: $Style): $FormattedText;
         static of(arg0: string): $FormattedText;
+        static of(arg0: string, arg1: $Style): $FormattedText;
         static composite(...arg0: $FormattedText[]): $FormattedText;
         static composite(arg0: $List_<$FormattedText>): $FormattedText;
         static EMPTY: $FormattedText;
         static STOP_ITERATION: ($Unit) | undefined;
     }
     export interface $FormattedText {
-        getString(): string;
         visit<T>(arg0: $FormattedText$ContentConsumer_<T>): (T) | undefined;
         visit<T>(arg0: $FormattedText$StyledContentConsumer_<T>, arg1: $Style): (T) | undefined;
+        getString(): string;
         get string(): string;
     }
     export class $Component$SerializerAdapter implements $JsonDeserializer<$MutableComponent>, $JsonSerializer<$Component> {
@@ -470,10 +470,10 @@ declare module "@package/net/minecraft/network/chat" {
      */
     export type $MessageSignature$Packed_ = { id?: number, fullSignature?: $MessageSignature_,  } | [id?: number, fullSignature?: $MessageSignature_, ];
     export class $TextColor implements $KubeColor {
-        kjs$getRGB(): number;
         formatValue(): string;
         kjs$getARGB(): number;
         static parseColor(arg0: string): $DataResult<$TextColor>;
+        kjs$getRGB(): number;
         getValue(): number;
         serialize(): string;
         static fromLegacyFormat(arg0: $ChatFormatting_): $TextColor;
@@ -508,18 +508,18 @@ declare module "@package/net/minecraft/network/chat" {
     /**
      * Values that may be interpreted as {@link $LastSeenMessages$Update}.
      */
-    export type $LastSeenMessages$Update_ = { acknowledged?: $BitSet, offset?: number,  } | [acknowledged?: $BitSet, offset?: number, ];
+    export type $LastSeenMessages$Update_ = { offset?: number, acknowledged?: $BitSet,  } | [offset?: number, acknowledged?: $BitSet, ];
     export class $CommonComponents {
-        static joinLines(arg0: $Collection_<$Component_>): $Component;
         static joinLines(...arg0: $Component_[]): $Component;
-        static space(): $MutableComponent;
-        static days(arg0: number): $MutableComponent;
+        static joinLines(arg0: $Collection_<$Component_>): $Component;
         static hours(arg0: number): $MutableComponent;
         static minutes(arg0: number): $MutableComponent;
+        static space(): $MutableComponent;
+        static days(arg0: number): $MutableComponent;
+        static joinForNarration(...arg0: $Component_[]): $MutableComponent;
         static optionStatus(arg0: boolean): $Component;
         static optionStatus(arg0: $Component_, arg1: boolean): $MutableComponent;
         static optionNameValue(arg0: $Component_, arg1: $Component_): $MutableComponent;
-        static joinForNarration(...arg0: $Component_[]): $MutableComponent;
         static GUI_TO_TITLE: $Component;
         static GUI_OPEN_IN_BROWSER: $Component;
         static CONNECT_FAILED: $Component;
@@ -597,12 +597,12 @@ declare module "@package/net/minecraft/network/chat" {
      */
     export type $FormattedText$ContentConsumer_<T> = ((arg0: string) => (T) | undefined);
     export class $ComponentUtils {
-        static copyOnClickText(arg0: string): $MutableComponent;
         static formatAndSortList<T extends $Comparable<T>>(arg0: $Collection_<T>, arg1: $Function_<T, $Component>): $Component;
+        static copyOnClickText(arg0: string): $MutableComponent;
         static fromMessage(arg0: $Message_): $Component;
-        static wrapInSquareBrackets(arg0: $Component_): $MutableComponent;
-        static mergeStyles(arg0: $MutableComponent_, arg1: $Style): $MutableComponent;
         static isTranslationResolvable(arg0: $Component_): boolean;
+        static mergeStyles(arg0: $MutableComponent_, arg1: $Style): $MutableComponent;
+        static wrapInSquareBrackets(arg0: $Component_): $MutableComponent;
         static formatList<T>(arg0: $Collection_<T>, arg1: $Component_, arg2: $Function_<T, $Component>): $MutableComponent;
         static formatList(arg0: $Collection_<$Component_>, arg1: $Component_): $Component;
         static formatList<T>(arg0: $Collection_<T>, arg1: ($Component_) | undefined, arg2: $Function_<T, $Component>): $MutableComponent;
@@ -679,7 +679,7 @@ declare module "@package/net/minecraft/network/chat" {
     /**
      * Values that may be interpreted as {@link $ComponentContents$Type}.
      */
-    export type $ComponentContents$Type_<T> = { id?: string, codec?: $MapCodec_<$ComponentContents_>,  } | [id?: string, codec?: $MapCodec_<$ComponentContents_>, ];
+    export type $ComponentContents$Type_<T> = { codec?: $MapCodec_<$ComponentContents_>, id?: string,  } | [codec?: $MapCodec_<$ComponentContents_>, id?: string, ];
     export class $SignedMessageValidator {
         static LOGGER: $Logger;
         static ACCEPT_UNSIGNED: $SignedMessageValidator;
@@ -707,36 +707,36 @@ declare module "@package/net/minecraft/network/chat" {
         static empty(): $MutableComponent;
         static literal(arg0: string): $MutableComponent;
         static score(arg0: string, arg1: string): $MutableComponent;
+        static nullToEmpty(arg0: string): $Component;
         static translatable(arg0: string): $MutableComponent;
         static translatable(arg0: string, ...arg1: $Object[]): $MutableComponent;
-        static nullToEmpty(arg0: string): $Component;
         static translatableEscape(arg0: string, ...arg1: $Object[]): $MutableComponent;
         static translatableWithFallback(arg0: string, arg1: string): $MutableComponent;
         static translatableWithFallback(arg0: string, arg1: string, ...arg2: $Object[]): $MutableComponent;
         static keybind(arg0: string): $MutableComponent;
         static nbt(arg0: string, arg1: boolean, arg2: ($Component_) | undefined, arg3: $DataSource): $MutableComponent;
-        static translationArg(arg0: $Date): $Component;
         static translationArg(arg0: $URI): $Component;
         static translationArg(arg0: $ChunkPos): $Component;
+        static translationArg(arg0: $Date): $Component;
         static translationArg(arg0: $ResourceLocation_): $Component;
         static translationArg(arg0: $UUID_): $Component;
         static translationArg(arg0: $Message_): $Component;
     }
     export interface $Component extends $Message, $FormattedText {
-        getContents(): $ComponentContents;
-        getString(arg0: number): string;
-        getString(): string;
-        contains(arg0: $Component_): boolean;
-        copy(): $MutableComponent;
         visit<T>(arg0: $FormattedText$StyledContentConsumer_<T>, arg1: $Style): (T) | undefined;
         visit<T>(arg0: $FormattedText$ContentConsumer_<T>): (T) | undefined;
+        getString(arg0: number): string;
+        getString(): string;
+        getContents(): $ComponentContents;
+        contains(arg0: $Component_): boolean;
+        copy(): $MutableComponent;
         getVisualOrderText(): $FormattedCharSequence;
         getStyle(): $Style;
         getSiblings(): $List<$Component>;
         tryCollapseToString(): string;
         plainCopy(): $MutableComponent;
-        toFlatList(): $List<$Component>;
         toFlatList(arg0: $Style): $List<$Component>;
+        toFlatList(): $List<$Component>;
         get contents(): $ComponentContents;
         get visualOrderText(): $FormattedCharSequence;
         get style(): $Style;
@@ -802,22 +802,22 @@ declare module "@package/net/minecraft/network/chat" {
         static updateSignature(arg0: $SignatureUpdater$Output_, arg1: $SignedMessageLink_, arg2: $SignedMessageBody_): void;
         hasExpiredClient(arg0: $Instant): boolean;
         signedBody(): $SignedMessageBody;
+        removeUnsignedContent(): $PlayerChatMessage;
+        isFullyFiltered(): boolean;
+        sender(): $UUID;
         withUnsignedContent(arg0: $Component_): $PlayerChatMessage;
         decoratedContent(): $Component;
         hasSignatureFrom(arg0: $UUID_): boolean;
         signedContent(): string;
-        sender(): $UUID;
-        removeUnsignedContent(): $PlayerChatMessage;
-        isFullyFiltered(): boolean;
-        static unsigned(arg0: $UUID_, arg1: string): $PlayerChatMessage;
-        timeStamp(): $Instant;
-        verify(arg0: $SignatureValidator_): boolean;
-        isSystem(): boolean;
         link(): $SignedMessageLink;
+        static unsigned(arg0: $UUID_, arg1: string): $PlayerChatMessage;
+        isSystem(): boolean;
+        timeStamp(): $Instant;
         signature(): $MessageSignature;
-        filter(arg0: $FilterMask): $PlayerChatMessage;
         filter(arg0: boolean): $PlayerChatMessage;
+        filter(arg0: $FilterMask): $PlayerChatMessage;
         static system(arg0: string): $PlayerChatMessage;
+        verify(arg0: $SignatureValidator_): boolean;
         hasSignature(): boolean;
         salt(): number;
         unsignedContent(): $Component;
@@ -831,7 +831,7 @@ declare module "@package/net/minecraft/network/chat" {
     /**
      * Values that may be interpreted as {@link $PlayerChatMessage}.
      */
-    export type $PlayerChatMessage_ = { signature?: $MessageSignature_, link?: $SignedMessageLink_, signedBody?: $SignedMessageBody_, unsignedContent?: $Component_, filterMask?: $FilterMask,  } | [signature?: $MessageSignature_, link?: $SignedMessageLink_, signedBody?: $SignedMessageBody_, unsignedContent?: $Component_, filterMask?: $FilterMask, ];
+    export type $PlayerChatMessage_ = { unsignedContent?: $Component_, signedBody?: $SignedMessageBody_, link?: $SignedMessageLink_, signature?: $MessageSignature_, filterMask?: $FilterMask,  } | [unsignedContent?: $Component_, signedBody?: $SignedMessageBody_, link?: $SignedMessageLink_, signature?: $MessageSignature_, filterMask?: $FilterMask, ];
     export class $MutableComponent implements $Component, $ComponentKJS {
         getContents(): $ComponentContents;
         append(arg0: $Component_): $MutableComponent;
@@ -845,16 +845,16 @@ declare module "@package/net/minecraft/network/chat" {
         withColor(arg0: number): $MutableComponent;
         getStyle(): $Style;
         getSiblings(): $List<$Component>;
+        visit<T>(arg0: $FormattedText$StyledContentConsumer_<T>, arg1: $Style): (T) | undefined;
+        visit<T>(arg0: $FormattedText$ContentConsumer_<T>): (T) | undefined;
         getString(arg0: number): string;
         getString(): string;
         contains(arg0: $Component_): boolean;
         copy(): $MutableComponent;
-        visit<T>(arg0: $FormattedText$StyledContentConsumer_<T>, arg1: $Style): (T) | undefined;
-        visit<T>(arg0: $FormattedText$ContentConsumer_<T>): (T) | undefined;
         tryCollapseToString(): string;
         plainCopy(): $MutableComponent;
-        toFlatList(): $List<$Component>;
         toFlatList(arg0: $Style): $List<$Component>;
+        toFlatList(): $List<$Component>;
         forEach(action: $Consumer_<$Component>): void;
         getCodec(): $Codec<never>;
         self(): $MutableComponent;
@@ -944,5 +944,5 @@ declare module "@package/net/minecraft/network/chat" {
     /**
      * Values that may be interpreted as {@link $ChatType$Bound}.
      */
-    export type $ChatType$Bound_ = { chatType?: $Holder_<$ChatType>, targetName?: ($Component_) | undefined, name?: $Component_,  } | [chatType?: $Holder_<$ChatType>, targetName?: ($Component_) | undefined, name?: $Component_, ];
+    export type $ChatType$Bound_ = { name?: $Component_, targetName?: ($Component_) | undefined, chatType?: $Holder_<$ChatType>,  } | [name?: $Component_, targetName?: ($Component_) | undefined, chatType?: $Holder_<$ChatType>, ];
 }

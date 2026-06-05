@@ -43,18 +43,18 @@ import { $RegisterCapabilitiesEvent } from "@package/net/neoforged/neoforge/capa
 
 declare module "@package/com/simibubi/create/content/kinetics/deployer" {
     export class $DeployerBlockEntity extends $KineticBlockEntity implements $Clearable {
+        getHandPose(): $PartialModel;
         changeMode(): void;
         discardPlayer(): void;
         redstoneUpdate(): void;
-        getHandPose(): $PartialModel;
         startFistBump(arg0: $Direction_): boolean;
         triggerFistBump(): void;
         getHandOffset(arg0: number): number;
         setAnimatedOffset(arg0: number): void;
         getPlayer(): $DeployerFakePlayer;
         getRecipe(arg0: $ItemStack_): $RecipeHolder<$Recipe<$RecipeInput>>;
-        clearContent(): void;
         static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
+        clearContent(): void;
         write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
         sequenceContext: $SequencedGearshiftBlockEntity$SequenceContext;
         networkDirty: boolean;
@@ -90,7 +90,6 @@ declare module "@package/com/simibubi/create/content/kinetics/deployer" {
         static deployerCollectsDropsFromKilledEntities(arg0: $LivingDropsEvent): void;
         static deployerKillsDoNotSpawnXP(arg0: $LivingExperienceDropEvent): void;
         static entitiesDontRetaliate(arg0: $LivingChangeTargetEvent): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $Player;
         lerpYRot: number;
         static USE_ITEM_INTERVAL: number;
         lerpYHeadRot: number;
@@ -103,6 +102,7 @@ declare module "@package/com/simibubi/create/content/kinetics/deployer" {
         swingingArm: $InteractionHand;
         static CRAFTING_SLOT_OFFSET: number;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         boardingCooldown: number;
         static DATA_POSE: $EntityDataAccessor<$Pose>;
@@ -222,6 +222,7 @@ declare module "@package/com/simibubi/create/content/kinetics/deployer" {
         static SWIMMING_BB_HEIGHT: number;
         verticalCollisionBelow: boolean;
         experienceLevel: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static PERSISTED_NBT_TAG: string;
         xxa: number;
@@ -241,6 +242,7 @@ declare module "@package/com/simibubi/create/content/kinetics/deployer" {
         dimensions: $EntityDimensions;
         static ENDER_SLOT_OFFSET: number;
         firstTick: boolean;
+        instance: $Player;
         static HELD_ITEM_SLOT: number;
         uuid: $UUID;
         lastHurtByPlayer: $Player;

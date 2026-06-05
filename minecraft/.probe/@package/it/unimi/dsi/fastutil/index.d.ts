@@ -61,11 +61,11 @@ declare module "@package/it/unimi/dsi/fastutil" {
     export class $Stack<K> {
     }
     export interface $Stack<K> {
+        push(arg0: K): void;
+        pop(): K;
         isEmpty(): boolean;
         peek(arg0: number): K;
         top(): K;
-        push(arg0: K): void;
-        pop(): K;
         get empty(): boolean;
     }
     export class $Hash {

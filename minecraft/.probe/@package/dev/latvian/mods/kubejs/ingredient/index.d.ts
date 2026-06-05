@@ -22,8 +22,6 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getItems(): $Stream<$ItemStack>;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        getItemIds(): $Set<string>;
-        getFirst(): $ItemStack;
         asIngredient(): $Ingredient;
         getStacks(): $ItemStackSet;
         getStackArray(): $ItemStack[];
@@ -31,23 +29,25 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getDisplayStacks(): $ItemStackSet;
         getItemStream(): $Stream<$Item>;
         getItemTypes(): $Set<$Item>;
+        getItemIds(): $Set<string>;
+        getFirst(): $ItemStack;
         isWildcard(): boolean;
+        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
         and(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
-        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         static CODEC: $MapCodec<$NamespaceIngredient>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $NamespaceIngredient>;
         constructor(namespace: string);
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get itemIds(): $Set<string>;
-        get first(): $ItemStack;
         get stacks(): $ItemStackSet;
         get stackArray(): $ItemStack[];
         get displayStacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
+        get itemIds(): $Set<string>;
+        get first(): $ItemStack;
         get wildcard(): boolean;
     }
     /**
@@ -81,8 +81,6 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getItems(): $Stream<$ItemStack>;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        getItemIds(): $Set<string>;
-        getFirst(): $ItemStack;
         asIngredient(): $Ingredient;
         getStacks(): $ItemStackSet;
         getStackArray(): $ItemStack[];
@@ -90,23 +88,25 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getDisplayStacks(): $ItemStackSet;
         getItemStream(): $Stream<$Item>;
         getItemTypes(): $Set<$Item>;
+        getItemIds(): $Set<string>;
+        getFirst(): $ItemStack;
         isWildcard(): boolean;
+        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
         and(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
-        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         static CODEC: $MapCodec<$CreativeTabIngredient>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $CreativeTabIngredient>;
         constructor(tab: $CreativeModeTab_);
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get itemIds(): $Set<string>;
-        get first(): $ItemStack;
         get stacks(): $ItemStackSet;
         get stackArray(): $ItemStack[];
         get displayStacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
+        get itemIds(): $Set<string>;
+        get first(): $ItemStack;
         get wildcard(): boolean;
     }
     /**
@@ -122,8 +122,6 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getItems(): $Stream<$ItemStack>;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        getItemIds(): $Set<string>;
-        getFirst(): $ItemStack;
         asIngredient(): $Ingredient;
         getStacks(): $ItemStackSet;
         getStackArray(): $ItemStack[];
@@ -131,10 +129,12 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getDisplayStacks(): $ItemStackSet;
         getItemStream(): $Stream<$Item>;
         getItemTypes(): $Set<$Item>;
+        getItemIds(): $Set<string>;
+        getFirst(): $ItemStack;
         isWildcard(): boolean;
+        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
         and(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
-        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         static CODEC: $MapCodec<$RegExIngredient>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $RegExIngredient>;
         constructor(pattern: $Pattern);
@@ -142,13 +142,13 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get itemIds(): $Set<string>;
-        get first(): $ItemStack;
         get stacks(): $ItemStackSet;
         get stackArray(): $ItemStack[];
         get displayStacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
+        get itemIds(): $Set<string>;
+        get first(): $ItemStack;
         get wildcard(): boolean;
     }
     /**
@@ -162,8 +162,6 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getItems(): $Stream<$ItemStack>;
         isSimple(): boolean;
         toVanilla(): $Ingredient;
-        getItemIds(): $Set<string>;
-        getFirst(): $ItemStack;
         asIngredient(): $Ingredient;
         getStacks(): $ItemStackSet;
         getStackArray(): $ItemStack[];
@@ -171,23 +169,25 @@ declare module "@package/dev/latvian/mods/kubejs/ingredient" {
         getDisplayStacks(): $ItemStackSet;
         getItemStream(): $Stream<$Item>;
         getItemTypes(): $Set<$Item>;
+        getItemIds(): $Set<string>;
+        getFirst(): $ItemStack;
         isWildcard(): boolean;
+        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
         and(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
-        or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         static CODEC: $MapCodec<$WildcardIngredient>;
         static INSTANCE: $WildcardIngredient;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $WildcardIngredient>;
         get type(): $IngredientType<never>;
         get items(): $Stream<$ItemStack>;
         get simple(): boolean;
-        get itemIds(): $Set<string>;
-        get first(): $ItemStack;
         get stacks(): $ItemStackSet;
         get stackArray(): $ItemStack[];
         get displayStacks(): $ItemStackSet;
         get itemStream(): $Stream<$Item>;
         get itemTypes(): $Set<$Item>;
+        get itemIds(): $Set<string>;
+        get first(): $ItemStack;
         get wildcard(): boolean;
     }
 }

@@ -3,7 +3,7 @@ import { $CullFrustum } from "@package/foundry/veil/api/client/render";
 import { $FrustumExtension } from "@package/foundry/veil/ext";
 import { $ViewportProvider, $Viewport } from "@package/net/caffeinemc/mods/sodium/client/render/viewport";
 import { $AABB_ } from "@package/net/minecraft/world/phys";
-import { $Vector2dc, $Matrix4f, $Matrix4fc, $Vector4fc, $Vector3dc, $Vector3ic, $Vector2fc, $Vector3fc } from "@package/org/joml";
+import { $Matrix4fc, $Matrix4f, $Vector2dc, $Vector4fc, $Vector3dc, $Vector3ic, $Vector2fc, $Vector3fc } from "@package/org/joml";
 
 declare module "@package/net/minecraft/client/renderer/culling" {
     export class $Frustum implements $FrustumExtension, $CullFrustum, $ViewportProvider {
@@ -16,14 +16,14 @@ declare module "@package/net/minecraft/client/renderer/culling" {
         toFrustum(): $Frustum;
         getPosition(): $Vector3dc;
         prepare(arg0: number, arg1: number, arg2: number): void;
-        sodium$createViewport(): $Viewport;
-        offsetToFullyIncludeCameraCube(arg0: number): $Frustum;
+        isVisible(arg0: $AABB_): boolean;
+        getViewVector(): $Vector3fc;
         testPoint(arg0: number, arg1: number, arg2: number): boolean;
         testSphere(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         testAab(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
         testAab(arg0: $AABB_): boolean;
-        isVisible(arg0: $AABB_): boolean;
-        getViewVector(): $Vector3fc;
+        offsetToFullyIncludeCameraCube(arg0: number): $Frustum;
+        sodium$createViewport(): $Viewport;
         cubeInFrustum(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
         testPlaneXY(arg0: $Vector2fc, arg1: $Vector2fc): boolean;
         testPlaneXY(arg0: $Vector2dc, arg1: $Vector2dc): boolean;

@@ -16,11 +16,11 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings/impl" {
     export class $SupplierDataSource<T> implements $IDataProvider<T>, $ITickable {
         checkUpdate(): void;
         tick(): void;
+        frequency(arg0: number): $SupplierDataSource<T>;
+        frequency(): number;
         getValue(): T;
         map<D>(arg0: $Function_<T, D>): $SupplierDataSource<D>;
         static of<T>(arg0: $Supplier_<T>): $SupplierDataSource<T>;
-        frequency(): number;
-        frequency(arg0: number): $SupplierDataSource<T>;
         registerListener(arg0: $Consumer_<T>): $ISubscription;
         getSupplier(): $Supplier<T>;
         registerListener(arg0: $Consumer_<T>, arg1: boolean): $ISubscription;
@@ -28,15 +28,15 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings/impl" {
         get supplier(): $Supplier<T>;
     }
     export class $DataBindingBuilder<T> {
-        s2cStrategy(arg0: $SyncStrategy_): $DataBindingBuilder<T>;
-        c2sStrategy(arg0: $SyncStrategy_): $DataBindingBuilder<T>;
+        static fluidStack(arg0: $Supplier_<$FluidStack>, arg1: $Consumer_<$FluidStack>): $DataBindingBuilder<$FluidStack>;
+        static longVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
         static fluidStackS2C(arg0: $Supplier_<$FluidStack>): $DataBindingBuilder<$FluidStack>;
         static intValS2C(arg0: $Supplier_<number>): $DataBindingBuilder<number>;
         remoteSetter(arg0: $Consumer_<T>): $DataBindingBuilder<T>;
-        static longVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
-        static fluidStack(arg0: $Supplier_<$FluidStack>, arg1: $Consumer_<$FluidStack>): $DataBindingBuilder<$FluidStack>;
-        syncType(arg0: $Class<never>): $DataBindingBuilder<T>;
+        s2cStrategy(arg0: $SyncStrategy_): $DataBindingBuilder<T>;
+        c2sStrategy(arg0: $SyncStrategy_): $DataBindingBuilder<T>;
         syncType(arg0: $Type): $DataBindingBuilder<T>;
+        syncType(arg0: $Class<never>): $DataBindingBuilder<T>;
         remoteGetter(arg0: $Supplier_<T>): $DataBindingBuilder<T>;
         static byteVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
         static shortVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
@@ -70,12 +70,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings/impl" {
         static enumValC2S<T extends $Enum<never>>(arg0: $Class<T>, arg1: $Consumer_<T>): $DataBindingBuilder<T>;
         static stringS2C(arg0: $Supplier_<string>): $DataBindingBuilder<string>;
         static stringC2S(arg0: $Consumer_<string>): $DataBindingBuilder<string>;
-        static doubleVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
-        static floatVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
-        static intVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
-        getter(arg0: $Supplier_<T>): $DataBindingBuilder<T>;
         setter(arg0: $Consumer_<T>): $DataBindingBuilder<T>;
         static tag(arg0: $Supplier_<$Tag>, arg1: $Consumer_<$Tag>): $DataBindingBuilder<$Tag>;
+        static intVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
+        getter(arg0: $Supplier_<T>): $DataBindingBuilder<T>;
+        static doubleVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
+        static floatVal(arg0: $Supplier_<number>, arg1: $Consumer_<number>): $DataBindingBuilder<number>;
         name(): string;
         name(arg0: string): $DataBindingBuilder<T>;
         type(arg0: $Type): $DataBindingBuilder<T>;
@@ -113,20 +113,20 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings/impl" {
         setCurrent(arg0: T): void;
         setCounter(arg0: number): void;
         checkUpdate(): void;
-        getCounter(): number;
         tick(): void;
+        getData(): $List<T>;
+        frequency(): number;
+        frequency(arg0: number): $ScrollDataSource<T>;
         getValue(): T;
         map<D>(arg0: $Function_<T, D>): $ScrollDataSource<D>;
         static of<T>(arg0: $List_<T>): $ScrollDataSource<T>;
-        frequency(arg0: number): $ScrollDataSource<T>;
-        frequency(): number;
-        getData(): $List<T>;
+        getCounter(): number;
         registerListener(arg0: $Consumer_<T>): $ISubscription;
         getListeners(): $List<$Consumer<T>>;
         getCurrent(): T;
         registerListener(arg0: $Consumer_<T>, arg1: boolean): $ISubscription;
-        get value(): T;
         get data(): $List<T>;
+        get value(): T;
         get listeners(): $List<$Consumer<T>>;
     }
 }

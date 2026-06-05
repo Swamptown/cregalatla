@@ -6,9 +6,9 @@ import { $Comparator, $List_, $Iterator, $List } from "@package/java/util";
 
 declare module "@package/net/minecraft/client/searchtree" {
     export class $SuffixArray<T> {
+        generate(): void;
         add(arg0: T, arg1: string): void;
         search(arg0: string): $List<T>;
-        generate(): void;
         list: $List<T>;
         constructor();
     }

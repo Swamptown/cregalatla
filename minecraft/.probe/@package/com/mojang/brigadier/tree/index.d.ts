@@ -6,7 +6,7 @@ import { $ArgumentBuilder } from "@package/com/mojang/brigadier/builder";
 import { $Comparable } from "@package/java/lang";
 import { $CommandContextBuilder, $CommandContext } from "@package/com/mojang/brigadier/context";
 import { $Collection } from "@package/java/util";
-import { $ArgumentType, $ArgumentType_ } from "@package/com/mojang/brigadier/arguments";
+import { $ArgumentType_, $ArgumentType } from "@package/com/mojang/brigadier/arguments";
 
 declare module "@package/com/mojang/brigadier/tree" {
     export class $ArgumentCommandNode<S, T> extends $CommandNode<S> {
@@ -28,29 +28,29 @@ declare module "@package/com/mojang/brigadier/tree" {
         constructor();
     }
     export class $CommandNode<S> implements $Comparable<$CommandNode<S>> {
+        getRequirement(): $Predicate<S>;
+        isFork(): boolean;
+        getRedirectModifier(): $RedirectModifier<S>;
         findAmbiguities(arg0: $AmbiguityConsumer_<S>): void;
         getRelevantNodes(arg0: $StringReader): $Collection<$CommandNode<S>>;
         getRedirect(): $CommandNode<S>;
         getUsageText(): string;
-        getRequirement(): $Predicate<S>;
-        isFork(): boolean;
-        getRedirectModifier(): $RedirectModifier<S>;
         listSuggestions(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         getCommand(): $Command<S>;
+        getChildren(): $Collection<$CommandNode<S>>;
         getChild(arg0: string): $CommandNode<S>;
         addChild(arg0: $CommandNode<S>): void;
-        getChildren(): $Collection<$CommandNode<S>>;
         getExamples(): $Collection<string>;
         getName(): string;
         compareTo(arg0: $CommandNode<S>): number;
         canUse(arg0: S): boolean;
         parse(arg0: $StringReader, arg1: $CommandContextBuilder<S>): void;
         createBuilder(): $ArgumentBuilder<S, never>;
-        get redirect(): $CommandNode<S>;
-        get usageText(): string;
         get requirement(): $Predicate<S>;
         get fork(): boolean;
         get redirectModifier(): $RedirectModifier<S>;
+        get redirect(): $CommandNode<S>;
+        get usageText(): string;
         get command(): $Command<S>;
         get children(): $Collection<$CommandNode<S>>;
         get examples(): $Collection<string>;

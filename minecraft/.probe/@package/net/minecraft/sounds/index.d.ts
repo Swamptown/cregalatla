@@ -22,9 +22,9 @@ declare module "@package/net/minecraft/sounds" {
     }
     export interface $SoundEvent extends RegistryMarked<RegistryTypes.SoundEventTag, RegistryTypes.SoundEvent> {}
     export class $SoundEvent {
-        getRange(arg0: number): number;
         static createFixedRangeEvent(arg0: $ResourceLocation_, arg1: number): $SoundEvent;
         static createVariableRangeEvent(arg0: $ResourceLocation_): $SoundEvent;
+        getRange(arg0: number): number;
         getLocation(): $ResourceLocation;
         static CODEC: $Codec<$Holder<$SoundEvent>>;
         static DIRECT_CODEC: $Codec<$SoundEvent>;

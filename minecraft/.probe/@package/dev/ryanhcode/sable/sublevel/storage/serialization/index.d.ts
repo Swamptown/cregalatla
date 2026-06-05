@@ -8,9 +8,9 @@ import { $AutoCloseable } from "@package/java/lang";
 
 declare module "@package/dev/ryanhcode/sable/sublevel/storage/serialization" {
     export class $SubLevelData {
+        fullTag(): $CompoundTag;
         getOriginLoadedChunk(): $ChunkPos;
         setOriginLoadedChunk(arg0: $ChunkPos): void;
-        fullTag(): $CompoundTag;
         bounds(): $BoundingBox3d;
         dependencies(): $List<$UUID>;
         uuid(): $UUID;
@@ -18,8 +18,8 @@ declare module "@package/dev/ryanhcode/sable/sublevel/storage/serialization" {
         constructor(arg0: $UUID_, arg1: $BoundingBox3d, arg2: $Pose3d, arg3: $List_<$UUID_>, arg4: $CompoundTag_);
     }
     export class $SubLevelStorage implements $AutoCloseable {
-        attemptSaveSubLevel(arg0: $GlobalSavedSubLevelPointer_, arg1: $SubLevelData): void;
         attemptSaveSubLevel(arg0: $ChunkPos, arg1: $SubLevelData): $GlobalSavedSubLevelPointer;
+        attemptSaveSubLevel(arg0: $GlobalSavedSubLevelPointer_, arg1: $SubLevelData): void;
         attemptSaveHoldingChunk(arg0: $ChunkPos, arg1: $SubLevelHoldingChunk): void;
         attemptLoadHoldingChunk(arg0: $ChunkPos): $SubLevelHoldingChunk;
         attemptLoadSubLevel(arg0: $ChunkPos, arg1: $SavedSubLevelPointer_): $SubLevelData;

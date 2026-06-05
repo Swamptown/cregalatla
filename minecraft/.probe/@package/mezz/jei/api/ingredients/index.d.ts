@@ -18,10 +18,10 @@ declare module "@package/mezz/jei/api/ingredients" {
     export class $IIngredientRenderer<T> {
     }
     export interface $IIngredientRenderer<T> {
-        getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: $TooltipFlag): void;
-        getTooltip(arg0: T, arg1: $TooltipFlag): $List<$Component>;
-        renderBatch(arg0: $GuiGraphics, arg1: $List_<$BatchRenderElement_<T>>): void;
         getFontRenderer(arg0: $Minecraft, arg1: T): $Font;
+        renderBatch(arg0: $GuiGraphics, arg1: $List_<$BatchRenderElement_<T>>): void;
+        getTooltip(arg0: T, arg1: $TooltipFlag): $List<$Component>;
+        getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: $TooltipFlag): void;
         getWidth(): number;
         getHeight(): number;
         render(arg0: $GuiGraphics, arg1: T, arg2: number, arg3: number): void;
@@ -55,22 +55,22 @@ declare module "@package/mezz/jei/api/ingredients" {
     export class $IIngredientTypeWithSubtypes<B, I> {
     }
     export interface $IIngredientTypeWithSubtypes<B, I> extends $IIngredientType<I> {
-        getIngredientBaseClass(): $Class<B>;
         getIngredientClass(): $Class<I>;
         getDefaultIngredient(arg0: B): I;
+        getIngredientBaseClass(): $Class<B>;
         getBase(arg0: I): B;
-        get ingredientBaseClass(): $Class<B>;
         get ingredientClass(): $Class<I>;
+        get ingredientBaseClass(): $Class<B>;
     }
     export class $IIngredientType<T> {
     }
     export interface $IIngredientType<T> {
+        getUid(): string;
         getIngredientClass(): $Class<T>;
         castIngredient(arg0: $Object): (T) | undefined;
         getCastIngredient(arg0: $Object): T;
-        getUid(): string;
-        get ingredientClass(): $Class<T>;
         get uid(): string;
+        get ingredientClass(): $Class<T>;
     }
     /**
      * Values that may be interpreted as {@link $IIngredientType}.
@@ -79,24 +79,17 @@ declare module "@package/mezz/jei/api/ingredients" {
     export class $IIngredientHelper<V> {
     }
     export interface $IIngredientHelper<V> {
-        getColors(arg0: V): $Iterable<number>;
+        getUid(arg0: V, arg1: $UidContext_): $Object;
+        getUid(arg0: $ITypedIngredient<V>, arg1: $UidContext_): $Object;
+        getCheatItemStack(arg0: V): $ItemStack;
+        getErrorInfo(arg0: V): string;
         getDisplayModId(arg0: V): string;
         /**
          * @deprecated
          */
         getWildcardId(arg0: V): string;
-        getGroupingUid(arg0: $ITypedIngredient<V>): $Object;
-        getGroupingUid(arg0: V): $Object;
-        getIngredientType(): $IIngredientType<V>;
-        copyIngredient(arg0: V): V;
-        getTagStream(arg0: V): $Stream<$ResourceLocation>;
-        isHiddenFromRecipeViewersByTags(arg0: $ITypedIngredient<V>): boolean;
-        isHiddenFromRecipeViewersByTags(arg0: V): boolean;
-        getTagKeyEquivalent(arg0: $Collection_<V>): ($TagKey<never>) | undefined;
         hasSubtypes(arg0: V): boolean;
         copyWithAmount(arg0: V, arg1: number): V;
-        getCheatItemStack(arg0: V): $ItemStack;
-        getErrorInfo(arg0: V): string;
         normalizeIngredient(arg0: V): V;
         isValidIngredient(arg0: V): boolean;
         isIngredientOnServer(arg0: V): boolean;
@@ -104,15 +97,22 @@ declare module "@package/mezz/jei/api/ingredients" {
          * @deprecated
          */
         getTagEquivalent(arg0: $Collection_<V>): ($ResourceLocation) | undefined;
+        getGroupingUid(arg0: V): $Object;
+        getGroupingUid(arg0: $ITypedIngredient<V>): $Object;
+        getIngredientType(): $IIngredientType<V>;
+        copyIngredient(arg0: V): V;
+        getTagStream(arg0: V): $Stream<$ResourceLocation>;
+        isHiddenFromRecipeViewersByTags(arg0: $ITypedIngredient<V>): boolean;
+        isHiddenFromRecipeViewersByTags(arg0: V): boolean;
+        getTagKeyEquivalent(arg0: $Collection_<V>): ($TagKey<never>) | undefined;
+        getColors(arg0: V): $Iterable<number>;
         getDisplayName(arg0: V): string;
-        getResourceLocation(arg0: V): $ResourceLocation;
         getAmount(arg0: V): number;
         /**
          * @deprecated
          */
         getUniqueId(arg0: V, arg1: $UidContext_): string;
-        getUid(arg0: V, arg1: $UidContext_): $Object;
-        getUid(arg0: $ITypedIngredient<V>, arg1: $UidContext_): $Object;
+        getResourceLocation(arg0: V): $ResourceLocation;
         get ingredientType(): $IIngredientType<V>;
     }
 }

@@ -21,6 +21,6 @@ declare module "@package/com/drmangotea/tfmg/content/items/weapons/flamethrover"
     /**
      * Values that may be interpreted as {@link $FlamethrowerFuelType}.
      */
-    export type $FlamethrowerFuelType_ = RegistryTypes.TfmgFlamethrowerFuelType | { color?: number, amount?: number, speed?: number, fluids?: $HolderSet_<$Fluid>, spread?: number, isCold?: boolean, hellfire?: boolean,  } | [color?: number, amount?: number, speed?: number, fluids?: $HolderSet_<$Fluid>, spread?: number, isCold?: boolean, hellfire?: boolean, ];
+    export type $FlamethrowerFuelType_ = RegistryTypes.TfmgFlamethrowerFuelType | { spread?: number, fluids?: $HolderSet_<$Fluid>, speed?: number, amount?: number, color?: number, hellfire?: boolean, isCold?: boolean,  } | [spread?: number, fluids?: $HolderSet_<$Fluid>, speed?: number, amount?: number, color?: number, hellfire?: boolean, isCold?: boolean, ];
     export interface $FlamethrowerFuelType extends RegistryMarked<RegistryTypes.TfmgFlamethrowerFuelTypeTag, RegistryTypes.TfmgFlamethrowerFuelType> {}
 }

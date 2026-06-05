@@ -20,8 +20,8 @@ declare module "@package/net/minecraft/server/commands/data" {
         getModifiedSuccess(): $Component;
         getPrintSuccess(arg0: $NbtPathArgument$NbtPath, arg1: number, arg2: number): $Component;
         getPrintSuccess(arg0: $Tag_): $Component;
-        setData(arg0: $CompoundTag_): void;
         getData(): $CompoundTag;
+        setData(arg0: $CompoundTag_): void;
         static PROVIDER: $Function<string, $DataCommands$DataProvider>;
         static ERROR_NOT_A_BLOCK_ENTITY: $SimpleCommandExceptionType;
         constructor(arg0: $BlockEntity, arg1: $BlockPos_);
@@ -33,8 +33,8 @@ declare module "@package/net/minecraft/server/commands/data" {
         getModifiedSuccess(): $Component;
         getPrintSuccess(arg0: $Tag_): $Component;
         getPrintSuccess(arg0: $NbtPathArgument$NbtPath, arg1: number, arg2: number): $Component;
-        setData(arg0: $CompoundTag_): void;
         getData(): $CompoundTag;
+        setData(arg0: $CompoundTag_): void;
         get modifiedSuccess(): $Component;
     }
     export class $DataCommands$DataProvider {
@@ -45,10 +45,10 @@ declare module "@package/net/minecraft/server/commands/data" {
     }
     export class $EntityDataAccessor implements $DataAccessor {
         getModifiedSuccess(): $Component;
-        getPrintSuccess(arg0: $Tag_): $Component;
         getPrintSuccess(arg0: $NbtPathArgument$NbtPath, arg1: number, arg2: number): $Component;
-        setData(arg0: $CompoundTag_): void;
+        getPrintSuccess(arg0: $Tag_): $Component;
         getData(): $CompoundTag;
+        setData(arg0: $CompoundTag_): void;
         static PROVIDER: $Function<string, $DataCommands$DataProvider>;
         constructor(arg0: $Entity);
         get modifiedSuccess(): $Component;
@@ -74,8 +74,8 @@ declare module "@package/net/minecraft/server/commands/data" {
         getModifiedSuccess(): $Component;
         getPrintSuccess(arg0: $NbtPathArgument$NbtPath, arg1: number, arg2: number): $Component;
         getPrintSuccess(arg0: $Tag_): $Component;
-        setData(arg0: $CompoundTag_): void;
         getData(): $CompoundTag;
+        setData(arg0: $CompoundTag_): void;
         static SUGGEST_STORAGE: $SuggestionProvider<$CommandSourceStack>;
         static PROVIDER: $Function<string, $DataCommands$DataProvider>;
         constructor(arg0: $CommandStorage, arg1: $ResourceLocation_);

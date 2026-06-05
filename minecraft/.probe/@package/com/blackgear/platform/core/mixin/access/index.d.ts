@@ -1,5 +1,5 @@
 import { $BlockGetter } from "@package/net/minecraft/world/level";
-import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
+import { $Sensor, $SensorType } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $NarratableEntry } from "@package/net/minecraft/client/gui/narration";
 import { $SpawnPlacements$Data, $EntityType } from "@package/net/minecraft/world/entity";
 import { $Renderable } from "@package/net/minecraft/client/gui/components";
@@ -45,13 +45,13 @@ declare module "@package/com/blackgear/platform/core/mixin/access" {
     export class $ScreenAccessor {
     }
     export interface $ScreenAccessor {
-        getNarratables(): $List<$NarratableEntry>;
-        getRenderables(): $List<$Renderable>;
         callAddRenderableWidget<T extends $GuiEventListener>(arg0: T): T;
         callAddRenderableOnly<T extends $Renderable>(arg0: T): T;
         callAddWidget<T extends $GuiEventListener>(arg0: T): T;
-        get narratables(): $List<$NarratableEntry>;
+        getRenderables(): $List<$Renderable>;
+        getNarratables(): $List<$NarratableEntry>;
         get renderables(): $List<$Renderable>;
+        get narratables(): $List<$NarratableEntry>;
     }
     export class $PackRepositoryAccessor {
     }

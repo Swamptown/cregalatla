@@ -37,30 +37,30 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema" {
      */
     export type $RecipeOptional_<T> = ((type: $RecipeSchemaType) => T);
     export class $RecipeSchemaData extends $Record {
+        postProcessors(): ($List<$RecipePostProcessor>) | undefined;
         recipeFactory(): ($ResourceLocation) | undefined;
-        mergeKeys(): boolean;
         mergeConstructors(): boolean;
         mergeUnique(): boolean;
         mergePostProcessors(): boolean;
         overrideKeys(): $Map<string, $JsonElement>;
-        postProcessors(): ($List<$RecipePostProcessor>) | undefined;
+        mergeKeys(): boolean;
         overrideType(): ($ResourceLocation) | undefined;
         unique(): ($List<string>) | undefined;
+        functions(): ($Map<string, $RecipeSchemaFunction>) | undefined;
         parent(): ($ResourceLocation) | undefined;
         merge(): $RecipeSchemaData$MergeData;
         constructors(): ($List<$RecipeSchemaData$ConstructorData>) | undefined;
         keys(): ($List<$RecipeSchemaData$RecipeKeyData>) | undefined;
         mappings(): $List<string>;
-        functions(): ($Map<string, $RecipeSchemaFunction>) | undefined;
         hidden(): (boolean) | undefined;
         static CODEC: $Function<$RecipeTypeRegistryContext, $Codec<$RecipeSchemaData>>;
-        constructor(parent: $ResourceLocation_, overrideType: $ResourceLocation_, recipeFactory: $ResourceLocation_, keys: $List_<$RecipeSchemaData$RecipeKeyData_>, constructors: $List_<$RecipeSchemaData$ConstructorData_>, functions: $Map_<string, $RecipeSchemaFunction>, overrideKeys: $Map_<string, $JsonElement_>, hidden: boolean, mappings: $List_<string>, unique: $List_<string>, postProcessors: $List_<$RecipePostProcessor>, merge: $RecipeSchemaData$MergeData_);
         constructor(parent: ($ResourceLocation_) | undefined, overrideType: ($ResourceLocation_) | undefined, recipeFactory: ($ResourceLocation_) | undefined, keys: ($List_<$RecipeSchemaData$RecipeKeyData_>) | undefined, constructors: ($List_<$RecipeSchemaData$ConstructorData_>) | undefined, functions: ($Map_<string, $RecipeSchemaFunction>) | undefined, overrideKeys: $Map_<string, $JsonElement_>, hidden: (boolean) | undefined, mappings: $List_<string>, unique: ($List_<string>) | undefined, postProcessors: ($List_<$RecipePostProcessor>) | undefined, merge: $RecipeSchemaData$MergeData_);
+        constructor(parent: $ResourceLocation_, overrideType: $ResourceLocation_, recipeFactory: $ResourceLocation_, keys: $List_<$RecipeSchemaData$RecipeKeyData_>, constructors: $List_<$RecipeSchemaData$ConstructorData_>, functions: $Map_<string, $RecipeSchemaFunction>, overrideKeys: $Map_<string, $JsonElement_>, hidden: boolean, mappings: $List_<string>, unique: $List_<string>, postProcessors: $List_<$RecipePostProcessor>, merge: $RecipeSchemaData$MergeData_);
     }
     /**
      * Values that may be interpreted as {@link $RecipeSchemaData}.
      */
-    export type $RecipeSchemaData_ = { recipeFactory?: ($ResourceLocation_) | undefined, functions?: ($Map_<string, $RecipeSchemaFunction>) | undefined, merge?: $RecipeSchemaData$MergeData_, mappings?: $List_<string>, unique?: ($List_<string>) | undefined, constructors?: ($List_<$RecipeSchemaData$ConstructorData_>) | undefined, overrideType?: ($ResourceLocation_) | undefined, keys?: ($List_<$RecipeSchemaData$RecipeKeyData_>) | undefined, hidden?: (boolean) | undefined, parent?: ($ResourceLocation_) | undefined, postProcessors?: ($List_<$RecipePostProcessor>) | undefined, overrideKeys?: $Map_<string, $JsonElement_>,  } | [recipeFactory?: ($ResourceLocation_) | undefined, functions?: ($Map_<string, $RecipeSchemaFunction>) | undefined, merge?: $RecipeSchemaData$MergeData_, mappings?: $List_<string>, unique?: ($List_<string>) | undefined, constructors?: ($List_<$RecipeSchemaData$ConstructorData_>) | undefined, overrideType?: ($ResourceLocation_) | undefined, keys?: ($List_<$RecipeSchemaData$RecipeKeyData_>) | undefined, hidden?: (boolean) | undefined, parent?: ($ResourceLocation_) | undefined, postProcessors?: ($List_<$RecipePostProcessor>) | undefined, overrideKeys?: $Map_<string, $JsonElement_>, ];
+    export type $RecipeSchemaData_ = { keys?: ($List_<$RecipeSchemaData$RecipeKeyData_>) | undefined, overrideType?: ($ResourceLocation_) | undefined, constructors?: ($List_<$RecipeSchemaData$ConstructorData_>) | undefined, unique?: ($List_<string>) | undefined, mappings?: $List_<string>, merge?: $RecipeSchemaData$MergeData_, functions?: ($Map_<string, $RecipeSchemaFunction>) | undefined, recipeFactory?: ($ResourceLocation_) | undefined, overrideKeys?: $Map_<string, $JsonElement_>, postProcessors?: ($List_<$RecipePostProcessor>) | undefined, parent?: ($ResourceLocation_) | undefined, hidden?: (boolean) | undefined,  } | [keys?: ($List_<$RecipeSchemaData$RecipeKeyData_>) | undefined, overrideType?: ($ResourceLocation_) | undefined, constructors?: ($List_<$RecipeSchemaData$ConstructorData_>) | undefined, unique?: ($List_<string>) | undefined, mappings?: $List_<string>, merge?: $RecipeSchemaData$MergeData_, functions?: ($Map_<string, $RecipeSchemaFunction>) | undefined, recipeFactory?: ($ResourceLocation_) | undefined, overrideKeys?: $Map_<string, $JsonElement_>, postProcessors?: ($List_<$RecipePostProcessor>) | undefined, parent?: ($ResourceLocation_) | undefined, hidden?: (boolean) | undefined, ];
     export class $UnknownRecipeSchemaType extends $RecipeSchemaType {
         schema: $RecipeSchema;
         parent: $RecipeSchemaType;
@@ -133,7 +133,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema" {
     /**
      * Values that may be interpreted as {@link $KubeRecipeFactory}.
      */
-    export type $KubeRecipeFactory_ = { id?: $ResourceLocation_, factory?: $Supplier_<$KubeRecipe>, recipeType?: $TypeInfo_,  } | [id?: $ResourceLocation_, factory?: $Supplier_<$KubeRecipe>, recipeType?: $TypeInfo_, ];
+    export type $KubeRecipeFactory_ = { recipeType?: $TypeInfo_, factory?: $Supplier_<$KubeRecipe>, id?: $ResourceLocation_,  } | [recipeType?: $TypeInfo_, factory?: $Supplier_<$KubeRecipe>, id?: $ResourceLocation_, ];
     export class $RecipeOptional$Unit<T> {
     }
     export interface $RecipeOptional$Unit<T> extends $RecipeOptional<T> {
@@ -161,7 +161,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema" {
     /**
      * Values that may be interpreted as {@link $RecipeSchemaData$ConstructorData}.
      */
-    export type $RecipeSchemaData$ConstructorData_ = { keys?: $List_<string>, overrides?: $Map_<string, $JsonElement_>,  } | [keys?: $List_<string>, overrides?: $Map_<string, $JsonElement_>, ];
+    export type $RecipeSchemaData$ConstructorData_ = { overrides?: $Map_<string, $JsonElement_>, keys?: $List_<string>,  } | [overrides?: $Map_<string, $JsonElement_>, keys?: $List_<string>, ];
     export class $UnknownKubeRecipe extends $KubeRecipe {
         newRecipe: boolean;
         static RECIPE_FACTORY: $KubeRecipeFactory;
@@ -246,12 +246,12 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema" {
     export class $RecipeNamespace extends $LinkedHashMap<string, $RecipeSchemaType> {
         getRegisteredOrThrow(id: string): $RecipeSchemaType;
         registerBasic(id: string, ...keys: $RecipeKey<never>[]): $RecipeNamespace;
-        shapeless(id: string): $RecipeNamespace;
         withExistingParent(id: string, parent: $ResourceLocation_): $RecipeNamespace;
+        shapeless(id: string): $RecipeNamespace;
         register(id: string, type: $RecipeSchema): $RecipeNamespace;
         register(id: string, type: $RegistryAwareSchema_): $RecipeNamespace;
-        shaped(id: string): $RecipeNamespace;
         special(id: string): $RecipeNamespace;
+        shaped(id: string): $RecipeNamespace;
         name: string;
         storage: $RecipeSchemaStorage;
         constructor(storage: $RecipeSchemaStorage, name: string);
@@ -281,7 +281,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema" {
     /**
      * Values that may be interpreted as {@link $RecipeSchemaData$MergeData}.
      */
-    export type $RecipeSchemaData$MergeData_ = { constructors?: boolean, keys?: boolean, unique?: boolean, postProcessors?: boolean,  } | [constructors?: boolean, keys?: boolean, unique?: boolean, postProcessors?: boolean, ];
+    export type $RecipeSchemaData$MergeData_ = { keys?: boolean, constructors?: boolean, postProcessors?: boolean, unique?: boolean,  } | [keys?: boolean, constructors?: boolean, postProcessors?: boolean, unique?: boolean, ];
     export class $RecipeSchemaStorage {
         fireEvents(registries: $RegistryAccessContainer, resourceManager: $ResourceManager): void;
         namespace(namespace: string): $RecipeNamespace;
@@ -322,16 +322,16 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema" {
         constructor();
     }
     export class $RecipeSchema {
-        inputCount(): number;
+        postProcessors(): $List<$RecipePostProcessor>;
         typeOverride(id: $ResourceLocation_): $RecipeSchema;
         minRequiredArguments(): number;
-        uniqueIds(keys: $SequencedCollection<$RecipeKey<never>>): $RecipeSchema;
         uniqueIds(): $List<$RecipeKey<never>>;
+        uniqueIds(keys: $SequencedCollection<$RecipeKey<never>>): $RecipeSchema;
         constructorsGenerated(): boolean;
         getOptionalKey<T>(id: string): $RecipeKey<T>;
         setOpFunction<T>(name: string, key: $RecipeKey<T>, value: T): $RecipeSchema;
         addToListOpFunction<T>(name: string, key: $RecipeKey<$List_<T>>): $RecipeSchema;
-        postProcessors(): $List<$RecipePostProcessor>;
+        inputCount(): number;
         outputCount(): number;
         buildUniqueId(r: $KubeRecipe): string;
         isHidden(): boolean;
@@ -356,8 +356,8 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema" {
     }
     export class $RecipeSchemaData$RecipeKeyData extends $Record {
         alwaysWrite(): boolean;
-        defaultOptional(): boolean;
         alternativeNames(): $List<string>;
+        defaultOptional(): boolean;
         functionNames(): $List<string>;
         excluded(): boolean;
         name(): string;
@@ -370,5 +370,5 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema" {
     /**
      * Values that may be interpreted as {@link $RecipeSchemaData$RecipeKeyData}.
      */
-    export type $RecipeSchemaData$RecipeKeyData_ = { type?: $RecipeComponent<never>, name?: string, defaultOptional?: boolean, role?: $ComponentRole_, optional?: ($JsonElement_) | undefined, functionNames?: $List_<string>, alternativeNames?: $List_<string>, alwaysWrite?: boolean, excluded?: boolean,  } | [type?: $RecipeComponent<never>, name?: string, defaultOptional?: boolean, role?: $ComponentRole_, optional?: ($JsonElement_) | undefined, functionNames?: $List_<string>, alternativeNames?: $List_<string>, alwaysWrite?: boolean, excluded?: boolean, ];
+    export type $RecipeSchemaData$RecipeKeyData_ = { excluded?: boolean, alwaysWrite?: boolean, alternativeNames?: $List_<string>, functionNames?: $List_<string>, optional?: ($JsonElement_) | undefined, role?: $ComponentRole_, defaultOptional?: boolean, name?: string, type?: $RecipeComponent<never>,  } | [excluded?: boolean, alwaysWrite?: boolean, alternativeNames?: $List_<string>, functionNames?: $List_<string>, optional?: ($JsonElement_) | undefined, role?: $ComponentRole_, defaultOptional?: boolean, name?: string, type?: $RecipeComponent<never>, ];
 }

@@ -45,12 +45,12 @@ declare module "@package/net/minecraft/client/renderer/item" {
         static registerGeneric(arg0: $ResourceLocation_, arg1: $ItemPropertyFunction_): $ItemPropertyFunction;
         static registerGeneric(arg0: $ResourceLocation_, arg1: $ClampedItemPropertyFunction_): $ClampedItemPropertyFunction;
         static registerCustomModelData(arg0: $ItemPropertyFunction_): void;
-        static getGENERIC_PROPERTIES$platform_$md$4ca6b6$0(): $Map<any, any>;
+        static getGENERIC_PROPERTIES$platform_$md$3b3139$0(): $Map<any, any>;
         static getProperty(arg0: $ItemStack_, arg1: $ResourceLocation_): $ItemPropertyFunction;
         static register(arg0: $Item_, arg1: $ResourceLocation_, arg2: $ClampedItemPropertyFunction_): void;
         static register(arg0: $Item_, arg1: $ResourceLocation_, arg2: $ItemPropertyFunction_): void;
         constructor();
-        static get GENERIC_PROPERTIES$platform_$md$4ca6b6$0(): $Map<any, any>;
+        static get GENERIC_PROPERTIES$platform_$md$3b3139$0(): $Map<any, any>;
     }
     /**
      * @deprecated

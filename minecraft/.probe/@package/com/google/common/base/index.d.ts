@@ -36,8 +36,8 @@ declare module "@package/com/google/common/base" {
         withKeyValueSeparator(separator: string): $Splitter$MapSplitter;
         withKeyValueSeparator(keyValueSplitter: $Splitter): $Splitter$MapSplitter;
         withKeyValueSeparator(separator: string): $Splitter$MapSplitter;
-        static onPattern(separatorPattern: string): $Splitter;
         omitEmptyStrings(): $Splitter;
+        static onPattern(separatorPattern: string): $Splitter;
         static fixedLength(length: number): $Splitter;
         trimResults(trimmer: $CharMatcher): $Splitter;
         trimResults(): $Splitter;
@@ -69,8 +69,6 @@ declare module "@package/com/google/common/base" {
     }
     export class $CharMatcher implements $Predicate<string> {
         static anyOf(sequence: $CharSequence): $CharMatcher;
-        static whitespace(): $CharMatcher;
-        and(other: $CharMatcher): $CharMatcher;
         static inRange(startInclusive: string, endInclusive: string): $CharMatcher;
         /**
          * @deprecated
@@ -92,6 +90,9 @@ declare module "@package/com/google/common/base" {
          * @deprecated
          */
         static javaLetterOrDigit(): $CharMatcher;
+        or(other: $CharMatcher): $CharMatcher;
+        and(other: $CharMatcher): $CharMatcher;
+        static whitespace(): $CharMatcher;
         static any(): $CharMatcher;
         matches(c: string): boolean;
         /**
@@ -105,7 +106,6 @@ declare module "@package/com/google/common/base" {
          * @deprecated
          */
         static digit(): $CharMatcher;
-        or(other: $CharMatcher): $CharMatcher;
         static none(): $CharMatcher;
         retainFrom(sequence: $CharSequence): string;
         removeFrom(sequence: $CharSequence): string;
@@ -129,16 +129,16 @@ declare module "@package/com/google/common/base" {
         indexIn(sequence: $CharSequence): number;
         lastIndexIn(sequence: $CharSequence): number;
         countIn(sequence: $CharSequence): number;
-        replaceFrom(sequence: $CharSequence, replacement: $CharSequence): string;
         replaceFrom(sequence: $CharSequence, replacement: string): string;
+        replaceFrom(sequence: $CharSequence, replacement: $CharSequence): string;
         trimFrom(sequence: $CharSequence): string;
         trimLeadingFrom(sequence: $CharSequence): string;
         trimTrailingFrom(sequence: $CharSequence): string;
         collapseFrom(sequence: $CharSequence, replacement: string): string;
         trimAndCollapseFrom(sequence: $CharSequence, replacement: string): string;
         test(input: string): boolean;
-        and(arg0: $Predicate_<string>): $Predicate$1<string>;
         or(arg0: $Predicate_<string>): $Predicate$1<string>;
+        and(arg0: $Predicate_<string>): $Predicate$1<string>;
         negate(): $Predicate$1<string>;
     }
 }

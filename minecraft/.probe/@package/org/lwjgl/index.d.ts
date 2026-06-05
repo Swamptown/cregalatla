@@ -4,7 +4,6 @@ import { $Pointer_, $CustomBuffer } from "@package/org/lwjgl/system";
 export * as util from "@package/org/lwjgl/util";
 export * as system from "@package/org/lwjgl/system";
 export * as glfw from "@package/org/lwjgl/glfw";
-export * as openal from "@package/org/lwjgl/openal";
 export * as stb from "@package/org/lwjgl/stb";
 
 declare module "@package/org/lwjgl" {

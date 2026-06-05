@@ -36,12 +36,12 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $SummonEntityEffect}.
      */
-    export type $SummonEntityEffect_ = { joinTeam?: boolean, entityTypes?: $HolderSet_<$EntityType<never>>,  } | [joinTeam?: boolean, entityTypes?: $HolderSet_<$EntityType<never>>, ];
+    export type $SummonEntityEffect_ = { entityTypes?: $HolderSet_<$EntityType<never>>, joinTeam?: boolean,  } | [entityTypes?: $HolderSet_<$EntityType<never>>, joinTeam?: boolean, ];
     export class $ReplaceBlock extends $Record implements $EnchantmentEntityEffect {
         triggerGameEvent(): ($Holder<$GameEvent>) | undefined;
+        predicate(): ($BlockPredicate) | undefined;
         apply(arg0: $ServerLevel, arg1: number, arg2: $EnchantedItemInUse_, arg3: $Entity, arg4: $Vec3_): void;
         offset(): $Vec3i;
-        predicate(): ($BlockPredicate) | undefined;
         codec(): $MapCodec<$ReplaceBlock>;
         blockState(): $BlockStateProvider;
         onChangedBlock(arg0: $ServerLevel, arg1: number, arg2: $EnchantedItemInUse_, arg3: $Entity, arg4: $Vec3_, arg5: boolean): void;
@@ -52,7 +52,7 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $ReplaceBlock}.
      */
-    export type $ReplaceBlock_ = { triggerGameEvent?: ($Holder_<$GameEvent>) | undefined, predicate?: ($BlockPredicate) | undefined, blockState?: $BlockStateProvider, offset?: $Vec3i,  } | [triggerGameEvent?: ($Holder_<$GameEvent>) | undefined, predicate?: ($BlockPredicate) | undefined, blockState?: $BlockStateProvider, offset?: $Vec3i, ];
+    export type $ReplaceBlock_ = { blockState?: $BlockStateProvider, predicate?: ($BlockPredicate) | undefined, triggerGameEvent?: ($Holder_<$GameEvent>) | undefined, offset?: $Vec3i,  } | [blockState?: $BlockStateProvider, predicate?: ($BlockPredicate) | undefined, triggerGameEvent?: ($Holder_<$GameEvent>) | undefined, offset?: $Vec3i, ];
     export class $DamageEntity extends $Record implements $EnchantmentEntityEffect {
         maxDamage(): $LevelBasedValue;
         minDamage(): $LevelBasedValue;
@@ -67,7 +67,7 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $DamageEntity}.
      */
-    export type $DamageEntity_ = { minDamage?: $LevelBasedValue, damageType?: $Holder_<$DamageType>, maxDamage?: $LevelBasedValue,  } | [minDamage?: $LevelBasedValue, damageType?: $Holder_<$DamageType>, maxDamage?: $LevelBasedValue, ];
+    export type $DamageEntity_ = { maxDamage?: $LevelBasedValue, damageType?: $Holder_<$DamageType>, minDamage?: $LevelBasedValue,  } | [maxDamage?: $LevelBasedValue, damageType?: $Holder_<$DamageType>, minDamage?: $LevelBasedValue, ];
     export class $Ignite extends $Record implements $EnchantmentEntityEffect {
         apply(arg0: $ServerLevel, arg1: number, arg2: $EnchantedItemInUse_, arg3: $Entity, arg4: $Vec3_): void;
         duration(): $LevelBasedValue;
@@ -117,8 +117,8 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
      */
     export type $DamageImmunity_ = {  } | [];
     export class $MultiplyValue extends $Record implements $EnchantmentValueEffect {
-        factor(): $LevelBasedValue;
         process(arg0: number, arg1: $RandomSource, arg2: number): number;
+        factor(): $LevelBasedValue;
         codec(): $MapCodec<$MultiplyValue>;
         static CODEC: $MapCodec<$MultiplyValue>;
         constructor(arg0: $LevelBasedValue);
@@ -151,7 +151,7 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $EnchantmentAttributeEffect}.
      */
-    export type $EnchantmentAttributeEffect_ = { amount?: $LevelBasedValue, operation?: $AttributeModifier$Operation_, attribute?: $Holder_<$Attribute>, id?: $ResourceLocation_,  } | [amount?: $LevelBasedValue, operation?: $AttributeModifier$Operation_, attribute?: $Holder_<$Attribute>, id?: $ResourceLocation_, ];
+    export type $EnchantmentAttributeEffect_ = { attribute?: $Holder_<$Attribute>, operation?: $AttributeModifier$Operation_, amount?: $LevelBasedValue, id?: $ResourceLocation_,  } | [attribute?: $Holder_<$Attribute>, operation?: $AttributeModifier$Operation_, amount?: $LevelBasedValue, id?: $ResourceLocation_, ];
     export class $EnchantmentLocationBasedEffect {
         static bootstrap(arg0: $Registry<$MapCodec_<$EnchantmentLocationBasedEffect>>): $MapCodec<$EnchantmentLocationBasedEffect>;
         static CODEC: $Codec<$EnchantmentLocationBasedEffect>;
@@ -163,9 +163,9 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     }
     export class $ReplaceDisk extends $Record implements $EnchantmentEntityEffect {
         triggerGameEvent(): ($Holder<$GameEvent>) | undefined;
+        predicate(): ($BlockPredicate) | undefined;
         apply(arg0: $ServerLevel, arg1: number, arg2: $EnchantedItemInUse_, arg3: $Entity, arg4: $Vec3_): void;
         offset(): $Vec3i;
-        predicate(): ($BlockPredicate) | undefined;
         height(): $LevelBasedValue;
         codec(): $MapCodec<$ReplaceDisk>;
         radius(): $LevelBasedValue;
@@ -178,13 +178,13 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $ReplaceDisk}.
      */
-    export type $ReplaceDisk_ = { radius?: $LevelBasedValue, height?: $LevelBasedValue, blockState?: $BlockStateProvider, predicate?: ($BlockPredicate) | undefined, offset?: $Vec3i, triggerGameEvent?: ($Holder_<$GameEvent>) | undefined,  } | [radius?: $LevelBasedValue, height?: $LevelBasedValue, blockState?: $BlockStateProvider, predicate?: ($BlockPredicate) | undefined, offset?: $Vec3i, triggerGameEvent?: ($Holder_<$GameEvent>) | undefined, ];
+    export type $ReplaceDisk_ = { offset?: $Vec3i, predicate?: ($BlockPredicate) | undefined, blockState?: $BlockStateProvider, height?: $LevelBasedValue, radius?: $LevelBasedValue, triggerGameEvent?: ($Holder_<$GameEvent>) | undefined,  } | [offset?: $Vec3i, predicate?: ($BlockPredicate) | undefined, blockState?: $BlockStateProvider, height?: $LevelBasedValue, radius?: $LevelBasedValue, triggerGameEvent?: ($Holder_<$GameEvent>) | undefined, ];
     export class $PlaySoundEffect extends $Record implements $EnchantmentEntityEffect {
         soundEvent(): $Holder<$SoundEvent>;
         apply(arg0: $ServerLevel, arg1: number, arg2: $EnchantedItemInUse_, arg3: $Entity, arg4: $Vec3_): void;
         codec(): $MapCodec<$PlaySoundEffect>;
-        volume(): $FloatProvider;
         pitch(): $FloatProvider;
+        volume(): $FloatProvider;
         onChangedBlock(arg0: $ServerLevel, arg1: number, arg2: $EnchantedItemInUse_, arg3: $Entity, arg4: $Vec3_, arg5: boolean): void;
         onDeactivated(arg0: $EnchantedItemInUse_, arg1: $Entity, arg2: $Vec3_, arg3: number): void;
         static CODEC: $MapCodec<$PlaySoundEffect>;
@@ -193,7 +193,7 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $PlaySoundEffect}.
      */
-    export type $PlaySoundEffect_ = { soundEvent?: $Holder_<$SoundEvent>, volume?: $FloatProvider, pitch?: $FloatProvider,  } | [soundEvent?: $Holder_<$SoundEvent>, volume?: $FloatProvider, pitch?: $FloatProvider, ];
+    export type $PlaySoundEffect_ = { volume?: $FloatProvider, soundEvent?: $Holder_<$SoundEvent>, pitch?: $FloatProvider,  } | [volume?: $FloatProvider, soundEvent?: $Holder_<$SoundEvent>, pitch?: $FloatProvider, ];
     export class $SpawnParticlesEffect extends $Record implements $EnchantmentEntityEffect {
         horizontalPosition(): $SpawnParticlesEffect$PositionSource;
         verticalPosition(): $SpawnParticlesEffect$PositionSource;
@@ -205,8 +205,8 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
         static fixedVelocity(arg0: $FloatProvider): $SpawnParticlesEffect$VelocitySource;
         apply(arg0: $ServerLevel, arg1: number, arg2: $EnchantedItemInUse_, arg3: $Entity, arg4: $Vec3_): void;
         codec(): $MapCodec<$SpawnParticlesEffect>;
-        particle(): $ParticleOptions;
         speed(): $FloatProvider;
+        particle(): $ParticleOptions;
         onChangedBlock(arg0: $ServerLevel, arg1: number, arg2: $EnchantedItemInUse_, arg3: $Entity, arg4: $Vec3_, arg5: boolean): void;
         onDeactivated(arg0: $EnchantedItemInUse_, arg1: $Entity, arg2: $Vec3_, arg3: number): void;
         static CODEC: $MapCodec<$SpawnParticlesEffect>;
@@ -215,13 +215,13 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $SpawnParticlesEffect}.
      */
-    export type $SpawnParticlesEffect_ = { verticalPosition?: $SpawnParticlesEffect$PositionSource_, horizontalVelocity?: $SpawnParticlesEffect$VelocitySource_, speed?: $FloatProvider, particle?: $ParticleOptions_, horizontalPosition?: $SpawnParticlesEffect$PositionSource_, verticalVelocity?: $SpawnParticlesEffect$VelocitySource_,  } | [verticalPosition?: $SpawnParticlesEffect$PositionSource_, horizontalVelocity?: $SpawnParticlesEffect$VelocitySource_, speed?: $FloatProvider, particle?: $ParticleOptions_, horizontalPosition?: $SpawnParticlesEffect$PositionSource_, verticalVelocity?: $SpawnParticlesEffect$VelocitySource_, ];
+    export type $SpawnParticlesEffect_ = { particle?: $ParticleOptions_, speed?: $FloatProvider, horizontalVelocity?: $SpawnParticlesEffect$VelocitySource_, verticalPosition?: $SpawnParticlesEffect$PositionSource_, verticalVelocity?: $SpawnParticlesEffect$VelocitySource_, horizontalPosition?: $SpawnParticlesEffect$PositionSource_,  } | [particle?: $ParticleOptions_, speed?: $FloatProvider, horizontalVelocity?: $SpawnParticlesEffect$VelocitySource_, verticalPosition?: $SpawnParticlesEffect$PositionSource_, verticalVelocity?: $SpawnParticlesEffect$VelocitySource_, horizontalPosition?: $SpawnParticlesEffect$PositionSource_, ];
     export class $ExplodeEffect extends $Record implements $EnchantmentEntityEffect {
         blockInteraction(): $Level$ExplosionInteraction;
         knockbackMultiplier(): ($LevelBasedValue) | undefined;
         immuneBlocks(): ($HolderSet<$Block>) | undefined;
-        attributeToUser(): boolean;
         damageType(): ($Holder<$DamageType>) | undefined;
+        attributeToUser(): boolean;
         createFire(): boolean;
         smallParticle(): $ParticleOptions;
         largeParticle(): $ParticleOptions;
@@ -238,7 +238,7 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $ExplodeEffect}.
      */
-    export type $ExplodeEffect_ = { blockInteraction?: $Level$ExplosionInteraction_, smallParticle?: $ParticleOptions_, offset?: $Vec3_, largeParticle?: $ParticleOptions_, immuneBlocks?: ($HolderSet_<$Block>) | undefined, createFire?: boolean, sound?: $Holder_<$SoundEvent>, attributeToUser?: boolean, damageType?: ($Holder_<$DamageType>) | undefined, radius?: $LevelBasedValue, knockbackMultiplier?: ($LevelBasedValue) | undefined,  } | [blockInteraction?: $Level$ExplosionInteraction_, smallParticle?: $ParticleOptions_, offset?: $Vec3_, largeParticle?: $ParticleOptions_, immuneBlocks?: ($HolderSet_<$Block>) | undefined, createFire?: boolean, sound?: $Holder_<$SoundEvent>, attributeToUser?: boolean, damageType?: ($Holder_<$DamageType>) | undefined, radius?: $LevelBasedValue, knockbackMultiplier?: ($LevelBasedValue) | undefined, ];
+    export type $ExplodeEffect_ = { damageType?: ($Holder_<$DamageType>) | undefined, attributeToUser?: boolean, sound?: $Holder_<$SoundEvent>, createFire?: boolean, immuneBlocks?: ($HolderSet_<$Block>) | undefined, largeParticle?: $ParticleOptions_, offset?: $Vec3_, smallParticle?: $ParticleOptions_, blockInteraction?: $Level$ExplosionInteraction_, knockbackMultiplier?: ($LevelBasedValue) | undefined, radius?: $LevelBasedValue,  } | [damageType?: ($Holder_<$DamageType>) | undefined, attributeToUser?: boolean, sound?: $Holder_<$SoundEvent>, createFire?: boolean, immuneBlocks?: ($HolderSet_<$Block>) | undefined, largeParticle?: $ParticleOptions_, offset?: $Vec3_, smallParticle?: $ParticleOptions_, blockInteraction?: $Level$ExplosionInteraction_, knockbackMultiplier?: ($LevelBasedValue) | undefined, radius?: $LevelBasedValue, ];
     export class $SpawnParticlesEffect$VelocitySource extends $Record {
         movementScale(): number;
         base(): $FloatProvider;
@@ -293,7 +293,7 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $ApplyMobEffect}.
      */
-    export type $ApplyMobEffect_ = { maxDuration?: $LevelBasedValue, minDuration?: $LevelBasedValue, maxAmplifier?: $LevelBasedValue, toApply?: $HolderSet_<$MobEffect>, minAmplifier?: $LevelBasedValue,  } | [maxDuration?: $LevelBasedValue, minDuration?: $LevelBasedValue, maxAmplifier?: $LevelBasedValue, toApply?: $HolderSet_<$MobEffect>, minAmplifier?: $LevelBasedValue, ];
+    export type $ApplyMobEffect_ = { toApply?: $HolderSet_<$MobEffect>, maxAmplifier?: $LevelBasedValue, minDuration?: $LevelBasedValue, maxDuration?: $LevelBasedValue, minAmplifier?: $LevelBasedValue,  } | [toApply?: $HolderSet_<$MobEffect>, maxAmplifier?: $LevelBasedValue, minDuration?: $LevelBasedValue, maxDuration?: $LevelBasedValue, minAmplifier?: $LevelBasedValue, ];
     export class $AllOf$EntityEffects extends $Record implements $EnchantmentEntityEffect {
         apply(arg0: $ServerLevel, arg1: number, arg2: $EnchantedItemInUse_, arg3: $Entity, arg4: $Vec3_): void;
         codec(): $MapCodec<$AllOf$EntityEffects>;
@@ -308,9 +308,9 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
      */
     export type $AllOf$EntityEffects_ = { effects?: $List_<$EnchantmentEntityEffect>,  } | [effects?: $List_<$EnchantmentEntityEffect>, ];
     export class $AllOf {
-        static entityEffects(...arg0: $EnchantmentEntityEffect[]): $AllOf$EntityEffects;
         static locationBasedEffects(...arg0: $EnchantmentLocationBasedEffect[]): $AllOf$LocationBasedEffects;
         static valueEffects(...arg0: $EnchantmentValueEffect[]): $AllOf$ValueEffects;
+        static entityEffects(...arg0: $EnchantmentEntityEffect[]): $AllOf$EntityEffects;
         static codec<T, A extends T>(arg0: $Codec<T>, arg1: $Function_<$List<T>, A>, arg2: $Function_<A, $List<T>>): $MapCodec<A>;
     }
     export interface $AllOf {
@@ -326,12 +326,12 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $SpawnParticlesEffect$PositionSource}.
      */
-    export type $SpawnParticlesEffect$PositionSource_ = { offset?: number, type?: $SpawnParticlesEffect$PositionSourceType_, scale?: number,  } | [offset?: number, type?: $SpawnParticlesEffect$PositionSourceType_, scale?: number, ];
+    export type $SpawnParticlesEffect$PositionSource_ = { scale?: number, type?: $SpawnParticlesEffect$PositionSourceType_, offset?: number,  } | [scale?: number, type?: $SpawnParticlesEffect$PositionSourceType_, offset?: number, ];
     export class $AllOf$LocationBasedEffects extends $Record implements $EnchantmentLocationBasedEffect {
         onDeactivated(arg0: $EnchantedItemInUse_, arg1: $Entity, arg2: $Vec3_, arg3: number): void;
         codec(): $MapCodec<$AllOf$LocationBasedEffects>;
-        effects(): $List<$EnchantmentLocationBasedEffect>;
         onChangedBlock(arg0: $ServerLevel, arg1: number, arg2: $EnchantedItemInUse_, arg3: $Entity, arg4: $Vec3_, arg5: boolean): void;
+        effects(): $List<$EnchantmentLocationBasedEffect>;
         static CODEC: $MapCodec<$AllOf$LocationBasedEffects>;
         constructor(arg0: $List_<$EnchantmentLocationBasedEffect>);
     }
@@ -340,8 +340,8 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
      */
     export type $AllOf$LocationBasedEffects_ = { effects?: $List_<$EnchantmentLocationBasedEffect>,  } | [effects?: $List_<$EnchantmentLocationBasedEffect>, ];
     export class $SetValue extends $Record implements $EnchantmentValueEffect {
-        value(): $LevelBasedValue;
         process(arg0: number, arg1: $RandomSource, arg2: number): number;
+        value(): $LevelBasedValue;
         codec(): $MapCodec<$SetValue>;
         static CODEC: $MapCodec<$SetValue>;
         constructor(arg0: $LevelBasedValue);
@@ -351,8 +351,8 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
      */
     export type $SetValue_ = { value?: $LevelBasedValue,  } | [value?: $LevelBasedValue, ];
     export class $AddValue extends $Record implements $EnchantmentValueEffect {
-        value(): $LevelBasedValue;
         process(arg0: number, arg1: $RandomSource, arg2: number): number;
+        value(): $LevelBasedValue;
         codec(): $MapCodec<$AddValue>;
         static CODEC: $MapCodec<$AddValue>;
         constructor(arg0: $LevelBasedValue);
@@ -403,5 +403,5 @@ declare module "@package/net/minecraft/world/item/enchantment/effects" {
     /**
      * Values that may be interpreted as {@link $SetBlockProperties}.
      */
-    export type $SetBlockProperties_ = { offset?: $Vec3i, properties?: $BlockItemStateProperties_, triggerGameEvent?: ($Holder_<$GameEvent>) | undefined,  } | [offset?: $Vec3i, properties?: $BlockItemStateProperties_, triggerGameEvent?: ($Holder_<$GameEvent>) | undefined, ];
+    export type $SetBlockProperties_ = { triggerGameEvent?: ($Holder_<$GameEvent>) | undefined, properties?: $BlockItemStateProperties_, offset?: $Vec3i,  } | [triggerGameEvent?: ($Holder_<$GameEvent>) | undefined, properties?: $BlockItemStateProperties_, offset?: $Vec3i, ];
 }

@@ -111,9 +111,9 @@ declare module "@package/net/minecraft/client/resources" {
      */
     export type $SkinManager$CacheKey_ = { packedTextures?: $Property_, profileId?: $UUID_,  } | [packedTextures?: $Property_, profileId?: $UUID_, ];
     export class $DefaultPlayerSkin {
-        static get(arg0: $GameProfile): $PlayerSkin;
-        static get(arg0: $UUID_): $PlayerSkin;
         static getDefaultTexture(): $ResourceLocation;
+        static get(arg0: $UUID_): $PlayerSkin;
+        static get(arg0: $GameProfile): $PlayerSkin;
         constructor();
         static get defaultTexture(): $ResourceLocation;
     }
@@ -129,12 +129,12 @@ declare module "@package/net/minecraft/client/resources" {
     /**
      * Values that may be interpreted as {@link $PlayerSkin}.
      */
-    export type $PlayerSkin_ = { elytraTexture?: $ResourceLocation_, model?: $PlayerSkin$Model_, secure?: boolean, textureUrl?: string, texture?: $ResourceLocation_, capeTexture?: $ResourceLocation_,  } | [elytraTexture?: $ResourceLocation_, model?: $PlayerSkin$Model_, secure?: boolean, textureUrl?: string, texture?: $ResourceLocation_, capeTexture?: $ResourceLocation_, ];
+    export type $PlayerSkin_ = { texture?: $ResourceLocation_, textureUrl?: string, secure?: boolean, model?: $PlayerSkin$Model_, elytraTexture?: $ResourceLocation_, capeTexture?: $ResourceLocation_,  } | [texture?: $ResourceLocation_, textureUrl?: string, secure?: boolean, model?: $PlayerSkin$Model_, elytraTexture?: $ResourceLocation_, capeTexture?: $ResourceLocation_, ];
     export class $SkinManager {
         lookupInsecure(arg0: $GameProfile): $Supplier<$PlayerSkin>;
         getInsecureSkin(arg0: $GameProfile): $PlayerSkin;
-        registerTextures(arg0: $UUID_, arg1: $MinecraftProfileTextures_): $CompletableFuture<$PlayerSkin>;
         getOrLoad(arg0: $GameProfile): $CompletableFuture<$PlayerSkin>;
+        registerTextures(arg0: $UUID_, arg1: $MinecraftProfileTextures_): $CompletableFuture<$PlayerSkin>;
         static LOGGER: $Logger;
         constructor(arg0: $TextureManager, arg1: $Path_, arg2: $MinecraftSessionService, arg3: $Executor_);
     }

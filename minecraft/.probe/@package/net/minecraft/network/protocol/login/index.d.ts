@@ -38,9 +38,9 @@ declare module "@package/net/minecraft/network/protocol/login" {
         constructor();
     }
     export class $ClientboundGameProfilePacket extends $Record implements $Packet<$ClientLoginPacketListener> {
-        isTerminal(): boolean;
         type(): $PacketType<$ClientboundGameProfilePacket>;
         handle(arg0: $ClientLoginPacketListener): void;
+        isTerminal(): boolean;
         gameProfile(): $GameProfile;
         /**
          * @deprecated
@@ -55,7 +55,7 @@ declare module "@package/net/minecraft/network/protocol/login" {
     /**
      * Values that may be interpreted as {@link $ClientboundGameProfilePacket}.
      */
-    export type $ClientboundGameProfilePacket_ = { strictErrorHandling?: boolean, gameProfile?: $GameProfile,  } | [strictErrorHandling?: boolean, gameProfile?: $GameProfile, ];
+    export type $ClientboundGameProfilePacket_ = { gameProfile?: $GameProfile, strictErrorHandling?: boolean,  } | [gameProfile?: $GameProfile, strictErrorHandling?: boolean, ];
     export class $ClientboundCustomQueryPacket extends $Record implements $Packet<$ClientLoginPacketListener> {
         transactionId(): number;
         payload(): $CustomQueryPayload;
@@ -73,9 +73,9 @@ declare module "@package/net/minecraft/network/protocol/login" {
      */
     export type $ClientboundCustomQueryPacket_ = { payload?: $CustomQueryPayload, transactionId?: number,  } | [payload?: $CustomQueryPayload, transactionId?: number, ];
     export class $ServerboundLoginAcknowledgedPacket implements $Packet<$ServerLoginPacketListener> {
-        isTerminal(): boolean;
         type(): $PacketType<$ServerboundLoginAcknowledgedPacket>;
         handle(arg0: $ServerLoginPacketListener): void;
+        isTerminal(): boolean;
         isSkippable(): boolean;
         static INSTANCE: $ServerboundLoginAcknowledgedPacket;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ServerboundLoginAcknowledgedPacket>;
@@ -97,7 +97,7 @@ declare module "@package/net/minecraft/network/protocol/login" {
     /**
      * Values that may be interpreted as {@link $ServerboundHelloPacket}.
      */
-    export type $ServerboundHelloPacket_ = { profileId?: $UUID_, name?: string,  } | [profileId?: $UUID_, name?: string, ];
+    export type $ServerboundHelloPacket_ = { name?: string, profileId?: $UUID_,  } | [name?: string, profileId?: $UUID_, ];
     export class $LoginPacketTypes {
         static CLIENTBOUND_GAME_PROFILE: $PacketType<$ClientboundGameProfilePacket>;
         static CLIENTBOUND_CUSTOM_QUERY: $PacketType<$ClientboundCustomQueryPacket>;
@@ -114,9 +114,9 @@ declare module "@package/net/minecraft/network/protocol/login" {
         getServerId(): string;
         getChallenge(): number[];
         shouldAuthenticate(): boolean;
-        getPublicKey(): $PublicKey;
         type(): $PacketType<$ClientboundHelloPacket>;
         handle(arg0: $ClientLoginPacketListener): void;
+        getPublicKey(): $PublicKey;
         isTerminal(): boolean;
         isSkippable(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundHelloPacket>;

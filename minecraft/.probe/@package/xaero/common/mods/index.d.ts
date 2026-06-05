@@ -26,15 +26,15 @@ declare module "@package/xaero/common/mods" {
         constructor();
     }
     export class $SupportXaeroWorldmap {
-        getWorldMapIgnoreHeightmaps(): boolean;
+        confirmPlayerRadarRender(arg0: $Player): void;
+        bumpLoadedRegion(arg0: $MapProcessor, arg1: $MapRegion): void;
         registerHighlighters(arg0: $HighlighterRegistry): void;
+        getWorldMapIgnoreHeightmaps(): boolean;
         createRadarRenderWrapper(arg0: $RadarRenderer): void;
         getMinimapBrightness(): number;
         drawMinimap(arg0: $MinimapSession, arg1: $PoseStack, arg2: $MinimapRendererHelper, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: boolean, arg10: number, arg11: number, arg12: $VertexConsumer, arg13: $MultiTextureRenderTypeRendererProvider): void;
         getMapDimensionScale(): number;
         getMapDimension(): $ResourceKey<$Level>;
-        confirmPlayerRadarRender(arg0: $Player): void;
-        bumpLoadedRegion(arg0: $MapProcessor, arg1: $MapRegion): void;
         toggleChunkClaims(): void;
         prepareMapTexturedRect(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $MapTileChunk, arg8: $MultiTextureRenderTypeRenderer, arg9: $MultiTextureRenderTypeRenderer, arg10: $MinimapRendererHelper): void;
         renderSlimeChunks(arg0: $MapTileChunk, arg1: number, arg2: number, arg3: number, arg4: $PoseStack, arg5: $MinimapRendererHelper, arg6: $VertexConsumer): void;
@@ -47,11 +47,13 @@ declare module "@package/xaero/common/mods" {
         tryToGetMultiworldName(arg0: $ResourceKey_<$Level>, arg1: string): string;
         worldMapIsRenderingRadar(): boolean;
         isMultiplayerMap(): boolean;
+        openSettings(): void;
         caveLayersAreUsable(): boolean;
         shouldPreventAutoCaveMode(arg0: $Level_): boolean;
         getClaimsBorderOpacity(): number;
         getClaimsFillOpacity(): number;
         getDisplayClaims(): boolean;
+        getAdjustHeightForCarpetLikeBlocks(): boolean;
         isStainedGlassDisplayed(): boolean;
         getWorldMapFlowers(): boolean;
         getWorldMapTerrainSlopes(): number;
@@ -59,7 +61,6 @@ declare module "@package/xaero/common/mods" {
         isLegibleCaveMaps(): boolean;
         getCaveModeDepth(): number;
         getBiomeBlending(): boolean;
-        getAdjustHeightForCarpetLikeBlocks(): boolean;
         getWorldMapScreenForOption(arg0: $ConfigOption<never>, arg1: $Screen): $Screen;
         getManualCaveStart(): number;
         getWorldMapBiomeColorsVanillaMode(): boolean;
@@ -67,7 +68,6 @@ declare module "@package/xaero/common/mods" {
         getPartialYTeleport(): boolean;
         getSettingsScreen(arg0: $Screen): $Screen;
         getSettingsScreen(arg0: $Screen, arg1: $Screen): $Screen;
-        openSettings(): void;
         compatibilityVersion: number;
         static WORLDMAP_COMPATIBILITY_VERSION: number;
         static MINIMAP_MW: string;
@@ -84,6 +84,7 @@ declare module "@package/xaero/common/mods" {
         get claimsBorderOpacity(): number;
         get claimsFillOpacity(): number;
         get displayClaims(): boolean;
+        get adjustHeightForCarpetLikeBlocks(): boolean;
         get stainedGlassDisplayed(): boolean;
         get worldMapFlowers(): boolean;
         get worldMapTerrainSlopes(): number;
@@ -91,19 +92,18 @@ declare module "@package/xaero/common/mods" {
         get legibleCaveMaps(): boolean;
         get caveModeDepth(): number;
         get biomeBlending(): boolean;
-        get adjustHeightForCarpetLikeBlocks(): boolean;
         get manualCaveStart(): number;
         get worldMapBiomeColorsVanillaMode(): boolean;
         get worldMapColours(): number;
         get partialYTeleport(): boolean;
     }
     export class $SupportMods {
-        framedBlocks(): boolean;
-        shouldUseWorldMapChunks(): boolean;
-        shouldUseWorldMapCaveChunks(): boolean;
-        pac(): boolean;
-        worldmap(): boolean;
         static checkForMinimapDuplicates(arg0: string): void;
+        worldmap(): boolean;
+        shouldUseWorldMapChunks(): boolean;
+        pac(): boolean;
+        shouldUseWorldMapCaveChunks(): boolean;
+        framedBlocks(): boolean;
         supportIris: $SupportIris;
         iris: boolean;
         xaeroPac: $SupportOpenPartiesAndClaims;

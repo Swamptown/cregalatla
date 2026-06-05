@@ -26,28 +26,28 @@ declare module "@package/jdk/jfr" {
     export class $Configuration {
         getSettings(): $Map<string, string>;
         getLabel(): string;
-        static getConfigurations(): $List<$Configuration>;
-        getContents(): string;
         getDescription(): string;
+        static getConfigurations(): $List<$Configuration>;
         getProvider(): string;
+        getContents(): string;
         getName(): string;
         static create(arg0: $Path_): $Configuration;
         static create(arg0: $Reader): $Configuration;
         static getConfiguration(arg0: string): $Configuration;
         get settings(): $Map<string, string>;
         get label(): string;
-        static get configurations(): $List<$Configuration>;
-        get contents(): string;
         get description(): string;
+        static get configurations(): $List<$Configuration>;
         get provider(): string;
+        get contents(): string;
         get name(): string;
     }
     export class $AnnotationElement {
         getAnnotationElements(): $List<$AnnotationElement>;
-        getValueDescriptors(): $List<$ValueDescriptor>;
         getValues(): $List<$Object>;
         getTypeId(): number;
         hasValue(arg0: string): boolean;
+        getValueDescriptors(): $List<$ValueDescriptor>;
         getValue(arg0: string): $Object;
         getTypeName(): string;
         getAnnotation<A>(arg0: $Class<$Annotation>): A;
@@ -55,9 +55,9 @@ declare module "@package/jdk/jfr" {
         constructor(arg0: $Class<$Annotation>);
         constructor(arg0: $Class<$Annotation>, arg1: $Object);
         get annotationElements(): $List<$AnnotationElement>;
-        get valueDescriptors(): $List<$ValueDescriptor>;
         get values(): $List<$Object>;
         get typeId(): number;
+        get valueDescriptors(): $List<$ValueDescriptor>;
         get typeName(): string;
     }
     export class $ValueDescriptor {
@@ -84,8 +84,8 @@ declare module "@package/jdk/jfr" {
         get fields(): $List<$ValueDescriptor>;
     }
     export class $EventType {
-        getAnnotationElements(): $List<$AnnotationElement>;
         static getEventType(arg0: $Class<$Event>): $EventType;
+        getAnnotationElements(): $List<$AnnotationElement>;
         getCategoryNames(): $List<string>;
         getSettingDescriptors(): $List<$SettingDescriptor>;
         getLabel(): string;
@@ -119,12 +119,12 @@ declare module "@package/jdk/jfr" {
         getSettings(): $Map<string, string>;
         getMaxSize(): number;
         getMaxAge(): $Duration;
-        getDestination(): $Path;
         getDuration(): $Duration;
         enable(arg0: $Class<$Event>): $EventSettings;
         enable(arg0: string): $EventSettings;
-        getStream(arg0: $Instant, arg1: $Instant): $InputStream;
         getDumpOnExit(): boolean;
+        getDestination(): $Path;
+        getStream(arg0: $Instant, arg1: $Instant): $InputStream;
         getName(): string;
         start(): void;
         stop(): boolean;

@@ -18,13 +18,13 @@ import { $DamageSource_, $DamageSource } from "@package/net/minecraft/world/dama
 declare module "@package/top/theillusivec4/curios/api/event" {
     export class $CurioChangeEvent extends $LivingEvent {
         getSlotIndex(): number;
-        getFrom(): $ItemStack;
         getIdentifier(): string;
+        getFrom(): $ItemStack;
         getTo(): $ItemStack;
         constructor(arg0: $LivingEntity, arg1: string, arg2: number, arg3: $ItemStack_, arg4: $ItemStack_);
         get slotIndex(): number;
-        get from(): $ItemStack;
         get identifier(): string;
+        get from(): $ItemStack;
         get to(): $ItemStack;
     }
     export class $DropRulesEvent extends $LivingEvent {
@@ -32,8 +32,8 @@ declare module "@package/top/theillusivec4/curios/api/event" {
         isRecentlyHit(): boolean;
         getSource(): $DamageSource;
         getOverrides(): $ImmutableList<$Tuple<$Predicate<$ItemStack>, $ICurio$DropRule>>;
-        addOverride(arg0: $Predicate_<$ItemStack>, arg1: $ICurio$DropRule_): void;
         getLootingLevel(): number;
+        addOverride(arg0: $Predicate_<$ItemStack>, arg1: $ICurio$DropRule_): void;
         constructor(arg0: $LivingEntity, arg1: $ICuriosItemHandler, arg2: $DamageSource_, arg3: number, arg4: boolean);
         get curioHandler(): $ICuriosItemHandler;
         get recentlyHit(): boolean;
@@ -42,9 +42,9 @@ declare module "@package/top/theillusivec4/curios/api/event" {
         get lootingLevel(): number;
     }
     export class $CurioCanEquipEvent extends $LivingEvent {
+        getSlotContext(): $SlotContext;
         getEquipResult(): $TriState;
         setEquipResult(arg0: $TriState_): void;
-        getSlotContext(): $SlotContext;
         getStack(): $ItemStack;
         constructor(arg0: $ItemStack_, arg1: $SlotContext_, arg2: $TriState_);
         /**
@@ -60,9 +60,9 @@ declare module "@package/top/theillusivec4/curios/api/event" {
         get types(): $Set<string>;
     }
     export class $CurioCanUnequipEvent extends $LivingEvent {
+        getSlotContext(): $SlotContext;
         getUnequipResult(): $TriState;
         setUnequipResult(arg0: $TriState_): void;
-        getSlotContext(): $SlotContext;
         getStack(): $ItemStack;
         constructor(arg0: $ItemStack_, arg1: $SlotContext_);
         get slotContext(): $SlotContext;
@@ -71,13 +71,13 @@ declare module "@package/top/theillusivec4/curios/api/event" {
     export class $CurioAttributeModifierEvent extends $Event {
         getSlotContext(): $SlotContext;
         getOriginalModifiers(): $Multimap<$Holder<$Attribute>, $AttributeModifier>;
-        addModifier(arg0: $Holder_<$Attribute>, arg1: $AttributeModifier_): boolean;
         clearModifiers(): void;
+        addModifier(arg0: $Holder_<$Attribute>, arg1: $AttributeModifier_): boolean;
         removeAttribute(arg0: $Holder_<$Attribute>): $Collection<$AttributeModifier>;
         getModifiers(): $Multimap<$Holder<$Attribute>, $AttributeModifier>;
         getId(): $ResourceLocation;
-        getItemStack(): $ItemStack;
         removeModifier(arg0: $Holder_<$Attribute>, arg1: $AttributeModifier_): boolean;
+        getItemStack(): $ItemStack;
         constructor(arg0: $ItemStack_, arg1: $SlotContext_, arg2: $ResourceLocation_, arg3: $Multimap<$Holder_<$Attribute>, $AttributeModifier_>);
         get slotContext(): $SlotContext;
         get originalModifiers(): $Multimap<$Holder<$Attribute>, $AttributeModifier>;
@@ -89,15 +89,15 @@ declare module "@package/top/theillusivec4/curios/api/event" {
         getCurioHandler(): $ICuriosItemHandler;
         isRecentlyHit(): boolean;
         getSource(): $DamageSource;
-        getLootingLevel(): number;
         getDrops(): $Collection<$ItemEntity>;
+        getLootingLevel(): number;
         setCanceled(arg0: boolean): void;
         isCanceled(): boolean;
         constructor(arg0: $LivingEntity, arg1: $ICuriosItemHandler, arg2: $DamageSource_, arg3: $Collection_<$ItemEntity>, arg4: number, arg5: boolean);
         get curioHandler(): $ICuriosItemHandler;
         get recentlyHit(): boolean;
         get source(): $DamageSource;
-        get lootingLevel(): number;
         get drops(): $Collection<$ItemEntity>;
+        get lootingLevel(): number;
     }
 }

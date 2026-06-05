@@ -8,8 +8,8 @@ import { $NoiseChunk } from "@package/net/minecraft/world/level/levelgen";
 
 declare module "@package/com/yungnickyoung/minecraft/yungsapi/world/structure/terrainadaptation/beardifier" {
     export class $EnhancedJigsawJunction extends $Record {
-        pieceTerrainAdaptation(): $EnhancedTerrainAdaptation;
         jigsawJunction(): $JigsawJunction;
+        pieceTerrainAdaptation(): $EnhancedTerrainAdaptation;
         constructor(jigsawJunction: $JigsawJunction, pieceTerrainAdaptation: $EnhancedTerrainAdaptation);
     }
     /**
@@ -26,15 +26,15 @@ declare module "@package/com/yungnickyoung/minecraft/yungsapi/world/structure/te
     /**
      * Values that may be interpreted as {@link $EnhancedBeardifierRigid}.
      */
-    export type $EnhancedBeardifierRigid_ = { pieceGroundLevelDelta?: number, rotation?: $Rotation_, pieceBoundingBox?: $BoundingBox, pieceTerrainAdaptation?: $EnhancedTerrainAdaptation,  } | [pieceGroundLevelDelta?: number, rotation?: $Rotation_, pieceBoundingBox?: $BoundingBox, pieceTerrainAdaptation?: $EnhancedTerrainAdaptation, ];
+    export type $EnhancedBeardifierRigid_ = { rotation?: $Rotation_, pieceGroundLevelDelta?: number, pieceTerrainAdaptation?: $EnhancedTerrainAdaptation, pieceBoundingBox?: $BoundingBox,  } | [rotation?: $Rotation_, pieceGroundLevelDelta?: number, pieceTerrainAdaptation?: $EnhancedTerrainAdaptation, pieceBoundingBox?: $BoundingBox, ];
     export class $EnhancedBeardifierData {
     }
     export interface $EnhancedBeardifierData {
-        getEnhancedPieceIterator(): $ObjectListIterator<$EnhancedBeardifierRigid>;
-        setEnhancedPieceIterator(arg0: $ObjectListIterator<$EnhancedBeardifierRigid_>): void;
         getEnhancedJunctionIterator(): $ObjectListIterator<$EnhancedJigsawJunction>;
         setEnhancedJunctionIterator(arg0: $ObjectListIterator<$EnhancedJigsawJunction_>): void;
         getNoiseChunk(): $NoiseChunk;
         setNoiseChunk(arg0: $NoiseChunk): void;
+        getEnhancedPieceIterator(): $ObjectListIterator<$EnhancedBeardifierRigid>;
+        setEnhancedPieceIterator(arg0: $ObjectListIterator<$EnhancedBeardifierRigid_>): void;
     }
 }

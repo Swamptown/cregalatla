@@ -115,7 +115,7 @@ declare module "@package/net/minecraft/network/syncher" {
     /**
      * Values that may be interpreted as {@link $SynchedEntityData$DataValue}.
      */
-    export type $SynchedEntityData$DataValue_<T> = { id?: number, serializer?: $EntityDataSerializer_<any>, value?: any,  } | [id?: number, serializer?: $EntityDataSerializer_<any>, value?: any, ];
+    export type $SynchedEntityData$DataValue_<T> = { serializer?: $EntityDataSerializer_<any>, id?: number, value?: any,  } | [serializer?: $EntityDataSerializer_<any>, id?: number, value?: any, ];
     export class $EntityDataAccessor<T> extends $Record {
         id(): number;
         serializer(): $EntityDataSerializer<T>;
@@ -124,7 +124,7 @@ declare module "@package/net/minecraft/network/syncher" {
     /**
      * Values that may be interpreted as {@link $EntityDataAccessor}.
      */
-    export type $EntityDataAccessor_<T> = { id?: number, serializer?: $EntityDataSerializer_<any>,  } | [id?: number, serializer?: $EntityDataSerializer_<any>, ];
+    export type $EntityDataAccessor_<T> = { serializer?: $EntityDataSerializer_<any>, id?: number,  } | [serializer?: $EntityDataSerializer_<any>, id?: number, ];
     export class $SynchedEntityData {
         packDirty(): $List<$SynchedEntityData$DataValue<never>>;
         getNonDefaultValues(): $List<$SynchedEntityData$DataValue<never>>;

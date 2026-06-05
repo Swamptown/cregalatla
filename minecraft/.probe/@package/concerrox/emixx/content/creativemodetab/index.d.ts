@@ -7,7 +7,8 @@ export * as gui from "@package/concerrox/emixx/content/creativemodetab/gui";
 
 declare module "@package/concerrox/emixx/content/creativemodetab" {
     export class $CreativeModeTabManager {
-        onCreativeModeInventoryScreenTabSelected$emixx_common(tab: $CreativeModeTab_): void;
+        static nextPage$emixx_common$default(arg0: $CreativeModeTabManager, arg1: $Button, arg2: number, arg3: $Object): void;
+        static previousPage$emixx_common$default(arg0: $CreativeModeTabManager, arg1: $Button, arg2: number, arg3: $Object): void;
         getVisibleCreativeModeTabs$emixx_common(): $List<$CreativeModeTab>;
         loadDisabledTabs$emixx_common(): $List<$CreativeModeTab>;
         initialize$emixx_common(): void;
@@ -19,8 +20,7 @@ declare module "@package/concerrox/emixx/content/creativemodetab" {
         getScrollOffset$emixx_common(): number;
         setScrollOffset$emixx_common(<set-?>: number): void;
         getMaxScroll$emixx_common(): number;
-        static nextPage$emixx_common$default(arg0: $CreativeModeTabManager, arg1: $Button, arg2: number, arg3: $Object): void;
-        static previousPage$emixx_common$default(arg0: $CreativeModeTabManager, arg1: $Button, arg2: number, arg3: $Object): void;
+        onCreativeModeInventoryScreenTabSelected$emixx_common(tab: $CreativeModeTab_): void;
         reload(): void;
         static INSTANCE: $CreativeModeTabManager;
         get visibleCreativeModeTabs$emixx_common(): $List<$CreativeModeTab>;

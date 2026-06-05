@@ -1,7 +1,7 @@
 import { $OneShot } from "@package/net/minecraft/world/entity/ai/behavior";
 import { $Supplier_, $Function_, $BiFunction, $Predicate_, $BiPredicate_, $BiFunction_, $Function } from "@package/java/util/function";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
-import { $Function4_, $Function3, $Function13_, $Function4, $Function5, $Function6, $Function8_, $Function7, $Function8, $Function9, $Function3_, $Unit, $Function14_, $Function10_, $Function7_, $Function15_, $Function6_, $Function11_, $Function5_, $Function16_, $Function9_, $Function12_ } from "@package/com/mojang/datafixers/util";
+import { $Function4_, $Function13_, $Function3, $Function4, $Function5, $Function6, $Function7, $Function8_, $Function8, $Function9, $Function3_, $Unit, $Function14_, $Function10_, $Function7_, $Function15_, $Function6_, $Function11_, $Function5_, $Function16_, $Function9_, $Function12_ } from "@package/com/mojang/datafixers/util";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
 import { $LivingEntity } from "@package/net/minecraft/world/entity";
 import { $Record } from "@package/java/lang";
@@ -11,8 +11,8 @@ import { $IdF$Mu, $Const$Mu, $Applicative$Mu, $OptionalBox$Mu, $K1, $Applicative
 
 declare module "@package/net/minecraft/world/entity/ai/behavior/declarative" {
     export class $MemoryCondition$Registered<Value> extends $Record implements $MemoryCondition<$OptionalBox$Mu, Value> {
-        memory(): $MemoryModuleType<Value>;
         createAccessor(arg0: $Brain<never>, arg1: (Value) | undefined): $MemoryAccessor<$OptionalBox$Mu, Value>;
+        memory(): $MemoryModuleType<Value>;
         condition(): $MemoryStatus;
         constructor(arg0: $MemoryModuleType_<Value>);
     }
@@ -30,17 +30,17 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/declarative" {
     export class $MemoryCondition<F extends $K1, Value> {
     }
     export interface $MemoryCondition<F extends $K1, Value> {
-        memory(): $MemoryModuleType<Value>;
         createAccessor(arg0: $Brain<never>, arg1: (Value) | undefined): $MemoryAccessor<F, Value>;
+        memory(): $MemoryModuleType<Value>;
         condition(): $MemoryStatus;
     }
     export class $BehaviorBuilder$Instance<E extends $LivingEntity> implements $Applicative<$BehaviorBuilder$Mu<E>, $BehaviorBuilder$Instance$Mu<E>> {
         ifTriggered(arg0: $Trigger_<E>): $BehaviorBuilder<E, $Unit>;
         point<A>(arg0: A): $BehaviorBuilder<E, A>;
         point<A>(arg0: $Supplier_<string>, arg1: A): $BehaviorBuilder<E, A>;
+        present<Value>(arg0: $MemoryModuleType_<Value>): $BehaviorBuilder<E, $MemoryAccessor<$IdF$Mu, Value>>;
         registered<Value>(arg0: $MemoryModuleType_<Value>): $BehaviorBuilder<E, $MemoryAccessor<$OptionalBox$Mu, Value>>;
         tryGet<Value>(arg0: $MemoryAccessor<$OptionalBox$Mu, Value>): (Value) | undefined;
-        present<Value>(arg0: $MemoryModuleType_<Value>): $BehaviorBuilder<E, $MemoryAccessor<$IdF$Mu, Value>>;
         get<Value>(arg0: $MemoryAccessor<$IdF$Mu, Value>): Value;
         map<T, R>(arg0: $Function_<T, R>, arg1: $App<$BehaviorBuilder$Mu<E>, T>): $BehaviorBuilder<E, R>;
         absent<Value>(arg0: $MemoryModuleType_<Value>): $BehaviorBuilder<E, $MemoryAccessor<$Const$Mu<$Unit>, Value>>;
@@ -101,11 +101,11 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/declarative" {
         static triggerIf<E extends $LivingEntity>(arg0: $Predicate_<E>): $OneShot<E>;
         static triggerIf<E extends $LivingEntity>(arg0: $BiPredicate_<$ServerLevel, E>): $OneShot<E>;
         static unbox<E extends $LivingEntity, M>(arg0: $App<$BehaviorBuilder$Mu<E>, M>): $BehaviorBuilder<E, M>;
-        static get<E extends $LivingEntity, M>(arg0: $App<$BehaviorBuilder$Mu<E>, M>): $BehaviorBuilder$TriggerWithResult<E, M>;
-        static create<E extends $LivingEntity>(arg0: $Function_<$BehaviorBuilder$Instance<E>, $App<$BehaviorBuilder$Mu<E>, $Trigger<E>>>): $OneShot<E>;
-        static create<E extends $LivingEntity, M>(arg0: $BehaviorBuilder$TriggerWithResult<E, M>): $BehaviorBuilder<E, M>;
-        static instance<E extends $LivingEntity>(): $BehaviorBuilder$Instance<E>;
         static sequence<E extends $LivingEntity>(arg0: $Trigger_<E>, arg1: $Trigger_<E>): $OneShot<E>;
+        static get<E extends $LivingEntity, M>(arg0: $App<$BehaviorBuilder$Mu<E>, M>): $BehaviorBuilder$TriggerWithResult<E, M>;
+        static create<E extends $LivingEntity, M>(arg0: $BehaviorBuilder$TriggerWithResult<E, M>): $BehaviorBuilder<E, M>;
+        static create<E extends $LivingEntity>(arg0: $Function_<$BehaviorBuilder$Instance<E>, $App<$BehaviorBuilder$Mu<E>, $Trigger<E>>>): $OneShot<E>;
+        static instance<E extends $LivingEntity>(): $BehaviorBuilder$Instance<E>;
         constructor(arg0: $BehaviorBuilder$TriggerWithResult<E, M>);
     }
     export class $BehaviorBuilder$Instance$Mu<E extends $LivingEntity> implements $Applicative$Mu {
@@ -120,8 +120,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/declarative" {
      */
     export type $Trigger_<E> = ((arg0: $ServerLevel, arg1: E, arg2: number) => boolean);
     export class $MemoryCondition$Present<Value> extends $Record implements $MemoryCondition<$IdF$Mu, Value> {
-        memory(): $MemoryModuleType<Value>;
         createAccessor(arg0: $Brain<never>, arg1: (Value) | undefined): $MemoryAccessor<$IdF$Mu, Value>;
+        memory(): $MemoryModuleType<Value>;
         condition(): $MemoryStatus;
         constructor(arg0: $MemoryModuleType_<Value>);
     }
@@ -130,8 +130,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/declarative" {
      */
     export type $MemoryCondition$Present_<Value> = { memory?: $MemoryModuleType_<any>,  } | [memory?: $MemoryModuleType_<any>, ];
     export class $MemoryCondition$Absent<Value> extends $Record implements $MemoryCondition<$Const$Mu<$Unit>, Value> {
-        memory(): $MemoryModuleType<Value>;
         createAccessor(arg0: $Brain<never>, arg1: (Value) | undefined): $MemoryAccessor<$Const$Mu<$Unit>, Value>;
+        memory(): $MemoryModuleType<Value>;
         condition(): $MemoryStatus;
         constructor(arg0: $MemoryModuleType_<Value>);
     }
@@ -146,8 +146,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/declarative" {
     export class $BehaviorBuilder$Constant<E extends $LivingEntity, A> extends $BehaviorBuilder<E, A> {
     }
     export class $MemoryAccessor<F extends $K1, Value> {
-        setWithExpiry(arg0: Value, arg1: number): void;
         setOrErase(arg0: (Value) | undefined): void;
+        setWithExpiry(arg0: Value, arg1: number): void;
         value(): $App<F, Value>;
         set(arg0: Value): void;
         erase(): void;

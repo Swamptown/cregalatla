@@ -8,35 +8,35 @@ declare module "@package/net/neoforged/neoforge/energy" {
     export class $IEnergyStorage {
     }
     export interface $IEnergyStorage {
+        getEnergyStored(): number;
+        getMaxEnergyStored(): number;
         receiveEnergy(arg0: number, arg1: boolean): number;
         extractEnergy(arg0: number, arg1: boolean): number;
         canExtract(): boolean;
         canReceive(): boolean;
-        getEnergyStored(): number;
-        getMaxEnergyStored(): number;
         get energyStored(): number;
         get maxEnergyStored(): number;
     }
     export class $EmptyEnergyStorage implements $IEnergyStorage {
+        getEnergyStored(): number;
+        getMaxEnergyStored(): number;
         receiveEnergy(arg0: number, arg1: boolean): number;
         extractEnergy(arg0: number, arg1: boolean): number;
         canExtract(): boolean;
         canReceive(): boolean;
-        getEnergyStored(): number;
-        getMaxEnergyStored(): number;
         static INSTANCE: $EmptyEnergyStorage;
         get energyStored(): number;
         get maxEnergyStored(): number;
     }
     export class $EnergyStorage implements $IEnergyStorage, $INBTSerializable<$Tag> {
+        getEnergyStored(): number;
+        getMaxEnergyStored(): number;
         receiveEnergy(arg0: number, arg1: boolean): number;
         extractEnergy(arg0: number, arg1: boolean): number;
         canExtract(): boolean;
         canReceive(): boolean;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $Tag_): void;
         serializeNBT(arg0: $HolderLookup$Provider): $Tag;
-        getEnergyStored(): number;
-        getMaxEnergyStored(): number;
         constructor(arg0: number);
         constructor(arg0: number, arg1: number);
         constructor(arg0: number, arg1: number, arg2: number);
@@ -45,12 +45,12 @@ declare module "@package/net/neoforged/neoforge/energy" {
         get maxEnergyStored(): number;
     }
     export class $ComponentEnergyStorage implements $IEnergyStorage {
+        getEnergyStored(): number;
+        getMaxEnergyStored(): number;
         receiveEnergy(arg0: number, arg1: boolean): number;
         extractEnergy(arg0: number, arg1: boolean): number;
         canExtract(): boolean;
         canReceive(): boolean;
-        getEnergyStored(): number;
-        getMaxEnergyStored(): number;
         constructor(arg0: $MutableDataComponentHolder, arg1: $DataComponentType_<number>, arg2: number, arg3: number, arg4: number);
         constructor(arg0: $MutableDataComponentHolder, arg1: $DataComponentType_<number>, arg2: number, arg3: number);
         constructor(arg0: $MutableDataComponentHolder, arg1: $DataComponentType_<number>, arg2: number);

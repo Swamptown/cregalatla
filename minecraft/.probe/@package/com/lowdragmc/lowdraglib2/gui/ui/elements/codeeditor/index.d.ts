@@ -28,8 +28,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor" {
     }
     export class $StyledLine extends $Record {
         getWidth(arg0: $Font, arg1: $Style): number;
-        text(): $List<$StyledText>;
         line(): number;
+        text(): $List<$StyledText>;
         constructor(line: number, text: $List_<$StyledText_>);
     }
     /**

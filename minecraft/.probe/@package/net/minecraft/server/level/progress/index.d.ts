@@ -29,24 +29,24 @@ declare module "@package/net/minecraft/server/level/progress" {
         onStatusChange(arg0: $ChunkPos, arg1: $ChunkStatus_): void;
     }
     export class $StoringChunkProgressListener implements $ChunkProgressListener {
-        getProgress(): number;
         static createCompleted(): $StoringChunkProgressListener;
+        getProgress(): number;
         start(): void;
         stop(): void;
         static create(arg0: number): $StoringChunkProgressListener;
         getStatus(arg0: number, arg1: number): $ChunkStatus;
         static createFromGameruleRadius(arg0: number): $StoringChunkProgressListener;
-        getFullDiameter(): number;
         updateSpawnPos(arg0: $ChunkPos): void;
         onStatusChange(arg0: $ChunkPos, arg1: $ChunkStatus_): void;
         getDiameter(): number;
+        getFullDiameter(): number;
         get progress(): number;
-        get fullDiameter(): number;
         get diameter(): number;
+        get fullDiameter(): number;
     }
     export class $LoggerChunkProgressListener implements $ChunkProgressListener {
-        getProgress(): number;
         static createCompleted(): $LoggerChunkProgressListener;
+        getProgress(): number;
         start(): void;
         stop(): void;
         static create(arg0: number): $LoggerChunkProgressListener;

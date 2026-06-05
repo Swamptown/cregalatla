@@ -157,9 +157,9 @@ declare module "@package/net/minecraft/world/entity/ai/memory" {
     }
     export interface $MemoryModuleType<U> extends RegistryMarked<RegistryTypes.MemoryModuleTypeTag, RegistryTypes.MemoryModuleType> {}
     export class $ExpirableValue<T> {
+        tick(): void;
         canExpire(): boolean;
         getTimeToLive(): number;
-        tick(): void;
         getValue(): T;
         static of<T>(arg0: T, arg1: number): $ExpirableValue<T>;
         static of<T>(arg0: T): $ExpirableValue<T>;

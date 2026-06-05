@@ -18,15 +18,15 @@ declare module "@package/net/minecraft/world/flag" {
      */
     export type $FeatureElement_ = (() => $FeatureFlagSet);
     export class $FeatureFlagSet {
-        subtract(arg0: $FeatureFlagSet): $FeatureFlagSet;
         intersects(arg0: $FeatureFlagSet): boolean;
         isEmpty(): boolean;
         join(arg0: $FeatureFlagSet): $FeatureFlagSet;
-        static of(arg0: $FeatureFlag, ...arg1: $FeatureFlag[]): $FeatureFlagSet;
         static of(): $FeatureFlagSet;
         static of(arg0: $FeatureFlag): $FeatureFlagSet;
+        static of(arg0: $FeatureFlag, ...arg1: $FeatureFlag[]): $FeatureFlagSet;
         contains(arg0: $FeatureFlag): boolean;
         static create(arg0: $FeatureFlagUniverse, arg1: $Collection_<$FeatureFlag>): $FeatureFlagSet;
+        subtract(arg0: $FeatureFlagSet): $FeatureFlagSet;
         isSubsetOf(arg0: $FeatureFlagSet): boolean;
         static MAX_CONTAINER_SIZE: number;
         get empty(): boolean;

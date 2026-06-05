@@ -16,13 +16,13 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pools/alia
     /**
      * Values that may be interpreted as {@link $Random}.
      */
-    export type $Random_ = { alias?: $ResourceKey_<$StructureTemplatePool>, targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>,  } | [alias?: $ResourceKey_<$StructureTemplatePool>, targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, ];
+    export type $Random_ = { targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, alias?: $ResourceKey_<$StructureTemplatePool>,  } | [targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, alias?: $ResourceKey_<$StructureTemplatePool>, ];
     export class $PoolAliasBinding {
         static randomGroup(arg0: $SimpleWeightedRandomList<$List_<$PoolAliasBinding>>): $RandomGroup;
-        static random(arg0: $ResourceKey_<$StructureTemplatePool>, arg1: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>): $Random;
-        static random(arg0: string, arg1: $SimpleWeightedRandomList<string>): $Random;
         static direct(arg0: $ResourceKey_<$StructureTemplatePool>, arg1: $ResourceKey_<$StructureTemplatePool>): $Direct;
         static direct(arg0: string, arg1: string): $Direct;
+        static random(arg0: $ResourceKey_<$StructureTemplatePool>, arg1: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>): $Random;
+        static random(arg0: string, arg1: $SimpleWeightedRandomList<string>): $Random;
         static CODEC: $Codec<$PoolAliasBinding>;
     }
     export interface $PoolAliasBinding {

@@ -5,7 +5,7 @@ declare module "@package/dev/lambdaurora/lambdynlights/engine/lookup" {
         static lightAtPos(x: number, y: number, z: number, pos: $BlockPos_, luminance: number): number;
     }
     export interface $SpatialLookupEntry {
-        getDynamicLightLevel(arg0: $BlockPos_): number;
         cellKey(): number;
+        getDynamicLightLevel(arg0: $BlockPos_): number;
     }
 }

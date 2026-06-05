@@ -7,8 +7,8 @@ declare module "@package/net/caffeinemc/mods/lithium/common/util/change_tracking
         static combine<T>(arg0: $ChangeSubscriber<T>, arg1: number, arg2: $ChangeSubscriber<T>, arg3: number): $ChangeSubscriber<T>;
         static dataWithout<T>(arg0: $ChangeSubscriber<T>, arg1: $ChangeSubscriber<T>, arg2: number, arg3: number, arg4: boolean): number;
         static dataWithout<T>(arg0: $ChangeSubscriber<T>, arg1: $ChangeSubscriber<T>, arg2: number): number;
-        static containsSubscriber(arg0: $ChangeSubscriber<$ItemStack_>, arg1: number, arg2: $ChangeSubscriber<$ItemStack_>, arg3: number): boolean;
         static dataOf(arg0: $ChangeSubscriber<never>, arg1: $ChangeSubscriber<never>, arg2: number): number;
+        static containsSubscriber(arg0: $ChangeSubscriber<$ItemStack_>, arg1: number, arg2: $ChangeSubscriber<$ItemStack_>, arg3: number): boolean;
     }
     export interface $ChangeSubscriber<T> {
         lithium$notify(arg0: T, arg1: number): void;

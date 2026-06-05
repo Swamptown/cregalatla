@@ -17,14 +17,6 @@ declare module "@package/xaero/common/minimap/element/render" {
         /**
          * @deprecated
          */
-        getElementReader(): $MinimapElementReader<E, RC>;
-        /**
-         * @deprecated
-         */
-        renderElement(arg0: number, arg1: boolean, arg2: boolean, arg3: $GuiGraphics, arg4: $MultiBufferSource$BufferSource, arg5: $Font, arg6: $RenderTarget, arg7: $MinimapRendererHelper, arg8: $Entity, arg9: $Player, arg10: number, arg11: number, arg12: number, arg13: number, arg14: number, arg15: number, arg16: E, arg17: number, arg18: number, arg19: boolean, arg20: number): boolean;
-        /**
-         * @deprecated
-         */
         preRender(arg0: number, arg1: $Entity, arg2: $Player, arg3: number, arg4: number, arg5: number, arg6: $IXaeroMinimap, arg7: $MultiBufferSource$BufferSource, arg8: $MultiTextureRenderTypeRendererProvider): void;
         /**
          * @deprecated
@@ -33,12 +25,15 @@ declare module "@package/xaero/common/minimap/element/render" {
         /**
          * @deprecated
          */
+        renderElement(arg0: number, arg1: boolean, arg2: boolean, arg3: $GuiGraphics, arg4: $MultiBufferSource$BufferSource, arg5: $Font, arg6: $RenderTarget, arg7: $MinimapRendererHelper, arg8: $Entity, arg9: $Player, arg10: number, arg11: number, arg12: number, arg13: number, arg14: number, arg15: number, arg16: E, arg17: number, arg18: number, arg19: boolean, arg20: number): boolean;
+        /**
+         * @deprecated
+         */
         shouldRender(arg0: number): boolean;
         /**
          * @deprecated
          */
         constructor(arg0: $MinimapElementReader<E, RC>, arg1: $MinimapElementRenderProvider<E, RC>, arg2: RC);
-        get elementReader(): $MinimapElementReader<E, RC>;
     }
     /**
      * @deprecated

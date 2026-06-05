@@ -10,3 +10,4 @@ export * as xml from "@package/org/xml";
 export * as embeddedt from "@package/org/embeddedt";
 export * as appliedenergistics from "@package/org/appliedenergistics";
 export * as sinytra from "@package/org/sinytra";
+export * as reactivestreams from "@package/org/reactivestreams";

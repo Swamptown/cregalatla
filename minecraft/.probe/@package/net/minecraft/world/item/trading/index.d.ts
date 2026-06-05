@@ -42,10 +42,12 @@ declare module "@package/net/minecraft/world/item/trading" {
         morejs$setPriceMultiplier(arg0: number): void;
         morejs$setRewardExp(arg0: boolean): void;
         morejs$isRewardingExp(): boolean;
-        static setCodec$morejs_$md$4ca6b6$0(arg0: $Codec<any>): void;
-        assemble(): $ItemStack;
-        getUses(): number;
+        static setCodec$morejs_$md$3b3139$0(arg0: $Codec<any>): void;
+        take(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
         getXp(): number;
+        getUses(): number;
+        getItemCostA(): $ItemCost;
+        getItemCostB(): ($ItemCost) | undefined;
         resetSpecialPriceDiff(): void;
         updateDemand(): void;
         resetUses(): void;
@@ -54,32 +56,30 @@ declare module "@package/net/minecraft/world/item/trading" {
         addToSpecialPriceDiff(arg0: number): void;
         getBaseCostA(): $ItemStack;
         shouldRewardExp(): boolean;
-        getItemCostA(): $ItemCost;
-        getItemCostB(): ($ItemCost) | undefined;
         increaseUses(): void;
+        assemble(): $ItemStack;
         getResult(): $ItemStack;
-        take(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
         copy(): $MerchantOffer;
         replaceEmeralds(arg0: $Item_): void;
         replaceItems(arg0: $Ingredient_, arg1: $ItemStack_): void;
+        maxUses: number;
         static CODEC: $Codec<$MerchantOffer>;
+        uses: number;
+        demand: number;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $MerchantOffer>;
         constructor(arg0: $ItemCost_, arg1: ($ItemCost_) | undefined, arg2: $ItemStack_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number);
-        constructor(arg0: $ItemCost_, arg1: $ItemStack_, arg2: number, arg3: number, arg4: number);
         constructor(arg0: $ItemCost_, arg1: ($ItemCost_) | undefined, arg2: $ItemStack_, arg3: number, arg4: number, arg5: number);
         constructor(arg0: $ItemCost_, arg1: ($ItemCost_) | undefined, arg2: $ItemStack_, arg3: number, arg4: number, arg5: number, arg6: number);
+        constructor(arg0: $ItemCost_, arg1: $ItemStack_, arg2: number, arg3: number, arg4: number);
         get costA(): $ItemStack;
         get costB(): $ItemStack;
-        get maxUses(): number;
-        get demand(): number;
         get outOfStock(): boolean;
-        static set codec$morejs_$md$4ca6b6$0(value: $Codec<any>);
-        get uses(): number;
+        static set codec$morejs_$md$3b3139$0(value: $Codec<any>);
         get xp(): number;
-        get priceMultiplier(): number;
-        get baseCostA(): $ItemStack;
         get itemCostA(): $ItemCost;
         get itemCostB(): ($ItemCost) | undefined;
+        get priceMultiplier(): number;
+        get baseCostA(): $ItemStack;
         get result(): $ItemStack;
     }
     export class $MerchantOffers extends $ArrayList<$MerchantOffer> {
@@ -93,6 +93,8 @@ declare module "@package/net/minecraft/world/item/trading" {
     export class $Merchant {
     }
     export interface $Merchant {
+        notifyTradeUpdated(arg0: $ItemStack_): void;
+        getNotifyTradeSound(): $SoundEvent;
         getOffers(): $MerchantOffers;
         getVillagerXp(): number;
         setTradingPlayer(arg0: $Player): void;
@@ -103,12 +105,10 @@ declare module "@package/net/minecraft/world/item/trading" {
         overrideOffers(arg0: $MerchantOffers): void;
         overrideXp(arg0: number): void;
         notifyTrade(arg0: $MerchantOffer): void;
-        notifyTradeUpdated(arg0: $ItemStack_): void;
-        getNotifyTradeSound(): $SoundEvent;
         isClientSide(): boolean;
+        get notifyTradeSound(): $SoundEvent;
         get offers(): $MerchantOffers;
         get villagerXp(): number;
-        get notifyTradeSound(): $SoundEvent;
         get clientSide(): boolean;
     }
     export class $ItemCost extends $Record {
@@ -129,5 +129,5 @@ declare module "@package/net/minecraft/world/item/trading" {
     /**
      * Values that may be interpreted as {@link $ItemCost}.
      */
-    export type $ItemCost_ = { count?: number, components?: $DataComponentPredicate, itemStack?: $ItemStack_, item?: $Holder_<$Item>,  } | [count?: number, components?: $DataComponentPredicate, itemStack?: $ItemStack_, item?: $Holder_<$Item>, ];
+    export type $ItemCost_ = { itemStack?: $ItemStack_, components?: $DataComponentPredicate, count?: number, item?: $Holder_<$Item>,  } | [itemStack?: $ItemStack_, components?: $DataComponentPredicate, count?: number, item?: $Holder_<$Item>, ];
 }

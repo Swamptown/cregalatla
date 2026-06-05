@@ -5,8 +5,8 @@ import { $Iterable } from "@package/java/lang";
 declare module "@package/xaero/hud/minimap/waypoint/server" {
     export class $ServerWaypointManager {
         getWaypoints(): $Iterable<$Waypoint>;
-        getBySlot(arg0: number): $Waypoint;
         addDisabled(arg0: number): void;
+        getBySlot(arg0: number): $Waypoint;
         getById(arg0: number): $Waypoint;
         remove(arg0: number): void;
         size(): number;

@@ -1,7 +1,7 @@
 import { $Serializable } from "@package/java/io";
 import { $Predicate, $Function_ } from "@package/java/util/function";
 import { $Stream } from "@package/java/util/stream";
-import { $CharSequence, $StringBuffer, $StringBuilder } from "@package/java/lang";
+import { $CharSequence, $StringBuilder, $StringBuffer } from "@package/java/lang";
 import { $Map } from "@package/java/util";
 
 declare module "@package/java/util/regex" {
@@ -65,6 +65,7 @@ declare module "@package/java/util/regex" {
     }
     export class $Pattern implements $Serializable {
         namedGroups(): $Map<string, number>;
+        static quote(arg0: string): string;
         asPredicate(): $Predicate<string>;
         asMatchPredicate(): $Predicate<string>;
         splitAsStream(arg0: $CharSequence): $Stream<string>;
@@ -77,7 +78,6 @@ declare module "@package/java/util/regex" {
         split(arg0: $CharSequence, arg1: number): string[];
         splitWithDelimiters(arg0: $CharSequence, arg1: number): string[];
         pattern(): string;
-        static quote(arg0: string): string;
         static DOTALL: number;
         static UNICODE_CASE: number;
         static LITERAL: number;

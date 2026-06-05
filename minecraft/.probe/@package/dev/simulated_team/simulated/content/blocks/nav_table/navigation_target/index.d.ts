@@ -7,8 +7,8 @@ import { $NavTableBlockEntity } from "@package/dev/simulated_team/simulated/cont
 
 declare module "@package/dev/simulated_team/simulated/content/blocks/nav_table/navigation_target" {
     export class $NavigationTarget {
-        static ofStack(arg0: $ItemStack_): $NavigationTarget;
         static getPlaneProjectedPos(arg0: $Vec3_, arg1: $Vec3i): $Vec3;
+        static ofStack(arg0: $ItemStack_): $NavigationTarget;
     }
     export interface $NavigationTarget {
         distanceToTarget(arg0: $NavTableBlockEntity): number;

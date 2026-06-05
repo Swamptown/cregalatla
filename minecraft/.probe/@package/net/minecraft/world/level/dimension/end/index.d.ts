@@ -32,17 +32,17 @@ declare module "@package/net/minecraft/world/level/dimension/end" {
          */
         removeAllGateways(): void;
         resetSpikeCrystals(): void;
+        tick(): void;
         removePlayer(arg0: $ServerPlayer): void;
         tryRespawn(): void;
         saveData(): $EndDragonFight$Data;
         addPlayer(arg0: $ServerPlayer): void;
+        onCrystalDestroyed(arg0: $EndCrystal, arg1: $DamageSource_): void;
         getDragonUUID(): $UUID;
         updateDragon(arg0: $EnderDragon): void;
         setDragonKilled(arg0: $EnderDragon): void;
         hasPreviouslyKilledDragon(): boolean;
         getCrystalsAlive(): number;
-        onCrystalDestroyed(arg0: $EndCrystal, arg1: $DamageSource_): void;
-        tick(): void;
         static TIME_BETWEEN_PLAYER_SCANS: number;
         static ARENA_TICKET_LEVEL: number;
         static DRAGON_SPAWN_Y: number;
@@ -69,5 +69,5 @@ declare module "@package/net/minecraft/world/level/dimension/end" {
     /**
      * Values that may be interpreted as {@link $EndDragonFight$Data}.
      */
-    export type $EndDragonFight$Data_ = { gateways?: ($List_<number>) | undefined, dragonUUID?: ($UUID_) | undefined, dragonKilled?: boolean, needsStateScanning?: boolean, isRespawning?: boolean, previouslyKilled?: boolean, exitPortalLocation?: ($BlockPos_) | undefined,  } | [gateways?: ($List_<number>) | undefined, dragonUUID?: ($UUID_) | undefined, dragonKilled?: boolean, needsStateScanning?: boolean, isRespawning?: boolean, previouslyKilled?: boolean, exitPortalLocation?: ($BlockPos_) | undefined, ];
+    export type $EndDragonFight$Data_ = { needsStateScanning?: boolean, dragonKilled?: boolean, dragonUUID?: ($UUID_) | undefined, gateways?: ($List_<number>) | undefined, exitPortalLocation?: ($BlockPos_) | undefined, previouslyKilled?: boolean, isRespawning?: boolean,  } | [needsStateScanning?: boolean, dragonKilled?: boolean, dragonUUID?: ($UUID_) | undefined, gateways?: ($List_<number>) | undefined, exitPortalLocation?: ($BlockPos_) | undefined, previouslyKilled?: boolean, isRespawning?: boolean, ];
 }

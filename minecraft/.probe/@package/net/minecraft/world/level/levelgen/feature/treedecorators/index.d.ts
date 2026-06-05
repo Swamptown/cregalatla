@@ -31,7 +31,7 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/treedecorato
         constructor(arg0: number);
     }
     export class $TreeDecoratorType<P extends $TreeDecorator> implements $TreeDecoratorTypeAccessor {
-        static createTreeDecorator$vanillabackport_$md$4ca6b6$0(arg0: $MapCodec_<any>): $TreeDecoratorType<any>;
+        static createTreeDecorator$vanillabackport_$md$3b3139$0(arg0: $MapCodec_<any>): $TreeDecoratorType<any>;
         codec(): $MapCodec<P>;
         static BEEHIVE: $TreeDecoratorType<$BeehiveDecorator>;
         static LEAVE_VINE: $TreeDecoratorType<$LeaveVineDecorator>;

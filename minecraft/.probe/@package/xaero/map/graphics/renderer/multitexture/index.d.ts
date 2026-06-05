@@ -9,9 +9,9 @@ declare module "@package/xaero/map/graphics/renderer/multitexture" {
     }
     export class $MultiTextureRenderTypeRendererProvider {
         static defaultTextureBind(arg0: number): void;
+        draw(arg0: $MultiTextureRenderTypeRenderer): void;
         getRenderer(arg0: $IntConsumer_, arg1: $IntConsumer_, arg2: $RenderType): $MultiTextureRenderTypeRenderer;
         getRenderer(arg0: $IntConsumer_, arg1: $IntConsumer_, arg2: $Runnable_, arg3: $RenderType): $MultiTextureRenderTypeRenderer;
-        draw(arg0: $MultiTextureRenderTypeRenderer): void;
         constructor(arg0: number);
     }
 }

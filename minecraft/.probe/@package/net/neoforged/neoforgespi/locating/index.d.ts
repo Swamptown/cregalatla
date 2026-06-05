@@ -67,7 +67,7 @@ declare module "@package/net/neoforged/neoforgespi/locating" {
     /**
      * Values that may be interpreted as {@link $ForgeFeature$Bound}.
      */
-    export type $ForgeFeature$Bound_ = { modInfo?: $IModInfo, featureName?: string, featureBound?: string,  } | [modInfo?: $IModInfo, featureName?: string, featureBound?: string, ];
+    export type $ForgeFeature$Bound_ = { featureBound?: string, featureName?: string, modInfo?: $IModInfo,  } | [featureBound?: string, featureName?: string, modInfo?: $IModInfo, ];
     export class $ModFileInfoParser {
     }
     export interface $ModFileInfoParser {
@@ -147,5 +147,5 @@ declare module "@package/net/neoforged/neoforgespi/locating" {
     /**
      * Values that may be interpreted as {@link $ModFileDiscoveryAttributes}.
      */
-    export type $ModFileDiscoveryAttributes_ = { locator?: $IModFileCandidateLocator_, reader?: $IModFileReader_, dependencyLocator?: $IDependencyLocator_, parent?: $IModFile,  } | [locator?: $IModFileCandidateLocator_, reader?: $IModFileReader_, dependencyLocator?: $IDependencyLocator_, parent?: $IModFile, ];
+    export type $ModFileDiscoveryAttributes_ = { reader?: $IModFileReader_, locator?: $IModFileCandidateLocator_, parent?: $IModFile, dependencyLocator?: $IDependencyLocator_,  } | [reader?: $IModFileReader_, locator?: $IModFileCandidateLocator_, parent?: $IModFile, dependencyLocator?: $IDependencyLocator_, ];
 }

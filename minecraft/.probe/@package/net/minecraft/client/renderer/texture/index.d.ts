@@ -45,8 +45,8 @@ declare module "@package/net/minecraft/client/renderer/texture" {
     }
     export class $Stitcher<T extends $Stitcher$Entry> {
         static smallestFittingMinTexel(arg0: number, arg1: number): number;
-        gatherSprites(arg0: $Stitcher$SpriteLoader_<T>): void;
         registerSprite(arg0: T): void;
+        gatherSprites(arg0: $Stitcher$SpriteLoader_<T>): void;
         getWidth(): number;
         getHeight(): number;
         stitch(): void;
@@ -67,11 +67,11 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         load(arg0: $ResourceManager): void;
         getId(): number;
         close(): void;
-        handler$zjm000$veil$setFilterDSA(arg0: boolean, arg1: boolean, arg2: $CallbackInfo, arg3: number, arg4: number): void;
         setBlurMipmap(arg0: boolean, arg1: boolean): void;
         restoreLastBlurMipmap(): void;
+        handler$zla000$veil$bind(arg0: $CallbackInfo): void;
         releaseId(): void;
-        handler$zjm000$veil$bind(arg0: $CallbackInfo): void;
+        handler$zla000$veil$setFilterDSA(arg0: boolean, arg1: boolean, arg2: $CallbackInfo, arg3: number, arg4: number): void;
         getTextureTarget(): number;
         static NOT_ASSIGNED: number;
         mipmap: boolean;
@@ -86,8 +86,8 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         static v(arg0: boolean): number;
         close(): void;
         static u(arg0: number): number;
-        setupOverlayColor(): void;
         teardownOverlayColor(): void;
+        setupOverlayColor(): void;
         static NO_WHITE_U: number;
         static WHITE_OVERLAY_V: number;
         static NO_OVERLAY: number;
@@ -117,7 +117,7 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         get image(): $NativeImage;
     }
     export class $SpriteContents$InterpolationData implements $AutoCloseable {
-        handler$cik000$sodium$assignParent(arg0: $SpriteContents, arg1: $CallbackInfo): void;
+        handler$clg000$sodium$assignParent(arg0: $SpriteContents, arg1: $CallbackInfo): void;
         uploadInterpolatedFrame(arg0: number, arg1: number, arg2: $SpriteContents$Ticker): void;
         close(): void;
         this$0: $SpriteContents;
@@ -127,16 +127,16 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         waitForUpload(): $CompletableFuture<$SpriteLoader$Preparations>;
         readyForUpload(): $CompletableFuture<void>;
         regions(): $Map<$ResourceLocation, $TextureAtlasSprite>;
-        mipLevel(): number;
         width(): number;
         height(): number;
         missing(): $TextureAtlasSprite;
+        mipLevel(): number;
         constructor(width: number, height: number, mipLevel: number, missing: $TextureAtlasSprite, regions: $Map_<$ResourceLocation_, $TextureAtlasSprite>, readyForUpload: $CompletableFuture<void>);
     }
     /**
      * Values that may be interpreted as {@link $SpriteLoader$Preparations}.
      */
-    export type $SpriteLoader$Preparations_ = { regions?: $Map_<$ResourceLocation_, $TextureAtlasSprite>, height?: number, missing?: $TextureAtlasSprite, width?: number, readyForUpload?: $CompletableFuture<void>, mipLevel?: number,  } | [regions?: $Map_<$ResourceLocation_, $TextureAtlasSprite>, height?: number, missing?: $TextureAtlasSprite, width?: number, readyForUpload?: $CompletableFuture<void>, mipLevel?: number, ];
+    export type $SpriteLoader$Preparations_ = { width?: number, missing?: $TextureAtlasSprite, height?: number, regions?: $Map_<$ResourceLocation_, $TextureAtlasSprite>, mipLevel?: number, readyForUpload?: $CompletableFuture<void>,  } | [width?: number, missing?: $TextureAtlasSprite, height?: number, regions?: $Map_<$ResourceLocation_, $TextureAtlasSprite>, mipLevel?: number, readyForUpload?: $CompletableFuture<void>, ];
     export class $Tickable {
     }
     export interface $Tickable {
@@ -156,11 +156,11 @@ declare module "@package/net/minecraft/client/renderer/texture" {
     /**
      * Values that may be interpreted as {@link $Stitcher$Holder}.
      */
-    export type $Stitcher$Holder_<T> = { height?: number, width?: number, entry?: $Stitcher$Entry,  } | [height?: number, width?: number, entry?: $Stitcher$Entry, ];
+    export type $Stitcher$Holder_<T> = { entry?: $Stitcher$Entry, width?: number, height?: number,  } | [entry?: $Stitcher$Entry, width?: number, height?: number, ];
     export class $SpriteLoader {
         static runSpriteSuppliers(arg0: $SpriteResourceLoader_, arg1: $List_<$Function_<$SpriteResourceLoader, $SpriteContents>>, arg2: $Executor_): $CompletableFuture<$List<$SpriteContents>>;
-        loadAndStitch(arg0: $ResourceManager, arg1: $ResourceLocation_, arg2: number, arg3: $Executor_, arg4: $Collection_<$MetadataSectionSerializer<never>>): $CompletableFuture<$SpriteLoader$Preparations>;
         loadAndStitch(arg0: $ResourceManager, arg1: $ResourceLocation_, arg2: number, arg3: $Executor_): $CompletableFuture<$SpriteLoader$Preparations>;
+        loadAndStitch(arg0: $ResourceManager, arg1: $ResourceLocation_, arg2: number, arg3: $Executor_, arg4: $Collection_<$MetadataSectionSerializer<never>>): $CompletableFuture<$SpriteLoader$Preparations>;
         static create(arg0: $TextureAtlas): $SpriteLoader;
         stitch(arg0: $List_<$SpriteContents>, arg1: number, arg2: $Executor_): $SpriteLoader$Preparations;
         static DEFAULT_METADATA_SECTIONS: $Set<$MetadataSectionSerializer<never>>;
@@ -211,9 +211,9 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         get future(): $CompletableFuture<void>;
     }
     export class $SpriteContents$Ticker implements $SpriteTicker, $SpriteContentsTickerAccessor, $TickerExtension {
-        simulated$setPlaying(arg0: boolean): void;
-        handler$cij000$sodium$assignParent(arg0: $SpriteContents, arg1: $SpriteContents$AnimatedTexture, arg2: $SpriteContents$InterpolationData, arg3: $CallbackInfo): void;
         simulated$isPlaying(): boolean;
+        simulated$setPlaying(arg0: boolean): void;
+        handler$clf000$sodium$assignParent(arg0: $SpriteContents, arg1: $SpriteContents$AnimatedTexture, arg2: $SpriteContents$InterpolationData, arg3: $CallbackInfo): void;
         close(): void;
         tickAndUpload(arg0: number, arg1: number): void;
         getAnimationInfo(): $SpriteContents$AnimatedTexture;
@@ -227,13 +227,13 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         get frameIndex(): number;
     }
     export class $SpriteContents implements $Stitcher$Entry, $AutoCloseable, $SpriteContentsExtension$2, $SpriteContentsInvoker, $SpriteContentsExtension, $SpriteContentsAccessor, $SpriteContentsExtension$3, $SpriteContentsExtension$1, $IPotentiallyInvisibleSpriteContents {
-        sodium$hasTransparentPixels(): boolean;
         getOriginalImage(): $NativeImage;
         fusionTextureMetadata(): $Pair<any, any>;
         sodium$hasTranslucentPixels(): boolean;
         railways$shouldDoInvisibility(): boolean;
         increaseMipLevel(arg0: number): void;
         getFrameCount(): number;
+        sodium$hasTransparentPixels(): boolean;
         getUniqueFrames(): $IntStream;
         isTransparent(arg0: number, arg1: number, arg2: number): boolean;
         clearFusionTextureMetadata(): void;
@@ -249,8 +249,8 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         close(): void;
         width(): number;
         height(): number;
-        uploadFirstFrame(arg0: number, arg1: number): void;
         metadata(): $ResourceMetadata;
+        uploadFirstFrame(arg0: number, arg1: number): void;
         upload(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $NativeImage[]): void;
         invokeUpload(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $NativeImage[]): void;
         getImages(): $NativeImage[];
@@ -267,8 +267,8 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         setPixels(arg0: $NativeImage): void;
         dumpContents(arg0: $ResourceLocation_, arg1: $Path_): void;
         upload(): void;
-        wrapOperation$gkj000$moonlight$forceMipMap(arg0: $NativeImage, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: $Operation_<any>): void;
-        wrapOperation$gkj000$moonlight$forceMipMap(arg0: number, arg1: number, arg2: number, arg3: $Operation_<any>): void;
+        wrapOperation$hhl000$moonlight$forceMipMap(arg0: $NativeImage, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: $Operation_<any>): void;
+        wrapOperation$hhl000$moonlight$forceMipMap(arg0: number, arg1: number, arg2: number, arg3: $Operation_<any>): void;
         getPixelsKonkrete(): $NativeImage;
         setPixelsKonkrete(arg0: $NativeImage): void;
         static NOT_ASSIGNED: number;
@@ -279,11 +279,11 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         constructor(arg0: $NativeImage);
     }
     export class $SpriteContents$AnimatedTexture implements $AnimatedTextureAccessor, $SpriteContentsAnimatedTextureAccessor, $AnimatedTextureDuck {
-        railways$uploadWithVisibility(): void;
         getFrameX(arg0: number): number;
         getFrameY(arg0: number): number;
         uploadFrame(arg0: number, arg1: number, arg2: number): void;
         getUniqueFrames(): $IntStream;
+        railways$uploadWithVisibility(): void;
         createTicker(): $SpriteTicker;
         uploadFirstFrame(arg0: number, arg1: number): void;
         getFrameRowSize(): number;
@@ -299,7 +299,7 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         maxSupportedTextureSize(): number;
         fabric_spriteFinder(): $SpriteFinderImpl;
         clearTextureData(): void;
-        redirect$zzh000$sodium_extra$sodiumExtra$tickAnimatedSprites(arg0: $TextureAtlasSprite): $TextureAtlasSprite$Ticker;
+        redirect$zbn000$sodium_extra$sodiumExtra$tickAnimatedSprites(arg0: $TextureAtlasSprite): $TextureAtlasSprite$Ticker;
         dumpContents(arg0: $ResourceLocation_, arg1: $Path_): void;
         cycleAnimationFrames(): void;
         updateFilter(arg0: $SpriteLoader$Preparations_): void;
@@ -339,9 +339,9 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         get x(): number;
     }
     export class $SimpleTexture extends $AbstractTexture implements $ITextureSize {
-        getTextureImage(arg0: $ResourceManager): $SimpleTexture$TextureImage;
         ldlib2$getImageWidth(): number;
         ldlib2$getImageHeight(): number;
+        getTextureImage(arg0: $ResourceManager): $SimpleTexture$TextureImage;
         getWidth(): number;
         getHeight(): number;
         ldlib2$imageWidth: number;
@@ -357,11 +357,13 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         get height(): number;
     }
     export class $TextureManager implements $PreparableReloadListener, $Tickable, $AutoCloseable, $TextureManagerExtension, $IdentifiableResourceReloadListener {
+        dumpAllSheets(arg0: $Path_): void;
+        veil$registerPreloadedTexture(arg0: $ResourceLocation_, arg1: $AbstractTexture, arg2: $Executor_): $CompletableFuture<any>;
         bindForSetup(arg0: $ResourceLocation_): void;
-        handler$zjc000$veil$applyLabel(arg0: $ResourceLocation_, arg1: $AbstractTexture, arg2: $CallbackInfo): void;
-        modify$zkj000$veil$wrap(arg0: $AbstractTexture, arg1: $ResourceLocation_): $AbstractTexture;
-        reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
+        modify$zln000$veil$wrap(arg0: $AbstractTexture, arg1: $ResourceLocation_): $AbstractTexture;
+        handler$zkg000$veil$applyLabel(arg0: $ResourceLocation_, arg1: $AbstractTexture, arg2: $CallbackInfo): void;
         tick(): void;
+        reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         register(arg0: $ResourceLocation_, arg1: $AbstractTexture): void;
         register(arg0: string, arg1: $DynamicTexture): $ResourceLocation;
         close(): void;
@@ -371,8 +373,6 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         getFabricId(): $ResourceLocation;
         getFabricDependencies(): $Collection<any>;
         preload(arg0: $ResourceLocation_, arg1: $Executor_): $CompletableFuture<void>;
-        dumpAllSheets(arg0: $Path_): void;
-        veil$registerPreloadedTexture(arg0: $ResourceLocation_, arg1: $AbstractTexture, arg2: $Executor_): $CompletableFuture<any>;
         getName(): string;
         byPath: $Map<$ResourceLocation, $AbstractTexture>;
         static INTENTIONAL_MISSING_TEXTURE: $ResourceLocation;
@@ -382,6 +382,7 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         get name(): string;
     }
     export class $TextureAtlasSprite implements $TextureAtlasSpriteExtension$1, $TextureAtlasSpriteExtension, $SpriteExtension {
+        getPixelRGBA(arg0: number, arg1: number, arg2: number): number;
         sodium$hasUnknownImageContents(): boolean;
         getUOffset(arg0: number): number;
         getVOffset(arg0: number): number;
@@ -403,7 +404,6 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         getV1(): number;
         getU(arg0: number): number;
         getV(arg0: number): number;
-        getPixelRGBA(arg0: number, arg1: number, arg2: number): number;
         x: number;
         y: number;
         v0: number;

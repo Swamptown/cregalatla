@@ -41,9 +41,9 @@ declare module "@package/com/simibubi/create/content/trains/signal" {
         isForcedRed(arg0: boolean): boolean;
         cycleSignalType(arg0: $BlockPos_): void;
         setGroup(arg0: boolean, arg1: $UUID_): void;
-        queueUpdate(arg0: $TrackNode): void;
         getGroup(arg0: $TrackNode): $UUID;
         getTypeFor(arg0: $BlockPos_): $SignalBlock$SignalType;
+        queueUpdate(arg0: $TrackNode): void;
         edgeLocation: $Couple<$TrackNodeLocation>;
         sidesToUpdate: $Couple<boolean>;
         types: $Couple<$SignalBlock$SignalType>;
@@ -55,16 +55,16 @@ declare module "@package/com/simibubi/create/content/trains/signal" {
         constructor();
     }
     export class $TrackEdgePoint {
-        isPrimary(arg0: $TrackNode): boolean;
         getLocationOn(arg0: $TrackEdge): number;
         canCoexistWith(arg0: $EdgePointType<never>, arg1: boolean): boolean;
         blockEntityAdded(arg0: $BlockEntity, arg1: boolean): void;
         blockEntityRemoved(arg0: $BlockPos_, arg1: boolean): void;
         canNavigateVia(arg0: $TrackNode): boolean;
-        canMerge(): boolean;
-        invalidate(arg0: $LevelAccessor): void;
-        setType(arg0: $EdgePointType<never>): void;
+        isPrimary(arg0: $TrackNode): boolean;
         tick(arg0: $TrackGraph, arg1: boolean): void;
+        canMerge(): boolean;
+        setType(arg0: $EdgePointType<never>): void;
+        invalidate(arg0: $LevelAccessor): void;
         write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: $DimensionPalette): void;
         write(arg0: $FriendlyByteBuf, arg1: $DimensionPalette): void;
         read(arg0: $FriendlyByteBuf, arg1: $DimensionPalette): void;
@@ -122,9 +122,9 @@ declare module "@package/com/simibubi/create/content/trains/signal" {
         static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
         getState(): $SignalBlockEntity$SignalState;
+        getSignal(): $SignalBoundary;
         setOverlay(arg0: $SignalBlockEntity$OverlayState_): void;
         getOverlay(): $SignalBlockEntity$OverlayState;
-        getSignal(): $SignalBoundary;
         worldPosition: $BlockPos;
         level: $Level;
         static ATTACHMENTS_NBT_KEY: string;

@@ -30,10 +30,10 @@ declare module "@package/net/minecraft/client/gui/screens/achievement" {
         static access$900(arg0: $StatsScreen): $Font;
         static access$1000(arg0: $StatsScreen): $Font;
         static access$1100(arg0: $StatsScreen): $Font;
+        static access$1200(arg0: $StatsScreen): $Font;
         static access$1300(arg0: $StatsScreen): $Font;
         static access$1400(arg0: $StatsScreen): $Font;
         static access$1500(arg0: $StatsScreen): $Font;
-        static access$1200(arg0: $StatsScreen): $Font;
         onStatsUpdated(): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;

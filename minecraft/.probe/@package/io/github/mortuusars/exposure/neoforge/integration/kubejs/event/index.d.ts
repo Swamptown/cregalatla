@@ -18,8 +18,8 @@ declare module "@package/io/github/mortuusars/exposure/neoforge/integration/kube
         getEntity(): $Entity;
         getPlayer(): $Player;
         getLevel(): $Level;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -60,15 +60,15 @@ declare module "@package/io/github/mortuusars/exposure/neoforge/integration/kube
         get entity(): $Entity;
         get player(): $Player;
         get level(): $Level;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get registries(): $RegistryAccess;
     }
     export class $ModifyFrameExtraDataEventJS extends $ModifyFrameExtraDataEvent implements $KubeEntityEvent {
         getEntity(): $Entity;
         getPlayer(): $Player;
         getLevel(): $Level;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -109,15 +109,15 @@ declare module "@package/io/github/mortuusars/exposure/neoforge/integration/kube
         get entity(): $Entity;
         get player(): $Player;
         get level(): $Level;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get registries(): $RegistryAccess;
     }
     export class $FrameAddedEventJS extends $FrameAddedEvent implements $KubeEntityEvent {
         getEntity(): $Entity;
         getPlayer(): $Player;
         getLevel(): $Level;
-        getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
+        getRegistries(): $RegistryAccess;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -158,7 +158,7 @@ declare module "@package/io/github/mortuusars/exposure/neoforge/integration/kube
         get entity(): $Entity;
         get player(): $Player;
         get level(): $Level;
-        get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
+        get registries(): $RegistryAccess;
     }
 }

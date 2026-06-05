@@ -1,14 +1,13 @@
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $JumpControl, $MoveControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $AnimationState, $EntityDimensions, $EntityType_, $Entity$RemovalReason, $LivingEntity, $Pose, $PortalProcessor, $WalkAnimationState } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID, $List, $Stack, $Map } from "@package/java/util";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $InteractionHand } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos } from "@package/net/minecraft/core";
+import { $BlockPos } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $Brain } from "@package/net/minecraft/world/entity/ai";
@@ -47,10 +46,10 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         constructor(arg0: number, arg1: number);
     }
     export class $LongJump extends $Behavior<$Breeze> {
-        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
-        static canRun(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
+        static canRun(arg0: $ServerLevel, arg1: $Breeze): boolean;
         start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         static DEFAULT_DURATION: number;
@@ -58,23 +57,22 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         constructor();
     }
     export class $ShootWhenStuck extends $Behavior<$Breeze> {
-        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         static DEFAULT_DURATION: number;
         entryCondition: $Map<$MemoryModuleType<never>, $MemoryStatus>;
         constructor();
     }
     export class $Breeze extends $Monster {
+        getSnoutYPosition(): number;
         emitGroundParticles(arg0: number): void;
         resetJumpTrail(): $Breeze;
         emitJumpTrailParticles(): void;
         playWhirlSound(): void;
         getHurtBy(): ($LivingEntity) | undefined;
         withinInnerCircleRange(arg0: $Vec3_): boolean;
-        getSnoutYPosition(): number;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -105,6 +103,7 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -131,6 +130,7 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -154,6 +154,7 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -243,12 +244,12 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         removeStingerTime: number;
         static BASE_SAFE_FALL_DISTANCE: number;
         constructor(arg0: $EntityType_<$Monster>, arg1: $Level_);
-        get hurtBy(): ($LivingEntity) | undefined;
         get snoutYPosition(): number;
+        get hurtBy(): ($LivingEntity) | undefined;
     }
     export class $Shoot extends $Behavior<$Breeze> {
-        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Breeze): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Breeze, arg2: number): boolean;
         static isFacingTarget(arg0: $Breeze, arg1: $LivingEntity): boolean;
         tick(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Breeze, arg2: number): void;
@@ -258,8 +259,8 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         constructor();
     }
     export class $BreezeAi {
-        static updateActivity(arg0: $Breeze): void;
         static makeBrain(arg0: $Breeze, arg1: $Brain<$Breeze>): $Brain<never>;
+        static updateActivity(arg0: $Breeze): void;
         static JUMP_CIRCLE_INNER_RADIUS: number;
         static MEMORY_TYPES: $List<$MemoryModuleType<never>>;
         static JUMP_CIRCLE_MIDDLE_RADIUS: number;

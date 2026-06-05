@@ -90,6 +90,12 @@ declare module "@package/net/minecraft/client/resources/server" {
     export class $DownloadedPackSource implements $AutoCloseable {
         popAll(): void;
         close(): void;
+        createRepositorySource(): $RepositorySource;
+        onRecovery(): void;
+        cleanupAfterDisconnect(): void;
+        onReloadSuccess(): void;
+        onRecoveryFailure(): void;
+        createDownloadNotifier(arg0: number): $HttpUtil$DownloadProgressListener;
         pushPack(arg0: $UUID_, arg1: $URL, arg2: string): void;
         pushLocalPack(arg0: $UUID_, arg1: $Path_): void;
         popPack(arg0: $UUID_): void;
@@ -98,12 +104,6 @@ declare module "@package/net/minecraft/client/resources/server" {
         rejectServerPacks(): void;
         configureForLocalWorld(): void;
         waitForPackFeedback(arg0: $UUID_): $CompletableFuture<void>;
-        createRepositorySource(): $RepositorySource;
-        onRecovery(): void;
-        cleanupAfterDisconnect(): void;
-        onReloadSuccess(): void;
-        onRecoveryFailure(): void;
-        createDownloadNotifier(arg0: number): $HttpUtil$DownloadProgressListener;
         minecraft: $Minecraft;
         manager: $ServerPackManager;
         static LOGGER: $Logger;

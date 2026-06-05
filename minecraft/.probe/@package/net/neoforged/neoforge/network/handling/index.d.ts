@@ -26,8 +26,8 @@ declare module "@package/net/neoforged/neoforge/network/handling" {
         finishCurrentTask(arg0: $ConfigurationTask$Type_): void;
         handle(arg0: $CustomPacketPayload_): void;
         flow(): $PacketFlow;
-        enqueueWork<T>(arg0: $Supplier_<T>): $CompletableFuture<T>;
         enqueueWork(arg0: $Runnable_): $CompletableFuture<void>;
+        enqueueWork<T>(arg0: $Supplier_<T>): $CompletableFuture<T>;
         payloadId(): $ResourceLocation;
         reply(arg0: $CustomPacketPayload_): void;
         channelHandlerContext(): $ChannelHandlerContext;
@@ -55,26 +55,26 @@ declare module "@package/net/neoforged/neoforge/network/handling" {
         protocol(): $ConnectionProtocol;
         connection(): $Connection;
         disconnect(arg0: $Component_): void;
-        player(): $Player;
         flow(): $PacketFlow;
+        player(): $Player;
         enqueueWork<T>(arg0: $Supplier_<T>): $CompletableFuture<T>;
         enqueueWork(arg0: $Runnable_): $CompletableFuture<void>;
     }
     export class $DirectionalPayloadHandler<T extends $CustomPacketPayload> extends $Record implements $IPayloadHandler<T> {
-        handle(arg0: T, arg1: $IPayloadContext): void;
         clientSide(): $IPayloadHandler<T>;
         serverSide(): $IPayloadHandler<T>;
+        handle(arg0: T, arg1: $IPayloadContext): void;
         constructor(clientSide: $IPayloadHandler_<T>, serverSide: $IPayloadHandler_<T>);
     }
     /**
      * Values that may be interpreted as {@link $DirectionalPayloadHandler}.
      */
-    export type $DirectionalPayloadHandler_<T> = { clientSide?: $IPayloadHandler_<$CustomPacketPayload>, serverSide?: $IPayloadHandler_<$CustomPacketPayload>,  } | [clientSide?: $IPayloadHandler_<$CustomPacketPayload>, serverSide?: $IPayloadHandler_<$CustomPacketPayload>, ];
+    export type $DirectionalPayloadHandler_<T> = { serverSide?: $IPayloadHandler_<$CustomPacketPayload>, clientSide?: $IPayloadHandler_<$CustomPacketPayload>,  } | [serverSide?: $IPayloadHandler_<$CustomPacketPayload>, clientSide?: $IPayloadHandler_<$CustomPacketPayload>, ];
     export class $ClientPayloadContext extends $Record implements $IPayloadContext {
         finishCurrentTask(arg0: $ConfigurationTask$Type_): void;
         handle(arg0: $CustomPacketPayload_): void;
-        player(): $Player;
         flow(): $PacketFlow;
+        player(): $Player;
         enqueueWork<T>(arg0: $Supplier_<T>): $CompletableFuture<T>;
         enqueueWork(arg0: $Runnable_): $CompletableFuture<void>;
         payloadId(): $ResourceLocation;

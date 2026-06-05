@@ -47,7 +47,7 @@ declare module "@package/com/blackgear/vanillabackport/common/api/variant/spawn"
     /**
      * Values that may be interpreted as {@link $SpawnContext}.
      */
-    export type $SpawnContext_ = { biome?: $Holder_<$Biome>, level?: $ServerLevelAccessor, pos?: $BlockPos_,  } | [biome?: $Holder_<$Biome>, level?: $ServerLevelAccessor, pos?: $BlockPos_, ];
+    export type $SpawnContext_ = { level?: $ServerLevelAccessor, biome?: $Holder_<$Biome>, pos?: $BlockPos_,  } | [level?: $ServerLevelAccessor, biome?: $Holder_<$Biome>, pos?: $BlockPos_, ];
     export class $PriorityProvider$Selector<Context, Condition extends $PriorityProvider$SelectorCondition<Context>> extends $Record {
         priority(): number;
         condition(): (Condition) | undefined;
@@ -59,7 +59,7 @@ declare module "@package/com/blackgear/vanillabackport/common/api/variant/spawn"
     /**
      * Values that may be interpreted as {@link $PriorityProvider$Selector}.
      */
-    export type $PriorityProvider$Selector_<Context, Condition> = { priority?: number, condition?: (Condition) | undefined,  } | [priority?: number, condition?: (Condition) | undefined, ];
+    export type $PriorityProvider$Selector_<Context, Condition> = { condition?: (Condition) | undefined, priority?: number,  } | [condition?: (Condition) | undefined, priority?: number, ];
     export class $SpawnCondition {
         static CODEC: $Codec<$SpawnCondition>;
     }

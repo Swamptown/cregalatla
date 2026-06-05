@@ -12,14 +12,14 @@ export * as creativemodetab from "@package/concerrox/emixx/content/creativemodet
 
 declare module "@package/concerrox/emixx/content" {
     export class $Layout$Tile {
+        component3(): number;
         check$emixx_common(bit: $Layout$TileType_): boolean;
         static copy$default(arg0: $Layout$Tile, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $Object): $Layout$Tile;
         component2(): number;
-        getY(): number;
         setType(<set-?>: number): void;
+        getY(): number;
         getType(): number;
         copy(x: number, y: number, type: number): $Layout$Tile;
-        component3(): number;
         getX(): number;
         component1(): number;
         constructor(x: number, y: number, type: number);
@@ -27,15 +27,15 @@ declare module "@package/concerrox/emixx/content" {
         get x(): number;
     }
     export class $ScreenManager {
-        setCustomIndexTitle$emixx_common(<set-?>: $Component_): void;
-        setIndexScreenSpace(<set-?>: $EmiScreenManager$ScreenSpace): void;
-        removeCustomIndexTitle(component: $Component_): void;
-        getCustomIndexTitle$emixx_common(): $Component;
-        onScreenInitialized(screen: $Screen): void;
         isSearching$emixx_common(): boolean;
         getIndexScreenSpace(): $EmiScreenManager$ScreenSpace;
+        onScreenInitialized(screen: $Screen): void;
+        getCustomIndexTitle$emixx_common(): $Component;
         onIndexScreenSpaceCreated(indexScreenSpace: $EmiScreenManager$ScreenSpace): void;
         onMouseScrolled(mouseX: number, mouseY: number, amount: number): boolean;
+        setCustomIndexTitle$emixx_common(<set-?>: $Component_): void;
+        removeCustomIndexTitle(component: $Component_): void;
+        setIndexScreenSpace(<set-?>: $EmiScreenManager$ScreenSpace): void;
         static INSTANCE: $ScreenManager;
         static ENTRY_SIZE: number;
         get searching$emixx_common(): boolean;
@@ -61,18 +61,21 @@ declare module "@package/concerrox/emixx/content" {
      */
     export type $Layout$TileType_ = "left" | "top" | "right" | "bottom" | "top_left" | "top_right" | "bottom_left" | "bottom_right";
     export class $Layout {
+        setTextureDirty(<set-?>: boolean): void;
         checkGridSize(tw: number, th: number): void;
         buildLayoutTiles(screenSpace: $EmiScreenManager$ScreenSpace, context: $EmiDrawContext): void;
         isClean(): boolean;
         setClean(<set-?>: boolean): void;
         isTextureDirty(): boolean;
-        setTextureDirty(<set-?>: boolean): void;
         render(screenSpace: $EmiScreenManager$ScreenSpace, context: $EmiDrawContext): void;
         getStartIndex(): number;
         setStartIndex(<set-?>: number): void;
         static INSTANCE: $Layout;
     }
     export class $StackManager {
+        search$emixx_common(sourceStacks: $List_<$EmiStack>, keyword: string): void;
+        updateSourceStacks$emixx_common(sourceStacks: $List_<$EmiStack>): void;
+        buildStacks$emixx_common(searchedStacks: $List_<$EmiStack>, query: string): void;
         onStackInteractionDeprecated(ingredient: $EmiIngredient): void;
         getIndexStacks$emixx_common(): $List<$EmiStack>;
         setIndexStacks$emixx_common(<set-?>: $List_<$EmiStack>): void;
@@ -80,9 +83,6 @@ declare module "@package/concerrox/emixx/content" {
         setSourceStacks$emixx_common(<set-?>: $List_<$EmiStack>): void;
         getSearchedStacks$emixx_common(): $List<$EmiStack>;
         setSearchedStacks$emixx_common(<set-?>: $List_<$EmiStack>): void;
-        search$emixx_common(sourceStacks: $List_<$EmiStack>, keyword: string): void;
-        buildStacks$emixx_common(searchedStacks: $List_<$EmiStack>, query: string): void;
-        updateSourceStacks$emixx_common(sourceStacks: $List_<$EmiStack>): void;
         getDisplayedStacks$emixx_common(): $List<$EmiStack>;
         setDisplayedStacks$emixx_common(<set-?>: $List_<$EmiStack>): void;
         getExpandedStackGroups$emixx_common(): $Set<$ResourceLocation>;

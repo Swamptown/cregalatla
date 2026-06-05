@@ -2,6 +2,8 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/com/zigythebird/playeranimcore/api/firstPerson" {
     export class $FirstPersonConfiguration {
+        isShowRightItem(): boolean;
+        isShowLeftItem(): boolean;
         isShowRightArm(): boolean;
         isShowLeftArm(): boolean;
         isShowArmor(): boolean;
@@ -10,10 +12,8 @@ declare module "@package/com/zigythebird/playeranimcore/api/firstPerson" {
         setShowRightItem(showRightItem: boolean): $FirstPersonConfiguration;
         setShowArmor(showArmor: boolean): $FirstPersonConfiguration;
         setShowLeftItem(showLeftItem: boolean): $FirstPersonConfiguration;
-        isShowRightItem(): boolean;
-        isShowLeftItem(): boolean;
-        constructor(showRightArm: boolean, showLeftArm: boolean, showRightItem: boolean, showLeftItem: boolean);
         constructor();
+        constructor(showRightArm: boolean, showLeftArm: boolean, showRightItem: boolean, showLeftItem: boolean);
         constructor(showRightArm: boolean, showLeftArm: boolean, showRightItem: boolean, showLeftItem: boolean, showArmor: boolean);
     }
     export class $FirstPersonMode extends $Enum<$FirstPersonMode> {

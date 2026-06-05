@@ -60,5 +60,5 @@ declare module "@package/net/minecraft/world/level/portal" {
     /**
      * Values that may be interpreted as {@link $DimensionTransition}.
      */
-    export type $DimensionTransition_ = { xRot?: number, yRot?: number, speed?: $Vec3_, pos?: $Vec3_, postDimensionTransition?: $DimensionTransition$PostDimensionTransition_, newLevel?: $ServerLevel, missingRespawnBlock?: boolean,  } | [xRot?: number, yRot?: number, speed?: $Vec3_, pos?: $Vec3_, postDimensionTransition?: $DimensionTransition$PostDimensionTransition_, newLevel?: $ServerLevel, missingRespawnBlock?: boolean, ];
+    export type $DimensionTransition_ = { missingRespawnBlock?: boolean, newLevel?: $ServerLevel, postDimensionTransition?: $DimensionTransition$PostDimensionTransition_, pos?: $Vec3_, speed?: $Vec3_, yRot?: number, xRot?: number,  } | [missingRespawnBlock?: boolean, newLevel?: $ServerLevel, postDimensionTransition?: $DimensionTransition$PostDimensionTransition_, pos?: $Vec3_, speed?: $Vec3_, yRot?: number, xRot?: number, ];
 }

@@ -8,6 +8,8 @@ export * as atomic from "@package/java/util/concurrent/atomic";
 
 declare module "@package/java/util/concurrent" {
     export class $ThreadPoolExecutor extends $AbstractExecutorService {
+        getPoolSize(): number;
+        isTerminating(): boolean;
         allowCoreThreadTimeOut(arg0: boolean): void;
         allowsCoreThreadTimeOut(): boolean;
         setThreadFactory(arg0: $ThreadFactory_): void;
@@ -26,21 +28,19 @@ declare module "@package/java/util/concurrent" {
         getLargestPoolSize(): number;
         getTaskCount(): number;
         getCompletedTaskCount(): number;
-        getPoolSize(): number;
-        isTerminating(): boolean;
         purge(): void;
         remove(arg0: $Runnable_): boolean;
         getQueue(): $BlockingQueue<$Runnable>;
-        constructor(arg0: number, arg1: number, arg2: number, arg3: $TimeUnit_, arg4: $BlockingQueue<$Runnable_>, arg5: $ThreadFactory_, arg6: $RejectedExecutionHandler_);
         constructor(arg0: number, arg1: number, arg2: number, arg3: $TimeUnit_, arg4: $BlockingQueue<$Runnable_>, arg5: $RejectedExecutionHandler_);
         constructor(arg0: number, arg1: number, arg2: number, arg3: $TimeUnit_, arg4: $BlockingQueue<$Runnable_>, arg5: $ThreadFactory_);
         constructor(arg0: number, arg1: number, arg2: number, arg3: $TimeUnit_, arg4: $BlockingQueue<$Runnable_>);
+        constructor(arg0: number, arg1: number, arg2: number, arg3: $TimeUnit_, arg4: $BlockingQueue<$Runnable_>, arg5: $ThreadFactory_, arg6: $RejectedExecutionHandler_);
+        get poolSize(): number;
+        get terminating(): boolean;
         get activeCount(): number;
         get largestPoolSize(): number;
         get taskCount(): number;
         get completedTaskCount(): number;
-        get poolSize(): number;
-        get terminating(): boolean;
         get queue(): $BlockingQueue<$Runnable>;
     }
     export class $Delayed {
@@ -49,6 +49,14 @@ declare module "@package/java/util/concurrent" {
         getDelay(arg0: $TimeUnit_): number;
     }
     export class $CompletableFuture<T> implements $Future<T>, $CompletionStage<T> {
+        defaultExecutor(): $Executor;
+        isCancelled(): boolean;
+        resultNow(): T;
+        exceptionNow(): $Throwable;
+        completeExceptionally(arg0: $Throwable): boolean;
+        static supplyAsync<U>(arg0: $Supplier_<U>): $CompletableFuture<U>;
+        static supplyAsync<U>(arg0: $Supplier_<U>, arg1: $Executor_): $CompletableFuture<U>;
+        getNow(arg0: T): T;
         static anyOf(...arg0: $CompletableFuture<never>[]): $CompletableFuture<$Object>;
         isCompletedExceptionally(): boolean;
         obtrudeValue(arg0: T): void;
@@ -57,52 +65,39 @@ declare module "@package/java/util/concurrent" {
         minimalCompletionStage(): $CompletionStage<T>;
         orTimeout(arg0: number, arg1: $TimeUnit_): $CompletableFuture<T>;
         completeOnTimeout(arg0: T, arg1: number, arg2: $TimeUnit_): $CompletableFuture<T>;
-        static delayedExecutor(arg0: number, arg1: $TimeUnit_): $Executor;
         static delayedExecutor(arg0: number, arg1: $TimeUnit_, arg2: $Executor_): $Executor;
+        static delayedExecutor(arg0: number, arg1: $TimeUnit_): $Executor;
         static completedStage<U>(arg0: U): $CompletionStage<U>;
         static failedFuture<U>(arg0: $Throwable): $CompletableFuture<U>;
         static failedStage<U>(arg0: $Throwable): $CompletionStage<U>;
-        defaultExecutor(): $Executor;
-        complete(arg0: T): boolean;
-        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>, arg1: $Executor_): $CompletableFuture<U>;
-        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>): $CompletableFuture<U>;
-        static supplyAsync<U>(arg0: $Supplier_<U>, arg1: $Executor_): $CompletableFuture<U>;
-        static supplyAsync<U>(arg0: $Supplier_<U>): $CompletableFuture<U>;
-        isCancelled(): boolean;
-        resultNow(): T;
-        exceptionNow(): $Throwable;
-        completeExceptionally(arg0: $Throwable): boolean;
-        static allOf(...arg0: $CompletableFuture<never>[]): $CompletableFuture<void>;
-        newIncompleteFuture<U>(): $CompletableFuture<U>;
-        toCompletableFuture(): $CompletableFuture<T>;
         completeAsync(arg0: $Supplier_<T>, arg1: $Executor_): $CompletableFuture<T>;
         completeAsync(arg0: $Supplier_<T>): $CompletableFuture<T>;
         exceptionallyComposeAsync(arg0: $Function_<$Throwable, $CompletionStage<T>>): $CompletableFuture<T>;
         exceptionallyAsync(arg0: $Function_<$Throwable, T>, arg1: $Executor_): $CompletableFuture<T>;
-        exceptionally(arg0: $Function_<$Throwable, T>): $CompletableFuture<T>;
-        whenCompleteAsync(arg0: $BiConsumer_<T, $Throwable>, arg1: $Executor_): $CompletableFuture<T>;
         whenCompleteAsync(arg0: $BiConsumer_<T, $Throwable>): $CompletableFuture<T>;
+        whenCompleteAsync(arg0: $BiConsumer_<T, $Throwable>, arg1: $Executor_): $CompletableFuture<T>;
+        thenComposeAsync<U>(arg0: $Function_<T, $CompletionStage<U>>): $CompletableFuture<U>;
         thenComposeAsync<U>(arg0: $Function_<T, $CompletionStage<U>>, arg1: $Executor_): $CompletableFuture<U>;
         thenCompose<U>(arg0: $Function_<T, $CompletionStage<U>>): $CompletableFuture<U>;
-        runAfterEitherAsync(arg0: $CompletionStage<never>, arg1: $Runnable_): $CompletableFuture<void>;
-        runAfterEither(arg0: $CompletionStage<never>, arg1: $Runnable_): $CompletableFuture<void>;
+        acceptEitherAsync(arg0: $CompletionStage<T>, arg1: $Consumer_<T>): $CompletableFuture<void>;
+        acceptEitherAsync(arg0: $CompletionStage<T>, arg1: $Consumer_<T>, arg2: $Executor_): $CompletableFuture<void>;
         acceptEither(arg0: $CompletionStage<T>, arg1: $Consumer_<T>): $CompletableFuture<void>;
-        runAfterBothAsync(arg0: $CompletionStage<never>, arg1: $Runnable_): $CompletableFuture<void>;
-        runAfterBothAsync(arg0: $CompletionStage<never>, arg1: $Runnable_, arg2: $Executor_): $CompletableFuture<void>;
         runAfterBoth(arg0: $CompletionStage<never>, arg1: $Runnable_): $CompletableFuture<void>;
         thenAcceptBothAsync<U>(arg0: $CompletionStage<U>, arg1: $BiConsumer_<T, U>, arg2: $Executor_): $CompletableFuture<void>;
-        thenAcceptBothAsync<U>(arg0: $CompletionStage<U>, arg1: $BiConsumer_<T, U>): $CompletableFuture<void>;
+        thenAcceptBoth<U>(arg0: $CompletionStage<U>, arg1: $BiConsumer_<T, U>): $CompletableFuture<void>;
         thenCombineAsync<U, V>(arg0: $CompletionStage<U>, arg1: $BiFunction_<T, U, V>): $CompletableFuture<V>;
+        thenCombine<U, V>(arg0: $CompletionStage<U>, arg1: $BiFunction_<T, U, V>): $CompletableFuture<V>;
         thenRunAsync(arg0: $Runnable_): $CompletableFuture<void>;
-        thenRun(arg0: $Runnable_): $CompletableFuture<void>;
         thenAcceptAsync(arg0: $Consumer_<T>, arg1: $Executor_): $CompletableFuture<void>;
-        thenAccept(arg0: $Consumer_<T>): $CompletableFuture<void>;
-        thenApplyAsync<U>(arg0: $Function_<T, U>, arg1: $Executor_): $CompletableFuture<U>;
+        thenAcceptAsync(arg0: $Consumer_<T>): $CompletableFuture<void>;
         thenApply<U>(arg0: $Function_<T, U>): $CompletableFuture<U>;
         static runAsync(arg0: $Runnable_, arg1: $Executor_): $CompletableFuture<void>;
         static runAsync(arg0: $Runnable_): $CompletableFuture<void>;
         static completedFuture<U>(arg0: U): $CompletableFuture<U>;
-        getNow(arg0: T): T;
+        newIncompleteFuture<U>(): $CompletableFuture<U>;
+        toCompletableFuture(): $CompletableFuture<T>;
+        static allOf(...arg0: $CompletableFuture<never>[]): $CompletableFuture<void>;
+        complete(arg0: T): boolean;
         get(): T;
         get(arg0: number, arg1: $TimeUnit_): T;
         join(): T;
@@ -110,43 +105,48 @@ declare module "@package/java/util/concurrent" {
         isDone(): boolean;
         cancel(arg0: boolean): boolean;
         copy(): $CompletableFuture<T>;
-        handle<U>(arg0: $BiFunction_<T, $Throwable, U>): $CompletableFuture<U>;
         exceptionallyComposeAsync(arg0: $Function_<$Throwable, $CompletionStage<T>>, arg1: $Executor_): $CompletionStage<T>;
         exceptionallyCompose(arg0: $Function_<$Throwable, $CompletionStage<T>>): $CompletionStage<T>;
         exceptionallyAsync(arg0: $Function_<$Throwable, T>): $CompletionStage<T>;
-        thenComposeAsync<U>(arg0: $Function_<T, $CompletionStage<U>>): $CompletionStage<U>;
+        exceptionally(arg0: $Function_<$Throwable, T>): $CompletionStage<T>;
         runAfterEitherAsync(arg0: $CompletionStage<never>, arg1: $Runnable_, arg2: $Executor_): $CompletionStage<void>;
-        acceptEitherAsync(arg0: $CompletionStage<T>, arg1: $Consumer_<T>, arg2: $Executor_): $CompletionStage<void>;
-        acceptEitherAsync(arg0: $CompletionStage<T>, arg1: $Consumer_<T>): $CompletionStage<void>;
+        runAfterEitherAsync(arg0: $CompletionStage<never>, arg1: $Runnable_): $CompletionStage<void>;
+        runAfterEither(arg0: $CompletionStage<never>, arg1: $Runnable_): $CompletionStage<void>;
         applyToEitherAsync<U>(arg0: $CompletionStage<T>, arg1: $Function_<T, U>, arg2: $Executor_): $CompletionStage<U>;
         applyToEitherAsync<U>(arg0: $CompletionStage<T>, arg1: $Function_<T, U>): $CompletionStage<U>;
         applyToEither<U>(arg0: $CompletionStage<T>, arg1: $Function_<T, U>): $CompletionStage<U>;
-        thenAcceptBoth<U>(arg0: $CompletionStage<U>, arg1: $BiConsumer_<T, U>): $CompletionStage<void>;
+        runAfterBothAsync(arg0: $CompletionStage<never>, arg1: $Runnable_, arg2: $Executor_): $CompletionStage<void>;
+        runAfterBothAsync(arg0: $CompletionStage<never>, arg1: $Runnable_): $CompletionStage<void>;
+        thenAcceptBothAsync<U>(arg0: $CompletionStage<U>, arg1: $BiConsumer_<T, U>): $CompletionStage<void>;
         thenCombineAsync<U, V>(arg0: $CompletionStage<U>, arg1: $BiFunction_<T, U, V>, arg2: $Executor_): $CompletionStage<V>;
-        thenCombine<U, V>(arg0: $CompletionStage<U>, arg1: $BiFunction_<T, U, V>): $CompletionStage<V>;
         thenRunAsync(arg0: $Runnable_, arg1: $Executor_): $CompletionStage<void>;
-        thenAcceptAsync(arg0: $Consumer_<T>): $CompletionStage<void>;
+        thenRun(arg0: $Runnable_): $CompletionStage<void>;
+        thenAccept(arg0: $Consumer_<T>): $CompletionStage<void>;
         thenApplyAsync<U>(arg0: $Function_<T, U>): $CompletionStage<U>;
+        thenApplyAsync<U>(arg0: $Function_<T, U>, arg1: $Executor_): $CompletionStage<U>;
+        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>, arg1: $Executor_): $CompletionStage<U>;
+        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>): $CompletionStage<U>;
+        handle<U>(arg0: $BiFunction_<T, $Throwable, U>): $CompletionStage<U>;
         whenComplete(arg0: $BiConsumer_<T, $Throwable>): $CompletionStage<T>;
         constructor();
+        get cancelled(): boolean;
         get completedExceptionally(): boolean;
         get numberOfDependents(): number;
-        get cancelled(): boolean;
         get done(): boolean;
     }
     export class $BlockingQueue<E> {
     }
     export interface $BlockingQueue<E> extends $Queue<E> {
+        take(): E;
         drainTo(arg0: $Collection_<E>, arg1: number): number;
         drainTo(arg0: $Collection_<E>): number;
-        offer(arg0: E, arg1: number, arg2: $TimeUnit_): boolean;
-        offer(arg0: E): boolean;
-        take(): E;
         remove(arg0: $Object): boolean;
         put(arg0: E): void;
         add(arg0: E): boolean;
         contains(arg0: $Object): boolean;
         poll(arg0: number, arg1: $TimeUnit_): E;
+        offer(arg0: E, arg1: number, arg2: $TimeUnit_): boolean;
+        offer(arg0: E): boolean;
         remainingCapacity(): number;
     }
     export class $RejectedExecutionHandler {
@@ -265,14 +265,11 @@ declare module "@package/java/util/concurrent" {
     export class $CompletionStage<T> {
     }
     export interface $CompletionStage<T> {
-        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>): $CompletionStage<U>;
-        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>, arg1: $Executor_): $CompletionStage<U>;
-        toCompletableFuture(): $CompletableFuture<T>;
-        exceptionallyComposeAsync(arg0: $Function_<$Throwable, $CompletionStage<T>>, arg1: $Executor_): $CompletionStage<T>;
         exceptionallyComposeAsync(arg0: $Function_<$Throwable, $CompletionStage<T>>): $CompletionStage<T>;
+        exceptionallyComposeAsync(arg0: $Function_<$Throwable, $CompletionStage<T>>, arg1: $Executor_): $CompletionStage<T>;
         exceptionallyCompose(arg0: $Function_<$Throwable, $CompletionStage<T>>): $CompletionStage<T>;
-        exceptionallyAsync(arg0: $Function_<$Throwable, T>): $CompletionStage<T>;
         exceptionallyAsync(arg0: $Function_<$Throwable, T>, arg1: $Executor_): $CompletionStage<T>;
+        exceptionallyAsync(arg0: $Function_<$Throwable, T>): $CompletionStage<T>;
         exceptionally(arg0: $Function_<$Throwable, T>): $CompletionStage<T>;
         whenCompleteAsync(arg0: $BiConsumer_<T, $Throwable>): $CompletionStage<T>;
         whenCompleteAsync(arg0: $BiConsumer_<T, $Throwable>, arg1: $Executor_): $CompletionStage<T>;
@@ -285,27 +282,30 @@ declare module "@package/java/util/concurrent" {
         acceptEitherAsync(arg0: $CompletionStage<T>, arg1: $Consumer_<T>): $CompletionStage<void>;
         acceptEitherAsync(arg0: $CompletionStage<T>, arg1: $Consumer_<T>, arg2: $Executor_): $CompletionStage<void>;
         acceptEither(arg0: $CompletionStage<T>, arg1: $Consumer_<T>): $CompletionStage<void>;
-        applyToEitherAsync<U>(arg0: $CompletionStage<T>, arg1: $Function_<T, U>): $CompletionStage<U>;
         applyToEitherAsync<U>(arg0: $CompletionStage<T>, arg1: $Function_<T, U>, arg2: $Executor_): $CompletionStage<U>;
+        applyToEitherAsync<U>(arg0: $CompletionStage<T>, arg1: $Function_<T, U>): $CompletionStage<U>;
         applyToEither<U>(arg0: $CompletionStage<T>, arg1: $Function_<T, U>): $CompletionStage<U>;
-        runAfterBothAsync(arg0: $CompletionStage<never>, arg1: $Runnable_, arg2: $Executor_): $CompletionStage<void>;
         runAfterBothAsync(arg0: $CompletionStage<never>, arg1: $Runnable_): $CompletionStage<void>;
+        runAfterBothAsync(arg0: $CompletionStage<never>, arg1: $Runnable_, arg2: $Executor_): $CompletionStage<void>;
         runAfterBoth(arg0: $CompletionStage<never>, arg1: $Runnable_): $CompletionStage<void>;
-        thenAcceptBothAsync<U>(arg0: $CompletionStage<U>, arg1: $BiConsumer_<T, U>): $CompletionStage<void>;
         thenAcceptBothAsync<U>(arg0: $CompletionStage<U>, arg1: $BiConsumer_<T, U>, arg2: $Executor_): $CompletionStage<void>;
+        thenAcceptBothAsync<U>(arg0: $CompletionStage<U>, arg1: $BiConsumer_<T, U>): $CompletionStage<void>;
         thenAcceptBoth<U>(arg0: $CompletionStage<U>, arg1: $BiConsumer_<T, U>): $CompletionStage<void>;
         thenCombineAsync<U, V>(arg0: $CompletionStage<U>, arg1: $BiFunction_<T, U, V>, arg2: $Executor_): $CompletionStage<V>;
         thenCombineAsync<U, V>(arg0: $CompletionStage<U>, arg1: $BiFunction_<T, U, V>): $CompletionStage<V>;
         thenCombine<U, V>(arg0: $CompletionStage<U>, arg1: $BiFunction_<T, U, V>): $CompletionStage<V>;
-        thenRunAsync(arg0: $Runnable_, arg1: $Executor_): $CompletionStage<void>;
         thenRunAsync(arg0: $Runnable_): $CompletionStage<void>;
+        thenRunAsync(arg0: $Runnable_, arg1: $Executor_): $CompletionStage<void>;
         thenRun(arg0: $Runnable_): $CompletionStage<void>;
         thenAcceptAsync(arg0: $Consumer_<T>, arg1: $Executor_): $CompletionStage<void>;
         thenAcceptAsync(arg0: $Consumer_<T>): $CompletionStage<void>;
         thenAccept(arg0: $Consumer_<T>): $CompletionStage<void>;
-        thenApplyAsync<U>(arg0: $Function_<T, U>, arg1: $Executor_): $CompletionStage<U>;
         thenApplyAsync<U>(arg0: $Function_<T, U>): $CompletionStage<U>;
+        thenApplyAsync<U>(arg0: $Function_<T, U>, arg1: $Executor_): $CompletionStage<U>;
         thenApply<U>(arg0: $Function_<T, U>): $CompletionStage<U>;
+        toCompletableFuture(): $CompletableFuture<T>;
+        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>): $CompletionStage<U>;
+        handleAsync<U>(arg0: $BiFunction_<T, $Throwable, U>, arg1: $Executor_): $CompletionStage<U>;
         handle<U>(arg0: $BiFunction_<T, $Throwable, U>): $CompletionStage<U>;
         whenComplete(arg0: $BiConsumer_<T, $Throwable>): $CompletionStage<T>;
     }
@@ -319,8 +319,8 @@ declare module "@package/java/util/concurrent" {
     }
     export interface $Flow$Subscriber<T> {
         onSubscribe(arg0: $Flow$Subscription): void;
-        onNext(arg0: T): void;
         onComplete(): void;
+        onNext(arg0: T): void;
         onError(arg0: $Throwable): void;
     }
     export class $ThreadFactory {

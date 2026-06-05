@@ -98,7 +98,7 @@ declare module "@package/com/mojang/blaze3d/shaders" {
     export interface $Effect extends $Shader {
     }
     export class $Program$Type extends $Enum<$Program$Type> implements $ProgramTypeAccessor {
-        static createProgramType$ldlib2_$md$4ca6b6$0(arg0: string, arg1: number, arg2: string, arg3: string, arg4: number): $Program$Type;
+        static createProgramType$ldlib2_$md$3b3139$0(arg0: string, arg1: number, arg2: string, arg3: string, arg4: number): $Program$Type;
         getExtension(): string;
         getName(): string;
         static values(): $Program$Type[];

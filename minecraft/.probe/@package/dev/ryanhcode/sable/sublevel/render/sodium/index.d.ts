@@ -6,9 +6,9 @@ import { $ClientSubLevel } from "@package/dev/ryanhcode/sable/sublevel";
 
 declare module "@package/dev/ryanhcode/sable/sublevel/render/sodium" {
     export class $SubLevelRenderSectionManager extends $RenderSectionManager {
+        shouldDisableOcclusionCulling(): boolean;
         apply(arg0: $ChunkRenderMatrices_, arg1: number, arg2: number, arg3: number): void;
         render(arg0: $ChunkRenderMatrices_, arg1: $RenderType, arg2: number, arg3: number, arg4: number): void;
-        shouldDisableOcclusionCulling(): boolean;
         constructor(arg0: $ClientSubLevel, arg1: $ClientLevel, arg2: number, arg3: $CommandList);
     }
 }

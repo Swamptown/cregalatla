@@ -1,7 +1,7 @@
 import { $Predicate_ } from "@package/java/util/function";
 import { $KnownPack_, $KnownPack, $PackSource } from "@package/net/minecraft/server/packs/repository";
 import { $PackType, $PackType_ } from "@package/net/minecraft/server/packs";
-import { $List_, $Set, $Set_, $List } from "@package/java/util";
+import { $List_, $Set_, $Set, $List } from "@package/java/util";
 
 declare module "@package/net/fabricmc/fabric/impl/resource/loader" {
     export class $FabricOriginalKnownPacksGetter {
@@ -31,8 +31,8 @@ declare module "@package/net/fabricmc/fabric/impl/resource/loader" {
     export class $FabricResourcePackProfile {
     }
     export interface $FabricResourcePackProfile {
+        fabric_isHidden(): boolean;
         fabric_parentsEnabled(arg0: $Set_<string>): boolean;
         fabric_setParentsPredicate(arg0: $Predicate_<$Set<string>>): void;
-        fabric_isHidden(): boolean;
     }
 }

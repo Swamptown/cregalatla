@@ -18,8 +18,8 @@ declare module "@package/com/railwayteam/railways/content/conductor/toolbox" {
         write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
         read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
         static read(arg0: $ConductorEntity, arg1: $CompoundTag_): $MountedToolbox;
-        getCloneItemStack(): $ItemStack;
         static openMenu(arg0: $ServerPlayer, arg1: $MountedToolbox): void;
+        getCloneItemStack(): $ItemStack;
         worldPosition: $BlockPos;
         drawers: $LerpedFloat;
         level: $Level;

@@ -17,11 +17,11 @@ import { $Record } from "@package/java/lang";
 declare module "@package/net/minecraft/world/level/levelgen/feature/rootplacers" {
     export class $RootPlacer {
         placeRoots(arg0: $LevelSimulatedReader, arg1: $BiConsumer_<$BlockPos, $BlockState>, arg2: $RandomSource, arg3: $BlockPos_, arg4: $BlockPos_, arg5: $TreeConfiguration): boolean;
+        getTrunkOrigin(arg0: $BlockPos_, arg1: $RandomSource): $BlockPos;
         static rootPlacerParts<P extends $RootPlacer>(arg0: $RecordCodecBuilder$Instance<P>): $Products$P3<$RecordCodecBuilder$Mu<P>, $IntProvider, $BlockStateProvider, ($AboveRootPlacement) | undefined>;
         getPotentiallyWaterloggedState(arg0: $LevelSimulatedReader, arg1: $BlockPos_, arg2: $BlockState_): $BlockState;
         canPlaceRoot(arg0: $LevelSimulatedReader, arg1: $BlockPos_): boolean;
         placeRoot(arg0: $LevelSimulatedReader, arg1: $BiConsumer_<$BlockPos, $BlockState>, arg2: $RandomSource, arg3: $BlockPos_, arg4: $TreeConfiguration): void;
-        getTrunkOrigin(arg0: $BlockPos_, arg1: $RandomSource): $BlockPos;
         type(): $RootPlacerType<never>;
         static CODEC: $Codec<$RootPlacer>;
         aboveRootPlacement: ($AboveRootPlacement) | undefined;
@@ -38,7 +38,7 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/rootplacers"
     /**
      * Values that may be interpreted as {@link $AboveRootPlacement}.
      */
-    export type $AboveRootPlacement_ = { aboveRootProvider?: $BlockStateProvider, aboveRootPlacementChance?: number,  } | [aboveRootProvider?: $BlockStateProvider, aboveRootPlacementChance?: number, ];
+    export type $AboveRootPlacement_ = { aboveRootPlacementChance?: number, aboveRootProvider?: $BlockStateProvider,  } | [aboveRootPlacementChance?: number, aboveRootProvider?: $BlockStateProvider, ];
     export interface $RootPlacerType<P> extends RegistryMarked<RegistryTypes.WorldgenRootPlacerTypeTag, RegistryTypes.WorldgenRootPlacerType> {}
     export class $MangroveRootPlacement extends $Record {
         canGrowThrough(): $HolderSet<$Block>;
@@ -53,7 +53,7 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/rootplacers"
     /**
      * Values that may be interpreted as {@link $MangroveRootPlacement}.
      */
-    export type $MangroveRootPlacement_ = { randomSkewChance?: number, maxRootWidth?: number, maxRootLength?: number, canGrowThrough?: $HolderSet_<$Block>, muddyRootsIn?: $HolderSet_<$Block>, muddyRootsProvider?: $BlockStateProvider,  } | [randomSkewChance?: number, maxRootWidth?: number, maxRootLength?: number, canGrowThrough?: $HolderSet_<$Block>, muddyRootsIn?: $HolderSet_<$Block>, muddyRootsProvider?: $BlockStateProvider, ];
+    export type $MangroveRootPlacement_ = { muddyRootsIn?: $HolderSet_<$Block>, canGrowThrough?: $HolderSet_<$Block>, maxRootLength?: number, maxRootWidth?: number, randomSkewChance?: number, muddyRootsProvider?: $BlockStateProvider,  } | [muddyRootsIn?: $HolderSet_<$Block>, canGrowThrough?: $HolderSet_<$Block>, maxRootLength?: number, maxRootWidth?: number, randomSkewChance?: number, muddyRootsProvider?: $BlockStateProvider, ];
     export class $MangroveRootPlacer extends $RootPlacer {
         potentialRootPositions(arg0: $BlockPos_, arg1: $Direction_, arg2: $RandomSource, arg3: $BlockPos_): $List<$BlockPos>;
         static CODEC: $MapCodec<$MangroveRootPlacer>;

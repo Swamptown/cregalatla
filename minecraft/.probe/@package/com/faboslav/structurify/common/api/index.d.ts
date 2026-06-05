@@ -58,18 +58,18 @@ declare module "@package/com/faboslav/structurify/common/api" {
     export class $StructurifyJigsawStructure {
     }
     export interface $StructurifyJigsawStructure extends $StructurifyStructure {
-        structurify$getMaxDistanceFromCenter(): number;
-        structurify$getMaxDistanceFromCenter(arg0: number): number;
-        structurify$setMaxDistanceFromCenter(arg0: number): void;
-        invalidateStructureJigsawData(): void;
+        structurify$getProjectStartToHeightmap(arg0: ($Heightmap$Types_) | undefined): ($Heightmap$Types) | undefined;
+        structurify$getProjectStartToHeightmap(): ($Heightmap$Types) | undefined;
         structurify$getMaxDepth(arg0: number): number;
         structurify$getMaxDepth(): number;
         structurify$setMaxDepth(arg0: number): void;
         structurify$getStartHeight(arg0: $HeightProvider): $HeightProvider;
         structurify$getStartHeight(): $HeightProvider;
         structurify$setStartHeight(arg0: $HeightProvider): void;
-        structurify$getProjectStartToHeightmap(): ($Heightmap$Types) | undefined;
-        structurify$getProjectStartToHeightmap(arg0: ($Heightmap$Types_) | undefined): ($Heightmap$Types) | undefined;
         structurify$setProjectStartToHeightmap(arg0: ($Heightmap$Types_) | undefined): void;
+        structurify$getMaxDistanceFromCenter(): number;
+        structurify$getMaxDistanceFromCenter(arg0: number): number;
+        structurify$setMaxDistanceFromCenter(arg0: number): void;
+        invalidateStructureJigsawData(): void;
     }
 }

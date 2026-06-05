@@ -9,27 +9,27 @@ import { $Animation, $AnimationProcessor, $AnimationState } from "@package/softw
 
 declare module "@package/software/bernie/geckolib/model" {
     export class $GeoModel<T extends $GeoAnimatable> {
-        applyMolangQueries(arg0: $AnimationState<T>, arg1: number): void;
-        getAnimationProcessor(): $AnimationProcessor<T>;
-        addAdditionalStateData(arg0: T, arg1: number, arg2: $BiConsumer_<$DataTicket<T>, T>): void;
-        getModelResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
-        /**
-         * @deprecated
-         */
-        getModelResource(arg0: T): $ResourceLocation;
-        getAnimationResource(arg0: T): $ResourceLocation;
-        getAnimationResourceFallbacks(arg0: T): $ResourceLocation[];
-        crashIfBoneMissing(): boolean;
-        setCustomAnimations(arg0: T, arg1: number, arg2: $AnimationState<T>): void;
-        getTextureResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
         /**
          * @deprecated
          */
         getTextureResource(arg0: T): $ResourceLocation;
-        getBakedModel(arg0: $ResourceLocation_): $BakedGeoModel;
+        getTextureResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
+        applyMolangQueries(arg0: $AnimationState<T>, arg1: number): void;
+        getAnimationProcessor(): $AnimationProcessor<T>;
+        /**
+         * @deprecated
+         */
+        getModelResource(arg0: T): $ResourceLocation;
+        getModelResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
+        addAdditionalStateData(arg0: T, arg1: number, arg2: $BiConsumer_<$DataTicket<T>, T>): void;
+        getAnimationResource(arg0: T): $ResourceLocation;
+        getAnimationResourceFallbacks(arg0: T): $ResourceLocation[];
+        crashIfBoneMissing(): boolean;
+        setCustomAnimations(arg0: T, arg1: number, arg2: $AnimationState<T>): void;
         getBone(arg0: string): ($GeoBone) | undefined;
-        getAnimation(arg0: T, arg1: string): $Animation;
+        getBakedModel(arg0: $ResourceLocation_): $BakedGeoModel;
         handleAnimations(arg0: T, arg1: number, arg2: $AnimationState<T>, arg3: number): void;
+        getAnimation(arg0: T, arg1: string): $Animation;
         getRenderType(arg0: T, arg1: $ResourceLocation_): $RenderType;
         constructor();
         get animationProcessor(): $AnimationProcessor<T>;

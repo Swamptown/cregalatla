@@ -2,15 +2,15 @@ import { $LevelAccessor } from "@package/net/minecraft/world/level";
 import { $Predicate_, $Supplier_, $Function_, $BiFunction_, $Consumer_, $BiConsumer_ } from "@package/java/util/function";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $Stream } from "@package/java/util/stream";
-import { $ListTag, $CompoundTag, $ListTag_ } from "@package/net/minecraft/nbt";
+import { $CompoundTag, $ListTag, $ListTag_ } from "@package/net/minecraft/nbt";
 import { $Spliterator, $Iterator } from "@package/java/util";
 import { $Iterable } from "@package/java/lang";
 import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/createmod/catnip/data" {
     export class $Pair<F, S> {
-        setFirst(arg0: F): void;
         setSecond(arg0: S): void;
+        setFirst(arg0: F): void;
         static streamCodec<B, F, S>(arg0: $StreamCodec<B, F>, arg1: $StreamCodec<B, S>): $StreamCodec<B, $Pair<F, S>>;
         getSecond(): S;
         static of<F, S>(arg0: F, arg1: S): $Pair<F, S>;
@@ -39,11 +39,10 @@ declare module "@package/net/createmod/catnip/data" {
         forEach(arg0: $Consumer_<T>): void;
         static create<T>(arg0: $Supplier_<T>): $Couple<T>;
         static create<T>(arg0: T, arg1: T): $Couple<T>;
-        swap(): $Couple<T>;
-        mapNotNull<S>(arg0: $Function_<T, S>): $Couple<S>;
         either(arg0: $Predicate_<T>): boolean;
         static codec<T>(arg0: $Codec<T>): $Codec<$Couple<T>>;
         both(arg0: $Predicate_<T>): boolean;
+        mapNotNull<S>(arg0: $Function_<T, S>): $Couple<S>;
         static createWithContext<T>(arg0: $Function_<boolean, T>): $Couple<T>;
         spliterator(): $Spliterator<T>;
         [Symbol.iterator](): Iterator<T>

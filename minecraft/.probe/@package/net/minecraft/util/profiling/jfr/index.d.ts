@@ -36,18 +36,18 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         constructor(arg0: $Runnable_);
     }
     export class $JfrProfiler implements $JvmProfiler {
-        onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
-        onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
         onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
+        onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
+        onServerTick(arg0: number): void;
         onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
+        onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
+        onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onWorldLoadedStarted(): $ProfiledDuration;
         isAvailable(): boolean;
         static getInstance(): $JfrProfiler;
         start(arg0: $Environment_): boolean;
         stop(): $Path;
         isRunning(): boolean;
-        onServerTick(arg0: number): void;
         static TICK_CATEGORY: string;
         static WORLD_GEN_CATEGORY: string;
         static STORAGE_CATEGORY: string;
@@ -62,17 +62,17 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         static INSTANCE: $JvmProfiler;
     }
     export interface $JvmProfiler {
-        onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
-        onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
         onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
+        onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
+        onServerTick(arg0: number): void;
         onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
+        onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
+        onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onWorldLoadedStarted(): $ProfiledDuration;
         isAvailable(): boolean;
         start(arg0: $Environment_): boolean;
         stop(): $Path;
         isRunning(): boolean;
-        onServerTick(arg0: number): void;
         get available(): boolean;
         get running(): boolean;
     }
@@ -82,17 +82,17 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         static DEFAULT_INDEXES: $Quantiles$ScaleAndIndexes;
     }
     export class $JvmProfiler$NoOpProfiler implements $JvmProfiler {
-        onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
-        onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
         onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
+        onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
+        onServerTick(arg0: number): void;
         onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
+        onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
+        onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
         onWorldLoadedStarted(): $ProfiledDuration;
         isAvailable(): boolean;
         start(arg0: $Environment_): boolean;
         stop(): $Path;
         isRunning(): boolean;
-        onServerTick(arg0: number): void;
         static noOpCommit: $ProfiledDuration;
         constructor();
         get available(): boolean;

@@ -24,13 +24,14 @@ declare module "@package/xaero/common/events" {
         constructor(arg0: $IXaeroMinimap);
     }
     export class $ClientEvents {
-        handlePlayerTickStart(arg0: $Player): void;
         handleRenderGameOverlayEventPost(): void;
+        handlePlayerTickStart(arg0: $Player): void;
         handleRenderStatusEffectOverlay(arg0: $GuiGraphics): boolean;
         handleForceToggleKeyMapping(arg0: $ToggleKeyMapping): boolean;
         handleGuiOpen(arg0: $Screen): $Screen;
         handleRenderGameOverlayEventPre(arg0: $GuiGraphics, arg1: number): void;
         handleClientSendChatEvent(arg0: string): boolean;
+        handleClientPlayerChatReceivedEvent(arg0: $ChatType$Bound_, arg1: $Component_, arg2: $GameProfile): boolean;
         handleClientSystemChatReceivedEvent(arg0: $Component_): boolean;
         handleDrawScreenEventPost(arg0: $Screen): void;
         handlePlayerSetSpawnEvent(arg0: $BlockPos_, arg1: $Level_): void;
@@ -39,17 +40,16 @@ declare module "@package/xaero/common/events" {
         handleClientTickStart(): void;
         handleRenderTickStart(): void;
         handleRenderCrosshairOverlay(arg0: $GuiGraphics): boolean;
-        handleClientPlayerChatReceivedEvent(arg0: $ChatType$Bound_, arg1: $Component_, arg2: $GameProfile): boolean;
         latestRealm: $RealmsServer;
         constructor(arg0: $HudMod);
         get lastGuiOpen(): $Object;
     }
     export class $CommonEvents {
+        onServerStarting(arg0: $MinecraftServer): void;
+        onServerStopped(arg0: $MinecraftServer): void;
         handlePlayerTickStart(arg0: $Player): void;
         onPlayerLogIn(arg0: $Player): void;
         onPlayerWorldJoin(arg0: $ServerPlayer): void;
-        onServerStarting(arg0: $MinecraftServer): void;
-        onServerStopped(arg0: $MinecraftServer): void;
         constructor(arg0: $HudMod);
     }
     export class $ClientEventsListener {

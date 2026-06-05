@@ -267,21 +267,22 @@ declare module "@package/org/jline/reader" {
     }
     export interface $LineReader {
         getBuffer(): $Buffer;
-        variable(arg0: string, arg1: $Object): $LineReader;
         getKeys(): $KeyMap<$Binding>;
+        variable(arg0: string, arg1: $Object): $LineReader;
         isSet(arg0: $LineReader$Option_): boolean;
-        readLine(arg0: string, arg1: string, arg2: $MaskingCallback, arg3: string): string;
         readLine(): string;
-        readLine(arg0: string, arg1: string, arg2: string, arg3: string): string;
-        readLine(arg0: string): string;
+        readLine(arg0: string, arg1: string, arg2: $MaskingCallback, arg3: string): string;
         readLine(arg0: string): string;
         readLine(arg0: string, arg1: string): string;
         readLine(arg0: string, arg1: string, arg2: string): string;
+        readLine(arg0: string, arg1: string, arg2: string, arg3: string): string;
+        readLine(arg0: string): string;
         option(arg0: $LineReader$Option_, arg1: boolean): $LineReader;
         getTerminal(): $Terminal;
-        printAbove(arg0: string): void;
         printAbove(arg0: $AttributedString): void;
+        printAbove(arg0: string): void;
         getParser(): $Parser;
+        setVariable(arg0: string, arg1: $Object): void;
         getWidgets(): $Map<string, $Widget>;
         readMouseEvent(): $MouseEvent;
         defaultKeyMaps(): $Map<string, $KeyMap<$Binding>>;
@@ -289,7 +290,6 @@ declare module "@package/org/jline/reader" {
         callWidget(arg0: string): void;
         getVariables(): $Map<string, $Object>;
         getVariable(arg0: string): $Object;
-        setVariable(arg0: string, arg1: $Object): void;
         setOpt(arg0: $LineReader$Option_): void;
         unsetOpt(arg0: $LineReader$Option_): void;
         getBuiltinWidgets(): $Map<string, $Widget>;
@@ -415,10 +415,10 @@ declare module "@package/org/jline/reader" {
     }
     export interface $ParsedLine {
         wordCursor(): number;
-        cursor(): number;
         words(): $List<string>;
         wordIndex(): number;
         word(): string;
+        cursor(): number;
         line(): string;
     }
     export class $History$Entry {
@@ -440,46 +440,46 @@ declare module "@package/org/jline/reader" {
     export class $Buffer {
     }
     export interface $Buffer {
+        currChar(arg0: number): boolean;
+        currChar(): number;
         atChar(arg0: number): number;
         moveXY(arg0: number, arg1: number): boolean;
         upToCursor(): string;
-        backspace(arg0: number): number;
         backspace(): boolean;
+        backspace(arg0: number): number;
         prevChar(): number;
-        cursor(arg0: number): boolean;
-        cursor(): number;
-        down(): boolean;
-        up(): boolean;
         move(arg0: number): number;
+        copyFrom(arg0: $Buffer): void;
+        cursor(): number;
+        cursor(arg0: number): boolean;
+        up(): boolean;
+        down(): boolean;
         length(): number;
         toString(): string;
         clear(): boolean;
         substring(arg0: number): string;
         substring(arg0: number, arg1: number): string;
-        write(arg0: $CharSequence, arg1: boolean): void;
         write(arg0: number): void;
         write(arg0: number, arg1: boolean): void;
+        write(arg0: $CharSequence, arg1: boolean): void;
         write(arg0: $CharSequence): void;
-        delete(arg0: number): number;
         delete(): boolean;
+        delete(arg0: number): number;
         copy(): $Buffer;
         nextChar(): number;
-        copyFrom(arg0: $Buffer): void;
-        currChar(): number;
-        currChar(arg0: number): boolean;
     }
     export class $Parser {
         static REGEX_VARIABLE: string;
         static REGEX_COMMAND: string;
     }
     export interface $Parser {
+        validVariableName(arg0: string): boolean;
         isEscapeChar(arg0: string): boolean;
         validCommandName(arg0: string): boolean;
         getCommand(arg0: string): string;
         parse(arg0: string, arg1: number, arg2: $Parser$ParseContext_): $ParsedLine;
         parse(arg0: string, arg1: number): $ParsedLine;
         getVariable(arg0: string): string;
-        validVariableName(arg0: string): boolean;
     }
     /**
      * Values that may be interpreted as {@link $Parser}.

@@ -12,10 +12,10 @@ import { $VersionChecker$Status } from "@package/net/neoforged/fml";
 
 declare module "@package/net/neoforged/neoforge/client/loading" {
     export class $ClientModLoader extends $CommonModLoader {
+        static checkForUpdates(): $VersionChecker$Status;
         static isLoading(): boolean;
         static begin(arg0: $Minecraft, arg1: $PackRepository, arg2: $ReloadableResourceManager): void;
         static completeModLoading(arg0: $Runnable_): $Runnable;
-        static checkForUpdates(): $VersionChecker$Status;
         constructor();
         static get loading(): boolean;
     }

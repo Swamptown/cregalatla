@@ -1,5 +1,5 @@
 import { $Predicate_ } from "@package/java/util/function";
-import { $ConfiguredProperty, $BalmConfigSchema } from "@package/net/blay09/mods/balm/api/config/schema";
+import { $BalmConfigSchema, $ConfiguredProperty } from "@package/net/blay09/mods/balm/api/config/schema";
 export * as schema from "@package/net/blay09/mods/balm/api/config/schema";
 
 declare module "@package/net/blay09/mods/balm/api/config" {

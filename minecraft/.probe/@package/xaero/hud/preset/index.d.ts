@@ -4,8 +4,8 @@ import { $Iterable } from "@package/java/lang";
 
 declare module "@package/xaero/hud/preset" {
     export class $HudPreset {
-        applyAndConfirm(): void;
         confirm(): void;
+        applyAndConfirm(): void;
         getName(): $Component;
         apply(): void;
         getId(): $ResourceLocation;

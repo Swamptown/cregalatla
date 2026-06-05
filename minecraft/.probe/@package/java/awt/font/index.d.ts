@@ -1,5 +1,5 @@
 import { $AttributedCharacterIterator$Attribute } from "@package/java/text";
-import { $Point2D, $Rectangle2D, $AffineTransform } from "@package/java/awt/geom";
+import { $Rectangle2D, $Point2D, $AffineTransform } from "@package/java/awt/geom";
 import { $Font, $Shape, $Rectangle } from "@package/java/awt";
 import { $Object, $Cloneable } from "@package/java/lang";
 
@@ -24,12 +24,12 @@ declare module "@package/java/awt/font" {
     }
     export class $TextHitInfo {
         getInsertionIndex(): number;
-        static trailing(arg0: number): $TextHitInfo;
         isLeadingEdge(): boolean;
         static beforeOffset(arg0: number): $TextHitInfo;
         static afterOffset(arg0: number): $TextHitInfo;
         getOtherHit(): $TextHitInfo;
         getOffsetHit(arg0: number): $TextHitInfo;
+        static trailing(arg0: number): $TextHitInfo;
         equals(arg0: $TextHitInfo): boolean;
         getCharIndex(): number;
         static leading(arg0: number): $TextHitInfo;
@@ -43,27 +43,27 @@ declare module "@package/java/awt/font" {
         getGlyphOutline(arg0: number): $Shape;
         getGlyphOutline(arg0: number, arg1: number, arg2: number): $Shape;
         getFontRenderContext(): $FontRenderContext;
-        getOutline(): $Shape;
-        getOutline(arg0: number, arg1: number): $Shape;
-        getGlyphMetrics(arg0: number): $GlyphMetrics;
-        getGlyphCode(arg0: number): number;
-        getLayoutFlags(): number;
+        getGlyphCharIndex(arg0: number): number;
+        getVisualBounds(): $Rectangle2D;
         getGlyphVisualBounds(arg0: number): $Shape;
+        performDefaultLayout(): void;
+        getGlyphCode(arg0: number): number;
+        getGlyphCodes(arg0: number, arg1: number, arg2: number[]): number[];
+        getGlyphCharIndices(arg0: number, arg1: number, arg2: number[]): number[];
+        getLogicalBounds(): $Rectangle2D;
+        getPixelBounds(arg0: $FontRenderContext, arg1: number, arg2: number): $Rectangle;
+        getGlyphPosition(arg0: number): $Point2D;
+        setGlyphPosition(arg0: number, arg1: $Point2D): void;
         getGlyphTransform(arg0: number): $AffineTransform;
         setGlyphTransform(arg0: number, arg1: $AffineTransform): void;
-        getGlyphPosition(arg0: number): $Point2D;
-        getGlyphCodes(arg0: number, arg1: number, arg2: number[]): number[];
+        getLayoutFlags(): number;
         getGlyphPositions(arg0: number, arg1: number, arg2: number[]): number[];
-        getGlyphCharIndices(arg0: number, arg1: number, arg2: number[]): number[];
-        performDefaultLayout(): void;
-        getGlyphCharIndex(arg0: number): number;
-        getLogicalBounds(): $Rectangle2D;
-        getVisualBounds(): $Rectangle2D;
-        getPixelBounds(arg0: $FontRenderContext, arg1: number, arg2: number): $Rectangle;
-        setGlyphPosition(arg0: number, arg1: $Point2D): void;
         getGlyphLogicalBounds(arg0: number): $Shape;
         getGlyphPixelBounds(arg0: number, arg1: $FontRenderContext, arg2: number, arg3: number): $Rectangle;
         getGlyphJustificationInfo(arg0: number): $GlyphJustificationInfo;
+        getGlyphMetrics(arg0: number): $GlyphMetrics;
+        getOutline(arg0: number, arg1: number): $Shape;
+        getOutline(): $Shape;
         equals(arg0: $GlyphVector): boolean;
         getFont(): $Font;
         static FLAG_HAS_TRANSFORMS: number;
@@ -73,9 +73,9 @@ declare module "@package/java/awt/font" {
         static FLAG_RUN_RTL: number;
         get numGlyphs(): number;
         get fontRenderContext(): $FontRenderContext;
-        get layoutFlags(): number;
-        get logicalBounds(): $Rectangle2D;
         get visualBounds(): $Rectangle2D;
+        get logicalBounds(): $Rectangle2D;
+        get layoutFlags(): number;
         get font(): $Font;
     }
     export class $GlyphJustificationInfo {
@@ -159,24 +159,24 @@ declare module "@package/java/awt/font" {
         static UNDERLINE_LOW_TWO_PIXEL: number;
     }
     export class $LineMetrics {
-        getLeading(): number;
-        getAscent(): number;
-        getDescent(): number;
-        getUnderlineOffset(): number;
         getUnderlineThickness(): number;
         getStrikethroughOffset(): number;
         getStrikethroughThickness(): number;
+        getAscent(): number;
+        getDescent(): number;
+        getUnderlineOffset(): number;
+        getLeading(): number;
         getNumChars(): number;
         getBaselineIndex(): number;
         getBaselineOffsets(): number[];
         getHeight(): number;
-        get leading(): number;
-        get ascent(): number;
-        get descent(): number;
-        get underlineOffset(): number;
         get underlineThickness(): number;
         get strikethroughOffset(): number;
         get strikethroughThickness(): number;
+        get ascent(): number;
+        get descent(): number;
+        get underlineOffset(): number;
+        get leading(): number;
         get numChars(): number;
         get baselineIndex(): number;
         get baselineOffsets(): number[];

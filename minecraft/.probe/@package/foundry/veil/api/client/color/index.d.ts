@@ -30,9 +30,9 @@ declare module "@package/foundry/veil/api/client/color" {
         alpha(arg0: number): $Color;
         alpha(): number;
         invert(): $Color;
-        lerp(arg0: $Colorc, arg1: number): $Color;
-        setSaturation(arg0: number): $Color;
         setLuminance(arg0: number): $Color;
+        setSaturation(arg0: number): $Color;
+        lerp(arg0: $Colorc, arg1: number): $Color;
         setHSV(arg0: number, arg1: number, arg2: number, arg3: $Color): $Color;
         redInt(): number;
         greenInt(): number;
@@ -48,13 +48,13 @@ declare module "@package/foundry/veil/api/client/color" {
         rgb(): number;
         mix(arg0: $Colorc, arg1: number, arg2: $Color): $Color;
         invert(arg0: $Color): $Color;
+        setLuminance(arg0: number, arg1: $Color): $Color;
+        luminance(): number;
+        setSaturation(arg0: number, arg1: $Color): $Color;
         argb(): number;
         lerp(arg0: $Colorc, arg1: number, arg2: $Color): $Color;
         maxComponent(): number;
         minComponent(): number;
-        setSaturation(arg0: number, arg1: $Color): $Color;
-        setLuminance(arg0: number, arg1: $Color): $Color;
-        luminance(): number;
         static WHITE: $Colorc;
         static RGB_INT_CODEC: $Codec<number>;
         static BLUE: $Colorc;
@@ -101,12 +101,12 @@ declare module "@package/foundry/veil/api/client/color" {
         green(): number;
         alpha(): number;
         invert(arg0: $Color): $Color;
+        setLuminance(arg0: number, arg1: $Color): $Color;
+        luminance(): number;
+        setSaturation(arg0: number, arg1: $Color): $Color;
         argb(): number;
         lerp(arg0: $Colorc, arg1: number, arg2: $Color): $Color;
         maxComponent(): number;
         minComponent(): number;
-        setSaturation(arg0: number, arg1: $Color): $Color;
-        setLuminance(arg0: number, arg1: $Color): $Color;
-        luminance(): number;
     }
 }

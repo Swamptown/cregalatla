@@ -21,8 +21,8 @@ declare module "@package/net/neoforged/neoforge/client/textures" {
         u1: number;
     }
     export class $NamespacedDirectoryLister extends $Record implements $SpriteSource {
-        idPrefix(): string;
         namespace(): string;
+        idPrefix(): string;
         run(arg0: $ResourceManager, arg1: $SpriteSource$Output): void;
         type(): $SpriteSourceType;
         sourcePath(): string;
@@ -33,7 +33,7 @@ declare module "@package/net/neoforged/neoforge/client/textures" {
     /**
      * Values that may be interpreted as {@link $NamespacedDirectoryLister}.
      */
-    export type $NamespacedDirectoryLister_ = { idPrefix?: string, namespace?: string, sourcePath?: string,  } | [idPrefix?: string, namespace?: string, sourcePath?: string, ];
+    export type $NamespacedDirectoryLister_ = { namespace?: string, idPrefix?: string, sourcePath?: string,  } | [namespace?: string, idPrefix?: string, sourcePath?: string, ];
     export class $SpriteContentsConstructor {
     }
     export interface $SpriteContentsConstructor {
@@ -44,8 +44,8 @@ declare module "@package/net/neoforged/neoforge/client/textures" {
      */
     export type $SpriteContentsConstructor_ = ((arg0: $ResourceLocation, arg1: $FrameSize, arg2: $NativeImage, arg3: $ResourceMetadata) => $SpriteContents);
     export class $FluidSpriteCache {
+        static getFluidSprites(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState): $TextureAtlasSprite[];
         static reload(): void;
         static getSprite(arg0: $ResourceLocation_): $TextureAtlasSprite;
-        static getFluidSprites(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState): $TextureAtlasSprite[];
     }
 }

@@ -78,8 +78,8 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(arg0: $RenderLayerParent<T, $WitchModel<T>>, arg1: $ItemInHandRenderer);
     }
     export class $ItemInHandLayer<T extends $LivingEntity, M extends $EntityModel<T>> extends $RenderLayer<T, M> {
-        render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         renderArmWithItem(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: $HumanoidArm_, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number): void;
+        render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         renderer: $RenderLayerParent<T, M>;
         constructor(arg0: $RenderLayerParent<T, M>, arg1: $ItemInHandRenderer);
     }
@@ -133,22 +133,22 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
     export class $HumanoidArmorLayer<T extends $LivingEntity, M extends $HumanoidModel<T>, A extends $HumanoidModel<T>> extends $RenderLayer<T, M> implements $HumanoidArmorLayerAccessor {
         setPartVisibility(arg0: A, arg1: $EquipmentSlot_): void;
         getArmorModelHook(arg0: T, arg1: $ItemStack_, arg2: $EquipmentSlot_, arg3: A): $Model;
-        wrapWithCondition$ddo000$geckolib$wrapArmorPieceRender(arg0: $HumanoidArmorLayer<any, any, any>, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: $LivingEntity, arg4: $EquipmentSlot_, arg5: number, arg6: $HumanoidModel<any>, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): boolean;
-        static getArmorLocationCache$create_$md$4ca6b6$0(): $Map<any, any>;
+        wrapWithCondition$dig000$geckolib$wrapArmorPieceRender(arg0: $HumanoidArmorLayer<any, any, any>, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: $LivingEntity, arg4: $EquipmentSlot_, arg5: number, arg6: $HumanoidModel<any>, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): boolean;
+        static getArmorLocationCache$create_$md$3b3139$0(): $Map<any, any>;
         render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         create$getInnerModel(): $HumanoidModel<never>;
-        create$callSetPartVisibility(arg0: $HumanoidModel<never>, arg1: $EquipmentSlot_): void;
         create$getOuterModel(): $HumanoidModel<never>;
+        create$callSetPartVisibility(arg0: $HumanoidModel<never>, arg1: $EquipmentSlot_): void;
         renderer: $RenderLayerParent<T, M>;
         constructor(arg0: $RenderLayerParent<T, M>, arg1: A, arg2: A, arg3: $ModelManager);
-        static get armorLocationCache$create_$md$4ca6b6$0(): $Map<any, any>;
+        static get armorLocationCache$create_$md$3b3139$0(): $Map<any, any>;
     }
     export class $EnderEyesLayer<T extends $LivingEntity> extends $EyesLayer<T, $EndermanModel<T>> {
         renderer: $RenderLayerParent<T, $EndermanModel<T>>;
         constructor(arg0: $RenderLayerParent<T, $EndermanModel<T>>);
     }
     export class $PlayerItemInHandLayer<T extends $Player, M extends $EntityModel<T>> extends $ItemInHandLayer<T, M> {
-        handler$gkp000$moonlight$poseRightArm(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: $HumanoidArm_, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: $CallbackInfo): void;
+        handler$hib000$moonlight$poseRightArm(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: $HumanoidArm_, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: $CallbackInfo): void;
         renderer: $RenderLayerParent<T, M>;
         constructor(arg0: $RenderLayerParent<T, M>, arg1: $ItemInHandRenderer);
     }
@@ -216,7 +216,8 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(arg0: $LivingEntityRenderer<T, M>);
     }
     export class $CapeLayer extends $RenderLayer<$AbstractClientPlayer, $PlayerModel<$AbstractClientPlayer>> implements $ICapeLayer {
-        handler$cdn000$fabric_rendering_v1$injectCapeRenderCheck(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CallbackInfo): void;
+        handler$cfk000$fabric_rendering_v1$injectCapeRenderCheck(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CallbackInfo): void;
+        handler$ekf001$beansbackpacks$injectCapeRenderCheck(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CallbackInfo): void;
         render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         applyBend(cape: $ModelPart, torso: $ModelPart, bend: number): void;
         resetBend(cape: $ModelPart): void;
@@ -238,7 +239,7 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
      */
     export type $WardenEmissiveLayer$DrawSelector_<T, M> = ((arg0: M) => $List_<$ModelPart>);
     export class $CustomHeadLayer<T extends $LivingEntity, M extends $EntityModel<T>> extends $RenderLayer<T, M> {
-        handler$ghi000$skinlayers3d$render(poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, i: number, livingEntity: $LivingEntity, f: number, g: number, h: number, j: number, k: number, l: number, info: $CallbackInfo): void;
+        handler$hek000$skinlayers3d$render(poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, i: number, livingEntity: $LivingEntity, f: number, g: number, h: number, j: number, k: number, l: number, info: $CallbackInfo): void;
         static translateToHead(arg0: $PoseStack, arg1: boolean): void;
         render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: T, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         renderer: $RenderLayerParent<T, M>;

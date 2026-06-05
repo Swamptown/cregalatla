@@ -14,9 +14,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync" {
     export class $IUISyncManagerHolder {
     }
     export interface $IUISyncManagerHolder {
-        writeInitialData(arg0: $RegistryFriendlyByteBuf): void;
         getSyncManager(): $UISyncManager;
         readInitialData(arg0: $RegistryFriendlyByteBuf): void;
+        writeInitialData(arg0: $RegistryFriendlyByteBuf): void;
         get syncManager(): $UISyncManager;
     }
     /**
@@ -31,20 +31,17 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync" {
         sendEvent<T>(arg0: $RPCEvent_, arg1: $Consumer_<T>, ...arg2: $Object[]): void;
         unregisterRPCEvent(arg0: $RPCEvent_): $UISyncManager;
         handleSyncPacket(arg0: $RegistryFriendlyByteBuf): void;
-        writeInitialData(arg0: $RegistryFriendlyByteBuf): void;
-        readInitialData(arg0: $RegistryFriendlyByteBuf): void;
         handEvent(arg0: $RegistryFriendlyByteBuf): void;
         handEventReturn(arg0: $RegistryFriendlyByteBuf): void;
         getReturnCallbacks(): $Map<number, $Consumer<never>>;
         tick(): void;
+        readInitialData(arg0: $RegistryFriendlyByteBuf): void;
+        writeInitialData(arg0: $RegistryFriendlyByteBuf): void;
         modularUI: $ModularUI;
         constructor(arg0: $ModularUI);
         get returnCallbacks(): $Map<number, $Consumer<never>>;
     }
     export class $SyncValue<T> {
-        writeSyncData(arg0: $RegistryFriendlyByteBuf): void;
-        readSyncData(arg0: $RegistryFriendlyByteBuf): void;
-        hasChanged(): boolean;
         markAsChanged(): void;
         clearChanged(): void;
         setValueProvider(arg0: $Supplier_<T>): void;
@@ -54,6 +51,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync" {
         setToSync(arg0: boolean): void;
         getSyncStrategy(): $SyncStrategy;
         setSyncStrategy(arg0: $SyncStrategy_): void;
+        writeSyncData(arg0: $RegistryFriendlyByteBuf): void;
+        readSyncData(arg0: $RegistryFriendlyByteBuf): void;
+        hasChanged(): boolean;
         update(): void;
         getValue(): T;
         setValue(arg0: T): void;

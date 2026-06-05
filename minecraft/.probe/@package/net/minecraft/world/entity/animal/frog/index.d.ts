@@ -1,7 +1,6 @@
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $SensorType, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $MoveControl, $LookControl, $JumpControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $CompoundTag } from "@package/net/minecraft/nbt";
 import { $EntityType_, $Pose, $PortalProcessor, $VariantHolder, $Entity, $AnimationState, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $WalkAnimationState, $Mob, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
@@ -10,7 +9,7 @@ import { $FrogVariant, $Animal, $AbstractFish } from "@package/net/minecraft/wor
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $Predicate } from "@package/java/util/function";
 import { $InteractionHand } from "@package/net/minecraft/world";
-import { $HolderLookup$Provider, $BlockPos, $Holder_, $Holder, $BlockPos_, $Vec3i } from "@package/net/minecraft/core";
+import { $BlockPos, $Holder_, $Holder, $BlockPos_, $Vec3i } from "@package/net/minecraft/core";
 import { $SoundEvent_ } from "@package/net/minecraft/sounds";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
@@ -40,8 +39,8 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
     export class $FrogAi {
         static getTemptations(): $Predicate<$ItemStack>;
         static initMemories(arg0: $Frog, arg1: $RandomSource): void;
-        static updateActivity(arg0: $Frog): void;
         static makeBrain(arg0: $Brain<$Frog>): $Brain<never>;
+        static updateActivity(arg0: $Frog): void;
         constructor();
         static get temptations(): $Predicate<$ItemStack>;
     }
@@ -55,13 +54,13 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         entityWidth: number;
     }
     export class $TadpoleAi {
-        static updateActivity(arg0: $Tadpole): void;
         static makeBrain(arg0: $Brain<$Tadpole>): $Brain<never>;
+        static updateActivity(arg0: $Tadpole): void;
         constructor();
     }
     export class $ShootTongue extends $Behavior<$Frog> {
-        canStillUse(arg0: $ServerLevel, arg1: $Frog, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Frog): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: $Frog, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Frog, arg2: number): void;
         start(arg0: $ServerLevel, arg1: $Frog, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Frog, arg2: number): void;
@@ -82,10 +81,9 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         setTongueTarget(arg0: $Entity): void;
         static checkFrogSpawnRules(arg0: $EntityType_<$Animal>, arg1: $LevelAccessor, arg2: $MobSpawnType_, arg3: $BlockPos_, arg4: $RandomSource): boolean;
         setVariant(arg0: $Holder_<$FrogVariant>): void;
-        getVariant(): $Holder<$FrogVariant>;
-        static canEat(arg0: $LivingEntity): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        serializeNBT(arg0: $HolderLookup$Provider): $Holder<$FrogVariant>;
+        static canEat(arg0: $LivingEntity): boolean;
+        getVariant(): $Holder<$FrogVariant>;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -117,6 +115,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -142,6 +141,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static DEFAULT_BB_HEIGHT: number;
@@ -168,6 +168,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;
@@ -285,7 +286,6 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
     export type $ShootTongue$State_ = "move_to_target" | "catch_animation" | "eat_animation" | "done";
     export class $Tadpole extends $AbstractFish {
         getTicksLeftUntilAdult(): number;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         static MAX_WEARING_ARMOR_CHANCE: number;
         lastHurtByPlayerTime: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -316,6 +316,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         handDropChances: number[];
         swingingArm: $InteractionHand;
         static ID_TAG: string;
+        static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         armorDropChances: number[];
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
@@ -340,6 +341,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         static RANDOM_SPAWN_BONUS_ID: $ResourceLocation;
         verticalCollisionBelow: boolean;
         static DEFAULT_BABY_SCALE: number;
+        eyeHeight: number;
         static ATTRIBUTES_FIELD: string;
         static UPDATE_GOAL_SELECTOR_EVERY_N_TICKS: number;
         static ticksToBeFrog: number;
@@ -366,6 +368,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         dimensions: $EntityDimensions;
         firstTick: boolean;
         damageContainers: $Stack<$DamageContainer>;
+        instance: $LivingEntity;
         static DEFAULT_EQUIPMENT_DROP_CHANCE: number;
         static ARMOR_SLOT_OFFSET: number;
         run: number;

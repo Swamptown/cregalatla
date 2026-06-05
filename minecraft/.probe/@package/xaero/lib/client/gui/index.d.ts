@@ -18,8 +18,8 @@ declare module "@package/xaero/lib/client/gui" {
     export class $IScreenBase {
     }
     export interface $IScreenBase extends $IDropDownContainer {
-        shouldSkipWorldRender(): boolean;
         getEscape(): $Screen;
+        shouldSkipWorldRender(): boolean;
         get escape(): $Screen;
     }
     export class $GuiSettings extends $ScreenBase implements $WidgetScreen {
@@ -45,16 +45,15 @@ declare module "@package/xaero/lib/client/gui" {
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
         font: $Font;
-        constructor(arg0: $Component_, arg1: $Screen, arg2: $Screen);
         constructor(arg0: $Component_, arg1: $Screen, arg2: $Screen, arg3: boolean);
+        constructor(arg0: $Component_, arg1: $Screen, arg2: $Screen);
         get entriesCopy(): $ISettingEntry[];
         get screen(): S;
     }
     export class $ScreenBase extends $Screen implements $IScreenBase {
-        shouldSkipWorldRender(): boolean;
-        getEscape(): $Screen;
         canSkipWorldRender(): boolean;
         renderEscapeScreen(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
+        getEscape(): $Screen;
         replaceWidget(arg0: $AbstractWidget, arg1: $AbstractWidget): void;
         restoreFocus(arg0: number): void;
         onDropdownOpen(arg0: $DropDownWidget): void;
@@ -62,6 +61,7 @@ declare module "@package/xaero/lib/client/gui" {
         replaceRenderableWidget(arg0: $AbstractWidget, arg1: $AbstractWidget): void;
         goBack(): void;
         static tryToGetEscape(arg0: $Screen): $Screen;
+        shouldSkipWorldRender(): boolean;
         refresh(): void;
         onExit(arg0: $Screen): void;
         getIndex(arg0: $GuiEventListener): number;

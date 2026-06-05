@@ -15,11 +15,11 @@ declare module "@package/com/google/common/hash" {
         putLong(l: number): $PrimitiveSink;
         putFloat(f: number): $PrimitiveSink;
         putDouble(d: number): $PrimitiveSink;
+        putBytes(bytes: number[], off: number, len: number): $PrimitiveSink;
+        putBytes(bytes: number[]): $PrimitiveSink;
+        putBytes(bytes: $ByteBuffer): $PrimitiveSink;
         putUnencodedChars(charSequence: $CharSequence): $PrimitiveSink;
         putString(charSequence: $CharSequence, charset: $Charset): $PrimitiveSink;
-        putBytes(bytes: $ByteBuffer): $PrimitiveSink;
-        putBytes(bytes: number[]): $PrimitiveSink;
-        putBytes(bytes: number[], off: number, len: number): $PrimitiveSink;
     }
     export class $HashFunction {
     }
@@ -38,8 +38,8 @@ declare module "@package/com/google/common/hash" {
     }
     export class $HashCode {
         asBytes(): number[];
-        asInt(): number;
         bits(): number;
+        asInt(): number;
         static fromString(string: string): $HashCode;
         asLong(): number;
         writeBytesTo(dest: number[], offset: number, maxLength: number): number;
@@ -68,16 +68,16 @@ declare module "@package/com/google/common/hash" {
         putChar(c: string): $Hasher;
         hash(): $HashCode;
         putObject<T>(instance: T, funnel: $Funnel_<T>): $Hasher;
-        putUnencodedChars(charSequence: $CharSequence): $Hasher;
-        putBytes(bytes: number[], off: number, len: number): $Hasher;
+        putString(charSequence: $CharSequence, charset: $Charset): $Hasher;
         putByte(b: number): $PrimitiveSink;
         putShort(s: number): $PrimitiveSink;
         putInt(i: number): $PrimitiveSink;
         putLong(l: number): $PrimitiveSink;
         putFloat(f: number): $PrimitiveSink;
         putDouble(d: number): $PrimitiveSink;
-        putString(charSequence: $CharSequence, charset: $Charset): $PrimitiveSink;
-        putBytes(bytes: $ByteBuffer): $PrimitiveSink;
-        putBytes(bytes: $ByteBuffer): $PrimitiveSink;
+        putBytes(bytes: number[]): $PrimitiveSink;
+        putBytes(bytes: number[], off: number, len: number): $PrimitiveSink;
+        putBytes(bytes: number[]): $PrimitiveSink;
+        putUnencodedChars(charSequence: $CharSequence): $PrimitiveSink;
     }
 }

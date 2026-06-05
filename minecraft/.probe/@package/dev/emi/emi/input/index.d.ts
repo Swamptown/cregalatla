@@ -20,7 +20,7 @@ declare module "@package/dev/emi/emi/input" {
     /**
      * Values that may be interpreted as {@link $EmiBind$ModifiedKey}.
      */
-    export type $EmiBind$ModifiedKey_ = { modifiers?: number, key?: $InputConstants$Key,  } | [modifiers?: number, key?: $InputConstants$Key, ];
+    export type $EmiBind$ModifiedKey_ = { key?: $InputConstants$Key, modifiers?: number,  } | [key?: $InputConstants$Key, modifiers?: number, ];
     export class $EmiBind implements $GlobalMixin {
         updateBinds(): void;
         getBindText(): $Component;

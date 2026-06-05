@@ -30,11 +30,11 @@ declare module "@package/com/simibubi/create/api/behaviour/movement" {
         renderInContraption(arg0: $MovementContext, arg1: $VirtualRenderWorld, arg2: $ContraptionMatrices, arg3: $MultiBufferSource_): void;
         createVisual(arg0: $VisualizationContext, arg1: $VirtualRenderWorld, arg2: $MovementContext): $ActorVisual;
         disableBlockEntityRendering(): boolean;
+        tick(arg0: $MovementContext): void;
         /**
          * @deprecated
          */
         dropItem(arg0: $MovementContext, arg1: $ItemStack_): void;
-        tick(arg0: $MovementContext): void;
         isActive(arg0: $MovementContext): boolean;
     }
 }

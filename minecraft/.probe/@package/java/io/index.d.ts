@@ -10,6 +10,8 @@ declare module "@package/java/io" {
     export class $DataInputStream extends $FilterInputStream implements $DataInput {
         readChar(): string;
         readFloat(): number;
+        readFully(arg0: number[], arg1: number, arg2: number): void;
+        readFully(arg0: number[]): void;
         readUnsignedByte(): number;
         readUnsignedShort(): number;
         skipBytes(arg0: number): number;
@@ -18,8 +20,6 @@ declare module "@package/java/io" {
         readShort(): number;
         readLong(): number;
         readDouble(): number;
-        readFully(arg0: number[]): void;
-        readFully(arg0: number[], arg1: number, arg2: number): void;
         /**
          * @deprecated
          */
@@ -150,6 +150,8 @@ declare module "@package/java/io" {
     export interface $DataInput {
         readChar(): string;
         readFloat(): number;
+        readFully(arg0: number[]): void;
+        readFully(arg0: number[], arg1: number, arg2: number): void;
         readUnsignedByte(): number;
         readUnsignedShort(): number;
         skipBytes(arg0: number): number;
@@ -158,8 +160,6 @@ declare module "@package/java/io" {
         readShort(): number;
         readLong(): number;
         readDouble(): number;
-        readFully(arg0: number[], arg1: number, arg2: number): void;
-        readFully(arg0: number[]): void;
         readLine(): string;
         readInt(): number;
         readUTF(): string;
@@ -202,8 +202,8 @@ declare module "@package/java/io" {
      */
     export type $FileFilter_ = ((arg0: $File) => boolean);
     export class $ByteArrayOutputStream extends $OutputStream {
-        writeTo(arg0: $OutputStream): void;
         toByteArray(): number[];
+        writeTo(arg0: $OutputStream): void;
         size(): number;
         reset(): void;
         toString(arg0: string): string;

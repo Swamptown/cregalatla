@@ -29,10 +29,10 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
     }
     export interface $HolderSetType extends RegistryMarked<RegistryTypes.NeoforgeHolderSetTypeTag, RegistryTypes.NeoforgeHolderSetType> {}
     export class $NotHolderSet<T> implements $ICustomHolderSet<T> {
-        canSerializeIn(arg0: $HolderOwner<T>): boolean;
-        addInvalidationListener(arg0: $Runnable_): void;
-        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
         registryLookup(): $HolderLookup$RegistryLookup<T>;
+        addInvalidationListener(arg0: $Runnable_): void;
+        canSerializeIn(arg0: $HolderOwner<T>): boolean;
+        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
         size(): number;
         get(arg0: number): $Holder<T>;
         type(): $HolderSetType;
@@ -66,8 +66,8 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
     export class $CompositeHolderSet<T> implements $ICustomHolderSet<T> {
         isHomogenous(): boolean;
         homogenize(): $List<$HolderSet<T>>;
-        canSerializeIn(arg0: $HolderOwner<T>): boolean;
         addInvalidationListener(arg0: $Runnable_): void;
+        canSerializeIn(arg0: $HolderOwner<T>): boolean;
         getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
         size(): number;
         get(arg0: number): $Holder<T>;
@@ -77,8 +77,8 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         unwrap(): $Either<$TagKey<T>, $List<$Holder<T>>>;
         getList(): $List<$Holder<T>>;
         getSet(): $Set<$Holder<T>>;
-        getComponents(): $List<$HolderSet<T>>;
         unwrapKey(): ($TagKey<T>) | undefined;
+        getComponents(): $List<$HolderSet<T>>;
         serializationType(): $IHolderSetExtension$SerializationType;
         spliterator(): $Spliterator<T>;
         forEach(arg0: $Consumer_<T>): void;
@@ -95,9 +95,9 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         constructor();
     }
     export class $AnyHolderSet<T> extends $Record implements $ICustomHolderSet<T> {
+        registryLookup(): $HolderLookup$RegistryLookup<T>;
         canSerializeIn(arg0: $HolderOwner<T>): boolean;
         getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
-        registryLookup(): $HolderLookup$RegistryLookup<T>;
         size(): number;
         get(arg0: number): $Holder<T>;
         type(): $HolderSetType;

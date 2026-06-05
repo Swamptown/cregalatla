@@ -5,10 +5,10 @@ export * as model from "@package/com/supermartijn642/fusion/entity/model";
 
 declare module "@package/com/supermartijn642/fusion/entity" {
     export class $VanillaModelLayerProperties {
+        getOffsetZ(): number;
         shouldFlipX(): boolean;
         shouldFlipY(): boolean;
         shouldFlipZ(): boolean;
-        getOffsetZ(): number;
         getOffsetX(): number;
         getOffsetY(): number;
         static get(location: $ModelLayerLocation, renderer: $EntityRenderer<never>): $VanillaModelLayerProperties;

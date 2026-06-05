@@ -7,7 +7,7 @@ import { $Reference2ReferenceMap, $ReferenceSet } from "@package/it/unimi/dsi/fa
 import { $Property } from "@package/net/minecraft/world/level/block/state/properties";
 import { $ColorProviderRegistryImpl$ColorMapperHolder } from "@package/net/fabricmc/fabric/impl/client/rendering";
 import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
-import { $Block_, $Block } from "@package/net/minecraft/world/level/block";
+import { $Block, $Block_ } from "@package/net/minecraft/world/level/block";
 import { $Map, $Set } from "@package/java/util";
 
 declare module "@package/net/minecraft/client/color/block" {
@@ -40,9 +40,9 @@ declare module "@package/net/minecraft/client/color/block" {
     export class $BlockTintCache$CacheData {
     }
     export class $BlockTintCache {
-        invalidateForChunk(arg0: number, arg1: number): void;
         getColor(arg0: $BlockPos_): number;
         invalidateAll(): void;
+        invalidateForChunk(arg0: number, arg1: number): void;
         constructor(arg0: $ToIntFunction_<$BlockPos>);
     }
 }

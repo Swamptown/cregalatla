@@ -17,9 +17,9 @@ declare module "@package/com/almostreliable/morejs/util" {
         map<T2>(arg0: $Function_<T, T2>): $WeightedList<T2>;
     }
     export class $Utils {
-        static nullableCast<T>(arg0: $Object): T;
         static matchesIngredient(arg0: $Ingredient_, arg1: $Ingredient_): boolean;
         static matchesItemCost(arg0: $Ingredient_, arg1: $ItemCost_): boolean;
+        static nullableCast<T>(arg0: $Object): T;
         static cast<T>(arg0: $Object, arg1: $Class<T>): (T) | undefined;
         static cast<T>(arg0: $Object): T;
         static format(arg0: string): string;
@@ -36,8 +36,8 @@ declare module "@package/com/almostreliable/morejs/util" {
      */
     export type $TriConsumer_<T1, T2, T3> = ((arg0: T1, arg1: T2, arg2: T3) => void);
     export class $ResourceOrTag<T> {
-        asHolderPredicate(): $Predicate<$Holder<T>>;
         asHolderSet(arg0: $Registry<T>): ($HolderSet<T>) | undefined;
+        asHolderPredicate(): $Predicate<$Holder<T>>;
         getName(): $Component;
         static get<E>(arg0: string, arg1: $ResourceKey_<$Registry<E>>): $ResourceOrTag<E>;
         get name(): $Component;

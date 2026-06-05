@@ -178,8 +178,8 @@ declare module "@package/com/simibubi/create/foundation/mixin/accessor" {
     }
     export interface $HumanoidArmorLayerAccessor {
         create$getInnerModel(): $HumanoidModel<never>;
-        create$callSetPartVisibility(arg0: $HumanoidModel<never>, arg1: $EquipmentSlot_): void;
         create$getOuterModel(): $HumanoidModel<never>;
+        create$callSetPartVisibility(arg0: $HumanoidModel<never>, arg1: $EquipmentSlot_): void;
     }
     export class $UseOnContextAccessor {
     }

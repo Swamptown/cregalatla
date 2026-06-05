@@ -14,7 +14,7 @@ declare module "@package/io/github/mortuusars/exposure/util/color" {
     /**
      * Values that may be interpreted as {@link $Color$Unbounded}.
      */
-    export type $Color$Unbounded_ = { a?: number, g?: number, b?: number, r?: number,  } | [a?: number, g?: number, b?: number, r?: number, ];
+    export type $Color$Unbounded_ = { g?: number, a?: number, r?: number, b?: number,  } | [g?: number, a?: number, r?: number, b?: number, ];
     export class $Color extends $Record {
         withAlpha(alpha: number): $Color;
         getARGB(): number;
@@ -43,13 +43,12 @@ declare module "@package/io/github/mortuusars/exposure/util/color" {
         static ABGRtoARGB(ABGR: number): number;
         static ARGBtoABGR(ARGB: number): number;
         static fromHex(hexColor: string): $Color;
-        static pack(alpha: number, red: number, green: number, blue: number): number;
-        getG(): number;
         getA(): number;
         getB(): number;
-        subtract(other: $Color_): $Color;
+        static pack(alpha: number, red: number, green: number, blue: number): number;
         static rgb(rgb: number): $Color;
         static rgb(r: number, g: number, b: number): $Color;
+        getG(): number;
         getRGB(): number;
         static clamp(channel: number): number;
         add(other: $Color_): $Color;
@@ -59,6 +58,7 @@ declare module "@package/io/github/mortuusars/exposure/util/color" {
         r(): number;
         multiply(scalar: number): $Color;
         static red(argb: number): number;
+        subtract(other: $Color_): $Color;
         static blue(argb: number): number;
         static green(argb: number): number;
         static alpha(argb: number): number;
@@ -82,5 +82,5 @@ declare module "@package/io/github/mortuusars/exposure/util/color" {
     /**
      * Values that may be interpreted as {@link $Color}.
      */
-    export type $Color_ = { a?: number, g?: number, b?: number, r?: number,  } | [a?: number, g?: number, b?: number, r?: number, ];
+    export type $Color_ = { g?: number, a?: number, r?: number, b?: number,  } | [g?: number, a?: number, r?: number, b?: number, ];
 }

@@ -7,8 +7,8 @@ declare module "@package/com/simibubi/create/content/processing/burner" {
         nextActiveLevel(): $BlazeBurnerBlock$HeatLevel;
         static values(): $BlazeBurnerBlock$HeatLevel[];
         static valueOf(arg0: string): $BlazeBurnerBlock$HeatLevel;
-        static byIndex(arg0: number): $BlazeBurnerBlock$HeatLevel;
         isAtLeast(arg0: $BlazeBurnerBlock$HeatLevel_): boolean;
+        static byIndex(arg0: number): $BlazeBurnerBlock$HeatLevel;
         getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static CODEC: $Codec<$BlazeBurnerBlock$HeatLevel>;

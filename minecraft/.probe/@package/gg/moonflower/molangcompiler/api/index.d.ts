@@ -53,15 +53,15 @@ declare module "@package/gg/moonflower/molangcompiler/api" {
         setQuery(arg0: string, arg1: number, arg2: $MolangJavaFunction_): $MolangEnvironmentBuilder<V>;
         setQuery(arg0: string, arg1: $Supplier_<number>): $MolangEnvironmentBuilder<V>;
         setQuery(arg0: string, arg1: $MolangExpression_): $MolangEnvironmentBuilder<V>;
-        setVariables(arg0: $MolangVariableProvider_): $MolangEnvironmentBuilder<V>;
         loadLibrary(arg0: string, arg1: $MolangObject): $MolangEnvironmentBuilder<V>;
         copy(arg0: $MolangEnvironment): $MolangEnvironmentBuilder<V>;
         create(): V;
         create(arg0: number): V;
         setGlobal(arg0: string, arg1: $MolangExpression_): $MolangEnvironmentBuilder<V>;
+        setGlobal(arg0: string, arg1: number, arg2: $MolangJavaFunction_): $MolangEnvironmentBuilder<V>;
         setGlobal(arg0: string, arg1: number): $MolangEnvironmentBuilder<V>;
         setGlobal(arg0: string, arg1: $Supplier_<number>): $MolangEnvironmentBuilder<V>;
-        setGlobal(arg0: string, arg1: number, arg2: $MolangJavaFunction_): $MolangEnvironmentBuilder<V>;
+        setVariables(arg0: $MolangVariableProvider_): $MolangEnvironmentBuilder<V>;
         setVariable(arg0: string, arg1: number): $MolangEnvironmentBuilder<V>;
         setVariable(arg0: string, arg1: $Supplier_<number>): $MolangEnvironmentBuilder<V>;
         setVariable(arg0: string, arg1: $MolangExpression_): $MolangEnvironmentBuilder<V>;
@@ -79,8 +79,8 @@ declare module "@package/gg/moonflower/molangcompiler/api" {
         hasParameter(arg0: number): boolean;
         setThisValue(arg0: number): void;
         edit(): $MolangEnvironmentBuilder<$MolangEnvironment>;
-        getThis(): number;
         getObjects(): $Collection<string>;
+        getThis(): number;
         has(arg0: string): boolean;
         get(arg0: string): $MolangObject;
         loadLibrary(arg0: string, arg1: $MolangObject, ...arg2: string[]): void;
@@ -91,8 +91,8 @@ declare module "@package/gg/moonflower/molangcompiler/api" {
         getParameter(arg0: number): number;
         canEdit(): boolean;
         set thisValue(value: number);
-        get this(): number;
         get objects(): $Collection<string>;
+        get this(): number;
         get parameters(): number;
     }
 }

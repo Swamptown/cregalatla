@@ -32,18 +32,18 @@ declare module "@package/com/simibubi/create/content/redstone/displayLink" {
         get targetPos(): $BlockPos;
     }
     export class $DisplayLinkBlockEntity extends $LinkWithBulbBlockEntity implements $TransformableBlockEntity {
+        getTargetPosition(): $BlockPos;
         tickSource(): void;
         onNoLongerPowered(): void;
+        handler$gjk001$sable$accountForSubLevels(arg0: $CallbackInfoReturnable<any>): void;
         setSourceConfig(arg0: $CompoundTag_): void;
-        handler$fpc001$sable$accountForSubLevels(arg0: $CallbackInfoReturnable<any>): void;
-        getTargetPosition(): $BlockPos;
         getSourceConfig(): $CompoundTag;
         updateGatheredData(): void;
         static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         target(arg0: $BlockPos_): void;
         transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
-        getDirection(): $Direction;
         getSourcePosition(): $BlockPos;
+        getDirection(): $Direction;
         worldPosition: $BlockPos;
         refreshTicks: number;
         level: $Level;
@@ -56,8 +56,8 @@ declare module "@package/com/simibubi/create/content/redstone/displayLink" {
         activeSource: $DisplaySource;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
         get targetPosition(): $BlockPos;
-        get direction(): $Direction;
         get sourcePosition(): $BlockPos;
+        get direction(): $Direction;
     }
     export class $LinkWithBulbBlockEntity extends $SmartBlockEntity {
         pulse(): void;

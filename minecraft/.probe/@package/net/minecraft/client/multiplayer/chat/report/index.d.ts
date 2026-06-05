@@ -18,9 +18,9 @@ import { $UserApiService } from "@package/com/mojang/authlib/minecraft";
 
 declare module "@package/net/minecraft/client/multiplayer/chat/report" {
     export class $ChatReportContextBuilder {
-        collectAllContext(arg0: $ChatLog, arg1: $IntCollection, arg2: $ChatReportContextBuilder$Handler_): void;
         acceptContext(arg0: $PlayerChatMessage_): boolean;
         trackContext(arg0: $PlayerChatMessage_): void;
+        collectAllContext(arg0: $ChatLog, arg1: $IntCollection, arg2: $ChatReportContextBuilder$Handler_): void;
         isActive(): boolean;
         leadingCount: number;
         constructor(arg0: number);
@@ -47,11 +47,11 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
         constructor(arg0: $UUID_, arg1: string, arg2: $AbuseReportLimits_);
     }
     export class $Report$Builder<R extends $Report> {
+        setComments(arg0: string): void;
         reportedProfileId(): $UUID;
         attested(): boolean;
         checkBuildable(): $Report$CannotBuildReason;
         setAttested(arg0: boolean): void;
-        setComments(arg0: string): void;
         report(): R;
         hasContent(): boolean;
         comments(): string;
@@ -87,12 +87,12 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
     /**
      * Values that may be interpreted as {@link $AbuseReportSender$Services}.
      */
-    export type $AbuseReportSender$Services_ = { environment?: $ReportEnvironment_, userApiService?: $UserApiService,  } | [environment?: $ReportEnvironment_, userApiService?: $UserApiService, ];
+    export type $AbuseReportSender$Services_ = { userApiService?: $UserApiService, environment?: $ReportEnvironment_,  } | [userApiService?: $UserApiService, environment?: $ReportEnvironment_, ];
     export class $ReportingContext {
-        sender(): $AbuseReportSender;
         setReportDraft(arg0: $Report): void;
         hasDraftReportFor(arg0: $UUID_): boolean;
         chatLog(): $ChatLog;
+        sender(): $AbuseReportSender;
         matches(arg0: $ReportEnvironment_): boolean;
         static create(arg0: $ReportEnvironment_, arg1: $UserApiService): $ReportingContext;
         hasDraftReport(): boolean;
@@ -101,11 +101,11 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
         set reportDraft(value: $Report);
     }
     export class $ReportEnvironment extends $Record {
-        clientVersion(): string;
         static thirdParty(arg0: string): $ReportEnvironment;
         clientInfo(): $AbuseReportRequest$ClientInfo;
         thirdPartyServerInfo(): $AbuseReportRequest$ThirdPartyServerInfo;
         realmInfo(): $AbuseReportRequest$RealmInfo;
+        clientVersion(): string;
         static create(arg0: $ReportEnvironment$Server): $ReportEnvironment;
         static local(): $ReportEnvironment;
         server(): $ReportEnvironment$Server;
@@ -165,9 +165,9 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
      */
     export type $ReportReason_ = "generic" | "hate_speech" | "harassment_or_bullying" | "self_harm_or_suicide" | "imminent_harm" | "defamation_impersonation_false_information" | "alcohol_tobacco_drugs" | "child_sexual_exploitation_or_abuse" | "terrorism_or_violent_extremism" | "non_consensual_intimate_imagery";
     export class $ChatReport$Builder extends $Report$Builder<$ChatReport> {
+        reportedMessages(): $IntSet;
         isReported(arg0: number): boolean;
         toggleReported(arg0: number): void;
-        reportedMessages(): $IntSet;
         copy(): $ChatReport$Builder;
         limits: $AbuseReportLimits;
         constructor(arg0: $ChatReport, arg1: $AbuseReportLimits_);
@@ -211,8 +211,8 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
     export class $ReportEnvironment$Server$Realm extends $Record implements $ReportEnvironment$Server {
         realmId(): number;
         slotId(): number;
-        constructor(arg0: number, arg1: number);
         constructor(arg0: $RealmsServer);
+        constructor(arg0: number, arg1: number);
     }
     /**
      * Values that may be interpreted as {@link $ReportEnvironment$Server$Realm}.
@@ -239,9 +239,9 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
     export class $ChatReportContextBuilder$Collector {
     }
     export class $Report {
+        createScreen(arg0: $Screen, arg1: $ReportingContext): $Screen;
         isReportedPlayer(arg0: $UUID_): boolean;
         copy(): $Report;
-        createScreen(arg0: $Screen, arg1: $ReportingContext): $Screen;
         reportedProfileId: $UUID;
         createdAt: $Instant;
         reason: $ReportReason;
@@ -270,5 +270,5 @@ declare module "@package/net/minecraft/client/multiplayer/chat/report" {
     /**
      * Values that may be interpreted as {@link $Report$Result}.
      */
-    export type $Report$Result_ = { id?: $UUID_, report?: $AbuseReport_, reportType?: $ReportType_,  } | [id?: $UUID_, report?: $AbuseReport_, reportType?: $ReportType_, ];
+    export type $Report$Result_ = { reportType?: $ReportType_, report?: $AbuseReport_, id?: $UUID_,  } | [reportType?: $ReportType_, report?: $AbuseReport_, id?: $UUID_, ];
 }

@@ -16,22 +16,22 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/rendering" {
         clear(): boolean;
         scale(arg0: number, arg1: number, arg2: number): void;
         last(): $PoseStack$Pose;
-        setIdentity(): void;
-        pushTransformation(arg0: $Transformation): void;
         mulPose(arg0: $Matrix4f): void;
         mulPose(arg0: $Quaternionf): void;
         translate(arg0: number, arg1: number, arg2: number): void;
         translate(arg0: number, arg1: number, arg2: number): void;
+        setIdentity(): void;
         pushPose(): void;
         popPose(): void;
         rotateAround(arg0: $Quaternionf, arg1: number, arg2: number, arg3: number): void;
+        pushTransformation(arg0: $Transformation): void;
         pose: $PoseStack;
         constructor(arg0: $PoseStack);
         set onTransform(value: $Runnable_);
     }
     export class $UIVisualLayer {
-        unbind(): void;
         bind(arg0: $GUIContext): void;
+        unbind(): void;
         clear(): void;
         release(): void;
         draw(arg0: $GUIContext): void;

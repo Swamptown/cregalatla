@@ -20,7 +20,7 @@ declare module "@package/software/bernie/geckolib/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $KeyframeStack}.
      */
-    export type $KeyframeStack_<T> = { zKeyframes?: $List_<$Keyframe_<never>>, yKeyframes?: $List_<$Keyframe_<never>>, xKeyframes?: $List_<$Keyframe_<never>>,  } | [zKeyframes?: $List_<$Keyframe_<never>>, yKeyframes?: $List_<$Keyframe_<never>>, xKeyframes?: $List_<$Keyframe_<never>>, ];
+    export type $KeyframeStack_<T> = { xKeyframes?: $List_<$Keyframe_<never>>, yKeyframes?: $List_<$Keyframe_<never>>, zKeyframes?: $List_<$Keyframe_<never>>,  } | [xKeyframes?: $List_<$Keyframe_<never>>, yKeyframes?: $List_<$Keyframe_<never>>, zKeyframes?: $List_<$Keyframe_<never>>, ];
     export class $BoneAnimationQueue extends $Record {
         rotationXQueue(): $AnimationPointQueue;
         rotationYQueue(): $AnimationPointQueue;
@@ -53,7 +53,7 @@ declare module "@package/software/bernie/geckolib/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $BoneAnimationQueue}.
      */
-    export type $BoneAnimationQueue_ = { scaleZQueue?: $AnimationPointQueue, scaleXQueue?: $AnimationPointQueue, rotationXQueue?: $AnimationPointQueue, positionYQueue?: $AnimationPointQueue, bone?: $GeoBone, rotationYQueue?: $AnimationPointQueue, scaleYQueue?: $AnimationPointQueue, positionZQueue?: $AnimationPointQueue, positionXQueue?: $AnimationPointQueue, rotationZQueue?: $AnimationPointQueue,  } | [scaleZQueue?: $AnimationPointQueue, scaleXQueue?: $AnimationPointQueue, rotationXQueue?: $AnimationPointQueue, positionYQueue?: $AnimationPointQueue, bone?: $GeoBone, rotationYQueue?: $AnimationPointQueue, scaleYQueue?: $AnimationPointQueue, positionZQueue?: $AnimationPointQueue, positionXQueue?: $AnimationPointQueue, rotationZQueue?: $AnimationPointQueue, ];
+    export type $BoneAnimationQueue_ = { positionXQueue?: $AnimationPointQueue, positionZQueue?: $AnimationPointQueue, scaleYQueue?: $AnimationPointQueue, rotationYQueue?: $AnimationPointQueue, bone?: $GeoBone, positionYQueue?: $AnimationPointQueue, rotationXQueue?: $AnimationPointQueue, scaleXQueue?: $AnimationPointQueue, scaleZQueue?: $AnimationPointQueue, rotationZQueue?: $AnimationPointQueue,  } | [positionXQueue?: $AnimationPointQueue, positionZQueue?: $AnimationPointQueue, scaleYQueue?: $AnimationPointQueue, rotationYQueue?: $AnimationPointQueue, bone?: $GeoBone, positionYQueue?: $AnimationPointQueue, rotationXQueue?: $AnimationPointQueue, scaleXQueue?: $AnimationPointQueue, scaleZQueue?: $AnimationPointQueue, rotationZQueue?: $AnimationPointQueue, ];
     export class $BoneAnimation extends $Record {
         boneName(): string;
         rotationKeyFrames(): $KeyframeStack<$Keyframe<$MathValue>>;
@@ -64,7 +64,7 @@ declare module "@package/software/bernie/geckolib/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $BoneAnimation}.
      */
-    export type $BoneAnimation_ = { boneName?: string, rotationKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, positionKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, scaleKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>,  } | [boneName?: string, rotationKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, positionKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, scaleKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, ];
+    export type $BoneAnimation_ = { positionKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, rotationKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, boneName?: string, scaleKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>,  } | [positionKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, rotationKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, boneName?: string, scaleKeyFrames?: $KeyframeStack_<$Keyframe_<$MathValue_>>, ];
     export class $Keyframe<T extends $MathValue> extends $Record {
         easingArgs(): $List<T>;
         easingType(): $EasingType;
@@ -78,5 +78,5 @@ declare module "@package/software/bernie/geckolib/animation/keyframe" {
     /**
      * Values that may be interpreted as {@link $Keyframe}.
      */
-    export type $Keyframe_<T> = { easingArgs?: $List_<$MathValue_>, easingType?: $EasingType_, endValue?: $MathValue_, length?: number, startValue?: $MathValue_,  } | [easingArgs?: $List_<$MathValue_>, easingType?: $EasingType_, endValue?: $MathValue_, length?: number, startValue?: $MathValue_, ];
+    export type $Keyframe_<T> = { length?: number, endValue?: $MathValue_, easingType?: $EasingType_, easingArgs?: $List_<$MathValue_>, startValue?: $MathValue_,  } | [length?: number, endValue?: $MathValue_, easingType?: $EasingType_, easingArgs?: $List_<$MathValue_>, startValue?: $MathValue_, ];
 }

@@ -23,10 +23,6 @@ export * as render from "@package/xaero/common/minimap/waypoints/render";
 declare module "@package/xaero/common/minimap/waypoints" {
     export class $Waypoint implements $Comparable<$Waypoint> {
         getInitialsSafe(arg0: string): string;
-        /**
-         * @deprecated
-         */
-        isOneoffDestination(): boolean;
         getNameSafe(arg0: string): string;
         /**
          * @deprecated
@@ -44,17 +40,21 @@ declare module "@package/xaero/common/minimap/waypoints" {
         /**
          * @deprecated
          */
-        setOneoffDestination(arg0: boolean): void;
-        getDistanceSq(arg0: number, arg1: number, arg2: number): number;
-        static getStringFromStringSafe(arg0: string, arg1: string): string;
+        isOneoffDestination(): boolean;
         /**
          * @deprecated
          */
-        getActualColor(): number;
+        setOneoffDestination(arg0: boolean): void;
+        getDistanceSq(arg0: number, arg1: number, arg2: number): number;
+        static getStringFromStringSafe(arg0: string, arg1: string): string;
         getComparisonAngleCos(arg0: $Camera, arg1: number): number;
         getComparisonName(): string;
         getComparisonDistance(arg0: $Camera, arg1: number): number;
         isServerWaypoint(): boolean;
+        /**
+         * @deprecated
+         */
+        getActualColor(): number;
         isYIncluded(): boolean;
         isRotation(): boolean;
         isDestination(): boolean;
@@ -65,31 +65,31 @@ declare module "@package/xaero/common/minimap/waypoints" {
         setInitials(arg0: string): void;
         setWaypointColor(arg0: $WaypointColor_): void;
         setYIncluded(arg0: boolean): void;
+        setDisabled(arg0: boolean): void;
         setTemporary(arg0: boolean): void;
         /**
          * @deprecated
          */
         getVisibilityType(): number;
         setYaw(arg0: number): void;
-        setDisabled(arg0: boolean): void;
+        getYaw(): number;
         isDisabled(): boolean;
         setRotation(arg0: boolean): void;
-        getYaw(): number;
-        getY(): number;
-        getInitials(): string;
-        /**
-         * @deprecated
-         */
-        getSymbol(): string;
-        /**
-         * @deprecated
-         */
-        setColor(arg0: number): void;
+        getLocalizedName(): string;
         /**
          * @deprecated
          */
         setType(arg0: number): void;
-        getLocalizedName(): string;
+        /**
+         * @deprecated
+         */
+        getSymbol(): string;
+        getInitials(): string;
+        getY(): number;
+        /**
+         * @deprecated
+         */
+        setColor(arg0: number): void;
         getName(): string;
         compareTo(arg0: $Waypoint): number;
         setName(arg0: string): void;
@@ -104,13 +104,13 @@ declare module "@package/xaero/common/minimap/waypoints" {
         setSymbol(arg0: string): void;
         setVisibility(arg0: $WaypointVisibilityType_): void;
         getVisibility(): $WaypointVisibilityType;
+        setX(arg0: number): void;
+        setY(arg0: number): void;
+        setZ(arg0: number): void;
         getX(arg0: number): number;
         getX(): number;
         getZ(arg0: number): number;
         getZ(): number;
-        setX(arg0: number): void;
-        setY(arg0: number): void;
-        setZ(arg0: number): void;
         static ONEOFF_DESTINATION_SAFE_FOR: number;
         static ONEOFF_DESTINATION_REMOVE_DISTANCE: number;
         static RENDER_SORTING_POS: $Vec3;
@@ -136,12 +136,12 @@ declare module "@package/xaero/common/minimap/waypoints" {
         constructor(arg0: number, arg1: number, arg2: number, arg3: string, arg4: string, arg5: $WaypointColor_, arg6: $WaypointPurpose_);
         get waypointType(): number;
         get createdAt(): number;
-        get actualColor(): number;
         get comparisonName(): string;
         get serverWaypoint(): boolean;
+        get actualColor(): number;
         get destination(): boolean;
-        set type(value: number);
         get localizedName(): string;
+        set type(value: number);
         get global(): boolean;
     }
     /**
@@ -163,11 +163,11 @@ declare module "@package/xaero/common/minimap/waypoints" {
         /**
          * @deprecated
          */
-        constructor(arg0: $HudMod, arg1: $MinimapSession, arg2: $XaeroPath);
+        constructor(arg0: $IXaeroMinimap, arg1: $XaeroMinimapSession, arg2: string);
         /**
          * @deprecated
          */
-        constructor(arg0: $IXaeroMinimap, arg1: $XaeroMinimapSession, arg2: string);
+        constructor(arg0: $HudMod, arg1: $MinimapSession, arg2: $XaeroPath);
     }
     /**
      * @deprecated
@@ -208,11 +208,11 @@ declare module "@package/xaero/common/minimap/waypoints" {
         /**
          * @deprecated
          */
-        getContainer(): $WaypointWorldContainer;
+        setCurrent(arg0: string): void;
         /**
          * @deprecated
          */
-        setCurrent(arg0: string): void;
+        getContainer(): $WaypointWorldContainer;
         /**
          * @deprecated
          */
@@ -339,6 +339,10 @@ declare module "@package/xaero/common/minimap/waypoints" {
         /**
          * @deprecated
          */
+        onServerLevelId(arg0: number): void;
+        /**
+         * @deprecated
+         */
         createDeathpoint(arg0: $Player): void;
         /**
          * @deprecated
@@ -355,19 +359,19 @@ declare module "@package/xaero/common/minimap/waypoints" {
         /**
          * @deprecated
          */
-        getCurrentContainerAndWorldID(): string;
-        /**
-         * @deprecated
-         */
         getCurrentContainerAndWorldID(arg0: string, arg1: string): string;
         /**
          * @deprecated
          */
-        getCurrentContainerID(arg0: string): string;
+        getCurrentContainerAndWorldID(): string;
         /**
          * @deprecated
          */
         getCurrentContainerID(): string;
+        /**
+         * @deprecated
+         */
+        getCurrentContainerID(arg0: string): string;
         /**
          * @deprecated
          */
@@ -379,11 +383,11 @@ declare module "@package/xaero/common/minimap/waypoints" {
         /**
          * @deprecated
          */
-        getCurrentOriginContainerID(): string;
+        getCurrentOriginContainerID(arg0: string): string;
         /**
          * @deprecated
          */
-        getCurrentOriginContainerID(arg0: string): string;
+        getCurrentOriginContainerID(): string;
         /**
          * @deprecated
          */
@@ -411,11 +415,11 @@ declare module "@package/xaero/common/minimap/waypoints" {
         /**
          * @deprecated
          */
-        createTemporaryWaypoints(arg0: $WaypointWorld, arg1: number, arg2: number, arg3: number, arg4: boolean): void;
+        createTemporaryWaypoints(arg0: $WaypointWorld, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: number): void;
         /**
          * @deprecated
          */
-        createTemporaryWaypoints(arg0: $WaypointWorld, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: number): void;
+        createTemporaryWaypoints(arg0: $WaypointWorld, arg1: number, arg2: number, arg3: number, arg4: boolean): void;
         /**
          * @deprecated
          */
@@ -487,10 +491,6 @@ declare module "@package/xaero/common/minimap/waypoints" {
         /**
          * @deprecated
          */
-        onServerLevelId(arg0: number): void;
-        /**
-         * @deprecated
-         */
         getCurrentWorld(): $WaypointWorld;
         /**
          * @deprecated
@@ -531,15 +531,15 @@ declare module "@package/xaero/common/minimap/waypoints" {
         /**
          * @deprecated
          */
+        getWorld(arg0: string, arg1: string): $WaypointWorld;
+        /**
+         * @deprecated
+         */
         teleportAnyway(): void;
         /**
          * @deprecated
          */
         getAutoWorld(): $WaypointWorld;
-        /**
-         * @deprecated
-         */
-        getWorld(arg0: string, arg1: string): $WaypointWorld;
         /**
          * @deprecated
          */

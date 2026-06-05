@@ -1,4 +1,4 @@
-import { $ModelPart, $PartPose } from "@package/net/minecraft/client/model/geom";
+import { $PartPose, $ModelPart } from "@package/net/minecraft/client/model/geom";
 import { $PoseStack, $VertexConsumer } from "@package/com/mojang/blaze3d/vertex";
 
 declare module "@package/dev/tr7zw/skinlayers/api" {
@@ -46,13 +46,13 @@ declare module "@package/dev/tr7zw/skinlayers/api" {
     export interface $Mesh {
         loadPose(arg0: $PartPose): void;
         setRotation(arg0: number, arg1: number, arg2: number): void;
-        reset(): void;
         copyFrom(arg0: $ModelPart): void;
-        render(poseStack: $PoseStack, vertexConsumer: $VertexConsumer, light: number, overlay: number): void;
-        render(arg0: $ModelPart, arg1: $PoseStack, arg2: $VertexConsumer, arg3: number, arg4: number, arg5: number): void;
-        render(vanillaModel: $ModelPart, poseStack: $PoseStack, vertexConsumer: $VertexConsumer, light: number, overlay: number, red: number, green: number, blue: number, alpha: number): void;
-        setVisible(arg0: boolean): void;
+        reset(): void;
         isVisible(): boolean;
+        render(poseStack: $PoseStack, vertexConsumer: $VertexConsumer, light: number, overlay: number): void;
+        render(vanillaModel: $ModelPart, poseStack: $PoseStack, vertexConsumer: $VertexConsumer, light: number, overlay: number, red: number, green: number, blue: number, alpha: number): void;
+        render(arg0: $ModelPart, arg1: $PoseStack, arg2: $VertexConsumer, arg3: number, arg4: number, arg5: number): void;
+        setVisible(arg0: boolean): void;
         setPosition(arg0: number, arg1: number, arg2: number): void;
     }
     export class $SkullData {

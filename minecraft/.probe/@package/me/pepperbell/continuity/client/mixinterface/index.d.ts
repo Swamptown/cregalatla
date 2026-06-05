@@ -14,8 +14,8 @@ declare module "@package/me/pepperbell/continuity/client/mixinterface" {
     export class $ModelLoaderExtension {
     }
     export interface $ModelLoaderExtension {
-        continuity$getModelWrappingHandler(): $ModelWrappingHandler;
         continuity$setModelWrappingHandler(arg0: $ModelWrappingHandler): void;
+        continuity$getModelWrappingHandler(): $ModelWrappingHandler;
     }
     export class $SpriteExtension {
     }

@@ -7,7 +7,7 @@ import { $FluidType } from "@package/net/neoforged/neoforge/fluids";
 import { $UUID } from "@package/java/util";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $EntityDataAccessor, $SynchedEntityData } from "@package/net/minecraft/network/syncher";
-import { $HolderLookup$Provider, $BlockPos } from "@package/net/minecraft/core";
+import { $BlockPos } from "@package/net/minecraft/core";
 import { $Object2DoubleMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $AtomicInteger } from "@package/java/util/concurrent/atomic";
 import { $Vec3 } from "@package/net/minecraft/world/phys";
@@ -17,7 +17,6 @@ export * as wither from "@package/net/minecraft/world/entity/boss/wither";
 
 declare module "@package/net/minecraft/world/entity/boss" {
     export class $EnderDragonPart extends $PartEntity<$EnderDragon> {
-        serializeNBT(arg0: $HolderLookup$Provider): $EnderDragon;
         firstTick: boolean;
         wasEyeInWater: boolean;
         hasImpulse: boolean;
@@ -67,6 +66,7 @@ declare module "@package/net/minecraft/world/entity/boss" {
          * @deprecated
          */
         fluidHeight: $Object2DoubleMap<$TagKey<$Fluid>>;
+        eyeHeight: number;
         minorHorizontalCollision: boolean;
         static DEFAULT_BB_HEIGHT: number;
         levelCallback: $EntityInLevelCallback;

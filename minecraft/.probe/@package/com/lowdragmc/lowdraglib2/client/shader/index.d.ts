@@ -24,9 +24,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/shader" {
         get shaderInstanceAccessor(): $ShaderInstanceAccessor;
     }
     export class $LDShaderInstance extends $ShaderInstance implements $ILDShaderInstance {
+        applySamplers(): void;
         getGeometry(): $Program;
         isSamplerCacheDirty(): boolean;
-        applySamplers(): void;
         static create(arg0: $ResourceLocation_, arg1: $VertexFormat, arg2: $Set_<string>): $LDShaderInstance;
         static create(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderInstance;
         FOG_START: $Uniform;
@@ -58,13 +58,13 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/shader" {
         buildConfigurator(arg0: $ConfiguratorGroup): void;
         addDynamicUniform(arg0: string, arg1: $Consumer_<$Uniform>): void;
         removeDynamicUniform(arg0: string): void;
-        getShaderInstance(): $LDShaderInstance;
         getShaderInstance(arg0: $Collection_<string>): $LDShaderInstance;
+        getShaderInstance(): $LDShaderInstance;
         addDynamicSampler(arg0: string, arg1: $Supplier_<$Object>): void;
-        isBuiltinUniform(arg0: $Uniform, arg1: $ShaderInstance): boolean;
         serializeSampler(arg0: $Object): $CompoundTag;
         deserializeSampler(arg0: $CompoundTag_): $Object;
         isBuiltinSampler(arg0: string): boolean;
+        isBuiltinUniform(arg0: $Uniform, arg1: $ShaderInstance): boolean;
         removeDynamicSampler(arg0: string): void;
         close(): void;
         static create(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderHolder;

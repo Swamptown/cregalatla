@@ -53,6 +53,7 @@ declare module "@package/xaero/common/minimap/render" {
         get triedFBO(): boolean;
     }
     export class $MinimapRendererHelper {
+        static restoreDefaultShaderBlendState(): void;
         defaultOrtho(arg0: $RenderTarget): void;
         prepareMyTexturedColoredModalRect(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number, arg13: number, arg14: $MultiTextureRenderTypeRenderer): void;
         addColoredLineToExistingBuffer(arg0: $PoseStack$Pose, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
@@ -61,9 +62,8 @@ declare module "@package/xaero/common/minimap/render" {
         addTexturedRectToExistingBuffer(arg0: $Matrix4f, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         drawIconOutline(arg0: $PoseStack, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
         prepareMyTexturedModalRect(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $MultiTextureRenderTypeRenderer): void;
-        drawMyColoredRect(arg0: $PoseStack, arg1: number, arg2: number, arg3: number, arg4: number): void;
         drawMyColoredRect(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
-        static restoreDefaultShaderBlendState(): void;
+        drawMyColoredRect(arg0: $PoseStack, arg1: number, arg2: number, arg3: number, arg4: number): void;
         constructor();
     }
     export class $MinimapRenderer {
@@ -73,10 +73,10 @@ declare module "@package/xaero/common/minimap/render" {
          */
         getLastPlayerDimDiv(): number;
         renderMinimap(arg0: $MinimapSession, arg1: $GuiGraphics, arg2: $MinimapProcessor, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CustomVertexConsumers): void;
+        getRenderAngle(arg0: boolean): number;
         setZoom(arg0: number): void;
         getZoom(): number;
         getSunBrightness(arg0: $MinimapProcessor, arg1: boolean): number;
-        getRenderAngle(arg0: boolean): number;
         static black: number;
         static slime: number;
         constructor(arg0: $HudMod, arg1: $Minecraft, arg2: $WaypointMapRenderer, arg3: $Minimap, arg4: $CompassRenderer);

@@ -29,10 +29,10 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/warden" {
         constructor();
     }
     export class $SonicBoom extends $Behavior<$Warden> {
-        canStillUse(arg0: $ServerLevel, arg1: $Warden, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: $Warden): boolean;
-        static setCooldown(arg0: $LivingEntity, arg1: number): void;
+        canStillUse(arg0: $ServerLevel, arg1: $Warden, arg2: number): boolean;
         tick(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
+        static setCooldown(arg0: $LivingEntity, arg1: number): void;
         start(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: $Warden, arg2: number): void;
         static COOLDOWN: number;
@@ -58,8 +58,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior/warden" {
         constructor(arg0: number);
     }
     export class $Digging<E extends $Warden> extends $Behavior<E> {
-        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         checkExtraStartConditions(arg0: $ServerLevel, arg1: E): boolean;
+        canStillUse(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         start(arg0: $ServerLevel, arg1: E, arg2: number): void;
         stop(arg0: $ServerLevel, arg1: E, arg2: number): void;
         static DEFAULT_DURATION: number;

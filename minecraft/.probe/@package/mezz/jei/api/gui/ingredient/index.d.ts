@@ -14,8 +14,7 @@ declare module "@package/mezz/jei/api/gui/ingredient" {
     export class $IRecipeSlotView {
     }
     export interface $IRecipeSlotView {
-        getIngredients<T>(arg0: $IIngredientType_<T>): $Stream<T>;
-        getItemStacks(): $Stream<$ItemStack>;
+        getRole(): $RecipeIngredientRole;
         getAllIngredients(): $Stream<$ITypedIngredient<never>>;
         getDisplayedIngredient<T>(arg0: $IIngredientType_<T>): (T) | undefined;
         getDisplayedIngredient(): ($ITypedIngredient<never>) | undefined;
@@ -23,14 +22,15 @@ declare module "@package/mezz/jei/api/gui/ingredient" {
         drawHighlight(arg0: $GuiGraphics, arg1: number): void;
         getDisplayedItemStack(): ($ItemStack) | undefined;
         getSlotName(): (string) | undefined;
-        getRole(): $RecipeIngredientRole;
+        getItemStacks(): $Stream<$ItemStack>;
+        getIngredients<T>(arg0: $IIngredientType_<T>): $Stream<T>;
         isEmpty(): boolean;
-        get itemStacks(): $Stream<$ItemStack>;
+        get role(): $RecipeIngredientRole;
         get allIngredients(): $Stream<$ITypedIngredient<never>>;
         get allIngredientsList(): $List<$ITypedIngredient<never>>;
         get displayedItemStack(): ($ItemStack) | undefined;
         get slotName(): (string) | undefined;
-        get role(): $RecipeIngredientRole;
+        get itemStacks(): $Stream<$ItemStack>;
         get empty(): boolean;
     }
     export class $IRecipeSlotRichTooltipCallback {
@@ -56,14 +56,6 @@ declare module "@package/mezz/jei/api/gui/ingredient" {
     export class $IRecipeSlotDrawable {
     }
     export interface $IRecipeSlotDrawable extends $IRecipeSlotView {
-        /**
-         * @deprecated
-         */
-        getTooltip(): $List<$Component>;
-        /**
-         * @deprecated
-         */
-        getTooltip(arg0: $ITooltipBuilder): void;
         drawHoverOverlays(arg0: $GuiGraphics): void;
         drawTooltip(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         createDisplayOverrides(): $IIngredientConsumer;
@@ -77,6 +69,14 @@ declare module "@package/mezz/jei/api/gui/ingredient" {
          */
         addTooltipCallback(arg0: $IRecipeSlotTooltipCallback_): void;
         getAreaIncludingBackground(): $Rect2i;
+        /**
+         * @deprecated
+         */
+        getTooltip(): $List<$Component>;
+        /**
+         * @deprecated
+         */
+        getTooltip(arg0: $ITooltipBuilder): void;
         draw(arg0: $GuiGraphics): void;
         isMouseOver(arg0: number, arg1: number): boolean;
         setPosition(arg0: number, arg1: number): void;

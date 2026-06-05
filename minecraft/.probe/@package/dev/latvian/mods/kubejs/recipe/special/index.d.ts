@@ -13,21 +13,21 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/dev/latvian/mods/kubejs/recipe/special" {
     export class $ShapelessKubeJSRecipe extends $ShapelessRecipe implements $KubeJSCraftingRecipe {
-        getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
         kjs$getIngredientActions(): $List<$IngredientActionHolder>;
         kjs$getModifyResult(): string;
-        kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
+        getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
         kjs$getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
+        kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
         result: $ItemStack;
         ingredients: $NonNullList<$Ingredient>;
         group: string;
         constructor(original: $ShapelessRecipe, ingredientActions: $List_<$IngredientActionHolder_>, modifyResult: string);
     }
     export class $SpecialRecipeSerializerManager implements $KubeEvent {
-        addSpecialFlag(id: $ResourceLocation_): void;
         ignoreSpecialFlag(id: $ResourceLocation_): void;
-        ignoreSpecialMod(modid: string): void;
         addSpecialMod(modid: string): void;
+        addSpecialFlag(id: $ResourceLocation_): void;
+        ignoreSpecialMod(modid: string): void;
         reset(): void;
         isSpecial(recipe: $Recipe<never>): boolean;
         /**
@@ -73,12 +73,12 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/special" {
         constructor();
     }
     export class $ShapedKubeJSRecipe extends $ShapedRecipe implements $KubeJSCraftingRecipe {
-        getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
         kjs$getMirror(): boolean;
         kjs$getIngredientActions(): $List<$IngredientActionHolder>;
         kjs$getModifyResult(): string;
-        kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
+        getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
         kjs$getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
+        kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
         result: $ItemStack;
         pattern: $ShapedRecipePattern;
         group: string;
@@ -90,10 +90,10 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/special" {
         static MODIFY_RESULT_KEY: string;
     }
     export interface $KubeJSCraftingRecipe extends $CraftingRecipe {
+        kjs$getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
         kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
         kjs$getIngredientActions(): $List<$IngredientActionHolder>;
         kjs$getModifyResult(): string;
-        kjs$getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
     }
     export class $ShapelessKubeJSRecipe$SerializerKJS implements $RecipeSerializer<$ShapelessKubeJSRecipe> {
         streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ShapelessKubeJSRecipe>;

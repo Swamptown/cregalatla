@@ -2,26 +2,26 @@ import { $Record } from "@package/java/lang";
 
 declare module "@package/software/bernie/geckolib/util" {
     export class $Color extends $Record {
+        argbInt(): number;
         static HSBtoARGB(arg0: number, arg1: number, arg2: number): number;
+        static ofRGBA(arg0: number, arg1: number, arg2: number, arg3: number): $Color;
+        static ofRGBA(arg0: number, arg1: number, arg2: number, arg3: number): $Color;
+        static ofOpaque(arg0: number): $Color;
+        static ofHSB(arg0: number, arg1: number, arg2: number): $Color;
+        static ofRGB(arg0: number, arg1: number, arg2: number): $Color;
+        static ofRGB(arg0: number, arg1: number, arg2: number): $Color;
+        static ofARGB(arg0: number, arg1: number, arg2: number, arg3: number): $Color;
+        static ofARGB(arg0: number, arg1: number, arg2: number, arg3: number): $Color;
         getAlphaFloat(): number;
         getRedFloat(): number;
         getGreenFloat(): number;
         getBlueFloat(): number;
-        static ofARGB(arg0: number, arg1: number, arg2: number, arg3: number): $Color;
-        static ofARGB(arg0: number, arg1: number, arg2: number, arg3: number): $Color;
-        static ofRGBA(arg0: number, arg1: number, arg2: number, arg3: number): $Color;
-        static ofRGBA(arg0: number, arg1: number, arg2: number, arg3: number): $Color;
-        static ofOpaque(arg0: number): $Color;
-        static ofRGB(arg0: number, arg1: number, arg2: number): $Color;
-        static ofRGB(arg0: number, arg1: number, arg2: number): $Color;
-        static ofHSB(arg0: number, arg1: number, arg2: number): $Color;
-        argbInt(): number;
-        brighter(arg0: number): $Color;
-        darker(arg0: number): $Color;
         getRed(): number;
         getGreen(): number;
         getBlue(): number;
         getAlpha(): number;
+        brighter(arg0: number): $Color;
+        darker(arg0: number): $Color;
         getColor(): number;
         static WHITE: $Color;
         static GRAY: $Color;

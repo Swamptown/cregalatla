@@ -11,10 +11,10 @@ export * as preprocessor from "@package/com/mojang/blaze3d/preprocessor";
 
 declare module "@package/com/mojang/blaze3d" {
     export class $Blaze3D {
-        static getTime(): number;
-        static process(arg0: $RenderPipeline, arg1: number): void;
-        static render(arg0: $RenderPipeline, arg1: number): void;
         static youJustLostTheGame(): void;
+        static process(arg0: $RenderPipeline, arg1: number): void;
+        static getTime(): number;
+        static render(arg0: $RenderPipeline, arg1: number): void;
         constructor();
         static get time(): number;
     }

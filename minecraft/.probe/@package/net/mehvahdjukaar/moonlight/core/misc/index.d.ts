@@ -31,11 +31,11 @@ declare module "@package/net/mehvahdjukaar/moonlight/core/misc" {
         moonlight$getDirtyCustomData(): ($List<$CustomMapData$DirtyDataPatch<never, never>>) | undefined;
     }
     export class $VillagerBrainEventInternal {
-        addSensor(arg0: $SensorType_<$Sensor<$Villager>>): void;
         getVillager(): $Villager;
         getMemories(): $Map<$MemoryModuleType<never>, ($ExpirableValue<never>) | undefined>;
         addOrReplaceActivity(arg0: $Activity_, arg1: $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>): void;
         scheduleActivity(arg0: $Activity_, arg1: number, arg2: number): void;
+        addSensor(arg0: $SensorType_<$Sensor<$Villager>>): void;
         addTaskToActivity<P extends $Pair<number, $Behavior<$Villager>>>(arg0: $Activity_, arg1: P): boolean;
         constructor(arg0: $Brain<$Villager>, arg1: $Villager);
         get villager(): $Villager;

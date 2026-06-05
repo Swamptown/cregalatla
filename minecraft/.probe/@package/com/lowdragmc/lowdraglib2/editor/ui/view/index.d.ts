@@ -16,6 +16,7 @@ import { $Editor, $View } from "@package/com/lowdragmc/lowdraglib2/editor/ui";
 
 declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/view" {
     export class $ResourceView extends $View {
+        loadResources(arg0: $Resources): void;
         getResourceInstance<T>(arg0: $Resource<never>): $ResourceInstance<T>;
         removeResource(arg0: $Resource<never>): void;
         addResourceInstances(...arg0: $ResourceInstance<never>[]): void;
@@ -23,7 +24,6 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/view" {
         getResourceTabs(): $BiMap<$Resource<never>, $Tab>;
         addResourceInstance(arg0: $ResourceInstance<never>): void;
         getSelectedResourceInstance(): $ResourceInstance<never>;
-        loadResources(arg0: $Resources): void;
         clear(): void;
         getResources(): $Map<$Resource<never>, $ResourceInstance<never>>;
         editor: $Editor;

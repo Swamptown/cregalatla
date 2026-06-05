@@ -31,26 +31,26 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk/compile/
         unwrap(): OUTPUT;
     }
     export class $ChunkBuilder {
-        tryStealTask(arg0: $ChunkJob): void;
-        getTotalThreadCount(): number;
-        shutdown(): void;
-        isBuildQueueEmpty(): boolean;
-        getHighEffortSchedulingBudget(): number;
         getLowEffortSchedulingBudget(): number;
         scheduleTask<TASK extends $ChunkBuilderTask<OUTPUT>, OUTPUT extends $BuilderTaskOutput>(arg0: TASK, arg1: boolean, arg2: $Consumer_<$ChunkJobResult<OUTPUT>>): $ChunkJobTyped<TASK, OUTPUT>;
         getScheduledJobCount(): number;
         getScheduledEffort(): number;
         getBusyThreadCount(): number;
+        getHighEffortSchedulingBudget(): number;
+        isBuildQueueEmpty(): boolean;
+        tryStealTask(arg0: $ChunkJob): void;
+        getTotalThreadCount(): number;
+        shutdown(): void;
         static EFFORT_PER_THREAD_PER_FRAME: number;
         static HIGH_EFFORT: number;
         static LOW_EFFORT: number;
         constructor(arg0: $ClientLevel, arg1: $ChunkVertexType);
-        get totalThreadCount(): number;
-        get buildQueueEmpty(): boolean;
-        get highEffortSchedulingBudget(): number;
         get lowEffortSchedulingBudget(): number;
         get scheduledJobCount(): number;
         get scheduledEffort(): number;
         get busyThreadCount(): number;
+        get highEffortSchedulingBudget(): number;
+        get buildQueueEmpty(): boolean;
+        get totalThreadCount(): number;
     }
 }

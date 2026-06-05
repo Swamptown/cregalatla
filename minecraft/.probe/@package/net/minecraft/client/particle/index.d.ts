@@ -8,7 +8,7 @@ import { $ParticleType_, $SculkChargeParticleOptions, $ParticleGroup, $Vibration
 import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $PositionSource } from "@package/net/minecraft/world/level/gameevent";
 import { $Camera } from "@package/net/minecraft/client";
-import { $ResourceManager, $PreparableReloadListener, $PreparableReloadListener$PreparationBarrier_ } from "@package/net/minecraft/server/packs/resources";
+import { $ResourceManager, $PreparableReloadListener$PreparationBarrier_, $PreparableReloadListener } from "@package/net/minecraft/server/packs/resources";
 import { $Queue, $Map, $List, $List_ } from "@package/java/util";
 import { $CellHasher } from "@package/dev/lambdaurora/lambdynlights/engine";
 import { $Frustum } from "@package/net/minecraft/client/renderer/culling";
@@ -242,11 +242,11 @@ declare module "@package/net/minecraft/client/particle" {
         constructor(arg0: $SpriteSet);
     }
     export class $FireworkParticles$Starter extends $NoRenderParticle {
-        redirect$zba000$sodium_extra$tick(arg0: $Particle, arg1: number, arg2: number, arg3: number): void;
+        redirect$zcg000$sodium_extra$tick(arg0: $Particle, arg1: number, arg2: number, arg3: number): void;
         createParticleBall(arg0: number, arg1: number, arg2: $IntList, arg3: $IntList, arg4: boolean, arg5: boolean): void;
         createParticleShape(arg0: number, arg1: number[][], arg2: $IntList, arg3: $IntList, arg4: boolean, arg5: boolean, arg6: boolean): void;
         createParticleBurst(arg0: $IntList, arg1: $IntList, arg2: boolean, arg3: boolean): void;
-        handler$zba000$sodium_extra$addExplosionParticle(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $IntList, arg7: $IntList, arg8: boolean, arg9: boolean, arg10: $CallbackInfo): void;
+        handler$zcg000$sodium_extra$addExplosionParticle(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $IntList, arg7: $IntList, arg8: boolean, arg9: boolean, arg10: $CallbackInfo): void;
         createParticle(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $IntList, arg7: $IntList, arg8: boolean, arg9: boolean): void;
         speedUpWhenYMotionIsBlocked: boolean;
         lifetime: number;
@@ -487,8 +487,8 @@ declare module "@package/net/minecraft/client/particle" {
         constructor(arg0: $SpriteSet);
     }
     export class $SimpleAnimatedParticle extends $TextureSheetParticle {
-        setColor(arg0: number): void;
         setFadeColor(arg0: number): void;
+        setColor(arg0: number): void;
         speedUpWhenYMotionIsBlocked: boolean;
         lifetime: number;
         roll: number;
@@ -521,8 +521,8 @@ declare module "@package/net/minecraft/client/particle" {
         bbWidth: number;
         age: number;
         constructor(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number, arg4: $SpriteSet, arg5: number);
-        set color(value: number);
         set fadeColor(value: number);
+        set color(value: number);
     }
     export class $DustPlumeParticle$Provider implements $ParticleProvider<$SimpleParticleType> {
         createParticle(arg0: $SimpleParticleType, arg1: $ClientLevel, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $Particle;
@@ -562,7 +562,7 @@ declare module "@package/net/minecraft/client/particle" {
         constructor(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $SpriteSet);
     }
     export class $FlameParticle extends $RisingParticle implements $ParticleExtension {
-        wrapMethod$fmi000$sable$move(arg0: number, arg1: number, arg2: number, arg3: $Operation_<any>): void;
+        wrapMethod$gha000$sable$move(arg0: number, arg1: number, arg2: number, arg3: $Operation_<any>): void;
         speedUpWhenYMotionIsBlocked: boolean;
         lifetime: number;
         roll: number;
@@ -792,7 +792,7 @@ declare module "@package/net/minecraft/client/particle" {
         getFacingCameraMode(): $SingleQuadParticle$FacingCameraMode;
         renderRotatedQuad(arg0: $VertexConsumer, arg1: $Quaternionf, arg2: number, arg3: number, arg4: number, arg5: number): void;
         renderRotatedQuad(arg0: $VertexConsumer, arg1: $Camera, arg2: $Quaternionf, arg3: number): void;
-        handler$chp000$sodium$renderRotatedQuad(arg0: $VertexConsumer, arg1: $Quaternionf, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $CallbackInfo): void;
+        handler$ckl000$sodium$renderRotatedQuad(arg0: $VertexConsumer, arg1: $Quaternionf, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $CallbackInfo): void;
         getQuadSize(arg0: number): number;
         getU0(): number;
         getU1(): number;
@@ -836,12 +836,12 @@ declare module "@package/net/minecraft/client/particle" {
         get v1(): number;
     }
     export class $Particle$LifetimeAlpha extends $Record {
+        currentAlphaForAge(arg0: number, arg1: number, arg2: number): number;
         startAtNormalizedAge(): number;
         endAtNormalizedAge(): number;
         startAlpha(): number;
         endAlpha(): number;
         isOpaque(): boolean;
-        currentAlphaForAge(arg0: number, arg1: number, arg2: number): number;
         static ALWAYS_OPAQUE: $Particle$LifetimeAlpha;
         constructor(startAlpha: number, endAlpha: number, startAtNormalizedAge: number, endAtNormalizedAge: number);
         get opaque(): boolean;
@@ -849,7 +849,7 @@ declare module "@package/net/minecraft/client/particle" {
     /**
      * Values that may be interpreted as {@link $Particle$LifetimeAlpha}.
      */
-    export type $Particle$LifetimeAlpha_ = { startAlpha?: number, endAlpha?: number, startAtNormalizedAge?: number, endAtNormalizedAge?: number,  } | [startAlpha?: number, endAlpha?: number, startAtNormalizedAge?: number, endAtNormalizedAge?: number, ];
+    export type $Particle$LifetimeAlpha_ = { endAlpha?: number, startAlpha?: number, endAtNormalizedAge?: number, startAtNormalizedAge?: number,  } | [endAlpha?: number, startAlpha?: number, endAtNormalizedAge?: number, startAtNormalizedAge?: number, ];
     export class $BlockMarker extends $TextureSheetParticle implements $ParticleSubLevelKickable {
         sable$shouldCollideWithTrackingSubLevel(): boolean;
         sable$shouldKickFromTracking(): boolean;
@@ -1073,8 +1073,8 @@ declare module "@package/net/minecraft/client/particle" {
         constructor(arg0: $SpriteSet);
     }
     export class $SculkChargeParticle$Provider extends $Record implements $ParticleProvider<$SculkChargeParticleOptions> {
-        createParticle(arg0: $SculkChargeParticleOptions_, arg1: $ClientLevel, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $Particle;
         sprite(): $SpriteSet;
+        createParticle(arg0: $SculkChargeParticleOptions_, arg1: $ClientLevel, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $Particle;
         constructor(arg0: $SpriteSet);
     }
     /**
@@ -1086,6 +1086,8 @@ declare module "@package/net/minecraft/client/particle" {
         constructor(arg0: $SpriteSet);
     }
     export class $DripParticle extends $TextureSheetParticle {
+        preMoveUpdate(): void;
+        postMoveUpdate(): void;
         static createLavaHangParticle(arg0: $SimpleParticleType, arg1: $ClientLevel, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $TextureSheetParticle;
         static createLavaFallParticle(arg0: $SimpleParticleType, arg1: $ClientLevel, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $TextureSheetParticle;
         static createLavaLandParticle(arg0: $SimpleParticleType, arg1: $ClientLevel, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $TextureSheetParticle;
@@ -1104,8 +1106,6 @@ declare module "@package/net/minecraft/client/particle" {
         static createDripstoneLavaHangParticle(arg0: $SimpleParticleType, arg1: $ClientLevel, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $TextureSheetParticle;
         static createDripstoneLavaFallParticle(arg0: $SimpleParticleType, arg1: $ClientLevel, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $TextureSheetParticle;
         getType(): $Fluid;
-        preMoveUpdate(): void;
-        postMoveUpdate(): void;
         speedUpWhenYMotionIsBlocked: boolean;
         lifetime: number;
         roll: number;
@@ -1366,8 +1366,8 @@ declare module "@package/net/minecraft/client/particle" {
         constructor(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $SpriteSet);
     }
     export class $SculkChargePopParticle$Provider extends $Record implements $ParticleProvider<$SimpleParticleType> {
-        createParticle(arg0: $SimpleParticleType, arg1: $ClientLevel, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $Particle;
         sprite(): $SpriteSet;
+        createParticle(arg0: $SimpleParticleType, arg1: $ClientLevel, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): $Particle;
         constructor(arg0: $SpriteSet);
     }
     /**
@@ -2093,7 +2093,7 @@ declare module "@package/net/minecraft/client/particle" {
     /**
      * Values that may be interpreted as {@link $ParticleEngine$1ParticleDefinition}.
      */
-    export type $ParticleEngine$1ParticleDefinition_ = { id?: $ResourceLocation_, sprites?: ($List_<$ResourceLocation_>) | undefined,  } | [id?: $ResourceLocation_, sprites?: ($List_<$ResourceLocation_>) | undefined, ];
+    export type $ParticleEngine$1ParticleDefinition_ = { sprites?: ($List_<$ResourceLocation_>) | undefined, id?: $ResourceLocation_,  } | [sprites?: ($List_<$ResourceLocation_>) | undefined, id?: $ResourceLocation_, ];
     export class $SpitParticle extends $ExplodeParticle {
         speedUpWhenYMotionIsBlocked: boolean;
         lifetime: number;
@@ -2174,24 +2174,24 @@ declare module "@package/net/minecraft/client/particle" {
     }
     export class $Particle implements $EntityDynamicLightSourceBehavior, $ParticleExtension {
         sable$moveWithInheritedVelocity(): void;
-        setColor(arg0: number, arg1: number, arg2: number): void;
         tick(): void;
         move(arg0: number, arg1: number, arg2: number): void;
+        setSize(arg0: number, arg1: number): void;
+        setColor(arg0: number, arg1: number, arg2: number): void;
         remove(): void;
         scale(arg0: number): $Particle;
         isAlive(): boolean;
-        setSize(arg0: number, arg1: number): void;
-        setPower(arg0: number): $Particle;
         render(arg0: $VertexConsumer, arg1: $Camera, arg2: number): void;
-        getRenderBoundingBox(arg0: number): $AABB;
-        getLightColor(arg0: number): number;
-        getRenderType(): $ParticleRenderType;
         setPos(arg0: number, arg1: number, arg2: number): void;
         getBoundingBox(): $AABB;
         dynamicLightTick(): void;
         setLuminance(luminance: number): void;
         getLuminance(): number;
+        sable$getTrackingSubLevel(): $SubLevel;
         setBoundingBox(arg0: $AABB_): void;
+        getRenderBoundingBox(arg0: number): $AABB;
+        getLightColor(arg0: number): number;
+        getPos(): $Vec3;
         sable$setTrackingSubLevel(arg0: $ClientSubLevel, arg1: $Vec3_): void;
         getDynamicLightId(): number;
         getDynamicLightX(): number;
@@ -2206,17 +2206,17 @@ declare module "@package/net/minecraft/client/particle" {
         setLastDynamicLuminance(luminance: number): void;
         lambdynlights$getTrackedLitChunkPos(): $LongSet;
         lambdynlights$setTrackedLitChunkPos(trackedLitChunkPos: $LongSet): void;
-        sable$getTrackingSubLevel(): $SubLevel;
-        getPos(): $Vec3;
+        getRenderType(): $ParticleRenderType;
+        setAlpha(arg0: number): void;
+        setPower(arg0: number): $Particle;
+        setLocationFromBoundingbox(): void;
+        sable$initialKickOut(): void;
         setParticleSpeed(arg0: number, arg1: number, arg2: number): void;
         setLifetime(arg0: number): void;
         getLifetime(): number;
-        setLocationFromBoundingbox(): void;
         getParticleGroup(): ($ParticleGroup) | undefined;
-        sable$initialKickOut(): void;
-        setAlpha(arg0: number): void;
-        setDynamicLightEnabled(enabled: boolean): void;
         getDynamicLightChunksToRebuild(forced: boolean): $Long2ObjectMap<$ChunkRebuildStatus>;
+        setDynamicLightEnabled(enabled: boolean): void;
         isDynamicLightEnabled(): boolean;
         splitIntoDynamicLightEntries(cellHasher: $CellHasher): $Stream<$SpatialLookupEntry>;
         speedUpWhenYMotionIsBlocked: boolean;
@@ -2250,8 +2250,6 @@ declare module "@package/net/minecraft/client/particle" {
         constructor(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number);
         constructor(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number);
         get alive(): boolean;
-        set power(value: number);
-        get renderType(): $ParticleRenderType;
         get dynamicLightId(): number;
         get dynamicLightX(): number;
         get dynamicLightY(): number;
@@ -2259,6 +2257,8 @@ declare module "@package/net/minecraft/client/particle" {
         get dynamicLightPrevX(): number;
         get dynamicLightPrevY(): number;
         get dynamicLightPrevZ(): number;
+        get renderType(): $ParticleRenderType;
+        set power(value: number);
         get particleGroup(): ($ParticleGroup) | undefined;
     }
     export class $FlyTowardsPositionParticle$EnchantProvider implements $ParticleProvider<$SimpleParticleType> {
@@ -2530,27 +2530,23 @@ declare module "@package/net/minecraft/client/particle" {
         constructor(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $SpriteSet);
     }
     export class $ParticleEngine implements $PreparableReloadListener, $ParticleEngineAccessor$2, $ParticleManagerAccessor, $ParticleEngineAccessor, $ParticleEngineAccessor$1 {
-        countParticles(): string;
         iterateParticles(arg0: $Consumer_<$Particle>): void;
-        crack(arg0: $BlockPos_, arg1: $Direction_): void;
+        countParticles(): string;
+        handler$zch000$sodium_extra$addParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $CallbackInfoReturnable<any>): void;
+        handler$zmb000$veil$tick(arg0: $CallbackInfo): void;
+        handler$bbn000$ldlib2$injectTick(arg0: $CallbackInfo): void;
+        handler$zmb000$veil$setLevel(arg0: $ClientLevel, arg1: $CallbackInfo): void;
+        handler$zch000$sodium_extra$addBlockBreakParticles(arg0: $BlockPos_, arg1: $BlockState_, arg2: $CallbackInfo): void;
+        handler$zch000$sodium_extra$addBlockBreakingParticles(arg0: $BlockPos_, arg1: $Direction_, arg2: $CallbackInfo): void;
+        handler$zmb000$veil$countParticles(arg0: $CallbackInfoReturnable<any>): void;
+        handler$zmb000$veil$clear(arg0: $CallbackInfo): void;
+        tick(): void;
         createTrackingEmitter(arg0: $Entity, arg1: $ParticleOptions_): void;
         createTrackingEmitter(arg0: $Entity, arg1: $ParticleOptions_, arg2: number): void;
+        crack(arg0: $BlockPos_, arg1: $Direction_): void;
         setLevel(arg0: $ClientLevel): void;
-        handler$zkn000$veil$tick(arg0: $CallbackInfo): void;
-        handler$bae000$ldlib2$injectTick(arg0: $CallbackInfo): void;
-        handler$zkn000$veil$setLevel(arg0: $ClientLevel, arg1: $CallbackInfo): void;
-        handler$zbb000$sodium_extra$addBlockBreakParticles(arg0: $BlockPos_, arg1: $BlockState_, arg2: $CallbackInfo): void;
-        handler$zbb000$sodium_extra$addBlockBreakingParticles(arg0: $BlockPos_, arg1: $Direction_, arg2: $CallbackInfo): void;
-        handler$zkn000$veil$countParticles(arg0: $CallbackInfoReturnable<any>): void;
-        handler$zkn000$veil$clear(arg0: $CallbackInfo): void;
-        handler$zbb000$sodium_extra$addParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $CallbackInfoReturnable<any>): void;
         reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
-        tick(): void;
         add(arg0: $Particle): void;
-        /**
-         * @deprecated
-         */
-        register<T extends $ParticleOptions>(arg0: $ParticleType_<T>, arg1: $ParticleEngine$SpriteParticleRegistration_<T>): void;
         /**
          * @deprecated
          */
@@ -2558,16 +2554,20 @@ declare module "@package/net/minecraft/client/particle" {
         /**
          * @deprecated
          */
+        register<T extends $ParticleOptions>(arg0: $ParticleType_<T>, arg1: $ParticleEngine$SpriteParticleRegistration_<T>): void;
+        /**
+         * @deprecated
+         */
         register<T extends $ParticleOptions>(arg0: $ParticleType_<T>, arg1: $ParticleProvider_<T>): void;
         destroy(arg0: $BlockPos_, arg1: $BlockState_): void;
         close(): void;
-        createParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): $Particle;
+        render(arg0: $LightTexture, arg1: $Camera, arg2: number, arg3: $Frustum, arg4: $Predicate_<$ParticleRenderType>): void;
         /**
          * @deprecated
          */
         render(arg0: $LightTexture, arg1: $Camera, arg2: number): void;
-        render(arg0: $LightTexture, arg1: $Camera, arg2: number, arg3: $Frustum, arg4: $Predicate_<$ParticleRenderType>): void;
         addBlockHitEffects(arg0: $BlockPos_, arg1: $BlockHitResult): void;
+        createParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): $Particle;
         getName(): string;
         getParticles(): $Map<$ParticleRenderType, $Queue<$Particle>>;
         getParticleAtlasTexture(): $TextureAtlas;
@@ -2902,8 +2902,8 @@ declare module "@package/net/minecraft/client/particle" {
         constructor(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number);
     }
     export class $TextureSheetParticle extends $SingleQuadParticle {
-        setSprite(arg0: $TextureAtlasSprite): void;
         setSpriteFromAge(arg0: $SpriteSet): void;
+        setSprite(arg0: $TextureAtlasSprite): void;
         pickSprite(arg0: $SpriteSet): void;
         speedUpWhenYMotionIsBlocked: boolean;
         lifetime: number;

@@ -31,21 +31,21 @@ export * as builtin from "@package/dev/latvian/mods/kubejs/plugin/builtin";
 
 declare module "@package/dev/latvian/mods/kubejs/plugin" {
     export class $KubeJSPlugins {
-        static createClassFilter(type: $ScriptType_): $ClassFilter;
         static addSidedBindings(event: $BindingRegistry_): void;
+        static createClassFilter(type: $ScriptType_): $ClassFilter;
         static getAll(): $List<$KubeJSPlugin>;
         static load(modFiles: $List_<$IModFile>, loadClientPlugins: boolean): void;
-        static forEachPlugin(callback: $Consumer_<$KubeJSPlugin>): void;
         static forEachPlugin<T>(instance: T, callback: $BiConsumer_<$KubeJSPlugin, T>): void;
+        static forEachPlugin(callback: $Consumer_<$KubeJSPlugin>): void;
         constructor();
         static get all(): $List<$KubeJSPlugin>;
     }
     export class $ClassFilter {
-        isAllowed(s: string): boolean;
-        allow(s: string): void;
-        allow(c: $Class<never>): void;
         deny(c: $Class<never>): void;
         deny(s: string): void;
+        isAllowed(s: string): boolean;
+        allow(c: $Class<never>): void;
+        allow(s: string): void;
         scriptType: $ScriptType;
         constructor(scriptType: $ScriptType_);
     }
@@ -55,16 +55,8 @@ declare module "@package/dev/latvian/mods/kubejs/plugin" {
     export class $KubeJSPlugin {
     }
     export interface $KubeJSPlugin {
-        attachServerData(event: $AttachedData<$MinecraftServer>): void;
-        registerTypeWrappers(registry: $TypeWrapperRegistry): void;
-        registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
-        /**
-         * @deprecated
-         */
-        clearCaches(): void;
-        beforeScriptsLoaded(manager: $ScriptManager): void;
-        initStartup(): void;
-        afterScriptsLoaded(manager: $ScriptManager): void;
+        registerEvents(registry: $EventGroupRegistry_): void;
+        breakpoint(args: $Object[]): void;
         registerBuilderTypes(registry: $BuilderTypeRegistry_): void;
         registerServerRegistries(registry: $ServerRegistryRegistry_): void;
         registerBindings(bindings: $BindingRegistry_): void;
@@ -80,9 +72,9 @@ declare module "@package/dev/latvian/mods/kubejs/plugin" {
         registerRecipeViewerEntryTypes(registry: $Consumer_<$RecipeViewerEntryType>): void;
         registerDataComponentTypeDescriptions(registry: $DataComponentTypeInfoRegistry_): void;
         registerLocalWebServerAPIs(registry: $LocalWebServerAPIRegistry_): void;
-        registerLocalWebServer(registry: $LocalWebServerRegistry): void;
         registerClasses(filter: $ClassFilter): void;
         registerRecipeSchemaFunctionTypes(registry: $RecipeSchemaFunctionRegistry_): void;
+        registerLocalWebServer(registry: $LocalWebServerRegistry): void;
         registerLocalWebServerWithAuth(registry: $LocalWebServerRegistry): void;
         localWebServerStarted(server: $LocalWebServer_): void;
         registerItemNameProviders(registry: $NameProvider$Registry_<$Item, $ItemStack>): void;
@@ -92,11 +84,19 @@ declare module "@package/dev/latvian/mods/kubejs/plugin" {
         generateLang(event: $LangKubeEvent_): void;
         exportServerData(_export: $DataExport): void;
         beforeRecipeLoading(event: $RecipesKubeEvent, manager: $RecipeManagerKJS, recipeJsons: $Map_<$ResourceLocation_, $JsonElement_>): void;
-        breakpoint(args: $Object[]): void;
+        attachServerData(event: $AttachedData<$MinecraftServer>): void;
+        registerTypeWrappers(registry: $TypeWrapperRegistry): void;
+        registerRecordDefaults(registry: $RecordDefaultsRegistry_): void;
+        /**
+         * @deprecated
+         */
+        clearCaches(): void;
+        beforeScriptsLoaded(manager: $ScriptManager): void;
+        initStartup(): void;
+        afterScriptsLoaded(manager: $ScriptManager): void;
         init(): void;
-        attachPlayerData(event: $AttachedData<$Player>): void;
         attachLevelData(event: $AttachedData<$Level_>): void;
+        attachPlayerData(event: $AttachedData<$Player>): void;
         afterInit(): void;
-        registerEvents(registry: $EventGroupRegistry_): void;
     }
 }

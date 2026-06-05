@@ -200,17 +200,17 @@ declare module "@package/org/jline/terminal" {
      */
     export type $MouseEvent$Modifier_ = "shift" | "alt" | "control";
     export class $MouseEvent {
+        getButton(): $MouseEvent$Button;
         getY(): number;
         getModifiers(): $EnumSet<$MouseEvent$Modifier>;
         getType(): $MouseEvent$Type;
         getX(): number;
-        getButton(): $MouseEvent$Button;
         constructor(arg0: $MouseEvent$Type_, arg1: $MouseEvent$Button_, arg2: $EnumSet<$MouseEvent$Modifier_>, arg3: number, arg4: number);
+        get button(): $MouseEvent$Button;
         get y(): number;
         get modifiers(): $EnumSet<$MouseEvent$Modifier>;
         get type(): $MouseEvent$Type;
         get x(): number;
-        get button(): $MouseEvent$Button;
     }
     export class $Attributes$LocalFlag extends $Enum<$Attributes$LocalFlag> {
         static values(): $Attributes$LocalFlag[];
@@ -266,6 +266,8 @@ declare module "@package/org/jline/terminal" {
     }
     export interface $Terminal extends $Closeable, $Flushable {
         setAttributes(arg0: $Attributes): void;
+        setSize(arg0: $Size): void;
+        output(): $OutputStream;
         getWidth(): number;
         getHeight(): number;
         getName(): string;
@@ -280,13 +282,9 @@ declare module "@package/org/jline/terminal" {
         input(): $InputStream;
         getAttributes(): $Attributes;
         raise(arg0: $Terminal$Signal_): void;
-        setSize(arg0: $Size): void;
-        output(): $OutputStream;
         getBufferSize(): $Size;
-        echo(arg0: boolean): boolean;
         echo(): boolean;
-        pause(arg0: boolean): void;
-        pause(): void;
+        echo(arg0: boolean): boolean;
         canPauseResume(): boolean;
         paused(): boolean;
         enterRawMode(): $Attributes;
@@ -297,11 +295,13 @@ declare module "@package/org/jline/terminal" {
         getCursorPosition(arg0: $IntConsumer_): $Cursor;
         hasMouseSupport(): boolean;
         trackMouse(arg0: $Terminal$MouseTracking_): boolean;
-        readMouseEvent(arg0: $IntSupplier_): $MouseEvent;
         readMouseEvent(): $MouseEvent;
+        readMouseEvent(arg0: $IntSupplier_): $MouseEvent;
         hasFocusSupport(): boolean;
         trackFocus(arg0: boolean): boolean;
         getPalette(): $ColorPalette;
+        pause(arg0: boolean): void;
+        pause(): void;
         get width(): number;
         get height(): number;
         get name(): string;
