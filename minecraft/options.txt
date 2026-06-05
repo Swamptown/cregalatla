@@ -228,6 +228,12 @@ key_create.keyinfo.ctrl_modifier:key.keyboard.left.control
 key_create.keyinfo.alt_modifier:key.keyboard.left.alt
 key_dndesires.keyinfo.saw_active:key.keyboard.left.alt
 key_dndesires.keyinfo.drill_active:key.keyboard.left.alt
+key_key.aeroworks.joystick.free_camera:key.keyboard.left.shift
+key_key.createthrusters.physics_goggles.toggle_force_gizmo:key.keyboard.g
+key_key.createthrusters.physics_goggles.toggle_diagram:key.keyboard.h
+key_key.createthrusters.physics_goggles.diagram_interactive_mode:key.keyboard.j
+key_key.createthrusters.physics_goggles.edit_overlays_mode:key.keyboard.k
+key_key.createthrusters.contraption_network_linker.cycle_scope_mode_modifier:key.keyboard.left.alt
 key_tfmg.keyinfo.transmission_shift_up:key.keyboard.v
 key_tfmg.keyinfo.transmission_shift_down:key.keyboard.unknown
 key_tfmg.keyinfo.custom_button:key.keyboard.b
@@ -240,6 +246,7 @@ key_key.jade.show_uses:key.keyboard.keypad.4
 key_key.jade.narrate:key.keyboard.keypad.5
 key_key.jade.show_details:key.keyboard.left.shift
 key_key.rocketnautics.toggle_jetpack:key.keyboard.g
+key_key.rocketnautics.toggle_dampeners:key.keyboard.z
 key_key.create_sa.flying:key.keyboard.space
 key_key.create_sa.increase_reach:key.keyboard.up
 key_key.create_sa.decrease_reach:key.keyboard.down
@@ -248,6 +255,7 @@ key_key.mymod.gposing:key.keyboard.f
 key_key.mymod.vposing:key.keyboard.v
 key_key.mymod.shift:key.keyboard.left.shift
 key_key.mymod.space:key.keyboard.space
+key_key.craftpresence.config_keycode.name:key.keyboard.unknown
 key_key.entityculling.toggle:key.keyboard.unknown
 soundCategory_master:0.24172185430463577
 soundCategory_music:0.1795774647887324

@@ -19,6 +19,10 @@
 	# Default: 80
 	# Range: 0 ~ 320
 	entitySpeedLimit = 80
+	#Speed in blocks/second (m/s) at which a ship breaks the sound barrier and triggers a sonic boom
+	# Default: 166.0
+	# Range: 1.0 ~ 500.0
+	sonicBoomSpeedThreshold = 166.0
 
 [Jetpack]
 	#Standard thrust power of the jetpack
@@ -29,3 +33,15 @@
 	# Default: 0.35
 	# Range: 0.01 ~ 2.0
 	jetpackSprintThrust = 0.35
+	#Standard consumption per tick of jetpack fuel
+	# Default: 5
+	# Range: 1 ~ 100
+	jetpackThrustConsumption = 5
+	#Consumption per tick of jetpack fuel while sprinting
+	# Default: 15
+	# Range: 1 ~ 100
+	jetpackSprintThrustConsumption = 15
+	#Base consumption per tick of pressurized air while leg thrusters are active
+	# Default: 2
+	# Range: 1 ~ 100
+	legThrusterBaseConsumption = 2

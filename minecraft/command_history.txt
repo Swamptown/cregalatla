@@ -1,10 +1,4 @@
 /tp mxwl
-/gamerule dashCoolDown 60
-/tp mxwl
-/gamerule dashCoolDown 70
-/tp mxwl
-/gamerule dashCoolDown 100
-/tp mxwl
 /tp SirPotato42 Rasgajag
 /gamemode creative SirPotato42
 /tp mxwl
@@ -48,3 +42,9 @@
 /tp @e[type=create:contraption] Rasgajag
 /tp @e Rasgajag
 /fill ~ ~ ~ ~ ~ ~ minecraft:diamond_block
+/execute as e4863986-f9df-4ac9-ad85-e181303a6da1 run tp ~ ~5 ~
+/execute as e4863986-f9df-4ac9-ad85-e181303a6da1 run tp ~ ~-5 ~
+/execute as e4863986-f9df-4ac9-ad85-e181303a6da1 run tp ~ ~-1 ~
+/kill e4863986-f9df-4ac9-ad85-e181303a6da1
+/time set day
+/tick unfreeze

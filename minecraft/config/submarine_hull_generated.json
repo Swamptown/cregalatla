@@ -171,6 +171,22 @@
     "maxDepthY": 4,
     "implosionChance": 0.8
   },
+  "aeroworks:gyroscope": {
+    "maxDepthY": -36,
+    "implosionChance": 0.28
+  },
+  "aeroworks:joystick": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "aeroworks:mechanical_servo": {
+    "maxDepthY": -36,
+    "implosionChance": 0.28
+  },
+  "aeroworks:stepper_servo": {
+    "maxDepthY": -36,
+    "implosionChance": 0.28
+  },
   "beansbackpacks:burlap_sack": {
     "maxDepthY": 26,
     "implosionChance": 0.85
@@ -7058,6 +7074,70 @@
   "createoreexcavation:sample_drill": {
     "maxDepthY": -36,
     "implosionChance": 0.05
+  },
+  "createthrusters:alternator": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "createthrusters:analogue_contraption_controller": {
+    "maxDepthY": -18,
+    "implosionChance": 0.725
+  },
+  "createthrusters:analogue_joystick": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
+  },
+  "createthrusters:andesite_cable": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
+  },
+  "createthrusters:bidirectional_gearbox": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "createthrusters:claw": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "createthrusters:gyroscope_link": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
+  },
+  "createthrusters:industrial_motor": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "createthrusters:physics_gantry_belt_wheel": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "createthrusters:physics_gantry_carriage": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "createthrusters:physics_gantry_shaft": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "createthrusters:powered_zipline": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "createthrusters:rope_knot": {
+    "maxDepthY": 26,
+    "implosionChance": 0.85
+  },
+  "createthrusters:thruster": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
+  },
+  "createthrusters:thruster_bearing": {
+    "maxDepthY": -36,
+    "implosionChance": 0.615
+  },
+  "createthrusters:variable_transmission": {
+    "maxDepthY": -35,
+    "implosionChance": 0.67
   },
   "dndecor:aluminum_cross_bolt": {
     "maxDepthY": -36,
@@ -14987,6 +15067,10 @@
     "maxDepthY": -36,
     "implosionChance": 0.56
   },
+  "rocketnautics:hologram_block": {
+    "maxDepthY": -36,
+    "implosionChance": 0.05
+  },
   "rocketnautics:raw_titanium_block": {
     "maxDepthY": -36,
     "implosionChance": 0.41333333
@@ -17146,6 +17230,38 @@
   "tfmg:zinc_truss": {
     "maxDepthY": -36,
     "implosionChance": 0.46666667
+  },
+  "vsfluidlink:chain_connector": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
+  },
+  "vsfluidlink:electric_magnet_wire_connector": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
+  },
+  "vsfluidlink:electric_wire_connector": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
+  },
+  "vsfluidlink:hose_connector": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
+  },
+  "vsfluidlink:item_hose_connector": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
+  },
+  "vsfluidlink:item_magnet_hose_connector": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
+  },
+  "vsfluidlink:magnet_chain_connector": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
+  },
+  "vsfluidlink:magnet_hose_connector": {
+    "maxDepthY": -2,
+    "implosionChance": 0.78
   },
   "xercapaint:canvas": {
     "maxDepthY": 26,
